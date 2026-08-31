@@ -1,0 +1,7 @@
+# Generated web preview; Android uses its separately synced, committed assets.
+dist/
+
+# Local runtime and editor state.
+node_modules/
+.DS_Store
+*.log

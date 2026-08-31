@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#2d1a14" />
+    <title>揭棋 · 本地双人试玩</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="重新开始揭棋试玩">
+          <span class="brand-seal" aria-hidden="true">揭</span>
+          <span><strong>揭棋</strong><small>本地双人试玩</small></span>
+        </a>
+        <button id="restart-button" class="quiet-button" type="button">重新开始</button>
+      </header>
+
+      <main>
+        <section id="rps-view" class="setup-card" aria-labelledby="rps-title">
+          <p class="eyebrow">开局决定先手</p>
+          <h1 id="rps-title">玩家一，请秘密出拳</h1>
+          <p id="rps-help" class="setup-help">选择后把设备交给玩家二；胜者执红并先走。</p>
+          <div class="rps-choices" aria-label="石头剪刀布选择">
+            <button class="rps-choice" type="button" data-choice="rock">
+              <span aria-hidden="true">✊</span><b>石头</b>
+            </button>
+            <button class="rps-choice" type="button" data-choice="scissors">
+              <span aria-hidden="true">✌</span><b>剪刀</b>
+            </button>
+            <button class="rps-choice" type="button" data-choice="paper">
+              <span aria-hidden="true">✋</span><b>布</b>
+            </button>
+          </div>
+          <p id="rps-history" class="history" aria-live="polite"></p>
+          <div class="mode-picker" aria-label="本地玩法设置">
+            <label>红方英雄<select id="red-hero"><option value="">无</option><option value="hunter">猎人</option><option value="rogue">潜行者</option><option value="warrior">战士</option></select></label>
+            <label>黑方英雄<select id="black-hero"><option value="">无</option><option value="hunter">猎人</option><option value="rogue">潜行者</option><option value="warrior">战士</option></select></label>
+            <label>畸变<select id="mutation"><option value="">无</option><option value="iron_steed">铁马</option><option value="iron_wall">铁壁</option><option value="shadow_dance">暗影之舞</option><option value="war_chariot">战车</option><option value="expedition">出征</option><option value="cavalry">骑兵</option></select></label>
+          </div>
+          <div class="rule-note">
+            <strong>试玩说明</strong>
+            <span>暗子按原始位置对应的兵种走第一步；落子后翻开，并按真实身份继续走。</span>
+          </div>
+        </section>
+
+        <section id="game-view" hidden aria-label="揭棋棋局">
+          <div class="scoreboard">
+            <div class="player-card black-side">
+              <span>黑方</span><strong id="black-player">玩家二</strong>
+            </div>
+            <div id="turn-status" class="turn-status" aria-live="polite"></div>
+            <div class="player-card red-side">
+              <span>红方</span><strong id="red-player">玩家一</strong>
+            </div>
+          </div>
+
+          <div id="announcement" class="announcement" aria-live="polite"></div>
+
+          <div class="game-layout">
+            <section class="board-column" aria-label="中国象棋棋盘">
+              <div class="board-frame">
+                <div class="board-plane">
+                  <svg class="board-lines" viewBox="0 0 8 9" aria-hidden="true">
+                    <rect x="0.04" y="0.04" width="7.92" height="8.92" rx="0.08" />
+                    <g class="horizontal-lines">
+                      <line x1="0" y1="0" x2="8" y2="0" />
+                      <line x1="0" y1="1" x2="8" y2="1" />
+                      <line x1="0" y1="2" x2="8" y2="2" />
+                      <line x1="0" y1="3" x2="8" y2="3" />
+                      <line x1="0" y1="4" x2="8" y2="4" />
+                      <line x1="0" y1="5" x2="8" y2="5" />
+                      <line x1="0" y1="6" x2="8" y2="6" />
+                      <line x1="0" y1="7" x2="8" y2="7" />
+                      <line x1="0" y1="8" x2="8" y2="8" />
+                      <line x1="0" y1="9" x2="8" y2="9" />
+                    </g>
+                    <g class="vertical-lines">
+                      <line x1="0" y1="0" x2="0" y2="9" />
+                      <line x1="8" y1="0" x2="8" y2="9" />
+                      <line x1="1" y1="0" x2="1" y2="4" /><line x1="1" y1="5" x2="1" y2="9" />
+                      <line x1="2" y1="0" x2="2" y2="4" /><line x1="2" y1="5" x2="2" y2="9" />
+                      <line x1="3" y1="0" x2="3" y2="4" /><line x1="3" y1="5" x2="3" y2="9" />
+                      <line x1="4" y1="0" x2="4" y2="4" /><line x1="4" y1="5" x2="4" y2="9" />
+                      <line x1="5" y1="0" x2="5" y2="4" /><line x1="5" y1="5" x2="5" y2="9" />
+                      <line x1="6" y1="0" x2="6" y2="4" /><line x1="6" y1="5" x2="6" y2="9" />
+                      <line x1="7" y1="0" x2="7" y2="4" /><line x1="7" y1="5" x2="7" y2="9" />
+                    </g>
+                    <g class="palace-lines">
+                      <line x1="3" y1="0" x2="5" y2="2" /><line x1="5" y1="0" x2="3" y2="2" />
+                      <line x1="3" y1="7" x2="5" y2="9" /><line x1="5" y1="7" x2="3" y2="9" />
+                    </g>
+                    <g class="river-label"><text x="2" y="4.68">楚河</text><text x="6" y="4.68">汉界</text></g>
+                  </svg>
+                  <div id="board-points" class="board-points" aria-label="可点击棋盘"></div>
+                  <span id="execution-ghost" class="execution-ghost" aria-hidden="true" hidden></span>
+                  <div id="termination-effect" class="termination-effect" aria-hidden="true"></div>
+                </div>
+              </div>
+              <p id="move-hint" class="move-hint">红方先行。点选己方棋子，再点选落点。</p>
+            </section>
+
+            <aside class="side-panel">
+              <section class="panel-section">
+                <h2>已吃棋子</h2>
+                <div class="capture-row"><span>红方吃掉</span><div id="red-captures" class="captures"></div></div>
+                <div class="capture-row"><span>黑方吃掉</span><div id="black-captures" class="captures"></div></div>
+              </section>
+              <section class="panel-section compact-rules">
+                <h2>本局要点</h2>
+                <p>暗子首步按所在兵种位走；吃子立即揭开。</p>
+                <p>暗子均可吃，包括己方暗子；己方明子不可吃。</p>
+                <p>翻出敌方棋子并直接将军，立即触发背刺。</p>
+                <p>明相/象、仕/士均可过河。</p>
+              </section>
+              <button id="resign-button" class="danger-button" type="button">当前方臣服</button>
+              <label class="skill-source" for="assassination-source">刺杀来源
+                <select id="assassination-source" aria-label="刺杀次数来源"></select>
+              </label>
+              <button id="assassination-button" class="quiet-button" type="button">发动刺杀</button>
+              <button id="strong-strike-button" class="quiet-button" type="button">发动强击</button>
+            </aside>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <dialog id="flow-dialog" aria-labelledby="dialog-title">
+      <div class="dialog-content">
+        <p class="eyebrow">揭棋</p>
+        <h2 id="dialog-title"></h2>
+        <p id="dialog-text"></p>
+        <button id="dialog-action" class="primary-button" type="button"></button>
+      </div>
+    </dialog>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
