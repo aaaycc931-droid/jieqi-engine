@@ -1,0 +1,69 @@
+import { RuleError } from "./errors.ts";
+
+/** Wire format shared by the Android RFCOMM layer and the WebView game host. */
+export const BLUETOOTH_PROTOCOL_VERSION = 1;
+export const BLUETOOTH_MAX_MESSAGE_BYTES = 48 * 1024;
+
+export type BluetoothMessageType = "hello" | "action" | "snapshot" | "error" | "ping" | "pong";
+
+export interface BluetoothEnvelope<T = unknown> {
+  v: typeof BLUETOOTH_PROTOCOL_VERSION;
+  type: BluetoothMessageType;
+  /** Idempotency key for actions and snapshots; optional only for hello/ping. */
+  id?: string;
+  payload?: T;
+}
+
+const MESSAGE_TYPES = new Set<BluetoothMessageType>(["hello", "action", "snapshot", "error", "ping", "pong"]);
+
+function byteLength(value: string): number {
+  return new TextEncoder().encode(value).byteLength;
+}
+
+function requireObject(value: unknown): Record<string, unknown> {
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    throw new RuleError("INVALID_BLUETOOTH_MESSAGE", "蓝牙消息必须是对象");
+  }
+  return value as Record<string, unknown>;
+}
+
+/**
+ * Verifies the small protocol boundary before a message reaches game rules.
+ * It deliberately has no game-secret knowledge; the host rule engine still
+ * validates player side, revision and every move command afterwards.
+ */
+export function parseBluetoothEnvelope(raw: string): BluetoothEnvelope {
+  if (byteLength(raw) > BLUETOOTH_MAX_MESSAGE_BYTES) {
+    throw new RuleError("BLUETOOTH_MESSAGE_TOO_LARGE", "蓝牙消息超过大小上限");
+  }
+  let value: unknown;
+  try {
+    value = JSON.parse(raw);
+  } catch {
+    throw new RuleError("INVALID_BLUETOOTH_MESSAGE", "蓝牙消息不是有效 JSON");
+  }
+  const message = requireObject(value);
+  if (message.v !== BLUETOOTH_PROTOCOL_VERSION) {
+    throw new RuleError("BLUETOOTH_PROTOCOL_MISMATCH", "蓝牙协议版本不匹配");
+  }
+  if (typeof message.type !== "string" || !MESSAGE_TYPES.has(message.type as BluetoothMessageType)) {
+    throw new RuleError("INVALID_BLUETOOTH_MESSAGE", "未知蓝牙消息类型");
+  }
+  if (message.id !== undefined && (typeof message.id !== "string" || !message.id.trim())) {
+    throw new RuleError("INVALID_BLUETOOTH_MESSAGE", "消息 id 必须是非空文本");
+  }
+  return message as BluetoothEnvelope;
+}
+
+export function encodeBluetoothEnvelope<T>(message: BluetoothEnvelope<T>): string {
+  // Round-trip through the parser so outbound and inbound constraints never drift.
+  const raw = JSON.stringify(message);
+  parseBluetoothEnvelope(raw);
+  return raw;
+}
+
+/** Host-only snapshot wrapper: callers must pass an already-sanitized public view. */
+export function createBluetoothSnapshot<T>(id: string, publicView: T): BluetoothEnvelope<T> {
+  if (!id.trim()) throw new RuleError("INVALID_BLUETOOTH_MESSAGE", "快照 id 不能为空");
+  return { v: BLUETOOTH_PROTOCOL_VERSION, type: "snapshot", id, payload: publicView };
+}

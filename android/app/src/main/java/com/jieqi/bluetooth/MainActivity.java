@@ -2,8 +2,14 @@ package com.jieqi.bluetooth;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.Manifest;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothManager;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Build;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -15,7 +21,9 @@ import android.webkit.WebViewClient;
  */
 public final class MainActivity extends Activity {
   private static final String GAME_URL = "file:///android_asset/game/web/index.html";
+  private static final int BLUETOOTH_PERMISSION_REQUEST = 4101;
   private WebView gameView;
+  private GameWebBridge gameBridge;
 
   @Override
   @SuppressLint("SetJavaScriptEnabled")
@@ -29,6 +37,10 @@ public final class MainActivity extends Activity {
     gameView.getSettings().setAllowContentAccess(false);
     gameView.getSettings().setAllowFileAccess(true);
     gameView.setWebViewClient(new GameOnlyWebViewClient());
+    BluetoothManager manager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+    BluetoothAdapter adapter = manager == null ? null : manager.getAdapter();
+    gameBridge = new GameWebBridge(this, gameView, adapter);
+    gameView.addJavascriptInterface(gameBridge, "JieqiBluetooth");
     setContentView(gameView);
 
     if (savedInstanceState == null) {
@@ -51,6 +63,32 @@ public final class MainActivity extends Activity {
     } else {
       super.onBackPressed();
     }
+  }
+
+  boolean hasBluetoothPermission() {
+    return Build.VERSION.SDK_INT < Build.VERSION_CODES.S
+      || checkSelfPermission(Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED;
+  }
+
+  boolean ensureBluetoothPermission() {
+    if (hasBluetoothPermission()) return true;
+    requestPermissions(new String[] { Manifest.permission.BLUETOOTH_CONNECT }, BLUETOOTH_PERMISSION_REQUEST);
+    return false;
+  }
+
+  @Override
+  public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    if (requestCode == BLUETOOTH_PERMISSION_REQUEST && gameBridge != null) {
+      gameBridge.onPermissionResult(hasBluetoothPermission());
+    }
+  }
+
+  @Override
+  protected void onDestroy() {
+    if (gameBridge != null) gameBridge.close();
+    if (gameView != null) gameView.destroy();
+    super.onDestroy();
   }
 
   private static final class GameOnlyWebViewClient extends WebViewClient {

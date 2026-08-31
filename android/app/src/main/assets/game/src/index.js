@@ -1,4 +1,5 @@
 export * from "./errors.js";
+export * from "./bluetooth-protocol.js";
 export * from "./game.js";
 export * from "./room.js";
 export * from "./remote-room.js";

@@ -1,4 +1,5 @@
 export * from "./errors.ts";
+export * from "./bluetooth-protocol.ts";
 export * from "./game.ts";
 export * from "./room.ts";
 export * from "./remote-room.ts";
