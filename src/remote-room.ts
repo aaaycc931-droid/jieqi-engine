@@ -1,6 +1,5 @@
-import { createHash, timingSafeEqual } from "node:crypto";
-
 import { RuleError } from "./errors.ts";
+import { equalHex, sha256Hex } from "./sha256.ts";
 import {
   applyAutomaticExecution,
   initializeFeatureGameState,
@@ -172,13 +171,11 @@ function requireText(value: string, code: string, message: string): void {
 
 export function hashInviteToken(inviteToken: string): string {
   requireText(inviteToken, "INVALID_INVITE", "邀请口令不能为空");
-  return createHash("sha256").update(inviteToken, "utf8").digest("hex");
+  return sha256Hex(inviteToken);
 }
 
 function hasMatchingInvite(room: RemoteRoom, inviteToken: string): boolean {
-  const supplied = Buffer.from(hashInviteToken(inviteToken), "hex");
-  const expected = Buffer.from(room.inviteTokenHash, "hex");
-  return supplied.length === expected.length && timingSafeEqual(supplied, expected);
+  return equalHex(hashInviteToken(inviteToken), room.inviteTokenHash);
 }
 
 function clonePublic<T>(value: T): T {

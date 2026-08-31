@@ -6,7 +6,7 @@
 - Android 第二阶段（通信基础）：已新增 Bluetooth Classic RFCOMM 单连接、主机/来宾状态机、断线回报、48 KiB 版本化 JSON 消息上限与受限 WebView 桥；网页资源仍内置且无需网络；
 - 联机准备：已完成纯 TypeScript 的服务端房间契约、权威结算、私有陷阱视图与公开状态净化；尚未创建或连接任何云环境；
 - 依赖：Node.js 24+，无第三方依赖；
-- 验证：`node --test --test-reporter=spec tests/*.test.ts`，当前应通过 111 项测试；`node scripts/build-web.ts` 与 `node android/scripts/sync-web-assets.mjs` 均已验证；
+- 验证：`node --test --test-reporter=spec tests/*.test.ts`，当前应通过 114 项测试；`node scripts/build-web.ts` 与 `node android/scripts/sync-web-assets.mjs` 均已验证；
 - 当前目录不是 Git 仓库；请在后续开始前自行选择并初始化远程仓库。
 
 ## 入口文件
@@ -22,6 +22,8 @@
 | `android/` | Android WebView 外壳、Bluetooth Classic RFCOMM 通信基础、桥接与资源同步脚本 |
 | `src/bluetooth-protocol.ts` | 原生 RFCOMM 与网页共享的版本化 JSON 协议校验 |
 | `tests/bluetooth-protocol.test.ts` | 协议版本、类型、大小限制与快照边界测试 |
+| `src/bluetooth-host-room.ts` | 仅在房主 WebView 运行的权威房间协调器 |
+| `tests/bluetooth-host-room.test.ts` | 跨端 SHA-256、猜拳隐私与公开棋盘边界测试 |
 | `../jieqi_rules_spec_v1.md` | 随交接包附带的规则冻结稿 |
 
 ## 已冻结的关键规则
@@ -54,6 +56,8 @@
 ## 下一步
 
 Android 通信基础已就绪：`BluetoothGameSession` 使用固定 UUID 的 RFCOMM 服务，房主监听、来宾连接；`GameWebBridge` 仅公开 `host`、`join`、`pairedDevices`、`send`、`disconnect` 和状态事件。用户先在系统设置配对，应用只读取已配对设备，故不扫描周边设备也不申请定位权限。
+
+`BluetoothHostRoom` 已复用现有 `RemoteRoom` 权威事务：物理连接建立后自动进入秘密猜拳，房主保存完整状态和 admission secret；来宾只能提交操作并读取 `playerRoomView`，暗子身份、未触发陷阱和未锁定的英雄选择不会进入其快照。`remote-room.ts` 的 SHA-256 已替换为浏览器可运行的同步实现，因此后续 WebView 不再受 `node:crypto` 阻塞。
 
 下一段必须把网页 UI 接入这条通道：房主 WebView 维护完整 `RemoteRoom` 与随机源，来宾以 `action` 提交猜拳/英雄/陷阱/移动/刺杀/臣服；房主以 `playerRoomView` 生成公开快照和各自私有视图后广播。完成前不得在网页中把“蓝牙联机”标为可玩；目前仅可验证原生通信层，尚不能两机对局。
 
