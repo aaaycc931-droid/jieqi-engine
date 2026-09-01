@@ -16,3 +16,21 @@ jobs:
           node-version: 24
       - name: Run complete rule suite and build the WebView assets
         run: node --test --test-reporter=spec tests/*.test.ts && node scripts/build-web.ts && node android/scripts/sync-web-assets.mjs
+
+  android-apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: android-actions/setup-android@v3
+      - name: Install the declared Android SDK components
+        run: sdkmanager --install "platforms;android-37" "build-tools;36.0.0"
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "9.5"
+      - name: Assemble the offline Bluetooth APK
+        working-directory: android
+        run: gradle --no-daemon :app:assembleDebug
