@@ -33,6 +33,12 @@ public final class MainActivity extends Activity {
     gameView.getSettings().setDomStorageEnabled(false);
     gameView.getSettings().setAllowContentAccess(false);
     gameView.getSettings().setAllowFileAccess(true);
+    // The packaged page is an ES module that imports the bundled rule modules
+    // from the same android_asset/game directory. Android disables file-to-file
+    // JavaScript access by default on modern target SDKs, which otherwise leaves
+    // the visible HTML loaded but none of its click handlers registered.
+    gameView.getSettings().setAllowFileAccessFromFileURLs(true);
+    gameView.getSettings().setAllowUniversalAccessFromFileURLs(false);
     gameView.setWebViewClient(new GameOnlyWebViewClient());
     BluetoothManager manager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
     BluetoothAdapter adapter = manager == null ? null : manager.getAdapter();
