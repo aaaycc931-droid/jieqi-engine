@@ -10,7 +10,7 @@ APK 内置完整揭棋网页，并加入 Bluetooth Classic RFCOMM 主机/加入�
 
 - Android Studio 当前稳定版；
 - JDK 17；
-- Android SDK Platform 37 与 Build Tools 36；
+- Android SDK Platform 36 与 Build Tools 36；
 - Node.js 24 或更高版本（只在更新网页资源时需要）。
 
 本工作区未包含 Android SDK 或 Gradle，因此请在 Android Studio 中直接打开本目录并完成首次同步。Android Gradle Plugin 9.3.0 使用 Gradle 9.5 与 JDK 17。
