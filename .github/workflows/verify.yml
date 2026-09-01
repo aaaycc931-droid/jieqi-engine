@@ -30,7 +30,7 @@ jobs:
         run: sdkmanager --install "platforms;android-36" "build-tools;36.0.0"
       - uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: "9.5"
+          gradle-version: "9.7.1"
       - name: Assemble the offline Bluetooth APK
         working-directory: android
         run: gradle --no-daemon :app:assembleDebug
