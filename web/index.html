@@ -12,12 +12,31 @@
       <header class="topbar">
         <a class="brand" href="#" aria-label="重新开始揭棋试玩">
           <span class="brand-seal" aria-hidden="true">揭</span>
-          <span><strong>揭棋</strong><small>本地双人试玩</small></span>
+          <span><strong>揭棋</strong><small>本地试玩 · 蓝牙双机</small></span>
         </a>
         <button id="restart-button" class="quiet-button" type="button">重新开始</button>
       </header>
 
       <main>
+        <section id="lobby-view" class="setup-card" aria-labelledby="lobby-title">
+          <p class="eyebrow">选择对局方式</p>
+          <h1 id="lobby-title">揭棋双人对弈</h1>
+          <p id="bluetooth-status" class="setup-help">本机试玩无需联网；蓝牙模式使用已配对设备，由房主权威裁定每一步。</p>
+          <div class="lobby-actions">
+            <button id="local-game-button" class="primary-button" type="button">本机双人试玩</button>
+            <button id="bluetooth-host-button" class="quiet-button" type="button">创建蓝牙房间</button>
+          </div>
+          <div id="bluetooth-options" class="mode-picker" aria-label="蓝牙房间玩法设置">
+            <label>英雄模式<select id="bluetooth-heroes"><option value="on">开启</option><option value="off">关闭</option></select></label>
+            <label>畸变模式<select id="bluetooth-mutations"><option value="on">开启</option><option value="off">关闭</option></select></label>
+            <label>已配对设备<select id="bluetooth-device"><option value="">请先刷新</option></select></label>
+          </div>
+          <div class="lobby-actions bluetooth-actions">
+            <button id="bluetooth-refresh-button" class="quiet-button" type="button">刷新已配对设备</button>
+            <button id="bluetooth-join-button" class="quiet-button" type="button">加入蓝牙房间</button>
+          </div>
+          <p class="rule-note"><strong>蓝牙准备</strong><span>两台手机先在系统设置完成蓝牙配对；一台点“创建”，另一台选中房主设备后点“加入”。连接成功后双方各自在自己的手机上猜拳、选英雄和行棋。</span></p>
+        </section>
         <section id="rps-view" class="setup-card" aria-labelledby="rps-title">
           <p class="eyebrow">开局决定先手</p>
           <h1 id="rps-title">玩家一，请秘密出拳</h1>
@@ -34,6 +53,14 @@
             </button>
           </div>
           <p id="rps-history" class="history" aria-live="polite"></p>
+          <div id="remote-hero-picker" class="hero-picker" hidden>
+            <p>请选择本局英雄（对方选择前不会公开）</p>
+            <div class="hero-choices">
+              <button type="button" data-hero="hunter">猎人 · 陷阱</button>
+              <button type="button" data-hero="rogue">潜行者 · 刺杀</button>
+              <button type="button" data-hero="warrior">战士 · 防护壁垒</button>
+            </div>
+          </div>
           <div class="mode-picker" aria-label="本地玩法设置">
             <label>红方英雄<select id="red-hero"><option value="">无</option><option value="hunter">猎人</option><option value="rogue">潜行者</option><option value="warrior">战士</option></select></label>
             <label>黑方英雄<select id="black-hero"><option value="">无</option><option value="hunter">猎人</option><option value="rogue">潜行者</option><option value="warrior">战士</option></select></label>

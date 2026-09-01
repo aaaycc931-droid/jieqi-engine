@@ -6,24 +6,24 @@ import {
   isInsideBoard,
   otherSide,
 } from "./slots.js";
-             
-            
-              
-                 
-            
-           
-              
-                
-       
-                    
 
-                                                 
 
-                                    
-                               
-                               
-                           
- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export function samePosition(first          , second          )          {
   return first.x === second.x && first.y === second.y;

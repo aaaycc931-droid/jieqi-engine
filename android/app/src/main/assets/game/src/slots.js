@@ -1,11 +1,11 @@
-             
-              
-            
-           
-              
-                
-       
-                    
+
+
+
+
+
+
+
+
 
 const backRank                                                   = [
   "rook",
@@ -79,9 +79,9 @@ export function getController(piece             )       {
     : piece.color;
 }
 
-export function getMovementIdentity(piece             )   
-             
-                  
+export function getMovementIdentity(piece             )
+
+
   {
   if (piece.faceDown) {
     const slot = requireCoveredSlot(piece.x, piece.y);

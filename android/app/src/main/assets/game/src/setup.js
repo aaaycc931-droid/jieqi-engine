@@ -1,15 +1,15 @@
 import { COVERED_SLOTS, createGeneral } from "./slots.js";
-             
-            
-            
-            
-                 
-              
-       
-                    
 
-const nonGeneralCounts                
-                                                  
+
+
+
+
+
+
+
+
+const nonGeneralCounts
+
   = [
   ["rook", 2],
   ["horse", 2],

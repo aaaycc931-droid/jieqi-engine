@@ -31,3 +31,51 @@ test("BTHOST-03 双方猜拳后由房主权威建局，并向来宾发送揭示�
   assert.equal(hidden.color, undefined);
   assert.equal(hidden.type, undefined);
 });
+
+test("BTHOST-04 英雄、陷阱和私有坐标均通过房主单点结算", () => {
+  let tick = 0;
+  const room = new BluetoothHostRoom({
+    roomId: "bt-heroes",
+    admissionSecret: "local-link",
+    now: () => ++tick,
+    randomInt: () => 0,
+    mode: { heroesEnabled: true, mutationsEnabled: true },
+  });
+  room.handle(BLUETOOTH_HOST_PLAYER, { kind: "rps", choice: "rock", round: 1 });
+  room.handle(BLUETOOTH_GUEST_PLAYER, { kind: "rps", choice: "scissors", round: 1 });
+  let views = room.views();
+  assert.equal(views.publicRoom.phase, "hero_selection");
+  assert.equal(views.guest.ownHeroChoice, undefined);
+
+  room.handle(BLUETOOTH_HOST_PLAYER, { kind: "hero", hero: "hunter" });
+  views = room.views();
+  assert.equal(views.guest.ownHeroChoice, undefined, "guest cannot learn host hero early");
+  views = room.handle(BLUETOOTH_GUEST_PLAYER, { kind: "hero", hero: "hunter" });
+  assert.equal(views.publicRoom.phase, "trap_setup");
+  assert.equal(views.publicRoom.features?.mutation, "iron_steed");
+
+  room.handle(BLUETOOTH_HOST_PLAYER, { kind: "traps", positions: [{ x: 0, y: 5 }, { x: 0, y: 5 }] });
+  views = room.views();
+  assert.equal(views.guest.ownTraps?.length, 0, "guest cannot receive host trap coordinates");
+  views = room.handle(BLUETOOTH_GUEST_PLAYER, { kind: "traps", positions: [{ x: 0, y: 0 }, { x: 0, y: 0 }] });
+  assert.equal(views.publicRoom.phase, "playing");
+  assert.equal(views.host.ownTraps?.length, 2);
+  assert.equal(views.guest.ownTraps?.length, 2);
+
+  views = room.handle(BLUETOOTH_HOST_PLAYER, {
+    kind: "move",
+    command: { from: { x: 0, y: 9 }, to: { x: 0, y: 8 }, expectedRevision: 0, actionId: "host-first-move" },
+  });
+  assert.equal(views.publicRoom.state?.revision, 1, "a complete Bluetooth room progresses into authoritative play");
+});
+
+test("BTHOST-05 来宾操作仍受回合、版本和房主规则引擎约束", () => {
+  let tick = 0;
+  const room = new BluetoothHostRoom({ roomId: "bt-turn", admissionSecret: "local-link", now: () => ++tick, randomInt: () => 0 });
+  room.handle(BLUETOOTH_HOST_PLAYER, { kind: "rps", choice: "rock", round: 1 });
+  room.handle(BLUETOOTH_GUEST_PLAYER, { kind: "rps", choice: "scissors", round: 1 });
+  assert.throws(() => room.handle(BLUETOOTH_GUEST_PLAYER, {
+    kind: "move",
+    command: { from: { x: 0, y: 0 }, to: { x: 0, y: 1 }, expectedRevision: 0, actionId: "guest-too-early" },
+  }), /还没有轮到/);
+});

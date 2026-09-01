@@ -1,0 +1,18 @@
+name: Verify rules and web build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  rules-and-web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Run complete rule suite and build the WebView assets
+        run: node --test --test-reporter=spec tests/*.test.ts && node scripts/build-web.ts && node android/scripts/sync-web-assets.mjs

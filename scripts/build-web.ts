@@ -26,7 +26,7 @@ async function compileTypeScriptDirectory(sourceRoot: string): Promise<void> {
     const javascript = stripTypeScriptTypes(source, { mode: "strip" }).replaceAll(
       ".ts\"",
       ".js\"",
-    ).replaceAll(".ts'", ".js'");
+    ).replaceAll(".ts'", ".js'").replace(/[ \t]+$/gm, "");
     await mkdir(dirname(outputPath), { recursive: true });
     await writeFile(outputPath, javascript);
   }

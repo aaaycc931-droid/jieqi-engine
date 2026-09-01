@@ -13,9 +13,9 @@
 - 英雄：猎人陷阱、潜行者刺杀/隐身/强击、战士防护壁垒/铁甲；
 - 畸变：铁马、铁壁、暗影之舞、战车、出征、骑兵；
 - 同一浏览器双人轮流试玩界面：秘密石头剪刀布、英雄与畸变选择、猎人私下布置、刺杀/强击按钮、翻子、吃子、背刺、裁决、无处可逃和臣服；
-- Android 第一阶段外壳：将网页试玩版作为离线资源封装进 APK，后续可在此基础上接入近距离蓝牙联机。
+- Android 蓝牙双机模式：已配对设备通过 Bluetooth Classic RFCOMM 建房/加入；房主权威结算，来宾只提交操作并接收自己的私有视图。
 
-当前网页尚未连接远程房间、账号、数据库或云函数；它只在本机运行，暗子真实身份仅保存在当前浏览器内存中，适合规则试玩而不适合正式联机。
+普通浏览器仍只提供本机试玩；Android APK 中则提供蓝牙双机房间。蓝牙房主持有完整房间和暗子身份，来宾仅接收已净化棋盘、自己的英雄选择和自己的陷阱坐标；两者都不依赖网络、账号、数据库或云函数。
 
 不过，联机所需的服务端房间契约已完成于 `src/remote-room.ts`：它包含邀请口令哈希、两席位、秘密猜拳、权威落子、服务端自动结算与公开状态净化；目前没有接入云账号，所以不会影响本地试玩。完整的 CloudBase 对接方案见 [ONLINE-ARCHITECTURE.md](ONLINE-ARCHITECTURE.md)。
 
@@ -53,11 +53,11 @@ npm run build:web
 
 把项目下载到一台已安装 Node.js 24 的电脑上，电脑与手机连接同一个 Wi-Fi，然后运行 `npm run serve:web`。终端会显示一个“同一 Wi-Fi 的手机打开”地址；在手机浏览器输入该地址即可。若打不开，请允许 Node.js 通过电脑防火墙的专用网络。
 
-当前验证结果：114 项规则、英雄、畸变、蓝牙房主与联机边界测试全部通过；背刺与裁决会自动选择终结棋子、播放终结演出，并在动画结束后展示对应胜利文案。
+当前验证结果：116 项规则、英雄、畸变、蓝牙房主与联机边界测试全部通过；背刺与裁决会自动选择终结棋子、播放终结演出，并在动画结束后展示对应胜利文案。
 
-### Android 离线 APK（第一阶段）
+### Android 蓝牙双机 APK
 
-`android/` 是一个可直接由 Android Studio 打开的原生工程。它用系统 WebView 加载 APK 内置的游戏页面，不申请网络或蓝牙权限；因此这一版能离线试玩，但还不能让两台手机连接。
+`android/` 是一个可直接由 Android Studio 打开的原生工程。它用系统 WebView 加载 APK 内置页面，不申请网络权限；Android 12+ 仅在第一次使用蓝牙入口时请求“附近的设备”连接权限。两台手机在系统设置配对后，一台创建房间、另一台选择已配对房主加入，即可完整猜拳、选英雄、布置陷阱和对弈。
 
 先在项目根目录生成并同步网页资源：
 
@@ -66,7 +66,7 @@ node scripts/build-web.ts
 node android/scripts/sync-web-assets.mjs
 ```
 
-然后在 Android Studio 打开 `android/`，选择 `Build > Build APK(s)`。完整环境要求与 APK 输出位置见 [android/README.md](android/README.md)。第二阶段才会加入 Bluetooth Classic 主机权威结算、配对与断线处理。
+然后在 Android Studio 打开 `android/`，选择 `Build > Build APK(s)`。完整环境要求与 APK 输出位置见 [android/README.md](android/README.md)。
 
 ## 终局表现
 
@@ -84,7 +84,7 @@ src/    纯规则模块与服务端房间契约
 tests/  自动测试
 web/    本地试玩界面
 scripts/ 零依赖构建与本地静态服务器
-android/ Android 离线 APK 外壳与网页资源同步脚本
+android/ Android APK、Bluetooth Classic 传输与网页资源同步脚本
 ```
 
 规则依据为《揭棋规则规格 v1》冻结稿。

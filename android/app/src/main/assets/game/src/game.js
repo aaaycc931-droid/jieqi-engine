@@ -8,24 +8,24 @@ import {
   validatePublicMove,
 } from "./rules.js";
 import { getController, getMovementIdentity, isInPalace, otherSide } from "./slots.js";
-             
-                
-                         
-                       
-                      
-            
-         
-             
-              
-             
-              
-                
-                 
-              
-       
-              
-                
-                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function cloneState(state           )            {
   return {

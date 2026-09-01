@@ -3,11 +3,11 @@
 ## 当前状态
 
 - 本地试玩：`v0.4.0` 基线已扩展为英雄与畸变可选模式；
-- Android 第二阶段（通信基础）：已新增 Bluetooth Classic RFCOMM 单连接、主机/来宾状态机、断线回报、48 KiB 版本化 JSON 消息上限与受限 WebView 桥；网页资源仍内置且无需网络；
+- Android 第二阶段（蓝牙完整链路）：已新增 Bluetooth Classic RFCOMM 单连接、主机/来宾状态机、断线回报、48 KiB 版本化 JSON 消息上限与受限 WebView 桥；网页大厅已经接入房主权威结算，完整支持猜拳、英雄、私有陷阱、走子、刺杀、臣服与终局演出；
 - 联机准备：已完成纯 TypeScript 的服务端房间契约、权威结算、私有陷阱视图与公开状态净化；尚未创建或连接任何云环境；
 - 依赖：Node.js 24+，无第三方依赖；
-- 验证：`node --test --test-reporter=spec tests/*.test.ts`，当前应通过 114 项测试；`node scripts/build-web.ts` 与 `node android/scripts/sync-web-assets.mjs` 均已验证；
-- 当前目录不是 Git 仓库；请在后续开始前自行选择并初始化远程仓库。
+- 验证：`node --test --test-reporter=spec tests/*.test.ts`，当前应通过 116 项测试；`node scripts/build-web.ts` 与 `node android/scripts/sync-web-assets.mjs` 均已验证；
+- GitHub `aaaycc931-droid/jieqi-engine` 的 `main` 为唯一代码源；后续开始前应先核对远端 HEAD。
 
 ## 入口文件
 
@@ -53,12 +53,14 @@
 - 路径碾碎按顺序公开记录，支持隐身路径棋、普通防御无效、乱杀、两败俱伤与“碾碎他们！”。
 - 本地网页已增加英雄/畸变下拉选择、猎人私下布置、刺杀来源选择与强击按钮；它仍是同设备轮流试玩，未接入真正的远程数据库。
 
-## 下一步
+## 当前可玩状态与下一步
 
 Android 通信基础已就绪：`BluetoothGameSession` 使用固定 UUID 的 RFCOMM 服务，房主监听、来宾连接；`GameWebBridge` 仅公开 `host`、`join`、`pairedDevices`、`send`、`disconnect` 和状态事件。用户先在系统设置配对，应用只读取已配对设备，故不扫描周边设备也不申请定位权限。
 
 `BluetoothHostRoom` 已复用现有 `RemoteRoom` 权威事务：物理连接建立后自动进入秘密猜拳，房主保存完整状态和 admission secret；来宾只能提交操作并读取 `playerRoomView`，暗子身份、未触发陷阱和未锁定的英雄选择不会进入其快照。`remote-room.ts` 的 SHA-256 已替换为浏览器可运行的同步实现，因此后续 WebView 不再受 `node:crypto` 阻塞。
 
-下一段必须把网页 UI 接入这条通道：房主 WebView 维护完整 `RemoteRoom` 与随机源，来宾以 `action` 提交猜拳/英雄/陷阱/移动/刺杀/臣服；房主以 `playerRoomView` 生成公开快照和各自私有视图后广播。完成前不得在网页中把“蓝牙联机”标为可玩；目前仅可验证原生通信层，尚不能两机对局。
+网页 UI 已接入该通道：房主 WebView 维护完整 `RemoteRoom` 与随机源，来宾以 `action` 提交猜拳/英雄/陷阱/移动/刺杀/臣服；房主以 `playerRoomView` 生成公开快照和各自私有视图后广播。两台已配对 Android 手机可完整对局；双方的未揭身份、未触发陷阱和未锁定英雄不会跨端传输。
+
+下一步应在两台真实 Android 手机上各装一次 APK，完整走一局并记录 Bluetooth Classic 在目标机型上的连接表现。当前工作区没有 Android SDK、Gradle 或真机，故不能在这里生成 APK 或完成射频层实测。
 
 远程互联网联机仍可在另一条路线中接入 CloudBase 云函数、房间公开文档与每位玩家私有陷阱子文档；这需要实际腾讯云/CloudBase 账号和部署权限。其余纯规则工作应以新增英雄、畸变或对局回放为主，并保持 `npm run check` 全绿。

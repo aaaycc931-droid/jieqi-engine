@@ -4,15 +4,15 @@ import { RuleError } from "./errors.js";
 export const BLUETOOTH_PROTOCOL_VERSION = 1;
 export const BLUETOOTH_MAX_MESSAGE_BYTES = 48 * 1024;
 
-                                                                                               
 
-                                                 
-                                       
-                             
-                                                                                 
-              
-              
- 
+
+
+
+
+
+
+
+
 
 const MESSAGE_TYPES = new Set                      (["hello", "action", "snapshot", "error", "ping", "pong"]);
 

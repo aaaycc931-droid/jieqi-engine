@@ -1,27 +1,27 @@
 import { RuleError } from "./errors.js";
 
-                                                      
 
-                            
-                
-                                     
-               
-                  
-                 
- 
 
-                                 
-                                  
-                
-                                     
-                                     
-                         
-                                               
- 
 
-                                 
-                                     
- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export function createRpsState(
   firstPlayer        ,

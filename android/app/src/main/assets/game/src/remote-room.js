@@ -19,29 +19,29 @@ import {
 } from "./rps.js";
 import { createInitialGame } from "./setup.js";
 import { getController, isInsideBoard } from "./slots.js";
-             
-                         
-                       
-            
-         
-              
-             
-                     
-           
-            
-       
-            
-                    
-                                          
-                                                                          
 
-                             
-             
-         
-                    
-                
-             
-               
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export const DEFAULT_OPTIONAL_MODE_CONFIG                     = {
   heroesEnabled: false,
@@ -59,111 +59,111 @@ const MUTATION_IDS                        = [
   "cavalry",
 ];
 
-                             
-                   
-                      
-                     
- 
 
-                                    
-                  
-                                                     
-                               
- 
 
-                                           
-                                
- 
 
-                                           
-                                         
- 
 
-                                       
-                                            
- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /** Kept server-side and returned only to its owner through playerRoomView. */
-                            
-             
-              
-                     
-                                 
- 
+
+
+
+
+
+
 
 /** Public after a trigger only; untriggered coordinates never leave the server. */
-                              
-                                                                                           
-                   
-                 
-              
-                        
-                     
- 
 
-                                         
-                                
-                        
-                                           
-                                   
- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /** Never copy this object into a public room document or a shared watch. */
-                                         
-                                           
-                     
- 
+
+
+
+
 
 /**
  * The server-only room aggregate.  CloudBase should store `inviteTokenHash`,
  * `rpsSecret`, and `game.secret` in rooms_secret, never in rooms_public.
  */
-                             
-                 
-                          
-                                                  
-                           
-                         
-                       
-                             
-                  
-                                    
-                                         
-                                        
-                                
-                    
- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /** The only shape that may be returned from a cloud function or database watch. */
-                                   
-                 
-                                                  
-                           
-                         
-                       
-                    
-                                    
-                                        
-                                
-                    
- 
+
+
+
+
+
+
+
+
+
+
+
+
 
 /** A public room plus secrets belonging only to the authenticated viewer. */
-                                                                
-                    
-                         
-                         
- 
 
-                                 
-                   
-                         
- 
 
-                                     
-                   
-                     
- 
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function requireText(value        , code        , message        )       {
   if (!value.trim()) throw new RuleError(code, message);

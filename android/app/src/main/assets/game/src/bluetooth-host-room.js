@@ -10,29 +10,29 @@ import {
   submitRemoteRps,
   submitRemoteTrapSetup,
   surrenderRemoteRoom,
-                            
-                        
-                  
+
+
+
 } from "./remote-room.js";
-                                                                                                                     
-                                          
+
+
 
 export const BLUETOOTH_HOST_PLAYER = "bluetooth:host";
 export const BLUETOOTH_GUEST_PLAYER = "bluetooth:guest";
 
-                                 
-                                                     
-                                  
-                                                     
-                                          
-                                                            
-                                                                   
 
-                                     
-                               
-                             
-                              
- 
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * The WebView on the Bluetooth host owns this class. The guest never creates
@@ -43,13 +43,13 @@ export class BluetoothHostRoom {
                    randomInt            ;
                    now              ;
 
-  constructor(options   
-                   
-                                       
-                          
-                       
-                                                                           
-                            
+  constructor(options
+
+
+
+
+
+
    ) {
     this.randomInt = options.randomInt;
     this.now = options.now ?? (() => Date.now());

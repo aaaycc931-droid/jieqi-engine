@@ -14,11 +14,8 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-/**
- * First-stage offline shell.  The complete game UI and rules are bundled below
- * android_asset/game.  Bluetooth and the JavaScript bridge deliberately arrive
- * in the next stage, so no native surface is exposed to page JavaScript yet.
- */
+/** Trusted offline game shell. The bundled page receives only the narrow
+ * Bluetooth transport bridge needed for the two-phone room protocol. */
 public final class MainActivity extends Activity {
   private static final String GAME_URL = "file:///android_asset/game/web/index.html";
   private static final int BLUETOOTH_PERMISSION_REQUEST = 4101;

@@ -4,24 +4,24 @@ import {
   applyAuthoritativeMove,
   applyResignation,
 } from "./game.js";
-             
-                       
-            
-              
-              
-       
-                    
 
-                           
-                                          
-                   
-                      
- 
 
-                                 
-                                          
-                   
- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export function sideForPlayer(room          , playerId        )       {
   if (room.players.red === playerId) return "red";
