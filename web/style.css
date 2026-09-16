@@ -439,8 +439,8 @@ dialog::backdrop { background: rgba(22, 10, 7, 0.68); }
   position: relative;
   z-index: 2;
   display: grid;
-  width: 100%;
-  height: 100%;
+  width: 107%;
+  height: 107%;
   place-items: center;
   border: 0;
   border-radius: 0;
@@ -505,7 +505,7 @@ dialog::backdrop { background: rgba(22, 10, 7, 0.68); }
 }
 .v4-board .execution-ghost {
   position: absolute;
-  width: 8.395%;
+  width: 8.98265%;
   height: auto;
   aspect-ratio: 1;
   opacity: 0;
