@@ -36,6 +36,11 @@ import {
   encodeBluetoothEnvelope,
   parseBluetoothEnvelope,
 } from "../src/bluetooth-protocol.js";
+import {
+  HERO_PREPARATION_DURATION_MS,
+  HERO_SELECTION_DURATION_MS,
+
+} from "../src/remote-room.js";
 
 
 
@@ -46,9 +51,34 @@ import {
 
 
 
+import { trapTriggerAnnouncement } from "./messages.js";
 
 const PLAYER_ONE = "玩家一";
 const PLAYER_TWO = "玩家二";
+const HERO_IDS                    = ["hunter", "rogue", "warrior"];
+const MUTATION_IDS                        = ["iron_steed", "iron_wall", "shadow_dance", "war_chariot", "expedition", "cavalry"];
+const heroCatalog                                                                                                                  = {
+  hunter: {
+    name: "猎人",
+    skills: [{
+      name: "陷阱",
+      description: "战斗准备时在己方半场秘密布置两层陷阱；可放在棋子脚下，也可同格叠加。",
+      fullDescription: "英雄入场后进入最多 60 秒的战斗准备。猎人在己方半场秘密布置两层陷阱，可放在棋子脚下或同格叠加。敌方棋子落入时消耗一层并直接死亡；未触发的层在十个敌方正式回合后消失。",
+    }],
+  },
+  rogue: {
+    name: "潜行者",
+    skills: [
+      { name: "刺杀", description: "每局一次，使己方明棋进行一次不吃子的合法移动并进入隐身。", fullDescription: "每局一次，选择己方一枚非将帅明棋移动到合法空位；第一次行动不能吃子或使用强击。行动结束后进入隐身并保留一次强击。" },
+      { name: "隐身", description: "隐身棋不阻挡、不能被普通吃子，也不触发普通将军。", fullDescription: "隐身持续接下来的两个己方正式回合。隐身棋仍占据落点，但不阻挡路线、不产生攻击和将军，也不能被普通吃子；主动行动或持续时间结束后解除。" },
+      { name: "强击", description: "隐身期间可直接击杀目标并清除其全部效果，使用后解除隐身。", fullDescription: "沿来源棋子的合法移动与吃子几何直接击杀一个非将帅目标，并先清除目标效果。强击完成后攻击者落在目标点，本次隐身结束。" },
+    ],
+  },
+  warrior: {
+    name: "战士",
+    skills: [{ name: "盔甲", description: "前两枚离开己方九宫的棋子获得一次防御；将帅另可免疫一次背刺。", fullDescription: "前两枚离开己方九宫的非将帅明棋获得一次防护壁垒，普通吃子会被弹回并消耗壁垒。将帅的铁甲可拦截一次背刺，并给予一次额外应将。" }],
+  },
+};
 const choiceLabel                            = { rock: "石头", scissors: "剪刀", paper: "布" };
 const pieceLabel = {
   red: { general: "帅", advisor: "仕", elephant: "相", horse: "马", rook: "车", cannon: "炮", pawn: "兵" },
@@ -64,6 +94,7 @@ function element                       (id        )    {
 
 const rpsView = element             ("rps-view");
 const lobbyView = element             ("lobby-view");
+const heroView = element             ("hero-view");
 const gameView = element             ("game-view");
 const rpsTitle = element             ("rps-title");
 const rpsHelp = element             ("rps-help");
@@ -80,13 +111,37 @@ const blackPlayer = element             ("black-player");
 const turnStatus = element             ("turn-status");
 const redCaptures = element             ("red-captures");
 const blackCaptures = element             ("black-captures");
+const battleTurnTimer = element             ("battle-turn-timer");
+const battleMutationName = element             ("battle-mutation-name");
+const capturedPanel = element             ("captured-panel");
+const capturedToggle = element                   ("captured-toggle");
+const battleMoreButton = element                   ("battle-more-button");
+const battleActionMenu = element             ("battle-action-menu");
+const statusBlueHeroName = element             ("status-blue-hero-name");
+const statusRedHeroName = element             ("status-red-hero-name");
 const flowDialog = element                   ("flow-dialog");
 const dialogTitle = element             ("dialog-title");
 const dialogText = element             ("dialog-text");
 const dialogAction = element                   ("dialog-action");
 const toast = element             ("toast");
 const bluetoothStatus = element             ("bluetooth-status");
-const heroPicker = element             ("remote-hero-picker");
+const heroGrid = element             ("hero-grid");
+const heroDetailAvatar = element             ("hero-detail-avatar");
+const heroSelectionName = element             ("hero-selection-name");
+const heroSkillList = element             ("hero-skill-list");
+const heroSkillDescription = element             ("hero-skill-description");
+const heroSelectionTimer = element             ("hero-selection-timer");
+const heroOpponentStatus = element             ("hero-opponent-status");
+const heroConfirmButton = element                   ("hero-confirm-button");
+const openingSequence = element             ("opening-sequence");
+const mutationReveal = element             ("mutation-reveal");
+const heroIntroStage = element             ("hero-intro-stage");
+const heroPreparationPanel = element             ("hero-preparation-panel");
+const heroPreparationStatus = element             ("hero-preparation-status");
+const heroPreparationTimer = element             ("hero-preparation-timer");
+const trapUndoButton = element                   ("trap-undo-button");
+const preparationConfirmButton = element                   ("preparation-confirm-button");
+
 
 
 
@@ -139,11 +194,62 @@ let executionTimer                    ;
 let assassinationArmed = false;
 let strongStrikeArmed = false;
 let localHeroes                                = {};
+let localHeroChoices                                  = {};
+let localHeroConfirmed                          = { [PLAYER_ONE]: false, [PLAYER_TWO]: false };
+let localHeroActor = PLAYER_ONE;
+let heroDraft                    ;
+let activeSkillIndex = 0;
+let heroSelectionDeadlineAt                    ;
 let localTraps                   = [];
 let trapSetupQueue         = [];
 let trapSetupSide                  ;
-let trapPlacementCount = 0;
+let localTrapDraft             = [];
+let heroPreparationDeadlineAt                    ;
+let localPreparationActive = false;
+let openingActive = false;
+let openingTimer                    ;
+let battleTurnRevision                    ;
+let battleTurnDeadlineAt                    ;
 let bluetooth                              ;
+
+const BOARD_X_CENTERS = [81, 162, 242, 322, 402, 482, 562, 642, 722]         ;
+const BOARD_Y_CENTERS = [57, 134, 212, 289, 367, 444, 522, 599, 677, 755]         ;
+const RING_ASSETS = [
+  "top_1_master1_120deg.png",
+  "top_2_master2_120deg.png",
+  "top_3_master3_120deg.png",
+  "top_4_master4_180deg.png",
+  "top_5_master5_180deg.png",
+  "bottom_1_master1_240deg.png",
+  "bottom_2_master2_240deg.png",
+  "bottom_3_master3_0deg.png",
+  "bottom_4_master4_0deg.png",
+  "bottom_5_master5_0deg.png",
+]         ;
+
+function ringAsset(index        )         {
+  return `./assets/gameplay-v4/components/rings-display-68/${RING_ASSETS[index % RING_ASSETS.length]}`;
+}
+
+function glyphAsset(color      , type           )         {
+  return `./assets/gameplay-v4/runtime/glyphs/${color}-${type}.png`;
+}
+
+function createPieceGlyph(color      , type           )                   {
+  const glyph = document.createElement("img");
+  glyph.className = "piece-glyph";
+  glyph.src = glyphAsset(color, type);
+  glyph.alt = "";
+  glyph.setAttribute("aria-hidden", "true");
+  glyph.draggable = false;
+  return glyph;
+}
+
+function stableRingIndex(value        )         {
+  let hash = 0;
+  for (const character of value) hash = ((hash * 31) + character.charCodeAt(0)) >>> 0;
+  return hash % RING_ASSETS.length;
+}
 
 function nativeBluetooth()                                    {
   return (window                                                         ).JieqiBluetooth;
@@ -176,10 +282,26 @@ function randomSessionText(prefix        )         {
 }
 
 function bluetoothModeConfig()                                                        {
-  return {
-    heroesEnabled: element                   ("bluetooth-heroes").value === "on",
-    mutationsEnabled: element                   ("bluetooth-mutations").value === "on",
-  };
+  return { heroesEnabled: true, mutationsEnabled: true };
+}
+
+function randomIndex(maxExclusive        )         {
+  const values = new Uint32Array(1);
+  globalThis.crypto.getRandomValues(values);
+  return values[0] % maxExclusive;
+}
+
+function randomHero()         {
+  return HERO_IDS[randomIndex(HERO_IDS.length)];
+}
+
+function randomMutation()             {
+  return MUTATION_IDS[randomIndex(MUTATION_IDS.length)];
+}
+
+function randomOwnHalfPosition(side      )           {
+  const index = randomIndex(45);
+  return { x: index % 9, y: (side === "red" ? 5 : 0) + Math.floor(index / 9) };
 }
 
 function setBluetoothStatus(message        )       {
@@ -188,9 +310,10 @@ function setBluetoothStatus(message        )       {
 
 function showLobby()       {
   lobbyView.hidden = false;
+  heroView.hidden = true;
   rpsView.hidden = true;
   gameView.hidden = true;
-  heroPicker.hidden = true;
+  openingSequence.hidden = true;
   const supported = Boolean(nativeBluetooth());
   element                   ("bluetooth-host-button").disabled = !supported;
   element                   ("bluetooth-refresh-button").disabled = !supported;
@@ -205,7 +328,8 @@ function showLobby()       {
 function activateLocalGame()       {
   bluetooth?.role && nativeBluetooth()?.disconnect();
   bluetooth = undefined;
-  resetRps();
+  resetMatch();
+  beginLocalHeroSelection();
 }
 
 function applyBluetoothView(view                      )       {
@@ -219,22 +343,64 @@ function applyBluetoothView(view                      )       {
   selectedPieceId = undefined;
   assassinationArmed = false;
   strongStrikeArmed = false;
+  if (view.phase === "hero_preparation") {
+    bluetooth.trapDraft = view.ownTrapDraft?.map((position) => ({ ...position })) ?? bluetooth.trapDraft;
+  } else if (view.phase !== "hero_intro") {
+    bluetooth.trapDraft = [];
+  }
   const assignments = view.rps?.assignments;
   if (assignments) {
     rpsPublic = view.rps ;
   }
 
-  if (view.phase === "rps" || view.phase === "hero_selection") {
+  const heroSelectionTimedOut = prior?.phase === "hero_selection"
+    && view.phase === "rps"
+    && Date.now() >= (prior.features?.heroSelection?.deadlineAt ?? Number.POSITIVE_INFINITY)
+    && Boolean(view.ownHeroChoice);
+  if (heroSelectionTimedOut) {
     lobbyView.hidden = true;
+    heroView.hidden = false;
+    rpsView.hidden = true;
+    gameView.hidden = true;
+    renderHeroSelection({
+      selected: view.ownHeroChoice,
+      confirmed: true,
+      opponentConfirmed: true,
+      deadlineAt: prior?.features?.heroSelection?.deadlineAt,
+    });
+    showToast("选择超时，系统已为未确认玩家随机英雄。");
+    window.setTimeout(() => {
+      if (bluetooth?.view?.phase !== "rps") return;
+      heroView.hidden = true;
+      rpsView.hidden = false;
+      renderRps();
+    }, 800);
+    return;
+  }
+
+  if (view.phase === "hero_selection") {
+    lobbyView.hidden = true;
+    heroView.hidden = false;
+    rpsView.hidden = true;
+    gameView.hidden = true;
+    renderHeroSelection();
+  } else if (view.phase === "rps") {
+    lobbyView.hidden = true;
+    heroView.hidden = true;
     rpsView.hidden = false;
     gameView.hidden = true;
     renderRps();
   } else if (view.state) {
     lobbyView.hidden = true;
+    heroView.hidden = true;
     rpsView.hidden = true;
     gameView.hidden = false;
     latestAnnouncement = bluetoothAnnouncement(view);
     renderGame();
+    if (view.phase === "hero_intro" && !bluetooth.openingStarted) {
+      bluetooth.openingStarted = true;
+      runOpeningSequence(() => handleBluetoothAction({ kind: "hero_intro_complete" }));
+    }
   }
 
   if (view.terminalAnimation && bluetooth.playedTerminalEventId !== view.terminalAnimation.eventId) {
@@ -254,7 +420,7 @@ function bluetoothAnnouncement(view                      )         {
 }
 
 function mutationName(mutation            )         {
-  return { iron_steed: "铁马", iron_wall: "铁壁", shadow_dance: "暗影之舞", war_chariot: "战车", expedition: "出征", cavalry: "骑兵" }[mutation];
+  return { iron_steed: "铁马", iron_wall: "堡垒", shadow_dance: "暗影之舞", war_chariot: "战车", expedition: "亲征", cavalry: "骑兵" }[mutation];
 }
 
 function sendBluetoothEnvelope   (envelope                                                                                                       )       {
@@ -325,11 +491,6 @@ function beginBluetoothHost()       {
   bluetooth = {
     role: "host",
     nativeState: "STARTING",
-    hostRoom: new BluetoothHostRoom({
-      roomId: randomSessionText("bt-room"),
-      admissionSecret: randomSessionText("physical"),
-      mode: bluetoothModeConfig(),
-    }),
     pendingAction: false,
     trapDraft: [],
   };
@@ -371,7 +532,7 @@ function refreshBluetoothDevices()       {
   }
 }
 
-function resetRps()       {
+function resetMatch()       {
   const session = createRpsState(PLAYER_ONE, PLAYER_TWO);
   rpsPublic = session.publicState;
   rpsSecret = session.secretState;
@@ -382,19 +543,46 @@ function resetRps()       {
   assassinationArmed = false;
   strongStrikeArmed = false;
   localHeroes = {};
+  localHeroChoices = {};
+  localHeroConfirmed = { [PLAYER_ONE]: false, [PLAYER_TWO]: false };
+  localHeroActor = PLAYER_ONE;
+  heroDraft = undefined;
+  activeSkillIndex = 0;
+  heroSelectionDeadlineAt = undefined;
   localTraps = [];
   trapSetupQueue = [];
   trapSetupSide = undefined;
-  trapPlacementCount = 0;
+  localTrapDraft = [];
+  heroPreparationDeadlineAt = undefined;
+  localPreparationActive = false;
+  openingActive = false;
+  battleTurnRevision = undefined;
+  battleTurnDeadlineAt = undefined;
   if (executionTimer) window.clearTimeout(executionTimer);
+  if (openingTimer) window.clearTimeout(openingTimer);
   executionTimer = undefined;
+  openingTimer = undefined;
   executionGhost.hidden = true;
   executionGhost.className = "execution-ghost";
   terminationEffect.className = "termination-effect";
+  capturedPanel.classList.remove("expanded");
+  capturedToggle.setAttribute("aria-expanded", "false");
+  battleActionMenu.hidden = true;
+  battleMoreButton.setAttribute("aria-expanded", "false");
   lobbyView.hidden = true;
-  rpsView.hidden = false;
+  heroView.hidden = true;
+  rpsView.hidden = true;
   gameView.hidden = true;
-  renderRps();
+}
+
+function beginLocalHeroSelection()       {
+  localHeroActor = PLAYER_ONE;
+  heroSelectionDeadlineAt = Date.now() + HERO_SELECTION_DURATION_MS;
+  lobbyView.hidden = true;
+  heroView.hidden = false;
+  rpsView.hidden = true;
+  gameView.hidden = true;
+  renderHeroSelection();
 }
 
 function showDialog(title        , text        , actionLabel        , action            )       {
@@ -415,21 +603,152 @@ function showToast(message        )       {
   toastTimer = window.setTimeout(() => toast.classList.remove("visible"), 2600);
 }
 
-function renderRps()       {
+function secondsRemaining(deadlineAt                    )         {
+  return deadlineAt === undefined ? 0 : Math.max(0, Math.ceil((deadlineAt - Date.now()) / 1_000));
+}
+
+function heroSelectionState()                                                                                             {
   if (bluetooth?.view?.phase === "hero_selection") {
-    const side = bluetooth.view.viewerSide;
-    const locked = side ? bluetooth.view.features?.heroSelection?.locked[side] : false;
-    rpsTitle.textContent = locked ? "英雄已锁定" : "选择你的英雄";
-    rpsHelp.textContent = locked ? "等待对方锁定英雄；双方选择完成后一起公开。" : "英雄选择为私有信息，对方选择完成前不会公开。";
-    rpsHistory.textContent = "";
-    heroPicker.hidden = Boolean(locked);
-    document.querySelectorAll                   (".rps-choice").forEach((button) => { button.hidden = true; });
-    element             ("red-hero").closest(".mode-picker") .hidden = true;
+    const own = ownBluetoothPlayerId();
+    const selection = bluetooth.view.features?.heroSelection;
+    const confirmed = own ? Boolean(selection?.confirmed[own]) : false;
+    const opponentConfirmed = own
+      ? Object.entries(selection?.confirmed ?? {}).some(([id, value]) => id !== own && value)
+      : false;
+    return {
+      selected: confirmed ? bluetooth.view.ownHeroChoice : heroDraft,
+      confirmed,
+      opponentConfirmed,
+      deadlineAt: selection?.deadlineAt,
+    };
+  }
+  const opponent = localHeroActor === PLAYER_ONE ? PLAYER_TWO : PLAYER_ONE;
+  return {
+    selected: localHeroConfirmed[localHeroActor] ? localHeroChoices[localHeroActor] : heroDraft,
+    confirmed: localHeroConfirmed[localHeroActor],
+    opponentConfirmed: localHeroConfirmed[opponent],
+    deadlineAt: heroSelectionDeadlineAt,
+  };
+}
+
+function renderHeroSelection(overrideState                                        )       {
+  const state = overrideState ?? heroSelectionState();
+  const selected = state.selected;
+  const remaining = secondsRemaining(state.deadlineAt);
+  heroSelectionTimer.textContent = String(remaining);
+  heroSelectionTimer.classList.toggle("urgent", remaining <= 10);
+  heroOpponentStatus.textContent = state.opponentConfirmed ? "对方已确定" : "对方选择中";
+  heroConfirmButton.textContent = state.confirmed ? "已确定" : "确定";
+  heroConfirmButton.disabled = state.confirmed || !selected || Boolean(bluetooth?.pendingAction);
+
+  if (!selected) {
+    heroSelectionName.textContent = "请选择英雄";
+    heroDetailAvatar.dataset.hero = "";
+    heroSkillList.replaceChildren();
+    heroSkillDescription.textContent = "选择下方英雄后查看技能。";
+  } else {
+    const hero = heroCatalog[selected];
+    heroSelectionName.textContent = hero.name;
+    heroDetailAvatar.dataset.hero = selected;
+    activeSkillIndex = Math.min(activeSkillIndex, hero.skills.length - 1);
+    heroSkillList.replaceChildren(...hero.skills.map((skill, index) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = `hero-skill-button${index === activeSkillIndex ? " active" : ""}`;
+      button.innerHTML = `<i aria-hidden="true">◌</i><span>${skill.name}</span>`;
+      button.setAttribute("aria-label", `${skill.name}：查看说明`);
+      button.addEventListener("click", () => {
+        activeSkillIndex = index;
+        renderHeroSelection(overrideState);
+      });
+      let helpTimer                    ;
+      const cancelHelp = () => {
+        if (helpTimer) window.clearTimeout(helpTimer);
+        helpTimer = undefined;
+      };
+      button.addEventListener("pointerdown", () => {
+        cancelHelp();
+        helpTimer = window.setTimeout(() => {
+          helpTimer = undefined;
+          showDialog(`${hero.name} · ${skill.name}`, skill.fullDescription, "知道了", () => undefined);
+        }, 650);
+      });
+      button.addEventListener("pointerup", cancelHelp);
+      button.addEventListener("pointercancel", cancelHelp);
+      button.addEventListener("pointerleave", cancelHelp);
+      button.addEventListener("contextmenu", (event) => {
+        event.preventDefault();
+        cancelHelp();
+        showDialog(`${hero.name} · ${skill.name}`, skill.fullDescription, "知道了", () => undefined);
+      });
+      return button;
+    }));
+    heroSkillDescription.textContent = hero.skills[activeSkillIndex].description;
+  }
+
+  heroGrid.replaceChildren(...HERO_IDS.map((heroId) => {
+    const hero = heroCatalog[heroId];
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `hero-grid-item${selected === heroId ? " selected" : ""}`;
+    button.disabled = state.confirmed;
+    button.innerHTML = `<span class="hero-art-placeholder grid-avatar" aria-hidden="true"><span>形象<br>待绘</span></span><span class="hero-grid-name${hero.name.length > 4 ? " long-name" : ""}">${hero.name}</span>`;
+    button.setAttribute("aria-label", `选择${hero.name}`);
+    button.addEventListener("click", () => {
+      if (state.confirmed) return;
+      heroDraft = heroId;
+      activeSkillIndex = 0;
+      renderHeroSelection();
+    });
+    return button;
+  }));
+}
+
+function confirmHeroSelection()       {
+  if (!heroDraft) return;
+  if (bluetooth?.view?.phase === "hero_selection") {
+    handleBluetoothAction({ kind: "hero", hero: heroDraft });
     return;
   }
-  heroPicker.hidden = true;
-  document.querySelectorAll                   (".rps-choice").forEach((button) => { button.hidden = false; });
-  element             ("red-hero").closest(".mode-picker") .hidden = Boolean(bluetooth);
+  localHeroChoices[localHeroActor] = heroDraft;
+  localHeroConfirmed[localHeroActor] = true;
+  if (localHeroConfirmed[PLAYER_ONE] && localHeroConfirmed[PLAYER_TWO]) {
+    beginLocalRps();
+    return;
+  }
+  const completed = localHeroActor;
+  localHeroActor = completed === PLAYER_ONE ? PLAYER_TWO : PLAYER_ONE;
+  heroDraft = undefined;
+  activeSkillIndex = 0;
+  showDialog("英雄已确定", `请将设备交给${localHeroActor}继续选择英雄。`, `${localHeroActor}已接手`, renderHeroSelection);
+  renderHeroSelection();
+}
+
+function handleLocalHeroSelectionTimeout()       {
+  if (heroSelectionDeadlineAt === undefined) return;
+  heroSelectionDeadlineAt = undefined;
+  for (const player of [PLAYER_ONE, PLAYER_TWO]) {
+    if (!localHeroConfirmed[player]) localHeroChoices[player] = randomHero();
+    localHeroConfirmed[player] = true;
+  }
+  heroDraft = localHeroChoices[localHeroActor];
+  renderHeroSelection();
+  if (flowDialog.open) flowDialog.close();
+  showToast(`选择超时，系统已为未确认玩家随机英雄。`);
+  window.setTimeout(beginLocalRps, 800);
+}
+
+function beginLocalRps()       {
+  if (flowDialog.open) flowDialog.close();
+  heroSelectionDeadlineAt = undefined;
+  heroView.hidden = true;
+  rpsView.hidden = false;
+  gameView.hidden = true;
+  rpsActor = PLAYER_ONE;
+  renderRps();
+}
+
+function renderRps()       {
   const tie = rpsPublic.lastResult?.tie;
   if (bluetooth?.view?.phase === "rps") {
     const submitted = bluetooth.view.rps?.submitted ?? {};
@@ -490,38 +809,245 @@ function submitChoice(choice           )       {
 
 function startGame()       {
   const session = createInitialGame();
-  const redHero = element                   ("red-hero").value               ;
-  const blackHero = element                   ("black-hero").value               ;
-  const mutation = element                   ("mutation").value                   ;
+  const assignments = rpsPublic.assignments ;
+  const redHero = localHeroChoices[assignments.red];
+  const blackHero = localHeroChoices[assignments.black];
+  if (!redHero || !blackHero) return showToast("双方英雄选择不完整，请重新开始。");
+  const mutation = randomMutation();
   localHeroes = {
-    ...(redHero ? { red: redHero } : {}),
-    ...(blackHero ? { black: blackHero } : {}),
+    red: redHero,
+    black: blackHero,
   };
   gameState = initializeFeatureGameState(
     session.state,
-    Object.keys(localHeroes).length > 0 ? localHeroes : undefined,
-    mutation || undefined,
+    localHeroes,
+    mutation,
   );
   gameSecret = session.secret;
   selectedPieceId = undefined;
   assassinationArmed = false;
   strongStrikeArmed = false;
   localTraps = [];
-  trapSetupQueue = (["red", "black"]         ).filter((side) => localHeroes[side] === "hunter");
-  trapSetupSide = trapSetupQueue.shift();
-  trapPlacementCount = 0;
+  trapSetupQueue = [];
+  trapSetupSide = undefined;
+  localTrapDraft = [];
+  localPreparationActive = false;
+  heroPreparationDeadlineAt = undefined;
   latestAnnouncement = `${rpsPublic.assignments .red}执红，红方先行。`;
+  heroView.hidden = true;
   rpsView.hidden = true;
   gameView.hidden = false;
   renderGame();
-  if (trapSetupSide) {
-    showDialog(
-      `${trapSetupSide === "red" ? "红方" : "黑方"}猎人布置陷阱`,
-      "请在自己的半场点选两个位置。坐标只在本机当前交接阶段可见，允许重叠与放在棋子脚下。",
-      "开始布置",
-      () => renderGame(),
-    );
+  runOpeningSequence(beginLocalHeroPreparation);
+}
+
+function battleHeroes()                                   {
+  const remote = bluetooth?.view?.features?.heroes;
+  if (remote) return remote;
+  if (localHeroes.red && localHeroes.black) return { red: localHeroes.red, black: localHeroes.black };
+  return undefined;
+}
+
+function setBattleHeroAvatars(heroes                      , visible         )       {
+  for (const side of ["red", "black"]         ) {
+    const avatar = element             (`${side}-hero-avatar`);
+    avatar.hidden = !visible;
+    avatar.dataset.hero = heroes[side];
+    avatar.title = heroCatalog[heroes[side]].name;
   }
+}
+
+function runOpeningSequence(onComplete            )       {
+  const heroes = battleHeroes();
+  const mutation = bluetooth?.view?.features?.mutation ?? gameState?.featureRules?.mutation;
+  if (!heroes) return onComplete();
+  openingActive = true;
+  setBattleHeroAvatars(heroes, false);
+  openingSequence.hidden = false;
+  heroIntroStage.hidden = true;
+  heroIntroStage.classList.remove("playing");
+  mutationReveal.hidden = false;
+  mutationReveal.textContent = mutation ? mutationName(mutation) : "无畸变";
+  mutationReveal.style.animation = "none";
+  void mutationReveal.offsetWidth;
+  mutationReveal.style.animation = "";
+  if (openingTimer) window.clearTimeout(openingTimer);
+  openingTimer = window.setTimeout(() => {
+    mutationReveal.hidden = true;
+    const blackHero = element             ("intro-black-hero");
+    const redHero = element             ("intro-red-hero");
+    blackHero.querySelector("b") .textContent = heroCatalog[heroes.black].name;
+    redHero.querySelector("b") .textContent = heroCatalog[heroes.red].name;
+    heroIntroStage.hidden = false;
+    heroIntroStage.classList.add("playing");
+    openingTimer = window.setTimeout(() => {
+      heroIntroStage.classList.remove("playing");
+      heroIntroStage.hidden = true;
+      openingSequence.hidden = true;
+      openingActive = false;
+      setBattleHeroAvatars(heroes, true);
+      openingTimer = undefined;
+      onComplete();
+    }, 2_000);
+  }, 1_200);
+}
+
+function beginLocalHeroPreparation()       {
+  trapSetupQueue = (["red", "black"]         ).filter((side) => localHeroes[side] === "hunter");
+  trapSetupSide = trapSetupQueue.shift();
+  localTrapDraft = [];
+  if (!trapSetupSide) {
+    finishLocalHeroPreparation();
+    return;
+  }
+  localPreparationActive = true;
+  heroPreparationDeadlineAt = Date.now() + HERO_PREPARATION_DURATION_MS;
+  renderGame();
+  showDialog(
+    `${trapSetupSide === "red" ? "红方" : "蓝方"}英雄准备`,
+    "猎人需要在己方半场布置两层陷阱；可以同格叠加，也可放在棋子脚下。",
+    "开始准备",
+    renderGame,
+  );
+}
+
+function finishLocalHeroPreparation()       {
+  localPreparationActive = false;
+  heroPreparationDeadlineAt = undefined;
+  trapSetupSide = undefined;
+  trapSetupQueue = [];
+  localTrapDraft = [];
+  latestAnnouncement = `${rpsPublic.assignments .red}执红，红方先行。`;
+  renderGame();
+}
+
+function commitLocalTrapDraft(side      )       {
+  const firstLayerIndex = localTraps.length;
+  localTrapDraft.forEach((position, index) => localTraps.push({
+    id: `local-trap:${side}:${firstLayerIndex + index}`,
+    owner: side,
+    position: { ...position },
+    opponentTurnsRemaining: 10,
+  }));
+}
+
+function completeLocalHeroPreparation()       {
+  if (!localPreparationActive || !trapSetupSide) return;
+  if (localTrapDraft.length !== 2) return showToast("请先布置完两层陷阱。");
+  const completedSide = trapSetupSide;
+  commitLocalTrapDraft(completedSide);
+  trapSetupSide = trapSetupQueue.shift();
+  localTrapDraft = [];
+  if (!trapSetupSide) {
+    finishLocalHeroPreparation();
+    return;
+  }
+  renderGame();
+  showDialog(
+    `${completedSide === "red" ? "红方" : "蓝方"}准备完成`,
+    `请将设备交给${trapSetupSide === "red" ? "红方" : "蓝方"}猎人继续准备。`,
+    "继续准备",
+    renderGame,
+  );
+}
+
+function handleLocalPreparationTimeout()       {
+  if (!localPreparationActive) return;
+  if (trapSetupSide) {
+    while (localTrapDraft.length < 2) localTrapDraft.push(randomOwnHalfPosition(trapSetupSide));
+    commitLocalTrapDraft(trapSetupSide);
+  }
+  if (flowDialog.open) flowDialog.close();
+  for (const side of trapSetupQueue) {
+    localTrapDraft = [randomOwnHalfPosition(side), randomOwnHalfPosition(side)];
+    commitLocalTrapDraft(side);
+  }
+  showToast("准备时间结束，系统已随机补齐剩余陷阱。");
+  finishLocalHeroPreparation();
+}
+
+function undoTrapDraft()       {
+  if (bluetooth?.view?.phase === "hero_preparation") {
+    const side = bluetooth.view.viewerSide;
+    const ready = side ? bluetooth.view.features?.heroPreparation?.ready[side] : true;
+    if (!side || ready || bluetooth.trapDraft.length === 0) return;
+    bluetooth.trapDraft.pop();
+    handleBluetoothAction({
+      kind: "trap_draft",
+      positions: bluetooth.trapDraft.map((position) => ({ ...position })),
+    });
+    renderGame();
+    return;
+  }
+  if (!localPreparationActive || localTrapDraft.length === 0) return;
+  localTrapDraft.pop();
+  renderGame();
+}
+
+function confirmHeroPreparation()       {
+  if (bluetooth?.view?.phase === "hero_preparation") {
+    handleBluetoothAction({ kind: "preparation_ready" });
+    return;
+  }
+  completeLocalHeroPreparation();
+}
+
+function updateVisibleTimers()       {
+  if (!heroView.hidden) {
+    const state = heroSelectionState();
+    const remaining = secondsRemaining(state.deadlineAt);
+    heroSelectionTimer.textContent = String(remaining);
+    heroSelectionTimer.classList.toggle("urgent", remaining <= 10);
+    if (remaining === 0) {
+      if (bluetooth?.role === "host" && bluetooth.view?.phase === "hero_selection") {
+        publishBluetoothViews();
+      } else if (!bluetooth && heroSelectionDeadlineAt !== undefined) {
+        handleLocalHeroSelectionTimeout();
+      }
+    }
+  }
+
+  const remotePreparation = bluetooth?.view?.phase === "hero_preparation";
+  if (!gameView.hidden && (remotePreparation || localPreparationActive)) {
+    const deadlineAt = remotePreparation
+      ? bluetooth?.view?.features?.heroPreparation?.deadlineAt
+      : heroPreparationDeadlineAt;
+    const remaining = secondsRemaining(deadlineAt);
+    heroPreparationTimer.textContent = String(remaining);
+    heroPreparationTimer.classList.toggle("urgent", remaining <= 10);
+    if (remaining === 0) {
+      if (bluetooth?.role === "host" && remotePreparation) {
+        publishBluetoothViews();
+      } else if (!bluetooth && localPreparationActive) {
+        handleLocalPreparationTimeout();
+      }
+    }
+  }
+
+  updateBattleTurnTimer();
+}
+
+function updateBattleTurnTimer()       {
+  if (gameView.hidden || !gameState) return;
+  const waitingForOpening = openingActive
+    || localPreparationActive
+    || bluetooth?.view?.phase === "hero_intro"
+    || bluetooth?.view?.phase === "hero_preparation";
+  if (gameState.status !== "playing" || waitingForOpening) {
+    battleTurnDeadlineAt = undefined;
+    battleTurnRevision = undefined;
+    battleTurnTimer.textContent = gameState.status === "finished" ? "0" : "60";
+    battleTurnTimer.classList.remove("urgent");
+    return;
+  }
+  if (battleTurnRevision !== gameState.revision || battleTurnDeadlineAt === undefined) {
+    battleTurnRevision = gameState.revision;
+    battleTurnDeadlineAt = Date.now() + 60_000;
+  }
+  const remaining = secondsRemaining(battleTurnDeadlineAt);
+  battleTurnTimer.textContent = String(remaining);
+  battleTurnTimer.classList.toggle("urgent", remaining <= 10);
+  // 当前规则只确认了 60 秒视觉倒计时；归零后的自动判负/换手仍待产品确认。
 }
 
 function positionKey(position          )         {
@@ -565,8 +1091,16 @@ function renderBoard()       {
   const executionPlan = gameState.status === "execution"
     ? getAutomaticExecutionPlan(gameState)
     : undefined;
-  const ownTrapKeys = new Set((bluetooth?.view?.ownTraps ?? localTraps)
-    .map((trap) => positionKey(trap.position)));
+  const visibleTrapPositions = bluetooth?.view
+    ? bluetooth.view.phase === "hero_preparation"
+      ? (bluetooth.view.ownTrapDraft ?? bluetooth.trapDraft)
+      : (bluetooth.view.ownTraps ?? []).map((trap) => trap.position)
+    : localPreparationActive ? localTrapDraft : [];
+  const ownTrapCounts = new Map                ();
+  for (const position of visibleTrapPositions) {
+    const key = positionKey(position);
+    ownTrapCounts.set(key, (ownTrapCounts.get(key) ?? 0) + 1);
+  }
   const fragment = document.createDocumentFragment();
 
   for (let y = 0; y <= 9; y += 1) {
@@ -577,8 +1111,8 @@ function renderBoard()       {
       const point = document.createElement("button");
       point.type = "button";
       point.className = "point";
-      point.style.left = `${(x / 8) * 100}%`;
-      point.style.top = `${(y / 9) * 100}%`;
+      point.style.left = `${(BOARD_X_CENTERS[x] / 810) * 100}%`;
+      point.style.top = `${(BOARD_Y_CENTERS[y] / 812) * 100}%`;
       point.dataset.x = String(x);
       point.dataset.y = String(y);
       point.setAttribute("aria-label", piece
@@ -590,13 +1124,15 @@ function renderBoard()       {
       if (lastMove && positionKey(lastMove.to) === key) point.classList.add("last-to");
       if (executionPlan && positionKey(executionPlan.from) === key) point.classList.add("execution-source");
       if (executionPlan && positionKey(executionPlan.to) === key) point.classList.add("execution-target");
-      if (ownTrapKeys.has(key)) point.classList.add("own-trap");
+      const trapLayers = ownTrapCounts.get(key) ?? 0;
+      if (trapLayers > 0) point.classList.add("own-trap", `trap-layers-${Math.min(trapLayers, 2)}`);
 
       if (piece) {
         const token = document.createElement("span");
         token.className = `piece ${piece.faceDown ? "covered" : piece.color}`;
+        token.style.setProperty("--ring-url", `url("${ringAsset(stableRingIndex(piece.id))}")`);
         token.setAttribute("aria-hidden", "true");
-        token.textContent = piece.faceDown ? "◇" : pieceLabel[piece.color][piece.type];
+        if (!piece.faceDown) token.append(createPieceGlyph(piece.color, piece.type));
         point.append(token);
         const effects = gameState.effectsByPieceId?.[piece.id];
         const badge = effects?.stealth ? "隐" : effects?.barrier ? "盾" : effects?.cavalry ? "骑" : undefined;
@@ -606,6 +1142,13 @@ function renderBoard()       {
           marker.textContent = badge;
           point.append(marker);
         }
+      }
+      if (trapLayers > 0) {
+        const trapCount = document.createElement("small");
+        trapCount.className = "trap-layer-count";
+        trapCount.textContent = String(trapLayers);
+        trapCount.setAttribute("aria-label", `己方陷阱 ${trapLayers} 层`);
+        point.append(trapCount);
       }
       fragment.append(point);
     }
@@ -623,7 +1166,8 @@ function renderCaptures(container             , side      )       {
   container.replaceChildren(...captured.map((piece) => {
     const token = document.createElement("span");
     token.className = `captured-token ${piece.color}`;
-    token.textContent = pieceLabel[piece.color][piece.type];
+    token.style.setProperty("--ring-url", `url("${ringAsset(stableRingIndex(piece.id))}")`);
+    token.append(createPieceGlyph(piece.color, piece.type));
     token.title = `${piece.color === "red" ? "红" : "黑"}${pieceLabel[piece.color][piece.type]}`;
     return token;
   }));
@@ -662,20 +1206,51 @@ function finishTitle()         {
 function renderGame()       {
   if (!gameState || !rpsPublic.assignments) return;
   const remoteView = bluetooth?.view;
-  const remoteTrapSetup = remoteView?.phase === "trap_setup";
+  const remotePreparation = remoteView?.phase === "hero_preparation";
   const remoteSide = remoteView?.viewerSide;
   const remoteIsHunter = Boolean(remoteSide && remoteView?.features?.heroes?.[remoteSide] === "hunter");
-  const remoteTrapDone = Boolean(remoteSide && remoteView?.features?.trapSetup?.submitted[remoteSide]);
+  const remoteReady = Boolean(remoteSide && remoteView?.features?.heroPreparation?.ready[remoteSide]);
+  const preparationActive = Boolean(remotePreparation || localPreparationActive);
+  const preparationDraft = remotePreparation ? bluetooth?.trapDraft ?? [] : localTrapDraft;
+  const preparationDeadline = remotePreparation
+    ? remoteView?.features?.heroPreparation?.deadlineAt
+    : heroPreparationDeadlineAt;
   redPlayer.textContent = rpsPublic.assignments.red;
   blackPlayer.textContent = rpsPublic.assignments.black;
-  if (remoteTrapSetup) {
-    turnStatus.innerHTML = `<b>${remoteIsHunter ? "猎人布置" : "等待猎人布置"}</b><span>${bluetooth .trapDraft.length} / 2</span>`;
-    announcement.textContent = remoteIsHunter ? "在己方半场点选两个陷阱位置。落点与叠层仅对你可见。" : "对方正在私下布置陷阱，请等待。";
-    moveHint.textContent = remoteTrapDone ? "你的陷阱已锁定，等待另一名猎人。" : remoteIsHunter ? `请选择第 ${bluetooth .trapDraft.length + 1} 个陷阱位置。` : "等待布置完成。";
-  } else if (trapSetupSide) {
-    turnStatus.innerHTML = `<b>${trapSetupSide === "red" ? "红方" : "黑方"}猎人布置</b><span>陷阱 ${trapPlacementCount} / 2</span>`;
-    announcement.textContent = "陷阱坐标仅对布置方可见；两层可以重叠，也可放在棋子脚下。";
-    moveHint.textContent = `请在${trapSetupSide === "red" ? "红方" : "黑方"}半场点选第 ${trapPlacementCount + 1} 个陷阱位置。`;
+  const heroes = battleHeroes();
+  statusBlueHeroName.textContent = heroes?.black ? heroCatalog[heroes.black].name : "英雄";
+  statusRedHeroName.textContent = heroes?.red ? heroCatalog[heroes.red].name : "英雄";
+  if (heroes) {
+    element             ("black-hero-avatar").dataset.hero = heroes.black;
+    element             ("red-hero-avatar").dataset.hero = heroes.red;
+  }
+  const mutation = remoteView?.features?.mutation ?? gameState.featureRules?.mutation;
+  battleMutationName.textContent = mutation ? mutationName(mutation) : "无畸变";
+  heroPreparationPanel.hidden = !preparationActive;
+  if (preparationActive) {
+    const remaining = secondsRemaining(preparationDeadline);
+    heroPreparationTimer.textContent = String(remaining);
+    heroPreparationTimer.classList.toggle("urgent", remaining <= 10);
+    const canPrepare = remotePreparation ? remoteIsHunter && !remoteReady : Boolean(trapSetupSide);
+    const sideLabel = remotePreparation
+      ? remoteSide === "red" ? "红方" : "蓝方"
+      : trapSetupSide === "red" ? "红方" : "蓝方";
+    turnStatus.innerHTML = `<b>战斗准备</b><span>${canPrepare ? `${sideLabel}陷阱 ${preparationDraft.length} / 2` : "等待对方"}</span>`;
+    announcement.textContent = canPrepare ? "在己方半场布置两层陷阱；可同格叠加，也可放在棋子脚下。" : "你的英雄无需操作或已经完成，正在等待对方准备。";
+    moveHint.textContent = canPrepare
+      ? preparationDraft.length < 2 ? `还需布置 ${2 - preparationDraft.length} 层陷阱。` : "陷阱已布置完成，点击“完成准备”锁定。"
+      : "对方准备完成后将自动开始正式行棋。";
+    heroPreparationStatus.textContent = canPrepare
+      ? `陷阱 ${preparationDraft.length}/2｜对方${remotePreparation && remoteSide ? remoteView.features?.heroPreparation?.ready[otherSide(remoteSide)] ? "已完成" : "准备中" : "准备中"}`
+      : "已完成，等待对方";
+    trapUndoButton.hidden = !canPrepare;
+    preparationConfirmButton.hidden = !canPrepare;
+    trapUndoButton.disabled = preparationDraft.length === 0 || Boolean(bluetooth?.pendingAction);
+    preparationConfirmButton.disabled = preparationDraft.length !== 2 || Boolean(bluetooth?.pendingAction);
+  } else if (openingActive || remoteView?.phase === "hero_intro") {
+    turnStatus.innerHTML = `<b>英雄入场</b><span>准备阶段尚未开始</span>`;
+    announcement.textContent = "本局畸变与双方英雄正在公布。";
+    moveHint.textContent = "动画结束、英雄头像落位后开始战斗准备。";
   } else if (gameState.status === "finished") {
     turnStatus.innerHTML = `<b>对局结束</b><span>第 ${gameState.revision} 手</span>`;
     announcement.textContent = finishMessage();
@@ -687,7 +1262,7 @@ function renderGame()       {
     moveHint.textContent = "棋盘已锁定，终结动画播放完毕后公布结果。";
   } else {
     const player = rpsPublic.assignments[gameState.turn];
-    turnStatus.innerHTML = `<b>${gameState.turn === "red" ? "红方" : "黑方"}行棋</b><span>${player} · 第 ${gameState.revision + 1} 手</span>`;
+    turnStatus.innerHTML = `<b>${gameState.turn === "red" ? "红方" : "蓝方"}行棋</b><span>${player} · 第 ${gameState.revision + 1} 手</span>`;
     const inCheck = isGeneralInCheck(gameState, gameState.turn);
     announcement.textContent = inCheck ? `${gameState.turn === "red" ? "红帅" : "黑将"}正在被将军，必须应将。` : latestAnnouncement;
     moveHint.textContent = selectedPieceId ? descriptionForPiece(selectedPieceId) : "点选当前方控制的棋子，再点选绿色落点。";
@@ -696,7 +1271,7 @@ function renderGame()       {
   renderCaptures(redCaptures, "red");
   renderCaptures(blackCaptures, "black");
   const remoteLocked = Boolean(bluetooth?.pendingAction) || (Boolean(remoteView) && remoteView?.viewerSide !== gameState.turn);
-  element                   ("resign-button").disabled = gameState.status !== "playing" || Boolean(trapSetupSide) || Boolean(remoteTrapSetup) || remoteLocked;
+  element                   ("resign-button").disabled = gameState.status !== "playing" || preparationActive || openingActive || remoteView?.phase === "hero_intro" || remoteLocked;
   const skill = gameState.assassination?.[gameState.turn];
   const active = skill?.activePieceId;
   const canAssassinate = Boolean(skill?.heroChargeAvailable || skill?.mutationChargeAvailable || active);
@@ -712,20 +1287,21 @@ function renderGame()       {
     return option;
   }));
   sourceSelect.hidden = availableSources.length === 0;
-  sourceSelect.disabled = gameState.status !== "playing" || Boolean(active) || remoteLocked;
+  sourceSelect.disabled = gameState.status !== "playing" || Boolean(active) || preparationActive || openingActive || remoteView?.phase === "hero_intro" || remoteLocked;
   const assassinationButton = element                   ("assassination-button");
-  assassinationButton.disabled = gameState.status !== "playing" || Boolean(trapSetupSide) || Boolean(remoteTrapSetup) || remoteLocked || !canAssassinate;
+  assassinationButton.disabled = gameState.status !== "playing" || preparationActive || openingActive || remoteView?.phase === "hero_intro" || remoteLocked || !canAssassinate;
   assassinationButton.textContent = active
     ? "选择隐身棋行动"
     : assassinationArmed ? "刺杀：请选择明棋" : "发动刺杀";
   const strongButton = element                   ("strong-strike-button");
-  strongButton.disabled = gameState.status !== "playing" || Boolean(trapSetupSide) || Boolean(remoteTrapSetup) || remoteLocked || !canAssassinate;
+  strongButton.disabled = gameState.status !== "playing" || preparationActive || openingActive || remoteView?.phase === "hero_intro" || remoteLocked || !active;
   strongButton.textContent = strongStrikeArmed ? "强击：请选择目标" : "发动强击";
+  updateBattleTurnTimer();
 }
 
 function moveSummary(targetWasCovered         , capturedLabel         , revealedLabel         )         {
   if (!gameState?.lastMove) return "已落子。";
-  const actor = gameState.lastMove.actingSide === "red" ? "红方" : "黑方";
+  const actor = gameState.lastMove.actingSide === "red" ? "红方" : "蓝方";
   const details = [capturedLabel ? `${actor}吃掉${capturedLabel}` : "已落子", revealedLabel ? `翻出${revealedLabel}` : ""];
   const crushed = gameState.lastMove.pathCrushed ?? [];
   if (crushed.length > 0) {
@@ -735,7 +1311,7 @@ function moveSummary(targetWasCovered         , capturedLabel         , revealed
   if (targetWasCovered && capturedLabel) details.push("被吃暗子已揭开");
   if (gameState.status === "execution") return `${details.filter(Boolean).join("，")}。终结已触发。`;
   if (gameState.status === "finished") return `${details.filter(Boolean).join("，")}。${finishMessage()}`;
-  return `${details.filter(Boolean).join("，")}。轮到${gameState.turn === "red" ? "红方" : "黑方"}。`;
+  return `${details.filter(Boolean).join("，")}。轮到${gameState.turn === "red" ? "红方" : "蓝方"}。`;
 }
 
 function beginAutomaticExecution()       {
@@ -754,7 +1330,8 @@ function beginAutomaticExecution()       {
   const reasonClass = gameState.reason === "ambush" ? "ambush" : "judgment";
   executionGhost.hidden = false;
   executionGhost.className = `execution-ghost piece ${source.color}`;
-  executionGhost.textContent = pieceLabel[source.color][source.type];
+  executionGhost.style.setProperty("--ring-url", `url("${ringAsset(stableRingIndex(source.id))}")`);
+  executionGhost.replaceChildren(createPieceGlyph(source.color, source.type));
   executionGhost.style.left = `${sourceRect.left - boardRect.left + sourceRect.width / 2}px`;
   executionGhost.style.top = `${sourceRect.top - boardRect.top + sourceRect.height / 2}px`;
   terminationEffect.textContent = gameState.reason === "ambush" ? "背刺" : "裁决";
@@ -804,7 +1381,8 @@ function playRemoteTerminalAnimation(terminal                                   
   const reasonClass = terminal.reason === "ambush" ? "ambush" : "judgment";
   executionGhost.hidden = false;
   executionGhost.className = `execution-ghost piece ${source.color}`;
-  executionGhost.textContent = pieceLabel[source.color][source.type];
+  executionGhost.style.setProperty("--ring-url", `url("${ringAsset(stableRingIndex(source.id))}")`);
+  executionGhost.replaceChildren(createPieceGlyph(source.color, source.type));
   executionGhost.style.left = `${sourceRect.left - boardRect.left + sourceRect.width / 2}px`;
   executionGhost.style.top = `${sourceRect.top - boardRect.top + sourceRect.height / 2}px`;
   terminationEffect.textContent = terminal.reason === "ambush" ? "背刺" : "裁决";
@@ -865,7 +1443,7 @@ function resolveLocalTrapsAfterAction()                     {
         ? layer
         : { ...layer, opponentTurnsRemaining: layer.opponentTurnsRemaining - 1 })
       .filter((layer) => layer.opponentTurnsRemaining > 0);
-    return `猎物已踏入陷阱！伏击触发，${trap.owner === "red" ? "红方" : "黑方"}获得胜利。`;
+    return trapTriggerAnnouncement(trap.owner, gameState.reason === "trap_ambush");
   }
   if (lastMove.countsAsFormalTurn !== false) {
     localTraps = localTraps
@@ -876,66 +1454,40 @@ function resolveLocalTrapsAfterAction()                     {
 }
 
 function placeLocalTrap(position          )       {
-  if (!trapSetupSide || !gameState) return;
+  if (!trapSetupSide || !gameState || !localPreparationActive) return;
   if (!isOwnHalf(trapSetupSide, position)) {
     showToast("陷阱只能布置在己方半场。");
     return;
   }
-  localTraps.push({
-    id: `local-trap:${trapSetupSide}:${trapPlacementCount}`,
-    owner: trapSetupSide,
-    position: { ...position },
-    opponentTurnsRemaining: 10,
-  });
-  trapPlacementCount += 1;
-  if (trapPlacementCount < 2) {
-    renderGame();
-    return;
-  }
-  const completedSide = trapSetupSide;
-  trapSetupSide = trapSetupQueue.shift();
-  trapPlacementCount = 0;
+  if (localTrapDraft.length >= 2) return showToast("两层陷阱已经放完；可撤回上一步后重新布置。");
+  localTrapDraft.push({ ...position });
   renderGame();
-  if (trapSetupSide) {
-    showDialog(
-      `${completedSide === "red" ? "红方" : "黑方"}陷阱已锁定`,
-      `请将设备交给${trapSetupSide === "red" ? "红方" : "黑方"}猎人布置其两个私有陷阱。`,
-      "继续布置",
-      () => renderGame(),
-    );
-  } else {
-    showDialog("陷阱布置完成", "双方陷阱已私下锁定，红方开始行棋。", "开始对局", () => renderGame());
-  }
 }
 
 function onBoardClick(event            )       {
   const target = (event.target               ).closest                   (".point");
   if (!target || !gameState) return;
   const to = { x: Number(target.dataset.x), y: Number(target.dataset.y) };
-  if (bluetooth?.view?.phase === "trap_setup") {
+  if (openingActive || bluetooth?.view?.phase === "hero_intro") return;
+  if (bluetooth?.view?.phase === "hero_preparation") {
     const side = bluetooth.view.viewerSide;
     const isHunter = Boolean(side && bluetooth.view.features?.heroes?.[side] === "hunter");
-    const alreadySubmitted = Boolean(side && bluetooth.view.features?.trapSetup?.submitted[side]);
-    if (!side || !isHunter || alreadySubmitted) return showToast("当前正在等待对方完成陷阱布置。");
+    const alreadyReady = Boolean(side && bluetooth.view.features?.heroPreparation?.ready[side]);
+    if (!side || !isHunter || alreadyReady) return showToast("当前正在等待对方完成英雄准备。");
     if (!isOwnHalf(side, to)) return showToast("陷阱只能布置在己方半场。");
+    if (bluetooth.trapDraft.length >= 2) return showToast("两层陷阱已经放完；可撤回上一步后重新布置。");
     bluetooth.trapDraft.push(to);
-    if (bluetooth.trapDraft.length < 2) {
-      renderGame();
-      return;
-    }
-    const positions = bluetooth.trapDraft;
-    bluetooth.trapDraft = [];
-    handleBluetoothAction({ kind: "traps", positions });
+    handleBluetoothAction({ kind: "trap_draft", positions: bluetooth.trapDraft });
     renderGame();
+    return;
+  }
+  if (localPreparationActive) {
+    placeLocalTrap(to);
     return;
   }
   if (gameState.status !== "playing") return;
   if (bluetooth?.view && bluetooth.view.viewerSide !== gameState.turn) {
     return showToast("现在轮到对方行棋。请等待房主同步。 ");
-  }
-  if (trapSetupSide) {
-    placeLocalTrap(to);
-    return;
   }
   const atTarget = pieceAt(gameState, to);
 
@@ -1040,17 +1592,38 @@ function onBoardClick(event            )       {
 document.querySelectorAll                   (".rps-choice").forEach((button) => {
   button.addEventListener("click", () => submitChoice(button.dataset.choice             ));
 });
-document.querySelectorAll                   (".hero-choices button").forEach((button) => {
-  button.addEventListener("click", () => {
-    if (!bluetooth?.view || bluetooth.view.phase !== "hero_selection") return;
-    handleBluetoothAction({ kind: "hero", hero: button.dataset.hero           });
-  });
-});
+heroConfirmButton.addEventListener("click", confirmHeroSelection);
+trapUndoButton.addEventListener("click", undoTrapDraft);
+preparationConfirmButton.addEventListener("click", confirmHeroPreparation);
 element                   ("local-game-button").addEventListener("click", activateLocalGame);
 element                   ("bluetooth-host-button").addEventListener("click", beginBluetoothHost);
 element                   ("bluetooth-refresh-button").addEventListener("click", refreshBluetoothDevices);
 element                   ("bluetooth-join-button").addEventListener("click", joinBluetoothRoom);
 boardPoints.addEventListener("click", onBoardClick);
+capturedToggle.addEventListener("click", () => {
+  const expanded = !capturedPanel.classList.contains("expanded");
+  capturedPanel.classList.toggle("expanded", expanded);
+  capturedToggle.setAttribute("aria-expanded", String(expanded));
+});
+
+function setBattleActionMenu(open         )       {
+  battleActionMenu.hidden = !open;
+  battleMoreButton.setAttribute("aria-expanded", String(open));
+}
+
+battleMoreButton.addEventListener("click", () => setBattleActionMenu(battleActionMenu.hidden));
+document.querySelectorAll                   (".v4-skill-trigger").forEach((button) => {
+  button.addEventListener("click", () => setBattleActionMenu(true));
+});
+element                   ("battle-rules-button").addEventListener("click", () => {
+  setBattleActionMenu(false);
+  showDialog(
+    "本局要点",
+    "暗子首步按所在兵种位置行动后揭开；暗子可以被任意一方吃，己方明子不可自残。翻出敌方棋子并直接将军会触发背刺。",
+    "知道了",
+    () => undefined,
+  );
+});
 element                   ("restart-button").addEventListener("click", () => {
   if (!gameState || gameState.status === "finished" || window.confirm("重新开始会结束当前对局，确定吗？")) {
     nativeBluetooth()?.disconnect();
@@ -1067,6 +1640,7 @@ document.querySelector                   (".brand") .addEventListener("click", (
   }
 });
 element                   ("resign-button").addEventListener("click", () => {
+  setBattleActionMenu(false);
   if (!gameState || gameState.status !== "playing") return;
   const player = rpsPublic.assignments?.[gameState.turn] ?? "当前方";
   if (!window.confirm(`${player}确定臣服吗？`)) return;
@@ -1083,6 +1657,7 @@ element                   ("resign-button").addEventListener("click", () => {
   showDialog(finishTitle(), finishMessage(), "查看棋盘", () => undefined);
 });
 element                   ("assassination-button").addEventListener("click", () => {
+  setBattleActionMenu(false);
   if (!gameState || gameState.status !== "playing") return;
   const activePieceId = gameState.assassination?.[gameState.turn]?.activePieceId;
   if (activePieceId) {
@@ -1099,22 +1674,20 @@ element                   ("assassination-button").addEventListener("click", () 
   renderGame();
 });
 element                   ("strong-strike-button").addEventListener("click", () => {
+  setBattleActionMenu(false);
   if (!gameState || gameState.status !== "playing") return;
   const activePieceId = gameState.assassination?.[gameState.turn]?.activePieceId;
+  if (!activePieceId) return showToast("强击只能由已经进入隐身的棋子发动。");
   strongStrikeArmed = !strongStrikeArmed;
-  if (activePieceId) {
-    selectedPieceId = activePieceId;
-    assassinationArmed = false;
-  } else {
-    assassinationArmed = strongStrikeArmed;
-    selectedPieceId = undefined;
-  }
+  selectedPieceId = activePieceId;
+  assassinationArmed = false;
   latestAnnouncement = strongStrikeArmed
     ? "强击已准备：选择可用刺杀棋，再选择一个非将帅目标。"
     : latestAnnouncement;
   renderGame();
 });
 flowDialog.addEventListener("cancel", (event) => event.preventDefault());
+window.setInterval(updateVisibleTimers, 250);
 
 window.addEventListener("jieqi-bluetooth", ((event                                   ) => {
   const detail = event.detail;
@@ -1124,7 +1697,14 @@ window.addEventListener("jieqi-bluetooth", ((event                              
     if (detail.state === "LISTENING") setBluetoothStatus("房主正在监听。请让另一台已配对手机选择本机并加入。");
     if (detail.state === "CONNECTED") {
       setBluetoothStatus("蓝牙已连接，正在同步房间。");
-      if (bluetooth?.role === "host") publishBluetoothViews();
+      if (bluetooth?.role === "host") {
+        bluetooth.hostRoom ??= new BluetoothHostRoom({
+          roomId: randomSessionText("bt-room"),
+          admissionSecret: randomSessionText("physical"),
+          mode: bluetoothModeConfig(),
+        });
+        publishBluetoothViews();
+      }
     }
     if (detail.state === "DISCONNECTED" || detail.state === "ERROR") {
       if (bluetooth) bluetooth.pendingAction = false;

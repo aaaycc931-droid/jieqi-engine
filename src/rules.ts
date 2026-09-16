@@ -336,7 +336,7 @@ export function validatePublicMove(
     const startsInsideEnemy = isInPalace(move.from, otherSide(destinationOwner));
     const endsInsideEnemy = isInPalace(move.to, otherSide(destinationOwner));
     if (!startsInsideEnemy && endsInsideEnemy) {
-      return { ok: false, code: "IRON_WALL", message: "铁壁阻止从九宫外进入敌方九宫" };
+      return { ok: false, code: "IRON_WALL", message: "堡垒阻止从九宫外进入敌方九宫" };
     }
   }
   if (hasStealthEffect(state, source.id) && !options.allowStealthSource) {
@@ -383,11 +383,14 @@ export function getLegalAssassinationMoves(
   const source = pieceById(state, pieceId);
   if (!source || getController(source) !== actingSide) return [];
   if (source.faceDown || source.type === "general") return [];
+  const continuing = state.assassination?.[actingSide]?.activePieceId === source.id;
+  if (!continuing && useStrongStrike) return [];
   const legal: Position[] = [];
   for (let y = 0; y <= 9; y += 1) {
     for (let x = 0; x <= 8; x += 1) {
       const to = { x, y };
       const target = pieceAt(state, to);
+      if (!continuing && target) continue;
       if (useStrongStrike && (!target || (!target.faceDown && target.type === "general"))) continue;
       if (validatePublicMove(state, { from: source, to }, actingSide, {
         allowStealthSource: hasStealthEffect(state, source.id),

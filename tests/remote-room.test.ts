@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import {
+  advanceRemoteRoomTime,
+  completeRemoteHeroIntro,
   RuleError,
   createRemoteRoom,
   joinRemoteRoom,
@@ -14,6 +16,7 @@ import {
   submitRemoteMove,
   submitRemoteRps,
   submitRemoteTrapSetup,
+  updateRemoteTrapDraft,
 } from "../src/index.ts";
 import type { RemoteRoom } from "../src/remote-room.ts";
 import { gameState, move, revealed, secretState, seededRandomInt } from "./helpers.ts";
@@ -129,7 +132,7 @@ test("ONLINE-05 客户端不能伪造服务端专用终局操作 ID", () => {
   );
 });
 
-test("MODE-01 双方锁定英雄前只公开锁定状态，本人可恢复自己的选择", () => {
+test("MODE-01 猜拳前双方确定英雄，只公开确认状态且本人可恢复选择", () => {
   const room = joinedRoom();
   const rpsFirst = submitRemoteRps(room, "alice", "scissors", 1, seededRandomInt(5), 300);
   const selecting = submitRemoteRps(rpsFirst, "bob", "paper", 1, seededRandomInt(5), 400);
@@ -147,28 +150,31 @@ test("MODE-01 双方锁定英雄前只公开锁定状态，本人可恢复自己
     "token",
     200,
   ).room;
-  const heroRpsFirst = submitRemoteRps(heroRoom, "alice", "scissors", 1, seededRandomInt(5), 300);
-  const selectingHeroes = submitRemoteRps(heroRpsFirst, "bob", "paper", 1, seededRandomInt(5), 400);
-  assert.equal(selectingHeroes.phase, "hero_selection");
-
   const aliceLocked = submitRemoteHeroSelection(
-    selectingHeroes,
+    heroRoom,
     "alice",
     "hunter",
     seededRandomInt(5),
     500,
   );
   const shared = publicRemoteRoom(aliceLocked);
-  assert.deepEqual(shared.features?.heroSelection?.locked, { red: true, black: false });
+  assert.deepEqual(shared.features?.heroSelection?.confirmed, { alice: true, bob: false });
   assert.equal(JSON.stringify(shared).includes("hunter"), false);
   assert.equal(playerRoomView(aliceLocked, "alice").ownHeroChoice, "hunter");
   assert.equal(playerRoomView(aliceLocked, "bob").ownHeroChoice, undefined);
+
+  const bothLocked = submitRemoteHeroSelection(aliceLocked, "bob", "warrior", seededRandomInt(5), 600);
+  assert.equal(bothLocked.phase, "rps");
+  assert.equal(JSON.stringify(publicRemoteRoom(bothLocked)).includes("hunter"), false);
+  const heroRpsFirst = submitRemoteRps(bothLocked, "alice", "scissors", 1, seededRandomInt(5), 700);
+  const intro = submitRemoteRps(heroRpsFirst, "bob", "paper", 1, seededRandomInt(5), 800);
+  assert.equal(intro.phase, "hero_intro");
+  assert.deepEqual(intro.features?.heroes, { red: "hunter", black: "warrior" });
 });
 
-test("MODE-02 英雄公开后抽取唯一畸变，双猎人秘密布置后才进入走棋", () => {
+test("MODE-02 英雄入场后双猎人同时准备，秘密锁定陷阱后才进入走棋", () => {
   const fixedZero = (_maxExclusive: number) => 0;
-  const rpsFirst = submitRemoteRps(
-    joinRemoteRoom(
+  const selection = joinRemoteRoom(
       createRemoteRoom(
         "setup-room",
         "alice",
@@ -179,23 +185,21 @@ test("MODE-02 英雄公开后抽取唯一畸变，双猎人秘密布置后才进
       "bob",
       "token",
       200,
-    ).room,
-    "alice",
-    "rock",
-    1,
-    fixedZero,
-    300,
-  );
-  const selecting = submitRemoteRps(rpsFirst, "bob", "scissors", 1, fixedZero, 400);
-  const aliceHero = submitRemoteHeroSelection(selecting, "alice", "hunter", fixedZero, 500);
-  const setup = submitRemoteHeroSelection(aliceHero, "bob", "hunter", fixedZero, 600);
-  assert.equal(setup.phase, "trap_setup");
+    ).room;
+  const aliceHero = submitRemoteHeroSelection(selection, "alice", "hunter", fixedZero, 300);
+  const rps = submitRemoteHeroSelection(aliceHero, "bob", "hunter", fixedZero, 400);
+  const rpsFirst = submitRemoteRps(rps, "alice", "rock", 1, fixedZero, 500);
+  const intro = submitRemoteRps(rpsFirst, "bob", "scissors", 1, fixedZero, 600);
+  assert.equal(intro.phase, "hero_intro");
+  const aliceIntro = completeRemoteHeroIntro(intro, "alice", 700);
+  const setup = completeRemoteHeroIntro(aliceIntro, "bob", 800);
+  assert.equal(setup.phase, "hero_preparation");
   assert.equal(setup.features?.mutation, "iron_steed");
   assert.deepEqual(setup.features?.heroes, { red: "hunter", black: "hunter" });
 
-  const redSet = submitRemoteTrapSetup(setup, "alice", [{ x: 0, y: 6 }, { x: 0, y: 6 }], 700);
-  assert.equal(redSet.phase, "trap_setup");
-  assert.deepEqual(redSet.features?.trapSetup?.submitted, { red: true });
+  const redSet = submitRemoteTrapSetup(setup, "alice", [{ x: 0, y: 6 }, { x: 0, y: 6 }], 900);
+  assert.equal(redSet.phase, "hero_preparation");
+  assert.deepEqual(redSet.features?.heroPreparation?.ready, { red: true, black: false });
   const sharedAfterTrap = JSON.stringify(publicRemoteRoom(redSet));
   assert.equal(sharedAfterTrap.includes("trap:red"), false);
   assert.equal(sharedAfterTrap.includes("opponentTurnsRemaining"), false);
@@ -205,15 +209,14 @@ test("MODE-02 英雄公开后抽取唯一畸变，双猎人秘密布置后才进
   ]);
   assert.deepEqual(playerRoomView(redSet, "bob").ownTraps, []);
 
-  const started = submitRemoteTrapSetup(redSet, "bob", [{ x: 8, y: 3 }, { x: 4, y: 3 }], 800);
+  const started = submitRemoteTrapSetup(redSet, "bob", [{ x: 8, y: 3 }, { x: 4, y: 3 }], 1_000);
   assert.equal(started.phase, "playing");
-  assert.equal(started.features?.trapSetup, undefined);
+  assert.equal(started.features?.heroPreparation, undefined);
   assert.equal(playerRoomView(started, "bob").ownTraps?.length, 2);
 });
 
 test("MODE-03 非猎人和越界坐标不能布置陷阱", () => {
-  const rpsFirst = submitRemoteRps(
-    joinRemoteRoom(
+  const selecting = joinRemoteRoom(
       createRemoteRoom(
         "trap-validation",
         "alice",
@@ -224,24 +227,63 @@ test("MODE-03 非猎人和越界坐标不能布置陷阱", () => {
       "bob",
       "token",
       200,
-    ).room,
-    "alice",
-    "rock",
-    1,
-    seededRandomInt(1),
-    300,
-  );
-  const selecting = submitRemoteRps(rpsFirst, "bob", "scissors", 1, seededRandomInt(1), 400);
-  const aliceHero = submitRemoteHeroSelection(selecting, "alice", "hunter", seededRandomInt(1), 500);
-  const setup = submitRemoteHeroSelection(aliceHero, "bob", "rogue", seededRandomInt(1), 600);
+    ).room;
+  const aliceHero = submitRemoteHeroSelection(selecting, "alice", "hunter", seededRandomInt(1), 300);
+  const rps = submitRemoteHeroSelection(aliceHero, "bob", "rogue", seededRandomInt(1), 400);
+  const rpsFirst = submitRemoteRps(rps, "alice", "rock", 1, seededRandomInt(1), 500);
+  const intro = submitRemoteRps(rpsFirst, "bob", "scissors", 1, seededRandomInt(1), 600);
+  const aliceIntro = completeRemoteHeroIntro(intro, "alice", 700);
+  const setup = completeRemoteHeroIntro(aliceIntro, "bob", 800);
   assert.throws(
-    () => submitRemoteTrapSetup(setup, "bob", [{ x: 0, y: 3 }, { x: 2, y: 3 }], 700),
+    () => submitRemoteTrapSetup(setup, "bob", [{ x: 0, y: 3 }, { x: 2, y: 3 }], 900),
     (error) => error instanceof RuleError && error.code === "NOT_HUNTER",
   );
   assert.throws(
-    () => submitRemoteTrapSetup(setup, "alice", [{ x: 0, y: 3 }, { x: 2, y: 3 }], 700),
+    () => submitRemoteTrapSetup(setup, "alice", [{ x: 0, y: 3 }, { x: 2, y: 3 }], 900),
     (error) => error instanceof RuleError && error.code === "INVALID_TRAP_POSITION",
   );
+});
+
+test("MODE-05 英雄选择六十秒超时只随机未确认玩家并进入猜拳", () => {
+  const fixedWarrior = (_maxExclusive: number) => 2;
+  const selecting = joinRemoteRoom(
+    createRemoteRoom("hero-timeout", "alice", "token", 100, { heroesEnabled: true }),
+    "bob",
+    "token",
+    200,
+  ).room;
+  const aliceLocked = submitRemoteHeroSelection(selecting, "alice", "hunter", fixedWarrior, 300);
+  const timedOut = advanceRemoteRoomTime(aliceLocked, fixedWarrior, 60_200);
+  assert.equal(timedOut.phase, "rps");
+  assert.equal(playerRoomView(timedOut, "alice").ownHeroChoice, "hunter");
+  assert.equal(playerRoomView(timedOut, "bob").ownHeroChoice, "warrior");
+  assert.equal(JSON.stringify(publicRemoteRoom(timedOut)).includes("hunter"), false);
+  assert.equal(JSON.stringify(publicRemoteRoom(timedOut)).includes("warrior"), false);
+});
+
+test("MODE-06 猎人准备超时保留草稿并随机补齐剩余层", () => {
+  const fixedZero = (_maxExclusive: number) => 0;
+  const selecting = joinRemoteRoom(
+    createRemoteRoom("prepare-timeout", "alice", "token", 100, { heroesEnabled: true }),
+    "bob",
+    "token",
+    200,
+  ).room;
+  const aliceHero = submitRemoteHeroSelection(selecting, "alice", "hunter", fixedZero, 300);
+  const rps = submitRemoteHeroSelection(aliceHero, "bob", "rogue", fixedZero, 400);
+  const rpsFirst = submitRemoteRps(rps, "alice", "rock", 1, fixedZero, 500);
+  const intro = submitRemoteRps(rpsFirst, "bob", "scissors", 1, fixedZero, 600);
+  const aliceIntro = completeRemoteHeroIntro(intro, "alice", 700);
+  const preparing = completeRemoteHeroIntro(aliceIntro, "bob", 800);
+  const drafted = updateRemoteTrapDraft(preparing, "alice", [{ x: 4, y: 7 }], 900);
+  const timedOut = advanceRemoteRoomTime(drafted, fixedZero, 60_800);
+  assert.equal(timedOut.phase, "playing");
+  assert.deepEqual(playerRoomView(timedOut, "alice").ownTraps?.map((trap) => trap.position), [
+    { x: 4, y: 7 },
+    { x: 0, y: 5 },
+  ]);
+  assert.equal(JSON.stringify(publicRemoteRoom(timedOut)).includes("trap:red"), false);
+  assert.equal(JSON.stringify(publicRemoteRoom(timedOut)).includes("trapDrafts"), false);
 });
 
 test("MODE-04 联机刺杀经房间事务结算，公开状态同步技能次数与隐身标记", () => {

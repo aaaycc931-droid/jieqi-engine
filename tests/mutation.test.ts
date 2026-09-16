@@ -3,12 +3,12 @@ import test from "node:test";
 import { applyAuthoritativeMove, getLegalMoves, initializeFeatureGameState, isGeneralInCheck, validatePublicMove } from "../src/index.ts";
 import { gameState, move, revealed, secretState } from "./helpers.ts";
 
-test("MUT-01 铁壁禁止从宫外落入敌方九宫", () => {
+test("MUT-01 堡垒禁止从宫外落入敌方九宫", () => {
   const state = initializeFeatureGameState(gameState([revealed("rook", "red", "rook", 4, 3)]), undefined, "iron_wall");
   assert.equal(validatePublicMove(state, { from: { x: 4, y: 3 }, to: { x: 4, y: 2 } }).code, "IRON_WALL");
 });
 
-test("MUT-02 出征将帅获得车式移动", () => {
+test("MUT-02 亲征将帅获得车式移动", () => {
   const state = initializeFeatureGameState(gameState([], { redGeneral: { x: 4, y: 9 } }), undefined, "expedition");
   assert.equal(getLegalMoves(state, "red-general").some((position) => position.x === 4 && position.y === 5), true);
 });

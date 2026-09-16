@@ -41,8 +41,6 @@ test("BTHOST-04 英雄、陷阱和私有坐标均通过房主单点结算", () =
     randomInt: () => 0,
     mode: { heroesEnabled: true, mutationsEnabled: true },
   });
-  room.handle(BLUETOOTH_HOST_PLAYER, { kind: "rps", choice: "rock", round: 1 });
-  room.handle(BLUETOOTH_GUEST_PLAYER, { kind: "rps", choice: "scissors", round: 1 });
   let views = room.views();
   assert.equal(views.publicRoom.phase, "hero_selection");
   assert.equal(views.guest.ownHeroChoice, undefined);
@@ -51,13 +49,24 @@ test("BTHOST-04 英雄、陷阱和私有坐标均通过房主单点结算", () =
   views = room.views();
   assert.equal(views.guest.ownHeroChoice, undefined, "guest cannot learn host hero early");
   views = room.handle(BLUETOOTH_GUEST_PLAYER, { kind: "hero", hero: "hunter" });
-  assert.equal(views.publicRoom.phase, "trap_setup");
+  assert.equal(views.publicRoom.phase, "rps");
+  assert.equal(views.guest.ownHeroChoice, "hunter");
+
+  room.handle(BLUETOOTH_HOST_PLAYER, { kind: "rps", choice: "rock", round: 1 });
+  views = room.handle(BLUETOOTH_GUEST_PLAYER, { kind: "rps", choice: "scissors", round: 1 });
+  assert.equal(views.publicRoom.phase, "hero_intro");
   assert.equal(views.publicRoom.features?.mutation, "iron_steed");
 
-  room.handle(BLUETOOTH_HOST_PLAYER, { kind: "traps", positions: [{ x: 0, y: 5 }, { x: 0, y: 5 }] });
+  room.handle(BLUETOOTH_HOST_PLAYER, { kind: "hero_intro_complete" });
+  views = room.handle(BLUETOOTH_GUEST_PLAYER, { kind: "hero_intro_complete" });
+  assert.equal(views.publicRoom.phase, "hero_preparation");
+
+  room.handle(BLUETOOTH_HOST_PLAYER, { kind: "trap_draft", positions: [{ x: 0, y: 5 }, { x: 0, y: 5 }] });
+  room.handle(BLUETOOTH_HOST_PLAYER, { kind: "preparation_ready" });
   views = room.views();
   assert.equal(views.guest.ownTraps?.length, 0, "guest cannot receive host trap coordinates");
-  views = room.handle(BLUETOOTH_GUEST_PLAYER, { kind: "traps", positions: [{ x: 0, y: 0 }, { x: 0, y: 0 }] });
+  room.handle(BLUETOOTH_GUEST_PLAYER, { kind: "trap_draft", positions: [{ x: 0, y: 0 }, { x: 0, y: 0 }] });
+  views = room.handle(BLUETOOTH_GUEST_PLAYER, { kind: "preparation_ready" });
   assert.equal(views.publicRoom.phase, "playing");
   assert.equal(views.host.ownTraps?.length, 2);
   assert.equal(views.guest.ownTraps?.length, 2);

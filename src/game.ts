@@ -632,6 +632,12 @@ export function applyAuthoritativeAssassination(
     if (sourcePiece.faceDown || sourcePiece.type === "general") {
       throw new RuleError("INVALID_ASSASSINATION_PIECE", "刺杀只能选择己方非将帅明棋");
     }
+    if (command.useStrongStrike) {
+      throw new RuleError("STRONG_STRIKE_REQUIRES_STEALTH", "强击只能由已经进入隐身的棋子发动");
+    }
+    if (pieceAt(state, command.to)) {
+      throw new RuleError("ASSASSINATION_FIRST_MOVE_MUST_BE_EMPTY", "刺杀首次行动只能移动到空位，不能吃子");
+    }
   }
 
   const validation = validatePublicMove(state, command, actingSide, {

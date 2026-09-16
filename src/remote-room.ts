@@ -37,11 +37,15 @@ import type { RpsChoice, RpsPublicState, RpsSecretState } from "./rps.ts";
 
 export type RemoteRoomPhase =
   | "waiting"
-  | "rps"
   | "hero_selection"
-  | "trap_setup"
+  | "rps"
+  | "hero_intro"
+  | "hero_preparation"
   | "playing"
   | "finished";
+
+export const HERO_SELECTION_DURATION_MS = 60_000;
+export const HERO_PREPARATION_DURATION_MS = 60_000;
 
 export const DEFAULT_OPTIONAL_MODE_CONFIG: OptionalModeConfig = {
   heroesEnabled: false,
@@ -72,15 +76,21 @@ export interface TerminalAnimation {
 }
 
 export interface HeroSelectionPublicState {
-  locked: Record<Side, boolean>;
+  confirmed: Record<string, boolean>;
+  deadlineAt: number;
 }
 
 export interface HeroSelectionSecretState {
-  choices: Partial<Record<Side, HeroId>>;
+  choices: Partial<Record<string, HeroId>>;
 }
 
-export interface TrapSetupPublicState {
-  submitted: Partial<Record<Side, boolean>>;
+export interface HeroIntroPublicState {
+  completed: Record<string, boolean>;
+}
+
+export interface HeroPreparationPublicState {
+  ready: Record<Side, boolean>;
+  deadlineAt: number;
 }
 
 /** Kept server-side and returned only to its owner through playerRoomView. */
@@ -105,12 +115,14 @@ export interface RoomFeaturePublicState {
   heroes?: Record<Side, HeroId>;
   mutation?: MutationId;
   heroSelection?: HeroSelectionPublicState;
-  trapSetup?: TrapSetupPublicState;
+  heroIntro?: HeroIntroPublicState;
+  heroPreparation?: HeroPreparationPublicState;
 }
 
 /** Never copy this object into a public room document or a shared watch. */
 export interface RoomFeatureSecretState {
   heroSelection?: HeroSelectionSecretState;
+  trapDrafts?: Partial<Record<Side, Position[]>>;
   traps: TrapLayer[];
 }
 
@@ -152,6 +164,7 @@ export interface PublicRemoteRoom {
 export interface PlayerRemoteRoomView extends PublicRemoteRoom {
   viewerSide?: Side;
   ownHeroChoice?: HeroId;
+  ownTrapDraft?: Position[];
   ownTraps?: TrapLayer[];
 }
 
@@ -196,6 +209,14 @@ function isHeroId(value: string): value is HeroId {
   return HERO_IDS.includes(value as HeroId);
 }
 
+function drawHero(randomInt?: RandomInt): HeroId {
+  const index = (randomInt ?? ((maxExclusive) => cryptoRandomInt(maxExclusive)))(HERO_IDS.length);
+  if (!Number.isInteger(index) || index < 0 || index >= HERO_IDS.length) {
+    throw new RangeError(`英雄随机数超出范围：${index}`);
+  }
+  return HERO_IDS[index];
+}
+
 function drawMutation(randomInt?: RandomInt): MutationId {
   const index = (randomInt ?? ((maxExclusive) => cryptoRandomInt(maxExclusive)))(
     MUTATION_IDS.length,
@@ -234,6 +255,12 @@ function makeSeat(playerId: string, now: number): RemoteSeat {
   return { playerId, connectedAt: now, lastSeenAt: now };
 }
 
+function roomPlayerIds(room: RemoteRoom): [string, string] {
+  const guest = room.seats.guest?.playerId;
+  if (!guest) throw new RuleError("ROOM_NOT_READY", "房间尚未坐满两名玩家");
+  return [room.seats.host.playerId, guest];
+}
+
 function assignmentsFor(room: RemoteRoom): { red: string; black: string } {
   const assignments = room.rps?.assignments;
   if (!assignments) {
@@ -255,6 +282,54 @@ function hunterSides(features: RoomFeaturePublicState | undefined): Side[] {
   return (["red", "black"] as const).filter((side) => heroes[side] === "hunter");
 }
 
+function randomOwnHalfPosition(side: Side, randomInt?: RandomInt): Position {
+  const index = (randomInt ?? ((maxExclusive) => cryptoRandomInt(maxExclusive)))(45);
+  if (!Number.isInteger(index) || index < 0 || index >= 45) {
+    throw new RangeError(`陷阱随机数超出范围：${index}`);
+  }
+  return {
+    x: index % 9,
+    y: (side === "red" ? 5 : 0) + Math.floor(index / 9),
+  };
+}
+
+function publicFeaturesAfterPreparation(features: RoomFeaturePublicState): RoomFeaturePublicState {
+  return {
+    ...(features.heroes ? { heroes: { ...features.heroes } } : {}),
+    ...(features.mutation ? { mutation: features.mutation } : {}),
+  };
+}
+
+function beginHeroPreparation(room: RemoteRoom, now: number): RemoteRoom {
+  const heroes = room.features?.heroes;
+  if (!heroes) return { ...room, phase: "playing", updatedAt: now };
+  const ready: Record<Side, boolean> = {
+    red: heroes.red !== "hunter",
+    black: heroes.black !== "hunter",
+  };
+  if (ready.red && ready.black) {
+    return {
+      ...room,
+      phase: "playing",
+      features: publicFeaturesAfterPreparation(room.features!),
+      updatedAt: now,
+    };
+  }
+  return {
+    ...room,
+    phase: "hero_preparation",
+    features: {
+      ...publicFeaturesAfterPreparation(room.features!),
+      heroPreparation: { ready, deadlineAt: now + HERO_PREPARATION_DURATION_MS },
+    },
+    featureSecret: {
+      ...(room.featureSecret ?? { traps: [] }),
+      trapDrafts: {},
+    },
+    updatedAt: now,
+  };
+}
+
 function createGameAfterSetup(
   room: RemoteRoom,
   randomInt: RandomInt | undefined,
@@ -268,17 +343,17 @@ function createGameAfterSetup(
     ...(heroes ? { heroes: { ...heroes } } : {}),
     ...(mutation ? { mutation } : {}),
   };
-  const hunters = hunterSides(features);
+  const playerIds = roomPlayerIds(room);
   return {
     ...room,
-    phase: hunters.length > 0 ? "trap_setup" : "playing",
+    phase: heroes ? "hero_intro" : "playing",
     game: {
       players: { red: assignments.red, black: assignments.black },
       state: initializeFeatureGameState(initial.state, heroes, mutation),
       secret: initial.secret,
     },
-    features: hunters.length > 0
-      ? { ...features, trapSetup: { submitted: {} } }
+    features: heroes
+      ? { ...features, heroIntro: { completed: Object.fromEntries(playerIds.map((id) => [id, false])) } }
       : features,
     featureSecret: { traps: [] },
     updatedAt: now,
@@ -423,13 +498,24 @@ export function joinRemoteRoom(
 
   const guest = makeSeat(guestPlayerId, now);
   const rps = createRpsState(room.seats.host.playerId, guest.playerId);
+  const playerIds = [room.seats.host.playerId, guest.playerId];
+  const heroSelection = room.mode.heroesEnabled
+    ? {
+        confirmed: Object.fromEntries(playerIds.map((id) => [id, false])),
+        deadlineAt: now + HERO_SELECTION_DURATION_MS,
+      }
+    : undefined;
   return {
     room: {
       ...room,
       seats: { host: { ...room.seats.host }, guest },
-      phase: "rps",
+      phase: heroSelection ? "hero_selection" : "rps",
       rps: rps.publicState,
       rpsSecret: rps.secretState,
+      ...(heroSelection ? {
+        features: { heroSelection },
+        featureSecret: { heroSelection: { choices: {} }, traps: [] },
+      } : {}),
       updatedAt: now,
     },
     alreadyJoined: false,
@@ -466,17 +552,22 @@ export function submitRemoteRps(
     rpsSecret: nextRps.secretState,
     updatedAt: now,
   };
+  let heroes: Record<Side, HeroId> | undefined;
   if (room.mode.heroesEnabled) {
-    return {
-      ...resolvedRoom,
-      phase: "hero_selection",
-      features: {
-        heroSelection: { locked: { red: false, black: false } },
-      },
-      featureSecret: { heroSelection: { choices: {} }, traps: [] },
-    };
+    const choices = room.featureSecret?.heroSelection?.choices;
+    const redHero = choices?.[assignments.red];
+    const blackHero = choices?.[assignments.black];
+    if (!redHero || !blackHero) {
+      throw new RuleError("MISSING_HERO_SELECTION", "猜拳前双方必须先确定英雄");
+    }
+    heroes = { red: redHero, black: blackHero };
   }
-  return createGameAfterSetup(resolvedRoom, randomInt, now);
+  return createGameAfterSetup(
+    { ...resolvedRoom, features: undefined, featureSecret: undefined },
+    randomInt,
+    now,
+    heroes,
+  );
 }
 
 export function submitRemoteHeroSelection(
@@ -487,95 +578,203 @@ export function submitRemoteHeroSelection(
   now = Date.now(),
 ): RemoteRoom {
   ensurePhase(room, "hero_selection");
+  requireRemotePlayer(room, playerId);
   if (!isHeroId(hero)) {
     throw new RuleError("INVALID_HERO", "英雄选择无效");
   }
-  const side = sideForAssignedPlayer(room, playerId);
   const publicSelection = room.features?.heroSelection;
   const secretSelection = room.featureSecret?.heroSelection;
   if (!publicSelection || !secretSelection) {
     throw new RuleError("MISSING_HERO_SELECTION", "房间缺少英雄选择状态");
   }
-  if (publicSelection.locked[side] || secretSelection.choices[side]) {
-    throw new RuleError("HERO_ALREADY_LOCKED", "该方已经锁定英雄");
+  if (now >= publicSelection.deadlineAt) {
+    return advanceRemoteRoomTime(room, randomInt, now);
+  }
+  if (publicSelection.confirmed[playerId] || secretSelection.choices[playerId]) {
+    throw new RuleError("HERO_ALREADY_LOCKED", "该玩家已经确定英雄");
   }
 
-  const locked = { ...publicSelection.locked, [side]: true };
-  const choices = { ...secretSelection.choices, [side]: hero };
+  const confirmed = { ...publicSelection.confirmed, [playerId]: true };
+  const choices = { ...secretSelection.choices, [playerId]: hero };
   const waitingRoom: RemoteRoom = {
     ...room,
-    features: { heroSelection: { locked } },
+    features: { heroSelection: { ...publicSelection, confirmed } },
     featureSecret: { ...room.featureSecret, heroSelection: { choices } },
     updatedAt: now,
   };
-  if (!locked.red || !locked.black) return waitingRoom;
-
-  const redHero = choices.red;
-  const blackHero = choices.black;
-  if (!redHero || !blackHero) {
-    throw new RuleError("MISSING_HERO_SELECTION", "双方英雄选择不完整");
-  }
-  return createGameAfterSetup(
-    {
-      ...waitingRoom,
-      features: undefined,
-      featureSecret: undefined,
-    },
-    randomInt,
-    now,
-    { red: redHero, black: blackHero },
-  );
+  return roomPlayerIds(room).every((id) => confirmed[id])
+    ? { ...waitingRoom, phase: "rps" }
+    : waitingRoom;
 }
 
+export function completeRemoteHeroIntro(
+  room: RemoteRoom,
+  playerId: string,
+  now = Date.now(),
+): RemoteRoom {
+  ensurePhase(room, "hero_intro");
+  requireRemotePlayer(room, playerId);
+  const intro = room.features?.heroIntro;
+  if (!intro) throw new RuleError("MISSING_HERO_INTRO", "房间缺少英雄入场状态");
+  if (intro.completed[playerId]) return room;
+  const completed = { ...intro.completed, [playerId]: true };
+  const nextRoom: RemoteRoom = {
+    ...room,
+    features: { ...room.features, heroIntro: { completed } },
+    updatedAt: now,
+  };
+  return roomPlayerIds(room).every((id) => completed[id])
+    ? beginHeroPreparation(nextRoom, now)
+    : nextRoom;
+}
+
+function validateTrapDraft(side: Side, positions: readonly Position[]): void {
+  if (positions.length > 2) {
+    throw new RuleError("INVALID_TRAP_COUNT", "猎人最多布置两个陷阱层");
+  }
+  if (positions.some((position) => !isInsideBoard(position) || !isOwnHalf(side, position))) {
+    throw new RuleError("INVALID_TRAP_POSITION", "陷阱只能布置在己方半场");
+  }
+}
+
+export function updateRemoteTrapDraft(
+  room: RemoteRoom,
+  playerId: string,
+  positions: readonly Position[],
+  now = Date.now(),
+): RemoteRoom {
+  ensurePhase(room, "hero_preparation");
+  if (!room.game) throw new RuleError("MISSING_GAME", "房间尚未创建棋局");
+  const side = sideForPlayer(room.game, playerId);
+  if (room.features?.heroes?.[side] !== "hunter") {
+    throw new RuleError("NOT_HUNTER", "只有猎人可以布置陷阱");
+  }
+  const preparation = room.features.heroPreparation;
+  if (!preparation || !room.featureSecret) {
+    throw new RuleError("MISSING_HERO_PREPARATION", "房间缺少英雄准备状态");
+  }
+  if (now >= preparation.deadlineAt) return advanceRemoteRoomTime(room, undefined, now);
+  if (preparation.ready[side]) {
+    throw new RuleError("HERO_ALREADY_READY", "该英雄已经完成准备");
+  }
+  validateTrapDraft(side, positions);
+  return {
+    ...room,
+    featureSecret: {
+      ...room.featureSecret,
+      trapDrafts: {
+        ...room.featureSecret.trapDrafts,
+        [side]: positions.map((position) => ({ ...position })),
+      },
+    },
+    updatedAt: now,
+  };
+}
+
+export function completeRemoteHeroPreparation(
+  room: RemoteRoom,
+  playerId: string,
+  now = Date.now(),
+): RemoteRoom {
+  ensurePhase(room, "hero_preparation");
+  if (!room.game) throw new RuleError("MISSING_GAME", "房间尚未创建棋局");
+  const side = sideForPlayer(room.game, playerId);
+  const preparation = room.features?.heroPreparation;
+  const featureSecret = room.featureSecret;
+  if (!preparation || !featureSecret) {
+    throw new RuleError("MISSING_HERO_PREPARATION", "房间缺少英雄准备状态");
+  }
+  if (now >= preparation.deadlineAt) return advanceRemoteRoomTime(room, undefined, now);
+  if (preparation.ready[side]) return room;
+  const draft = featureSecret.trapDrafts?.[side] ?? [];
+  if (room.features?.heroes?.[side] === "hunter" && draft.length !== 2) {
+    throw new RuleError("INVALID_TRAP_COUNT", "猎人必须布置两个陷阱层后才能完成准备");
+  }
+  const addedTraps = draft.map((position, index): TrapLayer => ({
+    id: `trap:${side}:${index}`,
+    owner: side,
+    position: { ...position },
+    opponentTurnsRemaining: 10,
+  }));
+  const ready = { ...preparation.ready, [side]: true };
+  const allReady = ready.red && ready.black;
+  const nextSecret: RoomFeatureSecretState = {
+    traps: [...featureSecret.traps.map(cloneTrap), ...addedTraps],
+    trapDrafts: { ...featureSecret.trapDrafts, [side]: [] },
+  };
+  return {
+    ...room,
+    phase: allReady ? "playing" : "hero_preparation",
+    features: allReady
+      ? publicFeaturesAfterPreparation(room.features!)
+      : { ...room.features, heroPreparation: { ...preparation, ready } },
+    featureSecret: nextSecret,
+    updatedAt: now,
+  };
+}
+
+/** Compatibility helper for callers that already submit both layers at once. */
 export function submitRemoteTrapSetup(
   room: RemoteRoom,
   playerId: string,
   positions: readonly Position[],
   now = Date.now(),
 ): RemoteRoom {
-  ensurePhase(room, "trap_setup");
-  if (!room.game) throw new RuleError("MISSING_GAME", "房间尚未创建棋局");
-  const side = sideForPlayer(room.game, playerId);
-  if (room.features?.heroes?.[side] !== "hunter") {
-    throw new RuleError("NOT_HUNTER", "只有猎人可以布置陷阱");
-  }
-  if (positions.length !== 2) {
-    throw new RuleError("INVALID_TRAP_COUNT", "猎人必须一次布置两个陷阱层");
-  }
-  if (positions.some((position) => !isInsideBoard(position) || !isOwnHalf(side, position))) {
-    throw new RuleError("INVALID_TRAP_POSITION", "陷阱只能布置在己方半场");
-  }
-  const publicSetup = room.features.trapSetup;
-  const featureSecret = room.featureSecret;
-  if (!publicSetup || !featureSecret) {
-    throw new RuleError("MISSING_TRAP_SETUP", "房间缺少陷阱布置状态");
-  }
-  if (publicSetup.submitted[side]) {
-    throw new RuleError("TRAPS_ALREADY_SET", "该猎人已经完成陷阱布置");
-  }
+  return completeRemoteHeroPreparation(
+    updateRemoteTrapDraft(room, playerId, positions, now),
+    playerId,
+    now,
+  );
+}
 
-  const addedTraps = positions.map((position, index): TrapLayer => ({
-    id: `trap:${side}:${index}`,
-    owner: side,
-    position: { ...position },
-    opponentTurnsRemaining: 10,
-  }));
-  const submitted = { ...publicSetup.submitted, [side]: true };
-  const nextSecret: RoomFeatureSecretState = {
-    traps: [...featureSecret.traps.map(cloneTrap), ...addedTraps],
-  };
-  const hunters = hunterSides(room.features);
-  const allSubmitted = hunters.every((hunter) => submitted[hunter] === true);
+export function advanceRemoteRoomTime(
+  room: RemoteRoom,
+  randomInt?: RandomInt,
+  now = Date.now(),
+): RemoteRoom {
+  if (room.phase === "hero_selection") {
+    const selection = room.features?.heroSelection;
+    const secret = room.featureSecret?.heroSelection;
+    if (!selection || !secret || now < selection.deadlineAt) return room;
+    const choices = { ...secret.choices };
+    const confirmed = { ...selection.confirmed };
+    for (const playerId of roomPlayerIds(room)) {
+      if (!confirmed[playerId]) choices[playerId] = drawHero(randomInt);
+      confirmed[playerId] = true;
+    }
+    return {
+      ...room,
+      phase: "rps",
+      features: { heroSelection: { ...selection, confirmed } },
+      featureSecret: { ...room.featureSecret, heroSelection: { choices } },
+      updatedAt: now,
+    };
+  }
+  if (room.phase !== "hero_preparation") return room;
+  const preparation = room.features?.heroPreparation;
+  const featureSecret = room.featureSecret;
+  if (!preparation || !featureSecret || now < preparation.deadlineAt) return room;
+  const traps = featureSecret.traps.map(cloneTrap);
+  const trapDrafts = { ...featureSecret.trapDrafts };
+  const ready = { ...preparation.ready };
+  for (const side of hunterSides(room.features)) {
+    if (ready[side]) continue;
+    const draft = [...(trapDrafts[side] ?? [])];
+    while (draft.length < 2) draft.push(randomOwnHalfPosition(side, randomInt));
+    draft.forEach((position, index) => traps.push({
+      id: `trap:${side}:${index}`,
+      owner: side,
+      position: { ...position },
+      opponentTurnsRemaining: 10,
+    }));
+    trapDrafts[side] = [];
+    ready[side] = true;
+  }
   return {
     ...room,
-    phase: allSubmitted ? "playing" : "trap_setup",
-    features: allSubmitted
-      ? {
-          ...(room.features.heroes ? { heroes: { ...room.features.heroes } } : {}),
-          ...(room.features.mutation ? { mutation: room.features.mutation } : {}),
-        }
-      : { ...room.features, trapSetup: { submitted } },
-    featureSecret: nextSecret,
+    phase: "playing",
+    features: publicFeaturesAfterPreparation(room.features!),
+    featureSecret: { traps, trapDrafts },
     updatedAt: now,
   };
 }
@@ -728,8 +927,10 @@ export function playerRoomView(
     : room.rps?.assignments
       ? sideForAssignedPlayer(room, playerId)
       : undefined;
-  const ownHeroChoice = viewerSide
-    ? room.featureSecret?.heroSelection?.choices[viewerSide]
+  const ownHeroChoice = room.featureSecret?.heroSelection?.choices[playerId]
+    ?? (viewerSide ? room.features?.heroes?.[viewerSide] : undefined);
+  const ownTrapDraft = viewerSide
+    ? room.featureSecret?.trapDrafts?.[viewerSide]?.map((position) => ({ ...position }))
     : undefined;
   const ownTraps = viewerSide && room.features?.heroes?.[viewerSide] === "hunter"
     ? room.featureSecret?.traps
@@ -740,6 +941,7 @@ export function playerRoomView(
     ...publicRemoteRoom(room),
     viewerSide,
     ...(ownHeroChoice ? { ownHeroChoice } : {}),
+    ...(ownTrapDraft ? { ownTrapDraft } : {}),
     ...(ownTraps ? { ownTraps } : {}),
   };
 }
