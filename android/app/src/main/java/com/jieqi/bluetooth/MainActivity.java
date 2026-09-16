@@ -28,7 +28,7 @@ public final class MainActivity extends Activity {
     super.onCreate(savedInstanceState);
 
     gameView = new WebView(this);
-    gameView.setBackgroundColor(Color.rgb(45, 26, 20));
+    gameView.setBackgroundColor(Color.rgb(238, 233, 221));
     gameView.getSettings().setJavaScriptEnabled(true);
     gameView.getSettings().setDomStorageEnabled(false);
     gameView.getSettings().setAllowContentAccess(false);

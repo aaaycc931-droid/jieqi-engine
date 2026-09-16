@@ -5,6 +5,7 @@ import {
   RuleError,
   applyAuthoritativeAssassination,
   applyAuthoritativeMove,
+  getLegalAssassinationMoves,
   initializeFeatureGameState,
   validatePublicMove,
 } from "../src/index.ts";
@@ -119,16 +120,23 @@ test("ROGUE-04 隐身两次己方其他走子后自动消失，普通走子不�
   );
 });
 
-test("ROGUE-05 首次普通刺杀撞壁垒会原地隐身并保留强击", () => {
+test("ROGUE-05 刺杀首次行动只能落到空位，不能吃子或直接使用强击", () => {
   const state = initializeFeatureGameState(
     gameState([revealed("rogue", "red", "rook", 0, 7), revealed("barrier", "black", "pawn", 0, 6)]),
     { red: "rogue", black: "warrior" },
   );
   state.effectsByPieceId = { barrier: { barrier: { owner: "black", enemyHalfEntered: false, movesAfterEnemyHalfEntry: 0 } } };
-  const result = applyAuthoritativeAssassination(state, secretState(), assassination({ x: 0, y: 7 }, { x: 0, y: 6 }, "bounce", "hero"));
-  assert.equal(result.state.pieces.find((piece) => piece.id === "rogue")?.y, 7);
-  assert.equal(result.state.effectsByPieceId?.barrier, undefined);
-  assert.equal(result.state.effectsByPieceId?.rogue?.stealth?.strongStrikeAvailable, true);
+  const legal = getLegalAssassinationMoves(state, "rogue", false);
+  assert.equal(legal.some((position) => position.x === 0 && position.y === 6), false);
+  assert.equal(legal.some((position) => position.x === 0 && position.y === 8), true);
+  assert.throws(
+    () => applyAuthoritativeAssassination(state, secretState(), assassination({ x: 0, y: 7 }, { x: 0, y: 6 }, "capture", "hero")),
+    (error) => error instanceof RuleError && error.code === "ASSASSINATION_FIRST_MOVE_MUST_BE_EMPTY",
+  );
+  assert.throws(
+    () => applyAuthoritativeAssassination(state, secretState(), assassination({ x: 0, y: 7 }, { x: 0, y: 6 }, "strong", "hero", true)),
+    (error) => error instanceof RuleError && error.code === "STRONG_STRIKE_REQUIRES_STEALTH",
+  );
 });
 
 test("ROGUE-06 强击与战车同一原子行动会先碾碎路径，再处决最终目标", () => {
@@ -141,10 +149,15 @@ test("ROGUE-06 强击与战车同一原子行动会先碾碎路径，再处决�
     { red: "rogue", black: "hunter" },
     "war_chariot",
   );
+  state.effectsByPieceId = {
+    "rogue-rook": { stealth: { owner: "red", remainingOwnerTurns: 2, strongStrikeAvailable: true, source: "hero" } },
+  };
+  state.assassination!.red.heroChargeAvailable = false;
+  state.assassination!.red.activePieceId = "rogue-rook";
   const result = applyAuthoritativeAssassination(
     state,
     secretState(),
-    assassination({ x: 0, y: 7 }, { x: 0, y: 3 }, "war-chariot-strong", "hero", true),
+    assassination({ x: 0, y: 7 }, { x: 0, y: 3 }, "war-chariot-strong", undefined, true),
   );
   assert.equal(result.state.pieces.some((piece) => piece.id === "path"), false);
   assert.equal(result.state.pieces.some((piece) => piece.id === "target"), false);
