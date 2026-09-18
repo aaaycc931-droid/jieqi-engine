@@ -1,12 +1,14 @@
 {
   "project": "乐子象棋 / 揭棋联机版",
   "updated_at": "2026-09-18",
-  "branch": "codex/ui-plan-final-20260918",
-  "base_branch": "codex/ui-v4-apk-test-20260915",
-  "base_commit": "de4eb73bcaea678e1f183ec2f0181369fe1cebce",
+  "branch": "codex/phase1-rogue-20260918",
+  "base_branch": "codex/ui-plan-final-20260918",
+  "base_commit": "c8b2b0530eb8c51c16ae30aebaefc87e191162c6",
+  "legacy_ui_base_branch": "codex/ui-v4-apk-test-20260915",
+  "legacy_ui_base_commit": "de4eb73bcaea678e1f183ec2f0181369fe1cebce",
   "main_at_last_check": "c25749d4f21d394c3d94486cfba1d786864083b6",
   "ui_planning_status": "complete_except_intentional_deferred_items",
-  "implementation_status": "old_baseline_new_decisions_pending",
+  "implementation_status": "phase1_rogue_implemented_remaining_new_decisions_pending",
   "authoritative_documents": [
     "CONFIRMED_UI_PLAN.md",
     "BALANCE_AND_RULE_UPDATES.md",
@@ -16,10 +18,10 @@
   ],
   "baseline_tests": {
     "command": "npm run check",
-    "passed": 135,
+    "passed": 138,
     "failed": 0,
     "web_build": "passed",
-    "scope_warning": "tests still cover old rogue and old UI baseline"
+    "scope_warning": "rogue phase1 is covered; remaining areas still use old UI and rule baseline"
   },
   "latest_locked_decisions": [
     "cumulative_disconnect_60_seconds_per_player",
@@ -38,7 +40,7 @@
     "exact_rarity_probabilities",
     "internet_multiplayer"
   ],
-  "next_action": "audit_code_against_specs_then_implement_rule_state_protocol_and_tests_in_stages",
+  "next_action": "implement_mutation_rarity_and_destiny_in_a_separate_stage",
   "restrictions": [
     "do_not_merge_main_without_explicit_authorization",
     "do_not_deploy_internet_multiplayer",

@@ -99,8 +99,8 @@ export interface LastMove {
  */
 export interface StealthEffect {
   owner: Side;
-  /** 只在拥有者完成正式行动时递减；发动回合不计入。 */
-  remainingOwnerTurns: 1 | 2;
+  /** 发动回合不计入；在接下来的一个己方正式行动结束时清除。 */
+  remainingOwnerTurns: 1;
   strongStrikeAvailable: boolean;
   source: SkillSource;
 }

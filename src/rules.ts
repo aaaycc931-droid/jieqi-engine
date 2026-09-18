@@ -383,14 +383,15 @@ export function getLegalAssassinationMoves(
   const source = pieceById(state, pieceId);
   if (!source || getController(source) !== actingSide) return [];
   if (source.faceDown || source.type === "general") return [];
-  const continuing = state.assassination?.[actingSide]?.activePieceId === source.id;
-  if (!continuing && useStrongStrike) return [];
+  const activePieceId = state.assassination?.[actingSide]?.activePieceId;
+  const continuing = activePieceId === source.id;
+  if (activePieceId && !continuing) return [];
   const legal: Position[] = [];
   for (let y = 0; y <= 9; y += 1) {
     for (let x = 0; x <= 8; x += 1) {
       const to = { x, y };
       const target = pieceAt(state, to);
-      if (!continuing && target) continue;
+      if (!continuing && !useStrongStrike && target) continue;
       if (useStrongStrike && (!target || (!target.faceDown && target.type === "general"))) continue;
       if (validatePublicMove(state, { from: source, to }, actingSide, {
         allowStealthSource: hasStealthEffect(state, source.id),

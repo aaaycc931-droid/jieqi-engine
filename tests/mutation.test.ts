@@ -97,7 +97,7 @@ test("MUT-11 战车只计一枚非隐身路径棋，但会同时碾碎所有隐�
     revealed("target", "black", "cannon", 0, 3),
   ]), undefined, "war_chariot");
   state.effectsByPieceId = {
-    "stealth-path": { stealth: { owner: "black", remainingOwnerTurns: 2, strongStrikeAvailable: true, source: "hero" } },
+    "stealth-path": { stealth: { owner: "black", remainingOwnerTurns: 1, strongStrikeAvailable: true, source: "hero" } },
   };
   state.assassination!.black.activePieceId = "stealth-path";
 

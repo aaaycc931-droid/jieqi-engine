@@ -69,9 +69,9 @@ const heroCatalog: Record<HeroId, { name: string; skills: Array<{ name: string; 
   rogue: {
     name: "潜行者",
     skills: [
-      { name: "刺杀", description: "每局一次，使己方明棋进行一次不吃子的合法移动并进入隐身。", fullDescription: "每局一次，选择己方一枚非将帅明棋移动到合法空位；第一次行动不能吃子或使用强击。行动结束后进入隐身并保留一次强击。" },
-      { name: "隐身", description: "隐身棋不阻挡、不能被普通吃子，也不触发普通将军。", fullDescription: "隐身持续接下来的两个己方正式回合。隐身棋仍占据落点，但不阻挡路线、不产生攻击和将军，也不能被普通吃子；主动行动或持续时间结束后解除。" },
-      { name: "强击", description: "隐身期间可直接击杀目标并清除其全部效果，使用后解除隐身。", fullDescription: "沿来源棋子的合法移动与吃子几何直接击杀一个非将帅目标，并先清除目标效果。强击完成后攻击者落在目标点，本次隐身结束。" },
+      { name: "刺杀", description: "每局一次，首次可移动到空位并保留强击，或立即强击。", fullDescription: "每局一次，选择己方一枚非将帅明棋：移动到合法空位并保留强击，或立即对合法目标发动强击。两种行动完成后都进入隐身。" },
+      { name: "隐身", description: "隐身棋不阻挡、不能被普通吃子，也不触发普通将军。", fullDescription: "隐身持续到下一个己方正式回合结束。隐身棋仍占据落点，但不阻挡路线、不产生攻击和将军，也不能被普通吃子；主动行动或该回合结束后解除。" },
+      { name: "强击", description: "直接击杀非将帅目标并清除其全部效果，每次刺杀限一次。", fullDescription: "沿来源棋子的合法移动与吃子几何直接击杀一个非将帅目标，并先清除目标效果。首次行动可立即使用；若移动到空位后保留，则可在下一个己方回合使用。" },
     ],
   },
   warrior: {
@@ -1294,7 +1294,8 @@ function renderGame(): void {
     ? "选择隐身棋行动"
     : assassinationArmed ? "刺杀：请选择明棋" : "发动刺杀";
   const strongButton = element<HTMLButtonElement>("strong-strike-button");
-  strongButton.disabled = gameState.status !== "playing" || preparationActive || openingActive || remoteView?.phase === "hero_intro" || remoteLocked || !active;
+  const activeStrikeAvailable = Boolean(active && gameState.effectsByPieceId?.[active]?.stealth?.strongStrikeAvailable);
+  strongButton.disabled = gameState.status !== "playing" || preparationActive || openingActive || remoteView?.phase === "hero_intro" || remoteLocked || !(activeStrikeAvailable || assassinationArmed);
   strongButton.textContent = strongStrikeArmed ? "强击：请选择目标" : "发动强击";
   updateBattleTurnTimer();
 }
@@ -1677,12 +1678,19 @@ element<HTMLButtonElement>("strong-strike-button").addEventListener("click", () 
   setBattleActionMenu(false);
   if (!gameState || gameState.status !== "playing") return;
   const activePieceId = gameState.assassination?.[gameState.turn]?.activePieceId;
-  if (!activePieceId) return showToast("强击只能由已经进入隐身的棋子发动。");
+  if (!activePieceId && !assassinationArmed) return showToast("请先发动刺杀，再选择是否立即强击。");
+  if (activePieceId && !gameState.effectsByPieceId?.[activePieceId]?.stealth?.strongStrikeAvailable) {
+    return showToast("本次刺杀的强击已经使用。");
+  }
   strongStrikeArmed = !strongStrikeArmed;
-  selectedPieceId = activePieceId;
-  assassinationArmed = false;
+  if (activePieceId) {
+    selectedPieceId = activePieceId;
+    assassinationArmed = false;
+  }
   latestAnnouncement = strongStrikeArmed
-    ? "强击已准备：选择可用刺杀棋，再选择一个非将帅目标。"
+    ? activePieceId
+      ? "强击已准备：选择一个符合棋子走法的非将帅目标。"
+      : "立即强击已准备：选择己方非将帅明棋，再选择合法目标。"
     : latestAnnouncement;
   renderGame();
 });

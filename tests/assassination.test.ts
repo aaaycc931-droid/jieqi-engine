@@ -37,7 +37,7 @@ test("ROGUE-01 刺杀首步消耗英雄次数，棋子进入公开隐身并保�
   assert.equal(result.state.assassination?.red.activePieceId, "rogue-rook");
   assert.deepEqual(result.state.effectsByPieceId?.["rogue-rook"]?.stealth, {
     owner: "red",
-    remainingOwnerTurns: 2,
+    remainingOwnerTurns: 1,
     strongStrikeAvailable: true,
     source: "hero",
   });
@@ -53,7 +53,7 @@ test("ROGUE-02 隐身棋仍占格但不挡路径，也不能被普通吃子", ()
   );
   state.effectsByPieceId = {
     "red-rook": {
-      stealth: { owner: "red", remainingOwnerTurns: 2, strongStrikeAvailable: true, source: "hero" },
+      stealth: { owner: "red", remainingOwnerTurns: 1, strongStrikeAvailable: true, source: "hero" },
     },
   };
   state.assassination!.red.activePieceId = "red-rook";
@@ -76,8 +76,8 @@ test("ROGUE-03 隐身期间强击可直接杀死隐身目标并清除对方活�
     { red: "rogue", black: "rogue" },
   );
   state.effectsByPieceId = {
-    "red-rook": { stealth: { owner: "red", remainingOwnerTurns: 2, strongStrikeAvailable: true, source: "hero" } },
-    "black-rook": { stealth: { owner: "black", remainingOwnerTurns: 2, strongStrikeAvailable: true, source: "hero" } },
+    "red-rook": { stealth: { owner: "red", remainingOwnerTurns: 1, strongStrikeAvailable: true, source: "hero" } },
+    "black-rook": { stealth: { owner: "black", remainingOwnerTurns: 1, strongStrikeAvailable: true, source: "hero" } },
   };
   state.assassination!.red.activePieceId = "red-rook";
   state.assassination!.black.activePieceId = "black-rook";
@@ -93,14 +93,12 @@ test("ROGUE-03 隐身期间强击可直接杀死隐身目标并清除对方活�
   assert.equal(result.state.pieces.find((piece) => piece.id === "black-rook")?.y, 7);
 });
 
-test("ROGUE-04 隐身两次己方其他走子后自动消失，普通走子不能直接调用隐身棋", () => {
+test("ROGUE-04 隐身在下一个己方其他走子后消失，普通走子不能直接调用隐身棋", () => {
   const state = initializeFeatureGameState(
     gameState([
       revealed("rogue-rook", "red", "rook", 0, 7),
       revealed("red-pawn-a", "red", "pawn", 1, 7),
-      revealed("red-pawn-b", "red", "pawn", 2, 7),
       revealed("black-pawn-a", "black", "pawn", 1, 2),
-      revealed("black-pawn-b", "black", "pawn", 2, 2),
     ]),
     { red: "rogue", black: "hunter" },
   );
@@ -109,37 +107,63 @@ test("ROGUE-04 隐身两次己方其他走子后自动消失，普通走子不�
   );
   const blackOne = applyAuthoritativeMove(first.state, first.secret, move({ x: 1, y: 2 }, { x: 1, y: 3 }, "black-1", 1));
   const redOne = applyAuthoritativeMove(blackOne.state, blackOne.secret, move({ x: 1, y: 7 }, { x: 1, y: 6 }, "red-1", 2));
-  assert.equal(redOne.state.effectsByPieceId?.["rogue-rook"]?.stealth?.remainingOwnerTurns, 1);
-  const blackTwo = applyAuthoritativeMove(redOne.state, redOne.secret, move({ x: 2, y: 2 }, { x: 2, y: 3 }, "black-2", 3));
-  const redTwo = applyAuthoritativeMove(blackTwo.state, blackTwo.secret, move({ x: 2, y: 7 }, { x: 2, y: 6 }, "red-2", 4));
-  assert.equal(redTwo.state.effectsByPieceId?.["rogue-rook"], undefined);
-  assert.equal(redTwo.state.assassination?.red.activePieceId, undefined);
+  assert.equal(redOne.state.effectsByPieceId?.["rogue-rook"], undefined);
+  assert.equal(redOne.state.assassination?.red.activePieceId, undefined);
   assert.throws(
     () => applyAuthoritativeMove({ ...first.state, turn: "red" }, first.secret, move({ x: 0, y: 6 }, { x: 0, y: 5 }, "wrong-api", 1)),
     (error) => error instanceof RuleError && error.code === "STEALTH_ACTION_REQUIRED",
   );
 });
 
-test("ROGUE-05 刺杀首次行动只能落到空位，不能吃子或直接使用强击", () => {
+test("ROGUE-05 刺杀首次行动可立即强击，破除防御后进入一回合隐身", () => {
   const state = initializeFeatureGameState(
     gameState([revealed("rogue", "red", "rook", 0, 7), revealed("barrier", "black", "pawn", 0, 6)]),
     { red: "rogue", black: "warrior" },
   );
   state.effectsByPieceId = { barrier: { barrier: { owner: "black", enemyHalfEntered: false, movesAfterEnemyHalfEntry: 0 } } };
-  const legal = getLegalAssassinationMoves(state, "rogue", false);
-  assert.equal(legal.some((position) => position.x === 0 && position.y === 6), false);
-  assert.equal(legal.some((position) => position.x === 0 && position.y === 8), true);
+  const normalLegal = getLegalAssassinationMoves(state, "rogue", false);
+  const strongLegal = getLegalAssassinationMoves(state, "rogue", true);
+  assert.equal(normalLegal.some((position) => position.x === 0 && position.y === 6), false);
+  assert.equal(normalLegal.some((position) => position.x === 0 && position.y === 8), true);
+  assert.equal(strongLegal.some((position) => position.x === 0 && position.y === 6), true);
   assert.throws(
     () => applyAuthoritativeAssassination(state, secretState(), assassination({ x: 0, y: 7 }, { x: 0, y: 6 }, "capture", "hero")),
     (error) => error instanceof RuleError && error.code === "ASSASSINATION_FIRST_MOVE_MUST_BE_EMPTY",
   );
+  const result = applyAuthoritativeAssassination(
+    state,
+    secretState(),
+    assassination({ x: 0, y: 7 }, { x: 0, y: 6 }, "strong", "hero", true),
+  );
+  assert.equal(result.state.pieces.some((piece) => piece.id === "barrier"), false);
+  assert.equal(result.state.pieces.find((piece) => piece.id === "rogue")?.y, 6);
+  assert.equal(result.state.assassination?.red.heroChargeAvailable, false);
+  assert.equal(result.state.assassination?.red.activePieceId, "rogue");
+  assert.deepEqual(result.state.effectsByPieceId?.rogue?.stealth, {
+    owner: "red",
+    remainingOwnerTurns: 1,
+    strongStrikeAvailable: false,
+    source: "hero",
+  });
+});
+
+test("ROGUE-06 首次立即强击仍不能以将帅为目标", () => {
+  const state = initializeFeatureGameState(
+    gameState([revealed("rogue", "red", "rook", 0, 7)], { blackGeneral: { x: 0, y: 6 } }),
+    { red: "rogue", black: "hunter" },
+  );
+  assert.equal(getLegalAssassinationMoves(state, "rogue", true).some((position) => position.x === 0 && position.y === 6), false);
   assert.throws(
-    () => applyAuthoritativeAssassination(state, secretState(), assassination({ x: 0, y: 7 }, { x: 0, y: 6 }, "strong", "hero", true)),
-    (error) => error instanceof RuleError && error.code === "STRONG_STRIKE_REQUIRES_STEALTH",
+    () => applyAuthoritativeAssassination(
+      state,
+      secretState(),
+      assassination({ x: 0, y: 7 }, { x: 0, y: 6 }, "general", "hero", true),
+    ),
+    (error) => error instanceof RuleError && error.code === "INVALID_STRONG_STRIKE_TARGET",
   );
 });
 
-test("ROGUE-06 强击与战车同一原子行动会先碾碎路径，再处决最终目标", () => {
+test("ROGUE-07 强击与战车同一原子行动会先碾碎路径，再处决最终目标", () => {
   const state = initializeFeatureGameState(
     gameState([
       revealed("rogue-rook", "red", "rook", 0, 7),
@@ -150,7 +174,7 @@ test("ROGUE-06 强击与战车同一原子行动会先碾碎路径，再处决�
     "war_chariot",
   );
   state.effectsByPieceId = {
-    "rogue-rook": { stealth: { owner: "red", remainingOwnerTurns: 2, strongStrikeAvailable: true, source: "hero" } },
+    "rogue-rook": { stealth: { owner: "red", remainingOwnerTurns: 1, strongStrikeAvailable: true, source: "hero" } },
   };
   state.assassination!.red.heroChargeAvailable = false;
   state.assassination!.red.activePieceId = "rogue-rook";
@@ -164,4 +188,59 @@ test("ROGUE-06 强击与战车同一原子行动会先碾碎路径，再处决�
   assert.equal(result.state.pieces.find((piece) => piece.id === "rogue-rook")?.y, 3);
   assert.equal(result.state.assassination?.red.heroChargeAvailable, false);
   assert.equal(result.state.assassination?.red.activePieceId, undefined);
+});
+
+test("ROGUE-08 英雄与暗影之舞来源独立消耗，并共享新刺杀规则", () => {
+  const state = initializeFeatureGameState(
+    gameState([
+      revealed("rogue-rook", "red", "rook", 0, 7),
+      revealed("red-pawn", "red", "pawn", 1, 7),
+      revealed("black-target", "black", "pawn", 0, 6),
+      revealed("black-pawn", "black", "pawn", 1, 2),
+    ]),
+    { red: "rogue", black: "hunter" },
+    "shadow_dance",
+  );
+  const hero = applyAuthoritativeAssassination(
+    state,
+    secretState(),
+    assassination({ x: 0, y: 7 }, { x: 0, y: 6 }, "hero-strong", "hero", true),
+  );
+  assert.equal(hero.state.assassination?.red.heroChargeAvailable, false);
+  assert.equal(hero.state.assassination?.red.mutationChargeAvailable, true);
+
+  const blackOne = applyAuthoritativeMove(hero.state, hero.secret, move({ x: 1, y: 2 }, { x: 1, y: 3 }, "black-one", 1));
+  const redOne = applyAuthoritativeMove(blackOne.state, blackOne.secret, move({ x: 1, y: 7 }, { x: 1, y: 6 }, "red-one", 2));
+  assert.equal(redOne.state.assassination?.red.activePieceId, undefined);
+  const blackTwo = applyAuthoritativeMove(redOne.state, redOne.secret, move({ x: 1, y: 3 }, { x: 1, y: 4 }, "black-two", 3));
+  const mutation = applyAuthoritativeAssassination(
+    blackTwo.state,
+    blackTwo.secret,
+    assassination({ x: 0, y: 6 }, { x: 0, y: 5 }, "mutation-move", "mutation", false, 4),
+  );
+  assert.equal(mutation.state.assassination?.red.heroChargeAvailable, false);
+  assert.equal(mutation.state.assassination?.red.mutationChargeAvailable, false);
+  assert.deepEqual(mutation.state.effectsByPieceId?.["rogue-rook"]?.stealth, {
+    owner: "red",
+    remainingOwnerTurns: 1,
+    strongStrikeAvailable: true,
+    source: "mutation",
+  });
+});
+
+test("ROGUE-09 暗影之舞进入隐身时保留同一步获得的战士壁垒", () => {
+  const state = initializeFeatureGameState(
+    gameState([revealed("warrior-rook", "red", "rook", 4, 7)]),
+    { red: "warrior", black: "hunter" },
+    "shadow_dance",
+  );
+  const result = applyAuthoritativeAssassination(
+    state,
+    secretState(),
+    assassination({ x: 4, y: 7 }, { x: 4, y: 6 }, "warrior-shadow", "mutation"),
+  );
+  assert.deepEqual(result.state.effectsByPieceId?.["warrior-rook"], {
+    barrier: { owner: "red", enemyHalfEntered: false, movesAfterEnemyHalfEntry: 0 },
+    stealth: { owner: "red", remainingOwnerTurns: 1, strongStrikeAvailable: true, source: "mutation" },
+  });
 });

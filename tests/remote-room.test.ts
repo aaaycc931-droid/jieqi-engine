@@ -319,7 +319,7 @@ test("MODE-04 联机刺杀经房间事务结算，公开状态同步技能次数
   const state = publicRemoteRoom(result.room).state;
   assert.equal(state?.assassination?.red.heroChargeAvailable, false);
   assert.equal(state?.assassination?.red.mutationChargeAvailable, true);
-  assert.equal(state?.effectsByPieceId?.["rogue-rook"]?.stealth?.remainingOwnerTurns, 2);
+  assert.equal(state?.effectsByPieceId?.["rogue-rook"]?.stealth?.remainingOwnerTurns, 1);
 });
 
 test("HUNTER-01 敌方落点触发一层陷阱，公开触发结果而不公开剩余坐标", () => {

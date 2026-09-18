@@ -230,7 +230,7 @@ function awardWarriorBarrier(
   };
 }
 
-/** Decrement only the active side's pending stealth after a formal action. */
+/** End the active side's pending stealth after its next formal action. */
 function advanceStealthTurn(
   state: GameState,
   actingSide: Side,
@@ -245,11 +245,7 @@ function advanceStealthTurn(
     clearAssassinationForPiece(state, activePieceId);
     return;
   }
-  if (stealth.remainingOwnerTurns === 1) {
-    endStealth(state, activePieceId);
-    return;
-  }
-  stealth.remainingOwnerTurns = 1;
+  endStealth(state, activePieceId);
 }
 
 function finishAfterPlayerAction(
@@ -588,9 +584,9 @@ function consumeAssassinationCharge(
 
 /**
  * Resolves either the initial Rogue/Shadow Dance assassination action or the
- * early move of its already-stealthed piece.  Strong strike is intentionally
- * a separate authoritative command path: it may target a stealthed piece and
- * clears that piece's effects before removing it.
+ * early move of its already-stealthed piece. A new charge may either move to
+ * an empty square and retain its strike, or spend that strike immediately on
+ * a legal target. Both initial choices enter one owner-turn of stealth.
  */
 export function applyAuthoritativeAssassination(
   state: GameState,
@@ -632,14 +628,15 @@ export function applyAuthoritativeAssassination(
     if (sourcePiece.faceDown || sourcePiece.type === "general") {
       throw new RuleError("INVALID_ASSASSINATION_PIECE", "刺杀只能选择己方非将帅明棋");
     }
-    if (command.useStrongStrike) {
-      throw new RuleError("STRONG_STRIKE_REQUIRES_STEALTH", "强击只能由已经进入隐身的棋子发动");
-    }
-    if (pieceAt(state, command.to)) {
+    if (!command.useStrongStrike && pieceAt(state, command.to)) {
       throw new RuleError("ASSASSINATION_FIRST_MOVE_MUST_BE_EMPTY", "刺杀首次行动只能移动到空位，不能吃子");
     }
   }
 
+  const targetForStrike = pieceAt(state, command.to);
+  if (command.useStrongStrike && targetForStrike && !targetForStrike.faceDown && targetForStrike.type === "general") {
+    throw new RuleError("INVALID_STRONG_STRIKE_TARGET", "强击不能以将帅为目标");
+  }
   const validation = validatePublicMove(state, command, actingSide, {
     allowStealthSource: continuing,
     allowStealthTarget: command.useStrongStrike,
@@ -647,10 +644,6 @@ export function applyAuthoritativeAssassination(
   });
   if (!validation.ok && !(validation.code === "SELF_CHECK" && permitsSelfCrushingGeneral(state, command, actingSide))) {
     validationError(validation.code, validation.message);
-  }
-  const targetForStrike = pieceAt(state, command.to);
-  if (command.useStrongStrike && (!targetForStrike || (!targetForStrike.faceDown && targetForStrike.type === "general"))) {
-    throw new RuleError("INVALID_STRONG_STRIKE_TARGET", "强击不能以将帅为目标");
   }
 
   const nextState = cloneState(state);
@@ -667,7 +660,7 @@ export function applyAuthoritativeAssassination(
     return captured ? [captured] : [];
   });
 
-  // 普通刺杀攻击被壁垒弹回：首击在原位进入隐身，后续隐身行动则直接现身。
+  // 隐身后的普通刺杀攻击被壁垒弹回，并在原位结束隐身。
   if (target && nextState.effectsByPieceId?.[target.id]?.barrier && !command.useStrongStrike) {
     removeBarrierEffect(nextState, target.id);
     nextState.revision = state.revision + 1;
@@ -681,18 +674,12 @@ export function applyAuthoritativeAssassination(
       bouncedAgainstPieceId: target.id,
       landed: false,
     };
-    const entersStealthOnBounce = !continuing;
     if (continuing) endStealth(nextState, source.id);
-    if (entersStealthOnBounce) {
-      nextState.effectsByPieceId ??= {};
-      nextState.effectsByPieceId[source.id] = { stealth: { owner: actingSide, remainingOwnerTurns: 2, strongStrikeAvailable: true, source: command.source as SkillSource } };
-      nextState.assassination?.[actingSide] && (nextState.assassination[actingSide].activePieceId = source.id);
-    }
     if (finishDirectDeaths(nextState, actingSide)) {
       nextSecret.processedActions[command.actionId] = nextState.revision;
       return { state: nextState, secret: nextSecret, duplicate: false };
     }
-    finishAfterPlayerAction(nextState, nextSecret, command, actingSide, false, source, entersStealthOnBounce);
+    finishAfterPlayerAction(nextState, nextSecret, command, actingSide, false, source, false);
     return { state: nextState, secret: nextSecret, duplicate: false };
   }
 
@@ -739,17 +726,18 @@ export function applyAuthoritativeAssassination(
     return { state: nextState, secret: nextSecret, duplicate: false };
   }
 
-  const entersStealth = !command.useStrongStrike && !continuing;
+  const entersStealth = !continuing;
   if (continuing) endStealth(nextState, source.id);
   if (entersStealth) {
     const skillState = nextState.assassination?.[actingSide];
     if (!skillState) throw new RuleError("NO_ASSASSINATION", "该方没有可用的刺杀技能");
     nextState.effectsByPieceId ??= {};
     nextState.effectsByPieceId[source.id] = {
+      ...nextState.effectsByPieceId[source.id],
       stealth: {
         owner: actingSide,
-        remainingOwnerTurns: 2,
-        strongStrikeAvailable: true,
+        remainingOwnerTurns: 1,
+        strongStrikeAvailable: !command.useStrongStrike,
         source: command.source as SkillSource,
       },
     };
