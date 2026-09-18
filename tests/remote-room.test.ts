@@ -195,6 +195,7 @@ test("MODE-02 英雄入场后双猎人同时准备，秘密锁定陷阱后才进
   const setup = completeRemoteHeroIntro(aliceIntro, "bob", 800);
   assert.equal(setup.phase, "hero_preparation");
   assert.equal(setup.features?.mutation, "iron_steed");
+  assert.equal(setup.features?.mutationRarity, "epic");
   assert.deepEqual(setup.features?.heroes, { red: "hunter", black: "hunter" });
 
   const redSet = submitRemoteTrapSetup(setup, "alice", [{ x: 0, y: 6 }, { x: 0, y: 6 }], 900);
@@ -212,6 +213,7 @@ test("MODE-02 英雄入场后双猎人同时准备，秘密锁定陷阱后才进
   const started = submitRemoteTrapSetup(redSet, "bob", [{ x: 8, y: 3 }, { x: 4, y: 3 }], 1_000);
   assert.equal(started.phase, "playing");
   assert.equal(started.features?.heroPreparation, undefined);
+  assert.equal(started.features?.mutationRarity, "epic");
   assert.equal(playerRoomView(started, "bob").ownTraps?.length, 2);
 });
 

@@ -26,6 +26,12 @@ import {
 import { createInitialGame } from "../src/setup.ts";
 import { getController, otherSide } from "../src/slots.ts";
 import {
+  MUTATION_IDS,
+  MUTATION_RARITY_LABELS,
+  NORMAL_FORMAL_TURN_DURATION_MS,
+  mutationDefinition,
+} from "../src/mutations.ts";
+import {
   BLUETOOTH_GUEST_PLAYER,
   BLUETOOTH_HOST_PLAYER,
   BluetoothHostRoom,
@@ -56,7 +62,6 @@ import { trapTriggerAnnouncement } from "./messages.ts";
 const PLAYER_ONE = "玩家一";
 const PLAYER_TWO = "玩家二";
 const HERO_IDS: readonly HeroId[] = ["hunter", "rogue", "warrior"];
-const MUTATION_IDS: readonly MutationId[] = ["iron_steed", "iron_wall", "shadow_dance", "war_chariot", "expedition", "cavalry"];
 const heroCatalog: Record<HeroId, { name: string; skills: Array<{ name: string; description: string; fullDescription: string }> }> = {
   hunter: {
     name: "猎人",
@@ -296,6 +301,7 @@ function randomHero(): HeroId {
 }
 
 function randomMutation(): MutationId {
+  // Transitional flat draw until the four outer rarity probabilities are confirmed.
   return MUTATION_IDS[randomIndex(MUTATION_IDS.length)];
 }
 
@@ -420,7 +426,22 @@ function bluetoothAnnouncement(view: PlayerRemoteRoomView): string {
 }
 
 function mutationName(mutation: MutationId): string {
-  return { iron_steed: "铁马", iron_wall: "堡垒", shadow_dance: "暗影之舞", war_chariot: "战车", expedition: "亲征", cavalry: "骑兵" }[mutation];
+  return mutationDefinition(mutation).name;
+}
+
+function showCurrentMutationDetails(): void {
+  const mutation = bluetooth?.view?.features?.mutation ?? gameState?.featureRules?.mutation;
+  if (!mutation) {
+    showDialog("本局畸变", "本局没有启用畸变。", "关闭", () => undefined);
+    return;
+  }
+  const definition = mutationDefinition(mutation);
+  showDialog(
+    `本局畸变 · ${MUTATION_RARITY_LABELS[definition.rarity]}`,
+    `${definition.name}：${definition.summary}\n\n${definition.rules}`,
+    "关闭",
+    () => undefined,
+  );
 }
 
 function sendBluetoothEnvelope<T>(envelope: { v: 1; type: "hello" | "action" | "snapshot" | "error" | "ping" | "pong"; id?: string; payload?: T }): void {
@@ -867,7 +888,17 @@ function runOpeningSequence(onComplete: () => void): void {
   heroIntroStage.hidden = true;
   heroIntroStage.classList.remove("playing");
   mutationReveal.hidden = false;
-  mutationReveal.textContent = mutation ? mutationName(mutation) : "无畸变";
+  const mutationInfo = mutation ? mutationDefinition(mutation) : undefined;
+  mutationReveal.dataset.rarity = mutationInfo?.rarity ?? "none";
+  if (mutationInfo) {
+    const name = document.createElement("strong");
+    name.textContent = mutationInfo.name;
+    const rarity = document.createElement("span");
+    rarity.textContent = MUTATION_RARITY_LABELS[mutationInfo.rarity];
+    mutationReveal.replaceChildren(name, rarity);
+  } else {
+    mutationReveal.textContent = "无畸变";
+  }
   mutationReveal.style.animation = "none";
   void mutationReveal.offsetWidth;
   mutationReveal.style.animation = "";
@@ -1042,7 +1073,7 @@ function updateBattleTurnTimer(): void {
   }
   if (battleTurnRevision !== gameState.revision || battleTurnDeadlineAt === undefined) {
     battleTurnRevision = gameState.revision;
-    battleTurnDeadlineAt = Date.now() + 60_000;
+    battleTurnDeadlineAt = Date.now() + NORMAL_FORMAL_TURN_DURATION_MS;
   }
   const remaining = secondsRemaining(battleTurnDeadlineAt);
   battleTurnTimer.textContent = String(remaining);
@@ -1226,6 +1257,7 @@ function renderGame(): void {
   }
   const mutation = remoteView?.features?.mutation ?? gameState.featureRules?.mutation;
   battleMutationName.textContent = mutation ? mutationName(mutation) : "无畸变";
+  battleMutationName.parentElement?.setAttribute("aria-label", mutation ? `查看本局畸变：${mutationName(mutation)}` : "查看本局畸变");
   heroPreparationPanel.hidden = !preparationActive;
   if (preparationActive) {
     const remaining = secondsRemaining(preparationDeadline);
@@ -1625,6 +1657,7 @@ element<HTMLButtonElement>("battle-rules-button").addEventListener("click", () =
     () => undefined,
   );
 });
+element<HTMLButtonElement>("battle-mutation-button").addEventListener("click", showCurrentMutationDetails);
 element<HTMLButtonElement>("restart-button").addEventListener("click", () => {
   if (!gameState || gameState.status === "finished" || window.confirm("重新开始会结束当前对局，确定吗？")) {
     nativeBluetooth()?.disconnect();

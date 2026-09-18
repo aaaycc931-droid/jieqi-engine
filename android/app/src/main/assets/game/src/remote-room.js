@@ -19,6 +19,11 @@ import {
 } from "./rps.js";
 import { createInitialGame } from "./setup.js";
 import { getController, isInsideBoard } from "./slots.js";
+import {
+  MUTATION_IDS,
+  mutationDefinition,
+
+} from "./mutations.js";
 
 
 
@@ -53,15 +58,6 @@ export const DEFAULT_OPTIONAL_MODE_CONFIG                     = {
 };
 
 const HERO_IDS                    = ["hunter", "rogue", "warrior"];
-
-const MUTATION_IDS                        = [
-  "iron_steed",
-  "iron_wall",
-  "shadow_dance",
-  "war_chariot",
-  "expedition",
-  "cavalry",
-];
 
 
 
@@ -102,6 +98,7 @@ const MUTATION_IDS                        = [
 
 
 /** Public after a trigger only; untriggered coordinates never leave the server. */
+
 
 
 
@@ -218,6 +215,7 @@ function drawHero(randomInt            )         {
 }
 
 function drawMutation(randomInt            )             {
+  // Transitional flat draw: exact outer rarity probabilities remain intentionally deferred.
   const index = (randomInt ?? ((maxExclusive) => cryptoRandomInt(maxExclusive)))(
     MUTATION_IDS.length,
   );
@@ -297,6 +295,7 @@ function publicFeaturesAfterPreparation(features                        )       
   return {
     ...(features.heroes ? { heroes: { ...features.heroes } } : {}),
     ...(features.mutation ? { mutation: features.mutation } : {}),
+    ...(features.mutationRarity ? { mutationRarity: features.mutationRarity } : {}),
   };
 }
 
@@ -341,7 +340,7 @@ function createGameAfterSetup(
   const mutation = room.mode.mutationsEnabled ? drawMutation(randomInt) : undefined;
   const features                         = {
     ...(heroes ? { heroes: { ...heroes } } : {}),
-    ...(mutation ? { mutation } : {}),
+    ...(mutation ? { mutation, mutationRarity: mutationDefinition(mutation).rarity } : {}),
   };
   const playerIds = roomPlayerIds(room);
   return {

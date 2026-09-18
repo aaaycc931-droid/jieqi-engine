@@ -3,6 +3,7 @@ export * from "./bluetooth-protocol.ts";
 export * from "./bluetooth-host-room.ts";
 export * from "./sha256.ts";
 export * from "./game.ts";
+export * from "./mutations.ts";
 export * from "./room.ts";
 export * from "./remote-room.ts";
 export * from "./rps.ts";

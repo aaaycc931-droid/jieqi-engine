@@ -19,6 +19,11 @@ import {
 } from "./rps.ts";
 import { createInitialGame } from "./setup.ts";
 import { getController, isInsideBoard } from "./slots.ts";
+import {
+  MUTATION_IDS,
+  mutationDefinition,
+  type MutationRarity,
+} from "./mutations.ts";
 import type {
   AutomaticExecutionPlan,
   AssassinationCommand,
@@ -53,15 +58,6 @@ export const DEFAULT_OPTIONAL_MODE_CONFIG: OptionalModeConfig = {
 };
 
 const HERO_IDS: readonly HeroId[] = ["hunter", "rogue", "warrior"];
-
-const MUTATION_IDS: readonly MutationId[] = [
-  "iron_steed",
-  "iron_wall",
-  "shadow_dance",
-  "war_chariot",
-  "expedition",
-  "cavalry",
-];
 
 export interface RemoteSeat {
   playerId: string;
@@ -114,6 +110,7 @@ export interface TrapTrigger {
 export interface RoomFeaturePublicState {
   heroes?: Record<Side, HeroId>;
   mutation?: MutationId;
+  mutationRarity?: MutationRarity;
   heroSelection?: HeroSelectionPublicState;
   heroIntro?: HeroIntroPublicState;
   heroPreparation?: HeroPreparationPublicState;
@@ -218,6 +215,7 @@ function drawHero(randomInt?: RandomInt): HeroId {
 }
 
 function drawMutation(randomInt?: RandomInt): MutationId {
+  // Transitional flat draw: exact outer rarity probabilities remain intentionally deferred.
   const index = (randomInt ?? ((maxExclusive) => cryptoRandomInt(maxExclusive)))(
     MUTATION_IDS.length,
   );
@@ -297,6 +295,7 @@ function publicFeaturesAfterPreparation(features: RoomFeaturePublicState): RoomF
   return {
     ...(features.heroes ? { heroes: { ...features.heroes } } : {}),
     ...(features.mutation ? { mutation: features.mutation } : {}),
+    ...(features.mutationRarity ? { mutationRarity: features.mutationRarity } : {}),
   };
 }
 
@@ -341,7 +340,7 @@ function createGameAfterSetup(
   const mutation = room.mode.mutationsEnabled ? drawMutation(randomInt) : undefined;
   const features: RoomFeaturePublicState = {
     ...(heroes ? { heroes: { ...heroes } } : {}),
-    ...(mutation ? { mutation } : {}),
+    ...(mutation ? { mutation, mutationRarity: mutationDefinition(mutation).rarity } : {}),
   };
   const playerIds = roomPlayerIds(room);
   return {

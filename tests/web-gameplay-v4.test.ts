@@ -60,10 +60,21 @@ test("UI-V4-07 棋子、已吃棋子和终结残影都复用独立墨圈", () =>
 });
 
 test("UI-V4-08 六十秒显示、已吃棋子展开和三点菜单已接入事件", () => {
-  assert.match(app, /battleTurnDeadlineAt = Date\.now\(\) \+ 60_000/);
+  assert.match(app, /battleTurnDeadlineAt = Date\.now\(\) \+ NORMAL_FORMAL_TURN_DURATION_MS/);
   assert.match(app, /capturedToggle\.addEventListener/);
   assert.match(app, /battleMoreButton\.addEventListener/);
   assert.match(app, /v4-skill-trigger/);
+});
+
+test("UI-V4-13 畸变揭示显示文字稀有度，顶部入口点击后才展示详情", () => {
+  assert.match(html, /id="battle-mutation-button"/);
+  assert.match(app, /rarity\.textContent = MUTATION_RARITY_LABELS\[mutationInfo\.rarity\]/);
+  assert.match(app, /battle-mutation-button"\)\.addEventListener\("click", showCurrentMutationDetails\)/);
+  assert.match(css, /mutation-reveal\[data-rarity="common"\]/);
+  assert.match(css, /mutation-reveal\[data-rarity="rare"\]/);
+  assert.match(css, /mutation-reveal\[data-rarity="epic"\]/);
+  assert.match(css, /mutation-reveal\[data-rarity="legendary"\]/);
+  assert.equal((css.match(/@keyframes mutation-ink/g) ?? []).length, 1);
 });
 
 test("UI-V4-09 棋子使用审核字形、外圈放大 15% 且不再显示黄色几何框", () => {
