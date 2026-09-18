@@ -1,7 +1,9 @@
-# 揭棋联机版最小架构（v0.1）
+# 乐子象棋互联网联机最小架构（v0.2）
 
-状态：已定方案，等待实现。  
-目标：两名朋友通过邀请链接进行一局揭棋；不做账号体系、聊天、排行榜或观战。
+> 2026-09-18 边界：互联网联机仍属暂缓功能。本文不覆盖当前 Bluetooth Classic 对局中新确认的聊天、累计断线 60 秒和再战邀请规则；蓝牙产品行为以 `CONFIRMED_UI_PLAN.md` 为准。
+
+状态：权威房间契约已实现，CloudBase 适配与部署尚未开始。
+目标：两名朋友通过邀请链接进行一局乐子象棋；不做账号体系、聊天、排行榜或观战。
 
 ## 1. 平台决定
 
@@ -36,8 +38,8 @@ sequenceDiagram
   B->>F: joinRoom
   F-->>A: 房间已满
   F-->>B: 房间已满
-  A->>F: rps / move / surrender
-  B->>F: rps / move / surrender
+  A->>F: hero / rps / prepare / move
+  B->>F: hero / rps / prepare / move
   F-->>A: 公共棋局实时更新
   F-->>B: 公共棋局实时更新
 ```
@@ -45,8 +47,10 @@ sequenceDiagram
 1. 房主打开网页后匿名登录，调用 `createRoom`。
 2. 服务端创建 `roomId` 和不可预测的邀请口令；网页提供“复制邀请链接”。
 3. 好友打开链接后匿名登录，调用 `joinRoom`。房间仅允许两人；满员后拒绝其他人。
-4. 双方按现有规则秘密猜拳；云函数确定红方与先手。
-5. 所有落子、臣服和终局自动演出由云函数产生唯一结果；客户端只渲染公共状态。
+4. 双方先在 60 秒内秘密选择并确认英雄；到时由云函数只为未确认者随机英雄。
+5. 双方秘密猜拳；云函数确定红方与先手，创建棋局并抽取畸变。
+6. 双方完成本机英雄入场动画后进入最多 60 秒的英雄准备；到时由云函数保留草稿并随机补齐。
+7. 所有落子、臣服和终局自动演出由云函数产生唯一结果；客户端只渲染公共状态与自己的私有数据。
 
 ## 4. 数据模型
 
@@ -55,13 +59,20 @@ sequenceDiagram
 ```ts
 {
   roomId: string,
-  phase: "waiting" | "rps" | "playing" | "finished",
+  phase: "waiting" | "hero_selection" | "rps" | "hero_intro" | "hero_preparation" | "playing" | "finished",
   seats: {
     host: { playerId: string, connectedAt: number, lastSeenAt: number },
     guest?: { playerId: string, connectedAt: number, lastSeenAt: number }
   },
   rps: RpsPublicState,
   state?: GameState, // 只能是 publicStateSnapshot 的结果
+  features?: {
+    heroes?: Record<Side, HeroId>,
+    mutation?: MutationId,
+    heroSelection?: { confirmed: Record<string, boolean>, deadlineAt: number },
+    heroIntro?: { completed: Record<string, boolean> },
+    heroPreparation?: { ready: Record<Side, boolean>, deadlineAt: number }
+  },
   terminalAnimation?: {
     eventId: string,
     reason: "ambush" | "checkmate", // 页面显示为「背刺」或「裁决」
@@ -78,6 +89,9 @@ sequenceDiagram
   inviteTokenHash: string,
   rpsSecret: RpsSecretState,
   gameSecret?: SecretState, // identities 与 processedActions
+  heroSelection?: { choices: Partial<Record<string, HeroId>> },
+  trapDrafts?: Partial<Record<Side, Position[]>>,
+  traps?: TrapLayer[],
   disconnect?: { side: Side, deadlineAt: number } // 后续断线规则定稿后启用
 }
 ```
@@ -91,7 +105,11 @@ sequenceDiagram
 | `createRoom` | 房主 | 创建房间、生成邀请口令 |
 | `joinRoom` | 受邀好友 | 校验口令并占用第二席 |
 | `getRoom` | 任一席位 | 刷新后恢复公共状态 |
+| `submitHero` | 任一席位 | 私下确认英雄；双方确认或到时后进入猜拳 |
 | `submitRps` | 当前出拳者 | 提交秘密出拳并推进回合 |
+| `completeHeroIntro` | 任一席位 | 确认本机英雄入场动画完成 |
+| `updatePreparationDraft` | 需要准备的一方 | 更新仅本人可见的战斗开始技能草稿 |
+| `completePreparation` | 需要准备的一方 | 锁定草稿；双方就绪后进入正式行棋 |
 | `submitMove` | 当前行动方 | 事务校验、落子、翻子、判定终局 |
 | `surrender` | 任一席位 | 触发「臣服」 |
 | `heartbeat` | 任一席位 | 更新 `lastSeenAt` |

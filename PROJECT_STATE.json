@@ -1,0 +1,49 @@
+{
+  "project": "乐子象棋 / 揭棋联机版",
+  "updated_at": "2026-09-18",
+  "branch": "codex/ui-plan-final-20260918",
+  "base_branch": "codex/ui-v4-apk-test-20260915",
+  "base_commit": "de4eb73bcaea678e1f183ec2f0181369fe1cebce",
+  "main_at_last_check": "c25749d4f21d394c3d94486cfba1d786864083b6",
+  "ui_planning_status": "complete_except_intentional_deferred_items",
+  "implementation_status": "old_baseline_new_decisions_pending",
+  "authoritative_documents": [
+    "CONFIRMED_UI_PLAN.md",
+    "BALANCE_AND_RULE_UPDATES.md",
+    "IMPLEMENTATION_STATUS.md",
+    "PENDING_AND_RESUME.md",
+    "RULES-CHANGELOG.md"
+  ],
+  "baseline_tests": {
+    "command": "npm run check",
+    "passed": 135,
+    "failed": 0,
+    "web_build": "passed",
+    "scope_warning": "tests still cover old rogue and old UI baseline"
+  },
+  "latest_locked_decisions": [
+    "cumulative_disconnect_60_seconds_per_player",
+    "rogue_first_action_move_or_immediate_strong_strike_then_one_owner_turn_stealth",
+    "four_mutation_rarities_and_hidden_destiny_inside_legendary_pool",
+    "destiny_first_formal_turn_75_seconds_for_each_player",
+    "phase_sensitive_menu_and_resign_label",
+    "bluetooth_rematch_invitation_30_seconds",
+    "local_two_player_rematch_immediate_restart",
+    "chat_captured_pieces_skill_status_help_and_settings_ui_confirmed"
+  ],
+  "intentional_deferred": [
+    "status_bar_geometry_and_button_positions",
+    "final_hero_portraits_and_skill_icons",
+    "destiny_reveal_visual_design",
+    "exact_rarity_probabilities",
+    "internet_multiplayer"
+  ],
+  "next_action": "audit_code_against_specs_then_implement_rule_state_protocol_and_tests_in_stages",
+  "restrictions": [
+    "do_not_merge_main_without_explicit_authorization",
+    "do_not_deploy_internet_multiplayer",
+    "do_not_commit_handoff_zip_or_apk",
+    "do_not_redraw_approved_ui_assets",
+    "do_not_fill_deferred_items_without_user_decision"
+  ]
+}
