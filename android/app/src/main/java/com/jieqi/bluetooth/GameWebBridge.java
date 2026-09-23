@@ -3,6 +3,8 @@ package com.jieqi.bluetooth;
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.content.Intent;
+import android.provider.Settings;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 
@@ -32,6 +34,7 @@ public final class GameWebBridge implements BluetoothGameSession.Listener {
     JSONObject value = new JSONObject();
     try {
       value.put("available", adapter != null);
+      value.put("enabled", adapter != null && adapter.isEnabled());
       value.put("role", session == null ? "NONE" : session.getRole().name());
       value.put("state", session == null ? "ERROR" : session.getState().name());
     } catch (JSONException ignored) { }
@@ -85,6 +88,18 @@ public final class GameWebBridge implements BluetoothGameSession.Listener {
     if (session != null) session.disconnect();
   }
 
+  @JavascriptInterface
+  public void reconnect() {
+    if (!activity.ensureBluetoothPermission()) return;
+    if (session == null) { emitError("此设备不支持蓝牙"); return; }
+    session.reconnect();
+  }
+
+  @JavascriptInterface
+  public void openBluetoothSettings() {
+    activity.startActivity(new Intent(Settings.ACTION_BLUETOOTH_SETTINGS));
+  }
+
   void onPermissionResult(boolean granted) {
     JSONObject event = new JSONObject();
     try { event.put("type", granted ? "permission-granted" : "permission-denied"); } catch (JSONException ignored) { }
@@ -98,6 +113,7 @@ public final class GameWebBridge implements BluetoothGameSession.Listener {
       event.put("type", "transport-state");
       event.put("role", role.name());
       event.put("state", state.name());
+      event.put("adapterEnabled", adapter != null && adapter.isEnabled());
       event.put("detail", detail);
     } catch (JSONException ignored) { }
     emit(event);

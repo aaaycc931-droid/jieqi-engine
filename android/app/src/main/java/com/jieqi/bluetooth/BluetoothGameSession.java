@@ -53,8 +53,13 @@ public final class BluetoothGameSession implements Closeable {
   private BluetoothSocket socket;
   private BufferedWriter writer;
   private volatile boolean closed;
+  private volatile boolean autoReconnect;
+  private volatile boolean everConnected;
+  private volatile boolean reconnectScheduled;
   private volatile Role role = Role.NONE;
+  private volatile Role reconnectRole = Role.NONE;
   private volatile State state = State.IDLE;
+  private String reconnectAddress;
 
   public BluetoothGameSession(BluetoothAdapter adapter, Listener listener) {
     this.adapter = adapter;
@@ -64,47 +69,83 @@ public final class BluetoothGameSession implements Closeable {
   public Role getRole() { return role; }
   public State getState() { return state; }
 
-  /** Ends the current room but keeps the transport reusable for a new room. */
+  /** Ends the current room and disables automatic reconnect. */
   public synchronized void disconnect() {
-    resetConnection();
+    autoReconnect = false;
+    reconnectScheduled = false;
+    closed = true;
+    closeServerSocket();
+    closeSocket();
+    writer = null;
+    role = Role.NONE;
+    reconnectRole = Role.NONE;
+    reconnectAddress = null;
+    everConnected = false;
     emit(State.DISCONNECTED, "已离开蓝牙房间");
   }
 
   @SuppressLint("MissingPermission")
   public synchronized void host() {
-    resetConnection();
+    autoReconnect = true;
+    everConnected = false;
+    reconnectRole = Role.HOST;
+    reconnectAddress = null;
+    startHost(false);
+  }
+
+  @SuppressLint("MissingPermission")
+  public synchronized void join(String address) {
+    autoReconnect = true;
+    everConnected = false;
+    reconnectRole = Role.GUEST;
+    reconnectAddress = address;
+    startGuest(address, false);
+  }
+
+  @SuppressLint("MissingPermission")
+  public synchronized void reconnect() {
+    if (reconnectRole == Role.NONE) return;
+    autoReconnect = true;
+    scheduleReconnect();
+  }
+
+  @SuppressLint("MissingPermission")
+  private synchronized void startHost(boolean reconnecting) {
+    closeServerSocket();
+    closeSocket();
     closed = false;
     role = Role.HOST;
-    emit(State.LISTENING, "正在等待另一台手机加入");
+    emit(State.LISTENING, reconnecting ? "正在自动等待对方重新连接" : "正在等待另一台手机加入");
     io.execute(() -> {
       try {
         serverSocket = adapter.listenUsingRfcommWithServiceRecord(SERVICE_NAME, SERVICE_UUID);
         BluetoothSocket accepted = serverSocket.accept();
         closeServerSocket();
-        attach(accepted, "对方已加入房间");
+        attach(accepted, reconnecting ? "连接已恢复" : "对方已加入房间");
       } catch (IOException error) {
-        if (!closed) fail("创建或等待房间失败：" + safeMessage(error));
+        if (!closed) handleTransportFailure("创建或等待房间失败：" + safeMessage(error));
       }
     });
   }
 
   @SuppressLint("MissingPermission")
-  public synchronized void join(String address) {
-    resetConnection();
+  private synchronized void startGuest(String address, boolean reconnecting) {
+    closeServerSocket();
+    closeSocket();
     closed = false;
     role = Role.GUEST;
-    emit(State.CONNECTING, "正在连接房主");
+    emit(State.CONNECTING, reconnecting ? "正在自动重新连接房主" : "正在连接房主");
     io.execute(() -> {
       try {
         BluetoothDevice device = adapter.getRemoteDevice(address);
         adapter.cancelDiscovery();
         BluetoothSocket candidate = device.createRfcommSocketToServiceRecord(SERVICE_UUID);
         candidate.connect();
-        attach(candidate, "已连接房主");
+        attach(candidate, reconnecting ? "连接已恢复" : "已连接房主");
       } catch (IllegalArgumentException error) {
-        fail("蓝牙设备地址无效");
+        handleTransportFailure("蓝牙设备地址无效");
       } catch (IOException error) {
-        if (!closed) fail("连接失败：" + safeMessage(error));
+        if (!closed) handleTransportFailure("连接失败：" + safeMessage(error));
       }
     });
   }
@@ -131,6 +172,8 @@ public final class BluetoothGameSession implements Closeable {
       socket = connected;
       writer = new BufferedWriter(new OutputStreamWriter(connected.getOutputStream(), StandardCharsets.UTF_8));
     }
+    everConnected = true;
+    reconnectScheduled = false;
     emit(State.CONNECTED, detail);
     readLoop(connected);
   }
@@ -152,12 +195,50 @@ public final class BluetoothGameSession implements Closeable {
           return;
         }
       }
-      if (!closed) emit(State.DISCONNECTED, "对方已断开连接");
+      if (!closed) handleUnexpectedDisconnect("对方已断开连接");
     } catch (IOException error) {
-      if (!closed) emit(State.DISCONNECTED, "蓝牙连接已断开");
+      if (!closed) handleUnexpectedDisconnect("蓝牙连接已断开");
     } finally {
       synchronized (this) { closeSocket(); }
     }
+  }
+
+  private void handleUnexpectedDisconnect(String detail) {
+    emit(State.DISCONNECTED, detail);
+    synchronized (this) { closeSocket(); }
+    scheduleReconnect();
+  }
+
+  private void handleTransportFailure(String detail) {
+    if (everConnected && autoReconnect) {
+      emit(State.DISCONNECTED, adapter.isEnabled() ? detail : "请开启蓝牙");
+      synchronized (this) { closeServerSocket(); closeSocket(); }
+      scheduleReconnect();
+      return;
+    }
+    fail(detail);
+  }
+
+  @SuppressLint("MissingPermission")
+  private synchronized void scheduleReconnect() {
+    if (!autoReconnect || reconnectRole == Role.NONE || reconnectScheduled || state == State.CONNECTED) return;
+    reconnectScheduled = true;
+    mainHandler.postDelayed(() -> {
+      synchronized (BluetoothGameSession.this) {
+        reconnectScheduled = false;
+        if (!autoReconnect || reconnectRole == Role.NONE || state == State.CONNECTED) return;
+        if (!adapter.isEnabled()) {
+          emit(State.DISCONNECTED, "请开启蓝牙");
+          scheduleReconnect();
+          return;
+        }
+        if (reconnectRole == Role.HOST) {
+          startHost(true);
+        } else if (reconnectAddress != null) {
+          startGuest(reconnectAddress, true);
+        }
+      }
+    }, 1_000);
   }
 
   private static void validateEnvelope(JSONObject message) throws JSONException {
@@ -167,15 +248,6 @@ public final class BluetoothGameSession implements Closeable {
       || "error".equals(type) || "ping".equals(type) || "pong".equals(type))) {
       throw new JSONException("未知消息类型");
     }
-  }
-
-  private synchronized void resetConnection() {
-    closed = true;
-    closeServerSocket();
-    closeSocket();
-    writer = null;
-    role = Role.NONE;
-    state = State.IDLE;
   }
 
   private void closeServerSocket() {
@@ -208,7 +280,15 @@ public final class BluetoothGameSession implements Closeable {
 
   @Override
   public synchronized void close() {
-    resetConnection();
+    autoReconnect = false;
+    reconnectScheduled = false;
+    closed = true;
+    closeServerSocket();
+    closeSocket();
+    writer = null;
+    role = Role.NONE;
+    reconnectRole = Role.NONE;
+    state = State.IDLE;
     io.shutdownNow();
   }
 }
