@@ -67,7 +67,8 @@ export type WinReason =
   | "resign"
   | "trap_ambush"
   | "crush_them"
-  | "rampage";
+  | "rampage"
+  | "disconnect";
 
 export interface CapturedPiece extends SecretIdentity {
   id: string;
@@ -143,7 +144,7 @@ export interface GameState {
   captured: CapturedPiece[];
   lastMove?: LastMove;
   winner?: Side;
-  drawReason?: "mutual_destruction";
+  drawReason?: "mutual_destruction" | "disconnect_timeout";
   reason?: WinReason;
   /** 未受英雄/畸变影响的旧棋局可省略，视为空效果。 */
   effectsByPieceId?: PieceEffectsById;

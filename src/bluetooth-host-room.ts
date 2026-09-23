@@ -4,7 +4,9 @@ import {
   completeRemoteHeroIntro,
   completeRemoteHeroPreparation,
   createRemoteRoom,
+  disconnectRemotePlayer,
   joinRemoteRoom,
+  reconnectRemotePlayer,
   playerRoomView,
   publicRemoteRoom,
   submitRemoteAssassination,
@@ -106,6 +108,16 @@ export class BluetoothHostRoom {
       default:
         throw new RuleError("INVALID_BLUETOOTH_ACTION", "未知蓝牙房间操作");
     }
+    return this.views();
+  }
+
+  disconnect(playerId: typeof BLUETOOTH_HOST_PLAYER | typeof BLUETOOTH_GUEST_PLAYER): BluetoothRoomViews {
+    this.room = disconnectRemotePlayer(this.room, playerId, this.now());
+    return this.views();
+  }
+
+  reconnect(playerId: typeof BLUETOOTH_HOST_PLAYER | typeof BLUETOOTH_GUEST_PLAYER): BluetoothRoomViews {
+    this.room = reconnectRemotePlayer(this.room, playerId, this.now());
     return this.views();
   }
 

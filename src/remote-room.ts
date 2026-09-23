@@ -51,6 +51,7 @@ export type RemoteRoomPhase =
 
 export const HERO_SELECTION_DURATION_MS = 60_000;
 export const HERO_PREPARATION_DURATION_MS = 60_000;
+export const DISCONNECT_TIMEOUT_MS = 60_000;
 
 export const DEFAULT_OPTIONAL_MODE_CONFIG: OptionalModeConfig = {
   heroesEnabled: false,
@@ -63,6 +64,22 @@ export interface RemoteSeat {
   playerId: string;
   connectedAt: number;
   lastSeenAt: number;
+}
+
+export interface RemoteDisconnectPlayerState {
+  accumulatedMs: number;
+  disconnectedAt?: number;
+  reconnectCount: number;
+}
+
+export interface RemoteDisconnectState {
+  players: Record<string, RemoteDisconnectPlayerState>;
+  pausedAt?: number;
+}
+
+export interface DisconnectOutcome {
+  timedOutPlayerIds: string[];
+  winnerPlayerId?: string;
 }
 
 export interface TerminalAnimation {
@@ -140,6 +157,8 @@ export interface RemoteRoom {
   featureSecret?: RoomFeatureSecretState;
   terminalAnimation?: TerminalAnimation;
   lastTrapTrigger?: TrapTrigger;
+  disconnects?: RemoteDisconnectState;
+  disconnectOutcome?: DisconnectOutcome;
   updatedAt: number;
 }
 
@@ -154,6 +173,8 @@ export interface PublicRemoteRoom {
   features?: RoomFeaturePublicState;
   terminalAnimation?: TerminalAnimation;
   lastTrapTrigger?: TrapTrigger;
+  disconnects?: RemoteDisconnectState;
+  disconnectOutcome?: DisconnectOutcome;
   updatedAt: number;
 }
 
@@ -242,7 +263,14 @@ function reserveServerActionId(actionId: string): void {
   }
 }
 
+function hasActiveDisconnect(room: RemoteRoom): boolean {
+  return Object.values(room.disconnects?.players ?? {}).some((player) => player.disconnectedAt !== undefined);
+}
+
 function ensurePhase(room: RemoteRoom, phase: RemoteRoomPhase): void {
+  if (phase !== "waiting" && hasActiveDisconnect(room)) {
+    throw new RuleError("MATCH_PAUSED_DISCONNECT", "对局因断线暂停，等待连接恢复");
+  }
   if (room.phase !== phase) {
     throw new RuleError("INVALID_PHASE", "房间当前阶段不能执行此操作");
   }
@@ -257,6 +285,127 @@ function roomPlayerIds(room: RemoteRoom): [string, string] {
   const guest = room.seats.guest?.playerId;
   if (!guest) throw new RuleError("ROOM_NOT_READY", "房间尚未坐满两名玩家");
   return [room.seats.host.playerId, guest];
+}
+
+function cloneDisconnects(disconnects: RemoteDisconnectState | undefined): RemoteDisconnectState | undefined {
+  if (!disconnects) return undefined;
+  return {
+    players: Object.fromEntries(
+      Object.entries(disconnects.players).map(([playerId, value]) => [playerId, { ...value }]),
+    ),
+    ...(disconnects.pausedAt !== undefined ? { pausedAt: disconnects.pausedAt } : {}),
+  };
+}
+
+function disconnectTotalMs(player: RemoteDisconnectPlayerState, now: number): number {
+  return player.accumulatedMs
+    + (player.disconnectedAt === undefined ? 0 : Math.max(0, now - player.disconnectedAt));
+}
+
+function sideForDisconnectPlayer(room: RemoteRoom, playerId: string): Side | undefined {
+  if (room.game) {
+    if (room.game.players.red === playerId) return "red";
+    if (room.game.players.black === playerId) return "black";
+  }
+  const assignments = room.rps?.assignments;
+  if (assignments?.red === playerId) return "red";
+  if (assignments?.black === playerId) return "black";
+  return undefined;
+}
+
+function shiftPausedDeadlines(room: RemoteRoom, pauseDurationMs: number): RemoteRoom {
+  if (pauseDurationMs <= 0) return room;
+  const features = room.features
+    ? {
+        ...room.features,
+        ...(room.features.heroSelection
+          ? { heroSelection: { ...room.features.heroSelection, deadlineAt: room.features.heroSelection.deadlineAt + pauseDurationMs } }
+          : {}),
+        ...(room.features.heroPreparation
+          ? { heroPreparation: { ...room.features.heroPreparation, deadlineAt: room.features.heroPreparation.deadlineAt + pauseDurationMs } }
+          : {}),
+      }
+    : undefined;
+  return { ...room, ...(features ? { features } : {}) };
+}
+
+function finishByDisconnectTimeout(room: RemoteRoom, timedOutPlayerIds: string[], now: number): RemoteRoom {
+  if (room.phase === "finished") return room;
+  const [firstPlayer, secondPlayer] = roomPlayerIds(room);
+  const timedOut = new Set(timedOutPlayerIds);
+  const simultaneous = timedOut.has(firstPlayer) && timedOut.has(secondPlayer);
+  const winnerPlayerId = simultaneous ? undefined : timedOut.has(firstPlayer) ? secondPlayer : firstPlayer;
+  let game = room.game;
+  if (game) {
+    const state = JSON.parse(JSON.stringify(game.state)) as GameState;
+    state.status = "finished";
+    state.revision += 1;
+    delete state.winner;
+    delete state.reason;
+    delete state.drawReason;
+    if (simultaneous) {
+      state.drawReason = "disconnect_timeout";
+    } else if (winnerPlayerId) {
+      const winnerSide = sideForDisconnectPlayer(room, winnerPlayerId);
+      if (winnerSide) {
+        state.winner = winnerSide;
+        state.reason = "disconnect";
+      }
+    }
+    game = { players: { ...game.players }, state, secret: game.secret };
+  }
+  return {
+    ...room,
+    phase: "finished",
+    ...(game ? { game } : {}),
+    terminalAnimation: undefined,
+    disconnectOutcome: {
+      timedOutPlayerIds: [...timedOutPlayerIds],
+      ...(winnerPlayerId ? { winnerPlayerId } : {}),
+    },
+    updatedAt: now,
+  };
+}
+
+function applyDisconnectTimeout(room: RemoteRoom, now: number): RemoteRoom {
+  if (!room.disconnects || room.phase === "finished") return room;
+  const timedOutPlayerIds = roomPlayerIds(room).filter((playerId) => {
+    const player = room.disconnects!.players[playerId];
+    return Boolean(player && disconnectTotalMs(player, now) >= DISCONNECT_TIMEOUT_MS);
+  });
+  return timedOutPlayerIds.length > 0 ? finishByDisconnectTimeout(room, timedOutPlayerIds, now) : room;
+}
+
+export function disconnectRemotePlayer(room: RemoteRoom, playerId: string, now = Date.now()): RemoteRoom {
+  requireRemotePlayer(room, playerId);
+  if (room.phase === "waiting" || room.phase === "finished" || !room.disconnects) return room;
+  const current = room.disconnects.players[playerId];
+  if (!current || current.disconnectedAt !== undefined) return room;
+  const disconnects = cloneDisconnects(room.disconnects)!;
+  disconnects.players[playerId] = { ...current, disconnectedAt: now };
+  disconnects.pausedAt ??= now;
+  return { ...room, disconnects, updatedAt: now };
+}
+
+export function reconnectRemotePlayer(room: RemoteRoom, playerId: string, now = Date.now()): RemoteRoom {
+  requireRemotePlayer(room, playerId);
+  if (!room.disconnects) return room;
+  const timed = applyDisconnectTimeout(room, now);
+  const current = timed.disconnects?.players[playerId];
+  if (!current || current.disconnectedAt === undefined) return timed;
+  const disconnects = cloneDisconnects(timed.disconnects)!;
+  const segmentMs = Math.max(0, now - current.disconnectedAt);
+  disconnects.players[playerId] = {
+    accumulatedMs: current.accumulatedMs + segmentMs,
+    reconnectCount: current.reconnectCount + 1,
+  };
+  const anyStillDisconnected = Object.values(disconnects.players).some((player) => player.disconnectedAt !== undefined);
+  if (timed.phase === "finished" || anyStillDisconnected) {
+    return { ...timed, disconnects, updatedAt: now };
+  }
+  const pauseDurationMs = disconnects.pausedAt === undefined ? 0 : Math.max(0, now - disconnects.pausedAt);
+  delete disconnects.pausedAt;
+  return { ...shiftPausedDeadlines(timed, pauseDurationMs), disconnects, updatedAt: now };
 }
 
 function assignmentsFor(room: RemoteRoom): { red: string; black: string } {
@@ -515,6 +664,11 @@ export function joinRemoteRoom(
         features: { heroSelection },
         featureSecret: { heroSelection: { choices: {} }, traps: [] },
       } : {}),
+      disconnects: {
+        players: Object.fromEntries(
+          playerIds.map((playerId) => [playerId, { accumulatedMs: 0, reconnectCount: 0 }]),
+        ),
+      },
       updatedAt: now,
     },
     alreadyJoined: false,
@@ -731,6 +885,8 @@ export function advanceRemoteRoomTime(
   randomInt?: RandomInt,
   now = Date.now(),
 ): RemoteRoom {
+  room = applyDisconnectTimeout(room, now);
+  if (room.phase === "finished" || hasActiveDisconnect(room)) return room;
   if (room.phase === "hero_selection") {
     const selection = room.features?.heroSelection;
     const secret = room.featureSecret?.heroSelection;
@@ -907,6 +1063,8 @@ export function publicRemoteRoom(room: RemoteRoom): PublicRemoteRoom {
       ? clonePublic(room.terminalAnimation)
       : undefined,
     lastTrapTrigger: room.lastTrapTrigger ? cloneTrapTrigger(room.lastTrapTrigger) : undefined,
+    disconnects: cloneDisconnects(room.disconnects),
+    disconnectOutcome: room.disconnectOutcome ? clonePublic(room.disconnectOutcome) : undefined,
     updatedAt: room.updatedAt,
   };
   return publicRoom;
