@@ -404,6 +404,7 @@ function resumeBluetoothUiClocks(): void {
 }
 
 function showLobby(): void {
+  disconnectLayer.hidden = true;
   lobbyView.hidden = false;
   heroView.hidden = true;
   rpsView.hidden = true;
@@ -501,7 +502,7 @@ function applyBluetoothView(view: PlayerRemoteRoomView): void {
   const ownPlayerId = ownBluetoothPlayerId();
   const disconnectOutcome = view.disconnectOutcome;
   if (disconnectOutcome && ownPlayerId && disconnectOutcome.timedOutPlayerIds.includes(ownPlayerId)) {
-    const key = [...disconnectOutcome.timedOutPlayerIds].sort().join("|");
+    const key = `lost:${[...disconnectOutcome.timedOutPlayerIds].sort().join("|")}`;
     if (bluetooth.nativeState === "CONNECTED" && bluetooth.shownDisconnectOutcomeKey !== key) {
       bluetooth.shownDisconnectOutcomeKey = key;
       const draw = disconnectOutcome.timedOutPlayerIds.length > 1;
@@ -509,6 +510,24 @@ function applyBluetoothView(view: PlayerRemoteRoomView): void {
         draw ? "断线平局" : "断线超时",
         draw ? "双方累计断线均达到 60 秒，本局平局。" : "你的累计断线时间达到 60 秒，本局判负。",
         "返回主菜单",
+        () => {
+          nativeBluetooth()?.disconnect();
+          bluetooth = undefined;
+          showLobby();
+        },
+      ), 50);
+    }
+    return;
+  }
+  if (disconnectOutcome && ownPlayerId && disconnectOutcome.winnerPlayerId === ownPlayerId && !view.state) {
+    const key = `won:${disconnectOutcome.timedOutPlayerIds.join("|")}`;
+    if (bluetooth.shownDisconnectOutcomeKey !== key) {
+      bluetooth.shownDisconnectOutcomeKey = key;
+      disconnectLayer.hidden = true;
+      window.setTimeout(() => showDialog(
+        "流放",
+        "对方被流放至扭曲虚空。您获得胜利！",
+        "返回蓝牙页",
         () => {
           nativeBluetooth()?.disconnect();
           bluetooth = undefined;
@@ -1176,6 +1195,18 @@ function updateBluetoothDisconnectState(): boolean {
   }
   if (bluetooth?.role === "host" && bluetooth.hostRoom) {
     refreshBluetoothHostViews(false);
+  }
+  const own = ownBluetoothPlayerId();
+  const outcome = bluetooth?.view?.disconnectOutcome;
+  const localWon = Boolean(
+    outcome
+    && own
+    && outcome.winnerPlayerId === own
+    && !outcome.timedOutPlayerIds.includes(own),
+  );
+  if (localWon) {
+    disconnectLayer.hidden = true;
+    return false;
   }
   renderDisconnectLayer();
   return true;
