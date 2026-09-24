@@ -1,14 +1,14 @@
 {
   "project": "乐子象棋 / 揭棋联机版",
-  "updated_at": "2026-09-18",
-  "branch": "codex/phase2-mutation-rarity-20260918",
-  "base_branch": "codex/phase1-rogue-20260918",
-  "base_commit": "cc4a1cb1b918cb14c23d71b179906f142b88f2e2",
+  "updated_at": "2026-09-24",
+  "branch": "codex/phase3-cumulative-disconnect-20260923",
+  "base_branch": "codex/phase2-mutation-rarity-20260918",
+  "base_commit": "30ba8486cc9bdeaf9ceb7f5e0a379e1617fd3846",
   "legacy_ui_base_branch": "codex/ui-v4-apk-test-20260915",
   "legacy_ui_base_commit": "de4eb73bcaea678e1f183ec2f0181369fe1cebce",
   "main_at_last_check": "c25749d4f21d394c3d94486cfba1d786864083b6",
   "ui_planning_status": "complete_except_intentional_deferred_items",
-  "implementation_status": "phase2_mutation_rarity_scaffold_implemented_weighted_draw_and_concrete_destiny_blocked",
+  "implementation_status": "phase3_cumulative_disconnect_implemented_ci_verified_physical_pending",
   "authoritative_documents": [
     "CONFIRMED_UI_PLAN.md",
     "BALANCE_AND_RULE_UPDATES.md",
@@ -18,10 +18,12 @@
   ],
   "baseline_tests": {
     "command": "npm run check",
-    "passed": 144,
+    "passed": 150,
     "failed": 0,
     "web_build": "passed",
-    "scope_warning": "rogue and mutation-rarity scaffold are covered; exact outer weights, concrete destiny runtime, disconnect, rematch and remaining UI are not"
+    "android_apk_build": "passed_after_current_web_assets_sync",
+    "github_actions_run_id": 35950543824,
+    "scope_warning": "cumulative disconnect ledger, pause/resume, timeout outcomes and web reconnect layer are automated/compile verified; real two-phone RFCOMM reconnect behavior is still pending physical validation"
   },
   "latest_locked_decisions": [
     "cumulative_disconnect_60_seconds_per_player",
@@ -40,12 +42,14 @@
     "exact_rarity_probabilities",
     "internet_multiplayer"
   ],
-  "next_action": "implement_cumulative_disconnect_60_seconds_and_disconnect_terminal_results",
+  "next_action": "two_phone_disconnect_reconnect_validation",
   "restrictions": [
     "do_not_merge_main_without_explicit_authorization",
     "do_not_deploy_internet_multiplayer",
     "do_not_commit_handoff_zip_or_apk",
     "do_not_redraw_approved_ui_assets",
     "do_not_fill_deferred_items_without_user_decision"
-  ]
+  ],
+  "latest_implementation_commit": "c331a0a6128ab8c2f977a4163a31acb8001f8f67",
+  "latest_ci_verified_feature_commit": "af9bb642f0d570285a55de2ef58577005b1fd622"
 }
