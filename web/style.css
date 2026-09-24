@@ -716,3 +716,33 @@ dialog::backdrop { background: rgba(22, 10, 7, 0.68); }
   .v4-board .piece, .v4-board .execution-ghost { font-size: 40px; }
   .captured-token { font-size: 30px; }
 }
+
+
+.disconnect-layer {
+  position: fixed;
+  z-index: 40;
+  inset: 0;
+  display: grid;
+  padding: 20px;
+  place-items: center;
+  background: rgba(29, 24, 20, .58);
+  backdrop-filter: blur(2px);
+}
+.disconnect-panel {
+  width: min(92vw, 430px);
+  padding: 26px 24px;
+  border: 1px solid rgba(70, 52, 39, .55);
+  border-radius: 18px;
+  background: rgba(248, 240, 224, .98);
+  box-shadow: 0 18px 54px rgba(20, 15, 11, .38);
+  text-align: center;
+}
+.disconnect-panel h2 { margin-bottom: 10px; }
+.disconnect-panel p { color: var(--muted); line-height: 1.65; }
+.disconnect-countdown {
+  display: block;
+  margin: 8px 0 12px;
+  font-size: clamp(42px, 12vw, 72px);
+  font-variant-numeric: tabular-nums;
+}
+.disconnect-panel .primary-button { margin-top: 8px; }

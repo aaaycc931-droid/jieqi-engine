@@ -43,6 +43,7 @@ import {
   parseBluetoothEnvelope,
 } from "../src/bluetooth-protocol.ts";
 import {
+  DISCONNECT_TIMEOUT_MS,
   HERO_PREPARATION_DURATION_MS,
   HERO_SELECTION_DURATION_MS,
   type PlayerRemoteRoomView,
@@ -146,6 +147,11 @@ const heroPreparationStatus = element<HTMLElement>("hero-preparation-status");
 const heroPreparationTimer = element<HTMLElement>("hero-preparation-timer");
 const trapUndoButton = element<HTMLButtonElement>("trap-undo-button");
 const preparationConfirmButton = element<HTMLButtonElement>("preparation-confirm-button");
+const disconnectLayer = element<HTMLElement>("disconnect-layer");
+const disconnectTitle = element<HTMLElement>("disconnect-title");
+const disconnectCopy = element<HTMLElement>("disconnect-copy");
+const disconnectTimer = element<HTMLElement>("disconnect-timer");
+const disconnectBluetoothButton = element<HTMLButtonElement>("disconnect-bluetooth-button");
 
 interface BluetoothNativeBridge {
   status(): string;
@@ -154,6 +160,8 @@ interface BluetoothNativeBridge {
   join(address: string): void;
   send(message: string): void;
   disconnect(): void;
+  reconnect(): void;
+  openBluetoothSettings(): void;
 }
 
 interface BluetoothEventDetail {
@@ -163,6 +171,7 @@ interface BluetoothEventDetail {
   message?: unknown;
   address?: string;
   detail?: string;
+  adapterEnabled?: boolean;
 }
 
 type BluetoothRole = "host" | "guest";
@@ -177,6 +186,11 @@ interface BluetoothSession {
   shownFinishRevision?: number;
   trapDraft: Position[];
   openingStarted?: boolean;
+  everConnected?: boolean;
+  localDisconnectStartedAt?: number;
+  localDisconnectPlayerId?: typeof BLUETOOTH_HOST_PLAYER | typeof BLUETOOTH_GUEST_PLAYER;
+  adapterEnabled?: boolean;
+  shownDisconnectOutcomeKey?: string;
 }
 
 interface LocalTrapLayer {
@@ -213,8 +227,13 @@ let heroPreparationDeadlineAt: number | undefined;
 let localPreparationActive = false;
 let openingActive = false;
 let openingTimer: number | undefined;
+let openingStage: "mutation" | "heroes" | undefined;
+let openingDeadlineAt: number | undefined;
+let openingPausedRemainingMs: number | undefined;
+let openingCompletion: (() => void) | undefined;
 let battleTurnRevision: number | undefined;
 let battleTurnDeadlineAt: number | undefined;
+let battlePausedRemainingMs: number | undefined;
 let bluetooth: BluetoothSession | undefined;
 
 const BOARD_X_CENTERS = [81, 162, 242, 322, 402, 482, 562, 642, 722] as const;
@@ -314,6 +333,76 @@ function setBluetoothStatus(message: string): void {
   bluetoothStatus.textContent = message;
 }
 
+function isBluetoothTransportInterrupted(): boolean {
+  return Boolean(bluetooth?.everConnected && bluetooth.nativeState !== "CONNECTED");
+}
+
+function pauseBluetoothUiClocks(): void {
+  if (battleTurnDeadlineAt !== undefined && battlePausedRemainingMs === undefined) {
+    battlePausedRemainingMs = Math.max(0, battleTurnDeadlineAt - Date.now());
+    battleTurnDeadlineAt = undefined;
+  }
+  if (openingActive && openingTimer !== undefined && openingDeadlineAt !== undefined && openingPausedRemainingMs === undefined) {
+    openingPausedRemainingMs = Math.max(0, openingDeadlineAt - Date.now());
+    window.clearTimeout(openingTimer);
+    openingTimer = undefined;
+  }
+}
+
+function scheduleOpeningStage(stage: "mutation" | "heroes", delayMs: number): void {
+  openingStage = stage;
+  openingDeadlineAt = Date.now() + delayMs;
+  if (openingTimer) window.clearTimeout(openingTimer);
+  openingTimer = window.setTimeout(() => {
+    openingTimer = undefined;
+    openingDeadlineAt = undefined;
+    if (isBluetoothTransportInterrupted()) {
+      openingPausedRemainingMs = 0;
+      return;
+    }
+    if (stage === "mutation") {
+      mutationReveal.hidden = true;
+      const heroes = battleHeroes();
+      if (!heroes) {
+        openingActive = false;
+        openingCompletion?.();
+        openingCompletion = undefined;
+        return;
+      }
+      const blackHero = element<HTMLElement>("intro-black-hero");
+      const redHero = element<HTMLElement>("intro-red-hero");
+      blackHero.querySelector("b")!.textContent = heroCatalog[heroes.black].name;
+      redHero.querySelector("b")!.textContent = heroCatalog[heroes.red].name;
+      heroIntroStage.hidden = false;
+      heroIntroStage.classList.add("playing");
+      scheduleOpeningStage("heroes", 2_000);
+      return;
+    }
+    heroIntroStage.classList.remove("playing");
+    heroIntroStage.hidden = true;
+    openingSequence.hidden = true;
+    openingActive = false;
+    openingStage = undefined;
+    const heroes = battleHeroes();
+    if (heroes) setBattleHeroAvatars(heroes, true);
+    const complete = openingCompletion;
+    openingCompletion = undefined;
+    complete?.();
+  }, Math.max(0, delayMs));
+}
+
+function resumeBluetoothUiClocks(): void {
+  if (battlePausedRemainingMs !== undefined) {
+    battleTurnDeadlineAt = Date.now() + battlePausedRemainingMs;
+    battlePausedRemainingMs = undefined;
+  }
+  if (openingActive && openingStage && openingPausedRemainingMs !== undefined) {
+    const remaining = openingPausedRemainingMs;
+    openingPausedRemainingMs = undefined;
+    scheduleOpeningStage(openingStage, remaining);
+  }
+}
+
 function showLobby(): void {
   lobbyView.hidden = false;
   heroView.hidden = true;
@@ -409,6 +498,27 @@ function applyBluetoothView(view: PlayerRemoteRoomView): void {
     }
   }
 
+  const ownPlayerId = ownBluetoothPlayerId();
+  const disconnectOutcome = view.disconnectOutcome;
+  if (disconnectOutcome && ownPlayerId && disconnectOutcome.timedOutPlayerIds.includes(ownPlayerId)) {
+    const key = [...disconnectOutcome.timedOutPlayerIds].sort().join("|");
+    if (bluetooth.nativeState === "CONNECTED" && bluetooth.shownDisconnectOutcomeKey !== key) {
+      bluetooth.shownDisconnectOutcomeKey = key;
+      const draw = disconnectOutcome.timedOutPlayerIds.length > 1;
+      window.setTimeout(() => showDialog(
+        draw ? "断线平局" : "断线超时",
+        draw ? "双方累计断线均达到 60 秒，本局平局。" : "你的累计断线时间达到 60 秒，本局判负。",
+        "返回主菜单",
+        () => {
+          nativeBluetooth()?.disconnect();
+          bluetooth = undefined;
+          showLobby();
+        },
+      ), 50);
+    }
+    return;
+  }
+
   if (view.terminalAnimation && bluetooth.playedTerminalEventId !== view.terminalAnimation.eventId) {
     bluetooth.playedTerminalEventId = view.terminalAnimation.eventId;
     playRemoteTerminalAnimation(view.terminalAnimation);
@@ -450,15 +560,22 @@ function sendBluetoothEnvelope<T>(envelope: { v: 1; type: "hello" | "action" | "
   bridge.send(encodeBluetoothEnvelope(envelope));
 }
 
-function publishBluetoothViews(): void {
+function refreshBluetoothHostViews(sendGuest: boolean): void {
   if (!bluetooth?.hostRoom) return;
   const views = bluetooth.hostRoom.views();
   applyBluetoothView(views.host);
-  sendBluetoothEnvelope(createBluetoothSnapshot(`snapshot-${views.publicRoom.updatedAt}-${views.publicRoom.phase}`, views.guest));
+  if (sendGuest && bluetooth.nativeState === "CONNECTED") {
+    sendBluetoothEnvelope(createBluetoothSnapshot(`snapshot-${views.publicRoom.updatedAt}-${views.publicRoom.phase}`, views.guest));
+  }
+}
+
+function publishBluetoothViews(): void {
+  refreshBluetoothHostViews(true);
 }
 
 function handleBluetoothAction(action: BluetoothRoomAction): void {
   if (!bluetooth) return;
+  if (isBluetoothTransportInterrupted()) return showToast("连接正在恢复，当前操作已锁定。");
   if (bluetooth.pendingAction) return showToast("正在等待房主确认上一项操作。");
   if (bluetooth.role === "host") {
     try {
@@ -577,8 +694,14 @@ function resetMatch(): void {
   heroPreparationDeadlineAt = undefined;
   localPreparationActive = false;
   openingActive = false;
+  openingStage = undefined;
+  openingDeadlineAt = undefined;
+  openingPausedRemainingMs = undefined;
+  openingCompletion = undefined;
   battleTurnRevision = undefined;
   battleTurnDeadlineAt = undefined;
+  battlePausedRemainingMs = undefined;
+  disconnectLayer.hidden = true;
   if (executionTimer) window.clearTimeout(executionTimer);
   if (openingTimer) window.clearTimeout(openingTimer);
   executionTimer = undefined;
@@ -883,6 +1006,7 @@ function runOpeningSequence(onComplete: () => void): void {
   const mutation = bluetooth?.view?.features?.mutation ?? gameState?.featureRules?.mutation;
   if (!heroes) return onComplete();
   openingActive = true;
+  openingCompletion = onComplete;
   setBattleHeroAvatars(heroes, false);
   openingSequence.hidden = false;
   heroIntroStage.hidden = true;
@@ -902,25 +1026,7 @@ function runOpeningSequence(onComplete: () => void): void {
   mutationReveal.style.animation = "none";
   void mutationReveal.offsetWidth;
   mutationReveal.style.animation = "";
-  if (openingTimer) window.clearTimeout(openingTimer);
-  openingTimer = window.setTimeout(() => {
-    mutationReveal.hidden = true;
-    const blackHero = element<HTMLElement>("intro-black-hero");
-    const redHero = element<HTMLElement>("intro-red-hero");
-    blackHero.querySelector("b")!.textContent = heroCatalog[heroes.black].name;
-    redHero.querySelector("b")!.textContent = heroCatalog[heroes.red].name;
-    heroIntroStage.hidden = false;
-    heroIntroStage.classList.add("playing");
-    openingTimer = window.setTimeout(() => {
-      heroIntroStage.classList.remove("playing");
-      heroIntroStage.hidden = true;
-      openingSequence.hidden = true;
-      openingActive = false;
-      setBattleHeroAvatars(heroes, true);
-      openingTimer = undefined;
-      onComplete();
-    }, 2_000);
-  }, 1_200);
+  scheduleOpeningStage("mutation", 1_200);
 }
 
 function beginLocalHeroPreparation(): void {
@@ -1023,7 +1129,60 @@ function confirmHeroPreparation(): void {
   completeLocalHeroPreparation();
 }
 
+function disconnectPlayerLabel(playerId: string): string {
+  const own = ownBluetoothPlayerId();
+  if (playerId === own) return "你";
+  const side = bluetooth?.view?.rps?.assignments
+    ? bluetooth.view.rps.assignments.red === playerId ? "红方" : bluetooth.view.rps.assignments.black === playerId ? "蓝方" : undefined
+    : undefined;
+  return side ? `对方（${side}）` : "对方";
+}
+
+function renderDisconnectLayer(): void {
+  if (!bluetooth?.everConnected || bluetooth.nativeState === "CONNECTED") {
+    disconnectLayer.hidden = true;
+    return;
+  }
+  disconnectLayer.hidden = false;
+  const now = Date.now();
+  const authoritative = bluetooth.view?.disconnects?.players ?? {};
+  const active = Object.entries(authoritative).filter(([, state]) => state.disconnectedAt !== undefined);
+  const fallbackId = bluetooth.localDisconnectPlayerId;
+  const rows = active.length > 0
+    ? active.map(([playerId, state]) => {
+        const total = state.accumulatedMs + Math.max(0, now - (state.disconnectedAt ?? now));
+        return { playerId, total };
+      })
+    : fallbackId
+      ? [{ playerId: fallbackId, total: Math.max(0, now - (bluetooth.localDisconnectStartedAt ?? now)) }]
+      : [];
+  disconnectTitle.textContent = bluetooth.adapterEnabled === false ? "请开启蓝牙" : "连接中断，正在重连";
+  disconnectCopy.textContent = rows.length > 0
+    ? rows.map(({ playerId, total }) => {
+        const elapsed = Math.min(DISCONNECT_TIMEOUT_MS, total);
+        const remaining = Math.max(0, DISCONNECT_TIMEOUT_MS - elapsed);
+        return `${disconnectPlayerLabel(playerId)}已累计断线 ${Math.floor(elapsed / 1_000)} 秒，剩余 ${Math.ceil(remaining / 1_000)} 秒。`;
+      }).join(" ")
+    : "对局已暂停，正在自动尝试恢复连接。";
+  const maxElapsed = rows.reduce((value, row) => Math.max(value, row.total), 0);
+  disconnectTimer.textContent = String(Math.max(0, Math.ceil((DISCONNECT_TIMEOUT_MS - maxElapsed) / 1_000)));
+  disconnectBluetoothButton.hidden = bluetooth.adapterEnabled !== false;
+}
+
+function updateBluetoothDisconnectState(): boolean {
+  if (!isBluetoothTransportInterrupted()) {
+    disconnectLayer.hidden = true;
+    return false;
+  }
+  if (bluetooth?.role === "host" && bluetooth.hostRoom) {
+    refreshBluetoothHostViews(false);
+  }
+  renderDisconnectLayer();
+  return true;
+}
+
 function updateVisibleTimers(): void {
+  if (updateBluetoothDisconnectState()) return;
   if (!heroView.hidden) {
     const state = heroSelectionState();
     const remaining = secondsRemaining(state.deadlineAt);
@@ -1060,6 +1219,7 @@ function updateVisibleTimers(): void {
 
 function updateBattleTurnTimer(): void {
   if (gameView.hidden || !gameState) return;
+  if (isBluetoothTransportInterrupted()) return;
   const waitingForOpening = openingActive
     || localPreparationActive
     || bluetooth?.view?.phase === "hero_intro"
@@ -1206,6 +1366,7 @@ function renderCaptures(container: HTMLElement, side: Side): void {
 
 function finishMessage(): string {
   if (gameState?.drawReason === "mutual_destruction") return "双方将帅同归于尽，两败俱伤！";
+  if (gameState?.drawReason === "disconnect_timeout") return "双方累计断线均达到 60 秒，本局平局。";
   if (!gameState?.winner) return "对局结束。";
   const reason = gameState.reason;
   const lostRemoteGame = Boolean(bluetooth?.view?.viewerSide && bluetooth.view.viewerSide !== gameState.winner);
@@ -1217,6 +1378,7 @@ function finishMessage(): string {
     if (reason === "trap_ambush") return "您已踏入对方陷阱！伏击得手。";
     if (reason === "crush_them") return "对方碾碎了您的将帅！";
     if (reason === "rampage") return "对方误伤己方将帅，乱杀失败；您获得胜利！";
+    if (reason === "disconnect") return "您因累计断线达到 60 秒，本局失败。";
     return "您已战败。";
   }
   if (reason === "ambush") return "暗中潜行，破影而袭！您获得胜利！";
@@ -1226,12 +1388,13 @@ function finishMessage(): string {
   if (reason === "trap_ambush") return "猎物已踏入陷阱！伏击得手，您获得胜利！";
   if (reason === "crush_them") return "碾碎他们！您获得胜利！";
   if (reason === "rampage") return "误伤己方将帅，乱杀失败！";
+  if (reason === "disconnect") return "对方被流放至扭曲虚空。您获得胜利！";
   return "您获得胜利！";
 }
 
 function finishTitle(): string {
   if (!gameState?.reason) return "对局结束";
-  return { ambush: "背刺", checkmate: "裁决", stalemate: "无处可逃", resign: "臣服", trap_ambush: "伏击", crush_them: "碾碎他们！", rampage: "乱杀失败" }[gameState.reason];
+  return { ambush: "背刺", checkmate: "裁决", stalemate: "无处可逃", resign: "臣服", trap_ambush: "伏击", crush_them: "碾碎他们！", rampage: "乱杀失败", disconnect: "流放" }[gameState.reason];
 }
 
 function renderGame(): void {
@@ -1302,7 +1465,9 @@ function renderGame(): void {
   renderBoard();
   renderCaptures(redCaptures, "red");
   renderCaptures(blackCaptures, "black");
-  const remoteLocked = Boolean(bluetooth?.pendingAction) || (Boolean(remoteView) && remoteView?.viewerSide !== gameState.turn);
+  const remoteLocked = isBluetoothTransportInterrupted()
+    || Boolean(bluetooth?.pendingAction)
+    || (Boolean(remoteView) && remoteView?.viewerSide !== gameState.turn);
   element<HTMLButtonElement>("resign-button").disabled = gameState.status !== "playing" || preparationActive || openingActive || remoteView?.phase === "hero_intro" || remoteLocked;
   const skill = gameState.assassination?.[gameState.turn];
   const active = skill?.activePieceId;
@@ -1500,6 +1665,7 @@ function placeLocalTrap(position: Position): void {
 function onBoardClick(event: MouseEvent): void {
   const target = (event.target as HTMLElement).closest<HTMLButtonElement>(".point");
   if (!target || !gameState) return;
+  if (isBluetoothTransportInterrupted()) return showToast("连接正在恢复，棋盘暂时锁定。");
   const to = { x: Number(target.dataset.x), y: Number(target.dataset.y) };
   if (openingActive || bluetooth?.view?.phase === "hero_intro") return;
   if (bluetooth?.view?.phase === "hero_preparation") {
@@ -1728,30 +1894,81 @@ element<HTMLButtonElement>("strong-strike-button").addEventListener("click", () 
   renderGame();
 });
 flowDialog.addEventListener("cancel", (event) => event.preventDefault());
+disconnectBluetoothButton.addEventListener("click", () => {
+  nativeBluetooth()?.openBluetoothSettings();
+  nativeBluetooth()?.reconnect();
+});
+
 window.setInterval(updateVisibleTimers, 250);
 
 window.addEventListener("jieqi-bluetooth", ((event: CustomEvent<BluetoothEventDetail>) => {
   const detail = event.detail;
   if (!detail) return;
   if (detail.event === "state" || detail.type === "transport-state") {
-    if (bluetooth) bluetooth.nativeState = detail.state ?? bluetooth.nativeState;
-    if (detail.state === "LISTENING") setBluetoothStatus("房主正在监听。请让另一台已配对手机选择本机并加入。");
+    if (!bluetooth) return;
+    const previousState = bluetooth.nativeState;
+    const wasEstablished = Boolean(bluetooth.everConnected);
+    bluetooth.nativeState = detail.state ?? bluetooth.nativeState;
+    bluetooth.adapterEnabled = detail.adapterEnabled ?? bluetooth.adapterEnabled;
+
+    if (detail.state === "LISTENING" && !wasEstablished) {
+      setBluetoothStatus("房主正在监听。请让另一台已配对手机选择本机并加入。");
+    }
+
     if (detail.state === "CONNECTED") {
-      setBluetoothStatus("蓝牙已连接，正在同步房间。");
-      if (bluetooth?.role === "host") {
+      const restoring = wasEstablished && previousState !== "CONNECTED";
+      bluetooth.everConnected = true;
+      bluetooth.pendingAction = false;
+      setBluetoothStatus(restoring ? "连接已恢复。" : "蓝牙已连接，正在同步房间。");
+
+      if (bluetooth.role === "host") {
         bluetooth.hostRoom ??= new BluetoothHostRoom({
           roomId: randomSessionText("bt-room"),
           admissionSecret: randomSessionText("physical"),
           mode: bluetoothModeConfig(),
         });
+        if (restoring) {
+          const disconnects = bluetooth.hostRoom.views().publicRoom.disconnects?.players ?? {};
+          for (const playerId of [BLUETOOTH_HOST_PLAYER, BLUETOOTH_GUEST_PLAYER] as const) {
+            if (disconnects[playerId]?.disconnectedAt !== undefined) bluetooth.hostRoom.reconnect(playerId);
+          }
+        }
         publishBluetoothViews();
       }
+
+      if (restoring) {
+        bluetooth.localDisconnectStartedAt = undefined;
+        bluetooth.localDisconnectPlayerId = undefined;
+        resumeBluetoothUiClocks();
+        disconnectTitle.textContent = "连接已恢复";
+        disconnectCopy.textContent = "正在恢复原阶段与动画位置。";
+        disconnectTimer.textContent = "";
+        disconnectBluetoothButton.hidden = true;
+        disconnectLayer.hidden = false;
+        window.setTimeout(() => {
+          if (bluetooth?.nativeState === "CONNECTED") disconnectLayer.hidden = true;
+        }, 2_000);
+      }
     }
-    if (detail.state === "DISCONNECTED" || detail.state === "ERROR") {
-      if (bluetooth) bluetooth.pendingAction = false;
-      const message = detail.detail || (detail.state === "ERROR" ? "蓝牙连接发生错误，请检查配对后重新创建或加入。" : "蓝牙连接已断开。当前对局已暂停。");
+
+    if ((detail.state === "DISCONNECTED" || detail.state === "ERROR") && wasEstablished) {
+      bluetooth.pendingAction = false;
+      if (previousState === "CONNECTED") {
+        bluetooth.localDisconnectStartedAt = Date.now();
+        bluetooth.localDisconnectPlayerId = detail.adapterEnabled === false
+          ? (bluetooth.role === "host" ? BLUETOOTH_HOST_PLAYER : BLUETOOTH_GUEST_PLAYER)
+          : (bluetooth.role === "host" ? BLUETOOTH_GUEST_PLAYER : BLUETOOTH_HOST_PLAYER);
+        pauseBluetoothUiClocks();
+      }
+      if (bluetooth.role === "host" && bluetooth.hostRoom && bluetooth.localDisconnectPlayerId) {
+        bluetooth.hostRoom.disconnect(bluetooth.localDisconnectPlayerId);
+        refreshBluetoothHostViews(false);
+      }
+      const message = detail.adapterEnabled === false
+        ? "请开启蓝牙；断线累计计时仍在继续。"
+        : detail.detail || "蓝牙连接已断开，当前对局已暂停并自动重连。";
       setBluetoothStatus(message);
-      showToast(message);
+      renderDisconnectLayer();
     }
   } else if ((detail.event === "message" || detail.type === "message") && detail.message) {
     handleIncomingBluetoothMessage(typeof detail.message === "string" ? detail.message : JSON.stringify(detail.message));

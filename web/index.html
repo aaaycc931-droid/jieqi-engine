@@ -167,6 +167,16 @@
       </main>
     </div>
 
+    <section id="disconnect-layer" class="disconnect-layer" hidden aria-live="assertive" aria-labelledby="disconnect-title">
+      <div class="disconnect-panel">
+        <p class="eyebrow">蓝牙对局</p>
+        <h2 id="disconnect-title">连接中断，正在重连</h2>
+        <strong id="disconnect-timer" class="disconnect-countdown">60</strong>
+        <p id="disconnect-copy">对局已暂停，正在自动尝试恢复连接。</p>
+        <button id="disconnect-bluetooth-button" class="primary-button" type="button" hidden>请开启蓝牙</button>
+      </div>
+    </section>
+
     <dialog id="flow-dialog" aria-labelledby="dialog-title">
       <div class="dialog-content">
         <p class="eyebrow">乐子象棋</p>
