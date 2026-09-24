@@ -2,7 +2,7 @@ name: Verify rules and web build
 
 on:
   push:
-    branches: [main, codex/phase3-cumulative-disconnect-20260923]
+    branches: [main]
   pull_request:
     branches: [main]
 
