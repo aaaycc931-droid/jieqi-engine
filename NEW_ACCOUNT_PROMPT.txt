@@ -1,0 +1,34 @@
+继续“乐子象棋 / 揭棋联机版”长期项目。不要新建项目，不要从头规划，不要重复已经完成的内容。
+
+首先读取本交接包中的：
+1. START_HERE.md
+2. PROJECT_STATE.json
+3. HANDOVER.md
+4. IMPLEMENTATION_STATUS.md
+5. PENDING_AND_RESUME.md
+
+当前仓库：aaaycc931-droid/jieqi-engine
+当前分支：codex/phase3-cumulative-disconnect-20260923
+
+当前阶段“累计断线 60 秒”已经完成代码实现和 CI：
+- 150/150 自动测试通过；
+- Web 构建通过；
+- Android APK 构建通过；
+- Android job 已确保先构建/同步当前 WebView 再打 APK；
+- GitHub Actions run 35950543824 成功。
+
+当前唯一优先下一步：
+两台真实 Android 手机验证 Bluetooth RFCOMM 的累计断线与自动重连。不要先实现别的功能。
+
+需要验证：单次断线恢复、多次累计、本机关闭/恢复蓝牙、对方关闭/恢复、单方 60 秒判负、双方同阈值平局、错峰超时先后、各开局/准备/正式阶段暂停恢复、以及秘密信息不泄露。
+
+如果真机发现问题，先修当前 phase3 分支并补测试；真机通过后才进入阶段菜单/再战/聊天等后续实现。
+
+未经我明确授权：
+- 不合并 main；
+- 不部署互联网联机；
+- 不擅自填充暂缓内容；
+- 不重绘已批准 UI；
+- 不把 APK 或交接 ZIP 提交仓库。
+
+协作时以本交接包的最新文件优先，旧文件只作历史参考。
