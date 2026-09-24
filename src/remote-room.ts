@@ -367,13 +367,29 @@ function finishByDisconnectTimeout(room: RemoteRoom, timedOutPlayerIds: string[]
   };
 }
 
+function disconnectThresholdAt(player: RemoteDisconnectPlayerState): number | undefined {
+  if (player.disconnectedAt === undefined) {
+    return player.accumulatedMs >= DISCONNECT_TIMEOUT_MS ? 0 : undefined;
+  }
+  return player.disconnectedAt + Math.max(0, DISCONNECT_TIMEOUT_MS - player.accumulatedMs);
+}
+
 function applyDisconnectTimeout(room: RemoteRoom, now: number): RemoteRoom {
   if (!room.disconnects || room.phase === "finished") return room;
-  const timedOutPlayerIds = roomPlayerIds(room).filter((playerId) => {
-    const player = room.disconnects!.players[playerId];
-    return Boolean(player && disconnectTotalMs(player, now) >= DISCONNECT_TIMEOUT_MS);
-  });
-  return timedOutPlayerIds.length > 0 ? finishByDisconnectTimeout(room, timedOutPlayerIds, now) : room;
+  const thresholds = roomPlayerIds(room)
+    .map((playerId) => {
+      const player = room.disconnects!.players[playerId];
+      return { playerId, thresholdAt: player ? disconnectThresholdAt(player) : undefined };
+    })
+    .filter((entry): entry is { playerId: string; thresholdAt: number } =>
+      entry.thresholdAt !== undefined && entry.thresholdAt <= now,
+    );
+  if (thresholds.length === 0) return room;
+  const earliest = Math.min(...thresholds.map((entry) => entry.thresholdAt));
+  const timedOutPlayerIds = thresholds
+    .filter((entry) => entry.thresholdAt === earliest)
+    .map((entry) => entry.playerId);
+  return finishByDisconnectTimeout(room, timedOutPlayerIds, now);
 }
 
 export function disconnectRemotePlayer(room: RemoteRoom, playerId: string, now = Date.now()): RemoteRoom {

@@ -144,3 +144,29 @@ test("BTDISC-05 成功重连会永久保留累计断线时间并增加重连历�
   assert.equal(second?.accumulatedMs, 15_000);
   assert.equal(second?.reconnectCount, 2);
 });
+
+
+test("BTDISC-06 延迟检查时按实际到达 60 秒的先后裁定，不把错开的超时误判为平局", () => {
+  let now = 1_000;
+  const room = new BluetoothHostRoom({
+    roomId: "bt-disconnect-staggered",
+    admissionSecret: "local-link",
+    now: () => now,
+    randomInt: () => 0,
+  });
+  room.handle(BLUETOOTH_HOST_PLAYER, { kind: "rps", choice: "rock", round: 1 });
+  room.handle(BLUETOOTH_GUEST_PLAYER, { kind: "rps", choice: "scissors", round: 1 });
+
+  now = 2_000;
+  room.disconnect(BLUETOOTH_HOST_PLAYER);
+  now = 12_000;
+  room.disconnect(BLUETOOTH_GUEST_PLAYER);
+
+  now = 72_000;
+  const finished = room.advance();
+  assert.equal(finished.publicRoom.phase, "finished");
+  assert.deepEqual(finished.publicRoom.disconnectOutcome?.timedOutPlayerIds, [BLUETOOTH_HOST_PLAYER]);
+  assert.equal(finished.publicRoom.disconnectOutcome?.winnerPlayerId, BLUETOOTH_GUEST_PLAYER);
+  assert.equal(finished.publicRoom.state?.winner, "black");
+  assert.equal(finished.publicRoom.state?.reason, "disconnect");
+});
