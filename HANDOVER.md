@@ -123,6 +123,8 @@
 - Web 构建：通过，生成 `dist/web/index.html`。
 - 当前 `dist` 已同步到 `android/app/src/main/assets/game`，两侧 108 个文件一致；包含最新 `menu-v1`、`rps-v1` 和规则图资源。
 - Android 静态外壳检查已覆盖：权限判断先于受保护 API、创建/加入阻塞套接字可被取消关闭，以及软键盘 `adjustResize` 配置。
+- GitHub Actions run `36846132332`：`rules-and-web` 与 `android-apk` 均通过；当前 APK 构建提交为 `2bb0f9ca128fb8a61728839ca0dcdce1b01027ab`，草稿 PR 为 `#2`。
+- 当前 debug APK 已下载并完成 ZIP 结构校验：8,174,945 bytes，SHA-256 `6a1ebe19340000507da7c05a1c4fd516c5177b3198bda36df4235dd399ec3001`。
 - `git diff --check`：通过。
 - 主菜单三比例静态分层检查：未发现标题、署名、四入口和设置图标裁切。
 - 蓝牙大厅与设置页做了静态分层结构检查。
@@ -131,7 +133,7 @@
 
 - 当前环境缺少可用 Chromium，未完成真实浏览器截图。
 - 云浏览器无法访问本地服务，未完成浏览器交互录屏。
-- 当前环境没有 Android SDK、Gradle 命令或 wrapper 运行文件，本轮 Android Java 与最新内置网页未能重新编译；旧 CI run `35950543824` 只覆盖 2026-09-24 检查点。
+- 当前环境没有 Android SDK、Gradle 命令或 wrapper 运行文件，但当前 Android Java 与最新内置网页已由 GitHub Actions run `36846132332` 成功编译；旧 run `35950543824` 仍只代表旧检查点。
 - 两台真实 Android 设备上的权限、RFCOMM、断线累计与自动重连仍未验证。
 
 ## 4. 仍未完整实现
@@ -143,7 +145,7 @@
 
 ## 5. 推荐续接顺序
 
-1. 在具备 Android SDK/Gradle 的环境用当前工作树重新构建并安装 debug APK，不使用旧 APK 代替。
+1. 安装 run `36846132332` 生成的当前 debug APK，不使用旧 APK 代替。
 2. Android WebView 真机视觉审核：安全区、短屏、长屏、字体缩放、软键盘和触控范围。
 3. 两机蓝牙大厅与权限/创建/加入/取消/断线/重连链路验证；发现问题先复现再修。
 4. 根据真机复现结果修正 WebView 或蓝牙桥接问题，并重跑完整检查。

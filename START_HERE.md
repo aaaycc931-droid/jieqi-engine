@@ -2,7 +2,7 @@
 
 ## 当前一句话状态
 
-用户已明确把本轮优先级切换为 UI。主菜单、蓝牙大厅、设置页、玩法说明页、八阶段流程、七类可放大走法图、英雄选择页、猜拳页、英雄准备/猎人陷阱、阶段三点菜单、规则/畸变覆盖层、终局结果/再战、消息/按局历史、已吃棋子、英雄/技能实时详情以及非终局事件提示已完成第一阶段重构。最新 Web 资源已同步到 Android assets，权限与连接取消桥接也已修正；当前通过 **200/200** 自动测试与 Web 构建，但尚未重新编译当前 APK，也未经过真实 Android WebView/双机最终批准。
+用户已明确把本轮优先级切换为 UI。主菜单、蓝牙大厅、设置页、玩法说明页、八阶段流程、七类可放大走法图、英雄选择页、猜拳页、英雄准备/猎人陷阱、阶段三点菜单、规则/畸变覆盖层、终局结果/再战、消息/按局历史、已吃棋子、英雄/技能实时详情以及非终局事件提示已完成第一阶段重构。最新 Web 资源已同步到 Android assets，权限与连接取消桥接也已修正；当前通过 **200/200** 自动测试、Web 构建和 Android APK CI，但尚未经过真实 Android WebView/双机最终批准。
 
 ## 当前分支与工作树
 
@@ -25,14 +25,16 @@
 - Web build：passed
 - `dist` 与 `android/app/src/main/assets/game`：108 个文件一致
 - Android 静态检查：权限前置、阻塞连接可取消、`adjustResize` 均通过
+- GitHub Actions run `36846132332`：规则/Web 与 Android APK job 均通过
+- 当前 APK 构建提交：`2bb0f9ca128fb8a61728839ca0dcdce1b01027ab`；草稿 PR：`#2`
 - `git diff --check`：passed
 - 9:16、19.5:9、20:9 主菜单静态分层检查：未见标题、署名、入口文字裁切
 - 当前环境没有可用 Chromium，本地页面也不能由云浏览器访问，因此没有真实浏览器截图
-- 当前环境缺少 Android SDK、Gradle 命令和 wrapper 运行文件；本轮 Android Java 与最新 assets 未重新编译，2026-09-24 的 Android CI 只能证明旧检查点
+- 当前环境缺少 Android SDK、Gradle 命令和 wrapper 运行文件；已改用 GitHub Actions 编译当前提交，旧 run `35950543824` 不再作为本轮 APK 依据
 
 ## 下一动作
 
-1. 在具备 Android SDK/Gradle 的环境构建当前 debug APK，确认最新 Web assets 被打包。
+1. 安装 run `36846132332` 生成的当前 debug APK，确认最新 Web assets 正确载入。
 2. 在 Android WebView 中审核全部已改页面，特别是规则图放大层、消息半屏上展、软键盘、字体缩放和触控锁定。
 3. 两台真实 Android 设备验证蓝牙权限、创建/加入/取消、权威聊天、断线草稿、断线累计与自动重连。
 4. 仅根据真机复现结果修正问题并重新执行完整检查。
