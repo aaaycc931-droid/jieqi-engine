@@ -18,7 +18,8 @@ import {
   submitRpsChoice,
 } from "./rps.ts";
 import { createInitialGame } from "./setup.ts";
-import { getController, isInsideBoard } from "./slots.ts";
+import { getController, isInsideBoard, otherSide } from "./slots.ts";
+import { isGeneralInCheck } from "./rules.ts";
 import {
   MUTATION_IDS,
   mutationDefinition,
@@ -50,8 +51,12 @@ export type RemoteRoomPhase =
   | "finished";
 
 export const HERO_SELECTION_DURATION_MS = 60_000;
+export const RPS_SELECTION_DURATION_MS = 30_000;
 export const HERO_PREPARATION_DURATION_MS = 60_000;
 export const DISCONNECT_TIMEOUT_MS = 60_000;
+export const REMATCH_INVITATION_DURATION_MS = 30_000;
+export const CHAT_COOLDOWN_MS = 2_000;
+export const CHAT_MAX_CHARACTERS = 50;
 
 export const DEFAULT_OPTIONAL_MODE_CONFIG: OptionalModeConfig = {
   heroesEnabled: false,
@@ -59,6 +64,7 @@ export const DEFAULT_OPTIONAL_MODE_CONFIG: OptionalModeConfig = {
 };
 
 const HERO_IDS: readonly HeroId[] = ["hunter", "rogue", "warrior"];
+const RPS_CHOICES: readonly RpsChoice[] = ["rock", "scissors", "paper"];
 
 export interface RemoteSeat {
   playerId: string;
@@ -82,10 +88,33 @@ export interface DisconnectOutcome {
   winnerPlayerId?: string;
 }
 
+export interface ForfeitOutcome {
+  actionId: string;
+  loserPlayerId: string;
+  winnerPlayerId: string;
+}
+
+export interface RematchInvitation {
+  invitationId: string;
+  requestedBy: string;
+  deadlineAt: number;
+  status: "pending" | "declined" | "expired";
+  respondedBy?: string;
+}
+
 export interface TerminalAnimation {
   eventId: string;
   reason: Extract<WinReason, "ambush" | "checkmate">;
   plan: AutomaticExecutionPlan;
+}
+
+export interface MatchMessage {
+  id: string;
+  kind: "chat" | "system";
+  text: string;
+  createdAt: number;
+  senderPlayerId?: string;
+  senderSide?: Side;
 }
 
 export interface HeroSelectionPublicState {
@@ -152,6 +181,7 @@ export interface RemoteRoom {
   phase: RemoteRoomPhase;
   rps?: RpsPublicState;
   rpsSecret?: RpsSecretState;
+  rpsDeadlineAt?: number;
   game?: RoomGame;
   features?: RoomFeaturePublicState;
   featureSecret?: RoomFeatureSecretState;
@@ -159,6 +189,11 @@ export interface RemoteRoom {
   lastTrapTrigger?: TrapTrigger;
   disconnects?: RemoteDisconnectState;
   disconnectOutcome?: DisconnectOutcome;
+  forfeitOutcome?: ForfeitOutcome;
+  rematch?: RematchInvitation;
+  messages?: MatchMessage[];
+  /** Server-only rate-limit state; never included in a public room view. */
+  chatLastSentAt?: Partial<Record<string, number>>;
   updatedAt: number;
 }
 
@@ -169,12 +204,16 @@ export interface PublicRemoteRoom {
   mode: OptionalModeConfig;
   phase: RemoteRoomPhase;
   rps?: RpsPublicState;
+  rpsDeadlineAt?: number;
   state?: GameState;
   features?: RoomFeaturePublicState;
   terminalAnimation?: TerminalAnimation;
   lastTrapTrigger?: TrapTrigger;
   disconnects?: RemoteDisconnectState;
   disconnectOutcome?: DisconnectOutcome;
+  forfeitOutcome?: ForfeitOutcome;
+  rematch?: RematchInvitation;
+  messages?: MatchMessage[];
   updatedAt: number;
 }
 
@@ -198,6 +237,50 @@ export interface RemoteActionResult {
 
 function requireText(value: string, code: string, message: string): void {
   if (!value.trim()) throw new RuleError(code, message);
+}
+
+function appendMessage(room: RemoteRoom, message: MatchMessage): RemoteRoom {
+  return { ...room, messages: [...(room.messages ?? []), message] };
+}
+
+function appendSystemMessage(room: RemoteRoom, text: string, now: number, id: string): RemoteRoom {
+  return appendMessage(room, { id, kind: "system", text, createdAt: now });
+}
+
+function sideName(side: Side): string {
+  return side === "red" ? "红方" : "蓝方";
+}
+
+function pieceName(color: Side, type: GameState["captured"][number]["type"]): string {
+  const names = {
+    red: { general: "帅", advisor: "仕", elephant: "相", horse: "马", rook: "车", cannon: "炮", pawn: "兵" },
+    black: { general: "将", advisor: "士", elephant: "象", horse: "馬", rook: "車", cannon: "砲", pawn: "卒" },
+  } as const;
+  return `${color === "red" ? "红" : "蓝"}${names[color][type]}`;
+}
+
+function actionHistoryText(state: GameState, skill?: "刺杀" | "强击"): string {
+  const lastMove = state.lastMove;
+  if (!lastMove) return "棋局状态已更新。";
+  const parts = [`${sideName(lastMove.actingSide)}${skill ? `发动${skill}` : "完成行棋"}`];
+  if (lastMove.captured) parts.push(`吃掉${pieceName(lastMove.captured.color, lastMove.captured.type)}`);
+  if (lastMove.pathCrushed?.length) parts.push(`碾碎${lastMove.pathCrushed.length}枚棋子`);
+  if (lastMove.bouncedAgainstPieceId) parts.push("攻击被壁垒弹回");
+  if (lastMove.revealed) parts.push(`揭示为${pieceName(lastMove.revealed.color, lastMove.revealed.type)}`);
+  if (state.status === "playing") {
+    if (isGeneralInCheck(state, state.turn)) parts.push(`${sideName(state.turn)}被将军`);
+    parts.push(`轮到${sideName(state.turn)}`);
+  } else {
+    parts.push("对局结束");
+  }
+  return `${parts.join("，")}。`;
+}
+
+function withActionHistory(room: RemoteRoom, now: number, actionId: string, skill?: "刺杀" | "强击"): RemoteRoom {
+  if (!room.game) return room;
+  const trapTriggered = room.lastTrapTrigger?.actionId === actionId;
+  const text = `${trapTriggered ? "猎人陷阱触发，" : ""}${actionHistoryText(room.game.state, skill)}`;
+  return appendSystemMessage(room, text, now, `system:${actionId}`);
 }
 
 export function hashInviteToken(inviteToken: string): string {
@@ -233,6 +316,14 @@ function drawHero(randomInt?: RandomInt): HeroId {
     throw new RangeError(`英雄随机数超出范围：${index}`);
   }
   return HERO_IDS[index];
+}
+
+function drawRpsChoice(randomInt?: RandomInt): RpsChoice {
+  const index = (randomInt ?? ((maxExclusive) => cryptoRandomInt(maxExclusive)))(RPS_CHOICES.length);
+  if (!Number.isInteger(index) || index < 0 || index >= RPS_CHOICES.length) {
+    throw new RangeError(`猜拳随机数超出范围：${index}`);
+  }
+  return RPS_CHOICES[index];
 }
 
 function drawMutation(randomInt?: RandomInt): MutationId {
@@ -326,7 +417,11 @@ function shiftPausedDeadlines(room: RemoteRoom, pauseDurationMs: number): Remote
           : {}),
       }
     : undefined;
-  return { ...room, ...(features ? { features } : {}) };
+  return {
+    ...room,
+    ...(features ? { features } : {}),
+    ...(room.rpsDeadlineAt !== undefined ? { rpsDeadlineAt: room.rpsDeadlineAt + pauseDurationMs } : {}),
+  };
 }
 
 function finishByDisconnectTimeout(room: RemoteRoom, timedOutPlayerIds: string[], now: number): RemoteRoom {
@@ -392,6 +487,15 @@ function applyDisconnectTimeout(room: RemoteRoom, now: number): RemoteRoom {
   return finishByDisconnectTimeout(room, timedOutPlayerIds, now);
 }
 
+function expireRematchInvitation(room: RemoteRoom, now: number): RemoteRoom {
+  if (room.rematch?.status !== "pending" || now < room.rematch.deadlineAt) return room;
+  return {
+    ...room,
+    rematch: { ...room.rematch, status: "expired" },
+    updatedAt: now,
+  };
+}
+
 export function disconnectRemotePlayer(room: RemoteRoom, playerId: string, now = Date.now()): RemoteRoom {
   requireRemotePlayer(room, playerId);
   if (room.phase === "waiting" || room.phase === "finished" || !room.disconnects) return room;
@@ -400,7 +504,10 @@ export function disconnectRemotePlayer(room: RemoteRoom, playerId: string, now =
   const disconnects = cloneDisconnects(room.disconnects)!;
   disconnects.players[playerId] = { ...current, disconnectedAt: now };
   disconnects.pausedAt ??= now;
-  return { ...room, disconnects, updatedAt: now };
+  const disconnected = { ...room, disconnects, updatedAt: now };
+  return room.phase === "playing"
+    ? appendSystemMessage(disconnected, `${sideName(sideForAssignedPlayer(room, playerId))}连接中断，对局暂停。`, now, `system:disconnect:${playerId}:${now}`)
+    : disconnected;
 }
 
 export function reconnectRemotePlayer(room: RemoteRoom, playerId: string, now = Date.now()): RemoteRoom {
@@ -421,7 +528,10 @@ export function reconnectRemotePlayer(room: RemoteRoom, playerId: string, now = 
   }
   const pauseDurationMs = disconnects.pausedAt === undefined ? 0 : Math.max(0, now - disconnects.pausedAt);
   delete disconnects.pausedAt;
-  return { ...shiftPausedDeadlines(timed, pauseDurationMs), disconnects, updatedAt: now };
+  const reconnected = { ...shiftPausedDeadlines(timed, pauseDurationMs), disconnects, updatedAt: now };
+  return timed.phase === "playing"
+    ? appendSystemMessage(reconnected, `${sideName(sideForAssignedPlayer(timed, playerId))}已重新连接，对局继续。`, now, `system:reconnect:${playerId}:${now}`)
+    : reconnected;
 }
 
 function assignmentsFor(room: RemoteRoom): { red: string; black: string } {
@@ -520,6 +630,8 @@ function createGameAfterSetup(
       ? { ...features, heroIntro: { completed: Object.fromEntries(playerIds.map((id) => [id, false])) } }
       : features,
     featureSecret: { traps: [] },
+    messages: [{ id: `system:start:${now}`, kind: "system", text: "对局开始，红方先行。", createdAt: now }],
+    chatLastSentAt: {},
     updatedAt: now,
   };
 }
@@ -676,6 +788,7 @@ export function joinRemoteRoom(
       phase: heroSelection ? "hero_selection" : "rps",
       rps: rps.publicState,
       rpsSecret: rps.secretState,
+      ...(!heroSelection ? { rpsDeadlineAt: now + RPS_SELECTION_DURATION_MS } : {}),
       ...(heroSelection ? {
         features: { heroSelection },
         featureSecret: { heroSelection: { choices: {} }, traps: [] },
@@ -703,12 +816,18 @@ export function submitRemoteRps(
   if (!room.rps || !room.rpsSecret) {
     throw new RuleError("MISSING_RPS", "房间缺少猜拳状态");
   }
+  if (room.rpsDeadlineAt !== undefined && now >= room.rpsDeadlineAt) {
+    return advanceRemoteRoomTime(room, randomInt, now);
+  }
   const nextRps = submitRpsChoice(room.rps, room.rpsSecret, playerId, choice, round);
   if (nextRps.publicState.status !== "resolved") {
     return {
       ...room,
       rps: nextRps.publicState,
       rpsSecret: nextRps.secretState,
+      rpsDeadlineAt: nextRps.publicState.round > room.rps.round
+        ? now + RPS_SELECTION_DURATION_MS
+        : room.rpsDeadlineAt ?? now + RPS_SELECTION_DURATION_MS,
       updatedAt: now,
     };
   }
@@ -719,6 +838,7 @@ export function submitRemoteRps(
     ...room,
     rps: nextRps.publicState,
     rpsSecret: nextRps.secretState,
+    rpsDeadlineAt: undefined,
     updatedAt: now,
   };
   let heroes: Record<Side, HeroId> | undefined;
@@ -772,7 +892,7 @@ export function submitRemoteHeroSelection(
     updatedAt: now,
   };
   return roomPlayerIds(room).every((id) => confirmed[id])
-    ? { ...waitingRoom, phase: "rps" }
+    ? { ...waitingRoom, phase: "rps", rpsDeadlineAt: now + RPS_SELECTION_DURATION_MS }
     : waitingRoom;
 }
 
@@ -902,6 +1022,7 @@ export function advanceRemoteRoomTime(
   now = Date.now(),
 ): RemoteRoom {
   room = applyDisconnectTimeout(room, now);
+  room = expireRematchInvitation(room, now);
   if (room.phase === "finished" || hasActiveDisconnect(room)) return room;
   if (room.phase === "hero_selection") {
     const selection = room.features?.heroSelection;
@@ -916,10 +1037,34 @@ export function advanceRemoteRoomTime(
     return {
       ...room,
       phase: "rps",
+      rpsDeadlineAt: now + RPS_SELECTION_DURATION_MS,
       features: { heroSelection: { ...selection, confirmed } },
       featureSecret: { ...room.featureSecret, heroSelection: { choices } },
       updatedAt: now,
     };
+  }
+  if (room.phase === "rps") {
+    if (!room.rps || !room.rpsSecret) return room;
+    if (room.rpsDeadlineAt === undefined) {
+      return { ...room, rpsDeadlineAt: now + RPS_SELECTION_DURATION_MS, updatedAt: now };
+    }
+    if (now < room.rpsDeadlineAt) return room;
+    let nextRoom = room;
+    for (const playerId of roomPlayerIds(room)) {
+      if (nextRoom.rps?.submitted[playerId]) continue;
+      nextRoom = submitRemoteRps(
+        nextRoom,
+        playerId,
+        drawRpsChoice(randomInt),
+        nextRoom.rps!.round,
+        randomInt,
+        room.rpsDeadlineAt - 1,
+      );
+      if (nextRoom.phase !== "rps") break;
+    }
+    return nextRoom.phase === "rps"
+      ? { ...nextRoom, rpsDeadlineAt: now + RPS_SELECTION_DURATION_MS, updatedAt: now }
+      : nextRoom;
   }
   if (room.phase !== "hero_preparation") return room;
   const preparation = room.features?.heroPreparation;
@@ -950,6 +1095,94 @@ export function advanceRemoteRoomTime(
   };
 }
 
+function beginRematch(room: RemoteRoom, now: number): RemoteRoom {
+  const playerIds = roomPlayerIds(room);
+  const rps = createRpsState(playerIds[0], playerIds[1]);
+  const heroSelection = room.mode.heroesEnabled
+    ? {
+        confirmed: Object.fromEntries(playerIds.map((id) => [id, false])),
+        deadlineAt: now + HERO_SELECTION_DURATION_MS,
+      }
+    : undefined;
+  return {
+    roomId: room.roomId,
+    inviteTokenHash: room.inviteTokenHash,
+    seats: clonePublic(room.seats),
+    mode: clonePublic(room.mode),
+    phase: heroSelection ? "hero_selection" : "rps",
+    rps: rps.publicState,
+    rpsSecret: rps.secretState,
+    ...(!heroSelection ? { rpsDeadlineAt: now + RPS_SELECTION_DURATION_MS } : {}),
+    ...(heroSelection ? {
+      features: { heroSelection },
+      featureSecret: { heroSelection: { choices: {} }, traps: [] },
+    } : {}),
+    disconnects: {
+      players: Object.fromEntries(
+        playerIds.map((playerId) => [playerId, { accumulatedMs: 0, reconnectCount: 0 }]),
+      ),
+    },
+    updatedAt: now,
+  };
+}
+
+export function requestRemoteRematch(
+  room: RemoteRoom,
+  playerId: string,
+  invitationId: string,
+  now = Date.now(),
+): RemoteActionResult {
+  requireRemotePlayer(room, playerId);
+  reserveServerActionId(invitationId);
+  if (room.phase !== "finished") {
+    throw new RuleError("INVALID_PHASE", "只有已经结束的对局可以邀请再战");
+  }
+  const timed = expireRematchInvitation(room, now);
+  if (timed.rematch?.invitationId === invitationId) return { room: timed, duplicate: true };
+  if (timed.rematch?.status === "pending") {
+    throw new RuleError("REMATCH_PENDING", "已有一项再战邀请正在等待回应");
+  }
+  return {
+    room: {
+      ...timed,
+      rematch: {
+        invitationId,
+        requestedBy: playerId,
+        deadlineAt: now + REMATCH_INVITATION_DURATION_MS,
+        status: "pending",
+      },
+      updatedAt: now,
+    },
+    duplicate: false,
+  };
+}
+
+export function respondRemoteRematch(
+  room: RemoteRoom,
+  playerId: string,
+  accept: boolean,
+  now = Date.now(),
+): RemoteRoom {
+  requireRemotePlayer(room, playerId);
+  if (room.phase !== "finished") {
+    throw new RuleError("INVALID_PHASE", "当前没有可以回应的再战邀请");
+  }
+  const timed = expireRematchInvitation(room, now);
+  const invitation = timed.rematch;
+  if (!invitation || invitation.status !== "pending") {
+    throw new RuleError("REMATCH_UNAVAILABLE", "再战邀请已失效");
+  }
+  if (invitation.requestedBy === playerId) {
+    throw new RuleError("REMATCH_SELF_RESPONSE", "邀请发起者不能回应自己的邀请");
+  }
+  if (accept) return beginRematch(timed, now);
+  return {
+    ...timed,
+    rematch: { ...invitation, status: "declined", respondedBy: playerId },
+    updatedAt: now,
+  };
+}
+
 /**
  * Applies one move as a cloud-function transaction would.  A 背刺/裁决 is
  * completed immediately, while its safe visual route is retained for both
@@ -968,15 +1201,18 @@ export function submitRemoteMove(
   const moved = applyRoomMove(room.game, playerId, command);
   if (moved.duplicate) return { room, duplicate: true };
   const trapped = roomWithResolvedTraps(room, moved.room, now);
-  if (trapped.room.game?.state.status === "finished") return { room: trapped.room, duplicate: false };
+  if (trapped.room.game?.state.status === "finished") {
+    return { room: withActionHistory(trapped.room, now, command.actionId), duplicate: false };
+  }
 
   if (trapped.room.game?.state.status !== "execution") {
+    const nextRoom = {
+      ...trapped.room,
+      phase: trapped.room.game?.state.status === "finished" ? "finished" as const : "playing" as const,
+      updatedAt: now,
+    };
     return {
-      room: {
-        ...trapped.room,
-        phase: trapped.room.game?.state.status === "finished" ? "finished" : "playing",
-        updatedAt: now,
-      },
+      room: withActionHistory(nextRoom, now, command.actionId),
       duplicate: false,
     };
   }
@@ -993,13 +1229,13 @@ export function submitRemoteMove(
     executionActionId,
   );
   return {
-    room: {
+    room: withActionHistory({
       ...trapped.room,
       phase: "finished",
       game: { players: { ...trapped.room.game.players }, state: finished.state, secret: finished.secret },
       terminalAnimation: { eventId: executionActionId, reason, plan },
       updatedAt: now,
-    },
+    }, now, command.actionId),
     duplicate: false,
   };
 }
@@ -1018,14 +1254,18 @@ export function submitRemoteAssassination(
   const moved = applyRoomAssassination(room.game, playerId, command);
   if (moved.duplicate) return { room, duplicate: true };
   const trapped = roomWithResolvedTraps(room, moved.room, now);
-  if (trapped.room.game?.state.status === "finished") return { room: trapped.room, duplicate: false };
+  const skill = command.useStrongStrike ? "强击" as const : "刺杀" as const;
+  if (trapped.room.game?.state.status === "finished") {
+    return { room: withActionHistory(trapped.room, now, command.actionId, skill), duplicate: false };
+  }
   if (trapped.room.game?.state.status !== "execution") {
+    const nextRoom = {
+      ...trapped.room,
+      phase: trapped.room.game?.state.status === "finished" ? "finished" as const : "playing" as const,
+      updatedAt: now,
+    };
     return {
-      room: {
-        ...trapped.room,
-        phase: trapped.room.game?.state.status === "finished" ? "finished" : "playing",
-        updatedAt: now,
-      },
+      room: withActionHistory(nextRoom, now, command.actionId, skill),
       duplicate: false,
     };
   }
@@ -1037,13 +1277,13 @@ export function submitRemoteAssassination(
   const executionActionId = `server:${command.actionId}:terminal`;
   const finished = applyAutomaticExecution(trapped.room.game.state, trapped.room.game.secret, executionActionId);
   return {
-    room: {
+    room: withActionHistory({
       ...trapped.room,
       phase: "finished",
       game: { players: { ...trapped.room.game.players }, state: finished.state, secret: finished.secret },
       terminalAnimation: { eventId: executionActionId, reason, plan },
       updatedAt: now,
-    },
+    }, now, command.actionId, skill),
     duplicate: false,
   };
 }
@@ -1061,7 +1301,95 @@ export function surrenderRemoteRoom(
   const result = resignRoomGame(room.game, playerId, expectedRevision, actionId);
   if (result.duplicate) return { room, duplicate: true };
   return {
-    room: { ...room, game: result.room, phase: "finished", updatedAt: now },
+    room: appendSystemMessage(
+      { ...room, game: result.room, phase: "finished", updatedAt: now },
+      `${sideName(sideForPlayer(room.game, playerId))}认输，对局结束。`,
+      now,
+      `system:${actionId}`,
+    ),
+    duplicate: false,
+  };
+}
+
+export function submitRemoteChat(
+  room: RemoteRoom,
+  playerId: string,
+  messageId: string,
+  text: string,
+  now = Date.now(),
+): RemoteActionResult {
+  ensurePhase(room, "playing");
+  reserveServerActionId(messageId);
+  requireRemotePlayer(room, playerId);
+  if (room.messages?.some((message) => message.id === messageId)) return { room, duplicate: true };
+  if (/\r|\n/.test(text)) throw new RuleError("CHAT_NEWLINE", "消息不能包含换行");
+  const normalized = text.trim();
+  if (!normalized) throw new RuleError("CHAT_EMPTY", "消息不能为空");
+  if (Array.from(normalized).length > CHAT_MAX_CHARACTERS) {
+    throw new RuleError("CHAT_TOO_LONG", `消息不能超过 ${CHAT_MAX_CHARACTERS} 个字符`);
+  }
+  const lastSentAt = room.chatLastSentAt?.[playerId];
+  if (lastSentAt !== undefined && now - lastSentAt < CHAT_COOLDOWN_MS) {
+    throw new RuleError("CHAT_COOLDOWN", "消息发送过快");
+  }
+  const senderSide = sideForAssignedPlayer(room, playerId);
+  const next = appendMessage(room, {
+    id: messageId,
+    kind: "chat",
+    text: normalized,
+    createdAt: now,
+    senderPlayerId: playerId,
+    senderSide,
+  });
+  return {
+    room: {
+      ...next,
+      chatLastSentAt: { ...(room.chatLastSentAt ?? {}), [playerId]: now },
+      updatedAt: now,
+    },
+    duplicate: false,
+  };
+}
+
+export function forfeitRemoteRoom(
+  room: RemoteRoom,
+  playerId: string,
+  actionId: string,
+  now = Date.now(),
+): RemoteActionResult {
+  if (room.phase === "finished" && room.forfeitOutcome?.actionId === actionId) {
+    return { room, duplicate: true };
+  }
+  if (room.phase === "waiting" || room.phase === "finished") {
+    throw new RuleError("INVALID_PHASE", "房间当前阶段不能退出对局");
+  }
+  if (hasActiveDisconnect(room)) {
+    throw new RuleError("MATCH_PAUSED_DISCONNECT", "对局因断线暂停，等待连接恢复");
+  }
+  reserveServerActionId(actionId);
+  requireRemotePlayer(room, playerId);
+  const [firstPlayer, secondPlayer] = roomPlayerIds(room);
+  const winnerPlayerId = playerId === firstPlayer ? secondPlayer : firstPlayer;
+  let game = room.game;
+  if (game) {
+    const loserSide = sideForPlayer(game, playerId);
+    const state = JSON.parse(JSON.stringify(game.state)) as GameState;
+    state.status = "finished";
+    state.winner = otherSide(loserSide);
+    state.reason = "resign";
+    state.revision += 1;
+    delete state.drawReason;
+    game = { players: { ...game.players }, state, secret: game.secret };
+  }
+  return {
+    room: {
+      ...room,
+      phase: "finished",
+      ...(game ? { game } : {}),
+      terminalAnimation: undefined,
+      forfeitOutcome: { actionId, loserPlayerId: playerId, winnerPlayerId },
+      updatedAt: now,
+    },
     duplicate: false,
   };
 }
@@ -1073,6 +1401,7 @@ export function publicRemoteRoom(room: RemoteRoom): PublicRemoteRoom {
     mode: clonePublic(room.mode),
     phase: room.phase,
     rps: room.rps ? clonePublic(room.rps) : undefined,
+    rpsDeadlineAt: room.rpsDeadlineAt,
     state: room.game ? publicStateSnapshot(room.game.state) : undefined,
     features: room.features ? clonePublic(room.features) : undefined,
     terminalAnimation: room.terminalAnimation
@@ -1081,6 +1410,9 @@ export function publicRemoteRoom(room: RemoteRoom): PublicRemoteRoom {
     lastTrapTrigger: room.lastTrapTrigger ? cloneTrapTrigger(room.lastTrapTrigger) : undefined,
     disconnects: cloneDisconnects(room.disconnects),
     disconnectOutcome: room.disconnectOutcome ? clonePublic(room.disconnectOutcome) : undefined,
+    forfeitOutcome: room.forfeitOutcome ? clonePublic(room.forfeitOutcome) : undefined,
+    rematch: room.rematch ? clonePublic(room.rematch) : undefined,
+    messages: room.messages ? clonePublic(room.messages) : undefined,
     updatedAt: room.updatedAt,
   };
   return publicRoom;

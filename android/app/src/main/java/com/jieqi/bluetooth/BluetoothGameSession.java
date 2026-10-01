@@ -117,13 +117,27 @@ public final class BluetoothGameSession implements Closeable {
     role = Role.HOST;
     emit(State.LISTENING, reconnecting ? "正在自动等待对方重新连接" : "正在等待另一台手机加入");
     io.execute(() -> {
+      BluetoothServerSocket candidate = null;
       try {
-        serverSocket = adapter.listenUsingRfcommWithServiceRecord(SERVICE_NAME, SERVICE_UUID);
-        BluetoothSocket accepted = serverSocket.accept();
+        candidate = adapter.listenUsingRfcommWithServiceRecord(SERVICE_NAME, SERVICE_UUID);
+        synchronized (this) {
+          if (closed) {
+            candidate.close();
+            return;
+          }
+          serverSocket = candidate;
+        }
+        BluetoothSocket accepted = candidate.accept();
         closeServerSocket();
         attach(accepted, reconnecting ? "连接已恢复" : "对方已加入房间");
+      } catch (SecurityException error) {
+        if (!closed) fail("蓝牙权限已失效，请在系统设置重新允许");
       } catch (IOException error) {
         if (!closed) handleTransportFailure("创建或等待房间失败：" + safeMessage(error));
+      } finally {
+        synchronized (this) {
+          if (serverSocket == candidate) closeServerSocket();
+        }
       }
     });
   }
@@ -140,10 +154,22 @@ public final class BluetoothGameSession implements Closeable {
         BluetoothDevice device = adapter.getRemoteDevice(address);
         adapter.cancelDiscovery();
         BluetoothSocket candidate = device.createRfcommSocketToServiceRecord(SERVICE_UUID);
+        synchronized (this) {
+          if (closed) {
+            candidate.close();
+            return;
+          }
+          // Register the connecting socket before connect() blocks so the UI's
+          // cancel action can close it immediately instead of waiting for the
+          // platform RFCOMM timeout.
+          socket = candidate;
+        }
         candidate.connect();
         attach(candidate, reconnecting ? "连接已恢复" : "已连接房主");
       } catch (IllegalArgumentException error) {
         handleTransportFailure("蓝牙设备地址无效");
+      } catch (SecurityException error) {
+        if (!closed) fail("蓝牙权限已失效，请在系统设置重新允许");
       } catch (IOException error) {
         if (!closed) handleTransportFailure("连接失败：" + safeMessage(error));
       }
@@ -211,7 +237,15 @@ public final class BluetoothGameSession implements Closeable {
 
   private void handleTransportFailure(String detail) {
     if (everConnected && autoReconnect) {
-      emit(State.DISCONNECTED, adapter.isEnabled() ? detail : "请开启蓝牙");
+      final boolean enabled;
+      try {
+        enabled = adapter.isEnabled();
+      } catch (SecurityException error) {
+        autoReconnect = false;
+        fail("蓝牙权限已失效，请在系统设置重新允许");
+        return;
+      }
+      emit(State.DISCONNECTED, enabled ? detail : "请开启蓝牙");
       synchronized (this) { closeServerSocket(); closeSocket(); }
       scheduleReconnect();
       return;
@@ -227,9 +261,15 @@ public final class BluetoothGameSession implements Closeable {
       synchronized (BluetoothGameSession.this) {
         reconnectScheduled = false;
         if (!autoReconnect || reconnectRole == Role.NONE || state == State.CONNECTED) return;
-        if (!adapter.isEnabled()) {
-          emit(State.DISCONNECTED, "请开启蓝牙");
-          scheduleReconnect();
+        try {
+          if (!adapter.isEnabled()) {
+            emit(State.DISCONNECTED, "请开启蓝牙");
+            scheduleReconnect();
+            return;
+          }
+        } catch (SecurityException error) {
+          autoReconnect = false;
+          fail("蓝牙权限已失效，请在系统设置重新允许");
           return;
         }
         if (reconnectRole == Role.HOST) {

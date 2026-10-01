@@ -88,3 +88,52 @@ test("BTHOST-05 来宾操作仍受回合、版本和房主规则引擎约束", (
     command: { from: { x: 0, y: 0 }, to: { x: 0, y: 1 }, expectedRevision: 0, actionId: "guest-too-early" },
   }), /还没有轮到/);
 });
+
+test("BTHOST-06 英雄选择起主动退出由房主立即权威判负", () => {
+  const room = new BluetoothHostRoom({
+    roomId: "bt-forfeit",
+    admissionSecret: "local-link",
+    now: () => 100,
+    mode: { heroesEnabled: true, mutationsEnabled: true },
+  });
+  const views = room.handle(BLUETOOTH_GUEST_PLAYER, { kind: "forfeit", actionId: "guest-exit" });
+  assert.equal(views.publicRoom.phase, "finished");
+  assert.equal(views.host.forfeitOutcome?.winnerPlayerId, BLUETOOTH_HOST_PLAYER);
+  assert.equal(views.guest.forfeitOutcome?.loserPlayerId, BLUETOOTH_GUEST_PLAYER);
+});
+
+test("BTHOST-07 再战邀请由房主计时并在对方接受后建立全新选英雄阶段", () => {
+  let now = 100;
+  const room = new BluetoothHostRoom({
+    roomId: "bt-rematch",
+    admissionSecret: "local-link",
+    now: () => now,
+    mode: { heroesEnabled: true, mutationsEnabled: true },
+  });
+  room.handle(BLUETOOTH_GUEST_PLAYER, { kind: "forfeit", actionId: "guest-exit" });
+  now = 200;
+  let views = room.handle(BLUETOOTH_HOST_PLAYER, { kind: "rematch_request", actionId: "again" });
+  assert.equal(views.guest.rematch?.requestedBy, BLUETOOTH_HOST_PLAYER);
+  assert.equal(views.guest.rematch?.deadlineAt, 30_200);
+  now = 300;
+  views = room.handle(BLUETOOTH_GUEST_PLAYER, { kind: "rematch_response", accept: true });
+  assert.equal(views.publicRoom.phase, "hero_selection");
+  assert.equal(views.publicRoom.state, undefined);
+  assert.equal(views.publicRoom.rematch, undefined);
+});
+
+test("BTHOST-08 双方聊天经房主权威同步且不阻塞行棋回合", () => {
+  let now = 100;
+  const room = new BluetoothHostRoom({ roomId: "bt-chat", admissionSecret: "local-link", now: () => now, randomInt: () => 0 });
+  room.handle(BLUETOOTH_HOST_PLAYER, { kind: "rps", choice: "rock", round: 1 });
+  room.handle(BLUETOOTH_GUEST_PLAYER, { kind: "rps", choice: "scissors", round: 1 });
+  now = 1_000;
+  let views = room.handle(BLUETOOTH_GUEST_PLAYER, { kind: "chat", messageId: "guest-chat", text: "好棋！" });
+  assert.equal(views.host.messages?.at(-1)?.senderSide, "black");
+  assert.equal(views.guest.messages?.at(-1)?.text, "好棋！");
+  assert.equal(views.publicRoom.state?.turn, "red");
+  assert.throws(
+    () => room.handle(BLUETOOTH_GUEST_PLAYER, { kind: "chat", messageId: "too-fast", text: "谢谢" }),
+    /发送过快/,
+  );
+});

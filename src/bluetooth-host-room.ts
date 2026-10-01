@@ -6,11 +6,15 @@ import {
   createRemoteRoom,
   disconnectRemotePlayer,
   joinRemoteRoom,
+  forfeitRemoteRoom,
   reconnectRemotePlayer,
+  requestRemoteRematch,
+  respondRemoteRematch,
   playerRoomView,
   publicRemoteRoom,
   submitRemoteAssassination,
   submitRemoteHeroSelection,
+  submitRemoteChat,
   submitRemoteMove,
   submitRemoteRps,
   submitRemoteTrapSetup,
@@ -35,7 +39,11 @@ export type BluetoothRoomAction =
   | { kind: "traps"; positions: readonly Position[] }
   | { kind: "move"; command: MoveCommand }
   | { kind: "assassination"; command: AssassinationCommand }
-  | { kind: "resign"; expectedRevision: number; actionId: string };
+  | { kind: "chat"; messageId: string; text: string }
+  | { kind: "forfeit"; actionId: string }
+  | { kind: "resign"; expectedRevision: number; actionId: string }
+  | { kind: "rematch_request"; actionId: string }
+  | { kind: "rematch_response"; accept: boolean };
 
 export interface BluetoothRoomViews {
   publicRoom: PublicRemoteRoom;
@@ -102,8 +110,20 @@ export class BluetoothHostRoom {
       case "assassination":
         this.room = submitRemoteAssassination(this.room, playerId, action.command, now).room;
         break;
+      case "chat":
+        this.room = submitRemoteChat(this.room, playerId, action.messageId, action.text, now).room;
+        break;
+      case "forfeit":
+        this.room = forfeitRemoteRoom(this.room, playerId, action.actionId, now).room;
+        break;
       case "resign":
         this.room = surrenderRemoteRoom(this.room, playerId, action.expectedRevision, action.actionId, now).room;
+        break;
+      case "rematch_request":
+        this.room = requestRemoteRematch(this.room, playerId, action.actionId, now).room;
+        break;
+      case "rematch_response":
+        this.room = respondRemoteRematch(this.room, playerId, action.accept, now);
         break;
       default:
         throw new RuleError("INVALID_BLUETOOTH_ACTION", "未知蓝牙房间操作");

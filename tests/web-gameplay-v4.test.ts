@@ -42,9 +42,10 @@ test("UI-V4-04 必需的 V4 组件均已接入网页资源目录", async () => {
 });
 
 test("UI-V4-05 正式 game-view 已绑定 V4 棋盘和全部功能区", () => {
-  for (const id of ["captured-panel", "captured-toggle", "battle-more-button", "battle-action-menu", "red-captures", "black-captures"]) {
+  for (const id of ["red-captured-button", "black-captured-button", "battle-more-button", "battle-action-menu", "red-captured-count", "black-captured-count"]) {
     assert.match(html, new RegExp(`id="${id}"`));
   }
+  assert.doesNotMatch(html, /id="captured-panel"|id="captured-toggle"/);
 });
 
 test("UI-V4-06 运行时棋位使用审核母版的精确交叉点而非平均铺排", () => {
@@ -59,10 +60,10 @@ test("UI-V4-07 棋子、已吃棋子和终结残影都复用独立墨圈", () =>
   assert.doesNotMatch(app, /piece\.faceDown \? "◇"/);
 });
 
-test("UI-V4-08 六十秒显示、已吃棋子展开和三点菜单已接入事件", () => {
+test("UI-V4-08 六十秒显示、状态栏已吃入口和三点菜单已接入事件", () => {
   assert.match(app, /battleTurnDeadlineAt = Date\.now\(\) \+ NORMAL_FORMAL_TURN_DURATION_MS/);
-  assert.match(app, /capturedToggle\.addEventListener/);
-  assert.match(app, /battleMoreButton\.addEventListener/);
+  assert.match(app, /redCapturedButton\.addEventListener\("click", showCapturedDetails\)/);
+  assert.match(app, /\[battleMoreButton, heroMoreButton, rpsMoreButton\]/);
   assert.match(app, /v4-skill-trigger/);
 });
 
@@ -86,10 +87,11 @@ test("UI-V4-09 棋子使用审核字形、外圈放大 15% 且不再显示黄色
   assert.match(css, /\.v4-board \.point\.legal-capture \.piece \{ box-shadow: none; \}/);
 });
 
-test("UI-V4-10 修复后的棋盘、已吃棋子栏和三点框逐层接入，不覆盖原图", () => {
+test("UI-V4-10 修复后的棋盘、状态栏与三点框逐层接入，不覆盖原图", () => {
   assert.match(css, /runtime\/board-clean-no-center\.png/);
-  assert.match(css, /runtime\/captured-panel-frame\.png/);
+  assert.match(css, /components\/panels\/status-panel-module\.png/);
   assert.match(css, /runtime\/more-button-clean\.png/);
+  assert.doesNotMatch(css, /runtime\/captured-panel-frame\.png/);
   assert.doesNotMatch(css, /background:\s*url\("\.\/assets\/gameplay-v4\/components\/board\/board-clean-no-pieces-transparent\.png"\)/);
 });
 

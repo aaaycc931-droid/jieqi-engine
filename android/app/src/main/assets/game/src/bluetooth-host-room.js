@@ -4,11 +4,17 @@ import {
   completeRemoteHeroIntro,
   completeRemoteHeroPreparation,
   createRemoteRoom,
+  disconnectRemotePlayer,
   joinRemoteRoom,
+  forfeitRemoteRoom,
+  reconnectRemotePlayer,
+  requestRemoteRematch,
+  respondRemoteRematch,
   playerRoomView,
   publicRemoteRoom,
   submitRemoteAssassination,
   submitRemoteHeroSelection,
+  submitRemoteChat,
   submitRemoteMove,
   submitRemoteRps,
   submitRemoteTrapSetup,
@@ -23,6 +29,10 @@ import {
 
 export const BLUETOOTH_HOST_PLAYER = "bluetooth:host";
 export const BLUETOOTH_GUEST_PLAYER = "bluetooth:guest";
+
+
+
+
 
 
 
@@ -100,12 +110,34 @@ export class BluetoothHostRoom {
       case "assassination":
         this.room = submitRemoteAssassination(this.room, playerId, action.command, now).room;
         break;
+      case "chat":
+        this.room = submitRemoteChat(this.room, playerId, action.messageId, action.text, now).room;
+        break;
+      case "forfeit":
+        this.room = forfeitRemoteRoom(this.room, playerId, action.actionId, now).room;
+        break;
       case "resign":
         this.room = surrenderRemoteRoom(this.room, playerId, action.expectedRevision, action.actionId, now).room;
+        break;
+      case "rematch_request":
+        this.room = requestRemoteRematch(this.room, playerId, action.actionId, now).room;
+        break;
+      case "rematch_response":
+        this.room = respondRemoteRematch(this.room, playerId, action.accept, now);
         break;
       default:
         throw new RuleError("INVALID_BLUETOOTH_ACTION", "未知蓝牙房间操作");
     }
+    return this.views();
+  }
+
+  disconnect(playerId                                                              )                     {
+    this.room = disconnectRemotePlayer(this.room, playerId, this.now());
+    return this.views();
+  }
+
+  reconnect(playerId                                                              )                     {
+    this.room = reconnectRemotePlayer(this.room, playerId, this.now());
     return this.views();
   }
 

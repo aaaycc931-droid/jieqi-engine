@@ -6,13 +6,17 @@ import {
   completeRemoteHeroIntro,
   RuleError,
   createRemoteRoom,
+  forfeitRemoteRoom,
   joinRemoteRoom,
   playerRoomView,
   publicRemoteRoom,
+  requestRemoteRematch,
+  respondRemoteRematch,
   serializePublicRemoteRoom,
   initializeFeatureGameState,
   submitRemoteHeroSelection,
   submitRemoteAssassination,
+  submitRemoteChat,
   submitRemoteMove,
   submitRemoteRps,
   submitRemoteTrapSetup,
@@ -75,6 +79,113 @@ test("ONLINE-03 猜拳胜者为红方，红方先走，未决选择不公开", (
   assert.equal(started.phase, "playing");
   assert.equal(started.game?.players.red, "alice");
   assert.equal(started.game?.state.turn, "red");
+});
+
+test("CHAT-01 正式对局消息由房主校验、公开同步并共用两秒冷却", () => {
+  const first = submitRemoteRps(joinedRoom(), "alice", "rock", 1, seededRandomInt(11), 300);
+  const started = submitRemoteRps(first, "bob", "scissors", 1, seededRandomInt(11), 400);
+  assert.equal(started.messages?.[0]?.kind, "system");
+
+  const sent = submitRemoteChat(started, "alice", "chat-1", "  你好！🙂  ", 1_000);
+  assert.deepEqual(sent.room.messages?.at(-1), {
+    id: "chat-1",
+    kind: "chat",
+    text: "你好！🙂",
+    createdAt: 1_000,
+    senderPlayerId: "alice",
+    senderSide: "red",
+  });
+  assert.equal(submitRemoteChat(sent.room, "alice", "chat-1", "重复", 1_100).duplicate, true);
+  assert.throws(
+    () => submitRemoteChat(sent.room, "alice", "chat-2", "好棋！", 2_999),
+    (error) => error instanceof RuleError && error.code === "CHAT_COOLDOWN",
+  );
+  const next = submitRemoteChat(sent.room, "alice", "chat-2", "好棋！", 3_000).room;
+  assert.equal(next.messages?.at(-1)?.text, "好棋！");
+  assert.equal("chatLastSentAt" in publicRemoteRoom(next), false);
+  assert.throws(() => submitRemoteChat(started, "alice", "blank", "   ", 1_000), /不能为空/);
+  assert.throws(() => submitRemoteChat(started, "alice", "newline", "你好\n好棋", 1_000), /不能包含换行/);
+  assert.throws(() => submitRemoteChat(started, "alice", "long", "🙂".repeat(51), 1_000), /不能超过 50/);
+});
+
+test("ONLINE-03A 猜拳三十秒到时由房主权威随机补齐且秘密结算", () => {
+  const room = joinedRoom();
+  assert.equal(room.rpsDeadlineAt, 30_200);
+  const advanced = advanceRemoteRoomTime(room, () => 0, 30_200);
+  assert.equal(advanced.phase, "rps", "双方同出石头时应开始下一轮");
+  assert.equal(advanced.rps?.round, 2);
+  assert.deepEqual(advanced.rps?.submitted, { alice: false, bob: false });
+  assert.equal(advanced.rpsDeadlineAt, 60_200);
+  assert.deepEqual(advanced.rps?.lastResult?.choices, { alice: "rock", bob: "rock" });
+  assert.equal(JSON.stringify(publicRemoteRoom(advanced)).includes("rpsSecret"), false);
+  assert.deepEqual(advanced.rps?.submitted, { alice: false, bob: false }, "下一轮未决选择仍不公开");
+});
+
+test("ONLINE-03B 进入英雄选择后主动退出会立即形成公开判负结果", () => {
+  const room = joinRemoteRoom(
+    createRemoteRoom("forfeit-before-board", "alice", "token", 100, { heroesEnabled: true, mutationsEnabled: true }),
+    "bob",
+    "token",
+    200,
+  ).room;
+  assert.equal(room.phase, "hero_selection");
+  const result = forfeitRemoteRoom(room, "bob", "leave-now", 300);
+  assert.equal(result.room.phase, "finished");
+  assert.deepEqual(result.room.forfeitOutcome, {
+    actionId: "leave-now",
+    loserPlayerId: "bob",
+    winnerPlayerId: "alice",
+  });
+  assert.deepEqual(publicRemoteRoom(result.room).forfeitOutcome, result.room.forfeitOutcome);
+  assert.equal(forfeitRemoteRoom(result.room, "bob", "leave-now", 400).duplicate, true);
+});
+
+test("ONLINE-03C 再战邀请公开等待三十秒，拒绝或超时后允许再次邀请", () => {
+  const started = joinRemoteRoom(
+    createRemoteRoom("rematch-invite", "alice", "token", 100, { heroesEnabled: true, mutationsEnabled: true }),
+    "bob",
+    "token",
+    200,
+  ).room;
+  const finished = forfeitRemoteRoom(started, "bob", "leave", 300).room;
+  const invited = requestRemoteRematch(finished, "alice", "invite-1", 400).room;
+  assert.deepEqual(publicRemoteRoom(invited).rematch, {
+    invitationId: "invite-1",
+    requestedBy: "alice",
+    deadlineAt: 30_400,
+    status: "pending",
+  });
+  assert.throws(() => respondRemoteRematch(invited, "alice", true, 500), /不能回应自己的邀请/);
+  const declined = respondRemoteRematch(invited, "bob", false, 600);
+  assert.equal(declined.rematch?.status, "declined");
+  const invitedAgain = requestRemoteRematch(declined, "bob", "invite-2", 700).room;
+  const expired = advanceRemoteRoomTime(invitedAgain, undefined, 30_700);
+  assert.equal(expired.rematch?.status, "expired");
+  assert.equal(requestRemoteRematch(expired, "alice", "invite-3", 30_800).room.rematch?.status, "pending");
+});
+
+test("ONLINE-03D 接受再战会清除上一局并重新进入秘密英雄选择", () => {
+  const started = joinRemoteRoom(
+    createRemoteRoom("rematch-accept", "alice", "token", 100, { heroesEnabled: true, mutationsEnabled: true }),
+    "bob",
+    "token",
+    200,
+  ).room;
+  const finished = forfeitRemoteRoom(started, "bob", "leave", 300).room;
+  const invited = requestRemoteRematch(finished, "alice", "invite", 400).room;
+  const restarted = respondRemoteRematch(invited, "bob", true, 500);
+  assert.equal(restarted.phase, "hero_selection");
+  assert.equal(restarted.game, undefined);
+  assert.equal(restarted.rematch, undefined);
+  assert.equal(restarted.forfeitOutcome, undefined);
+  assert.equal(restarted.messages, undefined);
+  assert.equal(restarted.chatLastSentAt, undefined);
+  assert.deepEqual(restarted.features?.heroSelection?.confirmed, { alice: false, bob: false });
+  assert.deepEqual(restarted.featureSecret?.heroSelection?.choices, {});
+  assert.deepEqual(restarted.disconnects?.players, {
+    alice: { accumulatedMs: 0, reconnectCount: 0 },
+    bob: { accumulatedMs: 0, reconnectCount: 0 },
+  });
 });
 
 test("ONLINE-04 云端自动结算裁决，仅公开动画路线和最终状态", () => {

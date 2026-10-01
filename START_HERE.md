@@ -1,37 +1,46 @@
-# START HERE — 乐子象棋（2026-09-24）
+# START HERE — 乐子象棋（2026-10-01）
 
 ## 当前一句话状态
-累计断线 60 秒阶段已经实现并通过 150/150 自动测试、Web 构建与 Android APK CI；**当前下一步不是继续写功能，而是用两台 Android 真机验证断线/自动重连。**
 
-## 当前分支
-`codex/phase3-cumulative-disconnect-20260923`
+用户已明确把本轮优先级切换为 UI。主菜单、蓝牙大厅、设置页、玩法说明页、八阶段流程、七类可放大走法图、英雄选择页、猜拳页、英雄准备/猎人陷阱、阶段三点菜单、规则/畸变覆盖层、终局结果/再战、消息/按局历史、已吃棋子、英雄/技能实时详情以及非终局事件提示已完成第一阶段重构。最新 Web 资源已同步到 Android assets，权限与连接取消桥接也已修正；当前通过 **200/200** 自动测试与 Web 构建，但尚未重新编译当前 APK，也未经过真实 Android WebView/双机最终批准。
 
-## 当前关键提交
-- 断线测试：`4ce7c425745dc8a5bc92f5eb161b19de725a91ae`
-- 权威断线账本：`a591f1d1d084fd0920f682450768aad13bb51873`
-- Android 自动重连基础：`bf66e7b273d3c026b226334183d2f463b74e4103`
-- Web 重连/断线 UI：`9267487a320434bad2512c3c15ceee6b2ca79cbd`
-- UI 边界修复：`070d7dfaf0214750ab8d6e6b83da26e725d91563`
-- 超时阈值先后修复：`05e4cb5679d1c98130782d17e9a7da2f85017604`
-- APK 构建前同步当前 Web：`af9bb642f0d570285a55de2ef58577005b1fd622`
-- 恢复 main-only CI push：`c331a0a6128ab8c2f977a4163a31acb8001f8f67`
-- 状态文档检查点：`045042cc0bc7e64dbd493e4052cdaebd9f0a0d89`
+## 当前分支与工作树
 
-## 验证
-- `npm run check`: 150 passed / 0 failed
-- Web build: passed
-- Android APK build: passed
-- GitHub Actions run: `35950543824`
-- 真机双机 RFCOMM: **未验证**
+- 分支：`codex/phase3-cumulative-disconnect-20260923`
+- 本轮 UI 改动仍在工作树中，未合并 `main`、未推送、未部署。
+- 旧断线阶段的最近提交仍是 2026-09-24 检查点；不要把它误当成本轮 UI 的提交点。
+
+## 必读顺序
+
+1. `PROJECT_STATE.json`
+2. `UI_SOURCE_OF_TRUTH.md`
+3. `HANDOVER.md`
+4. `IMPLEMENTATION_STATUS.md`
+5. `PENDING_AND_RESUME.md`
+6. `CONFIRMED_UI_PLAN.md`
+
+## 本轮验证
+
+- `npm run check`：200 passed / 0 failed
+- Web build：passed
+- `dist` 与 `android/app/src/main/assets/game`：108 个文件一致
+- Android 静态检查：权限前置、阻塞连接可取消、`adjustResize` 均通过
+- `git diff --check`：passed
+- 9:16、19.5:9、20:9 主菜单静态分层检查：未见标题、署名、入口文字裁切
+- 当前环境没有可用 Chromium，本地页面也不能由云浏览器访问，因此没有真实浏览器截图
+- 当前环境缺少 Android SDK、Gradle 命令和 wrapper 运行文件；本轮 Android Java 与最新 assets 未重新编译，2026-09-24 的 Android CI 只能证明旧检查点
 
 ## 下一动作
-执行 `PROJECT_STATE.json -> next_action = two_phone_disconnect_reconnect_validation`。
 
-测试真机前先读 `HANDOVER.md` 的“当前唯一优先下一步”。
+1. 在具备 Android SDK/Gradle 的环境构建当前 debug APK，确认最新 Web assets 被打包。
+2. 在 Android WebView 中审核全部已改页面，特别是规则图放大层、消息半屏上展、软键盘、字体缩放和触控锁定。
+3. 两台真实 Android 设备验证蓝牙权限、创建/加入/取消、权威聊天、断线草稿、断线累计与自动重连。
+4. 仅根据真机复现结果修正问题并重新执行完整检查。
 
 ## 不要做
-- 不要重新实现累计断线。
-- 不要从旧交接包恢复“断线只暂停”的旧逻辑。
-- 不要合并 main。
-- 不要先去做聊天、再战、菜单或互联网联机。
-- 不要把自动测试通过当成两台真机已经通过。
+
+- 不把历史整页图设为运行时背景或从中抠取正式组件。
+- 不把新增候选素材称为最终批准素材。
+- 不把互联网联机入口变为可用；它仍保留并禁用。
+- 不把自动测试通过等同于 Android WebView 或双机 RFCOMM 已验证。
+- 不合并 `main`、不推送、不部署，除非获得明确授权。

@@ -30,7 +30,9 @@ public final class MainActivity extends Activity {
     gameView = new WebView(this);
     gameView.setBackgroundColor(Color.rgb(238, 233, 221));
     gameView.getSettings().setJavaScriptEnabled(true);
-    gameView.getSettings().setDomStorageEnabled(false);
+    // UI preferences (sound, haptics and reduced motion) are stored only on
+    // this device.  The local trusted page has no network navigation access.
+    gameView.getSettings().setDomStorageEnabled(true);
     gameView.getSettings().setAllowContentAccess(false);
     gameView.getSettings().setAllowFileAccess(true);
     // The packaged page is an ES module that imports the bundled rule modules
@@ -61,11 +63,17 @@ public final class MainActivity extends Activity {
 
   @Override
   public void onBackPressed() {
-    if (gameView.canGoBack()) {
-      gameView.goBack();
-    } else {
-      super.onBackPressed();
-    }
+    gameView.evaluateJavascript(
+      "(function(){try{return Boolean(window.handleLeziBack&&window.handleLeziBack());}catch(error){return false;}})();",
+      handled -> {
+        if (!"true".equals(handled)) finishBackNavigation();
+      }
+    );
+  }
+
+  private void finishBackNavigation() {
+    if (gameView.canGoBack()) gameView.goBack();
+    else super.onBackPressed();
   }
 
   boolean hasBluetoothPermission() {
@@ -77,6 +85,11 @@ public final class MainActivity extends Activity {
     if (hasBluetoothPermission()) return true;
     requestPermissions(new String[] { Manifest.permission.BLUETOOTH_CONNECT }, BLUETOOTH_PERMISSION_REQUEST);
     return false;
+  }
+
+  boolean canRequestBluetoothPermissionAgain() {
+    return Build.VERSION.SDK_INT < Build.VERSION_CODES.S
+      || shouldShowRequestPermissionRationale(Manifest.permission.BLUETOOTH_CONNECT);
   }
 
   @Override

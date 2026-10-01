@@ -44,8 +44,13 @@ import {
 } from "../src/bluetooth-protocol.ts";
 import {
   DISCONNECT_TIMEOUT_MS,
+  CHAT_COOLDOWN_MS,
+  CHAT_MAX_CHARACTERS,
   HERO_PREPARATION_DURATION_MS,
   HERO_SELECTION_DURATION_MS,
+  REMATCH_INVITATION_DURATION_MS,
+  RPS_SELECTION_DURATION_MS,
+  type MatchMessage,
   type PlayerRemoteRoomView,
 } from "../src/remote-room.ts";
 import type {
@@ -92,39 +97,185 @@ const pieceLabel = {
 } as const;
 const movementLabel = { general: "将帅", advisor: "仕/士", elephant: "相/象", horse: "马", rook: "车", cannon: "炮", pawn: "兵/卒" } as const;
 
+type MovementGuideId = "rook" | "horse" | "cannon" | "pawn" | "general" | "advisor" | "elephant";
+type DiagramPoint = readonly [number, number];
+
+interface MovementRoute {
+  points: readonly DiagramPoint[];
+  secondary?: boolean;
+}
+
+interface MovementGuide {
+  id: MovementGuideId;
+  title: string;
+  glyph: string;
+  summary: string;
+  detail: string;
+  destinations: readonly DiagramPoint[];
+  routes: readonly MovementRoute[];
+  obstacles?: readonly { at: DiagramPoint; label: string }[];
+  caption?: string;
+}
+
+const movementGuides: readonly MovementGuide[] = [
+  {
+    id: "rook",
+    title: "车",
+    glyph: "车",
+    summary: "横直任意步",
+    detail: "车沿横线或直线移动任意距离，路径必须畅通。传说畸变“战车”生效时，车可隔一枚非隐身路径棋发动碾碎，并继续结算落点。",
+    destinations: [[20, 100], [60, 100], [140, 100], [180, 100], [100, 20], [100, 60], [100, 140], [100, 180]],
+    routes: [
+      { points: [[20, 100], [180, 100]] },
+      { points: [[100, 20], [100, 180]] },
+    ],
+  },
+  {
+    id: "horse",
+    title: "马",
+    glyph: "马",
+    summary: "日字跳跃，受马腿阻挡",
+    detail: "马走日字；与起点相邻的第一格是马腿，马腿有非隐身棋时该方向不能走。史诗畸变“铁马”会忽略并碾碎马腿。",
+    destinations: [[20, 60], [20, 140], [60, 20], [140, 20], [180, 60], [180, 140], [60, 180], [140, 180]],
+    routes: [
+      { points: [[100, 100], [60, 100], [20, 60]] }, { points: [[100, 100], [60, 100], [20, 140]] },
+      { points: [[100, 100], [100, 60], [60, 20]] }, { points: [[100, 100], [100, 60], [140, 20]] },
+      { points: [[100, 100], [140, 100], [180, 60]] }, { points: [[100, 100], [140, 100], [180, 140]] },
+      { points: [[100, 100], [100, 140], [60, 180]] }, { points: [[100, 100], [100, 140], [140, 180]] },
+    ],
+    obstacles: [
+      { at: [60, 100], label: "马腿" }, { at: [140, 100], label: "马腿" },
+      { at: [100, 60], label: "马腿" }, { at: [100, 140], label: "马腿" },
+    ],
+  },
+  {
+    id: "cannon",
+    title: "炮",
+    glyph: "炮",
+    summary: "平移如车，隔一枚吃子",
+    detail: "炮不吃子时沿横线或直线移动，路径中不能有棋；吃子时必须且只能隔一枚棋作为炮架。图中赭色点示意炮架，虚线终点示意可吃目标。",
+    destinations: [[20, 100], [60, 100], [100, 20], [100, 60], [100, 140], [100, 180], [180, 100]],
+    routes: [
+      { points: [[20, 100], [100, 100]] }, { points: [[100, 20], [100, 100]] },
+      { points: [[100, 100], [100, 180]] }, { points: [[100, 100], [140, 100], [180, 100]], secondary: true },
+    ],
+    obstacles: [{ at: [140, 100], label: "炮架" }],
+  },
+  {
+    id: "pawn",
+    title: "兵卒",
+    glyph: "兵",
+    summary: "向前一步，过河可横走",
+    detail: "兵卒每次一步，不能后退；未过河只能向前，过河后可向前或横走。方向和是否过河按棋子的真实阵营与当前位置判定。",
+    destinations: [[100, 60], [60, 100], [140, 100]],
+    routes: [
+      { points: [[100, 100], [100, 60]] },
+      { points: [[100, 100], [60, 100]], secondary: true },
+      { points: [[100, 100], [140, 100]], secondary: true },
+    ],
+    caption: "前",
+  },
+  {
+    id: "general",
+    title: "将帅",
+    glyph: "将",
+    summary: "九宫内横直一步",
+    detail: "将帅通常只能在己方九宫内横走或直走一步；两将帅同列且中间无棋时形成照面攻击。史诗畸变“亲征”会开放离开九宫后的现行移动规则。",
+    destinations: [[60, 100], [140, 100], [100, 60], [100, 140]],
+    routes: [
+      { points: [[60, 100], [140, 100]] }, { points: [[100, 60], [100, 140]] },
+      { points: [[100, 20], [100, 180]], secondary: true },
+    ],
+  },
+  {
+    id: "advisor",
+    title: "仕士",
+    glyph: "仕",
+    summary: "斜走一步",
+    detail: "暗仕、暗士首次移动按原位置兵种规则，必须留在对应九宫；揭示后的明仕、明士每次斜走一步，可离开九宫。",
+    destinations: [[60, 60], [140, 60], [60, 140], [140, 140]],
+    routes: [
+      { points: [[100, 100], [60, 60]] }, { points: [[100, 100], [140, 60]] },
+      { points: [[100, 100], [60, 140]] }, { points: [[100, 100], [140, 140]] },
+    ],
+  },
+  {
+    id: "elephant",
+    title: "相象",
+    glyph: "相",
+    summary: "田字斜走，受象眼阻挡",
+    detail: "相象沿对角线走两格；中间象眼有非隐身棋时不能通过。暗相、暗象首次移动受原位置限制，揭示后的明相、明象可以过河。",
+    destinations: [[20, 20], [180, 20], [20, 180], [180, 180]],
+    routes: [
+      { points: [[100, 100], [20, 20]] }, { points: [[100, 100], [180, 20]] },
+      { points: [[100, 100], [20, 180]] }, { points: [[100, 100], [180, 180]] },
+    ],
+    obstacles: [
+      { at: [60, 60], label: "象眼" }, { at: [140, 60], label: "象眼" },
+      { at: [60, 140], label: "象眼" }, { at: [140, 140], label: "象眼" },
+    ],
+  },
+] as const;
+
 function element<T extends HTMLElement>(id: string): T {
   const found = document.getElementById(id);
   if (!found) throw new Error(`找不到界面元素：${id}`);
   return found as T;
 }
 
+const mainMenuView = element<HTMLElement>("main-menu-view");
 const rpsView = element<HTMLElement>("rps-view");
-const lobbyView = element<HTMLElement>("lobby-view");
+const bluetoothLobbyView = element<HTMLElement>("lobby-view");
+const settingsView = element<HTMLElement>("settings-view");
+const rulesView = element<HTMLElement>("rules-view");
 const heroView = element<HTMLElement>("hero-view");
 const gameView = element<HTMLElement>("game-view");
+const battleCanvas = element<HTMLElement>("battle-canvas");
+const battleBoard = element<HTMLElement>("battle-board");
 const rpsTitle = element<HTMLElement>("rps-title");
 const rpsHelp = element<HTMLElement>("rps-help");
 const rpsHistory = element<HTMLElement>("rps-history");
+const rpsSelectionTimer = element<HTMLElement>("rps-selection-timer");
+const rpsLockStatus = element<HTMLElement>("rps-lock-status");
+const rpsConfirmButton = element<HTMLButtonElement>("rps-confirm-button");
 const boardPoints = element<HTMLElement>("board-points");
 const boardPlane = document.querySelector<HTMLElement>(".board-plane");
 if (!boardPlane) throw new Error("找不到棋盘");
 const executionGhost = element<HTMLElement>("execution-ghost");
 const terminationEffect = element<HTMLElement>("termination-effect");
+const battleEventCue = element<HTMLElement>("battle-event-cue");
 const moveHint = element<HTMLElement>("move-hint");
 const announcement = element<HTMLElement>("announcement");
 const redPlayer = element<HTMLElement>("red-player");
 const blackPlayer = element<HTMLElement>("black-player");
 const turnStatus = element<HTMLElement>("turn-status");
-const redCaptures = element<HTMLElement>("red-captures");
-const blackCaptures = element<HTMLElement>("black-captures");
 const battleTurnTimer = element<HTMLElement>("battle-turn-timer");
 const battleMutationName = element<HTMLElement>("battle-mutation-name");
-const capturedPanel = element<HTMLElement>("captured-panel");
-const capturedToggle = element<HTMLButtonElement>("captured-toggle");
+const redCapturedButton = element<HTMLButtonElement>("red-captured-button");
+const blackCapturedButton = element<HTMLButtonElement>("black-captured-button");
+const redCapturedCount = element<HTMLElement>("red-captured-count");
+const blackCapturedCount = element<HTMLElement>("black-captured-count");
 const battleMoreButton = element<HTMLButtonElement>("battle-more-button");
+const heroMoreButton = element<HTMLButtonElement>("hero-more-button");
+const rpsMoreButton = element<HTMLButtonElement>("rps-more-button");
+const matchMenuLayer = element<HTMLElement>("match-menu-layer");
 const battleActionMenu = element<HTMLElement>("battle-action-menu");
+const battleSkillPanel = element<HTMLElement>("battle-skill-panel");
+const matchMutationButton = element<HTMLButtonElement>("match-mutation-button");
+const matchExitButton = element<HTMLButtonElement>("match-exit-button");
+const resignButton = element<HTMLButtonElement>("resign-button");
+const matchDetailLayer = element<HTMLElement>("match-detail-layer");
+const matchDetailTitle = element<HTMLElement>("match-detail-title");
+const matchDetailBody = element<HTMLElement>("match-detail-body");
+const matchDetailActions = element<HTMLElement>("match-detail-actions");
+const matchDetailConfirm = element<HTMLButtonElement>("match-detail-confirm");
 const statusBlueHeroName = element<HTMLElement>("status-blue-hero-name");
 const statusRedHeroName = element<HTMLElement>("status-red-hero-name");
+const pieceMovementGrid = element<HTMLElement>("piece-movement-grid");
+const ruleDiagramLayer = element<HTMLElement>("rule-diagram-layer");
+const ruleDiagramTitle = element<HTMLElement>("rule-diagram-title");
+const ruleDiagramArt = element<HTMLElement>("rule-diagram-art");
+const ruleDiagramDescription = element<HTMLElement>("rule-diagram-description");
 const flowDialog = element<HTMLDialogElement>("flow-dialog");
 const dialogTitle = element<HTMLElement>("dialog-title");
 const dialogText = element<HTMLElement>("dialog-text");
@@ -143,6 +294,7 @@ const openingSequence = element<HTMLElement>("opening-sequence");
 const mutationReveal = element<HTMLElement>("mutation-reveal");
 const heroIntroStage = element<HTMLElement>("hero-intro-stage");
 const heroPreparationPanel = element<HTMLElement>("hero-preparation-panel");
+const heroPreparationTitle = element<HTMLElement>("hero-preparation-title");
 const heroPreparationStatus = element<HTMLElement>("hero-preparation-status");
 const heroPreparationTimer = element<HTMLElement>("hero-preparation-timer");
 const trapUndoButton = element<HTMLButtonElement>("trap-undo-button");
@@ -152,16 +304,73 @@ const disconnectTitle = element<HTMLElement>("disconnect-title");
 const disconnectCopy = element<HTMLElement>("disconnect-copy");
 const disconnectTimer = element<HTMLElement>("disconnect-timer");
 const disconnectBluetoothButton = element<HTMLButtonElement>("disconnect-bluetooth-button");
+const bluetoothInitialActions = element<HTMLElement>("bluetooth-initial-actions");
+const bluetoothJoinPanel = element<HTMLElement>("bluetooth-join-panel");
+const bluetoothStateActions = element<HTMLElement>("bluetooth-state-actions");
+const bluetoothEnableButton = element<HTMLButtonElement>("bluetooth-enable-button");
+const bluetoothPermissionButton = element<HTMLButtonElement>("bluetooth-permission-button");
+const bluetoothAppSettingsButton = element<HTMLButtonElement>("bluetooth-app-settings-button");
+const bluetoothSessionPanel = element<HTMLElement>("bluetooth-session-panel");
+const bluetoothSessionKicker = element<HTMLElement>("bluetooth-session-kicker");
+const bluetoothSessionTitle = element<HTMLElement>("bluetooth-session-title");
+const bluetoothSessionDevice = element<HTMLElement>("bluetooth-session-device");
+const bluetoothSessionDetail = element<HTMLElement>("bluetooth-session-detail");
+const bluetoothRematchTimer = element<HTMLElement>("bluetooth-rematch-timer");
+const bluetoothRetryButton = element<HTMLButtonElement>("bluetooth-retry-button");
+const bluetoothRematchRequestButton = element<HTMLButtonElement>("bluetooth-rematch-request-button");
+const bluetoothRematchAcceptButton = element<HTMLButtonElement>("bluetooth-rematch-accept-button");
+const bluetoothRematchDeclineButton = element<HTMLButtonElement>("bluetooth-rematch-decline-button");
+const bluetoothCancelButton = element<HTMLButtonElement>("bluetooth-cancel-button");
+const bluetoothReturnButton = element<HTMLButtonElement>("bluetooth-return-button");
+const matchResultLayer = element<HTMLElement>("match-result-layer");
+const matchResultHeading = element<HTMLElement>("match-result-heading");
+const matchResultType = element<HTMLElement>("match-result-type");
+const matchResultMessage = element<HTMLElement>("match-result-message");
+const matchResultWinner = element<HTMLElement>("match-result-winner");
+const matchResultAvatar = element<HTMLElement>("match-result-avatar");
+const matchResultSide = element<HTMLElement>("match-result-side");
+const matchResultPlayer = element<HTMLElement>("match-result-player");
+const matchResultHero = element<HTMLElement>("match-result-hero");
+const matchResultRematch = element<HTMLButtonElement>("match-result-rematch");
+const matchResultMainMenu = element<HTMLButtonElement>("match-result-main-menu");
+const messagePanelToggle = element<HTMLButtonElement>("message-panel-toggle");
+const messageLatest = element<HTMLElement>("message-latest");
+const messageUnreadDot = element<HTMLElement>("message-unread-dot");
+const messageDrawer = element<HTMLElement>("message-drawer");
+const messageDrawerClose = element<HTMLButtonElement>("message-drawer-close");
+const messageHistory = element<HTMLElement>("message-history");
+const messageNewButton = element<HTMLButtonElement>("message-new-button");
+const quickMessageArea = element<HTMLElement>("quick-message-area");
+const messageForm = element<HTMLFormElement>("message-form");
+const messageInput = element<HTMLInputElement>("message-input");
+const messageCharacterCount = element<HTMLElement>("message-character-count");
+const messageSend = element<HTMLButtonElement>("message-send");
+
+interface LocalUiPreferences {
+  sound: boolean;
+  haptics: boolean;
+  reduceMotion: boolean;
+}
+
+const DEFAULT_UI_PREFERENCES: LocalUiPreferences = {
+  sound: true,
+  haptics: true,
+  reduceMotion: false,
+};
+
+const UI_PREFERENCES_KEY = "lezi-xiangqi-ui-preferences-v1";
 
 interface BluetoothNativeBridge {
   status(): string;
   pairedDevices(): string;
+  requestPermission(): void;
   host(): void;
   join(address: string): void;
   send(message: string): void;
   disconnect(): void;
   reconnect(): void;
   openBluetoothSettings(): void;
+  openAppSettings(): void;
 }
 
 interface BluetoothEventDetail {
@@ -172,6 +381,17 @@ interface BluetoothEventDetail {
   address?: string;
   detail?: string;
   adapterEnabled?: boolean;
+  permanentlyDenied?: boolean;
+  role?: "NONE" | "HOST" | "GUEST";
+}
+
+interface BluetoothAvailabilityStatus {
+  available?: boolean;
+  enabled?: boolean;
+  permissionGranted?: boolean;
+  deviceName?: string;
+  role?: "NONE" | "HOST" | "GUEST";
+  state?: string;
 }
 
 type BluetoothRole = "host" | "guest";
@@ -191,6 +411,11 @@ interface BluetoothSession {
   localDisconnectPlayerId?: typeof BLUETOOTH_HOST_PLAYER | typeof BLUETOOTH_GUEST_PLAYER;
   adapterEnabled?: boolean;
   shownDisconnectOutcomeKey?: string;
+  shownForfeitActionId?: string;
+  targetAddress?: string;
+  targetName?: string;
+  localDeviceName?: string;
+  lastFailure?: string;
 }
 
 interface LocalTrapLayer {
@@ -203,6 +428,9 @@ interface LocalTrapLayer {
 let rpsPublic: RpsPublicState;
 let rpsSecret: RpsSecretState;
 let rpsActor = PLAYER_ONE;
+let rpsDraft: RpsChoice | undefined;
+let rpsDraftRound = 1;
+let localRpsDeadlineAt: number | undefined;
 let gameState: GameState | undefined;
 let gameSecret: SecretState | undefined;
 let selectedPieceId: string | undefined;
@@ -235,6 +463,17 @@ let battleTurnRevision: number | undefined;
 let battleTurnDeadlineAt: number | undefined;
 let battlePausedRemainingMs: number | undefined;
 let bluetooth: BluetoothSession | undefined;
+let localMessages: MatchMessage[] = [];
+let messageDrawerOpen = false;
+let messageHasUnread = false;
+let lastRenderedMessageId: string | undefined;
+let lastMessageSignature = "";
+let localChatCooldownUntil = 0;
+let chatCooldownTimer: number | undefined;
+let renderedCaptureCounts: Record<Side, number> = { red: 0, black: 0 };
+let eventCueQueue: string[] = [];
+let eventCueTimer: number | undefined;
+let lastEventCueActionId: string | undefined;
 
 const BOARD_X_CENTERS = [81, 162, 242, 322, 402, 482, 562, 642, 722] as const;
 const BOARD_Y_CENTERS = [57, 134, 212, 289, 367, 444, 522, 599, 677, 755] as const;
@@ -292,6 +531,160 @@ function bluetoothActionId(): string {
   return `bt-${nextActionId()}`;
 }
 
+function currentMatchMessages(): MatchMessage[] {
+  return bluetooth?.view?.messages ?? localMessages;
+}
+
+function appendLocalSystemMessage(text: string): void {
+  localMessages.push({
+    id: `local-system-${nextActionId()}`,
+    kind: "system",
+    text,
+    createdAt: Date.now(),
+  });
+}
+
+function playNextEventCue(): void {
+  if (eventCueTimer || eventCueQueue.length === 0) return;
+  const next = eventCueQueue.shift()!;
+  battleEventCue.hidden = true;
+  battleEventCue.textContent = next;
+  void battleEventCue.offsetWidth;
+  battleEventCue.hidden = false;
+  eventCueTimer = window.setTimeout(() => {
+    battleEventCue.hidden = true;
+    eventCueTimer = undefined;
+    playNextEventCue();
+  }, 900);
+}
+
+function queueFormalEventCues(state: GameState, trapTriggered = false, skillCue?: string): void {
+  const move = state.lastMove;
+  if (!move || move.actionId === lastEventCueActionId || state.status !== "playing") return;
+  lastEventCueActionId = move.actionId;
+  if (skillCue) eventCueQueue.push(skillCue);
+  if (move.pathCrushed?.length) eventCueQueue.push(`碾碎 ${move.pathCrushed.length} 枚棋子`);
+  if (move.bouncedAgainstPieceId) eventCueQueue.push("防护壁垒破裂");
+  if (trapTriggered) eventCueQueue.push("猎人陷阱触发");
+  if (isGeneralInCheck(state, state.turn)) eventCueQueue.push("将军");
+  playNextEventCue();
+}
+
+function historyIsAtNewest(): boolean {
+  return messageHistory.scrollHeight - messageHistory.scrollTop - messageHistory.clientHeight < 28;
+}
+
+function markMessagesRead(): void {
+  const latest = currentMatchMessages().at(-1);
+  lastRenderedMessageId = latest?.id;
+  messageHasUnread = false;
+  messageUnreadDot.hidden = true;
+  messageNewButton.hidden = true;
+}
+
+function renderMessagePanel(): void {
+  const messages = currentMatchMessages();
+  const latest = messages.at(-1);
+  const newestId = latest?.id;
+  const wasAtNewest = historyIsAtNewest();
+  if (newestId && newestId !== lastRenderedMessageId) {
+    if (lastRenderedMessageId === undefined && lastMessageSignature === "") lastRenderedMessageId = newestId;
+    else if (!messageDrawerOpen || !wasAtNewest) messageHasUnread = true;
+    else lastRenderedMessageId = newestId;
+  }
+  messageLatest.textContent = latest?.text ?? latestAnnouncement;
+  messageUnreadDot.hidden = messageDrawerOpen || !messageHasUnread;
+
+  const signature = messages.map((message) => message.id).join("|");
+  if (signature !== lastMessageSignature) {
+    messageHistory.replaceChildren(...messages.map((message) => {
+      const row = document.createElement("p");
+      const own = message.kind === "chat" && message.senderPlayerId === ownBluetoothPlayerId();
+      row.className = `message-row ${message.kind === "system" ? "system" : own ? "own" : "opponent"}`;
+      const copy = document.createElement("span");
+      copy.textContent = message.text;
+      row.append(copy);
+      return row;
+    }));
+    lastMessageSignature = signature;
+    if (messageDrawerOpen && wasAtNewest) {
+      messageHistory.scrollTop = messageHistory.scrollHeight;
+      markMessagesRead();
+    }
+  }
+
+  const canChat = bluetooth?.view?.phase === "playing";
+  quickMessageArea.hidden = !canChat;
+  const coolingDown = Date.now() < localChatCooldownUntil;
+  const disconnected = isBluetoothTransportInterrupted();
+  const disabled = !canChat || coolingDown || disconnected;
+  for (const button of document.querySelectorAll<HTMLButtonElement>("#quick-message-grid button")) button.disabled = disabled;
+  messageInput.disabled = !canChat || disconnected;
+  messageSend.disabled = disabled || !messageInput.value.trim();
+  messageCharacterCount.textContent = `${Array.from(messageInput.value).length}/${CHAT_MAX_CHARACTERS}`;
+  messageNewButton.hidden = !messageDrawerOpen || !messageHasUnread || wasAtNewest;
+}
+
+function setMessageDrawer(open: boolean): void {
+  messageDrawerOpen = open && !gameView.hidden;
+  messageDrawer.hidden = !messageDrawerOpen;
+  messagePanelToggle.setAttribute("aria-expanded", String(messageDrawerOpen));
+  if (messageDrawerOpen) {
+    setBattleActionMenu(false);
+    setBattleSkillPanel(false);
+    renderMessagePanel();
+    requestAnimationFrame(() => {
+      messageHistory.scrollTop = messageHistory.scrollHeight;
+      markMessagesRead();
+    });
+  }
+  renderGame();
+}
+
+function resetMessageUi(clearDraft: boolean): void {
+  messageDrawerOpen = false;
+  messageDrawer.hidden = true;
+  messagePanelToggle.setAttribute("aria-expanded", "false");
+  messageHasUnread = false;
+  lastRenderedMessageId = undefined;
+  lastMessageSignature = "";
+  localChatCooldownUntil = 0;
+  if (chatCooldownTimer) window.clearTimeout(chatCooldownTimer);
+  chatCooldownTimer = undefined;
+  if (clearDraft) messageInput.value = "";
+  messageHistory.replaceChildren();
+}
+
+function beginChatCooldown(): void {
+  localChatCooldownUntil = Date.now() + CHAT_COOLDOWN_MS;
+  if (chatCooldownTimer) window.clearTimeout(chatCooldownTimer);
+  chatCooldownTimer = window.setTimeout(renderMessagePanel, CHAT_COOLDOWN_MS + 20);
+  renderMessagePanel();
+}
+
+function sendBluetoothChat(rawText: string, clearInput: boolean): void {
+  if (!bluetooth?.view || bluetooth.view.phase !== "playing") return;
+  if (isBluetoothTransportInterrupted() || Date.now() < localChatCooldownUntil) return;
+  const text = rawText.trim();
+  if (!text || /\r|\n/.test(text) || Array.from(text).length > CHAT_MAX_CHARACTERS) return;
+  const messageId = bluetoothActionId();
+  const action: BluetoothRoomAction = { kind: "chat", messageId, text };
+  try {
+    if (bluetooth.role === "host") {
+      bluetooth.hostRoom!.handle(BLUETOOTH_HOST_PLAYER, action);
+      publishBluetoothViews();
+    } else {
+      sendBluetoothEnvelope({ v: 1, type: "action", id: `chat:${messageId}`, payload: action });
+    }
+    beginChatCooldown();
+    if (clearInput) messageInput.value = "";
+    renderMessagePanel();
+    if (clearInput) messageInput.focus({ preventScroll: true });
+  } catch {
+    // Chat send failures stay silent; the preserved draft can be retried after reconnect.
+  }
+}
+
 function nextActionId(): string {
   const values = new Uint32Array(2);
   globalThis.crypto.getRandomValues(values);
@@ -317,6 +710,11 @@ function randomIndex(maxExclusive: number): number {
 
 function randomHero(): HeroId {
   return HERO_IDS[randomIndex(HERO_IDS.length)];
+}
+
+function randomRpsChoice(): RpsChoice {
+  const choices: readonly RpsChoice[] = ["rock", "scissors", "paper"];
+  return choices[randomIndex(choices.length)];
 }
 
 function randomMutation(): MutationId {
@@ -403,22 +801,180 @@ function resumeBluetoothUiClocks(): void {
   }
 }
 
-function showLobby(): void {
-  disconnectLayer.hidden = true;
-  lobbyView.hidden = false;
+function hidePrimaryViews(): void {
+  if (messageDrawerOpen) setMessageDrawer(false);
+  setBattleActionMenu(false);
+  setBattleSkillPanel(false);
+  closeMatchDetail();
+  mainMenuView.hidden = true;
+  bluetoothLobbyView.hidden = true;
+  settingsView.hidden = true;
+  rulesView.hidden = true;
   heroView.hidden = true;
   rpsView.hidden = true;
   gameView.hidden = true;
+}
+
+function closeMatchResult(): void {
+  matchResultLayer.hidden = true;
+}
+
+function showMainMenu(): void {
+  disconnectLayer.hidden = true;
+  closeMatchResult();
+  hidePrimaryViews();
+  mainMenuView.hidden = false;
   openingSequence.hidden = true;
-  const supported = Boolean(nativeBluetooth());
-  element<HTMLButtonElement>("bluetooth-host-button").disabled = !supported;
-  element<HTMLButtonElement>("bluetooth-refresh-button").disabled = !supported;
-  element<HTMLButtonElement>("bluetooth-join-button").disabled = !supported;
-  if (!supported) {
-    setBluetoothStatus("当前为普通浏览器：可本机试玩。蓝牙双机功能仅在 Android 安装包中可用。");
-  } else if (!bluetooth) {
-    setBluetoothStatus("两台手机先在系统设置完成蓝牙配对；房主创建后，另一台选择房主设备加入。");
+}
+
+function readBluetoothAvailability(): BluetoothAvailabilityStatus | undefined {
+  const bridge = nativeBluetooth();
+  if (!bridge) return undefined;
+  try {
+    return JSON.parse(bridge.status()) as BluetoothAvailabilityStatus;
+  } catch {
+    return undefined;
   }
+}
+
+function resetBluetoothLobbyPanels(): void {
+  bluetoothInitialActions.hidden = false;
+  bluetoothJoinPanel.hidden = true;
+  bluetoothSessionPanel.hidden = true;
+  bluetoothRetryButton.hidden = true;
+  bluetoothRematchTimer.hidden = true;
+  bluetoothRematchRequestButton.hidden = true;
+  bluetoothRematchAcceptButton.hidden = true;
+  bluetoothRematchDeclineButton.hidden = true;
+  bluetoothCancelButton.hidden = false;
+  bluetoothReturnButton.hidden = true;
+  bluetoothSessionDevice.hidden = true;
+  bluetoothSessionDevice.textContent = "";
+  bluetoothSessionDetail.textContent = "";
+}
+
+function showBluetoothSessionState(options: {
+  kicker: string;
+  title: string;
+  detail: string;
+  deviceName?: string;
+  retry?: boolean;
+  cancel?: boolean;
+  back?: boolean;
+}): void {
+  bluetoothInitialActions.hidden = true;
+  bluetoothJoinPanel.hidden = true;
+  bluetoothStateActions.hidden = true;
+  bluetoothSessionPanel.hidden = false;
+  bluetoothSessionKicker.textContent = options.kicker;
+  bluetoothSessionTitle.textContent = options.title;
+  bluetoothSessionDetail.textContent = options.detail;
+  bluetoothSessionDevice.textContent = options.deviceName ?? "";
+  bluetoothSessionDevice.hidden = !options.deviceName;
+  bluetoothRetryButton.hidden = !options.retry;
+  bluetoothRematchTimer.hidden = true;
+  bluetoothRematchRequestButton.hidden = true;
+  bluetoothRematchAcceptButton.hidden = true;
+  bluetoothRematchDeclineButton.hidden = true;
+  bluetoothCancelButton.hidden = options.cancel === false;
+  bluetoothReturnButton.hidden = !options.back;
+}
+
+function cancelBluetoothSetup(): void {
+  nativeBluetooth()?.disconnect();
+  bluetooth = undefined;
+  resetBluetoothLobbyPanels();
+  renderBluetoothAvailability();
+}
+
+function leaveBluetoothLobby(): void {
+  if (bluetooth?.everConnected) {
+    showDialog(
+      "断开蓝牙对局",
+      "确定要断开当前蓝牙对局并返回主菜单吗？",
+      "确认断开",
+      () => {
+        nativeBluetooth()?.disconnect();
+        bluetooth = undefined;
+        showMainMenu();
+      },
+    );
+    return;
+  }
+  nativeBluetooth()?.disconnect();
+  bluetooth = undefined;
+  showMainMenu();
+}
+
+function renderBluetoothAvailability(): void {
+  const bridge = nativeBluetooth();
+  bluetoothStateActions.hidden = true;
+  bluetoothEnableButton.hidden = true;
+  bluetoothPermissionButton.hidden = true;
+  bluetoothAppSettingsButton.hidden = true;
+
+  const setControlsDisabled = (disabled: boolean) => {
+    element<HTMLButtonElement>("bluetooth-host-button").disabled = disabled;
+    element<HTMLButtonElement>("bluetooth-join-mode-button").disabled = disabled;
+    element<HTMLButtonElement>("bluetooth-refresh-button").disabled = disabled;
+    element<HTMLButtonElement>("bluetooth-join-button").disabled = disabled;
+  };
+
+  if (!bridge) {
+    bluetoothInitialActions.hidden = false;
+    setControlsDisabled(true);
+    setBluetoothStatus("当前为普通浏览器。蓝牙对局仅在 Android 安装包中可用。");
+    return;
+  }
+
+  try {
+    const status = readBluetoothAvailability();
+    if (!status) throw new Error("status unavailable");
+    if (status.available === false) {
+      bluetoothInitialActions.hidden = true;
+      bluetoothJoinPanel.hidden = true;
+      bluetoothSessionPanel.hidden = true;
+      setControlsDisabled(true);
+      setBluetoothStatus("此设备不支持蓝牙。");
+      return;
+    }
+    if (status.enabled === false) {
+      bluetoothInitialActions.hidden = true;
+      bluetoothJoinPanel.hidden = true;
+      bluetoothSessionPanel.hidden = true;
+      setControlsDisabled(true);
+      bluetoothStateActions.hidden = false;
+      bluetoothEnableButton.hidden = false;
+      setBluetoothStatus("蓝牙当前处于关闭状态，请先开启蓝牙。");
+      return;
+    }
+    if (status.permissionGranted === false) {
+      bluetoothInitialActions.hidden = true;
+      bluetoothJoinPanel.hidden = true;
+      bluetoothSessionPanel.hidden = true;
+      setControlsDisabled(true);
+      bluetoothStateActions.hidden = false;
+      bluetoothPermissionButton.hidden = false;
+      setBluetoothStatus("蓝牙对局需要附近设备权限，用于连接已配对的另一台手机。");
+      return;
+    }
+    setControlsDisabled(false);
+    if (bluetoothJoinPanel.hidden && bluetoothSessionPanel.hidden) bluetoothInitialActions.hidden = false;
+    setBluetoothStatus("请选择创建对局或加入对局。");
+  } catch {
+    setControlsDisabled(true);
+    setBluetoothStatus("无法读取蓝牙状态，请稍后重试。");
+  }
+}
+
+function showBluetoothLobby(): void {
+  disconnectLayer.hidden = true;
+  hidePrimaryViews();
+  bluetoothLobbyView.hidden = false;
+  resetBluetoothLobbyPanels();
+  openingSequence.hidden = true;
+  element<HTMLButtonElement>("bluetooth-open-settings-button").disabled = !nativeBluetooth();
+  renderBluetoothAvailability();
 }
 
 function activateLocalGame(): void {
@@ -448,13 +1004,35 @@ function applyBluetoothView(view: PlayerRemoteRoomView): void {
   if (assignments) {
     rpsPublic = view.rps!;
   }
+  if (prior?.state && view.state && prior.state.lastMove?.actionId !== view.state.lastMove?.actionId) {
+    const actionHistory = view.messages?.find((message) => message.id === `system:${view.state?.lastMove?.actionId}`)?.text ?? "";
+    const skillCue = actionHistory.includes("发动强击") ? "强击发动" : actionHistory.includes("发动刺杀") ? "刺杀发动" : undefined;
+    queueFormalEventCues(view.state, view.lastTrapTrigger?.actionId === view.state.lastMove?.actionId, skillCue);
+  }
+
+  if (prior?.phase === "finished" && view.phase !== "finished") {
+    resetMessageUi(true);
+    closeMatchResult();
+    bluetooth.openingStarted = false;
+    bluetooth.playedTerminalEventId = undefined;
+    bluetooth.shownFinishRevision = undefined;
+    bluetooth.shownForfeitActionId = undefined;
+    bluetooth.shownDisconnectOutcomeKey = undefined;
+  }
+
+  if (view.phase === "finished" && view.rematch) {
+    showBluetoothRematchLobby(view);
+    return;
+  }
 
   const heroSelectionTimedOut = prior?.phase === "hero_selection"
     && view.phase === "rps"
     && Date.now() >= (prior.features?.heroSelection?.deadlineAt ?? Number.POSITIVE_INFINITY)
     && Boolean(view.ownHeroChoice);
   if (heroSelectionTimedOut) {
-    lobbyView.hidden = true;
+    bluetoothLobbyView.hidden = true;
+    mainMenuView.hidden = true;
+    settingsView.hidden = true;
     heroView.hidden = false;
     rpsView.hidden = true;
     gameView.hidden = true;
@@ -475,19 +1053,25 @@ function applyBluetoothView(view: PlayerRemoteRoomView): void {
   }
 
   if (view.phase === "hero_selection") {
-    lobbyView.hidden = true;
+    bluetoothLobbyView.hidden = true;
+    mainMenuView.hidden = true;
+    settingsView.hidden = true;
     heroView.hidden = false;
     rpsView.hidden = true;
     gameView.hidden = true;
     renderHeroSelection();
   } else if (view.phase === "rps") {
-    lobbyView.hidden = true;
+    bluetoothLobbyView.hidden = true;
+    mainMenuView.hidden = true;
+    settingsView.hidden = true;
     heroView.hidden = true;
     rpsView.hidden = false;
     gameView.hidden = true;
     renderRps();
   } else if (view.state) {
-    lobbyView.hidden = true;
+    bluetoothLobbyView.hidden = true;
+    mainMenuView.hidden = true;
+    settingsView.hidden = true;
     heroView.hidden = true;
     rpsView.hidden = true;
     gameView.hidden = false;
@@ -500,8 +1084,27 @@ function applyBluetoothView(view: PlayerRemoteRoomView): void {
   }
 
   const ownPlayerId = ownBluetoothPlayerId();
+  const forfeitOutcome = view.forfeitOutcome;
+  if (forfeitOutcome && ownPlayerId && bluetooth.shownForfeitActionId !== forfeitOutcome.actionId) {
+    bluetooth.shownForfeitActionId = forfeitOutcome.actionId;
+    const lost = forfeitOutcome.loserPlayerId === ownPlayerId;
+    setBattleActionMenu(false);
+    closeMatchDetail();
+    window.setTimeout(() => showDialog(
+      lost ? "已退出对局" : "对方已退出",
+      lost ? "你已退出当前对局，本局判负。" : "对方已臣服于您，获得胜利！",
+      "返回主菜单",
+      () => {
+        nativeBluetooth()?.disconnect();
+        bluetooth = undefined;
+        showMainMenu();
+      },
+    ), 50);
+    return;
+  }
   const disconnectOutcome = view.disconnectOutcome;
   if (disconnectOutcome && ownPlayerId && disconnectOutcome.timedOutPlayerIds.includes(ownPlayerId)) {
+    messageInput.value = "";
     const key = `lost:${[...disconnectOutcome.timedOutPlayerIds].sort().join("|")}`;
     if (bluetooth.nativeState === "CONNECTED" && bluetooth.shownDisconnectOutcomeKey !== key) {
       bluetooth.shownDisconnectOutcomeKey = key;
@@ -513,7 +1116,7 @@ function applyBluetoothView(view: PlayerRemoteRoomView): void {
         () => {
           nativeBluetooth()?.disconnect();
           bluetooth = undefined;
-          showLobby();
+          showMainMenu();
         },
       ), 50);
     }
@@ -531,7 +1134,7 @@ function applyBluetoothView(view: PlayerRemoteRoomView): void {
         () => {
           nativeBluetooth()?.disconnect();
           bluetooth = undefined;
-          showLobby();
+          showMainMenu();
         },
       ), 50);
     }
@@ -544,7 +1147,77 @@ function applyBluetoothView(view: PlayerRemoteRoomView): void {
   } else if (view.state?.status === "finished" && prior?.state?.revision !== view.state.revision
     && bluetooth.shownFinishRevision !== view.state.revision) {
     bluetooth.shownFinishRevision = view.state.revision;
-    window.setTimeout(() => showDialog(finishTitle(), finishMessage(), "查看棋盘", () => undefined), 50);
+    window.setTimeout(showMatchResult, 50);
+  }
+}
+
+function showBluetoothRematchLobby(view = bluetooth?.view): void {
+  if (!bluetooth || !view) return;
+  closeMatchResult();
+  hidePrimaryViews();
+  bluetoothLobbyView.hidden = false;
+  bluetoothInitialActions.hidden = true;
+  bluetoothJoinPanel.hidden = true;
+  bluetoothStateActions.hidden = true;
+  bluetoothSessionPanel.hidden = false;
+  bluetoothCancelButton.hidden = true;
+  bluetoothReturnButton.hidden = true;
+  bluetoothRetryButton.hidden = true;
+  bluetoothRematchAcceptButton.hidden = true;
+  bluetoothRematchDeclineButton.hidden = true;
+  bluetoothRematchRequestButton.hidden = true;
+  bluetoothRematchAcceptButton.disabled = false;
+  bluetoothRematchDeclineButton.disabled = false;
+  bluetoothRematchRequestButton.disabled = false;
+  bluetoothRematchTimer.hidden = true;
+  bluetoothSessionKicker.textContent = "蓝牙房间 · 已连接";
+  bluetoothSessionDevice.hidden = true;
+  const rematch = view.rematch;
+  const own = ownBluetoothPlayerId();
+  if (!rematch) {
+    bluetoothSessionTitle.textContent = "本局已经结束";
+    bluetoothSessionDetail.textContent = "连接仍然保留，可以再次邀请对方开始新的一局。";
+    bluetoothRematchRequestButton.hidden = false;
+    return;
+  }
+  if (rematch.status === "pending") {
+    bluetoothRematchTimer.hidden = false;
+    bluetoothRematchTimer.textContent = String(secondsRemaining(rematch.deadlineAt));
+    if (rematch.requestedBy === own) {
+      bluetoothSessionTitle.textContent = "等待对方确认";
+      bluetoothSessionDetail.textContent = `再战邀请已发送；对方可在 ${REMATCH_INVITATION_DURATION_MS / 1_000} 秒内接受或拒绝。`;
+    } else {
+      bluetoothSessionTitle.textContent = "对方邀请再战";
+      bluetoothSessionDetail.textContent = "接受后将重新选择英雄、猜拳，并重新随机本局畸变。";
+      bluetoothRematchAcceptButton.hidden = false;
+      bluetoothRematchDeclineButton.hidden = false;
+    }
+    return;
+  }
+  bluetoothSessionTitle.textContent = rematch.status === "declined"
+    ? rematch.respondedBy === own ? "已拒绝再战" : "对方已拒绝再战"
+    : "对方未响应再战请求";
+  bluetoothSessionDetail.textContent = "仍保持蓝牙连接，可以稍后再次发起邀请。";
+  bluetoothRematchRequestButton.hidden = false;
+}
+
+function requestBluetoothRematch(): void {
+  if (!bluetooth?.view || bluetooth.view.phase !== "finished") return;
+  showBluetoothRematchLobby(bluetooth.view);
+  bluetoothSessionTitle.textContent = "正在发送再战邀请";
+  bluetoothSessionDetail.textContent = "请稍候，房主正在确认邀请状态。";
+  bluetoothRematchRequestButton.hidden = true;
+  handleBluetoothAction({ kind: "rematch_request", actionId: bluetoothActionId() });
+}
+
+function respondBluetoothRematch(accept: boolean): void {
+  if (!bluetooth?.view?.rematch || bluetooth.view.rematch.status !== "pending") return;
+  bluetoothRematchAcceptButton.disabled = true;
+  bluetoothRematchDeclineButton.disabled = true;
+  handleBluetoothAction({ kind: "rematch_response", accept });
+  if (!accept) {
+    bluetoothSessionTitle.textContent = "已拒绝再战";
+    bluetoothSessionDetail.textContent = "仍保持蓝牙连接，可以稍后由任一方再次邀请。";
   }
 }
 
@@ -561,15 +1234,13 @@ function mutationName(mutation: MutationId): string {
 function showCurrentMutationDetails(): void {
   const mutation = bluetooth?.view?.features?.mutation ?? gameState?.featureRules?.mutation;
   if (!mutation) {
-    showDialog("本局畸变", "本局没有启用畸变。", "关闭", () => undefined);
+    showMatchDetails("本局畸变", "<p>本局没有启用畸变。</p>");
     return;
   }
   const definition = mutationDefinition(mutation);
-  showDialog(
-    `本局畸变 · ${MUTATION_RARITY_LABELS[definition.rarity]}`,
-    `${definition.name}：${definition.summary}\n\n${definition.rules}`,
-    "关闭",
-    () => undefined,
+  showMatchDetails(
+    "本局畸变",
+    `<h3>${definition.name}</h3><p><strong>${MUTATION_RARITY_LABELS[definition.rarity]}</strong>｜${definition.summary}</p><p>${definition.rules}</p>`,
   );
 }
 
@@ -620,20 +1291,21 @@ function handleIncomingBluetoothMessage(raw: string): void {
   try {
     const envelope = parseBluetoothEnvelope(raw);
     if (bluetooth.role === "host" && envelope.type === "action") {
+      const action = envelope.payload as BluetoothRoomAction;
       try {
-        bluetooth.hostRoom!.handle(BLUETOOTH_GUEST_PLAYER, envelope.payload as BluetoothRoomAction);
+        bluetooth.hostRoom!.handle(BLUETOOTH_GUEST_PLAYER, action);
         publishBluetoothViews();
       } catch (error) {
         const message = error instanceof RuleError ? error.message : "房主拒绝了此操作。";
         sendBluetoothEnvelope({ v: 1, type: "error", id: envelope.id, payload: { message } });
-        showToast(message);
+        if (action.kind !== "chat") showToast(message);
       }
     } else if (bluetooth.role === "guest" && envelope.type === "snapshot") {
       applyBluetoothView(envelope.payload as PlayerRemoteRoomView);
     } else if (envelope.type === "error") {
       bluetooth.pendingAction = false;
       const payload = envelope.payload as { message?: string } | undefined;
-      showToast(payload?.message ?? "房主拒绝了此操作。");
+      if (!envelope.id?.startsWith("chat:")) showToast(payload?.message ?? "房主拒绝了此操作。");
     } else if (envelope.type === "ping") {
       sendBluetoothEnvelope({ v: 1, type: "pong", id: envelope.id });
     }
@@ -645,24 +1317,67 @@ function handleIncomingBluetoothMessage(raw: string): void {
 function beginBluetoothHost(): void {
   const bridge = nativeBluetooth();
   if (!bridge) return showToast("蓝牙双机模式只能在 Android 安装包内使用。");
+  const localDeviceName = readBluetoothAvailability()?.deviceName || "本机设备";
   bluetooth = {
     role: "host",
     nativeState: "STARTING",
     pendingAction: false,
     trapDraft: [],
+    localDeviceName,
   };
+  showBluetoothSessionState({
+    kicker: "创建对局",
+    title: "正在建立房间",
+    deviceName: localDeviceName,
+    detail: "正在开启房主监听，请稍候。",
+    cancel: true,
+  });
   setBluetoothStatus("正在开启房主监听，请让另一台已配对手机选择本机并加入。");
   bridge.host();
 }
 
-function joinBluetoothRoom(): void {
+function beginBluetoothGuest(address: string, targetName: string): void {
   const bridge = nativeBluetooth();
-  const address = element<HTMLSelectElement>("bluetooth-device").value;
   if (!bridge) return showToast("蓝牙双机模式只能在 Android 安装包内使用。");
-  if (!address) return showToast("请先刷新并选择已配对的房主设备。");
-  bluetooth = { role: "guest", nativeState: "CONNECTING", pendingAction: false, trapDraft: [] };
+  bluetooth = {
+    role: "guest",
+    nativeState: "CONNECTING",
+    pendingAction: false,
+    trapDraft: [],
+    targetAddress: address,
+    targetName,
+  };
+  showBluetoothSessionState({
+    kicker: "加入对局",
+    title: "正在连接",
+    deviceName: targetName,
+    detail: "正在连接房主设备，请稍候。",
+    cancel: true,
+  });
   setBluetoothStatus("正在连接房主设备，请稍候。");
   bridge.join(address);
+}
+
+function joinBluetoothRoom(): void {
+  const select = element<HTMLSelectElement>("bluetooth-device");
+  const address = select.value;
+  if (!address) return showToast("请先刷新并选择已配对的房主设备。");
+  const selected = select.selectedOptions[0];
+  beginBluetoothGuest(address, selected?.dataset.name || selected?.textContent || "房主设备");
+}
+
+function retryBluetoothConnection(): void {
+  if (!bluetooth) return showBluetoothLobby();
+  if (bluetooth.role === "host") {
+    beginBluetoothHost();
+    return;
+  }
+  if (bluetooth.targetAddress) {
+    const { targetAddress, targetName = "房主设备" } = bluetooth;
+    beginBluetoothGuest(targetAddress, targetName);
+    return;
+  }
+  showBluetoothLobby();
 }
 
 function refreshBluetoothDevices(): void {
@@ -674,6 +1389,7 @@ function refreshBluetoothDevices(): void {
     select.replaceChildren(...devices.map((device) => {
       const option = document.createElement("option");
       option.value = device.address;
+      option.dataset.name = device.name || "未命名设备";
       option.textContent = `${device.name || "未命名设备"} · ${device.address}`;
       return option;
     }));
@@ -683,17 +1399,32 @@ function refreshBluetoothDevices(): void {
       option.textContent = "没有已配对设备";
       select.append(option);
     }
-    setBluetoothStatus(`已读取 ${devices.length} 台已配对设备。`);
+    element<HTMLButtonElement>("bluetooth-join-button").disabled = devices.length === 0;
+    setBluetoothStatus(devices.length === 0
+      ? "没有找到已配对设备。请先在系统蓝牙设置中完成配对，再重新检测。"
+      : `已读取 ${devices.length} 台已配对设备。`);
   } catch {
+    element<HTMLButtonElement>("bluetooth-join-button").disabled = true;
     showToast("读取已配对设备失败，请检查蓝牙权限。");
   }
 }
 
 function resetMatch(): void {
+  localMessages = [];
+  resetMessageUi(true);
+  renderedCaptureCounts = { red: 0, black: 0 };
+  eventCueQueue = [];
+  lastEventCueActionId = undefined;
+  if (eventCueTimer) window.clearTimeout(eventCueTimer);
+  eventCueTimer = undefined;
+  battleEventCue.hidden = true;
   const session = createRpsState(PLAYER_ONE, PLAYER_TWO);
   rpsPublic = session.publicState;
   rpsSecret = session.secretState;
   rpsActor = PLAYER_ONE;
+  rpsDraft = undefined;
+  rpsDraftRound = 1;
+  localRpsDeadlineAt = undefined;
   gameState = undefined;
   gameSecret = undefined;
   selectedPieceId = undefined;
@@ -721,6 +1452,7 @@ function resetMatch(): void {
   battleTurnDeadlineAt = undefined;
   battlePausedRemainingMs = undefined;
   disconnectLayer.hidden = true;
+  closeMatchResult();
   if (executionTimer) window.clearTimeout(executionTimer);
   if (openingTimer) window.clearTimeout(openingTimer);
   executionTimer = undefined;
@@ -728,24 +1460,265 @@ function resetMatch(): void {
   executionGhost.hidden = true;
   executionGhost.className = "execution-ghost";
   terminationEffect.className = "termination-effect";
-  capturedPanel.classList.remove("expanded");
-  capturedToggle.setAttribute("aria-expanded", "false");
   battleActionMenu.hidden = true;
   battleMoreButton.setAttribute("aria-expanded", "false");
-  lobbyView.hidden = true;
-  heroView.hidden = true;
-  rpsView.hidden = true;
-  gameView.hidden = true;
+  hidePrimaryViews();
 }
 
 function beginLocalHeroSelection(): void {
   localHeroActor = PLAYER_ONE;
   heroSelectionDeadlineAt = Date.now() + HERO_SELECTION_DURATION_MS;
-  lobbyView.hidden = true;
+  mainMenuView.hidden = true;
+  bluetoothLobbyView.hidden = true;
+  settingsView.hidden = true;
   heroView.hidden = false;
   rpsView.hidden = true;
   gameView.hidden = true;
   renderHeroSelection();
+}
+
+function loadUiPreferences(): LocalUiPreferences {
+  try {
+    const stored = localStorage.getItem(UI_PREFERENCES_KEY);
+    if (!stored) return { ...DEFAULT_UI_PREFERENCES };
+    const parsed = JSON.parse(stored) as Partial<LocalUiPreferences>;
+    return {
+      sound: parsed.sound ?? DEFAULT_UI_PREFERENCES.sound,
+      haptics: parsed.haptics ?? DEFAULT_UI_PREFERENCES.haptics,
+      reduceMotion: parsed.reduceMotion ?? DEFAULT_UI_PREFERENCES.reduceMotion,
+    };
+  } catch {
+    return { ...DEFAULT_UI_PREFERENCES };
+  }
+}
+
+function applyUiPreferences(preferences: LocalUiPreferences): void {
+  element<HTMLInputElement>("sound-setting").checked = preferences.sound;
+  element<HTMLInputElement>("haptics-setting").checked = preferences.haptics;
+  element<HTMLInputElement>("reduce-motion-setting").checked = preferences.reduceMotion;
+  document.documentElement.classList.toggle("reduce-motion", preferences.reduceMotion);
+}
+
+function saveUiPreferences(): void {
+  const preferences: LocalUiPreferences = {
+    sound: element<HTMLInputElement>("sound-setting").checked,
+    haptics: element<HTMLInputElement>("haptics-setting").checked,
+    reduceMotion: element<HTMLInputElement>("reduce-motion-setting").checked,
+  };
+  try {
+    localStorage.setItem(UI_PREFERENCES_KEY, JSON.stringify(preferences));
+  } catch {
+    showToast("当前环境无法保存设置。");
+  }
+  applyUiPreferences(preferences);
+}
+
+function showSettings(): void {
+  hidePrimaryViews();
+  settingsView.hidden = false;
+  applyUiPreferences(loadUiPreferences());
+}
+
+function showRulesTab(tabName: string): void {
+  for (const tab of document.querySelectorAll<HTMLButtonElement>(".rule-tab")) {
+    const active = tab.dataset.ruleTab === tabName;
+    tab.classList.toggle("active", active);
+    tab.setAttribute("aria-selected", String(active));
+  }
+  for (const panel of document.querySelectorAll<HTMLElement>(".rule-panel")) {
+    panel.hidden = panel.dataset.rulePanel !== tabName;
+  }
+  element<HTMLElement>("rules-scroll").scrollTop = 0;
+}
+
+const SVG_NAMESPACE = "http://www.w3.org/2000/svg";
+
+function createMovementSvg(guide: MovementGuide): SVGSVGElement {
+  const svg = document.createElementNS(SVG_NAMESPACE, "svg");
+  svg.setAttribute("viewBox", "0 0 200 200");
+  svg.setAttribute("role", "img");
+  svg.setAttribute("aria-label", `${guide.title}走法示意图`);
+
+  const appendSvgElement = <K extends keyof SVGElementTagNameMap>(
+    tag: K,
+    attributes: Record<string, string>,
+  ): SVGElementTagNameMap[K] => {
+    const node = document.createElementNS(SVG_NAMESPACE, tag);
+    for (const [name, value] of Object.entries(attributes)) node.setAttribute(name, value);
+    svg.append(node);
+    return node;
+  };
+
+  for (const coordinate of [20, 60, 100, 140, 180]) {
+    appendSvgElement("line", { x1: "20", y1: String(coordinate), x2: "180", y2: String(coordinate), class: "movement-grid-line" });
+    appendSvgElement("line", { x1: String(coordinate), y1: "20", x2: String(coordinate), y2: "180", class: "movement-grid-line" });
+  }
+  for (const route of guide.routes) {
+    appendSvgElement("polyline", {
+      points: route.points.map(([x, y]) => `${x},${y}`).join(" "),
+      class: `movement-route${route.secondary ? " secondary" : ""}`,
+    });
+  }
+  for (const [x, y] of guide.destinations) {
+    appendSvgElement("circle", { cx: String(x), cy: String(y), r: "7", class: "movement-destination" });
+  }
+  for (const obstacle of guide.obstacles ?? []) {
+    const [x, y] = obstacle.at;
+    appendSvgElement("circle", { cx: String(x), cy: String(y), r: "6", class: "movement-obstacle" });
+    const label = appendSvgElement("text", { x: String(x), y: String(y - 10), class: "movement-obstacle-text" });
+    label.textContent = obstacle.label;
+  }
+  appendSvgElement("circle", { cx: "100", cy: "100", r: "20", class: "movement-origin" });
+  const glyph = appendSvgElement("text", { x: "100", y: "100", class: "movement-origin-text" });
+  glyph.textContent = guide.glyph;
+  if (guide.caption) {
+    const caption = appendSvgElement("text", { x: "100", y: "13", class: "movement-caption" });
+    caption.textContent = guide.caption;
+  }
+  return svg;
+}
+
+function closeRuleDiagram(): void {
+  ruleDiagramLayer.hidden = true;
+}
+
+function openRuleDiagram(guideId: MovementGuideId): void {
+  const guide = movementGuides.find((candidate) => candidate.id === guideId);
+  if (!guide) return;
+  ruleDiagramTitle.textContent = guide.title;
+  ruleDiagramArt.replaceChildren(createMovementSvg(guide));
+  ruleDiagramDescription.textContent = guide.detail;
+  ruleDiagramLayer.hidden = false;
+  element<HTMLButtonElement>("rule-diagram-close").focus();
+}
+
+function renderMovementGuides(): void {
+  pieceMovementGrid.replaceChildren(...movementGuides.map((guide) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "movement-card";
+    button.dataset.guide = guide.id;
+    button.setAttribute("aria-label", `放大查看${guide.title}走法`);
+    const copy = document.createElement("span");
+    copy.className = "movement-card-copy";
+    const title = document.createElement("strong");
+    title.textContent = guide.title;
+    const summary = document.createElement("small");
+    summary.textContent = guide.summary;
+    copy.append(title, summary);
+    button.append(createMovementSvg(guide), copy);
+    button.addEventListener("click", () => openRuleDiagram(guide.id));
+    return button;
+  }));
+}
+
+function showRules(): void {
+  hidePrimaryViews();
+  rulesView.hidden = false;
+  showRulesTab("basic");
+}
+
+function closeMatchDetail(): void {
+  matchDetailLayer.hidden = true;
+  matchDetailActions.hidden = true;
+  matchDetailConfirm.onclick = null;
+}
+
+function showMatchDetails(title: string, content: string): void {
+  setBattleActionMenu(false);
+  matchDetailTitle.textContent = title;
+  matchDetailBody.innerHTML = content;
+  matchDetailActions.hidden = true;
+  matchDetailLayer.hidden = false;
+  matchDetailBody.scrollTop = 0;
+}
+
+function showMatchConfirmation(title: string, text: string, confirmLabel: string, action: () => void): void {
+  setBattleActionMenu(false);
+  matchDetailTitle.textContent = title;
+  matchDetailBody.replaceChildren(Object.assign(document.createElement("p"), { textContent: text }));
+  matchDetailActions.hidden = false;
+  matchDetailConfirm.textContent = confirmLabel;
+  matchDetailConfirm.onclick = () => {
+    closeMatchDetail();
+    action();
+  };
+  matchDetailLayer.hidden = false;
+}
+
+function showMatchRules(): void {
+  showMatchDetails("对局规则", `
+    <details open><summary>暗子与揭棋</summary><p>除将帅外的棋子全局混合。暗子第一步按所在位置对应兵种行动，落子后公开真实阵营与兵种。</p></details>
+    <details><summary>移动与吃子</summary><p>明棋按真实兵种行动。明棋可吃任意阵营的暗子，但不能吃己方明棋，也不能把将帅当作普通目标直接吃掉。</p></details>
+    <details><summary>控制权与背刺</summary><p>暗子揭示后由真实阵营控制；若异色棋揭示后立即攻击当前控制方将帅，按背刺及防御规则结算。</p></details>
+    <details><summary>英雄与畸变</summary><p>英雄技能、公开状态和本局畸变会改变部分行动与结算；未触发陷阱坐标和暗子身份始终保持秘密。</p></details>
+    <details><summary>胜负</summary><p>裁决、背刺、伏击、碾碎、困毙、认输和断线超时等路径均可结束对局。</p></details>
+  `);
+}
+
+function handleSystemBack(): boolean {
+  if (!disconnectLayer.hidden) return true;
+  if (!ruleDiagramLayer.hidden) {
+    closeRuleDiagram();
+    return true;
+  }
+  if (flowDialog.open) {
+    flowDialog.close();
+    return true;
+  }
+  if (!matchResultLayer.hidden) {
+    returnFromMatchResult();
+    return true;
+  }
+  if (!matchDetailLayer.hidden) {
+    closeMatchDetail();
+    return true;
+  }
+  if (messageDrawerOpen) {
+    setMessageDrawer(false);
+    return true;
+  }
+  if (!matchMenuLayer.hidden) {
+    setBattleActionMenu(false);
+    return true;
+  }
+  if (!battleSkillPanel.hidden) {
+    setBattleSkillPanel(false);
+    return true;
+  }
+  if (assassinationArmed || strongStrikeArmed || (gameState?.assassination?.[gameState.turn]?.activePieceId === selectedPieceId)) {
+    assassinationArmed = false;
+    strongStrikeArmed = false;
+    selectedPieceId = undefined;
+    latestAnnouncement = "已取消技能目标选择。";
+    renderGame();
+    return true;
+  }
+  if (!settingsView.hidden) {
+    showMainMenu();
+    return true;
+  }
+  if (!rulesView.hidden) {
+    showMainMenu();
+    return true;
+  }
+  if (!bluetoothLobbyView.hidden) {
+    leaveBluetoothLobby();
+    return true;
+  }
+  if (!gameView.hidden) {
+    if (gameState?.status === "finished") {
+      showMainMenu();
+      return true;
+    }
+    setBattleActionMenu(true);
+    return true;
+  }
+  if (!heroView.hidden || !rpsView.hidden) {
+    setBattleActionMenu(true);
+    return true;
+  }
+  return false;
 }
 
 function showDialog(title: string, text: string, actionLabel: string, action: () => void): void {
@@ -798,27 +1771,35 @@ function renderHeroSelection(overrideState?: ReturnType<typeof heroSelectionStat
   const state = overrideState ?? heroSelectionState();
   const selected = state.selected;
   const remaining = secondsRemaining(state.deadlineAt);
+  const bluetoothSelection = bluetooth?.view?.phase === "hero_selection";
+  const pending = Boolean(bluetooth?.pendingAction);
   heroSelectionTimer.textContent = String(remaining);
   heroSelectionTimer.classList.toggle("urgent", remaining <= 10);
-  heroOpponentStatus.textContent = state.opponentConfirmed ? "对方已确定" : "对方选择中";
-  heroConfirmButton.textContent = state.confirmed ? "已确定" : "确定";
-  heroConfirmButton.disabled = state.confirmed || !selected || Boolean(bluetooth?.pendingAction);
+  heroOpponentStatus.textContent = bluetoothSelection
+    ? state.opponentConfirmed ? "对方已确定" : "对方选择中"
+    : localHeroConfirmed[localHeroActor === PLAYER_ONE ? PLAYER_TWO : PLAYER_ONE]
+      ? `${localHeroActor === PLAYER_ONE ? PLAYER_TWO : PLAYER_ONE}已确定`
+      : `${localHeroActor === PLAYER_ONE ? PLAYER_TWO : PLAYER_ONE}待选择`;
+  heroConfirmButton.textContent = state.confirmed ? "已确定" : pending ? "发送中" : "确定";
+  heroConfirmButton.disabled = state.confirmed || !selected || pending;
 
   if (!selected) {
     heroSelectionName.textContent = "请选择英雄";
     heroDetailAvatar.dataset.hero = "";
+    heroDetailAvatar.setAttribute("aria-label", "英雄形象尚未定稿");
     heroSkillList.replaceChildren();
     heroSkillDescription.textContent = "选择下方英雄后查看技能。";
   } else {
     const hero = heroCatalog[selected];
     heroSelectionName.textContent = hero.name;
     heroDetailAvatar.dataset.hero = selected;
+    heroDetailAvatar.setAttribute("aria-label", `${hero.name}形象占位，正式画像尚未定稿`);
     activeSkillIndex = Math.min(activeSkillIndex, hero.skills.length - 1);
     heroSkillList.replaceChildren(...hero.skills.map((skill, index) => {
       const button = document.createElement("button");
       button.type = "button";
       button.className = `hero-skill-button${index === activeSkillIndex ? " active" : ""}`;
-      button.innerHTML = `<i aria-hidden="true">◌</i><span>${skill.name}</span>`;
+      button.innerHTML = `<i aria-hidden="true">${skill.name.slice(0, 1)}</i><span>${skill.name}</span>`;
       button.setAttribute("aria-label", `${skill.name}：查看说明`);
       button.addEventListener("click", () => {
         activeSkillIndex = index;
@@ -854,8 +1835,8 @@ function renderHeroSelection(overrideState?: ReturnType<typeof heroSelectionStat
     const button = document.createElement("button");
     button.type = "button";
     button.className = `hero-grid-item${selected === heroId ? " selected" : ""}`;
-    button.disabled = state.confirmed;
-    button.innerHTML = `<span class="hero-art-placeholder grid-avatar" aria-hidden="true"><span>形象<br>待绘</span></span><span class="hero-grid-name${hero.name.length > 4 ? " long-name" : ""}">${hero.name}</span>`;
+    button.disabled = state.confirmed || pending;
+    button.innerHTML = `<span class="hero-art-placeholder grid-avatar" data-hero="${heroId}" aria-hidden="true"></span><span class="hero-grid-name${hero.name.length > 4 ? " long-name" : ""}">${hero.name}</span>`;
     button.setAttribute("aria-label", `选择${hero.name}`);
     button.addEventListener("click", () => {
       if (state.confirmed) return;
@@ -871,10 +1852,12 @@ function confirmHeroSelection(): void {
   if (!heroDraft) return;
   if (bluetooth?.view?.phase === "hero_selection") {
     handleBluetoothAction({ kind: "hero", hero: heroDraft });
+    renderHeroSelection();
     return;
   }
   localHeroChoices[localHeroActor] = heroDraft;
   localHeroConfirmed[localHeroActor] = true;
+  heroSelectionDeadlineAt = undefined;
   if (localHeroConfirmed[PLAYER_ONE] && localHeroConfirmed[PLAYER_TWO]) {
     beginLocalRps();
     return;
@@ -883,22 +1866,38 @@ function confirmHeroSelection(): void {
   localHeroActor = completed === PLAYER_ONE ? PLAYER_TWO : PLAYER_ONE;
   heroDraft = undefined;
   activeSkillIndex = 0;
-  showDialog("英雄已确定", `请将设备交给${localHeroActor}继续选择英雄。`, `${localHeroActor}已接手`, renderHeroSelection);
+  showDialog("英雄已确定", `请将设备交给${localHeroActor}继续选择英雄。上一位玩家的选择已从页面清除。`, `${localHeroActor}已接手`, () => {
+    heroSelectionDeadlineAt = Date.now() + HERO_SELECTION_DURATION_MS;
+    renderHeroSelection();
+  });
   renderHeroSelection();
 }
 
 function handleLocalHeroSelectionTimeout(): void {
   if (heroSelectionDeadlineAt === undefined) return;
   heroSelectionDeadlineAt = undefined;
-  for (const player of [PLAYER_ONE, PLAYER_TWO]) {
-    if (!localHeroConfirmed[player]) localHeroChoices[player] = randomHero();
-    localHeroConfirmed[player] = true;
-  }
-  heroDraft = localHeroChoices[localHeroActor];
+  const timedOutActor = localHeroActor;
+  const selected = randomHero();
+  localHeroChoices[timedOutActor] = selected;
+  localHeroConfirmed[timedOutActor] = true;
+  heroDraft = selected;
   renderHeroSelection();
   if (flowDialog.open) flowDialog.close();
-  showToast(`选择超时，系统已为未确认玩家随机英雄。`);
-  window.setTimeout(beginLocalRps, 800);
+  showToast(`选择超时，系统已为${timedOutActor}随机英雄。`);
+  window.setTimeout(() => {
+    if (localHeroConfirmed[PLAYER_ONE] && localHeroConfirmed[PLAYER_TWO]) {
+      beginLocalRps();
+      return;
+    }
+    localHeroActor = timedOutActor === PLAYER_ONE ? PLAYER_TWO : PLAYER_ONE;
+    heroDraft = undefined;
+    activeSkillIndex = 0;
+    showDialog("请交给下一位玩家", `${timedOutActor}的英雄已锁定并从页面清除。`, `${localHeroActor}已接手`, () => {
+      heroSelectionDeadlineAt = Date.now() + HERO_SELECTION_DURATION_MS;
+      renderHeroSelection();
+    });
+    renderHeroSelection();
+  }, 800);
 }
 
 function beginLocalRps(): void {
@@ -908,39 +1907,96 @@ function beginLocalRps(): void {
   rpsView.hidden = false;
   gameView.hidden = true;
   rpsActor = PLAYER_ONE;
+  rpsDraft = undefined;
+  rpsDraftRound = rpsPublic.round;
+  localRpsDeadlineAt = Date.now() + RPS_SELECTION_DURATION_MS;
   renderRps();
 }
 
 function renderRps(): void {
   const tie = rpsPublic.lastResult?.tie;
+  if (rpsDraftRound !== rpsPublic.round) {
+    rpsDraftRound = rpsPublic.round;
+    rpsDraft = undefined;
+  }
+  let confirmed = false;
+  let opponentConfirmed = false;
+  let deadlineAt = localRpsDeadlineAt;
   if (bluetooth?.view?.phase === "rps") {
     const submitted = bluetooth.view.rps?.submitted ?? {};
     const own = ownBluetoothPlayerId();
     const ownSubmitted = own ? Boolean(submitted[own]) : false;
+    confirmed = ownSubmitted;
+    opponentConfirmed = own
+      ? Object.entries(submitted).some(([id, value]) => id !== own && value)
+      : false;
+    deadlineAt = bluetooth.view.rpsDeadlineAt;
+    if (ownSubmitted) rpsDraft = undefined;
     rpsTitle.textContent = ownSubmitted ? "出拳已锁定" : "请秘密出拳";
     rpsHelp.textContent = ownSubmitted
       ? `第 ${rpsPublic.round} 轮：已发送，等待对方出拳。`
-      : `第 ${rpsPublic.round} 轮：双方各自在自己的手机上秘密出拳，胜者执红先走。`;
+      : `第 ${rpsPublic.round} 轮：选择一项后按“确定”，胜者执红先走。`;
     rpsHistory.textContent = tie && rpsPublic.lastResult
       ? `上一轮平局：双方再次出拳。`
       : "";
-    document.querySelectorAll<HTMLButtonElement>(".rps-choice").forEach((button) => { button.disabled = ownSubmitted || Boolean(bluetooth.pendingAction); });
-    return;
+  } else {
+    rpsTitle.textContent = `${rpsActor}，请秘密出拳`;
+    rpsHelp.textContent = rpsActor === PLAYER_ONE
+      ? `第 ${rpsPublic.round} 轮：选择一项后按“确定”，再把设备交给${PLAYER_TWO}。`
+      : `第 ${rpsPublic.round} 轮：${PLAYER_ONE} 已锁定。选择后确认，随后揭晓。`;
+    rpsHistory.textContent = tie && rpsPublic.lastResult
+      ? `上一轮平局：${PLAYER_ONE}${choiceLabel[rpsPublic.lastResult.choices[PLAYER_ONE]]}，${PLAYER_TWO}${choiceLabel[rpsPublic.lastResult.choices[PLAYER_TWO]]}。`
+      : "";
   }
-  rpsTitle.textContent = `${rpsActor}，请秘密出拳`;
-  rpsHelp.textContent = rpsActor === PLAYER_ONE
-    ? `第 ${rpsPublic.round} 轮：选择后把设备交给${PLAYER_TWO}。胜者执红并先走。`
-    : `第 ${rpsPublic.round} 轮：${PLAYER_ONE} 已锁定选择。请出拳，随后揭晓。`;
-  rpsHistory.textContent = tie && rpsPublic.lastResult
-    ? `上一轮平局：${PLAYER_ONE}${choiceLabel[rpsPublic.lastResult.choices[PLAYER_ONE]]}，${PLAYER_TWO}${choiceLabel[rpsPublic.lastResult.choices[PLAYER_TWO]]}。`
-    : "";
+
+  const remaining = secondsRemaining(deadlineAt);
+  rpsSelectionTimer.textContent = String(remaining);
+  rpsSelectionTimer.classList.toggle("urgent", remaining <= 10);
+  const pending = Boolean(bluetooth?.pendingAction);
+  const locked = confirmed || pending;
+  const choices = element<HTMLElement>("rps-view").querySelector<HTMLElement>(".rps-choices")!;
+  choices.classList.toggle("has-selection", Boolean(rpsDraft) && !locked);
+  choices.classList.toggle("is-locked", locked);
+  document.querySelectorAll<HTMLButtonElement>(".rps-choice").forEach((button) => {
+    const choice = button.dataset.choice as RpsChoice;
+    const selected = !locked && rpsDraft === choice;
+    button.disabled = locked;
+    button.classList.toggle("selected", selected);
+    button.classList.toggle("locked", locked);
+    button.setAttribute("aria-pressed", String(selected));
+  });
+  rpsConfirmButton.disabled = confirmed || pending || !rpsDraft;
+  rpsConfirmButton.textContent = confirmed ? "已锁定" : pending ? "发送中" : "确定";
+  rpsLockStatus.textContent = pending
+    ? "已隐藏手势，等待房主确认。"
+    : confirmed
+    ? opponentConfirmed ? "双方均已锁定，正在结算。" : "已锁定并隐藏手势，等待对方。"
+    : rpsDraft ? `已选择${choiceLabel[rpsDraft]}，确认后不可更改。` : "先选择手势，再确认锁定。";
 }
 
-function submitChoice(choice: RpsChoice): void {
+function selectRpsChoice(choice: RpsChoice): void {
+  if (bluetooth?.view?.phase === "rps") {
+    const own = ownBluetoothPlayerId();
+    if ((own && bluetooth.view.rps?.submitted[own]) || bluetooth.pendingAction) return;
+  }
+  rpsDraft = choice;
+  rpsDraftRound = rpsPublic.round;
+  renderRps();
+}
+
+function confirmRpsChoice(): void {
+  if (!rpsDraft) return;
+  submitChoice(rpsDraft);
+}
+
+function submitChoice(choice: RpsChoice, timedOut = false): void {
   if (bluetooth?.view?.phase === "rps") {
     handleBluetoothAction({ kind: "rps", choice, round: bluetooth.view.rps!.round });
+    renderRps();
     return;
   }
+  localRpsDeadlineAt = undefined;
+  rpsDraft = undefined;
   const beforeRound = rpsPublic.round;
   const result = submitRpsChoice(rpsPublic, rpsSecret, rpsActor, choice, beforeRound);
   rpsPublic = result.publicState;
@@ -950,7 +2006,7 @@ function submitChoice(choice: RpsChoice): void {
     const resolved = rpsPublic.lastResult!;
     const winner = resolved.winner!;
     const summary = `${PLAYER_ONE}出${choiceLabel[resolved.choices[PLAYER_ONE]]}，${PLAYER_TWO}出${choiceLabel[resolved.choices[PLAYER_TWO]]}。${winner}获胜，执红先走。`;
-    showDialog("先手已决定", summary, "开始对局", startGame);
+    showDialog(timedOut ? "倒计时结束" : "先手已决定", `${timedOut ? "系统已随机出拳。\n" : ""}${summary}`, "开始对局", startGame);
     return;
   }
 
@@ -959,15 +2015,25 @@ function submitChoice(choice: RpsChoice): void {
     const summary = `${PLAYER_ONE}出${choiceLabel[tie.choices[PLAYER_ONE]]}，${PLAYER_TWO}出${choiceLabel[tie.choices[PLAYER_TWO]]}。平局，再来一轮。`;
     showDialog("平局", summary, "下一轮", () => {
       rpsActor = PLAYER_ONE;
+      rpsDraftRound = rpsPublic.round;
+      localRpsDeadlineAt = Date.now() + RPS_SELECTION_DURATION_MS;
       renderRps();
     });
     return;
   }
 
-  showDialog("选择已锁定", `请将设备交给${PLAYER_TWO}，不要让${PLAYER_ONE}看到对方的选择。`, `${PLAYER_TWO}已接手`, () => {
+  showDialog(timedOut ? "倒计时结束" : "选择已锁定", `${timedOut ? "系统已随机出拳。\n" : ""}请将设备交给${PLAYER_TWO}，不要让${PLAYER_ONE}看到对方的选择。`, `${PLAYER_TWO}已接手`, () => {
     rpsActor = PLAYER_TWO;
+    rpsDraft = undefined;
+    localRpsDeadlineAt = Date.now() + RPS_SELECTION_DURATION_MS;
     renderRps();
   });
+}
+
+function handleLocalRpsTimeout(): void {
+  if (localRpsDeadlineAt === undefined) return;
+  localRpsDeadlineAt = undefined;
+  submitChoice(randomRpsChoice(), true);
 }
 
 function startGame(): void {
@@ -997,6 +2063,7 @@ function startGame(): void {
   localPreparationActive = false;
   heroPreparationDeadlineAt = undefined;
   latestAnnouncement = `${rpsPublic.assignments!.red}执红，红方先行。`;
+  appendLocalSystemMessage("对局开始，红方先行。");
   heroView.hidden = true;
   rpsView.hidden = true;
   gameView.hidden = false;
@@ -1009,6 +2076,132 @@ function battleHeroes(): Record<Side, HeroId> | undefined {
   if (remote) return remote;
   if (localHeroes.red && localHeroes.black) return { red: localHeroes.red, black: localHeroes.black };
   return undefined;
+}
+
+interface RuntimeSkillEntry {
+  key: string;
+  title: string;
+  state: string;
+  catalogIndex: number;
+  active: boolean;
+}
+
+function runtimeSkillEntries(side: Side, hero: HeroId): RuntimeSkillEntry[] {
+  if (hero === "hunter") {
+    const ready = gameState?.status === "playing" || gameState?.status === "execution" || gameState?.status === "finished";
+    return [{ key: "hunter-trap", title: "陷阱", state: ready ? "已秘密布置" : "准备中", catalogIndex: 0, active: false }];
+  }
+  if (hero === "warrior") {
+    const warrior = gameState?.warrior?.[side];
+    const barriers = warrior?.barrierPieceIds.length ?? 0;
+    return [{
+      key: "warrior-armor",
+      title: "盔甲",
+      state: `壁垒 ${barriers}｜铁甲${warrior?.ironArmorAvailable ? "可用" : "已用"}`,
+      catalogIndex: 0,
+      active: false,
+    }];
+  }
+  const assassination = gameState?.assassination?.[side];
+  const entries: RuntimeSkillEntry[] = [{
+    key: "assassination-hero",
+    title: "英雄·刺杀",
+    state: assassination?.heroChargeAvailable ? "可用" : "已用",
+    catalogIndex: 0,
+    active: true,
+  }];
+  if ((bluetooth?.view?.features?.mutation ?? gameState?.featureRules?.mutation) === "shadow_dance") {
+    entries.push({
+      key: "assassination-mutation",
+      title: "畸变·刺杀",
+      state: assassination?.mutationChargeAvailable ? "可用" : "已用",
+      catalogIndex: 0,
+      active: true,
+    });
+  }
+  const activePieceId = assassination?.activePieceId;
+  const strikeAvailable = Boolean(activePieceId && gameState?.effectsByPieceId?.[activePieceId]?.stealth?.strongStrikeAvailable);
+  entries.push({
+    key: "strong-strike",
+    title: "隐身·强击",
+    state: activePieceId ? `隐身中｜强击${strikeAvailable ? "可用" : "已用"}` : "未进入隐身",
+    catalogIndex: 2,
+    active: true,
+  });
+  return entries;
+}
+
+function canActivateRuntimeSkill(side: Side, entry: RuntimeSkillEntry): boolean {
+  if (!entry.active || !gameState || gameState.status !== "playing" || gameState.turn !== side) return false;
+  if (bluetooth?.view && bluetooth.view.viewerSide !== side) return false;
+  if (openingActive || localPreparationActive || bluetooth?.view?.phase !== undefined && bluetooth.view.phase !== "playing") return false;
+  if (isBluetoothTransportInterrupted() || isMatchOverlayOpen()) return false;
+  const assassination = gameState.assassination?.[side];
+  if (entry.key === "assassination-hero") return Boolean(assassination?.heroChargeAvailable || assassination?.activePieceId);
+  if (entry.key === "assassination-mutation") return Boolean(assassination?.mutationChargeAvailable || assassination?.activePieceId);
+  if (entry.key === "strong-strike") {
+    const active = assassination?.activePieceId;
+    return Boolean(active && gameState.effectsByPieceId?.[active]?.stealth?.strongStrikeAvailable);
+  }
+  return false;
+}
+
+function heroRuntimeSummary(side: Side, hero: HeroId): string[] {
+  return runtimeSkillEntries(side, hero).map((entry) => `${entry.title}：${entry.state}`);
+}
+
+function showHeroDetails(side: Side): void {
+  const hero = battleHeroes()?.[side];
+  if (!hero || !disconnectLayer.hidden || !matchResultLayer.hidden) return;
+  const info = heroCatalog[hero];
+  const skills = info.skills.map((skill) => `<details><summary>${skill.name}</summary><p>${skill.fullDescription}</p></details>`).join("");
+  const runtime = heroRuntimeSummary(side, hero).map((line) => `<li>${line}</li>`).join("");
+  showMatchDetails(`${side === "red" ? "红方" : "蓝方"}·${info.name}`, `${skills}<h3>本局公开状态</h3><ul>${runtime}</ul>`);
+}
+
+function skillEntryForButton(button: HTMLButtonElement): { side: Side; hero: HeroId; entry: RuntimeSkillEntry } | undefined {
+  const side: Side = button.closest(".v4-status-red") ? "red" : "black";
+  const hero = battleHeroes()?.[side];
+  const key = button.dataset.skillKey;
+  if (!hero || !key) return undefined;
+  const entry = runtimeSkillEntries(side, hero).find((candidate) => candidate.key === key);
+  return entry ? { side, hero, entry } : undefined;
+}
+
+function showRuntimeSkillDetails(button: HTMLButtonElement): void {
+  const resolved = skillEntryForButton(button);
+  if (!resolved || !disconnectLayer.hidden || !matchResultLayer.hidden) return;
+  const { side, hero, entry } = resolved;
+  const catalogEntry = heroCatalog[hero].skills[entry.catalogIndex] ?? heroCatalog[hero].skills[0];
+  showMatchDetails(entry.title, `<p>${catalogEntry.fullDescription}</p><h3>本局公开状态</h3><p>${entry.state}</p>`);
+}
+
+function activateRuntimeSkill(button: HTMLButtonElement): void {
+  const resolved = skillEntryForButton(button);
+  if (!resolved) return;
+  if (!canActivateRuntimeSkill(resolved.side, resolved.entry)) return showRuntimeSkillDetails(button);
+  const source = element<HTMLSelectElement>("assassination-source");
+  if (resolved.entry.key === "assassination-hero") source.value = "hero";
+  if (resolved.entry.key === "assassination-mutation") source.value = "mutation";
+  if (resolved.entry.key === "strong-strike") element<HTMLButtonElement>("strong-strike-button").click();
+  else element<HTMLButtonElement>("assassination-button").click();
+}
+
+function renderRuntimeStatusPanels(heroes: Record<Side, HeroId> | undefined): void {
+  if (!heroes) return;
+  for (const side of ["black", "red"] as const) {
+    const panel = document.querySelector<HTMLElement>(side === "red" ? ".v4-status-red" : ".v4-status-blue")!;
+    const entries = runtimeSkillEntries(side, heroes[side]);
+    panel.querySelectorAll<HTMLButtonElement>(".v4-skill-trigger").forEach((button, index) => {
+      const entry = entries[index];
+      button.hidden = !entry;
+      if (!entry) return;
+      button.dataset.skillKey = entry.key;
+      button.innerHTML = `<span>${entry.title}</span><small>${entry.state}</small>`;
+      button.setAttribute("aria-label", `${side === "red" ? "红方" : "蓝方"}${entry.title}，${entry.state}`);
+      button.disabled = gameState?.status !== "playing" || !disconnectLayer.hidden || !matchResultLayer.hidden;
+    });
+  }
 }
 
 function setBattleHeroAvatars(heroes: Record<Side, HeroId>, visible: boolean): void {
@@ -1162,6 +2355,9 @@ function renderDisconnectLayer(): void {
     disconnectLayer.hidden = true;
     return;
   }
+  setBattleActionMenu(false);
+  setBattleSkillPanel(false);
+  closeMatchDetail();
   disconnectLayer.hidden = false;
   const now = Date.now();
   const authoritative = bluetooth.view?.disconnects?.players ?? {};
@@ -1214,6 +2410,21 @@ function updateBluetoothDisconnectState(): boolean {
 
 function updateVisibleTimers(): void {
   if (updateBluetoothDisconnectState()) return;
+  if (!bluetoothLobbyView.hidden && bluetooth?.view?.rematch?.status === "pending") {
+    const remaining = secondsRemaining(bluetooth.view.rematch.deadlineAt);
+    bluetoothRematchTimer.textContent = String(remaining);
+    if (remaining === 0) {
+      if (bluetooth.role === "host" && bluetooth.hostRoom) publishBluetoothViews();
+      else {
+        bluetoothRematchTimer.hidden = true;
+        bluetoothSessionTitle.textContent = "对方未响应再战请求";
+        bluetoothSessionDetail.textContent = "仍保持蓝牙连接，可以稍后再次发起邀请。";
+        bluetoothRematchAcceptButton.hidden = true;
+        bluetoothRematchDeclineButton.hidden = true;
+        bluetoothRematchRequestButton.hidden = false;
+      }
+    }
+  }
   if (!heroView.hidden) {
     const state = heroSelectionState();
     const remaining = secondsRemaining(state.deadlineAt);
@@ -1224,6 +2435,22 @@ function updateVisibleTimers(): void {
         publishBluetoothViews();
       } else if (!bluetooth && heroSelectionDeadlineAt !== undefined) {
         handleLocalHeroSelectionTimeout();
+      }
+    }
+  }
+
+  if (!rpsView.hidden) {
+    const deadlineAt = bluetooth?.view?.phase === "rps"
+      ? bluetooth.view.rpsDeadlineAt
+      : localRpsDeadlineAt;
+    const remaining = secondsRemaining(deadlineAt);
+    rpsSelectionTimer.textContent = String(remaining);
+    rpsSelectionTimer.classList.toggle("urgent", remaining <= 10);
+    if (remaining === 0 && deadlineAt !== undefined) {
+      if (bluetooth?.role === "host" && bluetooth.view?.phase === "rps") {
+        publishBluetoothViews();
+      } else if (!bluetooth) {
+        handleLocalRpsTimeout();
       }
     }
   }
@@ -1255,6 +2482,17 @@ function updateBattleTurnTimer(): void {
     || localPreparationActive
     || bluetooth?.view?.phase === "hero_intro"
     || bluetooth?.view?.phase === "hero_preparation";
+  if (localPreparationActive || bluetooth?.view?.phase === "hero_preparation") {
+    const deadlineAt = bluetooth?.view?.phase === "hero_preparation"
+      ? bluetooth.view.features?.heroPreparation?.deadlineAt
+      : heroPreparationDeadlineAt;
+    const remaining = secondsRemaining(deadlineAt);
+    battleTurnDeadlineAt = undefined;
+    battleTurnRevision = undefined;
+    battleTurnTimer.textContent = String(remaining);
+    battleTurnTimer.classList.toggle("urgent", remaining <= 10);
+    return;
+  }
   if (gameState.status !== "playing" || waitingForOpening) {
     battleTurnDeadlineAt = undefined;
     battleTurnRevision = undefined;
@@ -1300,6 +2538,18 @@ function noLegalMoveMessage(pieceId: string): string {
 
 function renderBoard(): void {
   if (!gameState) return;
+  const remotePreparation = bluetooth?.view?.phase === "hero_preparation";
+  const remoteSide = bluetooth?.view?.viewerSide;
+  const remoteCanPrepare = Boolean(
+    remotePreparation
+    && remoteSide
+    && bluetooth?.view?.features?.heroes?.[remoteSide] === "hunter"
+    && !bluetooth.view.features?.heroPreparation?.ready[remoteSide],
+  );
+  const activeTrapSetupSide = remoteCanPrepare ? remoteSide : localPreparationActive ? trapSetupSide : undefined;
+  battleBoard.classList.toggle("trap-preparing", Boolean(activeTrapSetupSide));
+  battleBoard.classList.toggle("trap-preparing-red", activeTrapSetupSide === "red");
+  battleBoard.classList.toggle("trap-preparing-black", activeTrapSetupSide === "black");
   const activeStealth = selectedPieceId && gameState.assassination?.[gameState.turn]?.activePieceId === selectedPieceId;
   const usingAssassination = Boolean(selectedPieceId && (assassinationArmed || activeStealth));
   const legalMoves = selectedPieceId
@@ -1340,6 +2590,10 @@ function renderBoard(): void {
       point.setAttribute("aria-label", piece
         ? piece.faceDown ? `暗子，坐标 ${x + 1}, ${y + 1}` : `${piece.color === "red" ? "红" : "黑"}${pieceLabel[piece.color][piece.type]}，坐标 ${x + 1}, ${y + 1}`
         : `空位，坐标 ${x + 1}, ${y + 1}`);
+      if (activeTrapSetupSide && isOwnHalf(activeTrapSetupSide, position)) {
+        point.classList.add("trap-eligible");
+        point.setAttribute("aria-label", `${point.getAttribute("aria-label")}，可布置陷阱`);
+      }
       if (piece?.id === selectedPieceId) point.classList.add("selected");
       if (legalKeys.has(key)) point.classList.add(piece ? "legal-capture" : "legal-empty");
       if (lastMove && positionKey(lastMove.from) === key) point.classList.add("last-from");
@@ -1378,21 +2632,73 @@ function renderBoard(): void {
   boardPoints.replaceChildren(fragment);
 }
 
-function renderCaptures(container: HTMLElement, side: Side): void {
-  if (!gameState) return;
-  const captured = gameState.captured.filter((piece) => piece.capturedBy === side);
-  if (captured.length === 0) {
-    container.innerHTML = '<span class="empty-captures">尚无</span>';
-    return;
-  }
-  container.replaceChildren(...captured.map((piece) => {
+function capturesBySide(side: Side): GameState["captured"] {
+  if (!gameState) return [];
+  return gameState.captured.filter((piece) => piece.capturedBy === side && piece.color !== side);
+}
+
+function capturedToken(piece: GameState["captured"][number]): HTMLElement {
     const token = document.createElement("span");
     token.className = `captured-token ${piece.color}`;
     token.style.setProperty("--ring-url", `url("${ringAsset(stableRingIndex(piece.id))}")`);
     token.append(createPieceGlyph(piece.color, piece.type));
-    token.title = `${piece.color === "red" ? "红" : "黑"}${pieceLabel[piece.color][piece.type]}`;
+    token.title = `${piece.color === "red" ? "红方" : "蓝方"}${pieceLabel[piece.color][piece.type]}`;
     return token;
-  }));
+}
+
+function renderCaptureCounts(): void {
+  const redCount = capturesBySide("red").length;
+  const blackCount = capturesBySide("black").length;
+  redCapturedCount.textContent = String(redCount);
+  blackCapturedCount.textContent = String(blackCount);
+  redCapturedButton.setAttribute("aria-label", `查看红方已吃棋子，共 ${redCount} 枚`);
+  blackCapturedButton.setAttribute("aria-label", `查看蓝方已吃棋子，共 ${blackCount} 枚`);
+  for (const [side, count, button] of [["red", redCount, redCapturedButton], ["black", blackCount, blackCapturedButton]] as const) {
+    if (count > renderedCaptureCounts[side]) {
+      button.classList.remove("capture-updated");
+      requestAnimationFrame(() => button.classList.add("capture-updated"));
+      window.setTimeout(() => button.classList.remove("capture-updated"), 420);
+    }
+    renderedCaptureCounts[side] = count;
+  }
+}
+
+function captureDetailGroup(side: Side): HTMLElement {
+  const records = capturesBySide(side);
+  const section = document.createElement("section");
+  section.className = "captured-detail-group";
+  const heading = document.createElement("h3");
+  heading.innerHTML = `<span>${side === "red" ? "红方" : "蓝方"}</span><small>已吃 ${records.length}</small>`;
+  section.append(heading);
+  if (records.length === 0) {
+    const empty = document.createElement("p");
+    empty.className = "captured-detail-empty";
+    empty.textContent = "尚未吃子";
+    section.append(empty);
+    return section;
+  }
+  const grid = document.createElement("div");
+  grid.className = "captured-detail-grid";
+  for (const piece of records) {
+    const item = document.createElement("div");
+    item.className = "captured-detail-piece";
+    item.append(capturedToken(piece));
+    const identity = document.createElement("small");
+    identity.textContent = `${piece.color === "red" ? "红方" : "蓝方"}·${pieceLabel[piece.color][piece.type]}`;
+    item.append(identity);
+    grid.append(item);
+  }
+  section.append(grid);
+  return section;
+}
+
+function showCapturedDetails(): void {
+  if (!gameState || !disconnectLayer.hidden || !matchResultLayer.hidden) return;
+  showMatchDetails("已吃棋子", "");
+  const groups = document.createElement("div");
+  groups.className = "captured-detail-groups";
+  groups.append(captureDetailGroup("black"), captureDetailGroup("red"));
+  matchDetailBody.replaceChildren(groups);
 }
 
 function finishMessage(): string {
@@ -1428,8 +2734,83 @@ function finishTitle(): string {
   return { ambush: "背刺", checkmate: "裁决", stalemate: "无处可逃", resign: "臣服", trap_ambush: "伏击", crush_them: "碾碎他们！", rampage: "乱杀失败", disconnect: "流放" }[gameState.reason];
 }
 
+function resultOutcome(): "win" | "loss" | "draw" {
+  if (!gameState?.winner) return "draw";
+  const viewer = bluetooth?.view?.viewerSide;
+  if (viewer && viewer !== gameState.winner) return "loss";
+  return "win";
+}
+
+function resultPlayerName(side: Side): string {
+  const assigned = rpsPublic.assignments?.[side];
+  if (!assigned) return side === "red" ? "红方玩家" : "蓝方玩家";
+  const own = ownBluetoothPlayerId();
+  if (assigned === own) return "你";
+  if (bluetooth?.view) return "对方";
+  return assigned;
+}
+
+function showMatchResult(): void {
+  if (!gameState || gameState.status !== "finished") return;
+  setBattleActionMenu(false);
+  setBattleSkillPanel(false);
+  closeMatchDetail();
+  const outcome = resultOutcome();
+  matchResultLayer.dataset.outcome = outcome;
+  if (outcome === "draw") {
+    matchResultHeading.textContent = "平局";
+  } else if (bluetooth?.view) {
+    matchResultHeading.textContent = outcome === "win" ? "胜利" : "失败";
+  } else {
+    matchResultHeading.textContent = gameState.winner === "red" ? "红方胜利" : "蓝方胜利";
+  }
+  matchResultType.textContent = gameState.drawReason === "mutual_destruction"
+    ? "两败俱伤"
+    : gameState.drawReason === "disconnect_timeout"
+      ? "断线平局"
+      : finishTitle();
+  matchResultMessage.textContent = finishMessage();
+  matchResultWinner.hidden = !gameState.winner;
+  if (gameState.winner) {
+    const winner = gameState.winner;
+    const hero = battleHeroes()?.[winner];
+    matchResultSide.textContent = winner === "red" ? "红方" : "蓝方";
+    matchResultPlayer.textContent = resultPlayerName(winner);
+    matchResultHero.textContent = hero ? heroCatalog[hero].name : "未启用英雄";
+    matchResultAvatar.dataset.hero = hero ?? "none";
+    matchResultAvatar.querySelector("span")!.textContent = hero ? heroCatalog[hero].name : "胜方";
+  }
+  matchResultLayer.hidden = false;
+}
+
+function returnFromMatchResult(): void {
+  closeMatchResult();
+  if (bluetooth) {
+    nativeBluetooth()?.disconnect();
+    bluetooth = undefined;
+  }
+  showMainMenu();
+}
+
+function startRematchFromResult(): void {
+  if (bluetooth?.view) {
+    requestBluetoothRematch();
+    return;
+  }
+  closeMatchResult();
+  resetMatch();
+  beginLocalHeroSelection();
+}
+
 function renderGame(): void {
   if (!gameState || !rpsPublic.assignments) return;
+  if (gameState.status === "finished" || gameState.status === "execution") {
+    setBattleActionMenu(false);
+    setBattleSkillPanel(false);
+    closeMatchDetail();
+  } else if (!matchMenuLayer.hidden) {
+    setBattleActionMenu(true);
+  }
   const remoteView = bluetooth?.view;
   const remotePreparation = remoteView?.phase === "hero_preparation";
   const remoteSide = remoteView?.viewerSide;
@@ -1449,10 +2830,14 @@ function renderGame(): void {
     element<HTMLElement>("black-hero-avatar").dataset.hero = heroes.black;
     element<HTMLElement>("red-hero-avatar").dataset.hero = heroes.red;
   }
+  renderRuntimeStatusPanels(heroes);
+  renderCaptureCounts();
   const mutation = remoteView?.features?.mutation ?? gameState.featureRules?.mutation;
   battleMutationName.textContent = mutation ? mutationName(mutation) : "无畸变";
   battleMutationName.parentElement?.setAttribute("aria-label", mutation ? `查看本局畸变：${mutationName(mutation)}` : "查看本局畸变");
+  renderMessagePanel();
   heroPreparationPanel.hidden = !preparationActive;
+  battleCanvas.classList.toggle("is-hero-preparation", preparationActive);
   if (preparationActive) {
     const remaining = secondsRemaining(preparationDeadline);
     heroPreparationTimer.textContent = String(remaining);
@@ -1461,32 +2846,45 @@ function renderGame(): void {
     const sideLabel = remotePreparation
       ? remoteSide === "red" ? "红方" : "蓝方"
       : trapSetupSide === "red" ? "红方" : "蓝方";
-    turnStatus.innerHTML = `<b>战斗准备</b><span>${canPrepare ? `${sideLabel}陷阱 ${preparationDraft.length} / 2` : "等待对方"}</span>`;
+    const activeSide = canPrepare ? (remotePreparation ? remoteSide : trapSetupSide) : undefined;
+    battleCanvas.classList.toggle("preparing-red", activeSide === "red");
+    battleCanvas.classList.toggle("preparing-black", activeSide === "black");
+    battleTurnTimer.setAttribute("aria-label", "英雄准备剩余秒数");
+    heroPreparationTitle.textContent = canPrepare ? "猎人·布置陷阱" : "等待英雄准备";
+    turnStatus.innerHTML = `<b>英雄准备中</b><span>${canPrepare ? `${sideLabel}陷阱 ${preparationDraft.length} / 2` : "等待对方"}</span>`;
     announcement.textContent = canPrepare ? "在己方半场布置两层陷阱；可同格叠加，也可放在棋子脚下。" : "你的英雄无需操作或已经完成，正在等待对方准备。";
     moveHint.textContent = canPrepare
-      ? preparationDraft.length < 2 ? `还需布置 ${2 - preparationDraft.length} 层陷阱。` : "陷阱已布置完成，点击“完成准备”锁定。"
+      ? preparationDraft.length < 2 ? `还需布置 ${2 - preparationDraft.length} 层陷阱。` : "陷阱已布置完成，点击“锁定陷阱”确认。"
       : "对方准备完成后将自动开始正式行棋。";
     heroPreparationStatus.textContent = canPrepare
-      ? `陷阱 ${preparationDraft.length}/2｜对方${remotePreparation && remoteSide ? remoteView.features?.heroPreparation?.ready[otherSide(remoteSide)] ? "已完成" : "准备中" : "准备中"}`
-      : "已完成，等待对方";
+      ? `秘密草稿 ${preparationDraft.length}/2｜${preparationDraft.length < 2 ? "点击己方半场" : "可撤回或锁定"}`
+      : "己方已完成；对方的陷阱位置不可见";
     trapUndoButton.hidden = !canPrepare;
     preparationConfirmButton.hidden = !canPrepare;
     trapUndoButton.disabled = preparationDraft.length === 0 || Boolean(bluetooth?.pendingAction);
     preparationConfirmButton.disabled = preparationDraft.length !== 2 || Boolean(bluetooth?.pendingAction);
   } else if (openingActive || remoteView?.phase === "hero_intro") {
+    battleCanvas.classList.remove("preparing-red", "preparing-black");
+    battleTurnTimer.setAttribute("aria-label", "本回合剩余秒数");
     turnStatus.innerHTML = `<b>英雄入场</b><span>准备阶段尚未开始</span>`;
     announcement.textContent = "本局畸变与双方英雄正在公布。";
     moveHint.textContent = "动画结束、英雄头像落位后开始战斗准备。";
   } else if (gameState.status === "finished") {
+    battleCanvas.classList.remove("preparing-red", "preparing-black");
+    battleTurnTimer.setAttribute("aria-label", "本回合剩余秒数");
     turnStatus.innerHTML = `<b>对局结束</b><span>第 ${gameState.revision} 手</span>`;
     announcement.textContent = finishMessage();
     moveHint.textContent = "可以重新开始，再进行一局猜拳。";
   } else if (gameState.status === "execution") {
+    battleCanvas.classList.remove("preparing-red", "preparing-black");
+    battleTurnTimer.setAttribute("aria-label", "本回合剩余秒数");
     const title = finishTitle();
     turnStatus.innerHTML = `<b>${title}发动</b><span>终结演出中</span>`;
     announcement.textContent = "胜负已定，终结正在执行。";
     moveHint.textContent = "棋盘已锁定，终结动画播放完毕后公布结果。";
   } else {
+    battleCanvas.classList.remove("preparing-red", "preparing-black");
+    battleTurnTimer.setAttribute("aria-label", "本回合剩余秒数");
     const player = rpsPublic.assignments[gameState.turn];
     turnStatus.innerHTML = `<b>${gameState.turn === "red" ? "红方" : "蓝方"}行棋</b><span>${player} · 第 ${gameState.revision + 1} 手</span>`;
     const inCheck = isGeneralInCheck(gameState, gameState.turn);
@@ -1494,12 +2892,18 @@ function renderGame(): void {
     moveHint.textContent = selectedPieceId ? descriptionForPiece(selectedPieceId) : "点选当前方控制的棋子，再点选绿色落点。";
   }
   renderBoard();
-  renderCaptures(redCaptures, "red");
-  renderCaptures(blackCaptures, "black");
   const remoteLocked = isBluetoothTransportInterrupted()
     || Boolean(bluetooth?.pendingAction)
-    || (Boolean(remoteView) && remoteView?.viewerSide !== gameState.turn);
-  element<HTMLButtonElement>("resign-button").disabled = gameState.status !== "playing" || preparationActive || openingActive || remoteView?.phase === "hero_intro" || remoteLocked;
+    || (Boolean(remoteView) && remoteView?.viewerSide !== gameState.turn)
+    || isMatchOverlayOpen();
+  battleMoreButton.hidden = gameState.status === "finished" || gameState.status === "execution";
+  battleMoreButton.disabled = isBluetoothTransportInterrupted();
+  const detailControlsDisabled = isBluetoothTransportInterrupted() || gameState.status === "finished" || gameState.status === "execution";
+  redCapturedButton.disabled = detailControlsDisabled;
+  blackCapturedButton.disabled = detailControlsDisabled;
+  element<HTMLButtonElement>("red-hero-avatar").disabled = detailControlsDisabled;
+  element<HTMLButtonElement>("black-hero-avatar").disabled = detailControlsDisabled;
+  resignButton.disabled = gameState.status !== "playing" || preparationActive || openingActive || remoteView?.phase === "hero_intro" || remoteLocked;
   const skill = gameState.assassination?.[gameState.turn];
   const active = skill?.activePieceId;
   const canAssassinate = Boolean(skill?.heroChargeAvailable || skill?.mutationChargeAvailable || active);
@@ -1584,7 +2988,7 @@ function beginAutomaticExecution(): void {
       terminationEffect.className = "termination-effect";
       boardPlane.classList.remove("executing", "ambush", "judgment");
       renderGame();
-      showDialog(finishTitle(), finishMessage(), "查看棋盘", () => undefined);
+      showMatchResult();
     } catch (error) {
       showToast(error instanceof RuleError ? error.message : "终结失败，请重新开始对局。");
     } finally {
@@ -1601,7 +3005,7 @@ function playRemoteTerminalAnimation(terminal: NonNullable<PlayerRemoteRoomView[
   const sourcePoint = boardPoints.querySelector<HTMLElement>(`.point[data-x="${terminal.plan.from.x}"][data-y="${terminal.plan.from.y}"]`);
   const targetPoint = boardPoints.querySelector<HTMLElement>(`.point[data-x="${terminal.plan.to.x}"][data-y="${terminal.plan.to.y}"]`);
   if (!source || !sourcePoint || !targetPoint || source.faceDown) {
-    showDialog(finishTitle(), finishMessage(), "查看棋盘", () => undefined);
+    showMatchResult();
     return;
   }
   const boardRect = boardPlane.getBoundingClientRect();
@@ -1629,7 +3033,7 @@ function playRemoteTerminalAnimation(terminal: NonNullable<PlayerRemoteRoomView[
     terminationEffect.className = "termination-effect";
     boardPlane.classList.remove("executing", "ambush", "judgment");
     renderGame();
-    showDialog(finishTitle(), finishMessage(), "查看棋盘", () => undefined);
+    showMatchResult();
     executionTimer = undefined;
   }, 1150);
 }
@@ -1696,6 +3100,7 @@ function placeLocalTrap(position: Position): void {
 function onBoardClick(event: MouseEvent): void {
   const target = (event.target as HTMLElement).closest<HTMLButtonElement>(".point");
   if (!target || !gameState) return;
+  if (isMatchOverlayOpen()) return;
   if (isBluetoothTransportInterrupted()) return showToast("连接正在恢复，棋盘暂时锁定。");
   const to = { x: Number(target.dataset.x), y: Number(target.dataset.y) };
   if (openingActive || bluetooth?.view?.phase === "hero_intro") return;
@@ -1801,6 +3206,7 @@ function onBoardClick(event: MouseEvent): void {
     gameState = result.state;
     gameSecret = result.secret;
     const trapMessage = resolveLocalTrapsAfterAction();
+    queueFormalEventCues(gameState, Boolean(trapMessage), usingAssassination ? strongStrikeArmed ? "强击发动" : "刺杀发动" : undefined);
     const captured = gameState.lastMove?.captured;
     const revealed = gameState.lastMove?.revealed;
     latestAnnouncement = trapMessage ?? moveSummary(
@@ -1808,58 +3214,247 @@ function onBoardClick(event: MouseEvent): void {
       captured ? `${captured.color === "red" ? "红" : "黑"}${pieceLabel[captured.color][captured.type]}` : undefined,
       revealed ? `${revealed.color === "red" ? "红" : "黑"}${pieceLabel[revealed.color][revealed.type]}` : undefined,
     );
+    const actingSide = gameState.lastMove?.actingSide === "red" ? "红方" : "蓝方";
+    const skillPrefix = usingAssassination ? `${actingSide}发动${strongStrikeArmed ? "强击" : "刺杀"}，` : "";
+    appendLocalSystemMessage(`${skillPrefix}${latestAnnouncement}${gameState.status === "playing" ? ` 轮到${gameState.turn === "red" ? "红方" : "蓝方"}。` : " 对局结束。"}`);
     selectedPieceId = undefined;
     assassinationArmed = false;
     strongStrikeArmed = false;
     renderGame();
     if (gameState.status === "execution") beginAutomaticExecution();
-    if (gameState.status === "finished") showDialog(finishTitle(), finishMessage(), "查看棋盘", () => undefined);
+    if (gameState.status === "finished") showMatchResult();
   } catch (error) {
     showToast(error instanceof RuleError ? error.message : "落子失败，请重试。");
   }
 }
 
 document.querySelectorAll<HTMLButtonElement>(".rps-choice").forEach((button) => {
-  button.addEventListener("click", () => submitChoice(button.dataset.choice as RpsChoice));
+  button.addEventListener("click", () => selectRpsChoice(button.dataset.choice as RpsChoice));
 });
+rpsConfirmButton.addEventListener("click", confirmRpsChoice);
+element<HTMLButtonElement>("rps-back-button").addEventListener("click", handleSystemBack);
+element<HTMLButtonElement>("hero-back-button").addEventListener("click", handleSystemBack);
 heroConfirmButton.addEventListener("click", confirmHeroSelection);
 trapUndoButton.addEventListener("click", undoTrapDraft);
 preparationConfirmButton.addEventListener("click", confirmHeroPreparation);
 element<HTMLButtonElement>("local-game-button").addEventListener("click", activateLocalGame);
+element<HTMLButtonElement>("bluetooth-menu-button").addEventListener("click", showBluetoothLobby);
+element<HTMLButtonElement>("online-game-button").addEventListener("click", () => showToast("联机对战尚未开放"));
+element<HTMLButtonElement>("settings-menu-button").addEventListener("click", showSettings);
+element<HTMLButtonElement>("rules-menu-button").addEventListener("click", showRules);
+element<HTMLButtonElement>("rules-back-button").addEventListener("click", showMainMenu);
+for (const tab of document.querySelectorAll<HTMLButtonElement>(".rule-tab")) {
+  tab.addEventListener("click", () => showRulesTab(tab.dataset.ruleTab ?? "basic"));
+}
+for (const details of document.querySelectorAll<HTMLDetailsElement>(".rule-panel details")) {
+  details.addEventListener("toggle", () => {
+    if (!details.open) return;
+    const panel = details.closest<HTMLElement>(".rule-panel");
+    for (const sibling of panel?.querySelectorAll<HTMLDetailsElement>("details[open]") ?? []) {
+      if (sibling !== details) sibling.open = false;
+    }
+  });
+}
+renderMovementGuides();
+element<HTMLButtonElement>("rule-diagram-close").addEventListener("click", closeRuleDiagram);
+element<HTMLButtonElement>("rule-diagram-scrim").addEventListener("click", closeRuleDiagram);
+element<HTMLButtonElement>("bluetooth-back-button").addEventListener("click", leaveBluetoothLobby);
+element<HTMLButtonElement>("bluetooth-join-mode-button").addEventListener("click", () => {
+  bluetoothInitialActions.hidden = true;
+  bluetoothSessionPanel.hidden = true;
+  bluetoothJoinPanel.hidden = false;
+  setBluetoothStatus("请选择已配对的房主设备。");
+  refreshBluetoothDevices();
+});
+element<HTMLButtonElement>("bluetooth-open-settings-button").addEventListener("click", () => nativeBluetooth()?.openBluetoothSettings());
+element<HTMLButtonElement>("bluetooth-join-cancel-button").addEventListener("click", () => {
+  resetBluetoothLobbyPanels();
+  renderBluetoothAvailability();
+});
+bluetoothRetryButton.addEventListener("click", retryBluetoothConnection);
+bluetoothRematchRequestButton.addEventListener("click", requestBluetoothRematch);
+bluetoothRematchAcceptButton.addEventListener("click", () => respondBluetoothRematch(true));
+bluetoothRematchDeclineButton.addEventListener("click", () => respondBluetoothRematch(false));
+bluetoothCancelButton.addEventListener("click", cancelBluetoothSetup);
+bluetoothReturnButton.addEventListener("click", cancelBluetoothSetup);
+bluetoothEnableButton.addEventListener("click", () => nativeBluetooth()?.openBluetoothSettings());
+bluetoothPermissionButton.addEventListener("click", () => nativeBluetooth()?.requestPermission());
+bluetoothAppSettingsButton.addEventListener("click", () => nativeBluetooth()?.openAppSettings());
+element<HTMLButtonElement>("settings-back-button").addEventListener("click", showMainMenu);
+for (const id of ["sound-setting", "haptics-setting", "reduce-motion-setting"] as const) {
+  element<HTMLInputElement>(id).addEventListener("change", saveUiPreferences);
+}
+element<HTMLButtonElement>("settings-reset-button").addEventListener("click", () => {
+  try {
+    localStorage.removeItem(UI_PREFERENCES_KEY);
+  } catch {
+    // The default state can still be applied for this session.
+  }
+  applyUiPreferences({ ...DEFAULT_UI_PREFERENCES });
+  showToast("已恢复默认设置");
+});
 element<HTMLButtonElement>("bluetooth-host-button").addEventListener("click", beginBluetoothHost);
 element<HTMLButtonElement>("bluetooth-refresh-button").addEventListener("click", refreshBluetoothDevices);
 element<HTMLButtonElement>("bluetooth-join-button").addEventListener("click", joinBluetoothRoom);
 boardPoints.addEventListener("click", onBoardClick);
-capturedToggle.addEventListener("click", () => {
-  const expanded = !capturedPanel.classList.contains("expanded");
-  capturedPanel.classList.toggle("expanded", expanded);
-  capturedToggle.setAttribute("aria-expanded", String(expanded));
+messagePanelToggle.addEventListener("click", () => setMessageDrawer(true));
+messageDrawerClose.addEventListener("click", () => setMessageDrawer(false));
+messageNewButton.addEventListener("click", () => {
+  messageHistory.scrollTop = messageHistory.scrollHeight;
+  markMessagesRead();
 });
+messageHistory.addEventListener("scroll", () => {
+  if (messageDrawerOpen && historyIsAtNewest()) markMessagesRead();
+}, { passive: true });
+messageInput.addEventListener("input", () => {
+  const characters = Array.from(messageInput.value);
+  if (characters.length > CHAT_MAX_CHARACTERS) messageInput.value = characters.slice(0, CHAT_MAX_CHARACTERS).join("");
+  renderMessagePanel();
+});
+messageForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  sendBluetoothChat(messageInput.value, true);
+});
+document.querySelectorAll<HTMLButtonElement>("#quick-message-grid button").forEach((button) => {
+  button.addEventListener("click", () => sendBluetoothChat(button.textContent ?? "", false));
+});
+let messageSwipeStartY: number | undefined;
+messageDrawer.addEventListener("pointerdown", (event) => {
+  messageSwipeStartY = event.clientY;
+}, { passive: true });
+messageDrawer.addEventListener("pointerup", (event) => {
+  if (messageSwipeStartY !== undefined && event.clientY - messageSwipeStartY > 60) setMessageDrawer(false);
+  messageSwipeStartY = undefined;
+}, { passive: true });
+const updateMessageKeyboardInset = () => {
+  const viewport = window.visualViewport;
+  const inset = viewport ? Math.max(0, window.innerHeight - viewport.height - viewport.offsetTop) : 0;
+  document.documentElement.style.setProperty("--message-keyboard-inset", `${inset}px`);
+};
+window.visualViewport?.addEventListener("resize", updateMessageKeyboardInset);
+window.visualViewport?.addEventListener("scroll", updateMessageKeyboardInset);
+redCapturedButton.addEventListener("click", showCapturedDetails);
+blackCapturedButton.addEventListener("click", showCapturedDetails);
+element<HTMLButtonElement>("red-hero-avatar").addEventListener("click", () => showHeroDetails("red"));
+element<HTMLButtonElement>("black-hero-avatar").addEventListener("click", () => showHeroDetails("black"));
 
-function setBattleActionMenu(open: boolean): void {
-  battleActionMenu.hidden = !open;
-  battleMoreButton.setAttribute("aria-expanded", String(open));
+type MatchMenuMode = "preplay" | "opening" | "playing";
+
+function currentMatchMenuMode(): MatchMenuMode | undefined {
+  if (!heroView.hidden || !rpsView.hidden) return "preplay";
+  if (gameView.hidden || !gameState || gameState.status === "finished" || gameState.status === "execution") return undefined;
+  if (openingActive || localPreparationActive || bluetooth?.view?.phase === "hero_intro" || bluetooth?.view?.phase === "hero_preparation") return "opening";
+  return "playing";
 }
 
-battleMoreButton.addEventListener("click", () => setBattleActionMenu(battleActionMenu.hidden));
-document.querySelectorAll<HTMLButtonElement>(".v4-skill-trigger").forEach((button) => {
-  button.addEventListener("click", () => setBattleActionMenu(true));
-});
-element<HTMLButtonElement>("battle-rules-button").addEventListener("click", () => {
-  setBattleActionMenu(false);
-  showDialog(
-    "本局要点",
-    "暗子首步按所在兵种位置行动后揭开；暗子可以被任意一方吃，己方明子不可自残。翻出敌方棋子并直接将军会触发背刺。",
-    "知道了",
-    () => undefined,
+function isMatchOverlayOpen(): boolean {
+  return messageDrawerOpen || !matchMenuLayer.hidden || !matchDetailLayer.hidden || !matchResultLayer.hidden;
+}
+
+function setBattleActionMenu(open: boolean): void {
+  const mode = currentMatchMenuMode();
+  const shouldOpen = open && Boolean(mode) && disconnectLayer.hidden;
+  if (shouldOpen) setBattleSkillPanel(false);
+  matchMenuLayer.hidden = !shouldOpen;
+  matchMenuLayer.dataset.placement = mode === "preplay" ? "top" : "bottom";
+  matchMutationButton.hidden = mode === "preplay";
+  matchExitButton.hidden = mode === "playing";
+  resignButton.hidden = mode !== "playing";
+  battleMoreButton.setAttribute("aria-expanded", String(shouldOpen));
+  heroMoreButton.setAttribute("aria-expanded", String(shouldOpen));
+  rpsMoreButton.setAttribute("aria-expanded", String(shouldOpen));
+}
+
+function setBattleSkillPanel(open: boolean): void {
+  if (open) setBattleActionMenu(false);
+  battleSkillPanel.hidden = !open;
+}
+
+function confirmExitMatch(): void {
+  showMatchConfirmation(
+    "退出对局",
+    "确定要退出当前对局吗？进入英雄选择后主动退出，本局将立即判负。",
+    "确认退出",
+    () => {
+      if (bluetooth?.view) {
+        handleBluetoothAction({ kind: "forfeit", actionId: bluetoothActionId() });
+        return;
+      }
+      showMainMenu();
+    },
   );
+}
+
+function confirmResignation(): void {
+  if (!gameState || gameState.status !== "playing") return;
+  showMatchConfirmation(
+    "认输",
+    "确定要认输吗？认输后本局将立即结束。",
+    "确认认输",
+    () => {
+      if (!gameState || gameState.status !== "playing") return;
+      if (bluetooth?.view) {
+        handleBluetoothAction({ kind: "resign", expectedRevision: gameState.revision, actionId: bluetoothActionId() });
+        return;
+      }
+      if (!gameSecret) return;
+      const result = applyResignation(gameState, gameSecret, gameState.turn, gameState.revision, nextActionId());
+      gameState = result.state;
+      gameSecret = result.secret;
+      appendLocalSystemMessage(`${gameState.winner === "red" ? "蓝方" : "红方"}认输，对局结束。`);
+      selectedPieceId = undefined;
+      renderGame();
+      showMatchResult();
+    },
+  );
+}
+
+for (const button of [battleMoreButton, heroMoreButton, rpsMoreButton]) {
+  button.addEventListener("click", () => setBattleActionMenu(matchMenuLayer.hidden));
+}
+element<HTMLButtonElement>("match-menu-scrim").addEventListener("click", () => setBattleActionMenu(false));
+element<HTMLButtonElement>("match-detail-close").addEventListener("click", closeMatchDetail);
+element<HTMLButtonElement>("match-detail-cancel").addEventListener("click", closeMatchDetail);
+matchDetailLayer.addEventListener("click", (event) => {
+  if (event.target === matchDetailLayer) closeMatchDetail();
 });
+document.querySelectorAll<HTMLButtonElement>(".v4-skill-trigger").forEach((button) => {
+  let pressTimer: number | undefined;
+  const cancelTimer = () => {
+    if (pressTimer) window.clearTimeout(pressTimer);
+    pressTimer = undefined;
+  };
+  button.addEventListener("pointerdown", () => {
+    cancelTimer();
+    button.dataset.longPressed = "false";
+    pressTimer = window.setTimeout(() => {
+      button.dataset.longPressed = "true";
+      showRuntimeSkillDetails(button);
+    }, 550);
+  });
+  button.addEventListener("pointerup", cancelTimer);
+  button.addEventListener("pointercancel", cancelTimer);
+  button.addEventListener("pointerleave", cancelTimer);
+  button.addEventListener("click", () => {
+    if (button.dataset.longPressed === "true") {
+      button.dataset.longPressed = "false";
+      return;
+    }
+    activateRuntimeSkill(button);
+  });
+});
+element<HTMLButtonElement>("battle-rules-button").addEventListener("click", showMatchRules);
+matchMutationButton.addEventListener("click", showCurrentMutationDetails);
+matchExitButton.addEventListener("click", confirmExitMatch);
+resignButton.addEventListener("click", confirmResignation);
 element<HTMLButtonElement>("battle-mutation-button").addEventListener("click", showCurrentMutationDetails);
+matchResultRematch.addEventListener("click", startRematchFromResult);
+matchResultMainMenu.addEventListener("click", returnFromMatchResult);
 element<HTMLButtonElement>("restart-button").addEventListener("click", () => {
   if (!gameState || gameState.status === "finished" || window.confirm("重新开始会结束当前对局，确定吗？")) {
     nativeBluetooth()?.disconnect();
     bluetooth = undefined;
-    showLobby();
+    showMainMenu();
   }
 });
 document.querySelector<HTMLAnchorElement>(".brand")!.addEventListener("click", (event) => {
@@ -1867,28 +3462,11 @@ document.querySelector<HTMLAnchorElement>(".brand")!.addEventListener("click", (
   if (!gameState || gameState.status === "finished" || window.confirm("重新开始会结束当前对局，确定吗？")) {
     nativeBluetooth()?.disconnect();
     bluetooth = undefined;
-    showLobby();
+    showMainMenu();
   }
-});
-element<HTMLButtonElement>("resign-button").addEventListener("click", () => {
-  setBattleActionMenu(false);
-  if (!gameState || gameState.status !== "playing") return;
-  const player = rpsPublic.assignments?.[gameState.turn] ?? "当前方";
-  if (!window.confirm(`${player}确定臣服吗？`)) return;
-  if (bluetooth?.view) {
-    handleBluetoothAction({ kind: "resign", expectedRevision: gameState.revision, actionId: bluetoothActionId() });
-    return;
-  }
-  if (!gameSecret) return;
-  const result = applyResignation(gameState, gameSecret, gameState.turn, gameState.revision, nextActionId());
-  gameState = result.state;
-  gameSecret = result.secret;
-  selectedPieceId = undefined;
-  renderGame();
-  showDialog(finishTitle(), finishMessage(), "查看棋盘", () => undefined);
 });
 element<HTMLButtonElement>("assassination-button").addEventListener("click", () => {
-  setBattleActionMenu(false);
+  setBattleSkillPanel(false);
   if (!gameState || gameState.status !== "playing") return;
   const activePieceId = gameState.assassination?.[gameState.turn]?.activePieceId;
   if (activePieceId) {
@@ -1905,7 +3483,7 @@ element<HTMLButtonElement>("assassination-button").addEventListener("click", () 
   renderGame();
 });
 element<HTMLButtonElement>("strong-strike-button").addEventListener("click", () => {
-  setBattleActionMenu(false);
+  setBattleSkillPanel(false);
   if (!gameState || gameState.status !== "playing") return;
   const activePieceId = gameState.assassination?.[gameState.turn]?.activePieceId;
   if (!activePieceId && !assassinationArmed) return showToast("请先发动刺杀，再选择是否立即强击。");
@@ -1944,6 +3522,23 @@ window.addEventListener("jieqi-bluetooth", ((event: CustomEvent<BluetoothEventDe
 
     if (detail.state === "LISTENING" && !wasEstablished) {
       setBluetoothStatus("房主正在监听。请让另一台已配对手机选择本机并加入。");
+      showBluetoothSessionState({
+        kicker: "创建对局",
+        title: "等待对方加入",
+        deviceName: bluetooth.localDeviceName,
+        detail: detail.detail || "请让另一台已配对手机选择本机并加入。",
+        cancel: true,
+      });
+    }
+
+    if (detail.state === "CONNECTING" && !wasEstablished) {
+      showBluetoothSessionState({
+        kicker: "加入对局",
+        title: "正在连接",
+        deviceName: bluetooth.targetName,
+        detail: detail.detail || "正在连接房主设备，请稍候。",
+        cancel: true,
+      });
     }
 
     if (detail.state === "CONNECTED") {
@@ -1951,6 +3546,16 @@ window.addEventListener("jieqi-bluetooth", ((event: CustomEvent<BluetoothEventDe
       bluetooth.everConnected = true;
       bluetooth.pendingAction = false;
       setBluetoothStatus(restoring ? "连接已恢复。" : "蓝牙已连接，正在同步房间。");
+
+      if (!restoring && !wasEstablished) {
+        showBluetoothSessionState({
+          kicker: "蓝牙房间",
+          title: "连接成功",
+          deviceName: bluetooth.role === "host" ? undefined : bluetooth.targetName,
+          detail: "正在同步房间，即将进入英雄选择。",
+          cancel: false,
+        });
+      }
 
       if (bluetooth.role === "host") {
         bluetooth.hostRoom ??= new BluetoothHostRoom({
@@ -1967,7 +3572,12 @@ window.addEventListener("jieqi-bluetooth", ((event: CustomEvent<BluetoothEventDe
         publishBluetoothViews();
       }
 
-      if (restoring) {
+      const restoringPostGameLobby = restoring && bluetooth.view?.phase === "finished" && !bluetoothLobbyView.hidden;
+      if (restoringPostGameLobby) {
+        disconnectLayer.hidden = true;
+        showBluetoothRematchLobby(bluetooth.view);
+        showToast("蓝牙连接已恢复，可以再次邀请。 ");
+      } else if (restoring) {
         bluetooth.localDisconnectStartedAt = undefined;
         bluetooth.localDisconnectPlayerId = undefined;
         resumeBluetoothUiClocks();
@@ -1984,14 +3594,33 @@ window.addEventListener("jieqi-bluetooth", ((event: CustomEvent<BluetoothEventDe
 
     if ((detail.state === "DISCONNECTED" || detail.state === "ERROR") && wasEstablished) {
       bluetooth.pendingAction = false;
-      if (previousState === "CONNECTED") {
+      const awaitingRematch = bluetooth.view?.phase === "finished" && !bluetoothLobbyView.hidden;
+      if (awaitingRematch) {
+        disconnectLayer.hidden = true;
+        bluetoothRematchTimer.hidden = true;
+        bluetoothRematchAcceptButton.hidden = true;
+        bluetoothRematchDeclineButton.hidden = true;
+        bluetoothRematchRequestButton.hidden = true;
+        bluetoothSessionTitle.textContent = "对方已断线";
+        bluetoothSessionDetail.textContent = "再战邀请已经停止；关闭提示后仍停留在蓝牙页。";
+        showDialog("再战邀请", "对方已断线", "知道了", () => {
+          if (bluetooth?.view) showBluetoothRematchLobby(bluetooth.view);
+          bluetoothSessionKicker.textContent = "蓝牙房间";
+          bluetoothSessionTitle.textContent = "对方已断线";
+          bluetoothSessionDetail.textContent = "等待蓝牙连接恢复后，可以再次发起邀请。";
+          bluetoothRematchTimer.hidden = true;
+          bluetoothRematchRequestButton.hidden = true;
+          bluetoothRematchAcceptButton.hidden = true;
+          bluetoothRematchDeclineButton.hidden = true;
+        });
+      } else if (previousState === "CONNECTED") {
         bluetooth.localDisconnectStartedAt = Date.now();
         bluetooth.localDisconnectPlayerId = detail.adapterEnabled === false
           ? (bluetooth.role === "host" ? BLUETOOTH_HOST_PLAYER : BLUETOOTH_GUEST_PLAYER)
           : (bluetooth.role === "host" ? BLUETOOTH_GUEST_PLAYER : BLUETOOTH_HOST_PLAYER);
         pauseBluetoothUiClocks();
       }
-      if (bluetooth.role === "host" && bluetooth.hostRoom && bluetooth.localDisconnectPlayerId) {
+      if (!awaitingRematch && bluetooth.role === "host" && bluetooth.hostRoom && bluetooth.localDisconnectPlayerId) {
         bluetooth.hostRoom.disconnect(bluetooth.localDisconnectPlayerId);
         refreshBluetoothHostViews(false);
       }
@@ -1999,13 +3628,58 @@ window.addEventListener("jieqi-bluetooth", ((event: CustomEvent<BluetoothEventDe
         ? "请开启蓝牙；断线累计计时仍在继续。"
         : detail.detail || "蓝牙连接已断开，当前对局已暂停并自动重连。";
       setBluetoothStatus(message);
-      renderDisconnectLayer();
+      if (!awaitingRematch) renderDisconnectLayer();
+    } else if ((detail.state === "DISCONNECTED" || detail.state === "ERROR") && !wasEstablished) {
+      const failure = detail.detail || (detail.state === "ERROR" ? "蓝牙连接失败，请重试。" : "已停止蓝牙连接。");
+      bluetooth.lastFailure = failure;
+      setBluetoothStatus(failure);
+      showBluetoothSessionState({
+        kicker: bluetooth.role === "host" ? "创建对局" : "加入对局",
+        title: detail.state === "ERROR" ? "连接失败" : "连接已停止",
+        deviceName: bluetooth.role === "host" ? bluetooth.localDeviceName : bluetooth.targetName,
+        detail: failure,
+        retry: detail.state === "ERROR",
+        cancel: false,
+        back: true,
+      });
     }
   } else if ((detail.event === "message" || detail.type === "message") && detail.message) {
     handleIncomingBluetoothMessage(typeof detail.message === "string" ? detail.message : JSON.stringify(detail.message));
-  } else if (detail.type === "transport-error" || detail.type === "permission-denied") {
-    showToast(detail.detail ?? "无法使用蓝牙，请检查系统权限。");
+  } else if (detail.type === "permission-granted") {
+    renderBluetoothAvailability();
+    showToast("蓝牙权限已允许");
+  } else if (detail.type === "permission-denied") {
+    bluetoothStateActions.hidden = false;
+    bluetoothPermissionButton.hidden = Boolean(detail.permanentlyDenied);
+    bluetoothAppSettingsButton.hidden = !detail.permanentlyDenied;
+    setBluetoothStatus(detail.permanentlyDenied
+      ? "蓝牙权限已被永久拒绝，请前往系统设置重新允许。"
+      : "蓝牙权限未允许；可以再次尝试授权。");
+  } else if (detail.type === "transport-error") {
+    const message = detail.detail ?? "无法使用蓝牙，请检查系统权限。";
+    if (bluetooth && !bluetooth.everConnected) {
+      bluetooth.lastFailure = message;
+      setBluetoothStatus(message);
+      showBluetoothSessionState({
+        kicker: bluetooth.role === "host" ? "创建对局" : "加入对局",
+        title: "连接失败",
+        deviceName: bluetooth.role === "host" ? bluetooth.localDeviceName : bluetooth.targetName,
+        detail: message,
+        retry: true,
+        cancel: false,
+        back: true,
+      });
+    } else {
+      showToast(message);
+    }
   }
 }) as EventListener);
 
-showLobby();
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "visible" && !bluetoothLobbyView.hidden && !bluetooth) renderBluetoothAvailability();
+});
+
+(window as unknown as { handleLeziBack: () => boolean }).handleLeziBack = handleSystemBack;
+
+applyUiPreferences(loadUiPreferences());
+showMainMenu();
