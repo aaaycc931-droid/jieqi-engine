@@ -4,8 +4,10 @@ import test from "node:test";
 
 const sourceHtml = readFileSync(new URL("../web/index.html", import.meta.url), "utf8");
 const sourceCss = readFileSync(new URL("../web/style.css", import.meta.url), "utf8");
+const sourceRefreshCss = readFileSync(new URL("../web/ui-refresh.css", import.meta.url), "utf8");
 const bundledHtml = readFileSync(new URL("../android/app/src/main/assets/game/web/index.html", import.meta.url), "utf8");
 const bundledCss = readFileSync(new URL("../android/app/src/main/assets/game/web/style.css", import.meta.url), "utf8");
+const bundledRefreshCss = readFileSync(new URL("../android/app/src/main/assets/game/web/ui-refresh.css", import.meta.url), "utf8");
 const bundledApp = readFileSync(new URL("../android/app/src/main/assets/game/web/app.js", import.meta.url), "utf8");
 const bridge = readFileSync(new URL("../android/app/src/main/java/com/jieqi/bluetooth/GameWebBridge.java", import.meta.url), "utf8");
 const session = readFileSync(new URL("../android/app/src/main/java/com/jieqi/bluetooth/BluetoothGameSession.java", import.meta.url), "utf8");
@@ -14,6 +16,7 @@ const manifest = readFileSync(new URL("../android/app/src/main/AndroidManifest.x
 test("ANDROID-ASSET-01 APK 内置 HTML 与 CSS 已同步到当前 UI", () => {
   assert.equal(bundledHtml, sourceHtml);
   assert.equal(bundledCss, sourceCss);
+  assert.equal(bundledRefreshCss, sourceRefreshCss);
   for (const asset of [
     "../android/app/src/main/assets/game/web/assets/menu-v1/title-lezi-xiangqi.png",
     "../android/app/src/main/assets/game/web/assets/menu-v1/label-bluetooth.png",
@@ -24,6 +27,13 @@ test("ANDROID-ASSET-01 APK 内置 HTML 与 CSS 已同步到当前 UI", () => {
   assert.match(bundledApp, /function renderMovementGuides\(/);
   assert.match(bundledApp, /permission-granted/);
   assert.match(bundledApp, /CHAT_MAX_CHARACTERS/);
+});
+
+test("ANDROID-UI-02 非棋盘视觉层不覆盖已确认棋盘核心", () => {
+  for (const protectedSelector of [".v4-board", ".board-plane", ".board-points", ".point", ".piece", ".execution-ghost"]) {
+    assert.equal(sourceRefreshCss.includes(protectedSelector), false, `${protectedSelector} 不应出现在非棋盘视觉层`);
+  }
+  assert.match(sourceHtml, /ui-refresh\.css/);
 });
 
 test("ANDROID-BT-01 未取得附近设备权限前不调用受保护的蓝牙状态 API", () => {
