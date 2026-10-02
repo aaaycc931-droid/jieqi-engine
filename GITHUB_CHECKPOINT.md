@@ -1,26 +1,19 @@
-# GitHub Checkpoint — 2026-10-01
+# GitHub Checkpoint — 2026-10-02
 
 - repo: `aaaycc931-droid/jieqi-engine`
-- working_branch: `codex/phase3-cumulative-disconnect-20260923`
-- ci_build_branch: `codex/ui-android-apk-20261001`
-- branch_head_before_handoff_docs: `2f7dd2c`
-- base_phase2_commit: `30ba8486cc9bdeaf9ceb7f5e0a379e1617fd3846`
-- main_at_close: `c25749d4f21d394c3d94486cfba1d786864083b6`
-- latest_feature_ci_commit: `af9bb642f0d570285a55de2ef58577005b1fd622`
-- latest_implementation_commit: `c331a0a6128ab8c2f977a4163a31acb8001f8f67`
-- status_checkpoint: `2f7dd2c`
-- current_build_commit: `2bb0f9ca128fb8a61728839ca0dcdce1b01027ab`
-- ci_run: `36846132332`
-- draft_pr: `#2` (not merged)
-- current_working_tree: `uncommitted UI changes; no push performed`
-- tests: `200 passed / 0 failed` on current working tree
-- web_build: passed
-- android_assets: synchronized with current `dist` (108 files)
-- android_static_checks: permission-before-protected-API, cancellable blocking sockets, and `adjustResize` passed
-- android_apk_build: passed for the current UI and Android bridge build commit
-- apk_sha256: `6a1ebe19340000507da7c05a1c4fd516c5177b3198bda36df4235dd399ec3001`
-- physical_two_phone_test: pending
+- build_branch: `codex/ui-android-apk-20261001`
+- current_ui_commit: `30ddc5b352e7f8a714c15a2cbc5e8cb525d32525`
+- base_main_at_pr: `c25749d4f21d394c3d94486cfba1d786864083b6`
+- draft_pr: `#2` (open, draft, not merged)
+- workflow_run: `36969499661`
+- rules_and_web: success
+- android_apk: success
+- tests: `201 passed / 0 failed`
+- dist_android_asset_parity: `109 / 109`
+- apk_size_bytes: `8181509`
+- apk_sha256: `35607da8eca3f8c1ecfc5028a78dd6c8ed2d893faea704b30115403e64bc2106`
+- physical_android_webview_review: pending
+- physical_two_phone_bluetooth_test: pending
 - merge_main: not authorized / not performed
-- deploy: not performed
 
-下一动作：`install_current_apk_and_run_android_webview_then_two_device_bluetooth_validation`；聊天/历史、已吃棋子、英雄/技能实时详情、非终局事件提示、八阶段流程与七类可放大走法图已完成第一阶段实现，最新 Web 资源已同步到 Android assets 并通过当前 APK 编译。Android WebView 与双机物理链路仍为未完成验证项。
+下一动作：安装 2026-10-02 APK，优先审核所有非棋盘 UI；视觉通过后再执行双机蓝牙验证。2026-10-01 旧 APK 的非棋盘视觉已被否决，不得作为当前基准。

@@ -1,6 +1,6 @@
 # 乐子象棋 Android 蓝牙外壳
 
-> **当前实现说明（2026-10-01）：** Android 内置网页已同步到当前 UI 工作树；每名玩家单局累计断线 60 秒、自动重连后从原节点恢复、蓝牙再战 30 秒邀请和正式行棋阶段聊天均已接入。GitHub Actions run `36846132332` 已从提交 `2bb0f9ca128fb8a61728839ca0dcdce1b01027ab` 成功编译当前 debug APK；两台真实设备的物理链路验证仍未完成。
+> **当前实现说明（2026-10-02）：** Android 内置网页已同步到非棋盘 UI 重做版；仅保留 V4 棋盘核心，其他页面与覆盖层统一为确认稿水墨体系。GitHub Actions run `36969499661` 已从提交 `30ddc5b352e7f8a714c15a2cbc5e8cb525d32525` 成功编译当前 debug APK；真实 WebView 视觉批准与两台设备物理链路验证仍未完成。
 
 APK 内置完整乐子象棋网页，并加入 Bluetooth Classic RFCOMM 主机/加入传输层。它不需要网络权限。
 
@@ -15,7 +15,7 @@ APK 内置完整乐子象棋网页，并加入 Bluetooth Classic RFCOMM 主机/�
 - Android SDK Platform 36 与 Build Tools 36；
 - Node.js 24 或更高版本（只在更新网页资源时需要）。
 
-本工作区未包含 Android SDK、Gradle 命令或 wrapper 运行文件，因此不能在这里直接编译。请在 Android Studio 中直接打开本目录并完成首次同步。工程使用 JDK 17；当前 debug APK 已改由 GitHub Actions run `36846132332` 构建并保留为产物。
+本工作区未包含 Android SDK、Gradle 命令或 wrapper 运行文件，因此不能在这里直接编译。请在 Android Studio 中直接打开本目录并完成首次同步。工程使用 JDK 17；当前 debug APK 已由 GitHub Actions run `36969499661` 构建并保留为产物。
 
 ## 更新内置网页
 
@@ -38,7 +38,7 @@ app/build/outputs/apk/debug/app-debug.apk
 
 ## 当前 APK 验证清单
 
-1. 安装 run `36846132332` 生成的当前 debug APK，不使用旧 APK 代替。
+1. 安装 run `36969499661` 生成的 2026-10-02 debug APK，不使用旧 APK 代替。
 2. 确认安装包可进入主菜单，并能显示 `menu-v1`、`rps-v1`、八阶段流程图和七类走法图。
 3. Android 12+ 首次进入蓝牙大厅时，未授权状态可正常显示并请求“附近的设备”，不会因提前读取适配器状态崩溃。
 4. 房主创建、来宾选择已配对设备、连接中取消、连接失败后重试均可操作；取消应立即终止正在等待的 `accept()` 或 `connect()`。

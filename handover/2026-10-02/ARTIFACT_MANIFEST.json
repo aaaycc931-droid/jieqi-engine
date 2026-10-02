@@ -1,0 +1,42 @@
+{
+  "package_date": "2026-10-02",
+  "repository": "aaaycc931-droid/jieqi-engine",
+  "branch": "codex/ui-android-apk-20261001",
+  "pull_request": 2,
+  "pull_request_state": "open_draft_not_merged",
+  "ui_commit": "30ddc5b352e7f8a714c15a2cbc5e8cb525d32525",
+  "github_actions_run_id": 36969499661,
+  "tests": {
+    "passed": 201,
+    "failed": 0
+  },
+  "asset_parity": {
+    "dist_files": 109,
+    "android_asset_files": 109,
+    "hash_match": true
+  },
+  "apk": {
+    "file_name": "lezi-xiangqi-ui-refresh-debug-2026-10-02.apk",
+    "size_bytes": 8181509,
+    "sha256": "35607da8eca3f8c1ecfc5028a78dd6c8ed2d893faea704b30115403e64bc2106",
+    "zip_integrity": "passed",
+    "embedded_ui_refresh_matches_source": true,
+    "build_type": "debug"
+  },
+  "scope": {
+    "retained": [
+      "v4_board",
+      "board_geometry",
+      "piece_anchors",
+      "piece_ink_rings",
+      "board_interactions"
+    ],
+    "reworked": "all_non_board_pages_controls_states_and_overlays"
+  },
+  "pending": [
+    "android_webview_visual_approval",
+    "safe_area_font_scale_and_keyboard_device_checks",
+    "two_phone_bluetooth_physical_validation",
+    "release_signing"
+  ]
+}

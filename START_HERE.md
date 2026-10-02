@@ -1,48 +1,30 @@
-# START HERE — 乐子象棋（2026-10-01）
+# START HERE — 乐子象棋（2026-10-02）
 
-## 当前一句话状态
+## 一句话状态
 
-用户已明确把本轮优先级切换为 UI。主菜单、蓝牙大厅、设置页、玩法说明页、八阶段流程、七类可放大走法图、英雄选择页、猜拳页、英雄准备/猎人陷阱、阶段三点菜单、规则/畸变覆盖层、终局结果/再战、消息/按局历史、已吃棋子、英雄/技能实时详情以及非终局事件提示已完成第一阶段重构。最新 Web 资源已同步到 Android assets，权限与连接取消桥接也已修正；当前通过 **200/200** 自动测试、Web 构建和 Android APK CI，但尚未经过真实 Android WebView/双机最终批准。
+旧 APK 的非棋盘 UI 已被用户否决。本轮只保留 V4 棋盘本体，重新统一了主菜单、蓝牙大厅、设置、规则、英雄选择、猜拳和全部对局覆盖层；当前代码与 APK 构建通过，但真实 Android WebView 视觉仍等待用户审核。
 
-## 当前分支与工作树
+## 先读
 
-- 分支：`codex/phase3-cumulative-disconnect-20260923`
-- 本轮 UI 改动仍在工作树中，未合并 `main`、未推送、未部署。
-- 旧断线阶段的最近提交仍是 2026-09-24 检查点；不要把它误当成本轮 UI 的提交点。
+1. `handover/2026-10-02/README.md`
+2. `handover/2026-10-02/UI_ACCEPTANCE_CHECKLIST.md`
+3. `UI_SOURCE_OF_TRUTH.md`
+4. `CONFIRMED_UI_PLAN.md`
+5. `PROJECT_STATE.json`
 
-## 必读顺序
+## 当前构建
 
-1. `PROJECT_STATE.json`
-2. `UI_SOURCE_OF_TRUTH.md`
-3. `HANDOVER.md`
-4. `IMPLEMENTATION_STATUS.md`
-5. `PENDING_AND_RESUME.md`
-6. `CONFIRMED_UI_PLAN.md`
+- 分支：`codex/ui-android-apk-20261001`
+- 提交：`30ddc5b352e7f8a714c15a2cbc5e8cb525d32525`
+- 草稿 PR：`#2`，未合并
+- Actions run：`36969499661`，两项 job 成功
+- 测试：201 passed / 0 failed
+- APK SHA-256：`35607da8eca3f8c1ecfc5028a78dd6c8ed2d893faea704b30115403e64bc2106`
 
-## 本轮验证
+## 关键边界
 
-- `npm run check`：200 passed / 0 failed
-- Web build：passed
-- `dist` 与 `android/app/src/main/assets/game`：108 个文件一致
-- Android 静态检查：权限前置、阻塞连接可取消、`adjustResize` 均通过
-- GitHub Actions run `36846132332`：规则/Web 与 Android APK job 均通过
-- 当前 APK 构建提交：`2bb0f9ca128fb8a61728839ca0dcdce1b01027ab`；草稿 PR：`#2`
-- `git diff --check`：passed
-- 9:16、19.5:9、20:9 主菜单静态分层检查：未见标题、署名、入口文字裁切
-- 当前环境没有可用 Chromium，本地页面也不能由云浏览器访问，因此没有真实浏览器截图
-- 当前环境缺少 Android SDK、Gradle 命令和 wrapper 运行文件；已改用 GitHub Actions 编译当前提交，旧 run `35950543824` 不再作为本轮 APK 依据
-
-## 下一动作
-
-1. 安装 run `36846132332` 生成的当前 debug APK，确认最新 Web assets 正确载入。
-2. 在 Android WebView 中审核全部已改页面，特别是规则图放大层、消息半屏上展、软键盘、字体缩放和触控锁定。
-3. 两台真实 Android 设备验证蓝牙权限、创建/加入/取消、权威聊天、断线草稿、断线累计与自动重连。
-4. 仅根据真机复现结果修正问题并重新执行完整检查。
-
-## 不要做
-
-- 不把历史整页图设为运行时背景或从中抠取正式组件。
-- 不把新增候选素材称为最终批准素材。
-- 不把互联网联机入口变为可用；它仍保留并禁用。
-- 不把自动测试通过等同于 Android WebView 或双机 RFCOMM 已验证。
-- 不合并 `main`、不推送、不部署，除非获得明确授权。
+- 保留：棋盘、棋位、棋子锚点、棋子墨圈与棋盘交互。
+- 已替换：除棋盘外的页面、外层控件、状态和覆盖层。
+- 旧 2026-10-01 APK 已过时，不作为视觉依据。
+- 当前仍是 debug APK；尚未完成真机视觉批准与双机物理验证。
+- 不合并 `main`，除非用户明确授权。
