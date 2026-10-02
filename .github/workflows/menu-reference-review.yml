@@ -1,0 +1,32 @@
+name: Review original menu appearance
+
+on:
+  push:
+    branches: [codex/ui-android-apk-20261001]
+    paths:
+      - review/menu-reference/**
+      - scripts/review/**
+      - .github/workflows/menu-reference-review.yml
+
+jobs:
+  browser-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Build current runtime and isolated reference prototype
+        run: node scripts/build-web.ts && node scripts/review/prepare-menu-review.mjs
+      - name: Install the browser only for this review
+        run: npm install --no-save --package-lock=false playwright@1.58.2 && npx playwright install --with-deps chromium
+      - name: Render current and reference menus and check live controls
+        run: node scripts/review/capture-menu-review.mjs
+      - name: Keep browser screenshots and verification report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: menu-reference-browser-review
+          path: review-results/menu-reference/
+          if-no-files-found: error
+          retention-days: 7
