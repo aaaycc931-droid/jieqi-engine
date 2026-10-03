@@ -1,6 +1,6 @@
 {
   "project": "乐子象棋 / 揭棋联机版",
-  "updated_at": "2026-10-02",
+  "updated_at": "2026-10-03",
   "branch": "codex/ui-android-apk-20261001",
   "base_branch": "codex/phase2-mutation-rarity-20260918",
   "base_commit": "30ba8486cc9bdeaf9ceb7f5e0a379e1617fd3846",
@@ -8,7 +8,24 @@
   "legacy_ui_base_commit": "de4eb73bcaea678e1f183ec2f0181369fe1cebce",
   "main_at_last_check": "c25749d4f21d394c3d94486cfba1d786864083b6",
   "ui_planning_status": "complete_except_intentional_deferred_items",
-  "implementation_status": "board_retained_all_non_board_ui_reworked_web_and_apk_ci_verified_webview_visual_and_two_phone_physical_pending",
+  "implementation_status": "current_apk_home_appearance_rejected_reference_prototype_browser_verified_pending_user_adoption_and_android_validation",
+  "home_visual_review": {
+    "current_apk_status": "rejected_by_user",
+    "prototype_only": true,
+    "runtime_changed": false,
+    "prototype_path": "review/menu-reference",
+    "browser_review_commit": "16d5bdc0301d4d82e2e8df399d0ec5f9a09590f6",
+    "browser_review_run_id": 37127980260,
+    "browser_review_result": "success",
+    "browser_render_cases": 10,
+    "source_size": [941, 1672],
+    "compared_pixels": 1567727,
+    "changed_pixels": 0,
+    "comparison_exclusion": "later_confirmed_settings_control_region",
+    "live_controls": "local_hero_selection_bluetooth_lobby_rules_settings_persistence_online_unavailable_passed",
+    "adoption_decision": "pending_user_confirmation_of_original_artwork_windows_instead_of_independent_generated_components",
+    "android_webview_review": "pending"
+  },
   "authoritative_documents": [
     "CONFIRMED_UI_PLAN.md",
     "UI_SOURCE_OF_TRUTH.md",
@@ -58,10 +75,10 @@
     "exact_rarity_probabilities",
     "internet_multiplayer"
   ],
-  "next_action": "install_2026_10_02_apk_and_review_all_non_board_ui_before_two_device_validation",
+  "next_action": "show_verified_original_artwork_comparison_to_user_and_resolve_home_asset_constraint_before_runtime_adoption_and_apk_build",
   "ci_build_branch": "codex/ui-android-apk-20261001",
   "ci_draft_pull_request": 2,
-  "working_tree_note": "the local workspace mirrors the 2026-10-02 non-board UI rework plus refreshed handover documents; GitHub build commit contains the code and APK inputs, while handover documents are finalized separately with build metadata",
+  "working_tree_note": "runtime remains the visually rejected 2026-10-02 build; isolated review-output prototype retains original artwork and real controls, has passed Chromium checks, and is not included in Android assets",
   "restrictions": [
     "do_not_merge_main_without_explicit_authorization",
     "do_not_deploy_internet_multiplayer",

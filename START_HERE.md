@@ -1,16 +1,16 @@
-# START HERE — 乐子象棋（2026-10-02）
+# START HERE — 乐子象棋（2026-10-03 首页还原审核）
 
 ## 一句话状态
 
-旧 APK 的非棋盘 UI 已被用户否决。本轮只保留 V4 棋盘本体，重新统一了主菜单、蓝牙大厅、设置、规则、英雄选择、猜拳和全部对局覆盖层；当前代码与 APK 构建通过，但真实 Android WebView 视觉仍等待用户审核。
+2026-10-02 APK 的首页外观也已被用户否决。原图外观交互样稿已经通过 Chromium 多屏截图和真实按钮检查；原图尺寸下，排除新增设置入口后，1,567,727 个对比像素差异为 0。样稿尚未进入正式运行时，先等待用户根据对比图确认首页素材约束调整，再构建 APK。
 
 ## 先读
 
-1. `handover/2026-10-02/README.md`
-2. `handover/2026-10-02/UI_ACCEPTANCE_CHECKLIST.md`
+1. `PROJECT_STATE.json`
+2. `review/menu-reference/BROWSER_REVIEW.md`
 3. `UI_SOURCE_OF_TRUTH.md`
 4. `CONFIRMED_UI_PLAN.md`
-5. `PROJECT_STATE.json`
+5. `handover/2026-10-02/README.md`（构建与历史交接信息）
 
 ## 当前构建
 
