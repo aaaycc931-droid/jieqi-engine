@@ -82,7 +82,11 @@ try {
       }
       if (mode === 'reference' && viewport.name === '20x9') {
         const visible = id => page.locator('#' + id).isVisible();
-        await page.locator('#online-game-button').click();
+        // Physical tapping is permitted so the unavailable entry can show its
+        // explanation. Playwright's locator.click intentionally refuses any
+        // aria-disabled control, so tap its measured screen location instead.
+        const online = boxes['online-game-button'];
+        await page.touchscreen.tap(online.x + online.width / 2, online.y + online.height / 2);
         await page.waitForFunction(() => document.querySelector('.toast')?.textContent?.includes('联机对战尚未开放'));
         await page.locator('#settings-menu-button').click();
         assert(await visible('settings-view'));
@@ -103,6 +107,27 @@ try {
       }
       await context.close();
     }
+  }
+  // Compose retrieved browser screenshots in a web page; no art is regenerated.
+  const sheets = [
+    { file: 'appearance-comparison.png', columns: [
+      { title: '确认稿', bytes: await readFile(resolve(root, 'review/menu-reference/approved-menu.png')) },
+      { title: '被否决的当前首页', bytes: await readFile(resolve(output, 'current-9x16.png')) },
+      { title: '原图外观交互样稿', bytes: await readFile(resolve(output, 'reference-9x16.png')) },
+    ] },
+    { file: 'screen-adaptation.png', columns: [
+      { title: '9:16', bytes: await readFile(resolve(output, 'reference-9x16.png')) },
+      { title: '19.5:9', bytes: await readFile(resolve(output, 'reference-19.5x9.png')) },
+      { title: '20:9', bytes: await readFile(resolve(output, 'reference-20x9.png')) },
+    ] },
+  ];
+  for (const sheet of sheets) {
+    const context = await browser.newContext({ viewport: { width: 1168, height: sheet.file === 'screen-adaptation.png' ? 902 : 742 }, deviceScaleFactor: 1 });
+    const page = await context.newPage();
+    await page.setContent(`<!doctype html><meta charset="UTF-8"><style>body{margin:0;padding:24px;background:#e8e5dd;color:#201b17;font:20px sans-serif}main{display:flex;gap:20px}section{width:360px}h2{font-size:20px;margin:0 0 16px}img{width:360px;height:auto;display:block}</style><main>${sheet.columns.map(column => `<section><h2>${column.title}</h2><img src="data:image/png;base64,${column.bytes.toString('base64')}"></section>`).join('')}</main>`);
+    await page.evaluate(async () => { await Promise.all([...document.images].map(img => img.decode())); await document.fonts.ready; });
+    await page.screenshot({ path: resolve(output, sheet.file) });
+    await context.close();
   }
   await writeFile(resolve(output, 'browser-review.json'), JSON.stringify(report, null, 2));
   console.log(JSON.stringify({ browser: report.browser, cases: report.cases.length, interactions: report.interactions, pixelComparison: report.pixelComparison }));

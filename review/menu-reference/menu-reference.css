@@ -4,6 +4,7 @@
  */
 .main-menu-view {
   container-type: inline-size;
+  width: min(100vw, 941px);
   background: #f4ede0;
 }
 .main-menu-view::after,
@@ -90,6 +91,7 @@
   right: max(12px, env(safe-area-inset-right));
   width: clamp(40px, 8cqw, 58px);
   min-height: 40px;
+  background: radial-gradient(ellipse, rgba(244, 237, 224, .94) 30%, rgba(244, 237, 224, .65) 53%, transparent 73%);
 }
 .settings-menu-button img { width: 62%; height: 62%; }
 @media (max-aspect-ratio: 9/16) {
