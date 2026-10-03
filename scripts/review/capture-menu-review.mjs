@@ -102,7 +102,8 @@ try {
         assert(await visible('lobby-view'));
         await page.locator('#bluetooth-back-button').click();
         await page.locator('#local-game-button').click();
-        assert(await visible('hero-selection-view'));
+        await page.locator('#hero-view').waitFor({ state: 'visible' });
+        assert(await visible('hero-view'));
         report.interactions = { onlineUnavailable: true, settings: true, settingsPersist: true, rules: true, bluetoothLobby: true, localHeroSelection: true };
       }
       await context.close();
