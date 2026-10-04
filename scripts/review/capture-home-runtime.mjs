@@ -13,8 +13,8 @@ const types = { '.png': 'image/png', '.css': 'text/css', '.js': 'text/javascript
 const server = createServer(async (request, response) => {
   try {
     const url = new URL(request.url, 'http://localhost');
-    const mode = url.pathname.split('/')[1];
-    const base = resolve(root, mode === 'runtime' ? 'review-output' : 'dist');
+    if (url.pathname === '/favicon.ico') { response.writeHead(204).end(); return; }
+    const base = resolve(root, 'dist');
     let path = resolve(base, '.' + decodeURIComponent(url.pathname.replace(/^\/(runtime)/, '')));
     if (!path.startsWith(base + '/')) throw new Error('Invalid path');
     if ((await stat(path)).isDirectory()) path = resolve(path, 'index.html');
