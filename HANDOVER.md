@@ -1,3 +1,5 @@
+> 正式接入验证已完成：201 项检查通过，Chromium run `37170251516` 的 7 个尺寸与真实入口检查通过，APK job skipped。记录：`review/menu-reference/RUNTIME_INTEGRATION.md`。
+
 > **2026-10-04 最新决定与接入：** 用户已同意原图外观首页正式接入，采用 `web/home-menu.css` 和 `web/assets/menu-original/approved-menu.png`；继续修改其余非棋盘 UI，暂不生成 APK。自动 APK 构建已暂停。下方 2026-10-02 构建与 2026-10-03 样稿记录属于历史，本轮没有新 APK，也未生成最终交接压缩包。
 
 # 乐子象棋交接说明（2026-10-02 非棋盘 UI 重做版）

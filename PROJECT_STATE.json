@@ -17,7 +17,7 @@
     "browser_review_commit": "16d5bdc0301d4d82e2e8df399d0ec5f9a09590f6",
     "browser_review_run_id": 37127980260,
     "browser_review_result": "success",
-    "browser_render_cases": 10,
+    "browser_render_cases": 7,
     "source_size": [
       941,
       1672
@@ -30,8 +30,12 @@
     "android_webview_review": "pending",
     "runtime_css": "web/home-menu.css",
     "runtime_artwork": "web/assets/menu-original/approved-menu.png",
-    "runtime_browser_review": "pending_current_run",
-    "minimum_touch_target_css_pixels": 48
+    "runtime_browser_review": "success",
+    "minimum_touch_target_css_pixels": 48,
+    "runtime_browser_review_commit": "e3ad1be1fb0ebc14304945b68b13ec2cff155e4e",
+    "runtime_browser_review_run_id": 37170251516,
+    "prototype_browser_render_cases": 10,
+    "runtime_review_record": "review/menu-reference/RUNTIME_INTEGRATION.md"
   },
   "authoritative_documents": [
     "CONFIRMED_UI_PLAN.md",
@@ -46,11 +50,9 @@
     "passed": 201,
     "failed": 0,
     "web_build": "passed",
-    "android_apk_build": "passed_for_2026_10_02_non_board_ui_rework",
-    "github_actions_run_id": 36969499661,
-    "android_build_commit": "30ddc5b352e7f8a714c15a2cbc5e8cb525d32525",
-    "android_artifact_sha256": "35607da8eca3f8c1ecfc5028a78dd6c8ed2d893faea704b30115403e64bc2106",
-    "scope_warning": "201 local tests pass after homepage integration and Android Web resource sync; no APK generated in this round; actual WebView and two-phone validation remain pending"
+    "android_apk_build": "not_generated_user_paused",
+    "github_actions_run_id": 37170254145,
+    "scope_warning": "201 local and CI tests pass; official runtime homepage passed 7 Chromium viewports and live interactions; APK job skipped by user instruction; Android WebView and two-phone validation remain pending"
   },
   "latest_locked_decisions": [
     "cumulative_disconnect_60_seconds_per_player",
@@ -82,7 +84,7 @@
     "exact_rarity_probabilities",
     "internet_multiplayer"
   ],
-  "next_action": "verify_integrated_home_runtime_then_revise_bluetooth_settings_rules_and_remaining_non_board_ui_without_packaging_apk",
+  "next_action": "revise_bluetooth_settings_rules_and_remaining_non_board_ui_without_packaging_apk",
   "ci_build_branch": "codex/ui-android-apk-20261001",
   "ci_draft_pull_request": 2,
   "working_tree_note": "approved original homepage now integrated in Web and synced Android source assets; no APK generated",
@@ -94,12 +96,19 @@
     "do_not_fill_deferred_items_without_user_decision",
     "do_not_generate_apk_until_user_explicitly_resumes"
   ],
-  "latest_implementation_commit": "30ddc5b352e7f8a714c15a2cbc5e8cb525d32525",
-  "latest_ci_verified_feature_commit": "30ddc5b352e7f8a714c15a2cbc5e8cb525d32525",
+  "latest_implementation_commit": "e3ad1be1fb0ebc14304945b68b13ec2cff155e4e",
+  "latest_ci_verified_feature_commit": "e3ad1be1fb0ebc14304945b68b13ec2cff155e4e",
   "apk_generation_policy": {
     "status": "paused_by_user_2026_10_04",
     "reason": "remaining_non_board_pages_require_revisions",
     "automatic_job": "disabled",
     "resume_requires_user_instruction": true
+  },
+  "historical_rejected_apk_build": {
+    "android_apk_build": "passed_for_2026_10_02_non_board_ui_rework",
+    "github_actions_run_id": 36969499661,
+    "android_build_commit": "30ddc5b352e7f8a714c15a2cbc5e8cb525d32525",
+    "android_artifact_sha256": "35607da8eca3f8c1ecfc5028a78dd6c8ed2d893faea704b30115403e64bc2106",
+    "visual_status": "rejected_by_user"
   }
 }

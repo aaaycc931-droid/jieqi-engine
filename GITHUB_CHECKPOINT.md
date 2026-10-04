@@ -1,3 +1,5 @@
+> 当前验证提交 `e3ad1be1fb0ebc14304945b68b13ec2cff155e4e`；规则/Web run `37170254145` success，android-apk skipped；首页浏览器 run `37170251516` success。
+
 > 2026-10-04 当前工作：已授权首页原图方案正式接入，暂停 APK 打包；仅执行规则/Web 与正式首页浏览器检查。下方 APK 信息为历史构建，不是本轮产物。
 
 # GitHub Checkpoint — 2026-10-02

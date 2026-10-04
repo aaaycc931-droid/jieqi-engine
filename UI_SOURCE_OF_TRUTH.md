@@ -2,7 +2,7 @@
 
 状态：2026-10-04 用户已确认原图外观样稿并授权接入正式首页，明确暂不生成 APK，因为其余非棋盘页面仍需修改。
 
-首页已接入 `web/home-menu.css` 与 `web/assets/menu-original/approved-menu.png`，采用原图显示窗口和现有真实入口，新增设置入口独立保留。本地 201 项测试通过，Web 构建及 Android 内置网页资源同步完成；仅同步资源，不打包 APK。正式运行时的 Chromium 验证在本轮执行，真机视觉和实体双机验证仍待后续。
+首页已接入 `web/home-menu.css` 与 `web/assets/menu-original/approved-menu.png`，采用原图显示窗口和现有真实入口，新增设置入口独立保留。本地 201 项测试通过，Web 构建及 Android 内置网页资源同步完成；仅同步资源，不打包 APK。正式运行时 run `37170251516` 已通过 Chromium 的 7 个尺寸与入口检查；原图尺寸排除设置区域后像素差异 0。详见 `review/menu-reference/RUNTIME_INTEGRATION.md`。真机视觉和实体双机验证仍待后续。
 
 ## 1. 判定优先级
 

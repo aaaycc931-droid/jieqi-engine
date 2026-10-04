@@ -7,14 +7,16 @@
 ## 先读
 
 1. `PROJECT_STATE.json`
-2. `UI_SOURCE_OF_TRUTH.md`
-3. `CONFIRMED_UI_PLAN.md`
-4. `PENDING_AND_RESUME.md`
-5. `review/menu-reference/BROWSER_REVIEW.md`（历史样稿验证）
+2. `review/menu-reference/RUNTIME_INTEGRATION.md`
+3. `UI_SOURCE_OF_TRUTH.md`
+4. `CONFIRMED_UI_PLAN.md`
+5. `PENDING_AND_RESUME.md`
+6. `review/menu-reference/BROWSER_REVIEW.md`（历史样稿验证）
 
 ## 验证与构建边界
 
 - 本地测试 201 passed / 0 failed；Web 构建完成，Android 内置网页资源已同步，未生成 APK。
+- 正式首页 Chromium run `37170251516` 已通过 7 个尺寸及入口检查；原图尺寸排除设置区域后像素差异 0。验证提交 `e3ad1be1fb0ebc14304945b68b13ec2cff155e4e`。
 - 正式首页的浏览器检查脚本：`scripts/review/capture-home-runtime.mjs`。
 - `.github/workflows/verify.yml` 的自动 APK job 已暂停，只有用户明确恢复后才允许手动选择 `build_apk: true`。
 - 2026-10-01 与 2026-10-02 APK 外观被否决，不代表当前源码，也不作为视觉依据。
