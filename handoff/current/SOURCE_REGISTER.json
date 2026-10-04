@@ -1,0 +1,210 @@
+{
+  "handoff_revision": "LEZI-HANDOFF-CLEAN-2026-10-04",
+  "rule_revision": "LEZI-FUNCTION-2026-10-04-r1",
+  "code_checkpoint": "b7b968b91196170beb0db4f26852c63920a3d3e8",
+  "sources": [
+    {
+      "id": "RULE:CURRENT_RULE_DELTAS_2026-09-22.md",
+      "kind": "original_source_reference_only",
+      "path": "rules/confirmed/CURRENT_RULE_DELTAS_2026-09-22.md",
+      "url": "https://github.com/aaaycc931-droid/jieqi-engine/blob/b7b968b91196170beb0db4f26852c63920a3d3e8/rules/confirmed/CURRENT_RULE_DELTAS_2026-09-22.md",
+      "sha256": "1692a0159485a105a2647f3db27822e33a1cc43eef0be86ade6d7b5d9e67110d",
+      "applied_scope": "§§1–7 → 01；§§8–11,14.1–14.2,15 → 02；§§12–14.4 → 03；§4.3 → 04死亡记录；§16为已闭合，不复制历史状态",
+      "embedded_original": false
+    },
+    {
+      "id": "RULE:HERO-MUTATION-SPEC.md",
+      "kind": "original_source_reference_only",
+      "path": "rules/confirmed/HERO-MUTATION-SPEC.md",
+      "url": "https://github.com/aaaycc931-droid/jieqi-engine/blob/b7b968b91196170beb0db4f26852c63920a3d3e8/rules/confirmed/HERO-MUTATION-SPEC.md",
+      "sha256": "e16eae22edbb746a1c2907feb4ae71972871eee145452df342d53ecc5a480acd",
+      "applied_scope": "未被差分覆盖的英雄6A–6G、陷阱布置、畸变适用棋种、12A宿命参数；旧运行时说明、旧刺杀、旧骑兵、旧无形空间及旧崩坏绑定剔除",
+      "embedded_original": false
+    },
+    {
+      "id": "RULE:BALANCE_AND_RULE_UPDATES_2026-09-28.md",
+      "kind": "original_source_reference_only",
+      "path": "rules/confirmed/BALANCE_AND_RULE_UPDATES_2026-09-28.md",
+      "url": "https://github.com/aaaycc931-droid/jieqi-engine/blob/b7b968b91196170beb0db4f26852c63920a3d3e8/rules/confirmed/BALANCE_AND_RULE_UPDATES_2026-09-28.md",
+      "sha256": "9f55bb1032c846074e4f5372f079e8f8e2967224c1c2441bb5093e0d486a6bb4",
+      "applied_scope": "仅§7尖斜、§8秘密、§9风新增规则为玩法增量；§9.10记录于08。§1旧即刻强击不采纳，早期评分表不提升现行",
+      "embedded_original": false
+    },
+    {
+      "id": "RULE:KEYWORD_SYSTEM_CURRENT.md",
+      "kind": "original_source_reference_only",
+      "path": "rules/confirmed/KEYWORD_SYSTEM_CURRENT.md",
+      "url": "https://github.com/aaaycc931-droid/jieqi-engine/blob/b7b968b91196170beb0db4f26852c63920a3d3e8/rules/confirmed/KEYWORD_SYSTEM_CURRENT.md",
+      "sha256": "a2a7f1fecf7553d413517a658f8ac392840e08d951c16be896ff2f161ad5e7af",
+      "applied_scope": "01通用默认、标签与免疫封锁；原§15只两类窒息由r1扩充",
+      "embedded_original": false
+    },
+    {
+      "id": "RULE:ACTION-TIER-KEYWORDS.md",
+      "kind": "original_source_reference_only",
+      "path": "rules/confirmed/ACTION-TIER-KEYWORDS.md",
+      "url": "https://github.com/aaaycc931-droid/jieqi-engine/blob/b7b968b91196170beb0db4f26852c63920a3d3e8/rules/confirmed/ACTION-TIER-KEYWORDS.md",
+      "sha256": "2340a345644c920ce4213e3f8791d7d2cb12c5bf1d5f62e348945a0181ed5ab5",
+      "applied_scope": "01层级与主行动记录；原姆诺兹多示例的回溯词与新移置冲突以最新差分为准",
+      "embedded_original": false
+    },
+    {
+      "id": "RULE:CURRENT_RULE_DELTAS_2026-09-20.md",
+      "kind": "original_source_reference_only",
+      "path": "rules/confirmed/CURRENT_RULE_DELTAS_2026-09-20.md",
+      "url": "https://github.com/aaaycc931-droid/jieqi-engine/blob/b7b968b91196170beb0db4f26852c63920a3d3e8/rules/confirmed/CURRENT_RULE_DELTAS_2026-09-20.md",
+      "sha256": "47d4b6f8092cc11bd4e8036c7a041b7d72c09cb0bc184db64e4b710fdd843cef",
+      "applied_scope": "死亡骑士生成/寿命、评分记录和未确认骑兵状态；感染绑定格、旧铁甲额外回应与旧词表不采纳",
+      "embedded_original": false
+    },
+    {
+      "id": "RULE:STATE.json",
+      "kind": "original_source_reference_only",
+      "path": "rules/confirmed/STATE.json",
+      "url": "https://github.com/aaaycc931-droid/jieqi-engine/blob/b7b968b91196170beb0db4f26852c63920a3d3e8/rules/confirmed/STATE.json",
+      "sha256": "ef8b97232a8a82fbef0b560d803127ba855241ea1907f7eaec2b95f0c701330d",
+      "applied_scope": "仅设计数值与确认记录用于08；旧实现分支、144测试、待实现与next_stage不继承",
+      "embedded_original": false
+    },
+    {
+      "id": "RULE:PENDING_AUDIT_2026-09-22.md",
+      "kind": "original_source_reference_only",
+      "path": "rules/confirmed/PENDING_AUDIT_2026-09-22.md",
+      "url": "https://github.com/aaaycc931-droid/jieqi-engine/blob/b7b968b91196170beb0db4f26852c63920a3d3e8/rules/confirmed/PENDING_AUDIT_2026-09-22.md",
+      "sha256": "3ca268352f4673e60aa6483fdf50462fef3846ef7647813a301ac0f7f7f5780e",
+      "applied_scope": "来源闭合记录；不当仍待确认",
+      "embedded_original": false
+    },
+    {
+      "id": "RULE:CONFIRMED_DESIGN_BASELINE_2026-09-22.md",
+      "kind": "original_source_reference_only",
+      "path": "rules/confirmed/CONFIRMED_DESIGN_BASELINE_2026-09-22.md",
+      "url": "https://github.com/aaaycc931-droid/jieqi-engine/blob/b7b968b91196170beb0db4f26852c63920a3d3e8/rules/confirmed/CONFIRMED_DESIGN_BASELINE_2026-09-22.md",
+      "sha256": "092b6591495595704de27f740a2340e97db304047d64f3d121a98cd76011cacc",
+      "applied_scope": "来源保护，设计/实现分离；当前正文用最新差分表达",
+      "embedded_original": false
+    },
+    {
+      "id": "RULE:RULE_UPDATE_2026-10-04_WIND_RETURN.md",
+      "kind": "original_source_reference_only",
+      "path": "rules/confirmed/RULE_UPDATE_2026-10-04_WIND_RETURN.md",
+      "url": "https://github.com/aaaycc931-droid/jieqi-engine/blob/b7b968b91196170beb0db4f26852c63920a3d3e8/rules/confirmed/RULE_UPDATE_2026-10-04_WIND_RETURN.md",
+      "sha256": "197148bef2d4dedc409ee74eb871762b4fe1d7a1c09507ef97104795d134d811",
+      "applied_scope": "本轮用户确认全面折入01窒息、02风与qa合同",
+      "embedded_original": false
+    },
+    {
+      "id": "DOC:CONFIRMED_UI_PLAN.md",
+      "path": "CONFIRMED_UI_PLAN.md",
+      "url": "https://github.com/aaaycc931-droid/jieqi-engine/blob/b7b968b91196170beb0db4f26852c63920a3d3e8/CONFIRMED_UI_PLAN.md",
+      "sha256": "12a056e9aa7f8db5ae572ed6dcf528e246c48657255244fac6700c56e993367c",
+      "applied_scope": "全流程融合秘密、统一死亡记录、12英雄目录和UI最后指令 → 04",
+      "embedded_original": false
+    },
+    {
+      "id": "DOC:UI_SOURCE_OF_TRUTH.md",
+      "path": "UI_SOURCE_OF_TRUTH.md",
+      "url": "https://github.com/aaaycc931-droid/jieqi-engine/blob/b7b968b91196170beb0db4f26852c63920a3d3e8/UI_SOURCE_OF_TRUTH.md",
+      "sha256": "0f1774c2b3a45381c15872808c4c273f6377b2b571905881aeedc3f96e9260bb",
+      "applied_scope": "首页原图授权与素材批准范围 → 04；旧实现状态排除",
+      "embedded_original": false
+    },
+    {
+      "id": "DOC:ONLINE-ARCHITECTURE.md",
+      "path": "ONLINE-ARCHITECTURE.md",
+      "url": "https://github.com/aaaycc931-droid/jieqi-engine/blob/b7b968b91196170beb0db4f26852c63920a3d3e8/ONLINE-ARCHITECTURE.md",
+      "sha256": "20d2d334b48762dca62eadf4ffe10b98edaabd7573960f73e28c1163238301a6",
+      "applied_scope": "互联网架构留待未来，不部署；代码契约与原详细稿可定位",
+      "embedded_original": false
+    },
+    {
+      "id": "SCORING:v2.9",
+      "name": "乐子象棋_英雄技能评分规则_v2.9.md",
+      "library_file_id": "libfile_0d6ca509de0c8191854876029350eea9",
+      "sha256": "d22ec86641f9079623a4bf99cfdc65714d83ad385247c11f9ee60d13ffe2a4da",
+      "applied_scope": "方法正文§0–34 → 07；版本变更史不嵌入；理论ledger独立"
+    },
+    {
+      "id": "COLLAB:v1.8.0",
+      "name": "X_Collaboration_System-4.md",
+      "container_library_file_id": "libfile_ca1409ea4f608191b873da7ad56a8908",
+      "sha256": "492faf5d509e32f41fd68191873b0ec83d4ffc5803295ae3c97cbf1dc39ecd9b",
+      "applied_scope": "§3.10、批准基线保护、时序机会与当前用户偏好 → 06；个人总文档全文可从原交接源恢复，不冒称完整复制"
+    },
+    {
+      "id": "QA:69",
+      "name": "乐子象棋_Rule_Invariants_机器规格_v0.1.json",
+      "container_library_file_id": "libfile_f4a017f286b08191a2880b6b9c2f5087",
+      "sha256": "5bf0bb777e6db692f419d4a8bccd9b9a5f135fc28c812538c9e51318c5329d0f",
+      "applied_scope": "全部69不变量+20反例保留为待验证合同；去除旧运行时评级，两条范围升级+7补充"
+    },
+    {
+      "id": "UI:HOME",
+      "path": "web/assets/menu-original/approved-menu.png",
+      "sha256": "5c0dae37bb4dd84054d566c5ae5da98545ca73f23544ded5090ec80f1fbe211e",
+      "applied_scope": "当前首页视觉母版，包内assets/approved-home.png"
+    },
+    {
+      "id": "UI:V4",
+      "name": "lezi-xiangqi-v4-ui-clean-review-2026-09-15.png",
+      "library_file_id": "libfile_a2040a7fdda48191a5d876aba15a9071",
+      "sha256": "63671bd146ce72a3c61f40dac457f83f882d7ada78c5f5f98efb7bb3ba5eac26",
+      "applied_scope": "V4棋盘参考，外围历史状态字段不覆盖04，包内assets/approved-v4-reference.png"
+    }
+  ],
+  "coverage": {
+    "base_and_atomic": "01_CURRENT_RULES.md",
+    "heroes": {
+      "hunter": "02_CURRENT_HEROES.md",
+      "rogue": "02_CURRENT_HEROES.md",
+      "warrior": "02_CURRENT_HEROES.md",
+      "qin_long": "02_CURRENT_HEROES.md",
+      "murozond": "02_CURRENT_HEROES.md",
+      "nozdormu": "02_CURRENT_HEROES.md",
+      "murozond_minion": "02_CURRENT_HEROES.md",
+      "devout_zealot": "02_CURRENT_HEROES.md",
+      "prince": "02_CURRENT_HEROES.md",
+      "deathwing": "02_CURRENT_HEROES.md",
+      "death_knight": "02_CURRENT_HEROES.md",
+      "wind": "02_CURRENT_HEROES.md"
+    },
+    "mutations": {
+      "iron_steed": "03_CURRENT_MUTATIONS.md",
+      "iron_wall": "03_CURRENT_MUTATIONS.md",
+      "shadow_dance": "03_CURRENT_MUTATIONS.md",
+      "war_chariot": "03_CURRENT_MUTATIONS.md",
+      "expedition": "03_CURRENT_MUTATIONS.md",
+      "cavalry": "03_CURRENT_MUTATIONS.md",
+      "chaos": "03_CURRENT_MUTATIONS.md",
+      "jian_xie": "03_CURRENT_MUTATIONS.md",
+      "end_time": "03_CURRENT_MUTATIONS.md"
+    },
+    "ui_and_bluetooth": "04_CURRENT_UI_AND_FLOW.md",
+    "implementation_evidence_and_gaps": "05_PROGRESS_AND_NEXT.md",
+    "parallel_design": "06_COLLABORATION.md",
+    "scoring_method": "07_DESIGN_SCORING.md",
+    "scores": "08_SCORE_LEDGER.md",
+    "invariant_contracts": "qa/INVARIANTS.json"
+  },
+  "source_gaps": [
+    {
+      "name": "原始独立《揭棋规则规格 v1》全文",
+      "status": "not_located_this_round",
+      "fallback": "当前固定源码/测试和已恢复差分；不声称原稿完整恢复",
+      "action": "涉及基础区域/跨河变更前定位原稿核对"
+    },
+    {
+      "name": "未明确移交的其他对话英雄确认稿",
+      "status": "not_transferred",
+      "action": "用户明确移交完整提案后才评审接入"
+    }
+  ],
+  "excluded_payloads": [
+    "所有旧ZIP与APK",
+    "旧UI生成变体",
+    "已覆盖的旧规则段落",
+    "旧STATE运行时分支/测试数/下一步",
+    "过时3英雄进度"
+  ],
+  "completeness_claim": "当前恢复并核对源的主体规则已按域覆盖；不保证所有历史对话逐条恢复，明确缺口不得填空。"
+}

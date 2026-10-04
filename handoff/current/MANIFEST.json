@@ -1,0 +1,75 @@
+{
+  "format": "sha256",
+  "self_excluded": true,
+  "files": {
+    "00_READ_FIRST.md": {
+      "bytes": 2753,
+      "sha256": "80bc33f4dd3ae7fc400803dbfc04bc9531b23cc8507bbc3f4dca38d7d6e77ca9"
+    },
+    "01_CURRENT_RULES.md": {
+      "bytes": 20738,
+      "sha256": "16fb6963e415c4011b7b4f011338e6574c1a2350f4966890ca62e9f4a727e59b"
+    },
+    "02_CURRENT_HEROES.md": {
+      "bytes": 26572,
+      "sha256": "603d9781a2fbd965c78a2c9d56067c75414d205610dc016baf12c651c2c9f0dc"
+    },
+    "03_CURRENT_MUTATIONS.md": {
+      "bytes": 16382,
+      "sha256": "f3e2a857f40eb50aee2658c8851c5a57b8f0f1bd733ab3b5c3c1367d6f3dcac4"
+    },
+    "04_CURRENT_UI_AND_FLOW.md": {
+      "bytes": 18891,
+      "sha256": "c133b4ee797b778ce4c88233437b2466255f27c30fcaec5b0941c766cc4bae00"
+    },
+    "05_PROGRESS_AND_NEXT.md": {
+      "bytes": 4899,
+      "sha256": "09066b1b99411cc3fb84ec0892ccdeacc4ee02f2cc5e681f4054a01236d07860"
+    },
+    "06_COLLABORATION.md": {
+      "bytes": 3794,
+      "sha256": "4d77ff39b7318ae1f484691956ab275e2b593e7b2c1131348ef8f144dccda19d"
+    },
+    "07_DESIGN_SCORING.md": {
+      "bytes": 25701,
+      "sha256": "64a333d08eaccb12cbf6387874392d24a3831e824b59da8d1353f6e2c11925a0"
+    },
+    "08_SCORE_LEDGER.md": {
+      "bytes": 2028,
+      "sha256": "68845494b465bbcc1908f6cef862f350c1da4dadfc3e3a7473d11b2443edf23c"
+    },
+    "NEW_DIALOGUE_PROMPT.txt": {
+      "bytes": 1278,
+      "sha256": "363a15dfd88db50fab1870368489530bdf0cb6d792871b6cc6262e87111ffe93"
+    },
+    "SOURCE_REGISTER.json": {
+      "bytes": 11261,
+      "sha256": "0e9115f071b29bb79f85e7064217aebc0e3fb609054fdb8b0471fb1e60dceba6"
+    },
+    "STATE.json": {
+      "bytes": 2322,
+      "sha256": "cb4997a2a87573c3e705c35e7d7f74789ad4930bfbbb01e88726a3e2cc96b098"
+    },
+    "assets/approved-home.png": {
+      "bytes": 2157060,
+      "sha256": "5c0dae37bb4dd84054d566c5ae5da98545ca73f23544ded5090ec80f1fbe211e"
+    },
+    "assets/approved-v4-reference.png": {
+      "bytes": 1282661,
+      "sha256": "63671bd146ce72a3c61f40dac457f83f882d7ada78c5f5f98efb7bb3ba5eac26"
+    },
+    "qa/INVARIANTS.json": {
+      "bytes": 35955,
+      "sha256": "a1d0c817bd1d6bec20080460066d84b80ec0d5a29eff889973d2395c11ae6b22"
+    }
+  },
+  "checks": {
+    "frozen_source_hashes_match": true,
+    "current_delta_hash_matches": true,
+    "heroes_12_present": true,
+    "mutations_9_present": true,
+    "qa_69_plus_20_preserved": true,
+    "navigation_paths_exist": true,
+    "no_apk_or_nested_historical_packages": true
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "project": "乐子象棋 / jieqi-engine",
+  "handoff_revision": "LEZI-HANDOFF-CLEAN-2026-10-04",
+  "updated_at": "2026-10-04",
+  "repository": "https://github.com/aaaycc931-droid/jieqi-engine",
+  "working_branch": "codex/ui-android-apk-20261001",
+  "implementation_commit": "b7b968b91196170beb0db4f26852c63920a3d3e8",
+  "implementation_tree": "b7360eb92866e02d545ff15115050ae71ad0afe3",
+  "draft_pr": 2,
+  "baseline_id": "LEZI-FUNCTION-2026-10-04-v1",
+  "baseline_digest": "4bcf9fb91f5c6e41f456e7424ebd7ed09c6c07b1595ec825604aa730fdad020b",
+  "current_rule_revision": "LEZI-FUNCTION-2026-10-04-r1",
+  "current_rule_digest": "27191eba43cb10417e4e87ff09a5f6fb2aa890be9567ec710a171fb45ab67f35",
+  "authoritative_entry": "00_READ_FIRST.md",
+  "current_rules": [
+    "01_CURRENT_RULES.md",
+    "02_CURRENT_HEROES.md",
+    "03_CURRENT_MUTATIONS.md",
+    "04_CURRENT_UI_AND_FLOW.md"
+  ],
+  "current_progress": "05_PROGRESS_AND_NEXT.md",
+  "implementation_counts": {
+    "heroes": 12,
+    "standard_mutations": 8,
+    "destiny_mutations": 1
+  },
+  "validation": {
+    "tests_passed": 250,
+    "tests_failed": 0,
+    "web_build": "passed",
+    "ci_run": 37193007609,
+    "ci_commit": "b7b968b91196170beb0db4f26852c63920a3d3e8",
+    "ci_conclusion": "success",
+    "homepage_browser_run": 37180839292,
+    "homepage_browser_commit": "7ec16ad7c5d1a084699a626c6a74be9522f5802a",
+    "homepage_browser_scope": "homepage_and_entry_controls_only",
+    "android_web_asset_match_files": 116,
+    "new_hero_browser_full_flow": "pending",
+    "individual_69_invariants": "pending",
+    "android_webview": "pending",
+    "physical_two_phone": "pending",
+    "all_functions_accepted": false
+  },
+  "restrictions": [
+    "ui_last",
+    "no_apk",
+    "no_main_merge",
+    "no_internet_deployment",
+    "preserve_approved_home_and_v4_board",
+    "no_invented_rarity_weights",
+    "no_untransferred_hero_import",
+    "no_option_cards"
+  ],
+  "collaboration": {
+    "implementation_writer": "new_dialogue_after_this_handoff",
+    "design_dialogue": "proposal_only",
+    "old_dialogue_code_writes_after_handoff": "stop",
+    "automatic_import": false
+  },
+  "next_action": "Verify time-line and cross-rule contracts against current code before UI finalization",
+  "source_gap_register": "SOURCE_REGISTER.json",
+  "apk_built_this_round": false
+}

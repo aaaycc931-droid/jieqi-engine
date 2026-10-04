@@ -38,13 +38,14 @@
     "runtime_review_record": "review/menu-reference/RUNTIME_INTEGRATION.md"
   },
   "authoritative_documents": [
-    "rules/confirmed/CURRENT.json",
-    "rules/confirmed/BASELINE.json",
-    "IMPLEMENTATION_STATUS.md",
-    "PENDING_AND_RESUME.md",
-    "PARALLEL_HERO_DESIGN.md",
-    "CONFIRMED_UI_PLAN.md",
-    "UI_SOURCE_OF_TRUTH.md"
+    "handoff/current/00_READ_FIRST.md",
+    "handoff/current/STATE.json",
+    "handoff/current/01_CURRENT_RULES.md",
+    "handoff/current/02_CURRENT_HEROES.md",
+    "handoff/current/03_CURRENT_MUTATIONS.md",
+    "handoff/current/04_CURRENT_UI_AND_FLOW.md",
+    "handoff/current/05_PROGRESS_AND_NEXT.md",
+    "handoff/current/06_COLLABORATION.md"
   ],
   "baseline_tests": {
     "command": "npm run check",
@@ -52,10 +53,10 @@
     "failed": 0,
     "web_build": "passed",
     "android_apk_build": "not_generated_user_paused",
-    "current_batch_ci": "pending_for_wind_suffocation_update",
+    "current_batch_ci": "success",
     "current_batch_browser_review": "homepage_only_success_new_hero_gameplay_pending",
     "scope_warning": "Local automated checks are partial coverage; cross rules, browser gameplay, WebView and two-device verification pending.",
-    "github_actions_run_id": 37180841385,
+    "github_actions_run_id": 37193007609,
     "homepage_browser_run_id": 37180839292
   },
   "latest_locked_decisions": [
@@ -99,7 +100,7 @@
   "next_action": "cross_rule_and_gameplay_validation_then_ui_last_no_apk",
   "ci_build_branch": "codex/ui-android-apk-20261001",
   "ci_draft_pull_request": 2,
-  "working_tree_note": "Wind occupied-return rule is now confirmed and implemented; 250 local tests pass. Frozen baseline is unchanged; CURRENT.json points to approved additive rule update.",
+  "working_tree_note": "Current rules consolidated for transfer; 250 tests and latest CI pass, full cross-rule/browser/WebView/two-phone acceptance pending; UI last, APK paused.",
   "restrictions": [
     "do_not_merge_main_without_explicit_authorization",
     "do_not_deploy_internet_multiplayer",
@@ -108,7 +109,7 @@
     "do_not_fill_deferred_items_without_user_decision",
     "do_not_generate_apk_until_user_explicitly_resumes"
   ],
-  "latest_ci_verified_feature_commit": "7ec16ad7c5d1a084699a626c6a74be9522f5802a",
+  "latest_ci_verified_feature_commit": "b7b968b91196170beb0db4f26852c63920a3d3e8",
   "apk_generation_policy": {
     "status": "paused_by_user_2026_10_04",
     "reason": "remaining_non_board_pages_require_revisions",
@@ -154,5 +155,6 @@
     }
   ],
   "previous_implementation_commit": "7ec16ad7c5d1a084699a626c6a74be9522f5802a",
-  "implementation_commit_locator": "Current working branch HEAD; previous verified feature SHA kept separately. Read git log for exact checkpoint commit."
+  "implementation_commit_locator": "handoff/current/STATE.json pins implementation SHA; handoff docs may have later doc-only commit",
+  "handoff_entry": "handoff/current/00_READ_FIRST.md"
 }
