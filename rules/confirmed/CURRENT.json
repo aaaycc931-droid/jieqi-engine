@@ -1,0 +1,16 @@
+{
+  "rule_revision": "LEZI-FUNCTION-2026-10-04-r1",
+  "baseline_id": "LEZI-FUNCTION-2026-10-04-v1",
+  "baseline_manifest": "BASELINE.json",
+  "baseline_digest": "4bcf9fb91f5c6e41f456e7424ebd7ed09c6c07b1595ec825604aa730fdad020b",
+  "ordered_updates": [
+    {
+      "path": "RULE_UPDATE_2026-10-04_WIND_RETURN.md",
+      "sha256": "197148bef2d4dedc409ee74eb871762b4fe1d7a1c09507ef97104795d134d811",
+      "user_confirmation": "那就直接挤死主帅",
+      "scope": "wind.flow.occupied_ground_return"
+    }
+  ],
+  "resolution": "Latest explicit user decisions and ordered rule updates override corresponding frozen baseline sections; all other baseline rules retain their original priority.",
+  "current_digest": "27191eba43cb10417e4e87ff09a5f6fb2aa890be9567ec710a171fb45ab67f35"
+}

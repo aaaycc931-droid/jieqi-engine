@@ -1,6 +1,6 @@
 # 乐子象棋规则引擎
 
-> **当前边界（2026-10-04）：** 已接入 12 英雄、8 常规畸变与 1 宿命的功能检查点，本地 245 测试与 Web 构建通过；仍有规则边界、交叉组合及真机验证待完成。UI 半成品留到最后，暂停 APK。正式来源见 [规则基线](rules/confirmed/BASELINE.json)，进度见 [实现状态](IMPLEMENTATION_STATUS.md)，另对话协作见 [协作说明](PARALLEL_HERO_DESIGN.md)。
+> **当前边界（2026-10-04）：** 已接入 12 英雄、8 常规畸变与 1 宿命的功能检查点，本地 250 测试与 Web 构建通过；仍有规则边界、交叉组合及真机验证待完成。UI 半成品留到最后，暂停 APK。正式来源见 [当前规则](rules/confirmed/CURRENT.json)，进度见 [实现状态](IMPLEMENTATION_STATUS.md)，另对话协作见 [协作说明](PARALLEL_HERO_DESIGN.md)。
 
 这是“乐子象棋”的 H5 可玩版本与权威规则引擎，包含：
 

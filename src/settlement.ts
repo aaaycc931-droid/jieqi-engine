@@ -187,20 +187,23 @@ export function resolveWindReturn(state: GameState, secret: SecretState, executo
       if (attacker) { attacker.x = executor.from.x; attacker.y = executor.from.y; queueLanding(state, attacker, getController(attacker), "execution_return"); }
     }
     const occupant = pieceAt(state, death.position);
-    if (occupant && occupant.id !== host.id) {
-      throw new RuleError("WIND_RETURN_RULE_UNRESOLVED", "風归位格被地面棋占据，此边界规则待确认；本次行动未提交");
-    }
     const returnedGeneral: PublicPiece = { id: host.id, ...death.position, faceDown: false, color: side, type: "general" };
     state.pieces = state.pieces.map(p => p.id === host.id ? returnedGeneral : p);
     delete secret.identities[host.id];
     if (state.effectsByPieceId) delete state.effectsByPieceId[host.id];
     secret.trueGenerals![side] = host.id;
     w.decoyId = host.id; delete w.hostId;
+    returned = true;
+    if (occupant && occupant.id !== host.id) {
+      // 2026-10-04 用户确认：归位格有另一枚地面棋，真主帅直接窒息。
+      // 占位棋不被消灭或弹回；失败归位没有落位触发，也不授予舞步。
+      destroyPiece(state, secret, host.id, otherSide(side), "suffocation");
+      continue;
+    }
     queueLanding(state, returnedGeneral, side, "flow");
     state.automaticEvents ??= [];
     state.automaticEvents.push({ kind: "wind_flow", pieceId: host.id, side, position: death.position });
     if (executor) state.flowDance = { side, pieceId: host.id, steps: 0, resumeTurn: side };
-    returned = true;
   }
   if (returned) settleLandings(state, secret);
   return returned;

@@ -38,6 +38,7 @@
     "runtime_review_record": "review/menu-reference/RUNTIME_INTEGRATION.md"
   },
   "authoritative_documents": [
+    "rules/confirmed/CURRENT.json",
     "rules/confirmed/BASELINE.json",
     "IMPLEMENTATION_STATUS.md",
     "PENDING_AND_RESUME.md",
@@ -47,11 +48,11 @@
   ],
   "baseline_tests": {
     "command": "npm run check",
-    "passed": 245,
+    "passed": 250,
     "failed": 0,
     "web_build": "passed",
     "android_apk_build": "not_generated_user_paused",
-    "current_batch_ci": "success",
+    "current_batch_ci": "pending_for_wind_suffocation_update",
     "current_batch_browser_review": "homepage_only_success_new_hero_gameplay_pending",
     "scope_warning": "Local automated checks are partial coverage; cross rules, browser gameplay, WebView and two-device verification pending.",
     "github_actions_run_id": 37180841385,
@@ -82,7 +83,8 @@
     "warrior_three_distinct_pieces_three_enemy_formal_ends",
     "unified_destroyed_records_include_friendly_deaths_chaos_color_withheld",
     "ui_last_apk_paused",
-    "other_dialogue_proposals_require_explicit_transfer_and_three_way_review"
+    "other_dialogue_proposals_require_explicit_transfer_and_three_way_review",
+    "wind_occupied_ground_return_suffocates_true_general_preserves_occupant"
   ],
   "intentional_deferred": [
     "status_bar_geometry_and_button_positions",
@@ -97,7 +99,7 @@
   "next_action": "cross_rule_and_gameplay_validation_then_ui_last_no_apk",
   "ci_build_branch": "codex/ui-android-apk-20261001",
   "ci_draft_pull_request": 2,
-  "working_tree_note": "Functional batch based on remote 4d985f8; compare against remote tree, not stale local HEAD. New code not a complete product acceptance.",
+  "working_tree_note": "Wind occupied-return rule is now confirmed and implemented; 250 local tests pass. Frozen baseline is unchanged; CURRENT.json points to approved additive rule update.",
   "restrictions": [
     "do_not_merge_main_without_explicit_authorization",
     "do_not_deploy_internet_multiplayer",
@@ -106,7 +108,6 @@
     "do_not_fill_deferred_items_without_user_decision",
     "do_not_generate_apk_until_user_explicitly_resumes"
   ],
-  "latest_implementation_commit": "7ec16ad7c5d1a084699a626c6a74be9522f5802a",
   "latest_ci_verified_feature_commit": "7ec16ad7c5d1a084699a626c6a74be9522f5802a",
   "apk_generation_policy": {
     "status": "paused_by_user_2026_10_04",
@@ -136,18 +137,22 @@
   "implemented_hero_count": 12,
   "standard_mutation_count": 8,
   "destiny_mutation_count": 1,
-  "pending_rule_boundaries": [
-    {
-      "id": "wind_occupied_nonexecution_return",
-      "status": "unconfirmed",
-      "runtime": "reject_transaction_without_commit",
-      "source_gap": "Return required to decoy death square; executor return specified only for checkmate execution."
-    }
-  ],
+  "pending_rule_boundaries": [],
   "collaboration": {
     "implementation_writer": "this_dialogue",
     "design_dialogue": "proposal_only",
     "auto_sync": false,
     "proposal_review_script": "scripts/review/validate-hero-proposal.ts"
-  }
+  },
+  "current_rule_revision": "LEZI-FUNCTION-2026-10-04-r1",
+  "current_rule_digest": "27191eba43cb10417e4e87ff09a5f6fb2aa890be9567ec710a171fb45ab67f35",
+  "confirmed_rule_updates": [
+    {
+      "file": "rules/confirmed/RULE_UPDATE_2026-10-04_WIND_RETURN.md",
+      "user_quote": "那就直接挤死主帅",
+      "implemented": true
+    }
+  ],
+  "previous_implementation_commit": "7ec16ad7c5d1a084699a626c6a74be9522f5802a",
+  "implementation_commit_locator": "Current working branch HEAD; previous verified feature SHA kept separately. Read git log for exact checkpoint commit."
 }

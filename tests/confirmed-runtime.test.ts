@@ -291,12 +291,18 @@ test("RAIN legal check wins at atomic closure without ticking unrelated ghosts o
 });
 
 
-test("WIND pending occupied return rule rejects transaction without committing overlap or revealing the host", () => {
+test("WIND war chariot endpoint occupancy suffocates the returning true general and commits the attack", () => {
   const s = stateFor("wind", [revealed("host", "red", "rook", 0, 7), revealed("attacker", "black", "rook", 3, 5), revealed("screen", "black", "pawn", 3, 7)]), k = secretState();
   const r = applyHeroAbility(s, k, ability("shadow", s, { pieceId: "host" }));
   r.state.turn = "black"; r.state.featureRules.mutation = "war_chariot";
   const before = structuredClone(r);
-  assert.throws(() => applyAuthoritativeMove(r.state, r.secret, move({x:3,y:5}, {x:3,y:9}, "occupied-return")), e => e.code === "WIND_RETURN_RULE_UNRESOLVED");
+  const result = applyAuthoritativeMove(r.state, r.secret, move({x:3,y:5}, {x:3,y:9}, "occupied-return"));
+  assert.equal(result.state.status, "finished"); assert.equal(result.state.winner, "black"); assert.equal(result.state.reason, "suffocation");
+  assert.equal(result.state.pieces.find(p => p.id === "attacker")?.y, 9);
+  assert.equal(result.state.pieces.some(p => p.id === "host"), false);
+  assert.equal(result.state.captured.find(p => p.id === "host")?.type, "general");
+  assert.equal(result.state.captured.find(p => p.id === "host")?.cause, "suffocation");
+  assert.equal(result.state.flowDance, undefined);
   assert.deepEqual(r, before);
 });
 
@@ -318,4 +324,51 @@ test("CLOCK a move received at the exact deadline settles timeout instead of ren
   assert.equal(r.room.phase,"finished"); assert.equal(r.room.game.state.reason,"timeout");
   assert.equal(r.room.game.state.pieces.find(p=>p.id==="pawn").y,6);
   assert.equal(r.room.game.secret.processedActions.late,undefined);
+});
+
+
+test("WIND flight landing crushes decoy then suffocates returning true general without bouncing the flyer", () => {
+  const s = stateFor("wind", [revealed("host", "red", "rook", 0, 7), {...revealed("flyer", "black", "rook", 3, 9), layer:"air"}]), k = secretState();
+  const r = applyHeroAbility(s, k, ability("shadow", s, {pieceId:"host"}));
+  r.state.effectsByPieceId.host = {immuneCrush:true, intangible:true, barrier:{owner:"red",enemyTurnsRemaining:3}};
+  landFlyingPiece(r.state, r.secret, "flyer");
+  assert.equal(r.state.status,"finished"); assert.equal(r.state.winner,"black"); assert.equal(r.state.reason,"suffocation");
+  const flyer=r.state.pieces.find(p=>p.id==="flyer"); assert.equal(flyer.layer,undefined); assert.deepEqual({x:flyer.x,y:flyer.y},{x:3,y:9});
+  const dead=r.state.captured.find(p=>p.id==="host"); assert.equal(dead.type,"general"); assert.equal(dead.cause,"suffocation"); assert.deepEqual(dead.position,{x:3,y:9});
+  assert.equal(r.state.pieces.some(p=>p.x===0 && p.y===7),false);
+  assert.equal(r.state.flowDance,undefined); assert.equal(r.state.effectsByPieceId.host,undefined);
+});
+
+for (const color of ["red","black"] as const) test(`WIND ${color} ground occupancy stays in place while returning general suffocates`, () => {
+  const s=stateFor("wind",[revealed("host","red","rook",0,7)]), k=secretState();
+  const r=applyHeroAbility(s,k,ability("shadow",s,{pieceId:"host"}));
+  destroyPiece(r.state,r.secret,"red-general","black","crush");
+  r.state.pieces.push(revealed("occupant",color,"pawn",3,9));
+  resolveWindReturn(r.state,r.secret); closeDirectDeaths(r.state,r.secret,"black");
+  assert.equal(r.state.winner,"black"); assert.equal(r.state.reason,"suffocation");
+  assert.ok(r.state.pieces.some(p=>p.id==="occupant"));
+  assert.equal(r.state.pieces.filter(p=>p.layer!=="air"&&p.x===3&&p.y===9).length,1);
+});
+
+test("WIND covered ground occupant is retained without exposing its identity", () => {
+  const s=stateFor("wind",[revealed("host","red","rook",0,7)]), k=secretState();
+  const r=applyHeroAbility(s,k,ability("shadow",s,{pieceId:"host"}));
+  destroyPiece(r.state,r.secret,"red-general","black","crush");
+  r.state.pieces.push(covered("occupant",3,9)); r.secret.identities.occupant={color:"black",type:"cannon"};
+  resolveWindReturn(r.state,r.secret); closeDirectDeaths(r.state,r.secret,"black");
+  assert.equal(r.state.reason,"suffocation");
+  assert.deepEqual(r.state.pieces.find(p=>p.id==="occupant"),covered("occupant",3,9));
+  assert.deepEqual(r.secret.identities.occupant,{color:"black",type:"cannon"});
+  assert.equal(r.state.captured.some(p=>p.id==="occupant"),false);
+});
+
+test("WIND air-only occupancy does not block ground return or cause suffocation", () => {
+  const s=stateFor("wind",[revealed("host","red","rook",0,7), {...revealed("flyer","black","rook",3,9),layer:"air"}]), k=secretState();
+  const r=applyHeroAbility(s,k,ability("shadow",s,{pieceId:"host"}));
+  destroyPiece(r.state,r.secret,"red-general","black","crush");
+  resolveWindReturn(r.state,r.secret);
+  assert.equal(closeDirectDeaths(r.state,r.secret,"black"),false);
+  assert.equal(r.state.pieces.find(p=>p.id==="host").type,"general");
+  assert.equal(r.state.pieces.filter(p=>p.x===3&&p.y===9).length,2);
+  assert.equal(r.state.pieces.filter(p=>p.x===3&&p.y===9&&p.layer!=="air").length,1);
 });
