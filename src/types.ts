@@ -192,7 +192,7 @@ export interface SecretState {
   wind?: Partial<Record<Side, { uses: number; readyOnTurn: number; activatedOnTurn?: number; hostId?: string; decoyId: string }>>;
   destinyIdentities?: Record<string, { side: Side; kind: "time_warrior" | "infinite_dragon"; anchor: Position; shown: boolean; identity: SecretIdentity }>;
   rewindUsed?: Partial<Record<Side, true>>;
-  history?: Array<{ actingSide: Side; pieceId?: string; tier: number; from?: Position; state: GameState; secret: SecretState }>;
+  history?: Array<{ actingSide: Side; pieceId?: string; tier: number; from?: Position; remainingMs?: number; state: GameState; secret: SecretState }>;
   replay?: { pieceId: string; deadlineAt: number };
   chaosInitialized?: true;
 }

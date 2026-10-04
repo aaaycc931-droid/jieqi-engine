@@ -1,5 +1,5 @@
 import { RuleError } from "./errors.js";
-import { getController, isInPalace, otherSide } from "./slots.js";
+import { getController, isInPalace, isInsideBoard, otherSide } from "./slots.js";
 import { isGeneralInCheck, pieceAt, samePosition } from "./rules.js";
 
 
@@ -92,7 +92,7 @@ export function queueLanding(state           , piece             , beforeControl
 }
 
 export function placementAllowed(state           , piece             , to          , options                                              = {})          {
-  if (to.x < 0 || to.x > 8 || to.y < 0 || to.y > 9) return false;
+  if (!isInsideBoard(to)) return false;
   const occupied = state.pieces.some(p => p.id !== piece.id && p.layer === piece.layer && samePosition(p, to));
   if (occupied) return false;
   if (state.featureRules?.mutation === "iron_wall" && !options.flow && !options.warriorReturn &&
@@ -299,12 +299,15 @@ export function landFlyingPiece(state           , secret             , id       
 }
 
 /** 不递归保存历史；已处理ID与回溯使用元状态由回溯操作保留。 */
-export function rememberAction(state           , secret             , pieceId                    , tier        , from           )       {
+export function rememberAction(state           , secret             , pieceId                    , tier        , from           , now = Date.now())       {
   const privateSnapshot = copy(secret);
   delete privateSnapshot.history;
   delete privateSnapshot.processedActions;
   secret.history ??= [];
-  secret.history.push({ actingSide: state.turn, pieceId, tier, ...(from ? { from: { ...from } } : {}), state: copy(state), secret: privateSnapshot });
+  // 使用权威接收时刻保存落子前真实剩余，不能从历史回合起点重建总时长。
+  const clock = state.turnDeadlineAt;
+  const remainingMs = clock === undefined ? undefined : Math.max(0, clock - now);
+  secret.history.push({ actingSide: state.turn, pieceId, tier, ...(from ? { from: { ...from } } : {}), ...(remainingMs === undefined ? {} : { remainingMs }), state: copy(state), secret: privateSnapshot });
   // 至少保留双方上一正式行动。较长历史用于核验，快照不会指数膨胀。
   if (secret.history.length > 8) secret.history.shift();
 }

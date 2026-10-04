@@ -1,0 +1,962 @@
+{
+  "authority": "test_case_mapping_non_normative",
+  "ruleRevision": "LEZI-FUNCTION-2026-10-04-r1",
+  "cases": {
+    "INV-BOARD-002": [
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "FLIGHT air layer"
+      }
+    ],
+    "INV-SETUP-001": [
+      {
+        "file": "tests/setup-rps.test.ts",
+        "namePrefix": "SET-01 "
+      },
+      {
+        "file": "tests/setup-rps.test.ts",
+        "namePrefix": "SET-02 "
+      },
+      {
+        "file": "tests/setup-rps.test.ts",
+        "namePrefix": "SET-03 "
+      },
+      {
+        "file": "tests/setup-rps.test.ts",
+        "namePrefix": "SET-05 "
+      },
+      {
+        "file": "tests/setup-rps.test.ts",
+        "namePrefix": "SET-08 "
+      }
+    ],
+    "INV-COVERED-001": [
+      {
+        "file": "tests/movement.test.ts",
+        "namePrefix": "DARK-12 "
+      },
+      {
+        "file": "tests/movement.test.ts",
+        "namePrefix": "CAP-07 "
+      }
+    ],
+    "INV-COVERED-002": [
+      {
+        "file": "tests/movement.test.ts",
+        "namePrefix": "DARK-12 "
+      }
+    ],
+    "INV-REVEAL-001": [
+      {
+        "file": "tests/movement.test.ts",
+        "namePrefix": "CAP-05 "
+      },
+      {
+        "file": "tests/movement.test.ts",
+        "namePrefix": "CAP-06 "
+      },
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "HERO deathwing random"
+      }
+    ],
+    "INV-REVEAL-002": [
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "CHAOS dead covered"
+      }
+    ],
+    "INV-DESTROYED-RECORD-001": [
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "CHAOS dead covered"
+      },
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "DESTINY shown dead warrior"
+      }
+    ],
+    "INV-SECRET-001": [
+      {
+        "file": "tests/setup-rps.test.ts",
+        "namePrefix": "SET-06 "
+      },
+      {
+        "file": "tests/check-end-network.test.ts",
+        "namePrefix": "NET-07 "
+      }
+    ],
+    "INV-LEGALITY-001": [
+      {
+        "file": "tests/check-end-network.test.ts",
+        "namePrefix": "CHECK-09 "
+      }
+    ],
+    "INV-CONTROL-001": [
+      {
+        "file": "tests/movement.test.ts",
+        "namePrefix": "CTRL-01 "
+      },
+      {
+        "file": "tests/movement.test.ts",
+        "namePrefix": "CTRL-02 "
+      },
+      {
+        "file": "tests/movement.test.ts",
+        "namePrefix": "CTRL-03 "
+      }
+    ],
+    "INV-CAPTURE-001": [
+      {
+        "file": "tests/movement.test.ts",
+        "namePrefix": "CAP-03A "
+      },
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "RULE-9A delayed"
+      }
+    ],
+    "INV-CAPTURE-002": [
+      {
+        "file": "tests/movement.test.ts",
+        "namePrefix": "CAP-01 "
+      },
+      {
+        "file": "tests/movement.test.ts",
+        "namePrefix": "CAP-03 "
+      },
+      {
+        "file": "tests/movement.test.ts",
+        "namePrefix": "CAP-04 "
+      }
+    ],
+    "INV-CAPTURE-003": [
+      {
+        "file": "tests/movement.test.ts",
+        "namePrefix": "CAP-05 "
+      },
+      {
+        "file": "tests/movement.test.ts",
+        "namePrefix": "CAP-06 "
+      },
+      {
+        "file": "tests/movement.test.ts",
+        "namePrefix": "CAP-07 "
+      }
+    ],
+    "INV-ACTION-002": [
+      {
+        "file": "tests/check-end-network.test.ts",
+        "namePrefix": "CHECK-07 "
+      }
+    ],
+    "INV-DISPLACEMENT-001": [
+      {
+        "file": "tests/time-line-contracts.test.ts",
+        "namePrefix": "TIME-TRAP-01 "
+      },
+      {
+        "file": "tests/time-line-contracts.test.ts",
+        "namePrefix": "TIME-TRAP-02 "
+      },
+      {
+        "file": "tests/remote-room.test.ts",
+        "namePrefix": "HUNTER-04 "
+      }
+    ],
+    "INV-REWIND-001": [
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "HERO full rewind"
+      }
+    ],
+    "INV-REVIVE-001": [
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "DESTINY shown dead warrior"
+      },
+      {
+        "file": "tests/cross-rule-contracts.test.ts",
+        "namePrefix": "CROSS-REVIVE-01 "
+      }
+    ],
+    "INV-DESTROY-001": [
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "RULE-5 failed flight"
+      },
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "RULE-11 ghost"
+      },
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "HERO zealot fourth"
+      }
+    ],
+    "INV-TERMINAL-001": [
+      {
+        "file": "tests/check-end-network.test.ts",
+        "namePrefix": "END-03 "
+      },
+      {
+        "file": "tests/check-end-network.test.ts",
+        "namePrefix": "END-04 "
+      }
+    ],
+    "INV-ATOMIC-001": [
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "ATOMIC both generals"
+      },
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "WIND war chariot endpoint"
+      }
+    ],
+    "INV-ATOMIC-002": [
+      {
+        "file": "tests/mutation.test.ts",
+        "namePrefix": "MUT-09 "
+      },
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "WIND war chariot endpoint"
+      },
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "WIND flight landing"
+      },
+      {
+        "file": "tests/cross-rule-contracts.test.ts",
+        "namePrefix": "CROSS-ATOMIC-01 "
+      }
+    ],
+    "INV-ATOMIC-003": [
+      {
+        "file": "tests/mutation.test.ts",
+        "namePrefix": "MUT-09 "
+      },
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "ATOMIC both generals"
+      }
+    ],
+    "INV-END-001": [
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "RAIN legal check"
+      },
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "CLOCK network formal"
+      }
+    ],
+    "INV-REASON-001": [
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "WIND flight landing"
+      },
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "HERO revealed hidden"
+      }
+    ],
+    "INV-IDEMPOTENCY-001": [
+      {
+        "file": "tests/check-end-network.test.ts",
+        "namePrefix": "NET-04 "
+      },
+      {
+        "file": "tests/time-line-contracts.test.ts",
+        "namePrefix": "TIME-TIER-01 "
+      }
+    ],
+    "INV-PHASE-001": [
+      {
+        "file": "tests/check-end-network.test.ts",
+        "namePrefix": "NET-01 "
+      },
+      {
+        "file": "tests/bluetooth-disconnect.test.ts",
+        "namePrefix": "BTDISC-03 "
+      }
+    ],
+    "INV-INTANGIBLE-001": [
+      {
+        "file": "tests/assassination.test.ts",
+        "namePrefix": "ROGUE-02 "
+      },
+      {
+        "file": "tests/mutation.test.ts",
+        "namePrefix": "MUT-11 "
+      }
+    ],
+    "INV-INTANGIBLE-002": [
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "HERO zealot fourth"
+      }
+    ],
+    "INV-INTANGIBLE-003": [
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "RULES ground intangible"
+      },
+      {
+        "file": "tests/assassination.test.ts",
+        "namePrefix": "ROGUE-01 "
+      }
+    ],
+    "INV-FLIGHT-001": [
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "FLIGHT air layer"
+      },
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "RULES ground intangible"
+      }
+    ],
+    "INV-FLIGHT-002": [
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "RULE-5 failed flight"
+      },
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "WIND flight landing"
+      }
+    ],
+    "INV-CRUSH-001": [
+      {
+        "file": "tests/mutation.test.ts",
+        "namePrefix": "MUT-11 "
+      },
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "RULE-5 failed flight"
+      }
+    ],
+    "INV-SUFFOCATION-001": [
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "RULE-5 failed flight"
+      },
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "WIND war chariot endpoint"
+      }
+    ],
+    "INV-INFECTION-001": [
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "RULE-11 moving between"
+      },
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "RULE-11 ghost"
+      }
+    ],
+    "INV-INFECTION-002": [
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "RULE-11 ghost"
+      },
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "RULE-11 entering a late"
+      }
+    ],
+    "INV-WARRIOR-001": [
+      {
+        "file": "tests/warrior.test.ts",
+        "namePrefix": "WARRIOR-01 "
+      }
+    ],
+    "INV-WARRIOR-002": [
+      {
+        "file": "tests/warrior.test.ts",
+        "namePrefix": "WARRIOR-02 "
+      },
+      {
+        "file": "tests/warrior.test.ts",
+        "namePrefix": "WARRIOR-06 "
+      },
+      {
+        "file": "tests/assassination.test.ts",
+        "namePrefix": "ROGUE-07 "
+      }
+    ],
+    "INV-WARRIOR-003": [
+      {
+        "file": "tests/remote-room.test.ts",
+        "namePrefix": "HUNTER-04 "
+      }
+    ],
+    "INV-WARRIOR-004": [
+      {
+        "file": "tests/warrior.test.ts",
+        "namePrefix": "WARRIOR-04 "
+      }
+    ],
+    "INV-IRONARMOR-001": [
+      {
+        "file": "tests/warrior.test.ts",
+        "namePrefix": "WARRIOR-03 "
+      },
+      {
+        "file": "tests/warrior.test.ts",
+        "namePrefix": "WARRIOR-05 "
+      },
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "RULE-9 enemy-turn"
+      }
+    ],
+    "INV-ROGUE-001": [
+      {
+        "file": "tests/assassination.test.ts",
+        "namePrefix": "ROGUE-01 "
+      },
+      {
+        "file": "tests/assassination.test.ts",
+        "namePrefix": "ROGUE-05 "
+      },
+      {
+        "file": "tests/assassination.test.ts",
+        "namePrefix": "ROGUE-08 "
+      }
+    ],
+    "INV-ROGUE-002": [
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "RULE-9A delayed"
+      }
+    ],
+    "INV-STRIKE-001": [
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "RULE-9A delayed"
+      },
+      {
+        "file": "tests/assassination.test.ts",
+        "namePrefix": "ROGUE-07 "
+      }
+    ],
+    "INV-TRAP-001": [
+      {
+        "file": "tests/remote-room.test.ts",
+        "namePrefix": "HUNTER-01 "
+      },
+      {
+        "file": "tests/remote-room.test.ts",
+        "namePrefix": "HUNTER-04 "
+      },
+      {
+        "file": "tests/time-line-contracts.test.ts",
+        "namePrefix": "TIME-TRAP-01 "
+      },
+      {
+        "file": "tests/time-line-contracts.test.ts",
+        "namePrefix": "TIME-TRAP-02 "
+      }
+    ],
+    "INV-TRAP-002": [
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "RULE-10 hunter trap lifetime boundary"
+      },
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "RULE-10 late control"
+      },
+      {
+        "file": "tests/time-line-contracts.test.ts",
+        "namePrefix": "TIME-TRAP-01 "
+      }
+    ],
+    "INV-IRONSTEED-001": [
+      {
+        "file": "tests/mutation.test.ts",
+        "namePrefix": "MUT-05 "
+      },
+      {
+        "file": "tests/mutation.test.ts",
+        "namePrefix": "MUT-07 "
+      },
+      {
+        "file": "tests/mutation.test.ts",
+        "namePrefix": "MUT-08 "
+      }
+    ],
+    "INV-WARCHARIOT-001": [
+      {
+        "file": "tests/mutation.test.ts",
+        "namePrefix": "MUT-06 "
+      },
+      {
+        "file": "tests/mutation.test.ts",
+        "namePrefix": "MUT-11 "
+      }
+    ],
+    "INV-CAVALRY-001": [
+      {
+        "file": "tests/mutation.test.ts",
+        "namePrefix": "MUT-03 "
+      },
+      {
+        "file": "tests/mutation.test.ts",
+        "namePrefix": "MUT-12 "
+      }
+    ],
+    "INV-CAVALRY-002": [
+      {
+        "file": "tests/mutation.test.ts",
+        "namePrefix": "MUT-12 "
+      }
+    ],
+    "INV-FORTRESS-001": [
+      {
+        "file": "tests/mutation.test.ts",
+        "namePrefix": "MUT-01 "
+      }
+    ],
+    "INV-MUROZOND-001": [
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "HERO timeline twist moves"
+      },
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "HERO timeline twist refuses"
+      },
+      {
+        "file": "tests/time-line-contracts.test.ts",
+        "namePrefix": "TIME-TRAP-01 "
+      },
+      {
+        "file": "tests/time-line-contracts.test.ts",
+        "namePrefix": "TIME-TRAP-02 "
+      },
+      {
+        "file": "tests/time-line-contracts.test.ts",
+        "namePrefix": "TIME-TRAP-03 "
+      },
+      {
+        "file": "tests/time-line-contracts.test.ts",
+        "namePrefix": "TIME-TIER-02 "
+      }
+    ],
+    "INV-NOZDORMU-001": [
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "HERO full rewind"
+      },
+      {
+        "file": "tests/time-line-contracts.test.ts",
+        "namePrefix": "TIME-CLOCK-01 "
+      },
+      {
+        "file": "tests/time-line-contracts.test.ts",
+        "namePrefix": "TIME-CLOCK-02 "
+      },
+      {
+        "file": "tests/time-line-contracts.test.ts",
+        "namePrefix": "TIME-CLOCK-03 "
+      }
+    ],
+    "INV-TIME-COLLAPSE-001": [
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "DESTINY bomb attacks"
+      }
+    ],
+    "INV-HOURGLASS-001": [
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "DESTINY shown dead warrior"
+      }
+    ],
+    "INV-MANIFESTED-001": [
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "DESTINY shown dead warrior"
+      }
+    ],
+    "INV-CAREFREE-001": [
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "HERO prince permits"
+      }
+    ],
+    "INV-VISIBILITY-001": [
+      {
+        "file": "tests/remote-room.test.ts",
+        "namePrefix": "MODE-01 "
+      },
+      {
+        "file": "tests/setup-rps.test.ts",
+        "namePrefix": "RPS-01 "
+      }
+    ],
+    "INV-TRAP-VISIBILITY-001": [
+      {
+        "file": "tests/remote-room.test.ts",
+        "namePrefix": "HUNTER-01 "
+      },
+      {
+        "file": "tests/remote-room.test.ts",
+        "namePrefix": "MODE-02 "
+      }
+    ],
+    "INV-DISCONNECT-001": [
+      {
+        "file": "tests/bluetooth-disconnect.test.ts",
+        "namePrefix": "BTDISC-02 "
+      },
+      {
+        "file": "tests/bluetooth-disconnect.test.ts",
+        "namePrefix": "BTDISC-05 "
+      },
+      {
+        "file": "tests/bluetooth-disconnect.test.ts",
+        "namePrefix": "BTDISC-06 "
+      }
+    ],
+    "INV-DISCONNECT-002": [
+      {
+        "file": "tests/bluetooth-disconnect.test.ts",
+        "namePrefix": "BTDISC-01 "
+      },
+      {
+        "file": "tests/bluetooth-disconnect.test.ts",
+        "namePrefix": "BTDISC-03 "
+      }
+    ],
+    "INV-DISCONNECT-003": [
+      {
+        "file": "tests/bluetooth-disconnect.test.ts",
+        "namePrefix": "BTDISC-04 "
+      },
+      {
+        "file": "tests/bluetooth-disconnect.test.ts",
+        "namePrefix": "BTDISC-06 "
+      }
+    ],
+    "REJ-001": [
+      {
+        "file": "tests/movement.test.ts",
+        "namePrefix": "DARK-12 "
+      }
+    ],
+    "REJ-002": [
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "FLIGHT air layer"
+      },
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "RULES ground intangible"
+      }
+    ],
+    "REJ-003": [
+      {
+        "file": "tests/movement.test.ts",
+        "namePrefix": "CAP-01 "
+      },
+      {
+        "file": "tests/movement.test.ts",
+        "namePrefix": "CAP-04 "
+      },
+      {
+        "file": "tests/mutation.test.ts",
+        "namePrefix": "MUT-08 "
+      }
+    ],
+    "REJ-004": [
+      {
+        "file": "tests/mutation.test.ts",
+        "namePrefix": "MUT-07 "
+      },
+      {
+        "file": "tests/remote-room.test.ts",
+        "namePrefix": "HUNTER-03 "
+      },
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "WIND flight landing"
+      }
+    ],
+    "REJ-005": [
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "RULE-9A delayed"
+      }
+    ],
+    "REJ-006": [
+      {
+        "file": "tests/mutation.test.ts",
+        "namePrefix": "MUT-09 "
+      },
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "ATOMIC both generals"
+      }
+    ],
+    "REJ-007": [
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "RULE-5 failed flight"
+      },
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "HERO zealot fourth"
+      }
+    ],
+    "REJ-009": [
+      {
+        "file": "tests/assassination.test.ts",
+        "namePrefix": "ROGUE-02 "
+      },
+      {
+        "file": "tests/mutation.test.ts",
+        "namePrefix": "MUT-11 "
+      }
+    ],
+    "REJ-010": [
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "RULES ground intangible"
+      }
+    ],
+    "REJ-011": [
+      {
+        "file": "tests/assassination.test.ts",
+        "namePrefix": "ROGUE-03 "
+      }
+    ],
+    "REJ-013": [
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "RULE-5 failed flight"
+      }
+    ],
+    "REJ-014": [
+      {
+        "file": "tests/warrior.test.ts",
+        "namePrefix": "WARRIOR-01 "
+      },
+      {
+        "file": "tests/warrior.test.ts",
+        "namePrefix": "WARRIOR-04 "
+      }
+    ],
+    "REJ-015": [
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "RULE-10 hunter trap lifetime boundary"
+      },
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "RULE-10 late control"
+      }
+    ],
+    "REJ-016": [
+      {
+        "file": "tests/mutation.test.ts",
+        "namePrefix": "MUT-03 "
+      },
+      {
+        "file": "tests/mutation.test.ts",
+        "namePrefix": "MUT-12 "
+      }
+    ],
+    "REJ-018": [
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "DESTINY shown dead warrior"
+      },
+      {
+        "file": "tests/cross-rule-contracts.test.ts",
+        "namePrefix": "CROSS-REVIVE-01 "
+      }
+    ],
+    "REJ-019": [
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "HERO full rewind"
+      }
+    ],
+    "ADD-SECRET-001": [
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "HERO shadow activation"
+      }
+    ],
+    "ADD-WIND-001": [
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "WIND war chariot endpoint"
+      },
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "WIND red ground"
+      },
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "WIND black ground"
+      },
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "WIND covered ground"
+      },
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "WIND air-only"
+      }
+    ],
+    "ADD-WIND-002": [
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "WIND flight landing"
+      },
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "HERO non-execution decoy"
+      }
+    ],
+    "ADD-WIND-003": [
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "FLOW first step markers"
+      },
+      {
+        "file": "tests/confirmed-runtime.test.ts",
+        "namePrefix": "HERO checkmate execution"
+      }
+    ],
+    "ADD-CLOCK-001": [
+      {
+        "file": "tests/time-line-contracts.test.ts",
+        "namePrefix": "TIME-CLOCK-01 "
+      },
+      {
+        "file": "tests/time-line-contracts.test.ts",
+        "namePrefix": "TIME-CLOCK-02 "
+      },
+      {
+        "file": "tests/time-line-contracts.test.ts",
+        "namePrefix": "TIME-CLOCK-03 "
+      }
+    ],
+    "ADD-TWIST-001": [
+      {
+        "file": "tests/time-line-contracts.test.ts",
+        "namePrefix": "TIME-TRAP-01 "
+      },
+      {
+        "file": "tests/time-line-contracts.test.ts",
+        "namePrefix": "TIME-TRAP-02 "
+      },
+      {
+        "file": "tests/time-line-contracts.test.ts",
+        "namePrefix": "TIME-TRAP-03 "
+      }
+    ],
+    "INV-BOARD-001": [
+      {
+        "file": "tests/cross-rule-contracts.test.ts",
+        "namePrefix": "CROSS-BOARD-01 "
+      }
+    ],
+    "INV-ACTION-PLAN-001": [
+      {
+        "file": "tests/cross-rule-contracts.test.ts",
+        "namePrefix": "CROSS-PLAN-01 "
+      },
+      {
+        "file": "tests/cross-rule-contracts.test.ts",
+        "namePrefix": "CROSS-PLAN-02 "
+      }
+    ],
+    "INV-IRONSTEED-002": [
+      {
+        "file": "tests/cross-rule-contracts.test.ts",
+        "namePrefix": "CROSS-PLAN-01 "
+      }
+    ],
+    "INV-WARCHARIOT-002": [
+      {
+        "file": "tests/cross-rule-contracts.test.ts",
+        "namePrefix": "CROSS-CHARIOT-01 "
+      }
+    ],
+    "INV-TIME-COLLAPSE-002": [
+      {
+        "file": "tests/cross-rule-contracts.test.ts",
+        "namePrefix": "CROSS-COLLAPSE-01 "
+      }
+    ],
+    "INV-CAREFREE-002": [
+      {
+        "file": "tests/cross-rule-contracts.test.ts",
+        "namePrefix": "CROSS-CAREFREE-01 "
+      },
+      {
+        "file": "tests/cross-rule-contracts.test.ts",
+        "namePrefix": "CROSS-CAREFREE-02 "
+      },
+      {
+        "file": "tests/cross-rule-contracts.test.ts",
+        "namePrefix": "CROSS-PLAN-02 "
+      }
+    ],
+    "REJ-008": [
+      {
+        "file": "tests/cross-rule-contracts.test.ts",
+        "namePrefix": "CROSS-DISPLACE-01 "
+      }
+    ],
+    "REJ-012": [
+      {
+        "file": "tests/cross-rule-contracts.test.ts",
+        "namePrefix": "CROSS-FORTRESS-01 "
+      }
+    ],
+    "REJ-017": [
+      {
+        "file": "tests/cross-rule-contracts.test.ts",
+        "namePrefix": "CROSS-CHARIOT-01 "
+      }
+    ],
+    "ADD-JIANXIE-001": [
+      {
+        "file": "tests/cross-rule-contracts.test.ts",
+        "namePrefix": "CROSS-JIANXIE-01 "
+      }
+    ]
+  },
+  "limits": {
+    "INV-BOARD-002": "仅地面/空中同格与空中目标占用；还缺移置层标准化及全入口验证。",
+    "INV-WARRIOR-001": "仅首次离宮授盾；第三名额上限、复活资格及重复进出尚缺直接断言。",
+    "INV-WARRIOR-003": "仅弹回落位陷阱；堡垒复位例外与返回失败窒息尚缺专属用例。",
+    "INV-REVIVE-001": "沙漏复活逐项不继承临时状态已验证；仍缺技能资源与名额保留、落位交叉边界。",
+    "INV-NOZDORMU-001": "已有快照资源与计时案例；全部英雄资源、持续效果及回溯后的保密交接尚缺。",
+    "INV-DISCONNECT-002": "Node房间覆盖选择计时和命令暂停；正式回合时钟顺延、视觉动画与设备恢复尚缺。",
+    "ADD-SECRET-001": "引擎与玩家视图已验证；敌方按钮/动画和本机交接仍缺真实浏览器证据。",
+    "ADD-WIND-003": "中间步和成功结束已有运行用例；双步失败、亲征舞步限制尚缺。",
+    "ADD-CLOCK-001": "3/10/42秒历史预算、房间权威接收及到期已验证；浏览器显示与WebView尚未验收。",
+    "ADD-TWIST-001": "真实倒戈棋返回猎人陷阱、下一正式回合封锁和耗尽已验证；其他来源状态组合尚缺。",
+    "REJ-014": "三回合衰减已覆盖；三名额上限专属用例仍缺。",
+    "REJ-020": "该合同是防止代码替代规则的协作约束；原反例中“尚未实现”属于历史文字，不能用于推断本轮具体缺陷。",
+    "INV-BOARD-001": "移动/移置越界、非整数和非有限坐标拒绝已有证据；完整棋盘全入口保持性仍缺。",
+    "INV-WARCHARIOT-002": "单独验证该车的双将同死路线不构成威胁；不否定局面中其他棋或照面的独立将军。",
+    "REJ-017": "单独验证该车的双将同死路线不构成威胁；不否定局面中其他棋或照面的独立将军。"
+  },
+  "nonRuntime": {
+    "INV-ACTION-001": "术语分类约束需要规范/记录字段检查，不能通过一条执行用例证明。",
+    "INV-KEYWORD-001": "术语退役约束需要规范/日志静态检查，尚未完成。",
+    "REJ-020": "该合同是防止代码替代规则的协作约束；原反例中“尚未实现”属于历史文字，不能用于推断本轮具体缺陷。"
+  }
+}

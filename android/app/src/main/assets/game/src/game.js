@@ -383,6 +383,7 @@ export function applyAuthoritativeMove(
   secret             ,
   command             ,
   deferTurnEnd = false,
+  now = Date.now(),
 )             {
   if (state.flowDance && !deferTurnEnd) return applyFlowDance(state, secret, command);
   if (secret.processedActions[command.actionId] !== undefined) {
@@ -397,7 +398,7 @@ export function applyAuthoritativeMove(
   }
 
   if (secret.replay && (pieceAt(state, command.from)?.id !== secret.replay.pieceId || pieceAt(state, command.to) || pathPiecesForSpecialMove(state, pieceAt(state, command.from) , command.to).length)) throw new RuleError("REWIND_REPLAY", "回溯重走必须同棋且不能进攻");
-  const validation = validatePublicMove(state, command, state.turn);
+  const validation = validatePublicMove(state, command, state.turn, { allowLinkedControl: deferTurnEnd });
   if (!validation.ok && !(validation.code === "SELF_CHECK" && permitsSelfCrushingGeneral(state, command, state.turn))) {
     validationError(validation.code, validation.message);
   }
@@ -407,7 +408,7 @@ export function applyAuthoritativeMove(
   initializeFeatureSecret(nextState, nextSecret);
   nextState.automaticEvents = [];
   nextState.landingEvents = [];
-  if (!deferTurnEnd) rememberAction(state, nextSecret, (command.pieceId ? pieceById(state, command.pieceId) : pieceAt(state, command.from))?.id, pathPiecesForSpecialMove(state, (command.pieceId ? pieceById(state, command.pieceId) : pieceAt(state, command.from)) , command.to).length ? 2 : 1, command.from);
+  if (!deferTurnEnd) rememberAction(state, nextSecret, (command.pieceId ? pieceById(state, command.pieceId) : pieceAt(state, command.from))?.id, pathPiecesForSpecialMove(state, (command.pieceId ? pieceById(state, command.pieceId) : pieceAt(state, command.from)) , command.to).length ? 2 : 1, command.from, now);
   const actingSide = state.turn;
   const source = command.pieceId ? pieceById(nextState, command.pieceId) : pieceAt(nextState, command.from);
   if (!source) validationError("NO_PIECE", "起点没有棋子");
@@ -535,6 +536,7 @@ export function applyAuthoritativeAssassination(
   state           ,
   secret             ,
   command                      ,
+  now = Date.now(),
 )             {
   if (secret.processedActions[command.actionId] !== undefined) {
     return { state: cloneState(state), secret: cloneSecret(secret), duplicate: true };
@@ -592,7 +594,7 @@ export function applyAuthoritativeAssassination(
   initializeFeatureSecret(nextState, nextSecret);
   nextState.automaticEvents = [];
   nextState.landingEvents = [];
-  rememberAction(state, nextSecret, sourcePiece.id, 2, command.from);
+  rememberAction(state, nextSecret, sourcePiece.id, 2, command.from, now);
   const source = command.pieceId ? pieceById(nextState, command.pieceId) : pieceAt(nextState, command.from);
   if (!source) validationError("NO_PIECE", "起点没有棋子");
   const target = source.layer === "air" ? undefined : pieceAt(nextState, command.to);

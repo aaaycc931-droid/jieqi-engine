@@ -1178,7 +1178,7 @@ export function submitRemoteMove(
   const expired = expiredFormalAction(room, playerId, command.actionId, now);
   if (expired) return expired;
 
-  const moved = applyRoomMove(gameWithPrivateTraps(room), playerId, command);
+  const moved = applyRoomMove(gameWithPrivateTraps(room), playerId, command, now);
   if (moved.duplicate) return { room, duplicate: true };
   const trapped = roomWithResolvedTraps(room, moved.room, now);
   if (trapped.room.game?.state.status === "finished") {
@@ -1233,7 +1233,7 @@ export function submitRemoteAssassination(
   const expired = expiredFormalAction(room, playerId, command.actionId, now);
   if (expired) return expired;
 
-  const moved = applyRoomAssassination(gameWithPrivateTraps(room), playerId, command);
+  const moved = applyRoomAssassination(gameWithPrivateTraps(room), playerId, command, now);
   if (moved.duplicate) return { room, duplicate: true };
   const trapped = roomWithResolvedTraps(room, moved.room, now);
   const skill = command.useStrongStrike ? "强击" as const : "刺杀" as const;

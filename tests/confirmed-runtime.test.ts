@@ -123,8 +123,9 @@ test("HERO thief redistributes seconds and same hero mirror conserves sixty seco
 
 test("HERO full rewind restores piece death/reveal and both skill resources, keeps used metadata and revision monotonic", () => {
   const s = stateFor("nozdormu", [revealed("mover", "red", "rook", 0, 7), revealed("victim", "black", "pawn", 0, 6), revealed("reply", "black", "pawn", 2, 2)]), k = secretState();
-  const first = applyAuthoritativeMove(s, k, move({ x: 0, y: 7 }, { x: 0, y: 6 }, "capture"));
-  const reply = applyAuthoritativeMove(first.state, first.secret, move({ x: 2, y: 2 }, { x: 2, y: 3 }, "reply", 1));
+  s.turnStartedAt = 0; s.turnDeadlineAt = 60_000;
+  const first = applyAuthoritativeMove(s, k, move({ x: 0, y: 7 }, { x: 0, y: 6 }, "capture"), false, 50);
+  const reply = applyAuthoritativeMove(first.state, first.secret, move({ x: 2, y: 2 }, { x: 2, y: 3 }, "reply", 1), false, 90);
   reply.state.turnStartedAt = 100;
   const r = applyHeroAbility(reply.state, reply.secret, ability("rewind", reply.state), 101);
   assert.ok(r.state.pieces.some(p => p.id === "victim")); assert.equal(r.state.captured.length, 0);

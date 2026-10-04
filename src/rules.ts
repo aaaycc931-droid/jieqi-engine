@@ -25,6 +25,8 @@ export interface PublicMoveOptions {
   requireCapture?: boolean;
   allowGeneralTarget?: boolean;
   allowIntermediateCheck?: boolean;
+  /** 仅姆诺兹多当前连带操控；不删除或改变下一正式回合的控制陷阱。 */
+  allowLinkedControl?: boolean;
 }
 
 export function samePosition(first: Position, second: Position): boolean {
@@ -342,7 +344,7 @@ export function validatePublicMove(
   }
   const effects = state.effectsByPieceId?.[source.id];
   const target = source.layer === "air" ? undefined : pieceAt(state, move.to);
-  if (effects?.controlTrap && effects.controlTrap.controller === actingSide &&
+  if (!options.allowLinkedControl && effects?.controlTrap && effects.controlTrap.controller === actingSide &&
     effects.controlTrap.blockedFormalTurn === (state.formalTurns?.[actingSide] ?? 0) + 1) {
     return { ok: false, code: "CONTROL_TRAP", message: "该棋下一正式回合被封锁行动" };
   }
@@ -386,11 +388,12 @@ export function getLegalMoves(
   state: GameState,
   pieceId: string,
   actingSide: Side = state.turn,
+  options: PublicMoveOptions = {},
 ): Position[] {
   const source = pieceById(state, pieceId);
   if (!source || getController(source) !== actingSide) return [];
   return getPseudoMoves(state, pieceId).filter(
-    (to) => validatePublicMove(state, { from: source, to, pieceId: source.id }, actingSide).ok,
+    (to) => validatePublicMove(state, { from: source, to, pieceId: source.id }, actingSide, options).ok,
   );
 }
 

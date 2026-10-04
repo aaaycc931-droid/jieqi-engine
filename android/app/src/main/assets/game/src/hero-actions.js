@@ -83,15 +83,14 @@ export function applyHeroAbility(state           , secret             , command 
       const p = s.pieces.find(p => p.id === previous.pieceId);
       requireRule(p && command.to, "NO_TARGET", "目标已死亡或缺少重走落点");
       runtime.used = true;
-      rememberAction(state, k, p.id, 2, { x: p.x, y: p.y });
+      rememberAction(state, k, p.id, 3, { x: p.x, y: p.y }, now);
       const returned = relocatePiece(s, k, p.id, previous.from, "timeline_twist");
       if (!returned || !s.pieces.some(q => q.id === p.id)) { endsTurn = true; break; }
       const controlled = copy(s);
       controlled.turn = getController(p);
       // 此次操控是当前连带动作；“下一正式回合”封锁不取消它。
-      if (controlled.effectsByPieceId?.[p.id]?.controlTrap) delete controlled.effectsByPieceId[p.id].controlTrap;
-      requireRule(getLegalMoves(controlled, p.id).some(to => samePosition(to, command.to )), "INVALID_CONTROLLED_MOVE", "重走必须符合该敌棋一侧全部合法规则");
-      const moved = applyAuthoritativeMove(controlled, k, { from: p, to: command.to, expectedRevision: controlled.revision, actionId: `${command.actionId}:controlled` }, true);
+      requireRule(getLegalMoves(controlled, p.id, controlled.turn, { allowLinkedControl: true }).some(to => samePosition(to, command.to )), "INVALID_CONTROLLED_MOVE", "重走必须符合该敌棋一侧全部合法规则");
+      const moved = applyAuthoritativeMove(controlled, k, { from: p, to: command.to, expectedRevision: controlled.revision, actionId: `${command.actionId}:controlled` }, true, now);
       Object.assign(s, moved.state); Object.assign(k, moved.secret);
       s.turn = side;
       endsTurn = true;
@@ -103,12 +102,13 @@ export function applyHeroAbility(state           , secret             , command 
       requireRule(now - (state.turnStartedAt ?? now) < 10_000 && !isGeneralInCheck(s, side), "REWIND_WINDOW", "回溯只允许回合前10秒且未受将军");
       const previous = [...(k.history ?? [])].reverse().find(h => h.actingSide === side && h.pieceId);
       requireRule(previous?.pieceId, "NO_HISTORY", "没有上一己方行动快照");
+      requireRule(previous.remainingMs !== undefined && Number.isFinite(previous.remainingMs), "REWIND_CLOCK_MISSING", "历史落子前真实剩余时间缺失，不能推定回溯重走时限");
       const processed = copy(k.processedActions), used = { ...k.rewindUsed, [side]: true          }, history = k.history;
       for (const key of Object.keys(s)) delete (s                                      )[key];
       Object.assign(s, copy(previous.state));
       const restoredSecret = copy(previous.secret);
       for (const key of Object.keys(k)) delete (k                                      )[key];
-      Object.assign(k, restoredSecret, { processedActions: processed, rewindUsed: used, history, replay: { pieceId: previous.pieceId, deadlineAt: now + Math.min(10_000, Math.max(0, (previous.state.turnDeadlineAt ?? now + 10_000) - (previous.state.turnStartedAt ?? now))) } });
+      Object.assign(k, restoredSecret, { processedActions: processed, rewindUsed: used, history, replay: { pieceId: previous.pieceId, deadlineAt: now + Math.min(10_000, Math.max(0, previous.remainingMs)) } });
       s.revision = state.revision;
       s.turn = side; s.turnStartedAt = now; s.turnDeadlineAt = k.replay .deadlineAt;
       break;
@@ -170,8 +170,8 @@ export function applyHeroAbility(state           , secret             , command 
   if (!secretOnly) {
     s.revision += 1;
     if (endsTurn) {
-      if (command.ability !== "timeline_twist") rememberAction(state, k, undefined, 2);
-      s.lastMove = { actionId: command.actionId, pieceId: command.pieceId ?? `hero:${side}`, actingSide: side, from: command.to ?? { x: 0, y: 0 }, to: command.to ?? { x: 0, y: 0 }, landed: false, tier: 2, keywords: ["占步", "耗费"] };
+      if (command.ability !== "timeline_twist") rememberAction(state, k, undefined, 2, undefined, now);
+      s.lastMove = { actionId: command.actionId, pieceId: command.pieceId ?? `hero:${side}`, actingSide: side, from: command.to ?? { x: 0, y: 0 }, to: command.to ?? { x: 0, y: 0 }, landed: false, tier: command.ability === "timeline_twist" ? 3 : 2, keywords: ["占步", "耗费"] };
       endSkillTurn(s, k, side, randomInt);
     } else closeDirectDeaths(s, k, side);
   }

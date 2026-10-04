@@ -33,6 +33,7 @@ export function applyRoomMove(
   room          ,
   playerId        ,
   command             ,
+  now = Date.now(),
 )                                         {
   const side = sideForPlayer(room, playerId);
   const alreadyProcessed =
@@ -40,7 +41,7 @@ export function applyRoomMove(
   if (!alreadyProcessed && room.state.turn !== side) {
     throw new RuleError("WRONG_TURN", "还没有轮到该玩家");
   }
-  const result = applyAuthoritativeMove(room.state, room.secret, command);
+  const result = applyAuthoritativeMove(room.state, room.secret, command, false, now);
   return {
     room: {
       players: { ...room.players },
@@ -55,13 +56,14 @@ export function applyRoomAssassination(
   room          ,
   playerId        ,
   command                      ,
+  now = Date.now(),
 )                                         {
   const side = sideForPlayer(room, playerId);
   const alreadyProcessed = room.secret.processedActions[command.actionId] !== undefined;
   if (!alreadyProcessed && room.state.turn !== side) {
     throw new RuleError("WRONG_TURN", "还没有轮到该玩家");
   }
-  const result = applyAuthoritativeAssassination(room.state, room.secret, command);
+  const result = applyAuthoritativeAssassination(room.state, room.secret, command, now);
   return {
     room: {
       players: { ...room.players },
