@@ -1,0 +1,35 @@
+name: Review adopted homepage runtime
+
+on:
+  push:
+    branches: [codex/ui-android-apk-20261001]
+    paths:
+      - web/**
+      - scripts/build-web.ts
+      - review/menu-reference/**
+      - scripts/review/**
+      - .github/workflows/menu-reference-review.yml
+  workflow_dispatch:
+
+jobs:
+  browser-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Build the actual homepage runtime without packaging Android
+        run: node scripts/build-web.ts
+      - name: Install the browser for this review
+        run: npm install --no-save --package-lock=false playwright@1.58.2 && npx playwright install --with-deps chromium
+      - name: Render the adopted homepage and check live controls
+        run: node scripts/review/capture-home-runtime.mjs
+      - name: Keep browser screenshots and verification report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: home-runtime-browser-review
+          path: review-results/home-runtime/
+          if-no-files-found: error
+          retention-days: 7

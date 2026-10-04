@@ -67,7 +67,8 @@ export type WinReason =
   | "resign"
   | "trap_ambush"
   | "crush_them"
-  | "rampage";
+  | "rampage"
+  | "disconnect";
 
 export interface CapturedPiece extends SecretIdentity {
   id: string;
@@ -99,8 +100,8 @@ export interface LastMove {
  */
 export interface StealthEffect {
   owner: Side;
-  /** 只在拥有者完成正式行动时递减；发动回合不计入。 */
-  remainingOwnerTurns: 1 | 2;
+  /** 发动回合不计入；在接下来的一个己方正式行动结束时清除。 */
+  remainingOwnerTurns: 1;
   strongStrikeAvailable: boolean;
   source: SkillSource;
 }
@@ -143,7 +144,7 @@ export interface GameState {
   captured: CapturedPiece[];
   lastMove?: LastMove;
   winner?: Side;
-  drawReason?: "mutual_destruction";
+  drawReason?: "mutual_destruction" | "disconnect_timeout";
   reason?: WinReason;
   /** 未受英雄/畸变影响的旧棋局可省略，视为空效果。 */
   effectsByPieceId?: PieceEffectsById;
