@@ -1,0 +1,2133 @@
+{
+  "authority": "execution_evidence_non_normative",
+  "generatedAt": "2026-10-04T11:27:14.948Z",
+  "sourceCommitAtRun": "551ec5c107334d0e7bb2feb4aada42f0041f3c74",
+  "sourceDigest": "85076a29cf80632eeea4bc13943a3d9785172d80618e94894fd4fde68de954d7",
+  "sourceDigestPaths": [
+    ".github/workflows/menu-reference-review.yml",
+    ".github/workflows/verify.yml",
+    "package.json",
+    "review/invariants/CASE_MAP.json",
+    "scripts/build-web.ts",
+    "scripts/review/capture-home-runtime.mjs",
+    "scripts/review/capture-menu-review.mjs",
+    "scripts/review/prepare-menu-review.mjs",
+    "scripts/review/validate-hero-proposal.ts",
+    "scripts/review/verify-invariant-evidence.mjs",
+    "scripts/serve-web.ts",
+    "src/bluetooth-host-room.ts",
+    "src/bluetooth-protocol.ts",
+    "src/errors.ts",
+    "src/game.ts",
+    "src/hero-actions.ts",
+    "src/heroes.ts",
+    "src/index.ts",
+    "src/mutations.ts",
+    "src/proposal-review.ts",
+    "src/remote-room.ts",
+    "src/room.ts",
+    "src/rps.ts",
+    "src/rules.ts",
+    "src/settlement.ts",
+    "src/setup.ts",
+    "src/sha256.ts",
+    "src/slots.ts",
+    "src/types.ts",
+    "tests/android-shell.test.ts",
+    "tests/assassination.test.ts",
+    "tests/bluetooth-disconnect.test.ts",
+    "tests/bluetooth-host-room.test.ts",
+    "tests/bluetooth-protocol.test.ts",
+    "tests/check-end-network.test.ts",
+    "tests/confirmed-runtime.test.ts",
+    "tests/cross-rule-contracts.test.ts",
+    "tests/helpers.ts",
+    "tests/movement.test.ts",
+    "tests/mutation-rarity.test.ts",
+    "tests/mutation.test.ts",
+    "tests/proposal-review.test.ts",
+    "tests/remote-room.test.ts",
+    "tests/setup-rps.test.ts",
+    "tests/time-line-contracts.test.ts",
+    "tests/warrior.test.ts",
+    "tests/web-gameplay-v4.test.ts",
+    "tests/web-layout.test.ts",
+    "tests/web-messages.test.ts",
+    "web/app.ts",
+    "web/assets/gameplay-v4/components/backgrounds/paper-background.png",
+    "web/assets/gameplay-v4/components/board/board-clean-no-pieces-transparent.png",
+    "web/assets/gameplay-v4/components/board/board-structure-no-wash-transparent.png",
+    "web/assets/gameplay-v4/components/board/layers/complete-grid.png",
+    "web/assets/gameplay-v4/components/board/layers/ink-wash-overlay.png",
+    "web/assets/gameplay-v4/components/board/layers/organic-frame-balanced-native.png",
+    "web/assets/gameplay-v4/components/board/layers/river-labels.png",
+    "web/assets/gameplay-v4/components/controls/avatar-frame.png",
+    "web/assets/gameplay-v4/components/controls/captured-expand-arrow.png",
+    "web/assets/gameplay-v4/components/controls/more-button.png",
+    "web/assets/gameplay-v4/components/controls/skill-ring-original.png",
+    "web/assets/gameplay-v4/components/controls/skill-slot-empty-display.png",
+    "web/assets/gameplay-v4/components/controls/skill-slot-labeled-display.png",
+    "web/assets/gameplay-v4/components/header/mutation-badge.png",
+    "web/assets/gameplay-v4/components/header/player-blue-module.png",
+    "web/assets/gameplay-v4/components/header/player-red-module.png",
+    "web/assets/gameplay-v4/components/header/timer-60.png",
+    "web/assets/gameplay-v4/components/panels/captured-panel-base.png",
+    "web/assets/gameplay-v4/components/panels/captured-panel-module.png",
+    "web/assets/gameplay-v4/components/panels/message-panel-module.png",
+    "web/assets/gameplay-v4/components/panels/status-panel-frame.png",
+    "web/assets/gameplay-v4/components/panels/status-panel-module.png",
+    "web/assets/gameplay-v4/components/pieces/captured/piece-blue-rook-centered.png",
+    "web/assets/gameplay-v4/components/pieces/captured/piece-blue-soldier-centered.png",
+    "web/assets/gameplay-v4/components/pieces/captured/piece-red-cannon-centered.png",
+    "web/assets/gameplay-v4/components/pieces/captured/piece-red-soldier-centered.png",
+    "web/assets/gameplay-v4/components/pieces/glyph-black-general-display.png",
+    "web/assets/gameplay-v4/components/pieces/glyph-red-marshal-display.png",
+    "web/assets/gameplay-v4/components/rings-display-68/bottom_1_master1_240deg.png",
+    "web/assets/gameplay-v4/components/rings-display-68/bottom_2_master2_240deg.png",
+    "web/assets/gameplay-v4/components/rings-display-68/bottom_3_master3_0deg.png",
+    "web/assets/gameplay-v4/components/rings-display-68/bottom_4_master4_0deg.png",
+    "web/assets/gameplay-v4/components/rings-display-68/bottom_5_master5_0deg.png",
+    "web/assets/gameplay-v4/components/rings-display-68/top_1_master1_120deg.png",
+    "web/assets/gameplay-v4/components/rings-display-68/top_2_master2_120deg.png",
+    "web/assets/gameplay-v4/components/rings-display-68/top_3_master3_120deg.png",
+    "web/assets/gameplay-v4/components/rings-display-68/top_4_master4_180deg.png",
+    "web/assets/gameplay-v4/components/rings-display-68/top_5_master5_180deg.png",
+    "web/assets/gameplay-v4/components/rings-original/bottom_1_master1_240deg.png",
+    "web/assets/gameplay-v4/components/rings-original/bottom_2_master2_240deg.png",
+    "web/assets/gameplay-v4/components/rings-original/bottom_3_master3_0deg.png",
+    "web/assets/gameplay-v4/components/rings-original/bottom_4_master4_0deg.png",
+    "web/assets/gameplay-v4/components/rings-original/bottom_5_master5_0deg.png",
+    "web/assets/gameplay-v4/components/rings-original/top_1_master1_120deg.png",
+    "web/assets/gameplay-v4/components/rings-original/top_2_master2_120deg.png",
+    "web/assets/gameplay-v4/components/rings-original/top_3_master3_120deg.png",
+    "web/assets/gameplay-v4/components/rings-original/top_4_master4_180deg.png",
+    "web/assets/gameplay-v4/components/rings-original/top_5_master5_180deg.png",
+    "web/assets/gameplay-v4/layout-manifest.json",
+    "web/assets/gameplay-v4/ring-placement-manifest.tsv",
+    "web/assets/gameplay-v4/runtime/board-clean-no-center.png",
+    "web/assets/gameplay-v4/runtime/captured-panel-frame.png",
+    "web/assets/gameplay-v4/runtime/glyphs/black-advisor.png",
+    "web/assets/gameplay-v4/runtime/glyphs/black-cannon.png",
+    "web/assets/gameplay-v4/runtime/glyphs/black-elephant.png",
+    "web/assets/gameplay-v4/runtime/glyphs/black-general.png",
+    "web/assets/gameplay-v4/runtime/glyphs/black-horse.png",
+    "web/assets/gameplay-v4/runtime/glyphs/black-pawn.png",
+    "web/assets/gameplay-v4/runtime/glyphs/black-rook.png",
+    "web/assets/gameplay-v4/runtime/glyphs/red-advisor.png",
+    "web/assets/gameplay-v4/runtime/glyphs/red-cannon.png",
+    "web/assets/gameplay-v4/runtime/glyphs/red-elephant.png",
+    "web/assets/gameplay-v4/runtime/glyphs/red-general.png",
+    "web/assets/gameplay-v4/runtime/glyphs/red-horse.png",
+    "web/assets/gameplay-v4/runtime/glyphs/red-pawn.png",
+    "web/assets/gameplay-v4/runtime/glyphs/red-rook.png",
+    "web/assets/gameplay-v4/runtime/message-panel-frame.png",
+    "web/assets/gameplay-v4/runtime/more-button-clean.png",
+    "web/assets/gameplay-v4/runtime/mutation-frame.png",
+    "web/assets/gameplay-v4/runtime/player-blue-frame.png",
+    "web/assets/gameplay-v4/runtime/player-red-frame.png",
+    "web/assets/menu-original/README.md",
+    "web/assets/menu-original/approved-menu.png",
+    "web/assets/menu-v1/README.md",
+    "web/assets/menu-v1/author-liufengwuying.png",
+    "web/assets/menu-v1/decoration-footer.png",
+    "web/assets/menu-v1/decoration-header.png",
+    "web/assets/menu-v1/icon-back.png",
+    "web/assets/menu-v1/icon-settings.png",
+    "web/assets/menu-v1/label-bluetooth.png",
+    "web/assets/menu-v1/label-create.png",
+    "web/assets/menu-v1/label-join.png",
+    "web/assets/menu-v1/label-local.png",
+    "web/assets/menu-v1/label-online.png",
+    "web/assets/menu-v1/label-reset.png",
+    "web/assets/menu-v1/label-rules.png",
+    "web/assets/menu-v1/title-lezi-xiangqi.png",
+    "web/assets/menu-v1/title-settings.png",
+    "web/assets/rps-v1/README.md",
+    "web/assets/rps-v1/gesture-paper.png",
+    "web/assets/rps-v1/gesture-rock.png",
+    "web/assets/rps-v1/gesture-scissors.png",
+    "web/home-menu.css",
+    "web/index.html",
+    "web/messages.ts",
+    "web/style.css",
+    "web/ui-refresh.css"
+  ],
+  "ruleRevision": "LEZI-FUNCTION-2026-10-04-r1",
+  "contractDigest": "a1d0c817bd1d6bec20080460066d84b80ec0d5a29eff889973d2395c11ae6b22",
+  "runtime": "v24.19.0",
+  "testSummary": {
+    "passed": 273,
+    "failed": 0,
+    "executionFailed": false
+  },
+  "contractSummary": {
+    "total": 96,
+    "partial_evidence_passed": 93,
+    "failed_cases": 0,
+    "missing_tests": 0,
+    "non_runtime_contract": 3,
+    "fullyAccepted": 0
+  },
+  "limits": [
+    "相关用例重新运行通过不等于全称不变量已经证明。",
+    "静态源码/布局检查、引擎运行时、浏览器和实体双机证据不能互相替代。",
+    "未更改规则 revision、稀有度、评分或用户验收状态。"
+  ],
+  "contracts": [
+    {
+      "id": "INV-BOARD-001",
+      "group": "invariants",
+      "statement": "当前存活棋坐标必须为整数且 0≤x≤8, 0≤y≤9。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/cross-rule-contracts.test.ts",
+          "name": "CROSS-BOARD-01 invalid displacement coordinates leave the living piece and secret state unchanged",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "移动/移置越界、非整数和非有限坐标拒绝已有证据；完整棋盘全入口保持性仍缺。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-BOARD-002",
+      "group": "invariants",
+      "statement": "同坐标的【地面】层最多一枚棋，【飞行】层最多一枚棋；一地面一飞行可以共存。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "FLIGHT air layer can move above a ground piece without capturing it; air destination occupancy is enforced",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "仅地面/空中同格与空中目标占用；还缺移置层标准化及全入口验证。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-SETUP-001",
+      "group": "invariants",
+      "statement": "标准新局为 32 个唯一棋子 ID：两枚明将帅固定，30 枚暗子占标准暗位，秘密身份池不含将帅。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/setup-rps.test.ts",
+          "name": "SET-01 将帅固定在标准位置",
+          "passed": true
+        },
+        {
+          "file": "tests/setup-rps.test.ts",
+          "name": "SET-02 秘密池恰好30枚且不含将帅",
+          "passed": true
+        },
+        {
+          "file": "tests/setup-rps.test.ts",
+          "name": "SET-03 每种颜色的棋子数量正确",
+          "passed": true
+        },
+        {
+          "file": "tests/setup-rps.test.ts",
+          "name": "SET-05 32个棋子ID唯一且没有遗漏",
+          "passed": true
+        },
+        {
+          "file": "tests/setup-rps.test.ts",
+          "name": "SET-08 所有存活暗子都在标准暗子位置",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-COVERED-001",
+      "group": "invariants",
+      "statement": "暗来源成功完成预定【移动】或【进攻】落位后，必须在同一原子行动中【揭示】。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/movement.test.ts",
+          "name": "DARK-12 暗子非吃子移动后立即公开身份",
+          "passed": true
+        },
+        {
+          "file": "tests/movement.test.ts",
+          "name": "CAP-07 暗来源翻成被吃明子的同色后仍保留吃子结果",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-COVERED-002",
+      "group": "invariants",
+      "statement": "当前已定义来源中，存活暗子离开标准暗位只能来自明确不揭示的来源流程；不得由普通【移动】/【进攻】产生。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/movement.test.ts",
+          "name": "DARK-12 暗子非吃子移动后立即公开身份",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-REVEAL-001",
+      "group": "invariants",
+      "statement": "任何仍暗置的棋实际进入【消灭】时，必须同步死亡【揭示】真实身份，再进入已消灭记录。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/movement.test.ts",
+          "name": "CAP-05 被吃暗子真实同色也不会撤销吃子",
+          "passed": true
+        },
+        {
+          "file": "tests/movement.test.ts",
+          "name": "CAP-06 被吃暗子真实异色也不产生额外回合",
+          "passed": true
+        },
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "HERO deathwing random draws are independent, reveal dead covered identity and preserve generals",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-REVEAL-002",
+      "group": "invariants",
+      "statement": "【混乱】中的未正常揭示暗子死亡时只公开真实兵种，不公开死亡时秘密阵营。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "CHAOS dead covered piece reveals kind without publishing secret faction",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-DESTROYED-RECORD-001",
+      "group": "invariants",
+      "statement": "所有实际【消灭】统一进入当前“已消灭棋子记录”，按被消灭棋身份/公开阵营归组，不按杀手归组。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "CHAOS dead covered piece reveals kind without publishing secret faction",
+          "passed": true
+        },
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "DESTINY shown dead warrior revival and frozen blocked-anchor eligibility; cleanup and dragon reload still occur",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-SECRET-001",
+      "group": "invariants",
+      "statement": "公共暗子对象不得泄露真实颜色/兵种；权威私有状态可持有秘密身份。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/setup-rps.test.ts",
+          "name": "SET-06 公开暗子不含真实颜色与兵种",
+          "passed": true
+        },
+        {
+          "file": "tests/check-end-network.test.ts",
+          "name": "NET-07 所有公开数据都不包含未揭身份",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-LEGALITY-001",
+      "group": "invariants",
+      "statement": "普通合法性与落点提示不得读取未公开暗身份。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/check-end-network.test.ts",
+          "name": "CHECK-09 落子前的公开状态与提示不暴露背刺身份",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-CONTROL-001",
+      "group": "invariants",
+      "statement": "暗子由标准位置所属方控制；正常【揭示】后按公开真实阵营控制。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/movement.test.ts",
+          "name": "CTRL-01 红方暗子翻出红棋后仍由红方控制",
+          "passed": true
+        },
+        {
+          "file": "tests/movement.test.ts",
+          "name": "CTRL-02 红方暗子翻出黑棋后立即由黑方控制",
+          "passed": true
+        },
+        {
+          "file": "tests/movement.test.ts",
+          "name": "CTRL-03 黑方暗子翻出红棋后立即由红方控制",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-CAPTURE-001",
+      "group": "invariants",
+      "statement": "普通吃子流程不把将帅作为普通目标；将帅离场须来自裁决/背刺、碾碎、陷阱、感染、窒息、时间崩坏等明确来源。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/movement.test.ts",
+          "name": "CAP-03A 不能直接吃将帅",
+          "passed": true
+        },
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "RULE-9A delayed strong strike may backstab a true general after an entire enemy turn",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-CAPTURE-002",
+      "group": "invariants",
+      "statement": "基础自残只允许按合法几何进攻暗目标，不允许把己方明棋当普通目标。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/movement.test.ts",
+          "name": "CAP-01 红明子可以吃红方位置上的暗子",
+          "passed": true
+        },
+        {
+          "file": "tests/movement.test.ts",
+          "name": "CAP-03 自残只允许吃暗子，不能吃己方明子",
+          "passed": true
+        },
+        {
+          "file": "tests/movement.test.ts",
+          "name": "CAP-04 红方暗子可以吃另一枚红方暗子",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-CAPTURE-003",
+      "group": "invariants",
+      "statement": "暗目标被合法消灭后，其身份按揭示规则公开并记录；揭示出的同色/异色结果不回滚本次已合法发生的进攻。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/movement.test.ts",
+          "name": "CAP-05 被吃暗子真实同色也不会撤销吃子",
+          "passed": true
+        },
+        {
+          "file": "tests/movement.test.ts",
+          "name": "CAP-06 被吃暗子真实异色也不产生额外回合",
+          "passed": true
+        },
+        {
+          "file": "tests/movement.test.ts",
+          "name": "CAP-07 暗来源翻成被吃明子的同色后仍保留吃子结果",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-ACTION-001",
+      "group": "invariants",
+      "statement": "正式主行动只有【移动】与【进攻】；“走棋”只保留为自然语言，不是正式上位分类。",
+      "status": "non_runtime_contract",
+      "relatedCases": [],
+      "verificationLimit": "术语分类约束需要规范/记录字段检查，不能通过一条执行用例证明。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-ACTION-002",
+      "group": "invariants",
+      "statement": "“将军”是棋盘威胁状态，不是【进攻】或【终结】。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/check-end-network.test.ts",
+          "name": "CHECK-07 同色棋翻开后攻击对方将帅属于普通将军",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-KEYWORD-001",
+      "group": "invariants",
+      "statement": "【吃子】不得作为与【移动】、【进攻】并列的正式行动词；普通吃子属于【进攻】。",
+      "status": "non_runtime_contract",
+      "relatedCases": [],
+      "verificationLimit": "术语退役约束需要规范/日志静态检查，尚未完成。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-ACTION-PLAN-001",
+      "group": "invariants",
+      "statement": "主行动类型在行动计划阶段按所选路线的主动杀伤性质确定；事后自动触发不反向改类。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/cross-rule-contracts.test.ts",
+          "name": "CROSS-PLAN-01 iron steed attacking an immune friendly leg is still an attack before any kill",
+          "passed": true
+        },
+        {
+          "file": "tests/cross-rule-contracts.test.ts",
+          "name": "CROSS-PLAN-02 automatic landing trap does not reclassify an empty move as attack",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-DISPLACEMENT-001",
+      "group": "invariants",
+      "statement": "【移置】是存活棋的非【移动】、非【进攻】位置变化；成功落位默认结算正常落位效果。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/time-line-contracts.test.ts",
+          "name": "TIME-TRAP-01 returning turncoat completes linked control and keeps next formal-turn restriction",
+          "passed": true
+        },
+        {
+          "file": "tests/time-line-contracts.test.ts",
+          "name": "TIME-TRAP-02 lethal return trap closes the skill without executing its selected move",
+          "passed": true
+        },
+        {
+          "file": "tests/remote-room.test.ts",
+          "name": "HUNTER-04 壁垒弹回属于移置，触发起点的正常落位陷阱",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-REWIND-001",
+      "group": "invariants",
+      "statement": "【回溯】恢复来源规定的历史快照；被恢复的变化不视为重新发生，也不拆成逐枚【移置】/复活。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "HERO full rewind restores piece death/reveal and both skill resources, keeps used metadata and revision monotonic",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-REVIVE-001",
+      "group": "invariants",
+      "statement": "复活只恢复存活本体，不恢复死亡前临时状态。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "DESTINY shown dead warrior revival and frozen blocked-anchor eligibility; cleanup and dragon reload still occur",
+          "passed": true
+        },
+        {
+          "file": "tests/cross-rule-contracts.test.ts",
+          "name": "CROSS-REVIVE-01 hourglass revives a shown warrior without temporary states and preserves public identity",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "沙漏复活逐项不继承临时状态已验证；仍缺技能资源与名额保留、落位交叉边界。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-DESTROY-001",
+      "group": "invariants",
+      "statement": "【消灭】是棋子级结果，不要求杀手，也不自动等于【终结】；不得默认先清除全部状态。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "RULE-5 failed flight landing on crush immune victim suffocates; victim is unchanged",
+          "passed": true
+        },
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "RULE-11 ghost is a non-unit, infects intangible ground pieces, third opportunity kills",
+          "passed": true
+        },
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "HERO zealot fourth invocation ends turn; execution then prefers home half and can randomly hit intangible",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-TERMINAL-001",
+      "group": "invariants",
+      "statement": "【终结】是对局流程标签，可有或没有先行【消灭】。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/check-end-network.test.ts",
+          "name": "END-03 未被将军但没有合法棋即为无处可逃",
+          "passed": true
+        },
+        {
+          "file": "tests/check-end-network.test.ts",
+          "name": "END-04 玩家臣服后对方获胜",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-ATOMIC-001",
+      "group": "invariants",
+      "statement": "原子结算统一使用“候选终局 → 原子闭合 → 正式【终结】”。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "ATOMIC both generals destroyed in one committed set yields draw and preserves causes",
+          "passed": true
+        },
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "WIND war chariot endpoint occupancy suffocates the returning true general and commits the attack",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-ATOMIC-002",
+      "group": "invariants",
+      "statement": "原子闭合前，即使将帅中途【消灭】，同一不可分割来源的已承诺步骤、强制落位/返回、直接落位触发、死亡揭示与记录仍须完成。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/mutation.test.ts",
+          "name": "MUT-09 战车碾碎己方将帅并击杀敌将时两败俱伤",
+          "passed": true
+        },
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "WIND war chariot endpoint occupancy suffocates the returning true general and commits the attack",
+          "passed": true
+        },
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "WIND flight landing crushes decoy then suffocates returning true general without bouncing the flyer",
+          "passed": true
+        },
+        {
+          "file": "tests/cross-rule-contracts.test.ts",
+          "name": "CROSS-ATOMIC-01 destruction keeps its locked draw set after killing Wind's true host",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-ATOMIC-003",
+      "group": "invariants",
+      "statement": "原子闭合后双方将帅均【消灭】时，outcome reason 必须为 mutual_destruction，具体死亡来源保留在事件日志。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/mutation.test.ts",
+          "name": "MUT-09 战车碾碎己方将帅并击杀敌将时两败俱伤",
+          "passed": true
+        },
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "ATOMIC both generals destroyed in one committed set yields draw and preserves causes",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-END-001",
+      "group": "invariants",
+      "statement": "正式【终结】后停止回合切换、持续时间正常递减、下一回合/回合末刷新、无关新触发、新技能机会和玩家决策。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "RAIN legal check wins at atomic closure without ticking unrelated ghosts or formal turns",
+          "passed": true
+        },
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "CLOCK network formal turn expiry gives timeout and stays stable on later observations",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-REASON-001",
+      "group": "invariants",
+      "statement": "三层感染、窒息、时间崩坏、其他未命名杀将分别使用 infection、suffocation、time_collapse、general_destroyed。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "WIND flight landing crushes decoy then suffocates returning true general without bouncing the flyer",
+          "passed": true
+        },
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "HERO revealed hidden true general dies by ordinary piece eligibility, never rescues by flow",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-IDEMPOTENCY-001",
+      "group": "invariants",
+      "statement": "相同 actionId 重放不得再次改变权威状态。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/check-end-network.test.ts",
+          "name": "NET-04 同一actionId重复提交不会重复执行",
+          "passed": true
+        },
+        {
+          "file": "tests/time-line-contracts.test.ts",
+          "name": "TIME-TIER-01 timeline rewrite is tier III in history and public action record",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-PHASE-001",
+      "group": "invariants",
+      "statement": "只有与房间当前阶段匹配的命令可执行。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/check-end-network.test.ts",
+          "name": "NET-01 非当前行动方不能提交落子",
+          "passed": true
+        },
+        {
+          "file": "tests/bluetooth-disconnect.test.ts",
+          "name": "BTDISC-03 任一玩家断线后锁定双方全部游戏操作",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-INTANGIBLE-001",
+      "group": "invariants",
+      "statement": "【无形】只改变“能否被需要直接指定具体棋子的效果直接指定”，不改变空间存在。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/assassination.test.ts",
+          "name": "ROGUE-02 无形地面棋仍挡路径，不能直接进攻",
+          "passed": true
+        },
+        {
+          "file": "tests/mutation.test.ts",
+          "name": "MUT-11 战车路径包含无形地面棋的实体计数",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-INTANGIBLE-002",
+      "group": "invariants",
+      "statement": "系统从合法候选池【随机】抽取不属于直接指定；【无形】默认仍在池中。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "HERO zealot fourth invocation ends turn; execution then prefers home half and can randomly hit intangible",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-INTANGIBLE-003",
+      "group": "invariants",
+      "statement": "通用【无形】保留正常攻击几何并原则上可形成有效将军。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "RULES ground intangible rook still gives ordinary check, air rook does not",
+          "passed": true
+        },
+        {
+          "file": "tests/assassination.test.ts",
+          "name": "ROGUE-01 刺杀首步消耗英雄次数，棋子进入公开隐身并保留强击",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-FLIGHT-001",
+      "group": "invariants",
+      "statement": "【飞行】同时获得【无形】、失去【地面】、免疫【碾碎】、不能【进攻】；不占地面层。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "FLIGHT air layer can move above a ground piece without capturing it; air destination occupancy is enforced",
+          "passed": true
+        },
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "RULES ground intangible rook still gives ordinary check, air rook does not",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-FLIGHT-002",
+      "group": "invariants",
+      "statement": "飞行降落：无地面棋则恢复【地面】；有地面棋则先尝试【碾碎】；地面棋仍存活时飞行棋【窒息】【消灭】。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "RULE-5 failed flight landing on crush immune victim suffocates; victim is unchanged",
+          "passed": true
+        },
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "WIND flight landing crushes decoy then suffocates returning true general without bouncing the flyer",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-CRUSH-001",
+      "group": "invariants",
+      "statement": "【碾碎】直接尝试使对象【消灭】，不要求直接指定，也不默认先清除状态。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/mutation.test.ts",
+          "name": "MUT-11 战车路径包含无形地面棋的实体计数",
+          "passed": true
+        },
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "RULE-5 failed flight landing on crush immune victim suffocates; victim is unchanged",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-SUFFOCATION-001",
+      "group": "invariants",
+      "statement": "【窒息】只用于来源强制占据/返回/降落到指定位置而空间冲突无法解除的明确场景。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "RULE-5 failed flight landing on crush immune victim suffocates; victim is unchanged",
+          "passed": true
+        },
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "WIND war chariot endpoint occupancy suffocates the returning true general and commits the attack",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-INFECTION-001",
+      "group": "invariants",
+      "statement": "【感染】绑定棋子；亡魂是格上的持续影响，不是单位。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "RULE-11 moving between active ghosts preserves infection without an immediate stack",
+          "passed": true
+        },
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "RULE-11 ghost is a non-unit, infects intangible ground pieces, third opportunity kills",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-INFECTION-002",
+      "group": "invariants",
+      "statement": "每个对应死亡骑士方正式回合末，对合格敌方地面棋 +1 感染；达到 3 层立即【消灭】。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "RULE-11 ghost is a non-unit, infects intangible ground pieces, third opportunity kills",
+          "passed": true
+        },
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "RULE-11 entering a late ghost has too few opportunities for lethal infection",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-WARRIOR-001",
+      "group": "invariants",
+      "statement": "每局最多 3 枚不同己方非将帅明棋，在首次通过【移动】或【进攻】成功离开己方九宫时获得普通防御；名额与单棋资格不返还。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/warrior.test.ts",
+          "name": "WARRIOR-01 明棋离开己方九宫获得一次公开壁垒",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "仅首次离宮授盾；第三名额上限、复活资格及重复进出尚缺直接断言。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-WARRIOR-002",
+      "group": "invariants",
+      "statement": "普通防御只介入直接指定该棋且不带【强击】的【进攻】；触发后防御耗尽、目标留位、进攻者【移置】回进攻前位置。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/warrior.test.ts",
+          "name": "WARRIOR-02 普通吃子撞壁垒会弹回并消耗防御",
+          "passed": true
+        },
+        {
+          "file": "tests/warrior.test.ts",
+          "name": "WARRIOR-06 普通防御被消耗只移除壁垒，不会误删棋子上的骑兵效果",
+          "passed": true
+        },
+        {
+          "file": "tests/assassination.test.ts",
+          "name": "ROGUE-07 强击与战车同一原子行动会先碾碎路径，再处决最终目标",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-WARRIOR-003",
+      "group": "invariants",
+      "statement": "战士弹回原位是【堡垒】封锁的来源专属复位例外；若返回格空间不能容纳，进攻者【窒息】【消灭】。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/remote-room.test.ts",
+          "name": "HUNTER-04 壁垒弹回属于移置，触发起点的正常落位陷阱",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "仅弹回落位陷阱；堡垒复位例外与返回失败窒息尚缺专属用例。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-WARRIOR-004",
+      "group": "invariants",
+      "statement": "普通防御获得时有 3 层持续；每个敌方正式回合结束 -1，覆盖 3 个完整敌方正式回合。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/warrior.test.ts",
+          "name": "WARRIOR-04 壁垒按三个敌方正式回合结束衰减，不按自身走棋次数",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-IRONARMOR-001",
+      "group": "invariants",
+      "statement": "铁甲只免疫一次背刺【终结】，不是普遍【强击】或死亡免疫。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/warrior.test.ts",
+          "name": "WARRIOR-03 将帅铁甲会拦截一次背刺并交给己方额外应将",
+          "passed": true
+        },
+        {
+          "file": "tests/warrior.test.ts",
+          "name": "WARRIOR-05 铁甲挡下背刺但无合法应将时，立即转为裁决",
+          "passed": true
+        },
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "RULE-9 enemy-turn strong strike armor interception stays at origin and gives no extra response",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-ROGUE-001",
+      "group": "invariants",
+      "statement": "每个刺杀来源每局一次且彼此独立；发动回合只能让己方明置非将帅棋合法【移动】到空位，不能【进攻】或【强击】。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/assassination.test.ts",
+          "name": "ROGUE-01 刺杀首步消耗英雄次数，棋子进入公开隐身并保留强击",
+          "passed": true
+        },
+        {
+          "file": "tests/assassination.test.ts",
+          "name": "ROGUE-05 首次只能空移，不能立即强击；资源失败不消耗",
+          "passed": true
+        },
+        {
+          "file": "tests/assassination.test.ts",
+          "name": "ROGUE-08 英雄与暗影之舞来源独立消耗，并共享新刺杀规则",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-ROGUE-002",
+      "group": "invariants",
+      "statement": "对手获得完整一个正式回合后，到潜行者下一正式回合，该棋可按普通进攻几何进行一次【进攻】+【强击】。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "RULE-9A delayed strong strike may backstab a true general after an entire enemy turn",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-STRIKE-001",
+      "group": "invariants",
+      "statement": "【强击】是【进攻】标签，使用来源棋合法进攻几何；默认可选择将帅。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "RULE-9A delayed strong strike may backstab a true general after an entire enemy turn",
+          "passed": true
+        },
+        {
+          "file": "tests/assassination.test.ts",
+          "name": "ROGUE-07 强击与战车同一原子行动会先碾碎路径，再处决最终目标",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-TRAP-001",
+      "group": "invariants",
+      "statement": "通过【移动】、【进攻】、【移置】、复活落位或成功飞行降落而成为敌方陷阱格上的【地面】棋时进入陷阱检查。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/remote-room.test.ts",
+          "name": "HUNTER-01 敌方落点触发一层陷阱，公开触发结果而不公开剩余坐标",
+          "passed": true
+        },
+        {
+          "file": "tests/remote-room.test.ts",
+          "name": "HUNTER-04 壁垒弹回属于移置，触发起点的正常落位陷阱",
+          "passed": true
+        },
+        {
+          "file": "tests/time-line-contracts.test.ts",
+          "name": "TIME-TRAP-01 returning turncoat completes linked control and keeps next formal-turn restriction",
+          "passed": true
+        },
+        {
+          "file": "tests/time-line-contracts.test.ts",
+          "name": "TIME-TRAP-02 lethal return trap closes the skill without executing its selected move",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-TRAP-002",
+      "group": "invariants",
+      "statement": "每层陷阱寿命 12 个敌方正式回合末：1–9 为致死，10–12 为控制，归零失效。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "RULE-10 hunter trap lifetime boundary 12",
+          "passed": true
+        },
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "RULE-10 hunter trap lifetime boundary 4",
+          "passed": true
+        },
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "RULE-10 hunter trap lifetime boundary 3",
+          "passed": true
+        },
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "RULE-10 hunter trap lifetime boundary 1",
+          "passed": true
+        },
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "RULE-10 late control trap blocks next controller formal turn but not other pieces",
+          "passed": true
+        },
+        {
+          "file": "tests/time-line-contracts.test.ts",
+          "name": "TIME-TRAP-01 returning turncoat completes linked control and keeps next formal-turn restriction",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-IRONSTEED-001",
+      "group": "invariants",
+      "statement": "铁马只检查唯一马腿格的【地面】层；有地面棋则尝试【碾碎】后继续马步。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/mutation.test.ts",
+          "name": "MUT-05 铁马碾碎马腿棋并继续落位",
+          "passed": true
+        },
+        {
+          "file": "tests/mutation.test.ts",
+          "name": "MUT-07 铁马碾碎敌方将帅时触发碾碎他们终局",
+          "passed": true
+        },
+        {
+          "file": "tests/mutation.test.ts",
+          "name": "MUT-08 铁马误伤己方将帅时触发乱杀失败",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-IRONSTEED-002",
+      "group": "invariants",
+      "statement": "若所选马步路线必然尝试碾碎地面马腿棋，主行动从计划阶段就是【进攻】。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/cross-rule-contracts.test.ts",
+          "name": "CROSS-PLAN-01 iron steed attacking an immune friendly leg is still an attack before any kill",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-WARCHARIOT-001",
+      "group": "invariants",
+      "statement": "战车发动路径只统计起点与目标之间所有【地面】路径棋，恰好 1 枚才可发动并尝试碾碎它。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/mutation.test.ts",
+          "name": "MUT-06 战车隔一枚棋子碾碎路径后吃掉目标",
+          "passed": true
+        },
+        {
+          "file": "tests/mutation.test.ts",
+          "name": "MUT-11 战车路径包含无形地面棋的实体计数",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-WARCHARIOT-002",
+      "group": "invariants",
+      "statement": "若对敌将的唯一可执行路线必然同时碾碎己将、只能导致两败俱伤，则该路线不构成有效将军。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/cross-rule-contracts.test.ts",
+          "name": "CROSS-CHARIOT-01 a sole route crushing both generals gives no effective check",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "单独验证该车的双将同死路线不构成威胁；不否定局面中其他棋或照面的独立将军。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-CAVALRY-001",
+      "group": "invariants",
+      "statement": "每方真实身份为马的两枚棋在【揭示】为马后升级为【骑兵】。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/mutation.test.ts",
+          "name": "MUT-03 骑兵暗置时不启用额外马步，不按兵位授予",
+          "passed": true
+        },
+        {
+          "file": "tests/mutation.test.ts",
+          "name": "MUT-12 骑兵只给明马额外一步，保留八方向普通马跳",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-CAVALRY-002",
+      "group": "invariants",
+      "statement": "骑兵在己方半场额外前进 1 格；敌方半场额外前/左/右 1 格；“不能后退”只限制额外一步。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/mutation.test.ts",
+          "name": "MUT-12 骑兵只给明马额外一步，保留八方向普通马跳",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-FORTRESS-001",
+      "group": "invariants",
+      "statement": "【堡垒】禁止敌方棋从九宫外通过【移动】、【进攻】落位、【移置】或复活落位进入该九宫。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/mutation.test.ts",
+          "name": "MUT-01 堡垒禁止从宫外落入敌方九宫",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-MUROZOND-001",
+      "group": "invariants",
+      "statement": "姆诺兹多只可选择对手紧接上一正式回合完成的Ⅰ级俗手对应且仍存活的棋；先【移置】回原位并结算返回格，再决定是否【操控】。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "HERO timeline twist moves only the prior enemy ordinary mover, keeps earlier victims dead",
+          "passed": true
+        },
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "HERO timeline twist refuses a prior skill-tier action",
+          "passed": true
+        },
+        {
+          "file": "tests/time-line-contracts.test.ts",
+          "name": "TIME-TRAP-01 returning turncoat completes linked control and keeps next formal-turn restriction",
+          "passed": true
+        },
+        {
+          "file": "tests/time-line-contracts.test.ts",
+          "name": "TIME-TRAP-02 lethal return trap closes the skill without executing its selected move",
+          "passed": true
+        },
+        {
+          "file": "tests/time-line-contracts.test.ts",
+          "name": "TIME-TRAP-03 invalid controlled destination rolls back resource, trap and history changes",
+          "passed": true
+        },
+        {
+          "file": "tests/time-line-contracts.test.ts",
+          "name": "TIME-TIER-02 opposing Murozond cannot treat a completed rewrite as an ordinary prior action",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-NOZDORMU-001",
+      "group": "invariants",
+      "statement": "诺兹多姆执行完整权威快照【回溯】，包括当时棋盘和双方英雄技能状态；“回溯已使用”是时间线外元状态。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "HERO full rewind restores piece death/reveal and both skill resources, keeps used metadata and revision monotonic",
+          "passed": true
+        },
+        {
+          "file": "tests/time-line-contracts.test.ts",
+          "name": "TIME-CLOCK-01 rewind replay budget uses historical 3000ms remaining",
+          "passed": true
+        },
+        {
+          "file": "tests/time-line-contracts.test.ts",
+          "name": "TIME-CLOCK-01 rewind replay budget uses historical 10000ms remaining",
+          "passed": true
+        },
+        {
+          "file": "tests/time-line-contracts.test.ts",
+          "name": "TIME-CLOCK-01 rewind replay budget uses historical 42000ms remaining",
+          "passed": true
+        },
+        {
+          "file": "tests/time-line-contracts.test.ts",
+          "name": "TIME-CLOCK-02 room receipt time is authoritative for rewind, including exact replay expiry",
+          "passed": true
+        },
+        {
+          "file": "tests/time-line-contracts.test.ts",
+          "name": "TIME-CLOCK-03 missing historical clock evidence refuses rewind without consuming it",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已有快照资源与计时案例；全部英雄资源、持续效果及回溯后的保密交接尚缺。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-TIME-COLLAPSE-001",
+      "group": "invariants",
+      "statement": "诺兹多姆方棋通过合法结算成功成为有效时空扭曲格上的【地面】棋时获得时间崩坏。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "DESTINY bomb attacks one square at range3, ends no formal action, and global once-per-turn applies",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-TIME-COLLAPSE-002",
+      "group": "invariants",
+      "statement": "棋连续处于任一有效扭曲格时状态持续，从扭曲 A 到 B 不清除也不刷新截止点；离开或扭曲清除时解除。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/cross-rule-contracts.test.ts",
+          "name": "CROSS-COLLAPSE-01 displacement between warps preserves deadline and leaving removes collapse",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-HOURGLASS-001",
+      "group": "invariants",
+      "statement": "时光沙漏顺序固定为：候选锁定 → 锚点合法性检查 → 群体回归/复活 → 各自落位效果 → 净化全部扭曲 → 无限龙装填。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "DESTINY shown dead warrior revival and frozen blocked-anchor eligibility; cleanup and dragon reload still occur",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-MANIFESTED-001",
+      "group": "invariants",
+      "statement": "时光勇士第一次任何公开【揭示】即建立“已现身”；死亡【揭示】同样有效。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "DESTINY shown dead warrior revival and frozen blocked-anchor eligibility; cleanup and dragon reload still occur",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-CAREFREE-001",
+      "group": "invariants",
+      "statement": "【无忧】有效时，敌棋可在太子方半场移动，但当前位于该半场时不得主动【进攻】；也不得通过【进攻】落入该半场。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "HERO prince permits empty movement in domain but denies attacking from or into it",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-CAREFREE-002",
+      "group": "invariants",
+      "statement": "太子方在己方正式回合主动【进攻】并使最终目标【消灭】，或形成有效将军时，【无忧】暂失到太子方下一正式回合开始。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/cross-rule-contracts.test.ts",
+          "name": "CROSS-CAREFREE-01 final-target kill suspends protection for enemy turn then restores it",
+          "passed": true
+        },
+        {
+          "file": "tests/cross-rule-contracts.test.ts",
+          "name": "CROSS-CAREFREE-02 barrier bounce without final-target kill or check keeps protection",
+          "passed": true
+        },
+        {
+          "file": "tests/cross-rule-contracts.test.ts",
+          "name": "CROSS-PLAN-02 automatic landing trap does not reclassify an empty move as attack",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-VISIBILITY-001",
+      "group": "invariants",
+      "statement": "英雄选择与猜拳阶段，对手只能看见确认状态，不能看见具体英雄；英雄入场后双方公开。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/remote-room.test.ts",
+          "name": "MODE-01 猜拳前双方确定英雄，只公开确认状态且本人可恢复选择",
+          "passed": true
+        },
+        {
+          "file": "tests/setup-rps.test.ts",
+          "name": "RPS-01 单方选择只公开已提交状态",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-TRAP-VISIBILITY-001",
+      "group": "invariants",
+      "statement": "未触发陷阱坐标、叠层和剩余寿命只对主人和权威端可见。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/remote-room.test.ts",
+          "name": "HUNTER-01 敌方落点触发一层陷阱，公开触发结果而不公开剩余坐标",
+          "passed": true
+        },
+        {
+          "file": "tests/remote-room.test.ts",
+          "name": "MODE-02 英雄入场后双猎人同时准备，秘密锁定陷阱后才进入走棋",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-DISCONNECT-001",
+      "group": "invariants",
+      "statement": "首次连接成功并进入英雄选择后，每名玩家独立累计本局断线时间，多段不清零；最早真实达到 60 秒者判负。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/bluetooth-disconnect.test.ts",
+          "name": "BTDISC-02 同一玩家多次断线累计达到 60 秒后直接判负",
+          "passed": true
+        },
+        {
+          "file": "tests/bluetooth-disconnect.test.ts",
+          "name": "BTDISC-05 成功重连会永久保留累计断线时间并增加重连历史计数",
+          "passed": true
+        },
+        {
+          "file": "tests/bluetooth-disconnect.test.ts",
+          "name": "BTDISC-06 延迟检查时按实际到达 60 秒的先后裁定，不把错开的超时误判为平局",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-DISCONNECT-002",
+      "group": "invariants",
+      "statement": "任一玩家断线时，双方操作、阶段计时、普通视觉计时和开场动画暂停；全员重连后按暂停时长顺延。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/bluetooth-disconnect.test.ts",
+          "name": "BTDISC-01 断线期间暂停英雄选择倒计时，重连后从原剩余时间继续",
+          "passed": true
+        },
+        {
+          "file": "tests/bluetooth-disconnect.test.ts",
+          "name": "BTDISC-03 任一玩家断线后锁定双方全部游戏操作",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "Node房间覆盖选择计时和命令暂停；正式回合时钟顺延、视觉动画与设备恢复尚缺。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "INV-DISCONNECT-003",
+      "group": "invariants",
+      "statement": "只有双方在同一真实阈值时刻达到 60 秒才判断线平局；延迟检查不得把错峰超时变成平局。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/bluetooth-disconnect.test.ts",
+          "name": "BTDISC-04 双方在同一检查点均累计达到 60 秒时判为断线平局",
+          "passed": true
+        },
+        {
+          "file": "tests/bluetooth-disconnect.test.ts",
+          "name": "BTDISC-06 延迟检查时按实际到达 60 秒的先后裁定，不把错开的超时误判为平局",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "REJ-001",
+      "group": "anti_invariants",
+      "statement": "暗子可经过若干次正常移动仍保持暗置。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/movement.test.ts",
+          "name": "DARK-12 暗子非吃子移动后立即公开身份",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "REJ-002",
+      "group": "anti_invariants",
+      "statement": "所有占据同坐标的棋都阻挡地面路径、作炮架/马腿/象眼。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "FLIGHT air layer can move above a ground piece without capturing it; air destination occupancy is enforced",
+          "passed": true
+        },
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "RULES ground intangible rook still gives ordinary check, air rook does not",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "REJ-003",
+      "group": "anti_invariants",
+      "statement": "所有【进攻】只能以对方控制棋为目标。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/movement.test.ts",
+          "name": "CAP-01 红明子可以吃红方位置上的暗子",
+          "passed": true
+        },
+        {
+          "file": "tests/movement.test.ts",
+          "name": "CAP-04 红方暗子可以吃另一枚红方暗子",
+          "passed": true
+        },
+        {
+          "file": "tests/mutation.test.ts",
+          "name": "MUT-08 铁马误伤己方将帅时触发乱杀失败",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "REJ-004",
+      "group": "anti_invariants",
+      "statement": "将帅只能因普通将死离场。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/mutation.test.ts",
+          "name": "MUT-07 铁马碾碎敌方将帅时触发碾碎他们终局",
+          "passed": true
+        },
+        {
+          "file": "tests/remote-room.test.ts",
+          "name": "HUNTER-03 将帅踏入敌方陷阱时直接以伏击结束",
+          "passed": true
+        },
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "WIND flight landing crushes decoy then suffocates returning true general without bouncing the flyer",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "REJ-005",
+      "group": "anti_invariants",
+      "statement": "将帅在任何来源下都不能成为目标。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "RULE-9A delayed strong strike may backstab a true general after an entire enemy turn",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "REJ-006",
+      "group": "anti_invariants",
+      "statement": "原子结算中先被移除的将帅先输。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/mutation.test.ts",
+          "name": "MUT-09 战车碾碎己方将帅并击杀敌将时两败俱伤",
+          "passed": true
+        },
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "ATOMIC both generals destroyed in one committed set yields draw and preserves causes",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "REJ-007",
+      "group": "anti_invariants",
+      "statement": "【消灭】前必须先清除全部效果。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "RULE-5 failed flight landing on crush immune victim suffocates; victim is unchanged",
+          "passed": true
+        },
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "HERO zealot fourth invocation ends turn; execution then prefers home half and can randomly hit intangible",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "REJ-008",
+      "group": "anti_invariants",
+      "statement": "任一非法落位都会【窒息】。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/cross-rule-contracts.test.ts",
+          "name": "CROSS-DISPLACE-01 occupied ordinary displacement fails in place without suffocation or landing",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "REJ-009",
+      "group": "anti_invariants",
+      "statement": "【无形】棋不挡路、不当炮架/马腿/象眼。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/assassination.test.ts",
+          "name": "ROGUE-02 无形地面棋仍挡路径，不能直接进攻",
+          "passed": true
+        },
+        {
+          "file": "tests/mutation.test.ts",
+          "name": "MUT-11 战车路径包含无形地面棋的实体计数",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "REJ-010",
+      "group": "anti_invariants",
+      "statement": "【无形】棋不能产生攻击范围或有效将军。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "RULES ground intangible rook still gives ordinary check, air rook does not",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "REJ-011",
+      "group": "anti_invariants",
+      "statement": "【强击】可以穿透【无形】并自动清除目标状态。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/assassination.test.ts",
+          "name": "ROGUE-03 强击不能直接选取无形目标",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "REJ-012",
+      "group": "anti_invariants",
+      "statement": "飞行棋自动无视【封锁】。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/cross-rule-contracts.test.ts",
+          "name": "CROSS-FORTRESS-01 flight cannot enter enemy palace through movement or displacement",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "REJ-013",
+      "group": "anti_invariants",
+      "statement": "飞行降落失败后继续飞行。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "RULE-5 failed flight landing on crush immune victim suffocates; victim is unchanged",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "REJ-014",
+      "group": "anti_invariants",
+      "statement": "战士普通防御只有两个名额、持续两个敌方回合。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/warrior.test.ts",
+          "name": "WARRIOR-01 明棋离开己方九宫获得一次公开壁垒",
+          "passed": true
+        },
+        {
+          "file": "tests/warrior.test.ts",
+          "name": "WARRIOR-04 壁垒按三个敌方正式回合结束衰减，不按自身走棋次数",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "三回合衰减已覆盖；三名额上限专属用例仍缺。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "REJ-015",
+      "group": "anti_invariants",
+      "statement": "猎人陷阱十回合内始终致死。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "RULE-10 hunter trap lifetime boundary 12",
+          "passed": true
+        },
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "RULE-10 hunter trap lifetime boundary 4",
+          "passed": true
+        },
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "RULE-10 hunter trap lifetime boundary 3",
+          "passed": true
+        },
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "RULE-10 hunter trap lifetime boundary 1",
+          "passed": true
+        },
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "RULE-10 late control trap blocks next controller formal turn but not other pieces",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "REJ-016",
+      "group": "anti_invariants",
+      "statement": "骑兵固定由 1/3/5 路兵位获得。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/mutation.test.ts",
+          "name": "MUT-03 骑兵暗置时不启用额外马步，不按兵位授予",
+          "passed": true
+        },
+        {
+          "file": "tests/mutation.test.ts",
+          "name": "MUT-12 骑兵只给明马额外一步，保留八方向普通马跳",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "REJ-017",
+      "group": "anti_invariants",
+      "statement": "只能导致战车双将同死平局的路线仍构成有效将军。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/cross-rule-contracts.test.ts",
+          "name": "CROSS-CHARIOT-01 a sole route crushing both generals gives no effective check",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "单独验证该车的双将同死路线不构成威胁；不否定局面中其他棋或照面的独立将军。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "REJ-018",
+      "group": "anti_invariants",
+      "statement": "复活恢复死亡前完整状态。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "DESTINY shown dead warrior revival and frozen blocked-anchor eligibility; cleanup and dragon reload still occur",
+          "passed": true
+        },
+        {
+          "file": "tests/cross-rule-contracts.test.ts",
+          "name": "CROSS-REVIVE-01 hourglass revives a shown warrior without temporary states and preserves public identity",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "REJ-019",
+      "group": "anti_invariants",
+      "statement": "完整回溯等价于逐枚移置或复活。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "HERO full rewind restores piece death/reveal and both skill resources, keeps used metadata and revision monotonic",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "REJ-020",
+      "group": "anti_invariants",
+      "statement": "当前运行时代码就是全部最终规则。",
+      "status": "non_runtime_contract",
+      "relatedCases": [],
+      "verificationLimit": "该合同是防止代码替代规则的协作约束；原反例中“尚未实现”属于历史文字，不能用于推断本轮具体缺陷。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "ADD-SECRET-001",
+      "group": "supplements",
+      "statement": "风影发动前后敌方公共视图、按钮状态、日志和动画不泄漏实际使用次数、冷却或承载者。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "HERO shadow activation leaves every public field unchanged; enemy view cannot reveal uses or host",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "引擎与玩家视图已验证；敌方按钮/动画和本机交接仍缺真实浏览器证据。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "ADD-WIND-001",
+      "group": "supplements",
+      "statement": "风流目标地面占位导致真主帅窒息，占位棋保留、原承载者格为空，空中层不阻挡。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "WIND war chariot endpoint occupancy suffocates the returning true general and commits the attack",
+          "passed": true
+        },
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "WIND red ground occupancy stays in place while returning general suffocates",
+          "passed": true
+        },
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "WIND black ground occupancy stays in place while returning general suffocates",
+          "passed": true
+        },
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "WIND covered ground occupant is retained without exposing its identity",
+          "passed": true
+        },
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "WIND air-only occupancy does not block ground return or cause suffocation",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "ADD-WIND-002",
+      "group": "supplements",
+      "statement": "风失败归位不触发落位效果、不授予流舞；非裁决消灭不自动授予流舞。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "WIND flight landing crushes decoy then suffocates returning true general without bouncing the flyer",
+          "passed": true
+        },
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "HERO non-execution decoy death returns true general, clears host states and grants no dance",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "ADD-WIND-003",
+      "group": "supplements",
+      "statement": "流舞第一步可暂不安全、最多两步最终安全，失败原裁决成立，不改困毙；亲征不扩大舞步。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "FLOW first step markers allow intermediate check; stale commands cannot alter a special dance",
+          "passed": true
+        },
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "name": "HERO checkmate execution returns attacker then offers palace-only flow dance without formal ticks",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "中间步和成功结束已有运行用例；双步失败、亲征舞步限制尚缺。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "ADD-JIANXIE-001",
+      "group": "supplements",
+      "statement": "尖斜过河后只正前和两斜前一步，底线无动作不自动消灭。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/cross-rule-contracts.test.ts",
+          "name": "CROSS-JIANXIE-01 red crossed pawn uses only forward and diagonals; baseline pawn survives immobility",
+          "passed": true
+        },
+        {
+          "file": "tests/cross-rule-contracts.test.ts",
+          "name": "CROSS-JIANXIE-01 black crossed pawn uses only forward and diagonals; baseline pawn survives immobility",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "ADD-CLOCK-001",
+      "group": "supplements",
+      "statement": "回溯重走限时使用历史落子前真实剩余时间与10秒的较小值。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/time-line-contracts.test.ts",
+          "name": "TIME-CLOCK-01 rewind replay budget uses historical 3000ms remaining",
+          "passed": true
+        },
+        {
+          "file": "tests/time-line-contracts.test.ts",
+          "name": "TIME-CLOCK-01 rewind replay budget uses historical 10000ms remaining",
+          "passed": true
+        },
+        {
+          "file": "tests/time-line-contracts.test.ts",
+          "name": "TIME-CLOCK-01 rewind replay budget uses historical 42000ms remaining",
+          "passed": true
+        },
+        {
+          "file": "tests/time-line-contracts.test.ts",
+          "name": "TIME-CLOCK-02 room receipt time is authoritative for rewind, including exact replay expiry",
+          "passed": true
+        },
+        {
+          "file": "tests/time-line-contracts.test.ts",
+          "name": "TIME-CLOCK-03 missing historical clock evidence refuses rewind without consuming it",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "3/10/42秒历史预算、房间权威接收及到期已验证；浏览器显示与WebView尚未验收。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "ADD-TWIST-001",
+      "group": "supplements",
+      "statement": "返回格控制陷阱限制下一相关控制方正式回合，保留当前技能链继续与后续限制状态。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/time-line-contracts.test.ts",
+          "name": "TIME-TRAP-01 returning turncoat completes linked control and keeps next formal-turn restriction",
+          "passed": true
+        },
+        {
+          "file": "tests/time-line-contracts.test.ts",
+          "name": "TIME-TRAP-02 lethal return trap closes the skill without executing its selected move",
+          "passed": true
+        },
+        {
+          "file": "tests/time-line-contracts.test.ts",
+          "name": "TIME-TRAP-03 invalid controlled destination rolls back resource, trap and history changes",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "真实倒戈棋返回猎人陷阱、下一正式回合封锁和耗尽已验证；其他来源状态组合尚缺。",
+      "fullyAccepted": false
+    }
+  ],
+  "testedImplementationCommit": "8fdd54dd5506310ede2d6cb59bbb3933c4e8a47c",
+  "implementationCommitBinding": "Uploaded implementation tree equals the locally tested tree e76f44153d601f4aaa38c28dc20609d4ae30e982; digest was checked byte-for-byte. sourceCommitAtRun retains actual pre-commit HEAD.",
+  "webBuild": "passed",
+  "androidSourceSync": {
+    "files": 116,
+    "byteIdentical": true,
+    "apkGenerated": false
+  }
+}

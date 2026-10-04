@@ -4,7 +4,7 @@
   "files": {
     "00_READ_FIRST.md": {
       "bytes": 2753,
-      "sha256": "80bc33f4dd3ae7fc400803dbfc04bc9531b23cc8507bbc3f4dca38d7d6e77ca9"
+      "sha256": "9a177dd8626b935c3cbc8aa5eef22b282dd2c7606f4d78f6f551aa5c51e836ce"
     },
     "01_CURRENT_RULES.md": {
       "bytes": 20738,
@@ -23,12 +23,12 @@
       "sha256": "c133b4ee797b778ce4c88233437b2466255f27c30fcaec5b0941c766cc4bae00"
     },
     "05_PROGRESS_AND_NEXT.md": {
-      "bytes": 4899,
-      "sha256": "09066b1b99411cc3fb84ec0892ccdeacc4ee02f2cc5e681f4054a01236d07860"
+      "bytes": 6416,
+      "sha256": "49f7541434261761b64ddd49b1be01139ef2433a5569eeb89f8c4c9cc7df1c02"
     },
     "06_COLLABORATION.md": {
       "bytes": 3794,
-      "sha256": "4d77ff39b7318ae1f484691956ab275e2b593e7b2c1131348ef8f144dccda19d"
+      "sha256": "7d9fb4fc254a3c32bc3cb24eb981dc458a4dd7bce4fefea7916b39e2189200b1"
     },
     "07_DESIGN_SCORING.md": {
       "bytes": 25701,
@@ -40,15 +40,15 @@
     },
     "NEW_DIALOGUE_PROMPT.txt": {
       "bytes": 1278,
-      "sha256": "363a15dfd88db50fab1870368489530bdf0cb6d792871b6cc6262e87111ffe93"
+      "sha256": "cd9f9a99e3a6c1f549abc4e539d894e347b589d65f5b3326687e2b144acfe679"
     },
     "SOURCE_REGISTER.json": {
-      "bytes": 11261,
-      "sha256": "0e9115f071b29bb79f85e7064217aebc0e3fb609054fdb8b0471fb1e60dceba6"
+      "bytes": 11411,
+      "sha256": "a1ec6bc5d099a8189a856e9d55615d2d81ca8f4437a0771868fcc604708a9daa"
     },
     "STATE.json": {
-      "bytes": 2322,
-      "sha256": "cb4997a2a87573c3e705c35e7d7f74789ad4930bfbbb01e88726a3e2cc96b098"
+      "bytes": 3326,
+      "sha256": "5a9174d411b98a0549f03d583ba106d9c25244bbcc04d9ddaf29ae4f7a3fd55e"
     },
     "assets/approved-home.png": {
       "bytes": 2157060,

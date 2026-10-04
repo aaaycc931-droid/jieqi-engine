@@ -1,11 +1,11 @@
 {
   "project": "乐子象棋 / jieqi-engine",
-  "handoff_revision": "LEZI-HANDOFF-CLEAN-2026-10-04",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-04-validation-1",
   "updated_at": "2026-10-04",
   "repository": "https://github.com/aaaycc931-droid/jieqi-engine",
   "working_branch": "codex/ui-android-apk-20261001",
-  "implementation_commit": "b7b968b91196170beb0db4f26852c63920a3d3e8",
-  "implementation_tree": "b7360eb92866e02d545ff15115050ae71ad0afe3",
+  "implementation_commit": "8fdd54dd5506310ede2d6cb59bbb3933c4e8a47c",
+  "implementation_tree": "e76f44153d601f4aaa38c28dc20609d4ae30e982",
   "draft_pr": 2,
   "baseline_id": "LEZI-FUNCTION-2026-10-04-v1",
   "baseline_digest": "4bcf9fb91f5c6e41f456e7424ebd7ed09c6c07b1595ec825604aa730fdad020b",
@@ -25,21 +25,37 @@
     "destiny_mutations": 1
   },
   "validation": {
-    "tests_passed": 250,
+    "tests_passed": 273,
     "tests_failed": 0,
     "web_build": "passed",
-    "ci_run": 37193007609,
-    "ci_commit": "b7b968b91196170beb0db4f26852c63920a3d3e8",
-    "ci_conclusion": "success",
     "homepage_browser_run": 37180839292,
     "homepage_browser_commit": "7ec16ad7c5d1a084699a626c6a74be9522f5802a",
     "homepage_browser_scope": "homepage_and_entry_controls_only",
     "android_web_asset_match_files": 116,
     "new_hero_browser_full_flow": "pending",
-    "individual_69_invariants": "pending",
+    "individual_69_invariants": "partial_named_case_evidence_full_contract_acceptance_pending",
     "android_webview": "pending",
     "physical_two_phone": "pending",
-    "all_functions_accepted": false
+    "all_functions_accepted": false,
+    "individual_20_anti_invariants": "partial_named_case_evidence_full_contract_acceptance_pending",
+    "contract_evidence": {
+      "index": "review/invariants/LATEST.json",
+      "total": 96,
+      "partial_evidence_passed": 93,
+      "non_runtime_contract": 3,
+      "failed_cases": 0,
+      "missing_related_cases": 0,
+      "fully_accepted": 0
+    },
+    "current_ci": {
+      "status": "pending_remote_push",
+      "implementation_commit": "8fdd54dd5506310ede2d6cb59bbb3933c4e8a47c"
+    },
+    "previous_ci": {
+      "ci_run": 37193007609,
+      "ci_commit": "b7b968b91196170beb0db4f26852c63920a3d3e8",
+      "ci_conclusion": "success"
+    }
   },
   "restrictions": [
     "ui_last",
@@ -57,7 +73,19 @@
     "old_dialogue_code_writes_after_handoff": "stop",
     "automatic_import": false
   },
-  "next_action": "Verify time-line and cross-rule contracts against current code before UI finalization",
+  "next_action": "Expand dedicated invariant exceptions and browser new-hero/privacy flows; real WebView/two-phone remains pending, UI last and APK paused",
   "source_gap_register": "SOURCE_REGISTER.json",
-  "apk_built_this_round": false
+  "apk_built_this_round": false,
+  "previous_implementation_commit": "b7b968b91196170beb0db4f26852c63920a3d3e8",
+  "validation_round": {
+    "rules_changed": false,
+    "rule_revision_unchanged": true,
+    "fixed": [
+      "timeline_trap_persistence",
+      "historical_remaining_clock",
+      "timeline_tier_III",
+      "displacement_integer_coordinates"
+    ],
+    "new_tests": 23
+  }
 }

@@ -48,16 +48,17 @@
     "handoff/current/06_COLLABORATION.md"
   ],
   "baseline_tests": {
-    "command": "npm run check",
-    "passed": 250,
+    "command": "node scripts/review/verify-invariant-evidence.mjs + node scripts/build-web.ts",
+    "passed": 273,
     "failed": 0,
     "web_build": "passed",
     "android_apk_build": "not_generated_user_paused",
-    "current_batch_ci": "success",
+    "current_batch_ci": "pending_remote_push",
     "current_batch_browser_review": "homepage_only_success_new_hero_gameplay_pending",
     "scope_warning": "Local automated checks are partial coverage; cross rules, browser gameplay, WebView and two-device verification pending.",
-    "github_actions_run_id": 37193007609,
-    "homepage_browser_run_id": 37180839292
+    "github_actions_run_id": null,
+    "homepage_browser_run_id": 37180839292,
+    "previous_verified_ci_run_id": 37193007609
   },
   "latest_locked_decisions": [
     "cumulative_disconnect_60_seconds_per_player",
@@ -97,10 +98,10 @@
     "untransferred_hero_designs",
     "cavalry_final_rarity"
   ],
-  "next_action": "cross_rule_and_gameplay_validation_then_ui_last_no_apk",
+  "next_action": "Expand dedicated invariant exceptions and browser new-hero/privacy flows; real WebView/two-phone remains pending, UI last and APK paused",
   "ci_build_branch": "codex/ui-android-apk-20261001",
   "ci_draft_pull_request": 2,
-  "working_tree_note": "Current rules consolidated for transfer; 250 tests and latest CI pass, full cross-rule/browser/WebView/two-phone acceptance pending; UI last, APK paused.",
+  "working_tree_note": "Timeline and displacement fixes with 23 new regressions; 273 checks passed. Named partial evidence for 93 contracts; 3 normative contracts, no full invariant/browser/WebView/two-phone acceptance.",
   "restrictions": [
     "do_not_merge_main_without_explicit_authorization",
     "do_not_deploy_internet_multiplayer",
@@ -156,5 +157,15 @@
   ],
   "previous_implementation_commit": "7ec16ad7c5d1a084699a626c6a74be9522f5802a",
   "implementation_commit_locator": "handoff/current/STATE.json pins implementation SHA; handoff docs may have later doc-only commit",
-  "handoff_entry": "handoff/current/00_READ_FIRST.md"
+  "handoff_entry": "handoff/current/00_READ_FIRST.md",
+  "implementation_commit": "8fdd54dd5506310ede2d6cb59bbb3933c4e8a47c",
+  "invariant_evidence": {
+    "index": "review/invariants/LATEST.json",
+    "total": 96,
+    "partial_evidence_passed": 93,
+    "non_runtime_contract": 3,
+    "failed_cases": 0,
+    "missing_related_cases": 0,
+    "fully_accepted": 0
+  }
 }

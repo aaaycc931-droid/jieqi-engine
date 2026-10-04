@@ -1,7 +1,7 @@
 {
-  "handoff_revision": "LEZI-HANDOFF-CLEAN-2026-10-04",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-04-validation-1",
   "rule_revision": "LEZI-FUNCTION-2026-10-04-r1",
-  "code_checkpoint": "b7b968b91196170beb0db4f26852c63920a3d3e8",
+  "code_checkpoint": "8fdd54dd5506310ede2d6cb59bbb3933c4e8a47c",
   "sources": [
     {
       "id": "RULE:CURRENT_RULE_DELTAS_2026-09-22.md",
@@ -206,5 +206,7 @@
     "旧STATE运行时分支/测试数/下一步",
     "过时3英雄进度"
   ],
-  "completeness_claim": "当前恢复并核对源的主体规则已按域覆盖；不保证所有历史对话逐条恢复，明确缺口不得填空。"
+  "completeness_claim": "当前恢复并核对源的主体规则已按域覆盖；不保证所有历史对话逐条恢复，明确缺口不得填空。",
+  "previous_code_checkpoint": "b7b968b91196170beb0db4f26852c63920a3d3e8",
+  "runtime_evidence_index": "review/invariants/LATEST.json"
 }
