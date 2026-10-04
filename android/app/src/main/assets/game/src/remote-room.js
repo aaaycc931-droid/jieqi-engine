@@ -427,6 +427,20 @@ function shiftPausedDeadlines(room            , pauseDurationMs        )        
     ...room,
     ...(features ? { features } : {}),
     ...(room.rpsDeadlineAt !== undefined ? { rpsDeadlineAt: room.rpsDeadlineAt + pauseDurationMs } : {}),
+    ...(room.game ? {
+      game: {
+        ...room.game,
+        state: {
+          ...room.game.state,
+          ...(room.game.state.turnStartedAt !== undefined ? { turnStartedAt: room.game.state.turnStartedAt + pauseDurationMs } : {}),
+          ...(room.game.state.turnDeadlineAt !== undefined ? { turnDeadlineAt: room.game.state.turnDeadlineAt + pauseDurationMs } : {}),
+        },
+        secret: {
+          ...room.game.secret,
+          ...(room.game.secret.replay ? { replay: { ...room.game.secret.replay, deadlineAt: room.game.secret.replay.deadlineAt + pauseDurationMs } } : {}),
+        },
+      },
+    } : {}),
   };
 }
 
