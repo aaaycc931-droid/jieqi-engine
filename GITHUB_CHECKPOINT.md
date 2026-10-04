@@ -1,3 +1,5 @@
+> 2026-10-04 当前工作：已授权首页原图方案正式接入，暂停 APK 打包；仅执行规则/Web 与正式首页浏览器检查。下方 APK 信息为历史构建，不是本轮产物。
+
 # GitHub Checkpoint — 2026-10-02
 
 - repo: `aaaycc931-droid/jieqi-engine`

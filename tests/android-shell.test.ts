@@ -4,6 +4,8 @@ import test from "node:test";
 
 const sourceHtml = readFileSync(new URL("../web/index.html", import.meta.url), "utf8");
 const sourceCss = readFileSync(new URL("../web/style.css", import.meta.url), "utf8");
+const sourceHomeCss = readFileSync(new URL("../web/home-menu.css", import.meta.url), "utf8");
+const bundledHomeCss = readFileSync(new URL("../android/app/src/main/assets/game/web/home-menu.css", import.meta.url), "utf8");
 const sourceRefreshCss = readFileSync(new URL("../web/ui-refresh.css", import.meta.url), "utf8");
 const bundledHtml = readFileSync(new URL("../android/app/src/main/assets/game/web/index.html", import.meta.url), "utf8");
 const bundledCss = readFileSync(new URL("../android/app/src/main/assets/game/web/style.css", import.meta.url), "utf8");
@@ -17,8 +19,9 @@ test("ANDROID-ASSET-01 APK 内置 HTML 与 CSS 已同步到当前 UI", () => {
   assert.equal(bundledHtml, sourceHtml);
   assert.equal(bundledCss, sourceCss);
   assert.equal(bundledRefreshCss, sourceRefreshCss);
+  assert.equal(bundledHomeCss, sourceHomeCss);
   for (const asset of [
-    "../android/app/src/main/assets/game/web/assets/menu-v1/title-lezi-xiangqi.png",
+    "../android/app/src/main/assets/game/web/assets/menu-original/approved-menu.png",
     "../android/app/src/main/assets/game/web/assets/menu-v1/label-bluetooth.png",
     "../android/app/src/main/assets/game/web/assets/rps-v1/gesture-rock.png",
   ]) {

@@ -43,19 +43,15 @@ test("UI-RULES-01 玩法说明使用独立四分类滚动页而非占位弹窗",
   assert.match(css, /\.rules-scroll\s*\{[^}]*overflow-y:\s*auto/s);
 });
 
-test("UI-MENU-04 菜单运行时复用拆分组件而非整张历史效果图", () => {
+test("UI-MENU-04 首页采用批准的原图窗口，其余页面保留独立水墨组件", () => {
   assert.match(css, /paper-background\.png/);
   assert.match(css, /status-panel-frame\.png/);
   assert.doesNotMatch(html + css, /国风象棋主菜单按钮下移|乐子象棋三屏响应式菜单对比|乐子象棋主菜单\.png/);
 });
 
-test("UI-MENU-05 主菜单书法标题、署名、按钮文字与设置图标均为独立透明组件", () => {
+test("UI-MENU-05 设置及其余页面继续复用已有独立透明组件", () => {
   const assets = [
-    "title-lezi-xiangqi.png",
-    "author-liufengwuying.png",
-    "label-local.png",
     "label-bluetooth.png",
-    "label-online.png",
     "label-rules.png",
     "label-create.png",
     "label-join.png",
@@ -63,7 +59,6 @@ test("UI-MENU-05 主菜单书法标题、署名、按钮文字与设置图标均
     "label-reset.png",
     "icon-settings.png",
     "icon-back.png",
-    "decoration-header.png",
     "decoration-footer.png",
   ];
   for (const asset of assets) {

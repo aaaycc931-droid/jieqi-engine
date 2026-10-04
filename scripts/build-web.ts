@@ -39,6 +39,7 @@ await compileTypeScriptDirectory(join(projectRoot, "web"));
 await cp(join(projectRoot, "web", "index.html"), join(outputRoot, "web", "index.html"));
 await cp(join(projectRoot, "web", "style.css"), join(outputRoot, "web", "style.css"));
 await cp(join(projectRoot, "web", "ui-refresh.css"), join(outputRoot, "web", "ui-refresh.css"));
+await cp(join(projectRoot, "web", "home-menu.css"), join(outputRoot, "web", "home-menu.css"));
 await cp(join(projectRoot, "web", "assets"), join(outputRoot, "web", "assets"), { recursive: true });
 
 console.log("已生成本地试玩网页：dist/web/index.html");

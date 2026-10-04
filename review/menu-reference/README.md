@@ -1,21 +1,18 @@
-# 首页原图外观对照样稿
+# 首页原图外观对照与采用记录
 
-状态：2026-10-02 **样稿，未获正式采用批准**。当前 APK 首页已被用户否决。
+2026-10-04 用户审核确认稿、旧首页、还原样稿的对比图后，批准将还原方案接入正式首页；同时明确暂停 APK 生成，继续修改其余非棋盘页面。
 
-- 唯一视觉原图：`国风象棋主菜单按钮下移.png`，941 × 1672；保留原图像素。
-- 对照样稿保留真实 HTML 按钮、原有事件和无障碍名称，覆盖本机双人、蓝牙对局、禁用联机、玩法说明、设置。
-- 原图拆成网页中的上部、空白宣纸带、下部三个显示窗口。标题、墨环、装饰、按钮和文字按宽度等比缩放，长屏只增加中间宣纸带。
-- 设置入口是后续确认项，原图没有；样稿继续保留小型设置控件。
-- 此方式改变了正式方案中禁止从合成图截取显示区域的约束，**只用于实际渲染及交互对照**，尚不作为正式组件使用。
-- `scripts/review/prepare-menu-review.mjs` 单独生成 `review-output`，不修改 `web/index.html`，不复制到 Android。
-- 原方案仍可保留独立素材重建，但缺少原始图层时不能承诺笔触和像素与合成图完全一致。
+历史样稿的浏览器记录：`BROWSER_REVIEW.md`。原图是未重绘的 941×1672 `国风象棋主菜单按钮下移.png`。
 
-## 本地生成
+正式入口改用 `web/home-menu.css` 和 `web/assets/menu-original/approved-menu.png`。页面保留真实、可访问 HTML 控件与已有处理函数。标题、墨环、装饰与按钮图案保持等比，长屏只扩展空白宣纸带。设置入口单独保留；触控目标至少 48 CSS 像素。
+
+本次批准是首页例外，不改变棋盘或其他页面的素材约束。
 
 ```sh
 node scripts/build-web.ts
-node scripts/review/prepare-menu-review.mjs
-node scripts/review/capture-menu-review.mjs
+node scripts/review/capture-home-runtime.mjs
 ```
 
-最后一步要求安装 Playwright 及 Chromium。输出为真实浏览器截图和交互结果；截图仍需要用户视觉审核和 Android WebView 验证。
+最后一步要求 Playwright 与 Chromium，输出为正式运行时截图与入口检查。`prepare-menu-review.mjs` 仅复制已采用的运行时，不再注入重复图案。旧 `capture-menu-review.mjs` 仅保留历史样稿脚本，不作为本轮验证入口。
+
+Android WebView、安全区与双机验证仍待后续。用户恢复打包前不生成 APK。

@@ -7,6 +7,7 @@
     <title>乐子象棋</title>
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="./ui-refresh.css" />
+    <link rel="stylesheet" href="./home-menu.css" />
   </head>
   <body>
     <div class="app-shell">
@@ -20,22 +21,23 @@
 
       <main>
         <section id="main-menu-view" class="main-menu-view" aria-labelledby="main-menu-title">
-          <img class="main-menu-header-decoration" src="./assets/menu-v1/decoration-header.png" alt="" aria-hidden="true">
-          <img class="main-menu-footer-decoration" src="./assets/menu-v1/decoration-footer.png" alt="" aria-hidden="true">
+          <svg class="reference-paper" viewBox="0 620 941 355" preserveAspectRatio="none" aria-hidden="true">
+            <image href="./assets/menu-original/approved-menu.png" width="941" height="1672" />
+          </svg>
+          <div class="reference-header" aria-hidden="true"><img src="./assets/menu-original/approved-menu.png" alt=""></div>
+          <div class="reference-footer" aria-hidden="true"><img src="./assets/menu-original/approved-menu.png" alt=""></div>
           <button id="settings-menu-button" class="ink-icon-button settings-menu-button" type="button" aria-label="设置">
             <img src="./assets/menu-v1/icon-settings.png" alt="" aria-hidden="true">
           </button>
           <header class="main-menu-heading">
             <h1 id="main-menu-title" class="visually-hidden">乐子象棋</h1>
-            <img class="main-menu-title-art" src="./assets/menu-v1/title-lezi-xiangqi.png" alt="" aria-hidden="true">
             <p class="visually-hidden">作者：流风舞影</p>
-            <img class="main-menu-author-art" src="./assets/menu-v1/author-liufengwuying.png" alt="" aria-hidden="true">
           </header>
           <nav class="main-menu-actions" aria-label="主菜单">
-            <button id="local-game-button" class="ink-menu-button accent-blue" type="button"><img src="./assets/menu-v1/label-local.png" alt="" aria-hidden="true"><span class="visually-hidden">本机双人</span></button>
-            <button id="bluetooth-menu-button" class="ink-menu-button accent-red" type="button"><img src="./assets/menu-v1/label-bluetooth.png" alt="" aria-hidden="true"><span class="visually-hidden">蓝牙对局</span></button>
-            <button id="online-game-button" class="ink-menu-button unavailable" type="button" aria-disabled="true"><img src="./assets/menu-v1/label-online.png" alt="" aria-hidden="true"><span class="visually-hidden">联机对战</span></button>
-            <button id="rules-menu-button" class="ink-menu-button compact" type="button"><img src="./assets/menu-v1/label-rules.png" alt="" aria-hidden="true"><span class="visually-hidden">玩法说明</span></button>
+            <button id="local-game-button" class="ink-menu-button accent-blue" type="button"><span class="visually-hidden">本机双人</span></button>
+            <button id="bluetooth-menu-button" class="ink-menu-button accent-red" type="button"><span class="visually-hidden">蓝牙对局</span></button>
+            <button id="online-game-button" class="ink-menu-button unavailable" type="button" aria-disabled="true"><span class="visually-hidden">联机对战</span></button>
+            <button id="rules-menu-button" class="ink-menu-button compact" type="button"><span class="visually-hidden">玩法说明</span></button>
           </nav>
         </section>
 

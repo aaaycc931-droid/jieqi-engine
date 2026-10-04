@@ -1,3 +1,5 @@
+> 2026-10-04 后续覆盖：用户已批准原图外观首页接入，并明确暂停 APK 生成。此目录保留历史构建记录，继续工作请读根目录 `START_HERE.md` / `PROJECT_STATE.json`。
+
 # 乐子象棋全新交接包 — 2026-10-02
 
 > 最新纠正（2026-10-03）：本包 APK 的首页外观也已被用户否决。原图外观样稿已通过 Chromium 验证，尚未正式采用；续接先读根目录 `PROJECT_STATE.json`、`START_HERE.md` 与 `review/menu-reference/BROWSER_REVIEW.md`。本包原有“重做完成”描述不代表视觉审核通过。
