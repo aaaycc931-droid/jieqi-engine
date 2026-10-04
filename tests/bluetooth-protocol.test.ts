@@ -25,8 +25,8 @@ test("BT-01 协议消息可编码并在接收端无损解析", () => {
 });
 
 test("BT-02 错误版本、未知类型与非对象消息在规则层之前被拒绝", () => {
-  expectRuleError(() => parseBluetoothEnvelope('{"v":2,"type":"action"}'), "BLUETOOTH_PROTOCOL_MISMATCH");
-  expectRuleError(() => parseBluetoothEnvelope('{"v":1,"type":"secret-dump"}'), "INVALID_BLUETOOTH_MESSAGE");
+  expectRuleError(() => parseBluetoothEnvelope('{"v":1,"type":"action"}'), "BLUETOOTH_PROTOCOL_MISMATCH");
+  expectRuleError(() => parseBluetoothEnvelope('{"v":2,"type":"secret-dump"}'), "INVALID_BLUETOOTH_MESSAGE");
   expectRuleError(() => parseBluetoothEnvelope('[]'), "INVALID_BLUETOOTH_MESSAGE");
 });
 
@@ -47,7 +47,7 @@ test("BT-04 快照只接收调用方提供的公开视图，并保留幂等 id",
     pieces: [{ id: "hidden-1", faceDown: true }],
   });
   assert.deepEqual(snapshot, {
-    v: 1,
+    v: BLUETOOTH_PROTOCOL_VERSION,
     type: "snapshot",
     id: "state-4",
     payload: { revision: 4, pieces: [{ id: "hidden-1", faceDown: true }] },

@@ -61,7 +61,7 @@ test("UI-V4-07 棋子、已吃棋子和终结残影都复用独立墨圈", () =>
 });
 
 test("UI-V4-08 六十秒显示、状态栏已吃入口和三点菜单已接入事件", () => {
-  assert.match(app, /battleTurnDeadlineAt = Date\.now\(\) \+ NORMAL_FORMAL_TURN_DURATION_MS/);
+  assert.match(app, /battleTurnDeadlineAt = gameState\.turnDeadlineAt/);
   assert.match(app, /redCapturedButton\.addEventListener\("click", showCapturedDetails\)/);
   assert.match(app, /\[battleMoreButton, heroMoreButton, rpsMoreButton\]/);
   assert.match(app, /v4-skill-trigger/);

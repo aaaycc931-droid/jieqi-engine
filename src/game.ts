@@ -1,10 +1,13 @@
+import { copy, initializeFeatureSecret, destroyPiece, markRevealed, queueLanding, settleLandings, closeDirectDeaths, generateGhosts, finishFormalTurn, rememberAction, resolveWindReturn } from "./settlement.ts";
 import { RuleError } from "./errors.ts";
 import {
   canRevealedPieceAttack,
   findGeneral,
   isCheckmate,
+  isGeneralInCheck,
   isStalemate,
   pieceAt,
+  pieceById,
   validatePublicMove,
 } from "./rules.ts";
 import { getController, getMovementIdentity, isInPalace, otherSide } from "./slots.ts";
@@ -27,46 +30,7 @@ import type {
   WarriorStates,
 } from "./types.ts";
 
-function cloneState(state: GameState): GameState {
-  return {
-    ...state,
-    pieces: state.pieces.map((piece) => ({ ...piece })),
-    captured: state.captured.map((piece) => ({ ...piece })),
-    effectsByPieceId: Object.fromEntries(
-      Object.entries(state.effectsByPieceId ?? {}).map(([id, effects]) => [
-        id,
-        {
-          ...effects,
-          ...(effects.stealth ? { stealth: { ...effects.stealth } } : {}),
-          ...(effects.barrier ? { barrier: { ...effects.barrier } } : {}),
-        },
-      ]),
-    ),
-    assassination: state.assassination
-      ? {
-          red: { ...state.assassination.red },
-          black: { ...state.assassination.black },
-        }
-      : undefined,
-    warrior: state.warrior ? { red: { barrierPieceIds: [...state.warrior.red.barrierPieceIds], ironArmorAvailable: state.warrior.red.ironArmorAvailable }, black: { barrierPieceIds: [...state.warrior.black.barrierPieceIds], ironArmorAvailable: state.warrior.black.ironArmorAvailable } } : undefined,
-    forcedDefense: state.forcedDefense ? { ...state.forcedDefense } : undefined,
-    featureRules: state.featureRules ? { heroes: state.featureRules.heroes ? { ...state.featureRules.heroes } : undefined, mutation: state.featureRules.mutation } : undefined,
-    lastMove: state.lastMove
-      ? {
-          ...state.lastMove,
-          from: { ...state.lastMove.from },
-          to: { ...state.lastMove.to },
-          captured: state.lastMove.captured
-            ? { ...state.lastMove.captured }
-            : undefined,
-          pathCrushed: state.lastMove.pathCrushed?.map((captured) => ({ ...captured })),
-          revealed: state.lastMove.revealed
-            ? { ...state.lastMove.revealed }
-            : undefined,
-        }
-      : undefined,
-  };
-}
+function cloneState(state: GameState): GameState { return copy(state); }
 
 function emptyAssassinationStates(): AssassinationStates {
   return {
@@ -94,13 +58,9 @@ export function initializeFeatureGameState(
   nextState.featureRules = { ...(heroes ? { heroes: { ...heroes } } : {}), ...(mutation ? { mutation } : {}) };
   const warrior: WarriorStates = { red: { barrierPieceIds: [], ironArmorAvailable: heroes?.red === "warrior" }, black: { barrierPieceIds: [], ironArmorAvailable: heroes?.black === "warrior" } };
   nextState.warrior = heroes?.red === "warrior" || heroes?.black === "warrior" ? warrior : undefined;
-  if (mutation === "cavalry") {
-    for (const piece of nextState.pieces) {
-      if (piece.faceDown && (piece.y === 3 || piece.y === 6) && (piece.x === 0 || piece.x === 4 || piece.x === 8)) {
-        nextState.effectsByPieceId![piece.id] = { cavalry: true };
-      }
-    }
-  }
+  nextState.formalTurns = { red: 0, black: 0 };
+  nextState.heroRuntime = {};
+  for (const side of ["red", "black"] as const) nextState.heroRuntime[side] = { used: false, invokeCount: 0 };
   return nextState;
 }
 
@@ -130,16 +90,7 @@ function captureByCrush(
   pieceId: string,
   actingSide: Side,
 ): CapturedPiece | undefined {
-  const victim = state.pieces.find((piece) => piece.id === pieceId);
-  if (!victim) return undefined;
-  const identity = victim.faceDown ? requireIdentity(secret, victim.id) : { color: victim.color, type: victim.type };
-  if (victim.faceDown) delete secret.identities[victim.id];
-  const captured = { id: victim.id, ...identity, capturedBy: actingSide, moveNumber: state.revision + 1 };
-  state.captured.push(captured);
-  state.pieces = state.pieces.filter((piece) => piece.id !== victim.id);
-  removePieceEffects(state, victim.id);
-  clearAssassinationForPiece(state, victim.id);
-  return captured;
+  return destroyPiece(state, secret, pieceId, actingSide, "crush");
 }
 
 /**
@@ -174,18 +125,10 @@ function pathPiecesForSpecialMove(state: GameState, source: PublicPiece, to: { x
   return [];
 }
 
-function finishDirectDeaths(state: GameState, actingSide: Side): boolean {
-  const redAlive = state.pieces.some((piece) => !piece.faceDown && piece.color === "red" && piece.type === "general");
-  const blackAlive = state.pieces.some((piece) => !piece.faceDown && piece.color === "black" && piece.type === "general");
-  if (redAlive && blackAlive) return false;
-  state.status = "finished";
-  if (!redAlive && !blackAlive) {
-    state.drawReason = "mutual_destruction";
-    return true;
-  }
-  state.winner = redAlive ? "red" : "black";
-  state.reason = state.winner === actingSide ? "crush_them" : "rampage";
-  return true;
+function finishDirectDeaths(state: GameState, actingSide: Side, secret: SecretState): boolean {
+  settleLandings(state, secret);
+  resolveWindReturn(state, secret);
+  return closeDirectDeaths(state, secret, actingSide);
 }
 
 function clearAssassinationForPiece(state: GameState, pieceId: string): void {
@@ -201,14 +144,6 @@ function endStealth(state: GameState, pieceId: string): void {
   clearAssassinationForPiece(state, pieceId);
 }
 
-function advanceBarrierAfterMove(state: GameState, pieceId: string, y: number): void {
-  const barrier = state.effectsByPieceId?.[pieceId]?.barrier;
-  if (!barrier) return;
-  const inEnemyHalf = barrier.owner === "red" ? y <= 4 : y >= 5;
-  if (!barrier.enemyHalfEntered && inEnemyHalf) { barrier.enemyHalfEntered = true; return; }
-  if (barrier.enemyHalfEntered && barrier.movesAfterEnemyHalfEntry === 0) { barrier.movesAfterEnemyHalfEntry = 1; return; }
-  if (barrier.enemyHalfEntered) removeBarrierEffect(state, pieceId);
-}
 
 function awardWarriorBarrier(
   state: GameState,
@@ -218,15 +153,15 @@ function awardWarriorBarrier(
   to: { x: number; y: number },
   movedPiece: RevealedPiece | PublicPiece,
 ): void {
-  if (movedPiece.faceDown || movedPiece.type === "general" || !state.warrior?.[actingSide]) return;
+  if (movedPiece.faceDown || movedPiece.type === "general" || state.featureRules?.heroes?.[actingSide] !== "warrior" || !state.warrior?.[actingSide]) return;
   if (getController(movedPiece) !== actingSide || !isInPalace(from, actingSide) || isInPalace(to, actingSide)) return;
   const warrior = state.warrior[actingSide];
-  if (warrior.barrierPieceIds.length >= 2 || warrior.barrierPieceIds.includes(sourceId)) return;
+  if (warrior.barrierPieceIds.length >= 3 || warrior.barrierPieceIds.includes(sourceId)) return;
   warrior.barrierPieceIds.push(sourceId);
   state.effectsByPieceId ??= {};
   state.effectsByPieceId[sourceId] = {
     ...state.effectsByPieceId[sourceId],
-    barrier: { owner: actingSide, enemyHalfEntered: false, movesAfterEnemyHalfEntry: 0 },
+    barrier: { owner: actingSide, enemyTurnsRemaining: 3 },
   };
 }
 
@@ -268,7 +203,7 @@ function finishAfterPlayerAction(
   const nextSide = otherSide(actingSide);
   const movedRevealed = movedPiece as RevealedPiece;
   const isInfiniteSting =
-    sourceWasCovered &&
+    sourceWasCovered && nextState.pieces.some(p => p.id === movedPiece.id) &&
     movedRevealed.color === nextSide &&
     canRevealedPieceAttack(
       nextState,
@@ -276,6 +211,20 @@ function finishAfterPlayerAction(
       findGeneral(nextState, actingSide),
     );
 
+  const hadCheck = isGeneralInCheck(nextState, nextSide);
+  if (nextState.featureRules?.heroes?.[actingSide] === "prince" && (nextState.lastMove?.captured || hadCheck)) {
+    nextState.heroRuntime ??= {};
+    (nextState.heroRuntime[actingSide] ??= {}).carefreeSuspended = true;
+  }
+  const rainWin = nextState.heroRuntime?.[actingSide]?.rainActive && hadCheck;
+  if (rainWin) {
+    nextState.status = "finished"; nextState.winner = actingSide; nextState.reason = "rain_night";
+    nextSecret.processedActions[command.actionId] = nextState.revision; return;
+  }
+  generateGhosts(nextState);
+  // Backstab armor on the warrior's own formal turn creates an extra response.
+  if (!isInfiniteSting) finishFormalTurn(nextState, nextSecret, actingSide);
+  if (nextState.status === "finished") { nextSecret.processedActions[command.actionId] = nextState.revision; return; }
   advanceStealthTurn(nextState, actingSide, movedPiece.id, enteredStealth);
   const ironArmor = isInfiniteSting && nextState.warrior?.[actingSide].ironArmorAvailable;
   if (ironArmor) {
@@ -355,17 +304,7 @@ export function reassessAfterTrapResolution(state: GameState): void {
   }
 }
 
-function cloneSecret(secret: SecretState): SecretState {
-  return {
-    identities: Object.fromEntries(
-      Object.entries(secret.identities).map(([id, identity]) => [
-        id,
-        { ...identity },
-      ]),
-    ),
-    processedActions: { ...secret.processedActions },
-  };
-}
+function cloneSecret(secret: SecretState): SecretState { return copy(secret); }
 
 function requireIdentity(
   secret: SecretState,
@@ -391,7 +330,7 @@ function permitsSelfCrushingGeneral(
   command: MoveCommand,
   actingSide: Side,
 ): boolean {
-  const source = pieceAt(state, command.from);
+  const source = command.pieceId ? pieceById(state, command.pieceId) : pieceAt(state, command.from);
   if (!source) return false;
   return pathPiecesForSpecialMove(state, source, command.to).some(
     (piece) => !piece.faceDown && piece.color === actingSide && piece.type === "general",
@@ -443,7 +382,9 @@ export function applyAuthoritativeMove(
   state: GameState,
   secret: SecretState,
   command: MoveCommand,
+  deferTurnEnd = false,
 ): MoveResult {
+  if (state.flowDance && !deferTurnEnd) return applyFlowDance(state, secret, command);
   if (secret.processedActions[command.actionId] !== undefined) {
     return {
       state: cloneState(state),
@@ -455,6 +396,7 @@ export function applyAuthoritativeMove(
     throw new RuleError("STALE_REVISION", "客户端棋局版本已经过期");
   }
 
+  if (secret.replay && (pieceAt(state, command.from)?.id !== secret.replay.pieceId || pieceAt(state, command.to) || pathPiecesForSpecialMove(state, pieceAt(state, command.from)!, command.to).length)) throw new RuleError("REWIND_REPLAY", "回溯重走必须同棋且不能进攻");
   const validation = validatePublicMove(state, command, state.turn);
   if (!validation.ok && !(validation.code === "SELF_CHECK" && permitsSelfCrushingGeneral(state, command, state.turn))) {
     validationError(validation.code, validation.message);
@@ -462,13 +404,18 @@ export function applyAuthoritativeMove(
 
   const nextState = cloneState(state);
   const nextSecret = cloneSecret(secret);
+  initializeFeatureSecret(nextState, nextSecret);
+  nextState.automaticEvents = [];
+  nextState.landingEvents = [];
+  if (!deferTurnEnd) rememberAction(state, nextSecret, (command.pieceId ? pieceById(state, command.pieceId) : pieceAt(state, command.from))?.id, pathPiecesForSpecialMove(state, (command.pieceId ? pieceById(state, command.pieceId) : pieceAt(state, command.from))!, command.to).length ? 2 : 1, command.from);
   const actingSide = state.turn;
-  const source = pieceAt(nextState, command.from);
+  const source = command.pieceId ? pieceById(nextState, command.pieceId) : pieceAt(nextState, command.from);
   if (!source) validationError("NO_PIECE", "起点没有棋子");
-  const target = pieceAt(nextState, command.to);
+  const target = source.layer === "air" ? undefined : pieceAt(nextState, command.to);
   const sourceWasCovered = source.faceDown;
 
   const pathVictims = pathPiecesForSpecialMove(nextState, source, command.to);
+  if (source.layer === "air" && pathVictims.length) throw new RuleError("FLIGHT_NO_ATTACK", "飞行棋不能主动路径碾碎");
   const pathCrushed = pathVictims.flatMap((pathVictim) => {
     const captured = captureByCrush(nextState, nextSecret, pathVictim.id, actingSide);
     return captured ? [captured] : [];
@@ -488,7 +435,8 @@ export function applyAuthoritativeMove(
       bouncedAgainstPieceId: target.id,
       landed: false,
     };
-    if (finishDirectDeaths(nextState, actingSide)) {
+    queueLanding(nextState, source, actingSide, "warrior_return");
+    if (finishDirectDeaths(nextState, actingSide, nextSecret)) {
       nextSecret.processedActions[command.actionId] = nextState.revision;
       return { state: nextState, secret: nextSecret, duplicate: false };
     }
@@ -496,22 +444,7 @@ export function applyAuthoritativeMove(
     return { state: nextState, secret: nextSecret, duplicate: false };
   }
 
-  let captured: CapturedPiece | undefined;
-  if (target) {
-    const identity: SecretIdentity = target.faceDown
-      ? requireIdentity(nextSecret, target.id)
-      : { color: target.color, type: target.type };
-    captured = {
-      id: target.id,
-      ...identity,
-      capturedBy: actingSide,
-      moveNumber: state.revision + 1,
-    };
-    nextState.captured.push(captured);
-    if (target.faceDown) delete nextSecret.identities[target.id];
-    removePieceEffects(nextState, target.id);
-    clearAssassinationForPiece(nextState, target.id);
-  }
+  const captured = target ? destroyPiece(nextState, nextSecret, target.id, actingSide, "attack") : undefined;
 
   let revealed: SecretIdentity | undefined;
   let movedPiece: RevealedPiece | PublicPiece;
@@ -536,6 +469,10 @@ export function applyAuthoritativeMove(
     ),
     movedPiece,
   ];
+  markRevealed(nextState, nextSecret, source.id);
+  queueLanding(nextState, movedPiece, actingSide, "action");
+  if (nextSecret.replay && isGeneralInCheck(nextState, otherSide(actingSide))) throw new RuleError("REWIND_REPLAY_CHECK", "回溯重走不能形成将军");
+  delete nextSecret.replay;
   awardWarriorBarrier(nextState, actingSide, source.id, command.from, command.to, movedPiece);
   nextState.revision = state.revision + 1;
   nextState.lastMove = {
@@ -548,14 +485,20 @@ export function applyAuthoritativeMove(
     pathCrushed,
     revealed,
     landed: true,
+    tier: pathVictims.length > 0 ? 2 : 1,
+    keywords: [target || pathVictims.length > 0 ? "进攻" : "移动"],
   };
-  advanceBarrierAfterMove(nextState, source.id, movedPiece.y);
 
-  if (finishDirectDeaths(nextState, actingSide)) {
+
+  if (finishDirectDeaths(nextState, actingSide, nextSecret)) {
     nextSecret.processedActions[command.actionId] = nextState.revision;
     return { state: nextState, secret: nextSecret, duplicate: false };
   }
 
+  if (deferTurnEnd) {
+    nextSecret.processedActions[command.actionId] = nextState.revision;
+    return { state: nextState, secret: nextSecret, duplicate: false };
+  }
   finishAfterPlayerAction(
     nextState,
     nextSecret,
@@ -599,6 +542,7 @@ export function applyAuthoritativeAssassination(
   if (command.expectedRevision !== state.revision) {
     throw new RuleError("STALE_REVISION", "客户端棋局版本已经过期");
   }
+  if (state.flowDance) throw new RuleError("FLOW_ACTION_REQUIRED", "须先完成流·舞归位结算");
 
   const actingSide = state.turn;
   const sourcePiece = pieceAt(state, command.from);
@@ -628,18 +572,15 @@ export function applyAuthoritativeAssassination(
     if (sourcePiece.faceDown || sourcePiece.type === "general") {
       throw new RuleError("INVALID_ASSASSINATION_PIECE", "刺杀只能选择己方非将帅明棋");
     }
-    if (!command.useStrongStrike && pieceAt(state, command.to)) {
+    if (command.useStrongStrike) throw new RuleError("ASSASSINATION_DELAYED", "发动回合不能使用强击");
+    if (pieceAt(state, command.to)) {
       throw new RuleError("ASSASSINATION_FIRST_MOVE_MUST_BE_EMPTY", "刺杀首次行动只能移动到空位，不能吃子");
     }
   }
 
-  const targetForStrike = pieceAt(state, command.to);
-  if (command.useStrongStrike && targetForStrike && !targetForStrike.faceDown && targetForStrike.type === "general") {
-    throw new RuleError("INVALID_STRONG_STRIKE_TARGET", "强击不能以将帅为目标");
-  }
   const validation = validatePublicMove(state, command, actingSide, {
     allowStealthSource: continuing,
-    allowStealthTarget: command.useStrongStrike,
+    allowGeneralTarget: command.useStrongStrike,
     requireCapture: command.useStrongStrike,
   });
   if (!validation.ok && !(validation.code === "SELF_CHECK" && permitsSelfCrushingGeneral(state, command, actingSide))) {
@@ -648,13 +589,26 @@ export function applyAuthoritativeAssassination(
 
   const nextState = cloneState(state);
   const nextSecret = cloneSecret(secret);
-  const source = pieceAt(nextState, command.from);
+  initializeFeatureSecret(nextState, nextSecret);
+  nextState.automaticEvents = [];
+  nextState.landingEvents = [];
+  rememberAction(state, nextSecret, sourcePiece.id, 2, command.from);
+  const source = command.pieceId ? pieceById(nextState, command.pieceId) : pieceAt(nextState, command.from);
   if (!source) validationError("NO_PIECE", "起点没有棋子");
-  const target = pieceAt(nextState, command.to);
+  const target = source.layer === "air" ? undefined : pieceAt(nextState, command.to);
   const sourceWasCovered = source.faceDown;
+  if (command.useStrongStrike && target && !target.faceDown && target.type === "general" && nextState.warrior?.[target.color]?.ironArmorAvailable) {
+    nextState.warrior[target.color].ironArmorAvailable = false;
+    endStealth(nextState, source.id);
+    nextState.revision += 1;
+    nextState.lastMove = { actionId: command.actionId, pieceId: source.id, actingSide, from: { ...command.from }, to: { ...command.to }, landed: false, tier: 2, keywords: ["进攻", "强击"] };
+    finishAfterPlayerAction(nextState, nextSecret, command, actingSide, false, source, false);
+    return { state: nextState, secret: nextSecret, duplicate: false };
+  }
   if (!continuing) consumeAssassinationCharge(nextState, actingSide, command.source as SkillSource);
 
   const pathVictims = pathPiecesForSpecialMove(nextState, source, command.to);
+  if (source.layer === "air" && pathVictims.length) throw new RuleError("FLIGHT_NO_ATTACK", "飞行棋不能主动路径碾碎");
   const pathCrushed = pathVictims.flatMap((pathVictim) => {
     const captured = captureByCrush(nextState, nextSecret, pathVictim.id, actingSide);
     return captured ? [captured] : [];
@@ -675,7 +629,8 @@ export function applyAuthoritativeAssassination(
       landed: false,
     };
     if (continuing) endStealth(nextState, source.id);
-    if (finishDirectDeaths(nextState, actingSide)) {
+    queueLanding(nextState, source, actingSide, "warrior_return");
+    if (finishDirectDeaths(nextState, actingSide, nextSecret)) {
       nextSecret.processedActions[command.actionId] = nextState.revision;
       return { state: nextState, secret: nextSecret, duplicate: false };
     }
@@ -683,17 +638,7 @@ export function applyAuthoritativeAssassination(
     return { state: nextState, secret: nextSecret, duplicate: false };
   }
 
-  let captured: CapturedPiece | undefined;
-  if (target) {
-    const identity = target.faceDown
-      ? requireIdentity(nextSecret, target.id)
-      : { color: target.color, type: target.type };
-    captured = { id: target.id, ...identity, capturedBy: actingSide, moveNumber: state.revision + 1 };
-    nextState.captured.push(captured);
-    if (target.faceDown) delete nextSecret.identities[target.id];
-    removePieceEffects(nextState, target.id);
-    clearAssassinationForPiece(nextState, target.id);
-  }
+  const captured = target ? destroyPiece(nextState, nextSecret, target.id, actingSide, command.useStrongStrike ? "strong_strike" : "attack") : undefined;
 
   const movedPiece: RevealedPiece | PublicPiece = source.faceDown
     ? (() => {
@@ -716,12 +661,16 @@ export function applyAuthoritativeAssassination(
     captured,
     pathCrushed,
     landed: true,
+    tier: 2,
+    keywords: [target || pathVictims.length > 0 ? "进攻" : "移动", ...(command.useStrongStrike ? ["强击"] : ["耗费"])],
   };
 
+  markRevealed(nextState, nextSecret, source.id);
+  queueLanding(nextState, movedPiece, actingSide, "action");
   awardWarriorBarrier(nextState, actingSide, source.id, command.from, command.to, movedPiece);
-  advanceBarrierAfterMove(nextState, source.id, movedPiece.y);
 
-  if (finishDirectDeaths(nextState, actingSide)) {
+
+  if (finishDirectDeaths(nextState, actingSide, nextSecret)) {
     nextSecret.processedActions[command.actionId] = nextState.revision;
     return { state: nextState, secret: nextSecret, duplicate: false };
   }
@@ -778,20 +727,19 @@ export function applyAutomaticExecution(
 
   const nextState = cloneState(state);
   const nextSecret = cloneSecret(secret);
-  const captured: CapturedPiece = {
-    id: target.id,
-    color: target.color,
-    type: "general",
-    capturedBy: state.winner,
-    moveNumber: state.revision + 1,
-  };
+  initializeFeatureSecret(nextState, nextSecret);
+  nextState.automaticEvents = [];
+  const pathCrushed = pathPiecesForSpecialMove(nextState, source, plan.to).flatMap(p => {
+    const record = destroyPiece(nextState, nextSecret, p.id, state.winner!, "crush");
+    return record ? [record] : [];
+  });
+  const captured = destroyPiece(nextState, nextSecret, target.id, state.winner, state.reason === "checkmate" ? "execution" : "ambush")!;
   nextState.pieces = [
     ...nextState.pieces.filter((piece) => piece.id !== source.id && piece.id !== target.id),
     { ...source, x: plan.to.x, y: plan.to.y },
   ];
   removePieceEffects(nextState, target.id);
   clearAssassinationForPiece(nextState, target.id);
-  nextState.captured.push(captured);
   nextState.revision += 1;
   nextState.lastMove = {
     actionId,
@@ -800,10 +748,89 @@ export function applyAutomaticExecution(
     from: { ...plan.from },
     to: { ...plan.to },
     captured,
+    pathCrushed,
   };
   nextState.status = "finished";
+  if (pathCrushed.some(p => p.type === "general")) closeDirectDeaths(nextState, nextSecret, state.winner);
+  if (state.reason === "checkmate" && resolveWindReturn(nextState, nextSecret, { pieceId: source.id, from: plan.from })) {
+    if (!closeDirectDeaths(nextState, nextSecret, state.winner)) {
+      nextState.status = "playing"; delete nextState.winner; delete nextState.reason;
+      nextState.turn = nextState.flowDance!.side;
+      if (!flowHasEscape(nextState)) {
+        delete nextState.flowDance;
+        nextState.status = "execution"; nextState.winner = state.winner; nextState.turn = state.winner; nextState.reason = "checkmate";
+        return applyAutomaticExecution(nextState, nextSecret, `${actionId}:flow-failed`);
+      }
+    }
+  }
   nextSecret.processedActions[actionId] = nextState.revision;
   return { state: nextState, secret: nextSecret, duplicate: false };
+}
+
+function flowTargets(state: GameState): Array<{ x: number; y: number }> {
+  const flow = state.flowDance;
+  if (!flow) return [];
+  const p = state.pieces.find(p => p.id === flow.pieceId);
+  if (!p) return [];
+  return [{ x: p.x + 1, y: p.y }, { x: p.x - 1, y: p.y }, { x: p.x, y: p.y + 1 }, { x: p.x, y: p.y - 1 }].filter(to =>
+    isInPalace(to, flow.side) && validatePublicMove(state, { from: p, to }, flow.side, { allowIntermediateCheck: true }).ok);
+}
+function simulateFlowStep(state: GameState, to: { x: number; y: number }): GameState {
+  const next = cloneState(state), p = next.pieces.find(p => p.id === next.flowDance?.pieceId)!;
+  const target = pieceAt(next, to);
+  next.pieces = next.pieces.filter(q => q.id !== target?.id || q.id === p.id);
+  p.x = to.x; p.y = to.y;
+  next.flowDance!.steps = 1;
+  return next;
+}
+/** 第一步允许受将，第二步必须解将。 */
+export function getFlowDanceMoves(state: GameState, pieceId: string): Array<{ x: number; y: number }> {
+  if (state.flowDance?.pieceId !== pieceId) return [];
+  return flowTargets(state).filter(to => state.flowDance!.steps === 0 || !isGeneralInCheck(simulateFlowStep(state, to), state.flowDance!.side));
+}
+function flowHasEscape(state: GameState): boolean {
+  const side = state.flowDance!.side;
+  return flowTargets(state).some(to => {
+    const intermediate = simulateFlowStep(state, to);
+    if (!isGeneralInCheck(intermediate, side)) return true;
+    if (state.flowDance!.steps === 1) return false;
+    return flowTargets(intermediate).some(second => !isGeneralInCheck(simulateFlowStep(intermediate, second), side));
+  });
+}
+function applyFlowDance(state: GameState, secret: SecretState, command: MoveCommand): MoveResult {
+  if (secret.processedActions[command.actionId] !== undefined) return { state: cloneState(state), secret: cloneSecret(secret), duplicate: true };
+  if (command.expectedRevision !== state.revision) throw new RuleError("STALE_REVISION", "客户端棋局版本已经过期");
+  const flow = state.flowDance!;
+  const p = state.pieces.find(p => p.id === flow.pieceId)!;
+  if (command.from.x !== p.x || command.from.y !== p.y || !flowTargets(state).some(to => to.x === command.to.x && to.y === command.to.y)) throw new RuleError("INVALID_FLOW_STEP", "流·舞只能将帅在九宫内连续一格正交行动");
+  // 中间步的受将豁免只适用于本特殊结算。
+  const validationState = cloneState(state);
+  const saved = validationState.flowDance; delete validationState.flowDance;
+  const originalGeneral = validationState.pieces.find(q => q.id === p.id)!;
+  const validation = validatePublicMove(validationState, command, flow.side, { allowIntermediateCheck: true });
+  if (!validation.ok) throw new RuleError(validation.code!, validation.message!);
+  const newSecret = cloneSecret(secret);
+  const target = pieceAt(validationState, command.to);
+  validationState.automaticEvents = []; validationState.landingEvents = [];
+  if (target) destroyPiece(validationState, newSecret, target.id, flow.side, "flow_attack");
+  originalGeneral.x = command.to.x; originalGeneral.y = command.to.y;
+  queueLanding(validationState, originalGeneral, flow.side, "flow_dance"); settleLandings(validationState, newSecret);
+  validationState.revision += 1;
+  if (!closeDirectDeaths(validationState, newSecret, flow.side)) {
+    if (!isGeneralInCheck(validationState, flow.side)) {
+      validationState.turn = flow.resumeTurn;
+    } else if (flow.steps === 0) {
+      validationState.flowDance = { ...saved!, steps: 1 };
+      if (!flowHasEscape(validationState)) {
+        delete validationState.flowDance; validationState.status = "execution";
+        validationState.winner = otherSide(flow.side); validationState.turn = otherSide(flow.side); validationState.reason = "checkmate";
+      }
+    } else {
+      validationState.status = "execution"; validationState.winner = otherSide(flow.side); validationState.turn = otherSide(flow.side); validationState.reason = "checkmate";
+    }
+  }
+  newSecret.processedActions[command.actionId] = validationState.revision;
+  return { state: validationState, secret: newSecret, duplicate: false };
 }
 
 export function applyResignation(

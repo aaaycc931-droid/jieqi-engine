@@ -178,7 +178,7 @@ test("UI-HERO-06 英雄准备复用正式棋盘和顶部倒计时且不以圆角
 test("UI-HERO-07 猎人准备只标示当前方合法半场并将陷阱保持为秘密草稿", () => {
   assert.match(app, /const activeTrapSetupSide = remoteCanPrepare \? remoteSide : localPreparationActive \? trapSetupSide : undefined/);
   assert.match(app, /activeTrapSetupSide && isOwnHalf\(activeTrapSetupSide, position\)/);
-  assert.match(app, /localPreparationActive \? localTrapDraft : \[\]/);
+  assert.match(app, /localPreparationActive \? localTrapDraft : localTraps\.filter/);
   assert.doesNotMatch(app, /localPreparationActive \? localTraps/);
   assert.match(app, /对方的陷阱位置不可见/);
   assert.match(css, /\.v4-board\.trap-preparing-red::after\s*\{[^}]*bottom:\s*1%/s);
@@ -335,12 +335,12 @@ test("UI-CHAT-03 断线保留草稿、终局清空且键盘不重排棋盘", () 
   assert.doesNotMatch(html, /message-unread-count/);
 });
 
-test("UI-CAPTURE-01 已吃入口已迁入双方状态栏且只统计对方离场棋子", () => {
+test("UI-CAPTURE-01 消灭记录按离场棋的公开阵营归组，包含己方死亡", () => {
   for (const id of ["red-captured-button", "black-captured-button", "red-captured-count", "black-captured-count"]) {
     assert.match(html, new RegExp(`id="${id}"`));
   }
   assert.doesNotMatch(html, /id="captured-panel"|id="captured-toggle"/);
-  assert.match(app, /piece\.capturedBy === side && piece\.color !== side/);
+  assert.match(app, /piece\.color === side/);
   assert.match(app, /showCapturedDetails/);
   assert.match(css, /\.captured-detail-grid\s*\{[^}]*grid-template-columns:\s*repeat\(5,/s);
   assert.match(app, /尚未吃子/);

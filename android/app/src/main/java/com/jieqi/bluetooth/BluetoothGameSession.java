@@ -30,7 +30,7 @@ import java.util.concurrent.Executors;
  * request an action and never receives the host's private state.</p>
  */
 public final class BluetoothGameSession implements Closeable {
-  public static final int PROTOCOL_VERSION = 1;
+  public static final int PROTOCOL_VERSION = 2;
   public static final int MAX_MESSAGE_BYTES = 48 * 1024;
   private static final String SERVICE_NAME = "Jieqi Bluetooth Room";
   private static final UUID SERVICE_UUID = UUID.fromString("b13eb75c-31ac-4630-8af1-79e0221fd7e2");

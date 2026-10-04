@@ -13,12 +13,11 @@ test("MUT-02 亲征将帅获得车式移动", () => {
   assert.equal(getLegalMoves(state, "red-general").some((position) => position.x === 4 && position.y === 5), true);
 });
 
-test("MUT-03 骑兵为三枚固定兵位提供前向马步", () => {
-  const state = initializeFeatureGameState(gameState([
-    { id: "red-cavalry", x: 0, y: 6, faceDown: true },
-  ]), undefined, "cavalry");
-  assert.equal(getLegalMoves(state, "red-cavalry").some((position) => position.x === 1 && position.y === 4), true);
-  assert.equal(getLegalMoves(state, "red-cavalry").some((position) => position.x === 1 && position.y === 8), false);
+test("MUT-03 骑兵暗置时不启用额外马步，不按兵位授予", () => {
+ const state = initializeFeatureGameState(gameState([{ id: "covered", x: 0, y: 6, faceDown: true }]), undefined, "cavalry");
+ assert.equal(getLegalMoves(state, "covered").some(p => p.x === 1 && p.y === 4), false);
+ assert.equal(getLegalMoves(state, "covered").some(p => p.x === 0 && p.y === 5), true);
+ assert.equal(state.effectsByPieceId?.covered, undefined);
 });
 
 test("MUT-04 铁马无视马腿阻挡", () => {
@@ -89,33 +88,18 @@ test("MUT-10 铁马可把敌将帅作为马腿路径将军", () => {
   assert.equal(isGeneralInCheck(state, "black"), true);
 });
 
-test("MUT-11 战车只计一枚非隐身路径棋，但会同时碾碎所有隐身路径棋", () => {
-  const state = initializeFeatureGameState(gameState([
-    revealed("rook", "red", "rook", 0, 7),
-    revealed("counted-path", "black", "pawn", 0, 5),
-    revealed("stealth-path", "black", "horse", 0, 4),
-    revealed("target", "black", "cannon", 0, 3),
-  ]), undefined, "war_chariot");
-  state.effectsByPieceId = {
-    "stealth-path": { stealth: { owner: "black", remainingOwnerTurns: 1, strongStrikeAvailable: true, source: "hero" } },
-  };
-  state.assassination!.black.activePieceId = "stealth-path";
-
-  const result = applyAuthoritativeMove(state, secretState(), move({ x: 0, y: 7 }, { x: 0, y: 3 }, "all-paths"));
-  for (const id of ["counted-path", "stealth-path", "target"]) {
-    assert.equal(result.state.pieces.some((piece) => piece.id === id), false);
-  }
-  assert.equal(result.state.effectsByPieceId?.["stealth-path"], undefined);
-  assert.equal(result.state.assassination?.black.activePieceId, undefined);
-  assert.deepEqual(result.state.lastMove?.pathCrushed?.map((piece) => piece.id), ["counted-path", "stealth-path"]);
+test("MUT-11 战车路径包含无形地面棋的实体计数", () => {
+ const state = initializeFeatureGameState(gameState([revealed("rook", "red", "rook", 0, 7), revealed("first", "black", "pawn", 0, 5), revealed("intangible", "black", "horse", 0, 4), revealed("target", "black", "cannon", 0, 3)]), undefined, "war_chariot");
+ state.effectsByPieceId = { intangible: { intangible: true } };
+ assert.equal(validatePublicMove(state, { from: { x: 0, y: 7 }, to: { x: 0, y: 3 } }).code, "ILLEGAL_MOVEMENT");
+ state.pieces = state.pieces.filter(p => p.id !== "first");
+ const result = applyAuthoritativeMove(state, secretState(), move({ x: 0, y: 7 }, { x: 0, y: 3 }, "one"));
+ assert.deepEqual(result.state.lastMove.pathCrushed.map(p => p.id), ["intangible"]);
 });
 
-test("MUT-12 骑兵翻开成非兵种后仍保留完整八方向马步", () => {
-  const state = initializeFeatureGameState(gameState([
-    revealed("cavalry-rook", "red", "rook", 4, 6),
-    revealed("cavalry-pawn", "red", "pawn", 2, 6),
-  ]), undefined, "cavalry");
-  state.effectsByPieceId = { "cavalry-rook": { cavalry: true }, "cavalry-pawn": { cavalry: true } };
-  assert.equal(getLegalMoves(state, "cavalry-rook").some((position) => position.x === 3 && position.y === 8), true);
-  assert.equal(getLegalMoves(state, "cavalry-pawn").some((position) => position.x === 1 && position.y === 8), false);
+test("MUT-12 骑兵只给明马额外一步，保留八方向普通马跳", () => {
+ const state = initializeFeatureGameState(gameState([revealed("horse", "red", "horse", 4, 6), revealed("pawn", "red", "pawn", 2, 6)]), undefined, "cavalry");
+ assert.equal(getLegalMoves(state, "horse").some(p => p.x === 3 && p.y === 8), true);
+ assert.equal(getLegalMoves(state, "horse").some(p => p.x === 4 && p.y === 5), true);
+ assert.equal(getLegalMoves(state, "pawn").some(p => p.x === 1 && p.y === 8), false);
 });

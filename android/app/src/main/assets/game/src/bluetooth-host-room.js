@@ -13,6 +13,7 @@ import {
   playerRoomView,
   publicRemoteRoom,
   submitRemoteAssassination,
+  submitRemoteHeroAbility,
   submitRemoteHeroSelection,
   submitRemoteChat,
   submitRemoteMove,
@@ -29,6 +30,7 @@ import {
 
 export const BLUETOOTH_HOST_PLAYER = "bluetooth:host";
 export const BLUETOOTH_GUEST_PLAYER = "bluetooth:guest";
+
 
 
 
@@ -85,6 +87,7 @@ export class BluetoothHostRoom {
 
   handle(playerId                                                              , action                     )                     {
     const now = this.now();
+    this.room = advanceRemoteRoomTime(this.room, this.randomInt, now);
     switch (action.kind) {
       case "rps":
         this.room = submitRemoteRps(this.room, playerId, action.choice, action.round, this.randomInt, now);
@@ -109,6 +112,9 @@ export class BluetoothHostRoom {
         break;
       case "assassination":
         this.room = submitRemoteAssassination(this.room, playerId, action.command, now).room;
+        break;
+      case "hero_ability":
+        this.room = submitRemoteHeroAbility(this.room, playerId, action.command, now, this.randomInt).room;
         break;
       case "chat":
         this.room = submitRemoteChat(this.room, playerId, action.messageId, action.text, now).room;

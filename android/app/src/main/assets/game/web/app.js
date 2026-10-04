@@ -1,3 +1,6 @@
+import { HERO_IDS, HERO_CATALOG as heroCatalog } from "../src/heroes.js";
+import { applyHeroAbility, startFormalClock, formalTurnDurationMs } from "../src/hero-actions.js";
+import { initializeFeatureSecret } from "../src/settlement.js";
 // The browser playground must only load browser-safe modules.  In particular,
 // `src/index.ts` also re-exports the room adapter, which depends on
 // `node:crypto` for invite-token hashing.  Importing that server-only adapter
@@ -10,6 +13,7 @@ import {
   applyAuthoritativeMove,
   applyResignation,
   getAutomaticExecutionPlan,
+  getFlowDanceMoves,
   initializeFeatureGameState,
   reassessAfterTrapResolution,
 } from "../src/game.js";
@@ -27,6 +31,7 @@ import { createInitialGame } from "../src/setup.js";
 import { getController, otherSide } from "../src/slots.js";
 import {
   MUTATION_IDS,
+  drawRuntimeMutation,
   MUTATION_RARITY_LABELS,
   NORMAL_FORMAL_TURN_DURATION_MS,
   mutationDefinition,
@@ -38,6 +43,7 @@ import {
 
 } from "../src/bluetooth-host-room.js";
 import {
+  BLUETOOTH_PROTOCOL_VERSION,
   createBluetoothSnapshot,
   encodeBluetoothEnvelope,
   parseBluetoothEnvelope,
@@ -63,33 +69,11 @@ import {
 
 
 
+
 import { trapTriggerAnnouncement } from "./messages.js";
 
 const PLAYER_ONE = "玩家一";
 const PLAYER_TWO = "玩家二";
-const HERO_IDS                    = ["hunter", "rogue", "warrior"];
-const heroCatalog                                                                                                                  = {
-  hunter: {
-    name: "猎人",
-    skills: [{
-      name: "陷阱",
-      description: "战斗准备时在己方半场秘密布置两层陷阱；可放在棋子脚下，也可同格叠加。",
-      fullDescription: "英雄入场后进入最多 60 秒的战斗准备。猎人在己方半场秘密布置两层陷阱，可放在棋子脚下或同格叠加。敌方棋子落入时消耗一层并直接死亡；未触发的层在十个敌方正式回合后消失。",
-    }],
-  },
-  rogue: {
-    name: "潜行者",
-    skills: [
-      { name: "刺杀", description: "每局一次，首次可移动到空位并保留强击，或立即强击。", fullDescription: "每局一次，选择己方一枚非将帅明棋：移动到合法空位并保留强击，或立即对合法目标发动强击。两种行动完成后都进入隐身。" },
-      { name: "隐身", description: "隐身棋不阻挡、不能被普通吃子，也不触发普通将军。", fullDescription: "隐身持续到下一个己方正式回合结束。隐身棋仍占据落点，但不阻挡路线、不产生攻击和将军，也不能被普通吃子；主动行动或该回合结束后解除。" },
-      { name: "强击", description: "直接击杀非将帅目标并清除其全部效果，每次刺杀限一次。", fullDescription: "沿来源棋子的合法移动与吃子几何直接击杀一个非将帅目标，并先清除目标效果。首次行动可立即使用；若移动到空位后保留，则可在下一个己方回合使用。" },
-    ],
-  },
-  warrior: {
-    name: "战士",
-    skills: [{ name: "盔甲", description: "前两枚离开己方九宫的棋子获得一次防御；将帅另可免疫一次背刺。", fullDescription: "前两枚离开己方九宫的非将帅明棋获得一次防护壁垒，普通吃子会被弹回并消耗壁垒。将帅的铁甲可拦截一次背刺，并给予一次额外应将。" }],
-  },
-};
 const choiceLabel                            = { rock: "石头", scissors: "剪刀", paper: "布" };
 const pieceLabel = {
   red: { general: "帅", advisor: "仕", elephant: "相", horse: "马", rook: "车", cannon: "炮", pawn: "兵" },
@@ -440,6 +424,7 @@ let actionSequence = 0;
 let executionTimer                    ;
 let assassinationArmed = false;
 let strongStrikeArmed = false;
+let localPrivateViewerSide                  ;
 let localHeroes                                = {};
 let localHeroChoices                                  = {};
 let localHeroConfirmed                          = { [PLAYER_ONE]: false, [PLAYER_TWO]: false };
@@ -674,7 +659,7 @@ function sendBluetoothChat(rawText        , clearInput         )       {
       bluetooth.hostRoom .handle(BLUETOOTH_HOST_PLAYER, action);
       publishBluetoothViews();
     } else {
-      sendBluetoothEnvelope({ v: 1, type: "action", id: `chat:${messageId}`, payload: action });
+      sendBluetoothEnvelope({ v: BLUETOOTH_PROTOCOL_VERSION, type: "action", id: `chat:${messageId}`, payload: action });
     }
     beginChatCooldown();
     if (clearInput) messageInput.value = "";
@@ -717,9 +702,9 @@ function randomRpsChoice()            {
   return choices[randomIndex(choices.length)];
 }
 
-function randomMutation()             {
+function randomMutation(heroes                       )             {
   // Transitional flat draw until the four outer rarity probabilities are confirmed.
-  return MUTATION_IDS[randomIndex(MUTATION_IDS.length)];
+  return drawRuntimeMutation(randomIndex, heroes);
 }
 
 function randomOwnHalfPosition(side      )           {
@@ -1244,7 +1229,7 @@ function showCurrentMutationDetails()       {
   );
 }
 
-function sendBluetoothEnvelope   (envelope                                                                                                       )       {
+function sendBluetoothEnvelope   (envelope                                                                                                                                       )       {
   const bridge = nativeBluetooth();
   if (!bridge) throw new Error("此设备没有蓝牙桥接能力");
   bridge.send(encodeBluetoothEnvelope(envelope));
@@ -1278,7 +1263,7 @@ function handleBluetoothAction(action                     )       {
   }
   try {
     bluetooth.pendingAction = true;
-    sendBluetoothEnvelope({ v: 1, type: "action", id: bluetoothActionId(), payload: action });
+    sendBluetoothEnvelope({ v: BLUETOOTH_PROTOCOL_VERSION, type: "action", id: bluetoothActionId(), payload: action });
     showToast("操作已发送，等待房主裁定。");
   } catch (error) {
     bluetooth.pendingAction = false;
@@ -1297,7 +1282,7 @@ function handleIncomingBluetoothMessage(raw        )       {
         publishBluetoothViews();
       } catch (error) {
         const message = error instanceof RuleError ? error.message : "房主拒绝了此操作。";
-        sendBluetoothEnvelope({ v: 1, type: "error", id: envelope.id, payload: { message } });
+        sendBluetoothEnvelope({ v: BLUETOOTH_PROTOCOL_VERSION, type: "error", id: envelope.id, payload: { message } });
         if (action.kind !== "chat") showToast(message);
       }
     } else if (bluetooth.role === "guest" && envelope.type === "snapshot") {
@@ -1307,7 +1292,7 @@ function handleIncomingBluetoothMessage(raw        )       {
       const payload = envelope.payload                                    ;
       if (!envelope.id?.startsWith("chat:")) showToast(payload?.message ?? "房主拒绝了此操作。");
     } else if (envelope.type === "ping") {
-      sendBluetoothEnvelope({ v: 1, type: "pong", id: envelope.id });
+      sendBluetoothEnvelope({ v: BLUETOOTH_PROTOCOL_VERSION, type: "pong", id: envelope.id });
     }
   } catch (error) {
     showToast(error instanceof RuleError ? error.message : "收到的蓝牙消息无效。");
@@ -1438,6 +1423,7 @@ function resetMatch()       {
   activeSkillIndex = 0;
   heroSelectionDeadlineAt = undefined;
   localTraps = [];
+  if (gameState && gameSecret) initializeFeatureSecret(gameState, gameSecret);
   trapSetupQueue = [];
   trapSetupSide = undefined;
   localTrapDraft = [];
@@ -2042,7 +2028,7 @@ function startGame()       {
   const redHero = localHeroChoices[assignments.red];
   const blackHero = localHeroChoices[assignments.black];
   if (!redHero || !blackHero) return showToast("双方英雄选择不完整，请重新开始。");
-  const mutation = randomMutation();
+  const mutation = randomMutation({ red: redHero, black: blackHero });
   localHeroes = {
     red: redHero,
     black: blackHero,
@@ -2053,10 +2039,12 @@ function startGame()       {
     mutation,
   );
   gameSecret = session.secret;
+  localPrivateViewerSide = "red";
   selectedPieceId = undefined;
   assassinationArmed = false;
   strongStrikeArmed = false;
   localTraps = [];
+  if (gameState && gameSecret) initializeFeatureSecret(gameState, gameSecret);
   trapSetupQueue = [];
   trapSetupSide = undefined;
   localTrapDraft = [];
@@ -2102,6 +2090,13 @@ function runtimeSkillEntries(side      , hero        )                      {
       active: false,
     }];
   }
+  if (hero !== "rogue") {
+    const runtime = gameState?.heroRuntime?.[side];
+    const passive = ["qin_long", "murozond_minion", "prince", "death_knight"].includes(hero);
+    const abilities = hero === "devout_zealot" ? ["invoke", "unspeakable"] : hero === "deathwing" ? ["destruction"] : hero === "murozond" ? [gameState?.featureRules?.mutation === "end_time" ? "bomb" : "timeline_twist"] : hero === "nozdormu" ? [gameState?.featureRules?.mutation === "end_time" ? "hourglass" : "rewind"] : hero === "wind" ? ["shadow"] : [];
+    if (passive) return [{ key: `passive:${hero}`, title: heroCatalog[hero].skills[0].name, state: "被动技能", catalogIndex: 0, active: false }];
+    return abilities.map((ability, index) => ({ key: `ability:${ability}`, title: ability === "hourglass" ? "时光沙漏" : ability === "bomb" ? "时空扭曲炸弹" : heroCatalog[hero].skills[index]?.name ?? heroCatalog[hero].skills[0].name, state: hero === "wind" ? "秘密技能｜每局最多两次" : ability === "invoke" ? `祈求 ${runtime?.invokeCount ?? 0}/4` : ability === "hourglass" ? `剩余 ${gameState?.hourglasses ?? 0}` : runtime?.used ? "已用" : "主动技能", catalogIndex: index, active: true }));
+  }
   const assassination = gameState?.assassination?.[side];
   const entries                      = [{
     key: "assassination-hero",
@@ -2132,10 +2127,11 @@ function runtimeSkillEntries(side      , hero        )                      {
 }
 
 function canActivateRuntimeSkill(side      , entry                   )          {
-  if (!entry.active || !gameState || gameState.status !== "playing" || gameState.turn !== side) return false;
+  if (!entry.active || !gameState || gameState.status !== "playing" || gameState.turn !== side || gameState.flowDance) return false;
   if (bluetooth?.view && bluetooth.view.viewerSide !== side) return false;
   if (openingActive || localPreparationActive || bluetooth?.view?.phase !== undefined && bluetooth.view.phase !== "playing") return false;
   if (isBluetoothTransportInterrupted() || isMatchOverlayOpen()) return false;
+  if (entry.key.startsWith("ability:")) return true;
   const assassination = gameState.assassination?.[side];
   if (entry.key === "assassination-hero") return Boolean(assassination?.heroChargeAvailable || assassination?.activePieceId);
   if (entry.key === "assassination-mutation") return Boolean(assassination?.mutationChargeAvailable || assassination?.activePieceId);
@@ -2180,6 +2176,7 @@ function activateRuntimeSkill(button                   )       {
   const resolved = skillEntryForButton(button);
   if (!resolved) return;
   if (!canActivateRuntimeSkill(resolved.side, resolved.entry)) return showRuntimeSkillDetails(button);
+  if (resolved.entry.key.startsWith("ability:")) return openHeroAbility(resolved.entry.key.slice(8)                                 );
   const source = element                   ("assassination-source");
   if (resolved.entry.key === "assassination-hero") source.value = "hero";
   if (resolved.entry.key === "assassination-mutation") source.value = "mutation";
@@ -2276,7 +2273,7 @@ function commitLocalTrapDraft(side      )       {
     id: `local-trap:${side}:${firstLayerIndex + index}`,
     owner: side,
     position: { ...position },
-    opponentTurnsRemaining: 10,
+    opponentTurnsRemaining: 12,
   }));
 }
 
@@ -2502,7 +2499,8 @@ function updateBattleTurnTimer()       {
   }
   if (battleTurnRevision !== gameState.revision || battleTurnDeadlineAt === undefined) {
     battleTurnRevision = gameState.revision;
-    battleTurnDeadlineAt = Date.now() + NORMAL_FORMAL_TURN_DURATION_MS;
+    if (!bluetooth && gameState.turnStartedAt === undefined) startFormalClock(gameState, Date.now());
+    battleTurnDeadlineAt = gameState.turnDeadlineAt ?? Date.now() + formalTurnDurationMs(gameState, gameState.turn);
   }
   const remaining = secondsRemaining(battleTurnDeadlineAt);
   battleTurnTimer.textContent = String(remaining);
@@ -2555,7 +2553,7 @@ function renderBoard()       {
   const legalMoves = selectedPieceId
     ? usingAssassination
       ? getLegalAssassinationMoves(gameState, selectedPieceId, strongStrikeArmed)
-      : getLegalMoves(gameState, selectedPieceId)
+      : (gameState.flowDance ? getFlowDanceMoves(gameState, selectedPieceId) : getLegalMoves(gameState, selectedPieceId))
     : [];
   const legalKeys = new Set(legalMoves.map(positionKey));
   const pieces = new Map(gameState.pieces.map((piece) => [positionKey(piece), piece]));
@@ -2567,7 +2565,7 @@ function renderBoard()       {
     ? bluetooth.view.phase === "hero_preparation"
       ? (bluetooth.view.ownTrapDraft ?? bluetooth.trapDraft)
       : (bluetooth.view.ownTraps ?? []).map((trap) => trap.position)
-    : localPreparationActive ? localTrapDraft : [];
+    : localPreparationActive ? localTrapDraft : localTraps.filter(t => t.owner === localPrivateViewerSide).map(t => t.position);
   const ownTrapCounts = new Map                ();
   for (const position of visibleTrapPositions) {
     const key = positionKey(position);
@@ -2634,15 +2632,16 @@ function renderBoard()       {
 
 function capturesBySide(side      )                        {
   if (!gameState) return [];
-  return gameState.captured.filter((piece) => piece.capturedBy === side && piece.color !== side);
+  return gameState.captured.filter((piece) => piece.color === side && !piece.secretColorWithheld);
 }
 
 function capturedToken(piece                               )              {
     const token = document.createElement("span");
     token.className = `captured-token ${piece.color}`;
     token.style.setProperty("--ring-url", `url("${ringAsset(stableRingIndex(piece.id))}")`);
-    token.append(createPieceGlyph(piece.color, piece.type));
-    token.title = `${piece.color === "red" ? "红方" : "蓝方"}${pieceLabel[piece.color][piece.type]}`;
+    if (piece.secretColorWithheld) { token.className = "captured-token unknown"; token.textContent = movementLabel[piece.type]; }
+    else token.append(createPieceGlyph(piece.color, piece.type));
+    token.title = piece.secretColorWithheld ? "兵种已揭示，秘密阵营未公开" : `${piece.color === "red" ? "红方" : "蓝方"}${pieceLabel[piece.color][piece.type]}`;
     return token;
 }
 
@@ -2651,8 +2650,8 @@ function renderCaptureCounts()       {
   const blackCount = capturesBySide("black").length;
   redCapturedCount.textContent = String(redCount);
   blackCapturedCount.textContent = String(blackCount);
-  redCapturedButton.setAttribute("aria-label", `查看红方已吃棋子，共 ${redCount} 枚`);
-  blackCapturedButton.setAttribute("aria-label", `查看蓝方已吃棋子，共 ${blackCount} 枚`);
+  redCapturedButton.setAttribute("aria-label", `查看红方已消灭棋子，共 ${redCount} 枚`);
+  blackCapturedButton.setAttribute("aria-label", `查看蓝方已消灭棋子，共 ${blackCount} 枚`);
   for (const [side, count, button] of [["red", redCount, redCapturedButton], ["black", blackCount, blackCapturedButton]]         ) {
     if (count > renderedCaptureCounts[side]) {
       button.classList.remove("capture-updated");
@@ -2668,7 +2667,7 @@ function captureDetailGroup(side      )              {
   const section = document.createElement("section");
   section.className = "captured-detail-group";
   const heading = document.createElement("h3");
-  heading.innerHTML = `<span>${side === "red" ? "红方" : "蓝方"}</span><small>已吃 ${records.length}</small>`;
+  heading.innerHTML = `<span>${side === "red" ? "红方" : "蓝方"}</span><small>已消灭 ${records.length}</small>`;
   section.append(heading);
   if (records.length === 0) {
     const empty = document.createElement("p");
@@ -2694,10 +2693,17 @@ function captureDetailGroup(side      )              {
 
 function showCapturedDetails()       {
   if (!gameState || !disconnectLayer.hidden || !matchResultLayer.hidden) return;
-  showMatchDetails("已吃棋子", "");
+  showMatchDetails("已消灭棋子", "");
   const groups = document.createElement("div");
   groups.className = "captured-detail-groups";
   groups.append(captureDetailGroup("black"), captureDetailGroup("red"));
+  const withheld = gameState.captured.filter(p => p.secretColorWithheld);
+  if (withheld.length) {
+    const group = document.createElement("section"), title = document.createElement("h3");
+    title.textContent = "秘密阵营未公开"; group.append(title);
+    for (const record of withheld) group.append(capturedToken(record));
+    groups.append(group);
+  }
   matchDetailBody.replaceChildren(groups);
 }
 
@@ -2731,7 +2737,7 @@ function finishMessage()         {
 
 function finishTitle()         {
   if (!gameState?.reason) return "对局结束";
-  return { ambush: "背刺", checkmate: "裁决", stalemate: "无处可逃", resign: "臣服", trap_ambush: "伏击", crush_them: "碾碎他们！", rampage: "乱杀失败", disconnect: "流放" }[gameState.reason];
+  return { ambush: "背刺", checkmate: "裁决", stalemate: "无处可逃", resign: "臣服", trap_ambush: "伏击", crush_them: "碾碎他们！", rampage: "乱杀失败", disconnect: "流放", infection: "感染", suffocation: "窒息", time_collapse: "时间坍缩", general_destroyed: "主帅消灭", rain_night: "雨夜", timeout: "回合超时" }[gameState.reason];
 }
 
 function resultOutcome()                          {
@@ -3046,44 +3052,10 @@ function isOwnHalf(side      , position          )          {
  * games use the same rule through remote-room.ts, where coordinates never
  * enter the shared room document. */
 function resolveLocalTrapsAfterAction()                     {
-  if (!gameState || !gameSecret?.processedActions || !gameState.lastMove) return undefined;
-  const lastMove = gameState.lastMove;
-  const landed = lastMove.landed !== false
-    ? gameState.pieces.find((piece) => piece.id === lastMove.pieceId)
-    : undefined;
-  const index = landed && getController(landed) === lastMove.actingSide
-    ? localTraps.findIndex((trap) => trap.owner !== lastMove.actingSide && trap.position.x === landed.x && trap.position.y === landed.y)
-    : -1;
-  if (index >= 0 && landed) {
-    const [trap] = localTraps.splice(index, 1);
-    gameState.pieces = gameState.pieces.filter((piece) => piece.id !== landed.id);
-    delete gameState.effectsByPieceId?.[landed.id];
-    for (const side of ["red", "black"]         ) {
-      if (gameState.assassination?.[side].activePieceId === landed.id) delete gameState.assassination[side].activePieceId;
-    }
-    if (!landed.faceDown) {
-      gameState.captured.push({ id: landed.id, color: landed.color, type: landed.type, capturedBy: trap.owner, moveNumber: gameState.revision });
-    }
-    if (!landed.faceDown && landed.type === "general") {
-      gameState.status = "finished";
-      gameState.winner = trap.owner;
-      gameState.reason = "trap_ambush";
-    } else {
-      reassessAfterTrapResolution(gameState);
-    }
-    localTraps = localTraps
-      .map((layer) => layer.owner === lastMove.actingSide || lastMove.countsAsFormalTurn === false
-        ? layer
-        : { ...layer, opponentTurnsRemaining: layer.opponentTurnsRemaining - 1 })
-      .filter((layer) => layer.opponentTurnsRemaining > 0);
-    return trapTriggerAnnouncement(trap.owner, gameState.reason === "trap_ambush");
-  }
-  if (lastMove.countsAsFormalTurn !== false) {
-    localTraps = localTraps
-      .map((layer) => layer.owner === lastMove.actingSide ? layer : { ...layer, opponentTurnsRemaining: layer.opponentTurnsRemaining - 1 })
-      .filter((layer) => layer.opponentTurnsRemaining > 0);
-  }
-  return undefined;
+  if (!gameState || !gameSecret) return;
+  localTraps = gameSecret.traps ?? [];
+  const event = gameState.automaticEvents?.find(e => e.kind === "trap_trigger");
+  return event?.side ? trapTriggerAnnouncement(event.side, gameState.reason === "trap_ambush") : undefined;
 }
 
 function placeLocalTrap(position          )       {
@@ -3129,7 +3101,7 @@ function onBoardClick(event            )       {
   if (!selectedPieceId) {
     if (!atTarget) return showToast("请先点选当前方控制的棋子。");
     if (getController(atTarget) !== gameState.turn) return showToast("这枚棋子不由当前方控制。");
-    if (!assassinationArmed && getLegalMoves(gameState, atTarget.id).length === 0) {
+    if (!assassinationArmed && (gameState.flowDance ? getFlowDanceMoves(gameState, atTarget.id) : getLegalMoves(gameState, atTarget.id)).length === 0) {
       return showToast(noLegalMoveMessage(atTarget.id));
     }
     selectedPieceId = atTarget.id;
@@ -3149,7 +3121,7 @@ function onBoardClick(event            )       {
     ? getLegalAssassinationMoves(gameState, selectedPieceId, strongStrikeArmed).some(
       (move) => positionKey(move) === positionKey(to),
     )
-    : getLegalMoves(gameState, selectedPieceId).some(
+    : (gameState.flowDance ? getFlowDanceMoves(gameState, selectedPieceId) : getLegalMoves(gameState, selectedPieceId)).some(
       (move) => positionKey(move) === positionKey(to),
     );
   if (atTarget && getController(atTarget) === gameState.turn && !targetIsLegal) {
@@ -3188,23 +3160,26 @@ function onBoardClick(event            )       {
     return;
   }
   if (!gameSecret) return;
+  gameSecret.traps = structuredClone(localTraps);
   try {
     const result = usingAssassination
       ? applyAuthoritativeAssassination(gameState, gameSecret, {
           kind: "assassination",
-          from: { x: selected.x, y: selected.y }, to,
+          from: { x: selected.x, y: selected.y }, pieceId: selected.id, to,
           source: assassinationArmed ? element                   ("assassination-source").value                        : undefined,
           useStrongStrike: strongStrikeArmed,
           expectedRevision: gameState.revision, actionId: nextActionId(),
         })
       : applyAuthoritativeMove(gameState, gameSecret, {
       from: { x: selected.x, y: selected.y },
+      pieceId: selected.id,
       to,
       expectedRevision: gameState.revision,
       actionId: nextActionId(),
         });
     gameState = result.state;
     gameSecret = result.secret;
+    if (!gameState.flowDance) startFormalClock(gameState, Date.now());
     const trapMessage = resolveLocalTrapsAfterAction();
     queueFormalEventCues(gameState, Boolean(trapMessage), usingAssassination ? strongStrikeArmed ? "强击发动" : "刺杀发动" : undefined);
     const captured = gameState.lastMove?.captured;
@@ -3223,6 +3198,7 @@ function onBoardClick(event            )       {
     renderGame();
     if (gameState.status === "execution") beginAutomaticExecution();
     if (gameState.status === "finished") showMatchResult();
+    else if (!gameState.flowDance && !gameState.forcedDefense && gameState.status === "playing") localGameHandoff();
   } catch (error) {
     showToast(error instanceof RuleError ? error.message : "落子失败，请重试。");
   }
@@ -3683,3 +3659,45 @@ document.addEventListener("visibilitychange", () => {
 
 applyUiPreferences(loadUiPreferences());
 showMainMenu();
+
+function openHeroAbility(ability                               )       {
+  if (!gameState || gameState.status !== "playing") return;
+  const controls = document.createElement("div");
+  const piece = document.createElement("select");
+  piece.setAttribute("aria-label", "技能对象");
+  const eligible = gameState.pieces.filter(p => ability === "shadow" ? !p.faceDown && p.color === gameState .turn : ability === "bomb" ? !p.faceDown && p.color === gameState .turn && gameState .effectsByPieceId?.[p.id]?.destiny === "infinite_dragon" : false);
+  if (ability === "shadow") piece.add(new Option("随机己方真实阵营暗子", "random_covered"));
+  for (const p of eligible) piece.add(new Option(`${p.faceDown ? "暗棋" : pieceLabel[p.color][p.type]} (${p.x},${p.y})`, p.id));
+  if (ability === "shadow" || ability === "bomb") controls.append(piece);
+  const x = document.createElement("input"), y = document.createElement("input");
+  for (const [input, name, max] of [[x, "目标列（0–8）", 8], [y, "目标行（0–9）", 9]]         ) { input.type = "number"; input.min = "0"; input.max = String(max); input.value = "0"; input.setAttribute("aria-label", name); }
+  if (ability === "bomb" || ability === "timeline_twist") controls.append(x, y);
+  const detail = { invoke: "消耗整个正式行动，推进祈求。", unspeakable: "随机消灭合法敌方明棋并结束回合。", destruction: "各非将帅棋独立50%毁灭并结束回合。", rewind: "恢复上一己方行动前快照，并由同一棋重走。", hourglass: "依次回归/复活、结算落位、清除扭曲、补充无限龙弹药。", bomb: "选一名无限龙及距离3内目标格。", timeline_twist: "退回对手上一俗手的同一枚棋，再操控到指定落点。", shadow: "秘密选定承载者，己方正式行动继续。" };
+  showDialog("英雄技能", detail[ability], "发动", () => {
+    const command                     = { kind: "hero_ability", ability, expectedRevision: gameState .revision, actionId: nextActionId(), ...(piece.value && piece.value !== "random_covered" ? { pieceId: piece.value } : {}), ...(piece.value === "random_covered" ? { randomCovered: true } : {}), ...(ability === "bomb" || ability === "timeline_twist" ? { to: { x: Number(x.value), y: Number(y.value) } } : {}) };
+    if (bluetooth) { handleBluetoothAction({ kind: "hero_ability", command }); return; }
+    if (!gameSecret) return;
+    try {
+      gameSecret.traps = structuredClone(localTraps);
+      const previousSide = gameState .turn;
+      const result = applyHeroAbility(gameState , gameSecret, command);
+      gameState = result.state; gameSecret = result.secret; localTraps = gameSecret.traps ?? [];
+      if (gameSecret.replay) selectedPieceId = gameSecret.replay.pieceId;
+      if (previousSide !== gameState.turn) startFormalClock(gameState, Date.now());
+      renderGame();
+      if (gameState.status === "execution") beginAutomaticExecution();
+      if (gameState.status === "finished") showMatchResult();
+      else if (previousSide !== gameState.turn) localGameHandoff();
+    } catch (error) { showToast(error instanceof RuleError ? error.message : "技能结算失败"); }
+  });
+  dialogText.append(controls);
+}
+function localGameHandoff()       {
+  if (bluetooth || !gameState || gameState.status !== "playing") return;
+  localPrivateViewerSide = undefined;
+  renderGame();
+  showDialog("请交给下一位玩家", `请将设备交给${gameState.turn === "red" ? "红方" : "蓝方"}。上一位玩家的秘密信息已清除。`, "已接手", () => {
+    localPrivateViewerSide = gameState?.turn;
+    renderGame();
+  });
+}

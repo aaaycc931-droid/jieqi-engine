@@ -13,6 +13,7 @@ import {
   playerRoomView,
   publicRemoteRoom,
   submitRemoteAssassination,
+  submitRemoteHeroAbility,
   submitRemoteHeroSelection,
   submitRemoteChat,
   submitRemoteMove,
@@ -24,7 +25,7 @@ import {
   type PublicRemoteRoom,
   type RemoteRoom,
 } from "./remote-room.ts";
-import type { AssassinationCommand, HeroId, MoveCommand, OptionalModeConfig, Position, RandomInt } from "./types.ts";
+import type { AssassinationCommand, HeroAbilityCommand, HeroId, MoveCommand, OptionalModeConfig, Position, RandomInt } from "./types.ts";
 import type { RpsChoice } from "./rps.ts";
 
 export const BLUETOOTH_HOST_PLAYER = "bluetooth:host";
@@ -39,6 +40,7 @@ export type BluetoothRoomAction =
   | { kind: "traps"; positions: readonly Position[] }
   | { kind: "move"; command: MoveCommand }
   | { kind: "assassination"; command: AssassinationCommand }
+  | { kind: "hero_ability"; command: HeroAbilityCommand }
   | { kind: "chat"; messageId: string; text: string }
   | { kind: "forfeit"; actionId: string }
   | { kind: "resign"; expectedRevision: number; actionId: string }
@@ -85,6 +87,7 @@ export class BluetoothHostRoom {
 
   handle(playerId: typeof BLUETOOTH_HOST_PLAYER | typeof BLUETOOTH_GUEST_PLAYER, action: BluetoothRoomAction): BluetoothRoomViews {
     const now = this.now();
+    this.room = advanceRemoteRoomTime(this.room, this.randomInt, now);
     switch (action.kind) {
       case "rps":
         this.room = submitRemoteRps(this.room, playerId, action.choice, action.round, this.randomInt, now);
@@ -109,6 +112,9 @@ export class BluetoothHostRoom {
         break;
       case "assassination":
         this.room = submitRemoteAssassination(this.room, playerId, action.command, now).room;
+        break;
+      case "hero_ability":
+        this.room = submitRemoteHeroAbility(this.room, playerId, action.command, now, this.randomInt).room;
         break;
       case "chat":
         this.room = submitRemoteChat(this.room, playerId, action.messageId, action.text, now).room;

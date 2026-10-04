@@ -11,3 +11,6 @@ export * from "./rules.ts";
 export * from "./setup.ts";
 export * from "./slots.ts";
 export * from "./types.ts";
+export * from "./hero-actions.ts";
+export * from "./settlement.ts";
+export * from "./heroes.ts";

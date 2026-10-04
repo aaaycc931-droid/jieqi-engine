@@ -1,6 +1,8 @@
 export type Side = "red" | "black";
 
-export type HeroId = "hunter" | "rogue" | "warrior";
+export type HeroId = "hunter" | "rogue" | "warrior" | "qin_long" | "murozond"
+  | "nozdormu" | "murozond_minion" | "devout_zealot" | "prince" | "deathwing"
+  | "death_knight" | "wind";
 
 export type MutationId =
   | "iron_steed"
@@ -8,7 +10,7 @@ export type MutationId =
   | "shadow_dance"
   | "war_chariot"
   | "expedition"
-  | "cavalry";
+  | "cavalry" | "chaos" | "jian_xie" | "end_time";
 
 export interface FeatureRules {
   /** 本地试玩可只启用一方英雄；联机开始后的房间始终同时具备两方选择。 */
@@ -40,6 +42,7 @@ export interface Position {
 
 export interface PieceBase extends Position {
   id: string;
+  layer?: "air";
 }
 
 export type CoveredPiece = PieceBase & {
@@ -68,12 +71,17 @@ export type WinReason =
   | "trap_ambush"
   | "crush_them"
   | "rampage"
-  | "disconnect";
+  | "disconnect" | "infection" | "suffocation" | "time_collapse" | "general_destroyed"
+  | "rain_night" | "timeout";
 
 export interface CapturedPiece extends SecretIdentity {
   id: string;
   capturedBy: Side;
   moveNumber: number;
+  cause?: string;
+  /** 混乱暗子死亡只公开兵种；color 为既有公开控制方，非秘密阵营。 */
+  secretColorWithheld?: true;
+  position?: Position;
 }
 
 export interface LastMove {
@@ -92,6 +100,8 @@ export interface LastMove {
   landed?: boolean;
   /** 战士铁甲提供的额外应将不消耗猎人陷阱的十回合寿命。 */
   countsAsFormalTurn?: boolean;
+  tier?: 1 | 2 | 3;
+  keywords?: string[];
 }
 
 /**
@@ -109,9 +119,17 @@ export interface StealthEffect {
 export interface PieceEffects {
   stealth?: StealthEffect;
   /** 战士防护壁垒：普通吃子会消耗并把攻击者弹回。 */
-  barrier?: { owner: Side; enemyHalfEntered: boolean; movesAfterEnemyHalfEntry: 0 | 1 };
-  /** 骑兵畸变附着在开局三个兵位的具体棋子 ID 上。 */
+  barrier?: { owner: Side; enemyTurnsRemaining: number };
+  /** 骑兵仅在真实马揭示后附着。 */
   cavalry?: true;
+  intangible?: true;
+  immuneCrush?: true;
+  flight?: { remainingOwnerTurns: number };
+  infection?: { owner: Side; stacks: number };
+  controlTrap?: { controller: Side; blockedFormalTurn: number };
+  timeCollapse?: { expiresAtOwnerTurnEnd: number };
+  destiny?: "time_warrior" | "infinite_dragon";
+  ammunition?: 0 | 1;
 }
 
 export type PieceEffectsById = Record<string, PieceEffects>;
@@ -153,11 +171,30 @@ export interface GameState {
   warrior?: WarriorStates;
   forcedDefense?: ForcedDefenseState;
   featureRules?: FeatureRules;
+  formalTurns?: Record<Side, number>;
+  heroRuntime?: Partial<Record<Side, { used?: boolean; invokeCount?: number; rainActive?: boolean; carefreeSuspended?: boolean }>>;
+  ghosts?: Array<{ owner: Side; position: Position; remaining: number }>;
+  warps?: Position[];
+  hourglasses?: number;
+  /** 一次原子行动内各落位，含弹回/移置/复活，供共同结算管线使用。 */
+  landingEvents?: Array<{ pieceId: string; beforeController: Side; position: Position; source: string }>;
+  automaticEvents?: Array<{ kind: string; pieceId?: string; side?: Side; position?: Position }>;
+  turnStartedAt?: number;
+  turnDeadlineAt?: number;
+  flowDance?: { side: Side; pieceId: string; steps: 0 | 1; resumeTurn: Side };
 }
 
 export interface SecretState {
   identities: Record<string, SecretIdentity>;
   processedActions: Record<string, number>;
+  traps?: Array<{ id: string; owner: Side; position: Position; opponentTurnsRemaining: number }>;
+  trueGenerals?: Partial<Record<Side, string>>;
+  wind?: Partial<Record<Side, { uses: number; readyOnTurn: number; activatedOnTurn?: number; hostId?: string; decoyId: string }>>;
+  destinyIdentities?: Record<string, { side: Side; kind: "time_warrior" | "infinite_dragon"; anchor: Position; shown: boolean; identity: SecretIdentity }>;
+  rewindUsed?: Partial<Record<Side, true>>;
+  history?: Array<{ actingSide: Side; pieceId?: string; tier: number; from?: Position; state: GameState; secret: SecretState }>;
+  replay?: { pieceId: string; deadlineAt: number };
+  chaosInitialized?: true;
 }
 
 export interface MoveCommand {
@@ -165,6 +202,17 @@ export interface MoveCommand {
   to: Position;
   expectedRevision: number;
   actionId: string;
+  pieceId?: string;
+}
+
+export interface HeroAbilityCommand {
+  kind: "hero_ability";
+  ability: "invoke" | "unspeakable" | "destruction" | "timeline_twist" | "rewind" | "hourglass" | "bomb" | "shadow";
+  actionId: string;
+  expectedRevision: number;
+  pieceId?: string;
+  to?: Position;
+  randomCovered?: boolean;
 }
 
 /**

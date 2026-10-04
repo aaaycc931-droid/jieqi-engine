@@ -1,3 +1,6 @@
+import { HERO_IDS } from "./heroes.ts";
+import { applyHeroAbility, ownerHeroSecrets, startFormalClock } from "./hero-actions.ts";
+import { copy, initializeFeatureSecret } from "./settlement.ts";
 import { RuleError } from "./errors.ts";
 import { equalHex, sha256Hex } from "./sha256.ts";
 import {
@@ -22,6 +25,7 @@ import { getController, isInsideBoard, otherSide } from "./slots.ts";
 import { isGeneralInCheck } from "./rules.ts";
 import {
   MUTATION_IDS,
+  drawRuntimeMutation,
   mutationDefinition,
   type MutationRarity,
 } from "./mutations.ts";
@@ -30,6 +34,7 @@ import type {
   AssassinationCommand,
   GameState,
   HeroId,
+  HeroAbilityCommand,
   MoveCommand,
   MutationId,
   OptionalModeConfig,
@@ -63,7 +68,6 @@ export const DEFAULT_OPTIONAL_MODE_CONFIG: OptionalModeConfig = {
   mutationsEnabled: false,
 };
 
-const HERO_IDS: readonly HeroId[] = ["hunter", "rogue", "warrior"];
 const RPS_CHOICES: readonly RpsChoice[] = ["rock", "scissors", "paper"];
 
 export interface RemoteSeat {
@@ -223,6 +227,7 @@ export interface PlayerRemoteRoomView extends PublicRemoteRoom {
   ownHeroChoice?: HeroId;
   ownTrapDraft?: Position[];
   ownTraps?: TrapLayer[];
+  ownHeroSecrets?: ReturnType<typeof ownerHeroSecrets>;
 }
 
 export interface JoinRoomResult {
@@ -278,6 +283,7 @@ function actionHistoryText(state: GameState, skill?: "刺杀" | "强击"): strin
 
 function withActionHistory(room: RemoteRoom, now: number, actionId: string, skill?: "刺杀" | "强击"): RemoteRoom {
   if (!room.game) return room;
+  if (room.game.state.status === "playing" && !room.game.state.flowDance) startFormalClock(room.game.state, now);
   const trapTriggered = room.lastTrapTrigger?.actionId === actionId;
   const text = `${trapTriggered ? "猎人陷阱触发，" : ""}${actionHistoryText(room.game.state, skill)}`;
   return appendSystemMessage(room, text, now, `system:${actionId}`);
@@ -326,7 +332,7 @@ function drawRpsChoice(randomInt?: RandomInt): RpsChoice {
   return RPS_CHOICES[index];
 }
 
-function drawMutation(randomInt?: RandomInt): MutationId {
+function oldDrawMutation(randomInt?: RandomInt): MutationId {
   // Transitional flat draw: exact outer rarity probabilities remain intentionally deferred.
   const index = (randomInt ?? ((maxExclusive) => cryptoRandomInt(maxExclusive)))(
     MUTATION_IDS.length,
@@ -612,18 +618,20 @@ function createGameAfterSetup(
 ): RemoteRoom {
   const assignments = assignmentsFor(room);
   const initial = createInitialGame(randomInt);
-  const mutation = room.mode.mutationsEnabled ? drawMutation(randomInt) : undefined;
+  const mutation = room.mode.mutationsEnabled ? drawRuntimeMutation(randomInt ?? cryptoRandomInt, heroes) : undefined;
   const features: RoomFeaturePublicState = {
     ...(heroes ? { heroes: { ...heroes } } : {}),
     ...(mutation ? { mutation, mutationRarity: mutationDefinition(mutation).rarity } : {}),
   };
   const playerIds = roomPlayerIds(room);
+  const featureState = initializeFeatureGameState(initial.state, heroes, mutation);
+  initializeFeatureSecret(featureState, initial.secret, randomInt ?? cryptoRandomInt);
   return {
     ...room,
     phase: heroes ? "hero_intro" : "playing",
     game: {
       players: { red: assignments.red, black: assignments.black },
-      state: initializeFeatureGameState(initial.state, heroes, mutation),
+      state: featureState,
       secret: initial.secret,
     },
     features: heroes
@@ -653,65 +661,16 @@ function cloneTrapTrigger(trigger: TrapTrigger): TrapTrigger {
   return { ...trigger, position: { ...trigger.position } };
 }
 
-function advanceTrapLifetimes(traps: TrapLayer[], actingSide: Side, countsAsFormalTurn: boolean): TrapLayer[] {
-  if (!countsAsFormalTurn) return traps;
-  return traps.flatMap((trap) => {
-    if (trap.owner === actingSide) return [trap];
-    const next = { ...trap, opponentTurnsRemaining: trap.opponentTurnsRemaining - 1 };
-    return next.opponentTurnsRemaining > 0 ? [next] : [];
-  });
+function resolveTrapsAfterAction(room: RemoteRoom, moved: RoomGame): { game: RoomGame; traps: TrapLayer[]; trigger?: TrapTrigger } {
+  const traps = moved.secret.traps?.map(cloneTrap) ?? [];
+  const event = moved.state.automaticEvents?.find(e => e.kind === "trap_trigger");
+  const consumed = event && room.featureSecret?.traps.find(t => t.owner === event.side && t.position.x === event.position?.x && t.position.y === event.position?.y);
+  return { game: moved, traps, ...(event && consumed ? { trigger: { actionId: moved.state.lastMove?.actionId ?? "skill", trapId: consumed.id, owner: consumed.owner, victimPieceId: event.pieceId!, position: { ...consumed.position } } } : {}) };
 }
-
-/**
- * Applies exactly one layer after a successful formal move.  The action-side
- * is deliberately checked both before and after reveal/control transfer.
- */
-function resolveTrapsAfterAction(
-  room: RemoteRoom,
-  moved: RoomGame,
-): { game: RoomGame; traps: TrapLayer[]; trigger?: TrapTrigger } {
-  const traps = room.featureSecret?.traps.map(cloneTrap) ?? [];
-  const lastMove = moved.state.lastMove;
-  if (!lastMove) return { game: moved, traps };
-  const landed = moved.state.pieces.find((piece) => piece.id === lastMove.pieceId);
-  const eligible = lastMove.landed !== false && landed && getController(landed) === lastMove.actingSide;
-  const index = eligible
-    ? traps.findIndex((trap) => trap.owner !== lastMove.actingSide && trap.position.x === landed.x && trap.position.y === landed.y)
-    : -1;
-  if (index >= 0 && landed) {
-    const [trap] = traps.splice(index, 1);
-    const nextState = JSON.parse(JSON.stringify(moved.state)) as GameState;
-    const nextSecret = JSON.parse(JSON.stringify(moved.secret)) as RoomGame["secret"];
-    nextState.pieces = nextState.pieces.filter((piece) => piece.id !== landed.id);
-    delete nextState.effectsByPieceId?.[landed.id];
-    for (const side of ["red", "black"] as const) {
-      if (nextState.assassination?.[side].activePieceId === landed.id) {
-        delete nextState.assassination[side].activePieceId;
-      }
-    }
-    if (!landed.faceDown) {
-      nextState.captured.push({ id: landed.id, color: landed.color, type: landed.type, capturedBy: trap.owner, moveNumber: nextState.revision });
-    }
-    // Landing dark pieces have already been revealed by the authoritative move.
-    if (!landed.faceDown && landed.type === "general") {
-      nextState.status = "finished";
-      nextState.winner = trap.owner;
-      nextState.reason = "trap_ambush";
-    } else {
-      reassessAfterTrapResolution(nextState);
-    }
-    return {
-      game: { players: { ...moved.players }, state: nextState, secret: nextSecret },
-      traps: advanceTrapLifetimes(traps, lastMove.actingSide, lastMove.countsAsFormalTurn !== false),
-      trigger: { actionId: lastMove.actionId, trapId: trap.id, owner: trap.owner, victimPieceId: landed.id, position: { x: landed.x, y: landed.y } },
-    };
-  }
-  // 铁甲提供的额外应将仍可踩中陷阱，但不作为十回合寿命中的正式敌方回合。
-  // The tenth enemy move remains valid; remove a layer only after that move resolves.
-  return {
-    game: moved,
-    traps: advanceTrapLifetimes(traps, lastMove.actingSide, lastMove.countsAsFormalTurn !== false),
-  };
+function gameWithPrivateTraps(room: RemoteRoom): RoomGame {
+  const game = copy(room.game!);
+  game.secret.traps = (room.featureSecret?.traps ?? game.secret.traps ?? []).map(cloneTrap);
+  return game;
 }
 
 function roomWithResolvedTraps(
@@ -983,7 +942,7 @@ export function completeRemoteHeroPreparation(
     id: `trap:${side}:${index}`,
     owner: side,
     position: { ...position },
-    opponentTurnsRemaining: 10,
+    opponentTurnsRemaining: 12,
   }));
   const ready = { ...preparation.ready, [side]: true };
   const allReady = ready.red && ready.black;
@@ -1021,6 +980,15 @@ export function advanceRemoteRoomTime(
   randomInt?: RandomInt,
   now = Date.now(),
 ): RemoteRoom {
+  if (room.phase === "playing" && room.game && room.disconnects?.pausedAt === undefined) {
+    const timed = copy(room);
+    if (timed.game!.state.turnDeadlineAt === undefined) startFormalClock(timed.game!.state, now);
+    if (timed.game!.state.status === "playing" && now >= (timed.game!.state.turnDeadlineAt ?? Infinity)) {
+      timed.game!.state.status = "finished"; timed.game!.state.winner = otherSide(timed.game!.state.turn); timed.game!.state.reason = "timeout"; timed.game!.state.revision += 1; timed.phase = "finished";
+    }
+    room = timed;
+  }
+
   room = applyDisconnectTimeout(room, now);
   room = expireRematchInvitation(room, now);
   if (room.phase === "finished" || hasActiveDisconnect(room)) return room;
@@ -1081,7 +1049,7 @@ export function advanceRemoteRoomTime(
       id: `trap:${side}:${index}`,
       owner: side,
       position: { ...position },
-      opponentTurnsRemaining: 10,
+      opponentTurnsRemaining: 12,
     }));
     trapDrafts[side] = [];
     ready[side] = true;
@@ -1183,6 +1151,16 @@ export function respondRemoteRematch(
   };
 }
 
+/** A late command cannot reset the authority clock before timeout settlement. */
+function expiredFormalAction(room: RemoteRoom, playerId: string, actionId: string, now: number): RemoteActionResult | undefined {
+  if (!room.game) return undefined;
+  sideForPlayer(room.game, playerId);
+  if (room.game.secret.processedActions[actionId] !== undefined) return undefined;
+  if (room.disconnects?.pausedAt !== undefined || room.game.state.turnDeadlineAt === undefined || now < room.game.state.turnDeadlineAt) return undefined;
+  const timed = advanceRemoteRoomTime(room, undefined, now);
+  return timed.phase === "finished" ? { room: timed, duplicate: false } : undefined;
+}
+
 /**
  * Applies one move as a cloud-function transaction would.  A 背刺/裁决 is
  * completed immediately, while its safe visual route is retained for both
@@ -1197,8 +1175,10 @@ export function submitRemoteMove(
   ensurePhase(room, "playing");
   reserveServerActionId(command.actionId);
   if (!room.game) throw new RuleError("MISSING_GAME", "房间尚未开始棋局");
+  const expired = expiredFormalAction(room, playerId, command.actionId, now);
+  if (expired) return expired;
 
-  const moved = applyRoomMove(room.game, playerId, command);
+  const moved = applyRoomMove(gameWithPrivateTraps(room), playerId, command);
   if (moved.duplicate) return { room, duplicate: true };
   const trapped = roomWithResolvedTraps(room, moved.room, now);
   if (trapped.room.game?.state.status === "finished") {
@@ -1231,7 +1211,7 @@ export function submitRemoteMove(
   return {
     room: withActionHistory({
       ...trapped.room,
-      phase: "finished",
+      phase: finished.state.status === "finished" ? "finished" : "playing",
       game: { players: { ...trapped.room.game.players }, state: finished.state, secret: finished.secret },
       terminalAnimation: { eventId: executionActionId, reason, plan },
       updatedAt: now,
@@ -1250,8 +1230,10 @@ export function submitRemoteAssassination(
   ensurePhase(room, "playing");
   reserveServerActionId(command.actionId);
   if (!room.game) throw new RuleError("MISSING_GAME", "房间尚未开始棋局");
+  const expired = expiredFormalAction(room, playerId, command.actionId, now);
+  if (expired) return expired;
 
-  const moved = applyRoomAssassination(room.game, playerId, command);
+  const moved = applyRoomAssassination(gameWithPrivateTraps(room), playerId, command);
   if (moved.duplicate) return { room, duplicate: true };
   const trapped = roomWithResolvedTraps(room, moved.room, now);
   const skill = command.useStrongStrike ? "强击" as const : "刺杀" as const;
@@ -1279,7 +1261,7 @@ export function submitRemoteAssassination(
   return {
     room: withActionHistory({
       ...trapped.room,
-      phase: "finished",
+      phase: finished.state.status === "finished" ? "finished" : "playing",
       game: { players: { ...trapped.room.game.players }, state: finished.state, secret: finished.secret },
       terminalAnimation: { eventId: executionActionId, reason, plan },
       updatedAt: now,
@@ -1448,6 +1430,7 @@ export function playerRoomView(
     ...(ownHeroChoice ? { ownHeroChoice } : {}),
     ...(ownTrapDraft ? { ownTrapDraft } : {}),
     ...(ownTraps ? { ownTraps } : {}),
+    ...(viewerSide && room.game ? { ownHeroSecrets: ownerHeroSecrets(room.game.secret, viewerSide) } : {}),
   };
 }
 
@@ -1459,4 +1442,26 @@ export function requireRemotePlayer(room: RemoteRoom, playerId: string): void {
     return;
   }
   sideForPlayer(room.game, playerId);
+}
+
+export function submitRemoteHeroAbility(room: RemoteRoom, playerId: string, command: HeroAbilityCommand, now = Date.now(), randomInt?: RandomInt): RemoteActionResult {
+  ensurePhase(room, "playing"); reserveServerActionId(command.actionId);
+  if (!room.game) throw new RuleError("MISSING_GAME", "房间尚未开始棋局");
+  const expired = expiredFormalAction(room, playerId, command.actionId, now);
+  if (expired) return expired;
+  const side = sideForPlayer(room.game, playerId);
+  if (room.game.secret.processedActions[command.actionId] === undefined && room.game.state.turn !== side) throw new RuleError("WRONG_TURN", "还没有轮到该玩家");
+  const game = gameWithPrivateTraps(room);
+  const result = applyHeroAbility(game.state, game.secret, command, now, randomInt);
+  if (result.duplicate) return { room, duplicate: true };
+  let next: RemoteRoom = { ...room, game: { ...game, state: result.state, secret: result.secret }, updatedAt: now };
+  if (command.ability === "shadow") return { room: { ...next, updatedAt: room.updatedAt }, duplicate: false };
+  next.featureSecret = { ...(room.featureSecret ?? { traps: [] }), traps: result.secret.traps ?? [] };
+  if (result.state.status === "execution") {
+    const finished = applyAutomaticExecution(result.state, result.secret, `server:${command.actionId}:terminal`);
+    next.game = { ...game, state: finished.state, secret: finished.secret };
+  }
+  next.phase = next.game!.state.status === "finished" ? "finished" : "playing";
+  if (next.game!.state.turn !== room.game.state.turn) startFormalClock(next.game!.state, now);
+  return { room: next, duplicate: false };
 }

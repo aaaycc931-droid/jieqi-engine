@@ -482,7 +482,7 @@ test("HUNTER-03 将帅踏入敌方陷阱时直接以伏击结束", () => {
   assert.equal(result.room.game?.state.winner, "black");
 });
 
-test("HUNTER-04 撞上普通防御被弹回不触发起点陷阱，但仍消耗一个正式敌方回合", () => {
+test("HUNTER-04 壁垒弹回属于移置，触发起点的正常落位陷阱", () => {
   const room: RemoteRoom = {
     ...joinedRoom(), phase: "playing", features: { heroes: { red: "rogue", black: "hunter" } },
     featureSecret: { traps: [{ id: "trap:black:0", owner: "black", position: { x: 0, y: 7 }, opponentTurnsRemaining: 10 }] },
@@ -495,11 +495,11 @@ test("HUNTER-04 撞上普通防御被弹回不触发起点陷阱，但仍消耗�
       secret: secretState(),
     },
   };
-  room.game.state.effectsByPieceId = { guard: { barrier: { owner: "black", enemyHalfEntered: false, movesAfterEnemyHalfEntry: 0 } } };
+  room.game.state.effectsByPieceId = { guard: { barrier: { owner: "black", enemyTurnsRemaining: 3 } } };
   const result = submitRemoteMove(room, "alice", move({ x: 0, y: 7 }, { x: 0, y: 6 }, "bounce-trap", 0));
-  assert.equal(result.room.lastTrapTrigger, undefined);
-  assert.equal(result.room.game?.state.pieces.some((piece) => piece.id === "attacker"), true);
-  assert.equal(result.room.featureSecret?.traps[0]?.opponentTurnsRemaining, 9);
+  assert.equal(result.room.lastTrapTrigger?.victimPieceId, "attacker");
+  assert.equal(result.room.game?.state.pieces.some((piece) => piece.id === "attacker"), false);
+  assert.equal(result.room.featureSecret?.traps.length, 0);
 });
 
 test("HUNTER-05 战士铁甲后的额外应将不消耗陷阱回合", () => {

@@ -36,16 +36,16 @@ test("RARITY-01 六项畸变按确认稿映射到四种稀有度", () => {
 
 test("RARITY-02 稀有度池保留全部标准畸变且不重复", () => {
   assert.deepEqual(standardMutationsForRarity("common").map(({ id }) => id), ["iron_wall"]);
-  assert.deepEqual(standardMutationsForRarity("rare").map(({ id }) => id), ["cavalry"]);
+  assert.deepEqual(standardMutationsForRarity("rare").map(({ id }) => id), ["cavalry", "jian_xie"]);
   assert.deepEqual(standardMutationsForRarity("epic").map(({ id }) => id), ["iron_steed", "shadow_dance", "expedition"]);
-  assert.deepEqual(standardMutationsForRarity("legendary").map(({ id }) => id), ["war_chariot"]);
+  assert.deepEqual(standardMutationsForRarity("legendary").map(({ id }) => id), ["war_chariot", "chaos"]);
 });
 
 test("DESTINY-01 未定义具体宿命时传说池只包含普通传说畸变", () => {
-  assert.deepEqual(DESTINY_MUTATION_DEFINITIONS, []);
+  assert.equal(DESTINY_MUTATION_DEFINITIONS[0].id, "destiny:end_time");
   assert.deepEqual(
     legendaryMutationCandidates({ red: "hunter", black: "warrior" }).map(({ id }) => id),
-    ["war_chariot"],
+    ["war_chariot", "chaos"],
   );
 });
 
@@ -65,14 +65,14 @@ test("DESTINY-02 宿命候选只在对应英雄羁绊成立后加入传说内部
       { red: "rogue", black: "hunter" },
       [destiny],
     ).map(({ id }) => id),
-    ["war_chariot", "destiny:test-bond"],
+    ["war_chariot", "chaos", "destiny:test-bond"],
   );
   assert.deepEqual(
     legendaryMutationCandidates(
       { red: "warrior", black: "hunter" },
       [destiny],
     ).map(({ id }) => id),
-    ["war_chariot"],
+    ["war_chariot", "chaos"],
   );
 });
 

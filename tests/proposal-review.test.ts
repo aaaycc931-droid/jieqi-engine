@@ -1,0 +1,11 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { reviewHeroProposal, type HeroProposal } from "../src/proposal-review.ts";
+const baseline = { baseline_id: "frozen-v1", baseline_digest: "digest", heroes: ["hunter"] };
+const makeProposal = (): HeroProposal => ({ schema_version: 1, proposal_id: "hero-proposal-20261004-001", baseline_id: "frozen-v1", baseline_digest: "digest", approval_status: "draft", hero_id: "new_hero", title: "proposal", changes: [{ kind: "addition", rule_id: "hero.new_hero.ability", before: null, after: "Complete confirmed behavior", touches: ["hero.new_hero.ability"] }], ability: { uses: 1 }, interactions: [], acceptance_cases: ["a boundary scenario"], open_questions: [] });
+test("DESIGN draft is retained as draft, never auto-applied", () => { const r = reviewHeroProposal(makeProposal(), baseline); assert.equal(r.status, "draft"); assert.equal(r.writesPerformed, false); });
+test("DESIGN mismatched baseline cannot silently supersede formal rules", () => { const p = makeProposal(); p.baseline_digest = "new"; assert.equal(reviewHeroProposal(p, baseline).status, "conflict"); });
+test("DESIGN overlapping parent/child rule changes are conflicts", () => { assert.equal(reviewHeroProposal(makeProposal(), baseline, ["hero.new_hero"]).status, "conflict"); });
+test("DESIGN disjoint hero design may continue independently", () => { assert.equal(reviewHeroProposal(makeProposal(), baseline, ["hero.hunter.ability"]).status, "draft"); });
+test("DESIGN confirmed status requires confirmation evidence and no open questions", () => { const p = makeProposal(); p.approval_status = "user_confirmed"; assert.equal(reviewHeroProposal(p, baseline).status, "incomplete"); p.user_confirmation_quote = "Confirm this version"; assert.equal(reviewHeroProposal(p, baseline).status, "ready_for_review"); p.open_questions.push("missing radius"); assert.equal(reviewHeroProposal(p, baseline).status, "incomplete"); });
+test("DESIGN existing hero cannot masquerade as a new id", () => { const p = makeProposal(); p.hero_id = "hunter"; assert.equal(reviewHeroProposal(p, baseline).status, "conflict"); });
