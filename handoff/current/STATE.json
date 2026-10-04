@@ -28,8 +28,8 @@
     "tests_passed": 273,
     "tests_failed": 0,
     "web_build": "passed",
-    "homepage_browser_run": 37180839292,
-    "homepage_browser_commit": "7ec16ad7c5d1a084699a626c6a74be9522f5802a",
+    "homepage_browser_run": 37199310526,
+    "homepage_browser_commit": "b09c0e9ee8b83a9e145b09aafd47e537d4684716",
     "homepage_browser_scope": "homepage_and_entry_controls_only",
     "android_web_asset_match_files": 116,
     "new_hero_browser_full_flow": "pending",
@@ -48,8 +48,12 @@
       "fully_accepted": 0
     },
     "current_ci": {
-      "status": "pending_remote_push",
-      "implementation_commit": "8fdd54dd5506310ede2d6cb59bbb3933c4e8a47c"
+      "status": "success",
+      "run": 37199312900,
+      "commit": "b09c0e9ee8b83a9e145b09aafd47e537d4684716",
+      "implementation_commit": "8fdd54dd5506310ede2d6cb59bbb3933c4e8a47c",
+      "evidence_artifact": 11302751226,
+      "apk_job": "skipped"
     },
     "previous_ci": {
       "ci_run": 37193007609,

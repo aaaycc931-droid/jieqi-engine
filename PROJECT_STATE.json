@@ -32,8 +32,8 @@
     "runtime_artwork": "web/assets/menu-original/approved-menu.png",
     "runtime_browser_review": "success",
     "minimum_touch_target_css_pixels": 48,
-    "runtime_browser_review_commit": "7ec16ad7c5d1a084699a626c6a74be9522f5802a",
-    "runtime_browser_review_run_id": 37180839292,
+    "runtime_browser_review_commit": "b09c0e9ee8b83a9e145b09aafd47e537d4684716",
+    "runtime_browser_review_run_id": 37199310526,
     "prototype_browser_render_cases": 10,
     "runtime_review_record": "review/menu-reference/RUNTIME_INTEGRATION.md"
   },
@@ -53,11 +53,11 @@
     "failed": 0,
     "web_build": "passed",
     "android_apk_build": "not_generated_user_paused",
-    "current_batch_ci": "pending_remote_push",
+    "current_batch_ci": "success",
     "current_batch_browser_review": "homepage_only_success_new_hero_gameplay_pending",
     "scope_warning": "Local automated checks are partial coverage; cross rules, browser gameplay, WebView and two-device verification pending.",
-    "github_actions_run_id": null,
-    "homepage_browser_run_id": 37180839292,
+    "github_actions_run_id": 37199312900,
+    "homepage_browser_run_id": 37199310526,
     "previous_verified_ci_run_id": 37193007609
   },
   "latest_locked_decisions": [
@@ -110,7 +110,7 @@
     "do_not_fill_deferred_items_without_user_decision",
     "do_not_generate_apk_until_user_explicitly_resumes"
   ],
-  "latest_ci_verified_feature_commit": "b7b968b91196170beb0db4f26852c63920a3d3e8",
+  "latest_ci_verified_feature_commit": "8fdd54dd5506310ede2d6cb59bbb3933c4e8a47c",
   "apk_generation_policy": {
     "status": "paused_by_user_2026_10_04",
     "reason": "remaining_non_board_pages_require_revisions",
@@ -167,5 +167,6 @@
     "failed_cases": 0,
     "missing_related_cases": 0,
     "fully_accepted": 0
-  }
+  },
+  "latest_ci_run_commit": "b09c0e9ee8b83a9e145b09aafd47e537d4684716"
 }

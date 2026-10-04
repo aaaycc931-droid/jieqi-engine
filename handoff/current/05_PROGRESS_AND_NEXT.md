@@ -19,7 +19,7 @@
 
 另有具体用例覆盖毁灭锁定集合在真帅死亡后仍闭合、沙漏复活不继承临时状态、扭曲间不刷新截止、无忧暂失/恢复、铁马主动杀伤分类、飞行封锁、战车双将同死路线和红黑尖斜底线。全部为具体情景证据，不宣称全组合完结。
 
-逐项映射与新运行证据：`review/invariants/CASE_MAP.json`、`review/invariants/LATEST.json` 和 `LATEST.md`；可运行 `node scripts/review/verify-invariant-evidence.mjs` 重建。69不变量+20反例+7补充共96条：93条有部分通过用例，3条属于规范/概念合同；完整合同验收为0。每条均列剩余限制，不能把“有相关用例”改写为“全条通过”。CI已接入该脚本及证据归档，最新远端结果在推送后核对。`qa/INVARIANTS.json` 中的 b7b968 仍是合同来源检查点，新运行源码以 STATE.json 和执行报告为准。
+逐项映射与新运行证据：`review/invariants/CASE_MAP.json`、`review/invariants/LATEST.json` 和 `LATEST.md`；可运行 `node scripts/review/verify-invariant-evidence.mjs` 重建。69不变量+20反例+7补充共96条：93条有部分通过用例，3条属于规范/概念合同；完整合同验收为0。每条均列剩余限制，不能把“有相关用例”改写为“全条通过”。CI已接入该脚本及证据归档。最新远端源码树对应文档提交 b09c0e9 的 run 37199312900 成功，证据 artifact 11302751226 已归档，APK job跳过；首页浏览器 run 37199310526 成功，仅覆盖首页与入口。`qa/INVARIANTS.json` 中的 b7b968 仍是合同来源检查点，新运行源码以 STATE.json 和执行报告为准。
 
 ## 历史已有验证
 

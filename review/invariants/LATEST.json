@@ -2129,5 +2129,15 @@
     "files": 116,
     "byteIdentical": true,
     "apkGenerated": false
+  },
+  "remoteCi": {
+    "commit": "b09c0e9ee8b83a9e145b09aafd47e537d4684716",
+    "run": 37199312900,
+    "conclusion": "success",
+    "evidenceArtifact": 11302751226,
+    "apkJob": "skipped",
+    "homepageBrowserRun": 37199310526,
+    "homepageBrowserConclusion": "success",
+    "homepageScope": "homepage_and_entry_controls_only"
   }
 }
