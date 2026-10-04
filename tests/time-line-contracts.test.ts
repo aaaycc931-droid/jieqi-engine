@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { applyAuthoritativeMove, applyHeroAbility, initializeFeatureGameState, submitRemoteMove, submitRemoteHeroAbility, validatePublicMove } from "../src/index.ts";
+import { applyAuthoritativeMove, applyHeroAbility, initializeFeatureGameState, initializeFeatureSecret, submitRemoteMove, submitRemoteHeroAbility, validatePublicMove } from "../src/index.ts";
 import type { GameState, HeroAbilityCommand, RemoteRoom } from "../src/index.ts";
 import { covered, gameState, move, revealed, secretState } from "./helpers.ts";
 
@@ -101,4 +101,28 @@ test("TIME-CLOCK-03 missing historical clock evidence refuses rewind without con
   const before = structuredClone(h);
   assert.throws(() => applyHeroAbility(h.state, h.secret, skill("rewind", h.state), 63_000), e => e.code === "REWIND_CLOCK_MISSING");
   assert.deepEqual(h, before);
+});
+
+test("TIME-SNAPSHOT-01 rewind restores opponent secret skill resources and trap durations without re-landing", () => {
+  const s = initializeFeatureGameState(gameState([revealed("mover", "red", "rook", 0, 7), revealed("host", "black", "rook", 2, 2)]), { red: "nozdormu", black: "wind" });
+  s.turnStartedAt = 0; s.turnDeadlineAt = 60_000;
+  const k = secretState();
+  k.traps = [{ id: "persistent", owner: "red", position: { x: 1, y: 7 }, opponentTurnsRemaining: 8 }];
+  initializeFeatureSecret(s, k);
+  const initialWind = structuredClone(k.wind!.black);
+  const first = applyAuthoritativeMove(s, k, move({ x: 0, y: 7 }, { x: 0, y: 6 }, "first"), false, 55_000);
+  const shadow = applyHeroAbility(first.state, first.secret, { ...skill("shadow", first.state), pieceId: "host" }, 61_000);
+  assert.equal(shadow.secret.wind?.black?.uses, 1);
+  const reply = applyAuthoritativeMove(shadow.state, shadow.secret, move({ x: 2, y: 2 }, { x: 2, y: 3 }, "reply", shadow.state.revision), false, 62_000);
+  reply.state.turnStartedAt = 63_000; reply.state.turnDeadlineAt = 123_000;
+  assert.equal(reply.secret.traps?.[0].opponentTurnsRemaining, 7);
+  const rewind = applyHeroAbility(reply.state, reply.secret, skill("rewind", reply.state), 64_000);
+  assert.deepEqual(rewind.secret.wind?.black, initialWind);
+  assert.deepEqual(rewind.secret.traps, k.traps);
+  assert.deepEqual(rewind.state.pieces, s.pieces);
+  assert.deepEqual(rewind.state.heroRuntime, s.heroRuntime);
+  assert.equal(rewind.state.landingEvents?.length ?? 0, 0);
+  assert.equal(rewind.state.automaticEvents?.length ?? 0, 0);
+  assert.equal(rewind.secret.rewindUsed?.red, true);
+  assert.equal(rewind.secret.replay?.deadlineAt, 69_000);
 });

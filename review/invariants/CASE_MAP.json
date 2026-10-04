@@ -168,6 +168,10 @@
       {
         "file": "tests/confirmed-runtime.test.ts",
         "namePrefix": "HERO full rewind"
+      },
+      {
+        "file": "tests/time-line-contracts.test.ts",
+        "namePrefix": "TIME-SNAPSHOT-01 "
       }
     ],
     "INV-REVIVE-001": [
@@ -588,6 +592,10 @@
       {
         "file": "tests/exception-contracts.test.ts",
         "namePrefix": "EX-END-01 "
+      },
+      {
+        "file": "tests/time-line-contracts.test.ts",
+        "namePrefix": "TIME-SNAPSHOT-01 "
       }
     ],
     "INV-TIME-COLLAPSE-001": [
@@ -664,6 +672,10 @@
       {
         "file": "tests/exception-contracts.test.ts",
         "namePrefix": "EX-CLOCK-02 "
+      },
+      {
+        "file": "tests/bluetooth-disconnect.test.ts",
+        "namePrefix": "BTDISC-07 "
       }
     ],
     "INV-DISCONNECT-003": [
@@ -822,6 +834,10 @@
       {
         "file": "tests/confirmed-runtime.test.ts",
         "namePrefix": "HERO full rewind"
+      },
+      {
+        "file": "tests/time-line-contracts.test.ts",
+        "namePrefix": "TIME-SNAPSHOT-01 "
       }
     ],
     "ADD-SECRET-001": [

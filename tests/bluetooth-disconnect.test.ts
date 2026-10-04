@@ -7,6 +7,22 @@ import {
   BLUETOOTH_HOST_PLAYER,
 } from "../src/bluetooth-host-room.ts";
 
+test("BTDISC-07 real host preserves formal clock after RPS and expires at shifted deadline", () => {
+  let now = 1_000;
+  const room = new BluetoothHostRoom({ roomId: "formal-pause", admissionSecret: "link", now: () => now, randomInt: () => 0 });
+  room.handle(BLUETOOTH_HOST_PLAYER, { kind: "rps", choice: "rock", round: 1 });
+  room.handle(BLUETOOTH_GUEST_PLAYER, { kind: "rps", choice: "scissors", round: 1 });
+  const initial = room.views().publicRoom.state!;
+  assert.equal(initial.status, "playing"); assert.equal(initial.turnDeadlineAt, 61_000);
+  now = 11_000; room.disconnect(BLUETOOTH_GUEST_PLAYER);
+  now = 36_000; room.reconnect(BLUETOOTH_GUEST_PLAYER);
+  const resumed = room.views().publicRoom.state!;
+  assert.equal(resumed.turnStartedAt, 26_000); assert.equal(resumed.turnDeadlineAt, 86_000);
+  now = 61_000; assert.equal(room.advance().publicRoom.phase, "playing");
+  now = 86_000; const expired = room.advance().publicRoom;
+  assert.equal(expired.phase, "finished"); assert.equal(expired.state?.reason, "timeout");
+});
+
 test("BTDISC-01 断线期间暂停英雄选择倒计时，重连后从原剩余时间继续", () => {
   let now = 1_000;
   const room = new BluetoothHostRoom({

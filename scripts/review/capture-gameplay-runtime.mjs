@@ -18,6 +18,7 @@ await mkdir(output, { recursive: true });
 const fixtureAccess = `
 globalThis.__gameplayReview = {
   load(state, secret) {
+    if (flowDialog.open) flowDialog.close();
     resetMatch(); bluetooth = undefined;
     gameState = structuredClone(state); gameSecret = structuredClone(secret);
     rpsPublic = { assignments: { red: '红方测试', black: '蓝方测试' } };
@@ -63,6 +64,8 @@ const snapshot = () => page.evaluate(() => globalThis.__gameplayReview.snapshot(
 const point = (x, y) => page.locator(`.point[data-x="${x}"][data-y="${y}"]`);
 const skill = (ability, side = 'red') => page.locator(`${side === 'red' ? '.v4-status-red' : '.v4-status-blue'} [data-skill-key="ability:${ability}"]`);
 const load = async (state, secret = secretState()) => {
+  // Real local actions sync the authoritative trap list before submission.
+  secret.traps ??= [];
   initializeFeatureSecret(state, secret, () => 0);
   const now = Date.now(); state.turnStartedAt ??= now; state.turnDeadlineAt ??= now + 60_000;
   await page.evaluate(({ state, secret }) => globalThis.__gameplayReview.load(state, secret), { state, secret });
@@ -75,7 +78,6 @@ const run = async (name, action) => {
   } catch (e) {
     report.cases.push({ name, passed: false, error: e.stack ?? String(e) });
     await page.screenshot({ path: resolve(output, `${name}-failed.png`) }).catch(() => {});
-    throw e;
   }
 };
 try {
@@ -177,6 +179,7 @@ try {
     assert.equal(r.state.formalTurns.red, 1); await page.locator('#dialog-action').click();
   });
   assert.equal(report.cases.length, 6); assert.deepEqual(report.errors, []);
+  assert(report.cases.every(c => c.passed), 'Prepared browser interaction failures: ' + report.cases.filter(c => !c.passed).map(c => c.name).join(', '));
 } finally {
   await writeFile(resolve(output, 'browser-review.json'), JSON.stringify(report, null, 2) + '\n');
   console.log(JSON.stringify({ cases: report.cases, errors: report.errors }));
