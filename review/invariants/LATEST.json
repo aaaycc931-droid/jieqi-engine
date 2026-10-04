@@ -1,14 +1,16 @@
 {
   "authority": "execution_evidence_non_normative",
-  "generatedAt": "2026-10-04T11:27:14.948Z",
-  "sourceCommitAtRun": "551ec5c107334d0e7bb2feb4aada42f0041f3c74",
-  "sourceDigest": "85076a29cf80632eeea4bc13943a3d9785172d80618e94894fd4fde68de954d7",
+  "generatedAt": "2026-10-04T12:08:45.785Z",
+  "sourceCommitAtRun": "d45174e7cc2ab11f4f5f506221d27a411c27b9d1",
+  "sourceDigest": "021e6bf0890c254cd1123b6a2f2f2b1342e27c1d23a47f81f2f1c13bb50ae6c8",
   "sourceDigestPaths": [
+    ".github/workflows/gameplay-runtime-review.yml",
     ".github/workflows/menu-reference-review.yml",
     ".github/workflows/verify.yml",
     "package.json",
     "review/invariants/CASE_MAP.json",
     "scripts/build-web.ts",
+    "scripts/review/capture-gameplay-runtime.mjs",
     "scripts/review/capture-home-runtime.mjs",
     "scripts/review/capture-menu-review.mjs",
     "scripts/review/prepare-menu-review.mjs",
@@ -41,6 +43,7 @@
     "tests/check-end-network.test.ts",
     "tests/confirmed-runtime.test.ts",
     "tests/cross-rule-contracts.test.ts",
+    "tests/exception-contracts.test.ts",
     "tests/helpers.ts",
     "tests/movement.test.ts",
     "tests/mutation-rarity.test.ts",
@@ -156,7 +159,7 @@
   "contractDigest": "a1d0c817bd1d6bec20080460066d84b80ec0d5a29eff889973d2395c11ae6b22",
   "runtime": "v24.19.0",
   "testSummary": {
-    "passed": 273,
+    "passed": 285,
     "failed": 0,
     "executionFailed": false
   },
@@ -552,6 +555,11 @@
           "file": "tests/confirmed-runtime.test.ts",
           "name": "HERO full rewind restores piece death/reveal and both skill resources, keeps used metadata and revision monotonic",
           "passed": true
+        },
+        {
+          "file": "tests/time-line-contracts.test.ts",
+          "name": "TIME-SNAPSHOT-01 rewind restores opponent secret skill resources and trap durations without re-landing",
+          "passed": true
         }
       ],
       "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
@@ -616,6 +624,21 @@
         {
           "file": "tests/check-end-network.test.ts",
           "name": "END-04 玩家臣服后对方获胜",
+          "passed": true
+        },
+        {
+          "file": "tests/exception-contracts.test.ts",
+          "name": "EX-END-01 finished game rejects rewind without changing resources",
+          "passed": true
+        },
+        {
+          "file": "tests/exception-contracts.test.ts",
+          "name": "EX-END-01 finished game rejects timeline_twist without changing resources",
+          "passed": true
+        },
+        {
+          "file": "tests/exception-contracts.test.ts",
+          "name": "EX-END-01 finished game rejects hourglass without changing resources",
           "passed": true
         }
       ],
@@ -957,9 +980,14 @@
           "file": "tests/warrior.test.ts",
           "name": "WARRIOR-01 明棋离开己方九宫获得一次公开壁垒",
           "passed": true
+        },
+        {
+          "file": "tests/exception-contracts.test.ts",
+          "name": "EX-WARRIOR-01 three different slots persist after death, re-entry and restored piece identity",
+          "passed": true
         }
       ],
-      "verificationLimit": "仅首次离宮授盾；第三名额上限、复活资格及重复进出尚缺直接断言。",
+      "verificationLimit": "已验证三个不同ID上限、死亡不返还与复入宫不重复；复活资格只用重新插入同ID的状态恢复夹具验证，不能冒充完整复活来源流程。",
       "fullyAccepted": false
     },
     {
@@ -997,9 +1025,14 @@
           "file": "tests/remote-room.test.ts",
           "name": "HUNTER-04 壁垒弹回属于移置，触发起点的正常落位陷阱",
           "passed": true
+        },
+        {
+          "file": "tests/exception-contracts.test.ts",
+          "name": "EX-WARRIOR-02 fortress allows original-square barrier bounce but blocks other returns",
+          "passed": true
         }
       ],
-      "verificationLimit": "仅弹回落位陷阱；堡垒复位例外与返回失败窒息尚缺专属用例。",
+      "verificationLimit": "堡垒内原位弹回例外与普通返回封锁已有专属运行用例；返回空间冲突窒息仍缺可达原子链专属用例。",
       "fullyAccepted": false
     },
     {
@@ -1332,9 +1365,19 @@
           "file": "tests/time-line-contracts.test.ts",
           "name": "TIME-TIER-02 opposing Murozond cannot treat a completed rewrite as an ordinary prior action",
           "passed": true
+        },
+        {
+          "file": "tests/exception-contracts.test.ts",
+          "name": "EX-TIME-01 occupied timeline return spends once, leaves both pieces and skips controlled action",
+          "passed": true
+        },
+        {
+          "file": "tests/exception-contracts.test.ts",
+          "name": "EX-TIME-02 returned bottom-rank pawn with no legal move refuses the whole skill",
+          "passed": true
         }
       ],
-      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "verificationLimit": "已验证返回陷阱、返回失败跳过控制并占步、无合法重走拒绝事务；占位与无合法着法为明确构造状态，尚未穷尽真实行动历史的可达组合。",
       "fullyAccepted": false
     },
     {
@@ -1371,6 +1414,26 @@
         {
           "file": "tests/time-line-contracts.test.ts",
           "name": "TIME-CLOCK-03 missing historical clock evidence refuses rewind without consuming it",
+          "passed": true
+        },
+        {
+          "file": "tests/exception-contracts.test.ts",
+          "name": "EX-END-01 finished game rejects rewind without changing resources",
+          "passed": true
+        },
+        {
+          "file": "tests/exception-contracts.test.ts",
+          "name": "EX-END-01 finished game rejects timeline_twist without changing resources",
+          "passed": true
+        },
+        {
+          "file": "tests/exception-contracts.test.ts",
+          "name": "EX-END-01 finished game rejects hourglass without changing resources",
+          "passed": true
+        },
+        {
+          "file": "tests/time-line-contracts.test.ts",
+          "name": "TIME-SNAPSHOT-01 rewind restores opponent secret skill resources and trap durations without re-landing",
           "passed": true
         }
       ],
@@ -1557,9 +1620,29 @@
           "file": "tests/bluetooth-disconnect.test.ts",
           "name": "BTDISC-03 任一玩家断线后锁定双方全部游戏操作",
           "passed": true
+        },
+        {
+          "file": "tests/exception-contracts.test.ts",
+          "name": "EX-CLOCK-01 formal turn pause preserves remaining time and rejects expiry exactly",
+          "passed": true
+        },
+        {
+          "file": "tests/exception-contracts.test.ts",
+          "name": "EX-CLOCK-01 rewind replay pause preserves remaining time and rejects expiry exactly",
+          "passed": true
+        },
+        {
+          "file": "tests/exception-contracts.test.ts",
+          "name": "EX-CLOCK-02 overlapping disconnects shift once when the final player reconnects",
+          "passed": true
+        },
+        {
+          "file": "tests/bluetooth-disconnect.test.ts",
+          "name": "BTDISC-07 real host preserves formal clock after RPS and expires at shifted deadline",
+          "passed": true
         }
       ],
-      "verificationLimit": "Node房间覆盖选择计时和命令暂停；正式回合时钟顺延、视觉动画与设备恢复尚缺。",
+      "verificationLimit": "已覆盖普通正式回合、回溯重走、双方重叠断线后全员恢复的一次性顺延及精确到期；视觉动画、蓝牙WebView和设备恢复仍待。",
       "fullyAccepted": false
     },
     {
@@ -1832,6 +1915,11 @@
           "file": "tests/warrior.test.ts",
           "name": "WARRIOR-04 壁垒按三个敌方正式回合结束衰减，不按自身走棋次数",
           "passed": true
+        },
+        {
+          "file": "tests/exception-contracts.test.ts",
+          "name": "EX-WARRIOR-01 three different slots persist after death, re-entry and restored piece identity",
+          "passed": true
         }
       ],
       "verificationLimit": "三回合衰减已覆盖；三名额上限专属用例仍缺。",
@@ -1936,6 +2024,11 @@
         {
           "file": "tests/confirmed-runtime.test.ts",
           "name": "HERO full rewind restores piece death/reveal and both skill resources, keeps used metadata and revision monotonic",
+          "passed": true
+        },
+        {
+          "file": "tests/time-line-contracts.test.ts",
+          "name": "TIME-SNAPSHOT-01 rewind restores opponent secret skill resources and trap durations without re-landing",
           "passed": true
         }
       ],
@@ -2091,6 +2184,16 @@
           "file": "tests/time-line-contracts.test.ts",
           "name": "TIME-CLOCK-03 missing historical clock evidence refuses rewind without consuming it",
           "passed": true
+        },
+        {
+          "file": "tests/exception-contracts.test.ts",
+          "name": "EX-CLOCK-01 formal turn pause preserves remaining time and rejects expiry exactly",
+          "passed": true
+        },
+        {
+          "file": "tests/exception-contracts.test.ts",
+          "name": "EX-CLOCK-01 rewind replay pause preserves remaining time and rejects expiry exactly",
+          "passed": true
         }
       ],
       "verificationLimit": "3/10/42秒历史预算、房间权威接收及到期已验证；浏览器显示与WebView尚未验收。",
@@ -2121,23 +2224,5 @@
       "verificationLimit": "真实倒戈棋返回猎人陷阱、下一正式回合封锁和耗尽已验证；其他来源状态组合尚缺。",
       "fullyAccepted": false
     }
-  ],
-  "testedImplementationCommit": "8fdd54dd5506310ede2d6cb59bbb3933c4e8a47c",
-  "implementationCommitBinding": "Uploaded implementation tree equals the locally tested tree e76f44153d601f4aaa38c28dc20609d4ae30e982; digest was checked byte-for-byte. sourceCommitAtRun retains actual pre-commit HEAD.",
-  "webBuild": "passed",
-  "androidSourceSync": {
-    "files": 116,
-    "byteIdentical": true,
-    "apkGenerated": false
-  },
-  "remoteCi": {
-    "commit": "b09c0e9ee8b83a9e145b09aafd47e537d4684716",
-    "run": 37199312900,
-    "conclusion": "success",
-    "evidenceArtifact": 11302751226,
-    "apkJob": "skipped",
-    "homepageBrowserRun": 37199310526,
-    "homepageBrowserConclusion": "success",
-    "homepageScope": "homepage_and_entry_controls_only"
-  }
+  ]
 }

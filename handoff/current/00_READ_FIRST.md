@@ -22,7 +22,7 @@
 
 仓库：https://github.com/aaaycc931-droid/jieqi-engine
 工作分支：codex/ui-android-apk-20261001
-功能源码检查点：8fdd54dd5506310ede2d6cb59bbb3933c4e8a47c
+功能源码检查点：d45174e7cc2ab11f4f5f506221d27a411c27b9d1
 Draft PR：https://github.com/aaaycc931-droid/jieqi-engine/pull/2
 
 交接文档会另有仅文档提交；源码检查点固定到以上 SHA，不能从旧包内 runtime_commit 或本地陈旧 HEAD 恢复。优先读取仓库 handoff/current/，根目录旧规格与 rules/confirmed/ 原始源只供核对出处，不能直接覆盖整合正文。以后新用户确认增量才可覆盖对应段落。

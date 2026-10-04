@@ -1,11 +1,11 @@
 {
   "project": "乐子象棋 / jieqi-engine",
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-04-validation-1",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-04-validation-2",
   "updated_at": "2026-10-04",
   "repository": "https://github.com/aaaycc931-droid/jieqi-engine",
   "working_branch": "codex/ui-android-apk-20261001",
-  "implementation_commit": "8fdd54dd5506310ede2d6cb59bbb3933c4e8a47c",
-  "implementation_tree": "e76f44153d601f4aaa38c28dc20609d4ae30e982",
+  "implementation_commit": "d45174e7cc2ab11f4f5f506221d27a411c27b9d1",
+  "implementation_tree": "feedfec3105bfc179a2ad9f6cb24e7e48b652006",
   "draft_pr": 2,
   "baseline_id": "LEZI-FUNCTION-2026-10-04-v1",
   "baseline_digest": "4bcf9fb91f5c6e41f456e7424ebd7ed09c6c07b1595ec825604aa730fdad020b",
@@ -25,14 +25,14 @@
     "destiny_mutations": 1
   },
   "validation": {
-    "tests_passed": 273,
+    "tests_passed": 285,
     "tests_failed": 0,
     "web_build": "passed",
-    "homepage_browser_run": 37199310526,
-    "homepage_browser_commit": "b09c0e9ee8b83a9e145b09aafd47e537d4684716",
+    "homepage_browser_run": 37201026889,
+    "homepage_browser_commit": "d45174e7cc2ab11f4f5f506221d27a411c27b9d1",
     "homepage_browser_scope": "homepage_and_entry_controls_only",
     "android_web_asset_match_files": 116,
-    "new_hero_browser_full_flow": "pending",
+    "new_hero_browser_full_flow": "partial_prepared_state_six_flows_passed_full_match_pending",
     "individual_69_invariants": "partial_named_case_evidence_full_contract_acceptance_pending",
     "android_webview": "pending",
     "physical_two_phone": "pending",
@@ -49,16 +49,34 @@
     },
     "current_ci": {
       "status": "success",
+      "run": 37201029856,
+      "commit": "d45174e7cc2ab11f4f5f506221d27a411c27b9d1",
+      "implementation_commit": "d45174e7cc2ab11f4f5f506221d27a411c27b9d1",
+      "evidence_artifact": 11302699701,
+      "apk_job": "skipped",
+      "checkout_commit": "fb139bee54b78dfb4fd4e24e48a95cd2049c4257",
+      "source_digest": "021e6bf0890c254cd1123b6a2f2f2b1342e27c1d23a47f81f2f1c13bb50ae6c8",
+      "source_digest_matches_local": true
+    },
+    "previous_ci": {
+      "status": "success",
       "run": 37199312900,
       "commit": "b09c0e9ee8b83a9e145b09aafd47e537d4684716",
       "implementation_commit": "8fdd54dd5506310ede2d6cb59bbb3933c4e8a47c",
       "evidence_artifact": 11302751226,
       "apk_job": "skipped"
     },
-    "previous_ci": {
-      "ci_run": 37193007609,
-      "ci_commit": "b7b968b91196170beb0db4f26852c63920a3d3e8",
-      "ci_conclusion": "success"
+    "gameplay_browser": {
+      "status": "success",
+      "run": 37201026813,
+      "commit": "d45174e7cc2ab11f4f5f506221d27a411c27b9d1",
+      "artifact": 11302488498,
+      "case_count": 6,
+      "errors": 0,
+      "report": "review/gameplay/runtime-browser-review-2026-10-04.json",
+      "scope": "prepared_state_original_DOM_handlers_local_handoff_only",
+      "full_match_accepted": false,
+      "bluetooth_private_transport_accepted": false
     }
   },
   "restrictions": [
@@ -77,11 +95,21 @@
     "old_dialogue_code_writes_after_handoff": "stop",
     "automatic_import": false
   },
-  "next_action": "Expand dedicated invariant exceptions and browser new-hero/privacy flows; real WebView/two-phone remains pending, UI last and APK paused",
+  "next_action": "Continue reachable atomic return-space suffocation, remaining snapshot resource/secret exceptions and full random browser/Bluetooth flows; UI last, APK paused, WebView/two-phone pending",
   "source_gap_register": "SOURCE_REGISTER.json",
   "apk_built_this_round": false,
-  "previous_implementation_commit": "b7b968b91196170beb0db4f26852c63920a3d3e8",
+  "previous_implementation_commit": "8fdd54dd5506310ede2d6cb59bbb3933c4e8a47c",
   "validation_round": {
+    "rules_changed": false,
+    "rule_revision_unchanged": true,
+    "fixed": [
+      "formal_disconnect_clock_shift",
+      "rewind_replay_disconnect_clock_shift"
+    ],
+    "new_tests": 12,
+    "browser_prepared_flows_passed": 6
+  },
+  "previous_validation_round": {
     "rules_changed": false,
     "rule_revision_unchanged": true,
     "fixed": [

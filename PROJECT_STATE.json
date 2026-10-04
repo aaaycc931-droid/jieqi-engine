@@ -32,8 +32,8 @@
     "runtime_artwork": "web/assets/menu-original/approved-menu.png",
     "runtime_browser_review": "success",
     "minimum_touch_target_css_pixels": 48,
-    "runtime_browser_review_commit": "b09c0e9ee8b83a9e145b09aafd47e537d4684716",
-    "runtime_browser_review_run_id": 37199310526,
+    "runtime_browser_review_commit": "d45174e7cc2ab11f4f5f506221d27a411c27b9d1",
+    "runtime_browser_review_run_id": 37201026889,
     "prototype_browser_render_cases": 10,
     "runtime_review_record": "review/menu-reference/RUNTIME_INTEGRATION.md"
   },
@@ -49,16 +49,16 @@
   ],
   "baseline_tests": {
     "command": "node scripts/review/verify-invariant-evidence.mjs + node scripts/build-web.ts",
-    "passed": 273,
+    "passed": 285,
     "failed": 0,
     "web_build": "passed",
     "android_apk_build": "not_generated_user_paused",
     "current_batch_ci": "success",
-    "current_batch_browser_review": "homepage_only_success_new_hero_gameplay_pending",
-    "scope_warning": "Local automated checks are partial coverage; cross rules, browser gameplay, WebView and two-device verification pending.",
-    "github_actions_run_id": 37199312900,
-    "homepage_browser_run_id": 37199310526,
-    "previous_verified_ci_run_id": 37193007609
+    "current_batch_browser_review": "prepared_state_six_flows_success_full_match_and_devices_pending",
+    "scope_warning": "285 engine cases and six prepared Chromium DOM flows are partial coverage; random full matches, all exceptions, Bluetooth private transport, WebView and two-device acceptance remain pending.",
+    "github_actions_run_id": 37201029856,
+    "homepage_browser_run_id": 37201026889,
+    "previous_verified_ci_run_id": 37199312900
   },
   "latest_locked_decisions": [
     "cumulative_disconnect_60_seconds_per_player",
@@ -101,7 +101,7 @@
   "next_action": "Expand dedicated invariant exceptions and browser new-hero/privacy flows; real WebView/two-phone remains pending, UI last and APK paused",
   "ci_build_branch": "codex/ui-android-apk-20261001",
   "ci_draft_pull_request": 2,
-  "working_tree_note": "Timeline and displacement fixes with 23 new regressions; 273 checks passed. Named partial evidence for 93 contracts; 3 normative contracts, no full invariant/browser/WebView/two-phone acceptance.",
+  "working_tree_note": "Formal/replay disconnect clocks now pause and shift once on final reconnect; 12 new regressions, 285 passed. Six prepared-state browser flows passed. 93 contracts retain partial evidence and 3 normative status; none fully accepted.",
   "restrictions": [
     "do_not_merge_main_without_explicit_authorization",
     "do_not_deploy_internet_multiplayer",
@@ -110,7 +110,7 @@
     "do_not_fill_deferred_items_without_user_decision",
     "do_not_generate_apk_until_user_explicitly_resumes"
   ],
-  "latest_ci_verified_feature_commit": "8fdd54dd5506310ede2d6cb59bbb3933c4e8a47c",
+  "latest_ci_verified_feature_commit": "d45174e7cc2ab11f4f5f506221d27a411c27b9d1",
   "apk_generation_policy": {
     "status": "paused_by_user_2026_10_04",
     "reason": "remaining_non_board_pages_require_revisions",
@@ -155,10 +155,10 @@
       "implemented": true
     }
   ],
-  "previous_implementation_commit": "7ec16ad7c5d1a084699a626c6a74be9522f5802a",
+  "previous_implementation_commit": "8fdd54dd5506310ede2d6cb59bbb3933c4e8a47c",
   "implementation_commit_locator": "handoff/current/STATE.json pins implementation SHA; handoff docs may have later doc-only commit",
   "handoff_entry": "handoff/current/00_READ_FIRST.md",
-  "implementation_commit": "8fdd54dd5506310ede2d6cb59bbb3933c4e8a47c",
+  "implementation_commit": "d45174e7cc2ab11f4f5f506221d27a411c27b9d1",
   "invariant_evidence": {
     "index": "review/invariants/LATEST.json",
     "total": 96,
@@ -168,5 +168,19 @@
     "missing_related_cases": 0,
     "fully_accepted": 0
   },
-  "latest_ci_run_commit": "b09c0e9ee8b83a9e145b09aafd47e537d4684716"
+  "latest_ci_run_commit": "d45174e7cc2ab11f4f5f506221d27a411c27b9d1",
+  "gameplay_browser_review": {
+    "status": "success",
+    "run": 37201026813,
+    "commit": "d45174e7cc2ab11f4f5f506221d27a411c27b9d1",
+    "artifact": 11302488498,
+    "case_count": 6,
+    "errors": 0,
+    "report": "review/gameplay/runtime-browser-review-2026-10-04.json",
+    "scope": "prepared_state_original_DOM_handlers_local_handoff_only",
+    "full_match_accepted": false,
+    "bluetooth_private_transport_accepted": false
+  },
+  "latest_ci_checkout_commit": "fb139bee54b78dfb4fd4e24e48a95cd2049c4257",
+  "latest_ci_source_digest": "021e6bf0890c254cd1123b6a2f2f2b1342e27c1d23a47f81f2f1c13bb50ae6c8"
 }

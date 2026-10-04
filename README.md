@@ -2,7 +2,7 @@
 
 > **换对话入口：**先读 [当前整合交接](handoff/current/00_READ_FIRST.md)，其中规则正文与进度优先于根目录历史说明；缺口和未验收项已单列。
 
-> **当前边界（2026-10-04）：** 已接入 12 英雄、8 常规畸变与 1 宿命，本轮273项检查与 Web 构建通过；已修复时间线与移置边界，逐项证据仍是部分覆盖。浏览器完整流程与真机待验收，UI最后，暂停APK。正式来源见 [现行入口](handoff/current/00_READ_FIRST.md)，进度见 [实现状态](IMPLEMENTATION_STATUS.md)，证据见 [合同映射](review/invariants/LATEST.md)。
+> **当前边界（2026-10-04）：** 已接入 12 英雄、8 常规畸变与 1 宿命，本轮285项检查与 Web 构建通过；已修复时间线、移置与断线计时偏差，逐项证据仍是部分覆盖。六组预置棋局浏览器交互通过，完整随机对局与真机待验收，UI最后，暂停APK。正式来源见 [现行入口](handoff/current/00_READ_FIRST.md)，进度见 [实现状态](IMPLEMENTATION_STATUS.md)，证据见 [合同映射](review/invariants/LATEST.md)。
 
 这是“乐子象棋”的 H5 可玩版本与权威规则引擎，包含：
 
