@@ -5,7 +5,7 @@
 ## 读取顺序
 
 1. STATE.json 与 05_PROGRESS_AND_NEXT.md：代码位置、证据和未完成范围。
-2. 01_CURRENT_RULES.md → 02_CURRENT_HEROES.md → 03_CURRENT_MUTATIONS.md：现行规范正文。
+2. 09_CURRENT_GAME_MODES.md → 01_CURRENT_RULES.md → 02_CURRENT_HEROES.md → 03_CURRENT_MUTATIONS.md：现行模式与规范正文。
 3. 04_CURRENT_UI_AND_FLOW.md：保留已确认方向，UI 半成品最后处理。
 4. 06_COLLABORATION.md：双对话分工、用户偏好与规则写回流程。
 5. 07_DESIGN_SCORING.md、08_SCORE_LEDGER.md：评分方法及已有理论记录，不能替代玩法规则。
@@ -34,3 +34,5 @@ Draft PR：https://github.com/aaaycc931-droid/jieqi-engine/pull/2
 已覆盖当前 12 英雄、8 常规畸变、1 宿命、通用结算、当前 UI 流程、评分方法、源码与验证位置。**不能承诺所有历史对话中的每条确认均已恢复**：原始独立基础规格全文、本轮未明确移交的其他英雄设计及部分尚未验收证据边界见 05 与来源索引。看见冲突先报告具体段落，不按文件日期或“最终”字样自行选方案。
 
 当前验证：316测试、13预置DOM流程、五类主动技能自然终局样本；部分随机任务因上限/提前终局未完成。详情见05，不能称全部CI成功或完整功能验收。
+
+当前用户方向：已确认普通象棋、半混乱揭棋和现有揭棋三个基础模式，都保留英雄与畸变，后续独立适配。规则r2；新增模式待实现。原验证队列暂停。上一轮316测试等证据不覆盖新增模式。

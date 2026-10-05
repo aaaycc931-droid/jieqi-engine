@@ -1,6 +1,6 @@
 {
   "project": "乐子象棋 / jieqi-engine",
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-05-validation-6",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-05-modes-1",
   "updated_at": "2026-10-05",
   "repository": "https://github.com/aaaycc931-droid/jieqi-engine",
   "working_branch": "codex/ui-android-apk-20261001",
@@ -9,14 +9,15 @@
   "draft_pr": 2,
   "baseline_id": "LEZI-FUNCTION-2026-10-04-v1",
   "baseline_digest": "4bcf9fb91f5c6e41f456e7424ebd7ed09c6c07b1595ec825604aa730fdad020b",
-  "current_rule_revision": "LEZI-FUNCTION-2026-10-04-r1",
-  "current_rule_digest": "27191eba43cb10417e4e87ff09a5f6fb2aa890be9567ec710a171fb45ab67f35",
+  "current_rule_revision": "LEZI-FUNCTION-2026-10-05-r2",
+  "current_rule_digest": "17c458c031634cb2cb836b5b8311952a48b1534e7723bab6ba73f724ab8930af",
   "authoritative_entry": "00_READ_FIRST.md",
   "current_rules": [
     "01_CURRENT_RULES.md",
     "02_CURRENT_HEROES.md",
     "03_CURRENT_MUTATIONS.md",
-    "04_CURRENT_UI_AND_FLOW.md"
+    "04_CURRENT_UI_AND_FLOW.md",
+    "09_CURRENT_GAME_MODES.md"
   ],
   "current_progress": "05_PROGRESS_AND_NEXT.md",
   "implementation_counts": {
@@ -45,7 +46,8 @@
       "non_runtime_contract": 3,
       "failed_cases": 0,
       "missing_related_cases": 0,
-      "fully_accepted": 0
+      "fully_accepted": 0,
+      "applicable_rule_revision": "LEZI-FUNCTION-2026-10-04-r1"
     },
     "current_ci": {
       "status": "success",
@@ -254,7 +256,9 @@
       "independentReview": false,
       "report": "review/gameplay/active-match-browser-2026-10-05-summary.json",
       "rewind_special_run": 37275813051
-    }
+    },
+    "evidence_scope": "r1 existing mode runtime; no implementation or acceptance evidence for r2 new modes",
+    "new_mode_acceptance": false
   },
   "restrictions": [
     "ui_last",
@@ -272,7 +276,7 @@
     "old_dialogue_code_writes_after_handoff": "stop",
     "automatic_import": false
   },
-  "next_action": "Continue destiny bomb/hourglass full real matches, second Shadow cooldown/lifecycle, remaining private snapshot and cross-end clock intersections. Current five active families have sampled natural results; original Nozdormu/Prince and current 12-seat normal regression remain incomplete. Local timeout outcome not frozen; physical RFCOMM/WebView/two-phone pending. UI last; APK paused.",
+  "next_action": "Implement the confirmed three base modes and mode selection/configuration; keep heroes and mutations, with mode-specific adaptation deferred. Do not invent a universal special-rule priority or unresolved Chaos effects. Previous validation queue paused by user; UI last and APK paused.",
   "source_gap_register": "SOURCE_REGISTER.json",
   "apk_built_this_round": false,
   "previous_implementation_commit": "e3e3da189f178496e229752b4ff5724194aae59f",
@@ -306,5 +310,33 @@
     "initial_round_natural_samples": 9,
     "initial_round_capped_incomplete": 3,
     "rule_or_artwork_changes": false
+  },
+  "previous_rule_revision": "LEZI-FUNCTION-2026-10-04-r1",
+  "previous_rule_digest": "27191eba43cb10417e4e87ff09a5f6fb2aa890be9567ec710a171fb45ab67f35",
+  "rule_digest_algorithm": "sha256(concat(relative UTF-8 path + NUL + file bytes + NUL), STATE.current_rules order)",
+  "paused_next_action": "Continue destiny bomb/hourglass full real matches, second Shadow cooldown/lifecycle, remaining private snapshot and cross-end clock intersections. Current five active families have sampled natural results; original Nozdormu/Prince and current 12-seat normal regression remain incomplete. Local timeout outcome not frozen; physical RFCOMM/WebView/two-phone pending. UI last; APK paused.",
+  "work_status": "confirmed_mode_design_recorded_implementation_pending_previous_validation_paused",
+  "game_modes": {
+    "authority": "09_CURRENT_GAME_MODES.md",
+    "base_rule_status": "confirmed",
+    "implementation_status": {
+      "existing_jieqi": "implemented_partial_evidence",
+      "half_chaos_jieqi": "pending",
+      "standard_xiangqi": "pending"
+    },
+    "heroes_retained": true,
+    "mutations_retained": true,
+    "adaptation_strategy": "independent_per_mode_future_confirmation",
+    "universal_special_rule_priority": "not_confirmed",
+    "chaos_interactions_in_new_modes": "pending_mode_adaptation"
+  },
+  "rule_update": {
+    "classification": "addition",
+    "rules_changed": true,
+    "product_code_changed": false,
+    "artwork_changed": false,
+    "heroes_or_mutations_adapted": false,
+    "new_mode_tests_run": false,
+    "confirmation_record": "09_CURRENT_GAME_MODES.md"
   }
 }

@@ -1,6 +1,6 @@
 {
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-05-validation-6",
-  "rule_revision": "LEZI-FUNCTION-2026-10-04-r1",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-05-modes-1",
+  "rule_revision": "LEZI-FUNCTION-2026-10-05-r2",
   "code_checkpoint": "6e1c910cf5ab7fa1b76f3b6fa2ce737e89a840ca",
   "sources": [
     {
@@ -165,6 +165,14 @@
       "path": "review/gameplay/ACTIVE_MATCH_2026-10-05.md",
       "applied_scope": "回溯跨入口/非法路径、非盗贼暗影入口、准备正式时钟；316测试/13预置DOM/五类完整主动实战样本，未完成随机样本保留，不是全验收",
       "embedded_original": false
+    },
+    {
+      "id": "USER:GAME_MODES_2026-10-05",
+      "kind": "explicit_current_conversation_confirmation",
+      "path": "handoff/current/09_CURRENT_GAME_MODES.md",
+      "confirmed_at": "2026-10-05T19:10:02+08:00",
+      "applied_scope": "新增普通象棋/半混乱基础模式，保留英雄畸变，未来模式独立适配；暂停旧验证；通用优先级和混乱交互不定案",
+      "embedded_original": false
     }
   ],
   "coverage": {
@@ -199,7 +207,8 @@
     "parallel_design": "06_COLLABORATION.md",
     "scoring_method": "07_DESIGN_SCORING.md",
     "scores": "08_SCORE_LEDGER.md",
-    "invariant_contracts": "qa/INVARIANTS.json"
+    "invariant_contracts": "qa/INVARIANTS.json",
+    "game_modes": "09_CURRENT_GAME_MODES.md"
   },
   "source_gaps": [
     {
@@ -226,5 +235,6 @@
   "runtime_evidence_index": "review/invariants/LATEST.json",
   "gameplay_execution_evidence_index": "review/gameplay/runtime-browser-review-2026-10-05-active.json",
   "full_match_execution_evidence_index": "review/gameplay/full-match-browser-2026-10-05-active-regression-summary.json",
-  "active_skill_execution_evidence_index": "review/gameplay/active-match-browser-2026-10-05-summary.json"
+  "active_skill_execution_evidence_index": "review/gameplay/active-match-browser-2026-10-05-summary.json",
+  "previous_rule_revision": "LEZI-FUNCTION-2026-10-04-r1"
 }

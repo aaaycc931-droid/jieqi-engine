@@ -3,12 +3,12 @@
   "self_excluded": true,
   "files": {
     "00_READ_FIRST.md": {
-      "bytes": 2954,
-      "sha256": "5951536512be8c0eb6a0f218d1bec261cda1f2666c77440d80b722f389440a73"
+      "bytes": 3248,
+      "sha256": "cee216d992b7cbdca9f8714f3263628917d1be33b8c37333dd3b12f7327af811"
     },
     "01_CURRENT_RULES.md": {
-      "bytes": 20738,
-      "sha256": "16fb6963e415c4011b7b4f011338e6574c1a2350f4966890ca62e9f4a727e59b"
+      "bytes": 21016,
+      "sha256": "2ea7f950e419e4624497428b5ad0eb46cb9d2ccd6841aa256070cf39db5c96b2"
     },
     "02_CURRENT_HEROES.md": {
       "bytes": 26572,
@@ -23,12 +23,12 @@
       "sha256": "c133b4ee797b778ce4c88233437b2466255f27c30fcaec5b0941c766cc4bae00"
     },
     "05_PROGRESS_AND_NEXT.md": {
-      "bytes": 18806,
-      "sha256": "bbebc0ed5375da012530bf9de8811daaf7b4a0d1c6d01e551818fba248dc3ca9"
+      "bytes": 20081,
+      "sha256": "859de71ee681fd63b23b57e6c14a8a98a2767704bc7fede7410f0fe013cd9bd7"
     },
     "06_COLLABORATION.md": {
-      "bytes": 3896,
-      "sha256": "e70d8a61af01478b93619ad2d2a366b52a60e4d96cf2c1b792dbb1d898517ed8"
+      "bytes": 4117,
+      "sha256": "54443490b7f649e63e133cc2373d8231cdcb7f6521d5c14aafc6a5be0e184020"
     },
     "07_DESIGN_SCORING.md": {
       "bytes": 25701,
@@ -39,16 +39,16 @@
       "sha256": "68845494b465bbcc1908f6cef862f350c1da4dadfc3e3a7473d11b2443edf23c"
     },
     "NEW_DIALOGUE_PROMPT.txt": {
-      "bytes": 2035,
-      "sha256": "9b06ac24b40b0c769704230aa025a73958509269436afcd8a4083bb8a79530df"
+      "bytes": 2754,
+      "sha256": "44c922baca6efb8a04b2c8ddc947c1f3fcb6e338c10fa4d672ded13fb73bd602"
     },
     "SOURCE_REGISTER.json": {
-      "bytes": 12702,
-      "sha256": "1a02dce463ea2d5d9e23244ef019b2ddfff598e0091fc6a93335cfb07c55590c"
+      "bytes": 13234,
+      "sha256": "824b4ca708484a0e53d99b92c38cd8ce4e3dddba60266098d8b4efc90dfb7407"
     },
     "STATE.json": {
-      "bytes": 12113,
-      "sha256": "bf017b786e94423236ae4fe4d26fbd2a5445003386f5e83d7bce06f0a06230cc"
+      "bytes": 13836,
+      "sha256": "3dbd6d0084e95d39313b4add14efd4b3f97362b278f5600551d213e9b5bd7adc"
     },
     "assets/approved-home.png": {
       "bytes": 2157060,
@@ -61,6 +61,10 @@
     "qa/INVARIANTS.json": {
       "bytes": 35955,
       "sha256": "a1d0c817bd1d6bec20080460066d84b80ec0d5a29eff889973d2395c11ae6b22"
+    },
+    "09_CURRENT_GAME_MODES.md": {
+      "bytes": 4230,
+      "sha256": "3a779ec1b0eb55eff95fa1a05526690fb2c5aabd0e0b28b6e832d36ae602b50a"
     }
   },
   "checks": {
