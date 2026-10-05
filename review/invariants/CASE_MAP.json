@@ -188,6 +188,10 @@
       {
         "file": "tests/snapshot-resource-contracts.test.ts",
         "namePrefix": "SNAP-RESOURCE-"
+      },
+      {
+        "file": "tests/rewind-action-contracts.test.ts",
+        "namePrefix": "REPLAY-ACTION-0"
       }
     ],
     "INV-REVIVE-001": [
@@ -298,6 +302,10 @@
       {
         "file": "tests/time-line-contracts.test.ts",
         "namePrefix": "TIME-TIER-01 "
+      },
+      {
+        "file": "tests/rewind-action-contracts.test.ts",
+        "namePrefix": "REPLAY-ACTION-03 "
       }
     ],
     "INV-PHASE-001": [
@@ -640,6 +648,10 @@
       {
         "file": "tests/snapshot-resource-contracts.test.ts",
         "namePrefix": "SNAP-RESOURCE-"
+      },
+      {
+        "file": "tests/rewind-action-contracts.test.ts",
+        "namePrefix": "REPLAY-ACTION-0"
       }
     ],
     "INV-TIME-COLLAPSE-001": [
@@ -1000,6 +1012,10 @@
       {
         "file": "tests/flow-contracts.test.ts",
         "namePrefix": "FLOW-CLOCK-01 "
+      },
+      {
+        "file": "tests/rewind-action-contracts.test.ts",
+        "namePrefix": "REPLAY-ACTION-06 "
       }
     ],
     "ADD-TWIST-001": [
@@ -1094,7 +1110,7 @@
     "INV-WARRIOR-001": "已验证三个不同ID上限、死亡不返还与复入宫不重复；复活资格只用重新插入同ID的状态恢复夹具验证，不能冒充完整复活来源流程。",
     "INV-WARRIOR-003": "堡垒原位弹回、普通封锁及流·舞返回陷阱已有专属运行用例；当前普通弹回保留原格，尚未找到可达的返回格被占链。混合壁垒/陷阱夹具只隔离落点派发，不声称自然英雄组合。",
     "INV-REVIVE-001": "沙漏复活逐项不继承临时状态已验证；仍缺技能资源与名额保留、落位交叉边界。",
-    "INV-NOZDORMU-001": "已补毁灭/祈求/刺杀资源、战士名额防御、暗子身份与亡魂回溯；另有風与陷阱寿命证据。全部持续时序、重复回溯交叉、本机私有交接与设备流程仍未穷尽。",
+    "INV-NOZDORMU-001": "已补毁灭/祈求/刺杀资源、战士名额防御、暗子身份与亡魂回溯；另有風与陷阱寿命证据。全部持续时序、重复回溯交叉、本机私有交接与设备流程仍未穷尽。本轮补暗影之舞/恢复隐身重走的同棋、禁止进攻/将军、完成清理及重复命令；不外推全部组合。",
     "INV-DISCONNECT-002": "已覆盖普通正式回合、回溯重走、双方重叠断线后全员恢复的一次性顺延及精确到期；视觉动画、蓝牙WebView和设备恢复仍待。",
     "ADD-SECRET-001": "引擎与玩家视图已验证；敌方按钮/动画和本机交接仍缺真实浏览器证据。",
     "ADD-WIND-003": "已补实际裁决归位两步脱困、错误第一步继续裁决、亲征九宫限制、普通壁垒、陷阱终止、亡魂及房间计时；浏览器为预置状态操作，完整随机对局与实机仍待验证。",

@@ -10,6 +10,7 @@ on:
       - scripts/build-web.ts
       - scripts/review/capture-gameplay-runtime.mjs
       - scripts/review/capture-full-match-runtime.mjs
+      - scripts/review/capture-active-match-runtime.mjs
       - .github/workflows/gameplay-runtime-review.yml
   workflow_dispatch:
 jobs:
@@ -54,5 +55,27 @@ jobs:
         with:
           name: full-match-runtime-browser-review
           path: review-results/full-match-runtime/
+          if-no-files-found: error
+          retention-days: 7
+  active-match-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Build actual Web runtime without APK
+        run: node scripts/build-web.ts
+      - name: Install browser
+        run: npm install --no-save --package-lock=false playwright@1.58.2 && npx playwright install --with-deps chromium
+      - name: Play real active-skill setup-to-natural-result matches
+        run: node scripts/review/capture-active-match-runtime.mjs
+      - name: Keep skill commits, clocks, public traces and terminal screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: active-match-runtime-browser-review
+          path: review-results/active-match-runtime/
           if-no-files-found: error
           retention-days: 7

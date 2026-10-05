@@ -2075,6 +2075,23 @@ function battleHeroes()                                   {
 
 
 function runtimeSkillEntries(side      , hero        )                      {
+  const entries = baseRuntimeSkillEntries(side, hero);
+  if (hero === "rogue" || gameState?.featureRules?.mutation !== "shadow_dance") return entries;
+  const skills = gameState.assassination?.[side];
+  const active = skills?.activePieceId;
+  const strongAvailable = Boolean(active && gameState.effectsByPieceId?.[active]?.stealth?.strongStrikeAvailable);
+  // Every hero receives the mutation. Reuse the existing three skill circles;
+  // while stealthed, the mutation slot becomes its delayed strong-strike entry.
+  return [...entries, {
+    key: active ? "strong-strike" : "assassination-mutation",
+    title: active ? "隐身·强击" : "畸变·刺杀",
+    state: active ? `隐身中｜强击${strongAvailable ? "可用" : "已用"}` : skills?.mutationChargeAvailable ? "可用" : "已用",
+    catalogIndex: 0,
+    active: true,
+  }];
+}
+
+function baseRuntimeSkillEntries(side      , hero        )                      {
   if (hero === "hunter") {
     const ready = gameState?.status === "playing" || gameState?.status === "execution" || gameState?.status === "finished";
     return [{ key: "hunter-trap", title: "陷阱", state: ready ? "已秘密布置" : "准备中", catalogIndex: 0, active: false }];
@@ -2169,7 +2186,10 @@ function showRuntimeSkillDetails(button                   )       {
   if (!resolved || !disconnectLayer.hidden || !matchResultLayer.hidden) return;
   const { side, hero, entry } = resolved;
   const catalogEntry = heroCatalog[hero].skills[entry.catalogIndex] ?? heroCatalog[hero].skills[0];
-  showMatchDetails(entry.title, `<p>${catalogEntry.fullDescription}</p><h3>本局公开状态</h3><p>${entry.state}</p>`);
+  const activeId = gameState?.assassination?.[side]?.activePieceId;
+  const mutationSkill = entry.key === "assassination-mutation" || entry.key === "strong-strike" && Boolean(activeId && gameState?.effectsByPieceId?.[activeId]?.stealth?.source === "mutation");
+  const description = mutationSkill ? mutationDefinition("shadow_dance").rules : catalogEntry.fullDescription;
+  showMatchDetails(entry.title, `<p>${description}</p><h3>本局公开状态</h3><p>${entry.state}</p>`);
 }
 
 function activateRuntimeSkill(button                   )       {
@@ -3101,7 +3121,8 @@ function onBoardClick(event            )       {
   if (!selectedPieceId) {
     if (!atTarget) return showToast("请先点选当前方控制的棋子。");
     if (getController(atTarget) !== gameState.turn) return showToast("这枚棋子不由当前方控制。");
-    if (!assassinationArmed && (gameState.flowDance ? getFlowDanceMoves(gameState, atTarget.id) : getLegalMoves(gameState, atTarget.id)).length === 0) {
+    const activeStealthSource = gameState.assassination?.[gameState.turn]?.activePieceId === atTarget.id;
+    if (!assassinationArmed && (activeStealthSource ? getLegalAssassinationMoves(gameState, atTarget.id, false) : gameState.flowDance ? getFlowDanceMoves(gameState, atTarget.id) : getLegalMoves(gameState, atTarget.id)).length === 0) {
       return showToast(noLegalMoveMessage(atTarget.id));
     }
     selectedPieceId = atTarget.id;

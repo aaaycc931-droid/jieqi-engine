@@ -5,7 +5,7 @@ import { createRequire } from 'node:module';
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import assert from 'node:assert/strict';
-import { applyAuthoritativeAssassination, applyAuthoritativeMove, initializeFeatureGameState, initializeFeatureSecret, destroyPiece, markRevealed } from '../../src/index.ts';
+import { applyAuthoritativeAssassination, applyAuthoritativeMove, applyHeroAbility, initializeFeatureGameState, initializeFeatureSecret, destroyPiece, markRevealed } from '../../src/index.ts';
 import { flowFixture, executedWindFixture } from '../../tests/flow-fixtures.ts';
 import { gameState, revealed, secretState, move } from '../../tests/helpers.ts';
 
@@ -247,7 +247,41 @@ try {
     assert(!killed.state.automaticEvents.some(e => e.kind === 'wind_flow'));
     assert(await page.locator('#match-result-layer').isVisible());
   });
-  assert.equal(report.cases.length, 11); assert.deepEqual(report.errors, []);
+  await run('rewind-restores-stealth-exit-guards-and-clears-replay', async () => {
+    const s = initializeFeatureGameState(gameState([revealed('mover','red','rook',0,7),revealed('victim','black','rook',0,3),revealed('reply','black','pawn',2,3)]),{red:'nozdormu',black:'hunter'},'shadow_dance');
+    s.turnStartedAt=Date.now()-5000;s.turnDeadlineAt=s.turnStartedAt+60000;
+    let h=applyAuthoritativeAssassination(s,secretState(),{...move({x:0,y:7},{x:0,y:6},'conceal'),kind:'assassination',source:'mutation',useStrongStrike:false});
+    h=applyAuthoritativeMove(h.state,h.secret,move({x:2,y:3},{x:2,y:4},'reply',h.state.revision));
+    h=applyAuthoritativeAssassination(h.state,h.secret,{...move({x:0,y:6},{x:0,y:5},'exit',h.state.revision),kind:'assassination',useStrongStrike:false});
+    h=applyAuthoritativeMove(h.state,h.secret,move({x:2,y:4},{x:2,y:5},'second',h.state.revision));
+    h.state.turnStartedAt=Date.now();h.state.turnDeadlineAt=h.state.turnStartedAt+60000;
+    await load(h.state,h.secret);
+    await skill('rewind').click();await page.locator('#dialog-action').click();
+    const replay=await snapshot();assert.equal(replay.secret.replay.pieceId,'mover');assert(replay.state.effectsByPieceId.mover.stealth);
+    // Restored active stealth is selectable through the real skill panel.
+    await page.locator('.v4-status-red [data-skill-key="strong-strike"]').click();
+    await point(0,3).click();assert.deepEqual((await snapshot()).state,replay.state);assert.match(await page.locator('.toast').textContent(),/回溯重走/);
+    await page.locator('.v4-status-red [data-skill-key="strong-strike"]').click();
+    await point(5,6).click();assert.deepEqual((await snapshot()).state,replay.state);assert.match(await page.locator('.toast').textContent(),/不能形成将军/);
+    await point(1,6).click();const after=await snapshot();assert.equal(after.secret.replay,undefined);assert.equal(after.state.effectsByPieceId.mover.stealth,undefined);
+    assert.equal(after.state.turn,'black');assert.equal(after.secret.rewindUsed.red,true);
+    await page.locator('#dialog-action').click();
+  });
+  await run('non-rogue-shadow-dance-has-real-mutation-entry', async () => {
+    const s=initializeFeatureGameState(gameState([revealed('mover','red','rook',0,7),revealed('reply','black','pawn',2,3)]),{red:'devout_zealot',black:'hunter'},'shadow_dance');
+    await load(s);
+    assert.equal(await page.locator('.v4-status-red .v4-skill-trigger:not([hidden])').count(),3);
+    await page.locator('.v4-status-red [data-skill-key="assassination-mutation"]').click();
+    await point(0,7).click();await point(0,6).click();
+    assert.equal((await snapshot()).state.assassination.red.mutationChargeAvailable,false);
+    await page.locator('#dialog-action').click();await point(2,3).click();await point(2,4).click();await page.locator('#dialog-action').click();
+    assert(await page.locator('.v4-status-red [data-skill-key="strong-strike"]').isVisible());
+    // Ordinary exit does not need the removed hidden skill panel.
+    await point(0,6).click();assert(await point(1,6).evaluate(e=>e.classList.contains('legal-empty')));
+    await point(1,6).click();assert.equal((await snapshot()).state.effectsByPieceId.mover.stealth,undefined);
+    await page.locator('#dialog-action').click();
+  });
+  assert.equal(report.cases.length, 13); assert.deepEqual(report.errors, []);
   assert(report.cases.every(c => c.passed), 'Prepared browser interaction failures: ' + report.cases.filter(c => !c.passed).map(c => c.name).join(', '));
 } finally {
   await writeFile(resolve(output, 'browser-review.json'), JSON.stringify(report, null, 2) + '\n');

@@ -109,6 +109,9 @@ function pathPiecesForSpecialMove(state: GameState, source: PublicPiece, to: { x
     }
   }
   if (state.featureRules?.mutation === "war_chariot" && movement.type === "rook") {
+    // This helper also runs before public validation during rewind. A malformed
+    // diagonal or fractional destination must not create a nonterminating walk.
+    if (![source.x, source.y, to.x, to.y].every(Number.isInteger) || to.x < 0 || to.x > 8 || to.y < 0 || to.y > 9 || source.x !== to.x && source.y !== to.y) return [];
     const dx = Math.sign(to.x - source.x);
     const dy = Math.sign(to.y - source.y);
     let x = source.x + dx;
@@ -378,6 +381,12 @@ export function getAutomaticExecutionPlan(
   };
 }
 
+function validateRewindReplay(state: GameState, secret: SecretState, command: MoveCommand): void {
+  if (secret.replay && (pieceAt(state, command.from)?.id !== secret.replay.pieceId || pieceAt(state, command.to) || pathPiecesForSpecialMove(state, pieceAt(state, command.from)!, command.to).length)) {
+    throw new RuleError("REWIND_REPLAY", "回溯重走必须同棋且不能进攻");
+  }
+}
+
 export function applyAuthoritativeMove(
   state: GameState,
   secret: SecretState,
@@ -397,7 +406,7 @@ export function applyAuthoritativeMove(
     throw new RuleError("STALE_REVISION", "客户端棋局版本已经过期");
   }
 
-  if (secret.replay && (pieceAt(state, command.from)?.id !== secret.replay.pieceId || pieceAt(state, command.to) || pathPiecesForSpecialMove(state, pieceAt(state, command.from)!, command.to).length)) throw new RuleError("REWIND_REPLAY", "回溯重走必须同棋且不能进攻");
+  validateRewindReplay(state, secret, command);
   const validation = validatePublicMove(state, command, state.turn, { allowLinkedControl: deferTurnEnd });
   if (!validation.ok && !(validation.code === "SELF_CHECK" && permitsSelfCrushingGeneral(state, command, state.turn))) {
     validationError(validation.code, validation.message);
@@ -545,6 +554,7 @@ export function applyAuthoritativeAssassination(
     throw new RuleError("STALE_REVISION", "客户端棋局版本已经过期");
   }
   if (state.flowDance) throw new RuleError("FLOW_ACTION_REQUIRED", "须先完成流·舞归位结算");
+  validateRewindReplay(state, secret, command);
 
   const actingSide = state.turn;
   const sourcePiece = pieceAt(state, command.from);
@@ -694,6 +704,11 @@ export function applyAuthoritativeAssassination(
     };
     skillState.activePieceId = source.id;
   }
+
+  // A rewind may restore a pending stealth exit.  Its action still obeys
+  // same-piece, no attack and no check, after the final stealth transition.
+  if (nextSecret.replay && isGeneralInCheck(nextState, otherSide(actingSide))) throw new RuleError("REWIND_REPLAY_CHECK", "回溯重走不能形成将军");
+  delete nextSecret.replay;
 
   finishAfterPlayerAction(
     nextState,
