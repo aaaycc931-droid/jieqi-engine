@@ -1,7 +1,7 @@
 {
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-05-validation-3",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-05-validation-4",
   "rule_revision": "LEZI-FUNCTION-2026-10-04-r1",
-  "code_checkpoint": "b64a2ca03a77b26b74313afb3ad65d0b86f35102",
+  "code_checkpoint": "ffd2fb070c89d1d9eaae4d6cfce9112f151e5594",
   "sources": [
     {
       "id": "RULE:CURRENT_RULE_DELTAS_2026-09-22.md",
@@ -150,6 +150,14 @@
       "library_file_id": "libfile_a2040a7fdda48191a5d876aba15a9071",
       "sha256": "63671bd146ce72a3c61f40dac457f83f882d7ada78c5f5f98efb7bb3ba5eac26",
       "applied_scope": "V4棋盘参考，外围历史状态字段不覆盖04，包内assets/approved-v4-reference.png"
+    },
+    {
+      "id": "EVIDENCE:PUBLIC_TARGETS_AND_SNAPSHOT_2026-10-05",
+      "kind": "execution_evidence_non_normative",
+      "path": "review/invariants/ROUND_2026-10-05-targets.md",
+      "url": "https://github.com/aaaycc931-droid/jieqi-engine/blob/ffd2fb070c89d1d9eaae4d6cfce9112f151e5594/tests/public-target-contracts.test.ts",
+      "applied_scope": "公开目标资格、无形直接指定拒绝、五项对方资源回溯及11组预置DOM交互；不是全称合同/完整随机对局/设备验收",
+      "embedded_original": false
     }
   ],
   "coverage": {

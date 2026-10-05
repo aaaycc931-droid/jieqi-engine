@@ -1,8 +1,8 @@
 {
   "authority": "execution_evidence_non_normative",
-  "generatedAt": "2026-10-05T01:50:52.804Z",
-  "sourceCommitAtRun": "25d047c74f90945eba6b079ef09a9016df17619f",
-  "sourceDigest": "43be369c92651202fb004039080770a29048a6a6080a5088262aa34683a7b522",
+  "generatedAt": "2026-10-05T03:37:07.912Z",
+  "sourceCommitAtRun": "0ed82c0f475465dd25cdd828aa4bc2b870639e25",
+  "sourceDigest": "283c05469d49199a35d3d16177775aa527881d288e0ae90f1654c1254a50c700",
   "sourceDigestPaths": [
     ".github/workflows/gameplay-runtime-review.yml",
     ".github/workflows/menu-reference-review.yml",
@@ -52,8 +52,10 @@
     "tests/mutation-rarity.test.ts",
     "tests/mutation.test.ts",
     "tests/proposal-review.test.ts",
+    "tests/public-target-contracts.test.ts",
     "tests/remote-room.test.ts",
     "tests/setup-rps.test.ts",
+    "tests/snapshot-resource-contracts.test.ts",
     "tests/time-line-contracts.test.ts",
     "tests/warrior.test.ts",
     "tests/web-gameplay-v4.test.ts",
@@ -160,9 +162,9 @@
   ],
   "ruleRevision": "LEZI-FUNCTION-2026-10-04-r1",
   "contractDigest": "a1d0c817bd1d6bec20080460066d84b80ec0d5a29eff889973d2395c11ae6b22",
-  "runtime": "v24.19.0",
+  "runtime": "v24.21.0",
   "testSummary": {
-    "passed": 298,
+    "passed": 309,
     "failed": 0,
     "executionFailed": false
   },
@@ -370,6 +372,11 @@
           "file": "tests/bluetooth-private-contracts.test.ts",
           "name": "BT-PRIVATE-03 reconnect preserves owner-only secrets and shifts the shared deadline once",
           "passed": true
+        },
+        {
+          "file": "tests/public-target-contracts.test.ts",
+          "name": "TARGET-PRIVATE-01 opponent serialized view and public legality stay identical after secret shadow",
+          "passed": true
         }
       ],
       "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
@@ -384,6 +391,16 @@
         {
           "file": "tests/check-end-network.test.ts",
           "name": "CHECK-09 落子前的公开状态与提示不暴露背刺身份",
+          "passed": true
+        },
+        {
+          "file": "tests/public-target-contracts.test.ts",
+          "name": "TARGET-WIND-01 ordinary capture markers and check ignore the concealed true general identity",
+          "passed": true
+        },
+        {
+          "file": "tests/public-target-contracts.test.ts",
+          "name": "TARGET-WIND-02 delayed strong strike targets a normal-looking carrier, excludes public Wind generals with or without shadow",
           "passed": true
         }
       ],
@@ -578,6 +595,31 @@
           "file": "tests/time-line-contracts.test.ts",
           "name": "TIME-SNAPSHOT-01 rewind restores opponent secret skill resources and trap durations without re-landing",
           "passed": true
+        },
+        {
+          "file": "tests/snapshot-resource-contracts.test.ts",
+          "name": "SNAP-RESOURCE-01 rewind restores destruction charge, deaths and reveal after a committed random set",
+          "passed": true
+        },
+        {
+          "file": "tests/snapshot-resource-contracts.test.ts",
+          "name": "SNAP-RESOURCE-02 rewind restores invocation progress and formal counts",
+          "passed": true
+        },
+        {
+          "file": "tests/snapshot-resource-contracts.test.ts",
+          "name": "SNAP-RESOURCE-03 rewind restores assassination charge and removes newly activated stealth",
+          "passed": true
+        },
+        {
+          "file": "tests/snapshot-resource-contracts.test.ts",
+          "name": "SNAP-RESOURCE-04 rewind restores Warrior qualification IDs and removes a newly earned barrier",
+          "passed": true
+        },
+        {
+          "file": "tests/snapshot-resource-contracts.test.ts",
+          "name": "SNAP-RESOURCE-05 rewind restores self-captured covered identity and erases a newly generated ghost",
+          "passed": true
         }
       ],
       "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
@@ -677,6 +719,16 @@
         {
           "file": "tests/confirmed-runtime.test.ts",
           "name": "WIND war chariot endpoint occupancy suffocates the returning true general and commits the attack",
+          "passed": true
+        },
+        {
+          "file": "tests/public-target-contracts.test.ts",
+          "name": "TARGET-RANDOM-01 a sole invisible carrier remains a legal random execution target",
+          "passed": true
+        },
+        {
+          "file": "tests/public-target-contracts.test.ts",
+          "name": "TARGET-RANDOM-02 destruction includes a covered carrier and finishes every locked draw after its death",
           "passed": true
         }
       ],
@@ -862,6 +914,21 @@
         {
           "file": "tests/assassination.test.ts",
           "name": "ROGUE-01 刺杀首步消耗英雄次数，棋子进入公开隐身并保留强击",
+          "passed": true
+        },
+        {
+          "file": "tests/public-target-contracts.test.ts",
+          "name": "TARGET-SHADOW-01 actual Wind Shadow Dance cannot directly select its invisible piece and rolls back",
+          "passed": true
+        },
+        {
+          "file": "tests/public-target-contracts.test.ts",
+          "name": "TARGET-RANDOM-01 a sole invisible carrier remains a legal random execution target",
+          "passed": true
+        },
+        {
+          "file": "tests/public-target-contracts.test.ts",
+          "name": "TARGET-RANDOM-02 destruction includes a covered carrier and finishes every locked draw after its death",
           "passed": true
         }
       ],
@@ -1168,6 +1235,16 @@
           "file": "tests/assassination.test.ts",
           "name": "ROGUE-07 强击与战车同一原子行动会先碾碎路径，再处决最终目标",
           "passed": true
+        },
+        {
+          "file": "tests/public-target-contracts.test.ts",
+          "name": "TARGET-WIND-01 ordinary capture markers and check ignore the concealed true general identity",
+          "passed": true
+        },
+        {
+          "file": "tests/public-target-contracts.test.ts",
+          "name": "TARGET-WIND-02 delayed strong strike targets a normal-looking carrier, excludes public Wind generals with or without shadow",
+          "passed": true
         }
       ],
       "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
@@ -1473,9 +1550,34 @@
           "file": "tests/time-line-contracts.test.ts",
           "name": "TIME-SNAPSHOT-01 rewind restores opponent secret skill resources and trap durations without re-landing",
           "passed": true
+        },
+        {
+          "file": "tests/snapshot-resource-contracts.test.ts",
+          "name": "SNAP-RESOURCE-01 rewind restores destruction charge, deaths and reveal after a committed random set",
+          "passed": true
+        },
+        {
+          "file": "tests/snapshot-resource-contracts.test.ts",
+          "name": "SNAP-RESOURCE-02 rewind restores invocation progress and formal counts",
+          "passed": true
+        },
+        {
+          "file": "tests/snapshot-resource-contracts.test.ts",
+          "name": "SNAP-RESOURCE-03 rewind restores assassination charge and removes newly activated stealth",
+          "passed": true
+        },
+        {
+          "file": "tests/snapshot-resource-contracts.test.ts",
+          "name": "SNAP-RESOURCE-04 rewind restores Warrior qualification IDs and removes a newly earned barrier",
+          "passed": true
+        },
+        {
+          "file": "tests/snapshot-resource-contracts.test.ts",
+          "name": "SNAP-RESOURCE-05 rewind restores self-captured covered identity and erases a newly generated ghost",
+          "passed": true
         }
       ],
-      "verificationLimit": "已有快照资源与计时案例；全部英雄资源、持续效果及回溯后的保密交接尚缺。",
+      "verificationLimit": "已补毁灭/祈求/刺杀资源、战士名额防御、暗子身份与亡魂回溯；另有風与陷阱寿命证据。全部持续时序、重复回溯交叉、本机私有交接与设备流程仍未穷尽。",
       "fullyAccepted": false
     },
     {
@@ -1592,6 +1694,11 @@
         {
           "file": "tests/setup-rps.test.ts",
           "name": "RPS-01 单方选择只公开已提交状态",
+          "passed": true
+        },
+        {
+          "file": "tests/public-target-contracts.test.ts",
+          "name": "TARGET-PRIVATE-01 opponent serialized view and public legality stay identical after secret shadow",
           "passed": true
         }
       ],
@@ -2092,6 +2199,11 @@
           "file": "tests/confirmed-runtime.test.ts",
           "name": "HERO shadow activation leaves every public field unchanged; enemy view cannot reveal uses or host",
           "passed": true
+        },
+        {
+          "file": "tests/public-target-contracts.test.ts",
+          "name": "TARGET-PRIVATE-01 opponent serialized view and public legality stay identical after secret shadow",
+          "passed": true
         }
       ],
       "verificationLimit": "引擎与玩家视图已验证；敌方按钮/动画和本机交接仍缺真实浏览器证据。",
@@ -2142,9 +2254,34 @@
           "file": "tests/bluetooth-private-contracts.test.ts",
           "name": "BT-PRIVATE-03 reconnect preserves owner-only secrets and shifts the shared deadline once",
           "passed": true
+        },
+        {
+          "file": "tests/public-target-contracts.test.ts",
+          "name": "TARGET-WIND-01 ordinary capture markers and check ignore the concealed true general identity",
+          "passed": true
+        },
+        {
+          "file": "tests/public-target-contracts.test.ts",
+          "name": "TARGET-WIND-02 delayed strong strike targets a normal-looking carrier, excludes public Wind generals with or without shadow",
+          "passed": true
+        },
+        {
+          "file": "tests/public-target-contracts.test.ts",
+          "name": "TARGET-SHADOW-01 actual Wind Shadow Dance cannot directly select its invisible piece and rolls back",
+          "passed": true
+        },
+        {
+          "file": "tests/public-target-contracts.test.ts",
+          "name": "TARGET-RANDOM-01 a sole invisible carrier remains a legal random execution target",
+          "passed": true
+        },
+        {
+          "file": "tests/public-target-contracts.test.ts",
+          "name": "TARGET-RANDOM-02 destruction includes a covered carrier and finishes every locked draw after its death",
+          "passed": true
         }
       ],
-      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "verificationLimit": "已补公开进攻/强击/随机目标与隐藏承载者死亡、敌方编码视图不变；明子直接指定无形拒绝。部分阶段为明确构造夹具，完整随机对局与物理双机尚待。",
       "fullyAccepted": false
     },
     {

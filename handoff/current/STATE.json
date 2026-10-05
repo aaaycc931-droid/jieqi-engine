@@ -1,11 +1,11 @@
 {
   "project": "乐子象棋 / jieqi-engine",
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-05-validation-3",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-05-validation-4",
   "updated_at": "2026-10-05",
   "repository": "https://github.com/aaaycc931-droid/jieqi-engine",
   "working_branch": "codex/ui-android-apk-20261001",
-  "implementation_commit": "b64a2ca03a77b26b74313afb3ad65d0b86f35102",
-  "implementation_tree": "141cbd801440f87c0d3555cc80ae6cb18605f026",
+  "implementation_commit": "ffd2fb070c89d1d9eaae4d6cfce9112f151e5594",
+  "implementation_tree": "8c17d11f1aa034145c0722275c0594a1ce1297d1",
   "draft_pr": 2,
   "baseline_id": "LEZI-FUNCTION-2026-10-04-v1",
   "baseline_digest": "4bcf9fb91f5c6e41f456e7424ebd7ed09c6c07b1595ec825604aa730fdad020b",
@@ -25,14 +25,14 @@
     "destiny_mutations": 1
   },
   "validation": {
-    "tests_passed": 298,
+    "tests_passed": 309,
     "tests_failed": 0,
     "web_build": "passed",
-    "homepage_browser_run": 37253111329,
-    "homepage_browser_commit": "b64a2ca03a77b26b74313afb3ad65d0b86f35102",
+    "homepage_browser_run": 37260136017,
+    "homepage_browser_commit": "ffd2fb070c89d1d9eaae4d6cfce9112f151e5594",
     "homepage_browser_scope": "homepage_and_entry_controls_only",
     "android_web_asset_match_files": 116,
-    "new_hero_browser_full_flow": "partial_prepared_state_nine_flows_passed_full_match_pending",
+    "new_hero_browser_full_flow": "partial_prepared_state_eleven_flows_passed_full_match_pending",
     "individual_69_invariants": "partial_named_case_evidence_full_contract_acceptance_pending",
     "android_webview": "pending",
     "physical_two_phone": "pending",
@@ -49,6 +49,17 @@
     },
     "current_ci": {
       "status": "success",
+      "run": 37260137602,
+      "commit": "ffd2fb070c89d1d9eaae4d6cfce9112f151e5594",
+      "implementation_commit": "ffd2fb070c89d1d9eaae4d6cfce9112f151e5594",
+      "evidence_artifact": 11323819580,
+      "apk_job": "skipped",
+      "checkout_commit": "0ed82c0f475465dd25cdd828aa4bc2b870639e25",
+      "source_digest": "283c05469d49199a35d3d16177775aa527881d288e0ae90f1654c1254a50c700",
+      "source_digest_matches_local": true
+    },
+    "previous_ci": {
+      "status": "success",
       "run": 37253114598,
       "commit": "b64a2ca03a77b26b74313afb3ad65d0b86f35102",
       "implementation_commit": "b64a2ca03a77b26b74313afb3ad65d0b86f35102",
@@ -58,18 +69,19 @@
       "source_digest": "43be369c92651202fb004039080770a29048a6a6080a5088262aa34683a7b522",
       "source_digest_matches_local": true
     },
-    "previous_ci": {
-      "status": "success",
-      "run": 37201029856,
-      "commit": "d45174e7cc2ab11f4f5f506221d27a411c27b9d1",
-      "implementation_commit": "d45174e7cc2ab11f4f5f506221d27a411c27b9d1",
-      "evidence_artifact": 11302699701,
-      "apk_job": "skipped",
-      "checkout_commit": "fb139bee54b78dfb4fd4e24e48a95cd2049c4257",
-      "source_digest": "021e6bf0890c254cd1123b6a2f2f2b1342e27c1d23a47f81f2f1c13bb50ae6c8",
-      "source_digest_matches_local": true
-    },
     "gameplay_browser": {
+      "status": "success",
+      "run": 37260135932,
+      "commit": "ffd2fb070c89d1d9eaae4d6cfce9112f151e5594",
+      "artifact": 11324242995,
+      "case_count": 11,
+      "errors": 0,
+      "report": "review/gameplay/runtime-browser-review-2026-10-05-targets.json",
+      "scope": "prepared_state_original_DOM_handlers_public_target_list_carrier_capture_local_handoff_and_flow_clocks",
+      "full_match_accepted": false,
+      "bluetooth_private_transport_accepted": false
+    },
+    "previous_gameplay_browser": {
       "status": "success",
       "run": 37253111347,
       "commit": "b64a2ca03a77b26b74313afb3ad65d0b86f35102",
@@ -78,18 +90,6 @@
       "errors": 0,
       "report": "review/gameplay/runtime-browser-review-2026-10-05.json",
       "scope": "prepared_state_original_DOM_handlers_local_handoff_and_flow_clocks",
-      "full_match_accepted": false,
-      "bluetooth_private_transport_accepted": false
-    },
-    "previous_gameplay_browser": {
-      "status": "success",
-      "run": 37201026813,
-      "commit": "d45174e7cc2ab11f4f5f506221d27a411c27b9d1",
-      "artifact": 11302488498,
-      "case_count": 6,
-      "errors": 0,
-      "report": "review/gameplay/runtime-browser-review-2026-10-04.json",
-      "scope": "prepared_state_original_DOM_handlers_local_handoff_only",
       "full_match_accepted": false,
       "bluetooth_private_transport_accepted": false
     },
@@ -111,11 +111,21 @@
     "old_dialogue_code_writes_after_handoff": "stop",
     "automatic_import": false
   },
-  "next_action": "Continue public target eligibility, remaining snapshot/resource boundaries and full random browser matches; Warrior occupied-return reachability remains unproved. Bluetooth serialized views passed, physical RFCOMM/WebView/two-phone pending; UI last, APK paused.",
+  "next_action": "Run full random browser matches from actual hero selection/RPS/deal to natural terminal result, then remaining snapshot/secret/timing intersections. Public target eligibility and five opponent-resource rewind cases now have dedicated evidence; physical RFCOMM/WebView/two-phone remain pending; UI last, APK paused.",
   "source_gap_register": "SOURCE_REGISTER.json",
   "apk_built_this_round": false,
-  "previous_implementation_commit": "d45174e7cc2ab11f4f5f506221d27a411c27b9d1",
+  "previous_implementation_commit": "b64a2ca03a77b26b74313afb3ad65d0b86f35102",
   "validation_round": {
+    "rules_changed": false,
+    "rule_revision_unchanged": true,
+    "fixed": [
+      "shadow_direct_target_excludes_intangible",
+      "shadow_client_target_list_matches_owner_eligibility"
+    ],
+    "new_tests": 11,
+    "browser_prepared_flows_passed": 11
+  },
+  "previous_validation_round": {
     "rules_changed": false,
     "rule_revision_unchanged": true,
     "fixed": [
@@ -126,15 +136,5 @@
     ],
     "new_tests": 13,
     "browser_prepared_flows_passed": 9
-  },
-  "previous_validation_round": {
-    "rules_changed": false,
-    "rule_revision_unchanged": true,
-    "fixed": [
-      "formal_disconnect_clock_shift",
-      "rewind_replay_disconnect_clock_shift"
-    ],
-    "new_tests": 12,
-    "browser_prepared_flows_passed": 6
   }
 }

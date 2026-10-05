@@ -25,6 +25,6 @@
 
 ## Git 恢复
 
-仓库 https://github.com/aaaycc931-droid/jieqi-engine；实现分支 codex/ui-android-apk-20261001；源码检查点 b64a2ca03a77b26b74313afb3ad65d0b86f35102；Draft PR #2。先看远端当前 SHA 和 PR，后续仅在该工作分支或隔离分支工作，不 force、不合并 main、不覆盖并发写入。旧本地 repo-audit 的 HEAD 与远端功能提交不一致且有历史修改，不 reset、不批量提交整棵工作树。首次恢复交接的导航整理只选择对应文本；本轮实现与测试增量见 review/invariants/ROUND_2026-10-05.md，不据这条历史说明限制已授权实现。
+仓库 https://github.com/aaaycc931-droid/jieqi-engine；实现分支 codex/ui-android-apk-20261001；源码检查点 ffd2fb070c89d1d9eaae4d6cfce9112f151e5594；Draft PR #2。先看远端当前 SHA 和 PR，后续仅在该工作分支或隔离分支工作，不 force、不合并 main、不覆盖并发写入。旧本地 repo-audit 的 HEAD 与远端功能提交不一致且有历史修改，不 reset、不批量提交整棵工作树。首次恢复交接的导航整理只选择对应文本；本轮实现与测试增量见 review/invariants/ROUND_2026-10-05.md，不据这条历史说明限制已授权实现。
 
 根目录旧 PARALLEL_HERO_DESIGN 的“4d985 只有3英雄”属于被替换进度；新对话读本文件与 05 的 12英雄检查点。未获正式移交的外对话草案仍不实现。

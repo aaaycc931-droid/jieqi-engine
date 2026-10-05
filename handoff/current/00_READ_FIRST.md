@@ -1,6 +1,6 @@
 # 乐子象棋｜换对话交接入口
 
-交接日期：2026-10-04。交接类型：当前功能检查点，**不是全部功能/视觉验收完成**。
+更新日期：2026-10-05。交接类型：当前功能检查点，**不是全部功能/视觉验收完成**。
 
 ## 读取顺序
 
@@ -22,7 +22,7 @@
 
 仓库：https://github.com/aaaycc931-droid/jieqi-engine
 工作分支：codex/ui-android-apk-20261001
-功能源码检查点：b64a2ca03a77b26b74313afb3ad65d0b86f35102
+功能源码检查点：ffd2fb070c89d1d9eaae4d6cfce9112f151e5594
 Draft PR：https://github.com/aaaycc931-droid/jieqi-engine/pull/2
 
 交接文档会另有仅文档提交；源码检查点固定到以上 SHA，不能从旧包内 runtime_commit 或本地陈旧 HEAD 恢复。优先读取仓库 handoff/current/，根目录旧规格与 rules/confirmed/ 原始源只供核对出处，不能直接覆盖整合正文。以后新用户确认增量才可覆盖对应段落。

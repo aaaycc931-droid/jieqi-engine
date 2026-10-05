@@ -1,0 +1,11 @@
+{
+  "status": "success",
+  "run": 37260137602,
+  "commit": "ffd2fb070c89d1d9eaae4d6cfce9112f151e5594",
+  "implementation_commit": "ffd2fb070c89d1d9eaae4d6cfce9112f151e5594",
+  "evidence_artifact": 11323819580,
+  "apk_job": "skipped",
+  "checkout_commit": "0ed82c0f475465dd25cdd828aa4bc2b870639e25",
+  "source_digest": "283c05469d49199a35d3d16177775aa527881d288e0ae90f1654c1254a50c700",
+  "source_digest_matches_local": true
+}
