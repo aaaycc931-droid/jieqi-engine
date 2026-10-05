@@ -281,9 +281,9 @@ function actionHistoryText(state: GameState, skill?: "刺杀" | "强击"): strin
   return `${parts.join("，")}。`;
 }
 
-function withActionHistory(room: RemoteRoom, now: number, actionId: string, skill?: "刺杀" | "强击"): RemoteRoom {
+function withActionHistory(room: RemoteRoom, now: number, actionId: string, skill?: "刺杀" | "强击", preserveClock = false): RemoteRoom {
   if (!room.game) return room;
-  if (room.game.state.status === "playing" && !room.game.state.flowDance) startFormalClock(room.game.state, now);
+  if (!preserveClock && room.game.state.status === "playing" && !room.game.state.flowDance) startFormalClock(room.game.state, now);
   const trapTriggered = room.lastTrapTrigger?.actionId === actionId;
   const text = `${trapTriggered ? "猎人陷阱触发，" : ""}${actionHistoryText(room.game.state, skill)}`;
   return appendSystemMessage(room, text, now, `system:${actionId}`);
@@ -1206,7 +1206,7 @@ export function submitRemoteMove(
       updatedAt: now,
     };
     return {
-      room: withActionHistory(nextRoom, now, command.actionId),
+      room: withActionHistory(nextRoom, now, command.actionId, undefined, Boolean(room.game.state.flowDance)),
       duplicate: false,
     };
   }

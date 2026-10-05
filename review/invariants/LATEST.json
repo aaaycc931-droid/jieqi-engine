@@ -1,8 +1,8 @@
 {
   "authority": "execution_evidence_non_normative",
-  "generatedAt": "2026-10-04T12:08:45.785Z",
-  "sourceCommitAtRun": "d45174e7cc2ab11f4f5f506221d27a411c27b9d1",
-  "sourceDigest": "021e6bf0890c254cd1123b6a2f2f2b1342e27c1d23a47f81f2f1c13bb50ae6c8",
+  "generatedAt": "2026-10-05T01:50:52.804Z",
+  "sourceCommitAtRun": "25d047c74f90945eba6b079ef09a9016df17619f",
+  "sourceDigest": "43be369c92651202fb004039080770a29048a6a6080a5088262aa34683a7b522",
   "sourceDigestPaths": [
     ".github/workflows/gameplay-runtime-review.yml",
     ".github/workflows/menu-reference-review.yml",
@@ -39,11 +39,14 @@
     "tests/assassination.test.ts",
     "tests/bluetooth-disconnect.test.ts",
     "tests/bluetooth-host-room.test.ts",
+    "tests/bluetooth-private-contracts.test.ts",
     "tests/bluetooth-protocol.test.ts",
     "tests/check-end-network.test.ts",
     "tests/confirmed-runtime.test.ts",
     "tests/cross-rule-contracts.test.ts",
     "tests/exception-contracts.test.ts",
+    "tests/flow-contracts.test.ts",
+    "tests/flow-fixtures.ts",
     "tests/helpers.ts",
     "tests/movement.test.ts",
     "tests/mutation-rarity.test.ts",
@@ -159,7 +162,7 @@
   "contractDigest": "a1d0c817bd1d6bec20080460066d84b80ec0d5a29eff889973d2395c11ae6b22",
   "runtime": "v24.19.0",
   "testSummary": {
-    "passed": 285,
+    "passed": 298,
     "failed": 0,
     "executionFailed": false
   },
@@ -351,6 +354,21 @@
         {
           "file": "tests/check-end-network.test.ts",
           "name": "NET-07 所有公开数据都不包含未揭身份",
+          "passed": true
+        },
+        {
+          "file": "tests/bluetooth-private-contracts.test.ts",
+          "name": "BT-PRIVATE-01 actual Wind/Hunter setup and shadow change only the owner's serialized view",
+          "passed": true
+        },
+        {
+          "file": "tests/bluetooth-private-contracts.test.ts",
+          "name": "BT-PRIVATE-02 wrong-turn shadow is rejected without consuming or leaking private state",
+          "passed": true
+        },
+        {
+          "file": "tests/bluetooth-private-contracts.test.ts",
+          "name": "BT-PRIVATE-03 reconnect preserves owner-only secrets and shifts the shared deadline once",
           "passed": true
         }
       ],
@@ -1010,6 +1028,21 @@
           "file": "tests/assassination.test.ts",
           "name": "ROGUE-07 强击与战车同一原子行动会先碾碎路径，再处决最终目标",
           "passed": true
+        },
+        {
+          "file": "tests/flow-contracts.test.ts",
+          "name": "FLOW-DEFENSE-01 ordinary barrier bounces first dance attack and can be consumed before second capture",
+          "passed": true
+        },
+        {
+          "file": "tests/flow-contracts.test.ts",
+          "name": "FLOW-DEFENSE-02 second-step markers do not treat a protected capture as safe escape",
+          "passed": true
+        },
+        {
+          "file": "tests/flow-contracts.test.ts",
+          "name": "FLOW-DEFENSE-03 bounce triggers the original-square trap, never the protected target trap",
+          "passed": true
         }
       ],
       "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
@@ -1030,9 +1063,14 @@
           "file": "tests/exception-contracts.test.ts",
           "name": "EX-WARRIOR-02 fortress allows original-square barrier bounce but blocks other returns",
           "passed": true
+        },
+        {
+          "file": "tests/flow-contracts.test.ts",
+          "name": "FLOW-DEFENSE-03 bounce triggers the original-square trap, never the protected target trap",
+          "passed": true
         }
       ],
-      "verificationLimit": "堡垒内原位弹回例外与普通返回封锁已有专属运行用例；返回空间冲突窒息仍缺可达原子链专属用例。",
+      "verificationLimit": "堡垒原位弹回、普通封锁及流·舞返回陷阱已有专属运行用例；当前普通弹回保留原格，尚未找到可达的返回格被占链。混合壁垒/陷阱夹具只隔离落点派发，不声称自然英雄组合。",
       "fullyAccepted": false
     },
     {
@@ -2089,6 +2127,21 @@
           "file": "tests/confirmed-runtime.test.ts",
           "name": "WIND air-only occupancy does not block ground return or cause suffocation",
           "passed": true
+        },
+        {
+          "file": "tests/bluetooth-private-contracts.test.ts",
+          "name": "BT-PRIVATE-01 actual Wind/Hunter setup and shadow change only the owner's serialized view",
+          "passed": true
+        },
+        {
+          "file": "tests/bluetooth-private-contracts.test.ts",
+          "name": "BT-PRIVATE-02 wrong-turn shadow is rejected without consuming or leaking private state",
+          "passed": true
+        },
+        {
+          "file": "tests/bluetooth-private-contracts.test.ts",
+          "name": "BT-PRIVATE-03 reconnect preserves owner-only secrets and shifts the shared deadline once",
+          "passed": true
         }
       ],
       "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
@@ -2129,9 +2182,54 @@
           "file": "tests/confirmed-runtime.test.ts",
           "name": "HERO checkmate execution returns attacker then offers palace-only flow dance without formal ticks",
           "passed": true
+        },
+        {
+          "file": "tests/flow-contracts.test.ts",
+          "name": "FLOW-DEFENSE-01 ordinary barrier bounces first dance attack and can be consumed before second capture",
+          "passed": true
+        },
+        {
+          "file": "tests/flow-contracts.test.ts",
+          "name": "FLOW-DEFENSE-02 second-step markers do not treat a protected capture as safe escape",
+          "passed": true
+        },
+        {
+          "file": "tests/flow-contracts.test.ts",
+          "name": "FLOW-DEFENSE-03 bounce triggers the original-square trap, never the protected target trap",
+          "passed": true
+        },
+        {
+          "file": "tests/flow-contracts.test.ts",
+          "name": "FLOW-ATOMIC-01 actual execution return and two-step escape preserve formal counters and idempotency",
+          "passed": true
+        },
+        {
+          "file": "tests/flow-contracts.test.ts",
+          "name": "FLOW-FAIL-01 wrong first branch with no safe continuation retains original execution outcome",
+          "passed": true
+        },
+        {
+          "file": "tests/flow-contracts.test.ts",
+          "name": "FLOW-REGION-01 expedition still restricts dance to one orthogonal palace step",
+          "passed": true
+        },
+        {
+          "file": "tests/flow-contracts.test.ts",
+          "name": "FLOW-DEATH-01 dance capture creates Death Knight ghost without aging formal-turn durations",
+          "passed": true
+        },
+        {
+          "file": "tests/flow-contracts.test.ts",
+          "name": "FLOW-DEATH-02 lethal trap during actual returned dance stops before second step without formal tick",
+          "passed": true
+        },
+        {
+          "file": "tests/flow-contracts.test.ts",
+          "name": "FLOW-CLOCK-01 room two-step escape preserves its formal deadline and next ordinary move starts the next clock",
+          "passed": true
         }
       ],
-      "verificationLimit": "中间步和成功结束已有运行用例；双步失败、亲征舞步限制尚缺。",
+      "verificationLimit": "已补实际裁决归位两步脱困、错误第一步继续裁决、亲征九宫限制、普通壁垒、陷阱终止、亡魂及房间计时；浏览器为预置状态操作，完整随机对局与实机仍待验证。",
       "fullyAccepted": false
     },
     {
@@ -2193,6 +2291,11 @@
         {
           "file": "tests/exception-contracts.test.ts",
           "name": "EX-CLOCK-01 rewind replay pause preserves remaining time and rejects expiry exactly",
+          "passed": true
+        },
+        {
+          "file": "tests/flow-contracts.test.ts",
+          "name": "FLOW-CLOCK-01 room two-step escape preserves its formal deadline and next ordinary move starts the next clock",
           "passed": true
         }
       ],

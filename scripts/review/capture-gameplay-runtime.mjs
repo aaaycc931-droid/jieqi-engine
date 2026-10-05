@@ -6,6 +6,7 @@ import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import assert from 'node:assert/strict';
 import { applyAuthoritativeMove, initializeFeatureGameState, initializeFeatureSecret, destroyPiece, markRevealed } from '../../src/index.ts';
+import { flowFixture, executedWindFixture } from '../../tests/flow-fixtures.ts';
 import { gameState, revealed, secretState, move } from '../../tests/helpers.ts';
 
 const root = resolve(import.meta.dirname, '../..');
@@ -178,7 +179,45 @@ try {
     assert.equal(r.state.pieces.filter(p => p.type === 'general').length, 2);
     assert.equal(r.state.formalTurns.red, 1); await page.locator('#dialog-action').click();
   });
-  assert.equal(report.cases.length, 6); assert.deepEqual(report.errors, []);
+  await run('flow-barrier-escape-keeps-clock-and-player', async () => {
+    const h = flowFixture([revealed('lock', 'black', 'rook', 3, 5), revealed('guard', 'black', 'pawn', 4, 9)]);
+    h.state.effectsByPieceId = { guard: { barrier: { owner: 'black', enemyTurnsRemaining: 3 } } };
+    h.state.turnStartedAt = Date.now() - 20_000; h.state.turnDeadlineAt = h.state.turnStartedAt + 60_000;
+    await load(h.state, h.secret); const before = await snapshot();
+    await point(3, 9).click(); await point(4, 9).click();
+    const first = await snapshot(); assert.equal(first.state.flowDance.steps, 1);
+    assert(first.state.pieces.some(p => p.id === 'guard')); assert.equal(first.state.lastMove.landed, false);
+    await point(3, 9).click(); await point(4, 9).click();
+    const after = await snapshot(); assert.equal(after.state.flowDance, undefined);
+    assert.equal(after.state.turn, 'red'); assert.equal(after.viewer, 'red');
+    assert.equal(after.state.turnDeadlineAt, before.state.turnDeadlineAt);
+    assert.equal(after.state.turnStartedAt, before.state.turnStartedAt);
+    assert.deepEqual(after.state.formalTurns, before.state.formalTurns);
+    assert.equal(await page.locator('#flow-dialog').getAttribute('open'), null);
+  });
+  await run('flow-execution-return-two-step-escape', async () => {
+    const h = executedWindFixture();
+    h.state.turnStartedAt = Date.now() - 20_000; h.state.turnDeadlineAt = h.state.turnStartedAt + 60_000;
+    await load(h.state, h.secret); const before = await snapshot();
+    await point(3, 9).click(); await point(3, 8).click();
+    assert.equal((await snapshot()).state.flowDance.steps, 1);
+    await point(3, 8).click(); await point(3, 7).click();
+    const after = await snapshot(); assert.equal(after.state.flowDance, undefined);
+    assert.equal(after.state.status, 'playing'); assert.equal(after.viewer, 'red');
+    assert(after.state.captured.some(p => p.id === 'executor'));
+    assert.equal(after.state.turnDeadlineAt, before.state.turnDeadlineAt);
+    assert.deepEqual(after.state.formalTurns, before.state.formalTurns);
+  });
+  await run('flow-first-safe-step-ends-early', async () => {
+    const h = flowFixture(); h.state.turnStartedAt = Date.now() - 20_000; h.state.turnDeadlineAt = h.state.turnStartedAt + 60_000;
+    await load(h.state, h.secret); const before = await snapshot();
+    await point(3, 9).click(); await point(3, 8).click();
+    const after = await snapshot(); assert.equal(after.state.flowDance, undefined);
+    assert.equal(after.state.status, 'playing'); assert.equal(after.viewer, 'red');
+    assert.equal(after.state.turnDeadlineAt, before.state.turnDeadlineAt);
+    assert.equal(after.state.lastMove.countsAsFormalTurn, false);
+  });
+  assert.equal(report.cases.length, 9); assert.deepEqual(report.errors, []);
   assert(report.cases.every(c => c.passed), 'Prepared browser interaction failures: ' + report.cases.filter(c => !c.passed).map(c => c.name).join(', '));
 } finally {
   await writeFile(resolve(output, 'browser-review.json'), JSON.stringify(report, null, 2) + '\n');

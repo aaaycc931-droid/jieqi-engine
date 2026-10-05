@@ -780,8 +780,14 @@ function flowTargets(state           )                                  {
 function simulateFlowStep(state           , to                          )            {
   const next = cloneState(state), p = next.pieces.find(p => p.id === next.flowDance?.pieceId) ;
   const target = pieceAt(next, to);
-  next.pieces = next.pieces.filter(q => q.id !== target?.id || q.id === p.id);
-  p.x = to.x; p.y = to.y;
+  if (target && next.effectsByPieceId?.[target.id]?.barrier) {
+    // 普通防御拦截后留在原格；不能把被弹回的进攻当成安全落点。
+    removeBarrierEffect(next, target.id);
+  } else {
+    next.pieces = next.pieces.filter(q => q.id !== target?.id || q.id === p.id);
+    if (target) removePieceEffects(next, target.id);
+    p.x = to.x; p.y = to.y;
+  }
   next.flowDance .steps = 1;
   return next;
 }
@@ -814,11 +820,27 @@ function applyFlowDance(state           , secret             , command          
   const newSecret = cloneSecret(secret);
   const target = pieceAt(validationState, command.to);
   validationState.automaticEvents = []; validationState.landingEvents = [];
-  if (target) destroyPiece(validationState, newSecret, target.id, flow.side, "flow_attack");
-  originalGeneral.x = command.to.x; originalGeneral.y = command.to.y;
-  queueLanding(validationState, originalGeneral, flow.side, "flow_dance"); settleLandings(validationState, newSecret);
+  const bounced = Boolean(target && validationState.effectsByPieceId?.[target.id]?.barrier);
+  let captured                           ;
+  if (bounced) {
+    removeBarrierEffect(validationState, target .id);
+    queueLanding(validationState, originalGeneral, flow.side, "warrior_return");
+  } else {
+    if (target) captured = destroyPiece(validationState, newSecret, target.id, flow.side, "flow_attack");
+    originalGeneral.x = command.to.x; originalGeneral.y = command.to.y;
+    queueLanding(validationState, originalGeneral, flow.side, "flow_dance");
+  }
+  settleLandings(validationState, newSecret);
   validationState.revision += 1;
+  validationState.lastMove = {
+    actionId: command.actionId, pieceId: p.id, actingSide: flow.side,
+    from: { ...command.from }, to: { ...command.to }, captured,
+    ...(bounced ? { bouncedAgainstPieceId: target .id } : {}),
+    landed: !bounced, countsAsFormalTurn: false, tier: 3,
+    keywords: [target ? "进攻" : "移动"],
+  };
   if (!closeDirectDeaths(validationState, newSecret, flow.side)) {
+    generateGhosts(validationState);
     if (!isGeneralInCheck(validationState, flow.side)) {
       validationState.turn = flow.resumeTurn;
     } else if (flow.steps === 0) {

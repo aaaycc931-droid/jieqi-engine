@@ -3161,6 +3161,7 @@ function onBoardClick(event            )       {
   }
   if (!gameSecret) return;
   gameSecret.traps = structuredClone(localTraps);
+  const wasFlowDance = Boolean(gameState.flowDance);
   try {
     const result = usingAssassination
       ? applyAuthoritativeAssassination(gameState, gameSecret, {
@@ -3179,7 +3180,7 @@ function onBoardClick(event            )       {
         });
     gameState = result.state;
     gameSecret = result.secret;
-    if (!gameState.flowDance) startFormalClock(gameState, Date.now());
+    if (!gameState.flowDance && !wasFlowDance) startFormalClock(gameState, Date.now());
     const trapMessage = resolveLocalTrapsAfterAction();
     queueFormalEventCues(gameState, Boolean(trapMessage), usingAssassination ? strongStrikeArmed ? "强击发动" : "刺杀发动" : undefined);
     const captured = gameState.lastMove?.captured;
@@ -3198,7 +3199,7 @@ function onBoardClick(event            )       {
     renderGame();
     if (gameState.status === "execution") beginAutomaticExecution();
     if (gameState.status === "finished") showMatchResult();
-    else if (!gameState.flowDance && !gameState.forcedDefense && gameState.status === "playing") localGameHandoff();
+    else if (!wasFlowDance && !gameState.flowDance && !gameState.forcedDefense && gameState.status === "playing") localGameHandoff();
   } catch (error) {
     showToast(error instanceof RuleError ? error.message : "落子失败，请重试。");
   }

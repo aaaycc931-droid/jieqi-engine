@@ -84,6 +84,10 @@
       {
         "file": "tests/check-end-network.test.ts",
         "namePrefix": "NET-07 "
+      },
+      {
+        "file": "tests/bluetooth-private-contracts.test.ts",
+        "namePrefix": "BT-PRIVATE-"
       }
     ],
     "INV-LEGALITY-001": [
@@ -398,6 +402,10 @@
       {
         "file": "tests/assassination.test.ts",
         "namePrefix": "ROGUE-07 "
+      },
+      {
+        "file": "tests/flow-contracts.test.ts",
+        "namePrefix": "FLOW-DEFENSE-"
       }
     ],
     "INV-WARRIOR-003": [
@@ -408,6 +416,10 @@
       {
         "file": "tests/exception-contracts.test.ts",
         "namePrefix": "EX-WARRIOR-02 "
+      },
+      {
+        "file": "tests/flow-contracts.test.ts",
+        "namePrefix": "FLOW-DEFENSE-03 "
       }
     ],
     "INV-WARRIOR-004": [
@@ -866,6 +878,10 @@
       {
         "file": "tests/confirmed-runtime.test.ts",
         "namePrefix": "WIND air-only"
+      },
+      {
+        "file": "tests/bluetooth-private-contracts.test.ts",
+        "namePrefix": "BT-PRIVATE-"
       }
     ],
     "ADD-WIND-002": [
@@ -886,6 +902,30 @@
       {
         "file": "tests/confirmed-runtime.test.ts",
         "namePrefix": "HERO checkmate execution"
+      },
+      {
+        "file": "tests/flow-contracts.test.ts",
+        "namePrefix": "FLOW-DEFENSE-"
+      },
+      {
+        "file": "tests/flow-contracts.test.ts",
+        "namePrefix": "FLOW-ATOMIC-"
+      },
+      {
+        "file": "tests/flow-contracts.test.ts",
+        "namePrefix": "FLOW-FAIL-"
+      },
+      {
+        "file": "tests/flow-contracts.test.ts",
+        "namePrefix": "FLOW-REGION-"
+      },
+      {
+        "file": "tests/flow-contracts.test.ts",
+        "namePrefix": "FLOW-DEATH-"
+      },
+      {
+        "file": "tests/flow-contracts.test.ts",
+        "namePrefix": "FLOW-CLOCK-"
       }
     ],
     "ADD-CLOCK-001": [
@@ -904,6 +944,10 @@
       {
         "file": "tests/exception-contracts.test.ts",
         "namePrefix": "EX-CLOCK-01 "
+      },
+      {
+        "file": "tests/flow-contracts.test.ts",
+        "namePrefix": "FLOW-CLOCK-01 "
       }
     ],
     "ADD-TWIST-001": [
@@ -996,12 +1040,12 @@
   "limits": {
     "INV-BOARD-002": "仅地面/空中同格与空中目标占用；还缺移置层标准化及全入口验证。",
     "INV-WARRIOR-001": "已验证三个不同ID上限、死亡不返还与复入宫不重复；复活资格只用重新插入同ID的状态恢复夹具验证，不能冒充完整复活来源流程。",
-    "INV-WARRIOR-003": "堡垒内原位弹回例外与普通返回封锁已有专属运行用例；返回空间冲突窒息仍缺可达原子链专属用例。",
+    "INV-WARRIOR-003": "堡垒原位弹回、普通封锁及流·舞返回陷阱已有专属运行用例；当前普通弹回保留原格，尚未找到可达的返回格被占链。混合壁垒/陷阱夹具只隔离落点派发，不声称自然英雄组合。",
     "INV-REVIVE-001": "沙漏复活逐项不继承临时状态已验证；仍缺技能资源与名额保留、落位交叉边界。",
     "INV-NOZDORMU-001": "已有快照资源与计时案例；全部英雄资源、持续效果及回溯后的保密交接尚缺。",
     "INV-DISCONNECT-002": "已覆盖普通正式回合、回溯重走、双方重叠断线后全员恢复的一次性顺延及精确到期；视觉动画、蓝牙WebView和设备恢复仍待。",
     "ADD-SECRET-001": "引擎与玩家视图已验证；敌方按钮/动画和本机交接仍缺真实浏览器证据。",
-    "ADD-WIND-003": "中间步和成功结束已有运行用例；双步失败、亲征舞步限制尚缺。",
+    "ADD-WIND-003": "已补实际裁决归位两步脱困、错误第一步继续裁决、亲征九宫限制、普通壁垒、陷阱终止、亡魂及房间计时；浏览器为预置状态操作，完整随机对局与实机仍待验证。",
     "ADD-CLOCK-001": "3/10/42秒历史预算、房间权威接收及到期已验证；浏览器显示与WebView尚未验收。",
     "ADD-TWIST-001": "真实倒戈棋返回猎人陷阱、下一正式回合封锁和耗尽已验证；其他来源状态组合尚缺。",
     "REJ-014": "三回合衰减已覆盖；三名额上限专属用例仍缺。",

@@ -6,6 +6,7 @@ on:
       - src/**
       - web/**
       - tests/helpers.ts
+      - tests/flow-fixtures.ts
       - scripts/build-web.ts
       - scripts/review/capture-gameplay-runtime.mjs
       - .github/workflows/gameplay-runtime-review.yml
