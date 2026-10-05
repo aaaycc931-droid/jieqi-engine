@@ -1,11 +1,11 @@
 {
   "project": "乐子象棋 / jieqi-engine",
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-04-validation-2",
-  "updated_at": "2026-10-04",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-05-validation-3",
+  "updated_at": "2026-10-05",
   "repository": "https://github.com/aaaycc931-droid/jieqi-engine",
   "working_branch": "codex/ui-android-apk-20261001",
-  "implementation_commit": "d45174e7cc2ab11f4f5f506221d27a411c27b9d1",
-  "implementation_tree": "feedfec3105bfc179a2ad9f6cb24e7e48b652006",
+  "implementation_commit": "b64a2ca03a77b26b74313afb3ad65d0b86f35102",
+  "implementation_tree": "141cbd801440f87c0d3555cc80ae6cb18605f026",
   "draft_pr": 2,
   "baseline_id": "LEZI-FUNCTION-2026-10-04-v1",
   "baseline_digest": "4bcf9fb91f5c6e41f456e7424ebd7ed09c6c07b1595ec825604aa730fdad020b",
@@ -25,14 +25,14 @@
     "destiny_mutations": 1
   },
   "validation": {
-    "tests_passed": 285,
+    "tests_passed": 298,
     "tests_failed": 0,
     "web_build": "passed",
-    "homepage_browser_run": 37201026889,
-    "homepage_browser_commit": "d45174e7cc2ab11f4f5f506221d27a411c27b9d1",
+    "homepage_browser_run": 37253111329,
+    "homepage_browser_commit": "b64a2ca03a77b26b74313afb3ad65d0b86f35102",
     "homepage_browser_scope": "homepage_and_entry_controls_only",
     "android_web_asset_match_files": 116,
-    "new_hero_browser_full_flow": "partial_prepared_state_six_flows_passed_full_match_pending",
+    "new_hero_browser_full_flow": "partial_prepared_state_nine_flows_passed_full_match_pending",
     "individual_69_invariants": "partial_named_case_evidence_full_contract_acceptance_pending",
     "android_webview": "pending",
     "physical_two_phone": "pending",
@@ -49,6 +49,17 @@
     },
     "current_ci": {
       "status": "success",
+      "run": 37253114598,
+      "commit": "b64a2ca03a77b26b74313afb3ad65d0b86f35102",
+      "implementation_commit": "b64a2ca03a77b26b74313afb3ad65d0b86f35102",
+      "evidence_artifact": 11321213561,
+      "apk_job": "skipped",
+      "checkout_commit": "8ded300fc3aee52dd6515d71e89e69ee8d7b14dc",
+      "source_digest": "43be369c92651202fb004039080770a29048a6a6080a5088262aa34683a7b522",
+      "source_digest_matches_local": true
+    },
+    "previous_ci": {
+      "status": "success",
       "run": 37201029856,
       "commit": "d45174e7cc2ab11f4f5f506221d27a411c27b9d1",
       "implementation_commit": "d45174e7cc2ab11f4f5f506221d27a411c27b9d1",
@@ -58,15 +69,19 @@
       "source_digest": "021e6bf0890c254cd1123b6a2f2f2b1342e27c1d23a47f81f2f1c13bb50ae6c8",
       "source_digest_matches_local": true
     },
-    "previous_ci": {
-      "status": "success",
-      "run": 37199312900,
-      "commit": "b09c0e9ee8b83a9e145b09aafd47e537d4684716",
-      "implementation_commit": "8fdd54dd5506310ede2d6cb59bbb3933c4e8a47c",
-      "evidence_artifact": 11302751226,
-      "apk_job": "skipped"
-    },
     "gameplay_browser": {
+      "status": "success",
+      "run": 37253111347,
+      "commit": "b64a2ca03a77b26b74313afb3ad65d0b86f35102",
+      "artifact": 11322231062,
+      "case_count": 9,
+      "errors": 0,
+      "report": "review/gameplay/runtime-browser-review-2026-10-05.json",
+      "scope": "prepared_state_original_DOM_handlers_local_handoff_and_flow_clocks",
+      "full_match_accepted": false,
+      "bluetooth_private_transport_accepted": false
+    },
+    "previous_gameplay_browser": {
       "status": "success",
       "run": 37201026813,
       "commit": "d45174e7cc2ab11f4f5f506221d27a411c27b9d1",
@@ -77,7 +92,8 @@
       "scope": "prepared_state_original_DOM_handlers_local_handoff_only",
       "full_match_accepted": false,
       "bluetooth_private_transport_accepted": false
-    }
+    },
+    "bluetooth_private_snapshot": "actual_Wind_Hunter_setup_encoded_snapshot_shadow_duplicate_wrong_turn_reconnect_passed_physical_transport_pending"
   },
   "restrictions": [
     "ui_last",
@@ -95,11 +111,23 @@
     "old_dialogue_code_writes_after_handoff": "stop",
     "automatic_import": false
   },
-  "next_action": "Continue reachable atomic return-space suffocation, remaining snapshot resource/secret exceptions and full random browser/Bluetooth flows; UI last, APK paused, WebView/two-phone pending",
+  "next_action": "Continue public target eligibility, remaining snapshot/resource boundaries and full random browser matches; Warrior occupied-return reachability remains unproved. Bluetooth serialized views passed, physical RFCOMM/WebView/two-phone pending; UI last, APK paused.",
   "source_gap_register": "SOURCE_REGISTER.json",
   "apk_built_this_round": false,
-  "previous_implementation_commit": "8fdd54dd5506310ede2d6cb59bbb3933c4e8a47c",
+  "previous_implementation_commit": "d45174e7cc2ab11f4f5f506221d27a411c27b9d1",
   "validation_round": {
+    "rules_changed": false,
+    "rule_revision_unchanged": true,
+    "fixed": [
+      "flow_barrier_defense_and_safe_markers",
+      "flow_ghost_generation",
+      "flow_last_move_record",
+      "flow_completion_clock_and_local_handoff"
+    ],
+    "new_tests": 13,
+    "browser_prepared_flows_passed": 9
+  },
+  "previous_validation_round": {
     "rules_changed": false,
     "rule_revision_unchanged": true,
     "fixed": [
@@ -108,16 +136,5 @@
     ],
     "new_tests": 12,
     "browser_prepared_flows_passed": 6
-  },
-  "previous_validation_round": {
-    "rules_changed": false,
-    "rule_revision_unchanged": true,
-    "fixed": [
-      "timeline_trap_persistence",
-      "historical_remaining_clock",
-      "timeline_tier_III",
-      "displacement_integer_coordinates"
-    ],
-    "new_tests": 23
   }
 }
