@@ -2055,8 +2055,10 @@ function startGame()       {
   heroView.hidden = true;
   rpsView.hidden = true;
   gameView.hidden = false;
-  renderGame();
+  // Set the opening lock before rendering so the formal clock is not started
+  // during the introduction or the hunter preparation phase.
   runOpeningSequence(beginLocalHeroPreparation);
+  renderGame();
 }
 
 function battleHeroes()                                   {

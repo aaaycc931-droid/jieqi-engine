@@ -263,7 +263,7 @@ try {
     await point(0,3).click();assert.deepEqual((await snapshot()).state,replay.state);assert.match(await page.locator('.toast').textContent(),/回溯重走/);
     await page.locator('.v4-status-red [data-skill-key="strong-strike"]').click();
     await point(5,6).click();assert.deepEqual((await snapshot()).state,replay.state);assert.match(await page.locator('.toast').textContent(),/不能形成将军/);
-    await point(1,6).click();const after=await snapshot();assert.equal(after.secret.replay,undefined);assert.equal(after.state.effectsByPieceId.mover.stealth,undefined);
+    await point(1,6).click();const after=await snapshot();assert.equal(after.secret.replay,undefined);assert.equal(after.state.effectsByPieceId.mover?.stealth,undefined);
     assert.equal(after.state.turn,'black');assert.equal(after.secret.rewindUsed.red,true);
     await page.locator('#dialog-action').click();
   });
@@ -278,7 +278,7 @@ try {
     assert(await page.locator('.v4-status-red [data-skill-key="strong-strike"]').isVisible());
     // Ordinary exit does not need the removed hidden skill panel.
     await point(0,6).click();assert(await point(1,6).evaluate(e=>e.classList.contains('legal-empty')));
-    await point(1,6).click();assert.equal((await snapshot()).state.effectsByPieceId.mover.stealth,undefined);
+    await point(1,6).click();assert.equal((await snapshot()).state.effectsByPieceId.mover?.stealth,undefined);
     await page.locator('#dialog-action').click();
   });
   assert.equal(report.cases.length, 13); assert.deepEqual(report.errors, []);

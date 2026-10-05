@@ -114,9 +114,14 @@ try {
         await page.locator('#rps-confirm-button').click();
         await dialog();
       }
+      const opening = await snapshot();
+      assert.equal(opening.opening,true);
+      assert.equal(opening.state.turnStartedAt,undefined,'Formal clock must not run in hero intro');
+      entry.clockAtOpening={start:opening.state.turnStartedAt,deadline:opening.state.turnDeadlineAt};
       await page.waitForFunction(() => !globalThis.__activeMatchReview.snapshot().opening, undefined, { timeout: 15_000 });
       let before = await snapshot();
       while (before.preparation) {
+        assert.equal(before.state.turnStartedAt,undefined,'Hunter preparation must not consume formal clock');
         await dialog();
         const y = before.trapSide === 'red' ? 6 : 3;
         await point({ x: 4, y }).click(); await point({ x: 4, y }).click();
@@ -130,6 +135,7 @@ try {
       assert.equal(before.state.pieces.filter(p => p.faceDown).length, 30);
       assert.deepEqual(before.state.featureRules.heroes, { red: heroes[0], black: heroes[1] });
       assert.equal(before.viewer, 'red');
+      assert(before.state.turnStartedAt && before.state.turnDeadlineAt>before.state.turnStartedAt,'Clock starts only when ready');
       const visits = new Map(), rejected = new Set();
       const used = ability => entry.skills.filter(x => x.ability === ability && x.committed).length;
       const skillButton = (key, side) => page.locator(`${side === 'red' ? '.v4-status-red' : '.v4-status-blue'} [data-skill-key="${key}"]`);
