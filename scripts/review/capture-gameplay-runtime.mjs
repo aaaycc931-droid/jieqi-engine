@@ -5,7 +5,7 @@ import { createRequire } from 'node:module';
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import assert from 'node:assert/strict';
-import { applyAuthoritativeMove, initializeFeatureGameState, initializeFeatureSecret, destroyPiece, markRevealed } from '../../src/index.ts';
+import { applyAuthoritativeAssassination, applyAuthoritativeMove, initializeFeatureGameState, initializeFeatureSecret, destroyPiece, markRevealed } from '../../src/index.ts';
 import { flowFixture, executedWindFixture } from '../../tests/flow-fixtures.ts';
 import { gameState, revealed, secretState, move } from '../../tests/helpers.ts';
 
@@ -217,7 +217,37 @@ try {
     assert.equal(after.state.turnDeadlineAt, before.state.turnDeadlineAt);
     assert.equal(after.state.lastMove.countsAsFormalTurn, false);
   });
-  assert.equal(report.cases.length, 9); assert.deepEqual(report.errors, []);
+  await run('shadow-target-list-excludes-invisible-and-current-general', async () => {
+    const s = initializeFeatureGameState(gameState([revealed('invisible', 'red', 'rook', 0, 7), revealed('available', 'red', 'pawn', 2, 6), revealed('reply', 'black', 'pawn', 2, 3)]), { red: 'wind', black: 'hunter' }, 'shadow_dance');
+    const hidden = applyAuthoritativeAssassination(s, secretState(), { ...move({ x: 0, y: 7 }, { x: 0, y: 6 }, 'conceal'), kind: 'assassination', source: 'mutation', useStrongStrike: false });
+    const reply = applyAuthoritativeMove(hidden.state, hidden.secret, move({ x: 2, y: 3 }, { x: 2, y: 4 }, 'reply', hidden.state.revision));
+    await load(reply.state, reply.secret); const before = await snapshot();
+    await skill('shadow').click();
+    const ids = await page.getByLabel('技能对象').locator('option').evaluateAll(options => options.map(o => o.value));
+    assert.deepEqual(ids, ['random_covered', 'available']);
+    await page.evaluate(() => window.handleLeziBack()); assert.deepEqual(await snapshot(), before);
+    await skill('shadow').click(); await page.getByLabel('技能对象').selectOption('available'); await page.locator('#dialog-action').click();
+    const shadow = await snapshot(); assert.deepEqual(shadow.state, before.state);
+    assert.equal(shadow.secret.wind.red.hostId, 'available');
+    assert(shadow.state.effectsByPieceId.invisible.stealth);
+    await skill('shadow').click();
+    const afterIds = await page.getByLabel('技能对象').locator('option').evaluateAll(options => options.map(o => o.value));
+    assert.deepEqual(afterIds, ['random_covered', 'red-general']);
+    await page.evaluate(() => window.handleLeziBack());
+  });
+  await run('public-capture-marker-and-hidden-general-death', async () => {
+    const s = initializeFeatureGameState(gameState([revealed('host', 'red', 'rook', 0, 7), revealed('mover', 'red', 'pawn', 2, 6), revealed('attacker', 'black', 'rook', 0, 3)]), { red: 'wind', black: 'hunter' });
+    await load(s); await skill('shadow').click(); await page.getByLabel('技能对象').selectOption('host'); await page.locator('#dialog-action').click();
+    await point(2, 6).click(); await point(2, 5).click(); await page.locator('#dialog-action').click();
+    assert.equal((await snapshot()).viewer, 'black');
+    await point(0, 3).click(); assert(await point(0, 7).evaluate(e => e.classList.contains('legal-capture')));
+    await point(0, 7).click();
+    const killed = await snapshot(); assert.equal(killed.state.status, 'finished'); assert.equal(killed.state.winner, 'black');
+    assert.equal(killed.state.captured.find(p => p.id === 'host').type, 'general');
+    assert(!killed.state.automaticEvents.some(e => e.kind === 'wind_flow'));
+    assert(await page.locator('#match-result-layer').isVisible());
+  });
+  assert.equal(report.cases.length, 11); assert.deepEqual(report.errors, []);
   assert(report.cases.every(c => c.passed), 'Prepared browser interaction failures: ' + report.cases.filter(c => !c.passed).map(c => c.name).join(', '));
 } finally {
   await writeFile(resolve(output, 'browser-review.json'), JSON.stringify(report, null, 2) + '\n');

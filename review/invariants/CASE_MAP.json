@@ -88,12 +88,20 @@
       {
         "file": "tests/bluetooth-private-contracts.test.ts",
         "namePrefix": "BT-PRIVATE-"
+      },
+      {
+        "file": "tests/public-target-contracts.test.ts",
+        "namePrefix": "TARGET-PRIVATE-"
       }
     ],
     "INV-LEGALITY-001": [
       {
         "file": "tests/check-end-network.test.ts",
         "namePrefix": "CHECK-09 "
+      },
+      {
+        "file": "tests/public-target-contracts.test.ts",
+        "namePrefix": "TARGET-WIND-"
       }
     ],
     "INV-CONTROL-001": [
@@ -176,6 +184,10 @@
       {
         "file": "tests/time-line-contracts.test.ts",
         "namePrefix": "TIME-SNAPSHOT-01 "
+      },
+      {
+        "file": "tests/snapshot-resource-contracts.test.ts",
+        "namePrefix": "SNAP-RESOURCE-"
       }
     ],
     "INV-REVIVE-001": [
@@ -224,6 +236,10 @@
       {
         "file": "tests/confirmed-runtime.test.ts",
         "namePrefix": "WIND war chariot endpoint"
+      },
+      {
+        "file": "tests/public-target-contracts.test.ts",
+        "namePrefix": "TARGET-RANDOM-"
       }
     ],
     "INV-ATOMIC-002": [
@@ -318,6 +334,14 @@
       {
         "file": "tests/assassination.test.ts",
         "namePrefix": "ROGUE-01 "
+      },
+      {
+        "file": "tests/public-target-contracts.test.ts",
+        "namePrefix": "TARGET-SHADOW-"
+      },
+      {
+        "file": "tests/public-target-contracts.test.ts",
+        "namePrefix": "TARGET-RANDOM-"
       }
     ],
     "INV-FLIGHT-001": [
@@ -470,6 +494,10 @@
       {
         "file": "tests/assassination.test.ts",
         "namePrefix": "ROGUE-07 "
+      },
+      {
+        "file": "tests/public-target-contracts.test.ts",
+        "namePrefix": "TARGET-WIND-"
       }
     ],
     "INV-TRAP-001": [
@@ -608,6 +636,10 @@
       {
         "file": "tests/time-line-contracts.test.ts",
         "namePrefix": "TIME-SNAPSHOT-01 "
+      },
+      {
+        "file": "tests/snapshot-resource-contracts.test.ts",
+        "namePrefix": "SNAP-RESOURCE-"
       }
     ],
     "INV-TIME-COLLAPSE-001": [
@@ -642,6 +674,10 @@
       {
         "file": "tests/setup-rps.test.ts",
         "namePrefix": "RPS-01 "
+      },
+      {
+        "file": "tests/public-target-contracts.test.ts",
+        "namePrefix": "TARGET-PRIVATE-"
       }
     ],
     "INV-TRAP-VISIBILITY-001": [
@@ -856,6 +892,10 @@
       {
         "file": "tests/confirmed-runtime.test.ts",
         "namePrefix": "HERO shadow activation"
+      },
+      {
+        "file": "tests/public-target-contracts.test.ts",
+        "namePrefix": "TARGET-PRIVATE-"
       }
     ],
     "ADD-WIND-001": [
@@ -882,6 +922,18 @@
       {
         "file": "tests/bluetooth-private-contracts.test.ts",
         "namePrefix": "BT-PRIVATE-"
+      },
+      {
+        "file": "tests/public-target-contracts.test.ts",
+        "namePrefix": "TARGET-WIND-"
+      },
+      {
+        "file": "tests/public-target-contracts.test.ts",
+        "namePrefix": "TARGET-SHADOW-"
+      },
+      {
+        "file": "tests/public-target-contracts.test.ts",
+        "namePrefix": "TARGET-RANDOM-"
       }
     ],
     "ADD-WIND-002": [
@@ -1042,7 +1094,7 @@
     "INV-WARRIOR-001": "已验证三个不同ID上限、死亡不返还与复入宫不重复；复活资格只用重新插入同ID的状态恢复夹具验证，不能冒充完整复活来源流程。",
     "INV-WARRIOR-003": "堡垒原位弹回、普通封锁及流·舞返回陷阱已有专属运行用例；当前普通弹回保留原格，尚未找到可达的返回格被占链。混合壁垒/陷阱夹具只隔离落点派发，不声称自然英雄组合。",
     "INV-REVIVE-001": "沙漏复活逐项不继承临时状态已验证；仍缺技能资源与名额保留、落位交叉边界。",
-    "INV-NOZDORMU-001": "已有快照资源与计时案例；全部英雄资源、持续效果及回溯后的保密交接尚缺。",
+    "INV-NOZDORMU-001": "已补毁灭/祈求/刺杀资源、战士名额防御、暗子身份与亡魂回溯；另有風与陷阱寿命证据。全部持续时序、重复回溯交叉、本机私有交接与设备流程仍未穷尽。",
     "INV-DISCONNECT-002": "已覆盖普通正式回合、回溯重走、双方重叠断线后全员恢复的一次性顺延及精确到期；视觉动画、蓝牙WebView和设备恢复仍待。",
     "ADD-SECRET-001": "引擎与玩家视图已验证；敌方按钮/动画和本机交接仍缺真实浏览器证据。",
     "ADD-WIND-003": "已补实际裁决归位两步脱困、错误第一步继续裁决、亲征九宫限制、普通壁垒、陷阱终止、亡魂及房间计时；浏览器为预置状态操作，完整随机对局与实机仍待验证。",
@@ -1053,7 +1105,8 @@
     "INV-BOARD-001": "移动/移置越界、非整数和非有限坐标拒绝已有证据；完整棋盘全入口保持性仍缺。",
     "INV-WARCHARIOT-002": "单独验证该车的双将同死路线不构成威胁；不否定局面中其他棋或照面的独立将军。",
     "REJ-017": "单独验证该车的双将同死路线不构成威胁；不否定局面中其他棋或照面的独立将军。",
-    "INV-MUROZOND-001": "已验证返回陷阱、返回失败跳过控制并占步、无合法重走拒绝事务；占位与无合法着法为明确构造状态，尚未穷尽真实行动历史的可达组合。"
+    "INV-MUROZOND-001": "已验证返回陷阱、返回失败跳过控制并占步、无合法重走拒绝事务；占位与无合法着法为明确构造状态，尚未穷尽真实行动历史的可达组合。",
+    "ADD-WIND-001": "已补公开进攻/强击/随机目标与隐藏承载者死亡、敌方编码视图不变；明子直接指定无形拒绝。部分阶段为明确构造夹具，完整随机对局与物理双机尚待。"
   },
   "nonRuntime": {
     "INV-ACTION-001": "术语分类约束需要规范/记录字段检查，不能通过一条执行用例证明。",

@@ -1,12 +1,16 @@
 import { RuleError } from "./errors.js";
 import { applyAuthoritativeMove } from "./game.js";
 import { getController, isInPalace, otherSide } from "./slots.js";
-import { getLegalMoves, isCheckmate, isGeneralInCheck, isStalemate, samePosition } from "./rules.js";
+import { getLegalMoves, hasStealthEffect, isCheckmate, isGeneralInCheck, isStalemate, samePosition } from "./rules.js";
 import { closeDirectDeaths, copy, destroyPiece, effectiveIdentity, finishFormalTurn, formalTurn, generateGhosts, initializeFeatureSecret, markRevealed, placementAllowed, queueLanding, relocatePiece, rememberAction, settleLandings } from "./settlement.js";
 
 
 function requireRule(ok         , code        , text        )             {
   if (!ok) throw new RuleError(code, text);
+}
+/** 明子模式直接指定目标；当前承载者 ID 只能由拥有者的私有视图提供。 */
+export function getShadowRevealedTargets(state           , side      , currentGeneralId         ) {
+  return state.pieces.filter(p => !p.faceDown && p.color === side && p.id !== currentGeneralId && !hasStealthEffect(state, p.id));
 }
 export function formalTurnDurationMs(state           , side      )         {
   if (state.featureRules?.mutation === "end_time" && formalTurn(state, side) === 0) return 75_000;
@@ -157,7 +161,10 @@ export function applyHeroAbility(state           , secret             , command 
       requireRule(hero === "wind", "WRONG_HERO", "英雄没有影技能");
       const wind = k.wind?.[side];
       requireRule(wind && wind.uses < 2 && formalTurn(s, side) >= wind.readyOnTurn && wind.activatedOnTurn !== formalTurn(s, side), "SHADOW_UNAVAILABLE", "影尚在冷却或次数已用完");
-      const pool = s.pieces.filter(p => p.id !== (wind.hostId ?? wind.decoyId) && (command.randomCovered ? p.faceDown && effectiveIdentity(p, k).color === side : !p.faceDown && p.color === side));
+      // 随机暗子不是直接指定，无形仍可进入该池；明子选择遵守无形目标限制。
+      const pool = command.randomCovered
+        ? s.pieces.filter(p => p.id !== (wind.hostId ?? wind.decoyId) && p.faceDown && effectiveIdentity(p, k).color === side)
+        : getShadowRevealedTargets(s, side, wind.hostId ?? wind.decoyId);
       const host = command.randomCovered ? pool[randomInt(pool.length)] : pool.find(p => p.id === command.pieceId);
       requireRule(host, "INVALID_SHADOW_TARGET", "请选择己方合法明棋或随机己方真实阵营暗子");
       wind.uses += 1; wind.activatedOnTurn = formalTurn(s, side); wind.readyOnTurn = formalTurn(s, side) + 6;
