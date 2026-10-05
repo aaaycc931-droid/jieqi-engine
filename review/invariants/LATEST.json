@@ -1,8 +1,8 @@
 {
   "authority": "execution_evidence_non_normative",
-  "generatedAt": "2026-10-05T03:37:07.912Z",
-  "sourceCommitAtRun": "0ed82c0f475465dd25cdd828aa4bc2b870639e25",
-  "sourceDigest": "283c05469d49199a35d3d16177775aa527881d288e0ae90f1654c1254a50c700",
+  "generatedAt": "2026-10-05T04:05:50.739Z",
+  "sourceCommitAtRun": "d2384c456410c13c75f63e4dc41a072fea058d03",
+  "sourceDigest": "4803995680f8936b99dd17fb9aaffc02855c48101ea6e35de96f6b77413622e0",
   "sourceDigestPaths": [
     ".github/workflows/gameplay-runtime-review.yml",
     ".github/workflows/menu-reference-review.yml",
@@ -10,6 +10,7 @@
     "package.json",
     "review/invariants/CASE_MAP.json",
     "scripts/build-web.ts",
+    "scripts/review/capture-full-match-runtime.mjs",
     "scripts/review/capture-gameplay-runtime.mjs",
     "scripts/review/capture-home-runtime.mjs",
     "scripts/review/capture-menu-review.mjs",

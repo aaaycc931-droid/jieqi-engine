@@ -1,7 +1,7 @@
 {
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-05-validation-4",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-05-validation-5",
   "rule_revision": "LEZI-FUNCTION-2026-10-04-r1",
-  "code_checkpoint": "ffd2fb070c89d1d9eaae4d6cfce9112f151e5594",
+  "code_checkpoint": "e3e3da189f178496e229752b4ff5724194aae59f",
   "sources": [
     {
       "id": "RULE:CURRENT_RULE_DELTAS_2026-09-22.md",
@@ -215,7 +215,8 @@
     "过时3英雄进度"
   ],
   "completeness_claim": "当前恢复并核对源的主体规则已按域覆盖；不保证所有历史对话逐条恢复，明确缺口不得填空。",
-  "previous_code_checkpoint": "d45174e7cc2ab11f4f5f506221d27a411c27b9d1",
+  "previous_code_checkpoint": "ffd2fb070c89d1d9eaae4d6cfce9112f151e5594",
   "runtime_evidence_index": "review/invariants/LATEST.json",
-  "gameplay_execution_evidence_index": "review/gameplay/runtime-browser-review-2026-10-05.json"
+  "gameplay_execution_evidence_index": "review/gameplay/runtime-browser-review-2026-10-05-full-matches.json",
+  "full_match_execution_evidence_index": "review/gameplay/full-match-browser-2026-10-05-summary.json"
 }

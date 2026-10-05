@@ -1,0 +1,26 @@
+{
+  "authority": "ci_execution_evidence_non_normative",
+  "run": 37262027842,
+  "implementationCommit": "e3e3da189f178496e229752b4ff5724194aae59f",
+  "checkoutCommit": "d2384c456410c13c75f63e4dc41a072fea058d03",
+  "artifact": 11325356782,
+  "sourceDigest": "4803995680f8936b99dd17fb9aaffc02855c48101ea6e35de96f6b77413622e0",
+  "sourceDigestMatchesLocal": true,
+  "testSummary": {
+    "passed": 309,
+    "failed": 0,
+    "executionFailed": false
+  },
+  "contractSummary": {
+    "total": 96,
+    "partial_evidence_passed": 93,
+    "failed_cases": 0,
+    "missing_tests": 0,
+    "non_runtime_contract": 3,
+    "fullyAccepted": 0
+  },
+  "webBuild": "passed",
+  "androidAssetsSynced": 116,
+  "apkJob": "skipped",
+  "independentReview": false
+}
