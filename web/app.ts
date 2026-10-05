@@ -1716,6 +1716,7 @@ function handleSystemBack(): boolean {
 }
 
 function showDialog(title: string, text: string, actionLabel: string, action: () => void): void {
+  flowDialog.classList.remove("mode-preview-dialog");
   element<HTMLElement>("dialog-extra").replaceChildren();
   element<HTMLElement>("dialog-extra").hidden = true;
   dialogTitle.textContent = title;
@@ -3714,6 +3715,7 @@ function showBaseModePreview(): void {
   const mode = GAME_MODES[selectedGameMode];
   const { state } = createInitialGame(undefined, selectedGameMode);
   showDialog(`${mode.name} · 基础开局`, `${mode.description}${mode.featuresReady ? " 此处只展示开局，不进行对局。" : " 英雄与畸变尚待独立适配，完整对局暂未开放。"}`, "关闭预览", () => undefined);
+  flowDialog.classList.add("mode-preview-dialog");
   const table = document.createElement("table");
   table.id = "game-mode-preview-board";
   table.setAttribute("aria-label", `${mode.name}基础棋局预览`);
@@ -3723,7 +3725,7 @@ function showBaseModePreview(): void {
     for (let x = 0; x < 9; x += 1) {
       const cell = row.insertCell();
       cell.dataset.x = String(x); cell.dataset.y = String(y);
-      cell.style.cssText = "height:24px;padding:0;border:1px solid rgba(45,26,20,.2)";
+      cell.style.cssText = "height:22px;padding:0;border:1px solid rgba(45,26,20,.2)";
       const piece = state.pieces.find(p => p.x === x && p.y === y);
       if (!piece) continue;
       cell.dataset.faceDown = String(piece.faceDown);

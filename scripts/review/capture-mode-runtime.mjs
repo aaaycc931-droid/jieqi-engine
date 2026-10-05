@@ -80,6 +80,8 @@ try {
       }
       const tableBox = await table.boundingBox();
       assert(tableBox.x >= 0 && tableBox.x + tableBox.width <= viewport.width, 'Preview board overflows');
+      const closeBox = await page.locator('#dialog-action').boundingBox();
+      assert(closeBox.y >= 0 && closeBox.y + closeBox.height <= viewport.height, 'Preview close action clipped');
       assert.deepEqual(await page.evaluate(() => globalThis.__modeReview()), idle);
       await page.screenshot({ path: resolve(output, `${mode}-${viewport.width}x${viewport.height}.png`) });
       await page.locator('#dialog-action').click();
