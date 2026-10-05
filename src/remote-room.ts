@@ -21,6 +21,7 @@ import {
   submitRpsChoice,
 } from "./rps.ts";
 import { createInitialGame } from "./setup.ts";
+import { normalizeGameMode, requireModeAdaptationReady } from "./modes.ts";
 import { getController, isInsideBoard, otherSide } from "./slots.ts";
 import { isGeneralInCheck } from "./rules.ts";
 import {
@@ -305,7 +306,10 @@ function clonePublic<T>(value: T): T {
 function normalizeModeConfig(
   mode: Partial<OptionalModeConfig> | undefined,
 ): OptionalModeConfig {
+  const baseMode = normalizeGameMode(mode?.baseMode);
+  if (mode?.heroesEnabled || mode?.mutationsEnabled) requireModeAdaptationReady(baseMode);
   return {
+    ...(baseMode === "jieqi" ? {} : { baseMode }),
     heroesEnabled: mode?.heroesEnabled ?? DEFAULT_OPTIONAL_MODE_CONFIG.heroesEnabled,
     mutationsEnabled:
       mode?.mutationsEnabled ?? DEFAULT_OPTIONAL_MODE_CONFIG.mutationsEnabled,
@@ -631,7 +635,7 @@ function createGameAfterSetup(
   heroes?: Record<Side, HeroId>,
 ): RemoteRoom {
   const assignments = assignmentsFor(room);
-  const initial = createInitialGame(randomInt);
+  const initial = createInitialGame(randomInt, room.mode.baseMode);
   const mutation = room.mode.mutationsEnabled ? drawRuntimeMutation(randomInt ?? cryptoRandomInt, heroes) : undefined;
   const features: RoomFeaturePublicState = {
     ...(heroes ? { heroes: { ...heroes } } : {}),

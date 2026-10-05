@@ -9,6 +9,7 @@ export * from "./remote-room.js";
 export * from "./rps.js";
 export * from "./rules.js";
 export * from "./setup.js";
+export * from "./modes.js";
 export * from "./slots.js";
 export * from "./types.js";
 export * from "./hero-actions.js";

@@ -1,4 +1,5 @@
 import { RuleError } from "./errors.js";
+import { requireModeFeatureAdaptation } from "./modes.js";
 import { getController, isInPalace, isInsideBoard, otherSide } from "./slots.js";
 import { isGeneralInCheck, pieceAt, samePosition } from "./rules.js";
 
@@ -14,6 +15,7 @@ export function effectiveIdentity(piece             , secret             )      
 
 /** 初始化的秘密身份、锚点均只留在权威端；不得进入公共快照。 */
 export function initializeFeatureSecret(state           , secret             , randomInt            = max => Math.floor(Math.random() * max))       {
+  requireModeFeatureAdaptation(state.gameMode, state.featureRules);
   if (state.featureRules?.mutation === "chaos" && !secret.chaosInitialized) {
     for (const p of state.pieces) if (p.faceDown) secret.identities[p.id].color = randomInt(2) === 0 ? "red" : "black";
     secret.chaosInitialized = true;

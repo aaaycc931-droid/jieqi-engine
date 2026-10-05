@@ -28,6 +28,7 @@ import {
   validatePublicMove,
 } from "../src/rules.js";
 import { createInitialGame } from "../src/setup.js";
+import { GAME_MODES, normalizeGameMode } from "../src/modes.js";
 import { getController, otherSide } from "../src/slots.js";
 import {
   MUTATION_IDS,
@@ -59,6 +60,7 @@ import {
 
 
 } from "../src/remote-room.js";
+
 
 
 
@@ -953,6 +955,7 @@ function renderBluetoothAvailability()       {
 }
 
 function showBluetoothLobby()       {
+  if (!GAME_MODES[selectedGameMode].featuresReady) return showBaseModePreview();
   disconnectLayer.hidden = true;
   hidePrimaryViews();
   bluetoothLobbyView.hidden = false;
@@ -963,6 +966,10 @@ function showBluetoothLobby()       {
 }
 
 function activateLocalGame()       {
+  if (!GAME_MODES[selectedGameMode].featuresReady) {
+    showBaseModePreview();
+    return;
+  }
   bluetooth?.role && nativeBluetooth()?.disconnect();
   bluetooth = undefined;
   resetMatch();
@@ -1503,6 +1510,7 @@ function showSettings()       {
   hidePrimaryViews();
   settingsView.hidden = false;
   applyUiPreferences(loadUiPreferences());
+  renderGameModeSetting();
 }
 
 function showRulesTab(tabName        )       {
@@ -1708,6 +1716,8 @@ function handleSystemBack()          {
 }
 
 function showDialog(title        , text        , actionLabel        , action            )       {
+  element             ("dialog-extra").replaceChildren();
+  element             ("dialog-extra").hidden = true;
   dialogTitle.textContent = title;
   dialogText.textContent = text;
   dialogAction.textContent = actionLabel;
@@ -3281,6 +3291,12 @@ bluetoothEnableButton.addEventListener("click", () => nativeBluetooth()?.openBlu
 bluetoothPermissionButton.addEventListener("click", () => nativeBluetooth()?.requestPermission());
 bluetoothAppSettingsButton.addEventListener("click", () => nativeBluetooth()?.openAppSettings());
 element                   ("settings-back-button").addEventListener("click", showMainMenu);
+element                   ("game-mode-setting").addEventListener("change", (event) => {
+  selectedGameMode = normalizeGameMode((event.target                     ).value);
+  try { localStorage.setItem(GAME_MODE_PREFERENCE_KEY, selectedGameMode); } catch { /* Session choice remains usable. */ }
+  renderGameModeSetting();
+});
+element                   ("game-mode-preview-button").addEventListener("click", showBaseModePreview);
 for (const id of ["sound-setting", "haptics-setting", "reduce-motion-setting"]         ) {
   element                  (id).addEventListener("change", saveUiPreferences);
 }
@@ -3291,6 +3307,9 @@ element                   ("settings-reset-button").addEventListener("click", ()
     // The default state can still be applied for this session.
   }
   applyUiPreferences({ ...DEFAULT_UI_PREFERENCES });
+  selectedGameMode = "jieqi";
+  try { localStorage.removeItem(GAME_MODE_PREFERENCE_KEY); } catch { /* Reset current session regardless. */ }
+  renderGameModeSetting();
   showToast("已恢复默认设置");
 });
 element                   ("bluetooth-host-button").addEventListener("click", beginBluetoothHost);
@@ -3680,6 +3699,40 @@ document.addEventListener("visibilitychange", () => {
 });
 
 (window                                                ).handleLeziBack = handleSystemBack;
+
+const GAME_MODE_PREFERENCE_KEY = "lezi-base-game-mode";
+let selectedGameMode             = "jieqi";
+try { selectedGameMode = normalizeGameMode(localStorage.getItem(GAME_MODE_PREFERENCE_KEY) ?? undefined); } catch { /* Invalid preferences use the existing mode. */ }
+
+function renderGameModeSetting()       {
+  element                   ("game-mode-setting").value = selectedGameMode;
+  const mode = GAME_MODES[selectedGameMode];
+  element             ("game-mode-status").textContent = `${mode.description}${mode.featuresReady ? "" : " 英雄与畸变保留，独立适配完成后开放完整对局；当前可预览基础开局。"}`;
+}
+
+function showBaseModePreview()       {
+  const mode = GAME_MODES[selectedGameMode];
+  const { state } = createInitialGame(undefined, selectedGameMode);
+  showDialog(`${mode.name} · 基础开局`, `${mode.description}${mode.featuresReady ? " 此处只展示开局，不进行对局。" : " 英雄与畸变尚待独立适配，完整对局暂未开放。"}`, "关闭预览", () => undefined);
+  const table = document.createElement("table");
+  table.id = "game-mode-preview-board";
+  table.setAttribute("aria-label", `${mode.name}基础棋局预览`);
+  table.style.cssText = "width:100%;table-layout:fixed;border-collapse:collapse;font-size:16px;text-align:center";
+  for (let y = 0; y < 10; y += 1) {
+    const row = table.insertRow();
+    for (let x = 0; x < 9; x += 1) {
+      const cell = row.insertCell();
+      cell.dataset.x = String(x); cell.dataset.y = String(y);
+      cell.style.cssText = "height:24px;padding:0;border:1px solid rgba(45,26,20,.2)";
+      const piece = state.pieces.find(p => p.x === x && p.y === y);
+      if (!piece) continue;
+      cell.dataset.faceDown = String(piece.faceDown);
+      cell.textContent = piece.faceDown ? "暗" : pieceLabel[piece.color][piece.type];
+      if (!piece.faceDown) cell.style.color = piece.color === "red" ? "#9b3028" : "#283c56";
+    }
+  }
+  const extra = element             ("dialog-extra"); extra.append(table); extra.hidden = false;
+}
 
 applyUiPreferences(loadUiPreferences());
 showMainMenu();

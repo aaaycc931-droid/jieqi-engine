@@ -1,5 +1,7 @@
 export type Side = "red" | "black";
 
+export type GameModeId = "jieqi" | "half_chaos" | "xiangqi";
+
 export type HeroId = "hunter" | "rogue" | "warrior" | "qin_long" | "murozond"
   | "nozdormu" | "murozond_minion" | "devout_zealot" | "prince" | "deathwing"
   | "death_knight" | "wind";
@@ -24,6 +26,7 @@ export type SkillSource = "hero" | "mutation";
 export interface OptionalModeConfig {
   heroesEnabled: boolean;
   mutationsEnabled: boolean;
+  baseMode?: GameModeId;
 }
 
 export type PieceType =
@@ -155,6 +158,8 @@ export interface ForcedDefenseState {
 }
 
 export interface GameState {
+  /** 缺省为原有全局混洗揭棋，兼容既有棋局与快照。 */
+  gameMode?: GameModeId;
   status: "playing" | "execution" | "finished";
   turn: Side;
   revision: number;

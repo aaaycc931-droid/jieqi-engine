@@ -11,6 +11,7 @@ on:
       - scripts/review/capture-gameplay-runtime.mjs
       - scripts/review/capture-full-match-runtime.mjs
       - scripts/review/capture-active-match-runtime.mjs
+      - scripts/review/capture-mode-runtime.mjs
       - .github/workflows/gameplay-runtime-review.yml
   workflow_dispatch:
 jobs:
@@ -27,6 +28,16 @@ jobs:
         run: npm install --no-save --package-lock=false playwright@1.58.2 && npx playwright install --with-deps chromium
       - name: Exercise prepared-state hero, destiny and secret handoff interactions
         run: node scripts/review/capture-gameplay-runtime.mjs
+      - name: Check mode settings and real base opening previews
+        run: node scripts/review/capture-mode-runtime.mjs
+      - name: Keep mode foundation browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: game-mode-runtime-browser-review
+          path: review-results/game-modes/
+          if-no-files-found: error
+          retention-days: 7
       - name: Keep exact browser evidence and screenshots
         if: always()
         uses: actions/upload-artifact@v4
@@ -36,6 +47,8 @@ jobs:
           if-no-files-found: error
           retention-days: 7
   full-match-browser:
+    # User paused the previous full-match validation queue to add modes (2026-10-05).
+    if: ${{ false }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -58,6 +71,8 @@ jobs:
           if-no-files-found: error
           retention-days: 7
   active-match-browser:
+    # Resume only after the user returns to the paused validation queue.
+    if: ${{ false }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:

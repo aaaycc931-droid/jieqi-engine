@@ -26,6 +26,7 @@ import {
   type RemoteRoom,
 } from "./remote-room.ts";
 import type { AssassinationCommand, HeroAbilityCommand, HeroId, MoveCommand, OptionalModeConfig, Position, RandomInt } from "./types.ts";
+import { normalizeGameMode } from "./modes.ts";
 import type { RpsChoice } from "./rps.ts";
 
 export const BLUETOOTH_HOST_PLAYER = "bluetooth:host";
@@ -70,6 +71,9 @@ export class BluetoothHostRoom {
     /** Physical RFCOMM admission replaces a human-entered invite token. */
     admissionSecret: string;
   }) {
+    if (normalizeGameMode(options.mode?.baseMode) !== "jieqi") {
+      throw new RuleError("MODE_TRANSPORT_PENDING", "新模式尚待英雄畸变与蓝牙协议适配，暂未开放蓝牙对局");
+    }
     this.randomInt = options.randomInt;
     this.now = options.now ?? (() => Date.now());
     const initial = createRemoteRoom(options.roomId, BLUETOOTH_HOST_PLAYER, options.admissionSecret, this.now(), options.mode);

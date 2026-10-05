@@ -26,6 +26,7 @@ import {
 
 } from "./remote-room.js";
 
+import { normalizeGameMode } from "./modes.js";
 
 
 export const BLUETOOTH_HOST_PLAYER = "bluetooth:host";
@@ -70,6 +71,9 @@ export class BluetoothHostRoom {
 
 
    ) {
+    if (normalizeGameMode(options.mode?.baseMode) !== "jieqi") {
+      throw new RuleError("MODE_TRANSPORT_PENDING", "新模式尚待英雄畸变与蓝牙协议适配，暂未开放蓝牙对局");
+    }
     this.randomInt = options.randomInt;
     this.now = options.now ?? (() => Date.now());
     const initial = createRemoteRoom(options.roomId, BLUETOOTH_HOST_PLAYER, options.admissionSecret, this.now(), options.mode);

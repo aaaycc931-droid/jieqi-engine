@@ -9,6 +9,7 @@ export * from "./remote-room.ts";
 export * from "./rps.ts";
 export * from "./rules.ts";
 export * from "./setup.ts";
+export * from "./modes.ts";
 export * from "./slots.ts";
 export * from "./types.ts";
 export * from "./hero-actions.ts";

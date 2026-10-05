@@ -94,7 +94,7 @@ function isGeneralTarget(
 }
 
 function movementGeometryLegal(
-  state: Pick<GameState, "pieces" | "effectsByPieceId" | "featureRules">,
+  state: Pick<GameState, "pieces" | "effectsByPieceId" | "featureRules" | "gameMode">,
   piece: PublicPiece,
   to: Position,
   forAttack = false,
@@ -164,11 +164,12 @@ function movementGeometryLegal(
 
     case "advisor": {
       if (absX !== 1 || absY !== 1) return false;
-      return piece.faceDown ? isInPalace(to, side) : true;
+      return piece.faceDown || state.gameMode === "xiangqi" ? isInPalace(to, side) : true;
     }
 
     case "elephant": {
       if (absX !== 2 || absY !== 2) return false;
+      if (state.gameMode === "xiangqi" && isAcrossRiver(to, side)) return false;
       const eye = { x: piece.x + dx / 2, y: piece.y + dy / 2 };
       return !blocksPath(state, eye);
     }

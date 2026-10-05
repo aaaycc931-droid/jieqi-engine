@@ -102,6 +102,9 @@
             <label class="settings-row" for="sound-setting"><span>音效</span><input id="sound-setting" type="checkbox" checked></label>
             <label class="settings-row" for="haptics-setting"><span>触感反馈</span><input id="haptics-setting" type="checkbox" checked></label>
             <label class="settings-row" for="reduce-motion-setting"><span>减少动画</span><input id="reduce-motion-setting" type="checkbox"></label>
+            <label class="settings-row" for="game-mode-setting"><span>游戏模式</span><select id="game-mode-setting" aria-describedby="game-mode-status"><option value="jieqi">现有揭棋</option><option value="half_chaos">半混乱揭棋</option><option value="xiangqi">普通象棋</option></select></label>
+            <p id="game-mode-status"></p>
+            <button id="game-mode-preview-button" class="ink-text-button" type="button">查看基础开局</button>
           </div>
           <button id="settings-reset-button" class="ink-menu-button compact settings-reset-button" type="button"><img src="./assets/menu-v1/label-reset.png" alt="" aria-hidden="true"><span class="visually-hidden">恢复默认</span></button>
         </section>
@@ -393,6 +396,7 @@
         <p class="eyebrow">乐子象棋</p>
         <h2 id="dialog-title"></h2>
         <p id="dialog-text"></p>
+        <div id="dialog-extra" hidden></div>
         <button id="dialog-action" class="primary-button" type="button"></button>
       </div>
     </dialog>

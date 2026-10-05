@@ -1,5 +1,6 @@
 import { copy, initializeFeatureSecret, destroyPiece, markRevealed, queueLanding, settleLandings, closeDirectDeaths, generateGhosts, finishFormalTurn, rememberAction, resolveWindReturn } from "./settlement.js";
 import { RuleError } from "./errors.js";
+import { requireModeFeatureAdaptation } from "./modes.js";
 import {
   canRevealedPieceAttack,
   findGeneral,
@@ -45,6 +46,7 @@ export function initializeFeatureGameState(
   heroes                                ,
   mutation             ,
 )            {
+  requireModeFeatureAdaptation(state.gameMode, { heroes, mutation });
   const nextState = cloneState(state);
   const assassination = emptyAssassinationStates();
   for (const side of ["red", "black"]         ) {
