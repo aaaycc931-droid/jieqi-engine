@@ -1,0 +1,31 @@
+name: Review real rewind and ghost opponent match
+on:
+  push:
+    branches: [codex/ui-android-apk-20261001]
+    paths:
+      - scripts/review/capture-rewind-match-runtime.mjs
+      - .github/workflows/rewind-match-review.yml
+  workflow_dispatch:
+jobs:
+  rewind-match-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Build actual Web runtime without APK
+        run: node scripts/build-web.ts
+      - name: Install browser
+        run: npm install --no-save --package-lock=false playwright@1.58.2 && npx playwright install --with-deps chromium
+      - name: Real setup, rewind commit, same-piece replay and natural result
+        run: node scripts/review/capture-rewind-match-runtime.mjs
+      - name: Preserve every trial including capped or early-terminal trials
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rewind-match-runtime-browser-review
+          path: review-results/rewind-match-runtime/
+          if-no-files-found: error
+          retention-days: 7
