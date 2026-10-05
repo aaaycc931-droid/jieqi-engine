@@ -1,0 +1,344 @@
+{
+  "authority": "browser_execution_evidence_non_normative",
+  "sourceCommit": "6a2d04dee2d1b70bd01603ffa6149e92021ccf9e",
+  "appDigest": "15a99bf62bc3ce943f487539f1f4adb0d8777867a0876e1c0fae9743773368ac",
+  "browser": "145.0.7632.6",
+  "viewport": {
+    "width": 390,
+    "height": 845
+  },
+  "method": "Actual homepage, hero selection, locked RPS, original random mutation/deal, hunter preparation and DOM board actions to natural result. Review response exposes public read-only snapshot/legal candidates only.",
+  "policy": "Random public legal action; prefer captures with probability 0.85, otherwise prefer unrepeated moves. No secret-informed choices. Fixed rock versus scissors assigns player one red. Hero pairs tested with swapped seats; a capped trial is incomplete and retried from a fresh real setup, at most three trials per scenario.",
+  "actionCap": 300,
+  "limits": [
+    "Twelve randomly dealt local matches are sampled execution evidence, not exhaustive hero/mutation acceptance.",
+    "Active hero skills are not exercised by this match policy; prepared-state reviews cover selected skills separately.",
+    "Bluetooth transport, Android WebView, physical two-phone execution and timeout outcomes remain pending.",
+    "No APK, normative rule, production debug API or artwork change."
+  ],
+  "errors": [],
+  "run": 37274091291,
+  "runAttempt": 1,
+  "artifact": 11329693950,
+  "jobConclusion": "failure_capped_samples_only",
+  "traceArchive": "full-match-browser-2026-10-05-active-regression.json.gz",
+  "traceSHA256": "567a9f31003611b6f0785e9c8a5544296d279c3e547f5bb1ad06d464d9b743c5",
+  "passed": 11,
+  "incomplete": 6,
+  "actualInteractionFailures": 0,
+  "matches": [
+    {
+      "index": 1,
+      "scenario": 1,
+      "attempt": 1,
+      "heroes": [
+        "warrior",
+        "death_knight"
+      ],
+      "passed": true,
+      "incomplete": false,
+      "mutation": "cavalry",
+      "actions": 168,
+      "result": {
+        "winner": "black",
+        "reason": "checkmate",
+        "title": "裁决",
+        "message": "圣光的正义终结了敌人！您获得胜利！"
+      },
+      "errors": []
+    },
+    {
+      "index": 2,
+      "scenario": 2,
+      "attempt": 1,
+      "heroes": [
+        "qin_long",
+        "prince"
+      ],
+      "passed": true,
+      "incomplete": false,
+      "mutation": "war_chariot",
+      "actions": 135,
+      "result": {
+        "winner": "red",
+        "reason": "rain_night",
+        "title": "雨夜",
+        "message": "您获得胜利！"
+      },
+      "errors": []
+    },
+    {
+      "index": 3,
+      "scenario": 3,
+      "attempt": 1,
+      "heroes": [
+        "wind",
+        "hunter"
+      ],
+      "passed": true,
+      "incomplete": false,
+      "mutation": "iron_wall",
+      "actions": 124,
+      "result": {
+        "winner": "black",
+        "reason": "stalemate",
+        "title": "无处可逃",
+        "message": "对方已无路可走。您获得胜利！"
+      },
+      "errors": []
+    },
+    {
+      "index": 4,
+      "scenario": 4,
+      "attempt": 1,
+      "heroes": [
+        "rogue",
+        "devout_zealot"
+      ],
+      "passed": true,
+      "incomplete": false,
+      "mutation": "shadow_dance",
+      "actions": 147,
+      "result": {
+        "winner": "red",
+        "reason": "checkmate",
+        "title": "裁决",
+        "message": "圣光的正义终结了敌人！您获得胜利！"
+      },
+      "errors": []
+    },
+    {
+      "index": 5,
+      "scenario": 5,
+      "attempt": 1,
+      "heroes": [
+        "nozdormu",
+        "murozond"
+      ],
+      "passed": true,
+      "incomplete": false,
+      "mutation": "iron_wall",
+      "actions": 151,
+      "result": {
+        "winner": "red",
+        "reason": "stalemate",
+        "title": "无处可逃",
+        "message": "对方已无路可走。您获得胜利！"
+      },
+      "errors": []
+    },
+    {
+      "index": 6,
+      "scenario": 6,
+      "attempt": 1,
+      "heroes": [
+        "murozond_minion",
+        "deathwing"
+      ],
+      "passed": false,
+      "incomplete": true,
+      "mutation": "iron_wall",
+      "actions": 300,
+      "incompleteReason": "Observation capped after 300 legal actions; no terminal injected. Current rules do not guarantee a finite random match.",
+      "errors": []
+    },
+    {
+      "index": 7,
+      "scenario": 7,
+      "attempt": 1,
+      "heroes": [
+        "death_knight",
+        "warrior"
+      ],
+      "passed": true,
+      "incomplete": false,
+      "mutation": "iron_wall",
+      "actions": 38,
+      "result": {
+        "winner": "black",
+        "reason": "checkmate",
+        "title": "裁决",
+        "message": "圣光的正义终结了敌人！您获得胜利！"
+      },
+      "errors": []
+    },
+    {
+      "index": 8,
+      "scenario": 8,
+      "attempt": 1,
+      "heroes": [
+        "prince",
+        "qin_long"
+      ],
+      "passed": false,
+      "incomplete": true,
+      "mutation": "expedition",
+      "actions": 300,
+      "incompleteReason": "Observation capped after 300 legal actions; no terminal injected. Current rules do not guarantee a finite random match.",
+      "errors": []
+    },
+    {
+      "index": 9,
+      "scenario": 9,
+      "attempt": 1,
+      "heroes": [
+        "hunter",
+        "wind"
+      ],
+      "passed": true,
+      "incomplete": false,
+      "mutation": "iron_steed",
+      "actions": 125,
+      "result": {
+        "winner": "red",
+        "reason": "stalemate",
+        "title": "无处可逃",
+        "message": "对方已无路可走。您获得胜利！"
+      },
+      "errors": []
+    },
+    {
+      "index": 10,
+      "scenario": 10,
+      "attempt": 1,
+      "heroes": [
+        "devout_zealot",
+        "rogue"
+      ],
+      "passed": true,
+      "incomplete": false,
+      "mutation": "iron_steed",
+      "actions": 146,
+      "result": {
+        "winner": "black",
+        "reason": "stalemate",
+        "title": "无处可逃",
+        "message": "对方已无路可走。您获得胜利！"
+      },
+      "errors": []
+    },
+    {
+      "index": 11,
+      "scenario": 11,
+      "attempt": 1,
+      "heroes": [
+        "murozond",
+        "nozdormu"
+      ],
+      "passed": true,
+      "incomplete": false,
+      "mutation": "jian_xie",
+      "actions": 105,
+      "result": {
+        "winner": "red",
+        "reason": "stalemate",
+        "title": "无处可逃",
+        "message": "对方已无路可走。您获得胜利！"
+      },
+      "errors": []
+    },
+    {
+      "index": 12,
+      "scenario": 12,
+      "attempt": 1,
+      "heroes": [
+        "deathwing",
+        "murozond_minion"
+      ],
+      "passed": false,
+      "incomplete": true,
+      "mutation": "iron_wall",
+      "actions": 300,
+      "incompleteReason": "Observation capped after 300 legal actions; no terminal injected. Current rules do not guarantee a finite random match.",
+      "errors": []
+    },
+    {
+      "index": 13,
+      "scenario": 6,
+      "attempt": 2,
+      "heroes": [
+        "murozond_minion",
+        "deathwing"
+      ],
+      "passed": false,
+      "incomplete": true,
+      "mutation": "shadow_dance",
+      "actions": 300,
+      "incompleteReason": "Observation capped after 300 legal actions; no terminal injected. Current rules do not guarantee a finite random match.",
+      "errors": []
+    },
+    {
+      "index": 14,
+      "scenario": 8,
+      "attempt": 2,
+      "heroes": [
+        "prince",
+        "qin_long"
+      ],
+      "passed": false,
+      "incomplete": true,
+      "mutation": "jian_xie",
+      "actions": 300,
+      "incompleteReason": "Observation capped after 300 legal actions; no terminal injected. Current rules do not guarantee a finite random match.",
+      "errors": []
+    },
+    {
+      "index": 15,
+      "scenario": 12,
+      "attempt": 2,
+      "heroes": [
+        "deathwing",
+        "murozond_minion"
+      ],
+      "passed": true,
+      "incomplete": false,
+      "mutation": "jian_xie",
+      "actions": 58,
+      "result": {
+        "winner": "black",
+        "reason": "checkmate",
+        "title": "裁决",
+        "message": "圣光的正义终结了敌人！您获得胜利！"
+      },
+      "errors": []
+    },
+    {
+      "index": 16,
+      "scenario": 6,
+      "attempt": 3,
+      "heroes": [
+        "murozond_minion",
+        "deathwing"
+      ],
+      "passed": false,
+      "incomplete": true,
+      "mutation": "cavalry",
+      "actions": 300,
+      "incompleteReason": "Observation capped after 300 legal actions; no terminal injected. Current rules do not guarantee a finite random match.",
+      "errors": []
+    },
+    {
+      "index": 17,
+      "scenario": 8,
+      "attempt": 3,
+      "heroes": [
+        "prince",
+        "qin_long"
+      ],
+      "passed": true,
+      "incomplete": false,
+      "mutation": "iron_steed",
+      "actions": 32,
+      "result": {
+        "winner": "red",
+        "reason": "rampage",
+        "title": "乱杀失败",
+        "message": "误伤己方将帅，乱杀失败！"
+      },
+      "errors": []
+    }
+  ],
+  "missingNaturalScenarios": [
+    6
+  ]
+}

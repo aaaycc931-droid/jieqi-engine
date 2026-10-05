@@ -1,0 +1,116 @@
+{
+  "authority": "sampled_browser_evidence_non_normative",
+  "implementationCommit": "6e1c910cf5ab7fa1b76f3b6fa2ce737e89a840ca",
+  "appDigest": "15a99bf62bc3ce943f487539f1f4adb0d8777867a0876e1c0fae9743773368ac",
+  "sameAppBytesAcrossSources": true,
+  "familiesWithCompleteNaturalSample": 5,
+  "sampleReferences": [
+    {
+      "family": "wind/hunter",
+      "sourceCommit": "6a2d04dee2d1b70bd01603ffa6149e92021ccf9e",
+      "run": 37274091291,
+      "artifact": 11329488869,
+      "index": 1,
+      "mutation": "cavalry",
+      "actions": 2,
+      "result": {
+        "winner": "black",
+        "reason": "general_destroyed",
+        "title": "主帅消灭",
+        "message": "您获得胜利！"
+      },
+      "skills": [
+        "shadow"
+      ]
+    },
+    {
+      "family": "devout_zealot/hunter",
+      "sourceCommit": "6a2d04dee2d1b70bd01603ffa6149e92021ccf9e",
+      "run": 37274091291,
+      "artifact": 11329488869,
+      "index": 6,
+      "mutation": "war_chariot",
+      "actions": 115,
+      "result": {
+        "winner": "red",
+        "reason": "stalemate",
+        "title": "无处可逃",
+        "message": "对方已无路可走。您获得胜利！"
+      },
+      "skills": [
+        "invoke",
+        "invoke",
+        "invoke",
+        "invoke",
+        "unspeakable"
+      ]
+    },
+    {
+      "family": "deathwing/warrior",
+      "sourceCommit": "6a2d04dee2d1b70bd01603ffa6149e92021ccf9e",
+      "run": 37274091291,
+      "artifact": 11329488869,
+      "index": 3,
+      "mutation": "cavalry",
+      "actions": 1,
+      "result": {
+        "winner": "black",
+        "reason": "checkmate",
+        "title": "裁决",
+        "message": "圣光的正义终结了敌人！您获得胜利！"
+      },
+      "skills": [
+        "destruction"
+      ]
+    },
+    {
+      "family": "murozond/rogue",
+      "sourceCommit": "6a2d04dee2d1b70bd01603ffa6149e92021ccf9e",
+      "run": 37274091291,
+      "artifact": 11329488869,
+      "index": 5,
+      "mutation": "chaos",
+      "actions": 15,
+      "result": {
+        "winner": "black",
+        "reason": "ambush",
+        "title": "背刺",
+        "message": "暗中潜行，破影而袭！您获得胜利！"
+      },
+      "skills": [
+        "assassination",
+        "strong-strike",
+        "timeline_twist"
+      ]
+    },
+    {
+      "family": "nozdormu/death_knight",
+      "sourceCommit": "6e1c910cf5ab7fa1b76f3b6fa2ce737e89a840ca",
+      "run": 37275813051,
+      "artifact": 11329923138,
+      "index": 1,
+      "mutation": "chaos",
+      "actions": 81,
+      "result": {
+        "winner": "black",
+        "reason": "checkmate",
+        "title": "裁决",
+        "message": "圣光的正义终结了敌人！您获得胜利！"
+      },
+      "skills": [
+        "rewind"
+      ]
+    }
+  ],
+  "currentClockFixedTrials": 19,
+  "naturalTerminals": 10,
+  "skillGoalCompleteNaturalTerminals": 9,
+  "cappedIncomplete": 9,
+  "earlyTerminalBeforeSkillGoalIncomplete": 1,
+  "interactionErrors": 0,
+  "pageErrors": 0,
+  "originalNozdormuPrinceScenario": "incomplete; replaced by additional Death Knight opponent for rewind family evidence, not marked passed",
+  "allHeroMutationCombinationsAccepted": false,
+  "allFunctionsAccepted": false,
+  "independentReview": false
+}

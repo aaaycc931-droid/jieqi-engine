@@ -3,8 +3,8 @@
   "self_excluded": true,
   "files": {
     "00_READ_FIRST.md": {
-      "bytes": 2753,
-      "sha256": "371042d7047e7e7f62c8411e84231823a7d5b8e7dc4ab8878a25552a1a1f780f"
+      "bytes": 2954,
+      "sha256": "5951536512be8c0eb6a0f218d1bec261cda1f2666c77440d80b722f389440a73"
     },
     "01_CURRENT_RULES.md": {
       "bytes": 20738,
@@ -23,8 +23,8 @@
       "sha256": "c133b4ee797b778ce4c88233437b2466255f27c30fcaec5b0941c766cc4bae00"
     },
     "05_PROGRESS_AND_NEXT.md": {
-      "bytes": 16226,
-      "sha256": "b55ff42de653e178e7db2bce369437d80c62d94ac43b113f9c9409063d875d9a"
+      "bytes": 18806,
+      "sha256": "bbebc0ed5375da012530bf9de8811daaf7b4a0d1c6d01e551818fba248dc3ca9"
     },
     "06_COLLABORATION.md": {
       "bytes": 3896,
@@ -39,16 +39,16 @@
       "sha256": "68845494b465bbcc1908f6cef862f350c1da4dadfc3e3a7473d11b2443edf23c"
     },
     "NEW_DIALOGUE_PROMPT.txt": {
-      "bytes": 2140,
-      "sha256": "36ec2274b424dc814a7dee9700097f0762bcb22140f020febeb0232f8975cc9f"
+      "bytes": 2035,
+      "sha256": "9b06ac24b40b0c769704230aa025a73958509269436afcd8a4083bb8a79530df"
     },
     "SOURCE_REGISTER.json": {
-      "bytes": 12169,
-      "sha256": "5907912460e4a2924ceb89303f3bd0779f8dfe04372075463bc9656839c4858b"
+      "bytes": 12702,
+      "sha256": "1a02dce463ea2d5d9e23244ef019b2ddfff598e0091fc6a93335cfb07c55590c"
     },
     "STATE.json": {
-      "bytes": 6959,
-      "sha256": "a82eaf0726ec05db2b1e1e7ac5d67eea3a3bee35fde209ccdc0cb0d7a82d024f"
+      "bytes": 12113,
+      "sha256": "bf017b786e94423236ae4fe4d26fbd2a5445003386f5e83d7bce06f0a06230cc"
     },
     "assets/approved-home.png": {
       "bytes": 2157060,

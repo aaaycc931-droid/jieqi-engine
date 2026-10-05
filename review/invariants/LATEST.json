@@ -1,19 +1,22 @@
 {
   "authority": "execution_evidence_non_normative",
-  "generatedAt": "2026-10-05T04:05:50.739Z",
-  "sourceCommitAtRun": "d2384c456410c13c75f63e4dc41a072fea058d03",
-  "sourceDigest": "4803995680f8936b99dd17fb9aaffc02855c48101ea6e35de96f6b77413622e0",
+  "generatedAt": "2026-10-05T07:06:01.724Z",
+  "sourceCommitAtRun": "48249d4fca68e954996c6fda9e860c07ea0d3784",
+  "sourceDigest": "5ed07731c322aa5b8d8f3293544bf6bc9bab776fe072bb53b0701deca51eaa01",
   "sourceDigestPaths": [
     ".github/workflows/gameplay-runtime-review.yml",
     ".github/workflows/menu-reference-review.yml",
+    ".github/workflows/rewind-match-review.yml",
     ".github/workflows/verify.yml",
     "package.json",
     "review/invariants/CASE_MAP.json",
     "scripts/build-web.ts",
+    "scripts/review/capture-active-match-runtime.mjs",
     "scripts/review/capture-full-match-runtime.mjs",
     "scripts/review/capture-gameplay-runtime.mjs",
     "scripts/review/capture-home-runtime.mjs",
     "scripts/review/capture-menu-review.mjs",
+    "scripts/review/capture-rewind-match-runtime.mjs",
     "scripts/review/prepare-menu-review.mjs",
     "scripts/review/validate-hero-proposal.ts",
     "scripts/review/verify-invariant-evidence.mjs",
@@ -55,6 +58,7 @@
     "tests/proposal-review.test.ts",
     "tests/public-target-contracts.test.ts",
     "tests/remote-room.test.ts",
+    "tests/rewind-action-contracts.test.ts",
     "tests/setup-rps.test.ts",
     "tests/snapshot-resource-contracts.test.ts",
     "tests/time-line-contracts.test.ts",
@@ -165,7 +169,7 @@
   "contractDigest": "a1d0c817bd1d6bec20080460066d84b80ec0d5a29eff889973d2395c11ae6b22",
   "runtime": "v24.21.0",
   "testSummary": {
-    "passed": 309,
+    "passed": 316,
     "failed": 0,
     "executionFailed": false
   },
@@ -621,6 +625,41 @@
           "file": "tests/snapshot-resource-contracts.test.ts",
           "name": "SNAP-RESOURCE-05 rewind restores self-captured covered identity and erases a newly generated ghost",
           "passed": true
+        },
+        {
+          "file": "tests/rewind-action-contracts.test.ts",
+          "name": "REPLAY-ACTION-01 mutation assassination cannot substitute another piece during actual rewind",
+          "passed": true
+        },
+        {
+          "file": "tests/rewind-action-contracts.test.ts",
+          "name": "REPLAY-ACTION-02 restored stealth carrier cannot capture with strong strike during replay",
+          "passed": true
+        },
+        {
+          "file": "tests/rewind-action-contracts.test.ts",
+          "name": "REPLAY-ACTION-03 restored stealth replay to empty square clears pending replay and preserves spent charge",
+          "passed": true
+        },
+        {
+          "file": "tests/rewind-action-contracts.test.ts",
+          "name": "REPLAY-ACTION-04 restored stealth cannot exit with a move that gives check during replay",
+          "passed": true
+        },
+        {
+          "file": "tests/rewind-action-contracts.test.ts",
+          "name": "REPLAY-ACTION-05 same-piece empty assassination obeys replay completion and spends only mutation charge",
+          "passed": true
+        },
+        {
+          "file": "tests/rewind-action-contracts.test.ts",
+          "name": "REPLAY-ACTION-06 room receipt at exact replay deadline settles timeout before consuming assassination",
+          "passed": true
+        },
+        {
+          "file": "tests/rewind-action-contracts.test.ts",
+          "name": "REPLAY-ACTION-07 malformed chariot replay destinations reject without path walk or state change",
+          "passed": true
         }
       ],
       "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
@@ -840,6 +879,11 @@
         {
           "file": "tests/time-line-contracts.test.ts",
           "name": "TIME-TIER-01 timeline rewrite is tier III in history and public action record",
+          "passed": true
+        },
+        {
+          "file": "tests/rewind-action-contracts.test.ts",
+          "name": "REPLAY-ACTION-03 restored stealth replay to empty square clears pending replay and preserves spent charge",
           "passed": true
         }
       ],
@@ -1576,9 +1620,44 @@
           "file": "tests/snapshot-resource-contracts.test.ts",
           "name": "SNAP-RESOURCE-05 rewind restores self-captured covered identity and erases a newly generated ghost",
           "passed": true
+        },
+        {
+          "file": "tests/rewind-action-contracts.test.ts",
+          "name": "REPLAY-ACTION-01 mutation assassination cannot substitute another piece during actual rewind",
+          "passed": true
+        },
+        {
+          "file": "tests/rewind-action-contracts.test.ts",
+          "name": "REPLAY-ACTION-02 restored stealth carrier cannot capture with strong strike during replay",
+          "passed": true
+        },
+        {
+          "file": "tests/rewind-action-contracts.test.ts",
+          "name": "REPLAY-ACTION-03 restored stealth replay to empty square clears pending replay and preserves spent charge",
+          "passed": true
+        },
+        {
+          "file": "tests/rewind-action-contracts.test.ts",
+          "name": "REPLAY-ACTION-04 restored stealth cannot exit with a move that gives check during replay",
+          "passed": true
+        },
+        {
+          "file": "tests/rewind-action-contracts.test.ts",
+          "name": "REPLAY-ACTION-05 same-piece empty assassination obeys replay completion and spends only mutation charge",
+          "passed": true
+        },
+        {
+          "file": "tests/rewind-action-contracts.test.ts",
+          "name": "REPLAY-ACTION-06 room receipt at exact replay deadline settles timeout before consuming assassination",
+          "passed": true
+        },
+        {
+          "file": "tests/rewind-action-contracts.test.ts",
+          "name": "REPLAY-ACTION-07 malformed chariot replay destinations reject without path walk or state change",
+          "passed": true
         }
       ],
-      "verificationLimit": "已补毁灭/祈求/刺杀资源、战士名额防御、暗子身份与亡魂回溯；另有風与陷阱寿命证据。全部持续时序、重复回溯交叉、本机私有交接与设备流程仍未穷尽。",
+      "verificationLimit": "已补毁灭/祈求/刺杀资源、战士名额防御、暗子身份与亡魂回溯；另有風与陷阱寿命证据。全部持续时序、重复回溯交叉、本机私有交接与设备流程仍未穷尽。本轮补暗影之舞/恢复隐身重走的同棋、禁止进攻/将军、完成清理及重复命令；不外推全部组合。",
       "fullyAccepted": false
     },
     {
@@ -2434,6 +2513,11 @@
         {
           "file": "tests/flow-contracts.test.ts",
           "name": "FLOW-CLOCK-01 room two-step escape preserves its formal deadline and next ordinary move starts the next clock",
+          "passed": true
+        },
+        {
+          "file": "tests/rewind-action-contracts.test.ts",
+          "name": "REPLAY-ACTION-06 room receipt at exact replay deadline settles timeout before consuming assassination",
           "passed": true
         }
       ],

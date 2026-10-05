@@ -1,0 +1,361 @@
+{
+  "authority": "browser_execution_evidence_non_normative",
+  "sourceCommit": "9e069ba50b1ae78bcb479604a2e10bd9379de808",
+  "appDigest": "d911bb3467f87568b0d438d334b9ec536f3b1bcf77342e85f10208d461c52f0b",
+  "browser": "145.0.7632.6",
+  "viewport": {
+    "width": 390,
+    "height": 845
+  },
+  "method": "Actual homepage, hero selection, locked RPS, original random mutation/deal, hunter preparation and DOM board actions to natural result. Review response exposes public legal candidates and current viewer own Wind/replay information; opponent secrets and history are inaccessible.",
+  "policy": "Random public legal action; prefer captures with probability 0.85, otherwise prefer unrepeated moves. Skill choices use public legality or the acting player own own Wind/replay information. Fixed rock versus scissors assigns player one red. Five active-skill scenarios; a capped trial is incomplete and retried from a fresh real setup, at most three trials per scenario.",
+  "actionCap": 300,
+  "limits": [
+    "Active-skill randomly dealt local matches are sampled execution evidence, not exhaustive hero/mutation acceptance.",
+    "Required skill entry/commit is sampled in real matches; this does not certify every legal target or every lifecycle combination.",
+    "Bluetooth transport, Android WebView, physical two-phone execution and timeout outcomes remain pending.",
+    "No APK, normative rule, production debug API or artwork change."
+  ],
+  "errors": [],
+  "run": 37273738304,
+  "artifact": 11329117239,
+  "jobConclusion": "success",
+  "traceArchive": "active-match-browser-2026-10-05-first.json.gz",
+  "traceSHA256": "26c44165c7466ab9ddbb54f614585cd8dd5b88f0f5db71e0e48c2a86da4fc8d4",
+  "passed": 5,
+  "incomplete": 1,
+  "initialClockFixIncluded": false,
+  "matches": [
+    {
+      "index": 1,
+      "scenario": 1,
+      "attempt": 1,
+      "heroes": [
+        "wind",
+        "hunter"
+      ],
+      "passed": true,
+      "incomplete": false,
+      "skills": [
+        {
+          "ability": "shadow",
+          "side": "red",
+          "revision": 0,
+          "afterRevision": 0,
+          "committed": true,
+          "args": {},
+          "clockBefore": {
+            "start": 1791182557688,
+            "deadline": 1791182617688
+          },
+          "clockAfter": {
+            "start": 1791182557688,
+            "deadline": 1791182617688
+          }
+        }
+      ],
+      "required": [
+        "shadow"
+      ],
+      "mutation": "iron_steed",
+      "actions": 115,
+      "result": {
+        "winner": "black",
+        "reason": "general_destroyed",
+        "title": "主帅消灭",
+        "message": "您获得胜利！"
+      },
+      "skillCoverageComplete": true,
+      "errors": []
+    },
+    {
+      "index": 2,
+      "scenario": 2,
+      "attempt": 1,
+      "heroes": [
+        "devout_zealot",
+        "hunter"
+      ],
+      "passed": true,
+      "incomplete": false,
+      "skills": [
+        {
+          "ability": "invoke",
+          "side": "red",
+          "revision": 0,
+          "afterRevision": 1,
+          "committed": true,
+          "args": {},
+          "clockBefore": {
+            "start": 1791182576332,
+            "deadline": 1791182636332
+          },
+          "clockAfter": {
+            "start": 1791182579804,
+            "deadline": 1791182639804
+          }
+        },
+        {
+          "ability": "invoke",
+          "side": "red",
+          "revision": 2,
+          "afterRevision": 3,
+          "committed": true,
+          "args": {},
+          "clockBefore": {
+            "start": 1791182579935,
+            "deadline": 1791182639935
+          },
+          "clockAfter": {
+            "start": 1791182580052,
+            "deadline": 1791182640052
+          }
+        },
+        {
+          "ability": "invoke",
+          "side": "red",
+          "revision": 4,
+          "afterRevision": 5,
+          "committed": true,
+          "args": {},
+          "clockBefore": {
+            "start": 1791182580185,
+            "deadline": 1791182640185
+          },
+          "clockAfter": {
+            "start": 1791182580302,
+            "deadline": 1791182640302
+          }
+        },
+        {
+          "ability": "invoke",
+          "side": "red",
+          "revision": 6,
+          "afterRevision": 7,
+          "committed": true,
+          "args": {},
+          "clockBefore": {
+            "start": 1791182580418,
+            "deadline": 1791182640418
+          },
+          "clockAfter": {
+            "start": 1791182580536,
+            "deadline": 1791182640536
+          }
+        },
+        {
+          "ability": "unspeakable",
+          "side": "red",
+          "revision": 8,
+          "afterRevision": 9,
+          "committed": true,
+          "args": {},
+          "clockBefore": {
+            "start": 1791182580652,
+            "deadline": 1791182640652
+          },
+          "clockAfter": {
+            "start": 1791182580804,
+            "deadline": 1791182640804
+          }
+        }
+      ],
+      "required": [
+        "invoke",
+        "unspeakable"
+      ],
+      "mutation": "iron_steed",
+      "actions": 15,
+      "result": {
+        "winner": "black",
+        "reason": "ambush",
+        "title": "背刺",
+        "message": "暗中潜行，破影而袭！您获得胜利！"
+      },
+      "skillCoverageComplete": true,
+      "errors": []
+    },
+    {
+      "index": 3,
+      "scenario": 3,
+      "attempt": 1,
+      "heroes": [
+        "deathwing",
+        "warrior"
+      ],
+      "passed": true,
+      "incomplete": false,
+      "skills": [
+        {
+          "ability": "destruction",
+          "side": "red",
+          "revision": 0,
+          "afterRevision": 1,
+          "committed": true,
+          "args": {},
+          "clockBefore": {
+            "start": 1791182583868,
+            "deadline": 1791182643868
+          },
+          "clockAfter": {
+            "start": 1791182587188,
+            "deadline": 1791182647188
+          }
+        }
+      ],
+      "required": [
+        "destruction"
+      ],
+      "mutation": "iron_wall",
+      "actions": 11,
+      "result": {
+        "winner": "black",
+        "reason": "ambush",
+        "title": "背刺",
+        "message": "暗中潜行，破影而袭！您获得胜利！"
+      },
+      "skillCoverageComplete": true,
+      "errors": []
+    },
+    {
+      "index": 4,
+      "scenario": 4,
+      "attempt": 1,
+      "heroes": [
+        "nozdormu",
+        "prince"
+      ],
+      "passed": false,
+      "incomplete": true,
+      "skills": [
+        {
+          "ability": "rewind",
+          "side": "red",
+          "revision": 2,
+          "afterRevision": 3,
+          "committed": true,
+          "args": {},
+          "clockBefore": {
+            "start": 1791182594185,
+            "deadline": 1791182654185
+          },
+          "clockAfter": {
+            "start": 1791182594352,
+            "deadline": 1791182604352
+          }
+        }
+      ],
+      "required": [
+        "rewind"
+      ],
+      "mutation": "expedition",
+      "actions": 300,
+      "incompleteReason": "Observation capped after 300 legal actions; no terminal injected. Current rules do not guarantee a finite random match.",
+      "errors": []
+    },
+    {
+      "index": 5,
+      "scenario": 5,
+      "attempt": 1,
+      "heroes": [
+        "murozond",
+        "rogue"
+      ],
+      "passed": true,
+      "incomplete": false,
+      "skills": [
+        {
+          "ability": "assassination",
+          "side": "black",
+          "committed": true,
+          "revision": 1,
+          "afterRevision": 2
+        },
+        {
+          "ability": "strong-strike",
+          "side": "black",
+          "committed": true,
+          "revision": 3,
+          "afterRevision": 4
+        },
+        {
+          "ability": "timeline_twist",
+          "side": "red",
+          "revision": 6,
+          "afterRevision": 8,
+          "committed": true,
+          "args": {
+            "to": {
+              "x": 0,
+              "y": 5
+            }
+          },
+          "clockBefore": {
+            "start": 1791182634650,
+            "deadline": 1791182694650
+          },
+          "clockAfter": {
+            "start": 1791182634821,
+            "deadline": 1791182694821
+          }
+        }
+      ],
+      "required": [
+        "timeline_twist",
+        "assassination"
+      ],
+      "mutation": "expedition",
+      "actions": 12,
+      "result": {
+        "winner": "red",
+        "reason": "ambush",
+        "title": "背刺",
+        "message": "暗中潜行，破影而袭！您获得胜利！"
+      },
+      "skillCoverageComplete": true,
+      "errors": []
+    },
+    {
+      "index": 6,
+      "scenario": 4,
+      "attempt": 2,
+      "heroes": [
+        "nozdormu",
+        "prince"
+      ],
+      "passed": true,
+      "incomplete": false,
+      "skills": [
+        {
+          "ability": "rewind",
+          "side": "red",
+          "revision": 2,
+          "afterRevision": 3,
+          "committed": true,
+          "args": {},
+          "clockBefore": {
+            "start": 1791182641317,
+            "deadline": 1791182701317
+          },
+          "clockAfter": {
+            "start": 1791182641484,
+            "deadline": 1791182651484
+          }
+        }
+      ],
+      "required": [
+        "rewind"
+      ],
+      "mutation": "war_chariot",
+      "actions": 99,
+      "result": {
+        "winner": "black",
+        "reason": "checkmate",
+        "title": "裁决",
+        "message": "圣光的正义终结了敌人！您获得胜利！"
+      },
+      "skillCoverageComplete": true,
+      "errors": []
+    }
+  ]
+}

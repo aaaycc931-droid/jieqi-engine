@@ -1,0 +1,617 @@
+{
+  "authority": "browser_execution_evidence_non_normative",
+  "sourceCommit": "6a2d04dee2d1b70bd01603ffa6149e92021ccf9e",
+  "appDigest": "15a99bf62bc3ce943f487539f1f4adb0d8777867a0876e1c0fae9743773368ac",
+  "browser": "145.0.7632.6",
+  "viewport": {
+    "width": 390,
+    "height": 845
+  },
+  "method": "Actual homepage, hero selection, locked RPS, original random mutation/deal, hunter preparation and DOM board actions to natural result. Review response exposes public legal candidates and current viewer own Wind/replay information; opponent secrets and history are inaccessible.",
+  "policy": "Random public legal action; prefer captures with probability 0.85, otherwise prefer unrepeated moves. Skill choices use public legality or the acting player own own Wind/replay information. Fixed rock versus scissors assigns player one red. Five active-skill scenarios; a capped trial is incomplete and retried from a fresh real setup, at most three trials per scenario.",
+  "actionCap": 300,
+  "limits": [
+    "Active-skill randomly dealt local matches are sampled execution evidence, not exhaustive hero/mutation acceptance.",
+    "Required skill entry/commit is sampled in real matches; this does not certify every legal target or every lifecycle combination.",
+    "Bluetooth transport, Android WebView, physical two-phone execution and timeout outcomes remain pending.",
+    "No APK, normative rule, production debug API or artwork change."
+  ],
+  "errors": [],
+  "run": 37274091291,
+  "runAttempt": 2,
+  "artifact": 11330310733,
+  "jobConclusion": "failure_incomplete_samples_only",
+  "traceArchive": "active-match-browser-2026-10-05-clock-retry.json.gz",
+  "traceSHA256": "7ced38abfed2d5125c85b73a175fcec44300fbe11fea4651acd6e49f5380d502",
+  "passed": 4,
+  "incomplete": 6,
+  "naturalTerminalCount": 4,
+  "actualInteractionFailures": 0,
+  "initialClockFixIncluded": true,
+  "matches": [
+    {
+      "index": 1,
+      "scenario": 1,
+      "attempt": 1,
+      "heroes": [
+        "wind",
+        "hunter"
+      ],
+      "passed": true,
+      "incomplete": false,
+      "skills": [
+        {
+          "ability": "shadow",
+          "side": "red",
+          "revision": 0,
+          "afterRevision": 0,
+          "committed": true,
+          "args": {},
+          "clockBefore": {
+            "start": 1791183332313,
+            "deadline": 1791183392313
+          },
+          "clockAfter": {
+            "start": 1791183332313,
+            "deadline": 1791183392313
+          }
+        }
+      ],
+      "required": [
+        "shadow"
+      ],
+      "clockAtOpening": {},
+      "mutation": "expedition",
+      "actions": 29,
+      "result": {
+        "winner": "black",
+        "reason": "general_destroyed",
+        "title": "主帅消灭",
+        "message": "您获得胜利！"
+      },
+      "skillCoverageComplete": true,
+      "errors": []
+    },
+    {
+      "index": 2,
+      "scenario": 2,
+      "attempt": 1,
+      "heroes": [
+        "devout_zealot",
+        "hunter"
+      ],
+      "passed": false,
+      "incomplete": true,
+      "skills": [
+        {
+          "ability": "invoke",
+          "side": "red",
+          "revision": 0,
+          "afterRevision": 1,
+          "committed": true,
+          "args": {},
+          "clockBefore": {
+            "start": 1791183341979,
+            "deadline": 1791183401979
+          },
+          "clockAfter": {
+            "start": 1791183342114,
+            "deadline": 1791183402114
+          }
+        },
+        {
+          "ability": "invoke",
+          "side": "red",
+          "revision": 2,
+          "afterRevision": 3,
+          "committed": true,
+          "args": {},
+          "clockBefore": {
+            "start": 1791183342294,
+            "deadline": 1791183402294
+          },
+          "clockAfter": {
+            "start": 1791183342444,
+            "deadline": 1791183402444
+          }
+        },
+        {
+          "ability": "invoke",
+          "side": "red",
+          "revision": 4,
+          "afterRevision": 5,
+          "committed": true,
+          "args": {},
+          "clockBefore": {
+            "start": 1791183342627,
+            "deadline": 1791183402627
+          },
+          "clockAfter": {
+            "start": 1791183342778,
+            "deadline": 1791183402778
+          }
+        },
+        {
+          "ability": "invoke",
+          "side": "red",
+          "revision": 6,
+          "afterRevision": 7,
+          "committed": true,
+          "args": {},
+          "clockBefore": {
+            "start": 1791183342943,
+            "deadline": 1791183402943
+          },
+          "clockAfter": {
+            "start": 1791183343095,
+            "deadline": 1791183403095
+          }
+        },
+        {
+          "ability": "unspeakable",
+          "side": "red",
+          "revision": 8,
+          "afterRevision": 9,
+          "committed": true,
+          "args": {},
+          "clockBefore": {
+            "start": 1791183343261,
+            "deadline": 1791183403261
+          },
+          "clockAfter": {
+            "start": 1791183343462,
+            "deadline": 1791183403462
+          }
+        }
+      ],
+      "required": [
+        "invoke",
+        "unspeakable"
+      ],
+      "clockAtOpening": {},
+      "mutation": "iron_wall",
+      "actions": 300,
+      "incompleteReason": "Observation capped after 300 legal actions; no terminal injected. Current rules do not guarantee a finite random match.",
+      "errors": []
+    },
+    {
+      "index": 3,
+      "scenario": 3,
+      "attempt": 1,
+      "heroes": [
+        "deathwing",
+        "warrior"
+      ],
+      "passed": true,
+      "incomplete": false,
+      "skills": [
+        {
+          "ability": "destruction",
+          "side": "red",
+          "revision": 0,
+          "afterRevision": 1,
+          "committed": true,
+          "args": {},
+          "clockBefore": {
+            "start": 1791183393947,
+            "deadline": 1791183453947
+          },
+          "clockAfter": {
+            "start": 1791183393947,
+            "deadline": 1791183453947
+          }
+        }
+      ],
+      "required": [
+        "destruction"
+      ],
+      "clockAtOpening": {},
+      "mutation": "expedition",
+      "actions": 1,
+      "result": {
+        "winner": "black",
+        "reason": "checkmate",
+        "title": "裁决",
+        "message": "圣光的正义终结了敌人！您获得胜利！"
+      },
+      "skillCoverageComplete": true,
+      "errors": []
+    },
+    {
+      "index": 4,
+      "scenario": 4,
+      "attempt": 1,
+      "heroes": [
+        "nozdormu",
+        "prince"
+      ],
+      "passed": false,
+      "incomplete": true,
+      "skills": [
+        {
+          "ability": "rewind",
+          "side": "red",
+          "revision": 2,
+          "afterRevision": 3,
+          "committed": true,
+          "args": {},
+          "clockBefore": {
+            "start": 1791183400025,
+            "deadline": 1791183460025
+          },
+          "clockAfter": {
+            "start": 1791183400242,
+            "deadline": 1791183410242
+          }
+        }
+      ],
+      "required": [
+        "rewind"
+      ],
+      "clockAtOpening": {},
+      "mutation": "shadow_dance",
+      "actions": 300,
+      "incompleteReason": "Observation capped after 300 legal actions; no terminal injected. Current rules do not guarantee a finite random match.",
+      "errors": []
+    },
+    {
+      "index": 5,
+      "scenario": 5,
+      "attempt": 1,
+      "heroes": [
+        "murozond",
+        "rogue"
+      ],
+      "passed": false,
+      "incomplete": true,
+      "skills": [
+        {
+          "ability": "timeline_twist",
+          "side": "red",
+          "revision": 2,
+          "afterRevision": 4,
+          "committed": true,
+          "args": {
+            "to": {
+              "x": 1,
+              "y": 3
+            }
+          },
+          "clockBefore": {
+            "start": 1791183452823,
+            "deadline": 1791183512823
+          },
+          "clockAfter": {
+            "start": 1791183453043,
+            "deadline": 1791183513043
+          }
+        },
+        {
+          "ability": "assassination",
+          "side": "black",
+          "committed": true,
+          "revision": 4,
+          "afterRevision": 5
+        },
+        {
+          "ability": "assassination",
+          "side": "black",
+          "committed": true,
+          "revision": 6,
+          "afterRevision": 7
+        }
+      ],
+      "required": [
+        "timeline_twist",
+        "assassination"
+      ],
+      "clockAtOpening": {},
+      "mutation": "shadow_dance",
+      "actions": 300,
+      "incompleteReason": "Observation capped after 300 legal actions; no terminal injected. Current rules do not guarantee a finite random match.",
+      "errors": []
+    },
+    {
+      "index": 6,
+      "scenario": 2,
+      "attempt": 2,
+      "heroes": [
+        "devout_zealot",
+        "hunter"
+      ],
+      "passed": true,
+      "incomplete": false,
+      "skills": [
+        {
+          "ability": "invoke",
+          "side": "red",
+          "revision": 0,
+          "afterRevision": 1,
+          "committed": true,
+          "args": {},
+          "clockBefore": {
+            "start": 1791183505306,
+            "deadline": 1791183565306
+          },
+          "clockAfter": {
+            "start": 1791183505440,
+            "deadline": 1791183565440
+          }
+        },
+        {
+          "ability": "invoke",
+          "side": "red",
+          "revision": 2,
+          "afterRevision": 3,
+          "committed": true,
+          "args": {},
+          "clockBefore": {
+            "start": 1791183505604,
+            "deadline": 1791183565604
+          },
+          "clockAfter": {
+            "start": 1791183505755,
+            "deadline": 1791183565755
+          }
+        },
+        {
+          "ability": "invoke",
+          "side": "red",
+          "revision": 4,
+          "afterRevision": 5,
+          "committed": true,
+          "args": {},
+          "clockBefore": {
+            "start": 1791183505938,
+            "deadline": 1791183565938
+          },
+          "clockAfter": {
+            "start": 1791183506088,
+            "deadline": 1791183566088
+          }
+        },
+        {
+          "ability": "invoke",
+          "side": "red",
+          "revision": 6,
+          "afterRevision": 7,
+          "committed": true,
+          "args": {},
+          "clockBefore": {
+            "start": 1791183506254,
+            "deadline": 1791183566254
+          },
+          "clockAfter": {
+            "start": 1791183506405,
+            "deadline": 1791183566405
+          }
+        },
+        {
+          "ability": "unspeakable",
+          "side": "red",
+          "revision": 8,
+          "afterRevision": 9,
+          "committed": true,
+          "args": {},
+          "clockBefore": {
+            "start": 1791183506554,
+            "deadline": 1791183566554
+          },
+          "clockAfter": {
+            "start": 1791183506738,
+            "deadline": 1791183566738
+          }
+        }
+      ],
+      "required": [
+        "invoke",
+        "unspeakable"
+      ],
+      "clockAtOpening": {},
+      "mutation": "expedition",
+      "actions": 13,
+      "result": {
+        "winner": "black",
+        "reason": "ambush",
+        "title": "背刺",
+        "message": "暗中潜行，破影而袭！您获得胜利！"
+      },
+      "skillCoverageComplete": true,
+      "errors": []
+    },
+    {
+      "index": 7,
+      "scenario": 4,
+      "attempt": 2,
+      "heroes": [
+        "nozdormu",
+        "prince"
+      ],
+      "passed": false,
+      "incomplete": true,
+      "skills": [
+        {
+          "ability": "rewind",
+          "side": "red",
+          "revision": 2,
+          "afterRevision": 3,
+          "committed": true,
+          "args": {},
+          "clockBefore": {
+            "start": 1791183513403,
+            "deadline": 1791183573403
+          },
+          "clockAfter": {
+            "start": 1791183513604,
+            "deadline": 1791183523604
+          }
+        }
+      ],
+      "required": [
+        "rewind"
+      ],
+      "clockAtOpening": {},
+      "mutation": "expedition",
+      "actions": 300,
+      "incompleteReason": "Observation capped after 300 legal actions; no terminal injected. Current rules do not guarantee a finite random match.",
+      "errors": []
+    },
+    {
+      "index": 8,
+      "scenario": 5,
+      "attempt": 2,
+      "heroes": [
+        "murozond",
+        "rogue"
+      ],
+      "passed": false,
+      "incomplete": true,
+      "skills": [
+        {
+          "ability": "timeline_twist",
+          "side": "red",
+          "revision": 2,
+          "afterRevision": 4,
+          "committed": true,
+          "args": {
+            "to": {
+              "x": 2,
+              "y": 1
+            }
+          },
+          "clockBefore": {
+            "start": 1791183565284,
+            "deadline": 1791183625284
+          },
+          "clockAfter": {
+            "start": 1791183565507,
+            "deadline": 1791183625507
+          }
+        },
+        {
+          "ability": "assassination",
+          "side": "black",
+          "committed": true,
+          "revision": 4,
+          "afterRevision": 5
+        },
+        {
+          "ability": "assassination",
+          "side": "black",
+          "committed": true,
+          "revision": 6,
+          "afterRevision": 7
+        }
+      ],
+      "required": [
+        "timeline_twist",
+        "assassination"
+      ],
+      "clockAtOpening": {},
+      "mutation": "war_chariot",
+      "actions": 300,
+      "incompleteReason": "Observation capped after 300 legal actions; no terminal injected. Current rules do not guarantee a finite random match.",
+      "errors": []
+    },
+    {
+      "index": 9,
+      "scenario": 4,
+      "attempt": 3,
+      "heroes": [
+        "nozdormu",
+        "prince"
+      ],
+      "passed": false,
+      "incomplete": true,
+      "skills": [
+        {
+          "ability": "rewind",
+          "side": "red",
+          "revision": 2,
+          "afterRevision": 3,
+          "committed": true,
+          "args": {},
+          "clockBefore": {
+            "start": 1791183617248,
+            "deadline": 1791183677248
+          },
+          "clockAfter": {
+            "start": 1791183617450,
+            "deadline": 1791183627450
+          }
+        }
+      ],
+      "required": [
+        "rewind"
+      ],
+      "clockAtOpening": {},
+      "mutation": "expedition",
+      "actions": 300,
+      "incompleteReason": "Observation capped after 300 legal actions; no terminal injected. Current rules do not guarantee a finite random match.",
+      "errors": []
+    },
+    {
+      "index": 10,
+      "scenario": 5,
+      "attempt": 3,
+      "heroes": [
+        "murozond",
+        "rogue"
+      ],
+      "passed": true,
+      "incomplete": false,
+      "skills": [
+        {
+          "ability": "assassination",
+          "side": "black",
+          "committed": true,
+          "revision": 1,
+          "afterRevision": 2
+        },
+        {
+          "ability": "strong-strike",
+          "side": "black",
+          "committed": true,
+          "revision": 3,
+          "afterRevision": 4
+        },
+        {
+          "ability": "timeline_twist",
+          "side": "red",
+          "revision": 6,
+          "afterRevision": 8,
+          "committed": true,
+          "args": {
+            "to": {
+              "x": 4,
+              "y": 1
+            }
+          },
+          "clockBefore": {
+            "start": 1791183669680,
+            "deadline": 1791183729680
+          },
+          "clockAfter": {
+            "start": 1791183669902,
+            "deadline": 1791183729902
+          }
+        }
+      ],
+      "required": [
+        "timeline_twist",
+        "assassination"
+      ],
+      "clockAtOpening": {},
+      "mutation": "cavalry",
+      "actions": 56,
+      "result": {
+        "winner": "black",
+        "reason": "stalemate",
+        "title": "无处可逃",
+        "message": "对方已无路可走。您获得胜利！"
+      },
+      "skillCoverageComplete": true,
+      "errors": []
+    }
+  ]
+}

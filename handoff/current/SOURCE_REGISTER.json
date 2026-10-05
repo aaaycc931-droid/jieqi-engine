@@ -1,7 +1,7 @@
 {
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-05-validation-5",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-05-validation-6",
   "rule_revision": "LEZI-FUNCTION-2026-10-04-r1",
-  "code_checkpoint": "e3e3da189f178496e229752b4ff5724194aae59f",
+  "code_checkpoint": "6e1c910cf5ab7fa1b76f3b6fa2ce737e89a840ca",
   "sources": [
     {
       "id": "RULE:CURRENT_RULE_DELTAS_2026-09-22.md",
@@ -158,6 +158,13 @@
       "url": "https://github.com/aaaycc931-droid/jieqi-engine/blob/ffd2fb070c89d1d9eaae4d6cfce9112f151e5594/tests/public-target-contracts.test.ts",
       "applied_scope": "公开目标资格、无形直接指定拒绝、五项对方资源回溯及11组预置DOM交互；不是全称合同/完整随机对局/设备验收",
       "embedded_original": false
+    },
+    {
+      "id": "EVIDENCE:ACTIVE_REWIND_CLOCK_2026-10-05",
+      "kind": "execution_evidence_non_normative",
+      "path": "review/gameplay/ACTIVE_MATCH_2026-10-05.md",
+      "applied_scope": "回溯跨入口/非法路径、非盗贼暗影入口、准备正式时钟；316测试/13预置DOM/五类完整主动实战样本，未完成随机样本保留，不是全验收",
+      "embedded_original": false
     }
   ],
   "coverage": {
@@ -215,8 +222,9 @@
     "过时3英雄进度"
   ],
   "completeness_claim": "当前恢复并核对源的主体规则已按域覆盖；不保证所有历史对话逐条恢复，明确缺口不得填空。",
-  "previous_code_checkpoint": "ffd2fb070c89d1d9eaae4d6cfce9112f151e5594",
+  "previous_code_checkpoint": "e3e3da189f178496e229752b4ff5724194aae59f",
   "runtime_evidence_index": "review/invariants/LATEST.json",
-  "gameplay_execution_evidence_index": "review/gameplay/runtime-browser-review-2026-10-05-full-matches.json",
-  "full_match_execution_evidence_index": "review/gameplay/full-match-browser-2026-10-05-summary.json"
+  "gameplay_execution_evidence_index": "review/gameplay/runtime-browser-review-2026-10-05-active.json",
+  "full_match_execution_evidence_index": "review/gameplay/full-match-browser-2026-10-05-active-regression-summary.json",
+  "active_skill_execution_evidence_index": "review/gameplay/active-match-browser-2026-10-05-summary.json"
 }

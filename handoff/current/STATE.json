@@ -1,11 +1,11 @@
 {
   "project": "乐子象棋 / jieqi-engine",
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-05-validation-5",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-05-validation-6",
   "updated_at": "2026-10-05",
   "repository": "https://github.com/aaaycc931-droid/jieqi-engine",
   "working_branch": "codex/ui-android-apk-20261001",
-  "implementation_commit": "e3e3da189f178496e229752b4ff5724194aae59f",
-  "implementation_tree": "b755304c82c5913e21a8f5b04b14099cab83703e",
+  "implementation_commit": "6e1c910cf5ab7fa1b76f3b6fa2ce737e89a840ca",
+  "implementation_tree": "bfe8270ae0bd3a14f6dce4e57391ecb83f7ace58",
   "draft_pr": 2,
   "baseline_id": "LEZI-FUNCTION-2026-10-04-v1",
   "baseline_digest": "4bcf9fb91f5c6e41f456e7424ebd7ed09c6c07b1595ec825604aa730fdad020b",
@@ -25,14 +25,14 @@
     "destiny_mutations": 1
   },
   "validation": {
-    "tests_passed": 309,
+    "tests_passed": 316,
     "tests_failed": 0,
     "web_build": "passed",
-    "homepage_browser_run": 37262023389,
-    "homepage_browser_commit": "e3e3da189f178496e229752b4ff5724194aae59f",
+    "homepage_browser_run": 37274091400,
+    "homepage_browser_commit": "6a2d04dee2d1b70bd01603ffa6149e92021ccf9e",
     "homepage_browser_scope": "homepage_and_entry_controls_only",
     "android_web_asset_match_files": 116,
-    "new_hero_browser_full_flow": "partial_real_setup_twelve_hero_seat_scenarios_natural_result_passed_active_skill_full_matches_pending",
+    "new_hero_browser_full_flow": "partial_five_active_families_natural_samples_same_app_original_Nozdormu_Prince_and_current_twelve_seat_regression_incomplete",
     "individual_69_invariants": "partial_named_case_evidence_full_contract_acceptance_pending",
     "android_webview": "pending",
     "physical_two_phone": "pending",
@@ -49,6 +49,17 @@
     },
     "current_ci": {
       "status": "success",
+      "run": 37275817335,
+      "commit": "6e1c910cf5ab7fa1b76f3b6fa2ce737e89a840ca",
+      "implementation_commit": "6e1c910cf5ab7fa1b76f3b6fa2ce737e89a840ca",
+      "evidence_artifact": 11329878877,
+      "apk_job": "skipped",
+      "checkout_commit": "48249d4fca68e954996c6fda9e860c07ea0d3784",
+      "source_digest": "5ed07731c322aa5b8d8f3293544bf6bc9bab776fe072bb53b0701deca51eaa01",
+      "source_digest_matches_local": true
+    },
+    "previous_ci": {
+      "status": "success",
       "run": 37262027842,
       "commit": "e3e3da189f178496e229752b4ff5724194aae59f",
       "implementation_commit": "e3e3da189f178496e229752b4ff5724194aae59f",
@@ -58,18 +69,19 @@
       "source_digest": "4803995680f8936b99dd17fb9aaffc02855c48101ea6e35de96f6b77413622e0",
       "source_digest_matches_local": true
     },
-    "previous_ci": {
-      "status": "success",
-      "run": 37260137602,
-      "commit": "ffd2fb070c89d1d9eaae4d6cfce9112f151e5594",
-      "implementation_commit": "ffd2fb070c89d1d9eaae4d6cfce9112f151e5594",
-      "evidence_artifact": 11323819580,
-      "apk_job": "skipped",
-      "checkout_commit": "0ed82c0f475465dd25cdd828aa4bc2b870639e25",
-      "source_digest": "283c05469d49199a35d3d16177775aa527881d288e0ae90f1654c1254a50c700",
-      "source_digest_matches_local": true
-    },
     "gameplay_browser": {
+      "status": "prepared_cases_success_overall_workflow_sampling_failed",
+      "run": 37274091291,
+      "commit": "6a2d04dee2d1b70bd01603ffa6149e92021ccf9e",
+      "artifact": 11329193794,
+      "case_count": 13,
+      "errors": 0,
+      "report": "review/gameplay/runtime-browser-review-2026-10-05-active.json",
+      "scope": "prepared_state_original_DOM_and_shared_app_bytes_current",
+      "full_match_accepted": false,
+      "bluetooth_private_transport_accepted": false
+    },
+    "previous_gameplay_browser": {
       "status": "success",
       "run": 37262023373,
       "commit": "e3e3da189f178496e229752b4ff5724194aae59f",
@@ -81,20 +93,28 @@
       "full_match_accepted": false,
       "bluetooth_private_transport_accepted": false
     },
-    "previous_gameplay_browser": {
-      "status": "success",
-      "run": 37260135932,
-      "commit": "ffd2fb070c89d1d9eaae4d6cfce9112f151e5594",
-      "artifact": 11324242995,
-      "case_count": 11,
-      "errors": 0,
-      "report": "review/gameplay/runtime-browser-review-2026-10-05-targets.json",
-      "scope": "prepared_state_original_DOM_handlers_public_target_list_carrier_capture_local_handoff_and_flow_clocks",
-      "full_match_accepted": false,
-      "bluetooth_private_transport_accepted": false
-    },
     "bluetooth_private_snapshot": "actual_Wind_Hunter_setup_encoded_snapshot_shadow_duplicate_wrong_turn_reconnect_passed_physical_transport_pending",
     "full_match_browser": {
+      "status": "partial_sampling_gate_failed",
+      "run": 37274091291,
+      "commit": "6a2d04dee2d1b70bd01603ffa6149e92021ccf9e",
+      "artifact": 11329693950,
+      "trial_count": 17,
+      "natural_terminal_count": 11,
+      "capped_incomplete_count": 6,
+      "interaction_errors": 0,
+      "page_errors": 0,
+      "hero_seat_scenarios": 12,
+      "all_scenarios_have_natural_sample": false,
+      "missing_natural_scenarios": [
+        6
+      ],
+      "report": "review/gameplay/full-match-browser-2026-10-05-active-regression-summary.json",
+      "trace_archive": "review/gameplay/full-match-browser-2026-10-05-active-regression.json.gz",
+      "all_hero_mutation_combinations_accepted": false,
+      "physical_transport_accepted": false
+    },
+    "previous_full_match_browser": {
       "status": "success_sampled_execution",
       "run": 37262023373,
       "commit": "e3e3da189f178496e229752b4ff5724194aae59f",
@@ -116,6 +136,124 @@
       "active_hero_skills_covered_by_match_policy": false,
       "all_hero_mutation_combinations_accepted": false,
       "physical_transport_accepted": false
+    },
+    "active_skill_match_browser": {
+      "authority": "sampled_browser_evidence_non_normative",
+      "implementationCommit": "6e1c910cf5ab7fa1b76f3b6fa2ce737e89a840ca",
+      "appDigest": "15a99bf62bc3ce943f487539f1f4adb0d8777867a0876e1c0fae9743773368ac",
+      "sameAppBytesAcrossSources": true,
+      "familiesWithCompleteNaturalSample": 5,
+      "sampleReferences": [
+        {
+          "family": "wind/hunter",
+          "sourceCommit": "6a2d04dee2d1b70bd01603ffa6149e92021ccf9e",
+          "run": 37274091291,
+          "artifact": 11329488869,
+          "index": 1,
+          "mutation": "cavalry",
+          "actions": 2,
+          "result": {
+            "winner": "black",
+            "reason": "general_destroyed",
+            "title": "主帅消灭",
+            "message": "您获得胜利！"
+          },
+          "skills": [
+            "shadow"
+          ]
+        },
+        {
+          "family": "devout_zealot/hunter",
+          "sourceCommit": "6a2d04dee2d1b70bd01603ffa6149e92021ccf9e",
+          "run": 37274091291,
+          "artifact": 11329488869,
+          "index": 6,
+          "mutation": "war_chariot",
+          "actions": 115,
+          "result": {
+            "winner": "red",
+            "reason": "stalemate",
+            "title": "无处可逃",
+            "message": "对方已无路可走。您获得胜利！"
+          },
+          "skills": [
+            "invoke",
+            "invoke",
+            "invoke",
+            "invoke",
+            "unspeakable"
+          ]
+        },
+        {
+          "family": "deathwing/warrior",
+          "sourceCommit": "6a2d04dee2d1b70bd01603ffa6149e92021ccf9e",
+          "run": 37274091291,
+          "artifact": 11329488869,
+          "index": 3,
+          "mutation": "cavalry",
+          "actions": 1,
+          "result": {
+            "winner": "black",
+            "reason": "checkmate",
+            "title": "裁决",
+            "message": "圣光的正义终结了敌人！您获得胜利！"
+          },
+          "skills": [
+            "destruction"
+          ]
+        },
+        {
+          "family": "murozond/rogue",
+          "sourceCommit": "6a2d04dee2d1b70bd01603ffa6149e92021ccf9e",
+          "run": 37274091291,
+          "artifact": 11329488869,
+          "index": 5,
+          "mutation": "chaos",
+          "actions": 15,
+          "result": {
+            "winner": "black",
+            "reason": "ambush",
+            "title": "背刺",
+            "message": "暗中潜行，破影而袭！您获得胜利！"
+          },
+          "skills": [
+            "assassination",
+            "strong-strike",
+            "timeline_twist"
+          ]
+        },
+        {
+          "family": "nozdormu/death_knight",
+          "sourceCommit": "6e1c910cf5ab7fa1b76f3b6fa2ce737e89a840ca",
+          "run": 37275813051,
+          "artifact": 11329923138,
+          "index": 1,
+          "mutation": "chaos",
+          "actions": 81,
+          "result": {
+            "winner": "black",
+            "reason": "checkmate",
+            "title": "裁决",
+            "message": "圣光的正义终结了敌人！您获得胜利！"
+          },
+          "skills": [
+            "rewind"
+          ]
+        }
+      ],
+      "currentClockFixedTrials": 19,
+      "naturalTerminals": 10,
+      "skillGoalCompleteNaturalTerminals": 9,
+      "cappedIncomplete": 9,
+      "earlyTerminalBeforeSkillGoalIncomplete": 1,
+      "interactionErrors": 0,
+      "pageErrors": 0,
+      "originalNozdormuPrinceScenario": "incomplete; replaced by additional Death Knight opponent for rewind family evidence, not marked passed",
+      "allHeroMutationCombinationsAccepted": false,
+      "allFunctionsAccepted": false,
+      "independentReview": false,
+      "report": "review/gameplay/active-match-browser-2026-10-05-summary.json",
+      "rewind_special_run": 37275813051
     }
   },
   "restrictions": [
@@ -134,11 +272,30 @@
     "old_dialogue_code_writes_after_handoff": "stop",
     "automatic_import": false
   },
-  "next_action": "Continue active-skill full-match and remaining snapshot/secret/formal-clock intersections, then local timeout outcome. Twelve real hero-seat setup-to-natural-result scenarios have samples, not exhaustive acceptance; expedition was not drawn in these rounds. Physical RFCOMM/WebView/two-phone remain pending; UI last and APK paused.",
+  "next_action": "Continue destiny bomb/hourglass full real matches, second Shadow cooldown/lifecycle, remaining private snapshot and cross-end clock intersections. Current five active families have sampled natural results; original Nozdormu/Prince and current 12-seat normal regression remain incomplete. Local timeout outcome not frozen; physical RFCOMM/WebView/two-phone pending. UI last; APK paused.",
   "source_gap_register": "SOURCE_REGISTER.json",
   "apk_built_this_round": false,
-  "previous_implementation_commit": "ffd2fb070c89d1d9eaae4d6cfce9112f151e5594",
+  "previous_implementation_commit": "e3e3da189f178496e229752b4ff5724194aae59f",
   "validation_round": {
+    "rules_changed": false,
+    "rule_revision_unchanged": true,
+    "product_code_changed": true,
+    "new_engine_tests": 7,
+    "browser_prepared_flows_passed": 13,
+    "active_families_with_complete_natural_sample": 5,
+    "current_clock_active_trials": 19,
+    "current_clock_active_natural": 10,
+    "current_clock_active_capped": 9,
+    "current_clock_active_early_terminal_without_goal": 1,
+    "rule_or_artwork_changes": false,
+    "fixed": [
+      "rewind_cross_entry_same_piece_empty_no_check_and_clear",
+      "malformed_chariot_replay_path_rejected",
+      "non_rogue_shadow_dance_circle_entry_and_direct_exit",
+      "formal_clock_after_opening_and_preparation"
+    ]
+  },
+  "previous_validation_round": {
     "rules_changed": false,
     "rule_revision_unchanged": true,
     "product_code_changed": false,
@@ -149,15 +306,5 @@
     "initial_round_natural_samples": 9,
     "initial_round_capped_incomplete": 3,
     "rule_or_artwork_changes": false
-  },
-  "previous_validation_round": {
-    "rules_changed": false,
-    "rule_revision_unchanged": true,
-    "fixed": [
-      "shadow_direct_target_excludes_intangible",
-      "shadow_client_target_list_matches_owner_eligibility"
-    ],
-    "new_tests": 11,
-    "browser_prepared_flows_passed": 11
   }
 }
