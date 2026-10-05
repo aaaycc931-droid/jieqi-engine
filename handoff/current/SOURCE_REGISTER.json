@@ -1,5 +1,5 @@
 {
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-05-modes-foundation-1",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-05-stage-close-1",
   "rule_revision": "LEZI-FUNCTION-2026-10-05-r2",
   "code_checkpoint": "8b985a8f2bf8cd4ab96fdf63ab73894292cc6f7a",
   "sources": [
@@ -180,6 +180,14 @@
       "path": "review/gameplay/MODE_FOUNDATION_2026-10-05.md",
       "applied_scope": "r2 confirmed bases only, real opening preview and old-mode regression; no independent hero/mutation effects or full new mode acceptance",
       "authorization": "user 2026-10-05 19:21 同意; follows 19:10 confirmed mode definitions"
+    },
+    {
+      "id": "USER:STAGE_CLOSE_2026-10-05_221840",
+      "kind": "explicit_user_stage_close_instruction",
+      "quote": "我得结束本阶段工作了",
+      "timestamp": "2026-10-05T22:18:40+08:00",
+      "applied_scope": "stop further implementation/design/validation; retain prior pauses, archive current rules and actual evidence, resume only under new user scope",
+      "path": "10_STAGE_CLOSE.md"
     }
   ],
   "coverage": {
@@ -244,5 +252,6 @@
   "full_match_execution_evidence_index": "review/gameplay/full-match-browser-2026-10-05-active-regression-summary.json",
   "active_skill_execution_evidence_index": "review/gameplay/active-match-browser-2026-10-05-summary.json",
   "previous_rule_revision": "LEZI-FUNCTION-2026-10-04-r1",
-  "mode_foundation_evidence_index": "review/gameplay/mode-browser-review-2026-10-05.json"
+  "mode_foundation_evidence_index": "review/gameplay/mode-browser-review-2026-10-05.json",
+  "stage_close_index": "10_STAGE_CLOSE.md"
 }

@@ -1,6 +1,6 @@
 {
   "project": "乐子象棋 / jieqi-engine",
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-05-modes-foundation-1",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-05-stage-close-1",
   "updated_at": "2026-10-05",
   "repository": "https://github.com/aaaycc931-droid/jieqi-engine",
   "working_branch": "codex/ui-android-apk-20261001",
@@ -314,7 +314,7 @@
     "old_dialogue_code_writes_after_handoff": "stop",
     "automatic_import": false
   },
-  "next_action": "Prepare independent per-mode hero and mutation adaptation for user confirmation; full new-mode setup, rematch and Bluetooth negotiation follow confirmed adaptations. Do not invent Chaos effects or universal priority. Previous validation queue remains paused; UI last, APK paused.",
+  "next_action": "On the next authorized dialogue, read the current handoff and reconcile the remote working branch first. Await user scope before implementing independent mode hero/mutation adaptations or resuming the old validation queue. Do not auto-start either queue; UI last, APK paused.",
   "source_gap_register": "SOURCE_REGISTER.json",
   "apk_built_this_round": false,
   "previous_implementation_commit": "6e1c910cf5ab7fa1b76f3b6fa2ce737e89a840ca",
@@ -357,7 +357,7 @@
   "previous_rule_digest": "27191eba43cb10417e4e87ff09a5f6fb2aa890be9567ec710a171fb45ab67f35",
   "rule_digest_algorithm": "sha256(concat(relative UTF-8 path + NUL + file bytes + NUL), STATE.current_rules order)",
   "paused_next_action": "Continue destiny bomb/hourglass full real matches, second Shadow cooldown/lifecycle, remaining private snapshot and cross-end clock intersections. Current five active families have sampled natural results; original Nozdormu/Prince and current 12-seat normal regression remain incomplete. Local timeout outcome not frozen; physical RFCOMM/WebView/two-phone pending. UI last; APK paused.",
-  "work_status": "base_mode_foundation_implemented_new_complete_modes_pending_independent_adaptation_previous_validation_paused",
+  "work_status": "stage_closed_all_further_implementation_and_validation_paused_await_next_user_authorization",
   "game_modes": {
     "authority": "09_CURRENT_GAME_MODES.md",
     "base_rule_status": "confirmed",
@@ -394,5 +394,24 @@
       "digest": "17c458c031634cb2cb836b5b8311952a48b1534e7723bab6ba73f724ab8930af",
       "scope": "mode confirmation before implementation status metadata update"
     }
-  ]
+  ],
+  "stage_close": {
+    "requested_at": "2026-10-05T22:18:40+08:00",
+    "user_instruction": "我得结束本阶段工作了",
+    "status": "closed",
+    "last_product_commit": "8b985a8f2bf8cd4ab96fdf63ab73894292cc6f7a",
+    "evidence_archive_commit_before_close": "80879a430ed420b8f119c153ef81462d3c4c4dba",
+    "stage_close_record": "10_STAGE_CLOSE.md",
+    "product_code_changed_this_closure": false,
+    "semantic_rules_changed_this_closure": false,
+    "tests_rerun_this_closure": false,
+    "verified_results_reused": true,
+    "all_further_work_paused": true,
+    "old_implementation_dialogue_writes_after_handoff": "stop",
+    "next_dialogue_requires_user_authorized_scope": true,
+    "new_mode_full_play_enabled": false,
+    "independent_hero_and_mutation_adaptation": "pending_not_imported_from_other_dialogues",
+    "apk": "paused_not_generated",
+    "all_functions_accepted": false
+  }
 }
