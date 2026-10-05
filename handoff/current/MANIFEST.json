@@ -3,8 +3,8 @@
   "self_excluded": true,
   "files": {
     "00_READ_FIRST.md": {
-      "bytes": 3248,
-      "sha256": "cee216d992b7cbdca9f8714f3263628917d1be33b8c37333dd3b12f7327af811"
+      "bytes": 3521,
+      "sha256": "32a754b04cae5f907751892b7c3029d8f85c725871fe1e2d9f9d261f5b228701"
     },
     "01_CURRENT_RULES.md": {
       "bytes": 21016,
@@ -23,12 +23,12 @@
       "sha256": "c133b4ee797b778ce4c88233437b2466255f27c30fcaec5b0941c766cc4bae00"
     },
     "05_PROGRESS_AND_NEXT.md": {
-      "bytes": 20081,
-      "sha256": "859de71ee681fd63b23b57e6c14a8a98a2767704bc7fede7410f0fe013cd9bd7"
+      "bytes": 21810,
+      "sha256": "1b9d1913ec4e5a1d8be36ed6ef800b2b34982ee6ff124ff92d4f6b42d283aedc"
     },
     "06_COLLABORATION.md": {
-      "bytes": 4117,
-      "sha256": "54443490b7f649e63e133cc2373d8231cdcb7f6521d5c14aafc6a5be0e184020"
+      "bytes": 4120,
+      "sha256": "00315a0c8beaedc032761e00a177326dcb018c7d82b1a9455621c958467d202a"
     },
     "07_DESIGN_SCORING.md": {
       "bytes": 25701,
@@ -39,16 +39,16 @@
       "sha256": "68845494b465bbcc1908f6cef862f350c1da4dadfc3e3a7473d11b2443edf23c"
     },
     "NEW_DIALOGUE_PROMPT.txt": {
-      "bytes": 2754,
-      "sha256": "44c922baca6efb8a04b2c8ddc947c1f3fcb6e338c10fa4d672ded13fb73bd602"
+      "bytes": 2580,
+      "sha256": "dffd2e935a830a62a685e9d4e53218b9ddfb37990e5acdb71edd2ca01e3fd76a"
     },
     "SOURCE_REGISTER.json": {
-      "bytes": 13234,
-      "sha256": "824b4ca708484a0e53d99b92c38cd8ce4e3dddba60266098d8b4efc90dfb7407"
+      "bytes": 13790,
+      "sha256": "abc198d27b6a3e42b3f7493e5e0cf726db0403d921b32f0d97e59eaedb277bb0"
     },
     "STATE.json": {
-      "bytes": 13836,
-      "sha256": "3dbd6d0084e95d39313b4add14efd4b3f97362b278f5600551d213e9b5bd7adc"
+      "bytes": 16488,
+      "sha256": "0ad8f5c1f3e4354efa472e2508193e5e98211e694f198e5d25f3ed1138100a50"
     },
     "assets/approved-home.png": {
       "bytes": 2157060,
@@ -63,8 +63,8 @@
       "sha256": "a1d0c817bd1d6bec20080460066d84b80ec0d5a29eff889973d2395c11ae6b22"
     },
     "09_CURRENT_GAME_MODES.md": {
-      "bytes": 4230,
-      "sha256": "3a779ec1b0eb55eff95fa1a05526690fb2c5aabd0e0b28b6e832d36ae602b50a"
+      "bytes": 4749,
+      "sha256": "fee5f89a60880cb94aa80f1d39e2d692518c5226ed047f5c722590f4baee7bf1"
     }
   },
   "checks": {

@@ -1,0 +1,231 @@
+{
+  "authority": "browser_execution_evidence_non_normative",
+  "sourceCommit": "8b985a8f2bf8cd4ab96fdf63ab73894292cc6f7a",
+  "appDigest": "ea04a8beaa5d45b94d7fd85d7482dc118d926a4c411789cea2564cab9809b424",
+  "browser": "145.0.7632.6",
+  "cases": [
+    {
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "mode": "jieqi",
+      "publicBoard": true,
+      "coveredCount": 30,
+      "persistence": true,
+      "previewLeavesSessionIdle": true,
+      "pendingEntriesGuarded": false,
+      "selectorBox": {
+        "x": 189.203125,
+        "y": 389.71875,
+        "width": 102,
+        "height": 48
+      },
+      "previewButtonBox": {
+        "x": 28.796875,
+        "y": 385.71875,
+        "width": 120,
+        "height": 48
+      }
+    },
+    {
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "mode": "half_chaos",
+      "publicBoard": true,
+      "coveredCount": 30,
+      "persistence": true,
+      "previewLeavesSessionIdle": true,
+      "pendingEntriesGuarded": true,
+      "selectorBox": {
+        "x": 189.203125,
+        "y": 389.71875,
+        "width": 102,
+        "height": 48
+      },
+      "previewButtonBox": {
+        "x": 28.796875,
+        "y": 385.71875,
+        "width": 120,
+        "height": 48
+      }
+    },
+    {
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "mode": "xiangqi",
+      "publicBoard": true,
+      "coveredCount": 0,
+      "persistence": true,
+      "previewLeavesSessionIdle": true,
+      "pendingEntriesGuarded": true,
+      "selectorBox": {
+        "x": 189.203125,
+        "y": 389.71875,
+        "width": 102,
+        "height": 48
+      },
+      "previewButtonBox": {
+        "x": 28.796875,
+        "y": 385.71875,
+        "width": 120,
+        "height": 48
+      }
+    },
+    {
+      "viewport": {
+        "width": 360,
+        "height": 640
+      },
+      "mode": "jieqi",
+      "publicBoard": true,
+      "coveredCount": 30,
+      "persistence": true,
+      "previewLeavesSessionIdle": true,
+      "pendingEntriesGuarded": false,
+      "selectorBox": {
+        "x": 225.609375,
+        "y": 427.59375,
+        "width": 102,
+        "height": 48
+      },
+      "previewButtonBox": {
+        "x": 32.390625,
+        "y": 457.59375,
+        "width": 120,
+        "height": 48
+      }
+    },
+    {
+      "viewport": {
+        "width": 360,
+        "height": 640
+      },
+      "mode": "half_chaos",
+      "publicBoard": true,
+      "coveredCount": 30,
+      "persistence": true,
+      "previewLeavesSessionIdle": true,
+      "pendingEntriesGuarded": true,
+      "selectorBox": {
+        "x": 225.609375,
+        "y": 427.59375,
+        "width": 102,
+        "height": 48
+      },
+      "previewButtonBox": {
+        "x": 32.390625,
+        "y": 457.59375,
+        "width": 120,
+        "height": 48
+      }
+    },
+    {
+      "viewport": {
+        "width": 360,
+        "height": 640
+      },
+      "mode": "xiangqi",
+      "publicBoard": true,
+      "coveredCount": 0,
+      "persistence": true,
+      "previewLeavesSessionIdle": true,
+      "pendingEntriesGuarded": true,
+      "selectorBox": {
+        "x": 225.609375,
+        "y": 427.59375,
+        "width": 102,
+        "height": 48
+      },
+      "previewButtonBox": {
+        "x": 32.390625,
+        "y": 457.59375,
+        "width": 120,
+        "height": 48
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 845
+      },
+      "mode": "jieqi",
+      "publicBoard": true,
+      "coveredCount": 30,
+      "persistence": true,
+      "previewLeavesSessionIdle": true,
+      "pendingEntriesGuarded": false,
+      "selectorBox": {
+        "x": 252.90625,
+        "y": 501.5625,
+        "width": 102,
+        "height": 48
+      },
+      "previewButtonBox": {
+        "x": 35.09375,
+        "y": 599.4375,
+        "width": 120,
+        "height": 48
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 845
+      },
+      "mode": "half_chaos",
+      "publicBoard": true,
+      "coveredCount": 30,
+      "persistence": true,
+      "previewLeavesSessionIdle": true,
+      "pendingEntriesGuarded": true,
+      "selectorBox": {
+        "x": 252.90625,
+        "y": 501.5625,
+        "width": 102,
+        "height": 48
+      },
+      "previewButtonBox": {
+        "x": 35.09375,
+        "y": 641.4375,
+        "width": 120,
+        "height": 48
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 845
+      },
+      "mode": "xiangqi",
+      "publicBoard": true,
+      "coveredCount": 0,
+      "persistence": true,
+      "previewLeavesSessionIdle": true,
+      "pendingEntriesGuarded": true,
+      "selectorBox": {
+        "x": 252.90625,
+        "y": 501.5625,
+        "width": 102,
+        "height": 48
+      },
+      "previewButtonBox": {
+        "x": 35.09375,
+        "y": 641.4375,
+        "width": 120,
+        "height": 48
+      }
+    }
+  ],
+  "errors": [],
+  "limits": [
+    "New modes are real base opening previews; complete hero/mutation matches remain gated pending independent adaptation.",
+    "This is not new-mode full-match, Bluetooth transport, Android physical-device or competition-rule acceptance.",
+    "The previous full-match validation queue remains paused."
+  ],
+  "passed": true
+}

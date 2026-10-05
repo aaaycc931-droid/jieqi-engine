@@ -1,8 +1,8 @@
 {
   "authority": "execution_evidence_non_normative",
-  "generatedAt": "2026-10-05T07:06:01.724Z",
-  "sourceCommitAtRun": "48249d4fca68e954996c6fda9e860c07ea0d3784",
-  "sourceDigest": "5ed07731c322aa5b8d8f3293544bf6bc9bab776fe072bb53b0701deca51eaa01",
+  "generatedAt": "2026-10-05T11:48:24.462Z",
+  "sourceCommitAtRun": "74a154dcf09172117bfe62f251a7af21b5376004",
+  "sourceDigest": "25843e4e60a80f9312a56d0c4cf9064f04673953623a67d146387241cd8629c3",
   "sourceDigestPaths": [
     ".github/workflows/gameplay-runtime-review.yml",
     ".github/workflows/menu-reference-review.yml",
@@ -16,6 +16,7 @@
     "scripts/review/capture-gameplay-runtime.mjs",
     "scripts/review/capture-home-runtime.mjs",
     "scripts/review/capture-menu-review.mjs",
+    "scripts/review/capture-mode-runtime.mjs",
     "scripts/review/capture-rewind-match-runtime.mjs",
     "scripts/review/prepare-menu-review.mjs",
     "scripts/review/validate-hero-proposal.ts",
@@ -28,6 +29,7 @@
     "src/hero-actions.ts",
     "src/heroes.ts",
     "src/index.ts",
+    "src/modes.ts",
     "src/mutations.ts",
     "src/proposal-review.ts",
     "src/remote-room.ts",
@@ -51,6 +53,7 @@
     "tests/exception-contracts.test.ts",
     "tests/flow-contracts.test.ts",
     "tests/flow-fixtures.ts",
+    "tests/game-modes.test.ts",
     "tests/helpers.ts",
     "tests/movement.test.ts",
     "tests/mutation-rarity.test.ts",
@@ -169,7 +172,7 @@
   "contractDigest": "a1d0c817bd1d6bec20080460066d84b80ec0d5a29eff889973d2395c11ae6b22",
   "runtime": "v24.21.0",
   "testSummary": {
-    "passed": 316,
+    "passed": 328,
     "failed": 0,
     "executionFailed": false
   },

@@ -1,16 +1,16 @@
 {
   "project": "乐子象棋 / jieqi-engine",
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-05-modes-1",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-05-modes-foundation-1",
   "updated_at": "2026-10-05",
   "repository": "https://github.com/aaaycc931-droid/jieqi-engine",
   "working_branch": "codex/ui-android-apk-20261001",
-  "implementation_commit": "6e1c910cf5ab7fa1b76f3b6fa2ce737e89a840ca",
-  "implementation_tree": "bfe8270ae0bd3a14f6dce4e57391ecb83f7ace58",
+  "implementation_commit": "8b985a8f2bf8cd4ab96fdf63ab73894292cc6f7a",
+  "implementation_tree": "7915bd1b05e9d3d1f8c0107930b6e1dc7e8106cb",
   "draft_pr": 2,
   "baseline_id": "LEZI-FUNCTION-2026-10-04-v1",
   "baseline_digest": "4bcf9fb91f5c6e41f456e7424ebd7ed09c6c07b1595ec825604aa730fdad020b",
   "current_rule_revision": "LEZI-FUNCTION-2026-10-05-r2",
-  "current_rule_digest": "17c458c031634cb2cb836b5b8311952a48b1534e7723bab6ba73f724ab8930af",
+  "current_rule_digest": "b172c19d153ea140b8fc1e1bf981b25137a0a7e7c562a6b4fa291b957dedf178",
   "authoritative_entry": "00_READ_FIRST.md",
   "current_rules": [
     "01_CURRENT_RULES.md",
@@ -26,13 +26,13 @@
     "destiny_mutations": 1
   },
   "validation": {
-    "tests_passed": 316,
+    "tests_passed": 328,
     "tests_failed": 0,
     "web_build": "passed",
-    "homepage_browser_run": 37274091400,
-    "homepage_browser_commit": "6a2d04dee2d1b70bd01603ffa6149e92021ccf9e",
+    "homepage_browser_run": 37305274329,
+    "homepage_browser_commit": "8b985a8f2bf8cd4ab96fdf63ab73894292cc6f7a",
     "homepage_browser_scope": "homepage_and_entry_controls_only",
-    "android_web_asset_match_files": 116,
+    "android_web_asset_match_files": 117,
     "new_hero_browser_full_flow": "partial_five_active_families_natural_samples_same_app_original_Nozdormu_Prince_and_current_twelve_seat_regression_incomplete",
     "individual_69_invariants": "partial_named_case_evidence_full_contract_acceptance_pending",
     "android_webview": "pending",
@@ -51,6 +51,17 @@
     },
     "current_ci": {
       "status": "success",
+      "run": 37305279147,
+      "commit": "8b985a8f2bf8cd4ab96fdf63ab73894292cc6f7a",
+      "implementation_commit": "8b985a8f2bf8cd4ab96fdf63ab73894292cc6f7a",
+      "evidence_artifact": 11342459995,
+      "apk_job": "skipped",
+      "checkout_commit": "74a154dcf09172117bfe62f251a7af21b5376004",
+      "source_digest": "25843e4e60a80f9312a56d0c4cf9064f04673953623a67d146387241cd8629c3",
+      "source_digest_matches_local": true
+    },
+    "previous_ci": {
+      "status": "success",
       "run": 37275817335,
       "commit": "6e1c910cf5ab7fa1b76f3b6fa2ce737e89a840ca",
       "implementation_commit": "6e1c910cf5ab7fa1b76f3b6fa2ce737e89a840ca",
@@ -60,18 +71,19 @@
       "source_digest": "5ed07731c322aa5b8d8f3293544bf6bc9bab776fe072bb53b0701deca51eaa01",
       "source_digest_matches_local": true
     },
-    "previous_ci": {
-      "status": "success",
-      "run": 37262027842,
-      "commit": "e3e3da189f178496e229752b4ff5724194aae59f",
-      "implementation_commit": "e3e3da189f178496e229752b4ff5724194aae59f",
-      "evidence_artifact": 11325356782,
-      "apk_job": "skipped",
-      "checkout_commit": "d2384c456410c13c75f63e4dc41a072fea058d03",
-      "source_digest": "4803995680f8936b99dd17fb9aaffc02855c48101ea6e35de96f6b77413622e0",
-      "source_digest_matches_local": true
-    },
     "gameplay_browser": {
+      "status": "success",
+      "run": 37305274311,
+      "commit": "8b985a8f2bf8cd4ab96fdf63ab73894292cc6f7a",
+      "artifact": 11342618893,
+      "case_count": 13,
+      "errors": 0,
+      "report": "review/gameplay/runtime-browser-review-2026-10-05-modes.json",
+      "scope": "existing_jieqi_prepared_state_original_DOM_regression",
+      "full_match_accepted": false,
+      "bluetooth_private_transport_accepted": false
+    },
+    "previous_gameplay_browser": {
       "status": "prepared_cases_success_overall_workflow_sampling_failed",
       "run": 37274091291,
       "commit": "6a2d04dee2d1b70bd01603ffa6149e92021ccf9e",
@@ -80,18 +92,6 @@
       "errors": 0,
       "report": "review/gameplay/runtime-browser-review-2026-10-05-active.json",
       "scope": "prepared_state_original_DOM_and_shared_app_bytes_current",
-      "full_match_accepted": false,
-      "bluetooth_private_transport_accepted": false
-    },
-    "previous_gameplay_browser": {
-      "status": "success",
-      "run": 37262023373,
-      "commit": "e3e3da189f178496e229752b4ff5724194aae59f",
-      "artifact": 11325062819,
-      "case_count": 11,
-      "errors": 0,
-      "report": "review/gameplay/runtime-browser-review-2026-10-05-full-matches.json",
-      "scope": "prepared_state_original_DOM_handlers_public_targets_private_handoff_and_flow_clocks",
       "full_match_accepted": false,
       "bluetooth_private_transport_accepted": false
     },
@@ -257,8 +257,46 @@
       "report": "review/gameplay/active-match-browser-2026-10-05-summary.json",
       "rewind_special_run": 37275813051
     },
-    "evidence_scope": "r1 existing mode runtime; no implementation or acceptance evidence for r2 new modes",
-    "new_mode_acceptance": false
+    "evidence_scope": "r2 base mode foundation tests and opening preview only; existing mode regression and r1 contracts do not accept new-mode hero/mutation matches",
+    "new_mode_acceptance": false,
+    "homepage_browser_artifact": 11343765130,
+    "homepage_browser_report": "review/gameplay/home-browser-review-2026-10-05-modes.json",
+    "mode_foundation_browser": {
+      "status": "success",
+      "run": 37305274311,
+      "commit": "8b985a8f2bf8cd4ab96fdf63ab73894292cc6f7a",
+      "artifact": 11343073411,
+      "case_count": 9,
+      "errors": 0,
+      "report": "review/gameplay/mode-browser-review-2026-10-05.json",
+      "scope": "three_real_base_opening_previews_by_three_phone_sizes_settings_persistence_reset_corrupt_preference_pending_entry_guards_existing_hero_and_Bluetooth_entry_regression",
+      "minimum_new_control_touch_height": 48,
+      "short_screen_close_action_visible": true,
+      "new_mode_complete_matches_accepted": false,
+      "observer": "review_server_response_only_read_only_flags_and_deadlines_no_fixture_loading_secret_identity_or_rng_override"
+    },
+    "paused_full_match_jobs": {
+      "run": 37305274311,
+      "full_match_browser": "skipped",
+      "active_match_browser": "skipped",
+      "reason": "user_paused_previous_queue_to_add_modes",
+      "accepted": false
+    },
+    "new_mode_engine_case_ids": [
+      "MODE-01",
+      "MODE-02",
+      "MODE-03",
+      "MODE-04",
+      "MODE-05",
+      "MODE-06",
+      "MODE-07",
+      "MODE-08",
+      "MODE-09",
+      "MODE-10",
+      "MODE-11",
+      "MODE-12"
+    ],
+    "new_mode_engine_test_file": "tests/game-modes.test.ts"
   },
   "restrictions": [
     "ui_last",
@@ -276,11 +314,27 @@
     "old_dialogue_code_writes_after_handoff": "stop",
     "automatic_import": false
   },
-  "next_action": "Implement the confirmed three base modes and mode selection/configuration; keep heroes and mutations, with mode-specific adaptation deferred. Do not invent a universal special-rule priority or unresolved Chaos effects. Previous validation queue paused by user; UI last and APK paused.",
+  "next_action": "Prepare independent per-mode hero and mutation adaptation for user confirmation; full new-mode setup, rematch and Bluetooth negotiation follow confirmed adaptations. Do not invent Chaos effects or universal priority. Previous validation queue remains paused; UI last, APK paused.",
   "source_gap_register": "SOURCE_REGISTER.json",
   "apk_built_this_round": false,
-  "previous_implementation_commit": "e3e3da189f178496e229752b4ff5724194aae59f",
+  "previous_implementation_commit": "6e1c910cf5ab7fa1b76f3b6fa2ce737e89a840ca",
   "validation_round": {
+    "rules_changed": false,
+    "rule_revision_unchanged": true,
+    "product_code_changed": true,
+    "new_engine_tests": 12,
+    "tests_passed": 328,
+    "new_mode_complete_match_accepted": false,
+    "artwork_changed": false,
+    "functional_settings_and_preview_layout_changed": true,
+    "old_full_match_validation": "paused_user_requested_jobs_skipped",
+    "report": "review/gameplay/MODE_FOUNDATION_2026-10-05.md",
+    "browser_prepared_flows_passed": 13,
+    "mode_browser_previews_passed": 9,
+    "homepage_browser_sizes_passed": 7,
+    "short_phone_screenshots_visually_checked": true
+  },
+  "previous_validation_round": {
     "rules_changed": false,
     "rule_revision_unchanged": true,
     "product_code_changed": true,
@@ -299,44 +353,46 @@
       "formal_clock_after_opening_and_preparation"
     ]
   },
-  "previous_validation_round": {
-    "rules_changed": false,
-    "rule_revision_unchanged": true,
-    "product_code_changed": false,
-    "new_engine_tests": 0,
-    "browser_prepared_flows_passed": 11,
-    "full_match_natural_samples": 12,
-    "full_match_capped_incomplete": 1,
-    "initial_round_natural_samples": 9,
-    "initial_round_capped_incomplete": 3,
-    "rule_or_artwork_changes": false
-  },
   "previous_rule_revision": "LEZI-FUNCTION-2026-10-04-r1",
   "previous_rule_digest": "27191eba43cb10417e4e87ff09a5f6fb2aa890be9567ec710a171fb45ab67f35",
   "rule_digest_algorithm": "sha256(concat(relative UTF-8 path + NUL + file bytes + NUL), STATE.current_rules order)",
   "paused_next_action": "Continue destiny bomb/hourglass full real matches, second Shadow cooldown/lifecycle, remaining private snapshot and cross-end clock intersections. Current five active families have sampled natural results; original Nozdormu/Prince and current 12-seat normal regression remain incomplete. Local timeout outcome not frozen; physical RFCOMM/WebView/two-phone pending. UI last; APK paused.",
-  "work_status": "confirmed_mode_design_recorded_implementation_pending_previous_validation_paused",
+  "work_status": "base_mode_foundation_implemented_new_complete_modes_pending_independent_adaptation_previous_validation_paused",
   "game_modes": {
     "authority": "09_CURRENT_GAME_MODES.md",
     "base_rule_status": "confirmed",
     "implementation_status": {
-      "existing_jieqi": "implemented_partial_evidence",
-      "half_chaos_jieqi": "pending",
-      "standard_xiangqi": "pending"
+      "existing_jieqi": "implemented_regression_evidence",
+      "half_chaos_jieqi": "base_opening_movement_snapshot_and_preview_implemented_complete_mode_pending_adaptation",
+      "standard_xiangqi": "base_opening_movement_snapshot_and_preview_implemented_complete_mode_pending_adaptation"
     },
     "heroes_retained": true,
     "mutations_retained": true,
     "adaptation_strategy": "independent_per_mode_future_confirmation",
     "universal_special_rule_priority": "not_confirmed",
-    "chaos_interactions_in_new_modes": "pending_mode_adaptation"
+    "chaos_interactions_in_new_modes": "pending_mode_adaptation",
+    "selection": "settings_persisted_functional_control_with_public_base_opening_preview",
+    "new_mode_full_play_enabled": false,
+    "bluetooth_new_modes": "blocked_MODE_TRANSPORT_PENDING_protocol_v2_unchanged",
+    "new_mode_feature_guard": "reject_unadapted_enabled_heroes_or_mutation_before_mutation",
+    "new_mode_rematch_and_preparation": "pending_full_mode_adaptation"
   },
   "rule_update": {
     "classification": "addition",
     "rules_changed": true,
-    "product_code_changed": false,
+    "product_code_changed": true,
     "artwork_changed": false,
     "heroes_or_mutations_adapted": false,
-    "new_mode_tests_run": false,
-    "confirmation_record": "09_CURRENT_GAME_MODES.md"
-  }
+    "new_mode_tests_run": true,
+    "confirmation_record": "09_CURRENT_GAME_MODES.md",
+    "implementation_authorization": "user confirmation 2026-10-05 19:21 Asia/Shanghai",
+    "latest_round_semantic_rules_changed": false
+  },
+  "rule_digest_history": [
+    {
+      "revision": "LEZI-FUNCTION-2026-10-05-r2",
+      "digest": "17c458c031634cb2cb836b5b8311952a48b1534e7723bab6ba73f724ab8930af",
+      "scope": "mode confirmation before implementation status metadata update"
+    }
+  ]
 }

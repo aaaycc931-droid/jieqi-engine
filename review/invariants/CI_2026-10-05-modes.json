@@ -1,0 +1,84 @@
+{
+  "authority": "execution_evidence_non_normative",
+  "implementationCommit": "8b985a8f2bf8cd4ab96fdf63ab73894292cc6f7a",
+  "implementationTree": "7915bd1b05e9d3d1f8c0107930b6e1dc7e8106cb",
+  "ruleRevision": "LEZI-FUNCTION-2026-10-05-r2",
+  "engineTests": {
+    "passed": 328,
+    "failed": 0,
+    "executionFailed": false
+  },
+  "existingContractSummary": {
+    "total": 96,
+    "partial_evidence_passed": 93,
+    "failed_cases": 0,
+    "missing_tests": 0,
+    "non_runtime_contract": 3,
+    "fullyAccepted": 0
+  },
+  "existingContractRuleRevision": "LEZI-FUNCTION-2026-10-04-r1",
+  "ruleWeb": {
+    "status": "success",
+    "run": 37305279147,
+    "commit": "8b985a8f2bf8cd4ab96fdf63ab73894292cc6f7a",
+    "implementation_commit": "8b985a8f2bf8cd4ab96fdf63ab73894292cc6f7a",
+    "evidence_artifact": 11342459995,
+    "apk_job": "skipped",
+    "checkout_commit": "74a154dcf09172117bfe62f251a7af21b5376004",
+    "source_digest": "25843e4e60a80f9312a56d0c4cf9064f04673953623a67d146387241cd8629c3",
+    "source_digest_matches_local": true
+  },
+  "gameplayBrowser": {
+    "status": "success",
+    "run": 37305274311,
+    "commit": "8b985a8f2bf8cd4ab96fdf63ab73894292cc6f7a",
+    "artifact": 11342618893,
+    "case_count": 13,
+    "errors": 0,
+    "report": "review/gameplay/runtime-browser-review-2026-10-05-modes.json",
+    "scope": "existing_jieqi_prepared_state_original_DOM_regression",
+    "full_match_accepted": false,
+    "bluetooth_private_transport_accepted": false
+  },
+  "modeFoundationBrowser": {
+    "status": "success",
+    "run": 37305274311,
+    "commit": "8b985a8f2bf8cd4ab96fdf63ab73894292cc6f7a",
+    "artifact": 11343073411,
+    "case_count": 9,
+    "errors": 0,
+    "report": "review/gameplay/mode-browser-review-2026-10-05.json",
+    "scope": "three_real_base_opening_previews_by_three_phone_sizes_settings_persistence_reset_corrupt_preference_pending_entry_guards_existing_hero_and_Bluetooth_entry_regression",
+    "minimum_new_control_touch_height": 48,
+    "short_screen_close_action_visible": true,
+    "new_mode_complete_matches_accepted": false,
+    "observer": "review_server_response_only_read_only_flags_and_deadlines_no_fixture_loading_secret_identity_or_rng_override"
+  },
+  "homeBrowser": {
+    "run": 37305274329,
+    "artifact": 11343765130,
+    "cases": 7,
+    "pixelComparison": {
+      "excluded": "confirmed later-added settings control",
+      "comparedPixels": 1567727,
+      "changedPixels": 0,
+      "changedFraction": 0,
+      "meanChannelDifference": 0,
+      "maximumPixelDifference": 0
+    }
+  },
+  "appDigest": "ea04a8beaa5d45b94d7fd85d7482dc118d926a4c411789cea2564cab9809b424",
+  "androidSourceAssetsExactMatch": 117,
+  "oldFullMatchJobs": {
+    "run": 37305274311,
+    "full_match_browser": "skipped",
+    "active_match_browser": "skipped",
+    "reason": "user_paused_previous_queue_to_add_modes",
+    "accepted": false
+  },
+  "limits": [
+    "Core and preview foundation evidence only; new complete hero/mutation modes remain pending independent adaptation.",
+    "r1 contract evidence does not imply r2 full mode acceptance.",
+    "No APK, deployment, main merge or physical two-phone/WebView acceptance."
+  ]
+}

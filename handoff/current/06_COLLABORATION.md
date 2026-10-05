@@ -10,9 +10,9 @@
 
 实现对话（换过去的新对话）唯一维护正式规则与代码；英雄设计对话只写提案、评估，不改仓库，不把讨论稿当实现。不自动同步对话记忆。原实现对话在完成这次交接后停止代码写入，避免新实现对话与旧实现对话同时修改分支。
 
-设计提案至少包含 proposal_id、所基于 baseline_id/baseline_digest/current_rule_revision/current_digest、英雄 ID/名称、完整时机目标范围参数、次数冷却、是否占步、失败处理、秘密字段与公开字段、交叉/终局、时间轴、评分假设、待定项与明确用户确认记录。当前 baseline_id=LEZI-FUNCTION-2026-10-04-v1，baseline_digest=4bcf9fb91f5c6e41f456e7424ebd7ed09c6c07b1595ec825604aa730fdad020b；当前 revision=LEZI-FUNCTION-2026-10-05-r2，current_digest=17c458c031634cb2cb836b5b8311952a48b1534e7723bab6ba73f724ab8930af。
+设计提案至少包含 proposal_id、所基于 baseline_id/baseline_digest/current_rule_revision/current_digest、英雄 ID/名称、完整时机目标范围参数、次数冷却、是否占步、失败处理、秘密字段与公开字段、交叉/终局、时间轴、评分假设、待定项与明确用户确认记录。当前 baseline_id=LEZI-FUNCTION-2026-10-04-v1，baseline_digest=4bcf9fb91f5c6e41f456e7424ebd7ed09c6c07b1595ec825604aa730fdad020b；当前 revision=LEZI-FUNCTION-2026-10-05-r2，current_digest=b172c19d153ea140b8fc1e1bf981b25137a0a7e7c562a6b4fa291b957dedf178。
 
-用户将完整确认稿移交实现对话并明确要求接入后，做“提案所基于基线 → 当前 r1 → 提案”的比较，只采纳确认差分。保留当前风归位窒息规则。仓库 scripts/review/validate-hero-proposal.ts 是现有提案核验器；运行前读文件及其支持字段，不假设上述整理字段都已经写入校验器。
+用户将完整确认稿移交实现对话并明确要求接入后，做“提案所基于基线 → 当前规则 → 提案”的比较，只采纳确认差分。保留当前风归位窒息规则。仓库 scripts/review/validate-hero-proposal.ts 是现有提案核验器；运行前读文件及其支持字段，不假设上述整理字段都已经写入校验器。
 
 ## 每轮最小执行检查
 
@@ -25,7 +25,7 @@
 
 ## Git 恢复
 
-仓库 https://github.com/aaaycc931-droid/jieqi-engine；实现分支 codex/ui-android-apk-20261001；源码检查点 ffd2fb070c89d1d9eaae4d6cfce9112f151e5594；Draft PR #2。先看远端当前 SHA 和 PR，后续仅在该工作分支或隔离分支工作，不 force、不合并 main、不覆盖并发写入。旧本地 repo-audit 的 HEAD 与远端功能提交不一致且有历史修改，不 reset、不批量提交整棵工作树。首次恢复交接的导航整理只选择对应文本；本轮实现与测试增量见 review/invariants/ROUND_2026-10-05.md，不据这条历史说明限制已授权实现。
+仓库 https://github.com/aaaycc931-droid/jieqi-engine；实现分支 codex/ui-android-apk-20261001；源码检查点 8b985a8f2bf8cd4ab96fdf63ab73894292cc6f7a；Draft PR #2。先看远端当前 SHA 和 PR，后续仅在该工作分支或隔离分支工作，不 force、不合并 main、不覆盖并发写入。旧本地 repo-audit 的 HEAD 与远端功能提交不一致且有历史修改，不 reset、不批量提交整棵工作树。首次恢复交接的导航整理只选择对应文本；本轮实现与测试增量见 review/invariants/ROUND_2026-10-05.md，不据这条历史说明限制已授权实现。
 
 根目录旧 PARALLEL_HERO_DESIGN 的“4d985 只有3英雄”属于被替换进度；新对话读本文件与 05 的 12英雄检查点。未获正式移交的外对话草案仍不实现。
 
