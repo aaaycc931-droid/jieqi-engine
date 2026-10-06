@@ -1,3 +1,4 @@
+import { isBoardPiece, isGround, isRiver } from "./spaces.ts";
 import {
   getController,
   getCurrentPieceType,
@@ -31,14 +32,14 @@ export interface PublicMoveOptions {
 }
 
 export function samePosition(first: Position, second: Position): boolean {
-  return first.x === second.x && first.y === second.y;
+  return !isRiver(first) && !isRiver(second) && first.x === second.x && first.y === second.y;
 }
 
 export function pieceAt(
   state: Pick<GameState, "pieces">,
   position: Position,
 ): PublicPiece | undefined {
-  return state.pieces.find((piece) => piece.layer !== "air" && samePosition(piece, position));
+  return state.pieces.find((piece) => isGround(piece) && samePosition(piece, position));
 }
 
 export function pieceById(
@@ -100,7 +101,7 @@ function movementGeometryLegal(
   to: Position,
   forAttack = false,
 ): boolean {
-  if (!isInsideBoard(to) || samePosition(piece, to)) return false;
+  if (!isBoardPiece(piece) || !isInsideBoard(to) || samePosition(piece, to)) return false;
 
   const { side, type } = getMovementIdentity(piece);
   const mutation = state.featureRules?.mutation;
@@ -209,7 +210,7 @@ export function getPseudoMoves(
   pieceId: string,
 ): Position[] {
   const source = pieceById(state, pieceId);
-  if (!source) return [];
+  if (!source || !isBoardPiece(source)) return [];
   const result: Position[] = [];
   for (let y = 0; y <= 9; y += 1) {
     for (let x = 0; x <= 8; x += 1) {
@@ -231,11 +232,11 @@ export function canRevealedPieceAttack(
   position: Position,
 ): boolean {
   // 潜行者来源无形不产生有效将军；一般无形仅限制直接选取。
-  if (state.effectsByPieceId?.[piece.id]?.stealth || piece.layer === "air") return false;
+  if (!isGround(piece) || isRiver(position) || state.effectsByPieceId?.[piece.id]?.stealth) return false;
   if (princeProtects(state as GameState, otherSide(piece.color)) && ownHalf(otherSide(piece.color), piece)) return false;
   if (hasStealthEffect(state, pieceAt(state, position)?.id ?? "")) return false;
   if (state.featureRules?.mutation === "war_chariot" && getCurrentPieceType(piece) === "rook") {
-    const ownGeneral = state.pieces.find(p => !p.faceDown && p.color === piece.color && p.type === "general");
+    const ownGeneral = state.pieces.find(p => isGround(p) && !p.faceDown && p.color === piece.color && p.type === "general");
     const dx = Math.sign(position.x - piece.x), dy = Math.sign(position.y - piece.y);
     if (ownGeneral && countPiecesBetween(state, piece, position) === 1 &&
       (dx === 0 && ownGeneral.x === piece.x && (ownGeneral.y - piece.y) * dy > 0 && (position.y - ownGeneral.y) * dy > 0 ||
@@ -291,6 +292,7 @@ export function isGeneralInCheck(
   side: Side,
 ): boolean {
   const general = findGeneral(state, side);
+  if (isRiver(general)) return false;
   return isSquareAttacked(state, general, otherSide(side));
 }
 
@@ -340,6 +342,7 @@ export function validatePublicMove(
   if (!source) {
     return { ok: false, code: "NO_PIECE", message: "起点没有棋子" };
   }
+  if (!isBoardPiece(source)) return { ok: false, code: "RIVER_ACTION_REQUIRED", message: "河道棋须按来源专属规则行动" };
   if (!samePosition(source, move.from)) return { ok: false, code: "INVALID_SOURCE", message: "棋子ID与起点不符" };
   if (getController(source) !== actingSide) {
     return { ok: false, code: "NOT_CONTROLLED", message: "该棋子不由行动方控制" };
@@ -393,7 +396,7 @@ export function getLegalMoves(
   options: PublicMoveOptions = {},
 ): Position[] {
   const source = pieceById(state, pieceId);
-  if (!source || getController(source) !== actingSide) return [];
+  if (!source || !isBoardPiece(source) || getController(source) !== actingSide) return [];
   return getPseudoMoves(state, pieceId).filter(
     (to) => validatePublicMove(state, { from: source, to, pieceId: source.id }, actingSide, options).ok,
   );
@@ -408,7 +411,7 @@ export function getLegalAssassinationMoves(
   actingSide: Side = state.turn,
 ): Position[] {
   const source = pieceById(state, pieceId);
-  if (!source || getController(source) !== actingSide) return [];
+  if (!source || !isBoardPiece(source) || getController(source) !== actingSide) return [];
   if (source.faceDown || source.type === "general") return [];
   const activePieceId = state.assassination?.[actingSide]?.activePieceId;
   const continuing = activePieceId === source.id;
@@ -435,7 +438,7 @@ export function hasAnyLegalMove(state: GameState, side: Side): boolean {
   const stateForSide: GameState = { ...state, status: "playing", turn: side };
   return stateForSide.pieces.some(
     (piece) =>
-      getController(piece) === side &&
+      isBoardPiece(piece) && getController(piece) === side &&
       getLegalMoves(stateForSide, piece.id, side).length > 0,
   );
 }

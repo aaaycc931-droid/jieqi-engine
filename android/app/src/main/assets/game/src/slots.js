@@ -1,3 +1,4 @@
+import { isRiver } from "./spaces.js";
 import { RuleError } from "./errors.js";
 
 
@@ -76,6 +77,11 @@ export function requireCoveredSlot(x        , y        )              {
 }
 
 export function getController(piece             )       {
+  if (piece.faceDown && isRiver(piece)) {
+    const controller = piece.river?.coveredIdentity?.controller;
+    if (!controller) throw new RuleError("UNDEFINED_RIVER_CONTROL", "河道暗子的公开控制关系须由来源定义");
+    return controller;
+  }
   return piece.faceDown
     ? requireCoveredSlot(piece.x, piece.y).side
     : piece.color;
@@ -86,6 +92,11 @@ export function getController(piece             )       {
  * 非基础棋位须由允许该特殊移置的来源定义；公共层不提供秘密身份兜底。
  */
 export function getDarkIdentity(piece              )                                {
+  if (isRiver(piece)) {
+    const type = piece.river?.coveredIdentity?.type;
+    if (!type) throw new RuleError("UNDEFINED_DARK_IDENTITY", "河道暗子的【暗置身份】须由来源定义");
+    return type;
+  }
   const slot = getCoveredSlot(piece.x, piece.y);
   if (!slot) {
     throw new RuleError(
@@ -120,7 +131,7 @@ export function createGeneral(side      )                {
 }
 
 export function isInsideBoard(position          )          {
-  return (
+  return !isRiver(position) && (
     Number.isInteger(position.x) &&
     Number.isInteger(position.y) &&
     position.x >= 0 &&
@@ -135,6 +146,7 @@ export function otherSide(side      )       {
 }
 
 export function isInPalace(position          , side      )          {
+  if (isRiver(position)) return false;
   if (position.x < 3 || position.x > 5) return false;
   return side === "red"
     ? position.y >= 7 && position.y <= 9
@@ -142,5 +154,6 @@ export function isInPalace(position          , side      )          {
 }
 
 export function isAcrossRiver(position          , side      )          {
+  if (isRiver(position)) return false;
   return side === "red" ? position.y <= 4 : position.y >= 5;
 }

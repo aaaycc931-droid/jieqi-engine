@@ -1,3 +1,4 @@
+import { isBoardPiece, isGround } from "./spaces.js";
 import { RuleError } from "./errors.js";
 import { applyAuthoritativeMove } from "./game.js";
 import { getController, getCurrentPieceType, isInPalace, otherSide } from "./slots.js";
@@ -11,7 +12,7 @@ function requireRule(ok         , code        , text        )             {
 }
 /** 明子模式直接指定目标；当前承载者 ID 只能由拥有者的私有视图提供。 */
 export function getShadowRevealedTargets(state           , side      , currentGeneralId         ) {
-  return state.pieces.filter(p => !p.faceDown && p.color === side && p.id !== currentGeneralId && !hasStealthEffect(state, p.id));
+  return state.pieces.filter(p => isBoardPiece(p) && !p.faceDown && p.color === side && p.id !== currentGeneralId && !hasStealthEffect(state, p.id));
 }
 export function formalTurnDurationMs(state           , side      )         {
   if (state.featureRules?.mutation === "end_time" && formalTurn(state, side) === 0) return 75_000;
@@ -72,7 +73,7 @@ export function applyHeroAbility(state           , secret             , command 
       break;
     case "unspeakable": {
       requireRule(hero === "devout_zealot" && runtime.invokeCount === 4, "NOT_DESCENDED", "迦拉克隆尚未降临");
-      const targets = s.pieces.filter(p => !p.faceDown && p.color !== side && p.type !== "general");
+      const targets = s.pieces.filter(p => isBoardPiece(p) && !p.faceDown && p.color !== side && p.type !== "general");
       const home = targets.filter(p => side === "red" ? p.y >= 5 : p.y <= 4);
       const pool = home.length ? home : targets;
       requireRule(pool.length, "NO_TARGET", "没有合法处决目标");
@@ -82,7 +83,7 @@ export function applyHeroAbility(state           , secret             , command 
     }
     case "destruction": {
       requireRule(hero === "deathwing", "WRONG_HERO", "英雄没有毁灭技能"); once(); runtime.used = true;
-      const locked = s.pieces.filter(p => getCurrentPieceType(p) !== "general");
+      const locked = s.pieces.filter(p => isBoardPiece(p) && getCurrentPieceType(p) !== "general");
       const committed = locked.filter(() => randomInt(2) === 0).map(p => ({ pieceId: p.id, by: side, cause: "destruction" }));
       destroyPieceBatch(s, k, `${command.actionId}:destruction`, "deathwing:destruction", committed);
       endsTurn = true;
@@ -93,7 +94,7 @@ export function applyHeroAbility(state           , secret             , command 
       const previous = previousFormalAction(k);
       requireRule(previous && previous.actingSide === otherSide(side) && isOrdinaryFormalAction(previous) && previous.pieceId && previous.from, "NOT_PREVIOUS_ORDINARY", "只能操控对手紧接上一正式俗手的存活棋");
       const p = s.pieces.find(p => p.id === previous.pieceId);
-      requireRule(p && command.to, "NO_TARGET", "目标已死亡或缺少重走落点");
+      requireRule(p && isBoardPiece(p) && command.to, "NO_TARGET", "目标已死亡或缺少重走落点");
       runtime.used = true;
       rememberAction(beforeAction, k, p.id, 3, { x: p.x, y: p.y }, now, classification);
       const returned = relocatePiece(s, k, p.id, previous.from, "timeline_twist");
@@ -133,8 +134,8 @@ export function applyHeroAbility(state           , secret             , command 
       requireRule((s.hourglasses ?? 0) > 0, "SKILL_USED", "沙漏已耗尽");
       s.hourglasses --;
       // 候选和锚点合法性先冻结；不在净化后重试被扭曲或占据的锚点。
-      const candidates = Object.entries(k.destinyIdentities ?? {}).filter(([, d]) => d.kind === "time_warrior" && d.shown);
-      const eligible = candidates.filter(([id, d]) => !s.pieces.some(p => samePosition(p, d.anchor)) && !s.warps?.some(w => samePosition(w, d.anchor)) && placementAllowed(s, { id, ...d.anchor, faceDown: false, ...d.identity }, d.anchor));
+      const candidates = Object.entries(k.destinyIdentities ?? {}).filter(([id, d]) => d.kind === "time_warrior" && d.shown && !s.pieces.some(p => p.id === id && !isBoardPiece(p)));
+      const eligible = candidates.filter(([id, d]) => !s.pieces.some(p => isBoardPiece(p) && samePosition(p, d.anchor)) && !s.warps?.some(w => samePosition(w, d.anchor)) && placementAllowed(s, { id, ...d.anchor, faceDown: false, ...d.identity }, d.anchor));
       for (const [id, d] of eligible) {
         const living = s.pieces.find(p => p.id === id);
         if (living) { living.x = d.anchor.x; living.y = d.anchor.y; }
@@ -148,8 +149,8 @@ export function applyHeroAbility(state           , secret             , command 
       }
       settleLandings(s, k);
       s.warps = [];
-      for (const e of Object.values(s.effectsByPieceId ?? {})) delete e.timeCollapse;
-      for (const p of s.pieces) if (k.destinyIdentities?.[p.id]?.kind === "infinite_dragon" && k.destinyIdentities[p.id].shown) {
+      for (const [id, e] of Object.entries(s.effectsByPieceId ?? {})) if (!s.pieces.some(p => p.id === id && !isBoardPiece(p))) delete e.timeCollapse;
+      for (const p of s.pieces) if (isBoardPiece(p) && k.destinyIdentities?.[p.id]?.kind === "infinite_dragon" && k.destinyIdentities[p.id].shown) {
         s.effectsByPieceId ??= {}; s.effectsByPieceId[p.id] = { ...s.effectsByPieceId[p.id], ammunition: 1 };
       }
       break;
@@ -157,14 +158,14 @@ export function applyHeroAbility(state           , secret             , command 
     case "bomb": {
       requireRule(hero === "murozond" && s.featureRules?.mutation === "end_time", "NO_DESTINY", "只有无限龙可以投弹");
       const p = s.pieces.find(p => p.id === command.pieceId), d = command.pieceId ? k.destinyIdentities?.[command.pieceId] : undefined;
-      requireRule(p && d?.kind === "infinite_dragon" && d.shown && getController(p) === side && s.effectsByPieceId?.[p.id]?.ammunition === 1 && command.to, "INVALID_BOMBER", "需要已现身的己方无限龙及一枚弹药");
+      requireRule(p && isBoardPiece(p) && d?.kind === "infinite_dragon" && d.shown && getController(p) === side && s.effectsByPieceId?.[p.id]?.ammunition === 1 && command.to, "INVALID_BOMBER", "需要已现身的己方无限龙及一枚弹药");
       requireRule(!k.processedActions[`bomb:turn:${side}:${formalTurn(s, side)}`], "BOMB_TURN_LIMIT", "每个正式回合全军最多投放一枚");
       const to = command.to;
       requireRule(to.x >= 0 && to.x <= 8 && to.y >= 0 && to.y <= 9 && !samePosition(p, to) && Math.abs(p.x - to.x) + Math.abs(p.y - to.y) <= 3 && !s.warps?.some(w => samePosition(w, to)), "INVALID_BOMB_TARGET", "目标须在曼哈顿距离3内且非自身或已有扭曲");
       s.effectsByPieceId [p.id].ammunition = 0;
       s.warps ??= []; s.warps.push({ ...to });
       k.processedActions[`bomb:turn:${side}:${formalTurn(s, side)}`] = s.revision + 1;
-      for (const q of s.pieces.filter(q => q.layer !== "air" && samePosition(q, to) && getController(q) !== side)) queueLanding(s, q, getController(q), "bomb_hit");
+      for (const q of s.pieces.filter(q => isGround(q) && samePosition(q, to) && getController(q) !== side)) queueLanding(s, q, getController(q), "bomb_hit");
       settleLandings(s, k);
       break;
     }
@@ -174,7 +175,7 @@ export function applyHeroAbility(state           , secret             , command 
       requireRule(wind && wind.uses < 2 && formalTurn(s, side) >= wind.readyOnTurn && wind.activatedOnTurn !== formalTurn(s, side), "SHADOW_UNAVAILABLE", "影尚在冷却或次数已用完");
       // 随机暗子不是直接指定，无形仍可进入该池；明子选择遵守无形目标限制。
       const pool = command.randomCovered
-        ? s.pieces.filter(p => p.id !== (wind.hostId ?? wind.decoyId) && p.faceDown && effectiveIdentity(p, k).color === side)
+        ? s.pieces.filter(p => isBoardPiece(p) && p.id !== (wind.hostId ?? wind.decoyId) && p.faceDown && effectiveIdentity(p, k).color === side)
         : getShadowRevealedTargets(s, side, wind.hostId ?? wind.decoyId);
       const host = command.randomCovered ? pool[randomInt(pool.length)] : pool.find(p => p.id === command.pieceId);
       requireRule(host, "INVALID_SHADOW_TARGET", "请选择己方合法明棋或随机己方真实阵营暗子");

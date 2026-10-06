@@ -1,3 +1,4 @@
+import { isBoardPiece } from "../src/spaces.js";
 import { HERO_IDS, HERO_CATALOG as heroCatalog } from "../src/heroes.js";
 import { applyHeroAbility, getShadowRevealedTargets, startFormalClock, formalTurnDurationMs } from "../src/hero-actions.js";
 import { initializeFeatureSecret } from "../src/settlement.js";
@@ -2589,7 +2590,7 @@ function renderBoard()       {
       : (gameState.flowDance ? getFlowDanceMoves(gameState, selectedPieceId) : getLegalMoves(gameState, selectedPieceId))
     : [];
   const legalKeys = new Set(legalMoves.map(positionKey));
-  const pieces = new Map(gameState.pieces.map((piece) => [positionKey(piece), piece]));
+  const pieces = new Map(gameState.pieces.filter(isBoardPiece).map((piece) => [positionKey(piece), piece]));
   const lastMove = gameState.lastMove;
   const executionPlan = gameState.status === "execution"
     ? getAutomaticExecutionPlan(gameState)
@@ -3726,7 +3727,7 @@ function showBaseModePreview()       {
       const cell = row.insertCell();
       cell.dataset.x = String(x); cell.dataset.y = String(y);
       cell.style.cssText = "height:22px;padding:0;border:1px solid rgba(45,26,20,.2)";
-      const piece = state.pieces.find(p => p.x === x && p.y === y);
+      const piece = state.pieces.find(p => isBoardPiece(p) && p.x === x && p.y === y);
       if (!piece) continue;
       cell.dataset.faceDown = String(piece.faceDown);
       cell.textContent = piece.faceDown ? "暗" : pieceLabel[piece.color][piece.type];
@@ -3747,7 +3748,7 @@ function openHeroAbility(ability                               )       {
   const ownWind = bluetooth ? bluetooth.view?.ownHeroSecrets?.wind : localPrivateViewerSide === gameState.turn ? gameSecret?.wind?.[gameState.turn] : undefined;
   const eligible = ability === "shadow"
     ? getShadowRevealedTargets(gameState, gameState.turn, ownWind?.hostId ?? ownWind?.decoyId)
-    : gameState.pieces.filter(p => ability === "bomb" && !p.faceDown && p.color === gameState .turn && gameState .effectsByPieceId?.[p.id]?.destiny === "infinite_dragon");
+    : gameState.pieces.filter(p => isBoardPiece(p) && ability === "bomb" && !p.faceDown && p.color === gameState .turn && gameState .effectsByPieceId?.[p.id]?.destiny === "infinite_dragon");
   if (ability === "shadow") piece.add(new Option("随机己方真实阵营暗子", "random_covered"));
   for (const p of eligible) piece.add(new Option(`${p.faceDown ? "暗棋" : pieceLabel[p.color][p.type]} (${p.x},${p.y})`, p.id));
   if (ability === "shadow" || ability === "bomb") controls.append(piece);

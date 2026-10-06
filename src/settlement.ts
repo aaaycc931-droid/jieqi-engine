@@ -1,9 +1,11 @@
+import { boardPieces, isBoardPiece, isFlying, isGround, isRiver, mayReadRiver } from "./spaces.ts";
+export { isGround } from "./spaces.ts";
 import { RuleError } from "./errors.ts";
 import { requireModeFeatureAdaptation } from "./modes.ts";
-import { getController, isInPalace, isInsideBoard, otherSide } from "./slots.ts";
+import { getController, getCurrentPieceType, isInPalace, isInsideBoard, otherSide } from "./slots.ts";
 import { isCheckmate, isGeneralInCheck, isStalemate, pieceAt, samePosition } from "./rules.ts";
 import { enterTurnPhase } from "./turns.ts";
-import type { ActionClassification, CapturedPiece, ClosedDestructionBatch, DestructionTarget, GameState, Position, PublicPiece, RandomInt, SecretIdentity, SecretState, Side } from "./types.ts";
+import type { ActionClassification, CapturedPiece, ClosedDestructionBatch, DestructionTarget, GameState, Position, PublicPiece, RandomInt, RiverLocation, RiverReadPermission, SecretIdentity, SecretState, Side } from "./types.ts";
 
 // 仅同步权威结算栈持有开放批次；不能进入公共/秘密快照或历史恢复。
 const openDestructionBatches = new WeakMap<GameState, { batchId: string; targets: DestructionTarget[] }>();
@@ -12,7 +14,7 @@ function requireClosedDestructionBatch(state: GameState): void {
 }
 
 /** 冻结承诺、预检死亡身份，整批完成后才开放后续触发。不会重新扫描棋盘。 */
-export function destroyPieceBatch(state: GameState, secret: SecretState, batchId: string, source: string, targets: readonly DestructionTarget[]): ClosedDestructionBatch {
+export function destroyPieceBatch(state: GameState, secret: SecretState, batchId: string, source: string, targets: readonly DestructionTarget[], permission?: RiverReadPermission): ClosedDestructionBatch {
   requireClosedDestructionBatch(state);
   const prior = state.destructionBatches?.find(b => b.batchId === batchId);
   const locked = copy([...targets]);
@@ -24,12 +26,12 @@ export function destroyPieceBatch(state: GameState, secret: SecretState, batchId
   // 缺失真实身份不能留下半批死亡；仅预检仍存活且能被本来源消灭的对象。
   for (const t of locked) {
     const p = state.pieces.find(p => p.id === t.pieceId);
-    if (p && !(t.cause === "crush" && (!isGround(p) || state.effectsByPieceId?.[p.id]?.immuneCrush))) effectiveIdentity(p, secret);
+    if (p && (isBoardPiece(p) || mayReadRiver(permission)) && !(t.cause === "crush" && (!isGround(p) || state.effectsByPieceId?.[p.id]?.immuneCrush))) effectiveIdentity(p, secret);
   }
   const batch: ClosedDestructionBatch = { batchId, source, targets: locked, targetIds: locked.map(t => t.pieceId), destroyedIds: [], phase: "closed" };
   openDestructionBatches.set(state, { batchId, targets: locked });
   try {
-    for (const t of locked) if (destroyPiece(state, secret, t.pieceId, t.by, t.cause)) batch.destroyedIds.push(t.pieceId);
+    for (const t of locked) if (destroyPiece(state, secret, t.pieceId, t.by, t.cause, permission)) batch.destroyedIds.push(t.pieceId);
     (state.destructionBatches ??= []).push(batch);
   } finally {
     openDestructionBatches.delete(state);
@@ -38,7 +40,6 @@ export function destroyPieceBatch(state: GameState, secret: SecretState, batchId
 }
 
 export const copy = <T>(value: T): T => structuredClone(value);
-export const isGround = (piece: PublicPiece): boolean => piece.layer !== "air";
 export const formalTurn = (state: GameState, side: Side): number => state.formalTurns?.[side] ?? 0;
 /**
  * 权威端真实身份读取，仅供明确要求真实身份或执行死亡揭示的来源。
@@ -55,7 +56,7 @@ export function initializeFeatureSecret(state: GameState, secret: SecretState, r
   requireModeFeatureAdaptation(state.gameMode, state.featureRules);
   secret.trueGenerals ??= {};
   for (const side of ["red", "black"] as const) {
-    const general = state.pieces.find(p => !p.faceDown && p.type === "general" && p.color === side);
+    const general = state.pieces.find(p => isBoardPiece(p) && !p.faceDown && p.type === "general" && p.color === side);
     if (general) secret.trueGenerals[side] ??= general.id;
     if (state.featureRules?.heroes?.[side] === "wind" && general) {
       secret.wind ??= {};
@@ -66,7 +67,7 @@ export function initializeFeatureSecret(state: GameState, secret: SecretState, r
     secret.destinyIdentities = {};
     state.hourglasses = 5;
     state.warps = [];
-    for (const p of state.pieces) {
+    for (const p of boardPieces(state)) {
       const identity = effectiveIdentity(p, secret);
       if (identity.type !== "pawn") continue;
       const hero = state.featureRules.heroes?.[identity.color];
@@ -81,6 +82,7 @@ export function initializeFeatureSecret(state: GameState, secret: SecretState, r
 
 export function markRevealed(state: GameState, secret: SecretState, id: string): void {
   const p = state.pieces.find(p => p.id === id);
+  if (p && !isBoardPiece(p)) return;
   if (p && !p.faceDown && p.type === "horse" && state.featureRules?.mutation === "cavalry") {
     state.effectsByPieceId ??= {};
     state.effectsByPieceId[id] = { ...state.effectsByPieceId[id], cavalry: true };
@@ -97,18 +99,18 @@ export function markRevealed(state: GameState, secret: SecretState, id: string):
 }
 
 /** 所有实际消灭统一记录；不会先清状态来绕过目标资格。 */
-export function destroyPiece(state: GameState, secret: SecretState, id: string, by: Side, cause: string): CapturedPiece | undefined {
+export function destroyPiece(state: GameState, secret: SecretState, id: string, by: Side, cause: string, permission?: RiverReadPermission): CapturedPiece | undefined {
   const batch = openDestructionBatches.get(state);
   if (batch && !batch.targets.some(t => t.pieceId === id && t.by === by && t.cause === cause)) throw new RuleError("UNCOMMITTED_BATCH_TARGET", "不能向开放消灭批次追加对象");
   const victim = state.pieces.find(p => p.id === id);
-  if (!victim) return;
+  if (!victim || !isBoardPiece(victim) && !mayReadRiver(permission)) return;
   if (cause === "crush" && (!isGround(victim) || state.effectsByPieceId?.[id]?.immuneCrush)) return;
   const controller = getController(victim);
   const identity = effectiveIdentity(victim, secret);
   const withheld = victim.faceDown && state.featureRules?.mutation === "chaos";
   const record: CapturedPiece = {
     id, ...identity, ...(withheld ? { color: controller, secretColorWithheld: true as const } : {}),
-    capturedBy: by, moveNumber: state.revision + 1, cause, position: { x: victim.x, y: victim.y },
+    capturedBy: by, moveNumber: state.revision + 1, cause, ...(isRiver(victim) ? { river: copy(victim.river) } : { position: { x: victim.x, y: victim.y } }),
   };
   state.captured.push(record);
   state.pieces = state.pieces.filter(p => p.id !== id);
@@ -128,19 +130,20 @@ export function queueLanding(state: GameState, piece: PublicPiece, beforeControl
   state.landingEvents.push({ pieceId: piece.id, beforeController, position: { x: piece.x, y: piece.y }, source });
 }
 
-export function placementAllowed(state: GameState, piece: PublicPiece, to: Position, options: { warriorReturn?: boolean; flow?: boolean } = {}): boolean {
-  if (!isInsideBoard(to)) return false;
-  const occupied = state.pieces.some(p => p.id !== piece.id && p.layer === piece.layer && samePosition(p, to));
+export function placementAllowed(state: GameState, piece: PublicPiece, to: Position, options: { warriorReturn?: boolean; flow?: boolean; fromRiver?: Side } = {}): boolean {
+  if (!isBoardPiece(piece) || !isInsideBoard(to)) return false;
+  const occupied = state.pieces.some(p => p.id !== piece.id && isBoardPiece(p) && p.layer === piece.layer && samePosition(p, to));
   if (occupied) return false;
+  const controller = options.fromRiver ?? getController(piece);
   if (state.featureRules?.mutation === "iron_wall" && !options.flow && !options.warriorReturn &&
-    !isInPalace(piece, otherSide(getController(piece))) && isInPalace(to, otherSide(getController(piece)))) return false;
+    (options.fromRiver !== undefined || !isInPalace(piece, otherSide(controller))) && isInPalace(to, otherSide(controller))) return false;
   return true;
 }
 
 export function relocatePiece(state: GameState, secret: SecretState, id: string, to: Position, source: string, options: { warriorReturn?: boolean; flow?: boolean } = {}): boolean {
   requireClosedDestructionBatch(state);
   const p = state.pieces.find(p => p.id === id);
-  if (!p || !placementAllowed(state, p, to, options)) return false;
+  if (!p || !isBoardPiece(p) || !placementAllowed(state, p, to, options)) return false;
   const controller = getController(p);
   p.x = to.x; p.y = to.y;
   queueLanding(state, p, controller, source);
@@ -222,10 +225,10 @@ export function resolveWindReturn(state: GameState, secret: SecretState, executo
     if (!w?.hostId || state.pieces.some(p => p.id === w.decoyId)) continue;
     const host = state.pieces.find(p => p.id === w.hostId);
     const death = state.captured.find(p => p.id === w.decoyId);
-    if (!host || !death?.position) continue;
+    if (!host || !isBoardPiece(host) || !death?.position) continue;
     if (executor) {
       const attacker = state.pieces.find(p => p.id === executor.pieceId);
-      if (attacker) { attacker.x = executor.from.x; attacker.y = executor.from.y; queueLanding(state, attacker, getController(attacker), "execution_return"); }
+      if (attacker && isBoardPiece(attacker)) { attacker.x = executor.from.x; attacker.y = executor.from.y; queueLanding(state, attacker, getController(attacker), "execution_return"); }
     }
     const occupant = pieceAt(state, death.position);
     const returnedGeneral: PublicPiece = { id: host.id, ...death.position, faceDown: false, color: side, type: "general" };
@@ -288,7 +291,7 @@ export function beginFormalTurn(state: GameState, secret?: SecretState, randomIn
   }
   if (secret && (secret.formalStart?.side !== side || secret.formalStart.number !== number)) {
     if (state.featureRules?.mutation === "chaos") {
-      for (const p of state.pieces) if (p.faceDown) secret.identities[p.id].color = randomInt(2) === 0 ? "red" : "black";
+      for (const p of boardPieces(state)) if (p.faceDown) secret.identities[p.id].color = randomInt(2) === 0 ? "red" : "black";
       secret.chaosInitialized = true;
     }
     secret.formalStart = { side, number };
@@ -326,7 +329,7 @@ export function finishFormalTurn(state: GameState, secret: SecretState, actingSi
   let newEventStart = state.automaticEvents?.length ?? 0;
   for (const [id, e] of Object.entries(state.effectsByPieceId ?? {})) {
     const p = state.pieces.find(p => p.id === id);
-    if (!p) continue;
+    if (!p || !isBoardPiece(p)) continue;
     if (e.barrier && e.barrier.owner !== actingSide && --e.barrier.enemyTurnsRemaining <= 0) delete e.barrier;
     if (e.controlTrap && e.controlTrap.controller === actingSide && e.controlTrap.blockedFormalTurn <= formalTurn(state, actingSide)) delete e.controlTrap;
     if (!isGround(p)) { delete e.infection; delete e.timeCollapse; }
@@ -352,6 +355,7 @@ export function finishFormalTurn(state: GameState, secret: SecretState, actingSi
   generateGhosts(state, newEventStart);
   for (const [id, e] of Object.entries(state.effectsByPieceId ?? {})) {
     const p = state.pieces.find(p => p.id === id);
+    if (p && !isBoardPiece(p)) continue;
     if (e.infection && (!p || !state.ghosts?.some(g => g.owner === e.infection!.owner && samePosition(g.position, p)))) delete e.infection;
   }
   resolveWindReturn(state, secret);
@@ -363,7 +367,7 @@ export function finishFormalTurn(state: GameState, secret: SecretState, actingSi
 export function landFlyingPiece(state: GameState, secret: SecretState, id: string): void {
   requireClosedDestructionBatch(state);
   const p = state.pieces.find(p => p.id === id);
-  if (!p || isGround(p)) return;
+  if (!p || !isFlying(p)) return;
   const controller = getController(p);
   const under = state.pieces.find(q => isGround(q) && samePosition(q, p));
   if (under) destroyPiece(state, secret, under.id, controller, "crush");
@@ -392,4 +396,44 @@ export function rememberAction(state: GameState, secret: SecretState, pieceId: s
   secret.history.push({ actingSide: state.turn, pieceId, tier, ...(classification ? { classification: copy(classification), formalTurnNumber: formalTurn(state, state.turn) + 1 } : {}), ...(from ? { from: { ...from } } : {}), ...(remainingMs === undefined ? {} : { remainingMs }), state: copy(state), secret: privateSnapshot });
   // 至少保留双方上一正式行动。较长历史用于核验，快照不会指数膨胀。
   if (secret.history.length > 8) secret.history.shift();
+}
+
+/** 已确认来源调用此公共转换；进出资格、河格占用与连通由来源自己验证。 */
+export function enterRiverSpace(state: GameState, secret: SecretState, id: string, location: RiverLocation): boolean {
+  requireClosedDestructionBatch(state);
+  const p = state.pieces.find(p => p.id === id);
+  if (!p) return false;
+  if (isRiver(p)) throw new RuleError("RIVER_SOURCE_TRANSITION", "河道内移置须由来源定义，不能当作再次入河");
+  if (isFlying(p) || state.effectsByPieceId?.[id]?.flight) throw new RuleError("RIVER_FLIGHT_EXCLUSIVE", "河道与飞行互斥");
+  if (![location.source, location.spaceId, location.cellId].every(v => typeof v === "string" && v.trim())) throw new RuleError("INVALID_RIVER_LOCATION", "河道位置须具有来源、空间和格标识");
+  const candidate: PublicPiece = { ...p, layer: "river", river: copy(location) };
+  if (candidate.faceDown) { getController(candidate); /* 不得以旧棋盘位置或秘密身份兜底。 */ }
+  if (candidate.faceDown && !location.coveredIdentity?.type) throw new RuleError("UNDEFINED_DARK_IDENTITY", "来源须定义河道暗置身份");
+  Object.assign(p, candidate);
+  // 两者既有有效性均依赖地面。其余状态不额外驱散，也不自设河道持续。
+  const e = state.effectsByPieceId?.[id];
+  if (e) { delete e.infection; delete e.timeCollapse; }
+  return true;
+}
+
+/** 来源已确认出河后恢复地面，再按既有正常落位结算；非法棋位不自作窒息。 */
+export function leaveRiverSpace(state: GameState, secret: SecretState, id: string, to: Position, source: string): boolean {
+  requireClosedDestructionBatch(state);
+  const p = state.pieces.find(p => p.id === id);
+  if (!p || !isRiver(p) || !source.trim()) return false;
+  const beforeController = getController(p);
+  const candidate: PublicPiece = { ...p, ...to };
+  delete candidate.layer; delete candidate.river;
+  if (!placementAllowed(state, candidate, to, { fromRiver: beforeController })) return false;
+  // 暗子回到普通棋位后使用新的基础棋位，不继承河道身份；未定义棋位拒绝。
+  if (candidate.faceDown && !isInsideBoard(candidate)) return false;
+  if (candidate.faceDown) {
+    // 无来源自定义棋盘暗身份机制时，基础层必须拒绝非基础暗子位置。
+    getCurrentPieceType(candidate);
+  }
+  delete p.layer; delete p.river;
+  p.x = to.x; p.y = to.y;
+  queueLanding(state, p, beforeController, source);
+  settleLandings(state, secret);
+  return true;
 }

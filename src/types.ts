@@ -43,9 +43,20 @@ export interface Position {
   y: number;
 }
 
+/** 来源专属格标识；基础层不定义第11行、邻接或容量。 */
+export interface RiverLocation {
+  source: string;
+  spaceId: string;
+  cellId: string;
+  /** 暗子位于非基础空间时，须由来源明确提供公开身份与控制关系。 */
+  coveredIdentity?: { type: Exclude<PieceType, "general">; controller: Side };
+}
+export interface RiverReadPermission { source: string; readRiver: true }
+
 export interface PieceBase extends Position {
   id: string;
-  layer?: "air";
+  layer?: "air" | "river";
+  river?: RiverLocation;
 }
 
 export type CoveredPiece = PieceBase & {
@@ -85,6 +96,7 @@ export interface CapturedPiece extends SecretIdentity {
   /** 混乱暗子死亡只公开兵种；color 为既有公开控制方，非秘密阵营。 */
   secretColorWithheld?: true;
   position?: Position;
+  river?: RiverLocation;
 }
 
 export type ActionTier = 1 | 2 | 3;
