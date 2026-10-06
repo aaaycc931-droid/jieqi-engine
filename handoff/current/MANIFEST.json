@@ -3,12 +3,12 @@
   "self_excluded": true,
   "files": {
     "00_READ_FIRST.md": {
-      "bytes": 4848,
-      "sha256": "5ef122eb88ef262caf98801cfc5af9ad1a1c44cca1bbd41549b5666661ce83e0"
+      "bytes": 5570,
+      "sha256": "a52efbdc4b14cf7a0872a454398800fd096bf96080b45cba076d14b986d5c442"
     },
     "01_CURRENT_RULES.md": {
-      "bytes": 28179,
-      "sha256": "1771452d443808e5a71a24e57717e078631b51eb932efbfb6ac81ae9c435afd9"
+      "bytes": 30541,
+      "sha256": "945d9a58a7a9b9a79571f4952e9e2699691729f275401b691e43c7347354fe53"
     },
     "02_CURRENT_HEROES.md": {
       "bytes": 26572,
@@ -23,12 +23,12 @@
       "sha256": "c133b4ee797b778ce4c88233437b2466255f27c30fcaec5b0941c766cc4bae00"
     },
     "05_PROGRESS_AND_NEXT.md": {
-      "bytes": 22300,
-      "sha256": "f49d092e5908d285f9d119471e5ebf17906120bf929c759b385bcf865f0c3ffc"
+      "bytes": 22805,
+      "sha256": "6ffbe2b0ccacba566c90228c12f2086c399a9ff2e8d41e898aec1d3504e79c27"
     },
     "06_COLLABORATION.md": {
-      "bytes": 4120,
-      "sha256": "00315a0c8beaedc032761e00a177326dcb018c7d82b1a9455621c958467d202a"
+      "bytes": 4521,
+      "sha256": "e03634830cec800a55eb0837513ce5a251cea0e0d03161edbb5c18d1d5c9745b"
     },
     "07_DESIGN_SCORING.md": {
       "bytes": 25701,
@@ -39,16 +39,16 @@
       "sha256": "68845494b465bbcc1908f6cef862f350c1da4dadfc3e3a7473d11b2443edf23c"
     },
     "NEW_DIALOGUE_PROMPT.txt": {
-      "bytes": 3916,
-      "sha256": "6e1eaadc611ec2a82de493147e0a5c5da9bcd0f9db67535466c7f5fed4ef3da7"
+      "bytes": 4627,
+      "sha256": "50ea7ef3191870e187d1d66f25fa7d524d6b6a2bdbfefa488bf3126d4dfef179"
     },
     "SOURCE_REGISTER.json": {
-      "bytes": 15002,
-      "sha256": "5b7dacfef9fe4f28491359223f7019659a04607f2cb76887cf5f16888d6b884a"
+      "bytes": 15855,
+      "sha256": "6599fe66b6d26a2073e3b50f37d66bc34ae1408220866d8f765132bccc5e2487"
     },
     "STATE.json": {
-      "bytes": 18923,
-      "sha256": "e41d1cfb426b74f04529b75871c02a332bf3af54f101771ebf83bc4eb134a7bd"
+      "bytes": 20578,
+      "sha256": "f8d6a764ef62fbc145ac1a34b5d05d7068af8f98fb7f249d51bb3884b0a585e9"
     },
     "assets/approved-home.png": {
       "bytes": 2157060,
@@ -59,20 +59,24 @@
       "sha256": "63671bd146ce72a3c61f40dac457f83f882d7ada78c5f5f98efb7bb3ba5eac26"
     },
     "qa/INVARIANTS.json": {
-      "bytes": 39081,
-      "sha256": "9a169572e16cafb7c7de5469f9a1998e5b80f3e3450778077cb48791cd75beb9"
+      "bytes": 41127,
+      "sha256": "a82c7539d33f4fcae8b0442bc77408a7b76a7b8eb22a317efe37232db5459fc8"
     },
     "09_CURRENT_GAME_MODES.md": {
       "bytes": 4749,
       "sha256": "fee5f89a60880cb94aa80f1d39e2d692518c5226ed047f5c722590f4baee7bf1"
     },
     "10_STAGE_CLOSE.md": {
-      "bytes": 5704,
-      "sha256": "795f770b49049fbef381dd702442f18a507988771cf52a47765ab56cde04b881"
+      "bytes": 6287,
+      "sha256": "814a1c61d6f873756642ee675dc7f0ecff7c4f35bbccc0302f09512666728678"
     },
     "11_RULE_SYNC_2026-10-06.md": {
-      "bytes": 1825,
-      "sha256": "0a78904bfd4a9a6feacbecaaa3f57f9e86ff1af6e0f8aad6bd2f99328c724657"
+      "bytes": 1979,
+      "sha256": "c81ce01d78b0c366e5426bdcbede92b2e70388a520c41ea518f7f18ff16ef150"
+    },
+    "12_DARK_IDENTITY_SYNC_2026-10-06.md": {
+      "bytes": 1785,
+      "sha256": "b3a2fc765d3e79b48a92309da4fff4c45ed89623996a42d16a8cc86e9c9c35c9"
     }
   },
   "checks": {
@@ -83,8 +87,11 @@
     "qa_69_plus_20_preserved": true,
     "navigation_paths_exist": true,
     "no_apk_or_nested_historical_packages": true,
-    "current_rule_revision_r3": true,
     "global_rule_sync_record_present": true,
-    "r3_runtime_acceptance_claimed": false
+    "r3_runtime_acceptance_claimed": false,
+    "current_rule_revision_r4": true,
+    "dark_identity_sync_record_present": true,
+    "dark_identity_pending_question_closed": true,
+    "r4_runtime_acceptance_claimed": false
   }
 }

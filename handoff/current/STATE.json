@@ -1,6 +1,6 @@
 {
   "project": "乐子象棋 / jieqi-engine",
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-06-rules-sync-1",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-06-dark-identity-sync-1",
   "updated_at": "2026-10-06",
   "repository": "https://github.com/aaaycc931-droid/jieqi-engine",
   "working_branch": "codex/ui-android-apk-20261001",
@@ -9,8 +9,8 @@
   "draft_pr": 2,
   "baseline_id": "LEZI-FUNCTION-2026-10-04-v1",
   "baseline_digest": "4bcf9fb91f5c6e41f456e7424ebd7ed09c6c07b1595ec825604aa730fdad020b",
-  "current_rule_revision": "LEZI-FUNCTION-2026-10-06-r3",
-  "current_rule_digest": "86cf12befe729c161f1f078dc240052fe26a7a3a78909a2ec255dc0a84d3d776",
+  "current_rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
+  "current_rule_digest": "cf831ebe7872cb9d8ed55fa3b4edb7f03492b3c90a06c8d9be494ac9a9e9284f",
   "authoritative_entry": "00_READ_FIRST.md",
   "current_rules": [
     "01_CURRENT_RULES.md",
@@ -299,7 +299,10 @@
     "new_mode_engine_test_file": "tests/game-modes.test.ts",
     "r3_global_rule_sync_runtime_acceptance": false,
     "r3_global_rule_sync_tests_rerun": false,
-    "r3_global_rule_sync_note": "2026-10-06仅同步已确认规则事实源；既有328测试和旧浏览器证据不构成对r3新增语义的运行时验收。"
+    "r3_global_rule_sync_note": "2026-10-06仅同步已确认规则事实源；既有328测试和旧浏览器证据不构成对r3新增语义的运行时验收。",
+    "r4_dark_identity_runtime_acceptance": false,
+    "r4_dark_identity_tests_rerun": false,
+    "r4_dark_identity_note": "规则事实源/合同同步；公共判定层尚未实现，既有328 passed不验收r4。"
   },
   "restrictions": [
     "ui_last",
@@ -356,8 +359,8 @@
       "formal_clock_after_opening_and_preparation"
     ]
   },
-  "previous_rule_revision": "LEZI-FUNCTION-2026-10-05-r2",
-  "previous_rule_digest": "b172c19d153ea140b8fc1e1bf981b25137a0a7e7c562a6b4fa291b957dedf178",
+  "previous_rule_revision": "LEZI-FUNCTION-2026-10-06-r3",
+  "previous_rule_digest": "86cf12befe729c161f1f078dc240052fe26a7a3a78909a2ec255dc0a84d3d776",
   "rule_digest_algorithm": "sha256(concat(relative UTF-8 path + NUL + file bytes + NUL), STATE.current_rules order)",
   "paused_next_action": "Continue destiny bomb/hourglass full real matches, second Shadow cooldown/lifecycle, remaining private snapshot and cross-end clock intersections. Current five active families have sampled natural results; original Nozdormu/Prince and current 12-seat normal regression remain incomplete. Local timeout outcome not frozen; physical RFCOMM/WebView/two-phone pending. UI last; APK paused.",
   "work_status": "stage_closed_all_further_implementation_and_validation_paused_await_next_user_authorization",
@@ -401,6 +404,11 @@
       "revision": "LEZI-FUNCTION-2026-10-06-r3",
       "digest": "86cf12befe729c161f1f078dc240052fe26a7a3a78909a2ec255dc0a84d3d776",
       "scope": "post-stage user-authorized global rule sync; 01 semantic update only among current_rules; product code unchanged"
+    },
+    {
+      "revision": "LEZI-FUNCTION-2026-10-06-r4",
+      "digest": "cf831ebe7872cb9d8ed55fa3b4edb7f03492b3c90a06c8d9be494ac9a9e9284f",
+      "scope": "user-confirmed public dark identity base term; only 01 changed among current_rules; product code unchanged"
     }
   ],
   "stage_close": {
@@ -445,5 +453,29 @@
       "current_control_vs_secret_faction_information_boundary",
       "hero_outer_inner_form_package_semantics"
     ]
+  },
+  "dark_identity_rule_sync": {
+    "requested_at": "2026-10-06T16:16:33+08:00",
+    "classification": "base_rule_addition_and_warlock_handoff_correction",
+    "status": "written_to_current_rules",
+    "rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
+    "delta_source": "rules/confirmed/RULE_UPDATE_2026-10-06_DARK_IDENTITY.md",
+    "handoff_record": "handoff/current/12_DARK_IDENTITY_SYNC_2026-10-06.md",
+    "pre_sync_document_commit": "a01d2811ca55ca0f7c36e205efddcf764c74acee",
+    "product_code_changed": false,
+    "tests_rerun": false,
+    "apk_built": false,
+    "implementation_claim": false,
+    "stage_reopened": false,
+    "public_resolver_implementation": "required_shared_rule_layer_pending_runtime_authorization",
+    "closed_design_question": "术士仍暗置中心/普通目标的等级：基础暗置身份→既有等级表；不再待定",
+    "scopes": [
+      "dark_identity_current_position_base_rule",
+      "hidden_real_identity_read_permission",
+      "special_position_source_defined_policy",
+      "warlock_shared_identity_rank_mapping",
+      "retire_uniform_dark_rank_direction"
+    ],
+    "other_hero_designs_changed": false
   }
 }

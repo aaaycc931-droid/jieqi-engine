@@ -1,14 +1,14 @@
 {
   "authority": "test_contract_non_normative",
   "normative_source": "01_CURRENT_RULES.md + 02_CURRENT_HEROES.md + 03_CURRENT_MUTATIONS.md + 04_CURRENT_UI_AND_FLOW.md",
-  "current_rule_revision": "LEZI-FUNCTION-2026-10-06-r3",
+  "current_rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
   "code_checkpoint": "b7b968b91196170beb0db4f26852c63920a3d3e8",
   "counts": {
     "retained_invariants": 69,
     "retained_anti_invariants": 20,
-    "new_supplements": 15
+    "new_supplements": 20
   },
-  "note": "保留69项原合同与20项反不变量；2026-10-06同步全局规则后修正INV-ACTION-001范围、补强姆诺兹多上一正式回合边界，并新增8项待验证补充。测试合同仍非规范源，不代表运行时已实现。",
+  "note": "保留69项原合同与20项反不变量；2026-10-06同步全局规则后修正INV-ACTION-001范围、补强姆诺兹多上一正式回合边界，并新增8项待验证补充。测试合同仍非规范源，不代表运行时已实现。 2026-10-06 r4新增5项暗置身份公共判定合同，均待运行时验证；不改变69原合同/20反不变量及旧执行证据。",
   "invariants": [
     {
       "id": "INV-BOARD-001",
@@ -691,6 +691,31 @@
       "id": "ADD-HERO-FORM-001",
       "statement": "表/里为同一英雄的完整形态包；默认一局只使用所选形态，不能中途机会主义切换或同时叠加；命名为英雄名｜【技能名】与里·英雄名｜【里·技能名】。",
       "current_runtime_verification": "pending_runtime_model"
+    },
+    {
+      "id": "ADD-DARK-IDENTITY-001",
+      "statement": "未揭示棋子的默认当前兵种按当前位置对应基础棋位的【暗置身份】判定，与隐藏真实身份区分；相同位置和公开状态不同隐藏兵种不改变普通身份判定。",
+      "current_runtime_verification": "pending_runtime_model_after_r4_dark_identity_sync"
+    },
+    {
+      "id": "ADD-DARK-IDENTITY-002",
+      "statement": "普通暗置身份判定不触发揭示、不改隐藏真实身份、不以真实兵种或秘密阵营决定公开资格/资源/UI；只有来源明确要求真实身份/隐藏真实兵种/揭示后身份或执行揭示时才读取隐藏真实身份。",
+      "current_runtime_verification": "pending_runtime_model_after_r4_dark_identity_sync"
+    },
+    {
+      "id": "ADD-DARK-IDENTITY-003",
+      "statement": "正式揭示后不再使用暗置身份，后续当前兵种判定按已揭示真实兵种；该词条不自行改变控制方、阵营、揭示时机或原有行动机制。",
+      "current_runtime_verification": "pending_runtime_model_after_r4_dark_identity_sync"
+    },
+    {
+      "id": "ADD-DARK-IDENTITY-004",
+      "statement": "特殊来源让暗子保持暗置并移至无法确定基础棋位的位置时，必须由该来源定义暗置身份处理；公共层不读取隐藏真实身份兜底、不创造统一暗子身份。",
+      "current_runtime_verification": "pending_runtime_model_after_r4_dark_identity_sync"
+    },
+    {
+      "id": "ADD-DARK-IDENTITY-005",
+      "statement": "公共规则/判定层统一提供未揭示棋当前兵种判定，英雄/畸变/基础机制按来源权限共用；术士暗置中心与普通目标均引用暗置身份再映射兵1、士象2、马炮3、车4，不另设术士身份或所有暗子统一3级。",
+      "current_runtime_verification": "pending_runtime_model_after_r4_dark_identity_sync"
     }
   ]
 }

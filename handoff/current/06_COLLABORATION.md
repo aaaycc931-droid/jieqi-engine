@@ -10,7 +10,7 @@
 
 实现对话（换过去的新对话）唯一维护正式规则与代码；英雄设计对话只写提案、评估，不改仓库，不把讨论稿当实现。不自动同步对话记忆。原实现对话在完成这次交接后停止代码写入，避免新实现对话与旧实现对话同时修改分支。
 
-设计提案至少包含 proposal_id、所基于 baseline_id/baseline_digest/current_rule_revision/current_digest、英雄 ID/名称、完整时机目标范围参数、次数冷却、是否占步、失败处理、秘密字段与公开字段、交叉/终局、时间轴、评分假设、待定项与明确用户确认记录。当前 baseline_id=LEZI-FUNCTION-2026-10-04-v1，baseline_digest=4bcf9fb91f5c6e41f456e7424ebd7ed09c6c07b1595ec825604aa730fdad020b；当前 revision=LEZI-FUNCTION-2026-10-05-r2，current_digest=b172c19d153ea140b8fc1e1bf981b25137a0a7e7c562a6b4fa291b957dedf178。
+设计提案至少包含 proposal_id、所基于 baseline_id/baseline_digest/current_rule_revision/current_digest、英雄 ID/名称、完整时机目标范围参数、次数冷却、是否占步、失败处理、秘密字段与公开字段、交叉/终局、时间轴、评分假设、待定项与明确用户确认记录。当前 baseline_id=LEZI-FUNCTION-2026-10-04-v1，baseline_digest=4bcf9fb91f5c6e41f456e7424ebd7ed09c6c07b1595ec825604aa730fdad020b；当前 revision=LEZI-FUNCTION-2026-10-06-r4，current_digest=cf831ebe7872cb9d8ed55fa3b4edb7f03492b3c90a06c8d9be494ac9a9e9284f。
 
 用户将完整确认稿移交实现对话并明确要求接入后，做“提案所基于基线 → 当前规则 → 提案”的比较，只采纳确认差分。保留当前风归位窒息规则。仓库 scripts/review/validate-hero-proposal.ts 是现有提案核验器；运行前读文件及其支持字段，不假设上述整理字段都已经写入校验器。
 
@@ -30,3 +30,5 @@
 根目录旧 PARALLEL_HERO_DESIGN 的“4d985 只有3英雄”属于被替换进度；新对话读本文件与 05 的 12英雄检查点。未获正式移交的外对话草案仍不实现。
 
 2026-10-05当前模式新增见09_CURRENT_GAME_MODES.md；原r1仍是历史实现及运行证据版本。新模式的独立适配未确认前，不用通用优先级自动决定冲突。原验证队列由用户暂停。
+
+2026-10-06新增基础【暗置身份】词条已正式同步至01及12_DARK_IDENTITY_SYNC_2026-10-06.md：这是公共规则增量，术士只引用该定义，暗置等级未决项关闭。本对话不继续英雄设计或自行导入其他英雄完整方案。当前仅同步规则事实源/合同，产品实现与验证队列仍暂停；公共判定层接入须在后续授权范围内执行。
