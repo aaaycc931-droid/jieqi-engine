@@ -1,14 +1,14 @@
 {
   "authority": "test_contract_non_normative",
   "normative_source": "01_CURRENT_RULES.md + 02_CURRENT_HEROES.md + 03_CURRENT_MUTATIONS.md + 04_CURRENT_UI_AND_FLOW.md",
-  "current_rule_revision": "LEZI-FUNCTION-2026-10-04-r1",
+  "current_rule_revision": "LEZI-FUNCTION-2026-10-06-r3",
   "code_checkpoint": "b7b968b91196170beb0db4f26852c63920a3d3e8",
   "counts": {
     "retained_invariants": 69,
     "retained_anti_invariants": 20,
-    "new_supplements": 7
+    "new_supplements": 15
   },
-  "note": "保留69项原合同，去除旧运行时合格/失败状态；两条按新风增量更新范围。不是69项已通过声明。",
+  "note": "保留69项原合同与20项反不变量；2026-10-06同步全局规则后修正INV-ACTION-001范围、补强姆诺兹多上一正式回合边界，并新增8项待验证补充。测试合同仍非规范源，不代表运行时已实现。",
   "invariants": [
     {
       "id": "INV-BOARD-001",
@@ -111,9 +111,9 @@
     {
       "id": "INV-ACTION-001",
       "domain": "action_resolution_terminal",
-      "statement": "正式主行动只有【移动】与【进攻】；“走棋”只保留为自然语言，不是正式上位分类。",
-      "scope_and_exceptions": "自动【触发】、【连带】、【移置】、【回溯】不是新的主行动类别。",
-      "current_runtime_verification": "pending_individual_evidence"
+      "statement": "普通棋子棋盘主行动的核心动作只有【移动】与【进攻】；来源专属【占步】/特殊主行动可占用主行动机会而不强行归入两者；“走棋”不是正式上位分类。",
+      "scope_and_exceptions": "【移动】/【进攻】是动作结算维度，Ⅰ/Ⅱ/Ⅲ级与技能衍生等是来源/层级维度；【移置】、【回溯】及来源专属操作按各自规则，不新增第三个通用核心动作词。",
+      "current_runtime_verification": "pending_rule_migration_after_2026_10_06_sync"
     },
     {
       "id": "INV-ACTION-002",
@@ -405,9 +405,9 @@
     {
       "id": "INV-MUROZOND-001",
       "domain": "time_and_prince",
-      "statement": "姆诺兹多只可选择对手紧接上一正式回合完成的Ⅰ级俗手对应且仍存活的棋；先【移置】回原位并结算返回格，再决定是否【操控】。",
-      "scope_and_exceptions": "返回失败或返回格结算中被消灭则不再操控。控制陷阱限制从相关控制方下一正式回合起生效。",
-      "current_runtime_verification": "pending_individual_evidence"
+      "statement": "姆诺兹多只可选择对手紧接上一正式回合完成的合格Ⅰ级俗手对应且仍存活的棋；若上一正式回合没有合格Ⅰ级俗手，不得跳过该回合搜索更老行动。先【移置】回原位并结算返回格，再决定是否【操控】。",
+      "scope_and_exceptions": "返回失败或返回格结算中被消灭则不再操控。只有来源未来明确允许跨回合搜索时才能例外。控制陷阱限制从相关控制方下一正式回合起生效。",
+      "current_runtime_verification": "pending_rule_migration_after_2026_10_06_sync"
     },
     {
       "id": "INV-NOZDORMU-001",
@@ -651,6 +651,46 @@
       "id": "ADD-TWIST-001",
       "statement": "返回格控制陷阱限制下一相关控制方正式回合，保留当前技能链继续与后续限制状态。",
       "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "ADD-ACTION-TIER-001",
+      "statement": "动作关键词与行动层级为正交维度：技能衍生动作可按【移动】/【进攻】结算但不是Ⅰ级俗手；来源专属主行动可占主行动而非【移动】/【进攻】。",
+      "current_runtime_verification": "pending_runtime_model"
+    },
+    {
+      "id": "ADD-TURN-PHASE-001",
+      "statement": "正常正式回合默认按回合开始结算→主行动前窗口→主行动→行动原子闭合→回合结束结算五阶段推进。",
+      "current_runtime_verification": "pending_runtime_model"
+    },
+    {
+      "id": "ADD-DURATION-001",
+      "statement": "持续效果默认获得即生效、当回合即计时；额外/强迫/技能衍生子行动默认不推进正式回合计数、持续时间、培养、冷却或周期资源。",
+      "current_runtime_verification": "pending_runtime_model"
+    },
+    {
+      "id": "ADD-RIVER-001",
+      "statement": "【河道】为来源专属特殊空间状态：进入失去【地面】，离开恢复【地面】，与【飞行】互斥；无明确读取权限的既有棋盘效果默认不读取河道空间或河道棋。",
+      "current_runtime_verification": "pending_runtime_model"
+    },
+    {
+      "id": "ADD-BATCH-001",
+      "statement": "来源明确为同时/同批【消灭】时，先闭合整个消灭批次与其死亡揭示/记录，再处理由该批死亡产生的新亡魂、复活、召回、生成或资源触发；后续对象不倒流加入已闭合批次。",
+      "current_runtime_verification": "pending_runtime_model"
+    },
+    {
+      "id": "ADD-GHOST-OBJECT-001",
+      "statement": "【亡魂】与【里·亡魂】是独立格上对象，可共格但不互相叠层/刷新/提供资源；精确名称清除只处理对应对象，普通棋子消灭不顺带清除。",
+      "current_runtime_verification": "pending_runtime_model"
+    },
+    {
+      "id": "ADD-CURRENT-CONTROL-001",
+      "statement": "来源明确读取“当前控制方”时只读取对应时点控制关系，不读取原始真实阵营或【混乱】秘密阵营；无秘密读取权限的目标/资源/UI不得以秘密阵营作隐藏条件。",
+      "current_runtime_verification": "pending_runtime_model"
+    },
+    {
+      "id": "ADD-HERO-FORM-001",
+      "statement": "表/里为同一英雄的完整形态包；默认一局只使用所选形态，不能中途机会主义切换或同时叠加；命名为英雄名｜【技能名】与里·英雄名｜【里·技能名】。",
+      "current_runtime_verification": "pending_runtime_model"
     }
   ]
 }
