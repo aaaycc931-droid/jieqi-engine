@@ -1,7 +1,7 @@
 {
   "project": "乐子象棋 / jieqi-engine",
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-05-stage-close-1",
-  "updated_at": "2026-10-05",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-06-rules-sync-1",
+  "updated_at": "2026-10-06",
   "repository": "https://github.com/aaaycc931-droid/jieqi-engine",
   "working_branch": "codex/ui-android-apk-20261001",
   "implementation_commit": "8b985a8f2bf8cd4ab96fdf63ab73894292cc6f7a",
@@ -9,8 +9,8 @@
   "draft_pr": 2,
   "baseline_id": "LEZI-FUNCTION-2026-10-04-v1",
   "baseline_digest": "4bcf9fb91f5c6e41f456e7424ebd7ed09c6c07b1595ec825604aa730fdad020b",
-  "current_rule_revision": "LEZI-FUNCTION-2026-10-05-r2",
-  "current_rule_digest": "b172c19d153ea140b8fc1e1bf981b25137a0a7e7c562a6b4fa291b957dedf178",
+  "current_rule_revision": "LEZI-FUNCTION-2026-10-06-r3",
+  "current_rule_digest": "86cf12befe729c161f1f078dc240052fe26a7a3a78909a2ec255dc0a84d3d776",
   "authoritative_entry": "00_READ_FIRST.md",
   "current_rules": [
     "01_CURRENT_RULES.md",
@@ -296,7 +296,10 @@
       "MODE-11",
       "MODE-12"
     ],
-    "new_mode_engine_test_file": "tests/game-modes.test.ts"
+    "new_mode_engine_test_file": "tests/game-modes.test.ts",
+    "r3_global_rule_sync_runtime_acceptance": false,
+    "r3_global_rule_sync_tests_rerun": false,
+    "r3_global_rule_sync_note": "2026-10-06仅同步已确认规则事实源；既有328测试和旧浏览器证据不构成对r3新增语义的运行时验收。"
   },
   "restrictions": [
     "ui_last",
@@ -353,8 +356,8 @@
       "formal_clock_after_opening_and_preparation"
     ]
   },
-  "previous_rule_revision": "LEZI-FUNCTION-2026-10-04-r1",
-  "previous_rule_digest": "27191eba43cb10417e4e87ff09a5f6fb2aa890be9567ec710a171fb45ab67f35",
+  "previous_rule_revision": "LEZI-FUNCTION-2026-10-05-r2",
+  "previous_rule_digest": "b172c19d153ea140b8fc1e1bf981b25137a0a7e7c562a6b4fa291b957dedf178",
   "rule_digest_algorithm": "sha256(concat(relative UTF-8 path + NUL + file bytes + NUL), STATE.current_rules order)",
   "paused_next_action": "Continue destiny bomb/hourglass full real matches, second Shadow cooldown/lifecycle, remaining private snapshot and cross-end clock intersections. Current five active families have sampled natural results; original Nozdormu/Prince and current 12-seat normal regression remain incomplete. Local timeout outcome not frozen; physical RFCOMM/WebView/two-phone pending. UI last; APK paused.",
   "work_status": "stage_closed_all_further_implementation_and_validation_paused_await_next_user_authorization",
@@ -393,6 +396,11 @@
       "revision": "LEZI-FUNCTION-2026-10-05-r2",
       "digest": "17c458c031634cb2cb836b5b8311952a48b1534e7723bab6ba73f724ab8930af",
       "scope": "mode confirmation before implementation status metadata update"
+    },
+    {
+      "revision": "LEZI-FUNCTION-2026-10-06-r3",
+      "digest": "86cf12befe729c161f1f078dc240052fe26a7a3a78909a2ec255dc0a84d3d776",
+      "scope": "post-stage user-authorized global rule sync; 01 semantic update only among current_rules; product code unchanged"
     }
   ],
   "stage_close": {
@@ -413,5 +421,29 @@
     "independent_hero_and_mutation_adaptation": "pending_not_imported_from_other_dialogues",
     "apk": "paused_not_generated",
     "all_functions_accepted": false
+  },
+  "post_stage_rule_sync": {
+    "requested_at": "2026-10-06",
+    "user_instruction": "得写进游戏总规则里",
+    "classification": "confirmed_rule_source_sync",
+    "status": "written_to_current_rules",
+    "rule_revision": "LEZI-FUNCTION-2026-10-06-r3",
+    "delta_source": "rules/confirmed/RULE_UPDATE_2026-10-06_GLOBAL_RULE_SYNC.md",
+    "handoff_record": "11_RULE_SYNC_2026-10-06.md",
+    "product_code_changed": false,
+    "tests_rerun": false,
+    "apk_built": false,
+    "implementation_claim": false,
+    "stage_reopened": false,
+    "scopes": [
+      "action_keyword_vs_action_tier_orthogonality",
+      "formal_turn_five_phases_and_duration_timing",
+      "source_specific_main_actions_not_forced_into_move_or_attack",
+      "river_special_space_semantics",
+      "simultaneous_destruction_batch_then_downstream_triggers",
+      "normal_ghost_vs_inner_ghost_exact_object_semantics",
+      "current_control_vs_secret_faction_information_boundary",
+      "hero_outer_inner_form_package_semantics"
+    ]
   }
 }
