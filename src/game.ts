@@ -413,6 +413,7 @@ export function applyAuthoritativeMove(
   }
 
   nextState.automaticEvents = [];
+  nextState.destructionBatches = [];
   nextState.landingEvents = [];
   const actingSide = state.turn;
   const source = command.pieceId ? pieceById(nextState, command.pieceId) : pieceAt(nextState, command.from);
@@ -604,6 +605,7 @@ export function applyAuthoritativeAssassination(
   }
 
   nextState.automaticEvents = [];
+  nextState.destructionBatches = [];
   nextState.landingEvents = [];
   const source = command.pieceId ? pieceById(nextState, command.pieceId) : pieceAt(nextState, command.from);
   if (!source) validationError("NO_PIECE", "起点没有棋子");
@@ -752,6 +754,7 @@ export function applyAutomaticExecution(
   const nextSecret = cloneSecret(secret);
   initializeFeatureSecret(nextState, nextSecret);
   nextState.automaticEvents = [];
+  nextState.destructionBatches = [];
   const pathCrushed = pathPiecesForSpecialMove(nextState, source, plan.to).flatMap(p => {
     const record = destroyPiece(nextState, nextSecret, p.id, state.winner!, "crush");
     return record ? [record] : [];
@@ -842,7 +845,7 @@ function applyFlowDance(state: GameState, secret: SecretState, command: MoveComm
   const target = pieceAt(validationState, command.to);
   const classification: ActionClassification = { tier: 3, keywords: [target ? "进攻" : "移动", "额外"], source: "skill_derived", opportunity: "extra", countsAsFormalTurn: false };
   recordAction(validationState, { ...classification, actionId: command.actionId, actingSide: flow.side, pieceId: p.id, from: { ...command.from }, to: { ...command.to } });
-  validationState.automaticEvents = []; validationState.landingEvents = [];
+  validationState.automaticEvents = []; validationState.destructionBatches = []; validationState.landingEvents = [];
   const bounced = Boolean(target && validationState.effectsByPieceId?.[target.id]?.barrier);
   let captured: CapturedPiece | undefined;
   if (bounced) {

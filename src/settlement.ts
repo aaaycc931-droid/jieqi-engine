@@ -3,7 +3,39 @@ import { requireModeFeatureAdaptation } from "./modes.ts";
 import { getController, isInPalace, isInsideBoard, otherSide } from "./slots.ts";
 import { isCheckmate, isGeneralInCheck, isStalemate, pieceAt, samePosition } from "./rules.ts";
 import { enterTurnPhase } from "./turns.ts";
-import type { ActionClassification, CapturedPiece, GameState, Position, PublicPiece, RandomInt, SecretIdentity, SecretState, Side } from "./types.ts";
+import type { ActionClassification, CapturedPiece, ClosedDestructionBatch, DestructionTarget, GameState, Position, PublicPiece, RandomInt, SecretIdentity, SecretState, Side } from "./types.ts";
+
+// 仅同步权威结算栈持有开放批次；不能进入公共/秘密快照或历史恢复。
+const openDestructionBatches = new WeakMap<GameState, { batchId: string; targets: DestructionTarget[] }>();
+function requireClosedDestructionBatch(state: GameState): void {
+  if (openDestructionBatches.has(state)) throw new RuleError("DESTRUCTION_BATCH_OPEN", "必须闭合整个消灭批次后才处理后续触发或终局");
+}
+
+/** 冻结承诺、预检死亡身份，整批完成后才开放后续触发。不会重新扫描棋盘。 */
+export function destroyPieceBatch(state: GameState, secret: SecretState, batchId: string, source: string, targets: readonly DestructionTarget[]): ClosedDestructionBatch {
+  requireClosedDestructionBatch(state);
+  const prior = state.destructionBatches?.find(b => b.batchId === batchId);
+  const locked = copy([...targets]);
+  if (new Set(locked.map(t => t.pieceId)).size !== locked.length) throw new RuleError("DUPLICATE_BATCH_TARGET", "同一消灭批次不能重复承诺同一棋子");
+  if (prior) {
+    if (prior.source !== source || JSON.stringify(prior.targets) !== JSON.stringify(locked)) throw new RuleError("BATCH_ID_CONFLICT", "消灭批次ID与原承诺不一致");
+    return copy(prior);
+  }
+  // 缺失真实身份不能留下半批死亡；仅预检仍存活且能被本来源消灭的对象。
+  for (const t of locked) {
+    const p = state.pieces.find(p => p.id === t.pieceId);
+    if (p && !(t.cause === "crush" && (!isGround(p) || state.effectsByPieceId?.[p.id]?.immuneCrush))) effectiveIdentity(p, secret);
+  }
+  const batch: ClosedDestructionBatch = { batchId, source, targets: locked, targetIds: locked.map(t => t.pieceId), destroyedIds: [], phase: "closed" };
+  openDestructionBatches.set(state, { batchId, targets: locked });
+  try {
+    for (const t of locked) if (destroyPiece(state, secret, t.pieceId, t.by, t.cause)) batch.destroyedIds.push(t.pieceId);
+    (state.destructionBatches ??= []).push(batch);
+  } finally {
+    openDestructionBatches.delete(state);
+  }
+  return copy(batch);
+}
 
 export const copy = <T>(value: T): T => structuredClone(value);
 export const isGround = (piece: PublicPiece): boolean => piece.layer !== "air";
@@ -66,6 +98,8 @@ export function markRevealed(state: GameState, secret: SecretState, id: string):
 
 /** 所有实际消灭统一记录；不会先清状态来绕过目标资格。 */
 export function destroyPiece(state: GameState, secret: SecretState, id: string, by: Side, cause: string): CapturedPiece | undefined {
+  const batch = openDestructionBatches.get(state);
+  if (batch && !batch.targets.some(t => t.pieceId === id && t.by === by && t.cause === cause)) throw new RuleError("UNCOMMITTED_BATCH_TARGET", "不能向开放消灭批次追加对象");
   const victim = state.pieces.find(p => p.id === id);
   if (!victim) return;
   if (cause === "crush" && (!isGround(victim) || state.effectsByPieceId?.[id]?.immuneCrush)) return;
@@ -85,7 +119,7 @@ export function destroyPiece(state: GameState, secret: SecretState, id: string, 
   }
   if (secret.destinyIdentities?.[id]) secret.destinyIdentities[id].shown = true;
   state.automaticEvents ??= [];
-  state.automaticEvents.push({ kind: `destroy:${cause}`, pieceId: id, side: controller, position: record.position });
+  state.automaticEvents.push({ kind: `destroy:${cause}`, pieceId: id, side: controller, position: record.position, deathRecord: copy(record), ...(batch ? { batchId: batch.batchId } : {}) });
   return record;
 }
 
@@ -104,6 +138,7 @@ export function placementAllowed(state: GameState, piece: PublicPiece, to: Posit
 }
 
 export function relocatePiece(state: GameState, secret: SecretState, id: string, to: Position, source: string, options: { warriorReturn?: boolean; flow?: boolean } = {}): boolean {
+  requireClosedDestructionBatch(state);
   const p = state.pieces.find(p => p.id === id);
   if (!p || !placementAllowed(state, p, to, options)) return false;
   const controller = getController(p);
@@ -115,6 +150,7 @@ export function relocatePiece(state: GameState, secret: SecretState, id: string,
 
 /** 当前原子链内的所有落位先完成，再做终局。额外应将不结算正式回合计数。 */
 export function settleLandings(state: GameState, secret: SecretState): void {
+  requireClosedDestructionBatch(state);
   const events = state.landingEvents ?? [];
   state.landingEvents = [];
   for (const event of events) {
@@ -147,6 +183,7 @@ export function settleLandings(state: GameState, secret: SecretState): void {
 }
 
 export function closeDirectDeaths(state: GameState, secret: SecretState, actingSide: Side): boolean {
+  requireClosedDestructionBatch(state);
   const alive = (side: Side) => {
     const wind = secret.wind?.[side];
     const id = wind?.hostId ?? secret.trueGenerals?.[side];
@@ -178,6 +215,7 @@ export function closeDirectDeaths(state: GameState, secret: SecretState, actingS
 
 /** 候选终局前确认两者都死亡的优先级。普通回归不授予裁决舞步。 */
 export function resolveWindReturn(state: GameState, secret: SecretState, executor?: { pieceId: string; from: Position }): boolean {
+  requireClosedDestructionBatch(state);
   let returned = false;
   for (const side of ["red", "black"] as const) {
     const w = secret.wind?.[side];
@@ -214,11 +252,14 @@ export function resolveWindReturn(state: GameState, secret: SecretState, executo
 
 /** 只在未正式终局时生成亡魂；死亡控制方由公开自动事件保存。 */
 export function generateGhosts(state: GameState, firstEvent = 0): void {
-  if (state.status === "finished") return;
+  requireClosedDestructionBatch(state);
   for (const event of (state.automaticEvents ?? []).slice(firstEvent)) {
     if (!event.kind.startsWith("destroy:") || !event.position || !event.side) continue;
+    if (event.ghostTriggerHandled) continue;
+    event.ghostTriggerHandled = true;
+    if (state.status === "finished") continue;
     if (state.featureRules?.heroes?.[event.side] !== "death_knight") continue;
-    const dead = state.captured.find(p => p.id === event.pieceId);
+    const dead = event.deathRecord ?? [...state.captured].reverse().find(p => p.id === event.pieceId);
     if (!dead || dead.type === "general") continue;
     state.ghosts ??= [];
     const existing = state.ghosts.find(g => g.owner === event.side && samePosition(g.position, event.position!));
@@ -229,6 +270,7 @@ export function generateGhosts(state: GameState, firstEvent = 0): void {
 
 /** 开始效果只在真正的新正式回合运行一次，额外/连带/强迫行动不进入此入口。 */
 export function beginFormalTurn(state: GameState, secret?: SecretState, randomInt: RandomInt = max => Math.floor(Math.random() * max)): void {
+  requireClosedDestructionBatch(state);
   if (state.status !== "playing" || state.forcedDefense || state.flowDance) return;
   const side = state.turn, number = formalTurn(state, side) + 1;
   if (state.turnLifecycle?.side !== side || state.turnLifecycle.number !== number) {
@@ -255,6 +297,7 @@ export function beginFormalTurn(state: GameState, secret?: SecretState, randomIn
 
 /** 先以公开开始效果试算合法性；确认非终局后才实际开始下一回合、抽随机或刷新秘密。 */
 export function advanceToFormalTurn(state: GameState, secret: SecretState, side: Side, randomInt: RandomInt = max => Math.floor(Math.random() * max)): void {
+  requireClosedDestructionBatch(state);
   if (state.status !== "playing" || state.forcedDefense || state.flowDance) return;
   const probe = copy(state);
   probe.turn = side;
@@ -271,6 +314,7 @@ export function advanceToFormalTurn(state: GameState, secret: SecretState, side:
 }
 
 export function finishFormalTurn(state: GameState, secret: SecretState, actingSide: Side, randomInt: RandomInt = max => Math.floor(Math.random() * max)): void {
+  requireClosedDestructionBatch(state);
   if (state.status === "finished" || state.forcedDefense || state.lastMove?.countsAsFormalTurn === false) return;
   if (state.turnLifecycle) {
     if (state.turnLifecycle.side !== actingSide || state.turnLifecycle.phase === "turn_end") return;
@@ -317,6 +361,7 @@ export function finishFormalTurn(state: GameState, secret: SecretState, actingSi
 }
 
 export function landFlyingPiece(state: GameState, secret: SecretState, id: string): void {
+  requireClosedDestructionBatch(state);
   const p = state.pieces.find(p => p.id === id);
   if (!p || isGround(p)) return;
   const controller = getController(p);

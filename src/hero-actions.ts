@@ -2,7 +2,7 @@ import { RuleError } from "./errors.ts";
 import { applyAuthoritativeMove } from "./game.ts";
 import { getController, getCurrentPieceType, isInPalace, otherSide } from "./slots.ts";
 import { getLegalMoves, hasStealthEffect, isCheckmate, isGeneralInCheck, isStalemate, samePosition } from "./rules.ts";
-import { closeDirectDeaths, copy, destroyPiece, effectiveIdentity, beginFormalTurn, advanceToFormalTurn, finishFormalTurn, formalTurn, generateGhosts, initializeFeatureSecret, markRevealed, placementAllowed, queueLanding, relocatePiece, rememberAction, settleLandings } from "./settlement.ts";
+import { closeDirectDeaths, copy, destroyPiece, destroyPieceBatch, effectiveIdentity, beginFormalTurn, advanceToFormalTurn, finishFormalTurn, formalTurn, generateGhosts, initializeFeatureSecret, markRevealed, placementAllowed, queueLanding, relocatePiece, rememberAction, settleLandings } from "./settlement.ts";
 import { actionFields, closeMainActionAtom, isOrdinaryFormalAction, previousFormalAction, recordAction } from "./turns.ts";
 import type { ActionClassification, GameState, HeroAbilityCommand, MoveResult, RandomInt, SecretState, Side } from "./types.ts";
 
@@ -58,7 +58,7 @@ export function applyHeroAbility(state: GameState, secret: SecretState, command:
   }
   s.heroRuntime ??= {};
   const runtime = s.heroRuntime[side] ??= {};
-  s.automaticEvents = []; s.landingEvents = [];
+  s.automaticEvents = []; s.destructionBatches = []; s.landingEvents = [];
   const once = () => requireRule(!runtime.used, "SKILL_USED", "本局技能次数已用完");
   const ordinaryTime = () => requireRule(s.featureRules?.mutation !== "end_time", "DESTINY_REPLACED", "宿命已替换普通时间技能");
   let endsTurn = false, secretOnly = false;
@@ -83,7 +83,8 @@ export function applyHeroAbility(state: GameState, secret: SecretState, command:
     case "destruction": {
       requireRule(hero === "deathwing", "WRONG_HERO", "英雄没有毁灭技能"); once(); runtime.used = true;
       const locked = s.pieces.filter(p => getCurrentPieceType(p) !== "general");
-      for (const p of locked) if (randomInt(2) === 0) destroyPiece(s, k, p.id, side, "destruction");
+      const committed = locked.filter(() => randomInt(2) === 0).map(p => ({ pieceId: p.id, by: side, cause: "destruction" }));
+      destroyPieceBatch(s, k, `${command.actionId}:destruction`, "deathwing:destruction", committed);
       endsTurn = true;
       break;
     }

@@ -196,6 +196,17 @@ export interface ForcedDefenseState {
   cause: "iron_armor_blocked_backstab";
 }
 
+/** 来源先锁定的消灭承诺；只有明确同批来源才使用批次入口。 */
+export interface DestructionTarget { pieceId: string; by: Side; cause: string }
+export interface ClosedDestructionBatch {
+  batchId: string;
+  source: string;
+  targetIds: string[];
+  targets: DestructionTarget[];
+  destroyedIds: string[];
+  phase: "closed";
+}
+
 export interface GameState {
   /** 缺省为原有全局混洗揭棋，兼容既有棋局与快照。 */
   gameMode?: GameModeId;
@@ -227,7 +238,11 @@ export interface GameState {
   hourglasses?: number;
   /** 一次原子行动内各落位，含弹回/移置/复活，供共同结算管线使用。 */
   landingEvents?: Array<{ pieceId: string; beforeController: Side; position: Position; source: string }>;
-  automaticEvents?: Array<{ kind: string; pieceId?: string; side?: Side; position?: Position }>;
+  automaticEvents?: Array<{ kind: string; pieceId?: string; side?: Side; position?: Position;
+    /** 死亡时公开记录，不含未公开的混乱阵营。用于区分同ID复活后的再次死亡。 */
+    deathRecord?: CapturedPiece; ghostTriggerHandled?: true; batchId?: string }>;
+  /** 当前原子链中已闭合的消灭批次；不保存开放批次或秘密候选。 */
+  destructionBatches?: ClosedDestructionBatch[];
   turnStartedAt?: number;
   turnDeadlineAt?: number;
   flowDance?: { side: Side; pieceId: string; steps: 0 | 1; resumeTurn: Side };
