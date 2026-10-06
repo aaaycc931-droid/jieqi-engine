@@ -3,8 +3,8 @@
   "self_excluded": true,
   "files": {
     "00_READ_FIRST.md": {
-      "bytes": 6748,
-      "sha256": "9cfb3da14ed97a4fa958bf013cff871aef6632bbc55427caadc7bfd1de5203b1"
+      "bytes": 6836,
+      "sha256": "ab31523ccc1f212ad375cdc6f195f5921021a9c0a63506755a5fc8c07ace35dc"
     },
     "01_CURRENT_RULES.md": {
       "bytes": 30541,
@@ -23,8 +23,8 @@
       "sha256": "c133b4ee797b778ce4c88233437b2466255f27c30fcaec5b0941c766cc4bae00"
     },
     "05_PROGRESS_AND_NEXT.md": {
-      "bytes": 25332,
-      "sha256": "018b1f19defb5f17f7195488647c3bfc65a5551909e703ecb47cf094200b10c9"
+      "bytes": 26012,
+      "sha256": "f338440d23b1c5d08e155279a77343a389a2d32a26f06ddc24e873d232bb0217"
     },
     "06_COLLABORATION.md": {
       "bytes": 4521,
@@ -39,16 +39,16 @@
       "sha256": "68845494b465bbcc1908f6cef862f350c1da4dadfc3e3a7473d11b2443edf23c"
     },
     "NEW_DIALOGUE_PROMPT.txt": {
-      "bytes": 6372,
-      "sha256": "d1b38c360bbe8474f189587071040d6a1057152ba96c414891ae3e587ac06a92"
+      "bytes": 7027,
+      "sha256": "fcffba707133f73c7d9c0cc95d10f8619a5bc7cde94a4494f02da7e10c3925bd"
     },
     "SOURCE_REGISTER.json": {
-      "bytes": 18313,
-      "sha256": "d24fda02dc5aded866885cade360323e4a440294305ea8c6ebfb313ff1089b87"
+      "bytes": 19095,
+      "sha256": "3b1fe2489af234e2f6d5e9d9a3f1ee64a6671f3f0a6c3017f6b4aa469df0f485"
     },
     "STATE.json": {
-      "bytes": 27192,
-      "sha256": "e895c2d92d795041827281c582a815efcd1f41b8ec895a1cde09db1bf6dffe7b"
+      "bytes": 29282,
+      "sha256": "49df65f7d94cccec17406a7975a7eed876d59e8633582dbaf53f115eb5bffc58"
     },
     "assets/approved-home.png": {
       "bytes": 2157060,
@@ -59,8 +59,8 @@
       "sha256": "63671bd146ce72a3c61f40dac457f83f882d7ada78c5f5f98efb7bb3ba5eac26"
     },
     "qa/INVARIANTS.json": {
-      "bytes": 43222,
-      "sha256": "6ad8641f84dce7a677e4849f322fe8e03a6f9c771ce038ec58307f0f1195b2c4"
+      "bytes": 43415,
+      "sha256": "249e771ee324f9824011901a579564f433bf2174b12fab738aa8025dea018f06"
     },
     "09_CURRENT_GAME_MODES.md": {
       "bytes": 4749,
@@ -87,8 +87,12 @@
       "sha256": "08683ee700366cf619fe601fbc60512eaf625516f40636683c616c0d61e41d69"
     },
     "15_DESTRUCTION_BATCH_RUNTIME_2026-10-06.md": {
-      "bytes": 5162,
-      "sha256": "14e03678e1b7f449ff30b7f3babf077c58a277805eaec6b1152431d787574ba9"
+      "bytes": 5448,
+      "sha256": "497fbb2351b704030874d8863008263e2aecf42d402362f67830a73b7c6b534f"
+    },
+    "16_RIVER_SPACE_RUNTIME_2026-10-06.md": {
+      "bytes": 5835,
+      "sha256": "231159d06aea0be82eff0d76a8156004b81796fe314a681f00716681dcf95e61"
     }
   },
   "checks": {
@@ -108,6 +112,7 @@
     "dark_identity_runtime_record_present": true,
     "r4_full_runtime_acceptance_claimed": false,
     "action_turn_runtime_record_present": true,
-    "destruction_batch_runtime_record_present": true
+    "destruction_batch_runtime_record_present": true,
+    "river_space_runtime_record_present": true
   }
 }

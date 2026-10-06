@@ -1,7 +1,7 @@
 {
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-06-destruction-batch-runtime-1",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-06-river-space-runtime-1",
   "rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
-  "code_checkpoint": "a3b8dcaeac38cdb67f4a597ed23b483f16a661db",
+  "code_checkpoint": "998a02ab58e231550c9c71598b8419cca06578a9",
   "sources": [
     {
       "id": "RULE:CURRENT_RULE_DELTAS_2026-09-22.md",
@@ -232,6 +232,15 @@
       "authorization": "user 2026-10-06T18:11:04+08:00 同意继续同批消灭闭合",
       "applied_scope": "公共闭批入口/触发屏障、毁灭锁定成功集合、死亡公开快照及亡魂单次派生；13新用例、367引擎回归、Web构建与118资源一致。普通顺序来源保留，未来英雄/资源钩子与完整r3/r4、浏览器、实体设备未验收。",
       "embedded_original": false
+    },
+    {
+      "id": "EXECUTION:RIVER_SPACE_RUNTIME_2026-10-06",
+      "kind": "implementation_and_execution_evidence_non_normative",
+      "path": "handoff/current/16_RIVER_SPACE_RUNTIME_2026-10-06.md",
+      "implementation_commit": "998a02ab58e231550c9c71598b8419cca06578a9",
+      "authorization": "外部续接消息同意，当前18:59用户追问进度后继续此前河道范围",
+      "applied_scope": "公共河道状态/转换与默认棋盘读取隔离，来源公开暗身份/控制接口；17新用例、384回归、Web构建及119资源一致。未启用江鹤等英雄进出资格/连通/容量/时长规则；完整r3/r4、浏览器与实体设备未验收。",
+      "embedded_original": false
     }
   ],
   "coverage": {
@@ -290,7 +299,7 @@
     "过时3英雄进度"
   ],
   "completeness_claim": "当前已恢复并核对源的主体规则按域覆盖；2026-10-06已将本轮明确确认的全局规则同步进01。仍不保证所有历史对话的英雄专属细节逐条恢复，明确缺口不得填空。 2026-10-06后续明确确认的基础【暗置身份】词条已同步；只关闭术士暗置等级未决项，不提升其他英雄完整稿或特殊位置未定义处理。",
-  "previous_code_checkpoint": "62348cabf0da7fffa3f66368161d633e85bb4fde",
+  "previous_code_checkpoint": "a3b8dcaeac38cdb67f4a597ed23b483f16a661db",
   "runtime_evidence_index": "review/invariants/LATEST.json",
   "gameplay_execution_evidence_index": "review/gameplay/runtime-browser-review-2026-10-05-modes.json",
   "full_match_execution_evidence_index": "review/gameplay/full-match-browser-2026-10-05-active-regression-summary.json",
@@ -303,5 +312,6 @@
   "dark_identity_runtime_index": "handoff/current/13_DARK_IDENTITY_RUNTIME_2026-10-06.md",
   "runtime_mapping_index": "review/invariants/R4_RUNTIME_MAPPING_2026-10-06.md",
   "action_turn_runtime_index": "handoff/current/14_ACTION_TURN_RUNTIME_2026-10-06.md",
-  "destruction_batch_runtime_index": "15_DESTRUCTION_BATCH_RUNTIME_2026-10-06.md"
+  "destruction_batch_runtime_index": "15_DESTRUCTION_BATCH_RUNTIME_2026-10-06.md",
+  "river_space_runtime_index": "16_RIVER_SPACE_RUNTIME_2026-10-06.md"
 }

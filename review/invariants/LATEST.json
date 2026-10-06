@@ -1,8 +1,8 @@
 {
   "authority": "execution_evidence_non_normative",
-  "generatedAt": "2026-10-06T10:20:25.436Z",
-  "sourceCommitAtRun": "47ee108175b3286ac20a51819918ab7414bb63da",
-  "sourceDigest": "bb77425241a0a9094613777f64afae4ba2bd43dd48065e030be52173d9fc5c55",
+  "generatedAt": "2026-10-06T11:09:39.783Z",
+  "sourceCommitAtRun": "99d11189b1cdfb05c747dc1ff679361ea6ed9646",
+  "sourceDigest": "d32428cbcc138b3e09b0db6e5bdb8581cb51d3b8ea11e4b054cd7c2842b7b074",
   "sourceDigestPaths": [
     ".github/workflows/gameplay-runtime-review.yml",
     ".github/workflows/menu-reference-review.yml",
@@ -40,6 +40,7 @@
     "src/setup.ts",
     "src/sha256.ts",
     "src/slots.ts",
+    "src/spaces.ts",
     "src/turns.ts",
     "src/types.ts",
     "tests/action-turn-contracts.test.ts",
@@ -66,6 +67,7 @@
     "tests/public-target-contracts.test.ts",
     "tests/remote-room.test.ts",
     "tests/rewind-action-contracts.test.ts",
+    "tests/river-space.test.ts",
     "tests/setup-rps.test.ts",
     "tests/snapshot-resource-contracts.test.ts",
     "tests/time-line-contracts.test.ts",
@@ -173,18 +175,18 @@
     "web/ui-refresh.css"
   ],
   "ruleRevision": "LEZI-FUNCTION-2026-10-06-r4",
-  "contractDigest": "6ad8641f84dce7a677e4849f322fe8e03a6f9c771ce038ec58307f0f1195b2c4",
+  "contractDigest": "249e771ee324f9824011901a579564f433bf2174b12fab738aa8025dea018f06",
   "runtime": "v24.19.0",
   "testSummary": {
-    "passed": 367,
+    "passed": 384,
     "failed": 0,
     "executionFailed": false
   },
   "contractSummary": {
     "total": 109,
-    "partial_evidence_passed": 102,
+    "partial_evidence_passed": 103,
     "failed_cases": 0,
-    "missing_tests": 4,
+    "missing_tests": 3,
     "non_runtime_contract": 3,
     "fullyAccepted": 0
   },
@@ -2710,9 +2712,95 @@
       "id": "ADD-RIVER-001",
       "group": "supplements",
       "statement": "【河道】为来源专属特殊空间状态：进入失去【地面】，离开恢复【地面】，与【飞行】互斥；无明确读取权限的既有棋盘效果默认不读取河道空间或河道棋。",
-      "status": "missing_tests",
-      "relatedCases": [],
-      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/river-space.test.ts",
+          "name": "R4-RIVER-01 独立河道状态不占地面，不把保留棋盘位置当河格或第11行",
+          "passed": true
+        },
+        {
+          "file": "tests/river-space.test.ts",
+          "name": "R4-RIVER-02 河道与飞行互斥，飞行降落入口不能把河道棋自动拉回地面",
+          "passed": true
+        },
+        {
+          "file": "tests/river-space.test.ts",
+          "name": "R4-RIVER-03 入河即时清除地面依赖感染与崩坏，保留无额外驱散的状态",
+          "passed": true
+        },
+        {
+          "file": "tests/river-space.test.ts",
+          "name": "R4-RIVER-04 普通主行动与刺杀不可通过ID或旧坐标操纵河道棋",
+          "passed": true
+        },
+        {
+          "file": "tests/river-space.test.ts",
+          "name": "R4-RIVER-05 河道棋不作车路阻挡、炮架、马腿或象眼",
+          "passed": true
+        },
+        {
+          "file": "tests/river-space.test.ts",
+          "name": "R4-RIVER-06 河道目标不被普通进攻与路径碾碎读取",
+          "passed": true
+        },
+        {
+          "file": "tests/river-space.test.ts",
+          "name": "R4-RIVER-07 河道棋不形成棋盘将军；存活河道将帅不读旧锚点受攻击",
+          "passed": true
+        },
+        {
+          "file": "tests/river-space.test.ts",
+          "name": "R4-RIVER-08 既有陷阱、亡魂、扭曲落位与回合末不读取河道棋",
+          "passed": true
+        },
+        {
+          "file": "tests/river-space.test.ts",
+          "name": "R4-RIVER-09 出河恢复地面再触发陷阱；占位或堡垒冲突不自动窒息",
+          "passed": true
+        },
+        {
+          "file": "tests/river-space.test.ts",
+          "name": "R4-RIVER-10 暗置河道身份与控制须由来源定义，不读真实身份或旧棋位",
+          "passed": true
+        },
+        {
+          "file": "tests/river-space.test.ts",
+          "name": "R4-RIVER-11 全场毁灭与讳言随机池默认排除河道棋，不能读取未定义暗身份",
+          "passed": true
+        },
+        {
+          "file": "tests/river-space.test.ts",
+          "name": "R4-RIVER-12 风的明/暗承载池与混乱开始刷新默认排除河道棋",
+          "passed": true
+        },
+        {
+          "file": "tests/river-space.test.ts",
+          "name": "R4-RIVER-13 时光之末沙漏不召回河道勇士、不给河道龙补弹",
+          "passed": true
+        },
+        {
+          "file": "tests/river-space.test.ts",
+          "name": "R4-RIVER-14 消灭默认无河道权限；明确来源批次只记录河道死亡，不在旧锚点生亡魂",
+          "passed": true
+        },
+        {
+          "file": "tests/river-space.test.ts",
+          "name": "R4-RIVER-15 河道状态可公共协议恢复，消费层不创造同格容量或连通规则",
+          "passed": true
+        },
+        {
+          "file": "tests/river-space.test.ts",
+          "name": "R4-RIVER-16 时间线不把河道目标退回棋盘，投弹不读取河道龙或旧锚点",
+          "passed": true
+        },
+        {
+          "file": "tests/river-space.test.ts",
+          "name": "R4-RIVER-17 风归位不能把河道承载者拉回普通棋盘；出河允许与空中层共存",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "公共河道空间、地面/飞行互斥、默认路径/目标/技能/落位隔离、来源定义暗身份与控制、出河及序列化有专属情景证据。只提供可信来源调用接口，不开放普通客户端河道操作；江鹤等英雄进出资格、容量、连通、停留/超时、里形态仍未正式移交/集成。无浏览器或实体设备新增验收。",
       "fullyAccepted": false
     },
     {
@@ -2928,7 +3016,7 @@
       "fullyAccepted": false
     }
   ],
-  "publishedImplementationCommit": "a3b8dcaeac38cdb67f4a597ed23b483f16a661db",
-  "publishedImplementationTree": "aaddb047a50ea5a5cef7e1d0b2eaddc84db9deb8",
-  "publicationNote": "实际执行HEAD为47ee108175b3286ac20a51819918ab7414bb63da；通过GitHub连接器发布的源码提交作者/时间不同，但完整Git tree与实际执行源码树一致。保留原sourceCommitAtRun，不伪称额外重跑。"
+  "publishedImplementationCommit": "998a02ab58e231550c9c71598b8419cca06578a9",
+  "publishedImplementationTree": "f585bc97a6ec06cea69584d814dc6a0ff3aff711",
+  "publicationNote": "实际执行HEAD为99d11189b1cdfb05c747dc1ff679361ea6ed9646；GitHub连接器发布提交与本地执行提交完整tree相同，作者/时间不同。保留真实sourceCommitAtRun，不冒充额外重跑。"
 }
