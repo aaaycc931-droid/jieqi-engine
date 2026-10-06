@@ -1,5 +1,5 @@
 {
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-06-river-space-runtime-1",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-06-account-switch-close",
   "rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
   "code_checkpoint": "998a02ab58e231550c9c71598b8419cca06578a9",
   "sources": [
@@ -241,6 +241,15 @@
       "authorization": "外部续接消息同意，当前18:59用户追问进度后继续此前河道范围",
       "applied_scope": "公共河道状态/转换与默认棋盘读取隔离，来源公开暗身份/控制接口；17新用例、384回归、Web构建及119资源一致。未启用江鹤等英雄进出资格/连通/容量/时长规则；完整r3/r4、浏览器与实体设备未验收。",
       "embedded_original": false
+    },
+    {
+      "id": "HANDOFF:ACCOUNT_SWITCH_CLOSE_2026-10-06",
+      "kind": "stage_close_non_normative",
+      "path": "handoff/current/17_ACCOUNT_SWITCH_CLOSE_2026-10-06.md",
+      "authorization": "user 2026-10-06T23:14:24+08:00 我要更换账号了",
+      "implementation_commit_unchanged": "998a02ab58e231550c9c71598b8419cca06578a9",
+      "applied_scope": "仅收束交接和当前单一接续指令；不改运行时/规则、不重跑测试、不生成APK，旧对话停止产品写入",
+      "embedded_original": false
     }
   ],
   "coverage": {
@@ -313,5 +322,6 @@
   "runtime_mapping_index": "review/invariants/R4_RUNTIME_MAPPING_2026-10-06.md",
   "action_turn_runtime_index": "handoff/current/14_ACTION_TURN_RUNTIME_2026-10-06.md",
   "destruction_batch_runtime_index": "15_DESTRUCTION_BATCH_RUNTIME_2026-10-06.md",
-  "river_space_runtime_index": "16_RIVER_SPACE_RUNTIME_2026-10-06.md"
+  "river_space_runtime_index": "16_RIVER_SPACE_RUNTIME_2026-10-06.md",
+  "account_switch_close_index": "17_ACCOUNT_SWITCH_CLOSE_2026-10-06.md"
 }

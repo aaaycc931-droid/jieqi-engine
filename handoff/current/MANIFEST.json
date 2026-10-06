@@ -3,8 +3,8 @@
   "self_excluded": true,
   "files": {
     "00_READ_FIRST.md": {
-      "bytes": 6836,
-      "sha256": "ab31523ccc1f212ad375cdc6f195f5921021a9c0a63506755a5fc8c07ace35dc"
+      "bytes": 7371,
+      "sha256": "101a177fdb8955bb45d339e29a7a59f93666cf35b7655f04ebf63358fcda78a8"
     },
     "01_CURRENT_RULES.md": {
       "bytes": 30541,
@@ -23,8 +23,8 @@
       "sha256": "c133b4ee797b778ce4c88233437b2466255f27c30fcaec5b0941c766cc4bae00"
     },
     "05_PROGRESS_AND_NEXT.md": {
-      "bytes": 26012,
-      "sha256": "f338440d23b1c5d08e155279a77343a389a2d32a26f06ddc24e873d232bb0217"
+      "bytes": 26547,
+      "sha256": "bec1a448f18d5ed068eb83ec2c2596c170d86e086d8fe451b2f79e2f0e3ffcc2"
     },
     "06_COLLABORATION.md": {
       "bytes": 4521,
@@ -39,16 +39,16 @@
       "sha256": "68845494b465bbcc1908f6cef862f350c1da4dadfc3e3a7473d11b2443edf23c"
     },
     "NEW_DIALOGUE_PROMPT.txt": {
-      "bytes": 7027,
-      "sha256": "fcffba707133f73c7d9c0cc95d10f8619a5bc7cde94a4494f02da7e10c3925bd"
+      "bytes": 2861,
+      "sha256": "586af15661d1c2403c442f0723d6dff5f12da6edfebd4cc45c7084e841e690bf"
     },
     "SOURCE_REGISTER.json": {
-      "bytes": 19095,
-      "sha256": "3b1fe2489af234e2f6d5e9d9a3f1ee64a6671f3f0a6c3017f6b4aa469df0f485"
+      "bytes": 19703,
+      "sha256": "470a1e7983d6210980d19f8d48d853d136aa2a05b22664de6d7b3c260ebf40a4"
     },
     "STATE.json": {
-      "bytes": 29282,
-      "sha256": "49df65f7d94cccec17406a7975a7eed876d59e8633582dbaf53f115eb5bffc58"
+      "bytes": 30305,
+      "sha256": "3ffc6b5de2130eefe9a095b9c12df0581b3156e5dc5f7b5157641df56d8665f8"
     },
     "assets/approved-home.png": {
       "bytes": 2157060,
@@ -93,6 +93,10 @@
     "16_RIVER_SPACE_RUNTIME_2026-10-06.md": {
       "bytes": 5835,
       "sha256": "231159d06aea0be82eff0d76a8156004b81796fe314a681f00716681dcf95e61"
+    },
+    "17_ACCOUNT_SWITCH_CLOSE_2026-10-06.md": {
+      "bytes": 3643,
+      "sha256": "55e5d137dd6672d2667ec526445b079d5d3f46612f2793e4547494dd7a3b106a"
     }
   },
   "checks": {
@@ -113,6 +117,7 @@
     "r4_full_runtime_acceptance_claimed": false,
     "action_turn_runtime_record_present": true,
     "destruction_batch_runtime_record_present": true,
-    "river_space_runtime_record_present": true
+    "river_space_runtime_record_present": true,
+    "account_switch_close_record_present": true
   }
 }

@@ -1,6 +1,6 @@
 {
   "project": "乐子象棋 / jieqi-engine",
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-06-river-space-runtime-1",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-06-account-switch-close",
   "updated_at": "2026-10-06",
   "repository": "https://github.com/aaaycc931-droid/jieqi-engine",
   "working_branch": "codex/ui-android-apk-20261001",
@@ -387,7 +387,7 @@
     "old_dialogue_code_writes_after_handoff": "stop",
     "automatic_import": false
   },
-  "next_action": "Continue r4 runtime mapping with distinct ordinary/inner ghost objects and exact-name operations. River base state and default read isolation have scoped evidence; river hero entry/exit eligibility, lifetime, occupancy and connectivity remain source-defined and untransferred. Comprehensive current-control permission audit and complete hero forms remain pending. Preserve current r4, approved UI, paused old full-match/new-mode adaptation queues and APK pause.",
+  "next_action": "Read current handoff and verify remote branch first. Current dialogue stops writing product code after this closure. Resume only in the new account/dialogue on user continuation instruction, beginning with ordinary/inner ghost objects and exact-name operations; do not automatically resume old full-match, new-mode adaptation or hero-design import queues.",
   "source_gap_register": "SOURCE_REGISTER.json",
   "apk_built_this_round": false,
   "previous_implementation_commit": "a3b8dcaeac38cdb67f4a597ed23b483f16a661db",
@@ -430,7 +430,7 @@
   "previous_rule_digest": "86cf12befe729c161f1f078dc240052fe26a7a3a78909a2ec255dc0a84d3d776",
   "rule_digest_algorithm": "sha256(concat(relative UTF-8 path + NUL + file bytes + NUL), STATE.current_rules order)",
   "paused_next_action": "Continue destiny bomb/hourglass full real matches, second Shadow cooldown/lifecycle, remaining private snapshot and cross-end clock intersections. Current five active families have sampled natural results; original Nozdormu/Prince and current 12-seat normal regression remain incomplete. Local timeout outcome not frozen; physical RFCOMM/WebView/two-phone pending. UI last; APK paused.",
-  "work_status": "authorized_river_space_increment_completed_other_queues_paused",
+  "work_status": "account_switch_stage_closed_implementation_paused",
   "game_modes": {
     "authority": "09_CURRENT_GAME_MODES.md",
     "base_rule_status": "confirmed",
@@ -674,5 +674,21 @@
       "ADD-CURRENT-CONTROL-001",
       "ADD-HERO-FORM-001"
     ]
+  },
+  "pending_next_runtime_action": "Continue r4 runtime mapping with distinct ordinary/inner ghost objects and exact-name operations. River base state and default read isolation have scoped evidence; river hero entry/exit eligibility, lifetime, occupancy and connectivity remain source-defined and untransferred. Comprehensive current-control permission audit and complete hero forms remain pending. Preserve current r4, approved UI, paused old full-match/new-mode adaptation queues and APK pause.",
+  "account_switch_close": {
+    "requested_at": "2026-10-06T23:14:24+08:00",
+    "request": "我要更换账号了",
+    "record": "17_ACCOUNT_SWITCH_CLOSE_2026-10-06.md",
+    "verified_remote_before_close": "04eeee49ce4090fcc2a44212a06ee50e6f9b464a",
+    "implementation_commit_unchanged": "998a02ab58e231550c9c71598b8419cca06578a9",
+    "semantic_rules_changed": false,
+    "product_code_changed": false,
+    "tests_rerun": false,
+    "web_rebuilt": false,
+    "apk_built": false,
+    "current_dialogue_product_writes_after_close": "stop",
+    "new_account_entry": "00_READ_FIRST.md",
+    "continuation_prompt": "NEW_DIALOGUE_PROMPT.txt"
   }
 }
