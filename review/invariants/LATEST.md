@@ -1,8 +1,8 @@
 # 规则合同逐项运行证据
 
-规则：LEZI-FUNCTION-2026-10-06-r4；运行时：v24.19.0；时间：2026-10-06T09:25:55.266Z。
+规则：LEZI-FUNCTION-2026-10-06-r4；运行时：v24.19.0；时间：2026-10-06T09:50:50.741Z。
 
-测试 337 通过 / 0 失败。109 项合同：98 项有部分通过证据，8 项缺专属测试，3 项属于规范/概念检查；完整验收仍为 0 项。
+测试 354 通过 / 0 失败。109 项合同：101 项有部分通过证据，5 项缺专属测试，3 项属于规范/概念检查；完整验收仍为 0 项。
 
 本表关联具体情景用例，不把相关用例通过写成整条规则的完整证明。精确用例名称、源码摘要与限制见 LATEST.json。
 
@@ -104,9 +104,9 @@
 | ADD-JIANXIE-001 | partial_evidence_passed | tests/cross-rule-contracts.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
 | ADD-CLOCK-001 | partial_evidence_passed | tests/time-line-contracts.test.ts, tests/exception-contracts.test.ts, tests/flow-contracts.test.ts, tests/rewind-action-contracts.test.ts | 3/10/42秒历史预算、房间权威接收及到期已验证；浏览器显示与WebView尚未验收。 |
 | ADD-TWIST-001 | partial_evidence_passed | tests/time-line-contracts.test.ts | 真实倒戈棋返回猎人陷阱、下一正式回合封锁和耗尽已验证；其他来源状态组合尚缺。 |
-| ADD-ACTION-TIER-001 | missing_tests | — | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
-| ADD-TURN-PHASE-001 | missing_tests | — | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
-| ADD-DURATION-001 | missing_tests | — | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
+| ADD-ACTION-TIER-001 | partial_evidence_passed | tests/action-turn-contracts.test.ts | 已覆盖普通移动/进攻、弹回、时间线衍生、额外应将、流舞和回溯重走的独立分类，以及上一正式回合无Ⅰ级动作时拒绝跨回合搜索。未移交英雄和其他未来来源尚未接入；旧无classification历史仅兼容有明确tier且无已知子行动标志的快照。 |
+| ADD-TURN-PHASE-001 | partial_evidence_passed | tests/action-turn-contracts.test.ts | 现有普通主行动、占步、主行动前窗口、回溯、终局与开始效果幂等已有具体执行证据；未包含未来英雄的资源/训练钩子、同批消灭屏障、浏览器与实体设备全流程，不是全称合同证明。 |
+| ADD-DURATION-001 | partial_evidence_passed | tests/action-turn-contracts.test.ts, tests/confirmed-runtime.test.ts | 现有陷阱、防御、飞行、亡魂、潜行者明确例外及子行动计数已覆盖具体执行情景；风5回合冷却、时间崩坏下一己回合末等既有来源例外保留。未移交培养/周期资源不自动实现，尚待完整来源审计。 |
 | ADD-RIVER-001 | missing_tests | — | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
 | ADD-BATCH-001 | missing_tests | — | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
 | ADD-GHOST-OBJECT-001 | missing_tests | — | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
@@ -118,4 +118,4 @@
 | ADD-DARK-IDENTITY-004 | partial_evidence_passed | tests/dark-identity.test.ts | 公共入口在无法确定基础棋位时明确报错、不秘密兜底；来源专属非标准位置身份处理仍待相应来源定义。 |
 | ADD-DARK-IDENTITY-005 | partial_evidence_passed | tests/dark-identity.test.ts | 现有基础走法、战车/铁马和毁灭候选共用入口已验证；术士未移交运行时，因此燃烧烈焰中心/目标等级集成仍待验证，不宣称英雄技能完成。 |
 
-发布定位：70b9debba34be7a7f3ca119997b6e9e0ac266ff3；测试实际执行检查点：e5421285e794ec2f7b691df2f2a9f63942b9eee0。发布与执行的完整运行时提交树均为4bc34a49e4d50829f563f4b9df86939eb46368a8；LATEST.json保留实际运行SHA与原契约摘要，另记录发布SHA及元数据调整后的契约摘要。
+发布产品检查点：62348cabf0da7fffa3f66368161d633e85bb4fde；实际执行检查点：304e8103e937bb3cbb59a3df4b23af730b86a706。两者完整tree SHA均为94a6214814677e7b07b1114bd35c29314a823c19，已核对一致。未移交英雄的培养/周期资源没有在本轮实现，完整验收仍为0。

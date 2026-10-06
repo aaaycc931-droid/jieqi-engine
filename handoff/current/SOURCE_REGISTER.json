@@ -1,7 +1,7 @@
 {
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-06-dark-identity-runtime-1",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-06-action-turn-runtime-1",
   "rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
-  "code_checkpoint": "70b9debba34be7a7f3ca119997b6e9e0ac266ff3",
+  "code_checkpoint": "62348cabf0da7fffa3f66368161d633e85bb4fde",
   "sources": [
     {
       "id": "RULE:CURRENT_RULE_DELTAS_2026-09-22.md",
@@ -214,6 +214,15 @@
       "authorization": "user: 进行下一步推进",
       "applied_scope": "公共暗置身份、现有基础/畸变兵种判断及毁灭普通候选；9项新用例、337引擎回归、Web构建和117资源字节一致；不是完整r3/r4、术士技能、浏览器或实体设备验收",
       "embedded_original": false
+    },
+    {
+      "id": "EXECUTION:ACTION_TURN_RUNTIME_2026-10-06",
+      "kind": "implementation_and_execution_evidence_non_normative",
+      "path": "handoff/current/14_ACTION_TURN_RUNTIME_2026-10-06.md",
+      "implementation_commit": "62348cabf0da7fffa3f66368161d633e85bb4fde",
+      "authorization": "user 2026-10-06T17:32:45+08:00 同意继续行动历史与正式回合时序",
+      "applied_scope": "现有入口正交行动分类、正式主行动历史、五阶段、秦龙/太子/混乱开始结算及额外/子行动不推进计数；17新测试、354回归、118资源一致；不是未来英雄、完整r3/r4、浏览器或实体设备验收",
+      "embedded_original": false
     }
   ],
   "coverage": {
@@ -272,7 +281,7 @@
     "过时3英雄进度"
   ],
   "completeness_claim": "当前已恢复并核对源的主体规则按域覆盖；2026-10-06已将本轮明确确认的全局规则同步进01。仍不保证所有历史对话的英雄专属细节逐条恢复，明确缺口不得填空。 2026-10-06后续明确确认的基础【暗置身份】词条已同步；只关闭术士暗置等级未决项，不提升其他英雄完整稿或特殊位置未定义处理。",
-  "previous_code_checkpoint": "8b985a8f2bf8cd4ab96fdf63ab73894292cc6f7a",
+  "previous_code_checkpoint": "70b9debba34be7a7f3ca119997b6e9e0ac266ff3",
   "runtime_evidence_index": "review/invariants/LATEST.json",
   "gameplay_execution_evidence_index": "review/gameplay/runtime-browser-review-2026-10-05-modes.json",
   "full_match_execution_evidence_index": "review/gameplay/full-match-browser-2026-10-05-active-regression-summary.json",
@@ -283,5 +292,6 @@
   "rule_sync_index": "11_RULE_SYNC_2026-10-06.md",
   "dark_identity_sync_index": "handoff/current/12_DARK_IDENTITY_SYNC_2026-10-06.md",
   "dark_identity_runtime_index": "handoff/current/13_DARK_IDENTITY_RUNTIME_2026-10-06.md",
-  "runtime_mapping_index": "review/invariants/R4_RUNTIME_MAPPING_2026-10-06.md"
+  "runtime_mapping_index": "review/invariants/R4_RUNTIME_MAPPING_2026-10-06.md",
+  "action_turn_runtime_index": "handoff/current/14_ACTION_TURN_RUNTIME_2026-10-06.md"
 }

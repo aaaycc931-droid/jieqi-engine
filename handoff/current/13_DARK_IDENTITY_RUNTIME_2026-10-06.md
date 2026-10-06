@@ -34,3 +34,7 @@ src/slots.ts 提供 getDarkIdentity（仅暗子）及 getCurrentPieceType（默�
 ## 发布定位
 
 测试实际运行于本地执行检查点e5421285e794ec2f7b691df2f2a9f63942b9eee0；发布的产品检查点为70b9debba34be7a7f3ca119997b6e9e0ac266ff3。二者完整tree SHA均为4bc34a49e4d50829f563f4b9df86939eb46368a8，已核对一致，源码摘要不变。LATEST保留真实sourceCommitAtRun及contractDigest，并补充publishedImplementationCommit和发布契约摘要；不把发布定位调整冒充重新测试。
+
+## 后续行动/时序增量
+
+用户随后确认继续，行动分类、正式主行动历史和现有来源五阶段已接入；当前源码与354项测试证据见14_ACTION_TURN_RUNTIME_2026-10-06.md。本记录337项结果及源码SHA保留为身份增量历史，不表示当前停留于该检查点。

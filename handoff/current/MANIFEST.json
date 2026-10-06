@@ -3,8 +3,8 @@
   "self_excluded": true,
   "files": {
     "00_READ_FIRST.md": {
-      "bytes": 6271,
-      "sha256": "047959d6fa275cc73fe3aa603fc2b44dee6d9688b38bd6b0133d8bf01f762fdf"
+      "bytes": 6712,
+      "sha256": "5d1d1982141f8c00025102fbb12a9cb3cb43b3cbb8290c8e89e8b0dfe4d2fd87"
     },
     "01_CURRENT_RULES.md": {
       "bytes": 30541,
@@ -23,8 +23,8 @@
       "sha256": "c133b4ee797b778ce4c88233437b2466255f27c30fcaec5b0941c766cc4bae00"
     },
     "05_PROGRESS_AND_NEXT.md": {
-      "bytes": 23780,
-      "sha256": "13edb96637ef50888a2eed35646ef34dc58cf45799b52145358b1e3f455c6c71"
+      "bytes": 24682,
+      "sha256": "c1a357638bbae1aa83de0806ecf500811e5fec2c7ddf257f22655d684aef96f0"
     },
     "06_COLLABORATION.md": {
       "bytes": 4521,
@@ -39,16 +39,16 @@
       "sha256": "68845494b465bbcc1908f6cef862f350c1da4dadfc3e3a7473d11b2443edf23c"
     },
     "NEW_DIALOGUE_PROMPT.txt": {
-      "bytes": 5238,
-      "sha256": "2a2c053474d5d43432f3eb575165cb087a3dbb3a53809455375bc1f79e19a371"
+      "bytes": 5771,
+      "sha256": "4f08a91f6d8fe8d2c9b20f134b252bdb79e585fd5cb42b89b40aef17033d7d23"
     },
     "SOURCE_REGISTER.json": {
-      "bytes": 16733,
-      "sha256": "f6a295296ee5ce5e808191eb6fc99e3695fd00050a1fd5f9b11308e4aa5c036a"
+      "bytes": 17511,
+      "sha256": "c82ca941544a9bb4fbbf64058dd369755443af555a1a61cbcab8e3b8e9b75e79"
     },
     "STATE.json": {
-      "bytes": 22860,
-      "sha256": "3a1776711ac066b086bf161506f733f72d7a34ac5508f24a571322c5f83a1404"
+      "bytes": 25211,
+      "sha256": "c865cf9d4fa785f800ac4dd560b6ed187dc9b08d4d3b92cdcc103880fa7fed08"
     },
     "assets/approved-home.png": {
       "bytes": 2157060,
@@ -59,8 +59,8 @@
       "sha256": "63671bd146ce72a3c61f40dac457f83f882d7ada78c5f5f98efb7bb3ba5eac26"
     },
     "qa/INVARIANTS.json": {
-      "bytes": 42194,
-      "sha256": "f9c9ffa3a73b0b7b70f454df4fcf935e48d827b63967a54c87ee3b1f7e23540d"
+      "bytes": 43023,
+      "sha256": "ab23988a6764f498f8a169539430c8e1320b8ca0cde1fc38d3ef89a8485fbb03"
     },
     "09_CURRENT_GAME_MODES.md": {
       "bytes": 4749,
@@ -79,8 +79,12 @@
       "sha256": "20a31047d8a9b194a4af74119777a7dcb749afdcc763046401f405019d815c8a"
     },
     "13_DARK_IDENTITY_RUNTIME_2026-10-06.md": {
-      "bytes": 4274,
-      "sha256": "498fb44a804f53d280fd1c9899db7b1527d3f900601e97c1c3e0bde8824deab7"
+      "bytes": 4582,
+      "sha256": "fdbb96ff031ebdc6d9a8a1b2619b52f36188aa57dd6c88ee29c8301a8f8a2c9a"
+    },
+    "14_ACTION_TURN_RUNTIME_2026-10-06.md": {
+      "bytes": 6228,
+      "sha256": "bd8e18144800bb367f61cd2d9a11caf0aa73359893253bf3de44c75fa401a06f"
     }
   },
   "checks": {
@@ -98,6 +102,7 @@
     "dark_identity_pending_question_closed": true,
     "r4_runtime_acceptance_claimed": false,
     "dark_identity_runtime_record_present": true,
-    "r4_full_runtime_acceptance_claimed": false
+    "r4_full_runtime_acceptance_claimed": false,
+    "action_turn_runtime_record_present": true
   }
 }
