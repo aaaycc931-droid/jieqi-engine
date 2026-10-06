@@ -1,3 +1,5 @@
+import { RuleError } from "./errors.js";
+
 
 
 
@@ -79,15 +81,32 @@ export function getController(piece             )       {
     : piece.color;
 }
 
+/**
+ * 【暗置身份】：只读取暗子当前位置对应的基础棋位，不读取隐藏真实身份。
+ * 非基础棋位须由允许该特殊移置的来源定义；公共层不提供秘密身份兜底。
+ */
+export function getDarkIdentity(piece              )                                {
+  const slot = getCoveredSlot(piece.x, piece.y);
+  if (!slot) {
+    throw new RuleError(
+      "UNDEFINED_DARK_IDENTITY",
+      `当前位置无法确定【暗置身份】，须由特殊来源定义：(${piece.x},${piece.y})`,
+    );
+  }
+  return slot.type;
+}
+
+/** 普通当前兵种判定的公共入口；揭示后使用已公开的真实兵种。 */
+export function getCurrentPieceType(piece             )            {
+  return piece.faceDown ? getDarkIdentity(piece) : piece.type;
+}
+
 export function getMovementIdentity(piece             )
 
 
   {
-  if (piece.faceDown) {
-    const slot = requireCoveredSlot(piece.x, piece.y);
-    return { side: slot.side, type: slot.type };
-  }
-  return { side: piece.color, type: piece.type };
+  const type = getCurrentPieceType(piece);
+  return { side: getController(piece), type };
 }
 
 export function createGeneral(side      )                {

@@ -1,6 +1,6 @@
 {
   "authority": "test_case_mapping_non_normative",
-  "ruleRevision": "LEZI-FUNCTION-2026-10-04-r1",
+  "ruleRevision": "LEZI-FUNCTION-2026-10-06-r4",
   "cases": {
     "INV-BOARD-002": [
       {
@@ -1103,6 +1103,64 @@
         "file": "tests/cross-rule-contracts.test.ts",
         "namePrefix": "CROSS-JIANXIE-01 "
       }
+    ],
+    "ADD-DARK-IDENTITY-001": [
+      {
+        "file": "tests/dark-identity.test.ts",
+        "namePrefix": "R4-DARK-01 "
+      },
+      {
+        "file": "tests/dark-identity.test.ts",
+        "namePrefix": "R4-DARK-02 "
+      },
+      {
+        "file": "tests/dark-identity.test.ts",
+        "namePrefix": "R4-DARK-04 "
+      }
+    ],
+    "ADD-DARK-IDENTITY-002": [
+      {
+        "file": "tests/dark-identity.test.ts",
+        "namePrefix": "R4-DARK-03 "
+      },
+      {
+        "file": "tests/dark-identity.test.ts",
+        "namePrefix": "R4-DARK-04 "
+      },
+      {
+        "file": "tests/dark-identity.test.ts",
+        "namePrefix": "R4-DARK-09 "
+      }
+    ],
+    "ADD-DARK-IDENTITY-003": [
+      {
+        "file": "tests/dark-identity.test.ts",
+        "namePrefix": "R4-DARK-04 "
+      },
+      {
+        "file": "tests/dark-identity.test.ts",
+        "namePrefix": "R4-DARK-05 "
+      }
+    ],
+    "ADD-DARK-IDENTITY-004": [
+      {
+        "file": "tests/dark-identity.test.ts",
+        "namePrefix": "R4-DARK-06 "
+      }
+    ],
+    "ADD-DARK-IDENTITY-005": [
+      {
+        "file": "tests/dark-identity.test.ts",
+        "namePrefix": "R4-DARK-07 "
+      },
+      {
+        "file": "tests/dark-identity.test.ts",
+        "namePrefix": "R4-DARK-08 "
+      },
+      {
+        "file": "tests/dark-identity.test.ts",
+        "namePrefix": "R4-DARK-09 "
+      }
     ]
   },
   "limits": {
@@ -1122,7 +1180,12 @@
     "INV-WARCHARIOT-002": "单独验证该车的双将同死路线不构成威胁；不否定局面中其他棋或照面的独立将军。",
     "REJ-017": "单独验证该车的双将同死路线不构成威胁；不否定局面中其他棋或照面的独立将军。",
     "INV-MUROZOND-001": "已验证返回陷阱、返回失败跳过控制并占步、无合法重走拒绝事务；占位与无合法着法为明确构造状态，尚未穷尽真实行动历史的可达组合。",
-    "ADD-WIND-001": "已补公开进攻/强击/随机目标与隐藏承载者死亡、敌方编码视图不变；明子直接指定无形拒绝。部分阶段为明确构造夹具，完整随机对局与物理双机尚待。"
+    "ADD-WIND-001": "已补公开进攻/强击/随机目标与隐藏承载者死亡、敌方编码视图不变；明子直接指定无形拒绝。部分阶段为明确构造夹具，完整随机对局与物理双机尚待。",
+    "ADD-DARK-IDENTITY-001": "基础棋位、当前位置变化及普通走法已验证；未来特殊来源身份策略尚未接入。",
+    "ADD-DARK-IDENTITY-002": "公共入口不接受秘密状态；走法与毁灭候选覆盖具体情景。未覆盖所有英雄目标/资源/UI来源权限，影真实阵营与宿命真实兵保持明确许可读取。",
+    "ADD-DARK-IDENTITY-003": "普通落子揭示与明棋身份切换已验证；未扩展或验收其他特殊揭示来源。",
+    "ADD-DARK-IDENTITY-004": "公共入口在无法确定基础棋位时明确报错、不秘密兜底；来源专属非标准位置身份处理仍待相应来源定义。",
+    "ADD-DARK-IDENTITY-005": "现有基础走法、战车/铁马和毁灭候选共用入口已验证；术士未移交运行时，因此燃烧烈焰中心/目标等级集成仍待验证，不宣称英雄技能完成。"
   },
   "nonRuntime": {
     "INV-ACTION-001": "术语分类约束需要规范/记录字段检查，不能通过一条执行用例证明。",

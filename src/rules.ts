@@ -1,5 +1,6 @@
 import {
   getController,
+  getCurrentPieceType,
   getMovementIdentity,
   isAcrossRiver,
   isInPalace,
@@ -198,7 +199,7 @@ function targetEligible(
     if (options.allowGeneralTarget) return getController(target) !== getController(source);
     // 战车的隔子冲锋是路径碾碎终局的唯一例外：允许把敌将帅作为终点，
     // 以便与路径上的己方将帅形成两败俱伤。
-    return state.featureRules?.mutation === "war_chariot" && getMovementIdentity(source).type === "rook" && getController(target) !== getController(source);
+    return state.featureRules?.mutation === "war_chariot" && getCurrentPieceType(source) === "rook" && getController(target) !== getController(source);
   }
   return getController(target) !== getController(source);
 }
@@ -233,14 +234,14 @@ export function canRevealedPieceAttack(
   if (state.effectsByPieceId?.[piece.id]?.stealth || piece.layer === "air") return false;
   if (princeProtects(state as GameState, otherSide(piece.color)) && ownHalf(otherSide(piece.color), piece)) return false;
   if (hasStealthEffect(state, pieceAt(state, position)?.id ?? "")) return false;
-  if (state.featureRules?.mutation === "war_chariot" && getMovementIdentity(piece).type === "rook") {
+  if (state.featureRules?.mutation === "war_chariot" && getCurrentPieceType(piece) === "rook") {
     const ownGeneral = state.pieces.find(p => !p.faceDown && p.color === piece.color && p.type === "general");
     const dx = Math.sign(position.x - piece.x), dy = Math.sign(position.y - piece.y);
     if (ownGeneral && countPiecesBetween(state, piece, position) === 1 &&
       (dx === 0 && ownGeneral.x === piece.x && (ownGeneral.y - piece.y) * dy > 0 && (position.y - ownGeneral.y) * dy > 0 ||
        dy === 0 && ownGeneral.y === piece.y && (ownGeneral.x - piece.x) * dx > 0 && (position.x - ownGeneral.x) * dx > 0)) return false;
   }
-  if (state.featureRules?.mutation === "iron_steed" && getMovementIdentity(piece).type === "horse") {
+  if (state.featureRules?.mutation === "iron_steed" && getCurrentPieceType(piece) === "horse") {
     const dx = position.x - piece.x;
     const dy = position.y - piece.y;
     // 敌将帅处在马腿格时，只要该方向至少有一个可完成的日字落点，
@@ -448,7 +449,7 @@ export function isStalemate(state: GameState, side: Side): boolean {
 }
 
 export function getPieceTypeForMovement(piece: PublicPiece): PieceType {
-  return getMovementIdentity(piece).type;
+  return getCurrentPieceType(piece);
 }
 
 function ownHalf(side: Side, position: Position): boolean { return side === "red" ? position.y >= 5 : position.y <= 4; }

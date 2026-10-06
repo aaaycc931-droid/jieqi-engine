@@ -1,6 +1,6 @@
 import { RuleError } from "./errors.ts";
 import { applyAuthoritativeMove } from "./game.ts";
-import { getController, isInPalace, otherSide } from "./slots.ts";
+import { getController, getCurrentPieceType, isInPalace, otherSide } from "./slots.ts";
 import { getLegalMoves, hasStealthEffect, isCheckmate, isGeneralInCheck, isStalemate, samePosition } from "./rules.ts";
 import { closeDirectDeaths, copy, destroyPiece, effectiveIdentity, finishFormalTurn, formalTurn, generateGhosts, initializeFeatureSecret, markRevealed, placementAllowed, queueLanding, relocatePiece, rememberAction, settleLandings } from "./settlement.ts";
 import type { GameState, HeroAbilityCommand, MoveResult, RandomInt, SecretState, Side } from "./types.ts";
@@ -75,7 +75,7 @@ export function applyHeroAbility(state: GameState, secret: SecretState, command:
     }
     case "destruction": {
       requireRule(hero === "deathwing", "WRONG_HERO", "英雄没有毁灭技能"); once(); runtime.used = true;
-      const locked = s.pieces.filter(p => effectiveIdentity(p, k).type !== "general");
+      const locked = s.pieces.filter(p => getCurrentPieceType(p) !== "general");
       for (const p of locked) if (randomInt(2) === 0) destroyPiece(s, k, p.id, side, "destruction");
       endsTurn = true;
       break;

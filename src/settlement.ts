@@ -7,6 +7,10 @@ import type { CapturedPiece, GameState, Position, PublicPiece, RandomInt, Secret
 export const copy = <T>(value: T): T => structuredClone(value);
 export const isGround = (piece: PublicPiece): boolean => piece.layer !== "air";
 export const formalTurn = (state: GameState, side: Side): number => state.formalTurns?.[side] ?? 0;
+/**
+ * 权威端真实身份读取，仅供明确要求真实身份或执行死亡揭示的来源。
+ * 普通当前兵种判定应调用 slots.ts 的 getCurrentPieceType，不能使用此函数。
+ */
 export function effectiveIdentity(piece: PublicPiece, secret: SecretState): SecretIdentity {
   const identity = piece.faceDown ? secret.identities[piece.id] : piece;
   if (!identity) throw new RuleError("MISSING_SECRET", "暗子真实身份缺失");

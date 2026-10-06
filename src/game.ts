@@ -11,7 +11,7 @@ import {
   pieceById,
   validatePublicMove,
 } from "./rules.ts";
-import { getController, getMovementIdentity, isInPalace, otherSide } from "./slots.ts";
+import { getController, getCurrentPieceType, isInPalace, otherSide } from "./slots.ts";
 import type {
   CapturedPiece,
   AutomaticExecutionPlan,
@@ -100,8 +100,8 @@ function captureByCrush(
  * 因此这里按行进顺序返回全部路径受害者。
  */
 function pathPiecesForSpecialMove(state: GameState, source: PublicPiece, to: { x: number; y: number }): PublicPiece[] {
-  const movement = getMovementIdentity(source);
-  if (state.featureRules?.mutation === "iron_steed" && movement.type === "horse") {
+  const type = getCurrentPieceType(source);
+  if (state.featureRules?.mutation === "iron_steed" && type === "horse") {
     const dx = to.x - source.x;
     const dy = to.y - source.y;
     if ((Math.abs(dx) === 2 && Math.abs(dy) === 1) || (Math.abs(dx) === 1 && Math.abs(dy) === 2)) {
@@ -110,7 +110,7 @@ function pathPiecesForSpecialMove(state: GameState, source: PublicPiece, to: { x
       return victim ? [victim] : [];
     }
   }
-  if (state.featureRules?.mutation === "war_chariot" && movement.type === "rook") {
+  if (state.featureRules?.mutation === "war_chariot" && type === "rook") {
     // This helper also runs before public validation during rewind. A malformed
     // diagonal or fractional destination must not create a nonterminating walk.
     if (![source.x, source.y, to.x, to.y].every(Number.isInteger) || to.x < 0 || to.x > 8 || to.y < 0 || to.y > 9 || source.x !== to.x && source.y !== to.y) return [];
