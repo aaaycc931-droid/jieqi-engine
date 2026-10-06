@@ -1,6 +1,6 @@
 {
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-05-stage-close-1",
-  "rule_revision": "LEZI-FUNCTION-2026-10-05-r2",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-06-rules-sync-1",
+  "rule_revision": "LEZI-FUNCTION-2026-10-06-r3",
   "code_checkpoint": "8b985a8f2bf8cd4ab96fdf63ab73894292cc6f7a",
   "sources": [
     {
@@ -188,6 +188,13 @@
       "timestamp": "2026-10-05T22:18:40+08:00",
       "applied_scope": "stop further implementation/design/validation; retain prior pauses, archive current rules and actual evidence, resume only under new user scope",
       "path": "10_STAGE_CLOSE.md"
+    },
+    {
+      "id": "RULE:RULE_UPDATE_2026-10-06_GLOBAL_RULE_SYNC.md",
+      "kind": "user_confirmed_rule_delta",
+      "path": "rules/confirmed/RULE_UPDATE_2026-10-06_GLOBAL_RULE_SYNC.md",
+      "applied_scope": "2026-10-06用户明确要求将已确认全局规则写入游戏总规则；动作/层级正交、正式回合五阶段、河道空间、同批消灭、亡魂类精确语义、当前控制方秘密隔离、表/里形态 → 01；测试合同同步 → qa",
+      "embedded_original": false
     }
   ],
   "coverage": {
@@ -233,9 +240,9 @@
       "action": "涉及基础区域/跨河变更前定位原稿核对"
     },
     {
-      "name": "未明确移交的其他对话英雄确认稿",
-      "status": "not_transferred",
-      "action": "用户明确移交完整提案后才评审接入"
+      "name": "未完整移交的其他对话英雄完整确认稿",
+      "status": "partially_transferred_global_rules_only",
+      "action": "2026-10-06仅已确认的全局规则增量进入01；英雄专属完整方案仍需用户明确移交后才写入02/实现。"
     }
   ],
   "excluded_payloads": [
@@ -245,13 +252,14 @@
     "旧STATE运行时分支/测试数/下一步",
     "过时3英雄进度"
   ],
-  "completeness_claim": "当前恢复并核对源的主体规则已按域覆盖；不保证所有历史对话逐条恢复，明确缺口不得填空。",
+  "completeness_claim": "当前已恢复并核对源的主体规则按域覆盖；2026-10-06已将本轮明确确认的全局规则同步进01。仍不保证所有历史对话的英雄专属细节逐条恢复，明确缺口不得填空。",
   "previous_code_checkpoint": "6e1c910cf5ab7fa1b76f3b6fa2ce737e89a840ca",
   "runtime_evidence_index": "review/invariants/LATEST.json",
   "gameplay_execution_evidence_index": "review/gameplay/runtime-browser-review-2026-10-05-modes.json",
   "full_match_execution_evidence_index": "review/gameplay/full-match-browser-2026-10-05-active-regression-summary.json",
   "active_skill_execution_evidence_index": "review/gameplay/active-match-browser-2026-10-05-summary.json",
-  "previous_rule_revision": "LEZI-FUNCTION-2026-10-04-r1",
+  "previous_rule_revision": "LEZI-FUNCTION-2026-10-05-r2",
   "mode_foundation_evidence_index": "review/gameplay/mode-browser-review-2026-10-05.json",
-  "stage_close_index": "10_STAGE_CLOSE.md"
+  "stage_close_index": "10_STAGE_CLOSE.md",
+  "rule_sync_index": "11_RULE_SYNC_2026-10-06.md"
 }
