@@ -1,7 +1,7 @@
 {
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-06-dark-identity-sync-1",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-06-dark-identity-runtime-1",
   "rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
-  "code_checkpoint": "8b985a8f2bf8cd4ab96fdf63ab73894292cc6f7a",
+  "code_checkpoint": "70b9debba34be7a7f3ca119997b6e9e0ac266ff3",
   "sources": [
     {
       "id": "RULE:CURRENT_RULE_DELTAS_2026-09-22.md",
@@ -203,6 +203,16 @@
       "confirmed_at": "2026-10-06T16:16:33+08:00",
       "sha256": "3b801daf6e12de90d70d81065b6dd23328e2e717cbaed6128c8aa1fc9bf6531a",
       "applied_scope": "公共基础暗置身份及特殊位置处理→01；术士引用/原暗置等级未决关闭→12；公共判定层实现要求与5项待验证合同→qa；不导入其他英雄、不改运行时。",
+      "embedded_original": false,
+      "followup_runtime_record": "handoff/current/13_DARK_IDENTITY_RUNTIME_2026-10-06.md"
+    },
+    {
+      "id": "EXECUTION:DARK_IDENTITY_RUNTIME_2026-10-06",
+      "kind": "implementation_and_execution_evidence_non_normative",
+      "path": "handoff/current/13_DARK_IDENTITY_RUNTIME_2026-10-06.md",
+      "implementation_commit": "70b9debba34be7a7f3ca119997b6e9e0ac266ff3",
+      "authorization": "user: 进行下一步推进",
+      "applied_scope": "公共暗置身份、现有基础/畸变兵种判断及毁灭普通候选；9项新用例、337引擎回归、Web构建和117资源字节一致；不是完整r3/r4、术士技能、浏览器或实体设备验收",
       "embedded_original": false
     }
   ],
@@ -262,7 +272,7 @@
     "过时3英雄进度"
   ],
   "completeness_claim": "当前已恢复并核对源的主体规则按域覆盖；2026-10-06已将本轮明确确认的全局规则同步进01。仍不保证所有历史对话的英雄专属细节逐条恢复，明确缺口不得填空。 2026-10-06后续明确确认的基础【暗置身份】词条已同步；只关闭术士暗置等级未决项，不提升其他英雄完整稿或特殊位置未定义处理。",
-  "previous_code_checkpoint": "6e1c910cf5ab7fa1b76f3b6fa2ce737e89a840ca",
+  "previous_code_checkpoint": "8b985a8f2bf8cd4ab96fdf63ab73894292cc6f7a",
   "runtime_evidence_index": "review/invariants/LATEST.json",
   "gameplay_execution_evidence_index": "review/gameplay/runtime-browser-review-2026-10-05-modes.json",
   "full_match_execution_evidence_index": "review/gameplay/full-match-browser-2026-10-05-active-regression-summary.json",
@@ -271,5 +281,7 @@
   "mode_foundation_evidence_index": "review/gameplay/mode-browser-review-2026-10-05.json",
   "stage_close_index": "10_STAGE_CLOSE.md",
   "rule_sync_index": "11_RULE_SYNC_2026-10-06.md",
-  "dark_identity_sync_index": "handoff/current/12_DARK_IDENTITY_SYNC_2026-10-06.md"
+  "dark_identity_sync_index": "handoff/current/12_DARK_IDENTITY_SYNC_2026-10-06.md",
+  "dark_identity_runtime_index": "handoff/current/13_DARK_IDENTITY_RUNTIME_2026-10-06.md",
+  "runtime_mapping_index": "review/invariants/R4_RUNTIME_MAPPING_2026-10-06.md"
 }

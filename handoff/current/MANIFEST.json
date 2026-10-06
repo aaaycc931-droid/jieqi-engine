@@ -3,8 +3,8 @@
   "self_excluded": true,
   "files": {
     "00_READ_FIRST.md": {
-      "bytes": 5570,
-      "sha256": "a52efbdc4b14cf7a0872a454398800fd096bf96080b45cba076d14b986d5c442"
+      "bytes": 6271,
+      "sha256": "047959d6fa275cc73fe3aa603fc2b44dee6d9688b38bd6b0133d8bf01f762fdf"
     },
     "01_CURRENT_RULES.md": {
       "bytes": 30541,
@@ -23,8 +23,8 @@
       "sha256": "c133b4ee797b778ce4c88233437b2466255f27c30fcaec5b0941c766cc4bae00"
     },
     "05_PROGRESS_AND_NEXT.md": {
-      "bytes": 22805,
-      "sha256": "6ffbe2b0ccacba566c90228c12f2086c399a9ff2e8d41e898aec1d3504e79c27"
+      "bytes": 23780,
+      "sha256": "13edb96637ef50888a2eed35646ef34dc58cf45799b52145358b1e3f455c6c71"
     },
     "06_COLLABORATION.md": {
       "bytes": 4521,
@@ -39,16 +39,16 @@
       "sha256": "68845494b465bbcc1908f6cef862f350c1da4dadfc3e3a7473d11b2443edf23c"
     },
     "NEW_DIALOGUE_PROMPT.txt": {
-      "bytes": 4627,
-      "sha256": "50ea7ef3191870e187d1d66f25fa7d524d6b6a2bdbfefa488bf3126d4dfef179"
+      "bytes": 5238,
+      "sha256": "2a2c053474d5d43432f3eb575165cb087a3dbb3a53809455375bc1f79e19a371"
     },
     "SOURCE_REGISTER.json": {
-      "bytes": 15855,
-      "sha256": "6599fe66b6d26a2073e3b50f37d66bc34ae1408220866d8f765132bccc5e2487"
+      "bytes": 16733,
+      "sha256": "f6a295296ee5ce5e808191eb6fc99e3695fd00050a1fd5f9b11308e4aa5c036a"
     },
     "STATE.json": {
-      "bytes": 20578,
-      "sha256": "f8d6a764ef62fbc145ac1a34b5d05d7068af8f98fb7f249d51bb3884b0a585e9"
+      "bytes": 22860,
+      "sha256": "3a1776711ac066b086bf161506f733f72d7a34ac5508f24a571322c5f83a1404"
     },
     "assets/approved-home.png": {
       "bytes": 2157060,
@@ -59,24 +59,28 @@
       "sha256": "63671bd146ce72a3c61f40dac457f83f882d7ada78c5f5f98efb7bb3ba5eac26"
     },
     "qa/INVARIANTS.json": {
-      "bytes": 41127,
-      "sha256": "a82c7539d33f4fcae8b0442bc77408a7b76a7b8eb22a317efe37232db5459fc8"
+      "bytes": 42194,
+      "sha256": "f9c9ffa3a73b0b7b70f454df4fcf935e48d827b63967a54c87ee3b1f7e23540d"
     },
     "09_CURRENT_GAME_MODES.md": {
       "bytes": 4749,
       "sha256": "fee5f89a60880cb94aa80f1d39e2d692518c5226ed047f5c722590f4baee7bf1"
     },
     "10_STAGE_CLOSE.md": {
-      "bytes": 6287,
-      "sha256": "814a1c61d6f873756642ee675dc7f0ecff7c4f35bbccc0302f09512666728678"
+      "bytes": 6815,
+      "sha256": "784b23ed108851b63a6399f2e37c10e6e95c60deaf0282686c3799ac06e8011f"
     },
     "11_RULE_SYNC_2026-10-06.md": {
       "bytes": 1979,
       "sha256": "c81ce01d78b0c366e5426bdcbede92b2e70388a520c41ea518f7f18ff16ef150"
     },
     "12_DARK_IDENTITY_SYNC_2026-10-06.md": {
-      "bytes": 1785,
-      "sha256": "b3a2fc765d3e79b48a92309da4fff4c45ed89623996a42d16a8cc86e9c9c35c9"
+      "bytes": 2313,
+      "sha256": "20a31047d8a9b194a4af74119777a7dcb749afdcc763046401f405019d815c8a"
+    },
+    "13_DARK_IDENTITY_RUNTIME_2026-10-06.md": {
+      "bytes": 4274,
+      "sha256": "498fb44a804f53d280fd1c9899db7b1527d3f900601e97c1c3e0bde8824deab7"
     }
   },
   "checks": {
@@ -92,6 +96,8 @@
     "current_rule_revision_r4": true,
     "dark_identity_sync_record_present": true,
     "dark_identity_pending_question_closed": true,
-    "r4_runtime_acceptance_claimed": false
+    "r4_runtime_acceptance_claimed": false,
+    "dark_identity_runtime_record_present": true,
+    "r4_full_runtime_acceptance_claimed": false
   }
 }

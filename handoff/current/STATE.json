@@ -1,11 +1,11 @@
 {
   "project": "乐子象棋 / jieqi-engine",
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-06-dark-identity-sync-1",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-06-dark-identity-runtime-1",
   "updated_at": "2026-10-06",
   "repository": "https://github.com/aaaycc931-droid/jieqi-engine",
   "working_branch": "codex/ui-android-apk-20261001",
-  "implementation_commit": "8b985a8f2bf8cd4ab96fdf63ab73894292cc6f7a",
-  "implementation_tree": "7915bd1b05e9d3d1f8c0107930b6e1dc7e8106cb",
+  "implementation_commit": "70b9debba34be7a7f3ca119997b6e9e0ac266ff3",
+  "implementation_tree": "4bc34a49e4d50829f563f4b9df86939eb46368a8",
   "draft_pr": 2,
   "baseline_id": "LEZI-FUNCTION-2026-10-04-v1",
   "baseline_digest": "4bcf9fb91f5c6e41f456e7424ebd7ed09c6c07b1595ec825604aa730fdad020b",
@@ -26,7 +26,7 @@
     "destiny_mutations": 1
   },
   "validation": {
-    "tests_passed": 328,
+    "tests_passed": 337,
     "tests_failed": 0,
     "web_build": "passed",
     "homepage_browser_run": 37305274329,
@@ -41,13 +41,16 @@
     "individual_20_anti_invariants": "partial_named_case_evidence_full_contract_acceptance_pending",
     "contract_evidence": {
       "index": "review/invariants/LATEST.json",
-      "total": 96,
-      "partial_evidence_passed": 93,
+      "total": 109,
+      "partial_evidence_passed": 98,
+      "missing_related_cases": 8,
       "non_runtime_contract": 3,
       "failed_cases": 0,
-      "missing_related_cases": 0,
       "fully_accepted": 0,
-      "applicable_rule_revision": "LEZI-FUNCTION-2026-10-04-r1"
+      "applicable_rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
+      "source_commit_at_run": "e5421285e794ec2f7b691df2f2a9f63942b9eee0",
+      "scope": "named_case_evidence_only_r3_eight_new_contracts_missing_special_tests_warlock_integration_pending",
+      "published_implementation_commit": "70b9debba34be7a7f3ca119997b6e9e0ac266ff3"
     },
     "current_ci": {
       "status": "success",
@@ -58,7 +61,8 @@
       "apk_job": "skipped",
       "checkout_commit": "74a154dcf09172117bfe62f251a7af21b5376004",
       "source_digest": "25843e4e60a80f9312a56d0c4cf9064f04673953623a67d146387241cd8629c3",
-      "source_digest_matches_local": true
+      "source_digest_matches_local": true,
+      "applies_to_current_implementation": false
     },
     "previous_ci": {
       "status": "success",
@@ -302,7 +306,29 @@
     "r3_global_rule_sync_note": "2026-10-06仅同步已确认规则事实源；既有328测试和旧浏览器证据不构成对r3新增语义的运行时验收。",
     "r4_dark_identity_runtime_acceptance": false,
     "r4_dark_identity_tests_rerun": false,
-    "r4_dark_identity_note": "规则事实源/合同同步；公共判定层尚未实现，既有328 passed不验收r4。"
+    "r4_dark_identity_note": "规则事实源/合同同步；公共判定层尚未实现，既有328 passed不验收r4。",
+    "previous_engine_run": {
+      "implementation_commit": "8b985a8f2bf8cd4ab96fdf63ab73894292cc6f7a",
+      "tests_passed": 328,
+      "tests_failed": 0,
+      "scope": "historical_mode_foundation_not_r3_r4_acceptance"
+    },
+    "engine_scope": "full_regression_with_nine_dark_identity_cases_not_full_r3_r4_acceptance",
+    "engine_implementation_commit": "70b9debba34be7a7f3ca119997b6e9e0ac266ff3",
+    "previous_contract_evidence": {
+      "index": "review/invariants/LATEST.json",
+      "total": 96,
+      "partial_evidence_passed": 93,
+      "non_runtime_contract": 3,
+      "failed_cases": 0,
+      "missing_related_cases": 0,
+      "fully_accepted": 0,
+      "applicable_rule_revision": "LEZI-FUNCTION-2026-10-04-r1"
+    },
+    "current_runtime_ci": {
+      "implementation_commit": "70b9debba34be7a7f3ca119997b6e9e0ac266ff3",
+      "status": "not_observed_for_this_increment_at_local_handoff"
+    }
   },
   "restrictions": [
     "ui_last",
@@ -320,10 +346,10 @@
     "old_dialogue_code_writes_after_handoff": "stop",
     "automatic_import": false
   },
-  "next_action": "On the next authorized dialogue, read the current handoff and reconcile the remote working branch first. Await user scope before implementing independent mode hero/mutation adaptations or resuming the old validation queue. Do not auto-start either queue; UI last, APK paused.",
+  "next_action": "Continue the recorded r4 runtime mapping with orthogonal action source/tier/keywords, formal-vs-child action history and five-phase turn timing. Shared dark identity resolver is implemented with scoped evidence; do not reimplement it or import unfinished hero designs. Old full-match validation and new-mode adaptations remain paused; UI last, APK paused.",
   "source_gap_register": "SOURCE_REGISTER.json",
   "apk_built_this_round": false,
-  "previous_implementation_commit": "6e1c910cf5ab7fa1b76f3b6fa2ce737e89a840ca",
+  "previous_implementation_commit": "8b985a8f2bf8cd4ab96fdf63ab73894292cc6f7a",
   "validation_round": {
     "rules_changed": false,
     "rule_revision_unchanged": true,
@@ -363,7 +389,7 @@
   "previous_rule_digest": "86cf12befe729c161f1f078dc240052fe26a7a3a78909a2ec255dc0a84d3d776",
   "rule_digest_algorithm": "sha256(concat(relative UTF-8 path + NUL + file bytes + NUL), STATE.current_rules order)",
   "paused_next_action": "Continue destiny bomb/hourglass full real matches, second Shadow cooldown/lifecycle, remaining private snapshot and cross-end clock intersections. Current five active families have sampled natural results; original Nozdormu/Prince and current 12-seat normal regression remain incomplete. Local timeout outcome not frozen; physical RFCOMM/WebView/two-phone pending. UI last; APK paused.",
-  "work_status": "stage_closed_all_further_implementation_and_validation_paused_await_next_user_authorization",
+  "work_status": "authorized_shared_dark_identity_runtime_increment_completed_other_queues_paused",
   "game_modes": {
     "authority": "09_CURRENT_GAME_MODES.md",
     "base_rule_status": "confirmed",
@@ -476,6 +502,28 @@
       "warlock_shared_identity_rank_mapping",
       "retire_uniform_dark_rank_direction"
     ],
-    "other_hero_designs_changed": false
+    "other_hero_designs_changed": false,
+    "followup_runtime_record": "handoff/current/13_DARK_IDENTITY_RUNTIME_2026-10-06.md"
+  },
+  "latest_runtime_round": {
+    "authorization": "user: 进行下一步推进",
+    "rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
+    "implementation_commit": "70b9debba34be7a7f3ca119997b6e9e0ac266ff3",
+    "runtime_mapping": "review/invariants/R4_RUNTIME_MAPPING_2026-10-06.md",
+    "report": "handoff/current/13_DARK_IDENTITY_RUNTIME_2026-10-06.md",
+    "product_code_changed": true,
+    "semantic_rules_changed": false,
+    "new_engine_tests": 9,
+    "tests_passed": 337,
+    "tests_failed": 0,
+    "web_build": "passed",
+    "android_generated_files_matched": 117,
+    "browser_tests_run": false,
+    "apk_built": false,
+    "old_full_match_queue_resumed": false,
+    "untransferred_heroes_imported": false,
+    "all_functions_accepted": false,
+    "local_execution_checkpoint": "e5421285e794ec2f7b691df2f2a9f63942b9eee0",
+    "publication_tree_matches_execution_tree": true
   }
 }

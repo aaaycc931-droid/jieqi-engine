@@ -1,8 +1,8 @@
 {
   "authority": "execution_evidence_non_normative",
-  "generatedAt": "2026-10-05T11:48:24.462Z",
-  "sourceCommitAtRun": "74a154dcf09172117bfe62f251a7af21b5376004",
-  "sourceDigest": "25843e4e60a80f9312a56d0c4cf9064f04673953623a67d146387241cd8629c3",
+  "generatedAt": "2026-10-06T09:25:55.266Z",
+  "sourceCommitAtRun": "e5421285e794ec2f7b691df2f2a9f63942b9eee0",
+  "sourceDigest": "c0c548b1a462bdb65c31e5b2e403cddd314411a904bacd433e036c589206610f",
   "sourceDigestPaths": [
     ".github/workflows/gameplay-runtime-review.yml",
     ".github/workflows/menu-reference-review.yml",
@@ -50,6 +50,7 @@
     "tests/check-end-network.test.ts",
     "tests/confirmed-runtime.test.ts",
     "tests/cross-rule-contracts.test.ts",
+    "tests/dark-identity.test.ts",
     "tests/exception-contracts.test.ts",
     "tests/flow-contracts.test.ts",
     "tests/flow-fixtures.ts",
@@ -168,19 +169,19 @@
     "web/style.css",
     "web/ui-refresh.css"
   ],
-  "ruleRevision": "LEZI-FUNCTION-2026-10-04-r1",
-  "contractDigest": "a1d0c817bd1d6bec20080460066d84b80ec0d5a29eff889973d2395c11ae6b22",
-  "runtime": "v24.21.0",
+  "ruleRevision": "LEZI-FUNCTION-2026-10-06-r4",
+  "contractDigest": "7b984776536393c8fa3396ffc2774db7a789fbe36c8df45b5b7725c6dbffd432",
+  "runtime": "v24.19.0",
   "testSummary": {
-    "passed": 328,
+    "passed": 337,
     "failed": 0,
     "executionFailed": false
   },
   "contractSummary": {
-    "total": 96,
-    "partial_evidence_passed": 93,
+    "total": 109,
+    "partial_evidence_passed": 98,
     "failed_cases": 0,
-    "missing_tests": 0,
+    "missing_tests": 8,
     "non_runtime_contract": 3,
     "fullyAccepted": 0
   },
@@ -513,7 +514,7 @@
     {
       "id": "INV-ACTION-001",
       "group": "invariants",
-      "statement": "正式主行动只有【移动】与【进攻】；“走棋”只保留为自然语言，不是正式上位分类。",
+      "statement": "普通棋子棋盘主行动的核心动作只有【移动】与【进攻】；来源专属【占步】/特殊主行动可占用主行动机会而不强行归入两者；“走棋”不是正式上位分类。",
       "status": "non_runtime_contract",
       "relatedCases": [],
       "verificationLimit": "术语分类约束需要规范/记录字段检查，不能通过一条执行用例证明。",
@@ -1496,7 +1497,7 @@
     {
       "id": "INV-MUROZOND-001",
       "group": "invariants",
-      "statement": "姆诺兹多只可选择对手紧接上一正式回合完成的Ⅰ级俗手对应且仍存活的棋；先【移置】回原位并结算返回格，再决定是否【操控】。",
+      "statement": "姆诺兹多只可选择对手紧接上一正式回合完成的合格Ⅰ级俗手对应且仍存活的棋；若上一正式回合没有合格Ⅰ级俗手，不得跳过该回合搜索更老行动。先【移置】回原位并结算返回格，再决定是否【操控】。",
       "status": "partial_evidence_passed",
       "relatedCases": [
         {
@@ -2551,6 +2552,192 @@
       ],
       "verificationLimit": "真实倒戈棋返回猎人陷阱、下一正式回合封锁和耗尽已验证；其他来源状态组合尚缺。",
       "fullyAccepted": false
+    },
+    {
+      "id": "ADD-ACTION-TIER-001",
+      "group": "supplements",
+      "statement": "动作关键词与行动层级为正交维度：技能衍生动作可按【移动】/【进攻】结算但不是Ⅰ级俗手；来源专属主行动可占主行动而非【移动】/【进攻】。",
+      "status": "missing_tests",
+      "relatedCases": [],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "ADD-TURN-PHASE-001",
+      "group": "supplements",
+      "statement": "正常正式回合默认按回合开始结算→主行动前窗口→主行动→行动原子闭合→回合结束结算五阶段推进。",
+      "status": "missing_tests",
+      "relatedCases": [],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "ADD-DURATION-001",
+      "group": "supplements",
+      "statement": "持续效果默认获得即生效、当回合即计时；额外/强迫/技能衍生子行动默认不推进正式回合计数、持续时间、培养、冷却或周期资源。",
+      "status": "missing_tests",
+      "relatedCases": [],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "ADD-RIVER-001",
+      "group": "supplements",
+      "statement": "【河道】为来源专属特殊空间状态：进入失去【地面】，离开恢复【地面】，与【飞行】互斥；无明确读取权限的既有棋盘效果默认不读取河道空间或河道棋。",
+      "status": "missing_tests",
+      "relatedCases": [],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "ADD-BATCH-001",
+      "group": "supplements",
+      "statement": "来源明确为同时/同批【消灭】时，先闭合整个消灭批次与其死亡揭示/记录，再处理由该批死亡产生的新亡魂、复活、召回、生成或资源触发；后续对象不倒流加入已闭合批次。",
+      "status": "missing_tests",
+      "relatedCases": [],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "ADD-GHOST-OBJECT-001",
+      "group": "supplements",
+      "statement": "【亡魂】与【里·亡魂】是独立格上对象，可共格但不互相叠层/刷新/提供资源；精确名称清除只处理对应对象，普通棋子消灭不顺带清除。",
+      "status": "missing_tests",
+      "relatedCases": [],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "ADD-CURRENT-CONTROL-001",
+      "group": "supplements",
+      "statement": "来源明确读取“当前控制方”时只读取对应时点控制关系，不读取原始真实阵营或【混乱】秘密阵营；无秘密读取权限的目标/资源/UI不得以秘密阵营作隐藏条件。",
+      "status": "missing_tests",
+      "relatedCases": [],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "ADD-HERO-FORM-001",
+      "group": "supplements",
+      "statement": "表/里为同一英雄的完整形态包；默认一局只使用所选形态，不能中途机会主义切换或同时叠加；命名为英雄名｜【技能名】与里·英雄名｜【里·技能名】。",
+      "status": "missing_tests",
+      "relatedCases": [],
+      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "ADD-DARK-IDENTITY-001",
+      "group": "supplements",
+      "statement": "未揭示棋子的默认当前兵种按当前位置对应基础棋位的【暗置身份】判定，与隐藏真实身份区分；相同位置和公开状态不同隐藏兵种不改变普通身份判定。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/dark-identity.test.ts",
+          "name": "R4-DARK-01 两方全部30个基础暗子棋位使用位置兵种",
+          "passed": true
+        },
+        {
+          "file": "tests/dark-identity.test.ts",
+          "name": "R4-DARK-02 当前坐标决定兵种，不固定在原始棋位或棋子ID",
+          "passed": true
+        },
+        {
+          "file": "tests/dark-identity.test.ts",
+          "name": "R4-DARK-04 相同公开状态的不同隐藏身份不改变普通走法资格，揭示才读取真实身份",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "基础棋位、当前位置变化及普通走法已验证；未来特殊来源身份策略尚未接入。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "ADD-DARK-IDENTITY-002",
+      "group": "supplements",
+      "statement": "普通暗置身份判定不触发揭示、不改隐藏真实身份、不以真实兵种或秘密阵营决定公开资格/资源/UI；只有来源明确要求真实身份/隐藏真实兵种/揭示后身份或执行揭示时才读取隐藏真实身份。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/dark-identity.test.ts",
+          "name": "R4-DARK-03 普通判定不读附带真实身份、不揭示、不改变公开或秘密状态",
+          "passed": true
+        },
+        {
+          "file": "tests/dark-identity.test.ts",
+          "name": "R4-DARK-04 相同公开状态的不同隐藏身份不改变普通走法资格，揭示才读取真实身份",
+          "passed": true
+        },
+        {
+          "file": "tests/dark-identity.test.ts",
+          "name": "R4-DARK-09 毁灭的非将帅候选判定使用公共兵种，未消灭暗子不要求读取真实身份",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "公共入口不接受秘密状态；走法与毁灭候选覆盖具体情景。未覆盖所有英雄目标/资源/UI来源权限，影真实阵营与宿命真实兵保持明确许可读取。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "ADD-DARK-IDENTITY-003",
+      "group": "supplements",
+      "statement": "正式揭示后不再使用暗置身份，后续当前兵种判定按已揭示真实兵种；该词条不自行改变控制方、阵营、揭示时机或原有行动机制。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/dark-identity.test.ts",
+          "name": "R4-DARK-04 相同公开状态的不同隐藏身份不改变普通走法资格，揭示才读取真实身份",
+          "passed": true
+        },
+        {
+          "file": "tests/dark-identity.test.ts",
+          "name": "R4-DARK-05 明棋位于任何位置都使用公开真实兵种，不继续套暗置棋位",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "普通落子揭示与明棋身份切换已验证；未扩展或验收其他特殊揭示来源。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "ADD-DARK-IDENTITY-004",
+      "group": "supplements",
+      "statement": "特殊来源让暗子保持暗置并移至无法确定基础棋位的位置时，必须由该来源定义暗置身份处理；公共层不读取隐藏真实身份兜底、不创造统一暗子身份。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/dark-identity.test.ts",
+          "name": "R4-DARK-06 非基础棋位明确缺少来源定义，绝不以真实兵种或统一身份兜底",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "公共入口在无法确定基础棋位时明确报错、不秘密兜底；来源专属非标准位置身份处理仍待相应来源定义。",
+      "fullyAccepted": false
+    },
+    {
+      "id": "ADD-DARK-IDENTITY-005",
+      "group": "supplements",
+      "statement": "公共规则/判定层统一提供未揭示棋当前兵种判定，英雄/畸变/基础机制按来源权限共用；术士暗置中心与普通目标均引用暗置身份再映射兵1、士象2、马炮3、车4，不另设术士身份或所有暗子统一3级。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/dark-identity.test.ts",
+          "name": "R4-DARK-07 铁马的暗马位资格和马腿碾碎使用公共身份，随后揭示真实车",
+          "passed": true
+        },
+        {
+          "file": "tests/dark-identity.test.ts",
+          "name": "R4-DARK-08 战车的暗车位资格和路径碾碎使用公共身份，随后揭示真实兵",
+          "passed": true
+        },
+        {
+          "file": "tests/dark-identity.test.ts",
+          "name": "R4-DARK-09 毁灭的非将帅候选判定使用公共兵种，未消灭暗子不要求读取真实身份",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "现有基础走法、战车/铁马和毁灭候选共用入口已验证；术士未移交运行时，因此燃烧烈焰中心/目标等级集成仍待验证，不宣称英雄技能完成。",
+      "fullyAccepted": false
     }
-  ]
+  ],
+  "publishedImplementationCommit": "70b9debba34be7a7f3ca119997b6e9e0ac266ff3",
+  "publishedImplementationTree": "4bc34a49e4d50829f563f4b9df86939eb46368a8",
+  "publicationNote": "测试在本地执行检查点e5421285e794ec2f7b691df2f2a9f63942b9eee0运行；发布提交由GitHub连接器建立，其运行时提交完整tree SHA与本地检查点完全一致。契约元数据仅把code_checkpoint改为发布SHA，陈述、映射、验证状态不变。",
+  "publishedContractDigest": "f9c9ffa3a73b0b7b70f454df4fcf935e48d827b63967a54c87ee3b1f7e23540d"
 }

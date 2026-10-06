@@ -1,3 +1,5 @@
+当前接续补充（2026-10-06）：先读13_DARK_IDENTITY_RUNTIME_2026-10-06.md。公共【暗置身份】已在用户后续授权后实现；当前源码70b9debba34be7a7f3ca119997b6e9e0ac266ff3，337 passed、Web构建通过、117资源一致，无APK。差分映射已记录，109合同98部分证据+8缺专属测试+3规范，完整验收0；r3其他新增语义、术士等级集成仍待。下一步动作/历史与正式回合时序，未移交英雄不导入、旧整盘队列仍暂停。下文“公共层待授权”和“未改产品”仅是先前规则同步时点，不能当作当前状态。
+
 本阶段已于2026-10-05 22:18（Asia/Shanghai）由用户明确结束。2026-10-06用户又明确授权把已确认的全局规则同步进游戏总规则，但没有重新开启产品实现阶段。接手时先读取handoff/current/10_STAGE_CLOSE.md、11_RULE_SYNC_2026-10-06.md、12_DARK_IDENTITY_SYNC_2026-10-06.md与STATE；所有后续实现、独立适配和原验证队列仍暂停。先核验远端并报告当前状态，再依据用户新授权继续，不自动执行下方待办。原实现对话交接后停止写入。
 
 继续我的“乐子象棋”项目。使用GitHub连接器读取 https://github.com/aaaycc931-droid/jieqi-engine 的 codex/ui-android-apk-20261001；先读handoff/current/00_READ_FIRST.md、STATE.json、10_STAGE_CLOSE.md、11_RULE_SYNC_2026-10-06.md、12_DARK_IDENTITY_SYNC_2026-10-06.md、05_PROGRESS_AND_NEXT.md和09_CURRENT_GAME_MODES.md，再按入口读01–04及协作说明。源码检查点8b985a8f2bf8cd4ab96fdf63ab73894292cc6f7a，现行规则 **LEZI-FUNCTION-2026-10-06-r4**。根目录历史规格、旧包、代码兼容参数不能覆盖现行正文。
