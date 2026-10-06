@@ -2,7 +2,8 @@ import { RuleError } from "./errors.js";
 import { applyAuthoritativeMove } from "./game.js";
 import { getController, getCurrentPieceType, isInPalace, otherSide } from "./slots.js";
 import { getLegalMoves, hasStealthEffect, isCheckmate, isGeneralInCheck, isStalemate, samePosition } from "./rules.js";
-import { closeDirectDeaths, copy, destroyPiece, effectiveIdentity, finishFormalTurn, formalTurn, generateGhosts, initializeFeatureSecret, markRevealed, placementAllowed, queueLanding, relocatePiece, rememberAction, settleLandings } from "./settlement.js";
+import { closeDirectDeaths, copy, destroyPiece, effectiveIdentity, beginFormalTurn, advanceToFormalTurn, finishFormalTurn, formalTurn, generateGhosts, initializeFeatureSecret, markRevealed, placementAllowed, queueLanding, relocatePiece, rememberAction, settleLandings } from "./settlement.js";
+import { actionFields, closeMainActionAtom, isOrdinaryFormalAction, previousFormalAction, recordAction } from "./turns.js";
 
 
 function requireRule(ok         , code        , text        )             {
@@ -18,13 +19,15 @@ export function formalTurnDurationMs(state           , side      )         {
   const hasThief = heroes?.[side] === "murozond_minion", otherThief = heroes?.[otherSide(side)] === "murozond_minion";
   return hasThief === otherThief ? 60_000 : hasThief ? 75_000 : 45_000;
 }
-export function startFormalClock(state           , now        )       {
-  if (state.status !== "playing" || state.forcedDefense) return;
+export function startFormalClock(state           , now        , secret              , randomInt            )       {
+  if (state.status !== "playing" || state.forcedDefense || state.flowDance) return;
+  beginFormalTurn(state, secret, randomInt);
   state.turnStartedAt = now;
   state.turnDeadlineAt = now + formalTurnDurationMs(state, state.turn);
 }
 function endSkillTurn(state           , secret             , side      , randomInt           )       {
   settleLandings(state, secret);
+  if (state.lastMove) closeMainActionAtom(state, state.lastMove.actionId);
   if (closeDirectDeaths(state, secret, side)) return;
   generateGhosts(state);
   // 占步技能应将失败的结果在整个锁定集合结算完成后裁决。
@@ -34,12 +37,7 @@ function endSkillTurn(state           , secret             , side      , randomI
   }
   finishFormalTurn(state, secret, side, randomInt);
   if (state.status === "finished") return;
-  state.turn = otherSide(side);
-  if (isCheckmate(state, state.turn)) {
-    state.status = "execution"; state.winner = side; state.turn = side; state.reason = "checkmate";
-  } else if (isStalemate(state, state.turn)) {
-    state.status = "finished"; state.winner = side; state.reason = "stalemate";
-  }
+  advanceToFormalTurn(state, secret, otherSide(side), randomInt);
 }
 
 /** 共同权威技能入口：本机/蓝牙使用同一规则。私密技能不改变公共资源或日志。 */
@@ -49,6 +47,15 @@ export function applyHeroAbility(state           , secret             , command 
   requireRule(state.status === "playing" && !state.forcedDefense && !state.flowDance, "INVALID_PHASE", "只能在自己的正式回合开始发动技能");
   const s = copy(state), k = copy(secret), side = s.turn, hero = s.featureRules?.heroes?.[side];
   initializeFeatureSecret(s, k);
+  beginFormalTurn(s, k, randomInt);
+  requireRule(s.turnLifecycle?.phase === "before_main", "INVALID_PRE_MAIN_WINDOW", "只能在正式回合主行动前发动技能");
+  const isMain = ["invoke", "unspeakable", "destruction", "timeline_twist"].includes(command.ability);
+  const classification                       = { tier: command.ability === "timeline_twist" || command.ability === "rewind" ? 3 : 2, keywords: isMain ? ["占步", "耗费"] : ["耗费"], source: "hero", opportunity: isMain ? "main" : "before_main", countsAsFormalTurn: isMain };
+  const beforeAction = copy(s);
+  if (command.ability !== "shadow") {
+    if (isMain && command.ability !== "timeline_twist") rememberAction(beforeAction, k, undefined, classification.tier, undefined, now, classification);
+    recordAction(s, { ...classification, actionId: command.actionId, actingSide: side });
+  }
   s.heroRuntime ??= {};
   const runtime = s.heroRuntime[side] ??= {};
   s.automaticEvents = []; s.landingEvents = [];
@@ -82,19 +89,19 @@ export function applyHeroAbility(state           , secret             , command 
     }
     case "timeline_twist": {
       requireRule(hero === "murozond", "WRONG_HERO", "英雄没有扭曲时间线"); ordinaryTime(); once();
-      const previous = k.history?.at(-1);
-      requireRule(previous && previous.actingSide === otherSide(side) && previous.tier === 1 && previous.pieceId && previous.from, "NOT_PREVIOUS_ORDINARY", "只能操控对手紧接上一正式俗手的存活棋");
+      const previous = previousFormalAction(k);
+      requireRule(previous && previous.actingSide === otherSide(side) && isOrdinaryFormalAction(previous) && previous.pieceId && previous.from, "NOT_PREVIOUS_ORDINARY", "只能操控对手紧接上一正式俗手的存活棋");
       const p = s.pieces.find(p => p.id === previous.pieceId);
       requireRule(p && command.to, "NO_TARGET", "目标已死亡或缺少重走落点");
       runtime.used = true;
-      rememberAction(state, k, p.id, 3, { x: p.x, y: p.y }, now);
+      rememberAction(beforeAction, k, p.id, 3, { x: p.x, y: p.y }, now, classification);
       const returned = relocatePiece(s, k, p.id, previous.from, "timeline_twist");
       if (!returned || !s.pieces.some(q => q.id === p.id)) { endsTurn = true; break; }
       const controlled = copy(s);
       controlled.turn = getController(p);
       // 此次操控是当前连带动作；“下一正式回合”封锁不取消它。
       requireRule(getLegalMoves(controlled, p.id, controlled.turn, { allowLinkedControl: true }).some(to => samePosition(to, command.to )), "INVALID_CONTROLLED_MOVE", "重走必须符合该敌棋一侧全部合法规则");
-      const moved = applyAuthoritativeMove(controlled, k, { from: p, to: command.to, expectedRevision: controlled.revision, actionId: `${command.actionId}:controlled` }, true, now);
+      const moved = applyAuthoritativeMove(controlled, k, { from: p, to: command.to, expectedRevision: controlled.revision, actionId: `${command.actionId}:controlled` }, true, now, { parentActionId: command.actionId });
       Object.assign(s, moved.state); Object.assign(k, moved.secret);
       s.turn = side;
       endsTurn = true;
@@ -104,7 +111,7 @@ export function applyHeroAbility(state           , secret             , command 
       requireRule(hero === "nozdormu", "WRONG_HERO", "英雄没有回溯技能"); ordinaryTime();
       requireRule(!k.rewindUsed?.[side], "SKILL_USED", "本局回溯已使用");
       requireRule(now - (state.turnStartedAt ?? now) < 10_000 && !isGeneralInCheck(s, side), "REWIND_WINDOW", "回溯只允许回合前10秒且未受将军");
-      const previous = [...(k.history ?? [])].reverse().find(h => h.actingSide === side && h.pieceId);
+      const previous = previousFormalAction(k, side);
       requireRule(previous?.pieceId, "NO_HISTORY", "没有上一己方行动快照");
       requireRule(previous.remainingMs !== undefined && Number.isFinite(previous.remainingMs), "REWIND_CLOCK_MISSING", "历史落子前真实剩余时间缺失，不能推定回溯重走时限");
       const processed = copy(k.processedActions), used = { ...k.rewindUsed, [side]: true          }, history = k.history;
@@ -115,6 +122,9 @@ export function applyHeroAbility(state           , secret             , command 
       Object.assign(k, restoredSecret, { processedActions: processed, rewindUsed: used, history, replay: { pieceId: previous.pieceId, deadlineAt: now + Math.min(10_000, Math.max(0, previous.remainingMs)) } });
       s.revision = state.revision;
       s.turn = side; s.turnStartedAt = now; s.turnDeadlineAt = k.replay .deadlineAt;
+      // 回溯恢复阶段与开始结算，不能把已完成的开始效果再跑一次。
+      beginFormalTurn(s, k, randomInt);
+      recordAction(s, { ...classification, actionId: command.actionId, actingSide: side });
       break;
     }
     case "hourglass": {
@@ -177,8 +187,7 @@ export function applyHeroAbility(state           , secret             , command 
   if (!secretOnly) {
     s.revision += 1;
     if (endsTurn) {
-      if (command.ability !== "timeline_twist") rememberAction(state, k, undefined, 2, undefined, now);
-      s.lastMove = { actionId: command.actionId, pieceId: command.pieceId ?? `hero:${side}`, actingSide: side, from: command.to ?? { x: 0, y: 0 }, to: command.to ?? { x: 0, y: 0 }, landed: false, tier: command.ability === "timeline_twist" ? 3 : 2, keywords: ["占步", "耗费"] };
+      s.lastMove = { actionId: command.actionId, pieceId: command.pieceId ?? `hero:${side}`, actingSide: side, from: command.to ?? { x: 0, y: 0 }, to: command.to ?? { x: 0, y: 0 }, landed: false, ...actionFields(classification) };
       endSkillTurn(s, k, side, randomInt);
     } else closeDirectDeaths(s, k, side);
   }

@@ -1,7 +1,8 @@
 import { RuleError } from "./errors.js";
 import { requireModeFeatureAdaptation } from "./modes.js";
 import { getController, isInPalace, isInsideBoard, otherSide } from "./slots.js";
-import { isGeneralInCheck, pieceAt, samePosition } from "./rules.js";
+import { isCheckmate, isGeneralInCheck, isStalemate, pieceAt, samePosition } from "./rules.js";
+import { enterTurnPhase } from "./turns.js";
 
 
 export const copy =    (value   )    => structuredClone(value);
@@ -20,10 +21,6 @@ export function effectiveIdentity(piece             , secret             )      
 /** 初始化的秘密身份、锚点均只留在权威端；不得进入公共快照。 */
 export function initializeFeatureSecret(state           , secret             , randomInt            = max => Math.floor(Math.random() * max))       {
   requireModeFeatureAdaptation(state.gameMode, state.featureRules);
-  if (state.featureRules?.mutation === "chaos" && !secret.chaosInitialized) {
-    for (const p of state.pieces) if (p.faceDown) secret.identities[p.id].color = randomInt(2) === 0 ? "red" : "black";
-    secret.chaosInitialized = true;
-  }
   secret.trueGenerals ??= {};
   for (const side of ["red", "black"]         ) {
     const general = state.pieces.find(p => !p.faceDown && p.type === "general" && p.color === side);
@@ -230,8 +227,56 @@ export function generateGhosts(state           , firstEvent = 0)       {
   }
 }
 
+/** 开始效果只在真正的新正式回合运行一次，额外/连带/强迫行动不进入此入口。 */
+export function beginFormalTurn(state           , secret              , randomInt            = max => Math.floor(Math.random() * max))       {
+  if (state.status !== "playing" || state.forcedDefense || state.flowDance) return;
+  const side = state.turn, number = formalTurn(state, side) + 1;
+  if (state.turnLifecycle?.side !== side || state.turnLifecycle.number !== number) {
+    state.turnLifecycle = { side, number, phase: "turn_start", phases: ["turn_start"] };
+    const hero = state.featureRules?.heroes?.[side];
+    if (hero === "qin_long" && Math.min(formalTurn(state, "red"), formalTurn(state, "black")) >= 15) {
+      state.heroRuntime ??= {};
+      (state.heroRuntime[side] ??= {}).rainActive = randomInt(100) < 15;
+    }
+    if (hero === "prince") {
+      state.heroRuntime ??= {};
+      (state.heroRuntime[side] ??= {}).carefreeSuspended = false;
+    }
+    enterTurnPhase(state, "before_main");
+  }
+  if (secret && (secret.formalStart?.side !== side || secret.formalStart.number !== number)) {
+    if (state.featureRules?.mutation === "chaos") {
+      for (const p of state.pieces) if (p.faceDown) secret.identities[p.id].color = randomInt(2) === 0 ? "red" : "black";
+      secret.chaosInitialized = true;
+    }
+    secret.formalStart = { side, number };
+  }
+}
+
+/** 先以公开开始效果试算合法性；确认非终局后才实际开始下一回合、抽随机或刷新秘密。 */
+export function advanceToFormalTurn(state           , secret             , side      , randomInt            = max => Math.floor(Math.random() * max))       {
+  if (state.status !== "playing" || state.forcedDefense || state.flowDance) return;
+  const probe = copy(state);
+  probe.turn = side;
+  // 秦龙抽签只影响落子后专属胜负，不改变合法走法；试算不能消耗真实随机数。
+  beginFormalTurn(probe, undefined, () => 99);
+  if (isCheckmate(probe, side)) {
+    state.status = "execution"; state.winner = otherSide(side); state.turn = otherSide(side); state.reason = "checkmate";
+  } else if (isStalemate(probe, side)) {
+    state.status = "finished"; state.winner = otherSide(side); state.reason = "stalemate";
+  } else {
+    state.turn = side;
+    beginFormalTurn(state, secret, randomInt);
+  }
+}
+
 export function finishFormalTurn(state           , secret             , actingSide      , randomInt            = max => Math.floor(Math.random() * max))       {
   if (state.status === "finished" || state.forcedDefense || state.lastMove?.countsAsFormalTurn === false) return;
+  if (state.turnLifecycle) {
+    if (state.turnLifecycle.side !== actingSide || state.turnLifecycle.phase === "turn_end") return;
+    enterTurnPhase(state, "turn_end");
+    state.lastCompletedFormalTurn = copy(state.turnLifecycle);
+  }
   state.formalTurns ??= { red: 0, black: 0 };
   state.formalTurns[actingSide] += 1;
   let newEventStart = state.automaticEvents?.length ?? 0;
@@ -268,22 +313,7 @@ export function finishFormalTurn(state           , secret             , actingSi
   resolveWindReturn(state, secret);
   if (closeDirectDeaths(state, secret, actingSide)) return;
   secret.traps = secret.traps?.filter(t => t.owner === actingSide || --t.opponentTurnsRemaining > 0);
-  const nextSide = otherSide(actingSide);
   if (state.heroRuntime?.[actingSide]) state.heroRuntime[actingSide] .rainActive = false;
-  const hero = state.featureRules?.heroes?.[nextSide];
-  if (hero === "qin_long" && Math.min(formalTurn(state, "red"), formalTurn(state, "black")) >= 15) {
-    state.heroRuntime ??= {};
-    (state.heroRuntime[nextSide] ??= {}).rainActive = randomInt(100) < 15;
-  }
-  if (hero === "prince") {
-    state.heroRuntime ??= {};
-    (state.heroRuntime[nextSide] ??= {}).carefreeSuspended = false;
-  }
-  if (state.featureRules?.mutation === "chaos") {
-    for (const p of state.pieces) {
-      if (p.faceDown) secret.identities[p.id].color = randomInt(2) === 0 ? "red" : "black";
-    }
-  }
 }
 
 export function landFlyingPiece(state           , secret             , id        )       {
@@ -305,7 +335,8 @@ export function landFlyingPiece(state           , secret             , id       
 }
 
 /** 不递归保存历史；已处理ID与回溯使用元状态由回溯操作保留。 */
-export function rememberAction(state           , secret             , pieceId                    , tier        , from           , now = Date.now())       {
+export function rememberAction(state           , secret             , pieceId                    , tier        , from           , now = Date.now(), classification                       )       {
+  if (state.forcedDefense || state.flowDance || classification && (classification.opportunity !== "main" || !classification.countsAsFormalTurn)) return;
   const privateSnapshot = copy(secret);
   delete privateSnapshot.history;
   delete privateSnapshot.processedActions;
@@ -313,7 +344,7 @@ export function rememberAction(state           , secret             , pieceId   
   // 使用权威接收时刻保存落子前真实剩余，不能从历史回合起点重建总时长。
   const clock = state.turnDeadlineAt;
   const remainingMs = clock === undefined ? undefined : Math.max(0, clock - now);
-  secret.history.push({ actingSide: state.turn, pieceId, tier, ...(from ? { from: { ...from } } : {}), ...(remainingMs === undefined ? {} : { remainingMs }), state: copy(state), secret: privateSnapshot });
+  secret.history.push({ actingSide: state.turn, pieceId, tier, ...(classification ? { classification: copy(classification), formalTurnNumber: formalTurn(state, state.turn) + 1 } : {}), ...(from ? { from: { ...from } } : {}), ...(remainingMs === undefined ? {} : { remainingMs }), state: copy(state), secret: privateSnapshot });
   // 至少保留双方上一正式行动。较长历史用于核验，快照不会指数膨胀。
   if (secret.history.length > 8) secret.history.shift();
 }

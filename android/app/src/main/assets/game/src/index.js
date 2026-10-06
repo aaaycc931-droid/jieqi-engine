@@ -12,6 +12,7 @@ export * from "./setup.js";
 export * from "./modes.js";
 export * from "./slots.js";
 export * from "./types.js";
+export * from "./turns.js";
 export * from "./hero-actions.js";
 export * from "./settlement.js";
 export * from "./heroes.js";

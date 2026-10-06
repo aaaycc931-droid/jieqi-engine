@@ -2532,7 +2532,7 @@ function updateBattleTurnTimer()       {
   }
   if (battleTurnRevision !== gameState.revision || battleTurnDeadlineAt === undefined) {
     battleTurnRevision = gameState.revision;
-    if (!bluetooth && gameState.turnStartedAt === undefined) startFormalClock(gameState, Date.now());
+    if (!bluetooth && gameState.turnStartedAt === undefined) startFormalClock(gameState, Date.now(), gameSecret);
     battleTurnDeadlineAt = gameState.turnDeadlineAt ?? Date.now() + formalTurnDurationMs(gameState, gameState.turn);
   }
   const remaining = secondsRemaining(battleTurnDeadlineAt);
@@ -3214,7 +3214,7 @@ function onBoardClick(event            )       {
         });
     gameState = result.state;
     gameSecret = result.secret;
-    if (!gameState.flowDance && !wasFlowDance) startFormalClock(gameState, Date.now());
+    if (!gameState.flowDance && !wasFlowDance) startFormalClock(gameState, Date.now(), gameSecret);
     const trapMessage = resolveLocalTrapsAfterAction();
     queueFormalEventCues(gameState, Boolean(trapMessage), usingAssassination ? strongStrikeArmed ? "强击发动" : "刺杀发动" : undefined);
     const captured = gameState.lastMove?.captured;
@@ -3765,7 +3765,7 @@ function openHeroAbility(ability                               )       {
       const result = applyHeroAbility(gameState , gameSecret, command);
       gameState = result.state; gameSecret = result.secret; localTraps = gameSecret.traps ?? [];
       if (gameSecret.replay) selectedPieceId = gameSecret.replay.pieceId;
-      if (previousSide !== gameState.turn) startFormalClock(gameState, Date.now());
+      if (previousSide !== gameState.turn) startFormalClock(gameState, Date.now(), gameSecret);
       renderGame();
       if (gameState.status === "execution") beginAutomaticExecution();
       if (gameState.status === "finished") showMatchResult();

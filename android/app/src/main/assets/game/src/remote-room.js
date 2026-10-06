@@ -284,7 +284,7 @@ function actionHistoryText(state           , skill              )       
 
 function withActionHistory(room            , now        , actionId        , skill              , preserveClock = false)             {
   if (!room.game) return room;
-  if (!preserveClock && room.game.state.status === "playing" && !room.game.state.flowDance) startFormalClock(room.game.state, now);
+  if (!preserveClock && room.game.state.status === "playing" && !room.game.state.flowDance) startFormalClock(room.game.state, now, room.game.secret);
   const trapTriggered = room.lastTrapTrigger?.actionId === actionId;
   const text = `${trapTriggered ? "猎人陷阱触发，" : ""}${actionHistoryText(room.game.state, skill)}`;
   return appendSystemMessage(room, text, now, `system:${actionId}`);
@@ -1000,7 +1000,7 @@ export function advanceRemoteRoomTime(
 )             {
   if (room.phase === "playing" && room.game && room.disconnects?.pausedAt === undefined) {
     const timed = copy(room);
-    if (timed.game .state.turnDeadlineAt === undefined) startFormalClock(timed.game .state, now);
+    if (timed.game .state.turnDeadlineAt === undefined) startFormalClock(timed.game .state, now, timed.game .secret, randomInt);
     if (timed.game .state.status === "playing" && now >= (timed.game .state.turnDeadlineAt ?? Infinity)) {
       timed.game .state.status = "finished"; timed.game .state.winner = otherSide(timed.game .state.turn); timed.game .state.reason = "timeout"; timed.game .state.revision += 1; timed.phase = "finished";
     }
@@ -1480,6 +1480,6 @@ export function submitRemoteHeroAbility(room            , playerId        , comm
     next.game = { ...game, state: finished.state, secret: finished.secret };
   }
   next.phase = next.game .state.status === "finished" ? "finished" : "playing";
-  if (next.game .state.turn !== room.game.state.turn) startFormalClock(next.game .state, now);
+  if (next.game .state.turn !== room.game.state.turn) startFormalClock(next.game .state, now, next.game .secret, randomInt);
   return { room: next, duplicate: false };
 }

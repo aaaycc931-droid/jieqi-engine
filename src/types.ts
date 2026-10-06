@@ -87,6 +87,44 @@ export interface CapturedPiece extends SecretIdentity {
   position?: Position;
 }
 
+export type ActionTier = 1 | 2 | 3;
+export type FormalTurnPhase = "turn_start" | "before_main" | "main_action" | "atom_closure" | "turn_end";
+export interface ActionClassification {
+  tier: ActionTier;
+  keywords: string[];
+  source: "ordinary" | "hero" | "mutation" | "skill_derived" | "rewind_replay";
+  opportunity: "main" | "before_main" | "child" | "extra";
+  forced?: true;
+  countsAsFormalTurn: boolean;
+  parentActionId?: string;
+}
+export interface ActionRecord extends ActionClassification {
+  actionId: string;
+  actingSide: Side;
+  pieceId?: string;
+  from?: Position;
+  to?: Position;
+}
+export interface FormalTurnLifecycle {
+  side: Side;
+  number: number;
+  phase: FormalTurnPhase;
+  phases: FormalTurnPhase[];
+  mainActionId?: string;
+  mainPieceId?: string;
+}
+export interface FormalActionSnapshot {
+  actingSide: Side;
+  pieceId?: string;
+  tier: number;
+  classification?: ActionClassification;
+  formalTurnNumber?: number;
+  from?: Position;
+  remainingMs?: number;
+  state: GameState;
+  secret: SecretState;
+}
+
 export interface LastMove {
   actionId: string;
   pieceId: string;
@@ -105,6 +143,7 @@ export interface LastMove {
   countsAsFormalTurn?: boolean;
   tier?: 1 | 2 | 3;
   keywords?: string[];
+  classification?: ActionClassification;
 }
 
 /**
@@ -177,6 +216,11 @@ export interface GameState {
   forcedDefense?: ForcedDefenseState;
   featureRules?: FeatureRules;
   formalTurns?: Record<Side, number>;
+  /** 当前正式回合的阶段；子行动不创建或推进新的正式回合。 */
+  turnLifecycle?: FormalTurnLifecycle;
+  lastCompletedFormalTurn?: FormalTurnLifecycle;
+  /** 最近一次公开操作及其子行动；秘密操作不写入。 */
+  actionRecords?: ActionRecord[];
   heroRuntime?: Partial<Record<Side, { used?: boolean; invokeCount?: number; rainActive?: boolean; carefreeSuspended?: boolean }>>;
   ghosts?: Array<{ owner: Side; position: Position; remaining: number }>;
   warps?: Position[];
@@ -197,9 +241,11 @@ export interface SecretState {
   wind?: Partial<Record<Side, { uses: number; readyOnTurn: number; activatedOnTurn?: number; hostId?: string; decoyId: string }>>;
   destinyIdentities?: Record<string, { side: Side; kind: "time_warrior" | "infinite_dragon"; anchor: Position; shown: boolean; identity: SecretIdentity }>;
   rewindUsed?: Partial<Record<Side, true>>;
-  history?: Array<{ actingSide: Side; pieceId?: string; tier: number; from?: Position; remainingMs?: number; state: GameState; secret: SecretState }>;
+  history?: FormalActionSnapshot[];
   replay?: { pieceId: string; deadlineAt: number };
   chaosInitialized?: true;
+  /** 私密回合开始效果的幂等标记，公共时钟初始化不会暴露它。 */
+  formalStart?: { side: Side; number: number };
 }
 
 export interface MoveCommand {

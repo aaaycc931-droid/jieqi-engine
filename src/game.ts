@@ -1,4 +1,5 @@
-import { copy, initializeFeatureSecret, destroyPiece, markRevealed, queueLanding, settleLandings, closeDirectDeaths, generateGhosts, finishFormalTurn, rememberAction, resolveWindReturn } from "./settlement.ts";
+import { copy, initializeFeatureSecret, destroyPiece, markRevealed, queueLanding, settleLandings, closeDirectDeaths, generateGhosts, beginFormalTurn, advanceToFormalTurn, finishFormalTurn, rememberAction, resolveWindReturn } from "./settlement.ts";
+import { actionFields, closeMainActionAtom, movementClassification, recordAction } from "./turns.ts";
 import { RuleError } from "./errors.ts";
 import { requireModeFeatureAdaptation } from "./modes.ts";
 import {
@@ -14,6 +15,7 @@ import {
 import { getController, getCurrentPieceType, isInPalace, otherSide } from "./slots.ts";
 import type {
   CapturedPiece,
+  ActionClassification,
   AutomaticExecutionPlan,
   AssassinationCommand,
   AssassinationStates,
@@ -133,6 +135,7 @@ function pathPiecesForSpecialMove(state: GameState, source: PublicPiece, to: { x
 function finishDirectDeaths(state: GameState, actingSide: Side, secret: SecretState): boolean {
   settleLandings(state, secret);
   resolveWindReturn(state, secret);
+  if (state.lastMove) closeMainActionAtom(state, state.lastMove.actionId);
   return closeDirectDeaths(state, secret, actingSide);
 }
 
@@ -201,7 +204,7 @@ function finishAfterPlayerAction(
     const resumeTurn = nextState.forcedDefense.resumeTurn;
     delete nextState.forcedDefense;
     if (nextState.lastMove) nextState.lastMove.countsAsFormalTurn = false;
-    nextState.turn = resumeTurn;
+    advanceToFormalTurn(nextState, nextSecret, resumeTurn);
     nextSecret.processedActions[command.actionId] = nextState.revision;
     return;
   }
@@ -227,11 +230,11 @@ function finishAfterPlayerAction(
     nextSecret.processedActions[command.actionId] = nextState.revision; return;
   }
   generateGhosts(nextState);
-  // Backstab armor on the warrior's own formal turn creates an extra response.
-  if (!isInfiniteSting) finishFormalTurn(nextState, nextSecret, actingSide);
-  if (nextState.status === "finished") { nextSecret.processedActions[command.actionId] = nextState.revision; return; }
-  advanceStealthTurn(nextState, actingSide, movedPiece.id, enteredStealth);
+  // 原主行动完成一个正式回合；铁甲提供的额外应将不另计回合。
   const ironArmor = isInfiniteSting && nextState.warrior?.[actingSide].ironArmorAvailable;
+  if (!isInfiniteSting || ironArmor) finishFormalTurn(nextState, nextSecret, actingSide);
+  if (nextState.status === "finished") { nextSecret.processedActions[command.actionId] = nextState.revision; return; }
+  if (!isInfiniteSting || ironArmor) advanceStealthTurn(nextState, actingSide, movedPiece.id, enteredStealth);
   if (ironArmor) {
     nextState.warrior![actingSide].ironArmorAvailable = false;
     nextState.turn = actingSide;
@@ -255,17 +258,7 @@ function finishAfterPlayerAction(
     nextState.winner = nextSide;
     nextState.reason = "ambush";
   } else {
-    nextState.turn = nextSide;
-    if (isCheckmate(nextState, nextSide)) {
-      nextState.status = "execution";
-      nextState.turn = actingSide;
-      nextState.winner = actingSide;
-      nextState.reason = "checkmate";
-    } else if (isStalemate(nextState, nextSide)) {
-      nextState.status = "finished";
-      nextState.winner = actingSide;
-      nextState.reason = "stalemate";
-    }
+    advanceToFormalTurn(nextState, nextSecret, nextSide);
   }
   nextSecret.processedActions[command.actionId] = nextState.revision;
 }
@@ -395,6 +388,7 @@ export function applyAuthoritativeMove(
   command: MoveCommand,
   deferTurnEnd = false,
   now = Date.now(),
+  childAction?: { parentActionId?: string },
 ): MoveResult {
   if (state.flowDance && !deferTurnEnd) return applyFlowDance(state, secret, command);
   if (secret.processedActions[command.actionId] !== undefined) {
@@ -408,18 +402,18 @@ export function applyAuthoritativeMove(
     throw new RuleError("STALE_REVISION", "客户端棋局版本已经过期");
   }
 
-  validateRewindReplay(state, secret, command);
-  const validation = validatePublicMove(state, command, state.turn, { allowLinkedControl: deferTurnEnd });
+  const nextState = cloneState(state);
+  const nextSecret = cloneSecret(secret);
+  initializeFeatureSecret(nextState, nextSecret);
+  if (!deferTurnEnd && !state.forcedDefense) beginFormalTurn(nextState, nextSecret);
+  validateRewindReplay(nextState, nextSecret, command);
+  const validation = validatePublicMove(nextState, command, state.turn, { allowLinkedControl: deferTurnEnd });
   if (!validation.ok && !(validation.code === "SELF_CHECK" && permitsSelfCrushingGeneral(state, command, state.turn))) {
     validationError(validation.code, validation.message);
   }
 
-  const nextState = cloneState(state);
-  const nextSecret = cloneSecret(secret);
-  initializeFeatureSecret(nextState, nextSecret);
   nextState.automaticEvents = [];
   nextState.landingEvents = [];
-  if (!deferTurnEnd) rememberAction(state, nextSecret, (command.pieceId ? pieceById(state, command.pieceId) : pieceAt(state, command.from))?.id, pathPiecesForSpecialMove(state, (command.pieceId ? pieceById(state, command.pieceId) : pieceAt(state, command.from))!, command.to).length ? 2 : 1, command.from, now);
   const actingSide = state.turn;
   const source = command.pieceId ? pieceById(nextState, command.pieceId) : pieceAt(nextState, command.from);
   if (!source) validationError("NO_PIECE", "起点没有棋子");
@@ -427,6 +421,10 @@ export function applyAuthoritativeMove(
   const sourceWasCovered = source.faceDown;
 
   const pathVictims = pathPiecesForSpecialMove(nextState, source, command.to);
+  let classification = movementClassification(state, Boolean(target) || pathVictims.length > 0, pathVictims.length > 0, deferTurnEnd ? childAction ?? {} : undefined);
+  if (secret.replay && classification.opportunity === "main") classification = { ...classification, tier: 3, source: "rewind_replay" };
+  rememberAction(nextState, nextSecret, source.id, classification.tier, command.from, now, classification);
+  recordAction(nextState, { ...classification, actionId: command.actionId, actingSide, pieceId: source.id, from: { ...command.from }, to: { ...command.to } });
   if (source.layer === "air" && pathVictims.length) throw new RuleError("FLIGHT_NO_ATTACK", "飞行棋不能主动路径碾碎");
   const pathCrushed = pathVictims.flatMap((pathVictim) => {
     const captured = captureByCrush(nextState, nextSecret, pathVictim.id, actingSide);
@@ -446,6 +444,7 @@ export function applyAuthoritativeMove(
       pathCrushed,
       bouncedAgainstPieceId: target.id,
       landed: false,
+      ...actionFields(classification),
     };
     queueLanding(nextState, source, actingSide, "warrior_return");
     if (finishDirectDeaths(nextState, actingSide, nextSecret)) {
@@ -497,8 +496,7 @@ export function applyAuthoritativeMove(
     pathCrushed,
     revealed,
     landed: true,
-    tier: pathVictims.length > 0 ? 2 : 1,
-    keywords: [target || pathVictims.length > 0 ? "进攻" : "移动"],
+    ...actionFields(classification),
   };
 
 
@@ -556,7 +554,11 @@ export function applyAuthoritativeAssassination(
     throw new RuleError("STALE_REVISION", "客户端棋局版本已经过期");
   }
   if (state.flowDance) throw new RuleError("FLOW_ACTION_REQUIRED", "须先完成流·舞归位结算");
-  validateRewindReplay(state, secret, command);
+  const nextState = cloneState(state);
+  const nextSecret = cloneSecret(secret);
+  initializeFeatureSecret(nextState, nextSecret);
+  if (!state.forcedDefense) beginFormalTurn(nextState, nextSecret);
+  validateRewindReplay(nextState, nextSecret, command);
 
   const actingSide = state.turn;
   const sourcePiece = pieceAt(state, command.from);
@@ -592,7 +594,7 @@ export function applyAuthoritativeAssassination(
     }
   }
 
-  const validation = validatePublicMove(state, command, actingSide, {
+  const validation = validatePublicMove(nextState, command, actingSide, {
     allowStealthSource: continuing,
     allowGeneralTarget: command.useStrongStrike,
     requireCapture: command.useStrongStrike,
@@ -601,21 +603,23 @@ export function applyAuthoritativeAssassination(
     validationError(validation.code, validation.message);
   }
 
-  const nextState = cloneState(state);
-  const nextSecret = cloneSecret(secret);
-  initializeFeatureSecret(nextState, nextSecret);
   nextState.automaticEvents = [];
   nextState.landingEvents = [];
-  rememberAction(state, nextSecret, sourcePiece.id, 2, command.from, now);
   const source = command.pieceId ? pieceById(nextState, command.pieceId) : pieceAt(nextState, command.from);
   if (!source) validationError("NO_PIECE", "起点没有棋子");
   const target = source.layer === "air" ? undefined : pieceAt(nextState, command.to);
+  const classification: ActionClassification = state.forcedDefense
+    ? movementClassification(state, Boolean(target) || pathPiecesForSpecialMove(state, sourcePiece, command.to).length > 0, false)
+    : { tier: secret.replay ? 3 : 2, keywords: [target || pathPiecesForSpecialMove(state, sourcePiece, command.to).length > 0 ? "进攻" : "移动", command.useStrongStrike ? "强击" : "耗费"], source: secret.replay ? "rewind_replay" : (command.source ?? state.effectsByPieceId?.[source.id]?.stealth?.source ?? "hero"), opportunity: "main", countsAsFormalTurn: true };
+  rememberAction(nextState, nextSecret, sourcePiece.id, classification.tier, command.from, now, classification);
+  recordAction(nextState, { ...classification, actionId: command.actionId, actingSide, pieceId: source.id, from: { ...command.from }, to: { ...command.to } });
   const sourceWasCovered = source.faceDown;
   if (command.useStrongStrike && target && !target.faceDown && target.type === "general" && nextState.warrior?.[target.color]?.ironArmorAvailable) {
     nextState.warrior[target.color].ironArmorAvailable = false;
     endStealth(nextState, source.id);
     nextState.revision += 1;
-    nextState.lastMove = { actionId: command.actionId, pieceId: source.id, actingSide, from: { ...command.from }, to: { ...command.to }, landed: false, tier: 2, keywords: ["进攻", "强击"] };
+    nextState.lastMove = { actionId: command.actionId, pieceId: source.id, actingSide, from: { ...command.from }, to: { ...command.to }, landed: false, ...actionFields(classification) };
+    closeMainActionAtom(nextState, command.actionId);
     finishAfterPlayerAction(nextState, nextSecret, command, actingSide, false, source, false);
     return { state: nextState, secret: nextSecret, duplicate: false };
   }
@@ -641,6 +645,7 @@ export function applyAuthoritativeAssassination(
       pathCrushed,
       bouncedAgainstPieceId: target.id,
       landed: false,
+      ...actionFields(classification),
     };
     if (continuing) endStealth(nextState, source.id);
     queueLanding(nextState, source, actingSide, "warrior_return");
@@ -675,8 +680,7 @@ export function applyAuthoritativeAssassination(
     captured,
     pathCrushed,
     landed: true,
-    tier: 2,
-    keywords: [target || pathVictims.length > 0 ? "进攻" : "移动", ...(command.useStrongStrike ? ["强击"] : ["耗费"])],
+    ...actionFields(classification),
   };
 
   markRevealed(nextState, nextSecret, source.id);
@@ -836,6 +840,8 @@ function applyFlowDance(state: GameState, secret: SecretState, command: MoveComm
   if (!validation.ok) throw new RuleError(validation.code!, validation.message!);
   const newSecret = cloneSecret(secret);
   const target = pieceAt(validationState, command.to);
+  const classification: ActionClassification = { tier: 3, keywords: [target ? "进攻" : "移动", "额外"], source: "skill_derived", opportunity: "extra", countsAsFormalTurn: false };
+  recordAction(validationState, { ...classification, actionId: command.actionId, actingSide: flow.side, pieceId: p.id, from: { ...command.from }, to: { ...command.to } });
   validationState.automaticEvents = []; validationState.landingEvents = [];
   const bounced = Boolean(target && validationState.effectsByPieceId?.[target.id]?.barrier);
   let captured: CapturedPiece | undefined;
@@ -853,8 +859,7 @@ function applyFlowDance(state: GameState, secret: SecretState, command: MoveComm
     actionId: command.actionId, pieceId: p.id, actingSide: flow.side,
     from: { ...command.from }, to: { ...command.to }, captured,
     ...(bounced ? { bouncedAgainstPieceId: target!.id } : {}),
-    landed: !bounced, countsAsFormalTurn: false, tier: 3,
-    keywords: [target ? "进攻" : "移动"],
+    landed: !bounced, ...actionFields(classification),
   };
   if (!closeDirectDeaths(validationState, newSecret, flow.side)) {
     generateGhosts(validationState);

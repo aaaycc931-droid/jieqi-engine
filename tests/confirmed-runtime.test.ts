@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { applyAuthoritativeAssassination, applyAuthoritativeMove, applyHeroAbility, applyAutomaticExecution, getFlowDanceMoves, submitRemoteMove, closeDirectDeaths, destroyPiece, drawRuntimeMutation, finishFormalTurn, formalTurnDurationMs, generateGhosts, initializeFeatureGameState, initializeFeatureSecret, landFlyingPiece, markRevealed, publicRemoteRoom, playerRoomView, queueLanding, resolveWindReturn, settleLandings, submitRemoteHeroAbility, validatePublicMove, isGeneralInCheck, advanceRemoteRoomTime } from "../src/index.ts";
+import { applyAuthoritativeAssassination, applyAuthoritativeMove, applyHeroAbility, applyAutomaticExecution, getFlowDanceMoves, submitRemoteMove, closeDirectDeaths, destroyPiece, drawRuntimeMutation, beginFormalTurn, finishFormalTurn, formalTurnDurationMs, generateGhosts, initializeFeatureGameState, initializeFeatureSecret, landFlyingPiece, markRevealed, publicRemoteRoom, playerRoomView, queueLanding, resolveWindReturn, settleLandings, submitRemoteHeroAbility, validatePublicMove, isGeneralInCheck, advanceRemoteRoomTime } from "../src/index.ts";
 import type { GameState, HeroAbilityCommand, HeroId, RemoteRoom, SecretState } from "../src/index.ts";
 import { covered, gameState, move, revealed, secretState } from "./helpers.ts";
 
@@ -208,8 +208,12 @@ test("HERO timeline twist refuses a prior skill-tier action", () => {
 test("HERO rain unlocks after fifteen completed pairs, not fifteen single turns", () => {
   const s = stateFor("qin_long"), k = secretState();
   s.formalTurns = { red: 14, black: 14 }; finishFormalTurn(s, k, "black", () => 0);
+  s.turn = "red"; beginFormalTurn(s, k, () => 0);
   assert.equal(s.heroRuntime.red.rainActive, undefined);
+  delete s.turnLifecycle;
   s.formalTurns = { red: 15, black: 14 }; finishFormalTurn(s, k, "black", () => 0);
+  assert.equal(s.heroRuntime.red.rainActive, undefined);
+  s.turn = "red"; beginFormalTurn(s, k, () => 0);
   assert.equal(s.heroRuntime.red.rainActive, true);
 });
 
