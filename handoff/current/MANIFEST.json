@@ -3,12 +3,12 @@
   "self_excluded": true,
   "files": {
     "00_READ_FIRST.md": {
-      "bytes": 3689,
-      "sha256": "3f8170fd04b39d8bd9398d4b29cb33693531634d12614d185eab7c20bf50b25d"
+      "bytes": 4848,
+      "sha256": "5ef122eb88ef262caf98801cfc5af9ad1a1c44cca1bbd41549b5666661ce83e0"
     },
     "01_CURRENT_RULES.md": {
-      "bytes": 21016,
-      "sha256": "2ea7f950e419e4624497428b5ad0eb46cb9d2ccd6841aa256070cf39db5c96b2"
+      "bytes": 28179,
+      "sha256": "1771452d443808e5a71a24e57717e078631b51eb932efbfb6ac81ae9c435afd9"
     },
     "02_CURRENT_HEROES.md": {
       "bytes": 26572,
@@ -39,16 +39,16 @@
       "sha256": "68845494b465bbcc1908f6cef862f350c1da4dadfc3e3a7473d11b2443edf23c"
     },
     "NEW_DIALOGUE_PROMPT.txt": {
-      "bytes": 2922,
-      "sha256": "3d4b3741b892ee0226356f512c8627c09921d30bc33cb4110b02ae8b3871e232"
+      "bytes": 3916,
+      "sha256": "6e1eaadc611ec2a82de493147e0a5c5da9bcd0f9db67535466c7f5fed4ef3da7"
     },
     "SOURCE_REGISTER.json": {
-      "bytes": 14248,
-      "sha256": "a853e57cf69edf5f7777d29a4103b9581c057054005759e4324c15b597a07899"
+      "bytes": 15002,
+      "sha256": "5b7dacfef9fe4f28491359223f7019659a04607f2cb76887cf5f16888d6b884a"
     },
     "STATE.json": {
-      "bytes": 17360,
-      "sha256": "20fa9013ce7fc2ac567454ec9d826a6d7536b0f3349cfeca8617d4b2ac250771"
+      "bytes": 18923,
+      "sha256": "e41d1cfb426b74f04529b75871c02a332bf3af54f101771ebf83bc4eb134a7bd"
     },
     "assets/approved-home.png": {
       "bytes": 2157060,
@@ -59,16 +59,20 @@
       "sha256": "63671bd146ce72a3c61f40dac457f83f882d7ada78c5f5f98efb7bb3ba5eac26"
     },
     "qa/INVARIANTS.json": {
-      "bytes": 35955,
-      "sha256": "a1d0c817bd1d6bec20080460066d84b80ec0d5a29eff889973d2395c11ae6b22"
+      "bytes": 39081,
+      "sha256": "9a169572e16cafb7c7de5469f9a1998e5b80f3e3450778077cb48791cd75beb9"
     },
     "09_CURRENT_GAME_MODES.md": {
       "bytes": 4749,
       "sha256": "fee5f89a60880cb94aa80f1d39e2d692518c5226ed047f5c722590f4baee7bf1"
     },
     "10_STAGE_CLOSE.md": {
-      "bytes": 4314,
-      "sha256": "db24f8d603725011c0f3c11b0168bf5e301fbc3eddbdad75327d07e17da6cfe6"
+      "bytes": 5704,
+      "sha256": "795f770b49049fbef381dd702442f18a507988771cf52a47765ab56cde04b881"
+    },
+    "11_RULE_SYNC_2026-10-06.md": {
+      "bytes": 1825,
+      "sha256": "0a78904bfd4a9a6feacbecaaa3f57f9e86ff1af6e0f8aad6bd2f99328c724657"
     }
   },
   "checks": {
@@ -78,6 +82,9 @@
     "mutations_9_present": true,
     "qa_69_plus_20_preserved": true,
     "navigation_paths_exist": true,
-    "no_apk_or_nested_historical_packages": true
+    "no_apk_or_nested_historical_packages": true,
+    "current_rule_revision_r3": true,
+    "global_rule_sync_record_present": true,
+    "r3_runtime_acceptance_claimed": false
   }
 }
