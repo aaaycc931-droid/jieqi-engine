@@ -1,11 +1,11 @@
 {
   "project": "乐子象棋 / jieqi-engine",
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-06-action-turn-runtime-1",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-06-destruction-batch-runtime-1",
   "updated_at": "2026-10-06",
   "repository": "https://github.com/aaaycc931-droid/jieqi-engine",
   "working_branch": "codex/ui-android-apk-20261001",
-  "implementation_commit": "62348cabf0da7fffa3f66368161d633e85bb4fde",
-  "implementation_tree": "94a6214814677e7b07b1114bd35c29314a823c19",
+  "implementation_commit": "a3b8dcaeac38cdb67f4a597ed23b483f16a661db",
+  "implementation_tree": "aaddb047a50ea5a5cef7e1d0b2eaddc84db9deb8",
   "draft_pr": 2,
   "baseline_id": "LEZI-FUNCTION-2026-10-04-v1",
   "baseline_digest": "4bcf9fb91f5c6e41f456e7424ebd7ed09c6c07b1595ec825604aa730fdad020b",
@@ -26,7 +26,7 @@
     "destiny_mutations": 1
   },
   "validation": {
-    "tests_passed": 354,
+    "tests_passed": 367,
     "tests_failed": 0,
     "web_build": "passed",
     "homepage_browser_run": 37305274329,
@@ -42,15 +42,15 @@
     "contract_evidence": {
       "index": "review/invariants/LATEST.json",
       "total": 109,
-      "partial_evidence_passed": 101,
-      "missing_related_cases": 5,
+      "partial_evidence_passed": 102,
+      "missing_related_cases": 4,
       "non_runtime_contract": 3,
       "failed_cases": 0,
       "fully_accepted": 0,
       "applicable_rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
-      "source_commit_at_run": "304e8103e937bb3cbb59a3df4b23af730b86a706",
-      "published_implementation_commit": "62348cabf0da7fffa3f66368161d633e85bb4fde",
-      "scope": "named_case_evidence_only_river_batch_inner_ghost_control_permissions_forms_missing_special_tests_future_hero_sources_pending"
+      "source_commit_at_run": "47ee108175b3286ac20a51819918ab7414bb63da",
+      "published_implementation_commit": "a3b8dcaeac38cdb67f4a597ed23b483f16a661db",
+      "scope": "named_case_evidence_only_river_inner_ghost_control_permissions_forms_missing_special_tests_future_hero_sources_pending"
     },
     "current_ci": {
       "status": "success",
@@ -308,13 +308,13 @@
     "r4_dark_identity_tests_rerun": false,
     "r4_dark_identity_note": "规则事实源/合同同步；公共判定层尚未实现，既有328 passed不验收r4。",
     "previous_engine_run": {
-      "implementation_commit": "70b9debba34be7a7f3ca119997b6e9e0ac266ff3",
-      "tests_passed": 337,
+      "implementation_commit": "62348cabf0da7fffa3f66368161d633e85bb4fde",
+      "tests_passed": 354,
       "tests_failed": 0,
-      "scope": "shared_dark_identity_increment_with_scoped_evidence_not_full_r3_r4_acceptance"
+      "scope": "full_regression_with_seventeen_action_turn_cases_not_full_r3_r4_acceptance"
     },
-    "engine_scope": "full_regression_with_seventeen_action_turn_cases_not_full_r3_r4_acceptance",
-    "engine_implementation_commit": "62348cabf0da7fffa3f66368161d633e85bb4fde",
+    "engine_scope": "full_regression_with_thirteen_destruction_batch_cases_not_full_r3_r4_acceptance",
+    "engine_implementation_commit": "a3b8dcaeac38cdb67f4a597ed23b483f16a661db",
     "previous_contract_evidence": {
       "index": "review/invariants/LATEST.json",
       "total": 96,
@@ -326,7 +326,7 @@
       "applicable_rule_revision": "LEZI-FUNCTION-2026-10-04-r1"
     },
     "current_runtime_ci": {
-      "implementation_commit": "62348cabf0da7fffa3f66368161d633e85bb4fde",
+      "implementation_commit": "a3b8dcaeac38cdb67f4a597ed23b483f16a661db",
       "status": "not_observed_for_this_increment_at_local_handoff"
     },
     "contract_evidence_history": [
@@ -342,6 +342,19 @@
         "source_commit_at_run": "e5421285e794ec2f7b691df2f2a9f63942b9eee0",
         "scope": "named_case_evidence_only_r3_eight_new_contracts_missing_special_tests_warlock_integration_pending",
         "published_implementation_commit": "70b9debba34be7a7f3ca119997b6e9e0ac266ff3"
+      },
+      {
+        "index": "review/invariants/LATEST.json",
+        "total": 109,
+        "partial_evidence_passed": 101,
+        "missing_related_cases": 5,
+        "non_runtime_contract": 3,
+        "failed_cases": 0,
+        "fully_accepted": 0,
+        "applicable_rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
+        "source_commit_at_run": "304e8103e937bb3cbb59a3df4b23af730b86a706",
+        "published_implementation_commit": "62348cabf0da7fffa3f66368161d633e85bb4fde",
+        "scope": "named_case_evidence_only_river_batch_inner_ghost_control_permissions_forms_missing_special_tests_future_hero_sources_pending"
       }
     ]
   },
@@ -361,10 +374,10 @@
     "old_dialogue_code_writes_after_handoff": "stop",
     "automatic_import": false
   },
-  "next_action": "Continue the r4 runtime mapping with explicitly simultaneous death batches: freeze and close each committed destruction set before downstream ghost/revival/return/generation/resource triggers. Public dark identity, action classification and existing-source turn lifecycle are implemented with scoped evidence; do not reimplement them or import unfinished hero designs. River/inner ghost/forms and comprehensive current-control permission audit remain pending; old full-match and new-mode adaptation queues remain paused, UI last, APK paused.",
+  "next_action": "Continue r4 mapping with river special-space model and default board-effect read isolation. Public dark identity, action/turn lifecycle and destruction-batch infrastructure have scoped test evidence. Inner ghost, comprehensive current-control permission audit, hero forms and untransferred simultaneous hero sources remain pending. Do not import hero designs, reopen old full-match or new-mode adaptation queues, change approved UI or build APK.",
   "source_gap_register": "SOURCE_REGISTER.json",
   "apk_built_this_round": false,
-  "previous_implementation_commit": "70b9debba34be7a7f3ca119997b6e9e0ac266ff3",
+  "previous_implementation_commit": "62348cabf0da7fffa3f66368161d633e85bb4fde",
   "validation_round": {
     "rules_changed": false,
     "rule_revision_unchanged": true,
@@ -404,7 +417,7 @@
   "previous_rule_digest": "86cf12befe729c161f1f078dc240052fe26a7a3a78909a2ec255dc0a84d3d776",
   "rule_digest_algorithm": "sha256(concat(relative UTF-8 path + NUL + file bytes + NUL), STATE.current_rules order)",
   "paused_next_action": "Continue destiny bomb/hourglass full real matches, second Shadow cooldown/lifecycle, remaining private snapshot and cross-end clock intersections. Current five active families have sampled natural results; original Nozdormu/Prince and current 12-seat normal regression remain incomplete. Local timeout outcome not frozen; physical RFCOMM/WebView/two-phone pending. UI last; APK paused.",
-  "work_status": "authorized_action_history_and_formal_turn_increment_completed_other_queues_paused",
+  "work_status": "authorized_destruction_batch_increment_completed_other_queues_paused",
   "game_modes": {
     "authority": "09_CURRENT_GAME_MODES.md",
     "base_rule_status": "confirmed",
@@ -521,18 +534,18 @@
     "followup_runtime_record": "handoff/current/13_DARK_IDENTITY_RUNTIME_2026-10-06.md"
   },
   "latest_runtime_round": {
-    "authorization": "user: 同意（行动历史与正式回合时序）",
-    "authorized_at": "2026-10-06T17:32:45+08:00",
+    "authorization": "user: 同意（同批消灭闭合）",
+    "authorized_at": "2026-10-06T18:11:04+08:00",
     "rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
-    "implementation_commit": "62348cabf0da7fffa3f66368161d633e85bb4fde",
-    "local_execution_checkpoint": "304e8103e937bb3cbb59a3df4b23af730b86a706",
+    "implementation_commit": "a3b8dcaeac38cdb67f4a597ed23b483f16a661db",
+    "local_execution_checkpoint": "47ee108175b3286ac20a51819918ab7414bb63da",
     "publication_tree_matches_execution_tree": true,
     "runtime_mapping": "review/invariants/R4_RUNTIME_MAPPING_2026-10-06.md",
-    "report": "handoff/current/14_ACTION_TURN_RUNTIME_2026-10-06.md",
+    "report": "handoff/current/15_DESTRUCTION_BATCH_RUNTIME_2026-10-06.md",
     "product_code_changed": true,
     "semantic_rules_changed": false,
-    "new_engine_tests": 17,
-    "tests_passed": 354,
+    "new_engine_tests": 13,
+    "tests_passed": 367,
     "tests_failed": 0,
     "web_build": "passed",
     "android_generated_files_matched": 118,
@@ -563,6 +576,28 @@
       "all_functions_accepted": false,
       "local_execution_checkpoint": "e5421285e794ec2f7b691df2f2a9f63942b9eee0",
       "publication_tree_matches_execution_tree": true
+    },
+    {
+      "authorization": "user: 同意（行动历史与正式回合时序）",
+      "authorized_at": "2026-10-06T17:32:45+08:00",
+      "rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
+      "implementation_commit": "62348cabf0da7fffa3f66368161d633e85bb4fde",
+      "local_execution_checkpoint": "304e8103e937bb3cbb59a3df4b23af730b86a706",
+      "publication_tree_matches_execution_tree": true,
+      "runtime_mapping": "review/invariants/R4_RUNTIME_MAPPING_2026-10-06.md",
+      "report": "handoff/current/14_ACTION_TURN_RUNTIME_2026-10-06.md",
+      "product_code_changed": true,
+      "semantic_rules_changed": false,
+      "new_engine_tests": 17,
+      "tests_passed": 354,
+      "tests_failed": 0,
+      "web_build": "passed",
+      "android_generated_files_matched": 118,
+      "browser_tests_run": false,
+      "apk_built": false,
+      "old_full_match_queue_resumed": false,
+      "untransferred_heroes_imported": false,
+      "all_functions_accepted": false
     }
   ],
   "action_turn_runtime": {
@@ -575,7 +610,20 @@
     "acceptance": "partial_named_case_evidence_only",
     "remaining_runtime_contracts": [
       "ADD-RIVER-001",
-      "ADD-BATCH-001",
+      "ADD-GHOST-OBJECT-001",
+      "ADD-CURRENT-CONTROL-001",
+      "ADD-HERO-FORM-001"
+    ]
+  },
+  "destruction_batch_runtime": {
+    "record": "handoff/current/15_DESTRUCTION_BATCH_RUNTIME_2026-10-06.md",
+    "mapped_supplements": [
+      "ADD-BATCH-001"
+    ],
+    "acceptance": "partial_named_case_evidence_only",
+    "source_scope": "shared_explicit_batch_entry_and_existing_deathwing_locked_success_set_no_redefinition_of_sequential_sources",
+    "remaining_runtime_contracts": [
+      "ADD-RIVER-001",
       "ADD-GHOST-OBJECT-001",
       "ADD-CURRENT-CONTROL-001",
       "ADD-HERO-FORM-001"

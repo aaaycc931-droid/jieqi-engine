@@ -2,7 +2,7 @@
   "authority": "test_contract_non_normative",
   "normative_source": "01_CURRENT_RULES.md + 02_CURRENT_HEROES.md + 03_CURRENT_MUTATIONS.md + 04_CURRENT_UI_AND_FLOW.md",
   "current_rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
-  "code_checkpoint": "62348cabf0da7fffa3f66368161d633e85bb4fde",
+  "code_checkpoint": "a3b8dcaeac38cdb67f4a597ed23b483f16a661db",
   "counts": {
     "retained_invariants": 69,
     "retained_anti_invariants": 20,
@@ -681,7 +681,9 @@
     {
       "id": "ADD-BATCH-001",
       "statement": "来源明确为同时/同批【消灭】时，先闭合整个消灭批次与其死亡揭示/记录，再处理由该批死亡产生的新亡魂、复活、召回、生成或资源触发；后续对象不倒流加入已闭合批次。",
-      "current_runtime_verification": "pending_runtime_model"
+      "current_runtime_verification": "partial_named_case_evidence_pending_full_source_and_hero_integration",
+      "runtime_evidence": "review/invariants/LATEST.json",
+      "implementation_record": "handoff/current/15_DESTRUCTION_BATCH_RUNTIME_2026-10-06.md"
     },
     {
       "id": "ADD-GHOST-OBJECT-001",

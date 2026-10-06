@@ -1,8 +1,8 @@
 {
   "authority": "execution_evidence_non_normative",
-  "generatedAt": "2026-10-06T09:50:50.741Z",
-  "sourceCommitAtRun": "304e8103e937bb3cbb59a3df4b23af730b86a706",
-  "sourceDigest": "05612d726295e547b38f8a64094782e3369836d48ad9b8ef6edba305b8df2b23",
+  "generatedAt": "2026-10-06T10:20:25.436Z",
+  "sourceCommitAtRun": "47ee108175b3286ac20a51819918ab7414bb63da",
+  "sourceDigest": "bb77425241a0a9094613777f64afae4ba2bd43dd48065e030be52173d9fc5c55",
   "sourceDigestPaths": [
     ".github/workflows/gameplay-runtime-review.yml",
     ".github/workflows/menu-reference-review.yml",
@@ -53,6 +53,7 @@
     "tests/confirmed-runtime.test.ts",
     "tests/cross-rule-contracts.test.ts",
     "tests/dark-identity.test.ts",
+    "tests/destruction-batch.test.ts",
     "tests/exception-contracts.test.ts",
     "tests/flow-contracts.test.ts",
     "tests/flow-fixtures.ts",
@@ -172,18 +173,18 @@
     "web/ui-refresh.css"
   ],
   "ruleRevision": "LEZI-FUNCTION-2026-10-06-r4",
-  "contractDigest": "ab23988a6764f498f8a169539430c8e1320b8ca0cde1fc38d3ef89a8485fbb03",
+  "contractDigest": "6ad8641f84dce7a677e4849f322fe8e03a6f9c771ce038ec58307f0f1195b2c4",
   "runtime": "v24.19.0",
   "testSummary": {
-    "passed": 354,
+    "passed": 367,
     "failed": 0,
     "executionFailed": false
   },
   "contractSummary": {
     "total": 109,
-    "partial_evidence_passed": 101,
+    "partial_evidence_passed": 102,
     "failed_cases": 0,
-    "missing_tests": 5,
+    "missing_tests": 4,
     "non_runtime_contract": 3,
     "fullyAccepted": 0
   },
@@ -2718,9 +2719,75 @@
       "id": "ADD-BATCH-001",
       "group": "supplements",
       "statement": "来源明确为同时/同批【消灭】时，先闭合整个消灭批次与其死亡揭示/记录，再处理由该批死亡产生的新亡魂、复活、召回、生成或资源触发；后续对象不倒流加入已闭合批次。",
-      "status": "missing_tests",
-      "relatedCases": [],
-      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/destruction-batch.test.ts",
+          "name": "R4-BATCH-01 整批死亡揭示和记录闭合后才生成亡魂，重读不刷新旧死亡",
+          "passed": true
+        },
+        {
+          "file": "tests/destruction-batch.test.ts",
+          "name": "R4-BATCH-02 开放批次屏障禁止提前亡魂、召回、落位、回合末或终局",
+          "passed": true
+        },
+        {
+          "file": "tests/destruction-batch.test.ts",
+          "name": "R4-BATCH-03 冻结目标不受中途外部列表追加影响，闭合后移入与复活不倒流",
+          "passed": true
+        },
+        {
+          "file": "tests/destruction-batch.test.ts",
+          "name": "R4-BATCH-04 批次死亡缺失秘密身份时预检失败，不留下半批死亡",
+          "passed": true
+        },
+        {
+          "file": "tests/destruction-batch.test.ts",
+          "name": "R4-BATCH-05 重复目标与批次ID冲突拒绝，空批和已死目标可闭合",
+          "passed": true
+        },
+        {
+          "file": "tests/destruction-batch.test.ts",
+          "name": "R4-BATCH-06 同批双方真将帅死亡按闭合后两败俱伤，不抢先单方获胜",
+          "passed": true
+        },
+        {
+          "file": "tests/destruction-batch.test.ts",
+          "name": "R4-BATCH-07 风影武者与承载者同批死亡不能提前召回，存活承载者批后才归位",
+          "passed": true
+        },
+        {
+          "file": "tests/destruction-batch.test.ts",
+          "name": "R4-BATCH-08 混乱批次死亡只公开兵种，亡魂按死亡时公开控制方生成",
+          "passed": true
+        },
+        {
+          "file": "tests/destruction-batch.test.ts",
+          "name": "R4-BATCH-09 批次不先驱散、保留碾碎免疫和非地面资格",
+          "passed": true
+        },
+        {
+          "file": "tests/destruction-batch.test.ts",
+          "name": "R4-BATCH-10 毁灭先完成锁定集合独立判定，再闭合成功结果与亡魂",
+          "passed": true
+        },
+        {
+          "file": "tests/destruction-batch.test.ts",
+          "name": "R4-BATCH-11 同ID复活后新死亡独立派生，不借旧将帅记录判断新兵种",
+          "passed": true
+        },
+        {
+          "file": "tests/destruction-batch.test.ts",
+          "name": "R4-BATCH-12 普通进攻仍按来源顺序结算，不自动套用同批消灭",
+          "passed": true
+        },
+        {
+          "file": "tests/destruction-batch.test.ts",
+          "name": "R4-BATCH-13 公共蓝牙快照保留闭合与消费标记，恢复不重触发或泄露秘密",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "公共批次入口与毁灭已锁定成功结果的闭合、死亡揭示/记录、触发屏障、风归位、亡魂单次派生、双将同死、批后移入/复活及公共协议序列化有专属情景证据。未移交英雄的同时范围来源、召回/复活/生成/资源钩子、河道与里亡魂仍未集成；不得将普通顺序攻击统一改同批。无浏览器或实体设备新增验收。",
       "fullyAccepted": false
     },
     {
@@ -2861,7 +2928,7 @@
       "fullyAccepted": false
     }
   ],
-  "publishedImplementationCommit": "62348cabf0da7fffa3f66368161d633e85bb4fde",
-  "publishedImplementationTree": "94a6214814677e7b07b1114bd35c29314a823c19",
-  "publicationNote": "测试在本地提交304e8103e937bb3cbb59a3df4b23af730b86a706执行，连接器发布提交62348cabf0da7fffa3f66368161d633e85bb4fde的完整tree SHA完全相同；保留sourceCommitAtRun与实际契约摘要。"
+  "publishedImplementationCommit": "a3b8dcaeac38cdb67f4a597ed23b483f16a661db",
+  "publishedImplementationTree": "aaddb047a50ea5a5cef7e1d0b2eaddc84db9deb8",
+  "publicationNote": "实际执行HEAD为47ee108175b3286ac20a51819918ab7414bb63da；通过GitHub连接器发布的源码提交作者/时间不同，但完整Git tree与实际执行源码树一致。保留原sourceCommitAtRun，不伪称额外重跑。"
 }

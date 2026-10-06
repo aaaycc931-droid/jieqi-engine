@@ -1,14 +1,14 @@
 # 乐子象棋｜换对话交接入口
 
-当前推进：行动/回合时序增量已完成，先读14_ACTION_TURN_RUNTIME_2026-10-06.md。源码62348cabf0da7fffa3f66368161d633e85bb4fde，354 passed、Web构建通过、118个Android资源一致，无APK。现行规则仍r4；109合同101部分证据+5缺专属测试+3规范，完整验收0。13号记录及下文337/328测试等保留各自历史时点。英雄设计和未移交来源不自动接入，旧整盘队列仍暂停。
+当前推进：同批消灭闭合增量已完成，先读15_DESTRUCTION_BATCH_RUNTIME_2026-10-06.md。源码a3b8dcaeac38cdb67f4a597ed23b483f16a661db，367 passed、Web构建通过、118个Android资源一致，无APK。规则仍r4；109合同102部分证据+4缺专属测试+3规范，完整验收0。14号行动/时序与13号身份记录保留历史证据。英雄设计不自动接入，旧整盘队列仍暂停。
 
 更新日期：2026-10-06。交接类型：历史阶段结束 + r3/r4规则同步 + 后续获授权的身份与行动/时序运行时增量，**不是全部功能/视觉验收完成**。
 
-历史：用户于2026-10-05 22:18结束此前实施阶段，随后r3/r4只做规则同步，当时未重开实现或验证。之后用户分别授权“进行下一步推进”和“同意”，已完成13号身份增量及14号行动/时序增量。当前状态以本文件开头、STATE和14号记录为准；旧整盘采样与未确认的新模式独立适配继续暂停。
+历史：用户于2026-10-05 22:18结束此前实施阶段，随后r3/r4只做规则同步，当时未重开实现或验证。之后用户分别授权“进行下一步推进”和“同意”，已完成13号身份、14号行动/时序和15号消灭批次增量。当前状态以本文件开头、STATE和15号记录为准；旧整盘采样与未确认的新模式独立适配继续暂停。
 
 ## 读取顺序
 
-1. STATE.json、14_ACTION_TURN_RUNTIME_2026-10-06.md、13_DARK_IDENTITY_RUNTIME_2026-10-06.md：当前代码与最新证据；10–12号文件保留历史阶段关闭和r3/r4规则同步时点。
+1. STATE.json、15_DESTRUCTION_BATCH_RUNTIME_2026-10-06.md、14_ACTION_TURN_RUNTIME_2026-10-06.md、13_DARK_IDENTITY_RUNTIME_2026-10-06.md：当前代码与最新证据；10–12号文件保留历史阶段关闭和r3/r4规则同步时点。
 2. 05_PROGRESS_AND_NEXT.md：既有实现证据和未完成范围。
 3. 09_CURRENT_GAME_MODES.md → 01_CURRENT_RULES.md → 02_CURRENT_HEROES.md → 03_CURRENT_MUTATIONS.md：现行模式与规范正文；01当前为 **LEZI-FUNCTION-2026-10-06-r4**。
 4. 04_CURRENT_UI_AND_FLOW.md：保留已确认方向，UI 半成品最后处理。
@@ -27,7 +27,7 @@
 
 仓库：https://github.com/aaaycc931-droid/jieqi-engine
 工作分支：codex/ui-android-apk-20261001
-功能源码检查点：62348cabf0da7fffa3f66368161d633e85bb4fde
+功能源码检查点：a3b8dcaeac38cdb67f4a597ed23b483f16a661db
 Draft PR：https://github.com/aaaycc931-droid/jieqi-engine/pull/2
 
 交接文档会另有仅文档提交；当前源码检查点为以上 SHA，不能从旧包内 runtime_commit 或本地陈旧 HEAD 恢复。优先读取仓库 handoff/current/，根目录旧规格与 rules/confirmed/ 原始源只供核对出处，不能直接覆盖整合正文。以后新用户确认增量才可覆盖对应段落。
