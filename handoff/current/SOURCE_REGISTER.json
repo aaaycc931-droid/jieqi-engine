@@ -1,7 +1,7 @@
 {
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-07-hero-transfer",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-08-r5-cross",
   "rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
-  "code_checkpoint": "eb27de059ccf7c5e91ca9bef8e0d0c5d103ea3e2",
+  "code_checkpoint": "e67590bd578b2c40d89faa6b1214c9d213c56043",
   "sources": [
     {
       "id": "RULE:CURRENT_RULE_DELTAS_2026-09-22.md",
@@ -365,6 +365,13 @@
       "sha256": "211a0aab6ba6cb303a0c9c440534dd8ec815f60bac368174333f6dfd84d26e68",
       "bytes": 10900,
       "applied_scope": "Current source; gameplay only 01-03, scoring never changes gameplay."
+    },
+    {
+      "id": "RUNTIME:CROSS_SETTLEMENT:2026-10-08",
+      "kind": "execution_evidence_non_normative",
+      "path": "handoff/current/23_HERO_CROSS_SETTLEMENT_2026-10-08.md",
+      "sha256": "2eb9b7e34879843ce393ee5591845f2aba604404caffd808a644b8e50e69457b",
+      "applied_scope": "Three implementation corrections; eight engine scenarios and current CI evidence; no rule-source changes"
     }
   ],
   "coverage": {
@@ -451,7 +458,7 @@
     "过时3英雄进度"
   ],
   "completeness_claim": "H01-H21正式来源已经移交并接入已确认部分；470测试与8浏览器准备情景不等于21条英雄全部验收。四处来源定义缺项明确拒绝，其他未移交对话不自动恢复。",
-  "previous_code_checkpoint": "830c180de6f60593c42fee427959e77cb7ffb189",
+  "previous_code_checkpoint": "eb27de059ccf7c5e91ca9bef8e0d0c5d103ea3e2",
   "runtime_evidence_index": "review/invariants/LATEST.json",
   "gameplay_execution_evidence_index": "review/gameplay/runtime-browser-review-2026-10-05-modes.json",
   "full_match_execution_evidence_index": "review/gameplay/full-match-browser-2026-10-05-active-regression-summary.json",
@@ -473,7 +480,8 @@
   "acceptance_gap_close_index": "21_ACCEPTANCE_GAP_CLOSE_2026-10-07.md",
   "acceptance_gap_inventory_index": "qa/ACCEPTANCE_GAPS.json",
   "hero_transfer_index": "22_HERO_TRANSFER_2026-10-07.md",
-  "code_tree": "7b7045a5390bf620956caf2b47de3c02e2df409e",
-  "local_execution_checkpoint": "43e0b02fa622da8981edf514f956ce82061e3530",
-  "qa_contract_checkpoint_role": "INVARIANTS.code_checkpoint is the prior product checkpoint used for the r5 diff, not a claim of current runtime acceptance."
+  "code_tree": "4c748fa19e5fe44115aa27992b2f9eac15bc6756",
+  "local_execution_checkpoint": "3ff88a44c8808a792e65becd988174e2d98ae686",
+  "qa_contract_checkpoint_role": "INVARIANTS.code_checkpoint is the prior product checkpoint used for the r5 diff, not a claim of current runtime acceptance.",
+  "hero_cross_settlement_index": "23_HERO_CROSS_SETTLEMENT_2026-10-08.md"
 }

@@ -1,7 +1,7 @@
 {
   "authority": "prepared_browser_execution_non_normative",
   "ruleRevision": "LEZI-FUNCTION-2026-10-07-r5",
-  "sourceCommitAtRun": "9e5b525b544d8689bd574afa227b414ab59ea9fa",
+  "sourceCommitAtRun": "f2c8e361145caf223b06f7c30408f671721c4814",
   "workingTreeDirty": false,
   "appDigest": "b841af632d0b08003ebdbbaf792691fd4c83365b5c9b43f46537d3c1fa098fc9",
   "browser": "145.0.7632.6",

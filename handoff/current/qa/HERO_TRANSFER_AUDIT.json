@@ -213,6 +213,30 @@
         {
           "file": "tests/public-target-contracts.test.ts",
           "namePrefix": "TARGET-WIND-"
+        },
+        {
+          "file": "tests/hero-cross-settlement.test.ts",
+          "namePrefix": "R5-CROSS-03"
+        },
+        {
+          "file": "tests/hero-cross-settlement.test.ts",
+          "namePrefix": "R5-CROSS-04"
+        },
+        {
+          "file": "tests/hero-cross-settlement.test.ts",
+          "namePrefix": "R5-CROSS-05"
+        },
+        {
+          "file": "tests/hero-cross-settlement.test.ts",
+          "namePrefix": "R5-CROSS-06"
+        },
+        {
+          "file": "tests/hero-cross-settlement.test.ts",
+          "namePrefix": "R5-CROSS-07"
+        },
+        {
+          "file": "tests/hero-cross-settlement.test.ts",
+          "namePrefix": "R5-CROSS-08"
         }
       ],
       "fully_accepted": false,
@@ -354,6 +378,18 @@
         {
           "file": "tests/hero-transfer-r5.test.ts",
           "namePrefix": "R5-H16-02"
+        },
+        {
+          "file": "tests/hero-cross-settlement.test.ts",
+          "namePrefix": "R5-CROSS-01"
+        },
+        {
+          "file": "tests/hero-cross-settlement.test.ts",
+          "namePrefix": "R5-CROSS-02"
+        },
+        {
+          "file": "tests/hero-cross-settlement.test.ts",
+          "namePrefix": "R5-CROSS-03"
         }
       ],
       "fully_accepted": false,
@@ -378,6 +414,10 @@
         {
           "file": "tests/hero-transfer-r5.test.ts",
           "namePrefix": "R5-H17-02"
+        },
+        {
+          "file": "tests/hero-cross-settlement.test.ts",
+          "namePrefix": "R5-CROSS-01"
         }
       ],
       "fully_accepted": false,
@@ -433,6 +473,14 @@
         {
           "file": "tests/hero-transfer-r5.test.ts",
           "namePrefix": "R5-H20-02"
+        },
+        {
+          "file": "tests/hero-cross-settlement.test.ts",
+          "namePrefix": "R5-CROSS-04"
+        },
+        {
+          "file": "tests/hero-cross-settlement.test.ts",
+          "namePrefix": "R5-CROSS-05"
         }
       ],
       "fully_accepted": false,
@@ -514,10 +562,19 @@
     }
   ],
   "scoring_is_non_normative": true,
-  "implementation_commit": "eb27de059ccf7c5e91ca9bef8e0d0c5d103ea3e2",
-  "local_execution_commit": "43e0b02fa622da8981edf514f956ce82061e3530",
-  "implementation_tree": "7b7045a5390bf620956caf2b47de3c02e2df409e",
-  "tests_passed": 470,
+  "implementation_commit": "e67590bd578b2c40d89faa6b1214c9d213c56043",
+  "local_execution_commit": "3ff88a44c8808a792e65becd988174e2d98ae686",
+  "implementation_tree": "4c748fa19e5fe44115aa27992b2f9eac15bc6756",
+  "tests_passed": 478,
   "new_dedicated_cases": 36,
-  "browser_evidence": "review/invariants/HERO_TRANSFER_BROWSER_2026-10-07.json"
+  "browser_evidence": "review/invariants/HERO_TRANSFER_BROWSER_2026-10-07.json",
+  "previous_runtime_checkpoint": {
+    "implementation_commit": "eb27de059ccf7c5e91ca9bef8e0d0c5d103ea3e2",
+    "local_execution_commit": "43e0b02fa622da8981edf514f956ce82061e3530",
+    "implementation_tree": "7b7045a5390bf620956caf2b47de3c02e2df409e",
+    "tests_passed": 470,
+    "new_dedicated_cases": 36
+  },
+  "cross_settlement_cases": 8,
+  "cross_settlement_report": "handoff/current/23_HERO_CROSS_SETTLEMENT_2026-10-08.md"
 }

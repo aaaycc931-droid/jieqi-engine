@@ -1,8 +1,8 @@
 {
   "authority": "execution_evidence_non_normative",
-  "generatedAt": "2026-10-07T10:56:20.082Z",
-  "sourceCommitAtRun": "43e0b02fa622da8981edf514f956ce82061e3530",
-  "sourceDigest": "f3bb7163e3695b91b40dce1c49ab1da0887379a63748cb8bc1424518fd0205ee",
+  "generatedAt": "2026-10-07T16:14:35.203Z",
+  "sourceCommitAtRun": "3ff88a44c8808a792e65becd988174e2d98ae686",
+  "sourceDigest": "6d3f439668f8452add60c9cc1a2e23a472e4164edfd64a9020261517911fd9c8",
   "sourceDigestPaths": [
     ".github/workflows/gameplay-runtime-review.yml",
     ".github/workflows/menu-reference-review.yml",
@@ -71,6 +71,7 @@
     "tests/game-modes.test.ts",
     "tests/ghost-objects.test.ts",
     "tests/helpers.ts",
+    "tests/hero-cross-settlement.test.ts",
     "tests/hero-forms.test.ts",
     "tests/hero-transfer-r5.test.ts",
     "tests/movement.test.ts",
@@ -191,7 +192,7 @@
   "contractDigest": "c6e4649ce5a028b5477090b87066dd5bb7a65ad3a5632d138a05bf972b89e1e3",
   "runtime": "v24.19.0",
   "testSummary": {
-    "passed": 470,
+    "passed": 478,
     "failed": 0,
     "executionFailed": false
   },
@@ -821,6 +822,11 @@
         {
           "file": "tests/cross-rule-contracts.test.ts",
           "name": "CROSS-ATOMIC-01 destruction keeps its locked draw set after killing Wind's true host",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-cross-settlement.test.ts",
+          "name": "R5-CROSS-04 inner pulse closes Wind return before judging whether the skill relieved check",
           "passed": true
         }
       ],
@@ -2421,6 +2427,11 @@
           "file": "tests/confirmed-runtime.test.ts",
           "name": "HERO non-execution decoy death returns true general, clears host states and grants no dance",
           "passed": true
+        },
+        {
+          "file": "tests/hero-cross-settlement.test.ts",
+          "name": "R5-CROSS-05 pulse destroying decoy and carrier in one batch never resurrects a true general",
+          "passed": true
         }
       ],
       "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
@@ -2691,6 +2702,11 @@
           "file": "tests/action-turn-contracts.test.ts",
           "name": "R4-TURN-12 普通裁决候选不运行败方下一回合的秦龙抽签",
           "passed": true
+        },
+        {
+          "file": "tests/hero-cross-settlement.test.ts",
+          "name": "R5-CROSS-04 inner pulse closes Wind return before judging whether the skill relieved check",
+          "passed": true
         }
       ],
       "verificationLimit": "现有普通主行动、占步、主行动前窗口、回溯、终局与开始效果幂等已有具体执行证据；未包含未来英雄的资源/训练钩子、同批消灭屏障、浏览器与实体设备全流程，不是全称合同证明。",
@@ -2905,6 +2921,21 @@
         {
           "file": "tests/destruction-batch.test.ts",
           "name": "R4-BATCH-13 公共蓝牙快照保留闭合与消费标记，恢复不重触发或泄露秘密",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-cross-settlement.test.ts",
+          "name": "R5-CROSS-02 one closed destruction batch credits 3+2+1 to the public opponent only once",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-cross-settlement.test.ts",
+          "name": "R5-CROSS-03 open batch forbids Wind return and resource settlement without mutation",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-cross-settlement.test.ts",
+          "name": "R5-CROSS-05 pulse destroying decoy and carrier in one batch never resurrects a true general",
           "passed": true
         }
       ],

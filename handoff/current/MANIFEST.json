@@ -3,8 +3,8 @@
   "self_excluded": true,
   "files": {
     "00_READ_FIRST.md": {
-      "bytes": 2150,
-      "sha256": "f19706aecbdf88a2040c0de40dfdbf93b874a7ef4480badd5f43543d7831b143"
+      "bytes": 2546,
+      "sha256": "3b606015d8246bfb2f507643d4f79c1707d697f780269eb096dd88b8a48e96e3"
     },
     "01_CURRENT_RULES.md": {
       "bytes": 30087,
@@ -23,8 +23,8 @@
       "sha256": "c133b4ee797b778ce4c88233437b2466255f27c30fcaec5b0941c766cc4bae00"
     },
     "05_PROGRESS_AND_NEXT.md": {
-      "bytes": 30233,
-      "sha256": "1f1ad611e5a7a1596484206166e18064588caf735666fd60f08503833b491e45"
+      "bytes": 30857,
+      "sha256": "c4657167710f52b9478fc9f5505f9a1ee1b603fb60e1d2b3ecab9a6a7f27c6a8"
     },
     "06_COLLABORATION.md": {
       "bytes": 5415,
@@ -94,17 +94,21 @@
       "bytes": 6857,
       "sha256": "4a64b0a71207cecf09709ff0dc6af6c9e3262b9ef2fa820fcfa86b8f9aca35ee"
     },
+    "23_HERO_CROSS_SETTLEMENT_2026-10-08.md": {
+      "bytes": 4532,
+      "sha256": "2eb9b7e34879843ce393ee5591845f2aba604404caffd808a644b8e50e69457b"
+    },
     "NEW_DIALOGUE_PROMPT.txt": {
-      "bytes": 750,
-      "sha256": "f0d91cb44ce2689a479f90d1a83229b10f1f3174c80bb5b888d8db69a721ff03"
+      "bytes": 1072,
+      "sha256": "f8901b38edeeca6b6b1f889d1f924f3e6db6ea5cb96b7b4a62a953599567fdb5"
     },
     "SOURCE_REGISTER.json": {
-      "bytes": 28601,
-      "sha256": "656c17ca7cabe1d965cc5bb598a209911ea97e7d3ec176e01e1a76da42147dc3"
+      "bytes": 29071,
+      "sha256": "5bc55df7601e36495be4cc54e41af39812fecc18d529ea64cab06fe265d61c2a"
     },
     "STATE.json": {
-      "bytes": 45982,
-      "sha256": "c4ea4780a448d4e850f012b0707566126aba3aa63735902600cb14515c6c1cef"
+      "bytes": 51861,
+      "sha256": "e23744e6cadf7036af5292290fbac2f2745291f0928b53b106fb160ec2928a8f"
     },
     "assets/approved-home.png": {
       "bytes": 2157060,
@@ -119,8 +123,8 @@
       "sha256": "b476f6ba2696cb4a0185ac96da1ad976c7b43f37ff694b5bf86ccbc696cbc210"
     },
     "qa/HERO_TRANSFER_AUDIT.json": {
-      "bytes": 20137,
-      "sha256": "45f05d1e4771a8b3e38ae21872f9d5f4bef8f8dd9111f614cbe56f8ec0eb6467"
+      "bytes": 21960,
+      "sha256": "df64e568e1e598ff0a4059463c613ebb2350c4587a9986d6a4eb905d6bec013a"
     },
     "qa/INVARIANTS.json": {
       "bytes": 45423,
@@ -134,8 +138,7 @@
     "source_entries_H01_H21": true,
     "mutations_9_present": true,
     "qa_69_plus_20_and_20_supplements_preserved": true,
-    "new_hero_sources_imported_this_round": true,
-    "engine_470_passed": true,
+    "new_hero_sources_imported_this_round": false,
     "android_assets_127_equal": true,
     "browser_8_prepared_operations_passed": true,
     "browser_9_mode_foundation_cases_passed": true,
@@ -145,6 +148,9 @@
     "apk_built": false,
     "remote_and_execution_product_trees_equal": true,
     "historical_r4_inventory_preserved": true,
-    "design_required_branches": 4
+    "design_required_branches": 4,
+    "engine_478_passed": true,
+    "cross_settlement_8_new_cases_passed": true,
+    "rule_sources_unchanged_this_round": true
   }
 }

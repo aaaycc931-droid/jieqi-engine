@@ -1,11 +1,11 @@
 {
   "project": "乐子象棋 / jieqi-engine",
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-07-r5-runtime",
-  "updated_at": "2026-10-07",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-08-r5-cross",
+  "updated_at": "2026-10-08",
   "repository": "https://github.com/aaaycc931-droid/jieqi-engine",
   "working_branch": "codex/ui-android-apk-20261001",
-  "implementation_commit": "eb27de059ccf7c5e91ca9bef8e0d0c5d103ea3e2",
-  "implementation_tree": "7b7045a5390bf620956caf2b47de3c02e2df409e",
+  "implementation_commit": "e67590bd578b2c40d89faa6b1214c9d213c56043",
+  "implementation_tree": "4c748fa19e5fe44115aa27992b2f9eac15bc6756",
   "draft_pr": 2,
   "baseline_id": "LEZI-FUNCTION-2026-10-04-v1",
   "baseline_digest": "4bcf9fb91f5c6e41f456e7424ebd7ed09c6c07b1595ec825604aa730fdad020b",
@@ -30,7 +30,7 @@
     "destiny_mutations": 1
   },
   "validation": {
-    "tests_passed": 470,
+    "tests_passed": 478,
     "tests_failed": 0,
     "web_build": "passed",
     "homepage_browser_run": 37305274329,
@@ -52,25 +52,26 @@
       "failed_cases": 0,
       "fully_accepted": 0,
       "applicable_rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
-      "source_commit_at_run": "43e0b02fa622da8981edf514f956ce82061e3530",
-      "published_implementation_commit": "eb27de059ccf7c5e91ca9bef8e0d0c5d103ea3e2",
+      "source_commit_at_run": "3ff88a44c8808a792e65becd988174e2d98ae686",
+      "published_implementation_commit": "e67590bd578b2c40d89faa6b1214c9d213c56043",
       "scope": "109 existing contracts have scenario links; new hero per-source evidence is separate in HERO_TRANSFER_AUDIT, full acceptance remains 0",
-      "source_digest": "f3bb7163e3695b91b40dce1c49ab1da0887379a63748cb8bc1424518fd0205ee",
+      "source_digest": "6d3f439668f8452add60c9cc1a2e23a472e4164edfd64a9020261517911fd9c8",
       "contract_digest": "c6e4649ce5a028b5477090b87066dd5bb7a65ad3a5632d138a05bf972b89e1e3"
     },
     "current_ci": {
       "status": "success",
-      "run": 37610413835,
-      "commit": "eb27de059ccf7c5e91ca9bef8e0d0c5d103ea3e2",
-      "implementation_commit": "eb27de059ccf7c5e91ca9bef8e0d0c5d103ea3e2",
-      "evidence_artifact": 11477411963,
+      "run": 37650586699,
+      "commit": "e67590bd578b2c40d89faa6b1214c9d213c56043",
+      "implementation_commit": "e67590bd578b2c40d89faa6b1214c9d213c56043",
+      "evidence_artifact": 11496407526,
       "apk_job": "skipped",
-      "checkout_commit": "9e5b525b544d8689bd574afa227b414ab59ea9fa",
-      "source_digest": "f3bb7163e3695b91b40dce1c49ab1da0887379a63748cb8bc1424518fd0205ee",
+      "checkout_commit": "f2c8e361145caf223b06f7c30408f671721c4814",
+      "source_digest": "6d3f439668f8452add60c9cc1a2e23a472e4164edfd64a9020261517911fd9c8",
       "contract_digest": "c6e4649ce5a028b5477090b87066dd5bb7a65ad3a5632d138a05bf972b89e1e3",
       "source_digest_matches_local": true,
       "contract_digest_matches_local": true,
-      "applies_to_current_implementation": true
+      "applies_to_current_implementation": true,
+      "archive_sha256": "sha256:bc8f8bc4c5b86b9abf05f19b34ca8780fe19094de515f4cd1f3dc666c74c3fff"
     },
     "previous_ci": {
       "status": "success",
@@ -86,18 +87,21 @@
     },
     "gameplay_browser": {
       "status": "success",
-      "run": 37610413938,
-      "commit": "eb27de059ccf7c5e91ca9bef8e0d0c5d103ea3e2",
-      "checkout_commit": "9e5b525b544d8689bd574afa227b414ab59ea9fa",
-      "artifact": 11477347119,
+      "run": 37650587109,
+      "commit": "e67590bd578b2c40d89faa6b1214c9d213c56043",
+      "checkout_commit": "f2c8e361145caf223b06f7c30408f671721c4814",
+      "artifact": 11495388768,
       "case_count": 8,
       "errors": 0,
       "report": "review/invariants/HERO_TRANSFER_BROWSER_2026-10-07.json",
       "app_digest": "b841af632d0b08003ebdbbaf792691fd4c83365b5c9b43f46537d3c1fa098fc9",
       "app_digest_matches_local": true,
-      "scope": "r5 transferred hero synthetic prepared states, actual compiled DOM",
+      "compiled_source_digest": "6d3f439668f8452add60c9cc1a2e23a472e4164edfd64a9020261517911fd9c8",
+      "same_checkout_as_source_digest_verified_rules_ci": true,
+      "scope": "r5 transferred hero synthetic prepared states, actual compiled DOM; cross-fix scenarios specifically verified by eight engine cases",
       "full_match_accepted": false,
-      "bluetooth_private_transport_accepted": false
+      "bluetooth_private_transport_accepted": false,
+      "archive_sha256": "sha256:8f12bb0ef2a4070102d90c961a56ff20eded7111907bb84b45d3334175807b69"
     },
     "previous_gameplay_browser": {
       "status": "success",
@@ -292,10 +296,10 @@
       "observer": "review_server_response_only_read_only_flags_and_deadlines_no_fixture_loading_secret_identity_or_rng_override"
     },
     "paused_full_match_jobs": {
-      "run": 37305274311,
+      "run": 37650587109,
       "full_match_browser": "skipped",
       "active_match_browser": "skipped",
-      "reason": "user_paused_previous_queue_to_add_modes",
+      "reason": "user_paused_previous_queue",
       "accepted": false
     },
     "new_mode_engine_case_ids": [
@@ -325,8 +329,8 @@
       "tests_failed": 0,
       "scope": "full_regression_with_seventeen_ghost_object_cases_not_full_r3_r4_acceptance"
     },
-    "engine_scope": "full_regression_with_fifteen_current_control_cases_and_lightweight_actual_menu_execution_not_full_r4_acceptance",
-    "engine_implementation_commit": "af5e411d49099c2f5b936e6dde004b6f5e50059d",
+    "engine_scope": "r5 full regression plus eight focused cross-source death, Wind return and recursive command cases; partial acceptance only",
+    "engine_implementation_commit": "e67590bd578b2c40d89faa6b1214c9d213c56043",
     "previous_contract_evidence": {
       "index": "review/invariants/LATEST.json",
       "total": 96,
@@ -338,8 +342,9 @@
       "applicable_rule_revision": "LEZI-FUNCTION-2026-10-04-r1"
     },
     "current_runtime_ci": {
-      "implementation_commit": "998a02ab58e231550c9c71598b8419cca06578a9",
-      "status": "not_observed_for_this_increment_at_local_handoff"
+      "implementation_commit": "e67590bd578b2c40d89faa6b1214c9d213c56043",
+      "status": "success",
+      "run": 37650586699
     },
     "contract_evidence_history": [
       {
@@ -408,19 +413,80 @@
         "scope": "named_ghost_object_case_evidence_only_full_current_control_audit_complete_forms_and_untransferred_hero_sources_pending"
       }
     ],
-    "applies_to_current_rule_revision": false,
+    "applies_to_current_rule_revision": true,
     "historical_rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
-    "new_revision_validation": "not_run_yet",
+    "new_revision_validation": "partial_scenario_evidence_478_tests_and_prepared_browser_regression_not_full_acceptance",
     "historical_r4_test_count": 434,
     "mode_foundation_browser_current": {
       "status": "success",
-      "run": 37610413938,
-      "artifact": 11477357040,
+      "run": 37650587109,
+      "commit": "e67590bd578b2c40d89faa6b1214c9d213c56043",
+      "checkout_commit": "f2c8e361145caf223b06f7c30408f671721c4814",
+      "artifact": 11495328924,
       "cases": 9,
       "errors": 0,
       "report": "review/invariants/MODE_FOUNDATION_BROWSER_2026-10-07.json",
-      "scope": "existing settings/opening foundation regression only; independent hero adaptation still paused"
-    }
+      "scope": "existing settings/opening foundation regression only; independent hero adaptation still paused",
+      "archive_sha256": "sha256:465bdb55d933b3d5ed7659bf20f3d51914511d3f9bee28af94176b92b00adabd"
+    },
+    "runtime_validation_history": [
+      {
+        "tests_passed": 470,
+        "current_ci": {
+          "status": "success",
+          "run": 37610413835,
+          "commit": "eb27de059ccf7c5e91ca9bef8e0d0c5d103ea3e2",
+          "implementation_commit": "eb27de059ccf7c5e91ca9bef8e0d0c5d103ea3e2",
+          "evidence_artifact": 11477411963,
+          "apk_job": "skipped",
+          "checkout_commit": "9e5b525b544d8689bd574afa227b414ab59ea9fa",
+          "source_digest": "f3bb7163e3695b91b40dce1c49ab1da0887379a63748cb8bc1424518fd0205ee",
+          "contract_digest": "c6e4649ce5a028b5477090b87066dd5bb7a65ad3a5632d138a05bf972b89e1e3",
+          "source_digest_matches_local": true,
+          "contract_digest_matches_local": true,
+          "applies_to_current_implementation": true
+        },
+        "gameplay_browser": {
+          "status": "success",
+          "run": 37610413938,
+          "commit": "eb27de059ccf7c5e91ca9bef8e0d0c5d103ea3e2",
+          "checkout_commit": "9e5b525b544d8689bd574afa227b414ab59ea9fa",
+          "artifact": 11477347119,
+          "case_count": 8,
+          "errors": 0,
+          "report": "review/invariants/HERO_TRANSFER_BROWSER_2026-10-07.json",
+          "app_digest": "b841af632d0b08003ebdbbaf792691fd4c83365b5c9b43f46537d3c1fa098fc9",
+          "app_digest_matches_local": true,
+          "scope": "r5 transferred hero synthetic prepared states, actual compiled DOM",
+          "full_match_accepted": false,
+          "bluetooth_private_transport_accepted": false
+        },
+        "mode_foundation_browser_current": {
+          "status": "success",
+          "run": 37610413938,
+          "artifact": 11477357040,
+          "cases": 9,
+          "errors": 0,
+          "report": "review/invariants/MODE_FOUNDATION_BROWSER_2026-10-07.json",
+          "scope": "existing settings/opening foundation regression only; independent hero adaptation still paused"
+        },
+        "contract_evidence": {
+          "index": "review/invariants/LATEST.json",
+          "total": 109,
+          "partial_evidence_passed": 106,
+          "missing_related_cases": 0,
+          "non_runtime_contract": 3,
+          "failed_cases": 0,
+          "fully_accepted": 0,
+          "applicable_rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
+          "source_commit_at_run": "43e0b02fa622da8981edf514f956ce82061e3530",
+          "published_implementation_commit": "eb27de059ccf7c5e91ca9bef8e0d0c5d103ea3e2",
+          "scope": "109 existing contracts have scenario links; new hero per-source evidence is separate in HERO_TRANSFER_AUDIT, full acceptance remains 0",
+          "source_digest": "f3bb7163e3695b91b40dce1c49ab1da0887379a63748cb8bc1424518fd0205ee",
+          "contract_digest": "c6e4649ce5a028b5477090b87066dd5bb7a65ad3a5632d138a05bf972b89e1e3"
+        }
+      }
+    ]
   },
   "restrictions": [
     "ui_last",
@@ -438,11 +504,42 @@
     "old_dialogue_code_writes_after_handoff": "resumed_current_dialogue_by_explicit_user_override",
     "automatic_import": false
   },
-  "next_action": "Freeze the four source-specific missing definitions in HERO_TRANSFER_AUDIT; then implement only those confirmed deltas. Whole-source and natural match/device acceptance remains open; paused queues need their own user authorization.",
+  "next_action": "继续已确认来源的其他定点交叉审计；四项design-required须由正式设计来源补齐后再实现。旧整盘、主动技能整盘、模式独立适配、APK和最终视觉队列保持暂停。",
   "source_gap_register": "SOURCE_REGISTER.json",
   "apk_built_this_round": false,
-  "previous_implementation_commit": "830c180de6f60593c42fee427959e77cb7ffb189",
+  "previous_implementation_commit": "eb27de059ccf7c5e91ca9bef8e0d0c5d103ea3e2",
   "validation_round": {
+    "authorization": "user: 继续推进项目",
+    "verified_remote_before_implementation": "362d0f0fd34125ae6789a8645f0e6c79a0f3d587",
+    "rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
+    "implementation_commit": "e67590bd578b2c40d89faa6b1214c9d213c56043",
+    "local_execution_checkpoint": "3ff88a44c8808a792e65becd988174e2d98ae686",
+    "publication_tree_matches_execution_tree": true,
+    "report": "handoff/current/23_HERO_CROSS_SETTLEMENT_2026-10-08.md",
+    "product_code_changed": true,
+    "semantic_rules_changed": false,
+    "new_engine_tests": 8,
+    "tests_passed": 478,
+    "tests_failed": 0,
+    "web_build": "passed",
+    "android_generated_files_matched": 127,
+    "browser_tests_run": true,
+    "browser_prepared_cases_passed": 8,
+    "browser_mode_foundation_cases_passed": 9,
+    "apk_built": false,
+    "old_full_match_queue_resumed": false,
+    "untransferred_heroes_imported": false,
+    "all_functions_accepted": false,
+    "design_required_ids": [
+      "H07-mirror",
+      "H12-general-rank",
+      "H16-chaos-entry",
+      "H21-dragon-scale-placement"
+    ],
+    "artwork_changed": false,
+    "physical_device_tests_run": false
+  },
+  "previous_validation_round": {
     "authorization": "uploaded formal implementation handoff: 2026-10-07-r7-clean H01-H21",
     "verified_remote_before_implementation": "333c94eae2c2cc44a2517023d78145a6d505b74c",
     "rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
@@ -467,29 +564,11 @@
     "artwork_changed": false,
     "physical_device_tests_run": false
   },
-  "previous_validation_round": {
-    "rules_changed": false,
-    "rule_revision_unchanged": true,
-    "product_code_changed": true,
-    "new_engine_tests": 18,
-    "tests_passed": 434,
-    "web_build": "passed",
-    "android_web_asset_match_files": 122,
-    "new_mode_complete_match_accepted": false,
-    "artwork_changed": false,
-    "functional_settings_and_preview_layout_changed": false,
-    "old_full_match_validation": "paused_user_requested_jobs_skipped",
-    "report": "handoff/current/20_HERO_FORM_RUNTIME_2026-10-07.md",
-    "browser_tests_run": false,
-    "physical_device_tests_run": false,
-    "apk_built": false,
-    "all_functions_accepted": false
-  },
   "previous_rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
   "previous_rule_digest": "cf831ebe7872cb9d8ed55fa3b4edb7f03492b3c90a06c8d9be494ac9a9e9284f",
   "rule_digest_algorithm": "sha256(concat(relative UTF-8 path + NUL + file bytes + NUL), STATE.current_rules order)",
   "paused_next_action": "Continue destiny bomb/hourglass full real matches, second Shadow cooldown/lifecycle, remaining private snapshot and cross-end clock intersections. Current five active families have sampled natural results; original Nozdormu/Prince and current 12-seat normal regression remain incomplete. Local timeout outcome not frozen; physical RFCOMM/WebView/two-phone pending. UI last; APK paused.",
-  "work_status": "r5_confirmed_portions_implemented_published_partial_evidence_design_required_open",
+  "work_status": "r5_cross_settlement_fixes_published_partial_evidence_design_required_open",
   "game_modes": {
     "authority": "09_CURRENT_GAME_MODES.md",
     "base_rule_status": "confirmed",
@@ -611,17 +690,17 @@
     "followup_runtime_record": "handoff/current/13_DARK_IDENTITY_RUNTIME_2026-10-06.md"
   },
   "latest_runtime_round": {
-    "authorization": "uploaded formal implementation handoff: 2026-10-07-r7-clean H01-H21",
-    "verified_remote_before_implementation": "333c94eae2c2cc44a2517023d78145a6d505b74c",
+    "authorization": "user: 继续推进项目",
+    "verified_remote_before_implementation": "362d0f0fd34125ae6789a8645f0e6c79a0f3d587",
     "rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
-    "implementation_commit": "eb27de059ccf7c5e91ca9bef8e0d0c5d103ea3e2",
-    "local_execution_checkpoint": "43e0b02fa622da8981edf514f956ce82061e3530",
+    "implementation_commit": "e67590bd578b2c40d89faa6b1214c9d213c56043",
+    "local_execution_checkpoint": "3ff88a44c8808a792e65becd988174e2d98ae686",
     "publication_tree_matches_execution_tree": true,
-    "report": "handoff/current/22_HERO_TRANSFER_2026-10-07.md",
+    "report": "handoff/current/23_HERO_CROSS_SETTLEMENT_2026-10-08.md",
     "product_code_changed": true,
-    "semantic_rules_changed": true,
-    "new_engine_tests": 36,
-    "tests_passed": 470,
+    "semantic_rules_changed": false,
+    "new_engine_tests": 8,
+    "tests_passed": 478,
     "tests_failed": 0,
     "web_build": "passed",
     "android_generated_files_matched": 127,
@@ -796,6 +875,35 @@
       "old_full_match_queue_resumed": false,
       "untransferred_heroes_imported": false,
       "all_functions_accepted": false
+    },
+    {
+      "authorization": "uploaded formal implementation handoff: 2026-10-07-r7-clean H01-H21",
+      "verified_remote_before_implementation": "333c94eae2c2cc44a2517023d78145a6d505b74c",
+      "rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
+      "implementation_commit": "eb27de059ccf7c5e91ca9bef8e0d0c5d103ea3e2",
+      "local_execution_checkpoint": "43e0b02fa622da8981edf514f956ce82061e3530",
+      "publication_tree_matches_execution_tree": true,
+      "report": "handoff/current/22_HERO_TRANSFER_2026-10-07.md",
+      "product_code_changed": true,
+      "semantic_rules_changed": true,
+      "new_engine_tests": 36,
+      "tests_passed": 470,
+      "tests_failed": 0,
+      "web_build": "passed",
+      "android_generated_files_matched": 127,
+      "browser_tests_run": true,
+      "browser_prepared_cases_passed": 8,
+      "browser_mode_foundation_cases_passed": 9,
+      "apk_built": false,
+      "old_full_match_queue_resumed": false,
+      "untransferred_heroes_imported": false,
+      "all_functions_accepted": false,
+      "design_required_ids": [
+        "H07-mirror",
+        "H12-general-rank",
+        "H16-chaos-entry",
+        "H21-dragon-scale-placement"
+      ]
     }
   ],
   "action_turn_runtime": {
@@ -829,7 +937,7 @@
     "remaining_runtime_contracts": [],
     "remaining_runtime_contracts_note": "Public ADD-HERO-FORM-001 model now has named partial evidence in round20; future source integration and full acceptance remain pending."
   },
-  "pending_next_runtime_action": "Freeze the four source-specific missing definitions in HERO_TRANSFER_AUDIT; then implement only those confirmed deltas. Whole-source and natural match/device acceptance remains open; paused queues need their own user authorization.",
+  "pending_next_runtime_action": "继续已确认来源的其他定点交叉审计；四项design-required须由正式设计来源补齐后再实现。旧整盘、主动技能整盘、模式独立适配、APK和最终视觉队列保持暂停。",
   "account_switch_close": {
     "requested_at": "2026-10-06T23:14:24+08:00",
     "request": "我要更换账号了",
@@ -954,7 +1062,7 @@
       "physical_device_tests_run_this_round": false,
       "apk_built_this_round": false
     },
-    "superseded_by_current_runtime": "22_HERO_TRANSFER_2026-10-07.md"
+    "superseded_by_current_runtime": "23_HERO_CROSS_SETTLEMENT_2026-10-08.md"
   },
   "acceptance_gap_consolidation": {
     "status": "historical_r4_inventory_superseded_by_received_r5_transfer",
@@ -1021,6 +1129,29 @@
     ],
     "new_dedicated_tests": 36,
     "audit": "qa/HERO_TRANSFER_AUDIT.json",
-    "source_revision_is_separate_from_aggregate_r5": true
+    "source_revision_is_separate_from_aggregate_r5": true,
+    "cross_settlement_tests": 8,
+    "latest_total_tests_passed": 478
+  },
+  "hero_cross_settlement_runtime": {
+    "record": "handoff/current/23_HERO_CROSS_SETTLEMENT_2026-10-08.md",
+    "source_revision_unchanged": true,
+    "acceptance": "partial_named_case_evidence_only",
+    "test_file": "tests/hero-cross-settlement.test.ts",
+    "case_ids": [
+      "R5-CROSS-01",
+      "R5-CROSS-02",
+      "R5-CROSS-03",
+      "R5-CROSS-04",
+      "R5-CROSS-05",
+      "R5-CROSS-06",
+      "R5-CROSS-07",
+      "R5-CROSS-08"
+    ],
+    "fixes": [
+      "shared_closed_death_resource_credit",
+      "Wind_return_before_safety_and_terminal_judgment",
+      "outer_command_deduplication_after_recursive_execution"
+    ]
   }
 }
