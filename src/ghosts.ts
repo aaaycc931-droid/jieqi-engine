@@ -29,7 +29,7 @@ function requireQuery(query: GhostQuery): void {
 export function getGhostObjects(state: Pick<GameState, "ghosts">, query: GhostQuery): GhostObject[] {
   requireClosedDestructionBatch(state as GameState);
   requireQuery(query);
-  return state.ghosts?.filter(g => g.remaining > 0 && matches(g, query)) ?? [];
+  return state.ghosts?.filter(g => (g.persistent || g.remaining > 0) && matches(g, query)) ?? [];
 }
 /** 资源来源查询还必须给出归属；仅返回对象，不赋予任何英雄收益或爆发效果。 */
 export function getGhostResourceObjects(state: Pick<GameState, "ghosts">, query: GhostQuery & { owner: Side }): GhostObject[] {
@@ -41,7 +41,7 @@ export function getGhostResourceObjects(state: Pick<GameState, "ghosts">, query:
 export function putGhostObject(state: GameState, spec: GhostObjectSpec, conflict: "reject" | "replace" | "add_layers"): GhostObject {
   requireClosedDestructionBatch(state);
   requireKind(spec.kind); requireOwner(spec.owner);
-  if (!isInsideBoard(spec.position) || !Number.isInteger(spec.remaining) || spec.remaining <= 0 ||
+  if (!isInsideBoard(spec.position) || (!spec.persistent && (!Number.isInteger(spec.remaining) || spec.remaining <= 0)) ||
       typeof spec.source !== "string" || !spec.source.trim() ||
       spec.layers !== undefined && (!Number.isInteger(spec.layers) || spec.layers <= 0)) throw new RuleError("INVALID_GHOST_OBJECT", "亡魂对象须有明确来源、标准棋格及正整数寿命/来源层数");
   if (!["reject", "replace", "add_layers"].includes(conflict)) throw new RuleError("GHOST_CONFLICT_POLICY", "同类对象冲突须由来源明确处理");
@@ -82,6 +82,6 @@ export function clearAllGhostKinds(state: GameState, filter: Omit<GhostQuery, "k
 /** 仅推进所点名种类/归属；来源完成后续生成后再协调感染，保持原有结算顺序。 */
 export function tickGhostObjects(state: GameState, query: GhostQuery & { owner: Side }): void {
   requireClosedDestructionBatch(state); requireQuery(query); requireOwner(query.owner);
-  for (const g of getGhostObjects(state, query)) g.remaining -= 1;
-  if (state.ghosts) state.ghosts = state.ghosts.filter(g => !matches(g, query) || g.remaining > 0);
+  for (const g of getGhostObjects(state, query)) if (!g.persistent) g.remaining -= 1;
+  if (state.ghosts) state.ghosts = state.ghosts.filter(g => !matches(g, query) || g.persistent || g.remaining > 0);
 }

@@ -59,7 +59,7 @@ const report = {
   runtime: process.version,
   testSummary: { passed: outcomes.filter(c => c.passed).length, failed: outcomes.filter(c => !c.passed).length, executionFailed },
   contractSummary: { total: rows.length, ...counts, fullyAccepted: 0 },
-  limits: ['相关用例重新运行通过不等于全称不变量已经证明。', '静态源码/布局检查、引擎运行时、浏览器和实体双机证据不能互相替代。', '未更改规则 revision、稀有度、评分或用户验收状态。'],
+  limits: ['相关用例重新运行通过不等于全称不变量已经证明。', '静态源码/布局检查、引擎运行时、浏览器和实体双机证据不能互相替代。', '报告不自行更改正式规则、稀有度、评分或用户验收状态。'],
   contracts: evidence,
 };
 const output = resolve(root, 'review/invariants'); mkdirSync(output, { recursive: true });

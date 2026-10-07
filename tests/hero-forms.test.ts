@@ -29,7 +29,7 @@ function preparedRoom() {
   return { room, setNow: (n: number) => { now = n; } };
 }
 
-test("R4-FORM-01 twelve existing front packages retain complete catalog and exact naming", () => {
+test("R4-FORM-01 nineteen transferred front packages retain complete catalog and exact naming", () => {
   for (const hero of HERO_IDS) {
     const pkg = getHeroPackage(hero);
     assert.equal(pkg.form, "front"); assert.equal(pkg.heroId, hero);
@@ -38,11 +38,11 @@ test("R4-FORM-01 twelve existing front packages retain complete catalog and exac
     assert.equal(selectedHeroId(state, "red"), hero);
     assert.deepEqual(state.featureRules!.heroSelections, createHeroSelections({ red: hero }));
   }
-  assert.match(HERO_CATALOG.wind.skills[0].description, /五个己方正式回合/);
+  assert.match(HERO_CATALOG.wind.skills[0].description, /T1–T7/);
 });
 test("R4-FORM-02 inner naming is grammar only and never registers an unavailable package", () => {
   assert.equal(heroSkillLabel("风", "影", "inner"), "里·风｜【里·影】");
-  for (const hero of HERO_IDS) assert.throws(() => getHeroPackage(hero, "inner"), code("HERO_FORM_UNAVAILABLE"));
+  for (const hero of HERO_IDS) { if (["jiang_he","death_knight"].includes(hero)) { assert.equal(getHeroPackage(hero,"inner").form,"inner"); } else assert.throws(() => getHeroPackage(hero, "inner"), code("HERO_FORM_UNAVAILABLE")); }
 });
 test("R4-FORM-03 inner opening is rejected atomically without touching public or secret state", () => {
   const state = fresh(), before = structuredClone(state);

@@ -37,7 +37,8 @@ test("ROGUE-01 刺杀首步消耗英雄次数，棋子进入公开隐身并保�
   assert.equal(result.state.assassination?.red.activePieceId, "rogue-rook");
   assert.deepEqual(result.state.effectsByPieceId?.["rogue-rook"]?.stealth, {
     owner: "red",
-    remainingOwnerTurns: 1,
+    remainingOwnerTurns: 2,
+    activatedOnFormalTurn: 1,
     strongStrikeAvailable: true,
     source: "hero",
   });
@@ -67,7 +68,7 @@ test("ROGUE-02 无形地面棋仍挡路径，不能直接进攻", () => {
   );
 });
 
-test("ROGUE-03 强击不能直接选取无形目标", () => {
+test("ROGUE-03 刺杀机会可以直接指定无形目标", () => {
   const state = initializeFeatureGameState(
     gameState([
       revealed("red-rook", "red", "rook", 0, 7),
@@ -81,10 +82,11 @@ test("ROGUE-03 强击不能直接选取无形目标", () => {
   };
   state.assassination!.red.activePieceId = "red-rook";
   state.assassination!.black.activePieceId = "black-rook";
-  assert.throws(() => applyAuthoritativeAssassination(state, secretState(), assassination({ x: 0, y: 4 }, { x: 0, y: 7 }, "strong", undefined, true)), (e) => e instanceof RuleError && e.code === "ILLEGAL_TARGET");
+  const result = applyAuthoritativeAssassination(state, secretState(), assassination({ x: 0, y: 4 }, { x: 0, y: 7 }, "strong", undefined, true));
+  assert.equal(result.state.pieces.some(p => p.id === "red-rook"), false);
   assert.equal(state.pieces.some(p => p.id === "red-rook"), true);
 });
-test("ROGUE-04 隐身在下一个己方其他走子后消失，普通走子不能直接调用隐身棋", () => {
+test("ROGUE-04 两个己方窗口后隐身退出，普通入口不能绕过来源", () => {
   const state = initializeFeatureGameState(
     gameState([
       revealed("rogue-rook", "red", "rook", 0, 7),
@@ -98,15 +100,18 @@ test("ROGUE-04 隐身在下一个己方其他走子后消失，普通走子不�
   );
   const blackOne = applyAuthoritativeMove(first.state, first.secret, move({ x: 1, y: 2 }, { x: 1, y: 3 }, "black-1", 1));
   const redOne = applyAuthoritativeMove(blackOne.state, blackOne.secret, move({ x: 1, y: 7 }, { x: 1, y: 6 }, "red-1", 2));
-  assert.equal(redOne.state.effectsByPieceId?.["rogue-rook"], undefined);
-  assert.equal(redOne.state.assassination?.red.activePieceId, undefined);
+  assert.equal(redOne.state.effectsByPieceId?.["rogue-rook"]?.stealth?.remainingOwnerTurns, 1);
+  const blackTwo = applyAuthoritativeMove(redOne.state, redOne.secret, move({ x: 1, y: 3 }, { x: 1, y: 4 }, "black-2", 3));
+  const redTwo = applyAuthoritativeMove(blackTwo.state, blackTwo.secret, move({ x: 1, y: 6 }, { x: 1, y: 5 }, "red-2", 4));
+  assert.equal(redTwo.state.effectsByPieceId?.["rogue-rook"]?.stealth, undefined);
+  assert.equal(redTwo.state.assassination?.red.activePieceId, undefined);
   assert.throws(
     () => applyAuthoritativeMove({ ...first.state, turn: "red" }, first.secret, move({ x: 0, y: 6 }, { x: 0, y: 5 }, "wrong-api", 1)),
     (error) => error instanceof RuleError && error.code === "STEALTH_ACTION_REQUIRED",
   );
 });
 
-test("ROGUE-05 首次只能空移，不能立即强击；资源失败不消耗", () => {
+test("ROGUE-05 发动可普通进攻但不能立即使用刺杀机会；资源失败不消耗", () => {
   const state = initializeFeatureGameState(gameState([revealed("rogue", "red", "rook", 0, 7), revealed("barrier", "black", "pawn", 0, 6)]), { red: "rogue", black: "warrior" });
   assert.deepEqual(getLegalAssassinationMoves(state, "rogue", true), []);
   assert.throws(() => applyAuthoritativeAssassination(state, secretState(), assassination({ x: 0, y: 7 }, { x: 0, y: 6 }, "strong", "hero", true)), (e) => e instanceof RuleError && e.code === "ASSASSINATION_DELAYED");
@@ -176,19 +181,20 @@ test("ROGUE-08 英雄与暗影之舞来源独立消耗，并共享新刺杀规�
   assert.equal(hero.state.assassination?.red.mutationChargeAvailable, true);
 
   const blackOne = applyAuthoritativeMove(hero.state, hero.secret, move({ x: 1, y: 2 }, { x: 1, y: 3 }, "black-one", 1));
-  const redOne = applyAuthoritativeMove(blackOne.state, blackOne.secret, move({ x: 1, y: 7 }, { x: 1, y: 6 }, "red-one", 2));
+  const redOne = applyAuthoritativeAssassination(blackOne.state, blackOne.secret, assassination({ x: 0, y: 8 }, { x: 0, y: 7 }, "red-one", undefined, false, 2));
   assert.equal(redOne.state.assassination?.red.activePieceId, undefined);
   const blackTwo = applyAuthoritativeMove(redOne.state, redOne.secret, move({ x: 1, y: 3 }, { x: 1, y: 4 }, "black-two", 3));
   const mutation = applyAuthoritativeAssassination(
     blackTwo.state,
     blackTwo.secret,
-    assassination({ x: 0, y: 8 }, { x: 0, y: 7 }, "mutation-move", "mutation", false, 4),
+    assassination({ x: 0, y: 7 }, { x: 0, y: 8 }, "mutation-move", "mutation", false, 4),
   );
   assert.equal(mutation.state.assassination?.red.heroChargeAvailable, false);
   assert.equal(mutation.state.assassination?.red.mutationChargeAvailable, false);
   assert.deepEqual(mutation.state.effectsByPieceId?.["rogue-rook"]?.stealth, {
     owner: "red",
-    remainingOwnerTurns: 1,
+    remainingOwnerTurns: 2,
+    activatedOnFormalTurn: 3,
     strongStrikeAvailable: true,
     source: "mutation",
   });
@@ -207,6 +213,6 @@ test("ROGUE-09 暗影之舞进入隐身时保留同一步获得的战士壁垒",
   );
   assert.deepEqual(result.state.effectsByPieceId?.["warrior-rook"], {
     barrier: { owner: "red", enemyTurnsRemaining: 3 },
-    stealth: { owner: "red", remainingOwnerTurns: 1, strongStrikeAvailable: true, source: "mutation" },
+    stealth: { owner: "red", remainingOwnerTurns: 2, activatedOnFormalTurn: 1, strongStrikeAvailable: true, source: "mutation" },
   });
 });

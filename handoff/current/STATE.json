@@ -1,6 +1,6 @@
 {
   "project": "乐子象棋 / jieqi-engine",
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-07-acceptance-gaps",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-07-hero-transfer",
   "updated_at": "2026-10-07",
   "repository": "https://github.com/aaaycc931-droid/jieqi-engine",
   "working_branch": "codex/ui-android-apk-20261001",
@@ -9,8 +9,8 @@
   "draft_pr": 2,
   "baseline_id": "LEZI-FUNCTION-2026-10-04-v1",
   "baseline_digest": "4bcf9fb91f5c6e41f456e7424ebd7ed09c6c07b1595ec825604aa730fdad020b",
-  "current_rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
-  "current_rule_digest": "cf831ebe7872cb9d8ed55fa3b4edb7f03492b3c90a06c8d9be494ac9a9e9284f",
+  "current_rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
+  "current_rule_digest": "0d839b00f98f120a8a3e2ce6cde6eee90e67c17835d70503fb5735e228a1e08a",
   "authoritative_entry": "00_READ_FIRST.md",
   "current_rules": [
     "01_CURRENT_RULES.md",
@@ -395,7 +395,10 @@
         "published_implementation_commit": "364b711f522be18c6c636e59a3df5e02844092c7",
         "scope": "named_ghost_object_case_evidence_only_full_current_control_audit_complete_forms_and_untransferred_hero_sources_pending"
       }
-    ]
+    ],
+    "applies_to_current_rule_revision": false,
+    "historical_rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
+    "new_revision_validation": "not_run_yet"
   },
   "restrictions": [
     "ui_last",
@@ -454,11 +457,11 @@
       "formal_clock_after_opening_and_preparation"
     ]
   },
-  "previous_rule_revision": "LEZI-FUNCTION-2026-10-06-r3",
-  "previous_rule_digest": "86cf12befe729c161f1f078dc240052fe26a7a3a78909a2ec255dc0a84d3d776",
+  "previous_rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
+  "previous_rule_digest": "cf831ebe7872cb9d8ed55fa3b4edb7f03492b3c90a06c8d9be494ac9a9e9284f",
   "rule_digest_algorithm": "sha256(concat(relative UTF-8 path + NUL + file bytes + NUL), STATE.current_rules order)",
   "paused_next_action": "Continue destiny bomb/hourglass full real matches, second Shadow cooldown/lifecycle, remaining private snapshot and cross-end clock intersections. Current five active families have sampled natural results; original Nozdormu/Prince and current 12-seat normal regression remain incomplete. Local timeout outcome not frozen; physical RFCOMM/WebView/two-phone pending. UI last; APK paused.",
-  "work_status": "acceptance_gap_consolidation_completed_waiting_hero_design_transfer",
+  "work_status": "formal_hero_transfer_received_diff_and_runtime_in_progress",
   "game_modes": {
     "authority": "09_CURRENT_GAME_MODES.md",
     "base_rule_status": "confirmed",
@@ -504,6 +507,11 @@
       "revision": "LEZI-FUNCTION-2026-10-06-r4",
       "digest": "cf831ebe7872cb9d8ed55fa3b4edb7f03492b3c90a06c8d9be494ac9a9e9284f",
       "scope": "user-confirmed public dark identity base term; only 01 changed among current_rules; product code unchanged"
+    },
+    {
+      "revision": "LEZI-FUNCTION-2026-10-07-r5",
+      "digest": "0d839b00f98f120a8a3e2ce6cde6eee90e67c17835d70503fb5735e228a1e08a",
+      "scope": "formal complete hero transfer, original sources preserved"
     }
   ],
   "stage_close": {
@@ -907,5 +915,47 @@
     "current_step_completed": true,
     "new_hero_intake_status": "awaiting_user_transfer",
     "old_queues_resumed": false
+  },
+  "hero_transfer": {
+    "source": "rules/transferred/2026-10-07-r7-clean",
+    "hero_source_revision": "2026-10-07-r7-clean",
+    "remote_start_commit": "333c94eae2c2cc44a2517023d78145a6d505b74c",
+    "received_scope": "H01-H21; all existing twelve audited; 19 base heroes, two inner packages, five Galakrond variants",
+    "runtime_status": "in_progress",
+    "fully_accepted": false,
+    "source_manifest": {
+      "00_READ_FIRST.md": {
+        "sha256": "d74fb0ffcb67ca4a1fb0342b1d4c1eb6758f71ece4cbaa01d1f58af4534607b8",
+        "bytes": 1709
+      },
+      "01_CURRENT_RULES.md": {
+        "sha256": "98f2bdc1aa86527c11b05bf5f5fdcfa963eddfb784cb49fa0f9350aaaf8f192b",
+        "bytes": 29517
+      },
+      "02_CURRENT_HEROES.md": {
+        "sha256": "da104122e8279e3bb9646059ad14783b2c64ef5816c98b2c97204ebb0457454b",
+        "bytes": 32591
+      },
+      "03_CURRENT_MUTATIONS.md": {
+        "sha256": "e68b3123042cf4ce2bb7411ee3cea4c1289b6c8875f564f4b4c39db6542affb1",
+        "bytes": 17178
+      },
+      "07_DESIGN_SCORING.md": {
+        "sha256": "d0d7f6a2f3e6b2774ed03eb38c5199373d0fb887ad804b5db28fcd5ad2db293b",
+        "bytes": 4854
+      },
+      "08_SCORE_LEDGER.md": {
+        "sha256": "1381656cb5dd9fbc1108faeb93e4bcd594f85a871d1f51530ca66bc1c0d04481",
+        "bytes": 35456
+      },
+      "WORK_MODE_IMPLEMENTATION_HANDOFF_2026-10-07.md": {
+        "sha256": "211a0aab6ba6cb303a0c9c440534dd8ec815f60bac368174333f6dfd84d26e68",
+        "bytes": 10900
+      }
+    },
+    "unresolved": [
+      "H07 dual-thief mirror stacking",
+      "H21 Dragon Scale final attacker/target placement"
+    ]
   }
 }

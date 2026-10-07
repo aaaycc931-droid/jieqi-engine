@@ -19,3 +19,13 @@ export * from "./heroes.js";
 export * from "./spaces.js";
 export * from "./ghosts.js";
 export * from "./hero-forms.js";
+
+export * from "./hero-descent.js";
+
+export * from "./hero-progress.js";
+
+export * from "./hero-river.js";
+
+export * from "./hero-children.js";
+
+export * from "./hero-shuffle.js";

@@ -1,3 +1,4 @@
+import { submitRemoteHeroPreparationChoice } from "./remote-room.js";
 import { RuleError } from "./errors.js";
 import {
   advanceRemoteRoomTime,
@@ -31,6 +32,7 @@ import { normalizeGameMode } from "./modes.js";
 
 export const BLUETOOTH_HOST_PLAYER = "bluetooth:host";
 export const BLUETOOTH_GUEST_PLAYER = "bluetooth:guest";
+
 
 
 
@@ -97,8 +99,10 @@ export class BluetoothHostRoom {
         this.room = submitRemoteRps(this.room, playerId, action.choice, action.round, this.randomInt, now);
         break;
       case "hero":
-        this.room = submitRemoteHeroSelection(this.room, playerId, action.hero, this.randomInt, now);
+        this.room = submitRemoteHeroSelection(this.room, playerId, action.hero, this.randomInt, now, { form: action.form, variant: action.variant });
         break;
+      case "hero_preparation_choice":
+        this.room = submitRemoteHeroPreparationChoice(this.room, playerId, action, now, this.randomInt); break;
       case "hero_intro_complete":
         this.room = completeRemoteHeroIntro(this.room, playerId, now);
         break;

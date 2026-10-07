@@ -108,7 +108,7 @@ test("R4-RIVER-11 全场毁灭与讳言随机池默认排除河道棋，不能�
  s.pieces[2].layer="river";s.pieces[2].river=location;
  let rolls=0;const r=applyHeroAbility(s,k,skill("destruction",s),0,max=>{rolls++;return 0;});assert.equal(rolls,1);assert.deepEqual(r.state.captured.map(p=>p.id),["board"]);assert.ok(r.state.pieces.some(p=>p.id==="river-dark"));
  const t=initializeFeatureGameState(gameState([revealed("water","black","rook",0,7),revealed("board","black","pawn",0,3)]),{red:"devout_zealot"});t.heroRuntime!.red!.invokeCount=4;enterRiverSpace(t,secretState(),"water",location);
- const q=applyHeroAbility(t,secretState(),skill("unspeakable",t),0,()=>0);assert.deepEqual(q.state.captured.map(p=>p.id),["board"]);
+ t.heroRuntime!.red!.omen=true;beginFormalTurn(t,secretState(),()=>0);assert.deepEqual(t.captured.map(p=>p.id),["board"]);
 });
 
 test("R4-RIVER-12 风的明/暗承载池与混乱开始刷新默认排除河道棋", () => {

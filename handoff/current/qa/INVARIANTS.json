@@ -1,14 +1,14 @@
 {
   "authority": "test_contract_non_normative",
   "normative_source": "01_CURRENT_RULES.md + 02_CURRENT_HEROES.md + 03_CURRENT_MUTATIONS.md + 04_CURRENT_UI_AND_FLOW.md",
-  "current_rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
+  "current_rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
   "code_checkpoint": "830c180de6f60593c42fee427959e77cb7ffb189",
   "counts": {
     "retained_invariants": 69,
     "retained_anti_invariants": 20,
     "new_supplements": 20
   },
-  "note": "以下进展句保留各轮历史时点，不以旧“缺专属测试”覆盖最后的当前状态。 保留69项原合同与20项反不变量；2026-10-06同步全局规则后修正INV-ACTION-001范围、补强姆诺兹多上一正式回合边界，并新增8项待验证补充。测试合同仍非规范源，不代表运行时已实现。 2026-10-06 r4新增5项暗置身份公共判定合同，均待运行时验证；不改变69原合同/20反不变量及旧执行证据。 2026-10-06获授权实现公共暗置身份后，5项暗置身份合同有具体情景证据；未验收所有来源、资源/UI或术士技能。r3的8项新增合同继续待运行时模型验证；完整合同验收数仍为0。 后续用户同意推进行动/回合时序：3项动作/阶段/持续合同已接入现有来源并新增情景验证，其他5项r3新增合同仍缺专属测试；未移交英雄及未来资源/培养不自动实现，完整合同验收仍为0。 2026-10-07用户在当前对话恢复实现，亡魂对象合同新增17项公共模型/既有普通来源情景证据；完整当前控制权限及完整表/里形态仍缺专属增量验证。里英雄生成、持续/收益未移交，不自动定义，完整验收仍0。 2026-10-07当前控制权限现有源码审计及15项情景证据完成，保留明确真实读取例外，补接口来源标记和投弹菜单弹药资格；仅完整表/里形态缺专属增量测试，未来来源/浏览器/实机与全称合同仍待，完整验收0。 2026-10-07表/里公共模型完成18项专属情景验证，十二表完整包、整局独立锁、旧快照表迁移与实际回溯/蓝牙编码/重连/再战已有部分证据；109合同106部分证据+0缺专属测试+3规范，完整验收仍0。未移交里包、全部交叉来源、浏览器及实体设备仍待，未新增形态选择UI或APK。",
+  "note": "以下进展句保留各轮历史时点，不以旧“缺专属测试”覆盖最后的当前状态。 保留69项原合同与20项反不变量；2026-10-06同步全局规则后修正INV-ACTION-001范围、补强姆诺兹多上一正式回合边界，并新增8项待验证补充。测试合同仍非规范源，不代表运行时已实现。 2026-10-06 r4新增5项暗置身份公共判定合同，均待运行时验证；不改变69原合同/20反不变量及旧执行证据。 2026-10-06获授权实现公共暗置身份后，5项暗置身份合同有具体情景证据；未验收所有来源、资源/UI或术士技能。r3的8项新增合同继续待运行时模型验证；完整合同验收数仍为0。 后续用户同意推进行动/回合时序：3项动作/阶段/持续合同已接入现有来源并新增情景验证，其他5项r3新增合同仍缺专属测试；未移交英雄及未来资源/培养不自动实现，完整合同验收仍为0。 2026-10-07用户在当前对话恢复实现，亡魂对象合同新增17项公共模型/既有普通来源情景证据；完整当前控制权限及完整表/里形态仍缺专属增量验证。里英雄生成、持续/收益未移交，不自动定义，完整验收仍0。 2026-10-07当前控制权限现有源码审计及15项情景证据完成，保留明确真实读取例外，补接口来源标记和投弹菜单弹药资格；仅完整表/里形态缺专属增量测试，未来来源/浏览器/实机与全称合同仍待，完整验收0。 2026-10-07表/里公共模型完成18项专属情景验证，十二表完整包、整局独立锁、旧快照表迁移与实际回溯/蓝牙编码/重连/再战已有部分证据；109合同106部分证据+0缺专属测试+3规范，完整验收仍0。未移交里包、全部交叉来源、浏览器及实体设备仍待，未新增形态选择UI或APK。 2026-10-07收到r7-clean完整英雄来源后同步r5合同，修正潜行者、刺杀、防御、猎人寿命及返回格旧控制陷阱。新增21英雄映射见HERO_TRANSFER_AUDIT.json，不将相关用例当作完整验收。",
   "invariants": [
     {
       "id": "INV-BOARD-001",
@@ -91,7 +91,7 @@
       "id": "INV-CAPTURE-001",
       "domain": "board_and_information",
       "statement": "普通吃子流程不把将帅作为普通目标；将帅离场须来自裁决/背刺、碾碎、陷阱、感染、窒息、时间崩坏等明确来源。",
-      "scope_and_exceptions": "潜行者【强击】可按专属来源以将帅为目标；这不恢复“普通吃将”。",
+      "scope_and_exceptions": "潜行者及暗影之舞专属刺杀明确禁止指定将帅；不能引用旧强击吃将例外。",
       "current_runtime_verification": "pending_individual_evidence"
     },
     {
@@ -293,8 +293,8 @@
     {
       "id": "INV-WARRIOR-002",
       "domain": "hero_mutation_cross_rules",
-      "statement": "普通防御只介入直接指定该棋且不带【强击】的【进攻】；触发后防御耗尽、目标留位、进攻者【移置】回进攻前位置。",
-      "scope_and_exceptions": "成功返回结算返回格；目标格不结算进攻者落位效果。",
+      "statement": "普通防御介入普通直接进攻；触发后防御耗尽、目标留位、进攻者弹回。",
+      "scope_and_exceptions": "来源专属刺杀无视普通防御；龙爪端点追加碾碎按来源结算，不能恢复旧通用强击模型。",
       "current_runtime_verification": "pending_individual_evidence"
     },
     {
@@ -314,29 +314,29 @@
     {
       "id": "INV-IRONARMOR-001",
       "domain": "hero_mutation_cross_rules",
-      "statement": "铁甲只免疫一次背刺【终结】，不是普遍【强击】或死亡免疫。",
+      "statement": "铁甲只免疫一次背刺【终结】，不是普遍来源进攻或死亡免疫。",
       "scope_and_exceptions": "对手回合拦截后不给战士额外回应；战士自己回合发生背刺并拦截时才授予一次【额外】+【强迫】应将。",
       "current_runtime_verification": "pending_individual_evidence"
     },
     {
       "id": "INV-ROGUE-001",
       "domain": "hero_mutation_cross_rules",
-      "statement": "每个刺杀来源每局一次且彼此独立；发动回合只能让己方明置非将帅棋合法【移动】到空位，不能【进攻】或【强击】。",
-      "scope_and_exceptions": "移动成功后获得该来源【无形】。",
+      "statement": "每个刺杀来源每局一次且彼此独立；发动让当前己方明置非将帅棋合法普通移动或进攻。",
+      "scope_and_exceptions": "普通防御弹回时退还来源且不获得无形；成功存活且仍归己方才获得来源无形。",
       "current_runtime_verification": "pending_individual_evidence"
     },
     {
       "id": "INV-ROGUE-002",
       "domain": "hero_mutation_cross_rules",
-      "statement": "对手获得完整一个正式回合后，到潜行者下一正式回合，该棋可按普通进攻几何进行一次【进攻】+【强击】。",
-      "scope_and_exceptions": "该棋开始自己的行动前来源【无形】先结束；未使用强击则随该棋行动结束失效。",
+      "statement": "发动后保留两个未来己方正式回合的来源刺杀窗口；发动回合不消耗这两个未来窗口。",
+      "scope_and_exceptions": "专属刺杀按普通几何，可指定无形并无视普通防御，禁止将帅；不用刺杀而用该棋行动则结束，第二未来己方回合末到期。",
       "current_runtime_verification": "pending_individual_evidence"
     },
     {
       "id": "INV-STRIKE-001",
       "domain": "hero_mutation_cross_rules",
-      "statement": "【强击】是【进攻】标签，使用来源棋合法进攻几何；默认可选择将帅。",
-      "scope_and_exceptions": "不天然穿透【无形】、不天然驱散状态；成功通常落到目标格，除非来源例外。",
+      "statement": "刺杀是来源专属进攻规则，不能建立通用强击标签或默认可选将帅。",
+      "scope_and_exceptions": "潜行者及暗影之舞刺杀可选无形并无视普通防御；禁止将帅，不自动驱散，龙鳞交叉仍缺落位定义。",
       "current_runtime_verification": "pending_individual_evidence"
     },
     {
@@ -349,8 +349,8 @@
     {
       "id": "INV-TRAP-002",
       "domain": "hero_mutation_cross_rules",
-      "statement": "每层陷阱寿命 12 个敌方正式回合末：1–9 为致死，10–12 为控制，归零失效。",
-      "scope_and_exceptions": "额外行动/应将不扣寿命。控制效果只限制该棋在其控制方下一正式回合的【移动】/【进攻】。",
+      "statement": "每层陷阱寿命为12个敌方正式回合；包括第12回合在内均致死，闭合该回合原子后于回合末归零失效。",
+      "scope_and_exceptions": "额外、强迫、技能衍生子行动不单独扣寿命；不再有第10–12回合控制阶段。",
       "current_runtime_verification": "pending_individual_evidence"
     },
     {
@@ -399,14 +399,14 @@
       "id": "INV-FORTRESS-001",
       "domain": "hero_mutation_cross_rules",
       "statement": "【堡垒】禁止敌方棋从九宫外通过【移动】、【进攻】落位、【移置】或复活落位进入该九宫。",
-      "scope_and_exceptions": "宫内可内移/离开；飞行、无形、强击不自动绕过；完整【回溯】和战士专属弹回例外。 風流强制身份归位亦是明确例外；流舞不继承此封锁豁免。",
+      "scope_and_exceptions": "宫内可内移/离开；飞行、无形、来源进攻不自动绕过；完整【回溯】和战士专属弹回例外。 風流强制身份归位亦是明确例外；流舞不继承此封锁豁免。",
       "current_runtime_verification": "pending_individual_evidence"
     },
     {
       "id": "INV-MUROZOND-001",
       "domain": "time_and_prince",
       "statement": "姆诺兹多只可选择对手紧接上一正式回合完成的合格Ⅰ级俗手对应且仍存活的棋；若上一正式回合没有合格Ⅰ级俗手，不得跳过该回合搜索更老行动。先【移置】回原位并结算返回格，再决定是否【操控】。",
-      "scope_and_exceptions": "返回失败或返回格结算中被消灭则不再操控。只有来源未来明确允许跨回合搜索时才能例外。控制陷阱限制从相关控制方下一正式回合起生效。",
+      "scope_and_exceptions": "返回失败或返回格结算中被消灭则不再操控。只有来源未来明确允许跨回合搜索时才能例外。有效陷阱致死并停止当前链。",
       "current_runtime_verification": "pending_rule_migration_after_2026_10_06_sync"
     },
     {
@@ -522,7 +522,7 @@
     {
       "id": "REJ-005",
       "prohibited_global_claim": "将帅在任何来源下都不能成为目标。",
-      "counterexample": "潜行者【强击】可按来源以将帅为目标并触发背刺。",
+      "counterexample": "普通进攻与来源专属刺杀均不能以将帅为目标；明确消灭将帅的其他来源另行结算。",
       "current_runtime_verification": "pending_individual_evidence"
     },
     {
@@ -557,8 +557,8 @@
     },
     {
       "id": "REJ-011",
-      "prohibited_global_claim": "【强击】可以穿透【无形】并自动清除目标状态。",
-      "counterexample": "强击不天然穿透无形，也不天然驱散。",
+      "prohibited_global_claim": "所有来源进攻天然穿透无形并自动清除状态。",
+      "counterexample": "普通进攻不能指定无形；潜行者来源刺杀明确可指定无形，仍不自动驱散。",
       "current_runtime_verification": "pending_individual_evidence"
     },
     {
@@ -581,8 +581,8 @@
     },
     {
       "id": "REJ-015",
-      "prohibited_global_claim": "猎人陷阱十回合内始终致死。",
-      "counterexample": "当前 12 回合：前 9 致死、后 3 控制。",
+      "prohibited_global_claim": "猎人第10–12回合陷阱转为控制，或第12回合原子尚未闭合就失效。",
+      "counterexample": "12个敌方正式回合全部致死，最后回合原子结算后才在回合末到期。",
       "current_runtime_verification": "pending_individual_evidence"
     },
     {
@@ -649,7 +649,7 @@
     },
     {
       "id": "ADD-TWIST-001",
-      "statement": "返回格控制陷阱限制下一相关控制方正式回合，保留当前技能链继续与后续限制状态。",
+      "statement": "返回格按统一落位管线结算；有效敌方陷阱致死，返回棋死亡即停止操控链。",
       "current_runtime_verification": "pending_individual_evidence"
     },
     {
@@ -742,5 +742,6 @@
       "runtime_evidence": "review/invariants/LATEST.json",
       "implementation_record": "handoff/current/13_DARK_IDENTITY_RUNTIME_2026-10-06.md"
     }
-  ]
+  ],
+  "previous_rule_revision": "LEZI-FUNCTION-2026-10-06-r4"
 }

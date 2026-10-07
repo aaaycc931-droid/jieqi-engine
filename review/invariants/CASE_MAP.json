@@ -1,6 +1,6 @@
 {
   "authority": "test_case_mapping_non_normative",
-  "ruleRevision": "LEZI-FUNCTION-2026-10-06-r4",
+  "ruleRevision": "LEZI-FUNCTION-2026-10-07-r5",
   "cases": {
     "INV-BOARD-002": [
       {
@@ -471,7 +471,7 @@
       },
       {
         "file": "tests/confirmed-runtime.test.ts",
-        "namePrefix": "RULE-9 enemy-turn"
+        "namePrefix": "RULE-9 assassination rejection does not spend general armor"
       }
     ],
     "INV-ROGUE-001": [
@@ -486,12 +486,20 @@
       {
         "file": "tests/assassination.test.ts",
         "namePrefix": "ROGUE-08 "
+      },
+      {
+        "file": "tests/hero-transfer-r5.test.ts",
+        "namePrefix": "R5-H02-01"
       }
     ],
     "INV-ROGUE-002": [
       {
         "file": "tests/confirmed-runtime.test.ts",
         "namePrefix": "RULE-9A delayed"
+      },
+      {
+        "file": "tests/hero-transfer-r5.test.ts",
+        "namePrefix": "R5-H02-02"
       }
     ],
     "INV-STRIKE-001": [
@@ -506,6 +514,10 @@
       {
         "file": "tests/public-target-contracts.test.ts",
         "namePrefix": "TARGET-WIND-"
+      },
+      {
+        "file": "tests/hero-transfer-r5.test.ts",
+        "namePrefix": "R5-H02-02"
       }
     ],
     "INV-TRAP-001": [
@@ -533,7 +545,7 @@
       },
       {
         "file": "tests/confirmed-runtime.test.ts",
-        "namePrefix": "RULE-10 late control"
+        "namePrefix": "RULE-10 late trap"
       },
       {
         "file": "tests/time-line-contracts.test.ts",
@@ -838,6 +850,10 @@
       {
         "file": "tests/assassination.test.ts",
         "namePrefix": "ROGUE-03 "
+      },
+      {
+        "file": "tests/hero-transfer-r5.test.ts",
+        "namePrefix": "R5-H02-02"
       }
     ],
     "REJ-013": [
@@ -867,7 +883,7 @@
       },
       {
         "file": "tests/confirmed-runtime.test.ts",
-        "namePrefix": "RULE-10 late control"
+        "namePrefix": "RULE-10 late trap"
       }
     ],
     "REJ-016": [
@@ -1160,6 +1176,10 @@
       {
         "file": "tests/dark-identity.test.ts",
         "namePrefix": "R4-DARK-09 "
+      },
+      {
+        "file": "tests/hero-transfer-r5.test.ts",
+        "namePrefix": "R5-H12-01"
       }
     ],
     "ADD-ACTION-TIER-001": [
@@ -1245,7 +1265,7 @@
       },
       {
         "file": "tests/confirmed-runtime.test.ts",
-        "namePrefix": "HERO shadow cooldown excludes activation and all five following owner turns"
+        "namePrefix": "HERO shadow cooldown excludes activation and all seven following owner turns"
       }
     ],
     "ADD-BATCH-001": [
@@ -1276,6 +1296,10 @@
       {
         "file": "tests/hero-forms.test.ts",
         "namePrefix": "R4-FORM-"
+      },
+      {
+        "file": "tests/hero-transfer-r5.test.ts",
+        "namePrefix": "R5-H21-01"
       }
     ]
   },

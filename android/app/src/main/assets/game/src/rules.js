@@ -1,3 +1,4 @@
+import { strongBladeSide } from "./hero-progress.js";
 import { selectedHeroId, validateHeroForms } from "./hero-forms.js";
 import { isBoardPiece, isGround, isRiver } from "./spaces.js";
 import {
@@ -32,6 +33,7 @@ import {
 
 
 
+
 export function samePosition(first          , second          )          {
   return !isRiver(first) && !isRiver(second) && first.x === second.x && first.y === second.y;
 }
@@ -60,8 +62,9 @@ export function hasStealthEffect(
 function blocksPath(
   state                                                ,
   position          ,
+  layer                  ,
 )          {
-  const piece = pieceAt(state, position);
+  const piece = layer === "air" ? state.pieces.find(p => p.layer === "air" && samePosition(p, position)) : pieceAt(state, position);
   return Boolean(piece);
 }
 
@@ -79,7 +82,7 @@ function countPiecesBetween(
   let x = from.x + dx;
   let y = from.y + dy;
   while (x !== to.x || y !== to.y) {
-    if (blocksPath(state, { x, y })) count += 1;
+    if (blocksPath(state, { x, y }, (from               ).layer)) count += 1;
     x += dx;
     y += dy;
   }
@@ -101,6 +104,7 @@ function movementGeometryLegal(
   piece             ,
   to          ,
   forAttack = false,
+  stormAssault = false,
 )          {
   if (!isBoardPiece(piece) || !isInsideBoard(to) || samePosition(piece, to)) return false;
 
@@ -117,6 +121,11 @@ function movementGeometryLegal(
   }
 
   switch (type) {
+    case "storm_elemental": {
+      const distance = Math.max(absX, absY);
+      if (!(dx === 0 || dy === 0 || absX === absY) || distance < 1 || distance > (stormAssault ? 2 : 1)) return false;
+      return distance === 1 || !blocksPath(state, { x: piece.x + Math.sign(dx), y: piece.y + Math.sign(dy) });
+    }
     case "rook": {
       const between = countPiecesBetween(state, piece, to);
       if (between === 0) return true;
@@ -132,7 +141,7 @@ function movementGeometryLegal(
         absX === 2
           ? { x: piece.x + Math.sign(dx), y: piece.y }
           : { x: piece.x, y: piece.y + Math.sign(dy) };
-      return mutation === "iron_steed" || !blocksPath(state, leg);
+      return mutation === "iron_steed" || !blocksPath(state, leg, piece.layer);
     }
 
     case "cannon": {
@@ -174,7 +183,7 @@ function movementGeometryLegal(
       if (absX !== 2 || absY !== 2) return false;
       if (state.gameMode === "xiangqi" && isAcrossRiver(to, side)) return false;
       const eye = { x: piece.x + dx / 2, y: piece.y + dy / 2 };
-      return !blocksPath(state, eye);
+      return !blocksPath(state, eye, piece.layer);
     }
 
     default: {
@@ -193,7 +202,7 @@ function targetEligible(
   if (source.layer === "air") return !state.pieces.some(p => p.layer === "air" && samePosition(p, to));
   const target = source.layer === "air" ? undefined : pieceAt(state, to);
   if (!target) return true;
-  if (hasStealthEffect(state, target.id)) return false;
+  if (hasStealthEffect(state, target.id) && !options.allowStealthTarget) return false;
   // 自残只限暗子：暗子身份未知，始终可吃；己方已揭明子不可吃。
   if (target.faceDown) return true;
   if (target.type === "general") {
@@ -351,6 +360,8 @@ export function validatePublicMove(
   if (getController(source) !== actingSide) {
     return { ok: false, code: "NOT_CONTROLLED", message: "该棋子不由行动方控制" };
   }
+  if (state.pieces.some(p => p.layer === "air" && getController(p) === actingSide && state.effectsByPieceId?.[p.id]?.flight?.forcedLanding)) return { ok: false, code: "FORCED_LANDING_REQUIRED", message: "第四个控制方回合必须原地降落" };
+  if (selectedHeroId(state, actingSide) === "single_blade" && state.heroRuntime?.[actingSide]?.blade && source.x !== 4 && !strongBladeSide(state, actingSide, source.x) && Math.abs(move.to.x - 4) > Math.abs(source.x - 4)) return { ok: false, code: "WEAK_BLADE_OUTWARD", message: "弱侧普通行动不能离中轴更远" };
   const effects = state.effectsByPieceId?.[source.id];
   const target = source.layer === "air" ? undefined : pieceAt(state, move.to);
   if (!options.allowLinkedControl && effects?.controlTrap && effects.controlTrap.controller === actingSide &&
@@ -372,7 +383,7 @@ export function validatePublicMove(
       return { ok: false, code: "IRON_WALL", message: "堡垒阻止从九宫外进入敌方九宫" };
     }
   }
-  if (hasStealthEffect(state, source.id) && !options.allowStealthSource) {
+  if (hasStealthEffect(state, source.id) && source.layer !== "air" && !options.allowStealthSource) {
     return { ok: false, code: "STEALTH_ACTION_REQUIRED", message: "隐身棋必须通过刺杀行动移动" };
   }
   if (!targetEligible(state, source, move.to, options)) {
@@ -381,7 +392,7 @@ export function validatePublicMove(
   if (options.requireCapture && !pieceAt(state, move.to)) {
     return { ok: false, code: "STRONG_STRIKE_NEEDS_TARGET", message: "强击必须选择一个目标棋子" };
   }
-  if (!movementGeometryLegal(state, source, move.to)) {
+  if (!movementGeometryLegal(state, source, move.to, false, options.stormAssault)) {
     return { ok: false, code: "ILLEGAL_MOVEMENT", message: "棋子走法不合法" };
   }
 
@@ -427,12 +438,12 @@ export function getLegalAssassinationMoves(
     for (let x = 0; x <= 8; x += 1) {
       const to = { x, y };
       const target = pieceAt(state, to);
-      if (!continuing && !useStrongStrike && target) continue;
       if (!continuing && useStrongStrike) continue;
-      if (useStrongStrike && !target) continue;
+      if (useStrongStrike && (!target || !target.faceDown && target.type === "general")) continue;
       if (validatePublicMove(state, { from: source, to }, actingSide, {
         allowStealthSource: hasStealthEffect(state, source.id),
-        allowGeneralTarget: useStrongStrike,
+        allowStealthTarget: useStrongStrike,
+        allowGeneralTarget: false,
         requireCapture: useStrongStrike,
       }).ok) legal.push(to);
     }
@@ -441,6 +452,16 @@ export function getLegalAssassinationMoves(
 }
 
 export function hasAnyLegalMove(state           , side      )          {
+  // 已确认的占步技能与强制降落也是正式主行动机会；不能先按普通走子裁定困毙。
+  const hero = selectedHeroId(state, side), runtime = state.heroRuntime?.[side];
+  if (state.pieces.some(p => p.layer === "air" && getController(p) === side && state.effectsByPieceId?.[p.id]?.flight?.source === "sky_admiral")) return true;
+  if (hero === "deathwing" && !runtime?.used) return true;
+  if (hero === "devout_zealot" && (runtime?.invokeCount ?? 0) < 4 && !isGeneralInCheck(state, side)) return true;
+  if (hero === "warlock" && !runtime?.used && state.pieces.some(p => isBoardPiece(p) && getController(p) === side)) return true;
+  const selection = state.featureRules?.heroSelections?.[side];
+  if (selection?.heroId === "death_knight" && selection.form === "inner" && !runtime?.used) return true;
+  if (selection?.heroId === "jiang_he" && (selection.form === "front" || !runtime?.used) && state.pieces.some(p => getController(p) === side && (isRiver(p) || isGround(p) && [4,5].includes(p.y) && state.effectsByPieceId?.[p.id]?.riverQualified))) return true;
+
   const stateForSide            = { ...state, status: "playing", turn: side };
   return stateForSide.pieces.some(
     (piece) =>

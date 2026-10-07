@@ -1,8 +1,8 @@
 {
   "authority": "execution_evidence_non_normative",
-  "generatedAt": "2026-10-07T07:44:02.033Z",
-  "sourceCommitAtRun": "ba7a75ff4637c37f92142758d87199e43773ce81",
-  "sourceDigest": "a18b12151089b900943917ec13abf24db3675faa0b5bcf4bd19806a497c75761",
+  "generatedAt": "2026-10-07T10:47:06.292Z",
+  "sourceCommitAtRun": "333c94eae2c2cc44a2517023d78145a6d505b74c",
+  "sourceDigest": "64a2d8949b2739f8516a0b798ecf858b4b577dc346b83e1890bf8ef9b9ba2c7a",
   "sourceDigestPaths": [
     ".github/workflows/gameplay-runtime-review.yml",
     ".github/workflows/menu-reference-review.yml",
@@ -14,6 +14,7 @@
     "scripts/review/capture-active-match-runtime.mjs",
     "scripts/review/capture-full-match-runtime.mjs",
     "scripts/review/capture-gameplay-runtime.mjs",
+    "scripts/review/capture-hero-transfer-runtime.mjs",
     "scripts/review/capture-home-runtime.mjs",
     "scripts/review/capture-menu-review.mjs",
     "scripts/review/capture-mode-runtime.mjs",
@@ -28,7 +29,12 @@
     "src/game.ts",
     "src/ghosts.ts",
     "src/hero-actions.ts",
+    "src/hero-children.ts",
+    "src/hero-descent.ts",
     "src/hero-forms.ts",
+    "src/hero-progress.ts",
+    "src/hero-river.ts",
+    "src/hero-shuffle.ts",
     "src/heroes.ts",
     "src/index.ts",
     "src/modes.ts",
@@ -66,6 +72,7 @@
     "tests/ghost-objects.test.ts",
     "tests/helpers.ts",
     "tests/hero-forms.test.ts",
+    "tests/hero-transfer-r5.test.ts",
     "tests/movement.test.ts",
     "tests/mutation-rarity.test.ts",
     "tests/mutation.test.ts",
@@ -180,11 +187,11 @@
     "web/style.css",
     "web/ui-refresh.css"
   ],
-  "ruleRevision": "LEZI-FUNCTION-2026-10-06-r4",
-  "contractDigest": "55659ec2d9eede01318b196eb3efee3898c681c6fbece4095f94305bfccf0b19",
+  "ruleRevision": "LEZI-FUNCTION-2026-10-07-r5",
+  "contractDigest": "c6e4649ce5a028b5477090b87066dd5bb7a65ad3a5632d138a05bf972b89e1e3",
   "runtime": "v24.19.0",
   "testSummary": {
-    "passed": 434,
+    "passed": 468,
     "failed": 0,
     "executionFailed": false
   },
@@ -199,7 +206,7 @@
   "limits": [
     "相关用例重新运行通过不等于全称不变量已经证明。",
     "静态源码/布局检查、引擎运行时、浏览器和实体双机证据不能互相替代。",
-    "未更改规则 revision、稀有度、评分或用户验收状态。"
+    "报告不自行更改正式规则、稀有度、评分或用户验收状态。"
   ],
   "contracts": [
     {
@@ -465,7 +472,7 @@
         },
         {
           "file": "tests/confirmed-runtime.test.ts",
-          "name": "RULE-9A delayed strong strike may backstab a true general after an entire enemy turn",
+          "name": "RULE-9A delayed assassination rejects generals after a complete enemy turn",
           "passed": true
         }
       ],
@@ -583,7 +590,7 @@
       "relatedCases": [
         {
           "file": "tests/time-line-contracts.test.ts",
-          "name": "TIME-TRAP-01 returning turncoat completes linked control and keeps next formal-turn restriction",
+          "name": "TIME-TRAP-01 late return trap is lethal and stops linked control",
           "passed": true
         },
         {
@@ -718,7 +725,7 @@
         },
         {
           "file": "tests/confirmed-runtime.test.ts",
-          "name": "HERO zealot fourth invocation ends turn; execution then prefers home half and can randomly hit intangible",
+          "name": "HERO zealot fourth invocation grants omen then next owner begin automatically destroys up to four",
           "passed": true
         }
       ],
@@ -953,7 +960,7 @@
       "relatedCases": [
         {
           "file": "tests/confirmed-runtime.test.ts",
-          "name": "HERO zealot fourth invocation ends turn; execution then prefers home half and can randomly hit intangible",
+          "name": "HERO zealot fourth invocation grants omen then next owner begin automatically destroys up to four",
           "passed": true
         }
       ],
@@ -1138,7 +1145,7 @@
     {
       "id": "INV-WARRIOR-002",
       "group": "invariants",
-      "statement": "普通防御只介入直接指定该棋且不带【强击】的【进攻】；触发后防御耗尽、目标留位、进攻者【移置】回进攻前位置。",
+      "statement": "普通防御介入普通直接进攻；触发后防御耗尽、目标留位、进攻者弹回。",
       "status": "partial_evidence_passed",
       "relatedCases": [
         {
@@ -1218,7 +1225,7 @@
     {
       "id": "INV-IRONARMOR-001",
       "group": "invariants",
-      "statement": "铁甲只免疫一次背刺【终结】，不是普遍【强击】或死亡免疫。",
+      "statement": "铁甲只免疫一次背刺【终结】，不是普遍来源进攻或死亡免疫。",
       "status": "partial_evidence_passed",
       "relatedCases": [
         {
@@ -1233,7 +1240,7 @@
         },
         {
           "file": "tests/confirmed-runtime.test.ts",
-          "name": "RULE-9 enemy-turn strong strike armor interception stays at origin and gives no extra response",
+          "name": "RULE-9 assassination rejection does not spend general armor",
           "passed": true
         }
       ],
@@ -1243,7 +1250,7 @@
     {
       "id": "INV-ROGUE-001",
       "group": "invariants",
-      "statement": "每个刺杀来源每局一次且彼此独立；发动回合只能让己方明置非将帅棋合法【移动】到空位，不能【进攻】或【强击】。",
+      "statement": "每个刺杀来源每局一次且彼此独立；发动让当前己方明置非将帅棋合法普通移动或进攻。",
       "status": "partial_evidence_passed",
       "relatedCases": [
         {
@@ -1253,12 +1260,17 @@
         },
         {
           "file": "tests/assassination.test.ts",
-          "name": "ROGUE-05 首次只能空移，不能立即强击；资源失败不消耗",
+          "name": "ROGUE-05 发动可普通进攻但不能立即使用刺杀机会；资源失败不消耗",
           "passed": true
         },
         {
           "file": "tests/assassination.test.ts",
           "name": "ROGUE-08 英雄与暗影之舞来源独立消耗，并共享新刺杀规则",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "name": "R5-H02-01 activation attack is ordinary and barrier interception refunds the source",
           "passed": true
         }
       ],
@@ -1268,12 +1280,17 @@
     {
       "id": "INV-ROGUE-002",
       "group": "invariants",
-      "statement": "对手获得完整一个正式回合后，到潜行者下一正式回合，该棋可按普通进攻几何进行一次【进攻】+【强击】。",
+      "statement": "发动后保留两个未来己方正式回合的来源刺杀窗口；发动回合不消耗这两个未来窗口。",
       "status": "partial_evidence_passed",
       "relatedCases": [
         {
           "file": "tests/confirmed-runtime.test.ts",
-          "name": "RULE-9A delayed strong strike may backstab a true general after an entire enemy turn",
+          "name": "RULE-9A delayed assassination rejects generals after a complete enemy turn",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "name": "R5-H02-02 activation cannot target intangible but a later source attack can bypass it and barrier",
           "passed": true
         }
       ],
@@ -1283,12 +1300,12 @@
     {
       "id": "INV-STRIKE-001",
       "group": "invariants",
-      "statement": "【强击】是【进攻】标签，使用来源棋合法进攻几何；默认可选择将帅。",
+      "statement": "刺杀是来源专属进攻规则，不能建立通用强击标签或默认可选将帅。",
       "status": "partial_evidence_passed",
       "relatedCases": [
         {
           "file": "tests/confirmed-runtime.test.ts",
-          "name": "RULE-9A delayed strong strike may backstab a true general after an entire enemy turn",
+          "name": "RULE-9A delayed assassination rejects generals after a complete enemy turn",
           "passed": true
         },
         {
@@ -1304,6 +1321,11 @@
         {
           "file": "tests/public-target-contracts.test.ts",
           "name": "TARGET-WIND-02 delayed strong strike targets a normal-looking carrier, excludes public Wind generals with or without shadow",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "name": "R5-H02-02 activation cannot target intangible but a later source attack can bypass it and barrier",
           "passed": true
         }
       ],
@@ -1328,7 +1350,7 @@
         },
         {
           "file": "tests/time-line-contracts.test.ts",
-          "name": "TIME-TRAP-01 returning turncoat completes linked control and keeps next formal-turn restriction",
+          "name": "TIME-TRAP-01 late return trap is lethal and stops linked control",
           "passed": true
         },
         {
@@ -1343,7 +1365,7 @@
     {
       "id": "INV-TRAP-002",
       "group": "invariants",
-      "statement": "每层陷阱寿命 12 个敌方正式回合末：1–9 为致死，10–12 为控制，归零失效。",
+      "statement": "每层陷阱寿命为12个敌方正式回合；包括第12回合在内均致死，闭合该回合原子后于回合末归零失效。",
       "status": "partial_evidence_passed",
       "relatedCases": [
         {
@@ -1368,12 +1390,12 @@
         },
         {
           "file": "tests/confirmed-runtime.test.ts",
-          "name": "RULE-10 late control trap blocks next controller formal turn but not other pieces",
+          "name": "RULE-10 late trap is lethal instead of granting control lock",
           "passed": true
         },
         {
           "file": "tests/time-line-contracts.test.ts",
-          "name": "TIME-TRAP-01 returning turncoat completes linked control and keeps next formal-turn restriction",
+          "name": "TIME-TRAP-01 late return trap is lethal and stops linked control",
           "passed": true
         }
       ],
@@ -1523,7 +1545,7 @@
         },
         {
           "file": "tests/time-line-contracts.test.ts",
-          "name": "TIME-TRAP-01 returning turncoat completes linked control and keeps next formal-turn restriction",
+          "name": "TIME-TRAP-01 late return trap is lethal and stops linked control",
           "passed": true
         },
         {
@@ -1998,7 +2020,7 @@
       "relatedCases": [
         {
           "file": "tests/confirmed-runtime.test.ts",
-          "name": "RULE-9A delayed strong strike may backstab a true general after an entire enemy turn",
+          "name": "RULE-9A delayed assassination rejects generals after a complete enemy turn",
           "passed": true
         }
       ],
@@ -2038,7 +2060,7 @@
         },
         {
           "file": "tests/confirmed-runtime.test.ts",
-          "name": "HERO zealot fourth invocation ends turn; execution then prefers home half and can randomly hit intangible",
+          "name": "HERO zealot fourth invocation grants omen then next owner begin automatically destroys up to four",
           "passed": true
         }
       ],
@@ -2098,12 +2120,17 @@
     {
       "id": "REJ-011",
       "group": "anti_invariants",
-      "statement": "【强击】可以穿透【无形】并自动清除目标状态。",
+      "statement": "所有来源进攻天然穿透无形并自动清除状态。",
       "status": "partial_evidence_passed",
       "relatedCases": [
         {
           "file": "tests/assassination.test.ts",
-          "name": "ROGUE-03 强击不能直接选取无形目标",
+          "name": "ROGUE-03 刺杀机会可以直接指定无形目标",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "name": "R5-H02-02 activation cannot target intangible but a later source attack can bypass it and barrier",
           "passed": true
         }
       ],
@@ -2168,7 +2195,7 @@
     {
       "id": "REJ-015",
       "group": "anti_invariants",
-      "statement": "猎人陷阱十回合内始终致死。",
+      "statement": "猎人第10–12回合陷阱转为控制，或第12回合原子尚未闭合就失效。",
       "status": "partial_evidence_passed",
       "relatedCases": [
         {
@@ -2193,7 +2220,7 @@
         },
         {
           "file": "tests/confirmed-runtime.test.ts",
-          "name": "RULE-10 late control trap blocks next controller formal turn but not other pieces",
+          "name": "RULE-10 late trap is lethal instead of granting control lock",
           "passed": true
         }
       ],
@@ -2542,12 +2569,12 @@
     {
       "id": "ADD-TWIST-001",
       "group": "supplements",
-      "statement": "返回格控制陷阱限制下一相关控制方正式回合，保留当前技能链继续与后续限制状态。",
+      "statement": "返回格按统一落位管线结算；有效敌方陷阱致死，返回棋死亡即停止操控链。",
       "status": "partial_evidence_passed",
       "relatedCases": [
         {
           "file": "tests/time-line-contracts.test.ts",
-          "name": "TIME-TRAP-01 returning turncoat completes linked control and keeps next formal-turn restriction",
+          "name": "TIME-TRAP-01 late return trap is lethal and stops linked control",
           "passed": true
         },
         {
@@ -2707,7 +2734,7 @@
         },
         {
           "file": "tests/confirmed-runtime.test.ts",
-          "name": "HERO shadow cooldown excludes activation and all five following owner turns",
+          "name": "HERO shadow cooldown excludes activation and all seven following owner turns",
           "passed": true
         }
       ],
@@ -3072,7 +3099,7 @@
       "relatedCases": [
         {
           "file": "tests/hero-forms.test.ts",
-          "name": "R4-FORM-01 twelve existing front packages retain complete catalog and exact naming",
+          "name": "R4-FORM-01 nineteen transferred front packages retain complete catalog and exact naming",
           "passed": true
         },
         {
@@ -3158,6 +3185,11 @@
         {
           "file": "tests/hero-forms.test.ts",
           "name": "R4-FORM-18 rematch creates a new game with fresh selections without unlocking the previous game",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "name": "R5-H21-01 fixed variants lock before RPS and first intro publishes only selected package",
           "passed": true
         }
       ],
@@ -3269,13 +3301,15 @@
           "file": "tests/dark-identity.test.ts",
           "name": "R4-DARK-09 毁灭的非将帅候选判定使用公共兵种，未消灭暗子不要求读取真实身份",
           "passed": true
+        },
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "name": "R5-H12-01 flame uses public positional rank for covered center and targets, never their real rank",
+          "passed": true
         }
       ],
       "verificationLimit": "现有基础走法、战车/铁马和毁灭候选共用入口已验证；术士未移交运行时，因此燃烧烈焰中心/目标等级集成仍待验证，不宣称英雄技能完成。",
       "fullyAccepted": false
     }
-  ],
-  "publishedImplementationCommit": "830c180de6f60593c42fee427959e77cb7ffb189",
-  "publishedImplementationTree": "669cb1165f38881d350de557d5aa759881120842",
-  "publicationNote": "Actual sourceCommitAtRun is the local execution checkpoint. Published commit has the identical full tree; author/commit metadata differ. The publication SHA was not substituted for the actual test HEAD."
+  ]
 }

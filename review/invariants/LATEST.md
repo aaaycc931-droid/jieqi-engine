@@ -1,8 +1,8 @@
 # 规则合同逐项运行证据
 
-规则：LEZI-FUNCTION-2026-10-06-r4；运行时：v24.19.0；时间：2026-10-07T07:44:02.033Z。
+规则：LEZI-FUNCTION-2026-10-07-r5；运行时：v24.19.0；时间：2026-10-07T10:47:06.292Z。
 
-测试 434 通过 / 0 失败。109 项合同：106 项有部分通过证据，0 项缺专属测试，3 项属于规范/概念检查；完整验收仍为 0 项。
+测试 468 通过 / 0 失败。109 项合同：106 项有部分通过证据，0 项缺专属测试，3 项属于规范/概念检查；完整验收仍为 0 项。
 
 本表关联具体情景用例，不把相关用例通过写成整条规则的完整证明。精确用例名称、源码摘要与限制见 LATEST.json。
 
@@ -52,9 +52,9 @@
 | INV-WARRIOR-003 | partial_evidence_passed | tests/remote-room.test.ts, tests/exception-contracts.test.ts, tests/flow-contracts.test.ts | 堡垒原位弹回、普通封锁及流·舞返回陷阱已有专属运行用例；当前普通弹回保留原格，尚未找到可达的返回格被占链。混合壁垒/陷阱夹具只隔离落点派发，不声称自然英雄组合。 |
 | INV-WARRIOR-004 | partial_evidence_passed | tests/warrior.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
 | INV-IRONARMOR-001 | partial_evidence_passed | tests/warrior.test.ts, tests/confirmed-runtime.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
-| INV-ROGUE-001 | partial_evidence_passed | tests/assassination.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
-| INV-ROGUE-002 | partial_evidence_passed | tests/confirmed-runtime.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
-| INV-STRIKE-001 | partial_evidence_passed | tests/confirmed-runtime.test.ts, tests/assassination.test.ts, tests/public-target-contracts.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
+| INV-ROGUE-001 | partial_evidence_passed | tests/assassination.test.ts, tests/hero-transfer-r5.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
+| INV-ROGUE-002 | partial_evidence_passed | tests/confirmed-runtime.test.ts, tests/hero-transfer-r5.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
+| INV-STRIKE-001 | partial_evidence_passed | tests/confirmed-runtime.test.ts, tests/assassination.test.ts, tests/public-target-contracts.test.ts, tests/hero-transfer-r5.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
 | INV-TRAP-001 | partial_evidence_passed | tests/remote-room.test.ts, tests/time-line-contracts.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
 | INV-TRAP-002 | partial_evidence_passed | tests/confirmed-runtime.test.ts, tests/time-line-contracts.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
 | INV-IRONSTEED-001 | partial_evidence_passed | tests/mutation.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
@@ -87,7 +87,7 @@
 | REJ-008 | partial_evidence_passed | tests/cross-rule-contracts.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
 | REJ-009 | partial_evidence_passed | tests/assassination.test.ts, tests/mutation.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
 | REJ-010 | partial_evidence_passed | tests/confirmed-runtime.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
-| REJ-011 | partial_evidence_passed | tests/assassination.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
+| REJ-011 | partial_evidence_passed | tests/assassination.test.ts, tests/hero-transfer-r5.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
 | REJ-012 | partial_evidence_passed | tests/cross-rule-contracts.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
 | REJ-013 | partial_evidence_passed | tests/confirmed-runtime.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
 | REJ-014 | partial_evidence_passed | tests/warrior.test.ts, tests/exception-contracts.test.ts | 三回合衰减已覆盖；三名额上限专属用例仍缺。 |
@@ -111,11 +111,9 @@
 | ADD-BATCH-001 | partial_evidence_passed | tests/destruction-batch.test.ts | 公共批次入口与毁灭已锁定成功结果的闭合、死亡揭示/记录、触发屏障、风归位、亡魂单次派生、双将同死、批后移入/复活及公共协议序列化有专属情景证据。未移交英雄的同时范围来源、召回/复活/生成/资源钩子、河道与里亡魂仍未集成；不得将普通顺序攻击统一改同批。无浏览器或实体设备新增验收。 |
 | ADD-GHOST-OBJECT-001 | partial_evidence_passed | tests/ghost-objects.test.ts | 两类公共对象独立、共格、来源/归属/层数/寿命、精确清除和资源查询、普通死亡刷新/感染/计时、批次屏障及公共协议/实际回溯有17项具体情景证据。无种类旧快照仅兼容普通亡魂；未移交里英雄的生成、叠层、寿命时点、收益/爆发不自动定义，基础资源接口只返回点名类且指定公开归属的对象副本。无浏览器或实机新增验收，完整合同验收仍为0。 |
 | ADD-CURRENT-CONTROL-001 | partial_evidence_passed | tests/current-control.test.ts | 现有调用完成源码权限映射，15项情景验证当前位置/揭示/移置控制、普通及强击目标和错误、陷阱前后时点、亡魂死亡快照、感染/持续、资源/双方房间视图、真实读取来源约束和风/宿命许可例外。真实网页投弹/影菜单函数在轻量DOM执行，不能当作浏览器、换手机或实体蓝牙验收。无限龙公开单棋资格共用，但正式窗口和全军每回合限制仍由权威入口验证；来源标记是可信代码调用约束，不是客户端授权令牌。未移交来源及全部可达交叉组合未穷尽，完整验收仍0。 |
-| ADD-HERO-FORM-001 | partial_evidence_passed | tests/hero-forms.test.ts | 18项专属情景覆盖十二表完整包、表/里命名、未知/未移交里包明确拒绝、旧快照表兼容、公开/权威独立整局锁、别名/技能包冲突、主被动分派、重复请求、实际回溯及历史篡改、实际蓝牙房间编码/重连/新局再战。只有表包已经注册；未移交里包未实现，不假造技能/数值。锁为可信权威状态约束，不是客户端密码凭证。无新形态选择UI、浏览器或实机新增验收，未来完整里包及全称交叉仍需移交后验证。 |
+| ADD-HERO-FORM-001 | partial_evidence_passed | tests/hero-forms.test.ts, tests/hero-transfer-r5.test.ts | 18项专属情景覆盖十二表完整包、表/里命名、未知/未移交里包明确拒绝、旧快照表兼容、公开/权威独立整局锁、别名/技能包冲突、主被动分派、重复请求、实际回溯及历史篡改、实际蓝牙房间编码/重连/新局再战。只有表包已经注册；未移交里包未实现，不假造技能/数值。锁为可信权威状态约束，不是客户端密码凭证。无新形态选择UI、浏览器或实机新增验收，未来完整里包及全称交叉仍需移交后验证。 |
 | ADD-DARK-IDENTITY-001 | partial_evidence_passed | tests/dark-identity.test.ts | 基础棋位、当前位置变化及普通走法已验证；未来特殊来源身份策略尚未接入。 |
 | ADD-DARK-IDENTITY-002 | partial_evidence_passed | tests/dark-identity.test.ts | 公共入口不接受秘密状态；走法与毁灭候选覆盖具体情景。未覆盖所有英雄目标/资源/UI来源权限，影真实阵营与宿命真实兵保持明确许可读取。 |
 | ADD-DARK-IDENTITY-003 | partial_evidence_passed | tests/dark-identity.test.ts | 普通落子揭示与明棋身份切换已验证；未扩展或验收其他特殊揭示来源。 |
 | ADD-DARK-IDENTITY-004 | partial_evidence_passed | tests/dark-identity.test.ts | 公共入口在无法确定基础棋位时明确报错、不秘密兜底；来源专属非标准位置身份处理仍待相应来源定义。 |
-| ADD-DARK-IDENTITY-005 | partial_evidence_passed | tests/dark-identity.test.ts | 现有基础走法、战车/铁马和毁灭候选共用入口已验证；术士未移交运行时，因此燃烧烈焰中心/目标等级集成仍待验证，不宣称英雄技能完成。 |
-
-实际执行HEAD：ba7a75ff4637c37f92142758d87199e43773ce81；GitHub发布源码：830c180de6f60593c42fee427959e77cb7ffb189；二者完整树669cb1165f38881d350de557d5aa759881120842一致。作者/提交元数据不同，不能把发布SHA冒记为实际执行HEAD；合同另按实际读取字节摘要记录。
+| ADD-DARK-IDENTITY-005 | partial_evidence_passed | tests/dark-identity.test.ts, tests/hero-transfer-r5.test.ts | 现有基础走法、战车/铁马和毁灭候选共用入口已验证；术士未移交运行时，因此燃烧烈焰中心/目标等级集成仍待验证，不宣称英雄技能完成。 |

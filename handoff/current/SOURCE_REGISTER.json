@@ -1,6 +1,6 @@
 {
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-07-acceptance-gaps",
-  "rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-07-hero-transfer",
+  "rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
   "code_checkpoint": "830c180de6f60593c42fee427959e77cb7ffb189",
   "sources": [
     {
@@ -307,6 +307,62 @@
       "implementation_commit_unchanged": "830c180de6f60593c42fee427959e77cb7ffb189",
       "applied_scope": "既有r4源/证据摘要和109合同映射核验、未验收范围分类及正式英雄稿接收流程；只读盘点，无运行时代码/新测试/规则更新/APK",
       "embedded_original": false
+    },
+    {
+      "id": "TRANSFER:2026-10-07:00_READ_FIRST.md",
+      "kind": "formal_hero_design_transfer",
+      "path": "rules/transferred/2026-10-07-r7-clean/00_READ_FIRST.md",
+      "sha256": "d74fb0ffcb67ca4a1fb0342b1d4c1eb6758f71ece4cbaa01d1f58af4534607b8",
+      "bytes": 1709,
+      "applied_scope": "Current source; gameplay only 01-03, scoring never changes gameplay."
+    },
+    {
+      "id": "TRANSFER:2026-10-07:01_CURRENT_RULES.md",
+      "kind": "formal_hero_design_transfer",
+      "path": "rules/transferred/2026-10-07-r7-clean/01_CURRENT_RULES.md",
+      "sha256": "98f2bdc1aa86527c11b05bf5f5fdcfa963eddfb784cb49fa0f9350aaaf8f192b",
+      "bytes": 29517,
+      "applied_scope": "Current source; gameplay only 01-03, scoring never changes gameplay."
+    },
+    {
+      "id": "TRANSFER:2026-10-07:02_CURRENT_HEROES.md",
+      "kind": "formal_hero_design_transfer",
+      "path": "rules/transferred/2026-10-07-r7-clean/02_CURRENT_HEROES.md",
+      "sha256": "da104122e8279e3bb9646059ad14783b2c64ef5816c98b2c97204ebb0457454b",
+      "bytes": 32591,
+      "applied_scope": "Current source; gameplay only 01-03, scoring never changes gameplay."
+    },
+    {
+      "id": "TRANSFER:2026-10-07:03_CURRENT_MUTATIONS.md",
+      "kind": "formal_hero_design_transfer",
+      "path": "rules/transferred/2026-10-07-r7-clean/03_CURRENT_MUTATIONS.md",
+      "sha256": "e68b3123042cf4ce2bb7411ee3cea4c1289b6c8875f564f4b4c39db6542affb1",
+      "bytes": 17178,
+      "applied_scope": "Current source; gameplay only 01-03, scoring never changes gameplay."
+    },
+    {
+      "id": "TRANSFER:2026-10-07:07_DESIGN_SCORING.md",
+      "kind": "non_normative_scoring_audit",
+      "path": "rules/transferred/2026-10-07-r7-clean/07_DESIGN_SCORING.md",
+      "sha256": "d0d7f6a2f3e6b2774ed03eb38c5199373d0fb887ad804b5db28fcd5ad2db293b",
+      "bytes": 4854,
+      "applied_scope": "Current source; gameplay only 01-03, scoring never changes gameplay."
+    },
+    {
+      "id": "TRANSFER:2026-10-07:08_SCORE_LEDGER.md",
+      "kind": "non_normative_scoring_audit",
+      "path": "rules/transferred/2026-10-07-r7-clean/08_SCORE_LEDGER.md",
+      "sha256": "1381656cb5dd9fbc1108faeb93e4bcd594f85a871d1f51530ca66bc1c0d04481",
+      "bytes": 35456,
+      "applied_scope": "Current source; gameplay only 01-03, scoring never changes gameplay."
+    },
+    {
+      "id": "TRANSFER:2026-10-07:WORK_MODE_IMPLEMENTATION_HANDOFF_2026-10-07.md",
+      "kind": "formal_hero_design_transfer",
+      "path": "rules/transferred/2026-10-07-r7-clean/WORK_MODE_IMPLEMENTATION_HANDOFF_2026-10-07.md",
+      "sha256": "211a0aab6ba6cb303a0c9c440534dd8ec815f60bac368174333f6dfd84d26e68",
+      "bytes": 10900,
+      "applied_scope": "Current source; gameplay only 01-03, scoring never changes gameplay."
     }
   ],
   "coverage": {
@@ -350,11 +406,6 @@
       "status": "not_located_this_round",
       "fallback": "当前固定源码/测试和已恢复差分；不声称原稿完整恢复",
       "action": "涉及基础区域/跨河变更前定位原稿核对"
-    },
-    {
-      "name": "未完整移交的其他对话英雄完整确认稿",
-      "status": "partially_transferred_global_rules_only",
-      "action": "2026-10-06仅已确认的全局规则增量进入01；英雄专属完整方案仍需用户明确移交后才写入02/实现。"
     }
   ],
   "excluded_payloads": [
@@ -364,13 +415,13 @@
     "旧STATE运行时分支/测试数/下一步",
     "过时3英雄进度"
   ],
-  "completeness_claim": "当前已恢复并核对源的主体规则按域覆盖；2026-10-06已将本轮明确确认的全局规则同步进01。仍不保证所有历史对话的英雄专属细节逐条恢复，明确缺口不得填空。 2026-10-06后续明确确认的基础【暗置身份】词条已同步；只关闭术士暗置等级未决项，不提升其他英雄完整稿或特殊位置未定义处理。",
+  "completeness_claim": "本包H01–H21已经正式移交；运行时仍需逐项实现验证。H07镜像与H21龙鳞落位保留未决；不声称其他未移交对话全部恢复。",
   "previous_code_checkpoint": "af5e411d49099c2f5b936e6dde004b6f5e50059d",
   "runtime_evidence_index": "review/invariants/LATEST.json",
   "gameplay_execution_evidence_index": "review/gameplay/runtime-browser-review-2026-10-05-modes.json",
   "full_match_execution_evidence_index": "review/gameplay/full-match-browser-2026-10-05-active-regression-summary.json",
   "active_skill_execution_evidence_index": "review/gameplay/active-match-browser-2026-10-05-summary.json",
-  "previous_rule_revision": "LEZI-FUNCTION-2026-10-06-r3",
+  "previous_rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
   "mode_foundation_evidence_index": "review/gameplay/mode-browser-review-2026-10-05.json",
   "stage_close_index": "10_STAGE_CLOSE.md",
   "rule_sync_index": "11_RULE_SYNC_2026-10-06.md",
@@ -385,5 +436,6 @@
   "current_control_audit_index": "19_CURRENT_CONTROL_AUDIT_2026-10-07.md",
   "hero_form_runtime_index": "20_HERO_FORM_RUNTIME_2026-10-07.md",
   "acceptance_gap_close_index": "21_ACCEPTANCE_GAP_CLOSE_2026-10-07.md",
-  "acceptance_gap_inventory_index": "qa/ACCEPTANCE_GAPS.json"
+  "acceptance_gap_inventory_index": "qa/ACCEPTANCE_GAPS.json",
+  "hero_transfer_index": "22_HERO_TRANSFER_2026-10-07.md"
 }

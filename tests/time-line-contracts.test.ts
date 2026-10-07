@@ -14,19 +14,9 @@ function turncoatHistory(remaining: number) {
   return applyAuthoritativeMove(s, k, move({ x: 0, y: 6 }, { x: 0, y: 5 }, "turncoat"));
 }
 
-test("TIME-TRAP-01 returning turncoat completes linked control and keeps next formal-turn restriction", () => {
-  const h = turncoatHistory(3);
-  const before = structuredClone(h);
-  const r = applyHeroAbility(h.state, h.secret, skill("timeline_twist", h.state, { x: 0, y: 7 }), 100);
-  assert.equal(r.state.pieces.find(p => p.id === "turncoat")?.y, 7);
-  assert.deepEqual(r.state.effectsByPieceId?.turncoat?.controlTrap, { controller: "black", blockedFormalTurn: 2 });
-  assert.equal(r.state.formalTurns?.black, 1);
-  assert.equal(r.secret.traps?.length, 0);
-  const red = applyAuthoritativeMove(r.state, r.secret, move({ x: 2, y: 6 }, { x: 2, y: 5 }, "red-reply", r.state.revision));
-  assert.equal(validatePublicMove(red.state, { from: { x: 0, y: 7 }, to: { x: 0, y: 8 } }).code, "CONTROL_TRAP");
-  const black = applyAuthoritativeMove(red.state, red.secret, move({ x: 2, y: 3 }, { x: 2, y: 4 }, "black-other", red.state.revision));
-  assert.equal(black.state.effectsByPieceId?.turncoat?.controlTrap, undefined);
-  assert.deepEqual(h, before);
+test("TIME-TRAP-01 late return trap is lethal and stops linked control", () => {
+ const h=turncoatHistory(3),before=structuredClone(h),r=applyHeroAbility(h.state,h.secret,skill("timeline_twist",h.state,{x:0,y:7}),100);
+ assert.equal(r.state.pieces.some(p=>p.id==="turncoat"),false);assert.equal(r.state.formalTurns!.black,1);assert.equal(r.secret.traps?.length,0);assert.equal(r.secret.processedActions["skill:timeline_twist:1:controlled"],undefined);assert.deepEqual(h,before);
 });
 
 test("TIME-TIER-01 timeline rewrite is tier III in history and public action record", () => {
@@ -60,7 +50,7 @@ test("TIME-TRAP-02 lethal return trap closes the skill without executing its sel
 });
 
 test("TIME-TRAP-03 invalid controlled destination rolls back resource, trap and history changes", () => {
-  const h = turncoatHistory(3), before = structuredClone(h);
+  const h = turncoatHistory(0), before = structuredClone(h);
   assert.throws(() => applyHeroAbility(h.state, h.secret, skill("timeline_twist", h.state, { x: 1, y: 7 }), 100), e => e.code === "INVALID_CONTROLLED_MOVE");
   assert.deepEqual(h, before);
 });

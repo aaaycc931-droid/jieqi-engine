@@ -1,10 +1,16 @@
-import { selectedHeroId, validateHeroForms } from "./hero-forms.js";
+import { applyShuffleAction } from "./hero-shuffle.js";
+import { applyHeroChild } from "./hero-children.js";
+import { applyRiverAbility } from "./hero-river.js";
+import { settleHeroDeathResources } from "./hero-progress.js";
+import { applyDescentAction } from "./hero-descent.js";
+import { selectedHeroId, selectedHeroSelection, validateHeroForms } from "./hero-forms.js";
+import { getGhostObjects, clearGhostObjects, reconcileGhostInfections } from "./ghosts.js";
 import { isBoardPiece, isGround } from "./spaces.js";
 import { RuleError } from "./errors.js";
 import { applyAuthoritativeMove } from "./game.js";
 import { getController, getCurrentPieceType, isInPalace, otherSide } from "./slots.js";
 import { getLegalMoves, hasStealthEffect, isCheckmate, isGeneralInCheck, isStalemate, samePosition } from "./rules.js";
-import { closeDirectDeaths, copy, destroyPiece, destroyPieceBatch, effectiveIdentity, beginFormalTurn, advanceToFormalTurn, finishFormalTurn, formalTurn, generateGhosts, initializeFeatureSecret, markRevealed, placementAllowed, queueLanding, relocatePiece, rememberAction, settleLandings } from "./settlement.js";
+import { closeDirectDeaths, copy, destroyPiece, destroyPieceBatch, effectiveIdentity, beginFormalTurn, advanceToFormalTurn, finishFormalTurn, formalTurn, generateGhosts, initializeFeatureSecret, markRevealed, placementAllowed, queueLanding, relocatePiece, landFlyingPiece, rememberAction, settleLandings } from "./settlement.js";
 import { actionFields, closeMainActionAtom, isOrdinaryFormalAction, previousFormalAction, recordAction } from "./turns.js";
 
 
@@ -26,17 +32,22 @@ export function formalTurnDurationMs(state           , side      )         {
   validateHeroForms(state);
   if (state.featureRules?.mutation === "end_time" && formalTurn(state, side) === 0) return 75_000;
   const hasThief = selectedHeroId(state, side) === "murozond_minion", otherThief = selectedHeroId(state, otherSide(side)) === "murozond_minion";
-  return hasThief === otherThief ? 60_000 : hasThief ? 75_000 : 45_000;
+  if (hasThief && otherThief) throw new RuleError("DESIGN_REQUIRED_THIEF_MIRROR", "双方窃时镜像叠加尚未正式冻结");
+  return !hasThief && !otherThief ? 60_000 : hasThief ? 75_000 : 45_000;
 }
 export function startFormalClock(state           , now        , secret              , randomInt            )       {
-  if (state.status !== "playing" || state.forcedDefense || state.flowDance) return;
+  if (state.status !== "playing" || state.forcedDefense || state.flowDance || state.pendingShuffle) return;
   beginFormalTurn(state, secret, randomInt);
+  const number = formalTurn(state, state.turn) + 1;
+  if (state.formalClock?.side === state.turn && state.formalClock.number === number && state.turnDeadlineAt !== undefined) return;
+  state.formalClock = { side: state.turn, number };
   state.turnStartedAt = now;
   state.turnDeadlineAt = now + formalTurnDurationMs(state, state.turn);
 }
 function endSkillTurn(state           , secret             , side      , randomInt           )       {
   settleLandings(state, secret);
   if (state.lastMove) closeMainActionAtom(state, state.lastMove.actionId);
+  settleHeroDeathResources(state);
   if (closeDirectDeaths(state, secret, side)) return;
   generateGhosts(state);
   // 占步技能应将失败的结果在整个锁定集合结算完成后裁决。
@@ -53,13 +64,18 @@ function endSkillTurn(state           , secret             , side      , randomI
 export function applyHeroAbility(state           , secret             , command                    , now = Date.now(), randomInt            = max => Math.floor(Math.random() * max))             {
   validateHeroForms(state, secret);
   if (secret.processedActions[command.actionId] !== undefined) return { state: copy(state), secret: copy(secret), duplicate: true };
+  if (state.pendingShuffle) return applyShuffleAction(state, secret, command, randomInt);
+  if (state.pendingHeroChild) return applyHeroChild(state, secret, command, now, randomInt);
+  if (state.pendingDescent) return applyDescentAction(state, secret, command, now);
   requireRule(command.expectedRevision === state.revision, "STALE_REVISION", "客户端棋局版本已经过期");
   requireRule(state.status === "playing" && !state.forcedDefense && !state.flowDance, "INVALID_PHASE", "只能在自己的正式回合开始发动技能");
   const s = copy(state), k = copy(secret), side = s.turn, hero = selectedHeroId(s, side);
   initializeFeatureSecret(s, k);
   beginFormalTurn(s, k, randomInt);
   requireRule(s.turnLifecycle?.phase === "before_main", "INVALID_PRE_MAIN_WINDOW", "只能在正式回合主行动前发动技能");
-  const isMain = ["invoke", "unspeakable", "destruction", "timeline_twist"].includes(command.ability);
+  const forcedFlyer = s.pieces.find(p => p.layer === "air" && getController(p) === side && s.effectsByPieceId?.[p.id]?.flight?.forcedLanding);
+  const isMain = ["invoke", "destruction", "timeline_twist", "burning_flame", "inner_ghost_burst", "river_enter", "river_move", "river_exit", "inner_wave", "landing"].includes(command.ability);
+  requireRule(!forcedFlyer || !isMain || command.ability === "landing" && command.pieceId === forcedFlyer.id, "FORCED_LANDING_REQUIRED", "第四个控制方回合的主行动必须原地降落");
   const classification                       = { tier: command.ability === "timeline_twist" || command.ability === "rewind" ? 3 : 2, keywords: isMain ? ["占步", "耗费"] : ["耗费"], source: "hero", opportunity: isMain ? "main" : "before_main", countsAsFormalTurn: isMain };
   const beforeAction = copy(s);
   if (command.ability !== "shadow") {
@@ -78,25 +94,72 @@ export function applyHeroAbility(state           , secret             , command 
       requireRule(!isGeneralInCheck(s, side), "IN_CHECK", "被将军时不能祈求");
       requireRule((runtime.invokeCount ?? 0) < 4, "INVOKE_COMPLETE", "迦拉克隆已经降临");
       runtime.invokeCount = (runtime.invokeCount ?? 0) + 1;
+      if (runtime.invokeCount === 4) runtime.omen = true;
       endsTurn = true;
       break;
-    case "unspeakable": {
-      requireRule(hero === "devout_zealot" && runtime.invokeCount === 4, "NOT_DESCENDED", "迦拉克隆尚未降临");
-      const targets = s.pieces.filter(p => isBoardPiece(p) && !p.faceDown && p.color !== side && p.type !== "general");
-      const home = targets.filter(p => side === "red" ? p.y >= 5 : p.y <= 4);
-      const pool = home.length ? home : targets;
-      requireRule(pool.length, "NO_TARGET", "没有合法处决目标");
-      destroyPiece(s, k, pool[randomInt(pool.length)].id, side, "unspeakable");
-      endsTurn = true;
-      break;
-    }
+    case "unspeakable": throw new RuleError("RETIRED_SKILL", "讳言已替换为固定形态的自动降临，不能重复主动发动");
     case "destruction": {
       requireRule(hero === "deathwing", "WRONG_HERO", "英雄没有毁灭技能"); once(); runtime.used = true;
+      const checkedAtActivation = isGeneralInCheck(s, side);
       const locked = s.pieces.filter(p => isBoardPiece(p) && getCurrentPieceType(p) !== "general");
       const committed = locked.filter(() => randomInt(2) === 0).map(p => ({ pieceId: p.id, by: side, cause: "destruction" }));
       destroyPieceBatch(s, k, `${command.actionId}:destruction`, "deathwing:destruction", committed);
+      if (checkedAtActivation) {
+        const penalty = s.pieces.filter(p => isBoardPiece(p) && !p.faceDown && getController(p) === side && p.type !== "general").map(p => ({ pieceId: p.id, by: side, cause: "destruction_penalty" }));
+        destroyPieceBatch(s, k, `${command.actionId}:penalty`, "deathwing:in_check_penalty", penalty);
+      }
       endsTurn = true;
       break;
+    }
+    case "river_enter": case "river_move": case "river_exit": case "inner_wave": {
+      applyRiverAbility(s, k, side, command); endsTurn = true; break;
+    }
+    case "landing": {
+      const p = s.pieces.find(p => p.id === command.pieceId && p.layer === "air" && getController(p) === side);
+      requireRule(p && s.effectsByPieceId?.[p.id]?.flight?.source === "sky_admiral", "INVALID_FLYER", "请选择己方征兵飞行棋");
+      landFlyingPiece(s, k, p.id); endsTurn = true; break;
+    }
+    case "insight": {
+      requireRule(hero === "night", "WRONG_HERO", "英雄没有洞察");
+      const number = formalTurn(s, side) + 1, n = runtime.insightCount ?? 0;
+      requireRule(runtime.insightTurn !== number, "INSIGHT_TURN_LIMIT", "每个己方正式回合最多洞察一次");
+      const cost = command.secretInsight ? 7 + 6 * n : 4 + 4 * n;
+      requireRule((runtime.pupil ?? 0) >= cost, "INSUFFICIENT_PUPIL", "瞳力不足");
+      const p = s.pieces.find(p => p.id === command.pieceId && p.faceDown);
+      requireRule(p, "INVALID_INSIGHT_TARGET", "洞察目标必须仍为暗子");
+      const identity = effectiveIdentity(p, k, "hero:night:insight");
+      runtime.pupil = (runtime.pupil ?? 0) - cost; runtime.insightCount = n + 1; runtime.insightTurn = number;
+      k.insights ??= {}; (k.insights[side] ??= []).push({ pieceId: p.id, identity, revision: state.revision + 1, valid: true });
+      if (!command.secretInsight) { s.effectsByPieceId ??= {}; (s.effectsByPieceId[p.id] ??= {}).insightMark = true; }
+      // Secret mode publishes operation and cost, never its target.
+      const record = s.actionRecords?.at(-1); if (record && !command.secretInsight) record.pieceId = p.id;
+      break;
+    }
+    case "burning_flame": {
+      requireRule(hero === "warlock", "WRONG_HERO", "英雄没有燃烧烈焰"); once();
+      const center = s.pieces.find(p => p.id === command.pieceId && isBoardPiece(p) && getController(p) === side);
+      requireRule(center, "INVALID_FLAME_CENTER", "必须选择当前控制的合法棋盘中心棋");
+      const ranks                         = { pawn: 1, advisor: 2, elephant: 2, horse: 3, cannon: 3, rook: 4 };
+      const rank = ranks[getCurrentPieceType(center)];
+      const region = s.pieces.filter(p => isBoardPiece(p) && Math.abs(p.x - center.x) <= 1 && Math.abs(p.y - center.y) <= 1);
+      requireRule(!region.some(p => p.id !== center.id && (rank === undefined || getCurrentPieceType(p) === "general")), "DESIGN_REQUIRED_FLAME_GENERAL", "燃烧烈焰将帅中心/目标的普通层级交叉未定义，不能猜测");
+      const targets = region.filter(p => p.id === center.id || ranks[getCurrentPieceType(p)] <= rank + 1).map(p => ({ pieceId: p.id, by: side, cause: "burning_flame" }));
+      runtime.used = true;
+      destroyPieceBatch(s, k, `${command.actionId}:flame`, "warlock:burning_flame", targets); endsTurn = true; break;
+    }
+    case "inner_ghost_burst": {
+      const selection = selectedHeroSelection(s, side);
+      requireRule(selection?.heroId === "death_knight" && selection.form === "inner", "WRONG_HERO", "必须选择里死亡骑士完整包"); once();
+      reconcileGhostInfections(s);
+      const committed = copy(getGhostObjects(s, { kind: "inner_ghost", owner: side }));
+      const targets = s.pieces.filter(p => isGround(p) && getController(p) !== side).filter(p => {
+        const contribution = committed.reduce((sum, g) => sum + (Math.abs(g.position.x - p.x) + Math.abs(g.position.y - p.y) <= 1 ? g.layers ?? 0 : 0), 0);
+        const infection = s.effectsByPieceId?.[p.id]?.infection;
+        return contribution > 0 && contribution + (infection?.owner === side ? infection.stacks : 0) >= 3;
+      }).map(p => ({ pieceId: p.id, by: side, cause: "inner_ghost_burst" }));
+      runtime.used = true;
+      clearGhostObjects(s, { kind: "inner_ghost", owner: side });
+      destroyPieceBatch(s, k, `${command.actionId}:inner_ghost`, "death_knight:inner_burst", targets); endsTurn = true; break;
     }
     case "timeline_twist": {
       requireRule(hero === "murozond", "WRONG_HERO", "英雄没有扭曲时间线"); ordinaryTime(); once();
@@ -131,7 +194,15 @@ export function applyHeroAbility(state           , secret             , command 
       const processed = copy(k.processedActions), used = { ...k.rewindUsed, [side]: true          }, history = k.history;
       for (const key of Object.keys(s)) delete (s                                      )[key];
       Object.assign(s, copy(previous.state));
+      const knowledge = copy(k.insights);
       const restoredSecret = copy(previous.secret);
+      if (knowledge) {
+        restoredSecret.insights ??= {};
+        for (const owner of ["red", "black"]         ) {
+          const past = restoredSecret.insights[owner] ??= [];
+          for (const learned of knowledge[owner] ?? []) if (!past.some(row => JSON.stringify(row) === JSON.stringify(learned))) past.push({ ...learned, valid: false });
+        }
+      }
       for (const key of Object.keys(k)) delete (k                                      )[key];
       Object.assign(k, restoredSecret, { heroFormLock: formLock, processedActions: processed, rewindUsed: used, history, replay: { pieceId: previous.pieceId, deadlineAt: now + Math.min(10_000, Math.max(0, previous.remainingMs)) } });
       s.revision = state.revision;
@@ -191,7 +262,7 @@ export function applyHeroAbility(state           , secret             , command 
         : getShadowRevealedTargets(s, side, wind.hostId ?? wind.decoyId);
       const host = command.randomCovered ? pool[randomInt(pool.length)] : pool.find(p => p.id === command.pieceId);
       requireRule(host, "INVALID_SHADOW_TARGET", "请选择己方合法明棋或随机己方真实阵营暗子");
-      wind.uses += 1; wind.activatedOnTurn = formalTurn(s, side); wind.readyOnTurn = formalTurn(s, side) + 6;
+      wind.uses += 1; wind.activatedOnTurn = formalTurn(s, side); wind.readyOnTurn = formalTurn(s, side) + 8;
       wind.hostId = host.id === wind.decoyId ? undefined : host.id;
       secretOnly = true;
       break;
@@ -202,13 +273,16 @@ export function applyHeroAbility(state           , secret             , command 
     s.revision += 1;
     if (endsTurn) {
       s.lastMove = { actionId: command.actionId, pieceId: command.pieceId ?? `hero:${side}`, actingSide: side, from: command.to ?? { x: 0, y: 0 }, to: command.to ?? { x: 0, y: 0 }, landed: false, ...actionFields(classification) };
-      endSkillTurn(s, k, side, randomInt);
+      if (command.ability === "inner_wave" && s.pieces.some(p => p.id === command.pieceId && getController(p) === side) && !closeDirectDeaths(s, k, side) && !isGeneralInCheck(s, side)) {
+        closeMainActionAtom(s, command.actionId);
+        s.pendingHeroChild = { kind: "inner_wave", side, pieceId: command.pieceId , parent: copy(s.lastMove) };
+      } else endSkillTurn(s, k, side, randomInt);
     } else closeDirectDeaths(s, k, side);
   }
   k.processedActions[command.actionId] = s.revision;
   return { state: secretOnly ? copy(state) : s, secret: k, duplicate: false };
 }
 
-export function ownerHeroSecrets(secret             , side      )                                                    {
-  return secret.wind?.[side] ? { wind: copy(secret.wind[side]) } : {};
+export function ownerHeroSecrets(secret             , side      ) {
+  return { ...(secret.wind?.[side] ? { wind: copy(secret.wind[side]) } : {}), ...(secret.training?.[side] ? { training: copy(secret.training[side]) } : {}), ...(secret.insights?.[side] ? { insights: copy(secret.insights[side]) } : {}) };
 }

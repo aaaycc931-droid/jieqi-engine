@@ -189,7 +189,8 @@ test("UI-HERO-08 本机双猎人交接会清除上一方可见草稿且共享准
   assert.match(app, /commitLocalTrapDraft\(completedSide\);\s*trapSetupSide = trapSetupQueue\.shift\(\);\s*localTrapDraft = \[\];/s);
   assert.match(app, /heroPreparationDeadlineAt = Date\.now\(\) \+ HERO_PREPARATION_DURATION_MS/);
   assert.doesNotMatch(app, /completeLocalHeroPreparation[\s\S]*?heroPreparationDeadlineAt = Date\.now\(\) \+ HERO_PREPARATION_DURATION_MS/);
-  assert.match(app, /for \(const side of trapSetupQueue\)[\s\S]*?randomOwnHalfPosition\(side\)/s);
+  assert.match(app, /localHeroes\[trapSetupSide\] !== "hunter"\) return/);
+  assert.match(app, /while \(localTrapDraft.length < 2\) localTrapDraft.push\(randomOwnHalfPosition\(trapSetupSide\)\)/);
 });
 
 test("UI-MATCH-MENU-01 三点菜单从英雄选择起存在并按阶段切换现行条目", () => {
@@ -239,9 +240,9 @@ test("UI-MATCH-MENU-04 认输和开局退出使用二次确认且联机退出立
 test("UI-MATCH-MENU-05 主动技能控件与三点菜单保持分离", () => {
   const actionMenu = html.match(/id="battle-action-menu"[\s\S]*?<\/nav>/)?.[0] ?? "";
   const skillPanel = html.match(/id="battle-skill-panel"[\s\S]*?<\/div>/)?.[0] ?? "";
-  assert.doesNotMatch(actionMenu, /发动刺杀|发动强击|刺杀来源/);
+  assert.doesNotMatch(actionMenu, /发动刺杀|发动刺杀机会|刺杀来源/);
   assert.match(skillPanel, /发动刺杀/);
-  assert.match(skillPanel, /发动强击/);
+  assert.match(skillPanel, /发动刺杀机会/);
   assert.match(app, /function activateRuntimeSkill/);
   assert.match(app, /assassination-button"\)\.click\(\)/);
 });
@@ -374,7 +375,7 @@ test("UI-EVENT-01 非终局事件按队列短暂显示且不锁棋盘或修改�
   assert.match(app, /eventCueQueue\.push/);
   assert.match(app, /playNextEventCue\(\)/);
   assert.match(app, /}, 900\)/);
-  for (const cue of ["碾碎", "防护壁垒破裂", "猎人陷阱触发", "将军", "强击发动", "刺杀发动"]) {
+  for (const cue of ["碾碎", "防护壁垒破裂", "猎人陷阱触发", "将军", "刺杀机会发动", "刺杀发动"]) {
     assert.match(app, new RegExp(cue));
   }
   assert.match(css, /\.battle-event-cue\s*\{[^}]*pointer-events:\s*none/s);

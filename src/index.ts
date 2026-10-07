@@ -19,3 +19,13 @@ export * from "./heroes.ts";
 export * from "./spaces.ts";
 export * from "./ghosts.ts";
 export * from "./hero-forms.ts";
+
+export * from "./hero-descent.ts";
+
+export * from "./hero-progress.ts";
+
+export * from "./hero-river.ts";
+
+export * from "./hero-children.ts";
+
+export * from "./hero-shuffle.ts";

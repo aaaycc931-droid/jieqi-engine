@@ -112,7 +112,7 @@ try {
     await page.locator('#bluetooth-back-button').click();
     await page.locator('#local-game-button').click();
     await page.locator('#hero-view').waitFor({ state: 'visible' });
-    assert.equal(await page.locator('#hero-grid button').count(), 12);
+    assert.equal(await page.locator('#hero-grid button').count(), 19);
     assert(!(await page.locator('#game-mode-preview-board').isVisible()), 'Preview leaked into hero selection');
     await page.evaluate(() => localStorage.setItem('lezi-base-game-mode', 'corrupt'));
     await page.reload({ waitUntil: 'networkidle' });

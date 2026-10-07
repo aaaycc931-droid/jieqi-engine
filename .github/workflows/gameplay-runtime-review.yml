@@ -12,7 +12,10 @@ on:
       - scripts/review/capture-full-match-runtime.mjs
       - scripts/review/capture-active-match-runtime.mjs
       - scripts/review/capture-mode-runtime.mjs
+      - scripts/review/capture-hero-transfer-runtime.mjs
       - .github/workflows/gameplay-runtime-review.yml
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 jobs:
   gameplay-browser:
@@ -26,8 +29,8 @@ jobs:
         run: node scripts/build-web.ts
       - name: Install browser
         run: npm install --no-save --package-lock=false playwright@1.58.2 && npx playwright install --with-deps chromium
-      - name: Exercise prepared-state hero, destiny and secret handoff interactions
-        run: node scripts/review/capture-gameplay-runtime.mjs
+      - name: Exercise r5 transferred-hero prepared DOM controls
+        run: node scripts/review/capture-hero-transfer-runtime.mjs
       - name: Check mode settings and real base opening previews
         run: node scripts/review/capture-mode-runtime.mjs
       - name: Keep mode foundation browser evidence
@@ -42,8 +45,8 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: gameplay-runtime-browser-review
-          path: review-results/gameplay-runtime/
+          name: hero-transfer-runtime-browser-review
+          path: review/invariants/HERO_TRANSFER_BROWSER_2026-10-07.json
           if-no-files-found: error
           retention-days: 7
   full-match-browser:

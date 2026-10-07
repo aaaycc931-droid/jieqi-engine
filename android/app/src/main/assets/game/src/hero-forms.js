@@ -12,13 +12,15 @@ export function heroSkillLabel(heroName        , skillName        , form        
   return form === "inner" ? `里·${heroName}｜【里·${skillName}】` : `${heroName}｜【${skillName}】`;
 }
 
-/** 当前已移交的十二个表技能包；不合成、继承或注册未移交的里技能。 */
-export function getHeroPackage(heroId        , form           = "front") {
+/** 本次移交的19英雄及两个独立里包；迦拉克隆五子包在英雄确认时固定。 */
+export function getHeroPackage(heroId        , form           = "front", variant                ) {
   if (!HERO_IDS.includes(heroId)) return fail("未知英雄");
   if (form !== "front" && form !== "inner") return fail("未知英雄形态");
-  if (form === "inner") throw new RuleError("HERO_FORM_UNAVAILABLE", "该英雄的里形态完整技能包尚未正式移交");
-  const selection                = { heroId, form, packageId: `${heroId}:front:v1` };
-  return Object.freeze({ ...selection, name: HERO_CATALOG[heroId].name,
+  if (form === "inner" && !["jiang_he", "death_knight"].includes(heroId)) throw new RuleError("HERO_FORM_UNAVAILABLE", "该英雄没有正式移交的里形态完整包");
+  if (variant !== undefined && (heroId !== "devout_zealot" || form !== "front" || !["nightmare", "invincible", "fel", "storm", "unspeakable"].includes(variant))) return fail("未知或不适用的迦拉克隆完整形态");
+  const selectedVariant = heroId === "devout_zealot" ? variant ?? "unspeakable" : undefined;
+  const selection                = { heroId, form, packageId: `${heroId}:${form}:v1${selectedVariant ? ":" + selectedVariant : ""}`, ...(selectedVariant ? { variant: selectedVariant } : {}) };
+  return Object.freeze({ ...selection, name: `${form === "inner" ? "里·" : ""}${HERO_CATALOG[heroId].name}`,
     skillLabels: Object.freeze(HERO_CATALOG[heroId].skills.map(s => heroSkillLabel(HERO_CATALOG[heroId].name, s.name, form))) });
 }
 
@@ -27,14 +29,14 @@ function requireSideMap(value         )       {
   if (!value || typeof value !== "object" || Array.isArray(value) || Object.keys(value).some(key => !sides.includes(key        ))) fail("英雄选择必须按红黑双方分别指定");
 }
 
-export function createHeroSelections(heroes                                , forms                                  )                 {
-  requireSideMap(heroes); requireSideMap(forms);
+export function createHeroSelections(heroes                                , forms                                  , variants                                       )                 {
+  requireSideMap(heroes); requireSideMap(forms); requireSideMap(variants);
   const selections                 = {};
   for (const side of sides) {
     const hero = heroes?.[side], form = forms?.[side];
-    if (hero === undefined) { if (form !== undefined) fail("没有英雄时不能指定形态"); continue; }
-    const pkg = getHeroPackage(hero, form === undefined ? "front" : form);
-    selections[side] = { heroId: pkg.heroId, form: pkg.form, packageId: pkg.packageId };
+    if (hero === undefined) { if (form !== undefined || variants?.[side] !== undefined) fail("没有英雄时不能指定形态"); continue; }
+    const pkg = getHeroPackage(hero, form === undefined ? "front" : form, variants?.[side]);
+    selections[side] = { heroId: pkg.heroId, form: pkg.form, packageId: pkg.packageId, ...(pkg.variant ? { variant: pkg.variant } : {}) };
   }
   return selections;
 }
@@ -45,11 +47,11 @@ function readSelections(value                )                 {
   for (const side of sides) {
     const choice = value[side];
     if (choice === undefined) continue;
-    if (!choice || typeof choice !== "object" || Array.isArray(choice) || Object.keys(choice).sort().join(",") !== "form,heroId,packageId") fail("每方必须选择一个完整英雄形态包");
+    if (!choice || typeof choice !== "object" || Array.isArray(choice) || !["form,heroId,packageId", "form,heroId,packageId,variant"].includes(Object.keys(choice).sort().join(","))) fail("每方必须选择一个完整英雄形态包");
     if (choice.form !== "front" && choice.form !== "inner") fail("完整技能包必须指定形态");
-    const pkg = getHeroPackage(choice.heroId, choice.form);
+    const pkg = getHeroPackage(choice.heroId, choice.form, choice.variant);
     if (choice.packageId !== pkg.packageId) fail("英雄形态与技能包标识不一致");
-    result[side] = { heroId: pkg.heroId, form: pkg.form, packageId: pkg.packageId };
+    result[side] = { heroId: pkg.heroId, form: pkg.form, packageId: pkg.packageId, ...(pkg.variant ? { variant: pkg.variant } : {}) };
   }
   return result;
 }
@@ -59,7 +61,7 @@ export function validateHeroForms(state                                         
   const rules = state.featureRules;
   const legacy = createHeroSelections(rules?.heroes);
   const selections = rules?.heroSelections === undefined ? legacy : readSelections(rules.heroSelections);
-  if (rules?.heroes !== undefined && JSON.stringify(legacy) !== JSON.stringify(selections)) fail("英雄ID与完整形态选择冲突");
+  if (rules?.heroes !== undefined && sides.some(side => legacy[side]?.heroId !== selections[side]?.heroId)) fail("英雄ID与完整形态选择冲突");
   for (const lock of [state.heroFormLock, secret?.heroFormLock]) {
     if (lock !== undefined && JSON.stringify(readSelections(lock)) !== JSON.stringify(selections)) {
       throw new RuleError("HERO_FORM_LOCKED", "一局只能使用开局所选的完整英雄形态");
@@ -80,9 +82,10 @@ export function initializeHeroForms(state           , secret              )     
   if (secret) secret.heroFormLock = clone(selections);
 }
 
-/** 现有表技能分派唯一入口，显式形态必须先匹配已注册的完整包。 */
+/** 表技能分派入口，里包仅由独立选择入口分派，显式形态必须先匹配已注册的完整包。 */
 export function selectedHeroId(state                                                  , side      )                     {
   const selection = validateHeroForms(state)[side];
-  if (selection && selection.form !== "front") throw new RuleError("HERO_FORM_DISPATCH_PENDING", "里形态必须使用其独立完整技能包，不能分派表技能");
-  return selection?.heroId;
+  return selection?.form === "front" ? selection.heroId : undefined;
 }
+
+export function selectedHeroSelection(state                                                  , side      )                            { return validateHeroForms(state)[side]; }

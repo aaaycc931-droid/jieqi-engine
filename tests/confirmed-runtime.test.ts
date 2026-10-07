@@ -7,40 +7,26 @@ import { covered, gameState, move, revealed, secretState } from "./helpers.ts";
 const ability = (ability: HeroAbilityCommand["ability"], state: GameState, rest: Partial<HeroAbilityCommand> = {}) => ({ kind: "hero_ability" as const, ability, actionId: `skill:${ability}:${state.revision}`, expectedRevision: state.revision, ...rest });
 const stateFor = (hero: HeroId, pieces: GameState["pieces"] = []) => initializeFeatureGameState(gameState(pieces), { red: hero, black: "hunter" });
 
-test("RULE-9A delayed strong strike may backstab a true general after an entire enemy turn", () => {
-  let s = stateFor("rogue", [revealed("striker", "red", "rook", 0, 7), revealed("enemy-pawn", "black", "pawn", 1, 2)]);
-  let k = secretState();
-  let r = applyAuthoritativeAssassination(s, k, { ...move({ x: 0, y: 7 }, { x: 5, y: 7 }, "activate"), kind: "assassination", source: "hero", useStrongStrike: false });
-  r = applyAuthoritativeMove(r.state, r.secret, move({ x: 1, y: 2 }, { x: 1, y: 3 }, "enemy-full", 1));
-  r = applyAuthoritativeAssassination(r.state, r.secret, { ...move({ x: 5, y: 7 }, { x: 5, y: 0 }, "strike", 2), kind: "assassination", useStrongStrike: true });
-  assert.equal(r.state.status, "finished"); assert.equal(r.state.reason, "ambush"); assert.equal(r.state.winner, "red");
+test("RULE-9A delayed assassination rejects generals after a complete enemy turn", () => {
+  const s = stateFor("rogue", [revealed("striker", "red", "rook", 5, 7)]); s.assassination!.red.activePieceId = "striker";
+  s.effectsByPieceId = { striker: { stealth: { owner: "red", source: "hero", remainingOwnerTurns: 2, strongStrikeAvailable: true } } };
+  const before = structuredClone(s);
+  assert.throws(() => applyAuthoritativeAssassination(s, secretState(), { ...move({x:5,y:7},{x:5,y:0},"strike"), kind:"assassination",useStrongStrike:true }), e => e.code === "ILLEGAL_TARGET"); assert.deepEqual(s,before);
 });
-
-test("RULE-9 enemy-turn strong strike armor interception stays at origin and gives no extra response", () => {
-  const s = initializeFeatureGameState(gameState([revealed("striker", "red", "rook", 5, 7)]), { red: "rogue", black: "warrior" });
-  s.assassination!.red.activePieceId = "striker";
-  s.effectsByPieceId = { striker: { stealth: { owner: "red", source: "hero", remainingOwnerTurns: 1, strongStrikeAvailable: true } } };
-  const r = applyAuthoritativeAssassination(s, secretState(), { ...move({ x: 5, y: 7 }, { x: 5, y: 0 }, "armor"), kind: "assassination", useStrongStrike: true });
-  assert.equal(r.state.pieces.find(p => p.id === "striker")?.y, 7);
-  assert.equal(r.state.warrior!.black.ironArmorAvailable, false);
-  assert.equal(r.state.forcedDefense, undefined); assert.equal(r.state.turn, "black");
+test("RULE-9 assassination rejection does not spend general armor", () => {
+  const s=initializeFeatureGameState(gameState([revealed("striker","red","rook",5,7)]),{red:"rogue",black:"warrior"});s.assassination!.red.activePieceId="striker";s.effectsByPieceId={striker:{stealth:{owner:"red",source:"hero",remainingOwnerTurns:2,strongStrikeAvailable:true}}};
+  assert.throws(()=>applyAuthoritativeAssassination(s,secretState(),{...move({x:5,y:7},{x:5,y:0},"armor"),kind:"assassination",useStrongStrike:true}),e=>e.code==="ILLEGAL_TARGET");assert.equal(s.warrior!.black.ironArmorAvailable,true);
 });
-
-test("RULE-10 late control trap blocks next controller formal turn but not other pieces", () => {
-  const s = stateFor("hunter", [revealed("rook", "red", "rook", 0, 7), revealed("pawn", "red", "pawn", 2, 6)]), k = secretState();
-  k.traps = [{ id: "late", owner: "black", position: { x: 0, y: 6 }, opponentTurnsRemaining: 3 }];
-  const r = applyAuthoritativeMove(s, k, move({ x: 0, y: 7 }, { x: 0, y: 6 }, "late"));
-  assert.ok(r.state.pieces.some(p => p.id === "rook"));
-  r.state.turn = "red";
-  assert.equal(validatePublicMove(r.state, { from: { x: 0, y: 6 }, to: { x: 0, y: 5 } }).code, "CONTROL_TRAP");
-  assert.equal(validatePublicMove(r.state, { from: { x: 2, y: 6 }, to: { x: 2, y: 5 } }).ok, true);
+test("RULE-10 late trap is lethal instead of granting control lock",()=>{
+  const s=stateFor("hunter",[revealed("rook","red","rook",0,7)]),k=secretState();k.traps=[{id:"late",owner:"black",position:{x:0,y:6},opponentTurnsRemaining:1}];
+  const r=applyAuthoritativeMove(s,k,move({x:0,y:7},{x:0,y:6},"late"));assert.equal(r.state.pieces.some(p=>p.id==="rook"),false);assert.equal(r.state.captured[0].cause,"trap_ambush");assert.equal(r.secret.traps?.length,0);
 });
 
 for (const remaining of [12, 4, 3, 1]) test(`RULE-10 hunter trap lifetime boundary ${remaining}`, () => {
   const s = stateFor("hunter", [revealed("p", "red", "pawn", 0, 6)]), k = secretState();
   k.traps = [{ id: "t", owner: "black", position: { x: 0, y: 5 }, opponentTurnsRemaining: remaining }];
   const r = applyAuthoritativeMove(s, k, move({ x: 0, y: 6 }, { x: 0, y: 5 }, "land"));
-  assert.equal(r.state.pieces.some(p => p.id === "p"), remaining <= 3);
+  assert.equal(r.state.pieces.some(p => p.id === "p"), false);
 });
 
 test("RULE-10 trap cannot probe friendly covered identity before control transfer", () => {
@@ -98,14 +84,11 @@ test("HERO deathwing random draws are independent, reveal dead covered identity 
   assert.equal(r.state.turn, "black"); assert.equal(r.state.heroRuntime.red.used, true);
 });
 
-test("HERO zealot fourth invocation ends turn; execution then prefers home half and can randomly hit intangible", () => {
-  const s = stateFor("devout_zealot", [revealed("home", "black", "pawn", 0, 6), revealed("away", "black", "rook", 0, 2)]), k = secretState();
-  s.heroRuntime.red.invokeCount = 3;
-  const invoked = applyHeroAbility(s, k, ability("invoke", s), 100);
-  assert.equal(invoked.state.turn, "black"); assert.equal(invoked.state.heroRuntime.red.invokeCount, 4);
-  invoked.state.turn = "red"; invoked.state.effectsByPieceId = { home: { intangible: true } };
-  const r = applyHeroAbility(invoked.state, invoked.secret, ability("unspeakable", invoked.state), 101, () => 0);
-  assert.equal(r.state.pieces.some(p => p.id === "home"), false); assert.ok(r.state.pieces.some(p => p.id === "away"));
+test("HERO zealot fourth invocation grants omen then next owner begin automatically destroys up to four",()=>{
+ const s=stateFor("devout_zealot",[revealed("home","black","pawn",0,6),revealed("away","black","rook",0,2)]),k=secretState();s.heroRuntime!.red!.invokeCount=3;
+ const invoked=applyHeroAbility(s,k,ability("invoke",s),100);assert.equal(invoked.state.turn,"black");assert.equal(invoked.state.heroRuntime!.red!.omen,true);
+ invoked.state.turn="red";beginFormalTurn(invoked.state,invoked.secret,()=>0);assert.equal(invoked.state.heroRuntime!.red!.descended,true);assert.equal(invoked.state.pieces.some(p=>["home","away"].includes(p.id)),false);assert.equal(invoked.state.turnLifecycle!.phase,"before_main");
+ assert.throws(()=>applyHeroAbility(invoked.state,invoked.secret,ability("unspeakable",invoked.state)),e=>e.code==="RETIRED_SKILL");
 });
 
 test("HERO prince permits empty movement in domain but denies attacking from or into it", () => {
@@ -116,10 +99,10 @@ test("HERO prince permits empty movement in domain but denies attacking from or 
   assert.equal(validatePublicMove(s, { from: { x: 0, y: 4 }, to: { x: 0, y: 6 } }).ok, true);
 });
 
-test("HERO thief redistributes seconds and same hero mirror conserves sixty seconds", () => {
+test("HERO thief redistributes seconds and same hero mirror explicitly requires design", () => {
   const s = stateFor("murozond_minion"); assert.equal(formalTurnDurationMs(s, "red"), 75_000); assert.equal(formalTurnDurationMs(s, "black"), 45_000);
   const mirror = initializeFeatureGameState(gameState(), { red: "murozond_minion", black: "murozond_minion" });
-  assert.equal(formalTurnDurationMs(mirror, "red"), 60_000); assert.equal(formalTurnDurationMs(mirror, "black"), 60_000);
+  assert.throws(()=>formalTurnDurationMs(mirror,"red"),e=>e.code==="DESIGN_REQUIRED_THIEF_MIRROR"); assert.throws(()=>formalTurnDurationMs(mirror,"black"),e=>e.code==="DESIGN_REQUIRED_THIEF_MIRROR");
 });
 
 test("HERO full rewind restores piece death/reveal and both skill resources, keeps used metadata and revision monotonic", () => {
@@ -146,14 +129,14 @@ test("HERO shadow activation leaves every public field unchanged; enemy view can
   assert.equal(playerRoomView(after, "alice").ownHeroSecrets.wind.hostId, "host");
 });
 
-test("HERO shadow cooldown excludes activation and all five following owner turns", () => {
+test("HERO shadow cooldown excludes activation and all seven following owner turns", () => {
   const s = stateFor("wind", [revealed("host", "red", "rook", 0, 7), revealed("second", "red", "horse", 1, 7)]), k = secretState();
   const first = applyHeroAbility(s, k, ability("shadow", s, { pieceId: "host" }));
-  for (let turn = 1; turn <= 5; turn++) {
+  for (let turn = 1; turn <= 7; turn++) {
     first.state.formalTurns.red = turn;
     assert.throws(() => applyHeroAbility(first.state, first.secret, ability("shadow", first.state, { pieceId: "second", actionId: `again:${turn}` })), /冷却/);
   }
-  first.state.formalTurns.red = 6;
+  first.state.formalTurns.red = 8;
   const second = applyHeroAbility(first.state, first.secret, ability("shadow", first.state, { pieceId: "second", actionId: "ready" }));
   assert.equal(second.secret.wind.red.uses, 2);
 });

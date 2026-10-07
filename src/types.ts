@@ -4,10 +4,11 @@ export type GameModeId = "jieqi" | "half_chaos" | "xiangqi";
 
 export type HeroId = "hunter" | "rogue" | "warrior" | "qin_long" | "murozond"
   | "nozdormu" | "murozond_minion" | "devout_zealot" | "prince" | "deathwing"
-  | "death_knight" | "wind";
+  | "death_knight" | "wind" | "shuffler" | "warlock" | "single_blade" | "night" | "sky_admiral" | "berserker" | "jiang_he";
 
 export type HeroForm = "front" | "inner";
-export interface HeroSelection { heroId: HeroId; form: HeroForm; packageId: string }
+export type GalakrondForm = "nightmare" | "invincible" | "fel" | "storm" | "unspeakable";
+export interface HeroSelection { heroId: HeroId; form: HeroForm; packageId: string; variant?: GalakrondForm }
 export type HeroSelections = Partial<Record<Side, HeroSelection>>;
 
 export type MutationId =
@@ -42,7 +43,7 @@ export type PieceType =
   | "horse"
   | "rook"
   | "cannon"
-  | "pawn";
+  | "pawn" | "storm_elemental";
 
 export interface Position {
   x: number;
@@ -157,7 +158,7 @@ export interface LastMove {
   revealed?: SecretIdentity;
   /** 普通防御弹回时为 false：并未进入所选目标点。 */
   landed?: boolean;
-  /** 战士铁甲提供的额外应将不消耗猎人陷阱的十回合寿命。 */
+  /** 战士铁甲提供的额外应将不消耗猎人陷阱的十二回合寿命。 */
   countsAsFormalTurn?: boolean;
   tier?: 1 | 2 | 3;
   keywords?: string[];
@@ -170,8 +171,10 @@ export interface LastMove {
  */
 export interface StealthEffect {
   owner: Side;
-  /** 发动回合不计入；在接下来的一个己方正式行动结束时清除。 */
-  remainingOwnerTurns: 1;
+  /** 发动回合不计入；在随后两个己方正式回合窗口结束时清除。 */
+  remainingOwnerTurns: 1 | 2;
+  /** 发动所在己方正式回合，不计入两个后续窗口。 */
+  activatedOnFormalTurn?: number;
   strongStrikeAvailable: boolean;
   source: SkillSource;
 }
@@ -184,8 +187,12 @@ export interface PieceEffects {
   cavalry?: true;
   intangible?: true;
   immuneCrush?: true;
-  flight?: { remainingOwnerTurns: number };
+  flight?: { remainingOwnerTurns: number; source?: "sky_admiral"; forcedLanding?: true };
   infection?: { owner: Side; stacks: number };
+  insightMark?: true;
+  riverQualified?: true;
+  riverTurns?: number;
+  dragonClaw?: true; dragonScale?: 1;
   controlTrap?: { controller: Side; blockedFormalTurn: number };
   timeCollapse?: { expiresAtOwnerTurnEnd: number };
   destiny?: "time_warrior" | "infinite_dragon";
@@ -226,7 +233,7 @@ export interface ClosedDestructionBatch {
 }
 
 /** 明确获准读取真实身份的既有权威来源；普通目标/资源/UI不能借用。 */
-export type TrueIdentityReadSource = "death:reveal" | "mutation:end_time:initialization" | "hero:wind:covered_carrier";
+export type TrueIdentityReadSource = "death:reveal" | "mutation:end_time:initialization" | "hero:wind:covered_carrier" | "hero:night:insight" | "hero:sky_admiral:training";
 
 export type GhostKind = "ghost" | "inner_ghost";
 export interface GhostObject {
@@ -236,11 +243,23 @@ export interface GhostObject {
   owner: Side;
   position: Position;
   remaining: number;
+  /** 明确永久来源不参与回合寿命；旧对象仍按remaining计时。 */
+  persistent?: true;
   /** 只有来源明确提供时才记录；不从寿命或其他种类推算层数。 */
   layers?: number;
 }
 export type GhostObjectSpec = GhostObject & { kind: GhostKind; source: string };
 export interface GhostQuery { kind: GhostKind; owner?: Side; source?: string; position?: Position }
+
+export interface HeroRuntime {
+  used?: boolean; invokeCount?: number; rainActive?: boolean; carefreeSuspended?: boolean;
+  omen?: true; descended?: true;
+  pupil?: number; insightCount?: number; insightTurn?: number;
+  blade?: "left" | "right"; bladeTurn?: number;
+  trainingType?: Exclude<PieceType, "general">;
+  will?: number; chargeCount?: number; chargeTurn?: number;
+  shuffleWindow?: "A" | "B"; shuffleLost?: true;
+}
 
 export interface GameState {
   /** 缺省为原有全局混洗揭棋，兼容既有棋局与快照。 */
@@ -269,18 +288,22 @@ export interface GameState {
   lastCompletedFormalTurn?: FormalTurnLifecycle;
   /** 最近一次公开操作及其子行动；秘密操作不写入。 */
   actionRecords?: ActionRecord[];
-  heroRuntime?: Partial<Record<Side, { used?: boolean; invokeCount?: number; rainActive?: boolean; carefreeSuspended?: boolean }>>;
+  pendingShuffle?: { side: "black"; window: "A" | "B" };
+  pendingHeroChild?: { kind: "blade" | "charge" | "inner_wave"; side: Side; pieceId: string; parent: LastMove };
+  pendingDescent?: { side: Side; variant: GalakrondForm; pieces: PublicPiece[]; atom: string; assaultIds?: string[] };
+  heroRuntime?: Partial<Record<Side, HeroRuntime>>;
   /** 两种独立格对象共用存储，所有规则读取须精确指定种类。 */
   ghosts?: GhostObject[];
   warps?: Position[];
   hourglasses?: number;
   /** 一次原子行动内各落位，含弹回/移置/复活，供共同结算管线使用。 */
-  landingEvents?: Array<{ pieceId: string; beforeController: Side; position: Position; source: string }>;
+  landingEvents?: Array<{ pieceId: string; beforeController: Side; position: Position; source: string; beforeGhostOwners?: Side[] }>;
   automaticEvents?: Array<{ kind: string; pieceId?: string; side?: Side; position?: Position;
     /** 死亡时公开记录，不含未公开的混乱阵营。用于区分同ID复活后的再次死亡。 */
-    deathRecord?: CapturedPiece; ghostTriggerHandled?: true; batchId?: string }>;
+    deathRecord?: CapturedPiece; ghostTriggerHandled?: true; batchId?: string; wasCovered?: boolean; resourceHandled?: true }>;
   /** 当前原子链中已闭合的消灭批次；不保存开放批次或秘密候选。 */
   destructionBatches?: ClosedDestructionBatch[];
+  formalClock?: { side: Side; number: number };
   turnStartedAt?: number;
   turnDeadlineAt?: number;
   flowDance?: { side: Side; pieceId: string; steps: 0 | 1; resumeTurn: Side };
@@ -291,6 +314,10 @@ export interface SecretState {
   heroFormLock?: HeroSelections;
   identities: Record<string, SecretIdentity>;
   processedActions: Record<string, number>;
+  shuffleOpening?: { pieces: PublicPiece[]; identities: Record<string, SecretIdentity> };
+  timelineEpoch?: number;
+  training?: Partial<Record<Side, { type: Exclude<PieceType, "general">; pieceId?: string; progress: number; graduated?: true; failed?: true }>>;
+  insights?: Partial<Record<Side, Array<{ pieceId: string; identity: SecretIdentity; revision: number; valid: boolean }>>>;
   traps?: Array<{ id: string; owner: Side; position: Position; opponentTurnsRemaining: number }>;
   trueGenerals?: Partial<Record<Side, string>>;
   wind?: Partial<Record<Side, { uses: number; readyOnTurn: number; activatedOnTurn?: number; hostId?: string; decoyId: string }>>;
@@ -313,12 +340,15 @@ export interface MoveCommand {
 
 export interface HeroAbilityCommand {
   kind: "hero_ability";
-  ability: "invoke" | "unspeakable" | "destruction" | "timeline_twist" | "rewind" | "hourglass" | "bomb" | "shadow";
+  ability: "invoke" | "unspeakable" | "destruction" | "timeline_twist" | "rewind" | "hourglass" | "bomb" | "shadow" | "burning_flame" | "insight" | "inner_ghost_burst" | "ascension" | "storm_assault" | "river_enter" | "river_move" | "river_exit" | "inner_wave" | "landing" | "blade_shift" | "charge_move" | "charge_attack" | "wave_move" | "skip_child" | "shuffle";
   actionId: string;
   expectedRevision: number;
   pieceId?: string;
   to?: Position;
   randomCovered?: boolean;
+  secretInsight?: boolean;
+  placements?: Array<{ pieceId: string; to: Position }>;
+  skip?: boolean;
 }
 
 /**

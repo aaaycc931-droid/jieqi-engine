@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { applyAuthoritativeAssassination, applyAuthoritativeMove, applyHeroAbility, getLegalAssassinationMoves, getLegalMoves, initializeFeatureGameState, initializeFeatureSecret, isGeneralInCheck, publicRemoteRoom, playerRoomView, submitRemoteHeroAbility } from "../src/index.ts";
+import { beginFormalTurn, applyAuthoritativeAssassination, applyAuthoritativeMove, applyHeroAbility, getLegalAssassinationMoves, getLegalMoves, initializeFeatureGameState, initializeFeatureSecret, isGeneralInCheck, publicRemoteRoom, playerRoomView, submitRemoteHeroAbility } from "../src/index.ts";
 import type { GameState, HeroAbilityCommand, RemoteRoom } from "../src/index.ts";
 import { covered, gameState, move, revealed, secretState } from "./helpers.ts";
 
@@ -38,7 +38,7 @@ test("TARGET-WIND-02 delayed strong strike targets a normal-looking carrier, exc
   h = applyAuthoritativeMove(h.state, h.secret, move({ x: 2, y: 5 }, { x: 2, y: 4 }, "red-reply", h.state.revision));
   assert.ok(getLegalAssassinationMoves(h.state, "striker", true).some(p => p.x === 0 && p.y === 7));
   const killed = applyAuthoritativeAssassination(h.state, h.secret, { ...move({ x: 0, y: 2 }, { x: 0, y: 7 }, "strike", h.state.revision), kind: "assassination", useStrongStrike: true });
-  assert.equal(killed.state.reason, "ambush"); assert.equal(killed.state.winner, "black");
+  assert.equal(killed.state.reason, "general_destroyed"); assert.equal(killed.state.winner, "black");
   for (const activated of [false, true]) {
     const publicState = structuredClone(h.state);
     // Geometry fixture puts the same striker on the public general's file.
@@ -55,7 +55,7 @@ test("TARGET-RANDOM-01 a sole invisible carrier remains a legal random execution
   const shadow = applyHeroAbility(s, secretState(), skill("shadow", s, { pieceId: "host" }));
   const hidden = applyAuthoritativeAssassination(shadow.state, shadow.secret, { ...move({ x: 0, y: 7 }, { x: 0, y: 6 }, "conceal"), kind: "assassination", source: "mutation", useStrongStrike: false });
   let poolSize = 0;
-  const killed = applyHeroAbility(hidden.state, hidden.secret, skill("unspeakable", hidden.state), 100, max => { poolSize = max; return 0; });
+  const killed = (() => { const state=structuredClone(hidden.state),secret=structuredClone(hidden.secret); state.heroRuntime.red.omen=true; delete state.turnLifecycle; beginFormalTurn(state,secret,max=>{poolSize=max;return 0;}); return {state,secret}; })();
   assert.equal(poolSize, 1); assert.equal(killed.state.winner, "red");
   assert.equal(killed.state.reason, "general_destroyed");
   assert.equal(killed.state.captured.find(p => p.id === "host")?.cause, "unspeakable");

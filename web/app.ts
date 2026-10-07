@@ -1,3 +1,5 @@
+import { configureHeroPreparation } from "../src/hero-progress.ts";
+import { getHeroPackage } from "../src/hero-forms.ts";
 import { isBoardPiece } from "../src/spaces.ts";
 import { HERO_IDS, HERO_CATALOG as heroCatalog } from "../src/heroes.ts";
 import { applyHeroAbility, getShadowRevealedTargets, getBombers, startFormalClock, formalTurnDurationMs } from "../src/hero-actions.ts";
@@ -65,6 +67,7 @@ import type {
   GameState,
   GameModeId,
   HeroId,
+  HeroForm, GalakrondForm, HeroSelection,
   HeroAbilityCommand,
   MutationId,
   PieceType,
@@ -79,10 +82,10 @@ const PLAYER_ONE = "玩家一";
 const PLAYER_TWO = "玩家二";
 const choiceLabel: Record<RpsChoice, string> = { rock: "石头", scissors: "剪刀", paper: "布" };
 const pieceLabel = {
-  red: { general: "帅", advisor: "仕", elephant: "相", horse: "马", rook: "车", cannon: "炮", pawn: "兵" },
-  black: { general: "将", advisor: "士", elephant: "象", horse: "馬", rook: "車", cannon: "砲", pawn: "卒" },
+  red: { general: "帅", advisor: "仕", elephant: "相", horse: "马", rook: "车", cannon: "炮", pawn: "兵", storm_elemental: "风暴元素" },
+  black: { general: "将", advisor: "士", elephant: "象", horse: "馬", rook: "車", cannon: "砲", pawn: "卒", storm_elemental: "风暴元素" },
 } as const;
-const movementLabel = { general: "将帅", advisor: "仕/士", elephant: "相/象", horse: "马", rook: "车", cannon: "炮", pawn: "兵/卒" } as const;
+const movementLabel = { general: "将帅", advisor: "仕/士", elephant: "相/象", horse: "马", rook: "车", cannon: "炮", pawn: "兵/卒", storm_elemental: "风暴元素" } as const;
 
 type MovementGuideId = "rook" | "horse" | "cannon" | "pawn" | "general" | "advisor" | "elephant";
 type DiagramPoint = readonly [number, number];
@@ -429,6 +432,9 @@ let assassinationArmed = false;
 let strongStrikeArmed = false;
 let localPrivateViewerSide: Side | undefined;
 let localHeroes: Partial<Record<Side, HeroId>> = {};
+let heroFormDraft: HeroForm = "front";
+let galakrondDraft: GalakrondForm = "unspeakable";
+let localHeroPackages: Partial<Record<string, HeroSelection>> = {};
 let localHeroChoices: Partial<Record<string, HeroId>> = {};
 let localHeroConfirmed: Record<string, boolean> = { [PLAYER_ONE]: false, [PLAYER_TWO]: false };
 let localHeroActor = PLAYER_ONE;
@@ -489,7 +495,7 @@ function glyphAsset(color: Side, type: PieceType): string {
 function createPieceGlyph(color: Side, type: PieceType): HTMLImageElement {
   const glyph = document.createElement("img");
   glyph.className = "piece-glyph";
-  glyph.src = glyphAsset(color, type);
+  glyph.src = type === "storm_elemental" ? "data:image/svg+xml;charset=utf-8," + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80"><text x="40" y="58" text-anchor="middle" font-family="serif" font-size="52" fill="${color === "red" ? "#8c2828" : "#203951"}">风</text></svg>`) : glyphAsset(color, type);
   glyph.alt = "";
   glyph.setAttribute("aria-hidden", "true");
   glyph.draggable = false;
@@ -757,8 +763,8 @@ function scheduleOpeningStage(stage: "mutation" | "heroes", delayMs: number): vo
       }
       const blackHero = element<HTMLElement>("intro-black-hero");
       const redHero = element<HTMLElement>("intro-red-hero");
-      blackHero.querySelector("b")!.textContent = heroCatalog[heroes.black].name;
-      redHero.querySelector("b")!.textContent = heroCatalog[heroes.red].name;
+      blackHero.querySelector("b")!.textContent = battleHeroName("black");
+      redHero.querySelector("b")!.textContent = battleHeroName("red");
       heroIntroStage.hidden = false;
       heroIntroStage.classList.add("playing");
       scheduleOpeningStage("heroes", 2_000);
@@ -999,7 +1005,7 @@ function applyBluetoothView(view: PlayerRemoteRoomView): void {
   }
   if (prior?.state && view.state && prior.state.lastMove?.actionId !== view.state.lastMove?.actionId) {
     const actionHistory = view.messages?.find((message) => message.id === `system:${view.state?.lastMove?.actionId}`)?.text ?? "";
-    const skillCue = actionHistory.includes("发动强击") ? "强击发动" : actionHistory.includes("发动刺杀") ? "刺杀发动" : undefined;
+    const skillCue = actionHistory.includes("发动刺杀机会") ? "刺杀机会发动" : actionHistory.includes("发动刺杀") ? "刺杀发动" : undefined;
     queueFormalEventCues(view.state, view.lastTrapTrigger?.actionId === view.state.lastMove?.actionId, skillCue);
   }
 
@@ -1424,10 +1430,10 @@ function resetMatch(): void {
   assassinationArmed = false;
   strongStrikeArmed = false;
   localHeroes = {};
-  localHeroChoices = {};
+  localHeroChoices = {}; localHeroPackages = {}; heroFormDraft = "front"; galakrondDraft = "unspeakable";
   localHeroConfirmed = { [PLAYER_ONE]: false, [PLAYER_TWO]: false };
   localHeroActor = PLAYER_ONE;
-  heroDraft = undefined;
+  heroDraft = undefined; heroFormDraft = "front"; galakrondDraft = "unspeakable";
   activeSkillIndex = 0;
   heroSelectionDeadlineAt = undefined;
   localTraps = [];
@@ -1826,6 +1832,18 @@ function renderHeroSelection(overrideState?: ReturnType<typeof heroSelectionStat
       return button;
     }));
     heroSkillDescription.textContent = hero.skills[activeSkillIndex].description;
+    if (selected === "jiang_he" || selected === "death_knight") {
+      const form = document.createElement("select"); form.setAttribute("aria-label", "英雄完整形态");
+      form.add(new Option("表·完整技能包", "front")); form.add(new Option("里·完整技能包", "inner")); form.value = heroFormDraft; form.disabled = state.confirmed || pending;
+      form.onchange = () => { heroFormDraft = form.value as HeroForm; }; heroSkillDescription.append(form);
+    }
+    if (selected === "devout_zealot") {
+      const variant = document.createElement("select"); variant.setAttribute("aria-label", "迦拉克隆固定形态");
+      for (const [value, label] of [["nightmare","梦魇"],["invincible","无敌"],["fel","邪火"],["storm","风暴"],["unspeakable","讳言"]]) variant.add(new Option(label,value));
+      variant.value = galakrondDraft; variant.disabled = state.confirmed || pending;
+      variant.onchange = () => { galakrondDraft = variant.value as GalakrondForm; }; heroSkillDescription.append(variant);
+    }
+
   }
 
   heroGrid.replaceChildren(...HERO_IDS.map((heroId) => {
@@ -1838,7 +1856,7 @@ function renderHeroSelection(overrideState?: ReturnType<typeof heroSelectionStat
     button.setAttribute("aria-label", `选择${hero.name}`);
     button.addEventListener("click", () => {
       if (state.confirmed) return;
-      heroDraft = heroId;
+      heroDraft = heroId; heroFormDraft = "front"; galakrondDraft = "unspeakable";
       activeSkillIndex = 0;
       renderHeroSelection();
     });
@@ -1849,10 +1867,12 @@ function renderHeroSelection(overrideState?: ReturnType<typeof heroSelectionStat
 function confirmHeroSelection(): void {
   if (!heroDraft) return;
   if (bluetooth?.view?.phase === "hero_selection") {
-    handleBluetoothAction({ kind: "hero", hero: heroDraft });
+    handleBluetoothAction({ kind: "hero", hero: heroDraft, form: heroFormDraft, ...(heroDraft === "devout_zealot" ? { variant: galakrondDraft } : {}) });
     renderHeroSelection();
     return;
   }
+  const pkg = getHeroPackage(heroDraft, heroFormDraft, heroDraft === "devout_zealot" ? galakrondDraft : undefined);
+  localHeroPackages[localHeroActor] = { heroId: pkg.heroId, form: pkg.form, packageId: pkg.packageId, ...(pkg.variant ? { variant: pkg.variant } : {}) };
   localHeroChoices[localHeroActor] = heroDraft;
   localHeroConfirmed[localHeroActor] = true;
   heroSelectionDeadlineAt = undefined;
@@ -2036,10 +2056,16 @@ function handleLocalRpsTimeout(): void {
 
 function startGame(): void {
   const session = createInitialGame();
-  const assignments = rpsPublic.assignments!;
+  let assignments = rpsPublic.assignments!;
+  const swaps = [assignments.red, assignments.black].filter(id => localHeroChoices[id] === "shuffler").length;
+  if (swaps % 2) { assignments = { red: assignments.black, black: assignments.red }; rpsPublic.assignments = assignments; }
   const redHero = localHeroChoices[assignments.red];
   const blackHero = localHeroChoices[assignments.black];
   if (!redHero || !blackHero) return showToast("双方英雄选择不完整，请重新开始。");
+  if (redHero === "murozond_minion" && blackHero === "murozond_minion") {
+    showDialog("需要正式规则定义", "双方窃时镜像的计时叠加尚未冻结，请重新选择英雄。", "重新选择", () => { resetMatch(); beginLocalHeroSelection(); });
+    return;
+  }
   const mutation = randomMutation({ red: redHero, black: blackHero });
   localHeroes = {
     red: redHero,
@@ -2049,6 +2075,8 @@ function startGame(): void {
     session.state,
     localHeroes,
     mutation,
+    { red: localHeroPackages[assignments.red]?.form ?? "front", black: localHeroPackages[assignments.black]?.form ?? "front" },
+    { red: localHeroPackages[assignments.red]?.variant, black: localHeroPackages[assignments.black]?.variant },
   );
   gameSecret = session.secret;
   localPrivateViewerSide = "red";
@@ -2071,6 +2099,14 @@ function startGame(): void {
   // during the introduction or the hunter preparation phase.
   runOpeningSequence(beginLocalHeroPreparation);
   renderGame();
+}
+
+function battleHeroName(side: Side): string {
+  const selection = gameState?.featureRules?.heroSelections?.[side];
+  if (!selection) return heroCatalog[battleHeroes()?.[side] ?? "hunter"].name;
+  const name = getHeroPackage(selection.heroId, selection.form, selection.variant).name;
+  const variants = { nightmare: "梦魇", invincible: "无敌", fel: "邪能", storm: "风暴", unspeakable: "讳言" };
+  return selection.variant ? `${name}·${variants[selection.variant]}迦拉克隆` : name;
 }
 
 function battleHeroes(): Record<Side, HeroId> | undefined {
@@ -2098,8 +2134,8 @@ function runtimeSkillEntries(side: Side, hero: HeroId): RuntimeSkillEntry[] {
   // while stealthed, the mutation slot becomes its delayed strong-strike entry.
   return [...entries, {
     key: active ? "strong-strike" : "assassination-mutation",
-    title: active ? "隐身·强击" : "畸变·刺杀",
-    state: active ? `隐身中｜强击${strongAvailable ? "可用" : "已用"}` : skills?.mutationChargeAvailable ? "可用" : "已用",
+    title: active ? "隐身·刺杀机会" : "畸变·刺杀",
+    state: active ? `隐身中｜刺杀机会${strongAvailable ? "可用" : "已用"}` : skills?.mutationChargeAvailable ? "可用" : "已用",
     catalogIndex: 0,
     active: true,
   }];
@@ -2123,8 +2159,8 @@ function baseRuntimeSkillEntries(side: Side, hero: HeroId): RuntimeSkillEntry[] 
   }
   if (hero !== "rogue") {
     const runtime = gameState?.heroRuntime?.[side];
-    const passive = ["qin_long", "murozond_minion", "prince", "death_knight"].includes(hero);
-    const abilities = hero === "devout_zealot" ? ["invoke", "unspeakable"] : hero === "deathwing" ? ["destruction"] : hero === "murozond" ? [gameState?.featureRules?.mutation === "end_time" ? "bomb" : "timeline_twist"] : hero === "nozdormu" ? [gameState?.featureRules?.mutation === "end_time" ? "hourglass" : "rewind"] : hero === "wind" ? ["shadow"] : [];
+    const passive = ["qin_long", "murozond_minion", "prince", "single_blade", "berserker", "shuffler"].includes(hero) || hero === "death_knight" && gameState?.featureRules?.heroSelections?.[side]?.form !== "inner";
+    const abilities = hero === "death_knight" ? ["inner_ghost_burst"] : hero === "devout_zealot" ? ["invoke"] : hero === "deathwing" ? ["destruction"] : hero === "murozond" ? [gameState?.featureRules?.mutation === "end_time" ? "bomb" : "timeline_twist"] : hero === "nozdormu" ? [gameState?.featureRules?.mutation === "end_time" ? "hourglass" : "rewind"] : hero === "wind" ? ["shadow"] : hero === "warlock" ? ["burning_flame"] : hero === "night" ? ["insight"] : hero === "sky_admiral" ? ["landing"] : hero === "jiang_he" ? [gameState?.featureRules?.heroSelections?.[side]?.form === "inner" ? "inner_wave" : "river_enter", "river_move", "river_exit"] : [];
     if (passive) return [{ key: `passive:${hero}`, title: heroCatalog[hero].skills[0].name, state: "被动技能", catalogIndex: 0, active: false }];
     return abilities.map((ability, index) => ({ key: `ability:${ability}`, title: ability === "hourglass" ? "时光沙漏" : ability === "bomb" ? "时空扭曲炸弹" : heroCatalog[hero].skills[index]?.name ?? heroCatalog[hero].skills[0].name, state: hero === "wind" ? "秘密技能｜每局最多两次" : ability === "invoke" ? `祈求 ${runtime?.invokeCount ?? 0}/4` : ability === "hourglass" ? `剩余 ${gameState?.hourglasses ?? 0}` : runtime?.used ? "已用" : "主动技能", catalogIndex: index, active: true }));
   }
@@ -2149,8 +2185,8 @@ function baseRuntimeSkillEntries(side: Side, hero: HeroId): RuntimeSkillEntry[] 
   const strikeAvailable = Boolean(activePieceId && gameState?.effectsByPieceId?.[activePieceId]?.stealth?.strongStrikeAvailable);
   entries.push({
     key: "strong-strike",
-    title: "隐身·强击",
-    state: activePieceId ? `隐身中｜强击${strikeAvailable ? "可用" : "已用"}` : "未进入隐身",
+    title: "隐身·刺杀机会",
+    state: activePieceId ? `隐身中｜刺杀机会${strikeAvailable ? "可用" : "已用"}` : "未进入隐身",
     catalogIndex: 2,
     active: true,
   });
@@ -2240,7 +2276,7 @@ function setBattleHeroAvatars(heroes: Record<Side, HeroId>, visible: boolean): v
     const avatar = element<HTMLElement>(`${side}-hero-avatar`);
     avatar.hidden = !visible;
     avatar.dataset.hero = heroes[side];
-    avatar.title = heroCatalog[heroes[side]].name;
+    avatar.title = battleHeroName(side);
   }
 }
 
@@ -2273,7 +2309,7 @@ function runOpeningSequence(onComplete: () => void): void {
 }
 
 function beginLocalHeroPreparation(): void {
-  trapSetupQueue = (["red", "black"] as const).filter((side) => localHeroes[side] === "hunter");
+  trapSetupQueue = (["red", "black"] as const).filter((side) => ["hunter", "single_blade", "sky_admiral"].includes(localHeroes[side]));
   trapSetupSide = trapSetupQueue.shift();
   localTrapDraft = [];
   if (!trapSetupSide) {
@@ -2285,7 +2321,7 @@ function beginLocalHeroPreparation(): void {
   renderGame();
   showDialog(
     `${trapSetupSide === "red" ? "红方" : "蓝方"}英雄准备`,
-    "猎人需要在己方半场布置两层陷阱；可以同格叠加，也可放在棋子脚下。",
+    localHeroes[trapSetupSide] === "hunter" ? "猎人需在己方半场布置两层陷阱。" : "请在英雄准备面板选择公开刃侧或征兵兵种。",
     "开始准备",
     renderGame,
   );
@@ -2313,9 +2349,11 @@ function commitLocalTrapDraft(side: Side): void {
 
 function completeLocalHeroPreparation(): void {
   if (!localPreparationActive || !trapSetupSide) return;
-  if (localTrapDraft.length !== 2) return showToast("请先布置完两层陷阱。");
+  const hero = localHeroes[trapSetupSide];
+  if (hero === "hunter" && localTrapDraft.length !== 2) return showToast("请先布置完两层陷阱。");
+  if (hero === "single_blade" && !gameState?.heroRuntime?.[trapSetupSide]?.blade || hero === "sky_admiral" && !gameState?.heroRuntime?.[trapSetupSide]?.trainingType) return showToast("请先确定英雄准备选项。");
   const completedSide = trapSetupSide;
-  commitLocalTrapDraft(completedSide);
+  if (localHeroes[completedSide] === "hunter") commitLocalTrapDraft(completedSide);
   trapSetupSide = trapSetupQueue.shift();
   localTrapDraft = [];
   if (!trapSetupSide) {
@@ -2325,25 +2363,17 @@ function completeLocalHeroPreparation(): void {
   renderGame();
   showDialog(
     `${completedSide === "red" ? "红方" : "蓝方"}准备完成`,
-    `请将设备交给${trapSetupSide === "red" ? "红方" : "蓝方"}猎人继续准备。`,
+    `请将设备交给${trapSetupSide === "red" ? "红方" : "蓝方"}继续英雄准备。`,
     "继续准备",
     renderGame,
   );
 }
 
 function handleLocalPreparationTimeout(): void {
-  if (!localPreparationActive) return;
-  if (trapSetupSide) {
-    while (localTrapDraft.length < 2) localTrapDraft.push(randomOwnHalfPosition(trapSetupSide));
-    commitLocalTrapDraft(trapSetupSide);
-  }
-  if (flowDialog.open) flowDialog.close();
-  for (const side of trapSetupQueue) {
-    localTrapDraft = [randomOwnHalfPosition(side), randomOwnHalfPosition(side)];
-    commitLocalTrapDraft(side);
-  }
-  showToast("准备时间结束，系统已随机补齐剩余陷阱。");
-  finishLocalHeroPreparation();
+  if (!localPreparationActive || !trapSetupSide || localHeroes[trapSetupSide] !== "hunter") return;
+  while (localTrapDraft.length < 2) localTrapDraft.push(randomOwnHalfPosition(trapSetupSide));
+  completeLocalHeroPreparation();
+  showToast("准备时间结束，系统已补齐猎人陷阱；其他英雄仍需确认准备选项。");
 }
 
 function undoTrapDraft(): void {
@@ -2611,7 +2641,7 @@ function renderBoard(): void {
     for (let x = 0; x <= 8; x += 1) {
       const position = { x, y };
       const key = positionKey(position);
-      const piece = pieces.get(key);
+      const piece = gameState.pieces.find(p => p.layer === undefined && positionKey(p) === key) ?? pieces.get(key);
       const point = document.createElement("button");
       point.type = "button";
       point.className = "point";
@@ -2643,7 +2673,8 @@ function renderBoard(): void {
         if (!piece.faceDown) token.append(createPieceGlyph(piece.color, piece.type));
         point.append(token);
         const effects = gameState.effectsByPieceId?.[piece.id];
-        const badge = effects?.stealth ? "隐" : effects?.barrier ? "盾" : effects?.cavalry ? "骑" : undefined;
+        const airAt = gameState.pieces.filter(p => p.layer === "air" && positionKey(p) === key);
+        const badge = airAt.length ? `空${airAt.length}` : effects?.stealth ? "隐" : effects?.barrier ? "盾" : effects?.cavalry ? "骑" : undefined;
         if (badge) {
           const marker = document.createElement("small");
           marker.className = "effect-marker";
@@ -2864,8 +2895,8 @@ function renderGame(): void {
   redPlayer.textContent = rpsPublic.assignments.red;
   blackPlayer.textContent = rpsPublic.assignments.black;
   const heroes = battleHeroes();
-  statusBlueHeroName.textContent = heroes?.black ? heroCatalog[heroes.black].name : "英雄";
-  statusRedHeroName.textContent = heroes?.red ? heroCatalog[heroes.red].name : "英雄";
+  statusBlueHeroName.textContent = heroes?.black ? battleHeroName("black") : "英雄";
+  statusRedHeroName.textContent = heroes?.red ? battleHeroName("red") : "英雄";
   if (heroes) {
     element<HTMLElement>("black-hero-avatar").dataset.hero = heroes.black;
     element<HTMLElement>("red-hero-avatar").dataset.hero = heroes.red;
@@ -2882,7 +2913,8 @@ function renderGame(): void {
     const remaining = secondsRemaining(preparationDeadline);
     heroPreparationTimer.textContent = String(remaining);
     heroPreparationTimer.classList.toggle("urgent", remaining <= 10);
-    const canPrepare = remotePreparation ? remoteIsHunter && !remoteReady : Boolean(trapSetupSide);
+    const canPrepare = remotePreparation ? Boolean(remoteSide && !remoteReady) : Boolean(trapSetupSide);
+    const preparingHero = remotePreparation ? (remoteSide ? remoteView?.features?.heroes?.[remoteSide] : undefined) : trapSetupSide ? localHeroes[trapSetupSide] : undefined;
     const sideLabel = remotePreparation
       ? remoteSide === "red" ? "红方" : "蓝方"
       : trapSetupSide === "red" ? "红方" : "蓝方";
@@ -2899,8 +2931,9 @@ function renderGame(): void {
     heroPreparationStatus.textContent = canPrepare
       ? `秘密草稿 ${preparationDraft.length}/2｜${preparationDraft.length < 2 ? "点击己方半场" : "可撤回或锁定"}`
       : "己方已完成；对方的陷阱位置不可见";
-    trapUndoButton.hidden = !canPrepare;
-    preparationConfirmButton.hidden = !canPrepare;
+    trapUndoButton.hidden = !canPrepare || preparingHero !== "hunter";
+    preparationConfirmButton.hidden = !canPrepare || preparingHero !== "hunter";
+    if (canPrepare && preparingHero !== "hunter") { heroPreparationTitle.textContent = `${preparingHero ? heroCatalog[preparingHero].name : "英雄"}·准备`; heroPreparationStatus.textContent = "请在英雄准备面板中选择并确认。"; moveHint.textContent = "准备选项确认后再开始正式回合。"; announcement.textContent = "公开选择刃侧或征兵兵种。"; turnStatus.textContent = "英雄准备中"; }
     trapUndoButton.disabled = preparationDraft.length === 0 || Boolean(bluetooth?.pendingAction);
     preparationConfirmButton.disabled = preparationDraft.length !== 2 || Boolean(bluetooth?.pendingAction);
   } else if (openingActive || remoteView?.phase === "hero_intro") {
@@ -2967,9 +3000,10 @@ function renderGame(): void {
     : assassinationArmed ? "刺杀：请选择明棋" : "发动刺杀";
   const strongButton = element<HTMLButtonElement>("strong-strike-button");
   const activeStrikeAvailable = Boolean(active && gameState.effectsByPieceId?.[active]?.stealth?.strongStrikeAvailable);
-  strongButton.disabled = gameState.status !== "playing" || preparationActive || openingActive || remoteView?.phase === "hero_intro" || remoteLocked || !(activeStrikeAvailable || assassinationArmed);
-  strongButton.textContent = strongStrikeArmed ? "强击：请选择目标" : "发动强击";
+  strongButton.disabled = gameState.status !== "playing" || preparationActive || openingActive || remoteView?.phase === "hero_intro" || remoteLocked || !activeStrikeAvailable;
+  strongButton.textContent = strongStrikeArmed ? "刺杀机会：请选择目标" : "发动刺杀机会";
   updateBattleTurnTimer();
+  renderTransferredHeroControls();
 }
 
 function moveSummary(targetWasCovered: boolean, capturedLabel?: string, revealedLabel?: string): string {
@@ -3123,6 +3157,7 @@ function onBoardClick(event: MouseEvent): void {
     return;
   }
   if (localPreparationActive) {
+    if (trapSetupSide && localHeroes[trapSetupSide] !== "hunter") return showToast("请在英雄准备面板中选择并确认。");
     placeLocalTrap(to);
     return;
   }
@@ -3130,6 +3165,7 @@ function onBoardClick(event: MouseEvent): void {
   if (bluetooth?.view && bluetooth.view.viewerSide !== gameState.turn) {
     return showToast("现在轮到对方行棋。请等待房主同步。 ");
   }
+  if (gameState.pendingDescent || gameState.pendingHeroChild || gameState.pendingShuffle) return showToast("请先完成英雄结算面板中的选择。");
   const atTarget = pieceAt(gameState, to);
 
   if (!selectedPieceId) {
@@ -3172,7 +3208,7 @@ function onBoardClick(event: MouseEvent): void {
   if (bluetooth?.view) {
     const actionId = bluetoothActionId();
     const command = {
-      from: { x: selected.x, y: selected.y }, to,
+      from: { x: selected.x, y: selected.y }, pieceId: selected.id, to,
       expectedRevision: gameState.revision,
       actionId,
     };
@@ -3215,9 +3251,9 @@ function onBoardClick(event: MouseEvent): void {
         });
     gameState = result.state;
     gameSecret = result.secret;
-    if (!gameState.flowDance && !wasFlowDance) startFormalClock(gameState, Date.now(), gameSecret);
+    if (!gameState.flowDance && !wasFlowDance && !gameState.pendingHeroChild && !gameState.pendingShuffle) startFormalClock(gameState, Date.now(), gameSecret);
     const trapMessage = resolveLocalTrapsAfterAction();
-    queueFormalEventCues(gameState, Boolean(trapMessage), usingAssassination ? strongStrikeArmed ? "强击发动" : "刺杀发动" : undefined);
+    queueFormalEventCues(gameState, Boolean(trapMessage), usingAssassination ? strongStrikeArmed ? "刺杀机会发动" : "刺杀发动" : undefined);
     const captured = gameState.lastMove?.captured;
     const revealed = gameState.lastMove?.revealed;
     latestAnnouncement = trapMessage ?? moveSummary(
@@ -3226,7 +3262,7 @@ function onBoardClick(event: MouseEvent): void {
       revealed ? `${revealed.color === "red" ? "红" : "黑"}${pieceLabel[revealed.color][revealed.type]}` : undefined,
     );
     const actingSide = gameState.lastMove?.actingSide === "red" ? "红方" : "蓝方";
-    const skillPrefix = usingAssassination ? `${actingSide}发动${strongStrikeArmed ? "强击" : "刺杀"}，` : "";
+    const skillPrefix = usingAssassination ? `${actingSide}发动${strongStrikeArmed ? "刺杀机会" : "刺杀"}，` : "";
     appendLocalSystemMessage(`${skillPrefix}${latestAnnouncement}${gameState.status === "playing" ? ` 轮到${gameState.turn === "red" ? "红方" : "蓝方"}。` : " 对局结束。"}`);
     selectedPieceId = undefined;
     assassinationArmed = false;
@@ -3494,7 +3530,7 @@ element<HTMLButtonElement>("assassination-button").addEventListener("click", () 
     assassinationArmed = false;
     strongStrikeArmed = false;
     selectedPieceId = activePieceId;
-    latestAnnouncement = "请选择隐身棋的落点；普通行动会结束隐身并放弃未用强击。";
+    latestAnnouncement = "请选择隐身棋的落点；普通行动会结束隐身并放弃未用刺杀机会。";
   } else {
     assassinationArmed = !assassinationArmed;
     strongStrikeArmed = false;
@@ -3507,9 +3543,9 @@ element<HTMLButtonElement>("strong-strike-button").addEventListener("click", () 
   setBattleSkillPanel(false);
   if (!gameState || gameState.status !== "playing") return;
   const activePieceId = gameState.assassination?.[gameState.turn]?.activePieceId;
-  if (!activePieceId && !assassinationArmed) return showToast("请先发动刺杀，再选择是否立即强击。");
+  if (!activePieceId && !assassinationArmed) return showToast("请先发动刺杀，再选择是否立即刺杀机会。");
   if (activePieceId && !gameState.effectsByPieceId?.[activePieceId]?.stealth?.strongStrikeAvailable) {
-    return showToast("本次刺杀的强击已经使用。");
+    return showToast("本次刺杀的刺杀机会已经使用。");
   }
   strongStrikeArmed = !strongStrikeArmed;
   if (activePieceId) {
@@ -3518,8 +3554,8 @@ element<HTMLButtonElement>("strong-strike-button").addEventListener("click", () 
   }
   latestAnnouncement = strongStrikeArmed
     ? activePieceId
-      ? "强击已准备：选择一个符合棋子走法的非将帅目标。"
-      : "立即强击已准备：选择己方非将帅明棋，再选择合法目标。"
+      ? "刺杀机会已准备：选择一个符合棋子走法的非将帅目标。"
+      : "立即刺杀机会已准备：选择己方非将帅明棋，再选择合法目标。"
     : latestAnnouncement;
   renderGame();
 });
@@ -3742,6 +3778,7 @@ showMainMenu();
 
 function openHeroAbility(ability: HeroAbilityCommand["ability"]): void {
   if (!gameState || gameState.status !== "playing") return;
+  if (!["invoke", "destruction", "rewind", "hourglass", "bomb", "timeline_twist", "shadow"].includes(ability)) return openTransferredHeroAbility(ability);
   const controls = document.createElement("div");
   const piece = document.createElement("select");
   piece.setAttribute("aria-label", "技能对象");
@@ -3755,7 +3792,7 @@ function openHeroAbility(ability: HeroAbilityCommand["ability"]): void {
   const x = document.createElement("input"), y = document.createElement("input");
   for (const [input, name, max] of [[x, "目标列（0–8）", 8], [y, "目标行（0–9）", 9]] as const) { input.type = "number"; input.min = "0"; input.max = String(max); input.value = "0"; input.setAttribute("aria-label", name); }
   if (ability === "bomb" || ability === "timeline_twist") controls.append(x, y);
-  const detail = { invoke: "消耗整个正式行动，推进祈求。", unspeakable: "随机消灭合法敌方明棋并结束回合。", destruction: "各非将帅棋独立50%毁灭并结束回合。", rewind: "恢复上一己方行动前快照，并由同一棋重走。", hourglass: "依次回归/复活、结算落位、清除扭曲、补充无限龙弹药。", bomb: "选一名无限龙及距离3内目标格。", timeline_twist: "退回对手上一俗手的同一枚棋，再操控到指定落点。", shadow: "秘密选定承载者，己方正式行动继续。" };
+  const detail = { invoke: "消耗整个正式行动，推进祈求。", unspeakable: "讳言在降临时自动结算。", destruction: "各非将帅棋独立50%毁灭；受将发动还会清除剩余己方明棋，然后结束回合。", rewind: "恢复上一己方行动前快照，并由同一棋重走。", hourglass: "依次回归/复活、结算落位、清除扭曲、补充无限龙弹药。", bomb: "选一名无限龙及距离3内目标格。", timeline_twist: "退回对手上一俗手的同一枚棋，再操控到指定落点。", shadow: "秘密选定承载者，己方正式行动继续。" };
   showDialog("英雄技能", detail[ability], "发动", () => {
     const command: HeroAbilityCommand = { kind: "hero_ability", ability, expectedRevision: gameState!.revision, actionId: nextActionId(), ...(piece.value && piece.value !== "random_covered" ? { pieceId: piece.value } : {}), ...(piece.value === "random_covered" ? { randomCovered: true } : {}), ...(ability === "bomb" || ability === "timeline_twist" ? { to: { x: Number(x.value), y: Number(y.value) } } : {}) };
     if (bluetooth) { handleBluetoothAction({ kind: "hero_ability", command }); return; }
@@ -3783,4 +3820,111 @@ function localGameHandoff(): void {
     localPrivateViewerSide = gameState?.turn;
     renderGame();
   });
+}
+
+function runTransferredHeroCommand(command: HeroAbilityCommand): void {
+  if (!gameState) return;
+  if (bluetooth) { handleBluetoothAction({ kind: "hero_ability", command }); return; }
+  if (!gameSecret || localPrivateViewerSide !== gameState.turn) return showToast("请先由当前玩家接手设备。");
+  try {
+    gameSecret.traps = structuredClone(localTraps);
+    const previousSide = gameState.turn, previousClock = gameState.turnDeadlineAt;
+    const result = applyHeroAbility(gameState, gameSecret, command);
+    gameState = result.state; gameSecret = result.secret; localTraps = gameSecret.traps ?? [];
+    selectedPieceId = undefined;
+    if (previousSide !== gameState.turn || previousClock === undefined && !gameState.pendingShuffle) startFormalClock(gameState, Date.now(), gameSecret);
+    renderGame();
+    if (gameState.status === "execution") beginAutomaticExecution();
+    else if (gameState.status === "finished") showMatchResult();
+    else if (previousSide !== gameState.turn) localGameHandoff();
+  } catch (error) { showToast(error instanceof RuleError ? error.message : "技能结算失败"); }
+}
+function renderTransferredHeroControls(): void {
+  let panel = document.getElementById("transferred-hero-controls");
+  if (!panel) { panel = document.createElement("section"); panel.id = "transferred-hero-controls"; panel.setAttribute("aria-label", "英雄结算与私有信息"); panel.style.cssText = "padding:8px;max-height:22vh;overflow:auto"; gameView.append(panel); }
+  panel.replaceChildren(); panel.hidden = true;
+  if (!gameState) return;
+  const prepSide = bluetooth?.view?.phase === "hero_preparation" ? bluetooth.view.viewerSide : localPreparationActive ? trapSetupSide : undefined;
+  const side = prepSide ?? gameState.turn;
+  const hero = gameState.featureRules?.heroes?.[side];
+  const own = bluetooth ? bluetooth.view?.viewerSide === side : prepSide ? true : localPrivateViewerSide === side;
+  if (!own) return;
+  const addButton = (text: string, click: () => void) => { const b = document.createElement("button"); b.type = "button"; b.textContent = text; b.disabled = Boolean(bluetooth?.pendingAction); b.onclick = click; panel!.append(b); panel!.hidden = false; };
+  if (prepSide && (hero === "single_blade" || hero === "sky_admiral")) {
+    panel.hidden = false;
+    const select = document.createElement("select"); select.setAttribute("aria-label", hero === "single_blade" ? "公开刃侧" : "征兵兵种");
+    const runtime = gameState.heroRuntime?.[side], ready = hero === "single_blade" ? runtime?.blade : runtime?.trainingType;
+    if (!ready) {
+      for (const [value, label] of hero === "single_blade" ? [["left","左刃"],["right","右刃"]] : [["pawn","兵/卒"],["advisor","士/仕"],["elephant","相/象"],["horse","马"],["cannon","炮"],["rook","车"]]) select.add(new Option(label,value));
+      panel.append(select);
+      addButton("确定英雄准备选项", () => {
+        const choice = hero === "single_blade" ? { blade: select.value as "left" | "right" } : { trainingType: select.value as PieceType };
+        if (bluetooth) return handleBluetoothAction({ kind: "hero_preparation_choice", ...choice });
+        try { configureHeroPreparation(gameState!, gameSecret!, side, choice); renderGame(); } catch (e) { showToast(e instanceof RuleError ? e.message : "准备失败"); }
+      });
+    } else addButton("完成英雄准备", () => { if (bluetooth) handleBluetoothAction({ kind: "preparation_ready" }); else completeLocalHeroPreparation(); });
+    return;
+  }
+  if (openingActive || localPreparationActive || bluetooth?.view?.phase === "hero_intro" || bluetooth?.view?.phase === "hero_preparation" || gameState.status !== "playing") return;
+  const pending = gameState.pendingHeroChild, descent = gameState.pendingDescent;
+  if (gameState.pendingShuffle) {
+    addButton(`洗牌窗口${gameState.pendingShuffle.window}：发动`, () => runTransferredHeroCommand({ kind: "hero_ability", ability: "shuffle", actionId: nextActionId(), expectedRevision: gameState!.revision }));
+    addButton("本窗口不发动", () => runTransferredHeroCommand({ kind: "hero_ability", ability: "shuffle", skip: true, actionId: nextActionId(), expectedRevision: gameState!.revision }));
+  } else if (descent) addButton(descent.assaultIds ? "结算下一枚风暴元素突袭" : "完成迦拉克隆部署", () => openTransferredHeroAbility(descent.assaultIds ? "storm_assault" : "ascension"));
+  else if (pending) {
+    const abilities: Array<[HeroAbilityCommand["ability"],string]> = pending.kind === "blade" ? [["blade_shift","顺锋移置"]] : pending.kind === "inner_wave" ? [["wave_move","出河后额外移动"]] : [["charge_move","冲锋·逐"],["charge_attack","冲锋·斩"]];
+    for (const [ability,label] of abilities) addButton(label, () => openTransferredHeroAbility(ability));
+    addButton("放弃衍生行动", () => runTransferredHeroCommand({ kind: "hero_ability", ability: "skip_child", skip: true, expectedRevision: gameState!.revision, actionId: nextActionId() }));
+  }
+  const forced = gameState.pieces.find(p => p.layer === "air" && getController(p) === side && gameState!.effectsByPieceId?.[p.id]?.flight?.forcedLanding);
+  if (forced) addButton("飞行期限已到：原地降落", () => runTransferredHeroCommand({ kind: "hero_ability", ability: "landing", pieceId: forced.id, expectedRevision: gameState!.revision, actionId: nextActionId() }));
+  const secrets = bluetooth ? bluetooth.view?.ownHeroSecrets : { insights: gameSecret?.insights?.[side], training: gameSecret?.training?.[side] };
+  if (hero === "night") {
+    const p = document.createElement("p"); p.textContent = `瞳力 ${gameState.heroRuntime?.[side]?.pupil ?? 0}｜已成功洞察 ${gameState.heroRuntime?.[side]?.insightCount ?? 0} 次`;
+    panel.append(p); panel.hidden = false;
+    for (const insight of secrets?.insights ?? []) { const line = document.createElement("p"); line.textContent = `${insight.valid ? "洞察快照" : "历史情报（已失效）"}：第 ${insight.revision} 手时 ${insight.pieceId}，${insight.identity.color === "red" ? "红方" : "黑方"}${pieceLabel[insight.identity.color][insight.identity.type]}`; panel.append(line); }
+  }
+  if (secrets?.training) { const p = document.createElement("p"); p.textContent = secrets.training.failed ? "征兵无合法候选，培养失败" : `私有受训对象 ${secrets.training.pieceId ?? "无"}｜进度 ${secrets.training.progress}${secrets.training.graduated ? "｜已毕业" : ""}`; panel.append(p); panel.hidden = false; }
+  if (hero === "berserker") { const p = document.createElement("p"); p.textContent = `战意 ${gameState.heroRuntime?.[side]?.will ?? 0}｜冲锋次数 ${gameState.heroRuntime?.[side]?.chargeCount ?? 0}`; panel.append(p); panel.hidden = false; }
+  if (gameState.heroRuntime?.[side]?.omen) { const p = document.createElement("p"); p.textContent = "降临预兆：对方完成本次回应后，下一己方回合开始自动降临。"; panel.append(p); panel.hidden = false; }
+  for (const flyer of gameState.pieces.filter(p => p.layer === "air" && getController(p) === side)) addButton(`选择飞行棋 ${flyer.id}`, () => { selectedPieceId = flyer.id; renderGame(); });
+  const riverPieces = gameState.pieces.filter(p => p.layer === "river");
+  if (riverPieces.length) { const p = document.createElement("p"); p.textContent = `河道：${riverPieces.map(q => `${q.id} 在第 ${Number(q.river?.cellId) + 1} 路，剩余 ${gameState!.effectsByPieceId?.[q.id]?.riverTurns ?? "—"} 回合`).join("；")}`; panel.append(p); panel.hidden = false; }
+}
+function openTransferredHeroAbility(ability: HeroAbilityCommand["ability"]): void {
+  if (!gameState || gameState.status !== "playing") return;
+  const controls = document.createElement("div"), side = gameState.turn, pending = gameState.pendingHeroChild;
+  const piece = document.createElement("select"); piece.setAttribute("aria-label", "技能棋子");
+  const pool = ability === "insight" ? gameState.pieces.filter(p => p.faceDown) : gameState.pieces.filter(p => getController(p) === side);
+  for (const p of pool) piece.add(new Option(`${p.faceDown ? "暗棋" : pieceLabel[p.color][p.type]} ${p.id}${p.layer === "river" ? "（河道）" : `（${p.x},${p.y}）`}`, p.id));
+  if (pending) piece.value = pending.pieceId;
+  const targetAbilities = ["burning_flame","insight","landing","river_enter","river_move","river_exit","inner_wave","blade_shift","charge_move","charge_attack","wave_move"];
+  if (targetAbilities.includes(ability)) controls.append(piece);
+  const coordinates = () => {
+    const x = document.createElement("input"), y = document.createElement("input");
+    for (const [input,name,max] of [[x,"目标列（0–8）",8],[y,"目标行（0–9）",9]] as const) { input.type="number";input.min="0";input.max=String(max);input.value="0";input.setAttribute("aria-label",name); }
+    return { x,y };
+  };
+  const to = coordinates();
+  const moving = ["river_move","river_exit","inner_wave","blade_shift","charge_move","charge_attack","wave_move","storm_assault"].includes(ability);
+  if (moving) controls.append(to.x,to.y);
+  const secret = document.createElement("input"); secret.type="checkbox";
+  if (ability === "insight") { const label=document.createElement("label");label.textContent="秘密洞察（费用7+6n，隐藏目标）";label.append(secret);controls.append(label); }
+  const skip = document.createElement("input");skip.type="checkbox";
+  if (ability === "storm_assault") {const label=document.createElement("label");label.textContent="不使用这枚元素的突袭";label.append(skip);controls.append(label);}
+  const rows: Array<{ piece: HTMLSelectElement; to: ReturnType<typeof coordinates> }> = [];
+  if (ability === "ascension") {
+    const descent=gameState.pendingDescent;
+    if (!descent) return;
+    const items=descent.variant === "nightmare" ? [undefined,undefined,undefined,undefined] : descent.pieces;
+    for (const generated of items) {
+      const select=document.createElement("select");select.setAttribute("aria-label","待部署棋子");
+      if (generated) select.add(new Option(pieceLabel[side][generated.type],generated.id));
+      else { select.add(new Option("不选择此项",""));for(const p of pool.filter(p=>p.faceDown||p.type!=="general"))select.add(new Option(p.id,p.id)); }
+      const pos=coordinates();controls.append(select,pos.x,pos.y);rows.push({piece:select,to:pos});
+    }
+  }
+  const names: Partial<Record<HeroAbilityCommand["ability"], string>> = { burning_flame:"燃烧烈焰",insight:"洞察",inner_ghost_burst:"里·纠缠怨念",river_enter:"入河",river_move:"河道横移",river_exit:"出河",inner_wave:"里·清波",landing:"原地降落",blade_shift:"顺锋",charge_move:"冲锋·逐",charge_attack:"冲锋·斩",wave_move:"出河后额外移动",ascension:"迦拉克隆部署",storm_assault:"风暴元素突袭" };
+  showDialog(names[ability] ?? "英雄结算", "选择本次技能的对象与落点。非法选择会保留当前棋局和资源，请按技能说明调整。", "确认", () => runTransferredHeroCommand({ kind:"hero_ability",ability,actionId:nextActionId(),expectedRevision:gameState!.revision,...(targetAbilities.includes(ability) && piece.value ? {pieceId:piece.value}:{}),...(moving?{to:{x:Number(to.x.value),y:Number(to.y.value)}}:{}),...(ability==="insight"?{secretInsight:secret.checked}:{}),...(ability==="storm_assault"?{skip:skip.checked}:{}),...(ability==="ascension"?{placements:rows.filter(row=>row.piece.value).map(row=>({pieceId:row.piece.value,to:{x:Number(row.to.x.value),y:Number(row.to.y.value)}}))}:{}) }));
+  dialogText.append(controls);
 }

@@ -1,4 +1,7 @@
-import { initializeHeroForms, selectedHeroId, validateHeroForms } from "./hero-forms.ts";
+import { saveShuffleOpening, openShuffleB } from "./hero-shuffle.ts";
+import { advanceTraining, settleTrainingDeaths, TRAINING_COST } from "./hero-progress.ts";
+import { ascendGalakrond } from "./hero-descent.ts";
+import { initializeHeroForms, selectedHeroId, selectedHeroSelection, validateHeroForms } from "./hero-forms.ts";
 import { openDestructionBatches, requireClosedDestructionBatch } from "./settlement-context.ts";
 import { getGhostObjects, putGhostObject, reconcileGhostInfections, tickGhostObjects } from "./ghosts.ts";
 import { boardPieces, isBoardPiece, isFlying, isGround, isRiver, mayReadRiver } from "./spaces.ts";
@@ -43,7 +46,7 @@ export const formalTurn = (state: GameState, side: Side): number => state.formal
  * 普通当前兵种判定应调用 slots.ts 的 getCurrentPieceType，不能使用此函数。
  */
 export function effectiveIdentity(piece: PublicPiece, secret: SecretState, source: TrueIdentityReadSource): SecretIdentity {
-  if (!["death:reveal", "mutation:end_time:initialization", "hero:wind:covered_carrier"].includes(source)) throw new RuleError("TRUE_IDENTITY_PERMISSION", "真实身份读取须由明确获准的权威来源提供");
+  if (!["death:reveal", "mutation:end_time:initialization", "hero:wind:covered_carrier", "hero:night:insight", "hero:sky_admiral:training"].includes(source)) throw new RuleError("TRUE_IDENTITY_PERMISSION", "真实身份读取须由明确获准的权威来源提供");
   const identity = piece.faceDown ? secret.identities[piece.id] : piece;
   if (!identity) throw new RuleError("MISSING_SECRET", "暗子真实身份缺失");
   return { color: identity.color, type: identity.type };
@@ -54,6 +57,7 @@ export function initializeFeatureSecret(state: GameState, secret: SecretState, r
   validateHeroForms(state, secret);
   requireModeFeatureAdaptation(state.gameMode, state.featureRules);
   initializeHeroForms(state, secret);
+  saveShuffleOpening(state, secret);
   secret.trueGenerals ??= {};
   for (const side of ["red", "black"] as const) {
     const general = state.pieces.find(p => isBoardPiece(p) && !p.faceDown && p.type === "general" && p.color === side);
@@ -105,6 +109,7 @@ export function destroyPiece(state: GameState, secret: SecretState, id: string, 
   const victim = state.pieces.find(p => p.id === id);
   if (!victim || !isBoardPiece(victim) && !mayReadRiver(permission)) return;
   if (cause === "crush" && (!isGround(victim) || state.effectsByPieceId?.[id]?.immuneCrush)) return;
+  if (state.effectsByPieceId?.[id]?.dragonScale && ["attack", "assassination", "crush"].includes(cause)) throw new RuleError("DESIGN_REQUIRED_DRAGON_SCALE_PLACEMENT", "龙鳞拦截后的进攻者与目标落位尚未冻结，本操作不能提交");
   const controller = getController(victim);
   const identity = effectiveIdentity(victim, secret, "death:reveal");
   const withheld = victim.faceDown && state.featureRules?.mutation === "chaos";
@@ -121,13 +126,13 @@ export function destroyPiece(state: GameState, secret: SecretState, id: string, 
   }
   if (secret.destinyIdentities?.[id]) secret.destinyIdentities[id].shown = true;
   state.automaticEvents ??= [];
-  state.automaticEvents.push({ kind: `destroy:${cause}`, pieceId: id, side: controller, position: record.position, deathRecord: copy(record), ...(batch ? { batchId: batch.batchId } : {}) });
+  state.automaticEvents.push({ kind: `destroy:${cause}`, pieceId: id, side: controller, position: record.position, deathRecord: copy(record), wasCovered: victim.faceDown, ...(batch ? { batchId: batch.batchId } : {}) });
   return record;
 }
 
-export function queueLanding(state: GameState, piece: PublicPiece, beforeController: Side, source: string): void {
+export function queueLanding(state: GameState, piece: PublicPiece, beforeController: Side, source: string, from?: Position): void {
   state.landingEvents ??= [];
-  state.landingEvents.push({ pieceId: piece.id, beforeController, position: { x: piece.x, y: piece.y }, source });
+  state.landingEvents.push({ pieceId: piece.id, beforeController, position: { x: piece.x, y: piece.y }, source, beforeGhostOwners: from ? getGhostObjects(state, { kind: "ghost", position: from }).filter(g => g.owner !== beforeController).map(g => g.owner) : state.effectsByPieceId?.[piece.id]?.infection ? [state.effectsByPieceId[piece.id].infection!.owner] : [] });
 }
 
 export function placementAllowed(state: GameState, piece: PublicPiece, to: Position, options: { warriorReturn?: boolean; flow?: boolean; fromRiver?: Side } = {}): boolean {
@@ -145,8 +150,9 @@ export function relocatePiece(state: GameState, secret: SecretState, id: string,
   const p = state.pieces.find(p => p.id === id);
   if (!p || !isBoardPiece(p) || !placementAllowed(state, p, to, options)) return false;
   const controller = getController(p);
+  const from = { x: p.x, y: p.y };
   p.x = to.x; p.y = to.y;
-  queueLanding(state, p, controller, source);
+  queueLanding(state, p, controller, source, from);
   settleLandings(state, secret);
   return true;
 }
@@ -162,21 +168,25 @@ export function settleLandings(state: GameState, secret: SecretState): void {
     if (!p || !isGround(p)) continue;
     const afterController = getController(p);
     const traps = secret.traps ?? [];
-    const index = traps.findIndex(t => t.owner !== event.beforeController && t.owner !== afterController && samePosition(t.position, p));
+    const index = traps.findIndex(t => t.opponentTurnsRemaining > 0 && t.owner !== event.beforeController && t.owner !== afterController && samePosition(t.position, p));
     if (index >= 0) {
       const [trap] = traps.splice(index, 1);
       state.automaticEvents ??= [];
       state.automaticEvents.push({ kind: "trap_trigger", pieceId: p.id, side: trap.owner, position: { x: p.x, y: p.y } });
-      if (trap.opponentTurnsRemaining >= 4) {
-        destroyPiece(state, secret, p.id, trap.owner, "trap_ambush");
-        continue;
-      }
-      state.effectsByPieceId ??= {};
-      state.effectsByPieceId[p.id] = { ...state.effectsByPieceId[p.id], controlTrap: { controller: afterController, blockedFormalTurn: formalTurn(state, afterController) + (state.turn === afterController ? 2 : 1) } };
+      destroyPiece(state, secret, p.id, trap.owner, "trap_ambush");
+      continue;
     }
     const e = state.effectsByPieceId?.[p.id];
     const ghosts = getGhostObjects(state, { kind: "ghost", position: p }).filter(g => g.owner !== afterController);
     if (e?.infection && !ghosts.some(g => g.owner === e.infection!.owner)) delete e.infection;
+    for (const g of ghosts) {
+      if (event.beforeGhostOwners?.includes(g.owner) || state.automaticEvents?.some(e => e.kind === "ghost_entry" && e.pieceId === p.id && e.side === g.owner)) continue;
+      state.effectsByPieceId ??= {}; const effects = state.effectsByPieceId[p.id] ??= {};
+      effects.infection = { owner: g.owner, stacks: effects.infection?.owner === g.owner ? effects.infection.stacks + 1 : 1 };
+      (state.automaticEvents ??= []).push({ kind: "ghost_entry", pieceId: p.id, side: g.owner });
+      if (effects.infection.stacks >= 3) { destroyPiece(state, secret, p.id, g.owner, "infection"); break; }
+    }
+    if (!state.pieces.some(q => q.id === p.id)) continue;
     const warped = state.warps?.some(w => samePosition(w, p));
     if (e?.timeCollapse && !warped) delete e.timeCollapse;
     if (warped && selectedHeroId(state, afterController) === "nozdormu") {
@@ -188,6 +198,7 @@ export function settleLandings(state: GameState, secret: SecretState): void {
 
 export function closeDirectDeaths(state: GameState, secret: SecretState, actingSide: Side): boolean {
   requireClosedDestructionBatch(state);
+  settleTrainingDeaths(state, secret, max => Math.floor(Math.random() * max));
   const alive = (side: Side) => {
     const wind = secret.wind?.[side];
     const id = wind?.hostId ?? secret.trueGenerals?.[side];
@@ -248,7 +259,7 @@ export function resolveWindReturn(state: GameState, secret: SecretState, executo
     queueLanding(state, returnedGeneral, side, "flow");
     state.automaticEvents ??= [];
     state.automaticEvents.push({ kind: "wind_flow", pieceId: host.id, side, position: death.position });
-    if (executor) state.flowDance = { side, pieceId: host.id, steps: 0, resumeTurn: side };
+    if (executor && w.uses === 1) state.flowDance = { side, pieceId: host.id, steps: 0, resumeTurn: side };
   }
   if (returned) settleLandings(state, secret);
   return returned;
@@ -263,10 +274,12 @@ export function generateGhosts(state: GameState, firstEvent = 0): void {
     if (event.ghostTriggerHandled) continue;
     event.ghostTriggerHandled = true;
     if (state.status === "finished") continue;
-    if (selectedHeroId(state, event.side) !== "death_knight") continue;
+    const selection = selectedHeroSelection(state, event.side);
+    if (selection?.heroId !== "death_knight") continue;
     const dead = event.deathRecord ?? [...state.captured].reverse().find(p => p.id === event.pieceId);
     if (!dead || dead.type === "general") continue;
-    putGhostObject(state, { kind: "ghost", source: "death_knight:death", owner: event.side, position: { ...event.position }, remaining: 3 }, "replace");
+    if (selection.form === "inner") putGhostObject(state, { kind: "inner_ghost", source: "death_knight:inner_death", owner: event.side, position: { ...event.position }, remaining: 0, persistent: true, layers: 1 }, "add_layers");
+    else putGhostObject(state, { kind: "ghost", source: "death_knight:death", owner: event.side, position: { ...event.position }, remaining: 3 }, "replace");
   }
 }
 
@@ -277,19 +290,6 @@ export function beginFormalTurn(state: GameState, secret?: SecretState, randomIn
   if (state.status !== "playing" || state.forcedDefense || state.flowDance) return;
   initializeHeroForms(state, secret);
   const side = state.turn, number = formalTurn(state, side) + 1;
-  if (state.turnLifecycle?.side !== side || state.turnLifecycle.number !== number) {
-    state.turnLifecycle = { side, number, phase: "turn_start", phases: ["turn_start"] };
-    const hero = selectedHeroId(state, side);
-    if (hero === "qin_long" && Math.min(formalTurn(state, "red"), formalTurn(state, "black")) >= 15) {
-      state.heroRuntime ??= {};
-      (state.heroRuntime[side] ??= {}).rainActive = randomInt(100) < 15;
-    }
-    if (hero === "prince") {
-      state.heroRuntime ??= {};
-      (state.heroRuntime[side] ??= {}).carefreeSuspended = false;
-    }
-    enterTurnPhase(state, "before_main");
-  }
   if (secret && (secret.formalStart?.side !== side || secret.formalStart.number !== number)) {
     if (state.featureRules?.mutation === "chaos") {
       for (const p of boardPieces(state)) if (p.faceDown) secret.identities[p.id].color = randomInt(2) === 0 ? "red" : "black";
@@ -297,6 +297,28 @@ export function beginFormalTurn(state: GameState, secret?: SecretState, randomIn
     }
     secret.formalStart = { side, number };
   }
+  if (state.turnLifecycle?.side !== side || state.turnLifecycle.number !== number) {
+    state.turnLifecycle = { side, number, phase: "turn_start", phases: ["turn_start"] };
+    const hero = selectedHeroId(state, side);
+    if (hero === "qin_long" && Math.min(formalTurn(state, "red"), formalTurn(state, "black")) >= 15) {
+      state.heroRuntime ??= {};
+      (state.heroRuntime[side] ??= {}).rainActive = randomInt(100) < 15;
+    }
+    if (hero === "night") {
+      state.heroRuntime ??= {}; const runtime = state.heroRuntime[side] ??= {};
+      runtime.pupil ??= 0; runtime.insightCount ??= 0;
+      if (number % 2 === 0) runtime.pupil += 6;
+    }
+    if (hero === "prince") {
+      state.heroRuntime ??= {};
+      (state.heroRuntime[side] ??= {}).carefreeSuspended = false;
+    }
+    if (secret) advanceTraining(state, secret, side, randomInt);
+    if (secret) ascendGalakrond(state, secret, side, randomInt);
+    if (state.status !== "playing" || state.pendingDescent) return;
+    enterTurnPhase(state, "before_main");
+  }
+
 }
 
 /** 先以公开开始效果试算合法性；确认非终局后才实际开始下一回合、抽随机或刷新秘密。 */
@@ -304,6 +326,12 @@ export function advanceToFormalTurn(state: GameState, secret: SecretState, side:
   validateHeroForms(state, secret);
   requireClosedDestructionBatch(state);
   if (state.status !== "playing" || state.forcedDefense || state.flowDance) return;
+  if (openShuffleB(state, side)) return;
+  const training = secret.training?.[side];
+  if (state.heroRuntime?.[side]?.omen || training && !training.failed && !training.graduated && training.progress + 1 >= TRAINING_COST[training.type]!) {
+    state.turn = side; beginFormalTurn(state, secret, randomInt);
+    if (state.status !== "playing" || state.pendingDescent) return;
+  }
   const probe = copy(state);
   probe.turn = side;
   // 秦龙抽签只影响落子后专属胜负，不改变合法走法；试算不能消耗真实随机数。
@@ -332,11 +360,25 @@ export function finishFormalTurn(state: GameState, secret: SecretState, actingSi
   let newEventStart = state.automaticEvents?.length ?? 0;
   for (const [id, e] of Object.entries(state.effectsByPieceId ?? {})) {
     const p = state.pieces.find(p => p.id === id);
+    if (p && isRiver(p) && e.riverTurns !== undefined && getController(p) === actingSide && --e.riverTurns <= 0) destroyPiece(state, secret, p.id, otherSide(actingSide), "river_expiry", { source: "jiang_he:river_expiry", readRiver: true });
     if (!p || !isBoardPiece(p)) continue;
+    if (e.stealth && e.stealth.owner === actingSide && e.stealth.activatedOnFormalTurn !== formalTurn(state, actingSide)) {
+      e.stealth.remainingOwnerTurns -= 1;
+      if (e.stealth.remainingOwnerTurns <= 0) {
+        delete e.stealth;
+        if (state.assassination?.[actingSide]?.activePieceId === id) delete state.assassination[actingSide].activePieceId;
+      }
+    }
     if (e.barrier && e.barrier.owner !== actingSide && --e.barrier.enemyTurnsRemaining <= 0) delete e.barrier;
     if (e.controlTrap && e.controlTrap.controller === actingSide && e.controlTrap.blockedFormalTurn <= formalTurn(state, actingSide)) delete e.controlTrap;
     if (!isGround(p)) { delete e.infection; delete e.timeCollapse; }
-    if (e.flight && getController(p) === actingSide && --e.flight.remainingOwnerTurns <= 0) landFlyingPiece(state, secret, id);
+    if (e.flight && getController(p) === actingSide) {
+      e.flight.remainingOwnerTurns = Math.max(0, e.flight.remainingOwnerTurns - 1);
+      if (e.flight.remainingOwnerTurns === 0) {
+        if (e.flight.source === "sky_admiral") e.flight.forcedLanding = true;
+        else landFlyingPiece(state, secret, id);
+      }
+    }
     if (e.timeCollapse && getController(p) === actingSide && e.timeCollapse.expiresAtOwnerTurnEnd <= formalTurn(state, actingSide)) destroyPiece(state, secret, id, otherSide(actingSide), "time_collapse");
   }
   resolveWindReturn(state, secret);
@@ -374,7 +416,7 @@ export function landFlyingPiece(state: GameState, secret: SecretState, id: strin
     destroyPiece(state, secret, id, otherSide(controller), "suffocation");
   } else {
     delete p.layer;
-    if (state.effectsByPieceId?.[id]) { delete state.effectsByPieceId[id].flight; delete state.effectsByPieceId[id].intangible; }
+    if (state.effectsByPieceId?.[id]) { delete state.effectsByPieceId[id].flight; delete state.effectsByPieceId[id].intangible; delete state.effectsByPieceId[id].immuneCrush; }
     queueLanding(state, p, controller, "flight_landing");
     settleLandings(state, secret);
   }

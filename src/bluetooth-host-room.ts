@@ -1,3 +1,4 @@
+import { submitRemoteHeroPreparationChoice } from "./remote-room.ts";
 import { RuleError } from "./errors.ts";
 import {
   advanceRemoteRoomTime,
@@ -33,7 +34,8 @@ export const BLUETOOTH_HOST_PLAYER = "bluetooth:host";
 export const BLUETOOTH_GUEST_PLAYER = "bluetooth:guest";
 
 export type BluetoothRoomAction =
-  | { kind: "hero"; hero: HeroId }
+  | { kind: "hero"; hero: HeroId; form?: import("./types.ts").HeroForm; variant?: import("./types.ts").GalakrondForm }
+  | { kind: "hero_preparation_choice"; blade?: "left" | "right"; trainingType?: import("./types.ts").PieceType }
   | { kind: "rps"; choice: RpsChoice; round: number }
   | { kind: "hero_intro_complete" }
   | { kind: "trap_draft"; positions: readonly Position[] }
@@ -97,8 +99,10 @@ export class BluetoothHostRoom {
         this.room = submitRemoteRps(this.room, playerId, action.choice, action.round, this.randomInt, now);
         break;
       case "hero":
-        this.room = submitRemoteHeroSelection(this.room, playerId, action.hero, this.randomInt, now);
+        this.room = submitRemoteHeroSelection(this.room, playerId, action.hero, this.randomInt, now, { form: action.form, variant: action.variant });
         break;
+      case "hero_preparation_choice":
+        this.room = submitRemoteHeroPreparationChoice(this.room, playerId, action, now, this.randomInt); break;
       case "hero_intro_complete":
         this.room = completeRemoteHeroIntro(this.room, playerId, now);
         break;
