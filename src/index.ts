@@ -17,3 +17,4 @@ export * from "./hero-actions.ts";
 export * from "./settlement.ts";
 export * from "./heroes.ts";
 export * from "./spaces.ts";
+export * from "./ghosts.ts";

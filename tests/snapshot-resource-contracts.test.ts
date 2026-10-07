@@ -74,6 +74,6 @@ test("SNAP-RESOURCE-05 rewind restores self-captured covered identity and erases
   const { first, before } = firstMove("death_knight", [revealed("captor", "black", "rook", 2, 2), covered("sacrifice", 2, 3)], secretState({ sacrifice: { color: "black", type: "pawn" } }));
   const died = applyAuthoritativeMove(first.state, first.secret, move({ x: 2, y: 2 }, { x: 2, y: 3 }, "self-capture", first.state.revision), false, 62_000);
   assert.equal(died.state.captured[0].id, "sacrifice");
-  assert.deepEqual(died.state.ghosts, [{ owner: "black", position: { x: 2, y: 3 }, remaining: 2 }]);
+  assert.deepEqual(died.state.ghosts, [{ kind: "ghost", source: "death_knight:death", owner: "black", position: { x: 2, y: 3 }, remaining: 2 }]);
   rewind(died, before);
 });

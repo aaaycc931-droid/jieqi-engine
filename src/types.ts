@@ -219,6 +219,20 @@ export interface ClosedDestructionBatch {
   phase: "closed";
 }
 
+export type GhostKind = "ghost" | "inner_ghost";
+export interface GhostObject {
+  /** 旧快照省略时仅兼容为普通亡魂。新增对象必须通过明确种类的入口。 */
+  kind?: GhostKind;
+  source?: string;
+  owner: Side;
+  position: Position;
+  remaining: number;
+  /** 只有来源明确提供时才记录；不从寿命或其他种类推算层数。 */
+  layers?: number;
+}
+export type GhostObjectSpec = GhostObject & { kind: GhostKind; source: string };
+export interface GhostQuery { kind: GhostKind; owner?: Side; source?: string; position?: Position }
+
 export interface GameState {
   /** 缺省为原有全局混洗揭棋，兼容既有棋局与快照。 */
   gameMode?: GameModeId;
@@ -245,7 +259,8 @@ export interface GameState {
   /** 最近一次公开操作及其子行动；秘密操作不写入。 */
   actionRecords?: ActionRecord[];
   heroRuntime?: Partial<Record<Side, { used?: boolean; invokeCount?: number; rainActive?: boolean; carefreeSuspended?: boolean }>>;
-  ghosts?: Array<{ owner: Side; position: Position; remaining: number }>;
+  /** 两种独立格对象共用存储，所有规则读取须精确指定种类。 */
+  ghosts?: GhostObject[];
   warps?: Position[];
   hourglasses?: number;
   /** 一次原子行动内各落位，含弹回/移置/复活，供共同结算管线使用。 */

@@ -17,3 +17,4 @@ export * from "./hero-actions.js";
 export * from "./settlement.js";
 export * from "./heroes.js";
 export * from "./spaces.js";
+export * from "./ghosts.js";

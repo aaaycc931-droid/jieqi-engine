@@ -1,3 +1,5 @@
+import { openDestructionBatches, requireClosedDestructionBatch } from "./settlement-context.ts";
+import { getGhostObjects, putGhostObject, reconcileGhostInfections, tickGhostObjects } from "./ghosts.ts";
 import { boardPieces, isBoardPiece, isFlying, isGround, isRiver, mayReadRiver } from "./spaces.ts";
 export { isGround } from "./spaces.ts";
 import { RuleError } from "./errors.ts";
@@ -6,12 +8,6 @@ import { getController, getCurrentPieceType, isInPalace, isInsideBoard, otherSid
 import { isCheckmate, isGeneralInCheck, isStalemate, pieceAt, samePosition } from "./rules.ts";
 import { enterTurnPhase } from "./turns.ts";
 import type { ActionClassification, CapturedPiece, ClosedDestructionBatch, DestructionTarget, GameState, Position, PublicPiece, RandomInt, RiverLocation, RiverReadPermission, SecretIdentity, SecretState, Side } from "./types.ts";
-
-// 仅同步权威结算栈持有开放批次；不能进入公共/秘密快照或历史恢复。
-const openDestructionBatches = new WeakMap<GameState, { batchId: string; targets: DestructionTarget[] }>();
-function requireClosedDestructionBatch(state: GameState): void {
-  if (openDestructionBatches.has(state)) throw new RuleError("DESTRUCTION_BATCH_OPEN", "必须闭合整个消灭批次后才处理后续触发或终局");
-}
 
 /** 冻结承诺、预检死亡身份，整批完成后才开放后续触发。不会重新扫描棋盘。 */
 export function destroyPieceBatch(state: GameState, secret: SecretState, batchId: string, source: string, targets: readonly DestructionTarget[], permission?: RiverReadPermission): ClosedDestructionBatch {
@@ -174,7 +170,7 @@ export function settleLandings(state: GameState, secret: SecretState): void {
       state.effectsByPieceId[p.id] = { ...state.effectsByPieceId[p.id], controlTrap: { controller: afterController, blockedFormalTurn: formalTurn(state, afterController) + (state.turn === afterController ? 2 : 1) } };
     }
     const e = state.effectsByPieceId?.[p.id];
-    const ghosts = state.ghosts?.filter(g => g.owner !== afterController && samePosition(g.position, p)) ?? [];
+    const ghosts = getGhostObjects(state, { kind: "ghost", position: p }).filter(g => g.owner !== afterController);
     if (e?.infection && !ghosts.some(g => g.owner === e.infection!.owner)) delete e.infection;
     const warped = state.warps?.some(w => samePosition(w, p));
     if (e?.timeCollapse && !warped) delete e.timeCollapse;
@@ -264,10 +260,7 @@ export function generateGhosts(state: GameState, firstEvent = 0): void {
     if (state.featureRules?.heroes?.[event.side] !== "death_knight") continue;
     const dead = event.deathRecord ?? [...state.captured].reverse().find(p => p.id === event.pieceId);
     if (!dead || dead.type === "general") continue;
-    state.ghosts ??= [];
-    const existing = state.ghosts.find(g => g.owner === event.side && samePosition(g.position, event.position!));
-    if (existing) existing.remaining = 3;
-    else state.ghosts.push({ owner: event.side, position: { ...event.position }, remaining: 3 });
+    putGhostObject(state, { kind: "ghost", source: "death_knight:death", owner: event.side, position: { ...event.position }, remaining: 3 }, "replace");
   }
 }
 
@@ -340,7 +333,7 @@ export function finishFormalTurn(state: GameState, secret: SecretState, actingSi
   if (closeDirectDeaths(state, secret, actingSide)) return;
   generateGhosts(state, newEventStart);
   newEventStart = state.automaticEvents?.length ?? 0;
-  for (const g of state.ghosts ?? []) {
+  for (const g of getGhostObjects(state, { kind: "ghost", owner: actingSide })) {
     if (g.owner !== actingSide) continue;
     const p = pieceAt(state, g.position);
     if (p && isGround(p) && getController(p) !== g.owner) {
@@ -349,15 +342,10 @@ export function finishFormalTurn(state: GameState, secret: SecretState, actingSi
       e.infection = { owner: g.owner, stacks: e.infection?.owner === g.owner ? e.infection.stacks + 1 : 1 };
       if (e.infection.stacks >= 3) destroyPiece(state, secret, p.id, g.owner, "infection");
     }
-    g.remaining -= 1;
   }
-  state.ghosts = state.ghosts?.filter(g => g.remaining > 0);
+  tickGhostObjects(state, { kind: "ghost", owner: actingSide });
   generateGhosts(state, newEventStart);
-  for (const [id, e] of Object.entries(state.effectsByPieceId ?? {})) {
-    const p = state.pieces.find(p => p.id === id);
-    if (p && !isBoardPiece(p)) continue;
-    if (e.infection && (!p || !state.ghosts?.some(g => g.owner === e.infection!.owner && samePosition(g.position, p)))) delete e.infection;
-  }
+  reconcileGhostInfections(state);
   resolveWindReturn(state, secret);
   if (closeDirectDeaths(state, secret, actingSide)) return;
   secret.traps = secret.traps?.filter(t => t.owner === actingSide || --t.opponentTurnsRemaining > 0);
