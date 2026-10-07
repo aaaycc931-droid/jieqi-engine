@@ -44,7 +44,7 @@ try {
  await page.locator('#local-game-button').click();assert.equal(await page.locator('#hero-grid button').count(),19);done('nineteen hero selection entries');
  const n=pair('night',[covered('insight-target',0,6)]);n.secret.identities['insight-target']={color:'black',type:'cannon'};n.state.formalTurns.red=1;
  await load(n);await open('insight');await page.getByLabel('技能棋子',{exact:true}).selectOption('insight-target');await confirm();
- let s=await read();assert.equal(s.heroRuntime.red.pupil,2);assert.equal(s.effectsByPieceId['insight-target'].insightMark,true);assert.match(await page.locator('#transferred-hero-controls').textContent(),/洞察快照.*黑方炮/);
+ let s=await read();assert.equal(s.heroRuntime.red.pupil,2);assert.equal(s.effectsByPieceId['insight-target'].insightMark,true);assert.match(await page.locator('#transferred-hero-controls').textContent(),/洞察快照.*黑方[炮砲]/);
  await page.evaluate(()=>globalThis.__heroReview.handoff());assert.equal(await page.locator('#transferred-hero-controls').textContent(),'');done('public insight fee, private result and device handoff clearing');
  let b=pair('single_blade',[revealed('blade','red','rook',1,7)]);configureHeroPreparation(b.state,b.secret,'red',{blade:'left'});b=applyAuthoritativeMove(b.state,b.secret,move({x:1,y:7},{x:1,y:6},'blade-main'));
  await load(b);await page.getByRole('button',{name:'顺锋移置',exact:true}).click();await coordinates(2,6);await confirm();s=await read();assert.equal(s.pieces.find(p=>p.id==='blade').x,2);assert.equal(s.formalTurns.red,1);assert.equal(s.turn,'black');done('blade displacement child ends only its original formal turn');

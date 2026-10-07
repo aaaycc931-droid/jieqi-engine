@@ -57,6 +57,14 @@ export function applyShuffleAction(state           , secret             , comman
     for (const p of rebuilt) if (p.faceDown && !anchors.has(p.id)) k.identities[p.id] = shuffled[index++];
     const initialIds = new Set(rebuilt.map(p => p.id));
     s.pieces = rebuilt; s.captured = s.captured.filter(p => !initialIds.has(p.id));
+    // 恢复开局公开将帅结构时同步其权威引用，技能次数/冷却和有效宿主不回滚。
+    for (const side of ["red", "black"]         ) {
+      const general = rebuilt.find(p => !p.faceDown && p.type === "general" && p.color === side);
+      if (general) {
+        (k.trueGenerals ??= {})[side] = general.id;
+        if (k.wind?.[side]) k.wind[side] .decoyId = general.id;
+      }
+    }
     for (const effects of Object.values(s.effectsByPieceId ?? {})) delete effects.insightMark;
     for (const insights of Object.values(k.insights ?? {})) for (const result of insights ?? []) result.valid = false;
     for (const p of s.pieces) {

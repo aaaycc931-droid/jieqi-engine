@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { applyAuthoritativeAssassination, applyAuthoritativeMove, applyHeroAbility, beginFormalTurn, closeDirectDeaths, configureHeroPreparation, createBluetoothSnapshot, destroyPiece, finishFormalTurn, generateGhosts, getController, getHeroPackage, getLegalAssassinationMoves, getLegalMoves, initializeFeatureGameState, initializeFeatureSecret, isGeneralInCheck, landFlyingPiece, ownerHeroSecrets, playerRoomView, publicRemoteRoom, publicStateSnapshot, putGhostObject, queueLanding, recordAction, closeMainActionAtom, reconcileGhostInfections, relocatePiece, settleLandings, startFormalClock, validateHeroForms } from "../src/index.ts";
+import { applyAuthoritativeAssassination, applyAuthoritativeMove, applyHeroAbility, beginFormalTurn, closeDirectDeaths, configureHeroPreparation, createBluetoothSnapshot, destroyPiece, finishFormalTurn, generateGhosts, getController, getHeroPackage, getLegalAssassinationMoves, getLegalMoves, initializeFeatureGameState, initializeFeatureSecret, isGeneralInCheck, landFlyingPiece, ownerHeroSecrets, playerRoomView, publicRemoteRoom, publicStateSnapshot, putGhostObject, queueLanding, recordAction, closeMainActionAtom, reconcileGhostInfections, resolveWindReturn, relocatePiece, settleLandings, startFormalClock, validateHeroForms } from "../src/index.ts";
 import { BluetoothHostRoom, BLUETOOTH_HOST_PLAYER as host, BLUETOOTH_GUEST_PLAYER as guest } from "../src/bluetooth-host-room.ts";
 import type { GameState, HeroAbilityCommand, HeroId, HeroForm, GalakrondForm, RemoteRoom, SecretState, Side } from "../src/types.ts";
 import { covered, gameState, move, revealed, secretState } from "./helpers.ts";
@@ -106,7 +106,7 @@ test("R5-H19-01 entering from outside gets one infection per atom, supported-to-
 test("R5-H20-01 inner ghost air death makes persistent layer and ignores normal ticks",()=>{
  const a=pair("death_knight",[{...revealed("flyer","red","pawn",0,6),layer:"air"}],"inner");initializeFeatureSecret(a.state,a.secret);destroyPiece(a.state,a.secret,"flyer","black","destruction");generateGhosts(a.state);assert.equal(a.state.ghosts![0].kind,"inner_ghost");assert.equal(a.state.ghosts![0].persistent,true);assert.equal(a.state.ghosts![0].layers,1);end(a.state,a.secret,"red","end");assert.equal(a.state.ghosts![0].layers,1);assert.equal(a.state.ghosts![0].remaining,0);
 });
-test("R5-H20-02 pulse is cross5 only, no lasting sublethal infection, new death ghosts excluded from consumed snapshot",()=>{
+test("R5-H20-02 pulse is cross5 only, no lasting sublethal infection, committed layers consumed",()=>{
  const a=pair("death_knight",[revealed("hit","black","rook",1,5),revealed("diagonal","black","rook",2,4)],"inner");putGhostObject(a.state,{kind:"inner_ghost",source:"death_knight:inner_death",owner:"red",position:{x:1,y:4},remaining:0,persistent:true,layers:3},"add_layers");const r=applyHeroAbility(a.state,a.secret,skill(a.state,"inner_ghost_burst"));assert.equal(r.state.pieces.some(p=>p.id==="hit"),false);assert.equal(r.state.pieces.some(p=>p.id==="diagonal"),false); // orthogonal right belongs to cross
  const b=pair("death_knight",[revealed("sublethal","black","rook",1,5),revealed("diagonal","black","rook",2,5)],"inner");putGhostObject(b.state,{kind:"inner_ghost",source:"death_knight:inner_death",owner:"red",position:{x:1,y:4},remaining:0,persistent:true,layers:2},"add_layers");const spared=applyHeroAbility(b.state,b.secret,skill(b.state,"inner_ghost_burst"));assert.equal(spared.state.pieces.some(p=>p.id==="sublethal"),true);assert.equal(spared.state.pieces.some(p=>p.id==="diagonal"),true);assert.equal(spared.state.effectsByPieceId!.sublethal?.infection,undefined);assert.equal(spared.state.ghosts!.length,0);
 });
@@ -170,4 +170,17 @@ test("R5-H01-01 last trap turn stays lethal through an optional movement child",
 test("R5-H21-07 dragon claw endpoint crush still resolves after ordinary barrier bounce",()=>{
  const a=pair("hunter",[revealed("claw","red","rook",0,7),revealed("target","black","pawn",0,6)]);a.state.effectsByPieceId!.claw={dragonClaw:true};a.state.effectsByPieceId!.target={barrier:{owner:"black",enemyTurnsRemaining:3}};
  const r=applyAuthoritativeMove(a.state,a.secret,move({x:0,y:7},{x:0,y:6},"claw"));assert.equal(r.state.pieces.find(p=>p.id==="claw")!.y,7);assert.equal(r.state.pieces.some(p=>p.id==="target"),false);assert.equal(r.state.captured[0].cause,"crush");
+});
+
+test("R5-H11-04 shuffle after completed Wind return restores opening general references without refunding Shadow",()=>{
+ const state=initializeFeatureGameState(gameState([covered("host",0,6),revealed("red-mover","red","rook",1,7),revealed("black-mover","black","rook",7,2)]),{red:"wind",black:"shuffler"}),secret=secretState({host:{color:"red",type:"pawn"}});
+ let r=applyHeroAbility(state,secret,skill(state,"shadow",{randomCovered:true}),0,()=>0);destroyPiece(r.state,r.secret,"red-general","black","destruction");assert.equal(resolveWindReturn(r.state,r.secret),true);assert.equal(r.secret.trueGenerals!.red,"host");
+ r=applyAuthoritativeMove(r.state,r.secret,move({x:1,y:7},{x:1,y:6},"wind-red"));r=applyAuthoritativeMove(r.state,r.secret,move({x:7,y:2},{x:7,y:3},"wind-black",r.state.revision));r=applyHeroAbility(r.state,r.secret,skill(r.state,"shuffle"),0,()=>0);
+ assert.equal(r.secret.trueGenerals!.red,"red-general");assert.equal(r.secret.wind!.red!.decoyId,"red-general");assert.equal(r.secret.wind!.red!.hostId,undefined);assert.equal(r.secret.wind!.red!.uses,1);assert.equal(r.secret.wind!.red!.readyOnTurn,8);assert.equal(r.state.pieces.find(p=>p.id==="host")!.faceDown,true);
+});
+test("R5-H21-08 fourth invocation publishes omen then actual enemy formal reply triggers automatic descent",()=>{
+ const a=pair("devout_zealot",[revealed("reply","black","rook",7,2),revealed("victim","black","pawn",0,3)],"front","unspeakable");let r={...a,duplicate:false};
+ for(let i=0;i<4;i++) { r=applyHeroAbility(r.state,r.secret,skill(r.state,"invoke"),0,()=>0);assert.equal(r.state.turn,"black");assert.equal(r.state.heroRuntime!.red!.descended,undefined);if(i===3)assert.equal(r.state.heroRuntime!.red!.omen,true);
+ r=applyAuthoritativeMove(r.state,r.secret,move({x:7,y:i%2===0?2:3},{x:7,y:i%2===0?3:2},`actual-reply-${i}`,r.state.revision)); }
+ assert.equal(r.state.heroRuntime!.red!.descended,true);assert.equal(r.state.heroRuntime!.red!.omen,undefined);assert.equal(r.state.formalTurns!.red,4);assert.equal(r.state.formalTurns!.black,4);assert.equal(r.state.turnLifecycle!.phase,"before_main");assert.equal(r.state.captured.some(p=>p.id==="victim"),true);
 });
