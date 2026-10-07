@@ -1,8 +1,8 @@
 {
   "authority": "execution_evidence_non_normative",
-  "generatedAt": "2026-10-07T10:47:06.292Z",
-  "sourceCommitAtRun": "333c94eae2c2cc44a2517023d78145a6d505b74c",
-  "sourceDigest": "64a2d8949b2739f8516a0b798ecf858b4b577dc346b83e1890bf8ef9b9ba2c7a",
+  "generatedAt": "2026-10-07T10:56:20.082Z",
+  "sourceCommitAtRun": "43e0b02fa622da8981edf514f956ce82061e3530",
+  "sourceDigest": "f3bb7163e3695b91b40dce1c49ab1da0887379a63748cb8bc1424518fd0205ee",
   "sourceDigestPaths": [
     ".github/workflows/gameplay-runtime-review.yml",
     ".github/workflows/menu-reference-review.yml",
@@ -191,7 +191,7 @@
   "contractDigest": "c6e4649ce5a028b5477090b87066dd5bb7a65ad3a5632d138a05bf972b89e1e3",
   "runtime": "v24.19.0",
   "testSummary": {
-    "passed": 468,
+    "passed": 470,
     "failed": 0,
     "executionFailed": false
   },

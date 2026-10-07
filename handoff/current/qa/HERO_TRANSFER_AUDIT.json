@@ -3,7 +3,7 @@
   "hero_source_revision": "2026-10-07-r7-clean",
   "remote_start": "333c94eae2c2cc44a2517023d78145a6d505b74c",
   "scope": "H01-H21",
-  "status": "diff_registered_implementation_in_progress",
+  "status": "available_semantics_implemented_partial_validation_design_required_branches_open",
   "entries": [
     {
       "id": "H01",
@@ -12,9 +12,15 @@
       "prior": "existing",
       "required_delta": "12 enemy turns fully lethal; remove late control trap",
       "runtime_hooks": "settlement.ts: settleLandings / finishFormalTurn; remote-room hunter preparation",
-      "status": "not_yet_validated",
-      "tests": [],
-      "fully_accepted": false
+      "status": "implemented_partial_scenario_evidence",
+      "tests": [
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "namePrefix": "R5-H01-01"
+        }
+      ],
+      "fully_accepted": false,
+      "remaining": "完整来源交叉、概率全边界、自然完整局、设备与全称验收仍待；这些命名情景不能证明整条英雄规则。"
     },
     {
       "id": "H02",
@@ -23,9 +29,23 @@
       "prior": "existing",
       "required_delta": "activation move or normal attack; barrier refund; two future owner windows; special attack intangible allowed, general forbidden",
       "runtime_hooks": "game.ts assassination; rules.ts legal targets; web assassination menu; shadow_dance shared",
-      "status": "not_yet_validated",
-      "tests": [],
-      "fully_accepted": false
+      "status": "implemented_partial_scenario_evidence",
+      "tests": [
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "namePrefix": "R5-H02-01"
+        },
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "namePrefix": "R5-H02-02"
+        },
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "namePrefix": "R5-H02-03"
+        }
+      ],
+      "fully_accepted": false,
+      "remaining": "完整来源交叉、概率全边界、自然完整局、设备与全称验收仍待；这些命名情景不能证明整条英雄规则。"
     },
     {
       "id": "H03",
@@ -34,9 +54,19 @@
       "prior": "existing",
       "required_delta": "three unique ordinary exits; barrier three enemy ends; armor backstab terminal only",
       "runtime_hooks": "game.ts awardWarriorBarrier / finishAfterPlayerAction",
-      "status": "not_yet_validated",
-      "tests": [],
-      "fully_accepted": false
+      "status": "implemented_partial_scenario_evidence",
+      "tests": [
+        {
+          "file": "tests/warrior.test.ts",
+          "namePrefix": "WARRIOR-"
+        },
+        {
+          "file": "tests/exception-contracts.test.ts",
+          "namePrefix": "EX-WARRIOR-"
+        }
+      ],
+      "fully_accepted": false,
+      "remaining": "完整来源交叉、概率全边界、自然完整局、设备与全称验收仍待；这些命名情景不能证明整条英雄规则。"
     },
     {
       "id": "H04",
@@ -45,9 +75,19 @@
       "prior": "existing",
       "required_delta": "15 full pairs, 15% own begin, current-turn legal check immediate win",
       "runtime_hooks": "settlement.ts beginFormalTurn; game.ts finishAfterPlayerAction",
-      "status": "not_yet_validated",
-      "tests": [],
-      "fully_accepted": false
+      "status": "implemented_partial_scenario_evidence",
+      "tests": [
+        {
+          "file": "tests/action-turn-contracts.test.ts",
+          "namePrefix": "R4-TURN-03"
+        },
+        {
+          "file": "tests/action-turn-contracts.test.ts",
+          "namePrefix": "R4-TURN-12"
+        }
+      ],
+      "fully_accepted": false,
+      "remaining": "完整来源交叉、概率全边界、自然完整局、设备与全称验收仍待；这些命名情景不能证明整条英雄规则。"
     },
     {
       "id": "H05",
@@ -56,9 +96,19 @@
       "prior": "existing",
       "required_delta": "exact preceding opponent qualified I action only; same living piece; relocation and child action",
       "runtime_hooks": "hero-actions.ts timeline_twist; turns.ts previousFormalAction",
-      "status": "not_yet_validated",
-      "tests": [],
-      "fully_accepted": false
+      "status": "implemented_partial_scenario_evidence",
+      "tests": [
+        {
+          "file": "tests/time-line-contracts.test.ts",
+          "namePrefix": "TIME-TIER-"
+        },
+        {
+          "file": "tests/time-line-contracts.test.ts",
+          "namePrefix": "TIME-TRAP-"
+        }
+      ],
+      "fully_accepted": false,
+      "remaining": "完整来源交叉、概率全边界、自然完整局、设备与全称验收仍待；这些命名情景不能证明整条英雄规则。"
     },
     {
       "id": "H06",
@@ -67,9 +117,23 @@
       "prior": "existing",
       "required_delta": "complete snapshot; same-piece no attack/check; old-clock cap10s; learned information memory retained",
       "runtime_hooks": "hero-actions.ts rewind; game.ts validateRewindReplay",
-      "status": "not_yet_validated",
-      "tests": [],
-      "fully_accepted": false
+      "status": "implemented_partial_scenario_evidence",
+      "tests": [
+        {
+          "file": "tests/time-line-contracts.test.ts",
+          "namePrefix": "TIME-CLOCK-"
+        },
+        {
+          "file": "tests/time-line-contracts.test.ts",
+          "namePrefix": "TIME-SNAPSHOT-"
+        },
+        {
+          "file": "tests/rewind-action-contracts.test.ts",
+          "namePrefix": "REPLAY-ACTION-"
+        }
+      ],
+      "fully_accepted": false,
+      "remaining": "完整来源交叉、概率全边界、自然完整局、设备与全称验收仍待；这些命名情景不能证明整条英雄规则。"
     },
     {
       "id": "H07",
@@ -78,9 +142,18 @@
       "prior": "existing",
       "required_delta": "75/45 clock; dual-thief mirror unresolved",
       "runtime_hooks": "hero-actions.ts formalTurnDurationMs; remote-room.ts clock",
-      "status": "not_yet_validated",
-      "tests": [],
-      "fully_accepted": false
+      "status": "implemented_confirmed_portions_design_required_branch",
+      "tests": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "namePrefix": "HERO thief"
+        }
+      ],
+      "fully_accepted": false,
+      "remaining": "完整来源交叉、概率全边界、自然完整局、设备与全称验收仍待；这些命名情景不能证明整条英雄规则。",
+      "design_required": [
+        "H07-mirror"
+      ]
     },
     {
       "id": "H08",
@@ -89,9 +162,15 @@
       "prior": "existing",
       "required_delta": "first9 pairs, only own formal direct endpoint kill or legal check suspends",
       "runtime_hooks": "rules.ts princeProtects; game.ts finishAfterPlayerAction",
-      "status": "not_yet_validated",
-      "tests": [],
-      "fully_accepted": false
+      "status": "implemented_partial_scenario_evidence",
+      "tests": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "namePrefix": "HERO prince"
+        }
+      ],
+      "fully_accepted": false,
+      "remaining": "完整来源交叉、概率全边界、自然完整局、设备与全称验收仍待；这些命名情景不能证明整条英雄规则。"
     },
     {
       "id": "H09",
@@ -100,9 +179,19 @@
       "prior": "existing",
       "required_delta": "50% closed batch then in-check all-own-revealed penalty batch, no triggers between",
       "runtime_hooks": "hero-actions.ts destruction; settlement.ts batch barrier",
-      "status": "not_yet_validated",
-      "tests": [],
-      "fully_accepted": false
+      "status": "implemented_partial_scenario_evidence",
+      "tests": [
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "namePrefix": "R5-H09-01"
+        },
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "namePrefix": "R5-H09-02"
+        }
+      ],
+      "fully_accepted": false,
+      "remaining": "完整来源交叉、概率全边界、自然完整局、设备与全称验收仍待；这些命名情景不能证明整条英雄规则。"
     },
     {
       "id": "H10",
@@ -111,9 +200,23 @@
       "prior": "existing",
       "required_delta": "T1-T7 cooldown, T8 available; flow both uses, dance first successful use only",
       "runtime_hooks": "hero-actions.ts shadow; settlement.ts resolveWindReturn; game.ts execution/flow",
-      "status": "not_yet_validated",
-      "tests": [],
-      "fully_accepted": false
+      "status": "implemented_partial_scenario_evidence",
+      "tests": [
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "namePrefix": "HERO shadow"
+        },
+        {
+          "file": "tests/confirmed-runtime.test.ts",
+          "namePrefix": "HERO checkmate execution"
+        },
+        {
+          "file": "tests/public-target-contracts.test.ts",
+          "namePrefix": "TARGET-WIND-"
+        }
+      ],
+      "fully_accepted": false,
+      "remaining": "完整来源交叉、概率全边界、自然完整局、设备与全称验收仍待；这些命名情景不能证明整条英雄规则。"
     },
     {
       "id": "H11",
@@ -122,9 +225,27 @@
       "prior": "new",
       "required_delta": "postRPS side swap; mutually exclusive A/B black windows; restore all initial dead; randomize mapping; timeline break; insight invalidation",
       "runtime_hooks": "setup.ts, remote-room.ts RPS; settlement begin/end; new shuffle runtime",
-      "status": "not_yet_validated",
-      "tests": [],
-      "fully_accepted": false
+      "status": "implemented_partial_scenario_evidence",
+      "tests": [
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "namePrefix": "R5-H11-01"
+        },
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "namePrefix": "R5-H11-02"
+        },
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "namePrefix": "R5-H11-03"
+        },
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "namePrefix": "R5-H11-04"
+        }
+      ],
+      "fully_accepted": false,
+      "remaining": "完整来源交叉、概率全边界、自然完整局、设备与全称验收仍待；这些命名情景不能证明整条英雄规则。"
     },
     {
       "id": "H12",
@@ -133,9 +254,22 @@
       "prior": "new",
       "required_delta": "once main 3x3 locked batch board+air; public dark identity rank; general source semantics audit",
       "runtime_hooks": "hero-actions.ts new burning_flame; slots public current type",
-      "status": "not_yet_validated",
-      "tests": [],
-      "fully_accepted": false
+      "status": "implemented_confirmed_portions_design_required_branch",
+      "tests": [
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "namePrefix": "R5-H12-01"
+        },
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "namePrefix": "R5-H12-02"
+        }
+      ],
+      "fully_accepted": false,
+      "remaining": "完整来源交叉、概率全边界、自然完整局、设备与全称验收仍待；这些命名情景不能证明整条英雄规则。",
+      "design_required": [
+        "H12-general-rank"
+      ]
     },
     {
       "id": "H13",
@@ -144,9 +278,19 @@
       "prior": "new",
       "required_delta": "public prep left/right; weak-side ordinary geometry restriction; once strong-side successful move optional adjacent displacement",
       "runtime_hooks": "rules.ts move validation; game.ts atom child window",
-      "status": "not_yet_validated",
-      "tests": [],
-      "fully_accepted": false
+      "status": "implemented_partial_scenario_evidence",
+      "tests": [
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "namePrefix": "R5-H13-01"
+        },
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "namePrefix": "R5-H13-02"
+        }
+      ],
+      "fully_accepted": false,
+      "remaining": "完整来源交叉、概率全边界、自然完整局、设备与全称验收仍待；这些命名情景不能证明整条英雄规则。"
     },
     {
       "id": "H14",
@@ -155,9 +299,23 @@
       "prior": "new",
       "required_delta": "0 pupil; every even own begin +6; once pre-main shared n costs; private true-identity snapshot; public/secret target policy",
       "runtime_hooks": "settlement.ts begin; hero-actions insight; secret/public views",
-      "status": "not_yet_validated",
-      "tests": [],
-      "fully_accepted": false
+      "status": "implemented_partial_scenario_evidence",
+      "tests": [
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "namePrefix": "R5-H14-01"
+        },
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "namePrefix": "R5-H14-02"
+        },
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "namePrefix": "R5-H14-03"
+        }
+      ],
+      "fully_accepted": false,
+      "remaining": "完整来源交叉、概率全边界、自然完整局、设备与全称验收仍待；这些命名情景不能证明整条英雄规则。"
     },
     {
       "id": "H15",
@@ -166,9 +324,19 @@
       "prior": "new",
       "required_delta": "choose breed; secret true-owner target training; death restart0; graduate flight; fourth-controller-turn forced main landing",
       "runtime_hooks": "prep/private view; settlement begin/death; hero-actions landing",
-      "status": "not_yet_validated",
-      "tests": [],
-      "fully_accepted": false
+      "status": "implemented_partial_scenario_evidence",
+      "tests": [
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "namePrefix": "R5-H15-01"
+        },
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "namePrefix": "R5-H15-02"
+        }
+      ],
+      "fully_accepted": false,
+      "remaining": "完整来源交叉、概率全边界、自然完整局、设备与全称验收仍待；这些命名情景不能证明整条英雄规则。"
     },
     {
       "id": "H16",
@@ -177,9 +345,22 @@
       "prior": "new",
       "required_delta": "public current-control death atom will; I main qualifying kill child move/attack; chaos replaces by dark chain",
       "runtime_hooks": "settlement death snapshots; game closed atom and child dispatch",
-      "status": "not_yet_validated",
-      "tests": [],
-      "fully_accepted": false
+      "status": "implemented_confirmed_portions_design_required_branch",
+      "tests": [
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "namePrefix": "R5-H16-01"
+        },
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "namePrefix": "R5-H16-02"
+        }
+      ],
+      "fully_accepted": false,
+      "remaining": "完整来源交叉、概率全边界、自然完整局、设备与全称验收仍待；这些命名情景不能证明整条英雄规则。",
+      "design_required": [
+        "H16-chaos-entry"
+      ]
     },
     {
       "id": "H17",
@@ -188,9 +369,19 @@
       "prior": "new",
       "required_delta": "ordinary shore qualification; river entry main; horizontal any distance clear path; same-file exit;3 controller ends",
       "runtime_hooks": "shared river spaces + source capacity/path/action runtime",
-      "status": "not_yet_validated",
-      "tests": [],
-      "fully_accepted": false
+      "status": "implemented_partial_scenario_evidence",
+      "tests": [
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "namePrefix": "R5-H17-01"
+        },
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "namePrefix": "R5-H17-02"
+        }
+      ],
+      "fully_accepted": false,
+      "remaining": "完整来源交叉、概率全边界、自然完整局、设备与全称验收仍待；这些命名情景不能证明整条英雄规则。"
     },
     {
       "id": "H18",
@@ -199,9 +390,15 @@
       "prior": "new",
       "required_delta": "replace front; once entry/horizontal/empty exit atomic; optional ordinary move child",
       "runtime_hooks": "hero-forms inner independent dispatch; river source ability",
-      "status": "not_yet_validated",
-      "tests": [],
-      "fully_accepted": false
+      "status": "implemented_partial_scenario_evidence",
+      "tests": [
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "namePrefix": "R5-H18-01"
+        }
+      ],
+      "fully_accepted": false,
+      "remaining": "完整来源交叉、概率全边界、自然完整局、设备与全称验收仍待；这些命名情景不能证明整条英雄规则。"
     },
     {
       "id": "H19",
@@ -210,9 +407,15 @@
       "prior": "existing",
       "required_delta": "current-control nonGeneral death ghost; entry infection max1/atom; support preserve;3 own ends",
       "runtime_hooks": "settlement.ts generateGhosts/landing/end; ghosts.ts",
-      "status": "not_yet_validated",
-      "tests": [],
-      "fully_accepted": false
+      "status": "implemented_partial_scenario_evidence",
+      "tests": [
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "namePrefix": "R5-H19-01"
+        }
+      ],
+      "fully_accepted": false,
+      "remaining": "完整来源交叉、概率全边界、自然完整局、设备与全称验收仍待；这些命名情景不能证明整条英雄规则。"
     },
     {
       "id": "H20",
@@ -221,9 +424,19 @@
       "prior": "new",
       "required_delta": "persistent layers board coordinate inclair; once all-layer cross5 pulse; consume only committed layers",
       "runtime_hooks": "hero-forms inner; ghosts persistent; batch pulse ability",
-      "status": "not_yet_validated",
-      "tests": [],
-      "fully_accepted": false
+      "status": "implemented_partial_scenario_evidence",
+      "tests": [
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "namePrefix": "R5-H20-01"
+        },
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "namePrefix": "R5-H20-02"
+        }
+      ],
+      "fully_accepted": false,
+      "remaining": "完整来源交叉、概率全边界、自然完整局、设备与全称验收仍待；这些命名情景不能证明整条英雄规则。"
     },
     {
       "id": "H21",
@@ -232,22 +445,79 @@
       "prior": "existing",
       "required_delta": "five secret-fixed/public-intro packages;4 invokes omen;1 enemy reply; next-own-begin autoascend; allfive payloads",
       "runtime_hooks": "hero-forms variant lock; settlement begin; public pending placement; special storm geometry",
-      "status": "not_yet_validated",
-      "tests": [],
-      "fully_accepted": false
+      "status": "implemented_confirmed_portions_design_required_branch",
+      "tests": [
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "namePrefix": "R5-H21-01"
+        },
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "namePrefix": "R5-H21-02"
+        },
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "namePrefix": "R5-H21-03"
+        },
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "namePrefix": "R5-H21-04"
+        },
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "namePrefix": "R5-H21-05"
+        },
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "namePrefix": "R5-H21-06"
+        },
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "namePrefix": "R5-H21-07"
+        },
+        {
+          "file": "tests/hero-transfer-r5.test.ts",
+          "namePrefix": "R5-H21-08"
+        }
+      ],
+      "fully_accepted": false,
+      "remaining": "完整来源交叉、概率全边界、自然完整局、设备与全称验收仍待；这些命名情景不能证明整条英雄规则。",
+      "design_required": [
+        "H21-dragon-scale-placement"
+      ]
     }
   ],
   "design_required": [
     {
       "id": "H07-mirror",
       "status": "blocked/design-required",
-      "reason": "dual thief stacking not frozen"
+      "code": "DESIGN_REQUIRED_THIEF_MIRROR",
+      "reason": "正式稿明确双窃时叠加未冻结；不采用旧60/60猜测。"
+    },
+    {
+      "id": "H12-general-rank",
+      "status": "blocked/design-required",
+      "code": "DESIGN_REQUIRED_FLAME_GENERAL",
+      "reason": "将帅可作中心，但未定义其与普通层级目标的比较；普通中心邻接将帅的消灭条件也无法从“既有终局规则”唯一推出。仅拒绝涉及未定义交叉的范围。"
+    },
+    {
+      "id": "H16-chaos-entry",
+      "status": "blocked/design-required",
+      "code": "DESIGN_REQUIRED_BRAWL_ENTRY",
+      "reason": "资源及后续连斩结构已确认，但乱斗如何首次发动、如何付费及是否需要先有常态冲锋触发未定义。已接入确认资源，未开启连斩/付费入口。"
     },
     {
       "id": "H21-dragon-scale-placement",
       "status": "blocked/design-required",
-      "reason": "generic attack removes endpoint target; cannot derive surviving attacker/target placement"
+      "code": "DESIGN_REQUIRED_DRAGON_SCALE_PLACEMENT",
+      "reason": "龙鳞保住进攻终点棋后，攻击者与目标如何合法落位尚未冻结；拒绝整次相关行动且不消费龙鳞。"
     }
   ],
-  "scoring_is_non_normative": true
+  "scoring_is_non_normative": true,
+  "implementation_commit": "eb27de059ccf7c5e91ca9bef8e0d0c5d103ea3e2",
+  "local_execution_commit": "43e0b02fa622da8981edf514f956ce82061e3530",
+  "implementation_tree": "7b7045a5390bf620956caf2b47de3c02e2df409e",
+  "tests_passed": 470,
+  "new_dedicated_cases": 36,
+  "browser_evidence": "review/invariants/HERO_TRANSFER_BROWSER_2026-10-07.json"
 }

@@ -52,7 +52,7 @@
     "physical_device_tests_run_this_round": false,
     "apk_built_this_round": false
   },
-  "status": "inventory_completed_remaining_acceptance_open_waiting_hero_transfer",
+  "status": "historical_r4_inventory",
   "annotation_policy": "QA旧pending标记是保留的合同/历史审查注记；当前具体运行证据以LATEST同ID条目及字节摘要为准。登记工作不升级合同完整验收，也不改写历史证据时间。",
   "gap_groups": [
     {
@@ -2237,5 +2237,8 @@
     },
     "hero_sources_received_this_round": []
   },
-  "next_action": "Await the user transfer; first read and compare complete confirmed sources with current r4. Paused full-match, independent mode adaptation, final UI and APK queues remain paused."
+  "next_action": "Await the user transfer; first read and compare complete confirmed sources with current r4. Paused full-match, independent mode adaptation, final UI and APK queues remain paused.",
+  "superseded_current_intake_by": "HERO_TRANSFER_AUDIT.json",
+  "historical_inventory_preserved": true,
+  "hero_design_intake_current": "r7-clean H01-H21 received; implemented confirmed portions under r5"
 }

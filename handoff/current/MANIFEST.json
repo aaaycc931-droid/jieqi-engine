@@ -3,64 +3,40 @@
   "self_excluded": true,
   "files": {
     "00_READ_FIRST.md": {
-      "bytes": 7171,
-      "sha256": "da492664632a7e0dcc0d58b8e1f18adebd5c6304b88dcdf632a45151b4507de3"
+      "bytes": 2150,
+      "sha256": "f19706aecbdf88a2040c0de40dfdbf93b874a7ef4480badd5f43543d7831b143"
     },
     "01_CURRENT_RULES.md": {
-      "bytes": 30541,
-      "sha256": "945d9a58a7a9b9a79571f4952e9e2699691729f275401b691e43c7347354fe53"
+      "bytes": 30087,
+      "sha256": "c0fb3bfb9269a7bbe9b227287bbd4ddcefc663c30ae28c75006129af794c101c"
     },
     "02_CURRENT_HEROES.md": {
-      "bytes": 26572,
-      "sha256": "603d9781a2fbd965c78a2c9d56067c75414d205610dc016baf12c651c2c9f0dc"
+      "bytes": 32591,
+      "sha256": "da104122e8279e3bb9646059ad14783b2c64ef5816c98b2c97204ebb0457454b"
     },
     "03_CURRENT_MUTATIONS.md": {
-      "bytes": 16382,
-      "sha256": "f3e2a857f40eb50aee2658c8851c5a57b8f0f1bd733ab3b5c3c1367d6f3dcac4"
+      "bytes": 17178,
+      "sha256": "e68b3123042cf4ce2bb7411ee3cea4c1289b6c8875f564f4b4c39db6542affb1"
     },
     "04_CURRENT_UI_AND_FLOW.md": {
       "bytes": 18891,
       "sha256": "c133b4ee797b778ce4c88233437b2466255f27c30fcaec5b0941c766cc4bae00"
     },
     "05_PROGRESS_AND_NEXT.md": {
-      "bytes": 29712,
-      "sha256": "f3c95f6e31d5e23c22e6f2b1258adb85b9cb88e8877f0f689c18ec0aaad865e0"
+      "bytes": 30233,
+      "sha256": "1f1ad611e5a7a1596484206166e18064588caf735666fd60f08503833b491e45"
     },
     "06_COLLABORATION.md": {
       "bytes": 5415,
       "sha256": "adbe6dd30351177c994270acc24b0a24333f15dbf8355bb8edd1aa4efa3da762"
     },
     "07_DESIGN_SCORING.md": {
-      "bytes": 25701,
-      "sha256": "64a333d08eaccb12cbf6387874392d24a3831e824b59da8d1353f6e2c11925a0"
+      "bytes": 4854,
+      "sha256": "d0d7f6a2f3e6b2774ed03eb38c5199373d0fb887ad804b5db28fcd5ad2db293b"
     },
     "08_SCORE_LEDGER.md": {
-      "bytes": 2028,
-      "sha256": "68845494b465bbcc1908f6cef862f350c1da4dadfc3e3a7473d11b2443edf23c"
-    },
-    "NEW_DIALOGUE_PROMPT.txt": {
-      "bytes": 3198,
-      "sha256": "ab5e2b5b15448d8e1f7bb8ef089ced34368e34739f5e493311725668fc54e26c"
-    },
-    "SOURCE_REGISTER.json": {
-      "bytes": 24231,
-      "sha256": "e94d9211c6ed31169bf567b63b9201ce1236221f4159eaa4b325000e10092421"
-    },
-    "STATE.json": {
-      "bytes": 40287,
-      "sha256": "f899bd2b731b4ea1df2c24cfdfdf17e170423bd8cf344e7eb73def4d00d3f327"
-    },
-    "assets/approved-home.png": {
-      "bytes": 2157060,
-      "sha256": "5c0dae37bb4dd84054d566c5ae5da98545ca73f23544ded5090ec80f1fbe211e"
-    },
-    "assets/approved-v4-reference.png": {
-      "bytes": 1282661,
-      "sha256": "63671bd146ce72a3c61f40dac457f83f882d7ada78c5f5f98efb7bb3ba5eac26"
-    },
-    "qa/INVARIANTS.json": {
-      "bytes": 44939,
-      "sha256": "55659ec2d9eede01318b196eb3efee3898c681c6fbece4095f94305bfccf0b19"
+      "bytes": 35456,
+      "sha256": "1381656cb5dd9fbc1108faeb93e4bcd594f85a871d1f51530ca66bc1c0d04481"
     },
     "09_CURRENT_GAME_MODES.md": {
       "bytes": 4749,
@@ -114,37 +90,61 @@
       "bytes": 8107,
       "sha256": "64e73e77e49daf53bbf1c2666f4870ce188f950ab996312bc0201c6aa594b7ab"
     },
+    "22_HERO_TRANSFER_2026-10-07.md": {
+      "bytes": 6857,
+      "sha256": "4a64b0a71207cecf09709ff0dc6af6c9e3262b9ef2fa820fcfa86b8f9aca35ee"
+    },
+    "NEW_DIALOGUE_PROMPT.txt": {
+      "bytes": 750,
+      "sha256": "f0d91cb44ce2689a479f90d1a83229b10f1f3174c80bb5b888d8db69a721ff03"
+    },
+    "SOURCE_REGISTER.json": {
+      "bytes": 28601,
+      "sha256": "656c17ca7cabe1d965cc5bb598a209911ea97e7d3ec176e01e1a76da42147dc3"
+    },
+    "STATE.json": {
+      "bytes": 45982,
+      "sha256": "c4ea4780a448d4e850f012b0707566126aba3aa63735902600cb14515c6c1cef"
+    },
+    "assets/approved-home.png": {
+      "bytes": 2157060,
+      "sha256": "5c0dae37bb4dd84054d566c5ae5da98545ca73f23544ded5090ec80f1fbe211e"
+    },
+    "assets/approved-v4-reference.png": {
+      "bytes": 1282661,
+      "sha256": "63671bd146ce72a3c61f40dac457f83f882d7ada78c5f5f98efb7bb3ba5eac26"
+    },
     "qa/ACCEPTANCE_GAPS.json": {
-      "bytes": 114686,
-      "sha256": "590fc1f59fe17fca042a510a4cd884cc42f57252466438da6d468cc555c26abd"
+      "bytes": 114848,
+      "sha256": "b476f6ba2696cb4a0185ac96da1ad976c7b43f37ff694b5bf86ccbc696cbc210"
+    },
+    "qa/HERO_TRANSFER_AUDIT.json": {
+      "bytes": 20137,
+      "sha256": "45f05d1e4771a8b3e38ae21872f9d5f4bef8f8dd9111f614cbe56f8ec0eb6467"
+    },
+    "qa/INVARIANTS.json": {
+      "bytes": 45423,
+      "sha256": "c6e4649ce5a028b5477090b87066dd5bb7a65ad3a5632d138a05bf972b89e1e3"
     }
   },
   "checks": {
-    "frozen_source_hashes_match": true,
-    "current_delta_hash_matches": true,
-    "heroes_12_present": true,
+    "current_rule_revision_r5": true,
+    "hero_source_r7_clean_archived_exactly": true,
+    "heroes_19_front_2_inner_5_fixed_variants": true,
+    "source_entries_H01_H21": true,
     "mutations_9_present": true,
-    "qa_69_plus_20_preserved": true,
-    "navigation_paths_exist": true,
-    "no_apk_or_nested_historical_packages": true,
-    "global_rule_sync_record_present": true,
-    "r3_runtime_acceptance_claimed": false,
-    "current_rule_revision_r4": true,
-    "dark_identity_sync_record_present": true,
-    "dark_identity_pending_question_closed": true,
-    "r4_runtime_acceptance_claimed": false,
-    "dark_identity_runtime_record_present": true,
-    "r4_full_runtime_acceptance_claimed": false,
-    "action_turn_runtime_record_present": true,
-    "destruction_batch_runtime_record_present": true,
-    "river_space_runtime_record_present": true,
-    "account_switch_close_record_present": true,
-    "ghost_object_runtime_record_present": true,
-    "account_switch_pause_superseded_by_user": true,
-    "current_control_audit_record_present": true,
-    "hero_form_runtime_record_present": true,
-    "acceptance_gap_close_record_present": true,
-    "acceptance_gap_inventory_109_present": true,
-    "new_hero_sources_imported_this_round": false
+    "qa_69_plus_20_and_20_supplements_preserved": true,
+    "new_hero_sources_imported_this_round": true,
+    "engine_470_passed": true,
+    "android_assets_127_equal": true,
+    "browser_8_prepared_operations_passed": true,
+    "browser_9_mode_foundation_cases_passed": true,
+    "full_contracts_accepted": false,
+    "hero_full_matches_accepted": false,
+    "physical_devices_accepted": false,
+    "apk_built": false,
+    "remote_and_execution_product_trees_equal": true,
+    "historical_r4_inventory_preserved": true,
+    "design_required_branches": 4
   }
 }

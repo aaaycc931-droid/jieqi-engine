@@ -1,7 +1,7 @@
 {
   "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-07-hero-transfer",
   "rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
-  "code_checkpoint": "830c180de6f60593c42fee427959e77cb7ffb189",
+  "code_checkpoint": "eb27de059ccf7c5e91ca9bef8e0d0c5d103ea3e2",
   "sources": [
     {
       "id": "RULE:CURRENT_RULE_DELTAS_2026-09-22.md",
@@ -302,11 +302,13 @@
       "id": "EVIDENCE:ACCEPTANCE_GAP_INVENTORY_2026-10-07",
       "kind": "acceptance_gap_inventory_non_normative",
       "path": "handoff/current/qa/ACCEPTANCE_GAPS.json",
-      "sha256": "590fc1f59fe17fca042a510a4cd884cc42f57252466438da6d468cc555c26abd",
+      "sha256": "b476f6ba2696cb4a0185ac96da1ad976c7b43f37ff694b5bf86ccbc696cbc210",
       "authorization": "user 2026-10-07T17:14:00+08:00 同意，这一步结束后我会把新英雄设计提交给你",
       "implementation_commit_unchanged": "830c180de6f60593c42fee427959e77cb7ffb189",
-      "applied_scope": "既有r4源/证据摘要和109合同映射核验、未验收范围分类及正式英雄稿接收流程；只读盘点，无运行时代码/新测试/规则更新/APK",
-      "embedded_original": false
+      "applied_scope": "Historical r4 acceptance inventory retained with explicit supersession annotation; current hero intake tracked separately.",
+      "embedded_original": false,
+      "previous_sha256": "590fc1f59fe17fca042a510a4cd884cc42f57252466438da6d468cc555c26abd",
+      "bytes": 114848
     },
     {
       "id": "TRANSFER:2026-10-07:00_READ_FIRST.md",
@@ -379,7 +381,14 @@
       "prince": "02_CURRENT_HEROES.md",
       "deathwing": "02_CURRENT_HEROES.md",
       "death_knight": "02_CURRENT_HEROES.md",
-      "wind": "02_CURRENT_HEROES.md"
+      "wind": "02_CURRENT_HEROES.md",
+      "shuffler": "02_CURRENT_HEROES.md",
+      "warlock": "02_CURRENT_HEROES.md",
+      "single_blade": "02_CURRENT_HEROES.md",
+      "night": "02_CURRENT_HEROES.md",
+      "sky_admiral": "02_CURRENT_HEROES.md",
+      "berserker": "02_CURRENT_HEROES.md",
+      "jiang_he": "02_CURRENT_HEROES.md"
     },
     "mutations": {
       "iron_steed": "03_CURRENT_MUTATIONS.md",
@@ -398,7 +407,9 @@
     "scoring_method": "07_DESIGN_SCORING.md",
     "scores": "08_SCORE_LEDGER.md",
     "invariant_contracts": "qa/INVARIANTS.json",
-    "game_modes": "09_CURRENT_GAME_MODES.md"
+    "game_modes": "09_CURRENT_GAME_MODES.md",
+    "hero_forms": "02_CURRENT_HEROES.md H18/H20; full independent packages",
+    "hero_transfer_audit": "qa/HERO_TRANSFER_AUDIT.json"
   },
   "source_gaps": [
     {
@@ -406,6 +417,30 @@
       "status": "not_located_this_round",
       "fallback": "当前固定源码/测试和已恢复差分；不声称原稿完整恢复",
       "action": "涉及基础区域/跨河变更前定位原稿核对"
+    },
+    {
+      "id": "H07-mirror",
+      "status": "blocked/design-required",
+      "code": "DESIGN_REQUIRED_THIEF_MIRROR",
+      "reason": "正式稿明确双窃时叠加未冻结；不采用旧60/60猜测。"
+    },
+    {
+      "id": "H12-general-rank",
+      "status": "blocked/design-required",
+      "code": "DESIGN_REQUIRED_FLAME_GENERAL",
+      "reason": "将帅可作中心，但未定义其与普通层级目标的比较；普通中心邻接将帅的消灭条件也无法从“既有终局规则”唯一推出。仅拒绝涉及未定义交叉的范围。"
+    },
+    {
+      "id": "H16-chaos-entry",
+      "status": "blocked/design-required",
+      "code": "DESIGN_REQUIRED_BRAWL_ENTRY",
+      "reason": "资源及后续连斩结构已确认，但乱斗如何首次发动、如何付费及是否需要先有常态冲锋触发未定义。已接入确认资源，未开启连斩/付费入口。"
+    },
+    {
+      "id": "H21-dragon-scale-placement",
+      "status": "blocked/design-required",
+      "code": "DESIGN_REQUIRED_DRAGON_SCALE_PLACEMENT",
+      "reason": "龙鳞保住进攻终点棋后，攻击者与目标如何合法落位尚未冻结；拒绝整次相关行动且不消费龙鳞。"
     }
   ],
   "excluded_payloads": [
@@ -415,8 +450,8 @@
     "旧STATE运行时分支/测试数/下一步",
     "过时3英雄进度"
   ],
-  "completeness_claim": "本包H01–H21已经正式移交；运行时仍需逐项实现验证。H07镜像与H21龙鳞落位保留未决；不声称其他未移交对话全部恢复。",
-  "previous_code_checkpoint": "af5e411d49099c2f5b936e6dde004b6f5e50059d",
+  "completeness_claim": "H01-H21正式来源已经移交并接入已确认部分；470测试与8浏览器准备情景不等于21条英雄全部验收。四处来源定义缺项明确拒绝，其他未移交对话不自动恢复。",
+  "previous_code_checkpoint": "830c180de6f60593c42fee427959e77cb7ffb189",
   "runtime_evidence_index": "review/invariants/LATEST.json",
   "gameplay_execution_evidence_index": "review/gameplay/runtime-browser-review-2026-10-05-modes.json",
   "full_match_execution_evidence_index": "review/gameplay/full-match-browser-2026-10-05-active-regression-summary.json",
@@ -437,5 +472,8 @@
   "hero_form_runtime_index": "20_HERO_FORM_RUNTIME_2026-10-07.md",
   "acceptance_gap_close_index": "21_ACCEPTANCE_GAP_CLOSE_2026-10-07.md",
   "acceptance_gap_inventory_index": "qa/ACCEPTANCE_GAPS.json",
-  "hero_transfer_index": "22_HERO_TRANSFER_2026-10-07.md"
+  "hero_transfer_index": "22_HERO_TRANSFER_2026-10-07.md",
+  "code_tree": "7b7045a5390bf620956caf2b47de3c02e2df409e",
+  "local_execution_checkpoint": "43e0b02fa622da8981edf514f956ce82061e3530",
+  "qa_contract_checkpoint_role": "INVARIANTS.code_checkpoint is the prior product checkpoint used for the r5 diff, not a claim of current runtime acceptance."
 }

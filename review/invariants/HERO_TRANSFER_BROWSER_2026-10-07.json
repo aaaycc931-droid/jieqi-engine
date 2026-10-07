@@ -1,0 +1,53 @@
+{
+  "authority": "prepared_browser_execution_non_normative",
+  "ruleRevision": "LEZI-FUNCTION-2026-10-07-r5",
+  "sourceCommitAtRun": "9e5b525b544d8689bd574afa227b414ab59ea9fa",
+  "workingTreeDirty": false,
+  "appDigest": "b841af632d0b08003ebdbbaf792691fd4c83365b5c9b43f46537d3c1fa098fc9",
+  "browser": "145.0.7632.6",
+  "viewport": {
+    "width": 390,
+    "height": 845
+  },
+  "cases": [
+    {
+      "name": "nineteen hero selection entries",
+      "passed": true
+    },
+    {
+      "name": "public insight fee, private result and device handoff clearing",
+      "passed": true
+    },
+    {
+      "name": "blade displacement child ends only its original formal turn",
+      "passed": true
+    },
+    {
+      "name": "river arbitrary distance horizontal operation",
+      "passed": true
+    },
+    {
+      "name": "inner ghost committed pulse operation",
+      "passed": true
+    },
+    {
+      "name": "nightmare descent deployment and main opportunity preservation",
+      "passed": true
+    },
+    {
+      "name": "fel descent deployment and main opportunity preservation",
+      "passed": true
+    },
+    {
+      "name": "storm descent deployment and main opportunity preservation",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "limits": [
+    "Synthetic prepared fixtures exercise actual compiled DOM controls and authority calls.",
+    "Not natural full matches, Bluetooth transport, physical devices or complete hero acceptance.",
+    "No product debug API, APK or paused random-match queue."
+  ],
+  "passed": true
+}
