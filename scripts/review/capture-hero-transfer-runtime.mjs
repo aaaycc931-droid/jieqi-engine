@@ -13,7 +13,7 @@ const { chromium } = createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODUL
 // Synthetic prepared states are injected only in this test server's response.
 // This fixture API is never written into product assets or the APK.
 const fixture = `globalThis.__heroReview = {
- load(s,k) { gameState=structuredClone(s);gameSecret=structuredClone(k);localHeroes=gameState.featureRules.heroes;localTraps=gameSecret.traps??[];localPrivateViewerSide=gameState.turn;rpsPublic.assignments={red:'玩家一',black:'玩家二'};openingActive=false;localPreparationActive=false;trapSetupSide=undefined;selectedPieceId=undefined;heroView.hidden=true;rpsView.hidden=true;gameView.hidden=false;renderGame(); },
+ load(s,k) { resetMatch();gameState=structuredClone(s);gameSecret=structuredClone(k);localHeroes=gameState.featureRules.heroes;localTraps=gameSecret.traps??[];localPrivateViewerSide=gameState.turn;rpsPublic.assignments={red:'玩家一',black:'玩家二'};openingActive=false;localPreparationActive=false;trapSetupSide=undefined;selectedPieceId=undefined;heroView.hidden=true;rpsView.hidden=true;gameView.hidden=false;renderGame(); },
  open:openTransferredHeroAbility, handoff:localGameHandoff,
  read:()=>structuredClone(gameState)
 };`;
