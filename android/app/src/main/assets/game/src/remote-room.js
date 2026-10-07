@@ -167,6 +167,7 @@ const RPS_CHOICES                       = ["rock", "scissors", "paper"];
 
 
 
+
 /** Never copy this object into a public room document or a shared watch. */
 
 
@@ -593,6 +594,7 @@ function randomOwnHalfPosition(side      , randomInt            )           {
 function publicFeaturesAfterPreparation(features                        )                         {
   return {
     ...(features.heroes ? { heroes: { ...features.heroes } } : {}),
+    ...(features.heroSelections ? { heroSelections: copy(features.heroSelections) } : {}),
     ...(features.mutation ? { mutation: features.mutation } : {}),
     ...(features.mutationRarity ? { mutationRarity: features.mutationRarity } : {}),
   };
@@ -644,6 +646,7 @@ function createGameAfterSetup(
   const playerIds = roomPlayerIds(room);
   const featureState = initializeFeatureGameState(initial.state, heroes, mutation);
   initializeFeatureSecret(featureState, initial.secret, randomInt ?? cryptoRandomInt);
+  features.heroSelections = copy(featureState.featureRules .heroSelections);
   return {
     ...room,
     phase: heroes ? "hero_intro" : "playing",

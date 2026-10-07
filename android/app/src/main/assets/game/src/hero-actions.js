@@ -1,3 +1,4 @@
+import { selectedHeroId, validateHeroForms } from "./hero-forms.js";
 import { isBoardPiece, isGround } from "./spaces.js";
 import { RuleError } from "./errors.js";
 import { applyAuthoritativeMove } from "./game.js";
@@ -12,17 +13,19 @@ function requireRule(ok         , code        , text        )             {
 }
 /** 明子模式直接指定目标；当前承载者 ID 只能由拥有者的私有视图提供。 */
 export function getShadowRevealedTargets(state           , side      , currentGeneralId         ) {
+  validateHeroForms(state);
   return state.pieces.filter(p => isBoardPiece(p) && !p.faceDown && p.color === side && p.id !== currentGeneralId && !hasStealthEffect(state, p.id));
 }
 /** 已现身无限龙的公开单棋资格；正式窗口和全军每回合限制仍由权威入口检查。 */
 export function getBombers(state           , side      ) {
+  validateHeroForms(state);
   return state.pieces.filter(p => isBoardPiece(p) && !p.faceDown && getController(p) === side &&
     state.effectsByPieceId?.[p.id]?.destiny === "infinite_dragon" && state.effectsByPieceId[p.id].ammunition === 1);
 }
 export function formalTurnDurationMs(state           , side      )         {
+  validateHeroForms(state);
   if (state.featureRules?.mutation === "end_time" && formalTurn(state, side) === 0) return 75_000;
-  const heroes = state.featureRules?.heroes;
-  const hasThief = heroes?.[side] === "murozond_minion", otherThief = heroes?.[otherSide(side)] === "murozond_minion";
+  const hasThief = selectedHeroId(state, side) === "murozond_minion", otherThief = selectedHeroId(state, otherSide(side)) === "murozond_minion";
   return hasThief === otherThief ? 60_000 : hasThief ? 75_000 : 45_000;
 }
 export function startFormalClock(state           , now        , secret              , randomInt            )       {
@@ -48,10 +51,11 @@ function endSkillTurn(state           , secret             , side      , randomI
 
 /** 共同权威技能入口：本机/蓝牙使用同一规则。私密技能不改变公共资源或日志。 */
 export function applyHeroAbility(state           , secret             , command                    , now = Date.now(), randomInt            = max => Math.floor(Math.random() * max))             {
+  validateHeroForms(state, secret);
   if (secret.processedActions[command.actionId] !== undefined) return { state: copy(state), secret: copy(secret), duplicate: true };
   requireRule(command.expectedRevision === state.revision, "STALE_REVISION", "客户端棋局版本已经过期");
   requireRule(state.status === "playing" && !state.forcedDefense && !state.flowDance, "INVALID_PHASE", "只能在自己的正式回合开始发动技能");
-  const s = copy(state), k = copy(secret), side = s.turn, hero = s.featureRules?.heroes?.[side];
+  const s = copy(state), k = copy(secret), side = s.turn, hero = selectedHeroId(s, side);
   initializeFeatureSecret(s, k);
   beginFormalTurn(s, k, randomInt);
   requireRule(s.turnLifecycle?.phase === "before_main", "INVALID_PRE_MAIN_WINDOW", "只能在正式回合主行动前发动技能");
@@ -121,12 +125,15 @@ export function applyHeroAbility(state           , secret             , command 
       const previous = previousFormalAction(k, side);
       requireRule(previous?.pieceId, "NO_HISTORY", "没有上一己方行动快照");
       requireRule(previous.remainingMs !== undefined && Number.isFinite(previous.remainingMs), "REWIND_CLOCK_MISSING", "历史落子前真实剩余时间缺失，不能推定回溯重走时限");
+      validateHeroForms(previous.state, k);
+      validateHeroForms(previous.state, previous.secret);
+      const formLock = copy(k.heroFormLock);
       const processed = copy(k.processedActions), used = { ...k.rewindUsed, [side]: true          }, history = k.history;
       for (const key of Object.keys(s)) delete (s                                      )[key];
       Object.assign(s, copy(previous.state));
       const restoredSecret = copy(previous.secret);
       for (const key of Object.keys(k)) delete (k                                      )[key];
-      Object.assign(k, restoredSecret, { processedActions: processed, rewindUsed: used, history, replay: { pieceId: previous.pieceId, deadlineAt: now + Math.min(10_000, Math.max(0, previous.remainingMs)) } });
+      Object.assign(k, restoredSecret, { heroFormLock: formLock, processedActions: processed, rewindUsed: used, history, replay: { pieceId: previous.pieceId, deadlineAt: now + Math.min(10_000, Math.max(0, previous.remainingMs)) } });
       s.revision = state.revision;
       s.turn = side; s.turnStartedAt = now; s.turnDeadlineAt = k.replay .deadlineAt;
       // 回溯恢复阶段与开始结算，不能把已完成的开始效果再跑一次。

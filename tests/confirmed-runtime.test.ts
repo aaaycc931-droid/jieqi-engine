@@ -118,7 +118,8 @@ test("HERO prince permits empty movement in domain but denies attacking from or 
 
 test("HERO thief redistributes seconds and same hero mirror conserves sixty seconds", () => {
   const s = stateFor("murozond_minion"); assert.equal(formalTurnDurationMs(s, "red"), 75_000); assert.equal(formalTurnDurationMs(s, "black"), 45_000);
-  s.featureRules.heroes.black = "murozond_minion"; assert.equal(formalTurnDurationMs(s, "red"), 60_000);
+  const mirror = initializeFeatureGameState(gameState(), { red: "murozond_minion", black: "murozond_minion" });
+  assert.equal(formalTurnDurationMs(mirror, "red"), 60_000); assert.equal(formalTurnDurationMs(mirror, "black"), 60_000);
 });
 
 test("HERO full rewind restores piece death/reveal and both skill resources, keeps used metadata and revision monotonic", () => {

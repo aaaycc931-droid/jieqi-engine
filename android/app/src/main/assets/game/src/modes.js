@@ -24,5 +24,5 @@ export function requireModeAdaptationReady(mode         )       {
 /** 新模式保留系统，完整适配未确认时拒绝启动组合，不自行决定技能效果。 */
 export function requireModeFeatureAdaptation(mode         , rules               = {})       {
   normalizeGameMode(mode);
-  if (rules.mutation || Object.values(rules.heroes ?? {}).some(Boolean)) requireModeAdaptationReady(mode);
+  if (rules.mutation || Object.values(rules.heroes ?? {}).some(Boolean) || Object.values(rules.heroSelections ?? {}).some(Boolean)) requireModeAdaptationReady(mode);
 }

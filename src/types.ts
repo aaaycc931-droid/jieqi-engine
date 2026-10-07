@@ -6,6 +6,10 @@ export type HeroId = "hunter" | "rogue" | "warrior" | "qin_long" | "murozond"
   | "nozdormu" | "murozond_minion" | "devout_zealot" | "prince" | "deathwing"
   | "death_knight" | "wind";
 
+export type HeroForm = "front" | "inner";
+export interface HeroSelection { heroId: HeroId; form: HeroForm; packageId: string }
+export type HeroSelections = Partial<Record<Side, HeroSelection>>;
+
 export type MutationId =
   | "iron_steed"
   | "iron_wall"
@@ -17,6 +21,8 @@ export type MutationId =
 export interface FeatureRules {
   /** 本地试玩可只启用一方英雄；联机开始后的房间始终同时具备两方选择。 */
   heroes?: Partial<Record<Side, HeroId>>;
+  /** 单方单一完整形态包；缺省的旧英雄ID只对应现有表包。 */
+  heroSelections?: HeroSelections;
   mutation?: MutationId;
 }
 
@@ -255,6 +261,8 @@ export interface GameState {
   warrior?: WarriorStates;
   forcedDefense?: ForcedDefenseState;
   featureRules?: FeatureRules;
+  /** 开局所选完整形态，随公开快照/历史保存，不能中途重置。 */
+  heroFormLock?: HeroSelections;
   formalTurns?: Record<Side, number>;
   /** 当前正式回合的阶段；子行动不创建或推进新的正式回合。 */
   turnLifecycle?: FormalTurnLifecycle;
@@ -279,6 +287,8 @@ export interface GameState {
 }
 
 export interface SecretState {
+  /** 权威独立保存的整局形态锁，用于检测公共选择/历史恢复冲突。 */
+  heroFormLock?: HeroSelections;
   identities: Record<string, SecretIdentity>;
   processedActions: Record<string, number>;
   traps?: Array<{ id: string; owner: Side; position: Position; opponentTurnsRemaining: number }>;

@@ -18,3 +18,4 @@ export * from "./settlement.js";
 export * from "./heroes.js";
 export * from "./spaces.js";
 export * from "./ghosts.js";
+export * from "./hero-forms.js";

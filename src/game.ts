@@ -1,3 +1,4 @@
+import { createHeroSelections, initializeHeroForms, selectedHeroId, validateHeroForms } from "./hero-forms.ts";
 import { copy, initializeFeatureSecret, destroyPiece, markRevealed, queueLanding, settleLandings, closeDirectDeaths, generateGhosts, beginFormalTurn, advanceToFormalTurn, finishFormalTurn, rememberAction, resolveWindReturn } from "./settlement.ts";
 import { actionFields, closeMainActionAtom, movementClassification, recordAction } from "./turns.ts";
 import { RuleError } from "./errors.ts";
@@ -21,6 +22,7 @@ import type {
   AssassinationStates,
   GameState,
   HeroId,
+  HeroForm,
   MutationId,
   MoveCommand,
   MoveResult,
@@ -47,7 +49,10 @@ export function initializeFeatureGameState(
   state: GameState,
   heroes?: Partial<Record<Side, HeroId>>,
   mutation?: MutationId,
+  forms?: Partial<Record<Side, HeroForm>>,
 ): GameState {
+  if (state.heroFormLock !== undefined || state.featureRules !== undefined || state.revision !== 0 || state.lastMove || Object.values(state.formalTurns ?? {}).some(n => n !== 0)) throw new RuleError("HERO_FORM_LOCKED", "英雄形态只能在新局开局时配置，不能重置本局资源");
+  const heroSelections = createHeroSelections(heroes, forms);
   requireModeFeatureAdaptation(state.gameMode, { heroes, mutation });
   const nextState = cloneState(state);
   const assassination = emptyAssassinationStates();
@@ -59,7 +64,8 @@ export function initializeFeatureGameState(
   }
   nextState.effectsByPieceId = {};
   nextState.assassination = assassination;
-  nextState.featureRules = { ...(heroes ? { heroes: { ...heroes } } : {}), ...(mutation ? { mutation } : {}) };
+  nextState.featureRules = { heroSelections, ...(heroes ? { heroes: { ...heroes } } : {}), ...(mutation ? { mutation } : {}) };
+  initializeHeroForms(nextState);
   const warrior: WarriorStates = { red: { barrierPieceIds: [], ironArmorAvailable: heroes?.red === "warrior" }, black: { barrierPieceIds: [], ironArmorAvailable: heroes?.black === "warrior" } };
   nextState.warrior = heroes?.red === "warrior" || heroes?.black === "warrior" ? warrior : undefined;
   nextState.formalTurns = { red: 0, black: 0 };
@@ -161,7 +167,7 @@ function awardWarriorBarrier(
   to: { x: number; y: number },
   movedPiece: RevealedPiece | PublicPiece,
 ): void {
-  if (movedPiece.faceDown || movedPiece.type === "general" || state.featureRules?.heroes?.[actingSide] !== "warrior" || !state.warrior?.[actingSide]) return;
+  if (movedPiece.faceDown || movedPiece.type === "general" || selectedHeroId(state, actingSide) !== "warrior" || !state.warrior?.[actingSide]) return;
   if (getController(movedPiece) !== actingSide || !isInPalace(from, actingSide) || isInPalace(to, actingSide)) return;
   const warrior = state.warrior[actingSide];
   if (warrior.barrierPieceIds.length >= 3 || warrior.barrierPieceIds.includes(sourceId)) return;
@@ -220,7 +226,7 @@ function finishAfterPlayerAction(
     );
 
   const hadCheck = isGeneralInCheck(nextState, nextSide);
-  if (nextState.featureRules?.heroes?.[actingSide] === "prince" && (nextState.lastMove?.captured || hadCheck)) {
+  if (selectedHeroId(nextState, actingSide) === "prince" && (nextState.lastMove?.captured || hadCheck)) {
     nextState.heroRuntime ??= {};
     (nextState.heroRuntime[actingSide] ??= {}).carefreeSuspended = true;
   }
@@ -390,6 +396,7 @@ export function applyAuthoritativeMove(
   now = Date.now(),
   childAction?: { parentActionId?: string },
 ): MoveResult {
+  validateHeroForms(state, secret);
   if (state.flowDance && !deferTurnEnd) return applyFlowDance(state, secret, command);
   if (secret.processedActions[command.actionId] !== undefined) {
     return {
@@ -548,6 +555,7 @@ export function applyAuthoritativeAssassination(
   command: AssassinationCommand,
   now = Date.now(),
 ): MoveResult {
+  validateHeroForms(state, secret);
   if (secret.processedActions[command.actionId] !== undefined) {
     return { state: cloneState(state), secret: cloneSecret(secret), duplicate: true };
   }
@@ -735,6 +743,7 @@ export function applyAutomaticExecution(
   secret: SecretState,
   actionId: string,
 ): MoveResult {
+  validateHeroForms(state, secret);
   if (secret.processedActions[actionId] !== undefined) {
     return { state: cloneState(state), secret: cloneSecret(secret), duplicate: true };
   }
@@ -830,6 +839,7 @@ function flowHasEscape(state: GameState): boolean {
   });
 }
 function applyFlowDance(state: GameState, secret: SecretState, command: MoveCommand): MoveResult {
+  validateHeroForms(state, secret);
   if (secret.processedActions[command.actionId] !== undefined) return { state: cloneState(state), secret: cloneSecret(secret), duplicate: true };
   if (command.expectedRevision !== state.revision) throw new RuleError("STALE_REVISION", "客户端棋局版本已经过期");
   const flow = state.flowDance!;
@@ -889,6 +899,7 @@ export function applyResignation(
   expectedRevision: number,
   actionId: string,
 ): MoveResult {
+  validateHeroForms(state, secret);
   if (secret.processedActions[actionId] !== undefined) {
     return {
       state: cloneState(state),
@@ -905,6 +916,7 @@ export function applyResignation(
 
   const nextState = cloneState(state);
   const nextSecret = cloneSecret(secret);
+  initializeHeroForms(nextState, nextSecret);
   nextState.status = "finished";
   nextState.winner = otherSide(side);
   nextState.reason = "resign";
@@ -914,5 +926,7 @@ export function applyResignation(
 }
 
 export function publicStateSnapshot(state: GameState): GameState {
-  return JSON.parse(JSON.stringify(state)) as GameState;
+  const snapshot = JSON.parse(JSON.stringify(state)) as GameState;
+  initializeHeroForms(snapshot);
+  return snapshot;
 }

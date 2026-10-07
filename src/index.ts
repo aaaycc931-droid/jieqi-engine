@@ -18,3 +18,4 @@ export * from "./settlement.ts";
 export * from "./heroes.ts";
 export * from "./spaces.ts";
 export * from "./ghosts.ts";
+export * from "./hero-forms.ts";

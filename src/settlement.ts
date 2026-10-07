@@ -1,3 +1,4 @@
+import { initializeHeroForms, selectedHeroId, validateHeroForms } from "./hero-forms.ts";
 import { openDestructionBatches, requireClosedDestructionBatch } from "./settlement-context.ts";
 import { getGhostObjects, putGhostObject, reconcileGhostInfections, tickGhostObjects } from "./ghosts.ts";
 import { boardPieces, isBoardPiece, isFlying, isGround, isRiver, mayReadRiver } from "./spaces.ts";
@@ -50,12 +51,14 @@ export function effectiveIdentity(piece: PublicPiece, secret: SecretState, sourc
 
 /** 初始化的秘密身份、锚点均只留在权威端；不得进入公共快照。 */
 export function initializeFeatureSecret(state: GameState, secret: SecretState, randomInt: RandomInt = max => Math.floor(Math.random() * max)): void {
+  validateHeroForms(state, secret);
   requireModeFeatureAdaptation(state.gameMode, state.featureRules);
+  initializeHeroForms(state, secret);
   secret.trueGenerals ??= {};
   for (const side of ["red", "black"] as const) {
     const general = state.pieces.find(p => isBoardPiece(p) && !p.faceDown && p.type === "general" && p.color === side);
     if (general) secret.trueGenerals[side] ??= general.id;
-    if (state.featureRules?.heroes?.[side] === "wind" && general) {
+    if (selectedHeroId(state, side) === "wind" && general) {
       secret.wind ??= {};
       secret.wind[side] ??= { uses: 0, readyOnTurn: 0, decoyId: general.id };
     }
@@ -67,7 +70,7 @@ export function initializeFeatureSecret(state: GameState, secret: SecretState, r
     for (const p of boardPieces(state)) {
       const identity = effectiveIdentity(p, secret, "mutation:end_time:initialization");
       if (identity.type !== "pawn") continue;
-      const hero = state.featureRules.heroes?.[identity.color];
+      const hero = selectedHeroId(state, identity.color);
       if (hero !== "nozdormu" && hero !== "murozond") continue;
       secret.destinyIdentities[p.id] = {
         side: identity.color, kind: hero === "nozdormu" ? "time_warrior" : "infinite_dragon",
@@ -150,6 +153,7 @@ export function relocatePiece(state: GameState, secret: SecretState, id: string,
 
 /** 当前原子链内的所有落位先完成，再做终局。额外应将不结算正式回合计数。 */
 export function settleLandings(state: GameState, secret: SecretState): void {
+  validateHeroForms(state, secret);
   requireClosedDestructionBatch(state);
   const events = state.landingEvents ?? [];
   state.landingEvents = [];
@@ -175,7 +179,7 @@ export function settleLandings(state: GameState, secret: SecretState): void {
     if (e?.infection && !ghosts.some(g => g.owner === e.infection!.owner)) delete e.infection;
     const warped = state.warps?.some(w => samePosition(w, p));
     if (e?.timeCollapse && !warped) delete e.timeCollapse;
-    if (warped && state.featureRules?.heroes?.[afterController] === "nozdormu") {
+    if (warped && selectedHeroId(state, afterController) === "nozdormu") {
       state.effectsByPieceId ??= {};
       state.effectsByPieceId[p.id] = { ...state.effectsByPieceId[p.id], timeCollapse: e?.timeCollapse ?? { expiresAtOwnerTurnEnd: formalTurn(state, afterController) + (state.turn === afterController ? 2 : 1) } };
     }
@@ -252,13 +256,14 @@ export function resolveWindReturn(state: GameState, secret: SecretState, executo
 
 /** 只在未正式终局时生成亡魂；死亡控制方由公开自动事件保存。 */
 export function generateGhosts(state: GameState, firstEvent = 0): void {
+  validateHeroForms(state);
   requireClosedDestructionBatch(state);
   for (const event of (state.automaticEvents ?? []).slice(firstEvent)) {
     if (!event.kind.startsWith("destroy:") || !event.position || !event.side) continue;
     if (event.ghostTriggerHandled) continue;
     event.ghostTriggerHandled = true;
     if (state.status === "finished") continue;
-    if (state.featureRules?.heroes?.[event.side] !== "death_knight") continue;
+    if (selectedHeroId(state, event.side) !== "death_knight") continue;
     const dead = event.deathRecord ?? [...state.captured].reverse().find(p => p.id === event.pieceId);
     if (!dead || dead.type === "general") continue;
     putGhostObject(state, { kind: "ghost", source: "death_knight:death", owner: event.side, position: { ...event.position }, remaining: 3 }, "replace");
@@ -267,12 +272,14 @@ export function generateGhosts(state: GameState, firstEvent = 0): void {
 
 /** 开始效果只在真正的新正式回合运行一次，额外/连带/强迫行动不进入此入口。 */
 export function beginFormalTurn(state: GameState, secret?: SecretState, randomInt: RandomInt = max => Math.floor(Math.random() * max)): void {
+  validateHeroForms(state, secret);
   requireClosedDestructionBatch(state);
   if (state.status !== "playing" || state.forcedDefense || state.flowDance) return;
+  initializeHeroForms(state, secret);
   const side = state.turn, number = formalTurn(state, side) + 1;
   if (state.turnLifecycle?.side !== side || state.turnLifecycle.number !== number) {
     state.turnLifecycle = { side, number, phase: "turn_start", phases: ["turn_start"] };
-    const hero = state.featureRules?.heroes?.[side];
+    const hero = selectedHeroId(state, side);
     if (hero === "qin_long" && Math.min(formalTurn(state, "red"), formalTurn(state, "black")) >= 15) {
       state.heroRuntime ??= {};
       (state.heroRuntime[side] ??= {}).rainActive = randomInt(100) < 15;
@@ -294,6 +301,7 @@ export function beginFormalTurn(state: GameState, secret?: SecretState, randomIn
 
 /** 先以公开开始效果试算合法性；确认非终局后才实际开始下一回合、抽随机或刷新秘密。 */
 export function advanceToFormalTurn(state: GameState, secret: SecretState, side: Side, randomInt: RandomInt = max => Math.floor(Math.random() * max)): void {
+  validateHeroForms(state, secret);
   requireClosedDestructionBatch(state);
   if (state.status !== "playing" || state.forcedDefense || state.flowDance) return;
   const probe = copy(state);
@@ -311,6 +319,7 @@ export function advanceToFormalTurn(state: GameState, secret: SecretState, side:
 }
 
 export function finishFormalTurn(state: GameState, secret: SecretState, actingSide: Side, randomInt: RandomInt = max => Math.floor(Math.random() * max)): void {
+  validateHeroForms(state, secret);
   requireClosedDestructionBatch(state);
   if (state.status === "finished" || state.forcedDefense || state.lastMove?.countsAsFormalTurn === false) return;
   if (state.turnLifecycle) {
@@ -354,6 +363,7 @@ export function finishFormalTurn(state: GameState, secret: SecretState, actingSi
 }
 
 export function landFlyingPiece(state: GameState, secret: SecretState, id: string): void {
+  validateHeroForms(state, secret);
   requireClosedDestructionBatch(state);
   const p = state.pieces.find(p => p.id === id);
   if (!p || !isFlying(p)) return;
@@ -374,6 +384,7 @@ export function landFlyingPiece(state: GameState, secret: SecretState, id: strin
 
 /** 不递归保存历史；已处理ID与回溯使用元状态由回溯操作保留。 */
 export function rememberAction(state: GameState, secret: SecretState, pieceId: string | undefined, tier: number, from?: Position, now = Date.now(), classification?: ActionClassification): void {
+  initializeHeroForms(state, secret);
   if (state.forcedDefense || state.flowDance || classification && (classification.opportunity !== "main" || !classification.countsAsFormalTurn)) return;
   const privateSnapshot = copy(secret);
   delete privateSnapshot.history;

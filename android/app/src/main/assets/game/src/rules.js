@@ -1,3 +1,4 @@
+import { selectedHeroId, validateHeroForms } from "./hero-forms.js";
 import { isBoardPiece, isGround, isRiver } from "./spaces.js";
 import {
   getController,
@@ -184,7 +185,7 @@ function movementGeometryLegal(
 }
 
 function targetEligible(
-  state                                                                 ,
+  state                                                                                  ,
   source             ,
   to          ,
   options                    = {},
@@ -196,7 +197,7 @@ function targetEligible(
   // 自残只限暗子：暗子身份未知，始终可吃；己方已揭明子不可吃。
   if (target.faceDown) return true;
   if (target.type === "general") {
-    if (options.allowGeneralTarget && state.featureRules?.heroes?.[target.color] === "wind") return false;
+    if (options.allowGeneralTarget && selectedHeroId(state, target.color) === "wind") return false;
     if (options.allowGeneralTarget) return getController(target) !== getController(source);
     // 战车的隔子冲锋是路径碾碎终局的唯一例外：允许把敌将帅作为终点，
     // 以便与路径上的己方将帅形成两败俱伤。
@@ -209,6 +210,7 @@ export function getPseudoMoves(
   state           ,
   pieceId        ,
 )             {
+  validateHeroForms(state);
   const source = pieceById(state, pieceId);
   if (!source || !isBoardPiece(source)) return [];
   const result             = [];
@@ -227,10 +229,11 @@ export function getPseudoMoves(
 }
 
 export function canRevealedPieceAttack(
-  state                                                                 ,
+  state                                                                                  ,
   piece               ,
   position          ,
 )          {
+  validateHeroForms(state);
   // 潜行者来源无形不产生有效将军；一般无形仅限制直接选取。
   if (!isGround(piece) || isRiver(position) || state.effectsByPieceId?.[piece.id]?.stealth) return false;
   if (princeProtects(state             , otherSide(piece.color)) && ownHalf(otherSide(piece.color), piece)) return false;
@@ -265,7 +268,7 @@ export function canRevealedPieceAttack(
 }
 
 export function isSquareAttacked(
-  state                                                                 ,
+  state                                                                                  ,
   position          ,
   bySide      ,
 )          {
@@ -276,7 +279,7 @@ export function isSquareAttacked(
 }
 
 export function findGeneral(
-  state                                                                 ,
+  state                                                                                  ,
   side      ,
 )                {
   const general = state.pieces.find(
@@ -288,7 +291,7 @@ export function findGeneral(
 }
 
 export function isGeneralInCheck(
-  state                                                                 ,
+  state                                                                                  ,
   side      ,
 )          {
   const general = findGeneral(state, side);
@@ -325,6 +328,7 @@ export function validatePublicMove(
   actingSide       = state.turn,
   options                    = {},
 )                 {
+  validateHeroForms(state);
   if (state.status !== "playing") {
     return { ok: false, code: "GAME_FINISHED", message: "对局已经结束" };
   }
@@ -357,7 +361,7 @@ export function validatePublicMove(
   if (target && princeProtects(state, otherSide(actingSide)) && (ownHalf(otherSide(actingSide), source) || ownHalf(otherSide(actingSide), move.to))) {
     return { ok: false, code: "CAREFREE", message: "无忧领域阻止此次进攻" };
   }
-  if (!target && state.featureRules?.mutation === "end_time" && state.featureRules.heroes?.[actingSide] === "nozdormu" && state.warps?.some(p => samePosition(p, move.to))) {
+  if (!target && state.featureRules?.mutation === "end_time" && selectedHeroId(state, actingSide) === "nozdormu" && state.warps?.some(p => samePosition(p, move.to))) {
     return { ok: false, code: "WARP_EMPTY", message: "不能普通移动到空的时空扭曲格" };
   }
   if (state.featureRules?.mutation === "iron_wall") {
@@ -395,6 +399,7 @@ export function getLegalMoves(
   actingSide       = state.turn,
   options                    = {},
 )             {
+  validateHeroForms(state);
   const source = pieceById(state, pieceId);
   if (!source || !isBoardPiece(source) || getController(source) !== actingSide) return [];
   return getPseudoMoves(state, pieceId).filter(
@@ -410,6 +415,7 @@ export function getLegalAssassinationMoves(
   useStrongStrike         ,
   actingSide       = state.turn,
 )             {
+  validateHeroForms(state);
   const source = pieceById(state, pieceId);
   if (!source || !isBoardPiece(source) || getController(source) !== actingSide) return [];
   if (source.faceDown || source.type === "general") return [];
@@ -457,5 +463,5 @@ export function getPieceTypeForMovement(piece             )            {
 
 function ownHalf(side      , position          )          { return side === "red" ? position.y >= 5 : position.y <= 4; }
 export function princeProtects(state           , side      )          {
-  return state.featureRules?.heroes?.[side] === "prince" && Math.min(state.formalTurns?.red ?? 0, state.formalTurns?.black ?? 0) < 9 && !state.heroRuntime?.[side]?.carefreeSuspended;
+  return selectedHeroId(state, side) === "prince" && Math.min(state.formalTurns?.red ?? 0, state.formalTurns?.black ?? 0) < 9 && !state.heroRuntime?.[side]?.carefreeSuspended;
 }

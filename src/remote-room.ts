@@ -159,6 +159,7 @@ export interface TrapTrigger {
 }
 
 export interface RoomFeaturePublicState {
+  heroSelections?: import("./types.ts").HeroSelections;
   heroes?: Record<Side, HeroId>;
   mutation?: MutationId;
   mutationRarity?: MutationRarity;
@@ -593,6 +594,7 @@ function randomOwnHalfPosition(side: Side, randomInt?: RandomInt): Position {
 function publicFeaturesAfterPreparation(features: RoomFeaturePublicState): RoomFeaturePublicState {
   return {
     ...(features.heroes ? { heroes: { ...features.heroes } } : {}),
+    ...(features.heroSelections ? { heroSelections: copy(features.heroSelections) } : {}),
     ...(features.mutation ? { mutation: features.mutation } : {}),
     ...(features.mutationRarity ? { mutationRarity: features.mutationRarity } : {}),
   };
@@ -644,6 +646,7 @@ function createGameAfterSetup(
   const playerIds = roomPlayerIds(room);
   const featureState = initializeFeatureGameState(initial.state, heroes, mutation);
   initializeFeatureSecret(featureState, initial.secret, randomInt ?? cryptoRandomInt);
+  features.heroSelections = copy(featureState.featureRules!.heroSelections);
   return {
     ...room,
     phase: heroes ? "hero_intro" : "playing",
