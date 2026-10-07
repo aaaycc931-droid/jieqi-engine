@@ -1,6 +1,6 @@
 import { openShuffleA } from "./hero-shuffle.ts";
 import { openHeroChild } from "./hero-children.ts";
-import { qualifyRiverArrival, settleHeroDeathResources } from "./hero-progress.ts";
+import { qualifyRiverArrival } from "./hero-progress.ts";
 import { createHeroSelections, initializeHeroForms, selectedHeroId, validateHeroForms } from "./hero-forms.ts";
 import { copy, initializeFeatureSecret, destroyPiece, markRevealed, queueLanding, settleLandings, closeDirectDeaths, generateGhosts, beginFormalTurn, advanceToFormalTurn, finishFormalTurn, rememberAction, resolveWindReturn } from "./settlement.ts";
 import { actionFields, closeMainActionAtom, movementClassification, recordAction } from "./turns.ts";
@@ -147,7 +147,6 @@ function finishDirectDeaths(state: GameState, actingSide: Side, secret: SecretSt
   settleLandings(state, secret);
   resolveWindReturn(state, secret);
   if (state.lastMove) closeMainActionAtom(state, state.lastMove.actionId);
-  settleHeroDeathResources(state);
   return closeDirectDeaths(state, secret, actingSide);
 }
 
@@ -225,7 +224,6 @@ function finishAfterPlayerAction(
     nextSecret.processedActions[command.actionId] = nextState.revision; return;
   }
   qualifyRiverArrival(nextState, actingSide);
-  settleHeroDeathResources(nextState);
   generateGhosts(nextState);
   if (!isInfiniteSting && openHeroChild(nextState, actingSide)) { nextSecret.processedActions[command.actionId] = nextState.revision; return; }
   // 原主行动完成一个正式回合；铁甲提供的额外应将不另计回合。
@@ -788,11 +786,17 @@ export function applyAutomaticExecution(
       nextState.turn = defender;
       if (!nextState.flowDance) {
         advanceToFormalTurn(nextState, nextSecret, defender);
-        if (nextState.status === "execution") return applyAutomaticExecution(nextState, nextSecret, `${actionId}:second-flow`);
+        if (nextState.status === "execution") {
+          const result = applyAutomaticExecution(nextState, nextSecret, `${actionId}:second-flow`);
+          result.secret.processedActions[actionId] = result.state.revision;
+          return result;
+        }
       } else if (!flowHasEscape(nextState)) {
         delete nextState.flowDance;
         nextState.status = "execution"; nextState.winner = state.winner; nextState.turn = state.winner; nextState.reason = "checkmate";
-        return applyAutomaticExecution(nextState, nextSecret, `${actionId}:flow-failed`);
+        const result = applyAutomaticExecution(nextState, nextSecret, `${actionId}:flow-failed`);
+        result.secret.processedActions[actionId] = result.state.revision;
+        return result;
       }
     }
   }
@@ -940,7 +944,7 @@ export function finishHeroChildTurn(state: GameState, secret: SecretState, side:
     if (p) finishAfterPlayerAction(state, secret, { ...child, expectedRevision: state.revision }, side, true, p, false);
   } else {
     state.lastMove = { ...parent, countsAsFormalTurn: true };
-    settleLandings(state, secret); settleHeroDeathResources(state); generateGhosts(state);
+    settleLandings(state, secret); generateGhosts(state);
     resolveWindReturn(state, secret);
     if (!closeDirectDeaths(state, secret, side)) {
       if (isGeneralInCheck(state, side)) { state.status = "execution"; state.winner = otherSide(side); state.turn = otherSide(side); state.reason = "checkmate"; }

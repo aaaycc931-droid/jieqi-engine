@@ -1,5 +1,5 @@
 import { saveShuffleOpening, openShuffleB } from "./hero-shuffle.ts";
-import { advanceTraining, settleTrainingDeaths, TRAINING_COST } from "./hero-progress.ts";
+import { advanceTraining, settleTrainingDeaths, settleHeroDeathResources, TRAINING_COST } from "./hero-progress.ts";
 import { ascendGalakrond } from "./hero-descent.ts";
 import { initializeHeroForms, selectedHeroId, selectedHeroSelection, validateHeroForms } from "./hero-forms.ts";
 import { openDestructionBatches, requireClosedDestructionBatch } from "./settlement-context.ts";
@@ -198,6 +198,9 @@ export function settleLandings(state: GameState, secret: SecretState): void {
 
 export function closeDirectDeaths(state: GameState, secret: SecretState, actingSide: Side): boolean {
   requireClosedDestructionBatch(state);
+  // 每种调用来源都先闭合死亡派生，再判断解将/终局；不能依赖某个走子入口。
+  resolveWindReturn(state, secret);
+  settleHeroDeathResources(state);
   settleTrainingDeaths(state, secret, max => Math.floor(Math.random() * max));
   const alive = (side: Side) => {
     const wind = secret.wind?.[side];

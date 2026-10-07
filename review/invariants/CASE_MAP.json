@@ -262,6 +262,10 @@
       {
         "file": "tests/cross-rule-contracts.test.ts",
         "namePrefix": "CROSS-ATOMIC-01 "
+      },
+      {
+        "file": "tests/hero-cross-settlement.test.ts",
+        "namePrefix": "R5-CROSS-04"
       }
     ],
     "INV-ATOMIC-003": [
@@ -972,6 +976,10 @@
       {
         "file": "tests/confirmed-runtime.test.ts",
         "namePrefix": "HERO non-execution decoy"
+      },
+      {
+        "file": "tests/hero-cross-settlement.test.ts",
+        "namePrefix": "R5-CROSS-05"
       }
     ],
     "ADD-WIND-003": [
@@ -1236,6 +1244,10 @@
       {
         "file": "tests/action-turn-contracts.test.ts",
         "namePrefix": "R4-TURN-12 "
+      },
+      {
+        "file": "tests/hero-cross-settlement.test.ts",
+        "namePrefix": "R5-CROSS-04"
       }
     ],
     "ADD-DURATION-001": [
@@ -1272,6 +1284,18 @@
       {
         "file": "tests/destruction-batch.test.ts",
         "namePrefix": "R4-BATCH-"
+      },
+      {
+        "file": "tests/hero-cross-settlement.test.ts",
+        "namePrefix": "R5-CROSS-02"
+      },
+      {
+        "file": "tests/hero-cross-settlement.test.ts",
+        "namePrefix": "R5-CROSS-03"
+      },
+      {
+        "file": "tests/hero-cross-settlement.test.ts",
+        "namePrefix": "R5-CROSS-05"
       }
     ],
     "ADD-RIVER-001": [

@@ -1,7 +1,6 @@
 import { applyShuffleAction } from "./hero-shuffle.ts";
 import { applyHeroChild } from "./hero-children.ts";
 import { applyRiverAbility } from "./hero-river.ts";
-import { settleHeroDeathResources } from "./hero-progress.ts";
 import { applyDescentAction } from "./hero-descent.ts";
 import { selectedHeroId, selectedHeroSelection, validateHeroForms } from "./hero-forms.ts";
 import { getGhostObjects, clearGhostObjects, reconcileGhostInfections } from "./ghosts.ts";
@@ -47,7 +46,6 @@ export function startFormalClock(state: GameState, now: number, secret?: SecretS
 function endSkillTurn(state: GameState, secret: SecretState, side: Side, randomInt: RandomInt): void {
   settleLandings(state, secret);
   if (state.lastMove) closeMainActionAtom(state, state.lastMove.actionId);
-  settleHeroDeathResources(state);
   if (closeDirectDeaths(state, secret, side)) return;
   generateGhosts(state);
   // 占步技能应将失败的结果在整个锁定集合结算完成后裁决。

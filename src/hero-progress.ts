@@ -1,4 +1,5 @@
 import { RuleError } from "./errors.ts";
+import { requireClosedDestructionBatch } from "./settlement-context.ts";
 import { selectedHeroId, selectedHeroSelection, validateHeroForms } from "./hero-forms.ts";
 import { getController, getCurrentPieceType, otherSide } from "./slots.ts";
 import { isBoardPiece, isGround, isRiver } from "./spaces.ts";
@@ -62,6 +63,7 @@ export function qualifyRiverArrival(state: GameState, side: Side): void {
 }
 /** 整个原子结束后按死亡瞬间的公开控制方统一入账，不能由秘密阵营改变收益。 */
 export function settleHeroDeathResources(state: GameState): void {
+  requireClosedDestructionBatch(state);
   const events = (state.automaticEvents ?? []).filter(e => e.kind.startsWith("destroy:") && !e.resourceHandled);
   for (const side of ["red", "black"] as const) {
     if (selectedHeroId(state, side) !== "berserker") continue;
