@@ -1,7 +1,7 @@
 {
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-07-current-control",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-07-hero-forms",
   "rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
-  "code_checkpoint": "af5e411d49099c2f5b936e6dde004b6f5e50059d",
+  "code_checkpoint": "830c180de6f60593c42fee427959e77cb7ffb189",
   "sources": [
     {
       "id": "RULE:CURRENT_RULE_DELTAS_2026-09-22.md",
@@ -275,6 +275,18 @@
       "applied_scope": "现有源码控制/秘密读取映射与15项情景验证、真实身份明确来源、无限龙公开弹药候选共用，旧实际菜单复现；416通过、121资源；保留风/宿命真实许可，未导入未来英雄，完整验收0",
       "ui_reproduction": "review/invariants/CURRENT_CONTROL_UI_REPRO_2026-10-07.json",
       "embedded_original": false
+    },
+    {
+      "id": "RUNTIME:HERO_FORM_2026-10-07",
+      "kind": "runtime_execution_evidence_non_normative",
+      "path": "handoff/current/20_HERO_FORM_RUNTIME_2026-10-07.md",
+      "sha256": "e8e110328bc946736289fda342378a394ab5deafe1ac1ebee92a33c580db752c",
+      "authorization": "user 2026-10-07T15:37:30+08:00 同意（继续表/里公共模型）",
+      "implementation_commit": "830c180de6f60593c42fee427959e77cb7ffb189",
+      "local_execution_checkpoint": "ba7a75ff4637c37f92142758d87199e43773ce81",
+      "implementation_tree": "669cb1165f38881d350de557d5aa759881120842",
+      "applied_scope": "十二已移交表完整包登记、命名和整局公共/权威锁、旧快照迁移、主被动分派与实际回溯/蓝牙编码/重连/再战；18新测试、434通过、122资源；里包明确不可用，无新UI/浏览器/实机/APK，完整验收0",
+      "embedded_original": false
     }
   ],
   "coverage": {
@@ -333,7 +345,7 @@
     "过时3英雄进度"
   ],
   "completeness_claim": "当前已恢复并核对源的主体规则按域覆盖；2026-10-06已将本轮明确确认的全局规则同步进01。仍不保证所有历史对话的英雄专属细节逐条恢复，明确缺口不得填空。 2026-10-06后续明确确认的基础【暗置身份】词条已同步；只关闭术士暗置等级未决项，不提升其他英雄完整稿或特殊位置未定义处理。",
-  "previous_code_checkpoint": "364b711f522be18c6c636e59a3df5e02844092c7",
+  "previous_code_checkpoint": "af5e411d49099c2f5b936e6dde004b6f5e50059d",
   "runtime_evidence_index": "review/invariants/LATEST.json",
   "gameplay_execution_evidence_index": "review/gameplay/runtime-browser-review-2026-10-05-modes.json",
   "full_match_execution_evidence_index": "review/gameplay/full-match-browser-2026-10-05-active-regression-summary.json",
@@ -350,5 +362,6 @@
   "river_space_runtime_index": "16_RIVER_SPACE_RUNTIME_2026-10-06.md",
   "account_switch_close_index": "17_ACCOUNT_SWITCH_CLOSE_2026-10-06.md",
   "ghost_object_runtime_index": "18_GHOST_OBJECT_RUNTIME_2026-10-07.md",
-  "current_control_audit_index": "19_CURRENT_CONTROL_AUDIT_2026-10-07.md"
+  "current_control_audit_index": "19_CURRENT_CONTROL_AUDIT_2026-10-07.md",
+  "hero_form_runtime_index": "20_HERO_FORM_RUNTIME_2026-10-07.md"
 }

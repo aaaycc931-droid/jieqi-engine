@@ -3,8 +3,8 @@
   "self_excluded": true,
   "files": {
     "00_READ_FIRST.md": {
-      "bytes": 7047,
-      "sha256": "959fc7ad1932177980a35db974c85f5ab447bb7084a574c7b489868e67ce27d7"
+      "bytes": 7116,
+      "sha256": "f563c8dece37aac846e4e77e4c9a8bab6bcc934bbbaf300120e05feea9a6d96e"
     },
     "01_CURRENT_RULES.md": {
       "bytes": 30541,
@@ -23,8 +23,8 @@
       "sha256": "c133b4ee797b778ce4c88233437b2466255f27c30fcaec5b0941c766cc4bae00"
     },
     "05_PROGRESS_AND_NEXT.md": {
-      "bytes": 28112,
-      "sha256": "c7290d84759474f674b18011931ad167b8891ac03deaec7961b0a392b00869d1"
+      "bytes": 28886,
+      "sha256": "10d434d8a828bb9f2001ee9fc70c43fb1a46fa6bb43ae724a3538420ec8678e8"
     },
     "06_COLLABORATION.md": {
       "bytes": 4521,
@@ -39,16 +39,16 @@
       "sha256": "68845494b465bbcc1908f6cef862f350c1da4dadfc3e3a7473d11b2443edf23c"
     },
     "NEW_DIALOGUE_PROMPT.txt": {
-      "bytes": 3094,
-      "sha256": "03e11f9c3bf0a2153d37114a5de3bf64adfc39e2066c8bafeb442ffe7f12499f"
+      "bytes": 2804,
+      "sha256": "0d2ec1b5ca3d4835b500d8749d62ce40ded9fc3bb3bdda044a7936bf27f933d0"
     },
     "SOURCE_REGISTER.json": {
-      "bytes": 21711,
-      "sha256": "5b62ddba2e70c87fc866e4b653eb81c0e90483e48b4296862c0058fd12209c1a"
+      "bytes": 22678,
+      "sha256": "cb9d01b7a21854e46f0d4d205aa48edcdfb442cc370baab3d9d7674f6037ff6d"
     },
     "STATE.json": {
-      "bytes": 34948,
-      "sha256": "cc5947a142212fd0618c0966284f280dfa4815bd7e45ec22897700e8e3469847"
+      "bytes": 38125,
+      "sha256": "2c86b3fa98512cc176bf2d5f77c2ffce61d1029ce62b11066b3de0dbc739cf37"
     },
     "assets/approved-home.png": {
       "bytes": 2157060,
@@ -59,8 +59,8 @@
       "sha256": "63671bd146ce72a3c61f40dac457f83f882d7ada78c5f5f98efb7bb3ba5eac26"
     },
     "qa/INVARIANTS.json": {
-      "bytes": 44354,
-      "sha256": "8e3de3699bf435bbb5448f7cbf44409a699d816c14760be473217d1464568498"
+      "bytes": 44939,
+      "sha256": "55659ec2d9eede01318b196eb3efee3898c681c6fbece4095f94305bfccf0b19"
     },
     "09_CURRENT_GAME_MODES.md": {
       "bytes": 4749,
@@ -105,6 +105,10 @@
     "19_CURRENT_CONTROL_AUDIT_2026-10-07.md": {
       "bytes": 7967,
       "sha256": "041a02ee0cede1dcf44642dab431dcdbcb34548ad6296fcc812596869e4c8f0b"
+    },
+    "20_HERO_FORM_RUNTIME_2026-10-07.md": {
+      "bytes": 5356,
+      "sha256": "e8e110328bc946736289fda342378a394ab5deafe1ac1ebee92a33c580db752c"
     }
   },
   "checks": {
@@ -129,6 +133,7 @@
     "account_switch_close_record_present": true,
     "ghost_object_runtime_record_present": true,
     "account_switch_pause_superseded_by_user": true,
-    "current_control_audit_record_present": true
+    "current_control_audit_record_present": true,
+    "hero_form_runtime_record_present": true
   }
 }

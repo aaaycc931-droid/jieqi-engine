@@ -1,8 +1,8 @@
 {
   "authority": "execution_evidence_non_normative",
-  "generatedAt": "2026-10-07T02:28:18.987Z",
-  "sourceCommitAtRun": "14de414e76862d2adb8d014f66eae6f80bc8da3c",
-  "sourceDigest": "f2ea311f398420943fcd2e8c1dd3b9bd3c0e8c44b3386f8af141d3428ff65a09",
+  "generatedAt": "2026-10-07T07:44:02.033Z",
+  "sourceCommitAtRun": "ba7a75ff4637c37f92142758d87199e43773ce81",
+  "sourceDigest": "a18b12151089b900943917ec13abf24db3675faa0b5bcf4bd19806a497c75761",
   "sourceDigestPaths": [
     ".github/workflows/gameplay-runtime-review.yml",
     ".github/workflows/menu-reference-review.yml",
@@ -28,6 +28,7 @@
     "src/game.ts",
     "src/ghosts.ts",
     "src/hero-actions.ts",
+    "src/hero-forms.ts",
     "src/heroes.ts",
     "src/index.ts",
     "src/modes.ts",
@@ -64,6 +65,7 @@
     "tests/game-modes.test.ts",
     "tests/ghost-objects.test.ts",
     "tests/helpers.ts",
+    "tests/hero-forms.test.ts",
     "tests/movement.test.ts",
     "tests/mutation-rarity.test.ts",
     "tests/mutation.test.ts",
@@ -179,18 +181,18 @@
     "web/ui-refresh.css"
   ],
   "ruleRevision": "LEZI-FUNCTION-2026-10-06-r4",
-  "contractDigest": "8e3de3699bf435bbb5448f7cbf44409a699d816c14760be473217d1464568498",
+  "contractDigest": "55659ec2d9eede01318b196eb3efee3898c681c6fbece4095f94305bfccf0b19",
   "runtime": "v24.19.0",
   "testSummary": {
-    "passed": 416,
+    "passed": 434,
     "failed": 0,
     "executionFailed": false
   },
   "contractSummary": {
     "total": 109,
-    "partial_evidence_passed": 105,
+    "partial_evidence_passed": 106,
     "failed_cases": 0,
-    "missing_tests": 1,
+    "missing_tests": 0,
     "non_runtime_contract": 3,
     "fullyAccepted": 0
   },
@@ -3066,9 +3068,100 @@
       "id": "ADD-HERO-FORM-001",
       "group": "supplements",
       "statement": "表/里为同一英雄的完整形态包；默认一局只使用所选形态，不能中途机会主义切换或同时叠加；命名为英雄名｜【技能名】与里·英雄名｜【里·技能名】。",
-      "status": "missing_tests",
-      "relatedCases": [],
-      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/hero-forms.test.ts",
+          "name": "R4-FORM-01 twelve existing front packages retain complete catalog and exact naming",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-forms.test.ts",
+          "name": "R4-FORM-02 inner naming is grammar only and never registers an unavailable package",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-forms.test.ts",
+          "name": "R4-FORM-03 inner opening is rejected atomically without touching public or secret state",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-forms.test.ts",
+          "name": "R4-FORM-04 unknown form, two forms, unknown hero and a form without hero fail closed",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-forms.test.ts",
+          "name": "R4-FORM-05 partial hero opening fixes only the chosen side and independently owns the lock",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-forms.test.ts",
+          "name": "R4-FORM-06 legacy front snapshots migrate at public projection and authoritative move without input mutation",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-forms.test.ts",
+          "name": "R4-FORM-07 canonical-only selection resolves the whole front package for passives and skills",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-forms.test.ts",
+          "name": "R4-FORM-08 alias mismatch, wrong package ID and malformed multi-package snapshot are rejected",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-forms.test.ts",
+          "name": "R4-FORM-09 public per-game lock forbids switching, removal or adding another hero",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-forms.test.ts",
+          "name": "R4-FORM-10 authoritative independent lock rejects even a consistent replacement of all public package fields",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-forms.test.ts",
+          "name": "R4-FORM-11 inner snapshot never falls back to front passive, clock, target, death or active skill",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-forms.test.ts",
+          "name": "R4-FORM-12 reinitialization cannot reset skills or switch before or after the first action",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-forms.test.ts",
+          "name": "R4-FORM-13 actual rewind restores history while keeping the entire selected form fixed",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-forms.test.ts",
+          "name": "R4-FORM-14 a tampered historical package cannot replace the current authoritative game lock",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-forms.test.ts",
+          "name": "R4-FORM-15 mutation-only and no-hero old snapshots normalize without inventing a hero",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-forms.test.ts",
+          "name": "R4-FORM-16 duplicate packets preserve the lock and cannot bypass authoritative mismatch checks",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-forms.test.ts",
+          "name": "R4-FORM-17 actual Bluetooth setup, encoded owner views and reconnect retain public form metadata",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-forms.test.ts",
+          "name": "R4-FORM-18 rematch creates a new game with fresh selections without unlocking the previous game",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "18项专属情景覆盖十二表完整包、表/里命名、未知/未移交里包明确拒绝、旧快照表兼容、公开/权威独立整局锁、别名/技能包冲突、主被动分派、重复请求、实际回溯及历史篡改、实际蓝牙房间编码/重连/新局再战。只有表包已经注册；未移交里包未实现，不假造技能/数值。锁为可信权威状态约束，不是客户端密码凭证。无新形态选择UI、浏览器或实机新增验收，未来完整里包及全称交叉仍需移交后验证。",
       "fullyAccepted": false
     },
     {
@@ -3182,7 +3275,7 @@
       "fullyAccepted": false
     }
   ],
-  "publishedImplementationCommit": "af5e411d49099c2f5b936e6dde004b6f5e50059d",
-  "publishedImplementationTree": "d9b682eaae0de8dc497296af1d2784f0eeca66ad",
-  "publicationNote": "实际执行HEAD为14de414e76862d2adb8d014f66eae6f80bc8da3c；GitHub发布提交与本地执行提交完整tree相同，作者/时间不同。保留真实sourceCommitAtRun，不冒充额外重跑。"
+  "publishedImplementationCommit": "830c180de6f60593c42fee427959e77cb7ffb189",
+  "publishedImplementationTree": "669cb1165f38881d350de557d5aa759881120842",
+  "publicationNote": "Actual sourceCommitAtRun is the local execution checkpoint. Published commit has the identical full tree; author/commit metadata differ. The publication SHA was not substituted for the actual test HEAD."
 }
