@@ -1,0 +1,2241 @@
+{
+  "authority": "acceptance_gap_inventory_non_normative",
+  "schema_version": 1,
+  "generated_at": "2026-10-07T09:19:20.463722+00:00",
+  "authorization": {
+    "at": "2026-10-07T17:14:00+08:00",
+    "quote": "同意，这一步结束后我会把新英雄设计提交给你"
+  },
+  "verified_remote_before_round": "4941e54049837b43a1195f676954d8742ec9a366",
+  "rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
+  "rule_digest": "cf831ebe7872cb9d8ed55fa3b4edb7f03492b3c90a06c8d9be494ac9a9e9284f",
+  "implementation_commit": "830c180de6f60593c42fee427959e77cb7ffb189",
+  "implementation_tree": "669cb1165f38881d350de557d5aa759881120842",
+  "evidence_snapshot": {
+    "index": "review/invariants/LATEST.json",
+    "generated_at": "2026-10-07T07:44:02.033Z",
+    "sha256": "2d569c33822fcf70e6b6f6efc3022c0e31b5573f5e4ef0fb509a47a018e31bd6",
+    "source_commit_at_run": "ba7a75ff4637c37f92142758d87199e43773ce81",
+    "source_digest": "a18b12151089b900943917ec13abf24db3675faa0b5bcf4bd19806a497c75761",
+    "contract_digest": "55659ec2d9eede01318b196eb3efee3898c681c6fbece4095f94305bfccf0b19",
+    "test_summary": {
+      "passed": 434,
+      "failed": 0,
+      "executionFailed": false
+    },
+    "contract_summary": {
+      "total": 109,
+      "partial_evidence_passed": 106,
+      "failed_cases": 0,
+      "missing_tests": 0,
+      "non_runtime_contract": 3,
+      "fullyAccepted": 0
+    },
+    "tests_rerun_this_round": false
+  },
+  "read_only_verification": {
+    "current_r4_digest_matches": true,
+    "current_source_digest_matches_last_execution": true,
+    "contract_digest_matches_last_execution": true,
+    "published_and_local_execution_trees_match": true,
+    "contract_ids_unique_and_complete": true,
+    "all_mapping_selectors_resolve_to_recorded_passing_cases": true,
+    "mapping_selectors_checked": 266,
+    "old_manifest_entries_verified": 27,
+    "runtime_record_hashes_verified": true,
+    "android_assets_verified": 122,
+    "android_asset_check": "read_only_byte_compare_with_existing_dist",
+    "runtime_paths_unchanged_since_implementation": true,
+    "engine_tests_rerun_this_round": false,
+    "web_rebuilt_this_round": false,
+    "browser_tests_run_this_round": false,
+    "physical_device_tests_run_this_round": false,
+    "apk_built_this_round": false
+  },
+  "status": "inventory_completed_remaining_acceptance_open_waiting_hero_transfer",
+  "annotation_policy": "QA旧pending标记是保留的合同/历史审查注记；当前具体运行证据以LATEST同ID条目及字节摘要为准。登记工作不升级合同完整验收，也不改写历史证据时间。",
+  "gap_groups": [
+    {
+      "id": "GAP-SOURCE-HERO",
+      "title": "其他对话完整英雄确认稿",
+      "status": "awaiting_user_transfer",
+      "scope": "目前只移交全局规则/暗置身份增量；完整英雄及里包待用户本步结束后提交。",
+      "source_refs": [
+        "SOURCE_REGISTER.json:source_gaps",
+        "06_COLLABORATION.md",
+        "20_HERO_FORM_RUNTIME_2026-10-07.md"
+      ],
+      "closure_requirement": "接收现有完整确认稿，提取来源、用户确认和待定项，先比较提案基线、当前r4及确认差分；进入实现前明确接入范围。",
+      "contract_ids": [],
+      "completed_this_round": false
+    },
+    {
+      "id": "GAP-SOURCE-BASE",
+      "title": "独立揭棋规格v1原稿",
+      "status": "source_not_located",
+      "scope": "现有源与代码可追溯；不声称独立原稿完整恢复。",
+      "source_refs": [
+        "SOURCE_REGISTER.json:source_gaps",
+        "05_PROGRESS_AND_NEXT.md:资料缺口"
+      ],
+      "closure_requirement": "如果新稿触及原稿区域/跨河，定位原始确认全文核对；其他已确认机制不因此重设计。",
+      "contract_ids": [],
+      "completed_this_round": false
+    },
+    {
+      "id": "GAP-INTEGRATION",
+      "title": "公共r3/r4模型的未来来源集成",
+      "status": "awaiting_confirmed_source",
+      "scope": "河道资格/容量/连通/停留、里亡魂生成/寿命/收益、里完整技能分派、术士燃烧烈焰等尚无完整移交来源。",
+      "source_refs": [
+        "16_RIVER_SPACE_RUNTIME_2026-10-06.md",
+        "18_GHOST_OBJECT_RUNTIME_2026-10-07.md",
+        "20_HERO_FORM_RUNTIME_2026-10-07.md",
+        "review/invariants/CASE_MAP.json:limits"
+      ],
+      "closure_requirement": "只对移交并确认的来源补完整状态/入口/失败/秘密/时序和交叉测试；普通顺序行动不自动改同批，里包不继承表处理器。",
+      "contract_ids": [
+        "ADD-RIVER-001",
+        "ADD-BATCH-001",
+        "ADD-GHOST-OBJECT-001",
+        "ADD-HERO-FORM-001",
+        "ADD-DARK-IDENTITY-005"
+      ],
+      "completed_this_round": false
+    },
+    {
+      "id": "GAP-CONTRACT-COVERAGE",
+      "title": "106项具体情景的全称验收",
+      "status": "not_fully_accepted",
+      "scope": "已有相关通过用例，不表示全部来源、例外、可达交叉及客户端流程穷尽。",
+      "source_refs": [
+        "review/invariants/LATEST.json",
+        "qa/INVARIANTS.json",
+        "review/invariants/CASE_MAP.json"
+      ],
+      "closure_requirement": "后续按正式移交/授权改动影响的合同核对来源与例外，补针对性正反例、时序和用户端证据，逐项留下限制；不凭测试数量批量升级为完整验收。",
+      "contract_ids": [
+        "INV-BOARD-001",
+        "INV-BOARD-002",
+        "INV-SETUP-001",
+        "INV-COVERED-001",
+        "INV-COVERED-002",
+        "INV-REVEAL-001",
+        "INV-REVEAL-002",
+        "INV-DESTROYED-RECORD-001",
+        "INV-SECRET-001",
+        "INV-LEGALITY-001",
+        "INV-CONTROL-001",
+        "INV-CAPTURE-001",
+        "INV-CAPTURE-002",
+        "INV-CAPTURE-003",
+        "INV-ACTION-002",
+        "INV-ACTION-PLAN-001",
+        "INV-DISPLACEMENT-001",
+        "INV-REWIND-001",
+        "INV-REVIVE-001",
+        "INV-DESTROY-001",
+        "INV-TERMINAL-001",
+        "INV-ATOMIC-001",
+        "INV-ATOMIC-002",
+        "INV-ATOMIC-003",
+        "INV-END-001",
+        "INV-REASON-001",
+        "INV-IDEMPOTENCY-001",
+        "INV-PHASE-001",
+        "INV-INTANGIBLE-001",
+        "INV-INTANGIBLE-002",
+        "INV-INTANGIBLE-003",
+        "INV-FLIGHT-001",
+        "INV-FLIGHT-002",
+        "INV-CRUSH-001",
+        "INV-SUFFOCATION-001",
+        "INV-INFECTION-001",
+        "INV-INFECTION-002",
+        "INV-WARRIOR-001",
+        "INV-WARRIOR-002",
+        "INV-WARRIOR-003",
+        "INV-WARRIOR-004",
+        "INV-IRONARMOR-001",
+        "INV-ROGUE-001",
+        "INV-ROGUE-002",
+        "INV-STRIKE-001",
+        "INV-TRAP-001",
+        "INV-TRAP-002",
+        "INV-IRONSTEED-001",
+        "INV-IRONSTEED-002",
+        "INV-WARCHARIOT-001",
+        "INV-WARCHARIOT-002",
+        "INV-CAVALRY-001",
+        "INV-CAVALRY-002",
+        "INV-FORTRESS-001",
+        "INV-MUROZOND-001",
+        "INV-NOZDORMU-001",
+        "INV-TIME-COLLAPSE-001",
+        "INV-TIME-COLLAPSE-002",
+        "INV-HOURGLASS-001",
+        "INV-MANIFESTED-001",
+        "INV-CAREFREE-001",
+        "INV-CAREFREE-002",
+        "INV-VISIBILITY-001",
+        "INV-TRAP-VISIBILITY-001",
+        "INV-DISCONNECT-001",
+        "INV-DISCONNECT-002",
+        "INV-DISCONNECT-003",
+        "REJ-001",
+        "REJ-002",
+        "REJ-003",
+        "REJ-004",
+        "REJ-005",
+        "REJ-006",
+        "REJ-007",
+        "REJ-008",
+        "REJ-009",
+        "REJ-010",
+        "REJ-011",
+        "REJ-012",
+        "REJ-013",
+        "REJ-014",
+        "REJ-015",
+        "REJ-016",
+        "REJ-017",
+        "REJ-018",
+        "REJ-019",
+        "ADD-SECRET-001",
+        "ADD-WIND-001",
+        "ADD-WIND-002",
+        "ADD-WIND-003",
+        "ADD-JIANXIE-001",
+        "ADD-CLOCK-001",
+        "ADD-TWIST-001",
+        "ADD-ACTION-TIER-001",
+        "ADD-TURN-PHASE-001",
+        "ADD-DURATION-001",
+        "ADD-RIVER-001",
+        "ADD-BATCH-001",
+        "ADD-GHOST-OBJECT-001",
+        "ADD-CURRENT-CONTROL-001",
+        "ADD-HERO-FORM-001",
+        "ADD-DARK-IDENTITY-001",
+        "ADD-DARK-IDENTITY-002",
+        "ADD-DARK-IDENTITY-003",
+        "ADD-DARK-IDENTITY-004",
+        "ADD-DARK-IDENTITY-005"
+      ],
+      "completed_this_round": false
+    },
+    {
+      "id": "GAP-INV-ACTION-001",
+      "title": "动作维度/记录字段规范审查",
+      "status": "non_runtime_review_pending",
+      "scope": "术语分类约束需要规范/记录字段检查，不能通过一条执行用例证明。",
+      "source_refs": [
+        "qa/INVARIANTS.json:INV-ACTION-001",
+        "review/invariants/CASE_MAP.json:nonRuntime"
+      ],
+      "closure_requirement": "以正式规范、记录字段及可适用日志/来源差分完成专项审查；引擎单例不能替代此类审查。",
+      "contract_ids": [
+        "INV-ACTION-001"
+      ],
+      "completed_this_round": false
+    },
+    {
+      "id": "GAP-INV-KEYWORD-001",
+      "title": "退役术语与日志规范审查",
+      "status": "non_runtime_review_pending",
+      "scope": "术语退役约束需要规范/日志静态检查，尚未完成。",
+      "source_refs": [
+        "qa/INVARIANTS.json:INV-KEYWORD-001",
+        "review/invariants/CASE_MAP.json:nonRuntime"
+      ],
+      "closure_requirement": "以正式规范、记录字段及可适用日志/来源差分完成专项审查；引擎单例不能替代此类审查。",
+      "contract_ids": [
+        "INV-KEYWORD-001"
+      ],
+      "completed_this_round": false
+    },
+    {
+      "id": "GAP-REJ-020",
+      "title": "代码不得替代规则的来源审查",
+      "status": "non_runtime_review_pending",
+      "scope": "该合同是防止代码替代规则的协作约束；原反例中“尚未实现”属于历史文字，不能用于推断本轮具体缺陷。",
+      "source_refs": [
+        "qa/INVARIANTS.json:REJ-020",
+        "review/invariants/CASE_MAP.json:nonRuntime"
+      ],
+      "closure_requirement": "以正式规范、记录字段及可适用日志/来源差分完成专项审查；引擎单例不能替代此类审查。",
+      "contract_ids": [
+        "REJ-020"
+      ],
+      "completed_this_round": false
+    },
+    {
+      "id": "GAP-BROWSER",
+      "title": "当前运行时的真实浏览器流程",
+      "status": "pending_not_run_this_round",
+      "scope": "普通控制与菜单专项部分使用轻量DOM；敌方按钮/动画、本机交接、当前r4/形态锁及完整技能流程无新增真实浏览器验收。",
+      "source_refs": [
+        "19_CURRENT_CONTROL_AUDIT_2026-10-07.md",
+        "20_HERO_FORM_RUNTIME_2026-10-07.md",
+        "review/invariants/CASE_MAP.json:ADD-SECRET-001"
+      ],
+      "closure_requirement": "在获准的浏览器验证范围中使用当前源码完成自然流程、私有视图和公开UI一致性检查；旧源码浏览器样本不升级为当前引擎验收。",
+      "contract_ids": [
+        "ADD-SECRET-001",
+        "ADD-CURRENT-CONTROL-001",
+        "ADD-HERO-FORM-001"
+      ],
+      "completed_this_round": false
+    },
+    {
+      "id": "GAP-FULL-MATCH",
+      "title": "旧整盘/主动技能验证队列",
+      "status": "paused_by_user",
+      "scope": "原诺兹多姆/太子场景、当前12席回归、宿命投弹/沙漏、第二次影生命周期和计时交叉仍未完整收束。",
+      "source_refs": [
+        "STATE.json:paused_next_action",
+        "STATE.json:validation.full_match_browser",
+        "STATE.json:validation.active_skill_match_browser",
+        "09_CURRENT_GAME_MODES.md"
+      ],
+      "closure_requirement": "用户恢复队列后按当时最新已确认规则/源码验证未完场景，不把旧五类自然样本写为全部英雄畸变组合覆盖。",
+      "contract_ids": [],
+      "completed_this_round": false
+    },
+    {
+      "id": "GAP-DEVICE",
+      "title": "Android WebView与物理蓝牙双机",
+      "status": "pending_physical_validation",
+      "scope": "122个资源相同只证明打包输入一致；协议/房间模拟不证明RFCOMM传输、生命周期及真机体验。",
+      "source_refs": [
+        "STATE.json:validation.android_webview",
+        "STATE.json:validation.physical_two_phone",
+        "20_HERO_FORM_RUNTIME_2026-10-07.md"
+      ],
+      "closure_requirement": "获准真机验证后完成Android WebView、两机私有快照/重连/暂停/时限与实际传输验证；APK继续遵循用户暂停范围。",
+      "contract_ids": [],
+      "completed_this_round": false
+    },
+    {
+      "id": "GAP-MODES",
+      "title": "新模式英雄/畸变独立适配",
+      "status": "paused_pending_design",
+      "scope": "半混乱与普通象棋目前基础/预览；混乱、暗身份、士象/特殊操作、准备/再战、完整蓝牙和竞赛和棋细则未独立定案。",
+      "source_refs": [
+        "09_CURRENT_GAME_MODES.md",
+        "STATE.json:game_modes"
+      ],
+      "closure_requirement": "用户指定独立适配后按模式逐来源确认和实现；不自动添加通用特殊规则优先、替换/禁用/重抽或竞赛版本。",
+      "contract_ids": [],
+      "completed_this_round": false
+    },
+    {
+      "id": "GAP-PRODUCT-DECISIONS",
+      "title": "本机超时与双爪牙镜像解释",
+      "status": "awaiting_applicable_user_decision",
+      "scope": "计时函数现有双爪牙60秒回归通过；本机超时结果和镜像叠加解释未独立冻结。",
+      "source_refs": [
+        "05_PROGRESS_AND_NEXT.md:仍未确认",
+        "tests/confirmed-runtime.test.ts:HERO thief"
+      ],
+      "closure_requirement": "只在确实涉及这些产品边界时取得确认；保留当前函数行为，不自动套网络判负或重设叠加。",
+      "contract_ids": [],
+      "completed_this_round": false
+    },
+    {
+      "id": "GAP-UI",
+      "title": "最终UI/美术",
+      "status": "ui_last_paused",
+      "scope": "批准首页/V4保留；头像/技能图标、宿命视觉、状态栏几何及超15消灭记录适配待最后阶段。",
+      "source_refs": [
+        "04_CURRENT_UI_AND_FLOW.md",
+        "05_PROGRESS_AND_NEXT.md:仍未确认"
+      ],
+      "closure_requirement": "用户开启UI阶段后依批准母版/正式来源做差分和视觉验收；新英雄文本接收不自动启动整套UI重做。",
+      "contract_ids": [],
+      "completed_this_round": false
+    },
+    {
+      "id": "GAP-BALANCE",
+      "title": "稀有度权重与评分统一",
+      "status": "awaiting_design_confirmation",
+      "scope": "精确权重、骑兵最终评分/稀有度、v2.9和后续理论分未统一；理论分不是实测强度。",
+      "source_refs": [
+        "07_DESIGN_SCORING.md",
+        "08_SCORE_LEDGER.md",
+        "05_PROGRESS_AND_NEXT.md:仍未确认"
+      ],
+      "closure_requirement": "保留来源给出的假设与确认，未确认值不填入玩法；不以评分自动反推能力或重设概率/权重。",
+      "contract_ids": [],
+      "completed_this_round": false
+    },
+    {
+      "id": "GAP-PROPOSAL-VALIDATOR",
+      "title": "旧提案校验器能力边界",
+      "status": "manual_current_rule_review_required",
+      "scope": "CLI加载冻结BASELINE.json；reviewHeroProposal检查baseline_id/digest与基本字段/冲突，但不校验current_rule_revision/current_digest、完整时机语义或里包能力。",
+      "source_refs": [
+        "scripts/review/validate-hero-proposal.ts",
+        "src/proposal-review.ts",
+        "rules/confirmed/BASELINE.json",
+        "06_COLLABORATION.md"
+      ],
+      "closure_requirement": "接收时另核对r4规范摘要/明确确认稿/完整语义和触及规则；ready_for_review只表示旧辅助结构检查通过，不能代替用户确认、来源审查或运行时接入许可。",
+      "contract_ids": [],
+      "completed_this_round": false
+    },
+    {
+      "id": "GAP-CI",
+      "title": "旧CI与当前源码适用性",
+      "status": "historical_ci_not_current_acceptance",
+      "scope": "STATE旧成功CI检查点8b985a8，applies_to_current_implementation=false；本轮无新CI结果采样。",
+      "source_refs": [
+        "STATE.json:validation.current_ci",
+        "review/invariants/LATEST.json"
+      ],
+      "closure_requirement": "后续需当前提交CI证据时重新核对其checkout/sourceDigest/范围，不能移用旧success证明最新运行时。",
+      "contract_ids": [],
+      "completed_this_round": false
+    }
+  ],
+  "contract_inventory": [
+    {
+      "id": "INV-BOARD-001",
+      "group": "invariants",
+      "statement": "当前存活棋坐标必须为整数且 0≤x≤8, 0≤y≤9。",
+      "scope_and_exceptions": "历史事件中的旧坐标不属于当前存活棋。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 1,
+      "case_files": [
+        "tests/cross-rule-contracts.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-BOARD-001]",
+      "verification_limit": "移动/移置越界、非整数和非有限坐标拒绝已有证据；完整棋盘全入口保持性仍缺。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-BOARD-002",
+      "group": "invariants",
+      "statement": "同坐标的【地面】层最多一枚棋，【飞行】层最多一枚棋；一地面一飞行可以共存。",
+      "scope_and_exceptions": "未获得【飞行】的普通棋默认拥有【地面】。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 1,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-BOARD-002]",
+      "verification_limit": "仅地面/空中同格与空中目标占用；还缺移置层标准化及全入口验证。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-SETUP-001",
+      "group": "invariants",
+      "statement": "标准新局为 32 个唯一棋子 ID：两枚明将帅固定，30 枚暗子占标准暗位，秘密身份池不含将帅。",
+      "scope_and_exceptions": "不适用于手工残局。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 5,
+      "case_files": [
+        "tests/setup-rps.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-SETUP-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-COVERED-001",
+      "group": "invariants",
+      "statement": "暗来源成功完成预定【移动】或【进攻】落位后，必须在同一原子行动中【揭示】。",
+      "scope_and_exceptions": "战士防御成功弹回表示未完成预定目标格落位，暗攻击者保持暗置。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 2,
+      "case_files": [
+        "tests/movement.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-COVERED-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-COVERED-002",
+      "group": "invariants",
+      "statement": "当前已定义来源中，存活暗子离开标准暗位只能来自明确不揭示的来源流程；不得由普通【移动】/【进攻】产生。",
+      "scope_and_exceptions": "不是“任何未来【移置】都必须揭示”的全局规则。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 1,
+      "case_files": [
+        "tests/movement.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-COVERED-002]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-REVEAL-001",
+      "group": "invariants",
+      "statement": "任何仍暗置的棋实际进入【消灭】时，必须同步死亡【揭示】真实身份，再进入已消灭记录。",
+      "scope_and_exceptions": "【混乱】按下一条例外。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 3,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts",
+        "tests/movement.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-REVEAL-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-REVEAL-002",
+      "group": "invariants",
+      "statement": "【混乱】中的未正常揭示暗子死亡时只公开真实兵种，不公开死亡时秘密阵营。",
+      "scope_and_exceptions": "先前已正常揭示并锁定阵营者照常记录公开阵营。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 1,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-REVEAL-002]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-DESTROYED-RECORD-001",
+      "group": "invariants",
+      "statement": "所有实际【消灭】统一进入当前“已消灭棋子记录”，按被消灭棋身份/公开阵营归组，不按杀手归组。",
+      "scope_and_exceptions": "复活后从当前已消灭状态移除；历史事件仍可保留。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 2,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-DESTROYED-RECORD-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-SECRET-001",
+      "group": "invariants",
+      "statement": "公共暗子对象不得泄露真实颜色/兵种；权威私有状态可持有秘密身份。",
+      "scope_and_exceptions": "本地双人需通过交接清屏达到同等隔离。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 6,
+      "case_files": [
+        "tests/bluetooth-private-contracts.test.ts",
+        "tests/check-end-network.test.ts",
+        "tests/public-target-contracts.test.ts",
+        "tests/setup-rps.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-SECRET-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-LEGALITY-001",
+      "group": "invariants",
+      "statement": "普通合法性与落点提示不得读取未公开暗身份。",
+      "scope_and_exceptions": "揭示/死亡结算在权威端可读取。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 3,
+      "case_files": [
+        "tests/check-end-network.test.ts",
+        "tests/public-target-contracts.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-LEGALITY-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-CONTROL-001",
+      "group": "invariants",
+      "statement": "暗子由标准位置所属方控制；正常【揭示】后按公开真实阵营控制。",
+      "scope_and_exceptions": "【混乱】使用其专属秘密阵营与锁定规则。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 3,
+      "case_files": [
+        "tests/movement.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-CONTROL-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-CAPTURE-001",
+      "group": "invariants",
+      "statement": "普通吃子流程不把将帅作为普通目标；将帅离场须来自裁决/背刺、碾碎、陷阱、感染、窒息、时间崩坏等明确来源。",
+      "scope_and_exceptions": "潜行者【强击】可按专属来源以将帅为目标；这不恢复“普通吃将”。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 2,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts",
+        "tests/movement.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-CAPTURE-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-CAPTURE-002",
+      "group": "invariants",
+      "statement": "基础自残只允许按合法几何进攻暗目标，不允许把己方明棋当普通目标。",
+      "scope_and_exceptions": "路径【碾碎】可作用于己方地面棋，不属于普通目标吃子。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 3,
+      "case_files": [
+        "tests/movement.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-CAPTURE-002]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-CAPTURE-003",
+      "group": "invariants",
+      "statement": "暗目标被合法消灭后，其身份按揭示规则公开并记录；揭示出的同色/异色结果不回滚本次已合法发生的进攻。",
+      "scope_and_exceptions": "完整【回溯】恢复历史快照是另一个后续来源，不改变本次原子行动的后置条件。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 3,
+      "case_files": [
+        "tests/movement.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-CAPTURE-003]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-ACTION-001",
+      "group": "invariants",
+      "statement": "普通棋子棋盘主行动的核心动作只有【移动】与【进攻】；来源专属【占步】/特殊主行动可占用主行动机会而不强行归入两者；“走棋”不是正式上位分类。",
+      "scope_and_exceptions": "【移动】/【进攻】是动作结算维度，Ⅰ/Ⅱ/Ⅲ级与技能衍生等是来源/层级维度；【移置】、【回溯】及来源专属操作按各自规则，不新增第三个通用核心动作词。",
+      "evidence_status": "non_runtime_contract",
+      "related_case_count": 0,
+      "case_files": [],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-ACTION-001]",
+      "verification_limit": "术语分类约束需要规范/记录字段检查，不能通过一条执行用例证明。",
+      "qa_runtime_annotation": "pending_rule_migration_after_2026_10_06_sync",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-INV-ACTION-001"
+    },
+    {
+      "id": "INV-ACTION-002",
+      "group": "invariants",
+      "statement": "“将军”是棋盘威胁状态，不是【进攻】或【终结】。",
+      "scope_and_exceptions": "来源可让将军直接进入专属【终结】，但不改变其概念层级。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 1,
+      "case_files": [
+        "tests/check-end-network.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-ACTION-002]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-KEYWORD-001",
+      "group": "invariants",
+      "statement": "【吃子】不得作为与【移动】、【进攻】并列的正式行动词；普通吃子属于【进攻】。",
+      "scope_and_exceptions": "自然语言仍可写“吃子”。",
+      "evidence_status": "non_runtime_contract",
+      "related_case_count": 0,
+      "case_files": [],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-KEYWORD-001]",
+      "verification_limit": "术语退役约束需要规范/日志静态检查，尚未完成。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-INV-KEYWORD-001"
+    },
+    {
+      "id": "INV-ACTION-PLAN-001",
+      "group": "invariants",
+      "statement": "主行动类型在行动计划阶段按所选路线的主动杀伤性质确定；事后自动触发不反向改类。",
+      "scope_and_exceptions": "铁马路径必然尝试碾碎地面马腿时从一开始就是【进攻】。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 2,
+      "case_files": [
+        "tests/cross-rule-contracts.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-ACTION-PLAN-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-DISPLACEMENT-001",
+      "group": "invariants",
+      "statement": "【移置】是存活棋的非【移动】、非【进攻】位置变化；成功落位默认结算正常落位效果。",
+      "scope_and_exceptions": "失败通常留原位；战士弹回、飞行降落有来源专属失败处理。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 3,
+      "case_files": [
+        "tests/remote-room.test.ts",
+        "tests/time-line-contracts.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-DISPLACEMENT-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-REWIND-001",
+      "group": "invariants",
+      "statement": "【回溯】恢复来源规定的历史快照；被恢复的变化不视为重新发生，也不拆成逐枚【移置】/复活。",
+      "scope_and_exceptions": "来源要求的回溯后重新行动另行记录。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 14,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts",
+        "tests/rewind-action-contracts.test.ts",
+        "tests/snapshot-resource-contracts.test.ts",
+        "tests/time-line-contracts.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-REWIND-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-REVIVE-001",
+      "group": "invariants",
+      "statement": "复活只恢复存活本体，不恢复死亡前临时状态。",
+      "scope_and_exceptions": "已【揭示】、时光勇士身份、已占用防御名额、技能次数等身份/历史/资源信息不因此重置。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 2,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts",
+        "tests/cross-rule-contracts.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-REVIVE-001]",
+      "verification_limit": "沙漏复活逐项不继承临时状态已验证；仍缺技能资源与名额保留、落位交叉边界。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-DESTROY-001",
+      "group": "invariants",
+      "statement": "【消灭】是棋子级结果，不要求杀手，也不自动等于【终结】；不得默认先清除全部状态。",
+      "scope_and_exceptions": "只有来源明确规定消耗/清除/解除时才产生独立状态变化。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 3,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-DESTROY-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-TERMINAL-001",
+      "group": "invariants",
+      "statement": "【终结】是对局流程标签，可有或没有先行【消灭】。",
+      "scope_and_exceptions": "将死、困毙、认输、断线等可直接终结。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 5,
+      "case_files": [
+        "tests/check-end-network.test.ts",
+        "tests/exception-contracts.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-TERMINAL-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-ATOMIC-001",
+      "group": "invariants",
+      "statement": "原子结算统一使用“候选终局 → 原子闭合 → 正式【终结】”。",
+      "scope_and_exceptions": "认输、断线等无待闭合棋盘行动的直接终局可立即终结。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 4,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts",
+        "tests/public-target-contracts.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-ATOMIC-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-ATOMIC-002",
+      "group": "invariants",
+      "statement": "原子闭合前，即使将帅中途【消灭】，同一不可分割来源的已承诺步骤、强制落位/返回、直接落位触发、死亡揭示与记录仍须完成。",
+      "scope_and_exceptions": "与当前原子行动无关的新触发或玩家决策不在闭合范围。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 4,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts",
+        "tests/cross-rule-contracts.test.ts",
+        "tests/mutation.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-ATOMIC-002]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-ATOMIC-003",
+      "group": "invariants",
+      "statement": "原子闭合后双方将帅均【消灭】时，outcome reason 必须为 mutual_destruction，具体死亡来源保留在事件日志。",
+      "scope_and_exceptions": "不适用于不同动作或不同真实时间阈值的先后终局。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 2,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts",
+        "tests/mutation.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-ATOMIC-003]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-END-001",
+      "group": "invariants",
+      "statement": "正式【终结】后停止回合切换、持续时间正常递减、下一回合/回合末刷新、无关新触发、新技能机会和玩家决策。",
+      "scope_and_exceptions": "结果落盘、日志、版本、终局动画/UI 不算继续游戏。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 2,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-END-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-REASON-001",
+      "group": "invariants",
+      "statement": "三层感染、窒息、时间崩坏、其他未命名杀将分别使用 infection、suffocation、time_collapse、general_destroyed。",
+      "scope_and_exceptions": "已有专属 reason 不被兜底覆盖；winner 与 reason 分离。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 2,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-REASON-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-IDEMPOTENCY-001",
+      "group": "invariants",
+      "statement": "相同 actionId 重放不得再次改变权威状态。",
+      "scope_and_exceptions": "服务器自动终结可使用独立保留 actionId。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 3,
+      "case_files": [
+        "tests/check-end-network.test.ts",
+        "tests/rewind-action-contracts.test.ts",
+        "tests/time-line-contracts.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-IDEMPOTENCY-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-PHASE-001",
+      "group": "invariants",
+      "statement": "只有与房间当前阶段匹配的命令可执行。",
+      "scope_and_exceptions": "断线超时和重连管理命令在暂停层另行处理。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 2,
+      "case_files": [
+        "tests/bluetooth-disconnect.test.ts",
+        "tests/check-end-network.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-PHASE-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-INTANGIBLE-001",
+      "group": "invariants",
+      "statement": "【无形】只改变“能否被需要直接指定具体棋子的效果直接指定”，不改变空间存在。",
+      "scope_and_exceptions": "若仍有【地面】，仍占格、挡地面路径、作炮架/马腿/象眼并参与照面。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 2,
+      "case_files": [
+        "tests/assassination.test.ts",
+        "tests/mutation.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-INTANGIBLE-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-INTANGIBLE-002",
+      "group": "invariants",
+      "statement": "系统从合法候选池【随机】抽取不属于直接指定；【无形】默认仍在池中。",
+      "scope_and_exceptions": "只有来源明确排除【无形】时才排除。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 1,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-INTANGIBLE-002]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-INTANGIBLE-003",
+      "group": "invariants",
+      "statement": "通用【无形】保留正常攻击几何并原则上可形成有效将军。",
+      "scope_and_exceptions": "潜行者来源【无形】存续期间不产生有效将军；【飞行】另有“不能【进攻】”。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 5,
+      "case_files": [
+        "tests/assassination.test.ts",
+        "tests/confirmed-runtime.test.ts",
+        "tests/public-target-contracts.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-INTANGIBLE-003]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-FLIGHT-001",
+      "group": "invariants",
+      "statement": "【飞行】同时获得【无形】、失去【地面】、免疫【碾碎】、不能【进攻】；不占地面层。",
+      "scope_and_exceptions": "不自动改变原移动几何，也不自动绕过【封锁】。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 2,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-FLIGHT-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-FLIGHT-002",
+      "group": "invariants",
+      "statement": "飞行降落：无地面棋则恢复【地面】；有地面棋则先尝试【碾碎】；地面棋仍存活时飞行棋【窒息】【消灭】。",
+      "scope_and_exceptions": "失败后继续飞行的旧规则已退役。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 2,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-FLIGHT-002]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-CRUSH-001",
+      "group": "invariants",
+      "statement": "【碾碎】直接尝试使对象【消灭】，不要求直接指定，也不默认先清除状态。",
+      "scope_and_exceptions": "地面+无形可被碾碎；飞行免疫。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 2,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts",
+        "tests/mutation.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-CRUSH-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-SUFFOCATION-001",
+      "group": "invariants",
+      "statement": "【窒息】只用于来源强制占据/返回/降落到指定位置而空间冲突无法解除的明确场景。",
+      "scope_and_exceptions": "当前明确来源：战士弹回失败、飞行降落失败、風流归位地面占位；不得推广到所有非法落位。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 2,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-SUFFOCATION-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-INFECTION-001",
+      "group": "invariants",
+      "statement": "【感染】绑定棋子；亡魂是格上的持续影响，不是单位。",
+      "scope_and_exceptions": "在有效感染影响格之间移动保持层数；到无有效影响格或失去【地面】时清除。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 2,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-INFECTION-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-INFECTION-002",
+      "group": "invariants",
+      "statement": "每个对应死亡骑士方正式回合末，对合格敌方地面棋 +1 感染；达到 3 层立即【消灭】。",
+      "scope_and_exceptions": "普通防御和铁甲不能阻止；地面+无形仍可感染。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 2,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-INFECTION-002]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-WARRIOR-001",
+      "group": "invariants",
+      "statement": "每局最多 3 枚不同己方非将帅明棋，在首次通过【移动】或【进攻】成功离开己方九宫时获得普通防御；名额与单棋资格不返还。",
+      "scope_and_exceptions": "死亡、复活、重入九宫均不重置资格。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 2,
+      "case_files": [
+        "tests/exception-contracts.test.ts",
+        "tests/warrior.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-WARRIOR-001]",
+      "verification_limit": "已验证三个不同ID上限、死亡不返还与复入宫不重复；复活资格只用重新插入同ID的状态恢复夹具验证，不能冒充完整复活来源流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-WARRIOR-002",
+      "group": "invariants",
+      "statement": "普通防御只介入直接指定该棋且不带【强击】的【进攻】；触发后防御耗尽、目标留位、进攻者【移置】回进攻前位置。",
+      "scope_and_exceptions": "成功返回结算返回格；目标格不结算进攻者落位效果。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 6,
+      "case_files": [
+        "tests/assassination.test.ts",
+        "tests/flow-contracts.test.ts",
+        "tests/warrior.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-WARRIOR-002]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-WARRIOR-003",
+      "group": "invariants",
+      "statement": "战士弹回原位是【堡垒】封锁的来源专属复位例外；若返回格空间不能容纳，进攻者【窒息】【消灭】。",
+      "scope_and_exceptions": "失败返回不先形成存活落位，因此不触发返回格落位效果。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 3,
+      "case_files": [
+        "tests/exception-contracts.test.ts",
+        "tests/flow-contracts.test.ts",
+        "tests/remote-room.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-WARRIOR-003]",
+      "verification_limit": "堡垒原位弹回、普通封锁及流·舞返回陷阱已有专属运行用例；当前普通弹回保留原格，尚未找到可达的返回格被占链。混合壁垒/陷阱夹具只隔离落点派发，不声称自然英雄组合。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-WARRIOR-004",
+      "group": "invariants",
+      "statement": "普通防御获得时有 3 层持续；每个敌方正式回合结束 -1，覆盖 3 个完整敌方正式回合。",
+      "scope_and_exceptions": "额外行动/应将不额外扣层。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 1,
+      "case_files": [
+        "tests/warrior.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-WARRIOR-004]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-IRONARMOR-001",
+      "group": "invariants",
+      "statement": "铁甲只免疫一次背刺【终结】，不是普遍【强击】或死亡免疫。",
+      "scope_and_exceptions": "对手回合拦截后不给战士额外回应；战士自己回合发生背刺并拦截时才授予一次【额外】+【强迫】应将。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 3,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts",
+        "tests/warrior.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-IRONARMOR-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-ROGUE-001",
+      "group": "invariants",
+      "statement": "每个刺杀来源每局一次且彼此独立；发动回合只能让己方明置非将帅棋合法【移动】到空位，不能【进攻】或【强击】。",
+      "scope_and_exceptions": "移动成功后获得该来源【无形】。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 3,
+      "case_files": [
+        "tests/assassination.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-ROGUE-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-ROGUE-002",
+      "group": "invariants",
+      "statement": "对手获得完整一个正式回合后，到潜行者下一正式回合，该棋可按普通进攻几何进行一次【进攻】+【强击】。",
+      "scope_and_exceptions": "该棋开始自己的行动前来源【无形】先结束；未使用强击则随该棋行动结束失效。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 1,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-ROGUE-002]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-STRIKE-001",
+      "group": "invariants",
+      "statement": "【强击】是【进攻】标签，使用来源棋合法进攻几何；默认可选择将帅。",
+      "scope_and_exceptions": "不天然穿透【无形】、不天然驱散状态；成功通常落到目标格，除非来源例外。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 4,
+      "case_files": [
+        "tests/assassination.test.ts",
+        "tests/confirmed-runtime.test.ts",
+        "tests/public-target-contracts.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-STRIKE-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-TRAP-001",
+      "group": "invariants",
+      "statement": "通过【移动】、【进攻】、【移置】、复活落位或成功飞行降落而成为敌方陷阱格上的【地面】棋时进入陷阱检查。",
+      "scope_and_exceptions": "活棋还需落位前与结算时均由陷阱主人的敌方控制。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 4,
+      "case_files": [
+        "tests/remote-room.test.ts",
+        "tests/time-line-contracts.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-TRAP-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-TRAP-002",
+      "group": "invariants",
+      "statement": "每层陷阱寿命 12 个敌方正式回合末：1–9 为致死，10–12 为控制，归零失效。",
+      "scope_and_exceptions": "额外行动/应将不扣寿命。控制效果只限制该棋在其控制方下一正式回合的【移动】/【进攻】。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 6,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts",
+        "tests/time-line-contracts.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-TRAP-002]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-IRONSTEED-001",
+      "group": "invariants",
+      "statement": "铁马只检查唯一马腿格的【地面】层；有地面棋则尝试【碾碎】后继续马步。",
+      "scope_and_exceptions": "地面+无形算马腿；飞行不算且免疫碾碎。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 3,
+      "case_files": [
+        "tests/mutation.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-IRONSTEED-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-IRONSTEED-002",
+      "group": "invariants",
+      "statement": "若所选马步路线必然尝试碾碎地面马腿棋，主行动从计划阶段就是【进攻】。",
+      "scope_and_exceptions": "马腿为己方或免疫碾碎而存活不改类别。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 1,
+      "case_files": [
+        "tests/cross-rule-contracts.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-IRONSTEED-002]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-WARCHARIOT-001",
+      "group": "invariants",
+      "statement": "战车发动路径只统计起点与目标之间所有【地面】路径棋，恰好 1 枚才可发动并尝试碾碎它。",
+      "scope_and_exceptions": "地面+无形计数；飞行不计数且不受碾碎。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 2,
+      "case_files": [
+        "tests/mutation.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-WARCHARIOT-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-WARCHARIOT-002",
+      "group": "invariants",
+      "statement": "若对敌将的唯一可执行路线必然同时碾碎己将、只能导致两败俱伤，则该路线不构成有效将军。",
+      "scope_and_exceptions": "若战车实际合法发动并同原子消灭双方将帅，仍以两败俱伤终结。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 1,
+      "case_files": [
+        "tests/cross-rule-contracts.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-WARCHARIOT-002]",
+      "verification_limit": "单独验证该车的双将同死路线不构成威胁；不否定局面中其他棋或照面的独立将军。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-CAVALRY-001",
+      "group": "invariants",
+      "statement": "每方真实身份为马的两枚棋在【揭示】为马后升级为【骑兵】。",
+      "scope_and_exceptions": "暗置无标记；与铁马互斥；正常马步仍保留。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 2,
+      "case_files": [
+        "tests/mutation.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-CAVALRY-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-CAVALRY-002",
+      "group": "invariants",
+      "statement": "骑兵在己方半场额外前进 1 格；敌方半场额外前/左/右 1 格；“不能后退”只限制额外一步。",
+      "scope_and_exceptions": "额外一步按目标占用归类为【移动】或【进攻】。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 1,
+      "case_files": [
+        "tests/mutation.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-CAVALRY-002]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-FORTRESS-001",
+      "group": "invariants",
+      "statement": "【堡垒】禁止敌方棋从九宫外通过【移动】、【进攻】落位、【移置】或复活落位进入该九宫。",
+      "scope_and_exceptions": "宫内可内移/离开；飞行、无形、强击不自动绕过；完整【回溯】和战士专属弹回例外。 風流强制身份归位亦是明确例外；流舞不继承此封锁豁免。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 1,
+      "case_files": [
+        "tests/mutation.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-FORTRESS-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-MUROZOND-001",
+      "group": "invariants",
+      "statement": "姆诺兹多只可选择对手紧接上一正式回合完成的合格Ⅰ级俗手对应且仍存活的棋；若上一正式回合没有合格Ⅰ级俗手，不得跳过该回合搜索更老行动。先【移置】回原位并结算返回格，再决定是否【操控】。",
+      "scope_and_exceptions": "返回失败或返回格结算中被消灭则不再操控。只有来源未来明确允许跨回合搜索时才能例外。控制陷阱限制从相关控制方下一正式回合起生效。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 8,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts",
+        "tests/exception-contracts.test.ts",
+        "tests/time-line-contracts.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-MUROZOND-001]",
+      "verification_limit": "已验证返回陷阱、返回失败跳过控制并占步、无合法重走拒绝事务；占位与无合法着法为明确构造状态，尚未穷尽真实行动历史的可达组合。",
+      "qa_runtime_annotation": "pending_rule_migration_after_2026_10_06_sync",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-NOZDORMU-001",
+      "group": "invariants",
+      "statement": "诺兹多姆执行完整权威快照【回溯】，包括当时棋盘和双方英雄技能状态；“回溯已使用”是时间线外元状态。",
+      "scope_and_exceptions": "回溯后同一棋重新行动，不能【进攻】也不能形成将军；玩家既得信息不抹除。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 22,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts",
+        "tests/exception-contracts.test.ts",
+        "tests/rewind-action-contracts.test.ts",
+        "tests/snapshot-resource-contracts.test.ts",
+        "tests/time-line-contracts.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-NOZDORMU-001]",
+      "verification_limit": "已补毁灭/祈求/刺杀资源、战士名额防御、暗子身份与亡魂回溯；另有風与陷阱寿命证据。全部持续时序、重复回溯交叉、本机私有交接与设备流程仍未穷尽。本轮补暗影之舞/恢复隐身重走的同棋、禁止进攻/将军、完成清理及重复命令；不外推全部组合。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-TIME-COLLAPSE-001",
+      "group": "invariants",
+      "statement": "诺兹多姆方棋通过合法结算成功成为有效时空扭曲格上的【地面】棋时获得时间崩坏。",
+      "scope_and_exceptions": "覆盖进攻/移置/复活落位和成功降落；普通主动移动到空扭曲格仍非法。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 1,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-TIME-COLLAPSE-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-TIME-COLLAPSE-002",
+      "group": "invariants",
+      "statement": "棋连续处于任一有效扭曲格时状态持续，从扭曲 A 到 B 不清除也不刷新截止点；离开或扭曲清除时解除。",
+      "scope_and_exceptions": "截止点是获得后诺兹多姆方下一正式回合结束。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 1,
+      "case_files": [
+        "tests/cross-rule-contracts.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-TIME-COLLAPSE-002]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-HOURGLASS-001",
+      "group": "invariants",
+      "statement": "时光沙漏顺序固定为：候选锁定 → 锚点合法性检查 → 群体回归/复活 → 各自落位效果 → 净化全部扭曲 → 无限龙装填。",
+      "scope_and_exceptions": "单个勇士落位后再次消灭不阻止后续全局步骤。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 1,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-HOURGLASS-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-MANIFESTED-001",
+      "group": "invariants",
+      "statement": "时光勇士第一次任何公开【揭示】即建立“已现身”；死亡【揭示】同样有效。",
+      "scope_and_exceptions": "该身份/历史状态不因死亡、复活或临时状态重置丢失；是否跨其他未明示时间线机制不得擅自外推。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 1,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-MANIFESTED-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-CAREFREE-001",
+      "group": "invariants",
+      "statement": "【无忧】有效时，敌棋可在太子方半场移动，但当前位于该半场时不得主动【进攻】；也不得通过【进攻】落入该半场。",
+      "scope_and_exceptions": "半场内敌棋不产生有效将军；半场外远程将军不自动失效。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 1,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-CAREFREE-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-CAREFREE-002",
+      "group": "invariants",
+      "statement": "太子方在己方正式回合主动【进攻】并使最终目标【消灭】，或形成有效将军时，【无忧】暂失到太子方下一正式回合开始。",
+      "scope_and_exceptions": "被防御拦截且目标未消灭不触发；陷阱/感染等自动消灭不算主动争斗。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 3,
+      "case_files": [
+        "tests/cross-rule-contracts.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-CAREFREE-002]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-VISIBILITY-001",
+      "group": "invariants",
+      "statement": "英雄选择与猜拳阶段，对手只能看见确认状态，不能看见具体英雄；英雄入场后双方公开。",
+      "scope_and_exceptions": "本地双人通过交接清屏实现。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 3,
+      "case_files": [
+        "tests/public-target-contracts.test.ts",
+        "tests/remote-room.test.ts",
+        "tests/setup-rps.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-VISIBILITY-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-TRAP-VISIBILITY-001",
+      "group": "invariants",
+      "statement": "未触发陷阱坐标、叠层和剩余寿命只对主人和权威端可见。",
+      "scope_and_exceptions": "触发事件与触发坐标公开。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 2,
+      "case_files": [
+        "tests/remote-room.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-TRAP-VISIBILITY-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-DISCONNECT-001",
+      "group": "invariants",
+      "statement": "首次连接成功并进入英雄选择后，每名玩家独立累计本局断线时间，多段不清零；最早真实达到 60 秒者判负。",
+      "scope_and_exceptions": "首次配对失败不计；本地双人无此终局。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 3,
+      "case_files": [
+        "tests/bluetooth-disconnect.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-DISCONNECT-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-DISCONNECT-002",
+      "group": "invariants",
+      "statement": "任一玩家断线时，双方操作、阶段计时、普通视觉计时和开场动画暂停；全员重连后按暂停时长顺延。",
+      "scope_and_exceptions": "断线累计自身不暂停。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 6,
+      "case_files": [
+        "tests/bluetooth-disconnect.test.ts",
+        "tests/exception-contracts.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-DISCONNECT-002]",
+      "verification_limit": "已覆盖普通正式回合、回溯重走、双方重叠断线后全员恢复的一次性顺延及精确到期；视觉动画、蓝牙WebView和设备恢复仍待。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "INV-DISCONNECT-003",
+      "group": "invariants",
+      "statement": "只有双方在同一真实阈值时刻达到 60 秒才判断线平局；延迟检查不得把错峰超时变成平局。",
+      "scope_and_exceptions": "与棋盘原子 mutual_destruction 原因分离。",
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 2,
+      "case_files": [
+        "tests/bluetooth-disconnect.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[INV-DISCONNECT-003]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "REJ-001",
+      "group": "anti_invariants",
+      "statement": "暗子可经过若干次正常移动仍保持暗置。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 1,
+      "case_files": [
+        "tests/movement.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[REJ-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "REJ-002",
+      "group": "anti_invariants",
+      "statement": "所有占据同坐标的棋都阻挡地面路径、作炮架/马腿/象眼。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 2,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[REJ-002]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "REJ-003",
+      "group": "anti_invariants",
+      "statement": "所有【进攻】只能以对方控制棋为目标。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 3,
+      "case_files": [
+        "tests/movement.test.ts",
+        "tests/mutation.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[REJ-003]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "REJ-004",
+      "group": "anti_invariants",
+      "statement": "将帅只能因普通将死离场。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 3,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts",
+        "tests/mutation.test.ts",
+        "tests/remote-room.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[REJ-004]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "REJ-005",
+      "group": "anti_invariants",
+      "statement": "将帅在任何来源下都不能成为目标。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 1,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[REJ-005]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "REJ-006",
+      "group": "anti_invariants",
+      "statement": "原子结算中先被移除的将帅先输。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 2,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts",
+        "tests/mutation.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[REJ-006]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "REJ-007",
+      "group": "anti_invariants",
+      "statement": "【消灭】前必须先清除全部效果。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 2,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[REJ-007]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "REJ-008",
+      "group": "anti_invariants",
+      "statement": "任一非法落位都会【窒息】。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 1,
+      "case_files": [
+        "tests/cross-rule-contracts.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[REJ-008]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "REJ-009",
+      "group": "anti_invariants",
+      "statement": "【无形】棋不挡路、不当炮架/马腿/象眼。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 2,
+      "case_files": [
+        "tests/assassination.test.ts",
+        "tests/mutation.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[REJ-009]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "REJ-010",
+      "group": "anti_invariants",
+      "statement": "【无形】棋不能产生攻击范围或有效将军。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 1,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[REJ-010]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "REJ-011",
+      "group": "anti_invariants",
+      "statement": "【强击】可以穿透【无形】并自动清除目标状态。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 1,
+      "case_files": [
+        "tests/assassination.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[REJ-011]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "REJ-012",
+      "group": "anti_invariants",
+      "statement": "飞行棋自动无视【封锁】。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 1,
+      "case_files": [
+        "tests/cross-rule-contracts.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[REJ-012]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "REJ-013",
+      "group": "anti_invariants",
+      "statement": "飞行降落失败后继续飞行。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 1,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[REJ-013]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "REJ-014",
+      "group": "anti_invariants",
+      "statement": "战士普通防御只有两个名额、持续两个敌方回合。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 3,
+      "case_files": [
+        "tests/exception-contracts.test.ts",
+        "tests/warrior.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[REJ-014]",
+      "verification_limit": "三回合衰减已覆盖；三名额上限专属用例仍缺。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "REJ-015",
+      "group": "anti_invariants",
+      "statement": "猎人陷阱十回合内始终致死。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 5,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[REJ-015]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "REJ-016",
+      "group": "anti_invariants",
+      "statement": "骑兵固定由 1/3/5 路兵位获得。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 2,
+      "case_files": [
+        "tests/mutation.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[REJ-016]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "REJ-017",
+      "group": "anti_invariants",
+      "statement": "只能导致战车双将同死平局的路线仍构成有效将军。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 1,
+      "case_files": [
+        "tests/cross-rule-contracts.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[REJ-017]",
+      "verification_limit": "单独验证该车的双将同死路线不构成威胁；不否定局面中其他棋或照面的独立将军。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "REJ-018",
+      "group": "anti_invariants",
+      "statement": "复活恢复死亡前完整状态。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 2,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts",
+        "tests/cross-rule-contracts.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[REJ-018]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "REJ-019",
+      "group": "anti_invariants",
+      "statement": "完整回溯等价于逐枚移置或复活。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 2,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts",
+        "tests/time-line-contracts.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[REJ-019]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "REJ-020",
+      "group": "anti_invariants",
+      "statement": "当前运行时代码就是全部最终规则。",
+      "scope_and_exceptions": null,
+      "evidence_status": "non_runtime_contract",
+      "related_case_count": 0,
+      "case_files": [],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[REJ-020]",
+      "verification_limit": "该合同是防止代码替代规则的协作约束；原反例中“尚未实现”属于历史文字，不能用于推断本轮具体缺陷。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-REJ-020"
+    },
+    {
+      "id": "ADD-SECRET-001",
+      "group": "supplements",
+      "statement": "风影发动前后敌方公共视图、按钮状态、日志和动画不泄漏实际使用次数、冷却或承载者。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 2,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts",
+        "tests/public-target-contracts.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[ADD-SECRET-001]",
+      "verification_limit": "引擎与玩家视图已验证；敌方按钮/动画和本机交接仍缺真实浏览器证据。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "ADD-WIND-001",
+      "group": "supplements",
+      "statement": "风流目标地面占位导致真主帅窒息，占位棋保留、原承载者格为空，空中层不阻挡。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 13,
+      "case_files": [
+        "tests/bluetooth-private-contracts.test.ts",
+        "tests/confirmed-runtime.test.ts",
+        "tests/public-target-contracts.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[ADD-WIND-001]",
+      "verification_limit": "已补公开进攻/强击/随机目标与隐藏承载者死亡、敌方编码视图不变；明子直接指定无形拒绝。部分阶段为明确构造夹具，完整随机对局与物理双机尚待。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "ADD-WIND-002",
+      "group": "supplements",
+      "statement": "风失败归位不触发落位效果、不授予流舞；非裁决消灭不自动授予流舞。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 2,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[ADD-WIND-002]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "ADD-WIND-003",
+      "group": "supplements",
+      "statement": "流舞第一步可暂不安全、最多两步最终安全，失败原裁决成立，不改困毙；亲征不扩大舞步。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 11,
+      "case_files": [
+        "tests/confirmed-runtime.test.ts",
+        "tests/flow-contracts.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[ADD-WIND-003]",
+      "verification_limit": "已补实际裁决归位两步脱困、错误第一步继续裁决、亲征九宫限制、普通壁垒、陷阱终止、亡魂及房间计时；浏览器为预置状态操作，完整随机对局与实机仍待验证。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "ADD-JIANXIE-001",
+      "group": "supplements",
+      "statement": "尖斜过河后只正前和两斜前一步，底线无动作不自动消灭。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 2,
+      "case_files": [
+        "tests/cross-rule-contracts.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[ADD-JIANXIE-001]",
+      "verification_limit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "ADD-CLOCK-001",
+      "group": "supplements",
+      "statement": "回溯重走限时使用历史落子前真实剩余时间与10秒的较小值。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 9,
+      "case_files": [
+        "tests/exception-contracts.test.ts",
+        "tests/flow-contracts.test.ts",
+        "tests/rewind-action-contracts.test.ts",
+        "tests/time-line-contracts.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[ADD-CLOCK-001]",
+      "verification_limit": "3/10/42秒历史预算、房间权威接收及到期已验证；浏览器显示与WebView尚未验收。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "ADD-TWIST-001",
+      "group": "supplements",
+      "statement": "返回格控制陷阱限制下一相关控制方正式回合，保留当前技能链继续与后续限制状态。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 3,
+      "case_files": [
+        "tests/time-line-contracts.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[ADD-TWIST-001]",
+      "verification_limit": "真实倒戈棋返回猎人陷阱、下一正式回合封锁和耗尽已验证；其他来源状态组合尚缺。",
+      "qa_runtime_annotation": "pending_individual_evidence",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "ADD-ACTION-TIER-001",
+      "group": "supplements",
+      "statement": "动作关键词与行动层级为正交维度：技能衍生动作可按【移动】/【进攻】结算但不是Ⅰ级俗手；来源专属主行动可占主行动而非【移动】/【进攻】。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 8,
+      "case_files": [
+        "tests/action-turn-contracts.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[ADD-ACTION-TIER-001]",
+      "verification_limit": "已覆盖普通移动/进攻、弹回、时间线衍生、额外应将、流舞和回溯重走的独立分类，以及上一正式回合无Ⅰ级动作时拒绝跨回合搜索。未移交英雄和其他未来来源尚未接入；旧无classification历史仅兼容有明确tier且无已知子行动标志的快照。",
+      "qa_runtime_annotation": "partial_named_case_evidence_pending_full_source_and_hero_integration",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "ADD-TURN-PHASE-001",
+      "group": "supplements",
+      "statement": "正常正式回合默认按回合开始结算→主行动前窗口→主行动→行动原子闭合→回合结束结算五阶段推进。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 9,
+      "case_files": [
+        "tests/action-turn-contracts.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[ADD-TURN-PHASE-001]",
+      "verification_limit": "现有普通主行动、占步、主行动前窗口、回溯、终局与开始效果幂等已有具体执行证据；未包含未来英雄的资源/训练钩子、同批消灭屏障、浏览器与实体设备全流程，不是全称合同证明。",
+      "qa_runtime_annotation": "partial_named_case_evidence_pending_full_source_and_hero_integration",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "ADD-DURATION-001",
+      "group": "supplements",
+      "statement": "持续效果默认获得即生效、当回合即计时；额外/强迫/技能衍生子行动默认不推进正式回合计数、持续时间、培养、冷却或周期资源。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 7,
+      "case_files": [
+        "tests/action-turn-contracts.test.ts",
+        "tests/confirmed-runtime.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[ADD-DURATION-001]",
+      "verification_limit": "现有陷阱、防御、飞行、亡魂、潜行者明确例外及子行动计数已覆盖具体执行情景；风5回合冷却、时间崩坏下一己回合末等既有来源例外保留。未移交培养/周期资源不自动实现，尚待完整来源审计。",
+      "qa_runtime_annotation": "partial_named_case_evidence_pending_full_source_and_hero_integration",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "ADD-RIVER-001",
+      "group": "supplements",
+      "statement": "【河道】为来源专属特殊空间状态：进入失去【地面】，离开恢复【地面】，与【飞行】互斥；无明确读取权限的既有棋盘效果默认不读取河道空间或河道棋。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 17,
+      "case_files": [
+        "tests/river-space.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[ADD-RIVER-001]",
+      "verification_limit": "公共河道空间、地面/飞行互斥、默认路径/目标/技能/落位隔离、来源定义暗身份与控制、出河及序列化有专属情景证据。只提供可信来源调用接口，不开放普通客户端河道操作；江鹤等英雄进出资格、容量、连通、停留/超时、里形态仍未正式移交/集成。无浏览器或实体设备新增验收。",
+      "qa_runtime_annotation": "partial_named_case_evidence_pending_full_source_and_hero_integration",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "ADD-BATCH-001",
+      "group": "supplements",
+      "statement": "来源明确为同时/同批【消灭】时，先闭合整个消灭批次与其死亡揭示/记录，再处理由该批死亡产生的新亡魂、复活、召回、生成或资源触发；后续对象不倒流加入已闭合批次。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 13,
+      "case_files": [
+        "tests/destruction-batch.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[ADD-BATCH-001]",
+      "verification_limit": "公共批次入口与毁灭已锁定成功结果的闭合、死亡揭示/记录、触发屏障、风归位、亡魂单次派生、双将同死、批后移入/复活及公共协议序列化有专属情景证据。未移交英雄的同时范围来源、召回/复活/生成/资源钩子、河道与里亡魂仍未集成；不得将普通顺序攻击统一改同批。无浏览器或实体设备新增验收。",
+      "qa_runtime_annotation": "partial_named_case_evidence_pending_full_source_and_hero_integration",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "ADD-GHOST-OBJECT-001",
+      "group": "supplements",
+      "statement": "【亡魂】与【里·亡魂】是独立格上对象，可共格但不互相叠层/刷新/提供资源；精确名称清除只处理对应对象，普通棋子消灭不顺带清除。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 17,
+      "case_files": [
+        "tests/ghost-objects.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[ADD-GHOST-OBJECT-001]",
+      "verification_limit": "两类公共对象独立、共格、来源/归属/层数/寿命、精确清除和资源查询、普通死亡刷新/感染/计时、批次屏障及公共协议/实际回溯有17项具体情景证据。无种类旧快照仅兼容普通亡魂；未移交里英雄的生成、叠层、寿命时点、收益/爆发不自动定义，基础资源接口只返回点名类且指定公开归属的对象副本。无浏览器或实机新增验收，完整合同验收仍为0。",
+      "qa_runtime_annotation": "partial_named_case_evidence_pending_full_source_and_hero_integration",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "ADD-CURRENT-CONTROL-001",
+      "group": "supplements",
+      "statement": "来源明确读取“当前控制方”时只读取对应时点控制关系，不读取原始真实阵营或【混乱】秘密阵营；无秘密读取权限的目标/资源/UI不得以秘密阵营作隐藏条件。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 15,
+      "case_files": [
+        "tests/current-control.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[ADD-CURRENT-CONTROL-001]",
+      "verification_limit": "现有调用完成源码权限映射，15项情景验证当前位置/揭示/移置控制、普通及强击目标和错误、陷阱前后时点、亡魂死亡快照、感染/持续、资源/双方房间视图、真实读取来源约束和风/宿命许可例外。真实网页投弹/影菜单函数在轻量DOM执行，不能当作浏览器、换手机或实体蓝牙验收。无限龙公开单棋资格共用，但正式窗口和全军每回合限制仍由权威入口验证；来源标记是可信代码调用约束，不是客户端授权令牌。未移交来源及全部可达交叉组合未穷尽，完整验收仍0。",
+      "qa_runtime_annotation": "partial_named_case_evidence_pending_full_source_and_hero_integration",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "ADD-HERO-FORM-001",
+      "group": "supplements",
+      "statement": "表/里为同一英雄的完整形态包；默认一局只使用所选形态，不能中途机会主义切换或同时叠加；命名为英雄名｜【技能名】与里·英雄名｜【里·技能名】。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 18,
+      "case_files": [
+        "tests/hero-forms.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[ADD-HERO-FORM-001]",
+      "verification_limit": "18项专属情景覆盖十二表完整包、表/里命名、未知/未移交里包明确拒绝、旧快照表兼容、公开/权威独立整局锁、别名/技能包冲突、主被动分派、重复请求、实际回溯及历史篡改、实际蓝牙房间编码/重连/新局再战。只有表包已经注册；未移交里包未实现，不假造技能/数值。锁为可信权威状态约束，不是客户端密码凭证。无新形态选择UI、浏览器或实机新增验收，未来完整里包及全称交叉仍需移交后验证。",
+      "qa_runtime_annotation": "partial_named_case_evidence_pending_full_source_and_hero_integration",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "ADD-DARK-IDENTITY-001",
+      "group": "supplements",
+      "statement": "未揭示棋子的默认当前兵种按当前位置对应基础棋位的【暗置身份】判定，与隐藏真实身份区分；相同位置和公开状态不同隐藏兵种不改变普通身份判定。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 3,
+      "case_files": [
+        "tests/dark-identity.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[ADD-DARK-IDENTITY-001]",
+      "verification_limit": "基础棋位、当前位置变化及普通走法已验证；未来特殊来源身份策略尚未接入。",
+      "qa_runtime_annotation": "partial_named_case_evidence_pending_full_source_and_hero_integration",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "ADD-DARK-IDENTITY-002",
+      "group": "supplements",
+      "statement": "普通暗置身份判定不触发揭示、不改隐藏真实身份、不以真实兵种或秘密阵营决定公开资格/资源/UI；只有来源明确要求真实身份/隐藏真实兵种/揭示后身份或执行揭示时才读取隐藏真实身份。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 3,
+      "case_files": [
+        "tests/dark-identity.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[ADD-DARK-IDENTITY-002]",
+      "verification_limit": "公共入口不接受秘密状态；走法与毁灭候选覆盖具体情景。未覆盖所有英雄目标/资源/UI来源权限，影真实阵营与宿命真实兵保持明确许可读取。",
+      "qa_runtime_annotation": "partial_named_case_evidence_pending_full_source_and_hero_integration",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "ADD-DARK-IDENTITY-003",
+      "group": "supplements",
+      "statement": "正式揭示后不再使用暗置身份，后续当前兵种判定按已揭示真实兵种；该词条不自行改变控制方、阵营、揭示时机或原有行动机制。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 2,
+      "case_files": [
+        "tests/dark-identity.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[ADD-DARK-IDENTITY-003]",
+      "verification_limit": "普通落子揭示与明棋身份切换已验证；未扩展或验收其他特殊揭示来源。",
+      "qa_runtime_annotation": "partial_named_case_evidence_pending_full_source_and_hero_integration",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "ADD-DARK-IDENTITY-004",
+      "group": "supplements",
+      "statement": "特殊来源让暗子保持暗置并移至无法确定基础棋位的位置时，必须由该来源定义暗置身份处理；公共层不读取隐藏真实身份兜底、不创造统一暗子身份。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 1,
+      "case_files": [
+        "tests/dark-identity.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[ADD-DARK-IDENTITY-004]",
+      "verification_limit": "公共入口在无法确定基础棋位时明确报错、不秘密兜底；来源专属非标准位置身份处理仍待相应来源定义。",
+      "qa_runtime_annotation": "partial_named_case_evidence_pending_full_source_and_hero_integration",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    },
+    {
+      "id": "ADD-DARK-IDENTITY-005",
+      "group": "supplements",
+      "statement": "公共规则/判定层统一提供未揭示棋当前兵种判定，英雄/畸变/基础机制按来源权限共用；术士暗置中心与普通目标均引用暗置身份再映射兵1、士象2、马炮3、车4，不另设术士身份或所有暗子统一3级。",
+      "scope_and_exceptions": null,
+      "evidence_status": "partial_evidence_passed",
+      "related_case_count": 3,
+      "case_files": [
+        "tests/dark-identity.test.ts"
+      ],
+      "evidence_ref": "review/invariants/LATEST.json:contracts[ADD-DARK-IDENTITY-005]",
+      "verification_limit": "现有基础走法、战车/铁马和毁灭候选共用入口已验证；术士未移交运行时，因此燃烧烈焰中心/目标等级集成仍待验证，不宣称英雄技能完成。",
+      "qa_runtime_annotation": "partial_named_case_evidence_pending_full_source_and_hero_integration",
+      "fully_accepted": false,
+      "remaining_work_ref": "GAP-CONTRACT-COVERAGE"
+    }
+  ],
+  "hero_design_intake": {
+    "status": "awaiting_user_confirmed_design_transfer_after_this_step",
+    "source_format": "Existing complete confirmed design files or text accepted; user is not required to rewrite everything into the old JSON schema.",
+    "sequence": [
+      "Read the submitted complete confirmed text; list included hero/form IDs, source versions, confirmation evidence and open items.",
+      "Compare proposal baseline, current r4 source/digest and the confirmed delta. Missing historical baseline must remain explicitly unknown rather than invented.",
+      "Separate base-rule additions, new hero packages and existing hero corrections; flag actual conflicts and unanswered mechanics before dependent implementation.",
+      "Map each confirmed source to shared identity/control, action/formal-turn timing, river, batch closure, exact ghost objects and fixed complete-form package rules as applicable.",
+      "Record public/secret fields, target eligibility, charges/cooldown, failures, replay/revision, history restore and terminal outcomes with concrete timelines.",
+      "For a formally transferred and authorized package, write confirmed source/contract updates and implement only its agreed scope with meaningful source-specific tests."
+    ],
+    "runtime_authorization": "User submission enables reading and comparison; introduction to runtime follows the submitted explicit request and confirmed scope, never inferred from memory alone.",
+    "fields_to_extract": [
+      "proposal_id_or_source_id",
+      "source_version",
+      "basis_baseline_id_and_digest_if_provided",
+      "basis_current_rule_revision_and_digest_if_provided",
+      "hero_id_and_display_name",
+      "front_or_inner_complete_package",
+      "timing_target_range_effect_parameters",
+      "uses_cooldown_main_action",
+      "public_and_secret_fields",
+      "failure_and_atomic_terminal_rules",
+      "history_rewind_and_rematch_semantics",
+      "cross_source_and_mode_scope",
+      "time_axis",
+      "scoring_assumptions_if_provided",
+      "open_questions",
+      "explicit_user_confirmation"
+    ],
+    "optional_fields_policy": "Do not invent missing data or demand unrelated scoring fields before reading; ask only when the missing item changes implementation.",
+    "auxiliary_validator": {
+      "entry": "scripts/review/validate-hero-proposal.ts",
+      "baseline_file": "rules/confirmed/BASELINE.json",
+      "read_only": true,
+      "r4_revision_digest_validated": false,
+      "full_form_semantics_validated": false,
+      "passing_status_is_implementation_authorization": false
+    },
+    "hero_sources_received_this_round": []
+  },
+  "next_action": "Await the user transfer; first read and compare complete confirmed sources with current r4. Paused full-match, independent mode adaptation, final UI and APK queues remain paused."
+}

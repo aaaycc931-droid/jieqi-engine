@@ -2,13 +2,13 @@
 
 用户于2026-10-07明确“暂时无需更换账号，在当前对话继续”。17号换账号收束保留历史记录，其暂停安排已由本次接续授权覆盖；当前对话继续游戏本体。
 
-当前推进：表/里完整形态公共模型与整局固定选择增量已完成，先读20_HERO_FORM_RUNTIME_2026-10-07.md。源码830c180de6f60593c42fee427959e77cb7ffb189，18项专项测试、全套434 passed、Web构建通过、122个Android资源一致，无APK。规则仍r4；109合同106部分证据+0缺专属测试+3规范，完整验收0。十二表包已登记，未移交里包明确拒绝，不自动继承表技能；旧整盘和新模式适配仍暂停。
+当前推进：验收缺口收拢完成，先读21_ACCEPTANCE_GAP_CLOSE_2026-10-07.md和qa/ACCEPTANCE_GAPS.json；等待用户提交新英雄完整确认稿，收到后先做来源/基线/r4差分。产品源码仍830c180de6f60593c42fee427959e77cb7ffb189；434通过、Web成功、122资源一致均为20号轮既有证据，本步未重跑。109合同106部分证据+0缺专属测试+3规范，完整验收0；未接入新英雄，暂停队列保持原状态。
 
-更新日期：2026-10-07。交接类型：历史阶段结束 + r3/r4规则同步 + 后续获授权的身份、行动/时序、批次、河道、亡魂对象、当前控制权限与表/里公共模型增量，**不是全部功能/视觉验收完成**。当前状态以本文件开头、STATE和20号记录为准；旧整盘采样与未确认新模式独立适配继续暂停。
+更新日期：2026-10-07。交接类型：历史阶段结束 + r3/r4规则同步 + 后续获授权的身份、行动/时序、批次、河道、亡魂对象、当前控制权限与表/里公共模型增量，**不是全部功能/视觉验收完成**。当前状态以本文件开头、STATE和21号记录为准；旧整盘采样与未确认新模式独立适配继续暂停。
 
 ## 读取顺序
 
-1. 20_HERO_FORM_RUNTIME_2026-10-07.md、19_CURRENT_CONTROL_AUDIT_2026-10-07.md、18_GHOST_OBJECT_RUNTIME_2026-10-07.md、STATE.json、17_ACCOUNT_SWITCH_CLOSE_2026-10-06.md（历史收束，已恢复）、16_RIVER_SPACE_RUNTIME_2026-10-06.md、15_DESTRUCTION_BATCH_RUNTIME_2026-10-06.md、14_ACTION_TURN_RUNTIME_2026-10-06.md、13_DARK_IDENTITY_RUNTIME_2026-10-06.md：当前代码与最新证据；10–12号文件保留历史阶段关闭和r3/r4规则同步时点。
+1. 21_ACCEPTANCE_GAP_CLOSE_2026-10-07.md、qa/ACCEPTANCE_GAPS.json、20_HERO_FORM_RUNTIME_2026-10-07.md、19_CURRENT_CONTROL_AUDIT_2026-10-07.md、18_GHOST_OBJECT_RUNTIME_2026-10-07.md、STATE.json、17_ACCOUNT_SWITCH_CLOSE_2026-10-06.md（历史收束，已恢复）、16_RIVER_SPACE_RUNTIME_2026-10-06.md、15_DESTRUCTION_BATCH_RUNTIME_2026-10-06.md、14_ACTION_TURN_RUNTIME_2026-10-06.md、13_DARK_IDENTITY_RUNTIME_2026-10-06.md：当前代码与最新证据；10–12号文件保留历史阶段关闭和r3/r4规则同步时点。
 2. 05_PROGRESS_AND_NEXT.md：既有实现证据和未完成范围。
 3. 09_CURRENT_GAME_MODES.md → 01_CURRENT_RULES.md → 02_CURRENT_HEROES.md → 03_CURRENT_MUTATIONS.md：现行模式与规范正文；01当前为 **LEZI-FUNCTION-2026-10-06-r4**。
 4. 04_CURRENT_UI_AND_FLOW.md：保留已确认方向，UI 半成品最后处理。

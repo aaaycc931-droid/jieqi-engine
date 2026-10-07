@@ -1,5 +1,5 @@
 {
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-07-hero-forms",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-07-acceptance-gaps",
   "rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
   "code_checkpoint": "830c180de6f60593c42fee427959e77cb7ffb189",
   "sources": [
@@ -287,6 +287,26 @@
       "implementation_tree": "669cb1165f38881d350de557d5aa759881120842",
       "applied_scope": "十二已移交表完整包登记、命名和整局公共/权威锁、旧快照迁移、主被动分派与实际回溯/蓝牙编码/重连/再战；18新测试、434通过、122资源；里包明确不可用，无新UI/浏览器/实机/APK，完整验收0",
       "embedded_original": false
+    },
+    {
+      "id": "EVIDENCE:ACCEPTANCE_GAP_CLOSE_2026-10-07",
+      "kind": "acceptance_gap_inventory_non_normative",
+      "path": "handoff/current/21_ACCEPTANCE_GAP_CLOSE_2026-10-07.md",
+      "sha256": "64e73e77e49daf53bbf1c2666f4870ce188f950ab996312bc0201c6aa594b7ab",
+      "authorization": "user 2026-10-07T17:14:00+08:00 同意，这一步结束后我会把新英雄设计提交给你",
+      "implementation_commit_unchanged": "830c180de6f60593c42fee427959e77cb7ffb189",
+      "applied_scope": "既有r4源/证据摘要和109合同映射核验、未验收范围分类及正式英雄稿接收流程；只读盘点，无运行时代码/新测试/规则更新/APK",
+      "embedded_original": false
+    },
+    {
+      "id": "EVIDENCE:ACCEPTANCE_GAP_INVENTORY_2026-10-07",
+      "kind": "acceptance_gap_inventory_non_normative",
+      "path": "handoff/current/qa/ACCEPTANCE_GAPS.json",
+      "sha256": "590fc1f59fe17fca042a510a4cd884cc42f57252466438da6d468cc555c26abd",
+      "authorization": "user 2026-10-07T17:14:00+08:00 同意，这一步结束后我会把新英雄设计提交给你",
+      "implementation_commit_unchanged": "830c180de6f60593c42fee427959e77cb7ffb189",
+      "applied_scope": "既有r4源/证据摘要和109合同映射核验、未验收范围分类及正式英雄稿接收流程；只读盘点，无运行时代码/新测试/规则更新/APK",
+      "embedded_original": false
     }
   ],
   "coverage": {
@@ -363,5 +383,7 @@
   "account_switch_close_index": "17_ACCOUNT_SWITCH_CLOSE_2026-10-06.md",
   "ghost_object_runtime_index": "18_GHOST_OBJECT_RUNTIME_2026-10-07.md",
   "current_control_audit_index": "19_CURRENT_CONTROL_AUDIT_2026-10-07.md",
-  "hero_form_runtime_index": "20_HERO_FORM_RUNTIME_2026-10-07.md"
+  "hero_form_runtime_index": "20_HERO_FORM_RUNTIME_2026-10-07.md",
+  "acceptance_gap_close_index": "21_ACCEPTANCE_GAP_CLOSE_2026-10-07.md",
+  "acceptance_gap_inventory_index": "qa/ACCEPTANCE_GAPS.json"
 }

@@ -3,8 +3,8 @@
   "self_excluded": true,
   "files": {
     "00_READ_FIRST.md": {
-      "bytes": 7116,
-      "sha256": "f563c8dece37aac846e4e77e4c9a8bab6bcc934bbbaf300120e05feea9a6d96e"
+      "bytes": 7171,
+      "sha256": "da492664632a7e0dcc0d58b8e1f18adebd5c6304b88dcdf632a45151b4507de3"
     },
     "01_CURRENT_RULES.md": {
       "bytes": 30541,
@@ -23,12 +23,12 @@
       "sha256": "c133b4ee797b778ce4c88233437b2466255f27c30fcaec5b0941c766cc4bae00"
     },
     "05_PROGRESS_AND_NEXT.md": {
-      "bytes": 28886,
-      "sha256": "10d434d8a828bb9f2001ee9fc70c43fb1a46fa6bb43ae724a3538420ec8678e8"
+      "bytes": 29712,
+      "sha256": "f3c95f6e31d5e23c22e6f2b1258adb85b9cb88e8877f0f689c18ec0aaad865e0"
     },
     "06_COLLABORATION.md": {
-      "bytes": 4521,
-      "sha256": "e03634830cec800a55eb0837513ce5a251cea0e0d03161edbb5c18d1d5c9745b"
+      "bytes": 5415,
+      "sha256": "adbe6dd30351177c994270acc24b0a24333f15dbf8355bb8edd1aa4efa3da762"
     },
     "07_DESIGN_SCORING.md": {
       "bytes": 25701,
@@ -39,16 +39,16 @@
       "sha256": "68845494b465bbcc1908f6cef862f350c1da4dadfc3e3a7473d11b2443edf23c"
     },
     "NEW_DIALOGUE_PROMPT.txt": {
-      "bytes": 2804,
-      "sha256": "0d2ec1b5ca3d4835b500d8749d62ce40ded9fc3bb3bdda044a7936bf27f933d0"
+      "bytes": 3198,
+      "sha256": "ab5e2b5b15448d8e1f7bb8ef089ced34368e34739f5e493311725668fc54e26c"
     },
     "SOURCE_REGISTER.json": {
-      "bytes": 22678,
-      "sha256": "cb9d01b7a21854e46f0d4d205aa48edcdfb442cc370baab3d9d7674f6037ff6d"
+      "bytes": 24231,
+      "sha256": "e94d9211c6ed31169bf567b63b9201ce1236221f4159eaa4b325000e10092421"
     },
     "STATE.json": {
-      "bytes": 38125,
-      "sha256": "2c86b3fa98512cc176bf2d5f77c2ffce61d1029ce62b11066b3de0dbc739cf37"
+      "bytes": 40287,
+      "sha256": "f899bd2b731b4ea1df2c24cfdfdf17e170423bd8cf344e7eb73def4d00d3f327"
     },
     "assets/approved-home.png": {
       "bytes": 2157060,
@@ -109,6 +109,14 @@
     "20_HERO_FORM_RUNTIME_2026-10-07.md": {
       "bytes": 5356,
       "sha256": "e8e110328bc946736289fda342378a394ab5deafe1ac1ebee92a33c580db752c"
+    },
+    "21_ACCEPTANCE_GAP_CLOSE_2026-10-07.md": {
+      "bytes": 8107,
+      "sha256": "64e73e77e49daf53bbf1c2666f4870ce188f950ab996312bc0201c6aa594b7ab"
+    },
+    "qa/ACCEPTANCE_GAPS.json": {
+      "bytes": 114686,
+      "sha256": "590fc1f59fe17fca042a510a4cd884cc42f57252466438da6d468cc555c26abd"
     }
   },
   "checks": {
@@ -134,6 +142,9 @@
     "ghost_object_runtime_record_present": true,
     "account_switch_pause_superseded_by_user": true,
     "current_control_audit_record_present": true,
-    "hero_form_runtime_record_present": true
+    "hero_form_runtime_record_present": true,
+    "acceptance_gap_close_record_present": true,
+    "acceptance_gap_inventory_109_present": true,
+    "new_hero_sources_imported_this_round": false
   }
 }

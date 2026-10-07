@@ -1,6 +1,6 @@
 {
   "project": "乐子象棋 / jieqi-engine",
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-07-hero-forms",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-07-acceptance-gaps",
   "updated_at": "2026-10-07",
   "repository": "https://github.com/aaaycc931-droid/jieqi-engine",
   "working_branch": "codex/ui-android-apk-20261001",
@@ -413,7 +413,7 @@
     "old_dialogue_code_writes_after_handoff": "resumed_current_dialogue_by_explicit_user_override",
     "automatic_import": false
   },
-  "next_action": "Consolidate the remaining source/contract acceptance gaps against the current r4 runtime and await explicitly transferred complete hero packages before implementation. Do not reopen the paused full-match/new-mode/UI/APK queues or import other-dialogue hero proposals automatically.",
+  "next_action": "Await the user transfer; first read and compare complete confirmed sources with current r4. Paused full-match, independent mode adaptation, final UI and APK queues remain paused.",
   "source_gap_register": "SOURCE_REGISTER.json",
   "apk_built_this_round": false,
   "previous_implementation_commit": "af5e411d49099c2f5b936e6dde004b6f5e50059d",
@@ -458,7 +458,7 @@
   "previous_rule_digest": "86cf12befe729c161f1f078dc240052fe26a7a3a78909a2ec255dc0a84d3d776",
   "rule_digest_algorithm": "sha256(concat(relative UTF-8 path + NUL + file bytes + NUL), STATE.current_rules order)",
   "paused_next_action": "Continue destiny bomb/hourglass full real matches, second Shadow cooldown/lifecycle, remaining private snapshot and cross-end clock intersections. Current five active families have sampled natural results; original Nozdormu/Prince and current 12-seat normal regression remain incomplete. Local timeout outcome not frozen; physical RFCOMM/WebView/two-phone pending. UI last; APK paused.",
-  "work_status": "hero_form_public_packages_and_per_game_selection_runtime_completed",
+  "work_status": "acceptance_gap_consolidation_completed_waiting_hero_design_transfer",
   "game_modes": {
     "authority": "09_CURRENT_GAME_MODES.md",
     "base_rule_status": "confirmed",
@@ -764,7 +764,7 @@
     "remaining_runtime_contracts": [],
     "remaining_runtime_contracts_note": "Public ADD-HERO-FORM-001 model now has named partial evidence in round20; future source integration and full acceptance remain pending."
   },
-  "pending_next_runtime_action": "Consolidate the remaining source/contract acceptance gaps against the current r4 runtime and await explicitly transferred complete hero packages before implementation. Do not reopen the paused full-match/new-mode/UI/APK queues or import other-dialogue hero proposals automatically.",
+  "pending_next_runtime_action": "Await the user transfer; first read and compare complete confirmed sources with current r4. Paused full-match, independent mode adaptation, final UI and APK queues remain paused.",
   "account_switch_close": {
     "requested_at": "2026-10-06T23:14:24+08:00",
     "request": "我要更换账号了",
@@ -850,5 +850,62 @@
     "new_selection_ui": false,
     "browser_and_physical_devices_accepted": false,
     "remaining_runtime_contracts": []
+  },
+  "latest_document_round": {
+    "authorization": {
+      "at": "2026-10-07T17:14:00+08:00",
+      "quote": "同意，这一步结束后我会把新英雄设计提交给你"
+    },
+    "verified_remote_before_round": "4941e54049837b43a1195f676954d8742ec9a366",
+    "report": "handoff/current/21_ACCEPTANCE_GAP_CLOSE_2026-10-07.md",
+    "inventory": "handoff/current/qa/ACCEPTANCE_GAPS.json",
+    "classification": "acceptance_gap_consolidation_and_hero_intake_preparation",
+    "product_code_changed": false,
+    "semantic_rules_changed": false,
+    "tests_rerun": false,
+    "web_rebuilt": false,
+    "browser_tests_run": false,
+    "physical_device_tests_run": false,
+    "apk_built": false,
+    "new_hero_sources_received": false,
+    "all_functions_accepted": false,
+    "read_only_verification": {
+      "current_r4_digest_matches": true,
+      "current_source_digest_matches_last_execution": true,
+      "contract_digest_matches_last_execution": true,
+      "published_and_local_execution_trees_match": true,
+      "contract_ids_unique_and_complete": true,
+      "all_mapping_selectors_resolve_to_recorded_passing_cases": true,
+      "mapping_selectors_checked": 266,
+      "old_manifest_entries_verified": 27,
+      "runtime_record_hashes_verified": true,
+      "android_assets_verified": 122,
+      "android_asset_check": "read_only_byte_compare_with_existing_dist",
+      "runtime_paths_unchanged_since_implementation": true,
+      "engine_tests_rerun_this_round": false,
+      "web_rebuilt_this_round": false,
+      "browser_tests_run_this_round": false,
+      "physical_device_tests_run_this_round": false,
+      "apk_built_this_round": false
+    }
+  },
+  "acceptance_gap_consolidation": {
+    "status": "inventory_completed_remaining_acceptance_open_waiting_hero_transfer",
+    "record": "21_ACCEPTANCE_GAP_CLOSE_2026-10-07.md",
+    "inventory": "qa/ACCEPTANCE_GAPS.json",
+    "gap_group_count": 16,
+    "contracts": {
+      "total": 109,
+      "partial_evidence_passed": 106,
+      "failed_cases": 0,
+      "missing_tests": 0,
+      "non_runtime_contract": 3,
+      "fullyAccepted": 0
+    },
+    "last_execution_evidence": "review/invariants/LATEST.json",
+    "last_runtime_round": "20_HERO_FORM_RUNTIME_2026-10-07.md",
+    "current_step_completed": true,
+    "new_hero_intake_status": "awaiting_user_transfer",
+    "old_queues_resumed": false
   }
 }
