@@ -22,7 +22,7 @@ export function destroyPieceBatch(state           , secret             , batchId
   // 缺失真实身份不能留下半批死亡；仅预检仍存活且能被本来源消灭的对象。
   for (const t of locked) {
     const p = state.pieces.find(p => p.id === t.pieceId);
-    if (p && (isBoardPiece(p) || mayReadRiver(permission)) && !(t.cause === "crush" && (!isGround(p) || state.effectsByPieceId?.[p.id]?.immuneCrush))) effectiveIdentity(p, secret);
+    if (p && (isBoardPiece(p) || mayReadRiver(permission)) && !(t.cause === "crush" && (!isGround(p) || state.effectsByPieceId?.[p.id]?.immuneCrush))) effectiveIdentity(p, secret, "death:reveal");
   }
   const batch                         = { batchId, source, targets: locked, targetIds: locked.map(t => t.pieceId), destroyedIds: [], phase: "closed" };
   openDestructionBatches.set(state, { batchId, targets: locked });
@@ -41,7 +41,8 @@ export const formalTurn = (state           , side      )         => state.formal
  * 权威端真实身份读取，仅供明确要求真实身份或执行死亡揭示的来源。
  * 普通当前兵种判定应调用 slots.ts 的 getCurrentPieceType，不能使用此函数。
  */
-export function effectiveIdentity(piece             , secret             )                 {
+export function effectiveIdentity(piece             , secret             , source                        )                 {
+  if (!["death:reveal", "mutation:end_time:initialization", "hero:wind:covered_carrier"].includes(source)) throw new RuleError("TRUE_IDENTITY_PERMISSION", "真实身份读取须由明确获准的权威来源提供");
   const identity = piece.faceDown ? secret.identities[piece.id] : piece;
   if (!identity) throw new RuleError("MISSING_SECRET", "暗子真实身份缺失");
   return { color: identity.color, type: identity.type };
@@ -64,7 +65,7 @@ export function initializeFeatureSecret(state           , secret             , r
     state.hourglasses = 5;
     state.warps = [];
     for (const p of boardPieces(state)) {
-      const identity = effectiveIdentity(p, secret);
+      const identity = effectiveIdentity(p, secret, "mutation:end_time:initialization");
       if (identity.type !== "pawn") continue;
       const hero = state.featureRules.heroes?.[identity.color];
       if (hero !== "nozdormu" && hero !== "murozond") continue;
@@ -102,7 +103,7 @@ export function destroyPiece(state           , secret             , id        , 
   if (!victim || !isBoardPiece(victim) && !mayReadRiver(permission)) return;
   if (cause === "crush" && (!isGround(victim) || state.effectsByPieceId?.[id]?.immuneCrush)) return;
   const controller = getController(victim);
-  const identity = effectiveIdentity(victim, secret);
+  const identity = effectiveIdentity(victim, secret, "death:reveal");
   const withheld = victim.faceDown && state.featureRules?.mutation === "chaos";
   const record                = {
     id, ...identity, ...(withheld ? { color: controller, secretColorWithheld: true          } : {}),

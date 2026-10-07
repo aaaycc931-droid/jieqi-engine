@@ -219,6 +219,9 @@ export interface ClosedDestructionBatch {
   phase: "closed";
 }
 
+/** 明确获准读取真实身份的既有权威来源；普通目标/资源/UI不能借用。 */
+export type TrueIdentityReadSource = "death:reveal" | "mutation:end_time:initialization" | "hero:wind:covered_carrier";
+
 export type GhostKind = "ghost" | "inner_ghost";
 export interface GhostObject {
   /** 旧快照省略时仅兼容为普通亡魂。新增对象必须通过明确种类的入口。 */

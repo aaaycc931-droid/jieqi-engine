@@ -1,6 +1,6 @@
 import { isBoardPiece } from "../src/spaces.ts";
 import { HERO_IDS, HERO_CATALOG as heroCatalog } from "../src/heroes.ts";
-import { applyHeroAbility, getShadowRevealedTargets, startFormalClock, formalTurnDurationMs } from "../src/hero-actions.ts";
+import { applyHeroAbility, getShadowRevealedTargets, getBombers, startFormalClock, formalTurnDurationMs } from "../src/hero-actions.ts";
 import { initializeFeatureSecret } from "../src/settlement.ts";
 // The browser playground must only load browser-safe modules.  In particular,
 // `src/index.ts` also re-exports the room adapter, which depends on
@@ -3748,7 +3748,7 @@ function openHeroAbility(ability: HeroAbilityCommand["ability"]): void {
   const ownWind = bluetooth ? bluetooth.view?.ownHeroSecrets?.wind : localPrivateViewerSide === gameState.turn ? gameSecret?.wind?.[gameState.turn] : undefined;
   const eligible = ability === "shadow"
     ? getShadowRevealedTargets(gameState, gameState.turn, ownWind?.hostId ?? ownWind?.decoyId)
-    : gameState.pieces.filter(p => isBoardPiece(p) && ability === "bomb" && !p.faceDown && p.color === gameState!.turn && gameState!.effectsByPieceId?.[p.id]?.destiny === "infinite_dragon");
+    : ability === "bomb" ? getBombers(gameState, gameState.turn) : [];
   if (ability === "shadow") piece.add(new Option("随机己方真实阵营暗子", "random_covered"));
   for (const p of eligible) piece.add(new Option(`${p.faceDown ? "暗棋" : pieceLabel[p.color][p.type]} (${p.x},${p.y})`, p.id));
   if (ability === "shadow" || ability === "bomb") controls.append(piece);

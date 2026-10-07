@@ -7,7 +7,7 @@ import { requireModeFeatureAdaptation } from "./modes.ts";
 import { getController, getCurrentPieceType, isInPalace, isInsideBoard, otherSide } from "./slots.ts";
 import { isCheckmate, isGeneralInCheck, isStalemate, pieceAt, samePosition } from "./rules.ts";
 import { enterTurnPhase } from "./turns.ts";
-import type { ActionClassification, CapturedPiece, ClosedDestructionBatch, DestructionTarget, GameState, Position, PublicPiece, RandomInt, RiverLocation, RiverReadPermission, SecretIdentity, SecretState, Side } from "./types.ts";
+import type { ActionClassification, CapturedPiece, ClosedDestructionBatch, DestructionTarget, GameState, Position, PublicPiece, RandomInt, RiverLocation, RiverReadPermission, SecretIdentity, SecretState, Side, TrueIdentityReadSource } from "./types.ts";
 
 /** 冻结承诺、预检死亡身份，整批完成后才开放后续触发。不会重新扫描棋盘。 */
 export function destroyPieceBatch(state: GameState, secret: SecretState, batchId: string, source: string, targets: readonly DestructionTarget[], permission?: RiverReadPermission): ClosedDestructionBatch {
@@ -22,7 +22,7 @@ export function destroyPieceBatch(state: GameState, secret: SecretState, batchId
   // 缺失真实身份不能留下半批死亡；仅预检仍存活且能被本来源消灭的对象。
   for (const t of locked) {
     const p = state.pieces.find(p => p.id === t.pieceId);
-    if (p && (isBoardPiece(p) || mayReadRiver(permission)) && !(t.cause === "crush" && (!isGround(p) || state.effectsByPieceId?.[p.id]?.immuneCrush))) effectiveIdentity(p, secret);
+    if (p && (isBoardPiece(p) || mayReadRiver(permission)) && !(t.cause === "crush" && (!isGround(p) || state.effectsByPieceId?.[p.id]?.immuneCrush))) effectiveIdentity(p, secret, "death:reveal");
   }
   const batch: ClosedDestructionBatch = { batchId, source, targets: locked, targetIds: locked.map(t => t.pieceId), destroyedIds: [], phase: "closed" };
   openDestructionBatches.set(state, { batchId, targets: locked });
@@ -41,7 +41,8 @@ export const formalTurn = (state: GameState, side: Side): number => state.formal
  * 权威端真实身份读取，仅供明确要求真实身份或执行死亡揭示的来源。
  * 普通当前兵种判定应调用 slots.ts 的 getCurrentPieceType，不能使用此函数。
  */
-export function effectiveIdentity(piece: PublicPiece, secret: SecretState): SecretIdentity {
+export function effectiveIdentity(piece: PublicPiece, secret: SecretState, source: TrueIdentityReadSource): SecretIdentity {
+  if (!["death:reveal", "mutation:end_time:initialization", "hero:wind:covered_carrier"].includes(source)) throw new RuleError("TRUE_IDENTITY_PERMISSION", "真实身份读取须由明确获准的权威来源提供");
   const identity = piece.faceDown ? secret.identities[piece.id] : piece;
   if (!identity) throw new RuleError("MISSING_SECRET", "暗子真实身份缺失");
   return { color: identity.color, type: identity.type };
@@ -64,7 +65,7 @@ export function initializeFeatureSecret(state: GameState, secret: SecretState, r
     state.hourglasses = 5;
     state.warps = [];
     for (const p of boardPieces(state)) {
-      const identity = effectiveIdentity(p, secret);
+      const identity = effectiveIdentity(p, secret, "mutation:end_time:initialization");
       if (identity.type !== "pawn") continue;
       const hero = state.featureRules.heroes?.[identity.color];
       if (hero !== "nozdormu" && hero !== "murozond") continue;
@@ -102,7 +103,7 @@ export function destroyPiece(state: GameState, secret: SecretState, id: string, 
   if (!victim || !isBoardPiece(victim) && !mayReadRiver(permission)) return;
   if (cause === "crush" && (!isGround(victim) || state.effectsByPieceId?.[id]?.immuneCrush)) return;
   const controller = getController(victim);
-  const identity = effectiveIdentity(victim, secret);
+  const identity = effectiveIdentity(victim, secret, "death:reveal");
   const withheld = victim.faceDown && state.featureRules?.mutation === "chaos";
   const record: CapturedPiece = {
     id, ...identity, ...(withheld ? { color: controller, secretColorWithheld: true as const } : {}),

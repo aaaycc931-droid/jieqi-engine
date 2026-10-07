@@ -14,6 +14,11 @@ function requireRule(ok         , code        , text        )             {
 export function getShadowRevealedTargets(state           , side      , currentGeneralId         ) {
   return state.pieces.filter(p => isBoardPiece(p) && !p.faceDown && p.color === side && p.id !== currentGeneralId && !hasStealthEffect(state, p.id));
 }
+/** 已现身无限龙的公开单棋资格；正式窗口和全军每回合限制仍由权威入口检查。 */
+export function getBombers(state           , side      ) {
+  return state.pieces.filter(p => isBoardPiece(p) && !p.faceDown && getController(p) === side &&
+    state.effectsByPieceId?.[p.id]?.destiny === "infinite_dragon" && state.effectsByPieceId[p.id].ammunition === 1);
+}
 export function formalTurnDurationMs(state           , side      )         {
   if (state.featureRules?.mutation === "end_time" && formalTurn(state, side) === 0) return 75_000;
   const heroes = state.featureRules?.heroes;
@@ -157,8 +162,8 @@ export function applyHeroAbility(state           , secret             , command 
     }
     case "bomb": {
       requireRule(hero === "murozond" && s.featureRules?.mutation === "end_time", "NO_DESTINY", "只有无限龙可以投弹");
-      const p = s.pieces.find(p => p.id === command.pieceId), d = command.pieceId ? k.destinyIdentities?.[command.pieceId] : undefined;
-      requireRule(p && isBoardPiece(p) && d?.kind === "infinite_dragon" && d.shown && getController(p) === side && s.effectsByPieceId?.[p.id]?.ammunition === 1 && command.to, "INVALID_BOMBER", "需要已现身的己方无限龙及一枚弹药");
+      const p = getBombers(s, side).find(p => p.id === command.pieceId), d = command.pieceId ? k.destinyIdentities?.[command.pieceId] : undefined;
+      requireRule(p && d?.kind === "infinite_dragon" && d.shown && command.to, "INVALID_BOMBER", "需要已现身的己方无限龙及一枚弹药");
       requireRule(!k.processedActions[`bomb:turn:${side}:${formalTurn(s, side)}`], "BOMB_TURN_LIMIT", "每个正式回合全军最多投放一枚");
       const to = command.to;
       requireRule(to.x >= 0 && to.x <= 8 && to.y >= 0 && to.y <= 9 && !samePosition(p, to) && Math.abs(p.x - to.x) + Math.abs(p.y - to.y) <= 3 && !s.warps?.some(w => samePosition(w, to)), "INVALID_BOMB_TARGET", "目标须在曼哈顿距离3内且非自身或已有扭曲");
@@ -175,7 +180,7 @@ export function applyHeroAbility(state           , secret             , command 
       requireRule(wind && wind.uses < 2 && formalTurn(s, side) >= wind.readyOnTurn && wind.activatedOnTurn !== formalTurn(s, side), "SHADOW_UNAVAILABLE", "影尚在冷却或次数已用完");
       // 随机暗子不是直接指定，无形仍可进入该池；明子选择遵守无形目标限制。
       const pool = command.randomCovered
-        ? s.pieces.filter(p => isBoardPiece(p) && p.id !== (wind.hostId ?? wind.decoyId) && p.faceDown && effectiveIdentity(p, k).color === side)
+        ? s.pieces.filter(p => isBoardPiece(p) && p.id !== (wind.hostId ?? wind.decoyId) && p.faceDown && effectiveIdentity(p, k, "hero:wind:covered_carrier").color === side)
         : getShadowRevealedTargets(s, side, wind.hostId ?? wind.decoyId);
       const host = command.randomCovered ? pool[randomInt(pool.length)] : pool.find(p => p.id === command.pieceId);
       requireRule(host, "INVALID_SHADOW_TARGET", "请选择己方合法明棋或随机己方真实阵营暗子");
