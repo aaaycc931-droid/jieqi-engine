@@ -1,7 +1,7 @@
 {
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-06-account-switch-close",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-07-ghost-objects",
   "rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
-  "code_checkpoint": "998a02ab58e231550c9c71598b8419cca06578a9",
+  "code_checkpoint": "364b711f522be18c6c636e59a3df5e02844092c7",
   "sources": [
     {
       "id": "RULE:CURRENT_RULE_DELTAS_2026-09-22.md",
@@ -250,6 +250,18 @@
       "implementation_commit_unchanged": "998a02ab58e231550c9c71598b8419cca06578a9",
       "applied_scope": "仅收束交接和当前单一接续指令；不改运行时/规则、不重跑测试、不生成APK，旧对话停止产品写入",
       "embedded_original": false
+    },
+    {
+      "id": "RUNTIME:GHOST_OBJECTS_2026-10-07",
+      "kind": "runtime_execution_evidence_non_normative",
+      "path": "handoff/current/18_GHOST_OBJECT_RUNTIME_2026-10-07.md",
+      "sha256": "4e2660c3b728ce4c0ee12760a913be5bfbf0b3d76cc3cbf2f4a26ecf220240ad",
+      "authorization": "user 2026-10-07T09:33:28+08:00 暂时无需更换账号，在当前对话继续",
+      "implementation_commit": "364b711f522be18c6c636e59a3df5e02844092c7",
+      "local_execution_checkpoint": "78034962d9ccd3ac5c950269b60f9e4e9b92faac",
+      "implementation_tree": "23ba3b24107432060ad6e067309248b26d7befb8",
+      "applied_scope": "公共两类独立对象与精确名称/归属/来源接口、既有普通死亡骑士感染与计时、批次屏障和协议/实际回溯；17专项测试，401通过，121资源；未导入里英雄生成/持续/收益，完整验收0",
+      "embedded_original": false
     }
   ],
   "coverage": {
@@ -308,7 +320,7 @@
     "过时3英雄进度"
   ],
   "completeness_claim": "当前已恢复并核对源的主体规则按域覆盖；2026-10-06已将本轮明确确认的全局规则同步进01。仍不保证所有历史对话的英雄专属细节逐条恢复，明确缺口不得填空。 2026-10-06后续明确确认的基础【暗置身份】词条已同步；只关闭术士暗置等级未决项，不提升其他英雄完整稿或特殊位置未定义处理。",
-  "previous_code_checkpoint": "a3b8dcaeac38cdb67f4a597ed23b483f16a661db",
+  "previous_code_checkpoint": "998a02ab58e231550c9c71598b8419cca06578a9",
   "runtime_evidence_index": "review/invariants/LATEST.json",
   "gameplay_execution_evidence_index": "review/gameplay/runtime-browser-review-2026-10-05-modes.json",
   "full_match_execution_evidence_index": "review/gameplay/full-match-browser-2026-10-05-active-regression-summary.json",
@@ -323,5 +335,6 @@
   "action_turn_runtime_index": "handoff/current/14_ACTION_TURN_RUNTIME_2026-10-06.md",
   "destruction_batch_runtime_index": "15_DESTRUCTION_BATCH_RUNTIME_2026-10-06.md",
   "river_space_runtime_index": "16_RIVER_SPACE_RUNTIME_2026-10-06.md",
-  "account_switch_close_index": "17_ACCOUNT_SWITCH_CLOSE_2026-10-06.md"
+  "account_switch_close_index": "17_ACCOUNT_SWITCH_CLOSE_2026-10-06.md",
+  "ghost_object_runtime_index": "18_GHOST_OBJECT_RUNTIME_2026-10-07.md"
 }

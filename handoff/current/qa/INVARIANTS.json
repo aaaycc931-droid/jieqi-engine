@@ -2,13 +2,13 @@
   "authority": "test_contract_non_normative",
   "normative_source": "01_CURRENT_RULES.md + 02_CURRENT_HEROES.md + 03_CURRENT_MUTATIONS.md + 04_CURRENT_UI_AND_FLOW.md",
   "current_rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
-  "code_checkpoint": "998a02ab58e231550c9c71598b8419cca06578a9",
+  "code_checkpoint": "364b711f522be18c6c636e59a3df5e02844092c7",
   "counts": {
     "retained_invariants": 69,
     "retained_anti_invariants": 20,
     "new_supplements": 20
   },
-  "note": "保留69项原合同与20项反不变量；2026-10-06同步全局规则后修正INV-ACTION-001范围、补强姆诺兹多上一正式回合边界，并新增8项待验证补充。测试合同仍非规范源，不代表运行时已实现。 2026-10-06 r4新增5项暗置身份公共判定合同，均待运行时验证；不改变69原合同/20反不变量及旧执行证据。 2026-10-06获授权实现公共暗置身份后，5项暗置身份合同有具体情景证据；未验收所有来源、资源/UI或术士技能。r3的8项新增合同继续待运行时模型验证；完整合同验收数仍为0。 后续用户同意推进行动/回合时序：3项动作/阶段/持续合同已接入现有来源并新增情景验证，其他5项r3新增合同仍缺专属测试；未移交英雄及未来资源/培养不自动实现，完整合同验收仍为0。",
+  "note": "保留69项原合同与20项反不变量；2026-10-06同步全局规则后修正INV-ACTION-001范围、补强姆诺兹多上一正式回合边界，并新增8项待验证补充。测试合同仍非规范源，不代表运行时已实现。 2026-10-06 r4新增5项暗置身份公共判定合同，均待运行时验证；不改变69原合同/20反不变量及旧执行证据。 2026-10-06获授权实现公共暗置身份后，5项暗置身份合同有具体情景证据；未验收所有来源、资源/UI或术士技能。r3的8项新增合同继续待运行时模型验证；完整合同验收数仍为0。 后续用户同意推进行动/回合时序：3项动作/阶段/持续合同已接入现有来源并新增情景验证，其他5项r3新增合同仍缺专属测试；未移交英雄及未来资源/培养不自动实现，完整合同验收仍为0。 2026-10-07用户在当前对话恢复实现，亡魂对象合同新增17项公共模型/既有普通来源情景证据；完整当前控制权限及完整表/里形态仍缺专属增量验证。里英雄生成、持续/收益未移交，不自动定义，完整验收仍0。",
   "invariants": [
     {
       "id": "INV-BOARD-001",
@@ -690,7 +690,9 @@
     {
       "id": "ADD-GHOST-OBJECT-001",
       "statement": "【亡魂】与【里·亡魂】是独立格上对象，可共格但不互相叠层/刷新/提供资源；精确名称清除只处理对应对象，普通棋子消灭不顺带清除。",
-      "current_runtime_verification": "pending_runtime_model"
+      "current_runtime_verification": "partial_named_case_evidence_pending_full_source_and_hero_integration",
+      "runtime_evidence": "review/invariants/LATEST.json",
+      "implementation_record": "handoff/current/18_GHOST_OBJECT_RUNTIME_2026-10-07.md"
     },
     {
       "id": "ADD-CURRENT-CONTROL-001",

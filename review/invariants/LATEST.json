@@ -1,8 +1,8 @@
 {
   "authority": "execution_evidence_non_normative",
-  "generatedAt": "2026-10-06T11:09:39.783Z",
-  "sourceCommitAtRun": "99d11189b1cdfb05c747dc1ff679361ea6ed9646",
-  "sourceDigest": "d32428cbcc138b3e09b0db6e5bdb8581cb51d3b8ea11e4b054cd7c2842b7b074",
+  "generatedAt": "2026-10-07T01:42:05.827Z",
+  "sourceCommitAtRun": "78034962d9ccd3ac5c950269b60f9e4e9b92faac",
+  "sourceDigest": "445d0dd4f07afbcf7e898c7b09a0701dedcf8864dcd43389e9989c064c02f8e5",
   "sourceDigestPaths": [
     ".github/workflows/gameplay-runtime-review.yml",
     ".github/workflows/menu-reference-review.yml",
@@ -26,6 +26,7 @@
     "src/bluetooth-protocol.ts",
     "src/errors.ts",
     "src/game.ts",
+    "src/ghosts.ts",
     "src/hero-actions.ts",
     "src/heroes.ts",
     "src/index.ts",
@@ -36,6 +37,7 @@
     "src/room.ts",
     "src/rps.ts",
     "src/rules.ts",
+    "src/settlement-context.ts",
     "src/settlement.ts",
     "src/setup.ts",
     "src/sha256.ts",
@@ -59,6 +61,7 @@
     "tests/flow-contracts.test.ts",
     "tests/flow-fixtures.ts",
     "tests/game-modes.test.ts",
+    "tests/ghost-objects.test.ts",
     "tests/helpers.ts",
     "tests/movement.test.ts",
     "tests/mutation-rarity.test.ts",
@@ -175,18 +178,18 @@
     "web/ui-refresh.css"
   ],
   "ruleRevision": "LEZI-FUNCTION-2026-10-06-r4",
-  "contractDigest": "249e771ee324f9824011901a579564f433bf2174b12fab738aa8025dea018f06",
+  "contractDigest": "bc41b5b4bc6a4d29030a5cdf717513d00732a428cb05b966fc5cd4af1ed1fadd",
   "runtime": "v24.19.0",
   "testSummary": {
-    "passed": 384,
+    "passed": 401,
     "failed": 0,
     "executionFailed": false
   },
   "contractSummary": {
     "total": 109,
-    "partial_evidence_passed": 103,
+    "partial_evidence_passed": 104,
     "failed_cases": 0,
-    "missing_tests": 3,
+    "missing_tests": 2,
     "non_runtime_contract": 3,
     "fullyAccepted": 0
   },
@@ -2882,9 +2885,95 @@
       "id": "ADD-GHOST-OBJECT-001",
       "group": "supplements",
       "statement": "【亡魂】与【里·亡魂】是独立格上对象，可共格但不互相叠层/刷新/提供资源；精确名称清除只处理对应对象，普通棋子消灭不顺带清除。",
-      "status": "missing_tests",
-      "relatedCases": [],
-      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/ghost-objects.test.ts",
+          "name": "R4-GHOST-01 两类同格独立保存归属、来源、层数和寿命",
+          "passed": true
+        },
+        {
+          "file": "tests/ghost-objects.test.ts",
+          "name": "R4-GHOST-02 普通死亡只刷新普通亡魂，保留共格里亡魂及对方对象",
+          "passed": true
+        },
+        {
+          "file": "tests/ghost-objects.test.ts",
+          "name": "R4-GHOST-03 冲突策略由来源指定，同类叠层不能借其他来源或另一类",
+          "passed": true
+        },
+        {
+          "file": "tests/ghost-objects.test.ts",
+          "name": "R4-GHOST-04 无种类旧快照只按普通亡魂兼容，新写入必须明确来源与种类",
+          "passed": true
+        },
+        {
+          "file": "tests/ghost-objects.test.ts",
+          "name": "R4-GHOST-05 精确清普通亡魂保留里亡魂和另一归属，里亡魂不维持普通感染",
+          "passed": true
+        },
+        {
+          "file": "tests/ghost-objects.test.ts",
+          "name": "R4-GHOST-06 精确清里亡魂不改普通寿命、层数或现有感染",
+          "passed": true
+        },
+        {
+          "file": "tests/ghost-objects.test.ts",
+          "name": "R4-GHOST-07 只有显式所有亡魂类入口清双类，仍尊重归属与棋格过滤",
+          "passed": true
+        },
+        {
+          "file": "tests/ghost-objects.test.ts",
+          "name": "R4-GHOST-08 普通正式回合末只让普通亡魂感染及减寿，里亡魂无默认时钟",
+          "passed": true
+        },
+        {
+          "file": "tests/ghost-objects.test.ts",
+          "name": "R4-GHOST-09 只有里亡魂的格不感染、普通到期也不借里亡魂保留感染",
+          "passed": true
+        },
+        {
+          "file": "tests/ghost-objects.test.ts",
+          "name": "R4-GHOST-10 落位到里亡魂格不立即感染，原有普通感染不能跨类维持",
+          "passed": true
+        },
+        {
+          "file": "tests/ghost-objects.test.ts",
+          "name": "R4-GHOST-11 来源显式计时仅改点名类、归属和来源，不能替另一类刷新",
+          "passed": true
+        },
+        {
+          "file": "tests/ghost-objects.test.ts",
+          "name": "R4-GHOST-12 资源读取必须指定种类及公开归属，不混层、不奖励且返回副本",
+          "passed": true
+        },
+        {
+          "file": "tests/ghost-objects.test.ts",
+          "name": "R4-GHOST-13 普通棋子进攻与消灭不删除共格亡魂对象，也不把它们当棋子",
+          "passed": true
+        },
+        {
+          "file": "tests/ghost-objects.test.ts",
+          "name": "R4-GHOST-14 开放死亡批次禁止精确读取、清除、生成、资源和计时",
+          "passed": true
+        },
+        {
+          "file": "tests/ghost-objects.test.ts",
+          "name": "R4-GHOST-15 标准格亡魂不读河道锚点、飞行棋或隐藏真实阵营",
+          "passed": true
+        },
+        {
+          "file": "tests/ghost-objects.test.ts",
+          "name": "R4-GHOST-16 公共蓝牙快照保留两类来源层数寿命，旧对象兼容且无秘密字段",
+          "passed": true
+        },
+        {
+          "file": "tests/ghost-objects.test.ts",
+          "name": "R4-GHOST-17 实际回溯恢复两类完整对象及感染，不由另一类推算资源",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "两类公共对象独立、共格、来源/归属/层数/寿命、精确清除和资源查询、普通死亡刷新/感染/计时、批次屏障及公共协议/实际回溯有17项具体情景证据。无种类旧快照仅兼容普通亡魂；未移交里英雄的生成、叠层、寿命时点、收益/爆发不自动定义，基础资源接口只返回点名类且指定公开归属的对象副本。无浏览器或实机新增验收，完整合同验收仍为0。",
       "fullyAccepted": false
     },
     {
@@ -3016,7 +3105,7 @@
       "fullyAccepted": false
     }
   ],
-  "publishedImplementationCommit": "998a02ab58e231550c9c71598b8419cca06578a9",
-  "publishedImplementationTree": "f585bc97a6ec06cea69584d814dc6a0ff3aff711",
-  "publicationNote": "实际执行HEAD为99d11189b1cdfb05c747dc1ff679361ea6ed9646；GitHub连接器发布提交与本地执行提交完整tree相同，作者/时间不同。保留真实sourceCommitAtRun，不冒充额外重跑。"
+  "publishedImplementationCommit": "364b711f522be18c6c636e59a3df5e02844092c7",
+  "publishedImplementationTree": "23ba3b24107432060ad6e067309248b26d7befb8",
+  "publicationNote": "实际执行HEAD为78034962d9ccd3ac5c950269b60f9e4e9b92faac；GitHub发布提交与本地执行提交完整tree相同，作者/时间不同。保留真实sourceCommitAtRun，不冒充额外重跑。"
 }

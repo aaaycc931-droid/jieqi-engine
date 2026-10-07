@@ -1,11 +1,11 @@
 {
   "project": "乐子象棋 / jieqi-engine",
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-06-account-switch-close",
-  "updated_at": "2026-10-06",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-07-ghost-objects",
+  "updated_at": "2026-10-07",
   "repository": "https://github.com/aaaycc931-droid/jieqi-engine",
   "working_branch": "codex/ui-android-apk-20261001",
-  "implementation_commit": "998a02ab58e231550c9c71598b8419cca06578a9",
-  "implementation_tree": "f585bc97a6ec06cea69584d814dc6a0ff3aff711",
+  "implementation_commit": "364b711f522be18c6c636e59a3df5e02844092c7",
+  "implementation_tree": "23ba3b24107432060ad6e067309248b26d7befb8",
   "draft_pr": 2,
   "baseline_id": "LEZI-FUNCTION-2026-10-04-v1",
   "baseline_digest": "4bcf9fb91f5c6e41f456e7424ebd7ed09c6c07b1595ec825604aa730fdad020b",
@@ -26,13 +26,13 @@
     "destiny_mutations": 1
   },
   "validation": {
-    "tests_passed": 384,
+    "tests_passed": 401,
     "tests_failed": 0,
     "web_build": "passed",
     "homepage_browser_run": 37305274329,
     "homepage_browser_commit": "8b985a8f2bf8cd4ab96fdf63ab73894292cc6f7a",
     "homepage_browser_scope": "homepage_and_entry_controls_only",
-    "android_web_asset_match_files": 119,
+    "android_web_asset_match_files": 121,
     "new_hero_browser_full_flow": "partial_five_active_families_natural_samples_same_app_original_Nozdormu_Prince_and_current_twelve_seat_regression_incomplete",
     "individual_69_invariants": "partial_named_case_evidence_full_contract_acceptance_pending",
     "android_webview": "pending",
@@ -42,15 +42,15 @@
     "contract_evidence": {
       "index": "review/invariants/LATEST.json",
       "total": 109,
-      "partial_evidence_passed": 103,
-      "missing_related_cases": 3,
+      "partial_evidence_passed": 104,
+      "missing_related_cases": 2,
       "non_runtime_contract": 3,
       "failed_cases": 0,
       "fully_accepted": 0,
       "applicable_rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
-      "source_commit_at_run": "99d11189b1cdfb05c747dc1ff679361ea6ed9646",
-      "published_implementation_commit": "998a02ab58e231550c9c71598b8419cca06578a9",
-      "scope": "named_case_evidence_only_inner_ghost_control_permissions_forms_missing_special_tests_untransferred_river_hero_sources_pending"
+      "source_commit_at_run": "78034962d9ccd3ac5c950269b60f9e4e9b92faac",
+      "published_implementation_commit": "364b711f522be18c6c636e59a3df5e02844092c7",
+      "scope": "named_ghost_object_case_evidence_only_full_current_control_audit_complete_forms_and_untransferred_hero_sources_pending"
     },
     "current_ci": {
       "status": "success",
@@ -308,13 +308,13 @@
     "r4_dark_identity_tests_rerun": false,
     "r4_dark_identity_note": "规则事实源/合同同步；公共判定层尚未实现，既有328 passed不验收r4。",
     "previous_engine_run": {
-      "implementation_commit": "a3b8dcaeac38cdb67f4a597ed23b483f16a661db",
-      "tests_passed": 367,
+      "implementation_commit": "998a02ab58e231550c9c71598b8419cca06578a9",
+      "tests_passed": 384,
       "tests_failed": 0,
-      "scope": "full_regression_with_thirteen_destruction_batch_cases_not_full_r3_r4_acceptance"
+      "scope": "full_regression_with_seventeen_river_space_cases_not_full_r3_r4_acceptance"
     },
-    "engine_scope": "full_regression_with_seventeen_river_space_cases_not_full_r3_r4_acceptance",
-    "engine_implementation_commit": "998a02ab58e231550c9c71598b8419cca06578a9",
+    "engine_scope": "full_regression_with_seventeen_ghost_object_cases_not_full_r3_r4_acceptance",
+    "engine_implementation_commit": "364b711f522be18c6c636e59a3df5e02844092c7",
     "previous_contract_evidence": {
       "index": "review/invariants/LATEST.json",
       "total": 96,
@@ -368,6 +368,19 @@
         "source_commit_at_run": "47ee108175b3286ac20a51819918ab7414bb63da",
         "published_implementation_commit": "a3b8dcaeac38cdb67f4a597ed23b483f16a661db",
         "scope": "named_case_evidence_only_river_inner_ghost_control_permissions_forms_missing_special_tests_future_hero_sources_pending"
+      },
+      {
+        "index": "review/invariants/LATEST.json",
+        "total": 109,
+        "partial_evidence_passed": 103,
+        "missing_related_cases": 3,
+        "non_runtime_contract": 3,
+        "failed_cases": 0,
+        "fully_accepted": 0,
+        "applicable_rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
+        "source_commit_at_run": "99d11189b1cdfb05c747dc1ff679361ea6ed9646",
+        "published_implementation_commit": "998a02ab58e231550c9c71598b8419cca06578a9",
+        "scope": "named_case_evidence_only_inner_ghost_control_permissions_forms_missing_special_tests_untransferred_river_hero_sources_pending"
       }
     ]
   },
@@ -382,15 +395,15 @@
     "no_option_cards"
   ],
   "collaboration": {
-    "implementation_writer": "new_dialogue_after_this_handoff",
+    "implementation_writer": "current_dialogue_resumed_by_user_2026-10-07",
     "design_dialogue": "proposal_only",
-    "old_dialogue_code_writes_after_handoff": "stop",
+    "old_dialogue_code_writes_after_handoff": "resumed_current_dialogue_by_explicit_user_override",
     "automatic_import": false
   },
-  "next_action": "Read current handoff and verify remote branch first. Current dialogue stops writing product code after this closure. Resume only in the new account/dialogue on user continuation instruction, beginning with ordinary/inner ghost objects and exact-name operations; do not automatically resume old full-match, new-mode adaptation or hero-design import queues.",
+  "next_action": "Verify current handoff and remote branch, then map comprehensive current-control read permissions across targeting, resources and UI. Complete hero forms remain pending; no untransferred hero import, old full-match or new-mode adaptation queue resumption.",
   "source_gap_register": "SOURCE_REGISTER.json",
   "apk_built_this_round": false,
-  "previous_implementation_commit": "a3b8dcaeac38cdb67f4a597ed23b483f16a661db",
+  "previous_implementation_commit": "998a02ab58e231550c9c71598b8419cca06578a9",
   "validation_round": {
     "rules_changed": false,
     "rule_revision_unchanged": true,
@@ -430,7 +443,7 @@
   "previous_rule_digest": "86cf12befe729c161f1f078dc240052fe26a7a3a78909a2ec255dc0a84d3d776",
   "rule_digest_algorithm": "sha256(concat(relative UTF-8 path + NUL + file bytes + NUL), STATE.current_rules order)",
   "paused_next_action": "Continue destiny bomb/hourglass full real matches, second Shadow cooldown/lifecycle, remaining private snapshot and cross-end clock intersections. Current five active families have sampled natural results; original Nozdormu/Prince and current 12-seat normal regression remain incomplete. Local timeout outcome not frozen; physical RFCOMM/WebView/two-phone pending. UI last; APK paused.",
-  "work_status": "account_switch_stage_closed_implementation_paused",
+  "work_status": "ghost_object_runtime_increment_completed_current_dialogue_resumed",
   "game_modes": {
     "authority": "09_CURRENT_GAME_MODES.md",
     "base_rule_status": "confirmed",
@@ -547,21 +560,22 @@
     "followup_runtime_record": "handoff/current/13_DARK_IDENTITY_RUNTIME_2026-10-06.md"
   },
   "latest_runtime_round": {
-    "authorization": "外部续接消息同意继续河道空间与默认读取隔离；当前用户追问到哪一步了",
-    "authorization_observed_at": "2026-10-06T18:59:22+08:00",
+    "authorization": "user: 暂时无需更换账号，在当前对话继续",
+    "authorization_observed_at": "2026-10-07T09:33:28+08:00",
+    "verified_remote_before_implementation": "e04887fbaa77e69643ba981df42eebafbe0f7210",
     "rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
-    "implementation_commit": "998a02ab58e231550c9c71598b8419cca06578a9",
-    "local_execution_checkpoint": "99d11189b1cdfb05c747dc1ff679361ea6ed9646",
+    "implementation_commit": "364b711f522be18c6c636e59a3df5e02844092c7",
+    "local_execution_checkpoint": "78034962d9ccd3ac5c950269b60f9e4e9b92faac",
     "publication_tree_matches_execution_tree": true,
-    "runtime_mapping": "review/invariants/R4_RUNTIME_MAPPING_2026-10-06.md",
-    "report": "handoff/current/16_RIVER_SPACE_RUNTIME_2026-10-06.md",
+    "runtime_mapping": "handoff/current/18_GHOST_OBJECT_RUNTIME_2026-10-07.md",
+    "report": "handoff/current/18_GHOST_OBJECT_RUNTIME_2026-10-07.md",
     "product_code_changed": true,
     "semantic_rules_changed": false,
     "new_engine_tests": 17,
-    "tests_passed": 384,
+    "tests_passed": 401,
     "tests_failed": 0,
     "web_build": "passed",
-    "android_generated_files_matched": 119,
+    "android_generated_files_matched": 121,
     "browser_tests_run": false,
     "apk_built": false,
     "old_full_match_queue_resumed": false,
@@ -633,6 +647,28 @@
       "old_full_match_queue_resumed": false,
       "untransferred_heroes_imported": false,
       "all_functions_accepted": false
+    },
+    {
+      "authorization": "外部续接消息同意继续河道空间与默认读取隔离；当前用户追问到哪一步了",
+      "authorization_observed_at": "2026-10-06T18:59:22+08:00",
+      "rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
+      "implementation_commit": "998a02ab58e231550c9c71598b8419cca06578a9",
+      "local_execution_checkpoint": "99d11189b1cdfb05c747dc1ff679361ea6ed9646",
+      "publication_tree_matches_execution_tree": true,
+      "runtime_mapping": "review/invariants/R4_RUNTIME_MAPPING_2026-10-06.md",
+      "report": "handoff/current/16_RIVER_SPACE_RUNTIME_2026-10-06.md",
+      "product_code_changed": true,
+      "semantic_rules_changed": false,
+      "new_engine_tests": 17,
+      "tests_passed": 384,
+      "tests_failed": 0,
+      "web_build": "passed",
+      "android_generated_files_matched": 119,
+      "browser_tests_run": false,
+      "apk_built": false,
+      "old_full_match_queue_resumed": false,
+      "untransferred_heroes_imported": false,
+      "all_functions_accepted": false
     }
   ],
   "action_turn_runtime": {
@@ -644,7 +680,6 @@
     ],
     "acceptance": "partial_named_case_evidence_only",
     "remaining_runtime_contracts": [
-      "ADD-GHOST-OBJECT-001",
       "ADD-CURRENT-CONTROL-001",
       "ADD-HERO-FORM-001"
     ]
@@ -657,7 +692,6 @@
     "acceptance": "partial_named_case_evidence_only",
     "source_scope": "shared_explicit_batch_entry_and_existing_deathwing_locked_success_set_no_redefinition_of_sequential_sources",
     "remaining_runtime_contracts": [
-      "ADD-GHOST-OBJECT-001",
       "ADD-CURRENT-CONTROL-001",
       "ADD-HERO-FORM-001"
     ]
@@ -670,12 +704,11 @@
     "acceptance": "partial_named_case_evidence_only",
     "source_scope": "shared_river_state_transition_and_default_board_read_isolation_no_hero_river_mechanic_enabled",
     "remaining_runtime_contracts": [
-      "ADD-GHOST-OBJECT-001",
       "ADD-CURRENT-CONTROL-001",
       "ADD-HERO-FORM-001"
     ]
   },
-  "pending_next_runtime_action": "Continue r4 runtime mapping with distinct ordinary/inner ghost objects and exact-name operations. River base state and default read isolation have scoped evidence; river hero entry/exit eligibility, lifetime, occupancy and connectivity remain source-defined and untransferred. Comprehensive current-control permission audit and complete hero forms remain pending. Preserve current r4, approved UI, paused old full-match/new-mode adaptation queues and APK pause.",
+  "pending_next_runtime_action": "Verify current handoff and remote branch, then map comprehensive current-control read permissions across targeting, resources and UI. Complete hero forms remain pending; no untransferred hero import, old full-match or new-mode adaptation queue resumption.",
   "account_switch_close": {
     "requested_at": "2026-10-06T23:14:24+08:00",
     "request": "我要更换账号了",
@@ -689,6 +722,24 @@
     "apk_built": false,
     "current_dialogue_product_writes_after_close": "stop",
     "new_account_entry": "00_READ_FIRST.md",
-    "continuation_prompt": "NEW_DIALOGUE_PROMPT.txt"
+    "continuation_prompt": "NEW_DIALOGUE_PROMPT.txt",
+    "superseded_by": {
+      "observed_at": "2026-10-07T09:33:28+08:00",
+      "request": "暂时无需更换账号，在当前对话继续",
+      "current_dialogue_product_writes": "authorized_resume",
+      "record": "18_GHOST_OBJECT_RUNTIME_2026-10-07.md"
+    }
+  },
+  "ghost_object_runtime": {
+    "record": "handoff/current/18_GHOST_OBJECT_RUNTIME_2026-10-07.md",
+    "mapped_supplements": [
+      "ADD-GHOST-OBJECT-001"
+    ],
+    "acceptance": "partial_named_case_evidence_only",
+    "source_scope": "shared_exact_kind_objects_and_existing_ordinary_death_knight_integration_no_inner_hero_generation_duration_or_yield_defined",
+    "remaining_runtime_contracts": [
+      "ADD-CURRENT-CONTROL-001",
+      "ADD-HERO-FORM-001"
+    ]
   }
 }

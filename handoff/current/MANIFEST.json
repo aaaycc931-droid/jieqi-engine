@@ -3,8 +3,8 @@
   "self_excluded": true,
   "files": {
     "00_READ_FIRST.md": {
-      "bytes": 7371,
-      "sha256": "101a177fdb8955bb45d339e29a7a59f93666cf35b7655f04ebf63358fcda78a8"
+      "bytes": 6946,
+      "sha256": "82542c1f559b2bab46d7950269fc833ff027a775ebd896b0b215c08c1e72e43f"
     },
     "01_CURRENT_RULES.md": {
       "bytes": 30541,
@@ -23,8 +23,8 @@
       "sha256": "c133b4ee797b778ce4c88233437b2466255f27c30fcaec5b0941c766cc4bae00"
     },
     "05_PROGRESS_AND_NEXT.md": {
-      "bytes": 26547,
-      "sha256": "bec1a448f18d5ed068eb83ec2c2596c170d86e086d8fe451b2f79e2f0e3ffcc2"
+      "bytes": 27410,
+      "sha256": "eddd247d1fd5bba20d6be8a12d467cc8d7141dd671838d7ff6be73be6325cd50"
     },
     "06_COLLABORATION.md": {
       "bytes": 4521,
@@ -39,16 +39,16 @@
       "sha256": "68845494b465bbcc1908f6cef862f350c1da4dadfc3e3a7473d11b2443edf23c"
     },
     "NEW_DIALOGUE_PROMPT.txt": {
-      "bytes": 2861,
-      "sha256": "586af15661d1c2403c442f0723d6dff5f12da6edfebd4cc45c7084e841e690bf"
+      "bytes": 2747,
+      "sha256": "b97aac6867f4ee8ecdd6a9e422cd6bcf9ae6b8401468d016cbe7615fa5989e73"
     },
     "SOURCE_REGISTER.json": {
-      "bytes": 19703,
-      "sha256": "470a1e7983d6210980d19f8d48d853d136aa2a05b22664de6d7b3c260ebf40a4"
+      "bytes": 20673,
+      "sha256": "c242534a6707f24a0edd1a6d812b0fb1685d5f89f3a1f3a9731109ad5ab8e6df"
     },
     "STATE.json": {
-      "bytes": 30305,
-      "sha256": "3ffc6b5de2130eefe9a095b9c12df0581b3156e5dc5f7b5157641df56d8665f8"
+      "bytes": 32421,
+      "sha256": "9ed4c9c4e7c96e1661f8769e3d8e671b893e71d517ade66462da380a6e71f93d"
     },
     "assets/approved-home.png": {
       "bytes": 2157060,
@@ -59,8 +59,8 @@
       "sha256": "63671bd146ce72a3c61f40dac457f83f882d7ada78c5f5f98efb7bb3ba5eac26"
     },
     "qa/INVARIANTS.json": {
-      "bytes": 43415,
-      "sha256": "249e771ee324f9824011901a579564f433bf2174b12fab738aa8025dea018f06"
+      "bytes": 43884,
+      "sha256": "bc41b5b4bc6a4d29030a5cdf717513d00732a428cb05b966fc5cd4af1ed1fadd"
     },
     "09_CURRENT_GAME_MODES.md": {
       "bytes": 4749,
@@ -95,8 +95,12 @@
       "sha256": "231159d06aea0be82eff0d76a8156004b81796fe314a681f00716681dcf95e61"
     },
     "17_ACCOUNT_SWITCH_CLOSE_2026-10-06.md": {
-      "bytes": 3643,
-      "sha256": "55e5d137dd6672d2667ec526445b079d5d3f46612f2793e4547494dd7a3b106a"
+      "bytes": 4056,
+      "sha256": "5daaaebe00a8d29f027bfd0d441e03f66b159972a2368cabd0655aaaef880e23"
+    },
+    "18_GHOST_OBJECT_RUNTIME_2026-10-07.md": {
+      "bytes": 5145,
+      "sha256": "4e2660c3b728ce4c0ee12760a913be5bfbf0b3d76cc3cbf2f4a26ecf220240ad"
     }
   },
   "checks": {
@@ -118,6 +122,8 @@
     "action_turn_runtime_record_present": true,
     "destruction_batch_runtime_record_present": true,
     "river_space_runtime_record_present": true,
-    "account_switch_close_record_present": true
+    "account_switch_close_record_present": true,
+    "ghost_object_runtime_record_present": true,
+    "account_switch_pause_superseded_by_user": true
   }
 }

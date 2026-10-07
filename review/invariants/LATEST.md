@@ -1,8 +1,8 @@
 # 规则合同逐项运行证据
 
-规则：LEZI-FUNCTION-2026-10-06-r4；运行时：v24.19.0；时间：2026-10-06T11:09:39.783Z。
+规则：LEZI-FUNCTION-2026-10-06-r4；运行时：v24.19.0；时间：2026-10-07T01:42:05.827Z。
 
-测试 384 通过 / 0 失败。109 项合同：103 项有部分通过证据，3 项缺专属测试，3 项属于规范/概念检查；完整验收仍为 0 项。
+测试 401 通过 / 0 失败。109 项合同：104 项有部分通过证据，2 项缺专属测试，3 项属于规范/概念检查；完整验收仍为 0 项。
 
 本表关联具体情景用例，不把相关用例通过写成整条规则的完整证明。精确用例名称、源码摘要与限制见 LATEST.json。
 
@@ -109,7 +109,7 @@
 | ADD-DURATION-001 | partial_evidence_passed | tests/action-turn-contracts.test.ts, tests/confirmed-runtime.test.ts | 现有陷阱、防御、飞行、亡魂、潜行者明确例外及子行动计数已覆盖具体执行情景；风5回合冷却、时间崩坏下一己回合末等既有来源例外保留。未移交培养/周期资源不自动实现，尚待完整来源审计。 |
 | ADD-RIVER-001 | partial_evidence_passed | tests/river-space.test.ts | 公共河道空间、地面/飞行互斥、默认路径/目标/技能/落位隔离、来源定义暗身份与控制、出河及序列化有专属情景证据。只提供可信来源调用接口，不开放普通客户端河道操作；江鹤等英雄进出资格、容量、连通、停留/超时、里形态仍未正式移交/集成。无浏览器或实体设备新增验收。 |
 | ADD-BATCH-001 | partial_evidence_passed | tests/destruction-batch.test.ts | 公共批次入口与毁灭已锁定成功结果的闭合、死亡揭示/记录、触发屏障、风归位、亡魂单次派生、双将同死、批后移入/复活及公共协议序列化有专属情景证据。未移交英雄的同时范围来源、召回/复活/生成/资源钩子、河道与里亡魂仍未集成；不得将普通顺序攻击统一改同批。无浏览器或实体设备新增验收。 |
-| ADD-GHOST-OBJECT-001 | missing_tests | — | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
+| ADD-GHOST-OBJECT-001 | partial_evidence_passed | tests/ghost-objects.test.ts | 两类公共对象独立、共格、来源/归属/层数/寿命、精确清除和资源查询、普通死亡刷新/感染/计时、批次屏障及公共协议/实际回溯有17项具体情景证据。无种类旧快照仅兼容普通亡魂；未移交里英雄的生成、叠层、寿命时点、收益/爆发不自动定义，基础资源接口只返回点名类且指定公开归属的对象副本。无浏览器或实机新增验收，完整合同验收仍为0。 |
 | ADD-CURRENT-CONTROL-001 | missing_tests | — | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
 | ADD-HERO-FORM-001 | missing_tests | — | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
 | ADD-DARK-IDENTITY-001 | partial_evidence_passed | tests/dark-identity.test.ts | 基础棋位、当前位置变化及普通走法已验证；未来特殊来源身份策略尚未接入。 |
@@ -118,4 +118,4 @@
 | ADD-DARK-IDENTITY-004 | partial_evidence_passed | tests/dark-identity.test.ts | 公共入口在无法确定基础棋位时明确报错、不秘密兜底；来源专属非标准位置身份处理仍待相应来源定义。 |
 | ADD-DARK-IDENTITY-005 | partial_evidence_passed | tests/dark-identity.test.ts | 现有基础走法、战车/铁马和毁灭候选共用入口已验证；术士未移交运行时，因此燃烧烈焰中心/目标等级集成仍待验证，不宣称英雄技能完成。 |
 
-发布源码998a02ab58e231550c9c71598b8419cca06578a9与实际执行99d11189b1cdfb05c747dc1ff679361ea6ed9646完整树一致：f585bc97a6ec06cea69584d814dc6a0ff3aff711。执行SHA保留在LATEST.json，不伪称额外重跑。
+发布源码364b711f522be18c6c636e59a3df5e02844092c7与实际执行78034962d9ccd3ac5c950269b60f9e4e9b92faac完整树一致：23ba3b24107432060ad6e067309248b26d7befb8。执行SHA保留在LATEST.json，不伪称额外重跑。
