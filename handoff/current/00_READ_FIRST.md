@@ -2,13 +2,13 @@
 
 用户于2026-10-07明确“暂时无需更换账号，在当前对话继续”。17号换账号收束保留历史记录，其暂停安排已由本次接续授权覆盖；当前对话继续游戏本体。
 
-当前推进：亡魂/里亡魂独立格对象与精确名称操作增量已完成，先读18_GHOST_OBJECT_RUNTIME_2026-10-07.md。源码364b711f522be18c6c636e59a3df5e02844092c7，401 passed、Web构建通过、121个Android资源一致，无APK。规则仍r4；109合同104部分证据+2缺专属测试+3规范，完整验收0。13–16号记录保留历史证据；英雄设计不自动接入，旧整盘队列仍暂停。
+当前推进：现有运行时当前控制权限审计与定点修复已完成，先读19_CURRENT_CONTROL_AUDIT_2026-10-07.md。源码af5e411d49099c2f5b936e6dde004b6f5e50059d，15项专项测试、全套416 passed、Web构建通过、121个Android资源一致，无APK。规则仍r4；109合同105部分证据+1缺专属测试+3规范，完整验收0。保留风/宿命/揭示的明确真实读取例外；英雄设计不自动接入，旧整盘队列仍暂停。
 
-更新日期：2026-10-07。交接类型：历史阶段结束 + r3/r4规则同步 + 后续获授权的身份、行动/时序、批次、河道与亡魂对象增量，**不是全部功能/视觉验收完成**。当前状态以本文件开头、STATE和18号记录为准；旧整盘采样与未确认新模式独立适配继续暂停。
+更新日期：2026-10-07。交接类型：历史阶段结束 + r3/r4规则同步 + 后续获授权的身份、行动/时序、批次、河道、亡魂对象与当前控制权限增量，**不是全部功能/视觉验收完成**。当前状态以本文件开头、STATE和19号记录为准；旧整盘采样与未确认新模式独立适配继续暂停。
 
 ## 读取顺序
 
-1. 18_GHOST_OBJECT_RUNTIME_2026-10-07.md、STATE.json、17_ACCOUNT_SWITCH_CLOSE_2026-10-06.md（历史收束，已恢复）、16_RIVER_SPACE_RUNTIME_2026-10-06.md、15_DESTRUCTION_BATCH_RUNTIME_2026-10-06.md、14_ACTION_TURN_RUNTIME_2026-10-06.md、13_DARK_IDENTITY_RUNTIME_2026-10-06.md：当前代码与最新证据；10–12号文件保留历史阶段关闭和r3/r4规则同步时点。
+1. 19_CURRENT_CONTROL_AUDIT_2026-10-07.md、18_GHOST_OBJECT_RUNTIME_2026-10-07.md、STATE.json、17_ACCOUNT_SWITCH_CLOSE_2026-10-06.md（历史收束，已恢复）、16_RIVER_SPACE_RUNTIME_2026-10-06.md、15_DESTRUCTION_BATCH_RUNTIME_2026-10-06.md、14_ACTION_TURN_RUNTIME_2026-10-06.md、13_DARK_IDENTITY_RUNTIME_2026-10-06.md：当前代码与最新证据；10–12号文件保留历史阶段关闭和r3/r4规则同步时点。
 2. 05_PROGRESS_AND_NEXT.md：既有实现证据和未完成范围。
 3. 09_CURRENT_GAME_MODES.md → 01_CURRENT_RULES.md → 02_CURRENT_HEROES.md → 03_CURRENT_MUTATIONS.md：现行模式与规范正文；01当前为 **LEZI-FUNCTION-2026-10-06-r4**。
 4. 04_CURRENT_UI_AND_FLOW.md：保留已确认方向，UI 半成品最后处理。
@@ -27,7 +27,7 @@
 
 仓库：https://github.com/aaaycc931-droid/jieqi-engine
 工作分支：codex/ui-android-apk-20261001
-功能源码检查点：364b711f522be18c6c636e59a3df5e02844092c7
+功能源码检查点：af5e411d49099c2f5b936e6dde004b6f5e50059d
 Draft PR：https://github.com/aaaycc931-droid/jieqi-engine/pull/2
 
 交接文档会另有仅文档提交；当前源码检查点为以上 SHA，不能从旧包内 runtime_commit 或本地陈旧 HEAD 恢复。优先读取仓库 handoff/current/，根目录旧规格与 rules/confirmed/ 原始源只供核对出处，不能直接覆盖整合正文。以后新用户确认增量才可覆盖对应段落。

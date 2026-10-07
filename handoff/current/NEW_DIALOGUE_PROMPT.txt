@@ -4,16 +4,17 @@
 工作分支：codex/ui-android-apk-20261001
 现行规则：LEZI-FUNCTION-2026-10-06-r4
 规则摘要：cf831ebe7872cb9d8ed55fa3b4edb7f03492b3c90a06c8d9be494ac9a9e9284f
-产品源码检查点：364b711f522be18c6c636e59a3df5e02844092c7
-产品完整树：23ba3b24107432060ad6e067309248b26d7befb8
-用户2026-10-07已取消暂时换账号并授权在当前对话继续；17号收束属于历史，不能据此阻止已授权工作。交接文档有后续提交，先核对实际最新远端和并发修改，不force/reset到固定旧SHA。
+产品源码检查点：af5e411d49099c2f5b936e6dde004b6f5e50059d
+产品完整树：d9b682eaae0de8dc497296af1d2784f0eeca66ad
+用户2026-10-07取消暂时换账号并授权当前对话继续，之后确认当前控制权限审计；17号为已覆盖的历史暂停。交接有后续文档提交，先读取实际最新远端，保留并发修改，不force/reset到旧SHA。
 
-优先读取handoff/current/00_READ_FIRST.md、18_GHOST_OBJECT_RUNTIME_2026-10-07.md、STATE.json、05_PROGRESS_AND_NEXT.md、16_RIVER_SPACE_RUNTIME_2026-10-06.md、15_DESTRUCTION_BATCH_RUNTIME_2026-10-06.md、14_ACTION_TURN_RUNTIME_2026-10-06.md、13_DARK_IDENTITY_RUNTIME_2026-10-06.md。
-再读01_CURRENT_RULES.md、02_CURRENT_HEROES.md、03_CURRENT_MUTATIONS.md、04_CURRENT_UI_AND_FLOW.md、09_CURRENT_GAME_MODES.md、06_COLLABORATION.md、SOURCE_REGISTER.json、qa/INVARIANTS.json、review/invariants/R4_RUNTIME_MAPPING_2026-10-06.md及LATEST.json、确认r3/r4规则增量。10–12为历史阶段/规则同步，17为已覆盖的换账号关闭；旧根规格不能覆盖现行正文。
+优先读取handoff/current/00_READ_FIRST.md、19_CURRENT_CONTROL_AUDIT_2026-10-07.md、STATE.json、05_PROGRESS_AND_NEXT.md、18_GHOST_OBJECT_RUNTIME_2026-10-07.md、16_RIVER_SPACE_RUNTIME_2026-10-06.md、15_DESTRUCTION_BATCH_RUNTIME_2026-10-06.md、14_ACTION_TURN_RUNTIME_2026-10-06.md、13_DARK_IDENTITY_RUNTIME_2026-10-06.md。
+再读01_CURRENT_RULES.md、02_CURRENT_HEROES.md、03_CURRENT_MUTATIONS.md、04_CURRENT_UI_AND_FLOW.md、09_CURRENT_GAME_MODES.md、06_COLLABORATION.md、SOURCE_REGISTER.json、qa/INVARIANTS.json、review/invariants/R4_RUNTIME_MAPPING_2026-10-06.md和LATEST.json，以及确认r3/r4增量。10–12为历史关闭/规则同步，17为已覆盖的换账号记录；根目录旧规格不能覆盖当前正文。
 
-已经完成公共暗置身份、正交行动/正式历史/五阶段、死亡批次屏障、河道基础及默认隔离、亡魂/里亡魂独立对象与精确名称操作。最新17专项测试，全套401通过、Web构建通过、121个Android生成资源逐字节一致，没有APK。109合同104部分情景证据、2缺专属测试、3规范，完整验收0；无新增浏览器/实机验收，不把旧328测试或当前情景当全称r3/r4证明。
+已完成公共暗置身份、正交行动/正式历史/五阶段、死亡批次屏障、河道基础/默认隔离、两类亡魂独立对象/精确操作、现有当前控制权限源码审计及定点修复。最后新增15专项测试，全套416通过、Web构建成功、121资源一致，没有APK。109合同105部分情景证据、1缺专属测试、3规范，完整验收0。真实菜单函数在轻量DOM执行，不能冒作浏览器/实机验收。
+当前控制按公开关系及规则指定时点；effectiveIdentity需明确许可来源。风暗子池、宿命初始化和实际揭示/死亡保留真实读取许可，不能强行替换为棋位控制。getBombers公共单棋资格与权威/UI共用，弹药0不列入；全军每回合限制和窗口仍由权威检查。
 
-下一项是完整当前控制权限审计：先映射明确当前控制方来源、目标合法性、资源和UI对秘密阵营的读取权限，再修改并验证具体缺口；之后完整表/里形态包。亡魂公共层没有定义里英雄的生成、持续时点或收益。河道基础层没有启用江鹤等具体英雄的资格、容量、连通或停留/超时。
+下一项是完整表/里形态公共模型与整局固定所选形态合同：先做现有运行时→r4差分，后实现和补测试。不据此自动导入未移交里英雄的技能包/数值或新选择UI。当前两类亡魂不定义里英雄生成/持续/收益；河道基础未启用江鹤等进出资格、容量、连通或停留/超时。
 
-英雄设计在另一对话继续，本对话只维护游戏本体；不得自动从记忆、独立草案、强击/碾碎讨论或新毁灭提案导入未正式移交内容。12英雄以仓库规范为准，正式移交后才对照确认差分。
-旧完整实战/主动技能采样、新模式英雄畸变独立适配继续暂停。UI最后、保留批准首页/V4；APK暂停、不合并main、不部署互联网，不自设评分/概率/稀有度，不发选项卡问题。最新handoff/current为主，历史ZIP或旧r2/r3交接不能覆盖r4。
+英雄设计在另一对话继续，本对话维护游戏本体；不得从记忆、独立草案、强击/碾碎讨论或新毁灭提案导入未正式移交内容。12英雄以仓库规范为准，正式移交后才核对确认差分。
+旧完整实战/主动技能采样、新模式英雄畸变独立适配保持暂停。UI最后、保留批准首页/V4；APK暂停、不合并main、不部署互联网，不自设评分/概率/稀有度，不发选项卡问题。以最新handoff/current为主，旧ZIP或r2/r3交接不能覆盖r4。

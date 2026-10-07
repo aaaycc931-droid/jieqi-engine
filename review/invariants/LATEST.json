@@ -1,8 +1,8 @@
 {
   "authority": "execution_evidence_non_normative",
-  "generatedAt": "2026-10-07T01:42:05.827Z",
-  "sourceCommitAtRun": "78034962d9ccd3ac5c950269b60f9e4e9b92faac",
-  "sourceDigest": "445d0dd4f07afbcf7e898c7b09a0701dedcf8864dcd43389e9989c064c02f8e5",
+  "generatedAt": "2026-10-07T02:28:18.987Z",
+  "sourceCommitAtRun": "14de414e76862d2adb8d014f66eae6f80bc8da3c",
+  "sourceDigest": "f2ea311f398420943fcd2e8c1dd3b9bd3c0e8c44b3386f8af141d3428ff65a09",
   "sourceDigestPaths": [
     ".github/workflows/gameplay-runtime-review.yml",
     ".github/workflows/menu-reference-review.yml",
@@ -55,6 +55,7 @@
     "tests/check-end-network.test.ts",
     "tests/confirmed-runtime.test.ts",
     "tests/cross-rule-contracts.test.ts",
+    "tests/current-control.test.ts",
     "tests/dark-identity.test.ts",
     "tests/destruction-batch.test.ts",
     "tests/exception-contracts.test.ts",
@@ -178,18 +179,18 @@
     "web/ui-refresh.css"
   ],
   "ruleRevision": "LEZI-FUNCTION-2026-10-06-r4",
-  "contractDigest": "bc41b5b4bc6a4d29030a5cdf717513d00732a428cb05b966fc5cd4af1ed1fadd",
+  "contractDigest": "8e3de3699bf435bbb5448f7cbf44409a699d816c14760be473217d1464568498",
   "runtime": "v24.19.0",
   "testSummary": {
-    "passed": 401,
+    "passed": 416,
     "failed": 0,
     "executionFailed": false
   },
   "contractSummary": {
     "total": 109,
-    "partial_evidence_passed": 104,
+    "partial_evidence_passed": 105,
     "failed_cases": 0,
-    "missing_tests": 2,
+    "missing_tests": 1,
     "non_runtime_contract": 3,
     "fullyAccepted": 0
   },
@@ -2980,9 +2981,85 @@
       "id": "ADD-CURRENT-CONTROL-001",
       "group": "supplements",
       "statement": "来源明确读取“当前控制方”时只读取对应时点控制关系，不读取原始真实阵营或【混乱】秘密阵营；无秘密读取权限的目标/资源/UI不得以秘密阵营作隐藏条件。",
-      "status": "missing_tests",
-      "relatedCases": [],
-      "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
+      "status": "partial_evidence_passed",
+      "relatedCases": [
+        {
+          "file": "tests/current-control.test.ts",
+          "name": "R4-CONTROL-01 暗棋当前位置决定控制方，原始/混乱秘密阵营不参与",
+          "passed": true
+        },
+        {
+          "file": "tests/current-control.test.ts",
+          "name": "R4-CONTROL-02 普通及强击目标提示、非法来源错误不以秘密阵营变化",
+          "passed": true
+        },
+        {
+          "file": "tests/current-control.test.ts",
+          "name": "R4-CONTROL-03 普通进攻的公开死亡记录按当前控制方，秘密阵营不泄露",
+          "passed": true
+        },
+        {
+          "file": "tests/current-control.test.ts",
+          "name": "R4-CONTROL-04 落位陷阱明确读取进入前和揭示后的控制方",
+          "passed": true
+        },
+        {
+          "file": "tests/current-control.test.ts",
+          "name": "R4-CONTROL-05 暗置移置后落位重新读取当前控制，不沿用旧棋位或秘密色",
+          "passed": true
+        },
+        {
+          "file": "tests/current-control.test.ts",
+          "name": "R4-CONTROL-06 亡魂归属冻结死亡时控制，后续派生不重读秘密",
+          "passed": true
+        },
+        {
+          "file": "tests/current-control.test.ts",
+          "name": "R4-CONTROL-07 普通感染按地面棋当前控制，秘密同色不提供免疫",
+          "passed": true
+        },
+        {
+          "file": "tests/current-control.test.ts",
+          "name": "R4-CONTROL-08 持续计时读取当前控制方，飞行与死亡归属不偷读秘密",
+          "passed": true
+        },
+        {
+          "file": "tests/current-control.test.ts",
+          "name": "R4-CONTROL-09 资源和房间/双方私有视图对未授权秘密阵营编码一致",
+          "passed": true
+        },
+        {
+          "file": "tests/current-control.test.ts",
+          "name": "R4-CONTROL-10 真实身份接口拒绝缺少/伪造来源，拒绝前不触碰秘密",
+          "passed": true
+        },
+        {
+          "file": "tests/current-control.test.ts",
+          "name": "R4-CONTROL-11 风暗子池保留明确真实归属例外，不改为棋位控制",
+          "passed": true
+        },
+        {
+          "file": "tests/current-control.test.ts",
+          "name": "R4-CONTROL-12 宿命初始化保留真实兵归属例外，未现身时不泄露分类",
+          "passed": true
+        },
+        {
+          "file": "tests/current-control.test.ts",
+          "name": "R4-CONTROL-13 无限龙公开资格排除空弹、暗棋、另一控制方和河道，权威共用",
+          "passed": true
+        },
+        {
+          "file": "tests/current-control.test.ts",
+          "name": "R4-CONTROL-14 实际投弹菜单遵守公开弹药资格且不读取隐藏身份",
+          "passed": true
+        },
+        {
+          "file": "tests/current-control.test.ts",
+          "name": "R4-CONTROL-15 实际影菜单不以秘密池可用性探测暗阵营，只使用拥有者许可标记",
+          "passed": true
+        }
+      ],
+      "verificationLimit": "现有调用完成源码权限映射，15项情景验证当前位置/揭示/移置控制、普通及强击目标和错误、陷阱前后时点、亡魂死亡快照、感染/持续、资源/双方房间视图、真实读取来源约束和风/宿命许可例外。真实网页投弹/影菜单函数在轻量DOM执行，不能当作浏览器、换手机或实体蓝牙验收。无限龙公开单棋资格共用，但正式窗口和全军每回合限制仍由权威入口验证；来源标记是可信代码调用约束，不是客户端授权令牌。未移交来源及全部可达交叉组合未穷尽，完整验收仍0。",
       "fullyAccepted": false
     },
     {
@@ -3105,7 +3182,7 @@
       "fullyAccepted": false
     }
   ],
-  "publishedImplementationCommit": "364b711f522be18c6c636e59a3df5e02844092c7",
-  "publishedImplementationTree": "23ba3b24107432060ad6e067309248b26d7befb8",
-  "publicationNote": "实际执行HEAD为78034962d9ccd3ac5c950269b60f9e4e9b92faac；GitHub发布提交与本地执行提交完整tree相同，作者/时间不同。保留真实sourceCommitAtRun，不冒充额外重跑。"
+  "publishedImplementationCommit": "af5e411d49099c2f5b936e6dde004b6f5e50059d",
+  "publishedImplementationTree": "d9b682eaae0de8dc497296af1d2784f0eeca66ad",
+  "publicationNote": "实际执行HEAD为14de414e76862d2adb8d014f66eae6f80bc8da3c；GitHub发布提交与本地执行提交完整tree相同，作者/时间不同。保留真实sourceCommitAtRun，不冒充额外重跑。"
 }

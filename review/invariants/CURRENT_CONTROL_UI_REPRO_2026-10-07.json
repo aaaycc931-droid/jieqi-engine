@@ -1,0 +1,21 @@
+{
+  "authority": "targeted_execution_evidence_non_normative",
+  "baselineCommit": "23d764a4046752c4ea0408afec460473f3b77efa",
+  "fixture": "one_public_bomber_with_one_ammunition_and_one_spent_bomber_with_zero_ammunition",
+  "oldActualMenuOptions": [
+    "bomber",
+    "spent"
+  ],
+  "newActualMenuOptions": [
+    "bomber"
+  ],
+  "actualAppFunctionExecuted": true,
+  "browserExecuted": false,
+  "layoutOrPhysicalDeviceAcceptance": false,
+  "executionHeadBeforeCommit": "23d764a4046752c4ea0408afec460473f3b77efa",
+  "executionWorktreeDirty": true,
+  "newAppSha256": "a32b3c5da9885532605c0a46baade959f6a78539cd50c50e06411299893da2b5",
+  "baselineAppSha256": "f10cf56885d416d5a486b7fcb13b65598c38a1e14bea641a07cf29cea7af5c1f",
+  "publishedImplementationCommit": "af5e411d49099c2f5b936e6dde004b6f5e50059d",
+  "publicationNote": "复现在未提交工作区执行，只记录实际新app摘要；后续运行时提交的相同app由R4-CONTROL-14继续验证。"
+}
