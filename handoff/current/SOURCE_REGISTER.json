@@ -1,7 +1,7 @@
 {
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-08-r5-bomb-target",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-08-r5-flight-turn",
   "rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
-  "code_checkpoint": "b45077a692213953ee7e3edef31a6d16c011c940",
+  "code_checkpoint": "9ed5ff71590bf9658d1294def22bb669b195357b",
   "sources": [
     {
       "id": "RULE:CURRENT_RULE_DELTAS_2026-09-22.md",
@@ -417,6 +417,13 @@
       "path": "handoff/current/28_BOMB_TARGET_BOUNDARY_2026-10-08.md",
       "sha256": "a8f0ab4b13ba1579a55a75107ee6a748ee33f576fb3fc8adf7b5c7c4a38f18d4",
       "applied_scope": "宿命投弹目标校验、非法请求事务与全军次数/主行动的4引擎和2新增DOM情景，不定义玩法"
+    },
+    {
+      "id": "RUNTIME:FLIGHT-TURN-2026-10-08",
+      "kind": "runtime_evidence_non_rule",
+      "path": "handoff/current/29_FLIGHT_TURN_BOUNDARY_2026-10-08.md",
+      "sha256": "cf37769700cd84e1b3a14e72f84b9496cb181387ccac1ac024c46d1d6b8849c0",
+      "applied_scope": "显式连带操控与下一正式强制降落、空地共格原棋选择的3引擎和2新增DOM情景，不定义玩法"
     }
   ],
   "coverage": {
@@ -502,8 +509,8 @@
     "旧STATE运行时分支/测试数/下一步",
     "过时3英雄进度"
   ],
-  "completeness_claim": "H01-H21已接入确认部分；498项测试和18项浏览器准备态只是部分情景证据，109合同完整验收0，四处设计缺项保留。",
-  "previous_code_checkpoint": "c68a9b4acc6b9167f301ba21e2ee8d3e794ebfb2",
+  "completeness_claim": "H01-H21已接入确认部分；501项测试和20项浏览器准备态只是部分情景证据，109合同完整验收0，四处设计缺项保留。",
+  "previous_code_checkpoint": "b45077a692213953ee7e3edef31a6d16c011c940",
   "runtime_evidence_index": "review/invariants/LATEST.json",
   "gameplay_execution_evidence_index": "review/gameplay/runtime-browser-review-2026-10-05-modes.json",
   "full_match_execution_evidence_index": "review/gameplay/full-match-browser-2026-10-05-active-regression-summary.json",
@@ -525,8 +532,8 @@
   "acceptance_gap_close_index": "21_ACCEPTANCE_GAP_CLOSE_2026-10-07.md",
   "acceptance_gap_inventory_index": "qa/ACCEPTANCE_GAPS.json",
   "hero_transfer_index": "22_HERO_TRANSFER_2026-10-07.md",
-  "code_tree": "c2ad40457facf58a4456d22e017b52d058a1b4b2",
-  "local_execution_checkpoint": "3da2033393cd5c370843aa78e5cb54767ca18190",
+  "code_tree": "4731570c671e2f9e87d0179b9126ca0a5fbd869f",
+  "local_execution_checkpoint": "ccdea1053399539bdc1839929f454aacd165798d",
   "qa_contract_checkpoint_role": "INVARIANTS.code_checkpoint is the prior product checkpoint used for the r5 diff, not a claim of current runtime acceptance.",
   "hero_cross_settlement_index": "23_HERO_CROSS_SETTLEMENT_2026-10-08.md",
   "hero_child_boundary_index": "24_HERO_CHILD_BOUNDARY_2026-10-08.md",
@@ -538,5 +545,6 @@
   },
   "hero_descent_atom_index": "27_HERO_DESCENT_ATOM_2026-10-08.md",
   "current_hero_browser_evidence_index": "review/invariants/HERO_TRANSFER_BROWSER_2026-10-07.json",
-  "bomb_target_boundary_index": "28_BOMB_TARGET_BOUNDARY_2026-10-08.md"
+  "bomb_target_boundary_index": "28_BOMB_TARGET_BOUNDARY_2026-10-08.md",
+  "flight_turn_boundary_index": "29_FLIGHT_TURN_BOUNDARY_2026-10-08.md"
 }

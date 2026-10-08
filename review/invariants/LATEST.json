@@ -1,8 +1,8 @@
 {
   "authority": "execution_evidence_non_normative",
-  "generatedAt": "2026-10-08T09:29:21.358Z",
-  "sourceCommitAtRun": "3da2033393cd5c370843aa78e5cb54767ca18190",
-  "sourceDigest": "f7ea52f72d0207e1e8d81342ac316bc8e66728339c93ba9bfbb193b9c124dfec",
+  "generatedAt": "2026-10-08T12:22:49.077Z",
+  "sourceCommitAtRun": "ccdea1053399539bdc1839929f454aacd165798d",
+  "sourceDigest": "01056471b6edf4698a05115db505a6890ad0f91cb26a963ae45fab920c15d946",
   "sourceDigestPaths": [
     ".github/workflows/gameplay-runtime-review.yml",
     ".github/workflows/menu-reference-review.yml",
@@ -69,6 +69,7 @@
     "tests/dark-identity.test.ts",
     "tests/destruction-batch.test.ts",
     "tests/exception-contracts.test.ts",
+    "tests/flight-turn-boundaries.test.ts",
     "tests/flow-contracts.test.ts",
     "tests/flow-fixtures.ts",
     "tests/game-modes.test.ts",
@@ -198,7 +199,7 @@
   "contractDigest": "c6e4649ce5a028b5477090b87066dd5bb7a65ad3a5632d138a05bf972b89e1e3",
   "runtime": "v24.19.0",
   "testSummary": {
-    "passed": 498,
+    "passed": 501,
     "failed": 0,
     "executionFailed": false
   },
@@ -1094,6 +1095,16 @@
           "file": "tests/confirmed-runtime.test.ts",
           "name": "RULES ground intangible rook still gives ordinary check, air rook does not",
           "passed": true
+        },
+        {
+          "file": "tests/flight-turn-boundaries.test.ts",
+          "name": "R5-FLIGHT-TURN-02 timeline child may move the due flyer without restarting its lifetime or consuming its next main",
+          "passed": true
+        },
+        {
+          "file": "tests/flight-turn-boundaries.test.ts",
+          "name": "R5-FLIGHT-TURN-03 linked-control exemption still rejects illegal geometry and occupied air destinations transactionally",
+          "passed": true
         }
       ],
       "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
@@ -1113,6 +1124,16 @@
         {
           "file": "tests/confirmed-runtime.test.ts",
           "name": "WIND flight landing crushes decoy then suffocates returning true general without bouncing the flyer",
+          "passed": true
+        },
+        {
+          "file": "tests/flight-turn-boundaries.test.ts",
+          "name": "R5-FLIGHT-TURN-01 next-turn landing obligation does not cancel the opponent timeline ground-piece child",
+          "passed": true
+        },
+        {
+          "file": "tests/flight-turn-boundaries.test.ts",
+          "name": "R5-FLIGHT-TURN-02 timeline child may move the due flyer without restarting its lifetime or consuming its next main",
           "passed": true
         }
       ],
@@ -1648,6 +1669,21 @@
         {
           "file": "tests/exception-contracts.test.ts",
           "name": "EX-TIME-02 returned bottom-rank pawn with no legal move refuses the whole skill",
+          "passed": true
+        },
+        {
+          "file": "tests/flight-turn-boundaries.test.ts",
+          "name": "R5-FLIGHT-TURN-01 next-turn landing obligation does not cancel the opponent timeline ground-piece child",
+          "passed": true
+        },
+        {
+          "file": "tests/flight-turn-boundaries.test.ts",
+          "name": "R5-FLIGHT-TURN-02 timeline child may move the due flyer without restarting its lifetime or consuming its next main",
+          "passed": true
+        },
+        {
+          "file": "tests/flight-turn-boundaries.test.ts",
+          "name": "R5-FLIGHT-TURN-03 linked-control exemption still rejects illegal geometry and occupied air destinations transactionally",
           "passed": true
         }
       ],
@@ -2688,6 +2724,21 @@
           "file": "tests/time-line-contracts.test.ts",
           "name": "TIME-TRAP-03 invalid controlled destination rolls back resource, trap and history changes",
           "passed": true
+        },
+        {
+          "file": "tests/flight-turn-boundaries.test.ts",
+          "name": "R5-FLIGHT-TURN-01 next-turn landing obligation does not cancel the opponent timeline ground-piece child",
+          "passed": true
+        },
+        {
+          "file": "tests/flight-turn-boundaries.test.ts",
+          "name": "R5-FLIGHT-TURN-02 timeline child may move the due flyer without restarting its lifetime or consuming its next main",
+          "passed": true
+        },
+        {
+          "file": "tests/flight-turn-boundaries.test.ts",
+          "name": "R5-FLIGHT-TURN-03 linked-control exemption still rejects illegal geometry and occupied air destinations transactionally",
+          "passed": true
         }
       ],
       "verificationLimit": "真实倒戈棋返回猎人陷阱、下一正式回合封锁和耗尽已验证；其他来源状态组合尚缺。",
@@ -2742,6 +2793,11 @@
         {
           "file": "tests/hero-descent-atom.test.ts",
           "name": "R5-DESCENT-ATOM-03 both assaults retain one source event history and do not tick formal durations",
+          "passed": true
+        },
+        {
+          "file": "tests/flight-turn-boundaries.test.ts",
+          "name": "R5-FLIGHT-TURN-02 timeline child may move the due flyer without restarting its lifetime or consuming its next main",
           "passed": true
         }
       ],
@@ -2837,6 +2893,16 @@
         {
           "file": "tests/hero-descent-atom.test.ts",
           "name": "R5-DESCENT-ATOM-07 checkmate after both assault skips is evaluated at source closure instead of leaving an unusable main window",
+          "passed": true
+        },
+        {
+          "file": "tests/flight-turn-boundaries.test.ts",
+          "name": "R5-FLIGHT-TURN-01 next-turn landing obligation does not cancel the opponent timeline ground-piece child",
+          "passed": true
+        },
+        {
+          "file": "tests/flight-turn-boundaries.test.ts",
+          "name": "R5-FLIGHT-TURN-02 timeline child may move the due flyer without restarting its lifetime or consuming its next main",
           "passed": true
         }
       ],

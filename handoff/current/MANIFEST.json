@@ -3,8 +3,8 @@
   "self_excluded": true,
   "files": {
     "00_READ_FIRST.md": {
-      "bytes": 2067,
-      "sha256": "1f71b4c9ff82c6e0a5a3e930a0def3fb8570000de4e395f4eebc9102a96ff729"
+      "bytes": 2160,
+      "sha256": "236a21b1a8bc1454de1b7f49ebdf8ad1151858bf66c8f7300b54c371487062c9"
     },
     "01_CURRENT_RULES.md": {
       "bytes": 30087,
@@ -23,8 +23,8 @@
       "sha256": "c133b4ee797b778ce4c88233437b2466255f27c30fcaec5b0941c766cc4bae00"
     },
     "05_PROGRESS_AND_NEXT.md": {
-      "bytes": 36536,
-      "sha256": "606ee0349a4ea1da6ac2bcced09ce199408ddb79b007c18da4e1c9d054dc9369"
+      "bytes": 38746,
+      "sha256": "02b618bb7780afaa18310583d997bcfab2910f029366013a751559f766df0b17"
     },
     "06_COLLABORATION.md": {
       "bytes": 8164,
@@ -107,16 +107,16 @@
       "sha256": "9a0a9f908cb74eb7519e8f659f98cd8f36c87e31a5e58372023c538b1c22888d"
     },
     "NEW_DIALOGUE_PROMPT.txt": {
-      "bytes": 2082,
-      "sha256": "78ddbb56ec52be124ad1a1aa7fdb36259539404bfb7ca047a65c44985f218aca"
+      "bytes": 2175,
+      "sha256": "73a19ff5c2b1abfa761ecf5cebcc5f3688fb313f0f00f0d075f56550db2d0c0f"
     },
     "SOURCE_REGISTER.json": {
-      "bytes": 32160,
-      "sha256": "1937befc0e15cb0cb2e6b32f03e9f143591a35473e4ace18d3ab2752100c0ba3"
+      "bytes": 32635,
+      "sha256": "4d6fd31fce89db302d1b1806573823f1c5da2e7d9c9475ee6dbb0064e485250e"
     },
     "STATE.json": {
-      "bytes": 79835,
-      "sha256": "2604abab1af06e75b293183f3a0e6737d19f8571449f554362040809da1029a4"
+      "bytes": 87116,
+      "sha256": "6a0d48f5e4bd66d0bd715cd6b9cdcce759694ca1997fd4808f1fa0c75bdb53c6"
     },
     "assets/approved-home.png": {
       "bytes": 2157060,
@@ -131,8 +131,8 @@
       "sha256": "b476f6ba2696cb4a0185ac96da1ad976c7b43f37ff694b5bf86ccbc696cbc210"
     },
     "qa/HERO_TRANSFER_AUDIT.json": {
-      "bytes": 26243,
-      "sha256": "d03e4ca169a558e0dfbb58ce8d7989329bbf40cca255e38e4a4878eeecae19b6"
+      "bytes": 27405,
+      "sha256": "3e0e5603d9fbc98e861e7b4e3d81cf0f472b45b25c919e9181acc1234eea8401"
     },
     "qa/INVARIANTS.json": {
       "bytes": 45423,
@@ -149,6 +149,10 @@
     "28_BOMB_TARGET_BOUNDARY_2026-10-08.md": {
       "bytes": 5535,
       "sha256": "a8f0ab4b13ba1579a55a75107ee6a748ee33f576fb3fc8adf7b5c7c4a38f18d4"
+    },
+    "29_FLIGHT_TURN_BOUNDARY_2026-10-08.md": {
+      "bytes": 4890,
+      "sha256": "cf37769700cd84e1b3a14e72f84b9496cb181387ccac1ac024c46d1d6b8849c0"
     }
   },
   "checks": {
@@ -182,12 +186,15 @@
     "historical_browser_12_prepared_operations_passed": true,
     "historical_browser_9_mode_foundation_cases_passed": true,
     "descent_atom_7_new_cases_passed": true,
-    "mode_foundation_skipped_this_round": false,
+    "mode_foundation_skipped_this_round": true,
     "historical_engine_494_passed": true,
     "historical_browser_16_prepared_operations_passed": true,
-    "engine_498_passed": true,
-    "browser_18_prepared_operations_passed": true,
     "bomb_target_4_new_cases_passed": true,
-    "mode_foundation_9_failure_fallback_cases_passed": true
+    "historical_engine_498_passed": true,
+    "historical_browser_18_prepared_operations_passed": true,
+    "historical_mode_foundation_9_failure_fallback_cases_passed": true,
+    "engine_501_passed": true,
+    "browser_20_prepared_operations_passed": true,
+    "flight_turn_boundary_3_new_cases_passed": true
   }
 }

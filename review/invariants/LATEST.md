@@ -1,8 +1,8 @@
 # 规则合同逐项运行证据
 
-规则：LEZI-FUNCTION-2026-10-07-r5；运行时：v24.19.0；时间：2026-10-08T09:29:21.358Z。
+规则：LEZI-FUNCTION-2026-10-07-r5；运行时：v24.19.0；时间：2026-10-08T12:22:49.077Z。
 
-测试 498 通过 / 0 失败。109 项合同：106 项有部分通过证据，0 项缺专属测试，3 项属于规范/概念检查；完整验收仍为 0 项。
+测试 501 通过 / 0 失败。109 项合同：106 项有部分通过证据，0 项缺专属测试，3 项属于规范/概念检查；完整验收仍为 0 项。
 
 本表关联具体情景用例，不把相关用例通过写成整条规则的完整证明。精确用例名称、源码摘要与限制见 LATEST.json。
 
@@ -41,8 +41,8 @@
 | INV-INTANGIBLE-001 | partial_evidence_passed | tests/assassination.test.ts, tests/mutation.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
 | INV-INTANGIBLE-002 | partial_evidence_passed | tests/confirmed-runtime.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
 | INV-INTANGIBLE-003 | partial_evidence_passed | tests/confirmed-runtime.test.ts, tests/assassination.test.ts, tests/public-target-contracts.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
-| INV-FLIGHT-001 | partial_evidence_passed | tests/confirmed-runtime.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
-| INV-FLIGHT-002 | partial_evidence_passed | tests/confirmed-runtime.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
+| INV-FLIGHT-001 | partial_evidence_passed | tests/confirmed-runtime.test.ts, tests/flight-turn-boundaries.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
+| INV-FLIGHT-002 | partial_evidence_passed | tests/confirmed-runtime.test.ts, tests/flight-turn-boundaries.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
 | INV-CRUSH-001 | partial_evidence_passed | tests/mutation.test.ts, tests/confirmed-runtime.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
 | INV-SUFFOCATION-001 | partial_evidence_passed | tests/confirmed-runtime.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
 | INV-INFECTION-001 | partial_evidence_passed | tests/confirmed-runtime.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
@@ -64,7 +64,7 @@
 | INV-CAVALRY-001 | partial_evidence_passed | tests/mutation.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
 | INV-CAVALRY-002 | partial_evidence_passed | tests/mutation.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
 | INV-FORTRESS-001 | partial_evidence_passed | tests/mutation.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
-| INV-MUROZOND-001 | partial_evidence_passed | tests/confirmed-runtime.test.ts, tests/time-line-contracts.test.ts, tests/exception-contracts.test.ts | 已验证返回陷阱、返回失败跳过控制并占步、无合法重走拒绝事务；占位与无合法着法为明确构造状态，尚未穷尽真实行动历史的可达组合。 |
+| INV-MUROZOND-001 | partial_evidence_passed | tests/confirmed-runtime.test.ts, tests/time-line-contracts.test.ts, tests/exception-contracts.test.ts, tests/flight-turn-boundaries.test.ts | 已验证返回陷阱、返回失败跳过控制并占步、无合法重走拒绝事务；占位与无合法着法为明确构造状态，尚未穷尽真实行动历史的可达组合。 |
 | INV-NOZDORMU-001 | partial_evidence_passed | tests/confirmed-runtime.test.ts, tests/time-line-contracts.test.ts, tests/exception-contracts.test.ts, tests/snapshot-resource-contracts.test.ts, tests/rewind-action-contracts.test.ts | 已补毁灭/祈求/刺杀资源、战士名额防御、暗子身份与亡魂回溯；另有風与陷阱寿命证据。全部持续时序、重复回溯交叉、本机私有交接与设备流程仍未穷尽。本轮补暗影之舞/恢复隐身重走的同棋、禁止进攻/将军、完成清理及重复命令；不外推全部组合。 |
 | INV-TIME-COLLAPSE-001 | partial_evidence_passed | tests/confirmed-runtime.test.ts, tests/bomb-target-boundaries.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
 | INV-TIME-COLLAPSE-002 | partial_evidence_passed | tests/cross-rule-contracts.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
@@ -103,9 +103,9 @@
 | ADD-WIND-003 | partial_evidence_passed | tests/confirmed-runtime.test.ts, tests/flow-contracts.test.ts | 已补实际裁决归位两步脱困、错误第一步继续裁决、亲征九宫限制、普通壁垒、陷阱终止、亡魂及房间计时；浏览器为预置状态操作，完整随机对局与实机仍待验证。 |
 | ADD-JIANXIE-001 | partial_evidence_passed | tests/cross-rule-contracts.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
 | ADD-CLOCK-001 | partial_evidence_passed | tests/time-line-contracts.test.ts, tests/exception-contracts.test.ts, tests/flow-contracts.test.ts, tests/rewind-action-contracts.test.ts | 3/10/42秒历史预算、房间权威接收及到期已验证；浏览器显示与WebView尚未验收。 |
-| ADD-TWIST-001 | partial_evidence_passed | tests/time-line-contracts.test.ts | 真实倒戈棋返回猎人陷阱、下一正式回合封锁和耗尽已验证；其他来源状态组合尚缺。 |
-| ADD-ACTION-TIER-001 | partial_evidence_passed | tests/action-turn-contracts.test.ts, tests/hero-descent-atom.test.ts | 已覆盖普通移动/进攻、弹回、时间线衍生、额外应将、流舞和回溯重走的独立分类，以及上一正式回合无Ⅰ级动作时拒绝跨回合搜索。未移交英雄和其他未来来源尚未接入；旧无classification历史仅兼容有明确tier且无已知子行动标志的快照。 |
-| ADD-TURN-PHASE-001 | partial_evidence_passed | tests/action-turn-contracts.test.ts, tests/hero-cross-settlement.test.ts, tests/hero-child-boundaries.test.ts, tests/hero-descent-boundaries.test.ts, tests/hero-descent-atom.test.ts | 现有普通主行动、占步、主行动前窗口、回溯、终局与开始效果幂等已有具体执行证据；未包含未来英雄的资源/训练钩子、同批消灭屏障、浏览器与实体设备全流程，不是全称合同证明。 |
+| ADD-TWIST-001 | partial_evidence_passed | tests/time-line-contracts.test.ts, tests/flight-turn-boundaries.test.ts | 真实倒戈棋返回猎人陷阱、下一正式回合封锁和耗尽已验证；其他来源状态组合尚缺。 |
+| ADD-ACTION-TIER-001 | partial_evidence_passed | tests/action-turn-contracts.test.ts, tests/hero-descent-atom.test.ts, tests/flight-turn-boundaries.test.ts | 已覆盖普通移动/进攻、弹回、时间线衍生、额外应将、流舞和回溯重走的独立分类，以及上一正式回合无Ⅰ级动作时拒绝跨回合搜索。未移交英雄和其他未来来源尚未接入；旧无classification历史仅兼容有明确tier且无已知子行动标志的快照。 |
+| ADD-TURN-PHASE-001 | partial_evidence_passed | tests/action-turn-contracts.test.ts, tests/hero-cross-settlement.test.ts, tests/hero-child-boundaries.test.ts, tests/hero-descent-boundaries.test.ts, tests/hero-descent-atom.test.ts, tests/flight-turn-boundaries.test.ts | 现有普通主行动、占步、主行动前窗口、回溯、终局与开始效果幂等已有具体执行证据；未包含未来英雄的资源/训练钩子、同批消灭屏障、浏览器与实体设备全流程，不是全称合同证明。 |
 | ADD-DURATION-001 | partial_evidence_passed | tests/action-turn-contracts.test.ts, tests/confirmed-runtime.test.ts, tests/hero-child-boundaries.test.ts | 现有陷阱、防御、飞行、亡魂、潜行者明确例外及子行动计数已覆盖具体执行情景；风5回合冷却、时间崩坏下一己回合末等既有来源例外保留。未移交培养/周期资源不自动实现，尚待完整来源审计。 |
 | ADD-RIVER-001 | partial_evidence_passed | tests/river-space.test.ts | 公共河道空间、地面/飞行互斥、默认路径/目标/技能/落位隔离、来源定义暗身份与控制、出河及序列化有专属情景证据。只提供可信来源调用接口，不开放普通客户端河道操作；江鹤等英雄进出资格、容量、连通、停留/超时、里形态仍未正式移交/集成。无浏览器或实体设备新增验收。 |
 | ADD-BATCH-001 | partial_evidence_passed | tests/destruction-batch.test.ts, tests/hero-cross-settlement.test.ts | 公共批次入口与毁灭已锁定成功结果的闭合、死亡揭示/记录、触发屏障、风归位、亡魂单次派生、双将同死、批后移入/复活及公共协议序列化有专属情景证据。未移交英雄的同时范围来源、召回/复活/生成/资源钩子、河道与里亡魂仍未集成；不得将普通顺序攻击统一改同批。无浏览器或实体设备新增验收。 |

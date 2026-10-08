@@ -129,6 +129,18 @@
         {
           "file": "tests/bomb-target-boundaries.test.ts",
           "namePrefix": "R5-BOMB-TARGET-04"
+        },
+        {
+          "file": "tests/flight-turn-boundaries.test.ts",
+          "namePrefix": "R5-FLIGHT-TURN-01"
+        },
+        {
+          "file": "tests/flight-turn-boundaries.test.ts",
+          "namePrefix": "R5-FLIGHT-TURN-02"
+        },
+        {
+          "file": "tests/flight-turn-boundaries.test.ts",
+          "namePrefix": "R5-FLIGHT-TURN-03"
         }
       ],
       "fully_accepted": false,
@@ -381,6 +393,18 @@
         {
           "file": "tests/hero-transfer-r5.test.ts",
           "namePrefix": "R5-H15-02"
+        },
+        {
+          "file": "tests/flight-turn-boundaries.test.ts",
+          "namePrefix": "R5-FLIGHT-TURN-01"
+        },
+        {
+          "file": "tests/flight-turn-boundaries.test.ts",
+          "namePrefix": "R5-FLIGHT-TURN-02"
+        },
+        {
+          "file": "tests/flight-turn-boundaries.test.ts",
+          "namePrefix": "R5-FLIGHT-TURN-03"
         }
       ],
       "fully_accepted": false,
@@ -650,10 +674,10 @@
     }
   ],
   "scoring_is_non_normative": true,
-  "implementation_commit": "b45077a692213953ee7e3edef31a6d16c011c940",
-  "local_execution_commit": "3da2033393cd5c370843aa78e5cb54767ca18190",
-  "implementation_tree": "c2ad40457facf58a4456d22e017b52d058a1b4b2",
-  "tests_passed": 498,
+  "implementation_commit": "9ed5ff71590bf9658d1294def22bb669b195357b",
+  "local_execution_commit": "ccdea1053399539bdc1839929f454aacd165798d",
+  "implementation_tree": "4731570c671e2f9e87d0179b9126ca0a5fbd869f",
+  "tests_passed": 501,
   "new_dedicated_cases": 36,
   "browser_evidence": "review/invariants/HERO_TRANSFER_BROWSER_2026-10-07.json",
   "previous_runtime_checkpoint": {
@@ -691,15 +715,24 @@
       "implementation_tree": "8b9ee6c99a0c4ef776ef6e2b3a0bb2fbd300c0cc",
       "tests_passed": 494,
       "browser_prepared_cases": 16
+    },
+    {
+      "implementation_commit": "b45077a692213953ee7e3edef31a6d16c011c940",
+      "local_execution_commit": "3da2033393cd5c370843aa78e5cb54767ca18190",
+      "implementation_tree": "c2ad40457facf58a4456d22e017b52d058a1b4b2",
+      "tests_passed": 498,
+      "browser_prepared_cases": 18
     }
   ],
   "child_boundary_cases": 3,
   "child_boundary_report": "handoff/current/24_HERO_CHILD_BOUNDARY_2026-10-08.md",
-  "browser_prepared_cases": 18,
+  "browser_prepared_cases": 20,
   "descent_boundary_cases": 6,
   "descent_boundary_report": "handoff/current/25_HERO_DESCENT_BOUNDARY_2026-10-08.md",
   "descent_atom_cases": 7,
   "descent_atom_report": "handoff/current/27_HERO_DESCENT_ATOM_2026-10-08.md",
   "bomb_target_boundary_cases": 4,
-  "bomb_target_boundary_report": "handoff/current/28_BOMB_TARGET_BOUNDARY_2026-10-08.md"
+  "bomb_target_boundary_report": "handoff/current/28_BOMB_TARGET_BOUNDARY_2026-10-08.md",
+  "flight_turn_boundary_cases": 3,
+  "flight_turn_boundary_report": "handoff/current/29_FLIGHT_TURN_BOUNDARY_2026-10-08.md"
 }

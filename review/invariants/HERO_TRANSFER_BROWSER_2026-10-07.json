@@ -1,7 +1,7 @@
 {
   "authority": "prepared_browser_execution_non_normative",
   "ruleRevision": "LEZI-FUNCTION-2026-10-07-r5",
-  "sourceCommitAtRun": "dbadd0bae655c33c6f3127e8da9469177a825b5f",
+  "sourceCommitAtRun": "8f7a4369566b4f3d6f269bbd9855a56a17a8283c",
   "workingTreeDirty": false,
   "appDigest": "b841af632d0b08003ebdbbaf792691fd4c83365b5c9b43f46537d3c1fa098fc9",
   "browser": "145.0.7632.6",
@@ -80,6 +80,14 @@
     },
     {
       "name": "bomb army quota rejects a different dragon without spending its ammo",
+      "passed": true
+    },
+    {
+      "name": "next-turn flight obligation preserves timeline ground control then requires formal landing",
+      "passed": true
+    },
+    {
+      "name": "timeline controls the original flyer above ground objects then next formal main lands it",
       "passed": true
     }
   ],
