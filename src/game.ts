@@ -406,14 +406,16 @@ export function applyAuthoritativeMove(
   if (nextState.pendingHeroChild) throw new RuleError("HERO_CHILD_ACTION_REQUIRED", "须先处理当前衍生行动窗口");
   if (nextState.pendingDescent && !childAction?.stormAssault) throw new RuleError("DESCENT_ACTION_REQUIRED", "须先完成降临结算");
   validateRewindReplay(nextState, nextSecret, command);
-  const validation = validatePublicMove(nextState, command, state.turn, { allowLinkedControl: deferTurnEnd, stormAssault: childAction?.stormAssault });
+  const validation = validatePublicMove(nextState, command, state.turn, { allowLinkedControl: deferTurnEnd, stormAssault: childAction?.stormAssault, allowIntermediateCheck: childAction?.stormAssault });
   if (!validation.ok && !(validation.code === "SELF_CHECK" && permitsSelfCrushingGeneral(state, command, state.turn))) {
     validationError(validation.code, validation.message);
   }
 
-  nextState.automaticEvents = [];
-  nextState.destructionBatches = [];
-  nextState.landingEvents = [];
+  if (!childAction?.stormAssault) {
+    nextState.automaticEvents = [];
+    nextState.destructionBatches = [];
+    nextState.landingEvents = [];
+  }
   const actingSide = state.turn;
   const source = command.pieceId ? pieceById(nextState, command.pieceId) : pieceAt(nextState, command.from);
   if (!source) validationError("NO_PIECE", "起点没有棋子");
@@ -422,6 +424,7 @@ export function applyAuthoritativeMove(
 
   const pathVictims = pathPiecesForSpecialMove(nextState, source, command.to);
   let classification = movementClassification(state, Boolean(target) || pathVictims.length > 0, pathVictims.length > 0, deferTurnEnd ? { parentActionId: childAction?.parentActionId } : undefined);
+  if (childAction?.stormAssault) classification = { ...classification, keywords: [...classification.keywords, "额外"] };
   if (secret.replay && classification.opportunity === "main") classification = { ...classification, tier: 3, source: "rewind_replay" };
   rememberAction(nextState, nextSecret, source.id, classification.tier, command.from, now, classification);
   recordAction(nextState, { ...classification, actionId: command.actionId, actingSide, pieceId: source.id, from: { ...command.from }, to: { ...command.to } });

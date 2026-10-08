@@ -200,6 +200,9 @@ export function closeDirectDeaths(state: GameState, secret: SecretState, actingS
   requireClosedDestructionBatch(state);
   // 每种调用来源都先闭合死亡派生，再判断解将/终局；不能依赖某个走子入口。
   resolveWindReturn(state, secret);
+  // 降临的部署与各次突袭属于同一来源原子。子步骤可以闭合落位/归位，
+  // 但资源入账与正式终结要等整个公开窗口关闭，不能截断剩余机会。
+  if (state.pendingDescent) return false;
   settleHeroDeathResources(state);
   settleTrainingDeaths(state, secret, max => Math.floor(Math.random() * max));
   const alive = (side: Side) => {

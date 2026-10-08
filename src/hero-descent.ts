@@ -3,7 +3,7 @@ import { selectedHeroSelection } from "./hero-forms.ts";
 import { getController, isInsideBoard, otherSide } from "./slots.ts";
 import { isBoardPiece, isGround } from "./spaces.ts";
 import { isGeneralInCheck, pieceAt } from "./rules.ts";
-import { beginFormalTurn, closeDirectDeaths, copy, destroyPieceBatch, formalTurn, generateGhosts, markRevealed, placementAllowed, queueLanding, settleLandings } from "./settlement.ts";
+import { advanceToFormalTurn, closeDirectDeaths, copy, destroyPieceBatch, formalTurn, generateGhosts, markRevealed, placementAllowed, queueLanding, settleLandings } from "./settlement.ts";
 import { enterTurnPhase, recordAction } from "./turns.ts";
 import { applyAuthoritativeMove } from "./game.ts";
 import type { GameState, HeroAbilityCommand, MoveResult, Position, PublicPiece, RandomInt, SecretState, Side } from "./types.ts";
@@ -88,7 +88,6 @@ export function applyDescentAction(state: GameState, secret: SecretState, comman
     }
     settleLandings(s, k);
     generateGhosts(s); closeDirectDeaths(s, k, side);
-    if (pending!.variant === "nightmare") requireRule(!isGeneralInCheck(s, otherSide(side)), "DESCENT_CHECK", "梦魇完整部署结算不能形成将军");
     if (pending!.variant === "storm" && s.status === "playing") {
       pending!.assaultIds = pending!.pieces.filter(p => s.pieces.some(q => q.id === p.id)).map(p => p.id);
       if (!pending!.assaultIds.length) delete s.pendingDescent;
@@ -102,13 +101,20 @@ export function applyDescentAction(state: GameState, secret: SecretState, comman
     if (!command.skip) {
       requireRule(p && command.to && pieceAt(s, command.to), "INVALID_ASSAULT_TARGET", "突袭必须指定进攻目标");
       const result = applyAuthoritativeMove(s, k, { actionId: command.actionId, expectedRevision: s.revision, pieceId, from: { x: p!.x, y: p!.y }, to: command.to! }, true, now, { parentActionId: pending!.atom, stormAssault: true });
+      generateGhosts(result.state);
       requireRule(!isGeneralInCheck(result.state, otherSide(side)), "ASSAULT_CHECK", "突袭不能形成将军");
       Object.assign(s, result.state); Object.assign(k, result.secret);
     } else s.revision++;
     s.pendingDescent!.assaultIds!.shift();
     if (!s.pendingDescent!.assaultIds!.length) delete s.pendingDescent;
   }
-  if (!s.pendingDescent && s.status === "playing" && s.turnLifecycle?.phase === "turn_start") enterTurnPhase(s, "before_main");
+  if (!s.pendingDescent) {
+    closeDirectDeaths(s, k, side);
+    if (pending!.variant === "nightmare" && s.status === "playing") requireRule(!isGeneralInCheck(s, otherSide(side)), "DESCENT_CHECK", "梦魇完整部署结算不能形成将军");
+    if (s.status === "playing" && s.turnLifecycle?.phase === "turn_start") enterTurnPhase(s, "before_main");
+    // 整个开始来源完成后再检查裁决/困毙；重复开始不计时、不刷新资源。
+    if (s.status === "playing") advanceToFormalTurn(s, k, side);
+  }
   k.processedActions[command.actionId] = s.revision;
   return { state: s, secret: k, duplicate: false };
 }
