@@ -1,7 +1,7 @@
 {
   "authority": "prepared_browser_execution_non_normative",
   "ruleRevision": "LEZI-FUNCTION-2026-10-07-r5",
-  "sourceCommitAtRun": "64cc36ac3eeca674ec4c4f0a0655107444df9ffb",
+  "sourceCommitAtRun": "f4407d2ca556b530791aecb86e659cdb7df6f804",
   "workingTreeDirty": false,
   "appDigest": "b841af632d0b08003ebdbbaf792691fd4c83365b5c9b43f46537d3c1fa098fc9",
   "browser": "145.0.7632.6",
@@ -44,6 +44,18 @@
     },
     {
       "name": "storm descent deployment and main opportunity preservation",
+      "passed": true
+    },
+    {
+      "name": "nightmare fortress seal rejects deployment without consuming its window",
+      "passed": true
+    },
+    {
+      "name": "nightmare final check is evaluated after landing trap destruction",
+      "passed": true
+    },
+    {
+      "name": "storm summons killed on landing release the normal main opportunity",
       "passed": true
     }
   ],

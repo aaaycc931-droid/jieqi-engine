@@ -1,8 +1,8 @@
 {
   "authority": "execution_evidence_non_normative",
-  "generatedAt": "2026-10-08T02:09:08.615Z",
-  "sourceCommitAtRun": "a9cdcb57ddb853b1bb7e65e407fdf2a071564013",
-  "sourceDigest": "b3a6b6e24d7b860fb2bf8d0b9bf59c6eec474c1050867f0911890ee7051e787b",
+  "generatedAt": "2026-10-08T04:33:35.114Z",
+  "sourceCommitAtRun": "73ba243830a45268532e93da072134b6890d0b49",
+  "sourceDigest": "5073456e0d8be7452c4acd548696e0d4690a107465a3be7bd956e2f4c1aff1b6",
   "sourceDigestPaths": [
     ".github/workflows/gameplay-runtime-review.yml",
     ".github/workflows/menu-reference-review.yml",
@@ -73,6 +73,7 @@
     "tests/helpers.ts",
     "tests/hero-child-boundaries.test.ts",
     "tests/hero-cross-settlement.test.ts",
+    "tests/hero-descent-boundaries.test.ts",
     "tests/hero-forms.test.ts",
     "tests/hero-transfer-r5.test.ts",
     "tests/movement.test.ts",
@@ -193,7 +194,7 @@
   "contractDigest": "c6e4649ce5a028b5477090b87066dd5bb7a65ad3a5632d138a05bf972b89e1e3",
   "runtime": "v24.19.0",
   "testSummary": {
-    "passed": 481,
+    "passed": 487,
     "failed": 0,
     "executionFailed": false
   },
@@ -604,6 +605,16 @@
           "file": "tests/remote-room.test.ts",
           "name": "HUNTER-04 壁垒弹回属于移置，触发起点的正常落位陷阱",
           "passed": true
+        },
+        {
+          "file": "tests/hero-descent-boundaries.test.ts",
+          "name": "R5-DESCENT-01 nightmare cannot enter a fortress-sealed opposing palace; rejection is atomic",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-descent-boundaries.test.ts",
+          "name": "R5-DESCENT-02 fortress still permits a piece already inside the opposing palace to redeploy inside",
+          "passed": true
         }
       ],
       "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
@@ -838,6 +849,21 @@
         {
           "file": "tests/hero-child-boundaries.test.ts",
           "name": "R5-CHILD-02 deferred barrier bounce never starts the next formal turn inside the move primitive",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-descent-boundaries.test.ts",
+          "name": "R5-DESCENT-03 nightmare checks the final landing state: a checking rook destroyed by a landing trap does not invalidate deployment",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-descent-boundaries.test.ts",
+          "name": "R5-DESCENT-04 nightmare still rejects a surviving final check without consuming the pending deployment",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-descent-boundaries.test.ts",
+          "name": "R5-DESCENT-05 storm with both summons killed on landing closes its empty assault window and permits the normal main action",
           "passed": true
         }
       ],
@@ -2727,6 +2753,16 @@
         {
           "file": "tests/hero-child-boundaries.test.ts",
           "name": "R5-CHILD-02 deferred barrier bounce never starts the next formal turn inside the move primitive",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-descent-boundaries.test.ts",
+          "name": "R5-DESCENT-05 storm with both summons killed on landing closes its empty assault window and permits the normal main action",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-descent-boundaries.test.ts",
+          "name": "R5-DESCENT-06 storm with one surviving summon retains exactly its one optional assault",
           "passed": true
         }
       ],

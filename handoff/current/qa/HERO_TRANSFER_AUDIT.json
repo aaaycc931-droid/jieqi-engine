@@ -542,6 +542,30 @@
         {
           "file": "tests/hero-transfer-r5.test.ts",
           "namePrefix": "R5-H21-08"
+        },
+        {
+          "file": "tests/hero-descent-boundaries.test.ts",
+          "namePrefix": "R5-DESCENT-01"
+        },
+        {
+          "file": "tests/hero-descent-boundaries.test.ts",
+          "namePrefix": "R5-DESCENT-02"
+        },
+        {
+          "file": "tests/hero-descent-boundaries.test.ts",
+          "namePrefix": "R5-DESCENT-03"
+        },
+        {
+          "file": "tests/hero-descent-boundaries.test.ts",
+          "namePrefix": "R5-DESCENT-04"
+        },
+        {
+          "file": "tests/hero-descent-boundaries.test.ts",
+          "namePrefix": "R5-DESCENT-05"
+        },
+        {
+          "file": "tests/hero-descent-boundaries.test.ts",
+          "namePrefix": "R5-DESCENT-06"
         }
       ],
       "fully_accepted": false,
@@ -578,10 +602,10 @@
     }
   ],
   "scoring_is_non_normative": true,
-  "implementation_commit": "356ba577260bb4fd8228d134d5fd463c7e651919",
-  "local_execution_commit": "a9cdcb57ddb853b1bb7e65e407fdf2a071564013",
-  "implementation_tree": "0b87dbb00cd71c8f8681e215f04ecc75bb9b3992",
-  "tests_passed": 481,
+  "implementation_commit": "70f19144f399b6fcf3742d4d49188fb17d78a9d7",
+  "local_execution_commit": "73ba243830a45268532e93da072134b6890d0b49",
+  "implementation_tree": "39b9d71a905dd3e6041842202f4cec60fdc06117",
+  "tests_passed": 487,
   "new_dedicated_cases": 36,
   "browser_evidence": "review/invariants/HERO_TRANSFER_BROWSER_2026-10-07.json",
   "previous_runtime_checkpoint": {
@@ -599,9 +623,17 @@
       "local_execution_commit": "3ff88a44c8808a792e65becd988174e2d98ae686",
       "implementation_tree": "4c748fa19e5fe44115aa27992b2f9eac15bc6756",
       "tests_passed": 478
+    },
+    {
+      "implementation_commit": "356ba577260bb4fd8228d134d5fd463c7e651919",
+      "local_execution_commit": "a9cdcb57ddb853b1bb7e65e407fdf2a071564013",
+      "implementation_tree": "0b87dbb00cd71c8f8681e215f04ecc75bb9b3992",
+      "tests_passed": 481
     }
   ],
   "child_boundary_cases": 3,
   "child_boundary_report": "handoff/current/24_HERO_CHILD_BOUNDARY_2026-10-08.md",
-  "browser_prepared_cases": 9
+  "browser_prepared_cases": 12,
+  "descent_boundary_cases": 6,
+  "descent_boundary_report": "handoff/current/25_HERO_DESCENT_BOUNDARY_2026-10-08.md"
 }

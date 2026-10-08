@@ -1,11 +1,11 @@
 {
   "project": "乐子象棋 / jieqi-engine",
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-08-r5-child",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-08-r5-descent",
   "updated_at": "2026-10-08",
   "repository": "https://github.com/aaaycc931-droid/jieqi-engine",
   "working_branch": "codex/ui-android-apk-20261001",
-  "implementation_commit": "356ba577260bb4fd8228d134d5fd463c7e651919",
-  "implementation_tree": "0b87dbb00cd71c8f8681e215f04ecc75bb9b3992",
+  "implementation_commit": "70f19144f399b6fcf3742d4d49188fb17d78a9d7",
+  "implementation_tree": "39b9d71a905dd3e6041842202f4cec60fdc06117",
   "draft_pr": 2,
   "baseline_id": "LEZI-FUNCTION-2026-10-04-v1",
   "baseline_digest": "4bcf9fb91f5c6e41f456e7424ebd7ed09c6c07b1595ec825604aa730fdad020b",
@@ -30,14 +30,14 @@
     "destiny_mutations": 1
   },
   "validation": {
-    "tests_passed": 481,
+    "tests_passed": 487,
     "tests_failed": 0,
     "web_build": "passed",
     "homepage_browser_run": 37305274329,
     "homepage_browser_commit": "8b985a8f2bf8cd4ab96fdf63ab73894292cc6f7a",
     "homepage_browser_scope": "homepage_and_entry_controls_only",
     "android_web_asset_match_files": 127,
-    "new_hero_browser_full_flow": "9 synthetic prepared DOM operations only; natural full matches and physical transport unaccepted",
+    "new_hero_browser_full_flow": "12 synthetic prepared DOM operations only; natural full matches and physical transport unaccepted",
     "individual_69_invariants": "partial_named_case_evidence_full_contract_acceptance_pending",
     "android_webview": "pending",
     "physical_two_phone": "pending",
@@ -52,21 +52,21 @@
       "failed_cases": 0,
       "fully_accepted": 0,
       "applicable_rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
-      "source_commit_at_run": "a9cdcb57ddb853b1bb7e65e407fdf2a071564013",
-      "published_implementation_commit": "356ba577260bb4fd8228d134d5fd463c7e651919",
+      "source_commit_at_run": "73ba243830a45268532e93da072134b6890d0b49",
+      "published_implementation_commit": "70f19144f399b6fcf3742d4d49188fb17d78a9d7",
       "scope": "109 existing contracts have scenario links; new hero per-source evidence is separate in HERO_TRANSFER_AUDIT, full acceptance remains 0",
-      "source_digest": "b3a6b6e24d7b860fb2bf8d0b9bf59c6eec474c1050867f0911890ee7051e787b",
+      "source_digest": "5073456e0d8be7452c4acd548696e0d4690a107465a3be7bd956e2f4c1aff1b6",
       "contract_digest": "c6e4649ce5a028b5477090b87066dd5bb7a65ad3a5632d138a05bf972b89e1e3"
     },
     "current_ci": {
       "status": "success",
-      "run": 37716482888,
-      "commit": "356ba577260bb4fd8228d134d5fd463c7e651919",
-      "implementation_commit": "356ba577260bb4fd8228d134d5fd463c7e651919",
-      "evidence_artifact": 11524405205,
+      "run": 37728080320,
+      "commit": "70f19144f399b6fcf3742d4d49188fb17d78a9d7",
+      "implementation_commit": "70f19144f399b6fcf3742d4d49188fb17d78a9d7",
+      "evidence_artifact": 11529100039,
       "apk_job": "skipped",
-      "checkout_commit": "64cc36ac3eeca674ec4c4f0a0655107444df9ffb",
-      "source_digest": "b3a6b6e24d7b860fb2bf8d0b9bf59c6eec474c1050867f0911890ee7051e787b",
+      "checkout_commit": "f4407d2ca556b530791aecb86e659cdb7df6f804",
+      "source_digest": "5073456e0d8be7452c4acd548696e0d4690a107465a3be7bd956e2f4c1aff1b6",
       "contract_digest": "c6e4649ce5a028b5477090b87066dd5bb7a65ad3a5632d138a05bf972b89e1e3",
       "source_digest_matches_local": true,
       "contract_digest_matches_local": true,
@@ -87,18 +87,18 @@
     },
     "gameplay_browser": {
       "status": "success",
-      "run": 37716483001,
-      "commit": "356ba577260bb4fd8228d134d5fd463c7e651919",
-      "checkout_commit": "64cc36ac3eeca674ec4c4f0a0655107444df9ffb",
-      "artifact": 11523837720,
-      "case_count": 9,
+      "run": 37728080313,
+      "commit": "70f19144f399b6fcf3742d4d49188fb17d78a9d7",
+      "checkout_commit": "f4407d2ca556b530791aecb86e659cdb7df6f804",
+      "artifact": 11528835882,
+      "case_count": 12,
       "errors": 0,
       "report": "review/invariants/HERO_TRANSFER_BROWSER_2026-10-07.json",
       "app_digest": "b841af632d0b08003ebdbbaf792691fd4c83365b5c9b43f46537d3c1fa098fc9",
       "app_digest_matches_local": true,
-      "compiled_source_digest": "b3a6b6e24d7b860fb2bf8d0b9bf59c6eec474c1050867f0911890ee7051e787b",
+      "compiled_source_digest": "5073456e0d8be7452c4acd548696e0d4690a107465a3be7bd956e2f4c1aff1b6",
       "same_checkout_as_source_digest_verified_rules_ci": true,
-      "scope": "nine actual compiled DOM prepared operations, including charge barrier bounce parent/duration/resource checks",
+      "scope": "twelve actual compiled DOM prepared operations, including fortress seal rejection, nightmare post-trap final state and empty storm window",
       "full_match_accepted": false,
       "bluetooth_private_transport_accepted": false,
       "report_retrieval": "actual_job_log_evidenceFile_JSON; source_artifact_registered"
@@ -296,7 +296,7 @@
       "observer": "review_server_response_only_read_only_flags_and_deadlines_no_fixture_loading_secret_identity_or_rng_override"
     },
     "paused_full_match_jobs": {
-      "run": 37716483001,
+      "run": 37728080313,
       "full_match_browser": "skipped",
       "active_match_browser": "skipped",
       "reason": "user_paused_previous_queue",
@@ -329,8 +329,8 @@
       "tests_failed": 0,
       "scope": "full_regression_with_seventeen_ghost_object_cases_not_full_r3_r4_acceptance"
     },
-    "engine_scope": "r5 full regression plus three child barrier-bounce boundaries; actual DOM prepared charge bounce also verified",
-    "engine_implementation_commit": "356ba577260bb4fd8228d134d5fd463c7e651919",
+    "engine_scope": "r5 full regression with six descent boundary cases; three corresponding actual DOM prepared operations",
+    "engine_implementation_commit": "70f19144f399b6fcf3742d4d49188fb17d78a9d7",
     "previous_contract_evidence": {
       "index": "review/invariants/LATEST.json",
       "total": 96,
@@ -343,8 +343,8 @@
     },
     "current_runtime_ci": {
       "status": "success",
-      "run": 37716482888,
-      "implementation_commit": "356ba577260bb4fd8228d134d5fd463c7e651919"
+      "run": 37728080320,
+      "implementation_commit": "70f19144f399b6fcf3742d4d49188fb17d78a9d7"
     },
     "contract_evidence_history": [
       {
@@ -415,14 +415,14 @@
     ],
     "applies_to_current_rule_revision": true,
     "historical_rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
-    "new_revision_validation": "partial_scenario_evidence_481_tests_and_prepared_browser_regression_not_full_acceptance",
+    "new_revision_validation": "partial_scenario_evidence_487_tests_and_prepared_browser_regression_not_full_acceptance",
     "historical_r4_test_count": 434,
     "mode_foundation_browser_current": {
       "status": "success",
-      "run": 37716483001,
-      "commit": "356ba577260bb4fd8228d134d5fd463c7e651919",
-      "checkout_commit": "64cc36ac3eeca674ec4c4f0a0655107444df9ffb",
-      "artifact": 11523837715,
+      "run": 37728080313,
+      "commit": "70f19144f399b6fcf3742d4d49188fb17d78a9d7",
+      "checkout_commit": "f4407d2ca556b530791aecb86e659cdb7df6f804",
+      "artifact": 11529025311,
       "cases": 9,
       "errors": 0,
       "report": "review/invariants/MODE_FOUNDATION_BROWSER_2026-10-07.json",
@@ -548,6 +548,69 @@
           "source_digest": "6d3f439668f8452add60c9cc1a2e23a472e4164edfd64a9020261517911fd9c8",
           "contract_digest": "c6e4649ce5a028b5477090b87066dd5bb7a65ad3a5632d138a05bf972b89e1e3"
         }
+      },
+      {
+        "tests_passed": 481,
+        "current_ci": {
+          "status": "success",
+          "run": 37716482888,
+          "commit": "356ba577260bb4fd8228d134d5fd463c7e651919",
+          "implementation_commit": "356ba577260bb4fd8228d134d5fd463c7e651919",
+          "evidence_artifact": 11524405205,
+          "apk_job": "skipped",
+          "checkout_commit": "64cc36ac3eeca674ec4c4f0a0655107444df9ffb",
+          "source_digest": "b3a6b6e24d7b860fb2bf8d0b9bf59c6eec474c1050867f0911890ee7051e787b",
+          "contract_digest": "c6e4649ce5a028b5477090b87066dd5bb7a65ad3a5632d138a05bf972b89e1e3",
+          "source_digest_matches_local": true,
+          "contract_digest_matches_local": true,
+          "applies_to_current_implementation": true,
+          "provenance": "actual_GitHub_job_log_JSON_summary; artifact_index_recorded_archive_not_downloaded_this_round"
+        },
+        "gameplay_browser": {
+          "status": "success",
+          "run": 37716483001,
+          "commit": "356ba577260bb4fd8228d134d5fd463c7e651919",
+          "checkout_commit": "64cc36ac3eeca674ec4c4f0a0655107444df9ffb",
+          "artifact": 11523837720,
+          "case_count": 9,
+          "errors": 0,
+          "report": "review/invariants/HERO_TRANSFER_BROWSER_2026-10-07.json",
+          "app_digest": "b841af632d0b08003ebdbbaf792691fd4c83365b5c9b43f46537d3c1fa098fc9",
+          "app_digest_matches_local": true,
+          "compiled_source_digest": "b3a6b6e24d7b860fb2bf8d0b9bf59c6eec474c1050867f0911890ee7051e787b",
+          "same_checkout_as_source_digest_verified_rules_ci": true,
+          "scope": "nine actual compiled DOM prepared operations, including charge barrier bounce parent/duration/resource checks",
+          "full_match_accepted": false,
+          "bluetooth_private_transport_accepted": false,
+          "report_retrieval": "actual_job_log_evidenceFile_JSON; source_artifact_registered"
+        },
+        "mode_foundation_browser_current": {
+          "status": "success",
+          "run": 37716483001,
+          "commit": "356ba577260bb4fd8228d134d5fd463c7e651919",
+          "checkout_commit": "64cc36ac3eeca674ec4c4f0a0655107444df9ffb",
+          "artifact": 11523837715,
+          "cases": 9,
+          "errors": 0,
+          "report": "review/invariants/MODE_FOUNDATION_BROWSER_2026-10-07.json",
+          "scope": "existing settings/opening foundation regression only; independent hero adaptation still paused",
+          "report_retrieval": "actual_job_log_evidenceFile_JSON; source_artifact_registered"
+        },
+        "contract_evidence": {
+          "index": "review/invariants/LATEST.json",
+          "total": 109,
+          "partial_evidence_passed": 106,
+          "missing_related_cases": 0,
+          "non_runtime_contract": 3,
+          "failed_cases": 0,
+          "fully_accepted": 0,
+          "applicable_rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
+          "source_commit_at_run": "a9cdcb57ddb853b1bb7e65e407fdf2a071564013",
+          "published_implementation_commit": "356ba577260bb4fd8228d134d5fd463c7e651919",
+          "scope": "109 existing contracts have scenario links; new hero per-source evidence is separate in HERO_TRANSFER_AUDIT, full acceptance remains 0",
+          "source_digest": "b3a6b6e24d7b860fb2bf8d0b9bf59c6eec474c1050867f0911890ee7051e787b",
+          "contract_digest": "c6e4649ce5a028b5477090b87066dd5bb7a65ad3a5632d138a05bf972b89e1e3"
+        }
       }
     ],
     "child_browser_first_attempt": {
@@ -578,8 +641,40 @@
   "next_action": "继续已确认来源的其他定点交叉审计；四项design-required须由正式设计来源补齐后再实现。旧整盘、主动技能整盘、模式独立适配、APK和最终视觉队列保持暂停。",
   "source_gap_register": "SOURCE_REGISTER.json",
   "apk_built_this_round": false,
-  "previous_implementation_commit": "e67590bd578b2c40d89faa6b1214c9d213c56043",
+  "previous_implementation_commit": "356ba577260bb4fd8228d134d5fd463c7e651919",
   "validation_round": {
+    "authorization": "user: 继续推进项目",
+    "verified_remote_before_implementation": "88fbcccb488def245731ffa9fe4581ffde4bcf42",
+    "rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
+    "implementation_commit": "70f19144f399b6fcf3742d4d49188fb17d78a9d7",
+    "local_execution_checkpoint": "73ba243830a45268532e93da072134b6890d0b49",
+    "publication_tree_matches_execution_tree": true,
+    "report": "handoff/current/25_HERO_DESCENT_BOUNDARY_2026-10-08.md",
+    "product_code_changed": true,
+    "semantic_rules_changed": false,
+    "new_engine_tests": 6,
+    "tests_passed": 487,
+    "tests_failed": 0,
+    "web_build": "passed",
+    "android_generated_files_matched": 127,
+    "browser_tests_run": true,
+    "browser_prepared_cases_passed": 12,
+    "browser_new_cases": 3,
+    "browser_mode_foundation_cases_passed": 9,
+    "apk_built": false,
+    "old_full_match_queue_resumed": false,
+    "untransferred_heroes_imported": false,
+    "all_functions_accepted": false,
+    "design_required_ids": [
+      "H07-mirror",
+      "H12-general-rank",
+      "H16-chaos-entry",
+      "H21-dragon-scale-placement"
+    ],
+    "artwork_changed": false,
+    "physical_device_tests_run": false
+  },
+  "previous_validation_round": {
     "authorization": "user: 继续推进项目",
     "verified_remote_before_implementation": "aeed6b1947791f16485efc2cfcf2c36cd0c941d1",
     "rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
@@ -611,42 +706,11 @@
     "artwork_changed": false,
     "physical_device_tests_run": false
   },
-  "previous_validation_round": {
-    "authorization": "user: 继续推进项目",
-    "verified_remote_before_implementation": "362d0f0fd34125ae6789a8645f0e6c79a0f3d587",
-    "rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
-    "implementation_commit": "e67590bd578b2c40d89faa6b1214c9d213c56043",
-    "local_execution_checkpoint": "3ff88a44c8808a792e65becd988174e2d98ae686",
-    "publication_tree_matches_execution_tree": true,
-    "report": "handoff/current/23_HERO_CROSS_SETTLEMENT_2026-10-08.md",
-    "product_code_changed": true,
-    "semantic_rules_changed": false,
-    "new_engine_tests": 8,
-    "tests_passed": 478,
-    "tests_failed": 0,
-    "web_build": "passed",
-    "android_generated_files_matched": 127,
-    "browser_tests_run": true,
-    "browser_prepared_cases_passed": 8,
-    "browser_mode_foundation_cases_passed": 9,
-    "apk_built": false,
-    "old_full_match_queue_resumed": false,
-    "untransferred_heroes_imported": false,
-    "all_functions_accepted": false,
-    "design_required_ids": [
-      "H07-mirror",
-      "H12-general-rank",
-      "H16-chaos-entry",
-      "H21-dragon-scale-placement"
-    ],
-    "artwork_changed": false,
-    "physical_device_tests_run": false
-  },
   "previous_rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
   "previous_rule_digest": "cf831ebe7872cb9d8ed55fa3b4edb7f03492b3c90a06c8d9be494ac9a9e9284f",
   "rule_digest_algorithm": "sha256(concat(relative UTF-8 path + NUL + file bytes + NUL), STATE.current_rules order)",
   "paused_next_action": "Continue destiny bomb/hourglass full real matches, second Shadow cooldown/lifecycle, remaining private snapshot and cross-end clock intersections. Current five active families have sampled natural results; original Nozdormu/Prince and current 12-seat normal regression remain incomplete. Local timeout outcome not frozen; physical RFCOMM/WebView/two-phone pending. UI last; APK paused.",
-  "work_status": "r5_child_barrier_boundary_published_partial_evidence_design_required_open",
+  "work_status": "r5_descent_boundaries_published_partial_evidence_design_required_open",
   "game_modes": {
     "authority": "09_CURRENT_GAME_MODES.md",
     "base_rule_status": "confirmed",
@@ -769,22 +833,22 @@
   },
   "latest_runtime_round": {
     "authorization": "user: 继续推进项目",
-    "verified_remote_before_implementation": "aeed6b1947791f16485efc2cfcf2c36cd0c941d1",
+    "verified_remote_before_implementation": "88fbcccb488def245731ffa9fe4581ffde4bcf42",
     "rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
-    "implementation_commit": "356ba577260bb4fd8228d134d5fd463c7e651919",
-    "local_execution_checkpoint": "a9cdcb57ddb853b1bb7e65e407fdf2a071564013",
+    "implementation_commit": "70f19144f399b6fcf3742d4d49188fb17d78a9d7",
+    "local_execution_checkpoint": "73ba243830a45268532e93da072134b6890d0b49",
     "publication_tree_matches_execution_tree": true,
-    "report": "handoff/current/24_HERO_CHILD_BOUNDARY_2026-10-08.md",
+    "report": "handoff/current/25_HERO_DESCENT_BOUNDARY_2026-10-08.md",
     "product_code_changed": true,
     "semantic_rules_changed": false,
-    "new_engine_tests": 3,
-    "tests_passed": 481,
+    "new_engine_tests": 6,
+    "tests_passed": 487,
     "tests_failed": 0,
     "web_build": "passed",
     "android_generated_files_matched": 127,
     "browser_tests_run": true,
-    "browser_prepared_cases_passed": 9,
-    "browser_new_case": "charge barrier bounce closes parent turn and durations once",
+    "browser_prepared_cases_passed": 12,
+    "browser_new_cases": 3,
     "browser_mode_foundation_cases_passed": 9,
     "apk_built": false,
     "old_full_match_queue_resumed": false,
@@ -1012,6 +1076,36 @@
         "H16-chaos-entry",
         "H21-dragon-scale-placement"
       ]
+    },
+    {
+      "authorization": "user: 继续推进项目",
+      "verified_remote_before_implementation": "aeed6b1947791f16485efc2cfcf2c36cd0c941d1",
+      "rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
+      "implementation_commit": "356ba577260bb4fd8228d134d5fd463c7e651919",
+      "local_execution_checkpoint": "a9cdcb57ddb853b1bb7e65e407fdf2a071564013",
+      "publication_tree_matches_execution_tree": true,
+      "report": "handoff/current/24_HERO_CHILD_BOUNDARY_2026-10-08.md",
+      "product_code_changed": true,
+      "semantic_rules_changed": false,
+      "new_engine_tests": 3,
+      "tests_passed": 481,
+      "tests_failed": 0,
+      "web_build": "passed",
+      "android_generated_files_matched": 127,
+      "browser_tests_run": true,
+      "browser_prepared_cases_passed": 9,
+      "browser_new_case": "charge barrier bounce closes parent turn and durations once",
+      "browser_mode_foundation_cases_passed": 9,
+      "apk_built": false,
+      "old_full_match_queue_resumed": false,
+      "untransferred_heroes_imported": false,
+      "all_functions_accepted": false,
+      "design_required_ids": [
+        "H07-mirror",
+        "H12-general-rank",
+        "H16-chaos-entry",
+        "H21-dragon-scale-placement"
+      ]
     }
   ],
   "action_turn_runtime": {
@@ -1170,7 +1264,7 @@
       "physical_device_tests_run_this_round": false,
       "apk_built_this_round": false
     },
-    "superseded_by_current_runtime": "24_HERO_CHILD_BOUNDARY_2026-10-08.md"
+    "superseded_by_current_runtime": "25_HERO_DESCENT_BOUNDARY_2026-10-08.md"
   },
   "acceptance_gap_consolidation": {
     "status": "historical_r4_inventory_superseded_by_received_r5_transfer",
@@ -1239,8 +1333,9 @@
     "audit": "qa/HERO_TRANSFER_AUDIT.json",
     "source_revision_is_separate_from_aggregate_r5": true,
     "cross_settlement_tests": 8,
-    "latest_total_tests_passed": 481,
-    "child_boundary_tests": 3
+    "latest_total_tests_passed": 487,
+    "child_boundary_tests": 3,
+    "descent_boundary_tests": 6
   },
   "hero_cross_settlement_runtime": {
     "record": "handoff/current/23_HERO_CROSS_SETTLEMENT_2026-10-08.md",
@@ -1274,5 +1369,24 @@
     "acceptance": "partial_named_case_evidence_only",
     "source_revision_unchanged": true,
     "fix": "deferred_barrier_bounce_keeps_parent_turn_until_upper_level_closure"
+  },
+  "hero_descent_boundary_runtime": {
+    "record": "handoff/current/25_HERO_DESCENT_BOUNDARY_2026-10-08.md",
+    "test_file": "tests/hero-descent-boundaries.test.ts",
+    "case_ids": [
+      "R5-DESCENT-01",
+      "R5-DESCENT-02",
+      "R5-DESCENT-03",
+      "R5-DESCENT-04",
+      "R5-DESCENT-05",
+      "R5-DESCENT-06"
+    ],
+    "acceptance": "partial_named_case_evidence_only",
+    "source_revision_unchanged": true,
+    "fixes": [
+      "shared_sealed_placement_validation",
+      "nightmare_final_check_after_landing_closure",
+      "close_empty_storm_assault_window"
+    ]
   }
 }
