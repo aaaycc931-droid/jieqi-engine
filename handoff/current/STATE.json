@@ -1,6 +1,6 @@
 {
   "project": "乐子象棋 / jieqi-engine",
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-08-H07-confirmed",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-08-H12-threshold-confirmed",
   "updated_at": "2026-10-08",
   "repository": "https://github.com/aaaycc931-droid/jieqi-engine",
   "working_branch": "codex/ui-android-apk-20261001",
@@ -10,7 +10,7 @@
   "baseline_id": "LEZI-FUNCTION-2026-10-04-v1",
   "baseline_digest": "4bcf9fb91f5c6e41f456e7424ebd7ed09c6c07b1595ec825604aa730fdad020b",
   "current_rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
-  "current_rule_digest": "efb5857f15a0ffe96ea7522b267f29d41a022dd278f71572acb75cf805bd60c8",
+  "current_rule_digest": "46c1a914aec87cabe89798f23c21a49767837d28a94f2aa3c6b22c7fd63262d8",
   "authoritative_entry": "00_READ_FIRST.md",
   "current_rules": [
     "01_CURRENT_RULES.md",
@@ -479,7 +479,7 @@
     ],
     "applies_to_current_rule_revision": false,
     "historical_rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
-    "new_revision_validation": "501 engine and 20 prepared DOM historical pre-addendum evidence; H07 mirror confirmed semantics not implemented or tested",
+    "new_revision_validation": "501 engine and 20 prepared DOM pre-addenda partial evidence; H07 mirror and H12 general threshold not implemented or accepted",
     "historical_r4_test_count": 434,
     "mode_foundation_browser_current": {
       "status": "skipped_unaffected_scope",
@@ -833,7 +833,8 @@
       }
     ],
     "confirmed_addenda_runtime_acceptance": {
-      "LEZI-H07-MIRROR-2026-10-08": false
+      "LEZI-H07-MIRROR-2026-10-08": false,
+      "LEZI-H12-GENERAL-THRESHOLD-2026-10-08": false
     },
     "evidence_rule_digest_at_run": "0d839b00f98f120a8a3e2ce6cde6eee90e67c17835d70503fb5735e228a1e08a"
   },
@@ -930,10 +931,10 @@
     "physical_device_tests_run": false
   },
   "previous_rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
-  "previous_rule_digest": "0d839b00f98f120a8a3e2ce6cde6eee90e67c17835d70503fb5735e228a1e08a",
+  "previous_rule_digest": "efb5857f15a0ffe96ea7522b267f29d41a022dd278f71572acb75cf805bd60c8",
   "rule_digest_algorithm": "sha256(concat(relative UTF-8 path + NUL + file bytes + NUL), STATE.current_rules order)",
   "paused_next_action": "Continue destiny bomb/hourglass full real matches, second Shadow cooldown/lifecycle, remaining private snapshot and cross-end clock intersections. Current five active families have sampled natural results; original Nozdormu/Prince and current 12-seat normal regression remain incomplete. Local timeout outcome not frozen; physical RFCOMM/WebView/two-phone pending. UI last; APK paused.",
-  "work_status": "H07_mirror_confirmed_runtime_pending_three_design_gaps_open",
+  "work_status": "H07_and_H12_threshold_confirmed_runtime_pending_three_design_gaps_open",
   "game_modes": {
     "authority": "09_CURRENT_GAME_MODES.md",
     "base_rule_status": "confirmed",
@@ -989,6 +990,11 @@
       "revision": "LEZI-FUNCTION-2026-10-07-r5",
       "digest": "0d839b00f98f120a8a3e2ce6cde6eee90e67c17835d70503fb5735e228a1e08a",
       "scope": "pre H07 mirror confirmation; 29 runtime evidence"
+    },
+    {
+      "revision": "LEZI-FUNCTION-2026-10-07-r5",
+      "digest": "efb5857f15a0ffe96ea7522b267f29d41a022dd278f71572acb75cf805bd60c8",
+      "scope": "H07 mirror confirmed; before H12 ordinary-center general threshold"
     }
   ],
   "stage_close": {
@@ -1458,7 +1464,7 @@
     "remaining_runtime_contracts": [],
     "remaining_runtime_contracts_note": "Public ADD-HERO-FORM-001 model now has named partial evidence in round20; future source integration and full acceptance remain pending."
   },
-  "pending_next_runtime_action": "接入已确认H07双窃时抵消：解除镜像拒绝、校验标准60/60及单侧75/45；不改写其他明确特殊计时来源。",
+  "pending_next_runtime_action": "H07双窃时抵消及H12已确认普通中心对将帅3级门槛待接入；不外推未确认的将帅中心语义。",
   "account_switch_close": {
     "requested_at": "2026-10-06T23:14:24+08:00",
     "request": "我要更换账号了",
@@ -1645,12 +1651,12 @@
   },
   "latest_document_round": {
     "authorization": {
-      "at": "2026-10-08T20:59:35+08:00",
-      "quote": "互相偷然后就抵消了"
+      "at": "2026-10-08T21:13:45+08:00",
+      "quote": "至少3级才能消灭"
     },
-    "classification": "confirmed_hero_rule_addendum_only",
-    "report": "rules/confirmed/RULE_UPDATE_2026-10-08_THIEF_MIRROR.md",
-    "verified_remote_before_round": "60439985a55ab2759f31e0938b1cd2144dc8cfa2",
+    "classification": "partial_hero_rule_confirmation_only",
+    "report": "rules/confirmed/RULE_UPDATE_2026-10-08_FLAME_GENERAL.md",
+    "verified_remote_before_round": "5aea00fa2fb9c84ca1788dd08d57e546535583cd",
     "semantic_rules_changed": true,
     "product_code_changed": false,
     "local_game_tests_rerun": false,
@@ -1658,9 +1664,7 @@
     "local_browser_tests_run": false,
     "apk_built": false,
     "design_required_remaining": 3,
-    "implementation_pending": [
-      "H07-mirror"
-    ],
+    "H12_remaining": "将帅作为中心时的区域消灭条件",
     "existing_product_reports": "preserved_original_execution_revision_no_new_timestamps"
   },
   "acceptance_gap_consolidation": {
@@ -1721,7 +1725,7 @@
       }
     },
     "unresolved": [
-      "H12-general-rank: 将帅可作中心，但未定义其与普通层级目标的比较；普通中心邻接将帅的消灭条件也无法从“既有终局规则”唯一推出。仅拒绝涉及未定义交叉的范围。",
+      "H12-general-rank: 普通中心至少3级可消灭范围内将帅已确认；将帅自身作为中心时的范围消灭条件仍待确认。",
       "H16-chaos-entry: 资源及后续连斩结构已确认，但乱斗如何首次发动、如何付费及是否需要先有常态冲锋触发未定义。已接入确认资源，未开启连斩/付费入口。",
       "H21-dragon-scale-placement: 龙鳞保住进攻终点棋后，攻击者与目标如何合法落位尚未冻结；拒绝整次相关行动且不消费龙鳞。"
     ],
@@ -1889,6 +1893,26 @@
       "documentation_skip_validation": "inspect_actual_workflow_steps_for_the_published_documentation_commit_not_prefilled",
       "existing_product_reports": "preserved_original_execution_revision_no_new_timestamps",
       "superseded_by_current_runtime_report": "handoff/current/29_FLIGHT_TURN_BOUNDARY_2026-10-08.md"
+    },
+    {
+      "authorization": {
+        "at": "2026-10-08T20:59:35+08:00",
+        "quote": "互相偷然后就抵消了"
+      },
+      "classification": "confirmed_hero_rule_addendum_only",
+      "report": "rules/confirmed/RULE_UPDATE_2026-10-08_THIEF_MIRROR.md",
+      "verified_remote_before_round": "60439985a55ab2759f31e0938b1cd2144dc8cfa2",
+      "semantic_rules_changed": true,
+      "product_code_changed": false,
+      "local_game_tests_rerun": false,
+      "local_web_rebuilt": false,
+      "local_browser_tests_run": false,
+      "apk_built": false,
+      "design_required_remaining": 3,
+      "implementation_pending": [
+        "H07-mirror"
+      ],
+      "existing_product_reports": "preserved_original_execution_revision_no_new_timestamps"
     }
   ],
   "ci_scope_configuration": {
@@ -1959,6 +1983,15 @@
       "sha256": "30775c14cfe15ede76737779abd564eb2621af34970cd58dcbfa9b97e1cf857e",
       "confirmed_at": "2026-10-08T20:59:35+08:00",
       "user_quote": "互相偷然后就抵消了",
+      "runtime_status": "confirmed_pending_implementation",
+      "runtime_accepted": false
+    },
+    {
+      "id": "LEZI-H12-GENERAL-THRESHOLD-2026-10-08",
+      "path": "rules/confirmed/RULE_UPDATE_2026-10-08_FLAME_GENERAL.md",
+      "sha256": "b4bdec69c24513422e3a501fc32f6c8a0fa7c8bddd84e0535cfa65a459a6e110",
+      "confirmed_at": "2026-10-08T21:13:45+08:00",
+      "user_quote": "至少3级才能消灭",
       "runtime_status": "confirmed_pending_implementation",
       "runtime_accepted": false
     }

@@ -1,5 +1,5 @@
 {
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-08-H07-confirmed",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-08-H12-threshold-confirmed",
   "rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
   "code_checkpoint": "9ed5ff71590bf9658d1294def22bb669b195357b",
   "sources": [
@@ -431,6 +431,13 @@
       "path": "rules/confirmed/RULE_UPDATE_2026-10-08_THIEF_MIRROR.md",
       "sha256": "30775c14cfe15ede76737779abd564eb2621af34970cd58dcbfa9b97e1cf857e",
       "applied_scope": "H07双窃时互相抵消，覆盖r7-clean该未决项；运行时待接入"
+    },
+    {
+      "id": "LEZI-H12-GENERAL-THRESHOLD-2026-10-08",
+      "kind": "explicit_user_confirmed_hero_rule_addendum",
+      "path": "rules/confirmed/RULE_UPDATE_2026-10-08_FLAME_GENERAL.md",
+      "sha256": "b4bdec69c24513422e3a501fc32f6c8a0fa7c8bddd84e0535cfa65a459a6e110",
+      "applied_scope": "H12普通中心至少3级消灭将帅；不补将帅中心未决项"
     }
   ],
   "coverage": {
@@ -488,7 +495,8 @@
       "id": "H12-general-rank",
       "status": "blocked/design-required",
       "code": "DESIGN_REQUIRED_FLAME_GENERAL",
-      "reason": "将帅可作中心，但未定义其与普通层级目标的比较；普通中心邻接将帅的消灭条件也无法从“既有终局规则”唯一推出。仅拒绝涉及未定义交叉的范围。"
+      "reason": "普通中心至少3级可消灭范围内将帅已确认、运行时待接入；将/帅作为中心时对其他棋的消灭条件仍未定义。",
+      "partial_confirmation": "rules/confirmed/RULE_UPDATE_2026-10-08_FLAME_GENERAL.md"
     },
     {
       "id": "H16-chaos-entry",
@@ -510,7 +518,7 @@
     "旧STATE运行时分支/测试数/下一步",
     "过时3英雄进度"
   ],
-  "completeness_claim": "H07镜像设计已确认但运行时待接入；尚余3项设计缺口。501测试与20准备态DOM是增量前部分证据，109合同完整验收0。",
+  "completeness_claim": "H07镜像及H12普通中心对将帅门槛已确认、运行时待接入；H12将帅中心、H16入口、H21落位仍为3项设计缺口。501/20为增量前部分证据，109合同完整验收0。",
   "previous_code_checkpoint": "b45077a692213953ee7e3edef31a6d16c011c940",
   "runtime_evidence_index": "review/invariants/LATEST.json",
   "gameplay_execution_evidence_index": "review/gameplay/runtime-browser-review-2026-10-05-modes.json",
@@ -553,6 +561,11 @@
       "id": "LEZI-H07-MIRROR-2026-10-08",
       "path": "rules/confirmed/RULE_UPDATE_2026-10-08_THIEF_MIRROR.md",
       "sha256": "30775c14cfe15ede76737779abd564eb2621af34970cd58dcbfa9b97e1cf857e"
+    },
+    {
+      "id": "LEZI-H12-GENERAL-THRESHOLD-2026-10-08",
+      "path": "rules/confirmed/RULE_UPDATE_2026-10-08_FLAME_GENERAL.md",
+      "sha256": "b4bdec69c24513422e3a501fc32f6c8a0fa7c8bddd84e0535cfa65a459a6e110"
     }
   ]
 }

@@ -328,9 +328,13 @@
         }
       ],
       "fully_accepted": false,
-      "remaining": "完整来源交叉、概率全边界、自然完整局、设备与全称验收仍待；这些命名情景不能证明整条英雄规则。",
+      "remaining": "将帅自身作为中心的范围消灭条件待确认；已确认3级门槛待实现。完整来源、自然整盘、设备及全称验收仍待。",
       "design_required": [
         "H12-general-rank"
+      ],
+      "confirmed_threshold": "rules/confirmed/RULE_UPDATE_2026-10-08_FLAME_GENERAL.md",
+      "runtime_pending": [
+        "ordinary center rank>=3 may destroy non-center generals"
       ]
     },
     {
@@ -654,7 +658,8 @@
       "id": "H12-general-rank",
       "status": "blocked/design-required",
       "code": "DESIGN_REQUIRED_FLAME_GENERAL",
-      "reason": "将帅可作中心，但未定义其与普通层级目标的比较；普通中心邻接将帅的消灭条件也无法从“既有终局规则”唯一推出。仅拒绝涉及未定义交叉的范围。"
+      "reason": "普通中心至少3级可消灭范围内将帅已确认、运行时待接入；将/帅作为中心时对其他棋的消灭条件仍未定义。",
+      "partial_confirmation": "rules/confirmed/RULE_UPDATE_2026-10-08_FLAME_GENERAL.md"
     },
     {
       "id": "H16-chaos-entry",
@@ -744,6 +749,11 @@
     {
       "id": "LEZI-H07-MIRROR-2026-10-08",
       "path": "rules/confirmed/RULE_UPDATE_2026-10-08_THIEF_MIRROR.md",
+      "runtime_accepted": false
+    },
+    {
+      "id": "LEZI-H12-GENERAL-THRESHOLD-2026-10-08",
+      "path": "rules/confirmed/RULE_UPDATE_2026-10-08_FLAME_GENERAL.md",
       "runtime_accepted": false
     }
   ]
