@@ -328,13 +328,14 @@
         }
       ],
       "fully_accepted": false,
-      "remaining": "将帅自身作为中心的范围消灭条件待确认；已确认3级门槛待实现。完整来源、自然整盘、设备及全称验收仍待。",
+      "remaining": "将帅中心对范围内另一将帅的消灭条件待确认；已确认两项规则待实现。完整来源、自然整盘、设备及全称验收仍待。",
       "design_required": [
         "H12-general-rank"
       ],
       "confirmed_threshold": "rules/confirmed/RULE_UPDATE_2026-10-08_FLAME_GENERAL.md",
       "runtime_pending": [
-        "ordinary center rank>=3 may destroy non-center generals"
+        "ordinary center rank>=3 may destroy non-center generals",
+        "general center destroys all ordinary targets including rook"
       ]
     },
     {
@@ -658,7 +659,7 @@
       "id": "H12-general-rank",
       "status": "blocked/design-required",
       "code": "DESIGN_REQUIRED_FLAME_GENERAL",
-      "reason": "普通中心至少3级可消灭范围内将帅已确认、运行时待接入；将/帅作为中心时对其他棋的消灭条件仍未定义。",
+      "reason": "普通中心至少3级消灭将帅、将帅中心消灭全部普通棋均已确认；将帅中心对范围内另一将帅的消灭条件仍待确认。",
       "partial_confirmation": "rules/confirmed/RULE_UPDATE_2026-10-08_FLAME_GENERAL.md"
     },
     {
