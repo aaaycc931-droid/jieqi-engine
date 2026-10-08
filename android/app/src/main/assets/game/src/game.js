@@ -453,6 +453,10 @@ export function applyAuthoritativeMove(
       nextSecret.processedActions[command.actionId] = nextState.revision;
       return { state: nextState, secret: nextSecret, duplicate: false };
     }
+    if (deferTurnEnd) {
+      nextSecret.processedActions[command.actionId] = nextState.revision;
+      return { state: nextState, secret: nextSecret, duplicate: false };
+    }
     finishAfterPlayerAction(nextState, nextSecret, command, actingSide, false, source, false);
     return { state: nextState, secret: nextSecret, duplicate: false };
   }

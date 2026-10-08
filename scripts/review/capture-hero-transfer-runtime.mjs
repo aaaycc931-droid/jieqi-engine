@@ -48,6 +48,14 @@ try {
  await page.evaluate(()=>globalThis.__heroReview.handoff());assert.equal(await page.locator('#transferred-hero-controls').textContent(),'');done('public insight fee, private result and device handoff clearing');
  let b=pair('single_blade',[revealed('blade','red','rook',1,7)]);configureHeroPreparation(b.state,b.secret,'red',{blade:'left'});b=applyAuthoritativeMove(b.state,b.secret,move({x:1,y:7},{x:1,y:6},'blade-main'));
  await load(b);await page.getByRole('button',{name:'顺锋移置',exact:true}).click();await coordinates(2,6);await confirm();s=await read();assert.equal(s.pieces.find(p=>p.id==='blade').x,2);assert.equal(s.formalTurns.red,1);assert.equal(s.turn,'black');done('blade displacement child ends only its original formal turn');
+ let charge={state:initializeFeatureGameState(gameState([revealed('charger','red','rook',0,7),revealed('charge-first','black','pawn',0,6),revealed('charge-defender','black','horse',1,6),revealed('other-defender','black','horse',7,3)]),{red:'berserker',black:'warrior'}),secret:secretState()};
+ charge.state.heroRuntime.red.will=6;
+ for(const id of ['charge-defender','other-defender'])charge.state.effectsByPieceId[id]={barrier:{owner:'black',enemyTurnsRemaining:3}};
+ charge=applyAuthoritativeMove(charge.state,charge.secret,move({x:0,y:7},{x:0,y:6},'charge-parent'));
+ await load(charge);await page.getByRole('button',{name:'冲锋·斩',exact:true}).click();await coordinates(1,6);await confirm();s=await read();
+ assert.deepEqual(s.formalTurns,{red:1,black:0});assert.equal(s.turn,'black');assert.equal(s.pendingHeroChild,undefined);assert.equal(s.lastCompletedFormalTurn.mainActionId,'charge-parent');
+ assert.equal(s.heroRuntime.red.will,3);assert.equal(s.heroRuntime.red.chargeCount,1);assert.equal(s.effectsByPieceId['charge-defender']?.barrier,undefined);assert.equal(s.effectsByPieceId['other-defender'].barrier.enemyTurnsRemaining,2);
+ assert.equal(s.lastMove.countsAsFormalTurn,false);assert.equal(s.lastMove.bouncedAgainstPieceId,'charge-defender');assert.equal(s.pieces.find(p=>p.id==='charger').x,0);assert(s.pieces.some(p=>p.id==='charge-defender'));done('charge barrier bounce closes parent turn and durations once');
  const river=pair('jiang_he',[{...revealed('river','red','rook',0,4),layer:'river',river:{source:'jiang_he:front',spaceId:'jiang_he:river',cellId:'0'}}]);river.state.effectsByPieceId.river={riverTurns:2};
  await load(river);await open('river_move');await page.getByLabel('技能棋子',{exact:true}).selectOption('river');await coordinates(8,0);await confirm();s=await read();assert.equal(s.pieces.find(p=>p.id==='river').river.cellId,'8');done('river arbitrary distance horizontal operation');
  const inner=pair('death_knight',[revealed('victim','black','rook',0,6)],'inner');putGhostObject(inner.state,{owner:'red',position:{x:0,y:6},kind:'inner_ghost',source:'death_knight:inner_death',layers:3,remaining:0,persistent:true},'add_layers');

@@ -266,6 +266,14 @@
       {
         "file": "tests/hero-cross-settlement.test.ts",
         "namePrefix": "R5-CROSS-04"
+      },
+      {
+        "file": "tests/hero-child-boundaries.test.ts",
+        "namePrefix": "R5-CHILD-01"
+      },
+      {
+        "file": "tests/hero-child-boundaries.test.ts",
+        "namePrefix": "R5-CHILD-02"
       }
     ],
     "INV-ATOMIC-003": [
@@ -1248,6 +1256,14 @@
       {
         "file": "tests/hero-cross-settlement.test.ts",
         "namePrefix": "R5-CROSS-04"
+      },
+      {
+        "file": "tests/hero-child-boundaries.test.ts",
+        "namePrefix": "R5-CHILD-01"
+      },
+      {
+        "file": "tests/hero-child-boundaries.test.ts",
+        "namePrefix": "R5-CHILD-02"
       }
     ],
     "ADD-DURATION-001": [
@@ -1278,6 +1294,14 @@
       {
         "file": "tests/confirmed-runtime.test.ts",
         "namePrefix": "HERO shadow cooldown excludes activation and all seven following owner turns"
+      },
+      {
+        "file": "tests/hero-child-boundaries.test.ts",
+        "namePrefix": "R5-CHILD-01"
+      },
+      {
+        "file": "tests/hero-child-boundaries.test.ts",
+        "namePrefix": "R5-CHILD-02"
       }
     ],
     "ADD-BATCH-001": [
