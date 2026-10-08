@@ -1,6 +1,6 @@
 {
   "project": "乐子象棋 / jieqi-engine",
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-08-r5-flight-turn",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-08-H07-confirmed",
   "updated_at": "2026-10-08",
   "repository": "https://github.com/aaaycc931-droid/jieqi-engine",
   "working_branch": "codex/ui-android-apk-20261001",
@@ -10,7 +10,7 @@
   "baseline_id": "LEZI-FUNCTION-2026-10-04-v1",
   "baseline_digest": "4bcf9fb91f5c6e41f456e7424ebd7ed09c6c07b1595ec825604aa730fdad020b",
   "current_rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
-  "current_rule_digest": "0d839b00f98f120a8a3e2ce6cde6eee90e67c17835d70503fb5735e228a1e08a",
+  "current_rule_digest": "efb5857f15a0ffe96ea7522b267f29d41a022dd278f71572acb75cf805bd60c8",
   "authoritative_entry": "00_READ_FIRST.md",
   "current_rules": [
     "01_CURRENT_RULES.md",
@@ -73,7 +73,8 @@
       "evidence_artifact": 11549898795,
       "evidence_artifact_digest": "sha256:753a90af5a37bbbda9b8ed3b38a3567d420cd9b533bc9a77a0849cb9d3bba006",
       "apk_job": "skipped",
-      "provenance": "actual_GitHub_job_log_JSON_summary; artifact_index_recorded_archive_not_downloaded_this_round"
+      "provenance": "actual_GitHub_job_log_JSON_summary; artifact_index_recorded_archive_not_downloaded_this_round",
+      "accepts_new_H07_addendum": false
     },
     "previous_ci": {
       "status": "success",
@@ -361,7 +362,8 @@
       "evidence_artifact": 11549898795,
       "evidence_artifact_digest": "sha256:753a90af5a37bbbda9b8ed3b38a3567d420cd9b533bc9a77a0849cb9d3bba006",
       "apk_job": "skipped",
-      "provenance": "actual_GitHub_job_log_JSON_summary; artifact_index_recorded_archive_not_downloaded_this_round"
+      "provenance": "actual_GitHub_job_log_JSON_summary; artifact_index_recorded_archive_not_downloaded_this_round",
+      "accepts_new_H07_addendum": false
     },
     "contract_evidence_history": [
       {
@@ -475,9 +477,9 @@
         "contract_digest": "c6e4649ce5a028b5477090b87066dd5bb7a65ad3a5632d138a05bf972b89e1e3"
       }
     ],
-    "applies_to_current_rule_revision": true,
+    "applies_to_current_rule_revision": false,
     "historical_rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
-    "new_revision_validation": "partial_scenario_evidence_501_tests_and_20_prepared_browser_operations_not_full_acceptance",
+    "new_revision_validation": "501 engine and 20 prepared DOM historical pre-addendum evidence; H07 mirror confirmed semantics not implemented or tested",
     "historical_r4_test_count": 434,
     "mode_foundation_browser_current": {
       "status": "skipped_unaffected_scope",
@@ -829,7 +831,11 @@
         "new_cases": 0,
         "report_retrieval": "actual_job_log_evidenceFile_JSON; artifact_archive_bytes_not_verified"
       }
-    ]
+    ],
+    "confirmed_addenda_runtime_acceptance": {
+      "LEZI-H07-MIRROR-2026-10-08": false
+    },
+    "evidence_rule_digest_at_run": "0d839b00f98f120a8a3e2ce6cde6eee90e67c17835d70503fb5735e228a1e08a"
   },
   "restrictions": [
     "ui_last",
@@ -854,7 +860,7 @@
     "verification_policy": "impact_selected_during_development_then_one_full_regression_per_completed_batch",
     "ci_trigger_optimization": "implemented_current_change_scope_with_successful_predecessor_guard"
   },
-  "next_action": "继续已确认来源的其他定点交叉审计；四项design-required须由正式设计来源补齐后再实现。旧整盘、主动技能整盘、模式独立适配、APK和最终视觉队列保持暂停。",
+  "next_action": "继续与用户逐项补全剩余3项设计缺口；已确认H07双窃时抵消待运行时接入。旧整盘、主动技能整盘、模式独立适配、APK和最终视觉队列保持暂停。",
   "source_gap_register": "SOURCE_REGISTER.json",
   "apk_built_this_round": false,
   "previous_implementation_commit": "b45077a692213953ee7e3edef31a6d16c011c940",
@@ -924,10 +930,10 @@
     "physical_device_tests_run": false
   },
   "previous_rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
-  "previous_rule_digest": "cf831ebe7872cb9d8ed55fa3b4edb7f03492b3c90a06c8d9be494ac9a9e9284f",
+  "previous_rule_digest": "0d839b00f98f120a8a3e2ce6cde6eee90e67c17835d70503fb5735e228a1e08a",
   "rule_digest_algorithm": "sha256(concat(relative UTF-8 path + NUL + file bytes + NUL), STATE.current_rules order)",
   "paused_next_action": "Continue destiny bomb/hourglass full real matches, second Shadow cooldown/lifecycle, remaining private snapshot and cross-end clock intersections. Current five active families have sampled natural results; original Nozdormu/Prince and current 12-seat normal regression remain incomplete. Local timeout outcome not frozen; physical RFCOMM/WebView/two-phone pending. UI last; APK paused.",
-  "work_status": "r5_flight_turn_boundary_published_partial_evidence_design_required_open",
+  "work_status": "H07_mirror_confirmed_runtime_pending_three_design_gaps_open",
   "game_modes": {
     "authority": "09_CURRENT_GAME_MODES.md",
     "base_rule_status": "confirmed",
@@ -956,7 +962,7 @@
     "new_mode_tests_run": true,
     "confirmation_record": "09_CURRENT_GAME_MODES.md",
     "implementation_authorization": "user confirmation 2026-10-05 19:21 Asia/Shanghai",
-    "latest_round_semantic_rules_changed": false
+    "latest_round_semantic_rules_changed": true
   },
   "rule_digest_history": [
     {
@@ -978,6 +984,11 @@
       "revision": "LEZI-FUNCTION-2026-10-07-r5",
       "digest": "0d839b00f98f120a8a3e2ce6cde6eee90e67c17835d70503fb5735e228a1e08a",
       "scope": "formal complete hero transfer, original sources preserved"
+    },
+    {
+      "revision": "LEZI-FUNCTION-2026-10-07-r5",
+      "digest": "0d839b00f98f120a8a3e2ce6cde6eee90e67c17835d70503fb5735e228a1e08a",
+      "scope": "pre H07 mirror confirmation; 29 runtime evidence"
     }
   ],
   "stage_close": {
@@ -1447,7 +1458,7 @@
     "remaining_runtime_contracts": [],
     "remaining_runtime_contracts_note": "Public ADD-HERO-FORM-001 model now has named partial evidence in round20; future source integration and full acceptance remain pending."
   },
-  "pending_next_runtime_action": "继续已确认来源的其他定点交叉审计；四项design-required须由正式设计来源补齐后再实现。旧整盘、主动技能整盘、模式独立适配、APK和最终视觉队列保持暂停。",
+  "pending_next_runtime_action": "接入已确认H07双窃时抵消：解除镜像拒绝、校验标准60/60及单侧75/45；不改写其他明确特殊计时来源。",
   "account_switch_close": {
     "requested_at": "2026-10-06T23:14:24+08:00",
     "request": "我要更换账号了",
@@ -1634,42 +1645,23 @@
   },
   "latest_document_round": {
     "authorization": {
-      "at": "2026-10-08T16:20:48+08:00",
-      "quote": "继续推进项目"
+      "at": "2026-10-08T20:59:35+08:00",
+      "quote": "互相偷然后就抵消了"
     },
-    "classification": "ci_scope_configuration_and_handoff",
-    "report": "handoff/current/26_CI_SCOPE_2026-10-08.md",
-    "verified_remote_before_round": "fe1bf6211e3cb168183865be426f7edb0c34adba",
-    "ci_configuration_commit": "9980f891c2a293a0f3862717b7bffb66a8d02ee3",
+    "classification": "confirmed_hero_rule_addendum_only",
+    "report": "rules/confirmed/RULE_UPDATE_2026-10-08_THIEF_MIRROR.md",
+    "verified_remote_before_round": "60439985a55ab2759f31e0938b1cd2144dc8cfa2",
+    "semantic_rules_changed": true,
     "product_code_changed": false,
-    "semantic_rules_changed": false,
-    "game_tests_added": 0,
-    "local_ci_scope_tests_passed": 7,
     "local_game_tests_rerun": false,
     "local_web_rebuilt": false,
     "local_browser_tests_run": false,
-    "ci_configuration_changed": true,
-    "personal_main_document_modified": false,
     "apk_built": false,
-    "rules_ci": {
-      "run_id": 37749743281,
-      "job_id": 113219761984,
-      "scope_tests_passed": 7,
-      "existing_game_tests_passed": 487,
-      "web_and_assets": "success"
-    },
-    "browser_ci": {
-      "run_id": 37749743252,
-      "job_id": 113219761188,
-      "hero_prepared_cases": 12,
-      "mode_preview_cases": 9,
-      "errors": 0
-    },
-    "ci_checkout": "edb710db69a2f637163f99317f7ea67a1df577cd",
-    "ci_source_digest": "326313adaaf3694e4e9b1b5ebd02e6a3ad5b4c3f3177540ab2c95a300bc9517f",
-    "documentation_skip_validation": "inspect_actual_workflow_steps_for_the_published_documentation_commit_not_prefilled",
-    "existing_product_reports": "preserved_original_execution_revision_no_new_timestamps",
-    "superseded_by_current_runtime_report": "handoff/current/29_FLIGHT_TURN_BOUNDARY_2026-10-08.md"
+    "design_required_remaining": 3,
+    "implementation_pending": [
+      "H07-mirror"
+    ],
+    "existing_product_reports": "preserved_original_execution_revision_no_new_timestamps"
   },
   "acceptance_gap_consolidation": {
     "status": "historical_r4_inventory_superseded_by_received_r5_transfer",
@@ -1729,7 +1721,6 @@
       }
     },
     "unresolved": [
-      "H07-mirror: 正式稿明确双窃时叠加未冻结；不采用旧60/60猜测。",
       "H12-general-rank: 将帅可作中心，但未定义其与普通层级目标的比较；普通中心邻接将帅的消灭条件也无法从“既有终局规则”唯一推出。仅拒绝涉及未定义交叉的范围。",
       "H16-chaos-entry: 资源及后续连斩结构已确认，但乱斗如何首次发动、如何付费及是否需要先有常态冲锋触发未定义。已接入确认资源，未开启连斩/付费入口。",
       "H21-dragon-scale-placement: 龙鳞保住进攻终点棋后，攻击者与目标如何合法落位尚未冻结；拒绝整次相关行动且不消费龙鳞。"
@@ -1740,7 +1731,14 @@
     "cross_settlement_tests": 8,
     "latest_total_tests_passed": 487,
     "child_boundary_tests": 3,
-    "descent_boundary_tests": 6
+    "descent_boundary_tests": 6,
+    "resolved_design_pending_runtime": [
+      {
+        "id": "H07-mirror",
+        "confirmation": "rules/confirmed/RULE_UPDATE_2026-10-08_THIEF_MIRROR.md",
+        "status": "confirmed_pending_implementation"
+      }
+    ]
   },
   "hero_cross_settlement_runtime": {
     "record": "handoff/current/23_HERO_CROSS_SETTLEMENT_2026-10-08.md",
@@ -1852,6 +1850,45 @@
       "ci_configuration_changed": false,
       "personal_main_document_modified": false,
       "existing_runtime_evidence": "unchanged_previous_product_70f19144f399b6fcf3742d4d49188fb17d78a9d7_not_executed_this_document_round"
+    },
+    {
+      "authorization": {
+        "at": "2026-10-08T16:20:48+08:00",
+        "quote": "继续推进项目"
+      },
+      "classification": "ci_scope_configuration_and_handoff",
+      "report": "handoff/current/26_CI_SCOPE_2026-10-08.md",
+      "verified_remote_before_round": "fe1bf6211e3cb168183865be426f7edb0c34adba",
+      "ci_configuration_commit": "9980f891c2a293a0f3862717b7bffb66a8d02ee3",
+      "product_code_changed": false,
+      "semantic_rules_changed": false,
+      "game_tests_added": 0,
+      "local_ci_scope_tests_passed": 7,
+      "local_game_tests_rerun": false,
+      "local_web_rebuilt": false,
+      "local_browser_tests_run": false,
+      "ci_configuration_changed": true,
+      "personal_main_document_modified": false,
+      "apk_built": false,
+      "rules_ci": {
+        "run_id": 37749743281,
+        "job_id": 113219761984,
+        "scope_tests_passed": 7,
+        "existing_game_tests_passed": 487,
+        "web_and_assets": "success"
+      },
+      "browser_ci": {
+        "run_id": 37749743252,
+        "job_id": 113219761188,
+        "hero_prepared_cases": 12,
+        "mode_preview_cases": 9,
+        "errors": 0
+      },
+      "ci_checkout": "edb710db69a2f637163f99317f7ea67a1df577cd",
+      "ci_source_digest": "326313adaaf3694e4e9b1b5ebd02e6a3ad5b4c3f3177540ab2c95a300bc9517f",
+      "documentation_skip_validation": "inspect_actual_workflow_steps_for_the_published_documentation_commit_not_prefilled",
+      "existing_product_reports": "preserved_original_execution_revision_no_new_timestamps",
+      "superseded_by_current_runtime_report": "handoff/current/29_FLIGHT_TURN_BOUNDARY_2026-10-08.md"
     }
   ],
   "ci_scope_configuration": {
@@ -1914,5 +1951,16 @@
     "original_flyer_identity_preserved_above_ground": true,
     "status": "partial_named_scenario_evidence",
     "all_functions_accepted": false
-  }
+  },
+  "confirmed_rule_addenda": [
+    {
+      "id": "LEZI-H07-MIRROR-2026-10-08",
+      "path": "rules/confirmed/RULE_UPDATE_2026-10-08_THIEF_MIRROR.md",
+      "sha256": "30775c14cfe15ede76737779abd564eb2621af34970cd58dcbfa9b97e1cf857e",
+      "confirmed_at": "2026-10-08T20:59:35+08:00",
+      "user_quote": "互相偷然后就抵消了",
+      "runtime_status": "confirmed_pending_implementation",
+      "runtime_accepted": false
+    }
+  ]
 }

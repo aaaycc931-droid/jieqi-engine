@@ -1,5 +1,5 @@
 {
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-08-r5-flight-turn",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-08-H07-confirmed",
   "rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
   "code_checkpoint": "9ed5ff71590bf9658d1294def22bb669b195357b",
   "sources": [
@@ -424,6 +424,13 @@
       "path": "handoff/current/29_FLIGHT_TURN_BOUNDARY_2026-10-08.md",
       "sha256": "cf37769700cd84e1b3a14e72f84b9496cb181387ccac1ac024c46d1d6b8849c0",
       "applied_scope": "显式连带操控与下一正式强制降落、空地共格原棋选择的3引擎和2新增DOM情景，不定义玩法"
+    },
+    {
+      "id": "LEZI-H07-MIRROR-2026-10-08",
+      "kind": "explicit_user_confirmed_hero_rule_addendum",
+      "path": "rules/confirmed/RULE_UPDATE_2026-10-08_THIEF_MIRROR.md",
+      "sha256": "30775c14cfe15ede76737779abd564eb2621af34970cd58dcbfa9b97e1cf857e",
+      "applied_scope": "H07双窃时互相抵消，覆盖r7-clean该未决项；运行时待接入"
     }
   ],
   "coverage": {
@@ -478,12 +485,6 @@
       "action": "涉及基础区域/跨河变更前定位原稿核对"
     },
     {
-      "id": "H07-mirror",
-      "status": "blocked/design-required",
-      "code": "DESIGN_REQUIRED_THIEF_MIRROR",
-      "reason": "正式稿明确双窃时叠加未冻结；不采用旧60/60猜测。"
-    },
-    {
       "id": "H12-general-rank",
       "status": "blocked/design-required",
       "code": "DESIGN_REQUIRED_FLAME_GENERAL",
@@ -509,7 +510,7 @@
     "旧STATE运行时分支/测试数/下一步",
     "过时3英雄进度"
   ],
-  "completeness_claim": "H01-H21已接入确认部分；501项测试和20项浏览器准备态只是部分情景证据，109合同完整验收0，四处设计缺项保留。",
+  "completeness_claim": "H07镜像设计已确认但运行时待接入；尚余3项设计缺口。501测试与20准备态DOM是增量前部分证据，109合同完整验收0。",
   "previous_code_checkpoint": "b45077a692213953ee7e3edef31a6d16c011c940",
   "runtime_evidence_index": "review/invariants/LATEST.json",
   "gameplay_execution_evidence_index": "review/gameplay/runtime-browser-review-2026-10-05-modes.json",
@@ -546,5 +547,12 @@
   "hero_descent_atom_index": "27_HERO_DESCENT_ATOM_2026-10-08.md",
   "current_hero_browser_evidence_index": "review/invariants/HERO_TRANSFER_BROWSER_2026-10-07.json",
   "bomb_target_boundary_index": "28_BOMB_TARGET_BOUNDARY_2026-10-08.md",
-  "flight_turn_boundary_index": "29_FLIGHT_TURN_BOUNDARY_2026-10-08.md"
+  "flight_turn_boundary_index": "29_FLIGHT_TURN_BOUNDARY_2026-10-08.md",
+  "confirmed_rule_addenda": [
+    {
+      "id": "LEZI-H07-MIRROR-2026-10-08",
+      "path": "rules/confirmed/RULE_UPDATE_2026-10-08_THIEF_MIRROR.md",
+      "sha256": "30775c14cfe15ede76737779abd564eb2621af34970cd58dcbfa9b97e1cf857e"
+    }
+  ]
 }

@@ -176,9 +176,9 @@
       "hero": "murozond_minion",
       "form": "front",
       "prior": "existing",
-      "required_delta": "75/45 clock; dual-thief mirror unresolved",
+      "required_delta": "single thief75/45 unchanged; dual thief mutual transfer cancels to60/60",
       "runtime_hooks": "hero-actions.ts formalTurnDurationMs; remote-room.ts clock",
-      "status": "implemented_confirmed_portions_design_required_branch",
+      "status": "single_thief_implemented_mirror_confirmed_pending_implementation",
       "tests": [
         {
           "file": "tests/confirmed-runtime.test.ts",
@@ -187,9 +187,11 @@
       ],
       "fully_accepted": false,
       "remaining": "完整来源交叉、概率全边界、自然完整局、设备与全称验收仍待；这些命名情景不能证明整条英雄规则。",
-      "design_required": [
-        "H07-mirror"
-      ]
+      "confirmation": "rules/confirmed/RULE_UPDATE_2026-10-08_THIEF_MIRROR.md",
+      "runtime_pending": [
+        "Replace DESIGN_REQUIRED_THIEF_MIRROR rejection with confirmed cancellation; revise old mirror-rejection test"
+      ],
+      "existing_test_scope": "pre-addendum single-side75/45 evidence and obsolete mirror-rejection expectation; not acceptance of60/60"
     },
     {
       "id": "H08",
@@ -649,12 +651,6 @@
   ],
   "design_required": [
     {
-      "id": "H07-mirror",
-      "status": "blocked/design-required",
-      "code": "DESIGN_REQUIRED_THIEF_MIRROR",
-      "reason": "正式稿明确双窃时叠加未冻结；不采用旧60/60猜测。"
-    },
-    {
       "id": "H12-general-rank",
       "status": "blocked/design-required",
       "code": "DESIGN_REQUIRED_FLAME_GENERAL",
@@ -734,5 +730,21 @@
   "bomb_target_boundary_cases": 4,
   "bomb_target_boundary_report": "handoff/current/28_BOMB_TARGET_BOUNDARY_2026-10-08.md",
   "flight_turn_boundary_cases": 3,
-  "flight_turn_boundary_report": "handoff/current/29_FLIGHT_TURN_BOUNDARY_2026-10-08.md"
+  "flight_turn_boundary_report": "handoff/current/29_FLIGHT_TURN_BOUNDARY_2026-10-08.md",
+  "resolved_design_history": [
+    {
+      "id": "H07-mirror",
+      "status": "confirmed_pending_implementation",
+      "code": "DESIGN_REQUIRED_THIEF_MIRROR",
+      "reason": "正式稿明确双窃时叠加未冻结；不采用旧60/60猜测。",
+      "confirmation": "rules/confirmed/RULE_UPDATE_2026-10-08_THIEF_MIRROR.md"
+    }
+  ],
+  "confirmed_rule_addenda": [
+    {
+      "id": "LEZI-H07-MIRROR-2026-10-08",
+      "path": "rules/confirmed/RULE_UPDATE_2026-10-08_THIEF_MIRROR.md",
+      "runtime_accepted": false
+    }
+  ]
 }

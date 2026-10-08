@@ -3,16 +3,16 @@
   "self_excluded": true,
   "files": {
     "00_READ_FIRST.md": {
-      "bytes": 2160,
-      "sha256": "236a21b1a8bc1454de1b7f49ebdf8ad1151858bf66c8f7300b54c371487062c9"
+      "bytes": 2444,
+      "sha256": "bd5cfa0fc8f8633873cabafa4cf14ca92962ad7db70e21c4abfc05686c158ca5"
     },
     "01_CURRENT_RULES.md": {
       "bytes": 30087,
       "sha256": "c0fb3bfb9269a7bbe9b227287bbd4ddcefc663c30ae28c75006129af794c101c"
     },
     "02_CURRENT_HEROES.md": {
-      "bytes": 32591,
-      "sha256": "da104122e8279e3bb9646059ad14783b2c64ef5816c98b2c97204ebb0457454b"
+      "bytes": 32878,
+      "sha256": "49fd2b1a04a25e60fca90fea2cff599ee763c0b7d509dcaae68da351114d8027"
     },
     "03_CURRENT_MUTATIONS.md": {
       "bytes": 17178,
@@ -23,8 +23,8 @@
       "sha256": "c133b4ee797b778ce4c88233437b2466255f27c30fcaec5b0941c766cc4bae00"
     },
     "05_PROGRESS_AND_NEXT.md": {
-      "bytes": 38746,
-      "sha256": "02b618bb7780afaa18310583d997bcfab2910f029366013a751559f766df0b17"
+      "bytes": 39684,
+      "sha256": "c7e3a475d02df594f2b2b5b719ec570c34e2480bda75d8fdd2d05d0703ec907b"
     },
     "06_COLLABORATION.md": {
       "bytes": 8164,
@@ -107,16 +107,16 @@
       "sha256": "9a0a9f908cb74eb7519e8f659f98cd8f36c87e31a5e58372023c538b1c22888d"
     },
     "NEW_DIALOGUE_PROMPT.txt": {
-      "bytes": 2175,
-      "sha256": "73a19ff5c2b1abfa761ecf5cebcc5f3688fb313f0f00f0d075f56550db2d0c0f"
+      "bytes": 2459,
+      "sha256": "25e36ff0fbeb0b6b5d9d26d61de6cc1bfc3f1d6d72402335cabb2b0925534333"
     },
     "SOURCE_REGISTER.json": {
-      "bytes": 32635,
-      "sha256": "4d6fd31fce89db302d1b1806573823f1c5da2e7d9c9475ee6dbb0064e485250e"
+      "bytes": 33037,
+      "sha256": "b7a5bb8998a0510f8f5fdd1a6c9a39eadae25df8e63e93aabd1e0d6196ca66f6"
     },
     "STATE.json": {
-      "bytes": 87116,
-      "sha256": "6a0d48f5e4bd66d0bd715cd6b9cdcce759694ca1997fd4808f1fa0c75bdb53c6"
+      "bytes": 88908,
+      "sha256": "e5c44624f1325dc68d48d87e2f944f6313b36e1876e7541a7d4b11dc2b05f6db"
     },
     "assets/approved-home.png": {
       "bytes": 2157060,
@@ -131,8 +131,8 @@
       "sha256": "b476f6ba2696cb4a0185ac96da1ad976c7b43f37ff694b5bf86ccbc696cbc210"
     },
     "qa/HERO_TRANSFER_AUDIT.json": {
-      "bytes": 27405,
-      "sha256": "3e0e5603d9fbc98e861e7b4e3d81cf0f472b45b25c919e9181acc1234eea8401"
+      "bytes": 28078,
+      "sha256": "c96716cef8681592504d292dd52737434a999262cdf464913032961d895d7569"
     },
     "qa/INVARIANTS.json": {
       "bytes": 45423,
@@ -170,9 +170,8 @@
     "apk_built": false,
     "remote_and_execution_product_trees_equal": true,
     "historical_r4_inventory_preserved": true,
-    "design_required_branches": 4,
     "cross_settlement_8_new_cases_passed": true,
-    "rule_sources_unchanged_this_round": true,
+    "rule_sources_unchanged_this_round": false,
     "child_boundary_3_new_cases_passed": true,
     "first_browser_failure_preserved": true,
     "descent_boundary_6_new_cases_passed": true,
@@ -195,6 +194,10 @@
     "historical_mode_foundation_9_failure_fallback_cases_passed": true,
     "engine_501_passed": true,
     "browser_20_prepared_operations_passed": true,
-    "flight_turn_boundary_3_new_cases_passed": true
+    "flight_turn_boundary_3_new_cases_passed": true,
+    "historical_design_required_branches": 4,
+    "design_required_branches": 3,
+    "H07_mirror_confirmed_runtime_pending": true,
+    "product_tests_rerun_for_H07_confirmation": false
   }
 }
