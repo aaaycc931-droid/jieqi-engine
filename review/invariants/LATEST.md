@@ -1,8 +1,8 @@
 # 规则合同逐项运行证据
 
-规则：LEZI-FUNCTION-2026-10-07-r5；运行时：v24.19.0；时间：2026-10-08T09:12:15.449Z。
+规则：LEZI-FUNCTION-2026-10-07-r5；运行时：v24.19.0；时间：2026-10-08T09:29:21.358Z。
 
-测试 494 通过 / 0 失败。109 项合同：106 项有部分通过证据，0 项缺专属测试，3 项属于规范/概念检查；完整验收仍为 0 项。
+测试 498 通过 / 0 失败。109 项合同：106 项有部分通过证据，0 项缺专属测试，3 项属于规范/概念检查；完整验收仍为 0 项。
 
 本表关联具体情景用例，不把相关用例通过写成整条规则的完整证明。精确用例名称、源码摘要与限制见 LATEST.json。
 
@@ -66,7 +66,7 @@
 | INV-FORTRESS-001 | partial_evidence_passed | tests/mutation.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
 | INV-MUROZOND-001 | partial_evidence_passed | tests/confirmed-runtime.test.ts, tests/time-line-contracts.test.ts, tests/exception-contracts.test.ts | 已验证返回陷阱、返回失败跳过控制并占步、无合法重走拒绝事务；占位与无合法着法为明确构造状态，尚未穷尽真实行动历史的可达组合。 |
 | INV-NOZDORMU-001 | partial_evidence_passed | tests/confirmed-runtime.test.ts, tests/time-line-contracts.test.ts, tests/exception-contracts.test.ts, tests/snapshot-resource-contracts.test.ts, tests/rewind-action-contracts.test.ts | 已补毁灭/祈求/刺杀资源、战士名额防御、暗子身份与亡魂回溯；另有風与陷阱寿命证据。全部持续时序、重复回溯交叉、本机私有交接与设备流程仍未穷尽。本轮补暗影之舞/恢复隐身重走的同棋、禁止进攻/将军、完成清理及重复命令；不外推全部组合。 |
-| INV-TIME-COLLAPSE-001 | partial_evidence_passed | tests/confirmed-runtime.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
+| INV-TIME-COLLAPSE-001 | partial_evidence_passed | tests/confirmed-runtime.test.ts, tests/bomb-target-boundaries.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
 | INV-TIME-COLLAPSE-002 | partial_evidence_passed | tests/cross-rule-contracts.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
 | INV-HOURGLASS-001 | partial_evidence_passed | tests/confirmed-runtime.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |
 | INV-MANIFESTED-001 | partial_evidence_passed | tests/confirmed-runtime.test.ts | 已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。 |

@@ -113,6 +113,22 @@
         {
           "file": "tests/time-line-contracts.test.ts",
           "namePrefix": "TIME-TRAP-"
+        },
+        {
+          "file": "tests/bomb-target-boundaries.test.ts",
+          "namePrefix": "R5-BOMB-TARGET-01"
+        },
+        {
+          "file": "tests/bomb-target-boundaries.test.ts",
+          "namePrefix": "R5-BOMB-TARGET-02"
+        },
+        {
+          "file": "tests/bomb-target-boundaries.test.ts",
+          "namePrefix": "R5-BOMB-TARGET-03"
+        },
+        {
+          "file": "tests/bomb-target-boundaries.test.ts",
+          "namePrefix": "R5-BOMB-TARGET-04"
         }
       ],
       "fully_accepted": false,
@@ -634,10 +650,10 @@
     }
   ],
   "scoring_is_non_normative": true,
-  "implementation_commit": "c68a9b4acc6b9167f301ba21e2ee8d3e794ebfb2",
-  "local_execution_commit": "64b7a03513d7e1060d06a09f2244c68e03166da0",
-  "implementation_tree": "8b9ee6c99a0c4ef776ef6e2b3a0bb2fbd300c0cc",
-  "tests_passed": 494,
+  "implementation_commit": "b45077a692213953ee7e3edef31a6d16c011c940",
+  "local_execution_commit": "3da2033393cd5c370843aa78e5cb54767ca18190",
+  "implementation_tree": "c2ad40457facf58a4456d22e017b52d058a1b4b2",
+  "tests_passed": 498,
   "new_dedicated_cases": 36,
   "browser_evidence": "review/invariants/HERO_TRANSFER_BROWSER_2026-10-07.json",
   "previous_runtime_checkpoint": {
@@ -668,13 +684,22 @@
       "implementation_tree": "39b9d71a905dd3e6041842202f4cec60fdc06117",
       "tests_passed": 487,
       "browser_prepared_cases": 12
+    },
+    {
+      "implementation_commit": "c68a9b4acc6b9167f301ba21e2ee8d3e794ebfb2",
+      "local_execution_commit": "64b7a03513d7e1060d06a09f2244c68e03166da0",
+      "implementation_tree": "8b9ee6c99a0c4ef776ef6e2b3a0bb2fbd300c0cc",
+      "tests_passed": 494,
+      "browser_prepared_cases": 16
     }
   ],
   "child_boundary_cases": 3,
   "child_boundary_report": "handoff/current/24_HERO_CHILD_BOUNDARY_2026-10-08.md",
-  "browser_prepared_cases": 16,
+  "browser_prepared_cases": 18,
   "descent_boundary_cases": 6,
   "descent_boundary_report": "handoff/current/25_HERO_DESCENT_BOUNDARY_2026-10-08.md",
   "descent_atom_cases": 7,
-  "descent_atom_report": "handoff/current/27_HERO_DESCENT_ATOM_2026-10-08.md"
+  "descent_atom_report": "handoff/current/27_HERO_DESCENT_ATOM_2026-10-08.md",
+  "bomb_target_boundary_cases": 4,
+  "bomb_target_boundary_report": "handoff/current/28_BOMB_TARGET_BOUNDARY_2026-10-08.md"
 }

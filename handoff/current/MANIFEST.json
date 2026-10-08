@@ -3,8 +3,8 @@
   "self_excluded": true,
   "files": {
     "00_READ_FIRST.md": {
-      "bytes": 2048,
-      "sha256": "2dc4b5f886117ebfee76bf525be16ac10774878f27f647e97792b93420a35852"
+      "bytes": 2067,
+      "sha256": "1f71b4c9ff82c6e0a5a3e930a0def3fb8570000de4e395f4eebc9102a96ff729"
     },
     "01_CURRENT_RULES.md": {
       "bytes": 30087,
@@ -23,8 +23,8 @@
       "sha256": "c133b4ee797b778ce4c88233437b2466255f27c30fcaec5b0941c766cc4bae00"
     },
     "05_PROGRESS_AND_NEXT.md": {
-      "bytes": 34428,
-      "sha256": "0c17fd30ab3bcc104d3210009dfda6595fe8d66c30e7e63fee78081b4cb1c8b9"
+      "bytes": 36536,
+      "sha256": "606ee0349a4ea1da6ac2bcced09ce199408ddb79b007c18da4e1c9d054dc9369"
     },
     "06_COLLABORATION.md": {
       "bytes": 8164,
@@ -107,16 +107,16 @@
       "sha256": "9a0a9f908cb74eb7519e8f659f98cd8f36c87e31a5e58372023c538b1c22888d"
     },
     "NEW_DIALOGUE_PROMPT.txt": {
-      "bytes": 2063,
-      "sha256": "ccf7124a6af8ad1a10a4e965a10e5164e94eca8385705f4b82e3da00a53babd5"
+      "bytes": 2082,
+      "sha256": "78ddbb56ec52be124ad1a1aa7fdb36259539404bfb7ca047a65c44985f218aca"
     },
     "SOURCE_REGISTER.json": {
-      "bytes": 31688,
-      "sha256": "5d610f45c7ef3d97bbed6358dffe995ac928c39383e42651297ad48d5fa6c58b"
+      "bytes": 32160,
+      "sha256": "1937befc0e15cb0cb2e6b32f03e9f143591a35473e4ace18d3ab2752100c0ba3"
     },
     "STATE.json": {
-      "bytes": 72540,
-      "sha256": "b0f3bc488a7db2ba4977dc3bf32aa72a19fb816102a58adda3d98f7bc7f46b81"
+      "bytes": 79835,
+      "sha256": "2604abab1af06e75b293183f3a0e6737d19f8571449f554362040809da1029a4"
     },
     "assets/approved-home.png": {
       "bytes": 2157060,
@@ -131,8 +131,8 @@
       "sha256": "b476f6ba2696cb4a0185ac96da1ad976c7b43f37ff694b5bf86ccbc696cbc210"
     },
     "qa/HERO_TRANSFER_AUDIT.json": {
-      "bytes": 25327,
-      "sha256": "8684226389ec499a7fff53ca0e96e6ee21016b6b18d8bf63b73d98029124485c"
+      "bytes": 26243,
+      "sha256": "d03e4ca169a558e0dfbb58ce8d7989329bbf40cca255e38e4a4878eeecae19b6"
     },
     "qa/INVARIANTS.json": {
       "bytes": 45423,
@@ -145,6 +145,10 @@
     "27_HERO_DESCENT_ATOM_2026-10-08.md": {
       "bytes": 5318,
       "sha256": "1baae70fb55e3d85d770eb16ed99c4e25cad9074c6d361f5b16e6417c4c15631"
+    },
+    "28_BOMB_TARGET_BOUNDARY_2026-10-08.md": {
+      "bytes": 5535,
+      "sha256": "a8f0ab4b13ba1579a55a75107ee6a748ee33f576fb3fc8adf7b5c7c4a38f18d4"
     }
   },
   "checks": {
@@ -177,9 +181,13 @@
     "historical_engine_487_passed": true,
     "historical_browser_12_prepared_operations_passed": true,
     "historical_browser_9_mode_foundation_cases_passed": true,
-    "engine_494_passed": true,
-    "browser_16_prepared_operations_passed": true,
     "descent_atom_7_new_cases_passed": true,
-    "mode_foundation_skipped_this_round": true
+    "mode_foundation_skipped_this_round": false,
+    "historical_engine_494_passed": true,
+    "historical_browser_16_prepared_operations_passed": true,
+    "engine_498_passed": true,
+    "browser_18_prepared_operations_passed": true,
+    "bomb_target_4_new_cases_passed": true,
+    "mode_foundation_9_failure_fallback_cases_passed": true
   }
 }

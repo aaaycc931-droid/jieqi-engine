@@ -1,11 +1,11 @@
 {
   "project": "乐子象棋 / jieqi-engine",
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-08-r5-descent-atom",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-08-r5-bomb-target",
   "updated_at": "2026-10-08",
   "repository": "https://github.com/aaaycc931-droid/jieqi-engine",
   "working_branch": "codex/ui-android-apk-20261001",
-  "implementation_commit": "c68a9b4acc6b9167f301ba21e2ee8d3e794ebfb2",
-  "implementation_tree": "8b9ee6c99a0c4ef776ef6e2b3a0bb2fbd300c0cc",
+  "implementation_commit": "b45077a692213953ee7e3edef31a6d16c011c940",
+  "implementation_tree": "c2ad40457facf58a4456d22e017b52d058a1b4b2",
   "draft_pr": 2,
   "baseline_id": "LEZI-FUNCTION-2026-10-04-v1",
   "baseline_digest": "4bcf9fb91f5c6e41f456e7424ebd7ed09c6c07b1595ec825604aa730fdad020b",
@@ -30,14 +30,14 @@
     "destiny_mutations": 1
   },
   "validation": {
-    "tests_passed": 494,
+    "tests_passed": 498,
     "tests_failed": 0,
     "web_build": "passed",
     "homepage_browser_run": 37305274329,
     "homepage_browser_commit": "8b985a8f2bf8cd4ab96fdf63ab73894292cc6f7a",
     "homepage_browser_scope": "homepage_and_entry_controls_only",
     "android_web_asset_match_files": 127,
-    "new_hero_browser_full_flow": "16 synthetic prepared DOM operations only; natural full matches and physical transport unaccepted",
+    "new_hero_browser_full_flow": "18 synthetic prepared DOM operations only; natural full matches and physical transport unaccepted",
     "individual_69_invariants": "partial_named_case_evidence_full_contract_acceptance_pending",
     "android_webview": "pending",
     "physical_two_phone": "pending",
@@ -52,27 +52,29 @@
       "failed_cases": 0,
       "fully_accepted": 0,
       "applicable_rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
-      "source_commit_at_run": "64b7a03513d7e1060d06a09f2244c68e03166da0",
-      "published_implementation_commit": "c68a9b4acc6b9167f301ba21e2ee8d3e794ebfb2",
+      "source_commit_at_run": "3da2033393cd5c370843aa78e5cb54767ca18190",
+      "published_implementation_commit": "b45077a692213953ee7e3edef31a6d16c011c940",
       "scope": "109 existing contracts have scenario links; new hero per-source evidence is separate in HERO_TRANSFER_AUDIT, full acceptance remains 0",
-      "source_digest": "c047ebba3ed7878c41df9d29aa23e0e1a96551ce6eb8e1b431512c56678458cb",
+      "source_digest": "f7ea52f72d0207e1e8d81342ac316bc8e66728339c93ba9bfbb193b9c124dfec",
       "contract_digest": "c6e4649ce5a028b5477090b87066dd5bb7a65ad3a5632d138a05bf972b89e1e3"
     },
     "current_ci": {
       "status": "success",
-      "run": 37755106537,
-      "commit": "c68a9b4acc6b9167f301ba21e2ee8d3e794ebfb2",
-      "implementation_commit": "c68a9b4acc6b9167f301ba21e2ee8d3e794ebfb2",
-      "evidence_artifact": 11539412782,
+      "run": 37757473437,
+      "commit": "a64856ba8122a8f276ba3f9aecc278f6955592ba",
+      "implementation_commit": "b45077a692213953ee7e3edef31a6d16c011c940",
+      "evidence_artifact": 11540527809,
       "apk_job": "skipped",
-      "checkout_commit": "cb35180565d97b93784f9d41a8c6eedbd541b9fd",
-      "source_digest": "c047ebba3ed7878c41df9d29aa23e0e1a96551ce6eb8e1b431512c56678458cb",
+      "checkout_commit": "dbadd0bae655c33c6f3127e8da9469177a825b5f",
+      "source_digest": "a400e6864530db9da4c07b040830e3a683c9f5672f10267208faab0892f25d8f",
       "contract_digest": "c6e4649ce5a028b5477090b87066dd5bb7a65ad3a5632d138a05bf972b89e1e3",
       "source_digest_matches_local": true,
       "contract_digest_matches_local": true,
       "applies_to_current_implementation": true,
       "provenance": "actual_GitHub_job_log_JSON_summary; artifact_index_recorded_archive_not_downloaded_this_round",
-      "job": 113237622256
+      "job": 113245465934,
+      "source_digest_comparison": "matches current local including review-script fix; original local execution digest stored separately",
+      "original_local_execution_source_digest": "f7ea52f72d0207e1e8d81342ac316bc8e66728339c93ba9bfbb193b9c124dfec"
     },
     "previous_ci": {
       "status": "success",
@@ -88,22 +90,23 @@
     },
     "gameplay_browser": {
       "status": "success",
-      "run": 37755106467,
-      "commit": "c68a9b4acc6b9167f301ba21e2ee8d3e794ebfb2",
-      "checkout_commit": "cb35180565d97b93784f9d41a8c6eedbd541b9fd",
-      "artifact": 11540122038,
-      "case_count": 16,
+      "run": 37757473488,
+      "commit": "a64856ba8122a8f276ba3f9aecc278f6955592ba",
+      "checkout_commit": "dbadd0bae655c33c6f3127e8da9469177a825b5f",
+      "artifact": 11541480019,
+      "case_count": 18,
       "errors": 0,
       "report": "review/invariants/HERO_TRANSFER_BROWSER_2026-10-07.json",
       "app_digest": "b841af632d0b08003ebdbbaf792691fd4c83365b5c9b43f46537d3c1fa098fc9",
       "app_digest_matches_local": true,
-      "compiled_source_digest": "c047ebba3ed7878c41df9d29aa23e0e1a96551ce6eb8e1b431512c56678458cb",
+      "compiled_source_digest": "a400e6864530db9da4c07b040830e3a683c9f5672f10267208faab0892f25d8f",
       "same_checkout_as_source_digest_verified_rules_ci": true,
-      "scope": "sixteen actual compiled DOM prepared operations; four new descent source-atom cases",
+      "scope": "eighteen actual compiled DOM prepared operations; two new bomb target/quota cases",
       "full_match_accepted": false,
       "bluetooth_private_transport_accepted": false,
       "report_retrieval": "actual_job_log_evidenceFile_JSON; source_artifact_registered",
-      "job": 113237621303
+      "job": 113245467060,
+      "implementation_commit": "b45077a692213953ee7e3edef31a6d16c011c940"
     },
     "previous_gameplay_browser": {
       "status": "success",
@@ -298,7 +301,7 @@
       "observer": "review_server_response_only_read_only_flags_and_deadlines_no_fixture_loading_secret_identity_or_rng_override"
     },
     "paused_full_match_jobs": {
-      "run": 37755106467,
+      "run": 37757473488,
       "full_match_browser": "skipped",
       "active_match_browser": "skipped",
       "reason": "user_paused_previous_queue",
@@ -331,8 +334,8 @@
       "tests_failed": 0,
       "scope": "full_regression_with_seventeen_ghost_object_cases_not_full_r3_r4_acceptance"
     },
-    "engine_scope": "r5 full regression with seven descent source-atom cases; four corresponding actual DOM prepared operations",
-    "engine_implementation_commit": "c68a9b4acc6b9167f301ba21e2ee8d3e794ebfb2",
+    "engine_scope": "r5 full regression with four bomb target boundary cases; two corresponding prepared DOM operations",
+    "engine_implementation_commit": "b45077a692213953ee7e3edef31a6d16c011c940",
     "previous_contract_evidence": {
       "index": "review/invariants/LATEST.json",
       "total": 96,
@@ -345,8 +348,8 @@
     },
     "current_runtime_ci": {
       "status": "success",
-      "run": 37755106537,
-      "implementation_commit": "c68a9b4acc6b9167f301ba21e2ee8d3e794ebfb2"
+      "run": 37757473437,
+      "implementation_commit": "b45077a692213953ee7e3edef31a6d16c011c940"
     },
     "contract_evidence_history": [
       {
@@ -428,6 +431,21 @@
         "scope": "109 existing contracts have scenario links; new hero per-source evidence is separate in HERO_TRANSFER_AUDIT, full acceptance remains 0",
         "source_digest": "5073456e0d8be7452c4acd548696e0d4690a107465a3be7bd956e2f4c1aff1b6",
         "contract_digest": "c6e4649ce5a028b5477090b87066dd5bb7a65ad3a5632d138a05bf972b89e1e3"
+      },
+      {
+        "index": "review/invariants/LATEST.json",
+        "total": 109,
+        "partial_evidence_passed": 106,
+        "missing_related_cases": 0,
+        "non_runtime_contract": 3,
+        "failed_cases": 0,
+        "fully_accepted": 0,
+        "applicable_rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
+        "source_commit_at_run": "64b7a03513d7e1060d06a09f2244c68e03166da0",
+        "published_implementation_commit": "c68a9b4acc6b9167f301ba21e2ee8d3e794ebfb2",
+        "scope": "109 existing contracts have scenario links; new hero per-source evidence is separate in HERO_TRANSFER_AUDIT, full acceptance remains 0",
+        "source_digest": "c047ebba3ed7878c41df9d29aa23e0e1a96551ce6eb8e1b431512c56678458cb",
+        "contract_digest": "c6e4649ce5a028b5477090b87066dd5bb7a65ad3a5632d138a05bf972b89e1e3"
       }
     ],
     "applies_to_current_rule_revision": true,
@@ -435,13 +453,19 @@
     "new_revision_validation": "partial_scenario_evidence_487_tests_and_prepared_browser_regression_not_full_acceptance",
     "historical_r4_test_count": 434,
     "mode_foundation_browser_current": {
-      "status": "skipped_unaffected_scope",
-      "run": 37755106467,
-      "implementation_commit": "c68a9b4acc6b9167f301ba21e2ee8d3e794ebfb2",
-      "tests_run_this_round": false,
-      "accepted": false,
-      "previous_report": "review/invariants/MODE_FOUNDATION_BROWSER_2026-10-07.json",
-      "note": "prior nine-case results remain historical; not rerun for this product batch"
+      "status": "success",
+      "run": 37757473488,
+      "commit": "a64856ba8122a8f276ba3f9aecc278f6955592ba",
+      "implementation_commit": "b45077a692213953ee7e3edef31a6d16c011c940",
+      "checkout_commit": "dbadd0bae655c33c6f3127e8da9469177a825b5f",
+      "artifact": 11540278578,
+      "cases": 9,
+      "errors": 0,
+      "report": "review/invariants/MODE_FOUNDATION_BROWSER_2026-10-07.json",
+      "scope": "existing mode foundation repeated by failed-predecessor fallback; no new mode cases or full-match acceptance",
+      "tests_run_this_round": true,
+      "new_cases": 0,
+      "report_retrieval": "actual_job_log_evidenceFile_JSON; artifact_archive_bytes_not_verified"
     },
     "runtime_validation_history": [
       {
@@ -650,6 +674,22 @@
         "contract_digest_matches_local": true,
         "applies_to_current_implementation": true,
         "provenance": "actual_GitHub_job_log_JSON_summary; artifact_index_recorded_archive_not_downloaded_this_round"
+      },
+      {
+        "status": "success",
+        "run": 37755106537,
+        "commit": "c68a9b4acc6b9167f301ba21e2ee8d3e794ebfb2",
+        "implementation_commit": "c68a9b4acc6b9167f301ba21e2ee8d3e794ebfb2",
+        "evidence_artifact": 11539412782,
+        "apk_job": "skipped",
+        "checkout_commit": "cb35180565d97b93784f9d41a8c6eedbd541b9fd",
+        "source_digest": "c047ebba3ed7878c41df9d29aa23e0e1a96551ce6eb8e1b431512c56678458cb",
+        "contract_digest": "c6e4649ce5a028b5477090b87066dd5bb7a65ad3a5632d138a05bf972b89e1e3",
+        "source_digest_matches_local": true,
+        "contract_digest_matches_local": true,
+        "applies_to_current_implementation": false,
+        "provenance": "actual_GitHub_job_log_JSON_summary; artifact_index_recorded_archive_not_downloaded_this_round",
+        "job": 113237622256
       }
     ],
     "gameplay_browser_history": [
@@ -670,6 +710,25 @@
         "full_match_accepted": false,
         "bluetooth_private_transport_accepted": false,
         "report_retrieval": "actual_job_log_evidenceFile_JSON; source_artifact_registered"
+      },
+      {
+        "status": "success",
+        "run": 37755106467,
+        "commit": "c68a9b4acc6b9167f301ba21e2ee8d3e794ebfb2",
+        "checkout_commit": "cb35180565d97b93784f9d41a8c6eedbd541b9fd",
+        "artifact": 11540122038,
+        "case_count": 16,
+        "errors": 0,
+        "report": "review/invariants/HERO_TRANSFER_BROWSER_2026-10-07.json",
+        "app_digest": "b841af632d0b08003ebdbbaf792691fd4c83365b5c9b43f46537d3c1fa098fc9",
+        "app_digest_matches_local": true,
+        "compiled_source_digest": "c047ebba3ed7878c41df9d29aa23e0e1a96551ce6eb8e1b431512c56678458cb",
+        "same_checkout_as_source_digest_verified_rules_ci": true,
+        "scope": "sixteen actual compiled DOM prepared operations; four new descent source-atom cases",
+        "full_match_accepted": false,
+        "bluetooth_private_transport_accepted": false,
+        "report_retrieval": "actual_job_log_evidenceFile_JSON; source_artifact_registered",
+        "job": 113237621303
       }
     ],
     "mode_foundation_browser_history": [
@@ -685,6 +744,15 @@
         "scope": "existing settings/opening foundation regression only; independent hero adaptation still paused",
         "report_retrieval": "actual_job_log_evidenceFile_JSON; source_artifact_registered",
         "applies_to_current_implementation": false
+      },
+      {
+        "status": "skipped_unaffected_scope",
+        "run": 37755106467,
+        "implementation_commit": "c68a9b4acc6b9167f301ba21e2ee8d3e794ebfb2",
+        "tests_run_this_round": false,
+        "accepted": false,
+        "previous_report": "review/invariants/MODE_FOUNDATION_BROWSER_2026-10-07.json",
+        "note": "prior nine-case results remain historical; not rerun for this product batch"
       }
     ]
   },
@@ -714,25 +782,25 @@
   "next_action": "继续已确认来源的其他定点交叉审计；四项design-required须由正式设计来源补齐后再实现。旧整盘、主动技能整盘、模式独立适配、APK和最终视觉队列保持暂停。",
   "source_gap_register": "SOURCE_REGISTER.json",
   "apk_built_this_round": false,
-  "previous_implementation_commit": "70f19144f399b6fcf3742d4d49188fb17d78a9d7",
+  "previous_implementation_commit": "c68a9b4acc6b9167f301ba21e2ee8d3e794ebfb2",
   "validation_round": {
-    "authorization": "user: 先进行下一步",
-    "verified_remote_before_implementation": "e37ca25f5ab9dc23ffde5757c4412597c6ce6397",
+    "authorization": "user: 进行下一步; 2026-10-08T17:25:04+08:00",
+    "verified_remote_before_implementation": "b0fbd9504083cbeada04fa9b29220f6651866cd9",
     "rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
-    "implementation_commit": "c68a9b4acc6b9167f301ba21e2ee8d3e794ebfb2",
-    "local_execution_checkpoint": "64b7a03513d7e1060d06a09f2244c68e03166da0",
+    "implementation_commit": "b45077a692213953ee7e3edef31a6d16c011c940",
+    "local_execution_checkpoint": "3da2033393cd5c370843aa78e5cb54767ca18190",
     "publication_tree_matches_execution_tree": true,
-    "report": "handoff/current/27_HERO_DESCENT_ATOM_2026-10-08.md",
+    "report": "handoff/current/28_BOMB_TARGET_BOUNDARY_2026-10-08.md",
     "product_code_changed": true,
     "semantic_rules_changed": false,
-    "new_engine_tests": 7,
-    "tests_passed": 494,
+    "new_engine_tests": 4,
+    "tests_passed": 498,
     "tests_failed": 0,
     "web_build": "passed",
     "android_generated_files_matched": 127,
     "browser_tests_run": true,
-    "browser_prepared_cases_passed": 16,
-    "browser_new_cases": 4,
+    "browser_prepared_cases_passed": 18,
+    "browser_new_cases": 2,
     "apk_built": false,
     "old_full_match_queue_resumed": false,
     "untransferred_heroes_imported": false,
@@ -743,7 +811,8 @@
       "H16-chaos-entry",
       "H21-dragon-scale-placement"
     ],
-    "browser_mode_foundation_status": "skipped_unaffected_scope",
+    "browser_mode_foundation_status": "passed_failure_fallback_rerun",
+    "browser_mode_foundation_cases_passed": 9,
     "artwork_changed": false,
     "physical_device_tests_run": false
   },
@@ -905,23 +974,23 @@
     "followup_runtime_record": "handoff/current/13_DARK_IDENTITY_RUNTIME_2026-10-06.md"
   },
   "latest_runtime_round": {
-    "authorization": "user: 先进行下一步",
-    "verified_remote_before_implementation": "e37ca25f5ab9dc23ffde5757c4412597c6ce6397",
+    "authorization": "user: 进行下一步; 2026-10-08T17:25:04+08:00",
+    "verified_remote_before_implementation": "b0fbd9504083cbeada04fa9b29220f6651866cd9",
     "rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
-    "implementation_commit": "c68a9b4acc6b9167f301ba21e2ee8d3e794ebfb2",
-    "local_execution_checkpoint": "64b7a03513d7e1060d06a09f2244c68e03166da0",
+    "implementation_commit": "b45077a692213953ee7e3edef31a6d16c011c940",
+    "local_execution_checkpoint": "3da2033393cd5c370843aa78e5cb54767ca18190",
     "publication_tree_matches_execution_tree": true,
-    "report": "handoff/current/27_HERO_DESCENT_ATOM_2026-10-08.md",
+    "report": "handoff/current/28_BOMB_TARGET_BOUNDARY_2026-10-08.md",
     "product_code_changed": true,
     "semantic_rules_changed": false,
-    "new_engine_tests": 7,
-    "tests_passed": 494,
+    "new_engine_tests": 4,
+    "tests_passed": 498,
     "tests_failed": 0,
     "web_build": "passed",
     "android_generated_files_matched": 127,
     "browser_tests_run": true,
-    "browser_prepared_cases_passed": 16,
-    "browser_new_cases": 4,
+    "browser_prepared_cases_passed": 18,
+    "browser_new_cases": 2,
     "apk_built": false,
     "old_full_match_queue_resumed": false,
     "untransferred_heroes_imported": false,
@@ -932,7 +1001,8 @@
       "H16-chaos-entry",
       "H21-dragon-scale-placement"
     ],
-    "browser_mode_foundation_status": "skipped_unaffected_scope"
+    "browser_mode_foundation_status": "passed_failure_fallback_rerun",
+    "browser_mode_foundation_cases_passed": 9
   },
   "runtime_round_history": [
     {
@@ -1209,6 +1279,36 @@
         "H16-chaos-entry",
         "H21-dragon-scale-placement"
       ]
+    },
+    {
+      "authorization": "user: 先进行下一步",
+      "verified_remote_before_implementation": "e37ca25f5ab9dc23ffde5757c4412597c6ce6397",
+      "rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
+      "implementation_commit": "c68a9b4acc6b9167f301ba21e2ee8d3e794ebfb2",
+      "local_execution_checkpoint": "64b7a03513d7e1060d06a09f2244c68e03166da0",
+      "publication_tree_matches_execution_tree": true,
+      "report": "handoff/current/27_HERO_DESCENT_ATOM_2026-10-08.md",
+      "product_code_changed": true,
+      "semantic_rules_changed": false,
+      "new_engine_tests": 7,
+      "tests_passed": 494,
+      "tests_failed": 0,
+      "web_build": "passed",
+      "android_generated_files_matched": 127,
+      "browser_tests_run": true,
+      "browser_prepared_cases_passed": 16,
+      "browser_new_cases": 4,
+      "apk_built": false,
+      "old_full_match_queue_resumed": false,
+      "untransferred_heroes_imported": false,
+      "all_functions_accepted": false,
+      "design_required_ids": [
+        "H07-mirror",
+        "H12-general-rank",
+        "H16-chaos-entry",
+        "H21-dragon-scale-placement"
+      ],
+      "browser_mode_foundation_status": "skipped_unaffected_scope"
     }
   ],
   "action_turn_runtime": {
@@ -1344,6 +1444,38 @@
       ],
       "artwork_changed": false,
       "physical_device_tests_run": false
+    },
+    {
+      "authorization": "user: 先进行下一步",
+      "verified_remote_before_implementation": "e37ca25f5ab9dc23ffde5757c4412597c6ce6397",
+      "rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
+      "implementation_commit": "c68a9b4acc6b9167f301ba21e2ee8d3e794ebfb2",
+      "local_execution_checkpoint": "64b7a03513d7e1060d06a09f2244c68e03166da0",
+      "publication_tree_matches_execution_tree": true,
+      "report": "handoff/current/27_HERO_DESCENT_ATOM_2026-10-08.md",
+      "product_code_changed": true,
+      "semantic_rules_changed": false,
+      "new_engine_tests": 7,
+      "tests_passed": 494,
+      "tests_failed": 0,
+      "web_build": "passed",
+      "android_generated_files_matched": 127,
+      "browser_tests_run": true,
+      "browser_prepared_cases_passed": 16,
+      "browser_new_cases": 4,
+      "apk_built": false,
+      "old_full_match_queue_resumed": false,
+      "untransferred_heroes_imported": false,
+      "all_functions_accepted": false,
+      "design_required_ids": [
+        "H07-mirror",
+        "H12-general-rank",
+        "H16-chaos-entry",
+        "H21-dragon-scale-placement"
+      ],
+      "browser_mode_foundation_status": "skipped_unaffected_scope",
+      "artwork_changed": false,
+      "physical_device_tests_run": false
     }
   ],
   "hero_form_runtime": {
@@ -1399,7 +1531,7 @@
     "ci_source_digest": "326313adaaf3694e4e9b1b5ebd02e6a3ad5b4c3f3177540ab2c95a300bc9517f",
     "documentation_skip_validation": "inspect_actual_workflow_steps_for_the_published_documentation_commit_not_prefilled",
     "existing_product_reports": "preserved_original_execution_revision_no_new_timestamps",
-    "superseded_by_current_runtime_report": "handoff/current/27_HERO_DESCENT_ATOM_2026-10-08.md"
+    "superseded_by_current_runtime_report": "handoff/current/28_BOMB_TARGET_BOUNDARY_2026-10-08.md"
   },
   "acceptance_gap_consolidation": {
     "status": "historical_r4_inventory_superseded_by_received_r5_transfer",
@@ -1602,6 +1734,33 @@
       "failed": 6,
       "passed": 1,
       "isolated_baseline": "e37ca25f5ab9dc23ffde5757c4412597c6ce6397"
+    },
+    "status": "implemented_partial_scenario_evidence",
+    "fully_accepted": false
+  },
+  "bomb_browser_readiness_fix": {
+    "published_commit": "a64856ba8122a8f276ba3f9aecc278f6955592ba",
+    "local_commit": "155852083f851b76301781fd5dc166da35b863bf",
+    "tree": "fad422378afb37ca4a4a0a3ab815b0dad44870a0",
+    "product_runtime_changed": false,
+    "reason": "decode lazy CSS board background before prepared fixture navigation",
+    "first_failure": {
+      "run": 37757048873,
+      "job": 113244065090,
+      "artifact": 11540741099,
+      "not_counted_as_pass": true,
+      "record": "review/invariants/BOMB_BROWSER_FAILURE_2026-10-08.json"
+    },
+    "fallback_mode_cases": 9
+  },
+  "bomb_target_boundary_runtime": {
+    "report": "handoff/current/28_BOMB_TARGET_BOUNDARY_2026-10-08.md",
+    "new_engine_cases": 4,
+    "new_browser_cases": 2,
+    "pre_patch": {
+      "failed": 2,
+      "passed": 2,
+      "baseline": "b0fbd9504083cbeada04fa9b29220f6651866cd9"
     },
     "status": "implemented_partial_scenario_evidence",
     "fully_accepted": false

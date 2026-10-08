@@ -1,8 +1,8 @@
 {
   "authority": "execution_evidence_non_normative",
-  "generatedAt": "2026-10-08T09:12:15.449Z",
-  "sourceCommitAtRun": "64b7a03513d7e1060d06a09f2244c68e03166da0",
-  "sourceDigest": "c047ebba3ed7878c41df9d29aa23e0e1a96551ce6eb8e1b431512c56678458cb",
+  "generatedAt": "2026-10-08T09:29:21.358Z",
+  "sourceCommitAtRun": "3da2033393cd5c370843aa78e5cb54767ca18190",
+  "sourceDigest": "f7ea52f72d0207e1e8d81342ac316bc8e66728339c93ba9bfbb193b9c124dfec",
   "sourceDigestPaths": [
     ".github/workflows/gameplay-runtime-review.yml",
     ".github/workflows/menu-reference-review.yml",
@@ -61,6 +61,7 @@
     "tests/bluetooth-host-room.test.ts",
     "tests/bluetooth-private-contracts.test.ts",
     "tests/bluetooth-protocol.test.ts",
+    "tests/bomb-target-boundaries.test.ts",
     "tests/check-end-network.test.ts",
     "tests/confirmed-runtime.test.ts",
     "tests/cross-rule-contracts.test.ts",
@@ -197,7 +198,7 @@
   "contractDigest": "c6e4649ce5a028b5477090b87066dd5bb7a65ad3a5632d138a05bf972b89e1e3",
   "runtime": "v24.19.0",
   "testSummary": {
-    "passed": 494,
+    "passed": 498,
     "failed": 0,
     "executionFailed": false
   },
@@ -1782,6 +1783,26 @@
         {
           "file": "tests/confirmed-runtime.test.ts",
           "name": "DESTINY bomb attacks one square at range3, ends no formal action, and global once-per-turn applies",
+          "passed": true
+        },
+        {
+          "file": "tests/bomb-target-boundaries.test.ts",
+          "name": "R5-BOMB-TARGET-01 fractional columns and rows never create off-grid warps or consume a bomb",
+          "passed": true
+        },
+        {
+          "file": "tests/bomb-target-boundaries.test.ts",
+          "name": "R5-BOMB-TARGET-02 coerced, incomplete and non-finite wire coordinates are rejected transactionally",
+          "passed": true
+        },
+        {
+          "file": "tests/bomb-target-boundaries.test.ts",
+          "name": "R5-BOMB-TARGET-03 board, range, self and existing-warp boundaries reject without consuming the turn quota",
+          "passed": true
+        },
+        {
+          "file": "tests/bomb-target-boundaries.test.ts",
+          "name": "R5-BOMB-TARGET-04 exact range-three hit preserves normal main action, replay is free and army quota is shared",
           "passed": true
         }
       ],

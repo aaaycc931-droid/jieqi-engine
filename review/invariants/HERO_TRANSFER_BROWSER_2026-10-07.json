@@ -1,7 +1,7 @@
 {
   "authority": "prepared_browser_execution_non_normative",
   "ruleRevision": "LEZI-FUNCTION-2026-10-07-r5",
-  "sourceCommitAtRun": "cb35180565d97b93784f9d41a8c6eedbd541b9fd",
+  "sourceCommitAtRun": "dbadd0bae655c33c6f3127e8da9469177a825b5f",
   "workingTreeDirty": false,
   "appDigest": "b841af632d0b08003ebdbbaf792691fd4c83365b5c9b43f46537d3c1fa098fc9",
   "browser": "145.0.7632.6",
@@ -72,6 +72,14 @@
     },
     {
       "name": "storm exhausted source checks final unavoidable check before normal main",
+      "passed": true
+    },
+    {
+      "name": "bomb rejects fractional DOM target without spending ammo and accepts a range-three retry",
+      "passed": true
+    },
+    {
+      "name": "bomb army quota rejects a different dragon without spending its ammo",
       "passed": true
     }
   ],
