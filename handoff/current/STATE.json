@@ -4,8 +4,8 @@
   "updated_at": "2026-10-08",
   "repository": "https://github.com/aaaycc931-droid/jieqi-engine",
   "working_branch": "codex/ui-android-apk-20261001",
-  "implementation_commit": "9ed5ff71590bf9658d1294def22bb669b195357b",
-  "implementation_tree": "4731570c671e2f9e87d0179b9126ca0a5fbd869f",
+  "implementation_commit": "fd268f301cf8200993271bf1bc837fbbff7870ce",
+  "implementation_tree": "2196ff13746ef6e00fc0a5b4820eae20d1a8a209",
   "draft_pr": 2,
   "baseline_id": "LEZI-FUNCTION-2026-10-04-v1",
   "baseline_digest": "4bcf9fb91f5c6e41f456e7424ebd7ed09c6c07b1595ec825604aa730fdad020b",
@@ -37,7 +37,7 @@
     "homepage_browser_commit": "8b985a8f2bf8cd4ab96fdf63ab73894292cc6f7a",
     "homepage_browser_scope": "homepage_and_entry_controls_only",
     "android_web_asset_match_files": 128,
-    "new_hero_browser_full_flow": "new seven DOM scenarios prepared; actual browser execution pending CI, local browser unavailable",
+    "new_hero_browser_full_flow": "27 synthetic prepared actual DOM operations passed (20 retained, seven new); not natural full matches or physical transport acceptance",
     "individual_69_invariants": "partial_named_case_evidence_full_contract_acceptance_pending",
     "android_webview": "pending",
     "physical_two_phone": "pending",
@@ -53,15 +53,28 @@
       "fully_accepted": 0,
       "applicable_rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
       "source_commit_at_run": "f3ae349548970eaf94469c90d323b157777dbea8",
-      "published_implementation_commit": null,
+      "published_implementation_commit": "fd268f301cf8200993271bf1bc837fbbff7870ce",
       "scope": "109 existing contracts: 106 partial scenario evidence, three non-runtime, zero complete acceptance; final local 514 engine/static cases under r5 plus four confirmed addenda",
       "source_digest": "9d080ea3a14342e39a1355b1bf3a833d0bea3d26ba0dfbd306e2455328c31858",
       "contract_digest": "f09f83064cb2bff8cdd4d41130646733f751252fe4e534c75ab043160327baaa",
       "applies_to_current_rule_revision": true
     },
     "current_ci": {
-      "status": "pending_publication",
-      "applies_to_current_implementation": false
+      "status": "success",
+      "run": 37803496845,
+      "job": 113401568810,
+      "commit": "fd268f301cf8200993271bf1bc837fbbff7870ce",
+      "implementation_commit": "fd268f301cf8200993271bf1bc837fbbff7870ce",
+      "checkout_commit": "10cc079ef6dc292182f29c2b7aca43b9a4303752",
+      "source_digest": "9d080ea3a14342e39a1355b1bf3a833d0bea3d26ba0dfbd306e2455328c31858",
+      "contract_digest": "f09f83064cb2bff8cdd4d41130646733f751252fe4e534c75ab043160327baaa",
+      "source_digest_matches_local": true,
+      "contract_digest_matches_local": true,
+      "applies_to_current_implementation": true,
+      "evidence_artifact": 11562090946,
+      "evidence_artifact_digest": "sha256:f12294c3fc84087fa4253d6e067374975999e81e69db416143627ff5ae3fcc6a",
+      "apk_job": "skipped",
+      "provenance": "actual_GitHub_job_log_JSON_summary; artifact_index_registered_archives_not_downloaded"
     },
     "previous_ci": {
       "status": "success",
@@ -76,8 +89,27 @@
       "applies_to_current_implementation": false
     },
     "gameplay_browser": {
-      "status": "pending_publication",
-      "scope": "seven new prepared DOM cases, twenty retained; not full natural matches"
+      "status": "success",
+      "run": 37803496875,
+      "job": 113401569038,
+      "commit": "fd268f301cf8200993271bf1bc837fbbff7870ce",
+      "implementation_commit": "fd268f301cf8200993271bf1bc837fbbff7870ce",
+      "checkout_commit": "10cc079ef6dc292182f29c2b7aca43b9a4303752",
+      "artifact": 11562280024,
+      "artifact_digest": "sha256:0cc1e8c41e710182e0e7525ef81d62cbb7c9a5dc494126d2a6140f80303e9b20",
+      "case_count": 27,
+      "new_case_count": 7,
+      "retained_case_count": 20,
+      "errors": 0,
+      "report": "review/invariants/HERO_TRANSFER_BROWSER_2026-10-07.json",
+      "app_digest": "102928b45dbaf9d11894afc5ec67094f316513de0863a2894a1bb2b68290e1ee",
+      "app_digest_matches_local": true,
+      "compiled_source_digest": "9d080ea3a14342e39a1355b1bf3a833d0bea3d26ba0dfbd306e2455328c31858",
+      "same_checkout_as_source_digest_verified_rules_ci": true,
+      "scope": "27 prepared actual compiled DOM operations; seven new confirmed gap scenarios; not natural full matches or physical devices",
+      "full_match_accepted": false,
+      "bluetooth_private_transport_accepted": false,
+      "report_retrieval": "actual_job_log_evidenceFile_JSON; artifact_index_registered_archive_not_downloaded"
     },
     "previous_gameplay_browser": {
       "status": "success",
@@ -449,11 +481,23 @@
     ],
     "applies_to_current_rule_revision": true,
     "historical_rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
-    "new_revision_validation": "r5 plus four confirmed addenda: 514 engine/static passed, partial named scenarios; 27 prepared DOM planned, actual CI pending, full acceptance remains false",
+    "new_revision_validation": "r5 plus four confirmed addenda: 514 engine/static and27 prepared hero DOM scenarios passed; nine retained mode foundation cases; actual submitted CI verified, full acceptance remains false",
     "historical_r4_test_count": 434,
     "mode_foundation_browser_current": {
-      "status": "pending_actual_CI_shared_web_app_changed",
-      "tests_run": false
+      "status": "success",
+      "run": 37803496875,
+      "job": 113401569038,
+      "commit": "fd268f301cf8200993271bf1bc837fbbff7870ce",
+      "checkout_commit": "10cc079ef6dc292182f29c2b7aca43b9a4303752",
+      "tests_run": true,
+      "case_count": 9,
+      "new_case_count": 0,
+      "app_digest": "102928b45dbaf9d11894afc5ec67094f316513de0863a2894a1bb2b68290e1ee",
+      "app_digest_matches_local": true,
+      "scope_reason": "shared_web_app_changed; independent mode adaptation remains paused",
+      "report": "review/invariants/RULE_GAP_CI_2026-10-08.json#browser.modeReport",
+      "artifact": 11560818914,
+      "artifact_digest": "sha256:344bf62796d68194a3b90e857e87a65912ab2cc818e47559540da1284726e02f"
     },
     "runtime_validation_history": [
       {
@@ -848,7 +892,7 @@
     },
     "current_rule_addenda_runtime_acceptance": {
       "engine_partial_evidence": true,
-      "browser_pending": true,
+      "browser_partial_evidence": true,
       "fully_accepted": false
     }
   },
@@ -875,17 +919,16 @@
     "verification_policy": "impact_selected_during_development_then_one_full_regression_per_completed_batch",
     "ci_trigger_optimization": "implemented_current_change_scope_with_successful_predecessor_guard"
   },
-  "next_action": "完成本轮实际提交CI与浏览器验证后统一收束，等待用户的新英雄正式移交；不恢复另行暂停队列。",
+  "next_action": "本轮统一实现与CI收束完成，等待用户的新英雄正式移交；先按最新r5及四增量核对确认差分，不自动恢复暂停队列。",
   "source_gap_register": "SOURCE_REGISTER.json",
   "apk_built_this_round": false,
-  "previous_implementation_commit": "b45077a692213953ee7e3edef31a6d16c011c940",
+  "previous_implementation_commit": "9ed5ff71590bf9658d1294def22bb669b195357b",
   "validation_round": {
     "authorization": "先讨论全部完成，再一同推进；最终龙鳞落位同意 2026-10-08T23:17:34+08:00",
     "verified_remote_before_implementation": "ae16830f5cf747caa65647eb85d4b292b3892e42",
     "rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
     "report": "handoff/current/30_RULE_GAP_RUNTIME_2026-10-08.md",
     "local_execution_checkpoint": "f3ae349548970eaf94469c90d323b157777dbea8",
-    "publication_pending": true,
     "product_code_changed": true,
     "semantic_rules_changed": true,
     "new_engine_tests": 13,
@@ -899,13 +942,26 @@
     },
     "web_build": "passed",
     "android_generated_files_matched": 128,
-    "browser_tests_run": false,
-    "browser_status": "pending_actual_CI_local_chromium_unavailable_download_failed",
-    "browser_new_cases_planned": 7,
+    "browser_tests_run": true,
+    "browser_status": "actual_submitted_CI_passed_local_launch_environment_failed_before_any_DOM",
     "apk_built": false,
     "old_full_match_queue_resumed": false,
     "all_functions_accepted": false,
-    "design_required_ids": []
+    "design_required_ids": [],
+    "implementation_commit": "fd268f301cf8200993271bf1bc837fbbff7870ce",
+    "implementation_tree": "2196ff13746ef6e00fc0a5b4820eae20d1a8a209",
+    "local_assembled_publication_checkpoint": "83bfe5e1cf8d05373a6d2c846ad547afd4674215",
+    "publication_tree_matches_local_assembled_tree": true,
+    "local_source_execution_tree": "3b08583f1937597f745b2938e1f6b1b46520965a",
+    "source_execution_tree_equals_publication_tree": false,
+    "runtime_source_digest_matches_CI": true,
+    "contract_digest_matches_CI": true,
+    "browser_prepared_cases_passed": 27,
+    "browser_new_cases": 7,
+    "browser_retained_cases": 20,
+    "browser_errors": 0,
+    "browser_mode_foundation_status": "passed_shared_app_regression_9_retained",
+    "ci_summary": "review/invariants/RULE_GAP_CI_2026-10-08.json"
   },
   "previous_validation_round": {
     "authorization": "user: 进行下一步; 2026-10-08T17:25:04+08:00",
@@ -944,7 +1000,7 @@
   "previous_rule_digest": "7a66bf0aaa9ab546402d1718196663e6251c19c7a1588adbe6f1b1613f1029b3",
   "rule_digest_algorithm": "sha256(concat(relative UTF-8 path + NUL + file bytes + NUL), STATE.current_rules order)",
   "paused_next_action": "Continue destiny bomb/hourglass full real matches, second Shadow cooldown/lifecycle, remaining private snapshot and cross-end clock intersections. Current five active families have sampled natural results; original Nozdormu/Prince and current 12-seat normal regression remain incomplete. Local timeout outcome not frozen; physical RFCOMM/WebView/two-phone pending. UI last; APK paused.",
-  "work_status": "four_design_gaps_closed_runtime_engine_verified_browser_ci_pending",
+  "work_status": "four_design_gaps_confirmed_implemented_partial_engine_browser_CI_evidence_complete",
   "game_modes": {
     "authority": "09_CURRENT_GAME_MODES.md",
     "base_rule_status": "confirmed",
@@ -1096,7 +1152,6 @@
     "rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
     "report": "handoff/current/30_RULE_GAP_RUNTIME_2026-10-08.md",
     "local_execution_checkpoint": "f3ae349548970eaf94469c90d323b157777dbea8",
-    "publication_pending": true,
     "product_code_changed": true,
     "semantic_rules_changed": true,
     "new_engine_tests": 13,
@@ -1110,13 +1165,26 @@
     },
     "web_build": "passed",
     "android_generated_files_matched": 128,
-    "browser_tests_run": false,
-    "browser_status": "pending_actual_CI_local_chromium_unavailable_download_failed",
-    "browser_new_cases_planned": 7,
+    "browser_tests_run": true,
+    "browser_status": "actual_submitted_CI_passed_local_launch_environment_failed_before_any_DOM",
     "apk_built": false,
     "old_full_match_queue_resumed": false,
     "all_functions_accepted": false,
-    "design_required_ids": []
+    "design_required_ids": [],
+    "implementation_commit": "fd268f301cf8200993271bf1bc837fbbff7870ce",
+    "implementation_tree": "2196ff13746ef6e00fc0a5b4820eae20d1a8a209",
+    "local_assembled_publication_checkpoint": "83bfe5e1cf8d05373a6d2c846ad547afd4674215",
+    "publication_tree_matches_local_assembled_tree": true,
+    "local_source_execution_tree": "3b08583f1937597f745b2938e1f6b1b46520965a",
+    "source_execution_tree_equals_publication_tree": false,
+    "runtime_source_digest_matches_CI": true,
+    "contract_digest_matches_CI": true,
+    "browser_prepared_cases_passed": 27,
+    "browser_new_cases": 7,
+    "browser_retained_cases": 20,
+    "browser_errors": 0,
+    "browser_mode_foundation_status": "passed_shared_app_regression_9_retained",
+    "ci_summary": "review/invariants/RULE_GAP_CI_2026-10-08.json"
   },
   "runtime_round_history": [
     {
@@ -1517,7 +1585,7 @@
     "remaining_runtime_contracts": [],
     "remaining_runtime_contracts_note": "Public ADD-HERO-FORM-001 model now has named partial evidence in round20; future source integration and full acceptance remain pending."
   },
-  "pending_next_runtime_action": "当前四项设计缺口已确认并实现，浏览器提交CI待核对。",
+  "pending_next_runtime_action": "等待新英雄正式移交；本轮四项设计缺口0，完整来源/自然整盘/实机验收仍未完成。",
   "account_switch_close": {
     "requested_at": "2026-10-06T23:14:24+08:00",
     "request": "我要更换账号了",
@@ -1703,7 +1771,7 @@
     "historical_record": "handoff/current/20_HERO_FORM_RUNTIME_2026-10-07.md"
   },
   "latest_document_round": {
-    "classification": "unified_rule_and_runtime_followup",
+    "classification": "unified_runtime_evidence_and_handoff_close",
     "report": "handoff/current/30_RULE_GAP_RUNTIME_2026-10-08.md",
     "superseded_unpublished_brawl_option": "second option replaced by explicit first-option choice before remote publication",
     "product_code_changed": true,
@@ -1712,7 +1780,9 @@
     "local_web_rebuilt": true,
     "local_browser_tests_run": false,
     "apk_built": false,
-    "design_required_remaining": 0
+    "design_required_remaining": 0,
+    "actual_ci_completed": true,
+    "manual_product_tests_rerun_for_CI_documentation": false
   },
   "acceptance_gap_consolidation": {
     "status": "historical_r4_inventory_superseded_by_received_r5_transfer",
@@ -1739,7 +1809,7 @@
     "hero_source_revision": "2026-10-07-r7-clean",
     "remote_start_commit": "333c94eae2c2cc44a2517023d78145a6d505b74c",
     "received_scope": "H01-H21; all existing twelve audited; 19 base heroes, two inner packages, five Galakrond variants",
-    "runtime_status": "confirmed_portions_implemented_partial_evidence",
+    "runtime_status": "confirmed_sources_implemented_partial_engine_browser_scenario_evidence",
     "fully_accepted": false,
     "source_manifest": {
       "00_READ_FIRST.md": {
@@ -1784,22 +1854,22 @@
       {
         "id": "LEZI-H07-MIRROR-2026-10-08",
         "confirmation": "rules/confirmed/RULE_UPDATE_2026-10-08_THIEF_MIRROR.md",
-        "status": "implemented_partial_engine_evidence_browser_ci_pending"
+        "status": "implemented_partial_engine_browser_scenario_evidence"
       },
       {
         "id": "LEZI-H12-GENERAL-THRESHOLD-2026-10-08",
         "confirmation": "rules/confirmed/RULE_UPDATE_2026-10-08_FLAME_GENERAL.md",
-        "status": "implemented_partial_engine_evidence_browser_ci_pending"
+        "status": "implemented_partial_engine_browser_scenario_evidence"
       },
       {
         "id": "LEZI-H16-BRAWL-ENTRY-2026-10-08",
         "confirmation": "rules/confirmed/RULE_UPDATE_2026-10-08_BRAWL_ENTRY.md",
-        "status": "implemented_partial_engine_evidence_browser_ci_pending"
+        "status": "implemented_partial_engine_browser_scenario_evidence"
       },
       {
         "id": "LEZI-H21-DRAGON-SCALE-2026-10-08",
         "confirmation": "rules/confirmed/RULE_UPDATE_2026-10-08_DRAGON_SCALE.md",
-        "status": "implemented_partial_engine_evidence_browser_ci_pending"
+        "status": "implemented_partial_engine_browser_scenario_evidence"
       }
     ]
   },
@@ -2120,7 +2190,7 @@
       "sha256": "30775c14cfe15ede76737779abd564eb2621af34970cd58dcbfa9b97e1cf857e",
       "confirmed_at": "2026-10-08T20:59:35+08:00",
       "user_quote": "互相偷然后就抵消了",
-      "runtime_status": "implemented_partial_engine_evidence_browser_ci_pending",
+      "runtime_status": "implemented_partial_engine_browser_scenario_evidence",
       "runtime_accepted": false
     },
     {
@@ -2129,7 +2199,7 @@
       "sha256": "56571e87875a63d9def9ba5b9b430d643ebc0263f561c4272d9eb7dc4e415c93",
       "confirmed_at": "2026-10-08T21:13:45+08:00",
       "user_quote": "至少3级才能消灭",
-      "runtime_status": "implemented_partial_engine_evidence_browser_ci_pending",
+      "runtime_status": "implemented_partial_engine_browser_scenario_evidence",
       "runtime_accepted": false,
       "additional_confirmation": {
         "at": "2026-10-08T22:11:25+08:00",
@@ -2150,7 +2220,7 @@
       "confirmed_at": "2026-10-08T23:16:12+08:00",
       "user_quote": "是的",
       "confirmed_scope": "active upfront fee 6+5n, occupies main, same-piece covered chain, shared n once",
-      "runtime_status": "implemented_partial_engine_evidence_browser_ci_pending",
+      "runtime_status": "implemented_partial_engine_browser_scenario_evidence",
       "runtime_accepted": false,
       "superseded_confirmation": {
         "at": "2026-10-08T22:45:11+08:00",
@@ -2170,7 +2240,7 @@
       "confirmed_at": "2026-10-08T23:17:34+08:00",
       "user_quote": "同意",
       "confirmed_scope": "target stays; ground attacker returns with landing effects, opportunity consumed; existing blocked flight landing suffocation retained",
-      "runtime_status": "implemented_partial_engine_evidence_browser_ci_pending",
+      "runtime_status": "implemented_partial_engine_browser_scenario_evidence",
       "runtime_accepted": false
     }
   ],
@@ -2180,7 +2250,6 @@
     "rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
     "report": "handoff/current/30_RULE_GAP_RUNTIME_2026-10-08.md",
     "local_execution_checkpoint": "f3ae349548970eaf94469c90d323b157777dbea8",
-    "publication_pending": true,
     "product_code_changed": true,
     "semantic_rules_changed": true,
     "new_engine_tests": 13,
@@ -2194,12 +2263,25 @@
     },
     "web_build": "passed",
     "android_generated_files_matched": 128,
-    "browser_tests_run": false,
-    "browser_status": "pending_actual_CI_local_chromium_unavailable_download_failed",
-    "browser_new_cases_planned": 7,
+    "browser_tests_run": true,
+    "browser_status": "actual_submitted_CI_passed_local_launch_environment_failed_before_any_DOM",
     "apk_built": false,
     "old_full_match_queue_resumed": false,
     "all_functions_accepted": false,
-    "design_required_ids": []
+    "design_required_ids": [],
+    "implementation_commit": "fd268f301cf8200993271bf1bc837fbbff7870ce",
+    "implementation_tree": "2196ff13746ef6e00fc0a5b4820eae20d1a8a209",
+    "local_assembled_publication_checkpoint": "83bfe5e1cf8d05373a6d2c846ad547afd4674215",
+    "publication_tree_matches_local_assembled_tree": true,
+    "local_source_execution_tree": "3b08583f1937597f745b2938e1f6b1b46520965a",
+    "source_execution_tree_equals_publication_tree": false,
+    "runtime_source_digest_matches_CI": true,
+    "contract_digest_matches_CI": true,
+    "browser_prepared_cases_passed": 27,
+    "browser_new_cases": 7,
+    "browser_retained_cases": 20,
+    "browser_errors": 0,
+    "browser_mode_foundation_status": "passed_shared_app_regression_9_retained",
+    "ci_summary": "review/invariants/RULE_GAP_CI_2026-10-08.json"
   }
 }

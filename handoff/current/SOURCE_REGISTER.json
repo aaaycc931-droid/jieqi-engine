@@ -1,7 +1,7 @@
 {
   "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-08-four-design-gaps-runtime",
   "rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
-  "code_checkpoint": "9ed5ff71590bf9658d1294def22bb669b195357b",
+  "code_checkpoint": "fd268f301cf8200993271bf1bc837fbbff7870ce",
   "sources": [
     {
       "id": "RULE:CURRENT_RULE_DELTAS_2026-09-22.md",
@@ -430,28 +430,28 @@
       "kind": "explicit_user_confirmed_hero_rule_addendum",
       "path": "rules/confirmed/RULE_UPDATE_2026-10-08_THIEF_MIRROR.md",
       "sha256": "30775c14cfe15ede76737779abd564eb2621af34970cd58dcbfa9b97e1cf857e",
-      "applied_scope": "双窃时标准60/60；已实现，部分引擎证据，浏览器CI待完成"
+      "applied_scope": "双窃时标准60/60；已实现，引擎及准备态DOM/CI部分情景证据，非完整验收"
     },
     {
       "id": "LEZI-H12-GENERAL-THRESHOLD-2026-10-08",
       "kind": "explicit_user_confirmed_hero_rule_addendum",
       "path": "rules/confirmed/RULE_UPDATE_2026-10-08_FLAME_GENERAL.md",
       "sha256": "56571e87875a63d9def9ba5b9b430d643ebc0263f561c4272d9eb7dc4e415c93",
-      "applied_scope": "普通中心>=3级消灭将帅；将帅中心范围全部普通棋与另一将帅同批消灭；已实现，部分引擎证据，浏览器CI待完成"
+      "applied_scope": "普通中心>=3级消灭将帅；将帅中心范围全部普通棋与另一将帅同批消灭；已实现，引擎及准备态DOM/CI部分情景证据，非完整验收"
     },
     {
       "id": "LEZI-H16-BRAWL-ENTRY-2026-10-08",
       "kind": "explicit_user_confirmed_hero_rule_addendum",
       "path": "rules/confirmed/RULE_UPDATE_2026-10-08_BRAWL_ENTRY.md",
       "sha256": "caba373363d1aefa199ad140dc44e3cba6f8d5d51245e3b866d3a6adc5aed806",
-      "applied_scope": "主动先付6+5n，占主行动，己方暗子首刀，同棋暗子连斩，一链付费/共享n只一次；已实现，部分引擎证据，浏览器CI待完成"
+      "applied_scope": "主动先付6+5n，占主行动，己方暗子首刀，同棋暗子连斩，一链付费/共享n只一次；已实现，引擎及准备态DOM/CI部分情景证据，非完整验收"
     },
     {
       "id": "LEZI-H21-DRAGON-SCALE-2026-10-08",
       "kind": "explicit_user_confirmed_hero_rule_addendum",
       "path": "rules/confirmed/RULE_UPDATE_2026-10-08_DRAGON_SCALE.md",
       "sha256": "b332cb7821f8d29f067882b4c491cd89a17a71d264674bc14b0e617ae02b61b0",
-      "applied_scope": "龙鳞目标留位，地面进攻者返回结算落位，飞行降落受阻按既有规则窒息；已实现，部分引擎证据，浏览器CI待完成"
+      "applied_scope": "龙鳞目标留位，地面进攻者返回结算落位，飞行降落受阻按既有规则窒息；已实现，引擎及准备态DOM/CI部分情景证据，非完整验收"
     }
   ],
   "coverage": {
@@ -514,7 +514,7 @@
     "过时3英雄进度"
   ],
   "completeness_claim": "H07/H12已确认、运行时待接入；H16启动方式已确认，尚缺费用公式；H21龙鳞落位未确认，仍为2项设计缺口。501/20为增量前部分证据，完整验收0。",
-  "previous_code_checkpoint": "b45077a692213953ee7e3edef31a6d16c011c940",
+  "previous_code_checkpoint": "9ed5ff71590bf9658d1294def22bb669b195357b",
   "runtime_evidence_index": "review/invariants/LATEST.json",
   "gameplay_execution_evidence_index": "review/gameplay/runtime-browser-review-2026-10-05-modes.json",
   "full_match_execution_evidence_index": "review/gameplay/full-match-browser-2026-10-05-active-regression-summary.json",
@@ -536,8 +536,8 @@
   "acceptance_gap_close_index": "21_ACCEPTANCE_GAP_CLOSE_2026-10-07.md",
   "acceptance_gap_inventory_index": "qa/ACCEPTANCE_GAPS.json",
   "hero_transfer_index": "22_HERO_TRANSFER_2026-10-07.md",
-  "code_tree": "4731570c671e2f9e87d0179b9126ca0a5fbd869f",
-  "local_execution_checkpoint": "ccdea1053399539bdc1839929f454aacd165798d",
+  "code_tree": "2196ff13746ef6e00fc0a5b4820eae20d1a8a209",
+  "local_execution_checkpoint": "f3ae349548970eaf94469c90d323b157777dbea8",
   "qa_contract_checkpoint_role": "INVARIANTS.code_checkpoint is the prior product checkpoint used for the r5 diff, not a claim of current runtime acceptance.",
   "hero_cross_settlement_index": "23_HERO_CROSS_SETTLEMENT_2026-10-08.md",
   "hero_child_boundary_index": "24_HERO_CHILD_BOUNDARY_2026-10-08.md",
@@ -573,5 +573,7 @@
       "sha256": "b332cb7821f8d29f067882b4c491cd89a17a71d264674bc14b0e617ae02b61b0"
     }
   ],
-  "rule_gap_runtime_index": "30_RULE_GAP_RUNTIME_2026-10-08.md"
+  "rule_gap_runtime_index": "30_RULE_GAP_RUNTIME_2026-10-08.md",
+  "local_assembled_publication_checkpoint": "83bfe5e1cf8d05373a6d2c846ad547afd4674215",
+  "current_ci_evidence_index": "review/invariants/RULE_GAP_CI_2026-10-08.json"
 }

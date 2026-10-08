@@ -3,8 +3,8 @@
   "self_excluded": true,
   "files": {
     "00_READ_FIRST.md": {
-      "bytes": 2126,
-      "sha256": "4dcc0f99b6d779c457270f40b6083457afd747c71e9522bd14b5f763f894b163"
+      "bytes": 2551,
+      "sha256": "fba778ba5f1f07b8143a3f949183d9296c0b80ca9aa27f810015745af2101231"
     },
     "01_CURRENT_RULES.md": {
       "bytes": 30087,
@@ -23,8 +23,8 @@
       "sha256": "c133b4ee797b778ce4c88233437b2466255f27c30fcaec5b0941c766cc4bae00"
     },
     "05_PROGRESS_AND_NEXT.md": {
-      "bytes": 41527,
-      "sha256": "6f979e1bb3a103c6d63bb9a9ba8e8e477840e7989ce94a56d884050936dcf862"
+      "bytes": 41664,
+      "sha256": "6b93d5de478ef91999071d1bc4f4ebf8cf67ca13868990c54030f1cb12635d31"
     },
     "06_COLLABORATION.md": {
       "bytes": 8164,
@@ -123,20 +123,20 @@
       "sha256": "cf37769700cd84e1b3a14e72f84b9496cb181387ccac1ac024c46d1d6b8849c0"
     },
     "30_RULE_GAP_RUNTIME_2026-10-08.md": {
-      "bytes": 3773,
-      "sha256": "f119367c379e70396c717b4951ae336374fadf254cbfb4505f67b302371e2a2a"
+      "bytes": 5739,
+      "sha256": "cfb7f8c33922e1e4efaa06a0f0cffeb3127e60bd982281d58d23a8e412999a9b"
     },
     "NEW_DIALOGUE_PROMPT.txt": {
       "bytes": 2667,
       "sha256": "3ae6a73ae1451c4990a259b38b53345a7218cea29733b2343c6f344b6bcc39c8"
     },
     "SOURCE_REGISTER.json": {
-      "bytes": 34185,
-      "sha256": "1858bf54532e03360e3a46df801f1fc895a88e9424ae31309b8937a7ae0131ab"
+      "bytes": 34429,
+      "sha256": "b3f804e7d8f3defbc9ebb05819574fd5eddce834721b70e6d85734d57979ac87"
     },
     "STATE.json": {
-      "bytes": 98736,
-      "sha256": "2313864e9943a4058cf18be1896a1d8b82b062423d42217186a52a1403d70688"
+      "bytes": 103785,
+      "sha256": "109965ccfea085b62a02b98581ff7446ba49e575467fbf8ac71d01790d8085e3"
     },
     "assets/approved-home.png": {
       "bytes": 2157060,
@@ -151,8 +151,8 @@
       "sha256": "9714d648a41f2d034530248d838dcb7b8892aa73c681d6414ae31d55119371d4"
     },
     "qa/HERO_TRANSFER_AUDIT.json": {
-      "bytes": 31431,
-      "sha256": "7ad0abbc655ab0dfeeb0cc644664b738bbf5247fa12b53f0b0c3c151714221c5"
+      "bytes": 31721,
+      "sha256": "598d805db7d696033ea20c7ba83e382ace8cf84997746a22d3ea87cd29c0ba7c"
     },
     "qa/INVARIANTS.json": {
       "bytes": 45510,
@@ -167,12 +167,11 @@
     "mutations_9_present": true,
     "qa_69_plus_20_and_20_supplements_preserved": true,
     "new_hero_sources_imported_this_round": false,
-    "android_assets_127_equal": true,
     "full_contracts_accepted": false,
     "hero_full_matches_accepted": false,
     "physical_devices_accepted": false,
     "apk_built": false,
-    "remote_and_execution_product_trees_equal": true,
+    "remote_and_execution_product_trees_equal": false,
     "historical_r4_inventory_preserved": true,
     "cross_settlement_8_new_cases_passed": true,
     "rule_sources_unchanged_this_round": false,
@@ -189,15 +188,12 @@
     "historical_browser_12_prepared_operations_passed": true,
     "historical_browser_9_mode_foundation_cases_passed": true,
     "descent_atom_7_new_cases_passed": true,
-    "mode_foundation_skipped_this_round": true,
     "historical_engine_494_passed": true,
     "historical_browser_16_prepared_operations_passed": true,
     "bomb_target_4_new_cases_passed": true,
     "historical_engine_498_passed": true,
     "historical_browser_18_prepared_operations_passed": true,
     "historical_mode_foundation_9_failure_fallback_cases_passed": true,
-    "engine_501_passed": true,
-    "browser_20_prepared_operations_passed": true,
     "flight_turn_boundary_3_new_cases_passed": true,
     "historical_design_required_branches": 4,
     "design_required_branches": 0,
@@ -209,6 +205,15 @@
     "H16_entry_confirmed_fee_pending": false,
     "four_design_gaps_confirmed_implemented": true,
     "engine_514_passed": true,
-    "android_assets_128_equal": true
+    "android_assets_128_equal": true,
+    "historical_android_assets_127_equal": true,
+    "historical_engine_501_passed": true,
+    "historical_browser_20_prepared_operations_passed": true,
+    "historical_mode_foundation_skipped_this_round": true,
+    "browser_27_prepared_operations_passed": true,
+    "mode_foundation_9_shared_app_cases_passed": true,
+    "current_source_contract_app_digests_match_actual_CI": true,
+    "publication_tree_matches_local_assembled": true,
+    "publication_tree_matches_source_execution": false
   }
 }

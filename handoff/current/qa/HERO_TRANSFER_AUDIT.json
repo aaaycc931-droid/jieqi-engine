@@ -3,7 +3,7 @@
   "hero_source_revision": "2026-10-07-r7-clean",
   "remote_start": "333c94eae2c2cc44a2517023d78145a6d505b74c",
   "scope": "H01-H21",
-  "status": "all_four_recorded_design_gaps_confirmed_implemented_partial_evidence",
+  "status": "all_four_recorded_design_gaps_confirmed_implemented_partial_engine_browser_evidence",
   "entries": [
     {
       "id": "H01",
@@ -178,7 +178,7 @@
       "prior": "existing",
       "required_delta": "双窃时标准60/60",
       "runtime_hooks": "hero-actions.ts formalTurnDurationMs; remote-room.ts clock",
-      "status": "implemented_partial_engine_evidence_browser_ci_pending",
+      "status": "implemented_partial_engine_browser_scenario_evidence",
       "tests": [
         {
           "file": "tests/confirmed-runtime.test.ts",
@@ -190,7 +190,7 @@
         }
       ],
       "fully_accepted": false,
-      "remaining": "新增语义已接入且部分引擎情景通过；实际提交浏览器CI待核对，完整交叉、自然整盘、实机与全称验收仍待。",
+      "remaining": "相关引擎情景与实际提交准备态DOM/CI通过；完整交叉、自然整盘、实机与全称验收仍待。",
       "confirmation": "rules/confirmed/RULE_UPDATE_2026-10-08_THIEF_MIRROR.md",
       "existing_test_scope": "Updated old gap rejection to confirmed behavior; dedicated addendum scenarios in GAP-H07-01, partial evidence only",
       "design_required": [],
@@ -321,7 +321,7 @@
       "prior": "new",
       "required_delta": "普通中心>=3级消灭将帅；将帅中心范围全部普通棋与另一将帅同批消灭",
       "runtime_hooks": "hero-actions.ts new burning_flame; slots public current type",
-      "status": "implemented_partial_engine_evidence_browser_ci_pending",
+      "status": "implemented_partial_engine_browser_scenario_evidence",
       "tests": [
         {
           "file": "tests/hero-transfer-r5.test.ts",
@@ -337,7 +337,7 @@
         }
       ],
       "fully_accepted": false,
-      "remaining": "新增语义已接入且部分引擎情景通过；实际提交浏览器CI待核对，完整交叉、自然整盘、实机与全称验收仍待。",
+      "remaining": "相关引擎情景与实际提交准备态DOM/CI通过；完整交叉、自然整盘、实机与全称验收仍待。",
       "confirmed_threshold": "rules/confirmed/RULE_UPDATE_2026-10-08_FLAME_GENERAL.md",
       "design_required": [],
       "historical_runtime_pending": [
@@ -431,7 +431,7 @@
       "prior": "new",
       "required_delta": "主动先付6+5n，占主行动，己方暗子首刀，同棋暗子连斩，一链付费/共享n只一次",
       "runtime_hooks": "settlement death snapshots; game closed atom and child dispatch",
-      "status": "implemented_partial_engine_evidence_browser_ci_pending",
+      "status": "implemented_partial_engine_browser_scenario_evidence",
       "tests": [
         {
           "file": "tests/hero-transfer-r5.test.ts",
@@ -467,7 +467,7 @@
         }
       ],
       "fully_accepted": false,
-      "remaining": "新增语义已接入且部分引擎情景通过；实际提交浏览器CI待核对，完整交叉、自然整盘、实机与全称验收仍待。",
+      "remaining": "相关引擎情景与实际提交准备态DOM/CI通过；完整交叉、自然整盘、实机与全称验收仍待。",
       "design_required": [],
       "entry_confirmation": "rules/confirmed/RULE_UPDATE_2026-10-08_BRAWL_ENTRY.md"
     },
@@ -570,7 +570,7 @@
       "prior": "existing",
       "required_delta": "龙鳞目标留位，地面进攻者返回结算落位，飞行降落受阻按既有规则窒息",
       "runtime_hooks": "hero-forms variant lock; settlement begin; public pending placement; special storm geometry",
-      "status": "implemented_partial_engine_evidence_browser_ci_pending",
+      "status": "implemented_partial_engine_browser_scenario_evidence",
       "tests": [
         {
           "file": "tests/hero-transfer-r5.test.ts",
@@ -662,15 +662,15 @@
         }
       ],
       "fully_accepted": false,
-      "remaining": "新增语义已接入且部分引擎情景通过；实际提交浏览器CI待核对，完整交叉、自然整盘、实机与全称验收仍待。",
+      "remaining": "相关引擎情景与实际提交准备态DOM/CI通过；完整交叉、自然整盘、实机与全称验收仍待。",
       "design_required": []
     }
   ],
   "design_required": [],
   "scoring_is_non_normative": true,
-  "implementation_commit": "9ed5ff71590bf9658d1294def22bb669b195357b",
-  "local_execution_commit": "ccdea1053399539bdc1839929f454aacd165798d",
-  "implementation_tree": "4731570c671e2f9e87d0179b9126ca0a5fbd869f",
+  "implementation_commit": "fd268f301cf8200993271bf1bc837fbbff7870ce",
+  "local_execution_commit": "f3ae349548970eaf94469c90d323b157777dbea8",
+  "implementation_tree": "2196ff13746ef6e00fc0a5b4820eae20d1a8a209",
   "tests_passed": 514,
   "new_dedicated_cases": 36,
   "browser_evidence": "review/invariants/HERO_TRANSFER_BROWSER_2026-10-07.json",
@@ -716,11 +716,19 @@
       "implementation_tree": "c2ad40457facf58a4456d22e017b52d058a1b4b2",
       "tests_passed": 498,
       "browser_prepared_cases": 18
+    },
+    {
+      "implementation_commit": "9ed5ff71590bf9658d1294def22bb669b195357b",
+      "local_execution_commit": "ccdea1053399539bdc1839929f454aacd165798d",
+      "implementation_tree": "4731570c671e2f9e87d0179b9126ca0a5fbd869f",
+      "tests_passed": 501,
+      "browser_prepared_cases": 20,
+      "scope": "previous product before four confirmed addenda"
     }
   ],
   "child_boundary_cases": 3,
   "child_boundary_report": "handoff/current/24_HERO_CHILD_BOUNDARY_2026-10-08.md",
-  "browser_prepared_cases": 20,
+  "browser_prepared_cases": 27,
   "descent_boundary_cases": 6,
   "descent_boundary_report": "handoff/current/25_HERO_DESCENT_BOUNDARY_2026-10-08.md",
   "descent_atom_cases": 7,
@@ -758,7 +766,7 @@
       "sha256": "30775c14cfe15ede76737779abd564eb2621af34970cd58dcbfa9b97e1cf857e",
       "confirmed_at": "2026-10-08T20:59:35+08:00",
       "user_quote": "互相偷然后就抵消了",
-      "runtime_status": "implemented_partial_engine_evidence_browser_ci_pending",
+      "runtime_status": "implemented_partial_engine_browser_scenario_evidence",
       "runtime_accepted": false
     },
     {
@@ -767,7 +775,7 @@
       "sha256": "56571e87875a63d9def9ba5b9b430d643ebc0263f561c4272d9eb7dc4e415c93",
       "confirmed_at": "2026-10-08T21:13:45+08:00",
       "user_quote": "至少3级才能消灭",
-      "runtime_status": "implemented_partial_engine_evidence_browser_ci_pending",
+      "runtime_status": "implemented_partial_engine_browser_scenario_evidence",
       "runtime_accepted": false,
       "additional_confirmation": {
         "at": "2026-10-08T22:11:25+08:00",
@@ -788,7 +796,7 @@
       "confirmed_at": "2026-10-08T23:16:12+08:00",
       "user_quote": "是的",
       "confirmed_scope": "active upfront fee 6+5n, occupies main, same-piece covered chain, shared n once",
-      "runtime_status": "implemented_partial_engine_evidence_browser_ci_pending",
+      "runtime_status": "implemented_partial_engine_browser_scenario_evidence",
       "runtime_accepted": false,
       "superseded_confirmation": {
         "at": "2026-10-08T22:45:11+08:00",
@@ -808,10 +816,11 @@
       "confirmed_at": "2026-10-08T23:17:34+08:00",
       "user_quote": "同意",
       "confirmed_scope": "target stays; ground attacker returns with landing effects, opportunity consumed; existing blocked flight landing suffocation retained",
-      "runtime_status": "implemented_partial_engine_evidence_browser_ci_pending",
+      "runtime_status": "implemented_partial_engine_browser_scenario_evidence",
       "runtime_accepted": false
     }
   ],
   "rule_gap_runtime_cases": 13,
-  "rule_gap_runtime_report": "handoff/current/30_RULE_GAP_RUNTIME_2026-10-08.md"
+  "rule_gap_runtime_report": "handoff/current/30_RULE_GAP_RUNTIME_2026-10-08.md",
+  "rule_gap_runtime_browser_new_cases": 7
 }
