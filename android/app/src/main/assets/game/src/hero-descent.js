@@ -3,7 +3,7 @@ import { selectedHeroSelection } from "./hero-forms.js";
 import { getController, isInsideBoard, otherSide } from "./slots.js";
 import { isBoardPiece, isGround } from "./spaces.js";
 import { isGeneralInCheck, pieceAt } from "./rules.js";
-import { beginFormalTurn, closeDirectDeaths, copy, destroyPieceBatch, formalTurn, generateGhosts, markRevealed, queueLanding, settleLandings } from "./settlement.js";
+import { beginFormalTurn, closeDirectDeaths, copy, destroyPieceBatch, formalTurn, generateGhosts, markRevealed, placementAllowed, queueLanding, settleLandings } from "./settlement.js";
 import { enterTurnPhase, recordAction } from "./turns.js";
 import { applyAuthoritativeMove } from "./game.js";
 
@@ -69,7 +69,11 @@ export function applyDescentAction(state           , secret             , comman
     requireRule(new Set(placements.map(p => `${p.to.x},${p.to.y}`)).size === placements.length, "OCCUPIED", "地面落点不得重复");
     for (const placement of placements) {
       requireRule(isInsideBoard(placement.to) && !pieceAt(s, placement.to), "OCCUPIED", "必须选择空地面格");
-      if (pending .variant === "nightmare" && s.pieces.find(p => p.id === placement.pieceId)?.layer === "air") requireRule(!s.pieces.some(p => p.layer === "air" && p.x === placement.to.x && p.y === placement.to.y), "AIR_OCCUPIED", "空中落点已被占用");
+      if (pending .variant === "nightmare") {
+        reveal(s, k, placement.pieceId);
+        const p = s.pieces.find(p => p.id === placement.pieceId) ;
+        requireRule(placementAllowed(s, p, placement.to), "INVALID_DESCENT_SPACE", "梦魇部署必须遵守空间占用与封锁，未获得来源豁免");
+      }
       if (pending .variant !== "nightmare") requireRule(side === "red" ? placement.to.y >= 5 : placement.to.y <= 4, "OUTSIDE_HOME", "新棋只放己方半场");
     }
     for (const placement of placements) {
@@ -82,11 +86,13 @@ export function applyDescentAction(state           , secret             , comman
         s.pieces.push(p); queueLanding(s, p, side, `galakrond:${pending .variant}`);
       }
     }
-    if (pending .variant === "nightmare") requireRule(!isGeneralInCheck(s, otherSide(side)), "DESCENT_CHECK", "梦魇最终部署不能形成将军");
     settleLandings(s, k);
-    if (pending .variant === "nightmare") requireRule(!isGeneralInCheck(s, otherSide(side)), "DESCENT_CHECK", "梦魇完整部署结算不能形成将军");
     generateGhosts(s); closeDirectDeaths(s, k, side);
-    if (pending .variant === "storm" && s.status === "playing") pending .assaultIds = pending .pieces.filter(p => s.pieces.some(q => q.id === p.id)).map(p => p.id);
+    if (pending .variant === "nightmare") requireRule(!isGeneralInCheck(s, otherSide(side)), "DESCENT_CHECK", "梦魇完整部署结算不能形成将军");
+    if (pending .variant === "storm" && s.status === "playing") {
+      pending .assaultIds = pending .pieces.filter(p => s.pieces.some(q => q.id === p.id)).map(p => p.id);
+      if (!pending .assaultIds.length) delete s.pendingDescent;
+    }
     else delete s.pendingDescent;
     recordAction(s, { tier: 3, keywords: ["移置"], source: "skill_derived", opportunity: "child", countsAsFormalTurn: false, actionId: command.actionId, actingSide: side });
     s.revision++;

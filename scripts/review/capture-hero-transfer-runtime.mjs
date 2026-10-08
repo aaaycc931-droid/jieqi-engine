@@ -71,7 +71,15 @@ try {
   if(variant==='nightmare')assert.equal(s.pieces.find(p=>p.id==='nightmare-piece').y,7);else assert.equal(s.pieces.filter(p=>p.id.startsWith('galakrond:')).length,count);
   done(`${variant} descent deployment and main opportunity preservation`);
  }
- assert.deepEqual(report.errors,[]);report.passed=true;
+ const sealed={state:initializeFeatureGameState(gameState([revealed('sealed-horse','red','horse',0,6)]),{red:'devout_zealot',black:'hunter'},'iron_wall',undefined,{red:'nightmare'}),secret:secretState()};
+ sealed.state.heroRuntime.red.invokeCount=4;sealed.state.heroRuntime.red.omen=true;beginFormalTurn(sealed.state,sealed.secret,()=>0);
+ await load(sealed);const sealedBefore=await read();await page.getByRole('button',{name:'完成迦拉克隆部署',exact:true}).click();await page.getByLabel('待部署棋子',{exact:true}).nth(0).selectOption('sealed-horse');await coordinates(4,1);await confirm();s=await read();
+ assert.deepEqual(s,sealedBefore);assert.equal(await page.getByRole('button',{name:'完成迦拉克隆部署',exact:true}).count(),1);done('nightmare fortress seal rejects deployment without consuming its window');
+ const finalTrap=pair('devout_zealot',[revealed('checking-rook','red','rook',0,6)],'front','nightmare');finalTrap.state.heroRuntime.red.invokeCount=4;finalTrap.state.heroRuntime.red.omen=true;finalTrap.secret.traps=[{id:'final-check-trap',owner:'black',position:{x:5,y:3},opponentTurnsRemaining:12}];beginFormalTurn(finalTrap.state,finalTrap.secret,()=>0);
+ await load(finalTrap);await page.getByRole('button',{name:'完成迦拉克隆部署',exact:true}).click();await page.getByLabel('待部署棋子',{exact:true}).nth(0).selectOption('checking-rook');await coordinates(5,3);await confirm();s=await read();assert.equal(s.captured.find(p=>p.id==='checking-rook').cause,'trap_ambush');assert.equal(s.pendingDescent,undefined);assert.equal(s.turnLifecycle.phase,'before_main');assert.equal(s.formalTurns.red,0);done('nightmare final check is evaluated after landing trap destruction');
+ const emptyStorm=pair('devout_zealot',[revealed('storm-main','red','rook',0,7)],'front','storm');emptyStorm.state.heroRuntime.red.invokeCount=4;emptyStorm.state.heroRuntime.red.omen=true;emptyStorm.secret.traps=[0,1].map(x=>({id:`empty-storm-trap-${x}`,owner:'black',position:{x,y:6},opponentTurnsRemaining:12}));beginFormalTurn(emptyStorm.state,emptyStorm.secret,()=>0);
+ await load(emptyStorm);await page.getByRole('button',{name:'完成迦拉克隆部署',exact:true}).click();for(let i=0;i<2;i++)await coordinates(i,6,i);await confirm();s=await read();assert.equal(s.captured.length,2);assert.equal(s.pendingDescent,undefined);assert.equal(s.turnLifecycle.phase,'before_main');assert.equal(s.formalTurns.red,0);assert.equal(await page.getByRole('button',{name:'结算下一枚风暴元素突袭',exact:true}).count(),0);done('storm summons killed on landing release the normal main opportunity');
+ await page.waitForLoadState('networkidle');assert.deepEqual(report.errors,[]);report.passed=true;
 } catch(e){report.passed=false;report.failure=e.stack;throw e;}
 finally{await mkdir(resolve(root,'review/invariants'),{recursive:true});await writeFile(resolve(root,'review/invariants/HERO_TRANSFER_BROWSER_2026-10-07.json'),JSON.stringify(report,null,2)+'\n');await browser.close();await new Promise(done=>server.close(done));}
 console.log(JSON.stringify({passed:report.passed,cases:report.cases.length,errors:report.errors.length}));
