@@ -32,6 +32,13 @@ const report={authority:'prepared_browser_execution_non_normative',ruleRevision:
 const context=await browser.newContext({viewport:report.viewport,isMobile:true,hasTouch:true});const page=await context.newPage();
 page.on('pageerror',e=>report.errors.push(e.message));page.on('requestfailed',r=>report.errors.push(r.url()));page.on('response',r=>{if(r.status()>=400)report.errors.push(`${r.status()} ${r.url()}`);});
 const pair=(hero,pieces=[],form='front',variant)=>({state:initializeFeatureGameState(gameState(pieces),{red:hero,black:'hunter'},undefined,{red:form},{red:variant}),secret:secretState()});
+function flightWindow(flyerMoves) {
+ const state=initializeFeatureGameState(gameState([covered('flight-trainee',0,6),revealed('flight-mover','red','rook',2,7),revealed('flight-reply','black','rook',6,2),...(flyerMoves?[revealed('flight-return-ground','red','horse',0,4),revealed('flight-destination-ground','black','pawn',1,4)]:[])]),{red:'sky_admiral',black:'murozond'}),secret=secretState({'flight-trainee':{color:'red',type:'pawn'}});
+ configureHeroPreparation(state,secret,'red',{trainingType:'pawn'},()=>0);let r=applyAuthoritativeMove(state,secret,move({x:2,y:7},{x:2,y:6},'flight-prep'));
+ r=applyAuthoritativeMove(r.state,r.secret,move({x:6,y:2},{x:6,y:3},'flight-prep-reply',r.state.revision));
+ for(let i=0;i<3;i++){r=applyAuthoritativeMove(r.state,r.secret,{...move(flyerMoves?{x:0,y:6-i}:{x:2,y:i%2===0?6:7},flyerMoves?{x:0,y:5-i}:{x:2,y:i%2===0?7:6},`flight-main-${i}`,r.state.revision),pieceId:flyerMoves?'flight-trainee':'flight-mover'});if(i<2)r=applyAuthoritativeMove(r.state,r.secret,move({x:6,y:i%2===0?3:2},{x:6,y:i%2===0?2:3},`flight-reply-${i}`,r.state.revision));}
+ return r;
+}
 const skill=(s,ability,rest={})=>({kind:'hero_ability',ability,actionId:`browser:${ability}:${s.revision}`,expectedRevision:s.revision,...rest});
 // The board is a CSS background loaded lazily when the game becomes visible.
 // Decode it before fixture navigation so reload cannot cancel its first request.
@@ -103,6 +110,12 @@ try {
  await load(bombArmy);const beforeBomb=await read();await page.locator('button[data-skill-key="ability:bomb"]').click();await page.getByLabel('技能对象',{exact:true}).selectOption('bomb-dragon');await coordinates(0.5,3);await confirm();s=await read();assert.deepEqual(s,beforeBomb);
  await page.locator('button[data-skill-key="ability:bomb"]').click();await page.getByLabel('技能对象',{exact:true}).selectOption('bomb-dragon');await coordinates(0,6);await confirm();s=await read();assert.deepEqual(s.warps,[{x:0,y:6}]);assert.equal(s.effectsByPieceId['bomb-dragon'].ammunition,0);assert.equal(s.effectsByPieceId['bomb-victim'].timeCollapse.expiresAtOwnerTurnEnd,1);assert.equal(s.turn,'black');assert.equal(s.formalTurns.black,0);assert.equal(s.turnLifecycle.phase,'before_main');done('bomb rejects fractional DOM target without spending ammo and accepts a range-three retry');
  const firstBomb=structuredClone(s);await page.locator('button[data-skill-key="ability:bomb"]').click();await page.getByLabel('技能对象',{exact:true}).selectOption('bomb-second');await coordinates(2,4);await confirm();s=await read();assert.deepEqual(s,firstBomb);assert.equal(s.effectsByPieceId['bomb-second'].ammunition,1);done('bomb army quota rejects a different dragon without spending its ammo');
+ for(const air of [false,true]){
+  await load(flightWindow(air));await page.locator('button[data-skill-key="ability:timeline_twist"]').click();await coordinates(air?1:2,air?4:5);await confirm();s=await read();assert.deepEqual(s.formalTurns,{red:4,black:4});assert.equal(s.turn,'red');assert.equal(s.effectsByPieceId['flight-trainee'].flight.forcedLanding,true);assert.equal(s.effectsByPieceId['flight-trainee'].flight.remainingOwnerTurns,0);
+  if(air){assert.equal(s.pieces.find(p=>p.id==='flight-trainee').layer,'air');assert.equal(s.pieces.find(p=>p.id==='flight-trainee').x,1);assert.deepEqual(s.pieces.find(p=>p.id==='flight-return-ground'),revealed('flight-return-ground','red','horse',0,4));assert(s.pieces.some(p=>p.id==='flight-destination-ground'));}else assert.equal(s.pieces.find(p=>p.id==='flight-mover').y,5);
+  await page.getByRole('button',{name:'已接手',exact:true}).click();await page.getByRole('button',{name:'飞行期限已到：原地降落',exact:true}).click();s=await read();assert.deepEqual(s.formalTurns,{red:5,black:4});assert.equal(s.turn,'black');assert.equal(s.effectsByPieceId['flight-trainee'].flight,undefined);assert.equal(s.pieces.find(p=>p.id==='flight-trainee').layer,undefined);if(air)assert(s.captured.some(p=>p.id==='flight-destination-ground'&&p.cause==='crush'));
+  done(air?'timeline controls the original flyer above ground objects then next formal main lands it':'next-turn flight obligation preserves timeline ground control then requires formal landing');
+ }
  await page.waitForLoadState('networkidle');assert.deepEqual(report.errors,[]);report.passed=true;
 } catch(e){report.passed=false;report.failure=e.stack;throw e;}
 finally{await mkdir(resolve(root,'review/invariants'),{recursive:true});await writeFile(resolve(root,'review/invariants/HERO_TRANSFER_BROWSER_2026-10-07.json'),JSON.stringify(report,null,2)+'\n');await browser.close();await new Promise(done=>server.close(done));}

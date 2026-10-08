@@ -29,7 +29,7 @@ import {
 
 
 
-                                    
+                                       
 
 
 
@@ -360,7 +360,7 @@ export function validatePublicMove(
   if (getController(source) !== actingSide) {
     return { ok: false, code: "NOT_CONTROLLED", message: "该棋子不由行动方控制" };
   }
-  if (state.pieces.some(p => p.layer === "air" && getController(p) === actingSide && state.effectsByPieceId?.[p.id]?.flight?.forcedLanding)) return { ok: false, code: "FORCED_LANDING_REQUIRED", message: "第四个控制方回合必须原地降落" };
+  if (!options.allowLinkedControl && state.pieces.some(p => p.layer === "air" && getController(p) === actingSide && state.effectsByPieceId?.[p.id]?.flight?.forcedLanding)) return { ok: false, code: "FORCED_LANDING_REQUIRED", message: "第四个控制方回合必须原地降落" };
   if (selectedHeroId(state, actingSide) === "single_blade" && state.heroRuntime?.[actingSide]?.blade && source.x !== 4 && !strongBladeSide(state, actingSide, source.x) && Math.abs(move.to.x - 4) > Math.abs(source.x - 4)) return { ok: false, code: "WEAK_BLADE_OUTWARD", message: "弱侧普通行动不能离中轴更远" };
   const effects = state.effectsByPieceId?.[source.id];
   const target = source.layer === "air" ? undefined : pieceAt(state, move.to);

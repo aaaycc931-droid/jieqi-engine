@@ -416,6 +416,14 @@
       {
         "file": "tests/confirmed-runtime.test.ts",
         "namePrefix": "RULES ground intangible"
+      },
+      {
+        "file": "tests/flight-turn-boundaries.test.ts",
+        "namePrefix": "R5-FLIGHT-TURN-02"
+      },
+      {
+        "file": "tests/flight-turn-boundaries.test.ts",
+        "namePrefix": "R5-FLIGHT-TURN-03"
       }
     ],
     "INV-FLIGHT-002": [
@@ -426,6 +434,14 @@
       {
         "file": "tests/confirmed-runtime.test.ts",
         "namePrefix": "WIND flight landing"
+      },
+      {
+        "file": "tests/flight-turn-boundaries.test.ts",
+        "namePrefix": "R5-FLIGHT-TURN-01"
+      },
+      {
+        "file": "tests/flight-turn-boundaries.test.ts",
+        "namePrefix": "R5-FLIGHT-TURN-02"
       }
     ],
     "INV-CRUSH-001": [
@@ -686,6 +702,18 @@
       {
         "file": "tests/exception-contracts.test.ts",
         "namePrefix": "EX-TIME-02 "
+      },
+      {
+        "file": "tests/flight-turn-boundaries.test.ts",
+        "namePrefix": "R5-FLIGHT-TURN-01"
+      },
+      {
+        "file": "tests/flight-turn-boundaries.test.ts",
+        "namePrefix": "R5-FLIGHT-TURN-02"
+      },
+      {
+        "file": "tests/flight-turn-boundaries.test.ts",
+        "namePrefix": "R5-FLIGHT-TURN-03"
       }
     ],
     "INV-NOZDORMU-001": [
@@ -1122,6 +1150,18 @@
       {
         "file": "tests/time-line-contracts.test.ts",
         "namePrefix": "TIME-TRAP-03 "
+      },
+      {
+        "file": "tests/flight-turn-boundaries.test.ts",
+        "namePrefix": "R5-FLIGHT-TURN-01"
+      },
+      {
+        "file": "tests/flight-turn-boundaries.test.ts",
+        "namePrefix": "R5-FLIGHT-TURN-02"
+      },
+      {
+        "file": "tests/flight-turn-boundaries.test.ts",
+        "namePrefix": "R5-FLIGHT-TURN-03"
       }
     ],
     "INV-BOARD-001": [
@@ -1278,6 +1318,10 @@
       {
         "file": "tests/hero-descent-atom.test.ts",
         "namePrefix": "R5-DESCENT-ATOM-03"
+      },
+      {
+        "file": "tests/flight-turn-boundaries.test.ts",
+        "namePrefix": "R5-FLIGHT-TURN-02"
       }
     ],
     "ADD-TURN-PHASE-001": [
@@ -1348,6 +1392,14 @@
       {
         "file": "tests/hero-descent-atom.test.ts",
         "namePrefix": "R5-DESCENT-ATOM-07"
+      },
+      {
+        "file": "tests/flight-turn-boundaries.test.ts",
+        "namePrefix": "R5-FLIGHT-TURN-01"
+      },
+      {
+        "file": "tests/flight-turn-boundaries.test.ts",
+        "namePrefix": "R5-FLIGHT-TURN-02"
       }
     ],
     "ADD-DURATION-001": [

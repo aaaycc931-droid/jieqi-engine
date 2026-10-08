@@ -173,7 +173,7 @@ export function applyHeroAbility(state: GameState, secret: SecretState, command:
       controlled.turn = getController(p);
       // 此次操控是当前连带动作；“下一正式回合”封锁不取消它。
       requireRule(getLegalMoves(controlled, p.id, controlled.turn, { allowLinkedControl: true }).some(to => samePosition(to, command.to!)), "INVALID_CONTROLLED_MOVE", "重走必须符合该敌棋一侧全部合法规则");
-      const moved = applyAuthoritativeMove(controlled, k, { from: p, to: command.to, expectedRevision: controlled.revision, actionId: `${command.actionId}:controlled` }, true, now, { parentActionId: command.actionId });
+      const moved = applyAuthoritativeMove(controlled, k, { from: p, to: command.to, pieceId: p.id, expectedRevision: controlled.revision, actionId: `${command.actionId}:controlled` }, true, now, { parentActionId: command.actionId });
       Object.assign(s, moved.state); Object.assign(k, moved.secret);
       s.turn = side;
       endsTurn = true;
