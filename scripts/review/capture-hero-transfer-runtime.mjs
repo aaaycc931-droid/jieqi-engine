@@ -5,7 +5,7 @@ import { createRequire } from 'node:module';
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import assert from 'node:assert/strict';
-import { initializeFeatureGameState, beginFormalTurn, applyHeroAbility, applyAuthoritativeMove, configureHeroPreparation, putGhostObject, initializeFeatureSecret, getGhostObjects } from '../../src/index.ts';
+import { initializeFeatureGameState, beginFormalTurn, applyHeroAbility, applyAuthoritativeMove, configureHeroPreparation, putGhostObject, initializeFeatureSecret, getGhostObjects, markRevealed } from '../../src/index.ts';
 import { gameState, secretState, revealed, covered, move } from '../../tests/helpers.ts';
 
 const root = resolve(import.meta.dirname, '../..');
@@ -94,6 +94,11 @@ try {
  await load(mate);await page.getByRole('button',{name:'完成迦拉克隆部署',exact:true}).click();await coordinates(0,7,0);await coordinates(1,7,1);await confirm();
  for(let i=0;i<2;i++){await page.getByRole('button',{name:'结算下一枚风暴元素突袭',exact:true}).click();await page.getByRole('checkbox').check();await confirm();s=await read();if(i===0)assert.equal(s.status,'playing');}
  assert(['execution','finished'].includes(s.status));assert.equal(s.winner,'black');assert.equal(s.pendingDescent,undefined);assert.equal(s.formalTurns.red,0);done('storm exhausted source checks final unavoidable check before normal main');
+ const bombArmy={state:initializeFeatureGameState(gameState([revealed('bomb-dragon','black','pawn',0,3),revealed('bomb-second','black','pawn',2,3),revealed('bomb-victim','red','pawn',0,6)],{turn:'black'}),{red:'nozdormu',black:'murozond'},'end_time'),secret:secretState()};
+ initializeFeatureSecret(bombArmy.state,bombArmy.secret);for(const id of ['bomb-dragon','bomb-second'])markRevealed(bombArmy.state,bombArmy.secret,id);
+ await load(bombArmy);const beforeBomb=await read();await page.locator('button[data-skill-key="ability:bomb"]').click();await page.getByLabel('技能对象',{exact:true}).selectOption('bomb-dragon');await coordinates(0.5,3);await confirm();s=await read();assert.deepEqual(s,beforeBomb);
+ await page.locator('button[data-skill-key="ability:bomb"]').click();await page.getByLabel('技能对象',{exact:true}).selectOption('bomb-dragon');await coordinates(0,6);await confirm();s=await read();assert.deepEqual(s.warps,[{x:0,y:6}]);assert.equal(s.effectsByPieceId['bomb-dragon'].ammunition,0);assert.equal(s.effectsByPieceId['bomb-victim'].timeCollapse.expiresAtOwnerTurnEnd,1);assert.equal(s.turn,'black');assert.equal(s.formalTurns.black,0);assert.equal(s.turnLifecycle.phase,'before_main');done('bomb rejects fractional DOM target without spending ammo and accepts a range-three retry');
+ const firstBomb=structuredClone(s);await page.locator('button[data-skill-key="ability:bomb"]').click();await page.getByLabel('技能对象',{exact:true}).selectOption('bomb-second');await coordinates(2,4);await confirm();s=await read();assert.deepEqual(s,firstBomb);assert.equal(s.effectsByPieceId['bomb-second'].ammunition,1);done('bomb army quota rejects a different dragon without spending its ammo');
  await page.waitForLoadState('networkidle');assert.deepEqual(report.errors,[]);report.passed=true;
 } catch(e){report.passed=false;report.failure=e.stack;throw e;}
 finally{await mkdir(resolve(root,'review/invariants'),{recursive:true});await writeFile(resolve(root,'review/invariants/HERO_TRANSFER_BROWSER_2026-10-07.json'),JSON.stringify(report,null,2)+'\n');await browser.close();await new Promise(done=>server.close(done));}

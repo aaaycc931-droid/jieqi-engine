@@ -7,7 +7,7 @@ import { getGhostObjects, clearGhostObjects, reconcileGhostInfections } from "./
 import { isBoardPiece, isGround } from "./spaces.ts";
 import { RuleError } from "./errors.ts";
 import { applyAuthoritativeMove } from "./game.ts";
-import { getController, getCurrentPieceType, isInPalace, otherSide } from "./slots.ts";
+import { getController, getCurrentPieceType, isInPalace, isInsideBoard, otherSide } from "./slots.ts";
 import { getLegalMoves, hasStealthEffect, isCheckmate, isGeneralInCheck, isStalemate, samePosition } from "./rules.ts";
 import { closeDirectDeaths, copy, destroyPiece, destroyPieceBatch, effectiveIdentity, beginFormalTurn, advanceToFormalTurn, finishFormalTurn, formalTurn, generateGhosts, initializeFeatureSecret, markRevealed, placementAllowed, queueLanding, relocatePiece, landFlyingPiece, rememberAction, settleLandings } from "./settlement.ts";
 import { actionFields, closeMainActionAtom, isOrdinaryFormalAction, previousFormalAction, recordAction } from "./turns.ts";
@@ -242,7 +242,7 @@ export function applyHeroAbility(state: GameState, secret: SecretState, command:
       requireRule(p && d?.kind === "infinite_dragon" && d.shown && command.to, "INVALID_BOMBER", "需要已现身的己方无限龙及一枚弹药");
       requireRule(!k.processedActions[`bomb:turn:${side}:${formalTurn(s, side)}`], "BOMB_TURN_LIMIT", "每个正式回合全军最多投放一枚");
       const to = command.to;
-      requireRule(to.x >= 0 && to.x <= 8 && to.y >= 0 && to.y <= 9 && !samePosition(p, to) && Math.abs(p.x - to.x) + Math.abs(p.y - to.y) <= 3 && !s.warps?.some(w => samePosition(w, to)), "INVALID_BOMB_TARGET", "目标须在曼哈顿距离3内且非自身或已有扭曲");
+      requireRule(isInsideBoard(to) && !samePosition(p, to) && Math.abs(p.x - to.x) + Math.abs(p.y - to.y) <= 3 && !s.warps?.some(w => samePosition(w, to)), "INVALID_BOMB_TARGET", "目标须为棋盘整数格，在曼哈顿距离3内且非自身或已有扭曲");
       s.effectsByPieceId![p.id].ammunition = 0;
       s.warps ??= []; s.warps.push({ ...to });
       k.processedActions[`bomb:turn:${side}:${formalTurn(s, side)}`] = s.revision + 1;

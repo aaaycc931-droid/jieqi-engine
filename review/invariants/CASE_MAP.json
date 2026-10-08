@@ -726,6 +726,22 @@
       {
         "file": "tests/confirmed-runtime.test.ts",
         "namePrefix": "DESTINY bomb attacks"
+      },
+      {
+        "file": "tests/bomb-target-boundaries.test.ts",
+        "namePrefix": "R5-BOMB-TARGET-01"
+      },
+      {
+        "file": "tests/bomb-target-boundaries.test.ts",
+        "namePrefix": "R5-BOMB-TARGET-02"
+      },
+      {
+        "file": "tests/bomb-target-boundaries.test.ts",
+        "namePrefix": "R5-BOMB-TARGET-03"
+      },
+      {
+        "file": "tests/bomb-target-boundaries.test.ts",
+        "namePrefix": "R5-BOMB-TARGET-04"
       }
     ],
     "INV-HOURGLASS-001": [
