@@ -3,16 +3,16 @@
   "self_excluded": true,
   "files": {
     "00_READ_FIRST.md": {
-      "bytes": 2444,
-      "sha256": "bd5cfa0fc8f8633873cabafa4cf14ca92962ad7db70e21c4abfc05686c158ca5"
+      "bytes": 2652,
+      "sha256": "288daedc17ba4e6c0f62f2ced885c00d86127cbd2d6a9cfaeb9a8be08d3579bf"
     },
     "01_CURRENT_RULES.md": {
       "bytes": 30087,
       "sha256": "c0fb3bfb9269a7bbe9b227287bbd4ddcefc663c30ae28c75006129af794c101c"
     },
     "02_CURRENT_HEROES.md": {
-      "bytes": 33616,
-      "sha256": "06de50ce4f6edea23e6392ef7d2466a794ae7fb9d439a721e450ad23ccc22652"
+      "bytes": 33700,
+      "sha256": "e6e898f006f768390ad68d45b2c0dc7040a77aaea0344264d923aa958b1ca588"
     },
     "03_CURRENT_MUTATIONS.md": {
       "bytes": 17178,
@@ -23,8 +23,8 @@
       "sha256": "c133b4ee797b778ce4c88233437b2466255f27c30fcaec5b0941c766cc4bae00"
     },
     "05_PROGRESS_AND_NEXT.md": {
-      "bytes": 39684,
-      "sha256": "c7e3a475d02df594f2b2b5b719ec570c34e2480bda75d8fdd2d05d0703ec907b"
+      "bytes": 40630,
+      "sha256": "c63cd85408e5506010c922e8e53f3588c2772457b127f9c1ca0f069d6170342c"
     },
     "06_COLLABORATION.md": {
       "bytes": 8164,
@@ -107,16 +107,16 @@
       "sha256": "9a0a9f908cb74eb7519e8f659f98cd8f36c87e31a5e58372023c538b1c22888d"
     },
     "NEW_DIALOGUE_PROMPT.txt": {
-      "bytes": 2459,
-      "sha256": "25e36ff0fbeb0b6b5d9d26d61de6cc1bfc3f1d6d72402335cabb2b0925534333"
+      "bytes": 2667,
+      "sha256": "3ae6a73ae1451c4990a259b38b53345a7218cea29733b2343c6f344b6bcc39c8"
     },
     "SOURCE_REGISTER.json": {
-      "bytes": 33809,
-      "sha256": "de2166c8ba14baf302212ea6fbec88e289554dd99ed559c0ed4f7abc2decb560"
+      "bytes": 33392,
+      "sha256": "a567b44ca6145e5142ca77fe6282eb940788474f95b1c9ae9a27175aaa1ccbb8"
     },
     "STATE.json": {
-      "bytes": 91671,
-      "sha256": "011e600b476aaf951976746045e93193866e64d7a333a8581534b4cd3836ab75"
+      "bytes": 92873,
+      "sha256": "3355b10b2d8cb23807f9596b8b66960a1d5e30e513d4ce6ebe376e1b3cc5d8d6"
     },
     "assets/approved-home.png": {
       "bytes": 2157060,
@@ -131,8 +131,8 @@
       "sha256": "b476f6ba2696cb4a0185ac96da1ad976c7b43f37ff694b5bf86ccbc696cbc210"
     },
     "qa/HERO_TRANSFER_AUDIT.json": {
-      "bytes": 28567,
-      "sha256": "c4ba148b6791e37af8c9b6c5a4e05d81d1c352dbf0a31bc1df0ba1f93306caef"
+      "bytes": 28697,
+      "sha256": "254028b1d892c85ac89a6dbc34de3530e829835195a4a0d7fa84e71c10b2e7d6"
     },
     "qa/INVARIANTS.json": {
       "bytes": 45423,
@@ -196,10 +196,11 @@
     "browser_20_prepared_operations_passed": true,
     "flight_turn_boundary_3_new_cases_passed": true,
     "historical_design_required_branches": 4,
-    "design_required_branches": 3,
+    "design_required_branches": 2,
     "H07_mirror_confirmed_runtime_pending": true,
     "product_tests_rerun_for_H07_confirmation": false,
     "H12_ordinary_center_general_threshold_confirmed_runtime_pending": true,
-    "H12_general_center_ordinary_targets_confirmed_runtime_pending": true
+    "H12_general_center_ordinary_targets_confirmed_runtime_pending": true,
+    "H12_design_gap_closed_runtime_pending": true
   }
 }

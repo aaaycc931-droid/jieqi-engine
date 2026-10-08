@@ -1,5 +1,5 @@
 {
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-08-H12-center-confirmed",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-08-H12-design-closed",
   "rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
   "code_checkpoint": "9ed5ff71590bf9658d1294def22bb669b195357b",
   "sources": [
@@ -436,8 +436,8 @@
       "id": "LEZI-H12-GENERAL-THRESHOLD-2026-10-08",
       "kind": "explicit_user_confirmed_hero_rule_addendum",
       "path": "rules/confirmed/RULE_UPDATE_2026-10-08_FLAME_GENERAL.md",
-      "sha256": "ddf5b0cced4dd1a579c22c8cb3b7f459cdfb6ee5a4ba0889ee7d6521bf796f40",
-      "applied_scope": "H12普通中心至少3级消灭将帅；将帅中心消灭全部普通棋；将帅中心对另一将帅仍未决"
+      "sha256": "56571e87875a63d9def9ba5b9b430d643ebc0263f561c4272d9eb7dc4e415c93",
+      "applied_scope": "H12普通中心至少3级消灭将帅；将帅中心消灭全部普通棋和范围内另一将帅；同批两败俱伤，设计缺口关闭、运行时待接入"
     }
   ],
   "coverage": {
@@ -492,13 +492,6 @@
       "action": "涉及基础区域/跨河变更前定位原稿核对"
     },
     {
-      "id": "H12-general-rank",
-      "status": "blocked/design-required",
-      "code": "DESIGN_REQUIRED_FLAME_GENERAL",
-      "reason": "普通中心至少3级消灭将帅、将帅中心消灭全部普通棋均已确认；将帅中心对范围内另一将帅的消灭条件仍待确认。",
-      "partial_confirmation": "rules/confirmed/RULE_UPDATE_2026-10-08_FLAME_GENERAL.md"
-    },
-    {
       "id": "H16-chaos-entry",
       "status": "blocked/design-required",
       "code": "DESIGN_REQUIRED_BRAWL_ENTRY",
@@ -518,7 +511,7 @@
     "旧STATE运行时分支/测试数/下一步",
     "过时3英雄进度"
   ],
-  "completeness_claim": "H07镜像、H12普通中心3级门槛及将帅中心消灭全部普通棋已确认、运行时待接入；H12将帅中心对另一将帅、H16入口、H21落位仍为3项设计缺口。501/20为增量前部分证据，完整验收0。",
+  "completeness_claim": "H07/H12设计缺口已确认、运行时待接入；H16乱斗入口/费用与H21龙鳞落位仍为2项设计缺口。501/20为增量前部分证据，完整验收0。",
   "previous_code_checkpoint": "b45077a692213953ee7e3edef31a6d16c011c940",
   "runtime_evidence_index": "review/invariants/LATEST.json",
   "gameplay_execution_evidence_index": "review/gameplay/runtime-browser-review-2026-10-05-modes.json",
@@ -565,7 +558,7 @@
     {
       "id": "LEZI-H12-GENERAL-THRESHOLD-2026-10-08",
       "path": "rules/confirmed/RULE_UPDATE_2026-10-08_FLAME_GENERAL.md",
-      "sha256": "ddf5b0cced4dd1a579c22c8cb3b7f459cdfb6ee5a4ba0889ee7d6521bf796f40"
+      "sha256": "56571e87875a63d9def9ba5b9b430d643ebc0263f561c4272d9eb7dc4e415c93"
     }
   ]
 }

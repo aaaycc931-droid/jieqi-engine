@@ -316,7 +316,7 @@
       "prior": "new",
       "required_delta": "once main 3x3 locked batch board+air; public dark identity rank; general source semantics audit",
       "runtime_hooks": "hero-actions.ts new burning_flame; slots public current type",
-      "status": "implemented_confirmed_portions_design_required_branch",
+      "status": "general_interactions_confirmed_pending_implementation",
       "tests": [
         {
           "file": "tests/hero-transfer-r5.test.ts",
@@ -328,14 +328,11 @@
         }
       ],
       "fully_accepted": false,
-      "remaining": "将帅中心对范围内另一将帅的消灭条件待确认；已确认两项规则待实现。完整来源、自然整盘、设备及全称验收仍待。",
-      "design_required": [
-        "H12-general-rank"
-      ],
+      "remaining": "设计缺口已关闭，确认语义待实现与验证；完整来源、自然整盘、设备及全称验收仍待。",
       "confirmed_threshold": "rules/confirmed/RULE_UPDATE_2026-10-08_FLAME_GENERAL.md",
       "runtime_pending": [
         "ordinary center rank>=3 may destroy non-center generals",
-        "general center destroys all ordinary targets including rook"
+        "general center destroys all ordinary targets and other general in same batch"
       ]
     },
     {
@@ -656,13 +653,6 @@
   ],
   "design_required": [
     {
-      "id": "H12-general-rank",
-      "status": "blocked/design-required",
-      "code": "DESIGN_REQUIRED_FLAME_GENERAL",
-      "reason": "普通中心至少3级消灭将帅、将帅中心消灭全部普通棋均已确认；将帅中心对范围内另一将帅的消灭条件仍待确认。",
-      "partial_confirmation": "rules/confirmed/RULE_UPDATE_2026-10-08_FLAME_GENERAL.md"
-    },
-    {
       "id": "H16-chaos-entry",
       "status": "blocked/design-required",
       "code": "DESIGN_REQUIRED_BRAWL_ENTRY",
@@ -744,6 +734,15 @@
       "code": "DESIGN_REQUIRED_THIEF_MIRROR",
       "reason": "正式稿明确双窃时叠加未冻结；不采用旧60/60猜测。",
       "confirmation": "rules/confirmed/RULE_UPDATE_2026-10-08_THIEF_MIRROR.md"
+    },
+    {
+      "id": "H12-general-rank",
+      "status": "confirmed_pending_implementation",
+      "code": "DESIGN_REQUIRED_FLAME_GENERAL",
+      "reason": "普通中心至少3级消灭将帅、将帅中心消灭全部普通棋均已确认；将帅中心对范围内另一将帅的消灭条件仍待确认。",
+      "partial_confirmation": "rules/confirmed/RULE_UPDATE_2026-10-08_FLAME_GENERAL.md",
+      "confirmation": "rules/confirmed/RULE_UPDATE_2026-10-08_FLAME_GENERAL.md",
+      "resolution": "ordinary center rank>=3; general center destroys all ordinary targets and other general in same batch"
     }
   ],
   "confirmed_rule_addenda": [

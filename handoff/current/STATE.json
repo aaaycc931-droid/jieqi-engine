@@ -1,6 +1,6 @@
 {
   "project": "乐子象棋 / jieqi-engine",
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-08-H12-center-confirmed",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-08-H12-design-closed",
   "updated_at": "2026-10-08",
   "repository": "https://github.com/aaaycc931-droid/jieqi-engine",
   "working_branch": "codex/ui-android-apk-20261001",
@@ -10,7 +10,7 @@
   "baseline_id": "LEZI-FUNCTION-2026-10-04-v1",
   "baseline_digest": "4bcf9fb91f5c6e41f456e7424ebd7ed09c6c07b1595ec825604aa730fdad020b",
   "current_rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
-  "current_rule_digest": "e8c6c963b32fd1d155f94602207f7b4cec15265f60341e1318a08d668e7fd07b",
+  "current_rule_digest": "4ac0b405e23bd8c0d891c384b4b8721bac3be41e43360d86803e42ac48a68978",
   "authoritative_entry": "00_READ_FIRST.md",
   "current_rules": [
     "01_CURRENT_RULES.md",
@@ -861,7 +861,7 @@
     "verification_policy": "impact_selected_during_development_then_one_full_regression_per_completed_batch",
     "ci_trigger_optimization": "implemented_current_change_scope_with_successful_predecessor_guard"
   },
-  "next_action": "继续与用户逐项补全剩余3项设计缺口；已确认H07双窃时抵消待运行时接入。旧整盘、主动技能整盘、模式独立适配、APK和最终视觉队列保持暂停。",
+  "next_action": "继续与用户补全混乱乱斗首次发动/付费及龙鳞双方落位两项设计缺口；H07/H12已确认规则待实现，旧暂停队列不恢复。",
   "source_gap_register": "SOURCE_REGISTER.json",
   "apk_built_this_round": false,
   "previous_implementation_commit": "b45077a692213953ee7e3edef31a6d16c011c940",
@@ -931,10 +931,10 @@
     "physical_device_tests_run": false
   },
   "previous_rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
-  "previous_rule_digest": "46c1a914aec87cabe89798f23c21a49767837d28a94f2aa3c6b22c7fd63262d8",
+  "previous_rule_digest": "e8c6c963b32fd1d155f94602207f7b4cec15265f60341e1318a08d668e7fd07b",
   "rule_digest_algorithm": "sha256(concat(relative UTF-8 path + NUL + file bytes + NUL), STATE.current_rules order)",
   "paused_next_action": "Continue destiny bomb/hourglass full real matches, second Shadow cooldown/lifecycle, remaining private snapshot and cross-end clock intersections. Current five active families have sampled natural results; original Nozdormu/Prince and current 12-seat normal regression remain incomplete. Local timeout outcome not frozen; physical RFCOMM/WebView/two-phone pending. UI last; APK paused.",
-  "work_status": "H07_and_H12_confirmed_portions_runtime_pending_three_design_gaps_open",
+  "work_status": "H07_H12_design_confirmed_runtime_pending_two_design_gaps_open",
   "game_modes": {
     "authority": "09_CURRENT_GAME_MODES.md",
     "base_rule_status": "confirmed",
@@ -1000,6 +1000,11 @@
       "revision": "LEZI-FUNCTION-2026-10-07-r5",
       "digest": "46c1a914aec87cabe89798f23c21a49767837d28a94f2aa3c6b22c7fd63262d8",
       "scope": "before H12 general center ordinary-target confirmation"
+    },
+    {
+      "revision": "LEZI-FUNCTION-2026-10-07-r5",
+      "digest": "e8c6c963b32fd1d155f94602207f7b4cec15265f60341e1318a08d668e7fd07b",
+      "scope": "before H12 general center other-general confirmation"
     }
   ],
   "stage_close": {
@@ -1469,7 +1474,7 @@
     "remaining_runtime_contracts": [],
     "remaining_runtime_contracts_note": "Public ADD-HERO-FORM-001 model now has named partial evidence in round20; future source integration and full acceptance remain pending."
   },
-  "pending_next_runtime_action": "H07双窃时抵消及H12已确认普通中心3级门槛/将帅中心消灭全部普通棋待接入；将帅中心对另一将帅的条件不得外推。",
+  "pending_next_runtime_action": "H07抵消及H12将帅目标/中心确认语义待接入并验证；只读取既有允许身份，不自行扩展秘密读取。",
   "account_switch_close": {
     "requested_at": "2026-10-06T23:14:24+08:00",
     "request": "我要更换账号了",
@@ -1656,21 +1661,24 @@
   },
   "latest_document_round": {
     "authorization": {
-      "at": "2026-10-08T22:11:25+08:00",
-      "quote": "同意",
-      "proposal": "将帅中心消灭范围内全部普通棋，包括车"
+      "at": "2026-10-08T22:16:05+08:00",
+      "quote": "是的",
+      "proposal": "将帅中心同批消灭范围内另一将帅，按两败俱伤结算"
     },
-    "classification": "partial_hero_rule_confirmation_only",
+    "classification": "hero_design_gap_closed_rules_only",
     "report": "rules/confirmed/RULE_UPDATE_2026-10-08_FLAME_GENERAL.md",
-    "verified_remote_before_round": "3a42bef10eae06242e32ffdd91e2ed2cf2d8dd3a",
+    "verified_remote_before_round": "37e352156e157e3f0937acec66c31ae8e4a8965d",
     "semantic_rules_changed": true,
     "product_code_changed": false,
     "local_game_tests_rerun": false,
     "local_web_rebuilt": false,
     "local_browser_tests_run": false,
     "apk_built": false,
-    "design_required_remaining": 3,
-    "H12_remaining": "将帅中心对另一将帅的消灭条件",
+    "design_required_remaining": 2,
+    "implementation_pending": [
+      "H07-mirror",
+      "H12-general-rank"
+    ],
     "existing_product_reports": "preserved_original_execution_revision_no_new_timestamps"
   },
   "acceptance_gap_consolidation": {
@@ -1731,7 +1739,6 @@
       }
     },
     "unresolved": [
-      "H12-general-rank: 普通中心至少3级消灭将帅、将帅中心消灭全部普通棋均已确认；将帅中心对范围内另一将帅的消灭条件仍待确认。",
       "H16-chaos-entry: 资源及后续连斩结构已确认，但乱斗如何首次发动、如何付费及是否需要先有常态冲锋触发未定义。已接入确认资源，未开启连斩/付费入口。",
       "H21-dragon-scale-placement: 龙鳞保住进攻终点棋后，攻击者与目标如何合法落位尚未冻结；拒绝整次相关行动且不消费龙鳞。"
     ],
@@ -1746,6 +1753,11 @@
       {
         "id": "H07-mirror",
         "confirmation": "rules/confirmed/RULE_UPDATE_2026-10-08_THIEF_MIRROR.md",
+        "status": "confirmed_pending_implementation"
+      },
+      {
+        "id": "H12-general-rank",
+        "confirmation": "rules/confirmed/RULE_UPDATE_2026-10-08_FLAME_GENERAL.md",
         "status": "confirmed_pending_implementation"
       }
     ]
@@ -1937,6 +1949,25 @@
       "design_required_remaining": 3,
       "H12_remaining": "将帅作为中心时的区域消灭条件",
       "existing_product_reports": "preserved_original_execution_revision_no_new_timestamps"
+    },
+    {
+      "authorization": {
+        "at": "2026-10-08T22:11:25+08:00",
+        "quote": "同意",
+        "proposal": "将帅中心消灭范围内全部普通棋，包括车"
+      },
+      "classification": "partial_hero_rule_confirmation_only",
+      "report": "rules/confirmed/RULE_UPDATE_2026-10-08_FLAME_GENERAL.md",
+      "verified_remote_before_round": "3a42bef10eae06242e32ffdd91e2ed2cf2d8dd3a",
+      "semantic_rules_changed": true,
+      "product_code_changed": false,
+      "local_game_tests_rerun": false,
+      "local_web_rebuilt": false,
+      "local_browser_tests_run": false,
+      "apk_built": false,
+      "design_required_remaining": 3,
+      "H12_remaining": "将帅中心对另一将帅的消灭条件",
+      "existing_product_reports": "preserved_original_execution_revision_no_new_timestamps"
     }
   ],
   "ci_scope_configuration": {
@@ -2013,7 +2044,7 @@
     {
       "id": "LEZI-H12-GENERAL-THRESHOLD-2026-10-08",
       "path": "rules/confirmed/RULE_UPDATE_2026-10-08_FLAME_GENERAL.md",
-      "sha256": "ddf5b0cced4dd1a579c22c8cb3b7f459cdfb6ee5a4ba0889ee7d6521bf796f40",
+      "sha256": "56571e87875a63d9def9ba5b9b430d643ebc0263f561c4272d9eb7dc4e415c93",
       "confirmed_at": "2026-10-08T21:13:45+08:00",
       "user_quote": "至少3级才能消灭",
       "runtime_status": "confirmed_pending_implementation",
@@ -2023,7 +2054,12 @@
         "quote": "同意",
         "scope": "general center destroys all ordinary targets including rook"
       },
-      "remaining_design_gap": "general center vs other general target"
+      "final_confirmation": {
+        "at": "2026-10-08T22:16:05+08:00",
+        "quote": "是的",
+        "scope": "general center also destroys other general in same batch; mutual destruction"
+      },
+      "design_status": "confirmed_complete_for_recorded_gap"
     }
   ]
 }
