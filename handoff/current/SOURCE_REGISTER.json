@@ -1,5 +1,5 @@
 {
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-08-r5-descent",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-08-r5-collaboration",
   "rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
   "code_checkpoint": "70f19144f399b6fcf3742d4d49188fb17d78a9d7",
   "sources": [
@@ -129,7 +129,8 @@
       "name": "X_Collaboration_System-4.md",
       "container_library_file_id": "libfile_ca1409ea4f608191b873da7ad56a8908",
       "sha256": "492faf5d509e32f41fd68191873b0ec83d4ffc5803295ae3c97cbf1dc39ecd9b",
-      "applied_scope": "§3.10、批准基线保护、时序机会与当前用户偏好 → 06；个人总文档全文可从原交接源恢复，不冒称完整复制"
+      "applied_scope": "历史协作整理来源；主文档独立维护。项目现行执行约定见06_COLLABORATION.md v1.0，本次不复制或修改个人主文档。",
+      "kind": "historical_personal_document_reference_only"
     },
     {
       "id": "QA:69",
@@ -386,6 +387,15 @@
       "path": "handoff/current/25_HERO_DESCENT_BOUNDARY_2026-10-08.md",
       "sha256": "9a0a9f908cb74eb7519e8f659f98cd8f36c87e31a5e58372023c538b1c22888d",
       "applied_scope": "Three descent runtime corrections; six engine cases and three actual DOM cases; no normative change"
+    },
+    {
+      "id": "COLLAB:LEZI-PROJECT-COLLAB-v1.0",
+      "kind": "current_project_collaboration_non_rule",
+      "path": "handoff/current/06_COLLABORATION.md",
+      "sha256": "17b631c926363406e9a6b36e6a319df25a3f7adc600f2d500c6cffb52e33d3f7",
+      "applied_scope": "独立项目协作、授权与设计移交、按影响验证、重复执行控制、证据汇报与跨对话交接；不定义玩法",
+      "authorization": "本对话2026-10-08T14:21:52+08:00用户要求",
+      "personal_main_document_modified": false
     }
   ],
   "coverage": {

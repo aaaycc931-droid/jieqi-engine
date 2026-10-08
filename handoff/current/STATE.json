@@ -1,6 +1,6 @@
 {
   "project": "乐子象棋 / jieqi-engine",
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-08-r5-descent",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-08-r5-collaboration",
   "updated_at": "2026-10-08",
   "repository": "https://github.com/aaaycc931-droid/jieqi-engine",
   "working_branch": "codex/ui-android-apk-20261001",
@@ -636,7 +636,14 @@
     "implementation_writer": "current_dialogue_resumed_by_user_2026-10-07",
     "design_dialogue": "proposal_only",
     "old_dialogue_code_writes_after_handoff": "resumed_current_dialogue_by_explicit_user_override",
-    "automatic_import": false
+    "automatic_import": false,
+    "project_document": "handoff/current/06_COLLABORATION.md",
+    "project_document_id": "LEZI-PROJECT-COLLAB",
+    "project_document_version": "1.0",
+    "independent_from_personal_main_document": true,
+    "personal_main_document_modified": false,
+    "verification_policy": "impact_selected_during_development_then_one_full_regression_per_completed_batch",
+    "ci_trigger_optimization": "documented_separate_configuration_task_not_implemented"
   },
   "next_action": "继续已确认来源的其他定点交叉审计；四项design-required须由正式设计来源补齐后再实现。旧整盘、主动技能整盘、模式独立适配、APK和最终视觉队列保持暂停。",
   "source_gap_register": "SOURCE_REGISTER.json",
@@ -1229,13 +1236,12 @@
   },
   "latest_document_round": {
     "authorization": {
-      "at": "2026-10-07T17:14:00+08:00",
-      "quote": "同意，这一步结束后我会把新英雄设计提交给你"
+      "at": "2026-10-08T14:21:52+08:00",
+      "quote": "现在对本活动协作文档进行特别规划并写入协作文档，本项目相关协作文档应当独立于主协作文档，不能混在一起"
     },
-    "verified_remote_before_round": "4941e54049837b43a1195f676954d8742ec9a366",
-    "report": "handoff/current/21_ACCEPTANCE_GAP_CLOSE_2026-10-07.md",
-    "inventory": "handoff/current/qa/ACCEPTANCE_GAPS.json",
-    "classification": "acceptance_gap_consolidation_and_hero_intake_preparation",
+    "classification": "independent_project_collaboration_and_verification_policy",
+    "report": "handoff/current/06_COLLABORATION.md",
+    "verified_remote_before_round": "3dd15770e1678388d2fc045048e2cf82a774219e",
     "product_code_changed": false,
     "semantic_rules_changed": false,
     "tests_rerun": false,
@@ -1243,28 +1249,9 @@
     "browser_tests_run": false,
     "physical_device_tests_run": false,
     "apk_built": false,
-    "new_hero_sources_received": false,
-    "all_functions_accepted": false,
-    "read_only_verification": {
-      "current_r4_digest_matches": true,
-      "current_source_digest_matches_last_execution": true,
-      "contract_digest_matches_last_execution": true,
-      "published_and_local_execution_trees_match": true,
-      "contract_ids_unique_and_complete": true,
-      "all_mapping_selectors_resolve_to_recorded_passing_cases": true,
-      "mapping_selectors_checked": 266,
-      "old_manifest_entries_verified": 27,
-      "runtime_record_hashes_verified": true,
-      "android_assets_verified": 122,
-      "android_asset_check": "read_only_byte_compare_with_existing_dist",
-      "runtime_paths_unchanged_since_implementation": true,
-      "engine_tests_rerun_this_round": false,
-      "web_rebuilt_this_round": false,
-      "browser_tests_run_this_round": false,
-      "physical_device_tests_run_this_round": false,
-      "apk_built_this_round": false
-    },
-    "superseded_by_current_runtime": "25_HERO_DESCENT_BOUNDARY_2026-10-08.md"
+    "ci_configuration_changed": false,
+    "personal_main_document_modified": false,
+    "existing_runtime_evidence": "unchanged_previous_product_70f19144f399b6fcf3742d4d49188fb17d78a9d7_not_executed_this_document_round"
   },
   "acceptance_gap_consolidation": {
     "status": "historical_r4_inventory_superseded_by_received_r5_transfer",
@@ -1388,5 +1375,46 @@
       "nightmare_final_check_after_landing_closure",
       "close_empty_storm_assault_window"
     ]
-  }
+  },
+  "document_round_history": [
+    {
+      "authorization": {
+        "at": "2026-10-07T17:14:00+08:00",
+        "quote": "同意，这一步结束后我会把新英雄设计提交给你"
+      },
+      "verified_remote_before_round": "4941e54049837b43a1195f676954d8742ec9a366",
+      "report": "handoff/current/21_ACCEPTANCE_GAP_CLOSE_2026-10-07.md",
+      "inventory": "handoff/current/qa/ACCEPTANCE_GAPS.json",
+      "classification": "acceptance_gap_consolidation_and_hero_intake_preparation",
+      "product_code_changed": false,
+      "semantic_rules_changed": false,
+      "tests_rerun": false,
+      "web_rebuilt": false,
+      "browser_tests_run": false,
+      "physical_device_tests_run": false,
+      "apk_built": false,
+      "new_hero_sources_received": false,
+      "all_functions_accepted": false,
+      "read_only_verification": {
+        "current_r4_digest_matches": true,
+        "current_source_digest_matches_last_execution": true,
+        "contract_digest_matches_last_execution": true,
+        "published_and_local_execution_trees_match": true,
+        "contract_ids_unique_and_complete": true,
+        "all_mapping_selectors_resolve_to_recorded_passing_cases": true,
+        "mapping_selectors_checked": 266,
+        "old_manifest_entries_verified": 27,
+        "runtime_record_hashes_verified": true,
+        "android_assets_verified": 122,
+        "android_asset_check": "read_only_byte_compare_with_existing_dist",
+        "runtime_paths_unchanged_since_implementation": true,
+        "engine_tests_rerun_this_round": false,
+        "web_rebuilt_this_round": false,
+        "browser_tests_run_this_round": false,
+        "physical_device_tests_run_this_round": false,
+        "apk_built_this_round": false
+      },
+      "superseded_by_current_runtime": "25_HERO_DESCENT_BOUNDARY_2026-10-08.md"
+    }
+  ]
 }

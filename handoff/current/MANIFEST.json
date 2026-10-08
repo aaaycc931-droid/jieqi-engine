@@ -3,8 +3,8 @@
   "self_excluded": true,
   "files": {
     "00_READ_FIRST.md": {
-      "bytes": 2560,
-      "sha256": "559f39b0f2310da639eb4d789b3f3f9406dc2db9d0b13276d2da2e9fd7b435bb"
+      "bytes": 2829,
+      "sha256": "d0ffedfe5d3959e7e78d7979d14b554c9339b734cad21aebcf174e26152d2c75"
     },
     "01_CURRENT_RULES.md": {
       "bytes": 30087,
@@ -27,8 +27,8 @@
       "sha256": "1d5d04a9a5ea16c09f67e7764fb16a13cd5b1fc4f710e7c9cfb8e82819f647e3"
     },
     "06_COLLABORATION.md": {
-      "bytes": 5415,
-      "sha256": "adbe6dd30351177c994270acc24b0a24333f15dbf8355bb8edd1aa4efa3da762"
+      "bytes": 7898,
+      "sha256": "17b631c926363406e9a6b36e6a319df25a3f7adc600f2d500c6cffb52e33d3f7"
     },
     "07_DESIGN_SCORING.md": {
       "bytes": 4854,
@@ -107,16 +107,16 @@
       "sha256": "9a0a9f908cb74eb7519e8f659f98cd8f36c87e31a5e58372023c538b1c22888d"
     },
     "NEW_DIALOGUE_PROMPT.txt": {
-      "bytes": 1012,
-      "sha256": "f9960cc47ccb61b698c96dcd9584d5d292f1c616b52e467a1609ffebe45dff25"
+      "bytes": 1218,
+      "sha256": "201428ff36356aad9beb0f6bcc67440481ee6a3bbe3a282c3357fd31856c1d92"
     },
     "SOURCE_REGISTER.json": {
-      "bytes": 30017,
-      "sha256": "8f585e6ae64961cfad5a39187cf60c21acef3b547b05ab0b50a1f7654b99c455"
+      "bytes": 30621,
+      "sha256": "6d2c7c31aeb1987451f996b915b44d5129986c59ae3b2062e8d2d62d3c428813"
     },
     "STATE.json": {
-      "bytes": 62902,
-      "sha256": "5d916babfde16558f9642d725d5455f886aaa86b7225889f50e724a4ceaac949"
+      "bytes": 64375,
+      "sha256": "6e366fed39b18016e0e88ee086ae6568312f8c3496f5a4f1f22f2aab4df7c23b"
     },
     "assets/approved-home.png": {
       "bytes": 2157060,
@@ -162,6 +162,10 @@
     "first_browser_failure_preserved": true,
     "engine_487_passed": true,
     "browser_12_prepared_operations_passed": true,
-    "descent_boundary_6_new_cases_passed": true
+    "descent_boundary_6_new_cases_passed": true,
+    "project_collaboration_independent": true,
+    "personal_main_document_modified": false,
+    "product_tests_rerun_for_collaboration_document": false,
+    "ci_configuration_changed_for_collaboration_document": false
   }
 }

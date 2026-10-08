@@ -2,6 +2,8 @@
 
 现行规范 **LEZI-FUNCTION-2026-10-07-r5**；英雄原稿 **2026-10-07-r7-clean**。H01–H21确认部分已接入；本轮修复三处降临结算偏差，未新增规则。19表包、江鹤/死亡骑士两里包、虔信狂徒五固定形态保持。
 
+项目协作独立入口：`06_COLLABORATION.md`（LEZI-PROJECT-COLLAB v1.0）。先读此文件确定授权、验证与交接约定；个人主协作文档独立维护。本次仅协作文档更新，下面487项等为上一产品版本证据，未在本次重跑。
+
 读取顺序：
 
 1. STATE.json、25_HERO_DESCENT_BOUNDARY_2026-10-08.md：本轮产品与证据；24_HERO_CHILD_BOUNDARY_2026-10-08.md、23_HERO_CROSS_SETTLEMENT_2026-10-08.md：此前修复；22_HERO_TRANSFER_2026-10-07.md、qa/HERO_TRANSFER_AUDIT.json：正式移交及四项设计缺口。
