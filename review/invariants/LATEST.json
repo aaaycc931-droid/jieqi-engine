@@ -1,8 +1,8 @@
 {
   "authority": "execution_evidence_non_normative",
-  "generatedAt": "2026-10-07T16:14:35.203Z",
-  "sourceCommitAtRun": "3ff88a44c8808a792e65becd988174e2d98ae686",
-  "sourceDigest": "6d3f439668f8452add60c9cc1a2e23a472e4164edfd64a9020261517911fd9c8",
+  "generatedAt": "2026-10-08T02:09:08.615Z",
+  "sourceCommitAtRun": "a9cdcb57ddb853b1bb7e65e407fdf2a071564013",
+  "sourceDigest": "b3a6b6e24d7b860fb2bf8d0b9bf59c6eec474c1050867f0911890ee7051e787b",
   "sourceDigestPaths": [
     ".github/workflows/gameplay-runtime-review.yml",
     ".github/workflows/menu-reference-review.yml",
@@ -71,6 +71,7 @@
     "tests/game-modes.test.ts",
     "tests/ghost-objects.test.ts",
     "tests/helpers.ts",
+    "tests/hero-child-boundaries.test.ts",
     "tests/hero-cross-settlement.test.ts",
     "tests/hero-forms.test.ts",
     "tests/hero-transfer-r5.test.ts",
@@ -192,7 +193,7 @@
   "contractDigest": "c6e4649ce5a028b5477090b87066dd5bb7a65ad3a5632d138a05bf972b89e1e3",
   "runtime": "v24.19.0",
   "testSummary": {
-    "passed": 478,
+    "passed": 481,
     "failed": 0,
     "executionFailed": false
   },
@@ -827,6 +828,16 @@
         {
           "file": "tests/hero-cross-settlement.test.ts",
           "name": "R5-CROSS-04 inner pulse closes Wind return before judging whether the skill relieved check",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-child-boundaries.test.ts",
+          "name": "R5-CHILD-01 charge attack bounced by barrier closes its parent formal turn exactly once",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-child-boundaries.test.ts",
+          "name": "R5-CHILD-02 deferred barrier bounce never starts the next formal turn inside the move primitive",
           "passed": true
         }
       ],
@@ -2707,6 +2718,16 @@
           "file": "tests/hero-cross-settlement.test.ts",
           "name": "R5-CROSS-04 inner pulse closes Wind return before judging whether the skill relieved check",
           "passed": true
+        },
+        {
+          "file": "tests/hero-child-boundaries.test.ts",
+          "name": "R5-CHILD-01 charge attack bounced by barrier closes its parent formal turn exactly once",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-child-boundaries.test.ts",
+          "name": "R5-CHILD-02 deferred barrier bounce never starts the next formal turn inside the move primitive",
+          "passed": true
         }
       ],
       "verificationLimit": "现有普通主行动、占步、主行动前窗口、回溯、终局与开始效果幂等已有具体执行证据；未包含未来英雄的资源/训练钩子、同批消灭屏障、浏览器与实体设备全流程，不是全称合同证明。",
@@ -2751,6 +2772,16 @@
         {
           "file": "tests/confirmed-runtime.test.ts",
           "name": "HERO shadow cooldown excludes activation and all seven following owner turns",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-child-boundaries.test.ts",
+          "name": "R5-CHILD-01 charge attack bounced by barrier closes its parent formal turn exactly once",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-child-boundaries.test.ts",
+          "name": "R5-CHILD-02 deferred barrier bounce never starts the next formal turn inside the move primitive",
           "passed": true
         }
       ],

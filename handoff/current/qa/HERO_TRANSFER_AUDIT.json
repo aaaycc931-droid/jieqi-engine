@@ -63,6 +63,14 @@
         {
           "file": "tests/exception-contracts.test.ts",
           "namePrefix": "EX-WARRIOR-"
+        },
+        {
+          "file": "tests/hero-child-boundaries.test.ts",
+          "namePrefix": "R5-CHILD-01"
+        },
+        {
+          "file": "tests/hero-child-boundaries.test.ts",
+          "namePrefix": "R5-CHILD-03"
         }
       ],
       "fully_accepted": false,
@@ -390,6 +398,14 @@
         {
           "file": "tests/hero-cross-settlement.test.ts",
           "namePrefix": "R5-CROSS-03"
+        },
+        {
+          "file": "tests/hero-child-boundaries.test.ts",
+          "namePrefix": "R5-CHILD-01"
+        },
+        {
+          "file": "tests/hero-child-boundaries.test.ts",
+          "namePrefix": "R5-CHILD-02"
         }
       ],
       "fully_accepted": false,
@@ -562,10 +578,10 @@
     }
   ],
   "scoring_is_non_normative": true,
-  "implementation_commit": "e67590bd578b2c40d89faa6b1214c9d213c56043",
-  "local_execution_commit": "3ff88a44c8808a792e65becd988174e2d98ae686",
-  "implementation_tree": "4c748fa19e5fe44115aa27992b2f9eac15bc6756",
-  "tests_passed": 478,
+  "implementation_commit": "356ba577260bb4fd8228d134d5fd463c7e651919",
+  "local_execution_commit": "a9cdcb57ddb853b1bb7e65e407fdf2a071564013",
+  "implementation_tree": "0b87dbb00cd71c8f8681e215f04ecc75bb9b3992",
+  "tests_passed": 481,
   "new_dedicated_cases": 36,
   "browser_evidence": "review/invariants/HERO_TRANSFER_BROWSER_2026-10-07.json",
   "previous_runtime_checkpoint": {
@@ -576,5 +592,16 @@
     "new_dedicated_cases": 36
   },
   "cross_settlement_cases": 8,
-  "cross_settlement_report": "handoff/current/23_HERO_CROSS_SETTLEMENT_2026-10-08.md"
+  "cross_settlement_report": "handoff/current/23_HERO_CROSS_SETTLEMENT_2026-10-08.md",
+  "runtime_checkpoint_history": [
+    {
+      "implementation_commit": "e67590bd578b2c40d89faa6b1214c9d213c56043",
+      "local_execution_commit": "3ff88a44c8808a792e65becd988174e2d98ae686",
+      "implementation_tree": "4c748fa19e5fe44115aa27992b2f9eac15bc6756",
+      "tests_passed": 478
+    }
+  ],
+  "child_boundary_cases": 3,
+  "child_boundary_report": "handoff/current/24_HERO_CHILD_BOUNDARY_2026-10-08.md",
+  "browser_prepared_cases": 9
 }

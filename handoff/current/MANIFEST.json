@@ -3,8 +3,8 @@
   "self_excluded": true,
   "files": {
     "00_READ_FIRST.md": {
-      "bytes": 2546,
-      "sha256": "3b606015d8246bfb2f507643d4f79c1707d697f780269eb096dd88b8a48e96e3"
+      "bytes": 2716,
+      "sha256": "5e46b65c41394b292920e015ae0a60c7a63581096a3b8684e8537e041230379a"
     },
     "01_CURRENT_RULES.md": {
       "bytes": 30087,
@@ -23,8 +23,8 @@
       "sha256": "c133b4ee797b778ce4c88233437b2466255f27c30fcaec5b0941c766cc4bae00"
     },
     "05_PROGRESS_AND_NEXT.md": {
-      "bytes": 30857,
-      "sha256": "c4657167710f52b9478fc9f5505f9a1ee1b603fb60e1d2b3ecab9a6a7f27c6a8"
+      "bytes": 31643,
+      "sha256": "a52a5efd7bf287a2f97c027188368ffdaffb457aace004632679ae8555aa9b1a"
     },
     "06_COLLABORATION.md": {
       "bytes": 5415,
@@ -98,17 +98,21 @@
       "bytes": 4532,
       "sha256": "2eb9b7e34879843ce393ee5591845f2aba604404caffd808a644b8e50e69457b"
     },
+    "24_HERO_CHILD_BOUNDARY_2026-10-08.md": {
+      "bytes": 4960,
+      "sha256": "682ea99dc274c671db2c248545bb19b4696510e92bf4a905b9527938b6b9e735"
+    },
     "NEW_DIALOGUE_PROMPT.txt": {
-      "bytes": 1072,
-      "sha256": "f8901b38edeeca6b6b1f889d1f924f3e6db6ea5cb96b7b4a62a953599567fdb5"
+      "bytes": 1159,
+      "sha256": "0de30cdc4e233bff79fea3b808290f24802cf5c8139c96872feb0220b00cc368"
     },
     "SOURCE_REGISTER.json": {
-      "bytes": 29071,
-      "sha256": "5bc55df7601e36495be4cc54e41af39812fecc18d529ea64cab06fe265d61c2a"
+      "bytes": 29545,
+      "sha256": "806740c75b35c5404af5da1d4ebf19d2b699616df8497939b1eb306c9a49ff3c"
     },
     "STATE.json": {
-      "bytes": 51861,
-      "sha256": "e23744e6cadf7036af5292290fbac2f2745291f0928b53b106fb160ec2928a8f"
+      "bytes": 57613,
+      "sha256": "c4bee1935e4a8059e0d263472099838862101b4ec231e24c81cf809375797786"
     },
     "assets/approved-home.png": {
       "bytes": 2157060,
@@ -123,8 +127,8 @@
       "sha256": "b476f6ba2696cb4a0185ac96da1ad976c7b43f37ff694b5bf86ccbc696cbc210"
     },
     "qa/HERO_TRANSFER_AUDIT.json": {
-      "bytes": 21960,
-      "sha256": "df64e568e1e598ff0a4059463c613ebb2350c4587a9986d6a4eb905d6bec013a"
+      "bytes": 22868,
+      "sha256": "a4557b6ba34b1a5f97b642250ec1c9cc1439e86dc8d0c6dd7827e7926a458cab"
     },
     "qa/INVARIANTS.json": {
       "bytes": 45423,
@@ -140,7 +144,6 @@
     "qa_69_plus_20_and_20_supplements_preserved": true,
     "new_hero_sources_imported_this_round": false,
     "android_assets_127_equal": true,
-    "browser_8_prepared_operations_passed": true,
     "browser_9_mode_foundation_cases_passed": true,
     "full_contracts_accepted": false,
     "hero_full_matches_accepted": false,
@@ -149,8 +152,11 @@
     "remote_and_execution_product_trees_equal": true,
     "historical_r4_inventory_preserved": true,
     "design_required_branches": 4,
-    "engine_478_passed": true,
     "cross_settlement_8_new_cases_passed": true,
-    "rule_sources_unchanged_this_round": true
+    "rule_sources_unchanged_this_round": true,
+    "engine_481_passed": true,
+    "browser_9_prepared_operations_passed": true,
+    "child_boundary_3_new_cases_passed": true,
+    "first_browser_failure_preserved": true
   }
 }

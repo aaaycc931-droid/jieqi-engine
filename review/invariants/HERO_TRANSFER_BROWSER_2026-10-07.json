@@ -1,7 +1,7 @@
 {
   "authority": "prepared_browser_execution_non_normative",
   "ruleRevision": "LEZI-FUNCTION-2026-10-07-r5",
-  "sourceCommitAtRun": "f2c8e361145caf223b06f7c30408f671721c4814",
+  "sourceCommitAtRun": "64cc36ac3eeca674ec4c4f0a0655107444df9ffb",
   "workingTreeDirty": false,
   "appDigest": "b841af632d0b08003ebdbbaf792691fd4c83365b5c9b43f46537d3c1fa098fc9",
   "browser": "145.0.7632.6",
@@ -20,6 +20,10 @@
     },
     {
       "name": "blade displacement child ends only its original formal turn",
+      "passed": true
+    },
+    {
+      "name": "charge barrier bounce closes parent turn and durations once",
       "passed": true
     },
     {
