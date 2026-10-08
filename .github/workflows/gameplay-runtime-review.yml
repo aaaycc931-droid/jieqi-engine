@@ -1,40 +1,40 @@
 name: Review gameplay runtime
 on:
-  push:
-    branches: [codex/ui-android-apk-20261001]
-    paths:
-      - src/**
-      - web/**
-      - tests/helpers.ts
-      - tests/flow-fixtures.ts
-      - scripts/build-web.ts
-      - scripts/review/capture-gameplay-runtime.mjs
-      - scripts/review/capture-full-match-runtime.mjs
-      - scripts/review/capture-active-match-runtime.mjs
-      - scripts/review/capture-mode-runtime.mjs
-      - scripts/review/capture-hero-transfer-runtime.mjs
-      - .github/workflows/gameplay-runtime-review.yml
   pull_request:
     branches: [main]
   workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
 jobs:
   gameplay-browser:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 24
+      - name: Select checks for this update
+        id: scope
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/ci/select-scope.mjs
       - name: Build actual Web runtime without APK
+        if: steps.scope.outputs.hero == 'true' || steps.scope.outputs.mode == 'true'
         run: node scripts/build-web.ts
       - name: Install browser
+        if: steps.scope.outputs.hero == 'true' || steps.scope.outputs.mode == 'true'
         run: npm install --no-save --package-lock=false playwright@1.58.2 && npx playwright install --with-deps chromium
       - name: Exercise r5 transferred-hero prepared DOM controls
+        if: steps.scope.outputs.hero == 'true'
         run: node scripts/review/capture-hero-transfer-runtime.mjs
       - name: Check mode settings and real base opening previews
+        if: steps.scope.outputs.mode == 'true'
         run: node scripts/review/capture-mode-runtime.mjs
       - name: Keep mode foundation browser evidence
-        if: always()
+        if: always() && steps.scope.outputs.mode == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: game-mode-runtime-browser-review
@@ -42,7 +42,7 @@ jobs:
           if-no-files-found: error
           retention-days: 7
       - name: Keep exact browser evidence and screenshots
-        if: always()
+        if: always() && steps.scope.outputs.hero == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: hero-transfer-runtime-browser-review

@@ -7,7 +7,7 @@ on:
       - web/**
       - scripts/build-web.ts
       - review/menu-reference/**
-      - scripts/review/**
+      - scripts/review/capture-home-runtime.mjs
       - .github/workflows/menu-reference-review.yml
   workflow_dispatch:
 
