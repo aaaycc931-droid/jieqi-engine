@@ -2159,6 +2159,7 @@ function baseRuntimeSkillEntries(side      , hero        )                      
   }
   if (hero !== "rogue") {
     const runtime = gameState?.heroRuntime?.[side];
+    if (hero === "berserker" && gameState?.featureRules?.mutation === "chaos") return [{ key: "ability:brawl", title: "乱斗", state: `费用 ${6 + 5 * (runtime?.chargeCount ?? 0)} 战意`, catalogIndex: 0, active: true }];
     const passive = ["qin_long", "murozond_minion", "prince", "single_blade", "berserker", "shuffler"].includes(hero) || hero === "death_knight" && gameState?.featureRules?.heroSelections?.[side]?.form !== "inner";
     const abilities = hero === "death_knight" ? ["inner_ghost_burst"] : hero === "devout_zealot" ? ["invoke"] : hero === "deathwing" ? ["destruction"] : hero === "murozond" ? [gameState?.featureRules?.mutation === "end_time" ? "bomb" : "timeline_twist"] : hero === "nozdormu" ? [gameState?.featureRules?.mutation === "end_time" ? "hourglass" : "rewind"] : hero === "wind" ? ["shadow"] : hero === "warlock" ? ["burning_flame"] : hero === "night" ? ["insight"] : hero === "sky_admiral" ? ["landing"] : hero === "jiang_he" ? [gameState?.featureRules?.heroSelections?.[side]?.form === "inner" ? "inner_wave" : "river_enter", "river_move", "river_exit"] : [];
     if (passive) return [{ key: `passive:${hero}`, title: heroCatalog[hero].skills[0].name, state: "被动技能", catalogIndex: 0, active: false }];
@@ -3872,7 +3873,7 @@ function renderTransferredHeroControls()       {
     addButton("本窗口不发动", () => runTransferredHeroCommand({ kind: "hero_ability", ability: "shuffle", skip: true, actionId: nextActionId(), expectedRevision: gameState .revision }));
   } else if (descent) addButton(descent.assaultIds ? "结算下一枚风暴元素突袭" : "完成迦拉克隆部署", () => openTransferredHeroAbility(descent.assaultIds ? "storm_assault" : "ascension"));
   else if (pending) {
-    const abilities                                                = pending.kind === "blade" ? [["blade_shift","顺锋移置"]] : pending.kind === "inner_wave" ? [["wave_move","出河后额外移动"]] : [["charge_move","冲锋·逐"],["charge_attack","冲锋·斩"]];
+    const abilities                                                = pending.kind === "blade" ? [["blade_shift","顺锋移置"]] : pending.kind === "inner_wave" ? [["wave_move","出河后额外移动"]] : pending.kind === "brawl" ? [["brawl_attack","乱斗连斩"]] : [["charge_move","冲锋·逐"],["charge_attack","冲锋·斩"]];
     for (const [ability,label] of abilities) addButton(label, () => openTransferredHeroAbility(ability));
     addButton("放弃衍生行动", () => runTransferredHeroCommand({ kind: "hero_ability", ability: "skip_child", skip: true, expectedRevision: gameState .revision, actionId: nextActionId() }));
   }
@@ -3885,7 +3886,7 @@ function renderTransferredHeroControls()       {
     for (const insight of secrets?.insights ?? []) { const line = document.createElement("p"); line.textContent = `${insight.valid ? "洞察快照" : "历史情报（已失效）"}：第 ${insight.revision} 手时 ${insight.pieceId}，${insight.identity.color === "red" ? "红方" : "黑方"}${pieceLabel[insight.identity.color][insight.identity.type]}`; panel.append(line); }
   }
   if (secrets?.training) { const p = document.createElement("p"); p.textContent = secrets.training.failed ? "征兵无合法候选，培养失败" : `私有受训对象 ${secrets.training.pieceId ?? "无"}｜进度 ${secrets.training.progress}${secrets.training.graduated ? "｜已毕业" : ""}`; panel.append(p); panel.hidden = false; }
-  if (hero === "berserker") { const p = document.createElement("p"); p.textContent = `战意 ${gameState.heroRuntime?.[side]?.will ?? 0}｜冲锋次数 ${gameState.heroRuntime?.[side]?.chargeCount ?? 0}`; panel.append(p); panel.hidden = false; }
+  if (hero === "berserker") { const p = document.createElement("p"); p.textContent = `战意 ${gameState.heroRuntime?.[side]?.will ?? 0}｜冲锋／乱斗次数 ${gameState.heroRuntime?.[side]?.chargeCount ?? 0}`; panel.append(p); panel.hidden = false; }
   if (gameState.heroRuntime?.[side]?.omen) { const p = document.createElement("p"); p.textContent = "降临预兆：对方完成本次回应后，下一己方回合开始自动降临。"; panel.append(p); panel.hidden = false; }
   for (const flyer of gameState.pieces.filter(p => p.layer === "air" && getController(p) === side)) addButton(`选择飞行棋 ${flyer.id}`, () => { selectedPieceId = flyer.id; renderGame(); });
   const riverPieces = gameState.pieces.filter(p => p.layer === "river");
@@ -3898,7 +3899,8 @@ function openTransferredHeroAbility(ability                               )     
   const pool = ability === "insight" ? gameState.pieces.filter(p => p.faceDown) : gameState.pieces.filter(p => getController(p) === side);
   for (const p of pool) piece.add(new Option(`${p.faceDown ? "暗棋" : pieceLabel[p.color][p.type]} ${p.id}${p.layer === "river" ? "（河道）" : `（${p.x},${p.y}）`}`, p.id));
   if (pending) piece.value = pending.pieceId;
-  const targetAbilities = ["burning_flame","insight","landing","river_enter","river_move","river_exit","inner_wave","blade_shift","charge_move","charge_attack","wave_move"];
+  if (pending?.kind === "brawl") piece.disabled = true;
+  const targetAbilities = ["burning_flame","insight","landing","river_enter","river_move","river_exit","inner_wave","blade_shift","charge_move","charge_attack","wave_move","brawl","brawl_attack"];
   if (targetAbilities.includes(ability)) controls.append(piece);
   const coordinates = () => {
     const x = document.createElement("input"), y = document.createElement("input");
@@ -3906,7 +3908,7 @@ function openTransferredHeroAbility(ability                               )     
     return { x,y };
   };
   const to = coordinates();
-  const moving = ["river_move","river_exit","inner_wave","blade_shift","charge_move","charge_attack","wave_move","storm_assault"].includes(ability);
+  const moving = ["river_move","river_exit","inner_wave","blade_shift","charge_move","charge_attack","wave_move","storm_assault","brawl","brawl_attack"].includes(ability);
   if (moving) controls.append(to.x,to.y);
   const secret = document.createElement("input"); secret.type="checkbox";
   if (ability === "insight") { const label=document.createElement("label");label.textContent="秘密洞察（费用7+6n，隐藏目标）";label.append(secret);controls.append(label); }
@@ -3925,6 +3927,7 @@ function openTransferredHeroAbility(ability                               )     
     }
   }
   const names                                                         = { burning_flame:"燃烧烈焰",insight:"洞察",inner_ghost_burst:"里·纠缠怨念",river_enter:"入河",river_move:"河道横移",river_exit:"出河",inner_wave:"里·清波",landing:"原地降落",blade_shift:"顺锋",charge_move:"冲锋·逐",charge_attack:"冲锋·斩",wave_move:"出河后额外移动",ascension:"迦拉克隆部署",storm_assault:"风暴元素突袭" };
-  showDialog(names[ability] ?? "英雄结算", "选择本次技能的对象与落点。非法选择会保留当前棋局和资源，请按技能说明调整。", "确认", () => runTransferredHeroCommand({ kind:"hero_ability",ability,actionId:nextActionId(),expectedRevision:gameState .revision,...(targetAbilities.includes(ability) && piece.value ? {pieceId:piece.value}:{}),...(moving?{to:{x:Number(to.x.value),y:Number(to.y.value)}}:{}),...(ability==="insight"?{secretInsight:secret.checked}:{}),...(ability==="storm_assault"?{skip:skip.checked}:{}),...(ability==="ascension"?{placements:rows.filter(row=>row.piece.value).map(row=>({pieceId:row.piece.value,to:{x:Number(row.to.x.value),y:Number(row.to.y.value)}}))}:{}) }));
+  names.brawl = "乱斗"; names.brawl_attack = "乱斗连斩";
+  showDialog(names[ability] ?? "英雄结算", ability === "brawl" ? `先支付 ${6 + 5 * (gameState.heroRuntime?.[side]?.chargeCount ?? 0)} 战意，占用主行动；第一刀须进攻己方控制暗子。` : ability === "brawl_attack" ? "原棋可继续进攻暗子；己方暗子可续斩，敌方暗子结束。连斩不再付启动费。" : "选择本次技能的对象与落点。非法选择会保留当前棋局和资源，请按技能说明调整。", "确认", () => runTransferredHeroCommand({ kind:"hero_ability",ability,actionId:nextActionId(),expectedRevision:gameState .revision,...(targetAbilities.includes(ability) && piece.value ? {pieceId:piece.value}:{}),...(moving?{to:{x:Number(to.x.value),y:Number(to.y.value)}}:{}),...(ability==="insight"?{secretInsight:secret.checked}:{}),...(ability==="storm_assault"?{skip:skip.checked}:{}),...(ability==="ascension"?{placements:rows.filter(row=>row.piece.value).map(row=>({pieceId:row.piece.value,to:{x:Number(row.to.x.value),y:Number(row.to.y.value)}}))}:{}) }));
   dialogText.append(controls);
 }

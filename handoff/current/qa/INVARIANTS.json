@@ -336,7 +336,7 @@
       "id": "INV-STRIKE-001",
       "domain": "hero_mutation_cross_rules",
       "statement": "刺杀是来源专属进攻规则，不能建立通用强击标签或默认可选将帅。",
-      "scope_and_exceptions": "潜行者及暗影之舞刺杀可选无形并无视普通防御；禁止将帅，不自动驱散，龙鳞交叉仍缺落位定义。",
+      "scope_and_exceptions": "潜行者及暗影之舞刺杀可选无形并无视普通防御；禁止将帅，不自动驱散，龙鳞交叉沿用已确认返回落位：目标留位，进攻者返回并处理正常落位，行动机会已消耗。",
       "current_runtime_verification": "pending_individual_evidence"
     },
     {

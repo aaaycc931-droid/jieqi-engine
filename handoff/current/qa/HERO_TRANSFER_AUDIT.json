@@ -3,7 +3,7 @@
   "hero_source_revision": "2026-10-07-r7-clean",
   "remote_start": "333c94eae2c2cc44a2517023d78145a6d505b74c",
   "scope": "H01-H21",
-  "status": "available_semantics_implemented_partial_validation_design_required_branches_open",
+  "status": "all_four_recorded_design_gaps_confirmed_implemented_partial_evidence",
   "entries": [
     {
       "id": "H01",
@@ -176,22 +176,27 @@
       "hero": "murozond_minion",
       "form": "front",
       "prior": "existing",
-      "required_delta": "single thief75/45 unchanged; dual thief mutual transfer cancels to60/60",
+      "required_delta": "双窃时标准60/60",
       "runtime_hooks": "hero-actions.ts formalTurnDurationMs; remote-room.ts clock",
-      "status": "single_thief_implemented_mirror_confirmed_pending_implementation",
+      "status": "implemented_partial_engine_evidence_browser_ci_pending",
       "tests": [
         {
           "file": "tests/confirmed-runtime.test.ts",
           "namePrefix": "HERO thief"
+        },
+        {
+          "file": "tests/design-gap-runtime.test.ts",
+          "namePrefix": "GAP-H07-"
         }
       ],
       "fully_accepted": false,
-      "remaining": "完整来源交叉、概率全边界、自然完整局、设备与全称验收仍待；这些命名情景不能证明整条英雄规则。",
+      "remaining": "新增语义已接入且部分引擎情景通过；实际提交浏览器CI待核对，完整交叉、自然整盘、实机与全称验收仍待。",
       "confirmation": "rules/confirmed/RULE_UPDATE_2026-10-08_THIEF_MIRROR.md",
-      "runtime_pending": [
+      "existing_test_scope": "Updated old gap rejection to confirmed behavior; dedicated addendum scenarios in GAP-H07-01, partial evidence only",
+      "design_required": [],
+      "historical_runtime_pending": [
         "Replace DESIGN_REQUIRED_THIEF_MIRROR rejection with confirmed cancellation; revise old mirror-rejection test"
-      ],
-      "existing_test_scope": "pre-addendum single-side75/45 evidence and obsolete mirror-rejection expectation; not acceptance of60/60"
+      ]
     },
     {
       "id": "H08",
@@ -314,9 +319,9 @@
       "hero": "warlock",
       "form": "front",
       "prior": "new",
-      "required_delta": "once main 3x3 locked batch board+air; public dark identity rank; general source semantics audit",
+      "required_delta": "普通中心>=3级消灭将帅；将帅中心范围全部普通棋与另一将帅同批消灭",
       "runtime_hooks": "hero-actions.ts new burning_flame; slots public current type",
-      "status": "general_interactions_confirmed_pending_implementation",
+      "status": "implemented_partial_engine_evidence_browser_ci_pending",
       "tests": [
         {
           "file": "tests/hero-transfer-r5.test.ts",
@@ -325,12 +330,17 @@
         {
           "file": "tests/hero-transfer-r5.test.ts",
           "namePrefix": "R5-H12-02"
+        },
+        {
+          "file": "tests/design-gap-runtime.test.ts",
+          "namePrefix": "GAP-H12-"
         }
       ],
       "fully_accepted": false,
-      "remaining": "设计缺口已关闭，确认语义待实现与验证；完整来源、自然整盘、设备及全称验收仍待。",
+      "remaining": "新增语义已接入且部分引擎情景通过；实际提交浏览器CI待核对，完整交叉、自然整盘、实机与全称验收仍待。",
       "confirmed_threshold": "rules/confirmed/RULE_UPDATE_2026-10-08_FLAME_GENERAL.md",
-      "runtime_pending": [
+      "design_required": [],
+      "historical_runtime_pending": [
         "ordinary center rank>=3 may destroy non-center generals",
         "general center destroys all ordinary targets and other general in same batch"
       ]
@@ -419,9 +429,9 @@
       "hero": "berserker",
       "form": "front",
       "prior": "new",
-      "required_delta": "public current-control death atom will; I main qualifying kill child move/attack; chaos replaces by dark chain",
+      "required_delta": "主动先付6+5n，占主行动，己方暗子首刀，同棋暗子连斩，一链付费/共享n只一次",
       "runtime_hooks": "settlement death snapshots; game closed atom and child dispatch",
-      "status": "implemented_confirmed_portions_design_required_branch",
+      "status": "implemented_partial_engine_evidence_browser_ci_pending",
       "tests": [
         {
           "file": "tests/hero-transfer-r5.test.ts",
@@ -450,13 +460,16 @@
         {
           "file": "tests/hero-child-boundaries.test.ts",
           "namePrefix": "R5-CHILD-02"
+        },
+        {
+          "file": "tests/design-gap-runtime.test.ts",
+          "namePrefix": "GAP-H16-"
         }
       ],
       "fully_accepted": false,
-      "remaining": "完整来源交叉、概率全边界、自然完整局、设备与全称验收仍待；这些命名情景不能证明整条英雄规则。",
-      "design_required": [
-        "H16-chaos-entry"
-      ]
+      "remaining": "新增语义已接入且部分引擎情景通过；实际提交浏览器CI待核对，完整交叉、自然整盘、实机与全称验收仍待。",
+      "design_required": [],
+      "entry_confirmation": "rules/confirmed/RULE_UPDATE_2026-10-08_BRAWL_ENTRY.md"
     },
     {
       "id": "H17",
@@ -555,9 +568,9 @@
       "hero": "devout_zealot",
       "form": "front",
       "prior": "existing",
-      "required_delta": "five secret-fixed/public-intro packages;4 invokes omen;1 enemy reply; next-own-begin autoascend; allfive payloads",
+      "required_delta": "龙鳞目标留位，地面进攻者返回结算落位，飞行降落受阻按既有规则窒息",
       "runtime_hooks": "hero-forms variant lock; settlement begin; public pending placement; special storm geometry",
-      "status": "implemented_confirmed_portions_design_required_branch",
+      "status": "implemented_partial_engine_evidence_browser_ci_pending",
       "tests": [
         {
           "file": "tests/hero-transfer-r5.test.ts",
@@ -642,34 +655,23 @@
         {
           "file": "tests/hero-descent-atom.test.ts",
           "namePrefix": "R5-DESCENT-ATOM-07"
+        },
+        {
+          "file": "tests/design-gap-runtime.test.ts",
+          "namePrefix": "GAP-H21-"
         }
       ],
       "fully_accepted": false,
-      "remaining": "完整来源交叉、概率全边界、自然完整局、设备与全称验收仍待；这些命名情景不能证明整条英雄规则。",
-      "design_required": [
-        "H21-dragon-scale-placement"
-      ]
+      "remaining": "新增语义已接入且部分引擎情景通过；实际提交浏览器CI待核对，完整交叉、自然整盘、实机与全称验收仍待。",
+      "design_required": []
     }
   ],
-  "design_required": [
-    {
-      "id": "H16-chaos-entry",
-      "status": "blocked/design-required",
-      "code": "DESIGN_REQUIRED_BRAWL_ENTRY",
-      "reason": "资源及后续连斩结构已确认，但乱斗如何首次发动、如何付费及是否需要先有常态冲锋触发未定义。已接入确认资源，未开启连斩/付费入口。"
-    },
-    {
-      "id": "H21-dragon-scale-placement",
-      "status": "blocked/design-required",
-      "code": "DESIGN_REQUIRED_DRAGON_SCALE_PLACEMENT",
-      "reason": "龙鳞保住进攻终点棋后，攻击者与目标如何合法落位尚未冻结；拒绝整次相关行动且不消费龙鳞。"
-    }
-  ],
+  "design_required": [],
   "scoring_is_non_normative": true,
   "implementation_commit": "9ed5ff71590bf9658d1294def22bb669b195357b",
   "local_execution_commit": "ccdea1053399539bdc1839929f454aacd165798d",
   "implementation_tree": "4731570c671e2f9e87d0179b9126ca0a5fbd869f",
-  "tests_passed": 501,
+  "tests_passed": 514,
   "new_dedicated_cases": 36,
   "browser_evidence": "review/invariants/HERO_TRANSFER_BROWSER_2026-10-07.json",
   "previous_runtime_checkpoint": {
@@ -730,31 +732,86 @@
   "resolved_design_history": [
     {
       "id": "H07-mirror",
-      "status": "confirmed_pending_implementation",
+      "status": "confirmed_implemented_partial_engine_evidence",
       "code": "DESIGN_REQUIRED_THIEF_MIRROR",
-      "reason": "正式稿明确双窃时叠加未冻结；不采用旧60/60猜测。",
-      "confirmation": "rules/confirmed/RULE_UPDATE_2026-10-08_THIEF_MIRROR.md"
+      "reason": "双窃时标准60/60",
+      "confirmation": "rules/confirmed/RULE_UPDATE_2026-10-08_THIEF_MIRROR.md",
+      "previous_status": "confirmed_pending_implementation",
+      "historical_reason": "正式稿明确双窃时叠加未冻结；不采用旧60/60猜测。"
     },
     {
       "id": "H12-general-rank",
-      "status": "confirmed_pending_implementation",
+      "status": "confirmed_implemented_partial_engine_evidence",
       "code": "DESIGN_REQUIRED_FLAME_GENERAL",
-      "reason": "普通中心至少3级消灭将帅、将帅中心消灭全部普通棋均已确认；将帅中心对范围内另一将帅的消灭条件仍待确认。",
+      "reason": "普通中心>=3级消灭将帅；将帅中心范围全部普通棋与另一将帅同批消灭",
       "partial_confirmation": "rules/confirmed/RULE_UPDATE_2026-10-08_FLAME_GENERAL.md",
       "confirmation": "rules/confirmed/RULE_UPDATE_2026-10-08_FLAME_GENERAL.md",
-      "resolution": "ordinary center rank>=3; general center destroys all ordinary targets and other general in same batch"
+      "resolution": "ordinary center rank>=3; general center destroys all ordinary targets and other general in same batch",
+      "previous_status": "confirmed_pending_implementation",
+      "historical_reason": "普通中心至少3级消灭将帅、将帅中心消灭全部普通棋均已确认；将帅中心对范围内另一将帅的消灭条件仍待确认。"
     }
   ],
   "confirmed_rule_addenda": [
     {
       "id": "LEZI-H07-MIRROR-2026-10-08",
       "path": "rules/confirmed/RULE_UPDATE_2026-10-08_THIEF_MIRROR.md",
+      "sha256": "30775c14cfe15ede76737779abd564eb2621af34970cd58dcbfa9b97e1cf857e",
+      "confirmed_at": "2026-10-08T20:59:35+08:00",
+      "user_quote": "互相偷然后就抵消了",
+      "runtime_status": "implemented_partial_engine_evidence_browser_ci_pending",
       "runtime_accepted": false
     },
     {
       "id": "LEZI-H12-GENERAL-THRESHOLD-2026-10-08",
       "path": "rules/confirmed/RULE_UPDATE_2026-10-08_FLAME_GENERAL.md",
+      "sha256": "56571e87875a63d9def9ba5b9b430d643ebc0263f561c4272d9eb7dc4e415c93",
+      "confirmed_at": "2026-10-08T21:13:45+08:00",
+      "user_quote": "至少3级才能消灭",
+      "runtime_status": "implemented_partial_engine_evidence_browser_ci_pending",
+      "runtime_accepted": false,
+      "additional_confirmation": {
+        "at": "2026-10-08T22:11:25+08:00",
+        "quote": "同意",
+        "scope": "general center destroys all ordinary targets including rook"
+      },
+      "final_confirmation": {
+        "at": "2026-10-08T22:16:05+08:00",
+        "quote": "是的",
+        "scope": "general center also destroys other general in same batch; mutual destruction"
+      },
+      "design_status": "confirmed_complete_for_recorded_gap"
+    },
+    {
+      "id": "LEZI-H16-BRAWL-ENTRY-2026-10-08",
+      "path": "rules/confirmed/RULE_UPDATE_2026-10-08_BRAWL_ENTRY.md",
+      "sha256": "caba373363d1aefa199ad140dc44e3cba6f8d5d51245e3b866d3a6adc5aed806",
+      "confirmed_at": "2026-10-08T23:16:12+08:00",
+      "user_quote": "是的",
+      "confirmed_scope": "active upfront fee 6+5n, occupies main, same-piece covered chain, shared n once",
+      "runtime_status": "implemented_partial_engine_evidence_browser_ci_pending",
+      "runtime_accepted": false,
+      "superseded_confirmation": {
+        "at": "2026-10-08T22:45:11+08:00",
+        "quote": "同意",
+        "scope": "second option, normal main then pay; never published; superseded"
+      },
+      "entry_choice": {
+        "at": "2026-10-08T23:14:09+08:00",
+        "quote": "第一个吧",
+        "scope": "first option active upfront pay"
+      }
+    },
+    {
+      "id": "LEZI-H21-DRAGON-SCALE-2026-10-08",
+      "path": "rules/confirmed/RULE_UPDATE_2026-10-08_DRAGON_SCALE.md",
+      "sha256": "b332cb7821f8d29f067882b4c491cd89a17a71d264674bc14b0e617ae02b61b0",
+      "confirmed_at": "2026-10-08T23:17:34+08:00",
+      "user_quote": "同意",
+      "confirmed_scope": "target stays; ground attacker returns with landing effects, opportunity consumed; existing blocked flight landing suffocation retained",
+      "runtime_status": "implemented_partial_engine_evidence_browser_ci_pending",
       "runtime_accepted": false
     }
-  ]
+  ],
+  "rule_gap_runtime_cases": 13,
+  "rule_gap_runtime_report": "handoff/current/30_RULE_GAP_RUNTIME_2026-10-08.md"
 }

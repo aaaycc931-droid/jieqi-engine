@@ -5,7 +5,7 @@ import { createRequire } from 'node:module';
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import assert from 'node:assert/strict';
-import { initializeFeatureGameState, beginFormalTurn, applyHeroAbility, applyAuthoritativeMove, configureHeroPreparation, putGhostObject, initializeFeatureSecret, getGhostObjects, markRevealed } from '../../src/index.ts';
+import { initializeFeatureGameState, beginFormalTurn, applyHeroAbility, applyAuthoritativeMove, configureHeroPreparation, putGhostObject, initializeFeatureSecret, getGhostObjects, markRevealed, startFormalClock } from '../../src/index.ts';
 import { gameState, secretState, revealed, covered, move } from '../../tests/helpers.ts';
 
 const root = resolve(import.meta.dirname, '../..');
@@ -116,6 +116,26 @@ try {
   await page.getByRole('button',{name:'已接手',exact:true}).click();await page.getByRole('button',{name:'飞行期限已到：原地降落',exact:true}).click();s=await read();assert.deepEqual(s.formalTurns,{red:5,black:4});assert.equal(s.turn,'black');assert.equal(s.effectsByPieceId['flight-trainee'].flight,undefined);assert.equal(s.pieces.find(p=>p.id==='flight-trainee').layer,undefined);if(air)assert(s.captured.some(p=>p.id==='flight-destination-ground'&&p.cause==='crush'));
   done(air?'timeline controls the original flyer above ground objects then next formal main lands it':'next-turn flight obligation preserves timeline ground control then requires formal landing');
  }
+
+ const chaosFixture=will=>{
+  const q={state:initializeFeatureGameState(gameState([revealed('brawler','red','rook',0,7),covered('own-first',0,6),covered('own-next',2,6),covered('enemy-last',2,3)]),{red:'berserker',black:'hunter'},'chaos'),secret:secretState({'own-first':{color:'black',type:'horse'},'own-next':{color:'black',type:'cannon'},'enemy-last':{color:'red',type:'pawn'}})};
+  beginFormalTurn(q.state,q.secret,()=>0);q.secret.identities['own-first'].color='black';q.secret.identities['own-next'].color='black';q.secret.identities['enemy-last'].color='red';q.state.heroRuntime.red.will=will;startFormalClock(q.state,Date.now(),q.secret);return q;
+ };
+ await load(chaosFixture(6));const chainClock=(await read()).turnDeadlineAt;
+ await page.locator('button[data-skill-key="ability:brawl"]').click();await page.getByLabel('技能棋子',{exact:true}).selectOption('brawler');await coordinates(0,6);await confirm();s=await read();
+ assert.equal(s.heroRuntime.red.will,2);assert.equal(s.heroRuntime.red.chargeCount,1);assert.equal(s.pendingHeroChild.kind,'brawl');assert.equal(s.formalTurns.red,0);assert.equal(s.turnDeadlineAt,chainClock);
+ await page.getByRole('button',{name:'乱斗连斩',exact:true}).click();assert.equal(await page.getByLabel('技能棋子',{exact:true}).isDisabled(),true);await coordinates(2,6);await confirm();s=await read();assert.equal(s.heroRuntime.red.will,4);assert.equal(s.turnDeadlineAt,chainClock);
+ await page.getByRole('button',{name:'乱斗连斩',exact:true}).click();await coordinates(2,3);await confirm();s=await read();assert.equal(s.heroRuntime.red.will,7);assert.equal(s.heroRuntime.red.chargeCount,1);assert.equal(s.formalTurns.red,1);assert.equal(s.turn,'black');assert.equal(s.pendingHeroChild,undefined);done('active brawl DOM pays once and same-piece allied allied enemy chain closes one formal turn');
+ await load(chaosFixture(4));const insufficientBefore=await read();await page.locator('button[data-skill-key="ability:brawl"]').click();await page.getByLabel('技能棋子',{exact:true}).selectOption('brawler');await coordinates(0,6);await confirm();s=await read();assert.deepEqual(s,insufficientBefore);assert.equal(await page.getByRole('button',{name:'乱斗连斩',exact:true}).count(),0);done('brawl DOM refuses borrowing first kill resources without committing state');
+ for(const [type,lethal] of [['pawn',false],['horse',true]]){
+  await load(pair('warlock',[revealed('flame-center','red',type,3,8)]));await page.locator('button[data-skill-key="ability:burning_flame"]').click();await page.getByLabel('技能棋子',{exact:true}).selectOption('flame-center');await confirm();s=await read();assert.equal(s.captured.some(p=>p.id==='red-general'),lethal);assert(s.captured.some(p=>p.id==='flame-center'));done(`flame ${type} center DOM ${lethal?'eliminates':'spares'} neighboring general`);
+ }
+ const flameKings=pair('warlock',[revealed('flame-rook','black','rook',2,8)]);const otherKing=flameKings.state.pieces.find(p=>p.id==='black-general');otherKing.x=4;otherKing.y=8;
+ await load(flameKings);await page.locator('button[data-skill-key="ability:burning_flame"]').click();await page.getByLabel('技能棋子',{exact:true}).selectOption('red-general');await confirm();s=await read();assert.equal(s.drawReason,'mutual_destruction');assert.equal(s.destructionBatches.length,1);assert.equal(s.destructionBatches[0].destroyedIds.length,3);done('general flame center DOM includes rook and both generals in one mutual destruction batch');
+ const dragon=pair('devout_zealot',[revealed('protected','red','pawn',0,6),revealed('attacker','black','rook',0,2)],'front','invincible');dragon.state.heroRuntime.red.invokeCount=4;dragon.state.heroRuntime.red.omen=true;beginFormalTurn(dragon.state,dragon.secret,()=>0);dragon.state.turn='black';delete dragon.state.turnLifecycle;
+ await load(dragon);await page.locator('#board-points .point[data-x="0"][data-y="2"]').click();await page.locator('#board-points .point[data-x="0"][data-y="6"]').click();s=await read();assert.equal(s.pieces.find(p=>p.id==='attacker').y,2);assert(s.pieces.some(p=>p.id==='protected'));assert.equal(s.effectsByPieceId.protected.dragonScale,undefined);assert.equal(s.formalTurns.black,1);done('ordinary board attack consumes dragon scale and returns attacker to origin');
+ const scaledLanding=pair('sky_admiral',[{...revealed('scaled-flyer','red','horse',0,6),layer:'air'},revealed('scaled-ground','black','pawn',0,6)]);scaledLanding.state.effectsByPieceId['scaled-flyer']={flight:{source:'sky_admiral',owner:'red',remainingOwnerTurns:0,forcedLanding:true}};scaledLanding.state.effectsByPieceId['scaled-ground']={dragonScale:1};
+ await load(scaledLanding);await page.getByRole('button',{name:'飞行期限已到：原地降落',exact:true}).click();s=await read();assert(s.pieces.some(p=>p.id==='scaled-ground'));assert.equal(s.effectsByPieceId['scaled-ground'].dragonScale,undefined);assert.equal(s.captured.find(p=>p.id==='scaled-flyer').cause,'suffocation');assert.equal(s.formalTurns.red,1);done('forced landing DOM consumes ground scale and suffocates flyer without retry');
  await page.waitForLoadState('networkidle');assert.deepEqual(report.errors,[]);report.passed=true;
 } catch(e){report.passed=false;report.failure=e.stack;throw e;}
 finally{await mkdir(resolve(root,'review/invariants'),{recursive:true});await writeFile(resolve(root,'review/invariants/HERO_TRANSFER_BROWSER_2026-10-07.json'),JSON.stringify(report,null,2)+'\n');await browser.close();await new Promise(done=>server.close(done));}

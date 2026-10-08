@@ -1,8 +1,8 @@
 {
   "authority": "execution_evidence_non_normative",
-  "generatedAt": "2026-10-08T12:22:49.077Z",
-  "sourceCommitAtRun": "ccdea1053399539bdc1839929f454aacd165798d",
-  "sourceDigest": "01056471b6edf4698a05115db505a6890ad0f91cb26a963ae45fab920c15d946",
+  "generatedAt": "2026-10-08T15:40:19.585Z",
+  "sourceCommitAtRun": "f3ae349548970eaf94469c90d323b157777dbea8",
+  "sourceDigest": "9d080ea3a14342e39a1355b1bf3a833d0bea3d26ba0dfbd306e2455328c31858",
   "sourceDigestPaths": [
     ".github/workflows/gameplay-runtime-review.yml",
     ".github/workflows/menu-reference-review.yml",
@@ -31,6 +31,7 @@
     "src/game.ts",
     "src/ghosts.ts",
     "src/hero-actions.ts",
+    "src/hero-brawl.ts",
     "src/hero-children.ts",
     "src/hero-descent.ts",
     "src/hero-forms.ts",
@@ -67,6 +68,7 @@
     "tests/cross-rule-contracts.test.ts",
     "tests/current-control.test.ts",
     "tests/dark-identity.test.ts",
+    "tests/design-gap-runtime.test.ts",
     "tests/destruction-batch.test.ts",
     "tests/exception-contracts.test.ts",
     "tests/flight-turn-boundaries.test.ts",
@@ -196,10 +198,10 @@
     "web/ui-refresh.css"
   ],
   "ruleRevision": "LEZI-FUNCTION-2026-10-07-r5",
-  "contractDigest": "c6e4649ce5a028b5477090b87066dd5bb7a65ad3a5632d138a05bf972b89e1e3",
+  "contractDigest": "f09f83064cb2bff8cdd4d41130646733f751252fe4e534c75ab043160327baaa",
   "runtime": "v24.19.0",
   "testSummary": {
-    "passed": 501,
+    "passed": 514,
     "failed": 0,
     "executionFailed": false
   },
@@ -1135,6 +1137,11 @@
           "file": "tests/flight-turn-boundaries.test.ts",
           "name": "R5-FLIGHT-TURN-02 timeline child may move the due flyer without restarting its lifetime or consuming its next main",
           "passed": true
+        },
+        {
+          "file": "tests/design-gap-runtime.test.ts",
+          "name": "GAP-H21-03 blocked landing consumes ground scale then suffocates flyer instead of keeping air retry",
+          "passed": true
         }
       ],
       "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
@@ -1424,6 +1431,11 @@
         {
           "file": "tests/hero-transfer-r5.test.ts",
           "name": "R5-H02-02 activation cannot target intangible but a later source attack can bypass it and barrier",
+          "passed": true
+        },
+        {
+          "file": "tests/design-gap-runtime.test.ts",
+          "name": "GAP-H21-02 strong assassination returns to origin, spends opportunity and cannot bypass scale",
           "passed": true
         }
       ],
@@ -2799,6 +2811,16 @@
           "file": "tests/flight-turn-boundaries.test.ts",
           "name": "R5-FLIGHT-TURN-02 timeline child may move the due flyer without restarting its lifetime or consuming its next main",
           "passed": true
+        },
+        {
+          "file": "tests/design-gap-runtime.test.ts",
+          "name": "GAP-H16-01 paid main starts same-piece chain; children earn current-controller resources and finish only one formal turn",
+          "passed": true
+        },
+        {
+          "file": "tests/design-gap-runtime.test.ts",
+          "name": "GAP-H16-03 chain rejects another actor, revealed target and new main; skip closes parent and durations once",
+          "passed": true
         }
       ],
       "verificationLimit": "已覆盖普通移动/进攻、弹回、时间线衍生、额外应将、流舞和回溯重走的独立分类，以及上一正式回合无Ⅰ级动作时拒绝跨回合搜索。未移交英雄和其他未来来源尚未接入；旧无classification历史仅兼容有明确tier且无已知子行动标志的快照。",
@@ -2904,6 +2926,16 @@
           "file": "tests/flight-turn-boundaries.test.ts",
           "name": "R5-FLIGHT-TURN-02 timeline child may move the due flyer without restarting its lifetime or consuming its next main",
           "passed": true
+        },
+        {
+          "file": "tests/design-gap-runtime.test.ts",
+          "name": "GAP-H16-01 paid main starts same-piece chain; children earn current-controller resources and finish only one formal turn",
+          "passed": true
+        },
+        {
+          "file": "tests/design-gap-runtime.test.ts",
+          "name": "GAP-H16-03 chain rejects another actor, revealed target and new main; skip closes parent and durations once",
+          "passed": true
         }
       ],
       "verificationLimit": "现有普通主行动、占步、主行动前窗口、回溯、终局与开始效果幂等已有具体执行证据；未包含未来英雄的资源/训练钩子、同批消灭屏障、浏览器与实体设备全流程，不是全称合同证明。",
@@ -2958,6 +2990,16 @@
         {
           "file": "tests/hero-child-boundaries.test.ts",
           "name": "R5-CHILD-02 deferred barrier bounce never starts the next formal turn inside the move primitive",
+          "passed": true
+        },
+        {
+          "file": "tests/design-gap-runtime.test.ts",
+          "name": "GAP-H16-01 paid main starts same-piece chain; children earn current-controller resources and finish only one formal turn",
+          "passed": true
+        },
+        {
+          "file": "tests/design-gap-runtime.test.ts",
+          "name": "GAP-H16-03 chain rejects another actor, revealed target and new main; skip closes parent and durations once",
           "passed": true
         }
       ],
@@ -3144,6 +3186,16 @@
           "file": "tests/hero-cross-settlement.test.ts",
           "name": "R5-CROSS-05 pulse destroying decoy and carrier in one batch never resurrects a true general",
           "passed": true
+        },
+        {
+          "file": "tests/design-gap-runtime.test.ts",
+          "name": "GAP-H12-02 general center closes one batch including rook, air and both generals before mutual destruction",
+          "passed": true
+        },
+        {
+          "file": "tests/design-gap-runtime.test.ts",
+          "name": "GAP-H21-05 blocked crush batch never reads dark true identity and scale does not block flame range death",
+          "passed": true
         }
       ],
       "verificationLimit": "公共批次入口与毁灭已锁定成功结果的闭合、死亡揭示/记录、触发屏障、风归位、亡魂单次派生、双将同死、批后移入/复活及公共协议序列化有专属情景证据。未移交英雄的同时范围来源、召回/复活/生成/资源钩子、河道与里亡魂仍未集成；不得将普通顺序攻击统一改同批。无浏览器或实体设备新增验收。",
@@ -3329,6 +3381,16 @@
           "file": "tests/current-control.test.ts",
           "name": "R4-CONTROL-15 实际影菜单不以秘密池可用性探测暗阵营，只使用拥有者许可标记",
           "passed": true
+        },
+        {
+          "file": "tests/design-gap-runtime.test.ts",
+          "name": "GAP-H16-01 paid main starts same-piece chain; children earn current-controller resources and finish only one formal turn",
+          "passed": true
+        },
+        {
+          "file": "tests/design-gap-runtime.test.ts",
+          "name": "GAP-H16-02 insufficient upfront balance cannot borrow first kill, invalid first targets preserve state",
+          "passed": true
         }
       ],
       "verificationLimit": "现有调用完成源码权限映射，15项情景验证当前位置/揭示/移置控制、普通及强击目标和错误、陷阱前后时点、亡魂死亡快照、感染/持续、资源/双方房间视图、真实读取来源约束和风/宿命许可例外。真实网页投弹/影菜单函数在轻量DOM执行，不能当作浏览器、换手机或实体蓝牙验收。无限龙公开单棋资格共用，但正式窗口和全军每回合限制仍由权威入口验证；来源标记是可信代码调用约束，不是客户端授权令牌。未移交来源及全部可达交叉组合未穷尽，完整验收仍0。",
@@ -3459,6 +3521,11 @@
           "file": "tests/dark-identity.test.ts",
           "name": "R4-DARK-04 相同公开状态的不同隐藏身份不改变普通走法资格，揭示才读取真实身份",
           "passed": true
+        },
+        {
+          "file": "tests/design-gap-runtime.test.ts",
+          "name": "GAP-H12-01 only public ordinary ranks at least three eliminate a non-center general",
+          "passed": true
         }
       ],
       "verificationLimit": "基础棋位、当前位置变化及普通走法已验证；未来特殊来源身份策略尚未接入。",
@@ -3483,6 +3550,16 @@
         {
           "file": "tests/dark-identity.test.ts",
           "name": "R4-DARK-09 毁灭的非将帅候选判定使用公共兵种，未消灭暗子不要求读取真实身份",
+          "passed": true
+        },
+        {
+          "file": "tests/design-gap-runtime.test.ts",
+          "name": "GAP-H16-01 paid main starts same-piece chain; children earn current-controller resources and finish only one formal turn",
+          "passed": true
+        },
+        {
+          "file": "tests/design-gap-runtime.test.ts",
+          "name": "GAP-H16-02 insufficient upfront balance cannot borrow first kill, invalid first targets preserve state",
           "passed": true
         }
       ],

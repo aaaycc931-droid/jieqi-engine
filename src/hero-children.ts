@@ -1,5 +1,6 @@
 import { RuleError } from "./errors.ts";
 import { selectedHeroId } from "./hero-forms.ts";
+import { applyBrawlChild } from "./hero-brawl.ts";
 import { getController } from "./slots.ts";
 import { isGround } from "./spaces.ts";
 import { getLegalMoves, pieceAt } from "./rules.ts";
@@ -16,12 +17,13 @@ export function openHeroChild(state: GameState, side: Side): boolean {
   if (hero === "single_blade" && runtime?.bladeTurn !== number && last.landed && last.keywords?.includes("移动") && strongBladeSide(state, side, last.from.x) && strongBladeSide(state, side, piece.x) && isGround(piece)) {
     state.pendingHeroChild = { kind: "blade", side, pieceId: piece.id, parent: copy(last) }; return true;
   }
-  if (hero === "berserker" && runtime?.chargeTurn !== number && last.tier === 1 && state.automaticEvents?.some(e => e.kind.startsWith("destroy:") && e.side !== side && e.deathRecord?.capturedBy === side && ["destroy:attack", "destroy:crush"].includes(e.kind))) {
+  if (hero === "berserker" && state.featureRules?.mutation !== "chaos" && runtime?.chargeTurn !== number && last.tier === 1 && state.automaticEvents?.some(e => e.kind.startsWith("destroy:") && e.side !== side && e.deathRecord?.capturedBy === side && ["destroy:attack", "destroy:crush"].includes(e.kind))) {
     state.pendingHeroChild = { kind: "charge", side, pieceId: piece.id, parent: copy(last) }; return true;
   }
   return false;
 }
 export function applyHeroChild(state: GameState, secret: SecretState, command: HeroAbilityCommand, now: number, random: RandomInt): MoveResult {
+  if (state.pendingHeroChild?.kind === "brawl") return applyBrawlChild(state, secret, command, now);
   const s = copy(state), k = copy(secret), pending = s.pendingHeroChild;
   requireRule(pending && s.status === "playing" && s.turn === pending.side, "NO_CHILD_WINDOW", "没有该英雄的衍生窗口");
   requireRule(command.expectedRevision === state.revision, "STALE_REVISION", "客户端版本过期");
@@ -37,7 +39,7 @@ export function applyHeroChild(state: GameState, secret: SecretState, command: H
     const isWave = pending!.kind === "inner_wave", attack = command.ability === "charge_attack", n = runtime.chargeCount ?? 0;
     requireRule(piece && command.to && (isWave ? command.ability === "wave_move" : command.ability === "charge_move" || attack), "INVALID_CHILD_ACTION", "请选择同棋的合法衍生行动");
     if (!isWave) {
-      requireRule(s.featureRules?.mutation !== "chaos", "DESIGN_REQUIRED_BRAWL_ENTRY", "乱斗初始付费/发动触发边界未完整定义，当前只结算已确认资源");
+      requireRule(s.featureRules?.mutation !== "chaos", "BRAWL_ACTION_REQUIRED", "混乱狂战应从主动乱斗入口发动");
       const cost = attack ? 6 + 5 * n : 4 + 3 * n;
       requireRule((runtime.will ?? 0) >= cost, "INSUFFICIENT_WILL", "战意不足");
       runtime.will = (runtime.will ?? 0) - cost; runtime.chargeCount = n + 1; runtime.chargeTurn = formalTurn(s, side) + 1;

@@ -1,5 +1,6 @@
 import { applyShuffleAction } from "./hero-shuffle.ts";
 import { applyHeroChild } from "./hero-children.ts";
+import { applyBrawlStart } from "./hero-brawl.ts";
 import { applyRiverAbility } from "./hero-river.ts";
 import { applyDescentAction } from "./hero-descent.ts";
 import { selectedHeroId, selectedHeroSelection, validateHeroForms } from "./hero-forms.ts";
@@ -31,7 +32,7 @@ export function formalTurnDurationMs(state: GameState, side: Side): number {
   validateHeroForms(state);
   if (state.featureRules?.mutation === "end_time" && formalTurn(state, side) === 0) return 75_000;
   const hasThief = selectedHeroId(state, side) === "murozond_minion", otherThief = selectedHeroId(state, otherSide(side)) === "murozond_minion";
-  if (hasThief && otherThief) throw new RuleError("DESIGN_REQUIRED_THIEF_MIRROR", "双方窃时镜像叠加尚未正式冻结");
+  if (hasThief && otherThief) return 60_000;
   return !hasThief && !otherThief ? 60_000 : hasThief ? 75_000 : 45_000;
 }
 export function startFormalClock(state: GameState, now: number, secret?: SecretState, randomInt?: RandomInt): void {
@@ -64,6 +65,7 @@ export function applyHeroAbility(state: GameState, secret: SecretState, command:
   if (secret.processedActions[command.actionId] !== undefined) return { state: copy(state), secret: copy(secret), duplicate: true };
   if (state.pendingShuffle) return applyShuffleAction(state, secret, command, randomInt);
   if (state.pendingHeroChild) return applyHeroChild(state, secret, command, now, randomInt);
+  if (command.ability === "brawl") return applyBrawlStart(state, secret, command, now, randomInt);
   if (state.pendingDescent) return applyDescentAction(state, secret, command, now);
   requireRule(command.expectedRevision === state.revision, "STALE_REVISION", "客户端棋局版本已经过期");
   requireRule(state.status === "playing" && !state.forcedDefense && !state.flowDance, "INVALID_PHASE", "只能在自己的正式回合开始发动技能");
@@ -139,9 +141,13 @@ export function applyHeroAbility(state: GameState, secret: SecretState, command:
       requireRule(center, "INVALID_FLAME_CENTER", "必须选择当前控制的合法棋盘中心棋");
       const ranks: Record<string, number> = { pawn: 1, advisor: 2, elephant: 2, horse: 3, cannon: 3, rook: 4 };
       const rank = ranks[getCurrentPieceType(center)];
+      const generalCenter = getCurrentPieceType(center) === "general";
       const region = s.pieces.filter(p => isBoardPiece(p) && Math.abs(p.x - center.x) <= 1 && Math.abs(p.y - center.y) <= 1);
-      requireRule(!region.some(p => p.id !== center.id && (rank === undefined || getCurrentPieceType(p) === "general")), "DESIGN_REQUIRED_FLAME_GENERAL", "燃烧烈焰将帅中心/目标的普通层级交叉未定义，不能猜测");
-      const targets = region.filter(p => p.id === center.id || ranks[getCurrentPieceType(p)] <= rank + 1).map(p => ({ pieceId: p.id, by: side, cause: "burning_flame" }));
+      requireRule(generalCenter || rank !== undefined || region.length === 1, "FLAME_CENTER_RANK_UNDEFINED", "特殊中心棋没有本来源定义的层级");
+      const targets = region.filter(p => {
+        const type = getCurrentPieceType(p);
+        return p.id === center.id || (type === "general" ? generalCenter || rank >= 3 : generalCenter ? ranks[type] !== undefined : ranks[type] <= rank + 1);
+      }).map(p => ({ pieceId: p.id, by: side, cause: "burning_flame" }));
       runtime.used = true;
       destroyPieceBatch(s, k, `${command.actionId}:flame`, "warlock:burning_flame", targets); endsTurn = true; break;
     }

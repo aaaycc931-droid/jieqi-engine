@@ -442,6 +442,10 @@
       {
         "file": "tests/flight-turn-boundaries.test.ts",
         "namePrefix": "R5-FLIGHT-TURN-02"
+      },
+      {
+        "file": "tests/design-gap-runtime.test.ts",
+        "namePrefix": "GAP-H21-03"
       }
     ],
     "INV-CRUSH-001": [
@@ -590,6 +594,10 @@
       {
         "file": "tests/hero-transfer-r5.test.ts",
         "namePrefix": "R5-H02-02"
+      },
+      {
+        "file": "tests/design-gap-runtime.test.ts",
+        "namePrefix": "GAP-H21-02"
       }
     ],
     "INV-TRAP-001": [
@@ -1248,6 +1256,10 @@
       {
         "file": "tests/dark-identity.test.ts",
         "namePrefix": "R4-DARK-04 "
+      },
+      {
+        "file": "tests/design-gap-runtime.test.ts",
+        "namePrefix": "GAP-H12-01"
       }
     ],
     "ADD-DARK-IDENTITY-002": [
@@ -1262,6 +1274,14 @@
       {
         "file": "tests/dark-identity.test.ts",
         "namePrefix": "R4-DARK-09 "
+      },
+      {
+        "file": "tests/design-gap-runtime.test.ts",
+        "namePrefix": "GAP-H16-01"
+      },
+      {
+        "file": "tests/design-gap-runtime.test.ts",
+        "namePrefix": "GAP-H16-02"
       }
     ],
     "ADD-DARK-IDENTITY-003": [
@@ -1322,6 +1342,14 @@
       {
         "file": "tests/flight-turn-boundaries.test.ts",
         "namePrefix": "R5-FLIGHT-TURN-02"
+      },
+      {
+        "file": "tests/design-gap-runtime.test.ts",
+        "namePrefix": "GAP-H16-01"
+      },
+      {
+        "file": "tests/design-gap-runtime.test.ts",
+        "namePrefix": "GAP-H16-03"
       }
     ],
     "ADD-TURN-PHASE-001": [
@@ -1400,6 +1428,14 @@
       {
         "file": "tests/flight-turn-boundaries.test.ts",
         "namePrefix": "R5-FLIGHT-TURN-02"
+      },
+      {
+        "file": "tests/design-gap-runtime.test.ts",
+        "namePrefix": "GAP-H16-01"
+      },
+      {
+        "file": "tests/design-gap-runtime.test.ts",
+        "namePrefix": "GAP-H16-03"
       }
     ],
     "ADD-DURATION-001": [
@@ -1438,6 +1474,14 @@
       {
         "file": "tests/hero-child-boundaries.test.ts",
         "namePrefix": "R5-CHILD-02"
+      },
+      {
+        "file": "tests/design-gap-runtime.test.ts",
+        "namePrefix": "GAP-H16-01"
+      },
+      {
+        "file": "tests/design-gap-runtime.test.ts",
+        "namePrefix": "GAP-H16-03"
       }
     ],
     "ADD-BATCH-001": [
@@ -1456,6 +1500,14 @@
       {
         "file": "tests/hero-cross-settlement.test.ts",
         "namePrefix": "R5-CROSS-05"
+      },
+      {
+        "file": "tests/design-gap-runtime.test.ts",
+        "namePrefix": "GAP-H12-02"
+      },
+      {
+        "file": "tests/design-gap-runtime.test.ts",
+        "namePrefix": "GAP-H21-05"
       }
     ],
     "ADD-RIVER-001": [
@@ -1478,6 +1530,14 @@
       {
         "file": "tests/current-control.test.ts",
         "namePrefix": "R4-CONTROL-"
+      },
+      {
+        "file": "tests/design-gap-runtime.test.ts",
+        "namePrefix": "GAP-H16-01"
+      },
+      {
+        "file": "tests/design-gap-runtime.test.ts",
+        "namePrefix": "GAP-H16-02"
       }
     ],
     "ADD-HERO-FORM-001": [

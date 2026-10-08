@@ -1,5 +1,5 @@
 {
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-08-H12-design-closed",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-08-four-design-gaps-runtime",
   "rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
   "code_checkpoint": "9ed5ff71590bf9658d1294def22bb669b195357b",
   "sources": [
@@ -430,14 +430,28 @@
       "kind": "explicit_user_confirmed_hero_rule_addendum",
       "path": "rules/confirmed/RULE_UPDATE_2026-10-08_THIEF_MIRROR.md",
       "sha256": "30775c14cfe15ede76737779abd564eb2621af34970cd58dcbfa9b97e1cf857e",
-      "applied_scope": "H07双窃时互相抵消，覆盖r7-clean该未决项；运行时待接入"
+      "applied_scope": "双窃时标准60/60；已实现，部分引擎证据，浏览器CI待完成"
     },
     {
       "id": "LEZI-H12-GENERAL-THRESHOLD-2026-10-08",
       "kind": "explicit_user_confirmed_hero_rule_addendum",
       "path": "rules/confirmed/RULE_UPDATE_2026-10-08_FLAME_GENERAL.md",
       "sha256": "56571e87875a63d9def9ba5b9b430d643ebc0263f561c4272d9eb7dc4e415c93",
-      "applied_scope": "H12普通中心至少3级消灭将帅；将帅中心消灭全部普通棋和范围内另一将帅；同批两败俱伤，设计缺口关闭、运行时待接入"
+      "applied_scope": "普通中心>=3级消灭将帅；将帅中心范围全部普通棋与另一将帅同批消灭；已实现，部分引擎证据，浏览器CI待完成"
+    },
+    {
+      "id": "LEZI-H16-BRAWL-ENTRY-2026-10-08",
+      "kind": "explicit_user_confirmed_hero_rule_addendum",
+      "path": "rules/confirmed/RULE_UPDATE_2026-10-08_BRAWL_ENTRY.md",
+      "sha256": "caba373363d1aefa199ad140dc44e3cba6f8d5d51245e3b866d3a6adc5aed806",
+      "applied_scope": "主动先付6+5n，占主行动，己方暗子首刀，同棋暗子连斩，一链付费/共享n只一次；已实现，部分引擎证据，浏览器CI待完成"
+    },
+    {
+      "id": "LEZI-H21-DRAGON-SCALE-2026-10-08",
+      "kind": "explicit_user_confirmed_hero_rule_addendum",
+      "path": "rules/confirmed/RULE_UPDATE_2026-10-08_DRAGON_SCALE.md",
+      "sha256": "b332cb7821f8d29f067882b4c491cd89a17a71d264674bc14b0e617ae02b61b0",
+      "applied_scope": "龙鳞目标留位，地面进攻者返回结算落位，飞行降落受阻按既有规则窒息；已实现，部分引擎证据，浏览器CI待完成"
     }
   ],
   "coverage": {
@@ -490,18 +504,6 @@
       "status": "not_located_this_round",
       "fallback": "当前固定源码/测试和已恢复差分；不声称原稿完整恢复",
       "action": "涉及基础区域/跨河变更前定位原稿核对"
-    },
-    {
-      "id": "H16-chaos-entry",
-      "status": "blocked/design-required",
-      "code": "DESIGN_REQUIRED_BRAWL_ENTRY",
-      "reason": "资源及后续连斩结构已确认，但乱斗如何首次发动、如何付费及是否需要先有常态冲锋触发未定义。已接入确认资源，未开启连斩/付费入口。"
-    },
-    {
-      "id": "H21-dragon-scale-placement",
-      "status": "blocked/design-required",
-      "code": "DESIGN_REQUIRED_DRAGON_SCALE_PLACEMENT",
-      "reason": "龙鳞保住进攻终点棋后，攻击者与目标如何合法落位尚未冻结；拒绝整次相关行动且不消费龙鳞。"
     }
   ],
   "excluded_payloads": [
@@ -511,7 +513,7 @@
     "旧STATE运行时分支/测试数/下一步",
     "过时3英雄进度"
   ],
-  "completeness_claim": "H07/H12设计缺口已确认、运行时待接入；H16乱斗入口/费用与H21龙鳞落位仍为2项设计缺口。501/20为增量前部分证据，完整验收0。",
+  "completeness_claim": "H07/H12已确认、运行时待接入；H16启动方式已确认，尚缺费用公式；H21龙鳞落位未确认，仍为2项设计缺口。501/20为增量前部分证据，完整验收0。",
   "previous_code_checkpoint": "b45077a692213953ee7e3edef31a6d16c011c940",
   "runtime_evidence_index": "review/invariants/LATEST.json",
   "gameplay_execution_evidence_index": "review/gameplay/runtime-browser-review-2026-10-05-modes.json",
@@ -559,6 +561,17 @@
       "id": "LEZI-H12-GENERAL-THRESHOLD-2026-10-08",
       "path": "rules/confirmed/RULE_UPDATE_2026-10-08_FLAME_GENERAL.md",
       "sha256": "56571e87875a63d9def9ba5b9b430d643ebc0263f561c4272d9eb7dc4e415c93"
+    },
+    {
+      "id": "LEZI-H16-BRAWL-ENTRY-2026-10-08",
+      "path": "rules/confirmed/RULE_UPDATE_2026-10-08_BRAWL_ENTRY.md",
+      "sha256": "caba373363d1aefa199ad140dc44e3cba6f8d5d51245e3b866d3a6adc5aed806"
+    },
+    {
+      "id": "LEZI-H21-DRAGON-SCALE-2026-10-08",
+      "path": "rules/confirmed/RULE_UPDATE_2026-10-08_DRAGON_SCALE.md",
+      "sha256": "b332cb7821f8d29f067882b4c491cd89a17a71d264674bc14b0e617ae02b61b0"
     }
-  ]
+  ],
+  "rule_gap_runtime_index": "30_RULE_GAP_RUNTIME_2026-10-08.md"
 }

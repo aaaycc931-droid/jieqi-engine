@@ -2237,8 +2237,8 @@
     },
     "hero_sources_received_this_round": []
   },
-  "next_action": "Await the user transfer; first read and compare complete confirmed sources with current r4. Paused full-match, independent mode adaptation, final UI and APK queues remain paused.",
+  "next_action": "本轮实际提交CI收束后等待新英雄正式移交，按确认差分接续；暂停队列保持。",
   "superseded_current_intake_by": "HERO_TRANSFER_AUDIT.json",
   "historical_inventory_preserved": true,
-  "hero_design_intake_current": "r7-clean H01-H21 received; implemented confirmed portions under r5"
+  "hero_design_intake_current": "r7-clean H01-H21 received; r5 plus four explicit user-confirmed addenda implemented, partial scenario validation; four design gaps zero, complete acceptance remains pending"
 }

@@ -289,7 +289,7 @@ export interface GameState {
   /** 最近一次公开操作及其子行动；秘密操作不写入。 */
   actionRecords?: ActionRecord[];
   pendingShuffle?: { side: "black"; window: "A" | "B" };
-  pendingHeroChild?: { kind: "blade" | "charge" | "inner_wave"; side: Side; pieceId: string; parent: LastMove };
+  pendingHeroChild?: { kind: "blade" | "charge" | "inner_wave" | "brawl"; side: Side; pieceId: string; parent: LastMove };
   pendingDescent?: { side: Side; variant: GalakrondForm; pieces: PublicPiece[]; atom: string; assaultIds?: string[] };
   heroRuntime?: Partial<Record<Side, HeroRuntime>>;
   /** 两种独立格对象共用存储，所有规则读取须精确指定种类。 */
@@ -340,7 +340,7 @@ export interface MoveCommand {
 
 export interface HeroAbilityCommand {
   kind: "hero_ability";
-  ability: "invoke" | "unspeakable" | "destruction" | "timeline_twist" | "rewind" | "hourglass" | "bomb" | "shadow" | "burning_flame" | "insight" | "inner_ghost_burst" | "ascension" | "storm_assault" | "river_enter" | "river_move" | "river_exit" | "inner_wave" | "landing" | "blade_shift" | "charge_move" | "charge_attack" | "wave_move" | "skip_child" | "shuffle";
+  ability: "invoke" | "unspeakable" | "destruction" | "timeline_twist" | "rewind" | "hourglass" | "bomb" | "shadow" | "burning_flame" | "insight" | "inner_ghost_burst" | "ascension" | "storm_assault" | "river_enter" | "river_move" | "river_exit" | "inner_wave" | "landing" | "blade_shift" | "charge_move" | "charge_attack" | "wave_move" | "skip_child" | "shuffle" | "brawl" | "brawl_attack";
   actionId: string;
   expectedRevision: number;
   pieceId?: string;

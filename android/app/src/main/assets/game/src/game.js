@@ -2,7 +2,7 @@ import { openShuffleA } from "./hero-shuffle.js";
 import { openHeroChild } from "./hero-children.js";
 import { qualifyRiverArrival } from "./hero-progress.js";
 import { createHeroSelections, initializeHeroForms, selectedHeroId, validateHeroForms } from "./hero-forms.js";
-import { copy, initializeFeatureSecret, destroyPiece, markRevealed, queueLanding, settleLandings, closeDirectDeaths, generateGhosts, beginFormalTurn, advanceToFormalTurn, finishFormalTurn, rememberAction, resolveWindReturn } from "./settlement.js";
+import { copy, initializeFeatureSecret, destroyPiece, consumeDragonScale, markRevealed, queueLanding, settleLandings, closeDirectDeaths, generateGhosts, beginFormalTurn, advanceToFormalTurn, finishFormalTurn, rememberAction, resolveWindReturn } from "./settlement.js";
 import { actionFields, closeMainActionAtom, movementClassification, recordAction } from "./turns.js";
 import { RuleError } from "./errors.js";
 import { requireModeFeatureAdaptation } from "./modes.js";
@@ -383,7 +383,7 @@ export function applyAuthoritativeMove(
   command             ,
   deferTurnEnd = false,
   now = Date.now(),
-  childAction                                                      ,
+  childAction                                                                                                 ,
 )             {
   validateHeroForms(state, secret);
   if (state.flowDance && !deferTurnEnd) return applyFlowDance(state, secret, command);
@@ -406,7 +406,7 @@ export function applyAuthoritativeMove(
   if (nextState.pendingHeroChild) throw new RuleError("HERO_CHILD_ACTION_REQUIRED", "须先处理当前衍生行动窗口");
   if (nextState.pendingDescent && !childAction?.stormAssault) throw new RuleError("DESCENT_ACTION_REQUIRED", "须先完成降临结算");
   validateRewindReplay(nextState, nextSecret, command);
-  const validation = validatePublicMove(nextState, command, state.turn, { allowLinkedControl: deferTurnEnd, stormAssault: childAction?.stormAssault, allowIntermediateCheck: childAction?.stormAssault });
+  const validation = validatePublicMove(nextState, command, state.turn, { allowLinkedControl: deferTurnEnd && !childAction?.mainClassification, stormAssault: childAction?.stormAssault, allowIntermediateCheck: childAction?.stormAssault });
   if (!validation.ok && !(validation.code === "SELF_CHECK" && permitsSelfCrushingGeneral(state, command, state.turn))) {
     validationError(validation.code, validation.message);
   }
@@ -424,6 +424,7 @@ export function applyAuthoritativeMove(
 
   const pathVictims = pathPiecesForSpecialMove(nextState, source, command.to);
   let classification = movementClassification(state, Boolean(target) || pathVictims.length > 0, pathVictims.length > 0, deferTurnEnd ? { parentActionId: childAction?.parentActionId } : undefined);
+  if (childAction?.mainClassification) classification = childAction.mainClassification;
   if (childAction?.stormAssault) classification = { ...classification, keywords: [...classification.keywords, "额外"] };
   if (secret.replay && classification.opportunity === "main") classification = { ...classification, tier: 3, source: "rewind_replay" };
   rememberAction(nextState, nextSecret, source.id, classification.tier, command.from, now, classification);
@@ -435,9 +436,11 @@ export function applyAuthoritativeMove(
   });
 
   // 普通攻击撞到壁垒：目标留在原处，防御消耗，攻击者弹回起点。
-  if (target && nextState.effectsByPieceId?.[target.id]?.barrier) {
-    removeBarrierEffect(nextState, target.id);
-    const clawCaptured = nextState.effectsByPieceId?.[source.id]?.dragonClaw ? destroyPiece(nextState, nextSecret, target.id, actingSide, "crush") : undefined;
+  if (target && (nextState.effectsByPieceId?.[target.id]?.barrier || nextState.effectsByPieceId?.[target.id]?.dragonScale)) {
+    const barrier = Boolean(nextState.effectsByPieceId?.[target.id]?.barrier);
+    if (barrier) removeBarrierEffect(nextState, target.id);
+    else consumeDragonScale(nextState, target.id, "attack");
+    const clawCaptured = barrier && nextState.effectsByPieceId?.[source.id]?.dragonClaw ? destroyPiece(nextState, nextSecret, target.id, actingSide, "crush") : undefined;
     nextState.revision = state.revision + 1;
     nextState.lastMove = {
       actionId: command.actionId,
@@ -451,7 +454,7 @@ export function applyAuthoritativeMove(
       landed: false,
       ...actionFields(classification),
     };
-    queueLanding(nextState, source, actingSide, "warrior_return");
+    queueLanding(nextState, source, actingSide, barrier ? "warrior_return" : "dragon_scale_return");
     if (finishDirectDeaths(nextState, actingSide, nextSecret)) {
       nextSecret.processedActions[command.actionId] = nextState.revision;
       return { state: nextState, secret: nextSecret, duplicate: false };
@@ -665,7 +668,8 @@ export function applyAuthoritativeAssassination(
   }
 
   if (!continuing) consumeAssassinationCharge(nextState, actingSide, command.source               );
-  const captured = target ? destroyPiece(nextState, nextSecret, target.id, actingSide, command.useStrongStrike ? "assassination" : "attack") : undefined;
+  const scaleBounced = Boolean(target && consumeDragonScale(nextState, target.id, command.useStrongStrike ? "assassination" : "attack"));
+  const captured = target && !scaleBounced ? destroyPiece(nextState, nextSecret, target.id, actingSide, command.useStrongStrike ? "assassination" : "attack") : undefined;
 
   const movedPiece                              = source.faceDown
     ? (() => {
@@ -673,9 +677,9 @@ export function applyAuthoritativeAssassination(
         delete nextSecret.identities[source.id];
         return { id: source.id, x: command.to.x, y: command.to.y, faceDown: false, ...revealed };
       })()
-    : { ...source, x: command.to.x, y: command.to.y };
+    : { ...source, x: scaleBounced ? source.x : command.to.x, y: scaleBounced ? source.y : command.to.y };
   nextState.pieces = [
-    ...nextState.pieces.filter((piece) => piece.id !== source.id && piece.id !== target?.id),
+    ...nextState.pieces.filter((piece) => piece.id !== source.id && (scaleBounced || piece.id !== target?.id)),
     movedPiece,
   ];
   nextState.revision = state.revision + 1;
@@ -687,12 +691,13 @@ export function applyAuthoritativeAssassination(
     to: { ...command.to },
     captured,
     pathCrushed,
-    landed: true,
+    landed: !scaleBounced,
+    ...(scaleBounced ? { bouncedAgainstPieceId: target .id } : {}),
     ...actionFields(classification),
   };
 
   markRevealed(nextState, nextSecret, source.id);
-  queueLanding(nextState, movedPiece, actingSide, "action", sourceWasCovered ? undefined : command.from);
+  queueLanding(nextState, movedPiece, actingSide, scaleBounced ? "dragon_scale_return" : "action", sourceWasCovered ? undefined : command.from);
   awardWarriorBarrier(nextState, actingSide, source.id, command.from, command.to, movedPiece);
 
 
@@ -865,11 +870,13 @@ function applyFlowDance(state           , secret             , command          
   const classification                       = { tier: 3, keywords: [target ? "进攻" : "移动", "额外"], source: "skill_derived", opportunity: "extra", countsAsFormalTurn: false };
   recordAction(validationState, { ...classification, actionId: command.actionId, actingSide: flow.side, pieceId: p.id, from: { ...command.from }, to: { ...command.to } });
   validationState.automaticEvents = []; validationState.destructionBatches = []; validationState.landingEvents = [];
-  const bounced = Boolean(target && validationState.effectsByPieceId?.[target.id]?.barrier);
+  const barrier = Boolean(target && validationState.effectsByPieceId?.[target.id]?.barrier);
+  const scale = Boolean(target && !barrier && consumeDragonScale(validationState, target.id, "flow_attack"));
+  const bounced = barrier || scale;
   let captured                           ;
   if (bounced) {
-    removeBarrierEffect(validationState, target .id);
-    queueLanding(validationState, originalGeneral, flow.side, "warrior_return");
+    if (barrier) removeBarrierEffect(validationState, target .id);
+    queueLanding(validationState, originalGeneral, flow.side, barrier ? "warrior_return" : "dragon_scale_return");
   } else {
     if (target) captured = destroyPiece(validationState, newSecret, target.id, flow.side, "flow_attack");
     originalGeneral.x = command.to.x; originalGeneral.y = command.to.y;
@@ -944,7 +951,7 @@ export function publicStateSnapshot(state           )            {
 export function finishHeroChildTurn(state           , secret             , side      , parent          , now        )       {
   if (state.status !== "playing") return;
   const child = state.lastMove;
-  if (child?.pieceId === parent.pieceId && child.actionId !== parent.actionId && child.revealed?.color !== undefined && child.revealed.color !== side) {
+  if (child?.pieceId === parent.pieceId && child.revealed?.color !== undefined && child.revealed.color !== side) {
     // 揭示倒戈仍经过已有背刺/铁甲管线，但不得再次开放衍生窗口。
     state.lastMove = { ...child, countsAsFormalTurn: true };
     const p = state.pieces.find(p => p.id === child.pieceId);

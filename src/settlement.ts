@@ -26,7 +26,7 @@ export function destroyPieceBatch(state: GameState, secret: SecretState, batchId
   // 缺失真实身份不能留下半批死亡；仅预检仍存活且能被本来源消灭的对象。
   for (const t of locked) {
     const p = state.pieces.find(p => p.id === t.pieceId);
-    if (p && (isBoardPiece(p) || mayReadRiver(permission)) && !(t.cause === "crush" && (!isGround(p) || state.effectsByPieceId?.[p.id]?.immuneCrush))) effectiveIdentity(p, secret, "death:reveal");
+    if (p && (isBoardPiece(p) || mayReadRiver(permission)) && !(t.cause === "crush" && (!isGround(p) || state.effectsByPieceId?.[p.id]?.immuneCrush)) && !(state.effectsByPieceId?.[p.id]?.dragonScale && ["attack", "assassination", "flow_attack", "crush"].includes(t.cause))) effectiveIdentity(p, secret, "death:reveal");
   }
   const batch: ClosedDestructionBatch = { batchId, source, targets: locked, targetIds: locked.map(t => t.pieceId), destroyedIds: [], phase: "closed" };
   openDestructionBatches.set(state, { batchId, targets: locked });
@@ -109,7 +109,7 @@ export function destroyPiece(state: GameState, secret: SecretState, id: string, 
   const victim = state.pieces.find(p => p.id === id);
   if (!victim || !isBoardPiece(victim) && !mayReadRiver(permission)) return;
   if (cause === "crush" && (!isGround(victim) || state.effectsByPieceId?.[id]?.immuneCrush)) return;
-  if (state.effectsByPieceId?.[id]?.dragonScale && ["attack", "assassination", "crush"].includes(cause)) throw new RuleError("DESIGN_REQUIRED_DRAGON_SCALE_PLACEMENT", "龙鳞拦截后的进攻者与目标落位尚未冻结，本操作不能提交");
+  if (consumeDragonScale(state, id, cause)) return;
   const controller = getController(victim);
   const identity = effectiveIdentity(victim, secret, "death:reveal");
   const withheld = victim.faceDown && state.featureRules?.mutation === "chaos";
@@ -128,6 +128,14 @@ export function destroyPiece(state: GameState, secret: SecretState, id: string, 
   state.automaticEvents ??= [];
   state.automaticEvents.push({ kind: `destroy:${cause}`, pieceId: id, side: controller, position: record.position, deathRecord: copy(record), wasCovered: victim.faceDown, ...(batch ? { batchId: batch.batchId } : {}) });
   return record;
+}
+
+/** 仅阻止进攻本体终点击杀/碾碎，不把一次性龙鳞变成普遍死亡免疫。 */
+export function consumeDragonScale(state: GameState, id: string, cause: string): boolean {
+  const effects = state.effectsByPieceId?.[id];
+  if (!effects?.dragonScale || !["attack", "assassination", "flow_attack", "crush"].includes(cause)) return false;
+  delete effects.dragonScale;
+  return true;
 }
 
 export function queueLanding(state: GameState, piece: PublicPiece, beforeController: Side, source: string, from?: Position): void {

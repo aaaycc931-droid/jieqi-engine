@@ -314,6 +314,7 @@ function simulatePublicMove(
   to: Position,
 ): GameState {
   const target = source.layer === "air" ? undefined : pieceAt(state, to);
+  if (target && state.effectsByPieceId?.[target.id]?.dragonScale) return state;
   const moved: PublicPiece = { ...source, x: to.x, y: to.y };
   return {
     ...state,

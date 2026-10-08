@@ -1,6 +1,6 @@
 {
   "project": "乐子象棋 / jieqi-engine",
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-08-H12-design-closed",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-08-four-design-gaps-runtime",
   "updated_at": "2026-10-08",
   "repository": "https://github.com/aaaycc931-droid/jieqi-engine",
   "working_branch": "codex/ui-android-apk-20261001",
@@ -10,7 +10,7 @@
   "baseline_id": "LEZI-FUNCTION-2026-10-04-v1",
   "baseline_digest": "4bcf9fb91f5c6e41f456e7424ebd7ed09c6c07b1595ec825604aa730fdad020b",
   "current_rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
-  "current_rule_digest": "4ac0b405e23bd8c0d891c384b4b8721bac3be41e43360d86803e42ac48a68978",
+  "current_rule_digest": "ca02aa585767102795d23019cd3b80f7772d0f9d2317479e81e0e83320251234",
   "authoritative_entry": "00_READ_FIRST.md",
   "current_rules": [
     "01_CURRENT_RULES.md",
@@ -30,14 +30,14 @@
     "destiny_mutations": 1
   },
   "validation": {
-    "tests_passed": 501,
+    "tests_passed": 514,
     "tests_failed": 0,
     "web_build": "passed",
     "homepage_browser_run": 37305274329,
     "homepage_browser_commit": "8b985a8f2bf8cd4ab96fdf63ab73894292cc6f7a",
     "homepage_browser_scope": "homepage_and_entry_controls_only",
-    "android_web_asset_match_files": 127,
-    "new_hero_browser_full_flow": "20 synthetic prepared DOM operations only; natural full matches and physical transport unaccepted",
+    "android_web_asset_match_files": 128,
+    "new_hero_browser_full_flow": "new seven DOM scenarios prepared; actual browser execution pending CI, local browser unavailable",
     "individual_69_invariants": "partial_named_case_evidence_full_contract_acceptance_pending",
     "android_webview": "pending",
     "physical_two_phone": "pending",
@@ -52,29 +52,16 @@
       "failed_cases": 0,
       "fully_accepted": 0,
       "applicable_rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
-      "source_commit_at_run": "ccdea1053399539bdc1839929f454aacd165798d",
-      "published_implementation_commit": "9ed5ff71590bf9658d1294def22bb669b195357b",
-      "scope": "109 existing contracts have scenario links; new hero per-source evidence is separate in HERO_TRANSFER_AUDIT, full acceptance remains 0",
-      "source_digest": "01056471b6edf4698a05115db505a6890ad0f91cb26a963ae45fab920c15d946",
-      "contract_digest": "c6e4649ce5a028b5477090b87066dd5bb7a65ad3a5632d138a05bf972b89e1e3"
+      "source_commit_at_run": "f3ae349548970eaf94469c90d323b157777dbea8",
+      "published_implementation_commit": null,
+      "scope": "109 existing contracts: 106 partial scenario evidence, three non-runtime, zero complete acceptance; final local 514 engine/static cases under r5 plus four confirmed addenda",
+      "source_digest": "9d080ea3a14342e39a1355b1bf3a833d0bea3d26ba0dfbd306e2455328c31858",
+      "contract_digest": "f09f83064cb2bff8cdd4d41130646733f751252fe4e534c75ab043160327baaa",
+      "applies_to_current_rule_revision": true
     },
     "current_ci": {
-      "status": "success",
-      "run": 37776332454,
-      "job": 113308022675,
-      "commit": "9ed5ff71590bf9658d1294def22bb669b195357b",
-      "implementation_commit": "9ed5ff71590bf9658d1294def22bb669b195357b",
-      "checkout_commit": "8f7a4369566b4f3d6f269bbd9855a56a17a8283c",
-      "source_digest": "01056471b6edf4698a05115db505a6890ad0f91cb26a963ae45fab920c15d946",
-      "contract_digest": "c6e4649ce5a028b5477090b87066dd5bb7a65ad3a5632d138a05bf972b89e1e3",
-      "source_digest_matches_local": true,
-      "contract_digest_matches_local": true,
-      "applies_to_current_implementation": true,
-      "evidence_artifact": 11549898795,
-      "evidence_artifact_digest": "sha256:753a90af5a37bbbda9b8ed3b38a3567d420cd9b533bc9a77a0849cb9d3bba006",
-      "apk_job": "skipped",
-      "provenance": "actual_GitHub_job_log_JSON_summary; artifact_index_recorded_archive_not_downloaded_this_round",
-      "accepts_new_H07_addendum": false
+      "status": "pending_publication",
+      "applies_to_current_implementation": false
     },
     "previous_ci": {
       "status": "success",
@@ -89,25 +76,8 @@
       "applies_to_current_implementation": false
     },
     "gameplay_browser": {
-      "status": "success",
-      "run": 37776332494,
-      "commit": "9ed5ff71590bf9658d1294def22bb669b195357b",
-      "checkout_commit": "8f7a4369566b4f3d6f269bbd9855a56a17a8283c",
-      "artifact": 11549099405,
-      "case_count": 20,
-      "errors": 0,
-      "report": "review/invariants/HERO_TRANSFER_BROWSER_2026-10-07.json",
-      "app_digest": "b841af632d0b08003ebdbbaf792691fd4c83365b5c9b43f46537d3c1fa098fc9",
-      "app_digest_matches_local": true,
-      "compiled_source_digest": "01056471b6edf4698a05115db505a6890ad0f91cb26a963ae45fab920c15d946",
-      "same_checkout_as_source_digest_verified_rules_ci": true,
-      "scope": "twenty actual compiled DOM prepared operations; two new timeline/flight-turn boundary cases",
-      "full_match_accepted": false,
-      "bluetooth_private_transport_accepted": false,
-      "report_retrieval": "actual_job_log_evidenceFile_JSON; source_artifact_registered",
-      "job": 113308022824,
-      "implementation_commit": "9ed5ff71590bf9658d1294def22bb669b195357b",
-      "artifact_digest": "sha256:f92cef40f99e02186d373ea40023d46e182bfe3c97081405cc637d6980120449"
+      "status": "pending_publication",
+      "scope": "seven new prepared DOM cases, twenty retained; not full natural matches"
     },
     "previous_gameplay_browser": {
       "status": "success",
@@ -477,19 +447,13 @@
         "contract_digest": "c6e4649ce5a028b5477090b87066dd5bb7a65ad3a5632d138a05bf972b89e1e3"
       }
     ],
-    "applies_to_current_rule_revision": false,
+    "applies_to_current_rule_revision": true,
     "historical_rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
-    "new_revision_validation": "501 engine and 20 prepared DOM pre-addenda partial evidence; H07 mirror and H12 general threshold not implemented or accepted",
+    "new_revision_validation": "r5 plus four confirmed addenda: 514 engine/static passed, partial named scenarios; 27 prepared DOM planned, actual CI pending, full acceptance remains false",
     "historical_r4_test_count": 434,
     "mode_foundation_browser_current": {
-      "status": "skipped_unaffected_scope",
-      "run": 37776332494,
-      "commit": "9ed5ff71590bf9658d1294def22bb669b195357b",
-      "implementation_commit": "9ed5ff71590bf9658d1294def22bb669b195357b",
-      "tests_run": false,
-      "scope_reason": "affected-checks-with-successful-predecessor",
-      "previous_report": "review/gameplay/mode-browser-review-2026-10-05.json",
-      "previous_report_current_round_acceptance": false
+      "status": "pending_actual_CI_shared_web_app_changed",
+      "tests_run": false
     },
     "runtime_validation_history": [
       {
@@ -834,9 +798,59 @@
     ],
     "confirmed_addenda_runtime_acceptance": {
       "LEZI-H07-MIRROR-2026-10-08": false,
-      "LEZI-H12-GENERAL-THRESHOLD-2026-10-08": false
+      "LEZI-H12-GENERAL-THRESHOLD-2026-10-08": false,
+      "LEZI-H16-BRAWL-ENTRY-2026-10-08": false
     },
-    "evidence_rule_digest_at_run": "0d839b00f98f120a8a3e2ce6cde6eee90e67c17835d70503fb5735e228a1e08a"
+    "evidence_rule_digest_at_run": "0d839b00f98f120a8a3e2ce6cde6eee90e67c17835d70503fb5735e228a1e08a",
+    "previous_product_validation": {
+      "implementation_commit": "9ed5ff71590bf9658d1294def22bb669b195357b",
+      "tests_passed": 501,
+      "android_web_asset_match_files": 127,
+      "hero_browser": {
+        "status": "success",
+        "run": 37776332494,
+        "commit": "9ed5ff71590bf9658d1294def22bb669b195357b",
+        "checkout_commit": "8f7a4369566b4f3d6f269bbd9855a56a17a8283c",
+        "artifact": 11549099405,
+        "case_count": 20,
+        "errors": 0,
+        "report": "review/invariants/HERO_TRANSFER_BROWSER_2026-10-07.json",
+        "app_digest": "b841af632d0b08003ebdbbaf792691fd4c83365b5c9b43f46537d3c1fa098fc9",
+        "app_digest_matches_local": true,
+        "compiled_source_digest": "01056471b6edf4698a05115db505a6890ad0f91cb26a963ae45fab920c15d946",
+        "same_checkout_as_source_digest_verified_rules_ci": true,
+        "scope": "twenty actual compiled DOM prepared operations; two new timeline/flight-turn boundary cases",
+        "full_match_accepted": false,
+        "bluetooth_private_transport_accepted": false,
+        "report_retrieval": "actual_job_log_evidenceFile_JSON; source_artifact_registered",
+        "job": 113308022824,
+        "implementation_commit": "9ed5ff71590bf9658d1294def22bb669b195357b",
+        "artifact_digest": "sha256:f92cef40f99e02186d373ea40023d46e182bfe3c97081405cc637d6980120449"
+      },
+      "engine_ci": {
+        "status": "success",
+        "run": 37776332454,
+        "job": 113308022675,
+        "commit": "9ed5ff71590bf9658d1294def22bb669b195357b",
+        "implementation_commit": "9ed5ff71590bf9658d1294def22bb669b195357b",
+        "checkout_commit": "8f7a4369566b4f3d6f269bbd9855a56a17a8283c",
+        "source_digest": "01056471b6edf4698a05115db505a6890ad0f91cb26a963ae45fab920c15d946",
+        "contract_digest": "c6e4649ce5a028b5477090b87066dd5bb7a65ad3a5632d138a05bf972b89e1e3",
+        "source_digest_matches_local": true,
+        "contract_digest_matches_local": true,
+        "applies_to_current_implementation": true,
+        "evidence_artifact": 11549898795,
+        "evidence_artifact_digest": "sha256:753a90af5a37bbbda9b8ed3b38a3567d420cd9b533bc9a77a0849cb9d3bba006",
+        "apk_job": "skipped",
+        "provenance": "actual_GitHub_job_log_JSON_summary; artifact_index_recorded_archive_not_downloaded_this_round",
+        "accepts_new_H07_addendum": false
+      }
+    },
+    "current_rule_addenda_runtime_acceptance": {
+      "engine_partial_evidence": true,
+      "browser_pending": true,
+      "fully_accepted": false
+    }
   },
   "restrictions": [
     "ui_last",
@@ -861,41 +875,37 @@
     "verification_policy": "impact_selected_during_development_then_one_full_regression_per_completed_batch",
     "ci_trigger_optimization": "implemented_current_change_scope_with_successful_predecessor_guard"
   },
-  "next_action": "继续与用户补全混乱乱斗首次发动/付费及龙鳞双方落位两项设计缺口；H07/H12已确认规则待实现，旧暂停队列不恢复。",
+  "next_action": "完成本轮实际提交CI与浏览器验证后统一收束，等待用户的新英雄正式移交；不恢复另行暂停队列。",
   "source_gap_register": "SOURCE_REGISTER.json",
   "apk_built_this_round": false,
   "previous_implementation_commit": "b45077a692213953ee7e3edef31a6d16c011c940",
   "validation_round": {
-    "authorization": "user: 现在开始进行下一步; 2026-10-08T20:13:17+08:00",
-    "verified_remote_before_implementation": "bf6aab5255586e36e3617febf7926cae7514f2c7",
+    "authorization": "先讨论全部完成，再一同推进；最终龙鳞落位同意 2026-10-08T23:17:34+08:00",
+    "verified_remote_before_implementation": "ae16830f5cf747caa65647eb85d4b292b3892e42",
     "rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
-    "implementation_commit": "9ed5ff71590bf9658d1294def22bb669b195357b",
-    "local_execution_checkpoint": "ccdea1053399539bdc1839929f454aacd165798d",
-    "publication_tree_matches_execution_tree": true,
-    "report": "handoff/current/29_FLIGHT_TURN_BOUNDARY_2026-10-08.md",
+    "report": "handoff/current/30_RULE_GAP_RUNTIME_2026-10-08.md",
+    "local_execution_checkpoint": "f3ae349548970eaf94469c90d323b157777dbea8",
+    "publication_pending": true,
     "product_code_changed": true,
-    "semantic_rules_changed": false,
-    "new_engine_tests": 3,
-    "tests_passed": 501,
+    "semantic_rules_changed": true,
+    "new_engine_tests": 13,
+    "existing_engine_tests": 501,
+    "tests_passed": 514,
     "tests_failed": 0,
+    "before_baseline": {
+      "commit": "ae16830f5cf747caa65647eb85d4b292b3892e42",
+      "dedicated_passed": 0,
+      "dedicated_failed": 13
+    },
     "web_build": "passed",
-    "android_generated_files_matched": 127,
-    "browser_tests_run": true,
-    "browser_prepared_cases_passed": 20,
-    "browser_new_cases": 2,
+    "android_generated_files_matched": 128,
+    "browser_tests_run": false,
+    "browser_status": "pending_actual_CI_local_chromium_unavailable_download_failed",
+    "browser_new_cases_planned": 7,
     "apk_built": false,
     "old_full_match_queue_resumed": false,
-    "untransferred_heroes_imported": false,
     "all_functions_accepted": false,
-    "design_required_ids": [
-      "H07-mirror",
-      "H12-general-rank",
-      "H16-chaos-entry",
-      "H21-dragon-scale-placement"
-    ],
-    "browser_mode_foundation_status": "skipped_unaffected_scope",
-    "artwork_changed": false,
-    "physical_device_tests_run": false
+    "design_required_ids": []
   },
   "previous_validation_round": {
     "authorization": "user: 进行下一步; 2026-10-08T17:25:04+08:00",
@@ -931,10 +941,10 @@
     "physical_device_tests_run": false
   },
   "previous_rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
-  "previous_rule_digest": "e8c6c963b32fd1d155f94602207f7b4cec15265f60341e1318a08d668e7fd07b",
+  "previous_rule_digest": "7a66bf0aaa9ab546402d1718196663e6251c19c7a1588adbe6f1b1613f1029b3",
   "rule_digest_algorithm": "sha256(concat(relative UTF-8 path + NUL + file bytes + NUL), STATE.current_rules order)",
   "paused_next_action": "Continue destiny bomb/hourglass full real matches, second Shadow cooldown/lifecycle, remaining private snapshot and cross-end clock intersections. Current five active families have sampled natural results; original Nozdormu/Prince and current 12-seat normal regression remain incomplete. Local timeout outcome not frozen; physical RFCOMM/WebView/two-phone pending. UI last; APK paused.",
-  "work_status": "H07_H12_design_confirmed_runtime_pending_two_design_gaps_open",
+  "work_status": "four_design_gaps_closed_runtime_engine_verified_browser_ci_pending",
   "game_modes": {
     "authority": "09_CURRENT_GAME_MODES.md",
     "base_rule_status": "confirmed",
@@ -1005,6 +1015,11 @@
       "revision": "LEZI-FUNCTION-2026-10-07-r5",
       "digest": "e8c6c963b32fd1d155f94602207f7b4cec15265f60341e1318a08d668e7fd07b",
       "scope": "before H12 general center other-general confirmation"
+    },
+    {
+      "revision": "LEZI-FUNCTION-2026-10-07-r5",
+      "digest": "4ac0b405e23bd8c0d891c384b4b8721bac3be41e43360d86803e42ac48a68978",
+      "scope": "H07/H12 design closed; before H16 initial trigger confirmation"
     }
   ],
   "stage_close": {
@@ -1076,34 +1091,32 @@
     "followup_runtime_record": "handoff/current/13_DARK_IDENTITY_RUNTIME_2026-10-06.md"
   },
   "latest_runtime_round": {
-    "authorization": "user: 现在开始进行下一步; 2026-10-08T20:13:17+08:00",
-    "verified_remote_before_implementation": "bf6aab5255586e36e3617febf7926cae7514f2c7",
+    "authorization": "先讨论全部完成，再一同推进；最终龙鳞落位同意 2026-10-08T23:17:34+08:00",
+    "verified_remote_before_implementation": "ae16830f5cf747caa65647eb85d4b292b3892e42",
     "rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
-    "implementation_commit": "9ed5ff71590bf9658d1294def22bb669b195357b",
-    "local_execution_checkpoint": "ccdea1053399539bdc1839929f454aacd165798d",
-    "publication_tree_matches_execution_tree": true,
-    "report": "handoff/current/29_FLIGHT_TURN_BOUNDARY_2026-10-08.md",
+    "report": "handoff/current/30_RULE_GAP_RUNTIME_2026-10-08.md",
+    "local_execution_checkpoint": "f3ae349548970eaf94469c90d323b157777dbea8",
+    "publication_pending": true,
     "product_code_changed": true,
-    "semantic_rules_changed": false,
-    "new_engine_tests": 3,
-    "tests_passed": 501,
+    "semantic_rules_changed": true,
+    "new_engine_tests": 13,
+    "existing_engine_tests": 501,
+    "tests_passed": 514,
     "tests_failed": 0,
+    "before_baseline": {
+      "commit": "ae16830f5cf747caa65647eb85d4b292b3892e42",
+      "dedicated_passed": 0,
+      "dedicated_failed": 13
+    },
     "web_build": "passed",
-    "android_generated_files_matched": 127,
-    "browser_tests_run": true,
-    "browser_prepared_cases_passed": 20,
-    "browser_new_cases": 2,
+    "android_generated_files_matched": 128,
+    "browser_tests_run": false,
+    "browser_status": "pending_actual_CI_local_chromium_unavailable_download_failed",
+    "browser_new_cases_planned": 7,
     "apk_built": false,
     "old_full_match_queue_resumed": false,
-    "untransferred_heroes_imported": false,
     "all_functions_accepted": false,
-    "design_required_ids": [
-      "H07-mirror",
-      "H12-general-rank",
-      "H16-chaos-entry",
-      "H21-dragon-scale-placement"
-    ],
-    "browser_mode_foundation_status": "skipped_unaffected_scope"
+    "design_required_ids": []
   },
   "runtime_round_history": [
     {
@@ -1441,6 +1454,36 @@
       ],
       "browser_mode_foundation_status": "passed_failure_fallback_rerun",
       "browser_mode_foundation_cases_passed": 9
+    },
+    {
+      "authorization": "user: 现在开始进行下一步; 2026-10-08T20:13:17+08:00",
+      "verified_remote_before_implementation": "bf6aab5255586e36e3617febf7926cae7514f2c7",
+      "rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
+      "implementation_commit": "9ed5ff71590bf9658d1294def22bb669b195357b",
+      "local_execution_checkpoint": "ccdea1053399539bdc1839929f454aacd165798d",
+      "publication_tree_matches_execution_tree": true,
+      "report": "handoff/current/29_FLIGHT_TURN_BOUNDARY_2026-10-08.md",
+      "product_code_changed": true,
+      "semantic_rules_changed": false,
+      "new_engine_tests": 3,
+      "tests_passed": 501,
+      "tests_failed": 0,
+      "web_build": "passed",
+      "android_generated_files_matched": 127,
+      "browser_tests_run": true,
+      "browser_prepared_cases_passed": 20,
+      "browser_new_cases": 2,
+      "apk_built": false,
+      "old_full_match_queue_resumed": false,
+      "untransferred_heroes_imported": false,
+      "all_functions_accepted": false,
+      "design_required_ids": [
+        "H07-mirror",
+        "H12-general-rank",
+        "H16-chaos-entry",
+        "H21-dragon-scale-placement"
+      ],
+      "browser_mode_foundation_status": "skipped_unaffected_scope"
     }
   ],
   "action_turn_runtime": {
@@ -1474,7 +1517,7 @@
     "remaining_runtime_contracts": [],
     "remaining_runtime_contracts_note": "Public ADD-HERO-FORM-001 model now has named partial evidence in round20; future source integration and full acceptance remain pending."
   },
-  "pending_next_runtime_action": "H07抵消及H12将帅目标/中心确认语义待接入并验证；只读取既有允许身份，不自行扩展秘密读取。",
+  "pending_next_runtime_action": "当前四项设计缺口已确认并实现，浏览器提交CI待核对。",
   "account_switch_close": {
     "requested_at": "2026-10-06T23:14:24+08:00",
     "request": "我要更换账号了",
@@ -1660,26 +1703,16 @@
     "historical_record": "handoff/current/20_HERO_FORM_RUNTIME_2026-10-07.md"
   },
   "latest_document_round": {
-    "authorization": {
-      "at": "2026-10-08T22:16:05+08:00",
-      "quote": "是的",
-      "proposal": "将帅中心同批消灭范围内另一将帅，按两败俱伤结算"
-    },
-    "classification": "hero_design_gap_closed_rules_only",
-    "report": "rules/confirmed/RULE_UPDATE_2026-10-08_FLAME_GENERAL.md",
-    "verified_remote_before_round": "37e352156e157e3f0937acec66c31ae8e4a8965d",
+    "classification": "unified_rule_and_runtime_followup",
+    "report": "handoff/current/30_RULE_GAP_RUNTIME_2026-10-08.md",
+    "superseded_unpublished_brawl_option": "second option replaced by explicit first-option choice before remote publication",
+    "product_code_changed": true,
     "semantic_rules_changed": true,
-    "product_code_changed": false,
-    "local_game_tests_rerun": false,
-    "local_web_rebuilt": false,
+    "local_game_tests_rerun": true,
+    "local_web_rebuilt": true,
     "local_browser_tests_run": false,
     "apk_built": false,
-    "design_required_remaining": 2,
-    "implementation_pending": [
-      "H07-mirror",
-      "H12-general-rank"
-    ],
-    "existing_product_reports": "preserved_original_execution_revision_no_new_timestamps"
+    "design_required_remaining": 0
   },
   "acceptance_gap_consolidation": {
     "status": "historical_r4_inventory_superseded_by_received_r5_transfer",
@@ -1738,27 +1771,35 @@
         "bytes": 10900
       }
     },
-    "unresolved": [
-      "H16-chaos-entry: 资源及后续连斩结构已确认，但乱斗如何首次发动、如何付费及是否需要先有常态冲锋触发未定义。已接入确认资源，未开启连斩/付费入口。",
-      "H21-dragon-scale-placement: 龙鳞保住进攻终点棋后，攻击者与目标如何合法落位尚未冻结；拒绝整次相关行动且不消费龙鳞。"
-    ],
+    "unresolved": [],
     "new_dedicated_tests": 36,
     "audit": "qa/HERO_TRANSFER_AUDIT.json",
     "source_revision_is_separate_from_aggregate_r5": true,
     "cross_settlement_tests": 8,
-    "latest_total_tests_passed": 487,
+    "latest_total_tests_passed": 514,
     "child_boundary_tests": 3,
     "descent_boundary_tests": 6,
-    "resolved_design_pending_runtime": [
+    "resolved_design_pending_runtime": [],
+    "resolved_design_runtime": [
       {
-        "id": "H07-mirror",
+        "id": "LEZI-H07-MIRROR-2026-10-08",
         "confirmation": "rules/confirmed/RULE_UPDATE_2026-10-08_THIEF_MIRROR.md",
-        "status": "confirmed_pending_implementation"
+        "status": "implemented_partial_engine_evidence_browser_ci_pending"
       },
       {
-        "id": "H12-general-rank",
+        "id": "LEZI-H12-GENERAL-THRESHOLD-2026-10-08",
         "confirmation": "rules/confirmed/RULE_UPDATE_2026-10-08_FLAME_GENERAL.md",
-        "status": "confirmed_pending_implementation"
+        "status": "implemented_partial_engine_evidence_browser_ci_pending"
+      },
+      {
+        "id": "LEZI-H16-BRAWL-ENTRY-2026-10-08",
+        "confirmation": "rules/confirmed/RULE_UPDATE_2026-10-08_BRAWL_ENTRY.md",
+        "status": "implemented_partial_engine_evidence_browser_ci_pending"
+      },
+      {
+        "id": "LEZI-H21-DRAGON-SCALE-2026-10-08",
+        "confirmation": "rules/confirmed/RULE_UPDATE_2026-10-08_DRAGON_SCALE.md",
+        "status": "implemented_partial_engine_evidence_browser_ci_pending"
       }
     ]
   },
@@ -1968,6 +2009,47 @@
       "design_required_remaining": 3,
       "H12_remaining": "将帅中心对另一将帅的消灭条件",
       "existing_product_reports": "preserved_original_execution_revision_no_new_timestamps"
+    },
+    {
+      "authorization": {
+        "at": "2026-10-08T22:16:05+08:00",
+        "quote": "是的",
+        "proposal": "将帅中心同批消灭范围内另一将帅，按两败俱伤结算"
+      },
+      "classification": "hero_design_gap_closed_rules_only",
+      "report": "rules/confirmed/RULE_UPDATE_2026-10-08_FLAME_GENERAL.md",
+      "verified_remote_before_round": "37e352156e157e3f0937acec66c31ae8e4a8965d",
+      "semantic_rules_changed": true,
+      "product_code_changed": false,
+      "local_game_tests_rerun": false,
+      "local_web_rebuilt": false,
+      "local_browser_tests_run": false,
+      "apk_built": false,
+      "design_required_remaining": 2,
+      "implementation_pending": [
+        "H07-mirror",
+        "H12-general-rank"
+      ],
+      "existing_product_reports": "preserved_original_execution_revision_no_new_timestamps"
+    },
+    {
+      "authorization": {
+        "at": "2026-10-08T22:45:11+08:00",
+        "quote": "同意",
+        "proposal": "第二种：正常主行动触发，再付费"
+      },
+      "classification": "partial_hero_rule_confirmation_only",
+      "report": "rules/confirmed/RULE_UPDATE_2026-10-08_BRAWL_ENTRY.md",
+      "verified_remote_before_round": "ae16830f5cf747caa65647eb85d4b292b3892e42",
+      "semantic_rules_changed": true,
+      "product_code_changed": false,
+      "local_game_tests_rerun": false,
+      "local_web_rebuilt": false,
+      "local_browser_tests_run": false,
+      "apk_built": false,
+      "design_required_remaining": 2,
+      "H16_remaining": "启动费用公式",
+      "existing_product_reports": "preserved_original_execution_revision_no_new_timestamps"
     }
   ],
   "ci_scope_configuration": {
@@ -2038,7 +2120,7 @@
       "sha256": "30775c14cfe15ede76737779abd564eb2621af34970cd58dcbfa9b97e1cf857e",
       "confirmed_at": "2026-10-08T20:59:35+08:00",
       "user_quote": "互相偷然后就抵消了",
-      "runtime_status": "confirmed_pending_implementation",
+      "runtime_status": "implemented_partial_engine_evidence_browser_ci_pending",
       "runtime_accepted": false
     },
     {
@@ -2047,7 +2129,7 @@
       "sha256": "56571e87875a63d9def9ba5b9b430d643ebc0263f561c4272d9eb7dc4e415c93",
       "confirmed_at": "2026-10-08T21:13:45+08:00",
       "user_quote": "至少3级才能消灭",
-      "runtime_status": "confirmed_pending_implementation",
+      "runtime_status": "implemented_partial_engine_evidence_browser_ci_pending",
       "runtime_accepted": false,
       "additional_confirmation": {
         "at": "2026-10-08T22:11:25+08:00",
@@ -2060,6 +2142,64 @@
         "scope": "general center also destroys other general in same batch; mutual destruction"
       },
       "design_status": "confirmed_complete_for_recorded_gap"
+    },
+    {
+      "id": "LEZI-H16-BRAWL-ENTRY-2026-10-08",
+      "path": "rules/confirmed/RULE_UPDATE_2026-10-08_BRAWL_ENTRY.md",
+      "sha256": "caba373363d1aefa199ad140dc44e3cba6f8d5d51245e3b866d3a6adc5aed806",
+      "confirmed_at": "2026-10-08T23:16:12+08:00",
+      "user_quote": "是的",
+      "confirmed_scope": "active upfront fee 6+5n, occupies main, same-piece covered chain, shared n once",
+      "runtime_status": "implemented_partial_engine_evidence_browser_ci_pending",
+      "runtime_accepted": false,
+      "superseded_confirmation": {
+        "at": "2026-10-08T22:45:11+08:00",
+        "quote": "同意",
+        "scope": "second option, normal main then pay; never published; superseded"
+      },
+      "entry_choice": {
+        "at": "2026-10-08T23:14:09+08:00",
+        "quote": "第一个吧",
+        "scope": "first option active upfront pay"
+      }
+    },
+    {
+      "id": "LEZI-H21-DRAGON-SCALE-2026-10-08",
+      "path": "rules/confirmed/RULE_UPDATE_2026-10-08_DRAGON_SCALE.md",
+      "sha256": "b332cb7821f8d29f067882b4c491cd89a17a71d264674bc14b0e617ae02b61b0",
+      "confirmed_at": "2026-10-08T23:17:34+08:00",
+      "user_quote": "同意",
+      "confirmed_scope": "target stays; ground attacker returns with landing effects, opportunity consumed; existing blocked flight landing suffocation retained",
+      "runtime_status": "implemented_partial_engine_evidence_browser_ci_pending",
+      "runtime_accepted": false
     }
-  ]
+  ],
+  "rule_gap_runtime": {
+    "authorization": "先讨论全部完成，再一同推进；最终龙鳞落位同意 2026-10-08T23:17:34+08:00",
+    "verified_remote_before_implementation": "ae16830f5cf747caa65647eb85d4b292b3892e42",
+    "rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
+    "report": "handoff/current/30_RULE_GAP_RUNTIME_2026-10-08.md",
+    "local_execution_checkpoint": "f3ae349548970eaf94469c90d323b157777dbea8",
+    "publication_pending": true,
+    "product_code_changed": true,
+    "semantic_rules_changed": true,
+    "new_engine_tests": 13,
+    "existing_engine_tests": 501,
+    "tests_passed": 514,
+    "tests_failed": 0,
+    "before_baseline": {
+      "commit": "ae16830f5cf747caa65647eb85d4b292b3892e42",
+      "dedicated_passed": 0,
+      "dedicated_failed": 13
+    },
+    "web_build": "passed",
+    "android_generated_files_matched": 128,
+    "browser_tests_run": false,
+    "browser_status": "pending_actual_CI_local_chromium_unavailable_download_failed",
+    "browser_new_cases_planned": 7,
+    "apk_built": false,
+    "old_full_match_queue_resumed": false,
+    "all_functions_accepted": false,
+    "design_required_ids": []
+  }
 }
