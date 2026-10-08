@@ -67,5 +67,5 @@ writeFileSync(resolve(output, 'LATEST.json'), JSON.stringify(report, null, 2) + 
 const lines = ['# 规则合同逐项运行证据', '', `规则：${report.ruleRevision}；运行时：${process.version}；时间：${report.generatedAt}。`, '', `测试 ${report.testSummary.passed} 通过 / ${report.testSummary.failed} 失败。${rows.length} 项合同：${counts.partial_evidence_passed} 项有部分通过证据，${counts.missing_tests} 项缺专属测试，${counts.non_runtime_contract} 项属于规范/概念检查；完整验收仍为 0 项。`, '', '本表关联具体情景用例，不把相关用例通过写成整条规则的完整证明。精确用例名称、源码摘要与限制见 LATEST.json。', '', '| 合同 ID | 状态 | 证据文件 | 剩余限制 |', '| --- | --- | --- | --- |'];
 for (const e of evidence) lines.push(`| ${e.id} | ${e.status} | ${[...new Set(e.relatedCases.map(c => c.file))].join(', ') || '—'} | ${e.verificationLimit.replaceAll('|', '/')} |`);
 writeFileSync(resolve(output, 'LATEST.md'), lines.join('\n') + '\n');
-console.log(JSON.stringify({ output: relative(root, output), tests: report.testSummary, contracts: report.contractSummary }));
+console.log(JSON.stringify({ output: relative(root, output), tests: report.testSummary, contracts: report.contractSummary, sourceCommitAtRun: report.sourceCommitAtRun, sourceDigest: report.sourceDigest, contractDigest: report.contractDigest }));
 if (executionFailed || report.testSummary.failed) process.exitCode = 1;

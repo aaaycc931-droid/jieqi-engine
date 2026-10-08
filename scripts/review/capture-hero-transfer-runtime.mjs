@@ -33,7 +33,7 @@ const context=await browser.newContext({viewport:report.viewport,isMobile:true,h
 page.on('pageerror',e=>report.errors.push(e.message));page.on('requestfailed',r=>report.errors.push(r.url()));page.on('response',r=>{if(r.status()>=400)report.errors.push(`${r.status()} ${r.url()}`);});
 const pair=(hero,pieces=[],form='front',variant)=>({state:initializeFeatureGameState(gameState(pieces),{red:hero,black:'hunter'},undefined,{red:form},{red:variant}),secret:secretState()});
 const skill=(s,ability,rest={})=>({kind:'hero_ability',ability,actionId:`browser:${ability}:${s.revision}`,expectedRevision:s.revision,...rest});
-const load=async p=>{await page.reload({waitUntil:'networkidle'});await page.evaluate(({s,k})=>globalThis.__heroReview.load(s,k),{s:p.state,k:p.secret});};
+const load=async p=>{await page.waitForLoadState('networkidle');await page.reload({waitUntil:'networkidle'});await page.evaluate(({s,k})=>globalThis.__heroReview.load(s,k),{s:p.state,k:p.secret});await page.waitForLoadState('networkidle');};
 const read=()=>page.evaluate(()=>globalThis.__heroReview.read());
 const open=ability=>page.evaluate(a=>globalThis.__heroReview.open(a),ability);
 const confirm=()=>page.locator('#dialog-action').click();
@@ -75,3 +75,4 @@ try {
 } catch(e){report.passed=false;report.failure=e.stack;throw e;}
 finally{await mkdir(resolve(root,'review/invariants'),{recursive:true});await writeFile(resolve(root,'review/invariants/HERO_TRANSFER_BROWSER_2026-10-07.json'),JSON.stringify(report,null,2)+'\n');await browser.close();await new Promise(done=>server.close(done));}
 console.log(JSON.stringify({passed:report.passed,cases:report.cases.length,errors:report.errors.length}));
+console.log(JSON.stringify({evidenceFile:'review/invariants/HERO_TRANSFER_BROWSER_2026-10-07.json',report}));

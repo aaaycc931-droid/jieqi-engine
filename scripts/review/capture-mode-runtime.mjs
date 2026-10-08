@@ -132,3 +132,4 @@ try {
   await new Promise(done => server.close(done));
 }
 console.log(JSON.stringify({ passed: report.passed, cases: report.cases.length, appDigest: report.appDigest }));
+console.log(JSON.stringify({ evidenceFile: 'review-results/game-modes/report.json', report }));
