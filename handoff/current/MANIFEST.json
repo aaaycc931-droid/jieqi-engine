@@ -3,8 +3,8 @@
   "self_excluded": true,
   "files": {
     "00_READ_FIRST.md": {
-      "bytes": 2890,
-      "sha256": "4c5c8c34448475280dbd0ef9c3799bf4617a4060932b5125f9799174bfc1e24b"
+      "bytes": 2048,
+      "sha256": "2dc4b5f886117ebfee76bf525be16ac10774878f27f647e97792b93420a35852"
     },
     "01_CURRENT_RULES.md": {
       "bytes": 30087,
@@ -23,8 +23,8 @@
       "sha256": "c133b4ee797b778ce4c88233437b2466255f27c30fcaec5b0941c766cc4bae00"
     },
     "05_PROGRESS_AND_NEXT.md": {
-      "bytes": 32330,
-      "sha256": "1d5d04a9a5ea16c09f67e7764fb16a13cd5b1fc4f710e7c9cfb8e82819f647e3"
+      "bytes": 34428,
+      "sha256": "0c17fd30ab3bcc104d3210009dfda6595fe8d66c30e7e63fee78081b4cb1c8b9"
     },
     "06_COLLABORATION.md": {
       "bytes": 8164,
@@ -107,16 +107,16 @@
       "sha256": "9a0a9f908cb74eb7519e8f659f98cd8f36c87e31a5e58372023c538b1c22888d"
     },
     "NEW_DIALOGUE_PROMPT.txt": {
-      "bytes": 1413,
-      "sha256": "6750c423db32b1eef7a7cb523a02640f42ff9297280a231e86c0981076c2efd3"
+      "bytes": 2063,
+      "sha256": "ccf7124a6af8ad1a10a4e965a10e5164e94eca8385705f4b82e3da00a53babd5"
     },
     "SOURCE_REGISTER.json": {
-      "bytes": 31191,
-      "sha256": "8f6f315a7c386eb8cce3f23ec72028f781c2cda3b96a7858ef8419dc62de10f0"
+      "bytes": 31688,
+      "sha256": "5d610f45c7ef3d97bbed6358dffe995ac928c39383e42651297ad48d5fa6c58b"
     },
     "STATE.json": {
-      "bytes": 66342,
-      "sha256": "5fc5106213377450de2ab3d6c4418bb1862e7359ccf9129f98200061462d1e40"
+      "bytes": 72540,
+      "sha256": "b0f3bc488a7db2ba4977dc3bf32aa72a19fb816102a58adda3d98f7bc7f46b81"
     },
     "assets/approved-home.png": {
       "bytes": 2157060,
@@ -131,8 +131,8 @@
       "sha256": "b476f6ba2696cb4a0185ac96da1ad976c7b43f37ff694b5bf86ccbc696cbc210"
     },
     "qa/HERO_TRANSFER_AUDIT.json": {
-      "bytes": 23970,
-      "sha256": "b3ceaeacf8ea46dc443c317721c775035f96cef5795ddc198c989f22661885d3"
+      "bytes": 25327,
+      "sha256": "8684226389ec499a7fff53ca0e96e6ee21016b6b18d8bf63b73d98029124485c"
     },
     "qa/INVARIANTS.json": {
       "bytes": 45423,
@@ -141,6 +141,10 @@
     "26_CI_SCOPE_2026-10-08.md": {
       "bytes": 4430,
       "sha256": "0b43d3f8b14511e6c739c6ec75b913efe6ebc3d0eaa5053a2b9c70e237298567"
+    },
+    "27_HERO_DESCENT_ATOM_2026-10-08.md": {
+      "bytes": 5318,
+      "sha256": "1baae70fb55e3d85d770eb16ed99c4e25cad9074c6d361f5b16e6417c4c15631"
     }
   },
   "checks": {
@@ -152,7 +156,6 @@
     "qa_69_plus_20_and_20_supplements_preserved": true,
     "new_hero_sources_imported_this_round": false,
     "android_assets_127_equal": true,
-    "browser_9_mode_foundation_cases_passed": true,
     "full_contracts_accepted": false,
     "hero_full_matches_accepted": false,
     "physical_devices_accepted": false,
@@ -164,14 +167,19 @@
     "rule_sources_unchanged_this_round": true,
     "child_boundary_3_new_cases_passed": true,
     "first_browser_failure_preserved": true,
-    "engine_487_passed": true,
-    "browser_12_prepared_operations_passed": true,
     "descent_boundary_6_new_cases_passed": true,
     "project_collaboration_independent": true,
     "personal_main_document_modified": false,
     "product_tests_rerun_for_collaboration_document": false,
     "ci_configuration_changed_for_collaboration_document": false,
     "ci_scope_configuration_implemented_in_followup": true,
-    "runtime_rules_unchanged_by_ci_scope_round": true
+    "runtime_rules_unchanged_by_ci_scope_round": true,
+    "historical_engine_487_passed": true,
+    "historical_browser_12_prepared_operations_passed": true,
+    "historical_browser_9_mode_foundation_cases_passed": true,
+    "engine_494_passed": true,
+    "browser_16_prepared_operations_passed": true,
+    "descent_atom_7_new_cases_passed": true,
+    "mode_foundation_skipped_this_round": true
   }
 }

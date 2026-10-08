@@ -1,22 +1,13 @@
 # 乐子象棋｜当前实现交接入口
 
-现行规范 **LEZI-FUNCTION-2026-10-07-r5**；英雄原稿 **2026-10-07-r7-clean**。H01–H21确认部分已接入；本轮修复三处降临结算偏差，未新增规则。19表包、江鹤/死亡骑士两里包、虔信狂徒五固定形态保持。
+现行规范 **LEZI-FUNCTION-2026-10-07-r5**；英雄原稿 **2026-10-07-r7-clean**。H01–H21确认部分已接入；当前轮修复风暴降临的完整来源、死亡记录与正式终结边界，未新增规则。19表包、2里包、5固定形态不变。
 
-项目协作独立入口：`06_COLLABORATION.md`（LEZI-PROJECT-COLLAB v1.1）。先读此文件确定授权、验证与交接约定；个人主协作文档独立维护。本轮CI触发优化见26_CI_SCOPE_2026-10-08.md；没有改玩法与运行时代码。下面产品轮证据保留原版本，本轮配置CI验证另见26。
+先读独立项目协作文档06_COLLABORATION.md（v1.1），再读STATE.json、27_HERO_DESCENT_ATOM_2026-10-08.md、qa/HERO_TRANSFER_AUDIT.json，随后01→02→03、04与09；26_CI_SCOPE_2026-10-08.md为当前CI范围策略。SOURCE_REGISTER.json、MANIFEST.json、qa/INVARIANTS.json及review/invariants/LATEST.json登记来源与实际证据。13–26号运行/配置记录保留各自历史范围。
 
-读取顺序：
+当前产品c68a9b4acc6b9167f301ba21e2ee8d3e794ebfb2，本地执行64b7a03513d7e1060d06a09f2244c68e03166da0，完整产品树8b9ee6c99a0c4ef776ef6e2b3a0bb2fbd300c0cc相同。494项引擎/静态测试通过（487已有、7新增），Web成功、127资源一致；16项英雄准备态DOM通过（12已有、4新增）、错误0。模式基础本轮跳过，旧9项结果仅历史。规则与浏览器CI摘要一致；109合同106部分证据、3非运行时、0完整验收。
 
-1. STATE.json、25_HERO_DESCENT_BOUNDARY_2026-10-08.md：本轮产品与证据；24_HERO_CHILD_BOUNDARY_2026-10-08.md、23_HERO_CROSS_SETTLEMENT_2026-10-08.md：此前修复；22_HERO_TRANSFER_2026-10-07.md、qa/HERO_TRANSFER_AUDIT.json：正式移交及四项设计缺口。
-2. 01_CURRENT_RULES.md → 02_CURRENT_HEROES.md → 03_CURRENT_MUTATIONS.md：现行玩法。
-3. 09_CURRENT_GAME_MODES.md、04_CURRENT_UI_AND_FLOW.md：模式与UI边界。
-4. 07_DESIGN_SCORING.md、08_SCORE_LEDGER.md：评分审计，不决定玩法。
-5. SOURCE_REGISTER.json、MANIFEST.json、qa/INVARIANTS.json及review/invariants/LATEST.json：来源与实际合同证据。
-6. 13–24号轮记录只说明历史时点，不覆盖本轮状态。
+第一突袭合法消灭風真主帅承载者后仍保留第二次突袭/跳过，最后才正式终结；两次死亡及亡魂保留，突袭不推进正式计数或效果寿命，来源闭合后按最终局面裁决。普通进攻将帅目标规则与風归位机制未改。
 
-产品发布70f19144f399b6fcf3742d4d49188fb17d78a9d7；本地执行73ba243830a45268532e93da072134b6890d0b49；完整产品树39b9d71a905dd3e6041842202f4cec60fdc06117相同。487项测试通过（6新增）、Web成功、127文件资源一致。12项英雄准备态DOM（3新增）与9项模式基础入口检查通过，页面/请求错误为0；当前CI源码/合同摘要与本地一致。109合同仍106部分证据、3非运行时、0完整验收。此前481等证据保留为历史。
+四项设计缺口保持：双窃时镜像、燃烧烈焰将帅层级、混乱乱斗首次发动/付费、龙鳞双方落位。完整来源交叉、自然整盘、旧存局迁移、实体蓝牙与Android WebView未完整验收。
 
-本轮修复：梦魇使用公共空间判定遵守堡垒封锁；梦魇的将军限制按落点死亡等闭合后的最终局面检查；风暴无存活元素时关闭空突袭窗口，恢复正常主行动前。六项引擎情景及三项新增真实DOM操作通过。
-
-四处design-required仍待：双窃时镜像、燃烧烈焰将帅层级交叉、混乱乱斗首次发动/付费、龙鳞拦截后的落位。完整英雄/畸变交叉、自然完整局、旧存局语义迁移、实体双机及Android WebView仍未完整验收。正式规则与原始移交来源未改，不以测试数量冒充完整验收。
-
-仓库aaaycc931-droid/jieqi-engine，分支codex/ui-android-apk-20261001。保留并发变更，不force/reset；PR #2保持open draft，不合main；最终视觉最后，无APK/互联网部署。继续已确认来源的其他定点交叉审计；四项design-required须由正式设计来源补齐后再实现。旧整盘、主动技能整盘、模式独立适配、APK和最终视觉队列保持暂停。
+仓库aaaycc931-droid/jieqi-engine；分支codex/ui-android-apk-20261001。核对远端并保留并发变更，不force/reset；PR2保持open draft，不合main，无APK/互联网部署。继续已确认规则定点审计，四项缺口等正式设计来源；旧整盘、主动技能整盘、模式独立适配和最终视觉队列继续暂停。

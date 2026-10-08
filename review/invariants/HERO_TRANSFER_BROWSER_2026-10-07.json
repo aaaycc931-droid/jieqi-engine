@@ -1,7 +1,7 @@
 {
   "authority": "prepared_browser_execution_non_normative",
   "ruleRevision": "LEZI-FUNCTION-2026-10-07-r5",
-  "sourceCommitAtRun": "f4407d2ca556b530791aecb86e659cdb7df6f804",
+  "sourceCommitAtRun": "cb35180565d97b93784f9d41a8c6eedbd541b9fd",
   "workingTreeDirty": false,
   "appDigest": "b841af632d0b08003ebdbbaf792691fd4c83365b5c9b43f46537d3c1fa098fc9",
   "browser": "145.0.7632.6",
@@ -56,6 +56,22 @@
     },
     {
       "name": "storm summons killed on landing release the normal main opportunity",
+      "passed": true
+    },
+    {
+      "name": "storm candidate terminal waits for second assault attack",
+      "passed": true
+    },
+    {
+      "name": "storm candidate terminal waits for second assault skip",
+      "passed": true
+    },
+    {
+      "name": "storm preserves both death events and generates both unticked ghosts",
+      "passed": true
+    },
+    {
+      "name": "storm exhausted source checks final unavoidable check before normal main",
       "passed": true
     }
   ],

@@ -468,6 +468,10 @@
         {
           "file": "tests/hero-transfer-r5.test.ts",
           "namePrefix": "R5-H19-01"
+        },
+        {
+          "file": "tests/hero-descent-atom.test.ts",
+          "namePrefix": "R5-DESCENT-ATOM-05"
         }
       ],
       "fully_accepted": false,
@@ -566,6 +570,34 @@
         {
           "file": "tests/hero-descent-boundaries.test.ts",
           "namePrefix": "R5-DESCENT-06"
+        },
+        {
+          "file": "tests/hero-descent-atom.test.ts",
+          "namePrefix": "R5-DESCENT-ATOM-01"
+        },
+        {
+          "file": "tests/hero-descent-atom.test.ts",
+          "namePrefix": "R5-DESCENT-ATOM-02"
+        },
+        {
+          "file": "tests/hero-descent-atom.test.ts",
+          "namePrefix": "R5-DESCENT-ATOM-03"
+        },
+        {
+          "file": "tests/hero-descent-atom.test.ts",
+          "namePrefix": "R5-DESCENT-ATOM-04"
+        },
+        {
+          "file": "tests/hero-descent-atom.test.ts",
+          "namePrefix": "R5-DESCENT-ATOM-05"
+        },
+        {
+          "file": "tests/hero-descent-atom.test.ts",
+          "namePrefix": "R5-DESCENT-ATOM-06"
+        },
+        {
+          "file": "tests/hero-descent-atom.test.ts",
+          "namePrefix": "R5-DESCENT-ATOM-07"
         }
       ],
       "fully_accepted": false,
@@ -602,10 +634,10 @@
     }
   ],
   "scoring_is_non_normative": true,
-  "implementation_commit": "70f19144f399b6fcf3742d4d49188fb17d78a9d7",
-  "local_execution_commit": "73ba243830a45268532e93da072134b6890d0b49",
-  "implementation_tree": "39b9d71a905dd3e6041842202f4cec60fdc06117",
-  "tests_passed": 487,
+  "implementation_commit": "c68a9b4acc6b9167f301ba21e2ee8d3e794ebfb2",
+  "local_execution_commit": "64b7a03513d7e1060d06a09f2244c68e03166da0",
+  "implementation_tree": "8b9ee6c99a0c4ef776ef6e2b3a0bb2fbd300c0cc",
+  "tests_passed": 494,
   "new_dedicated_cases": 36,
   "browser_evidence": "review/invariants/HERO_TRANSFER_BROWSER_2026-10-07.json",
   "previous_runtime_checkpoint": {
@@ -629,11 +661,20 @@
       "local_execution_commit": "a9cdcb57ddb853b1bb7e65e407fdf2a071564013",
       "implementation_tree": "0b87dbb00cd71c8f8681e215f04ecc75bb9b3992",
       "tests_passed": 481
+    },
+    {
+      "implementation_commit": "70f19144f399b6fcf3742d4d49188fb17d78a9d7",
+      "local_execution_commit": "73ba243830a45268532e93da072134b6890d0b49",
+      "implementation_tree": "39b9d71a905dd3e6041842202f4cec60fdc06117",
+      "tests_passed": 487,
+      "browser_prepared_cases": 12
     }
   ],
   "child_boundary_cases": 3,
   "child_boundary_report": "handoff/current/24_HERO_CHILD_BOUNDARY_2026-10-08.md",
-  "browser_prepared_cases": 12,
+  "browser_prepared_cases": 16,
   "descent_boundary_cases": 6,
-  "descent_boundary_report": "handoff/current/25_HERO_DESCENT_BOUNDARY_2026-10-08.md"
+  "descent_boundary_report": "handoff/current/25_HERO_DESCENT_BOUNDARY_2026-10-08.md",
+  "descent_atom_cases": 7,
+  "descent_atom_report": "handoff/current/27_HERO_DESCENT_ATOM_2026-10-08.md"
 }

@@ -1,8 +1,8 @@
 {
   "authority": "execution_evidence_non_normative",
-  "generatedAt": "2026-10-08T04:33:35.114Z",
-  "sourceCommitAtRun": "73ba243830a45268532e93da072134b6890d0b49",
-  "sourceDigest": "5073456e0d8be7452c4acd548696e0d4690a107465a3be7bd956e2f4c1aff1b6",
+  "generatedAt": "2026-10-08T09:12:15.449Z",
+  "sourceCommitAtRun": "64b7a03513d7e1060d06a09f2244c68e03166da0",
+  "sourceDigest": "c047ebba3ed7878c41df9d29aa23e0e1a96551ce6eb8e1b431512c56678458cb",
   "sourceDigestPaths": [
     ".github/workflows/gameplay-runtime-review.yml",
     ".github/workflows/menu-reference-review.yml",
@@ -11,6 +11,8 @@
     "package.json",
     "review/invariants/CASE_MAP.json",
     "scripts/build-web.ts",
+    "scripts/ci/select-scope.mjs",
+    "scripts/ci/select-scope.test.mjs",
     "scripts/review/capture-active-match-runtime.mjs",
     "scripts/review/capture-full-match-runtime.mjs",
     "scripts/review/capture-gameplay-runtime.mjs",
@@ -73,6 +75,7 @@
     "tests/helpers.ts",
     "tests/hero-child-boundaries.test.ts",
     "tests/hero-cross-settlement.test.ts",
+    "tests/hero-descent-atom.test.ts",
     "tests/hero-descent-boundaries.test.ts",
     "tests/hero-forms.test.ts",
     "tests/hero-transfer-r5.test.ts",
@@ -194,7 +197,7 @@
   "contractDigest": "c6e4649ce5a028b5477090b87066dd5bb7a65ad3a5632d138a05bf972b89e1e3",
   "runtime": "v24.19.0",
   "testSummary": {
-    "passed": 487,
+    "passed": 494,
     "failed": 0,
     "executionFailed": false
   },
@@ -805,6 +808,21 @@
           "file": "tests/public-target-contracts.test.ts",
           "name": "TARGET-RANDOM-02 destruction includes a covered carrier and finishes every locked draw after its death",
           "passed": true
+        },
+        {
+          "file": "tests/hero-descent-atom.test.ts",
+          "name": "R5-DESCENT-ATOM-01 first assault destroys the Wind carrier but second committed opportunity completes before terminal closure",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-descent-atom.test.ts",
+          "name": "R5-DESCENT-ATOM-02 skipping the remaining assault closes a candidate terminal without advancing formal time",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-descent-atom.test.ts",
+          "name": "R5-DESCENT-ATOM-07 checkmate after both assault skips is evaluated at source closure instead of leaving an unusable main window",
+          "passed": true
         }
       ],
       "verificationLimit": "已列用例只验证具体情景，尚未覆盖本陈述的全部来源、例外、边界和客户端流程。",
@@ -864,6 +882,21 @@
         {
           "file": "tests/hero-descent-boundaries.test.ts",
           "name": "R5-DESCENT-05 storm with both summons killed on landing closes its empty assault window and permits the normal main action",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-descent-atom.test.ts",
+          "name": "R5-DESCENT-ATOM-01 first assault destroys the Wind carrier but second committed opportunity completes before terminal closure",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-descent-atom.test.ts",
+          "name": "R5-DESCENT-ATOM-02 skipping the remaining assault closes a candidate terminal without advancing formal time",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-descent-atom.test.ts",
+          "name": "R5-DESCENT-ATOM-04 surviving enemy check is still rejected atomically and the parent window is preserved",
           "passed": true
         }
       ],
@@ -2684,6 +2717,11 @@
           "file": "tests/action-turn-contracts.test.ts",
           "name": "R4-TURN-10 回溯恢复主行动前阶段；重新行动标Ⅲ级并仅结算一次正式回合",
           "passed": true
+        },
+        {
+          "file": "tests/hero-descent-atom.test.ts",
+          "name": "R5-DESCENT-ATOM-03 both assaults retain one source event history and do not tick formal durations",
+          "passed": true
         }
       ],
       "verificationLimit": "已覆盖普通移动/进攻、弹回、时间线衍生、额外应将、流舞和回溯重走的独立分类，以及上一正式回合无Ⅰ级动作时拒绝跨回合搜索。未移交英雄和其他未来来源尚未接入；旧无classification历史仅兼容有明确tier且无已知子行动标志的快照。",
@@ -2763,6 +2801,21 @@
         {
           "file": "tests/hero-descent-boundaries.test.ts",
           "name": "R5-DESCENT-06 storm with one surviving summon retains exactly its one optional assault",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-descent-atom.test.ts",
+          "name": "R5-DESCENT-ATOM-03 both assaults retain one source event history and do not tick formal durations",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-descent-atom.test.ts",
+          "name": "R5-DESCENT-ATOM-06 storm may settle while checked and leaves legal check response to the normal main action",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-descent-atom.test.ts",
+          "name": "R5-DESCENT-ATOM-07 checkmate after both assault skips is evaluated at source closure instead of leaving an unusable main window",
           "passed": true
         }
       ],
@@ -3098,6 +3151,11 @@
         {
           "file": "tests/ghost-objects.test.ts",
           "name": "R4-GHOST-17 实际回溯恢复两类完整对象及感染，不由另一类推算资源",
+          "passed": true
+        },
+        {
+          "file": "tests/hero-descent-atom.test.ts",
+          "name": "R5-DESCENT-ATOM-05 assault deaths generate each Death Knight ghost exactly once without ticking its lifetime",
           "passed": true
         }
       ],
