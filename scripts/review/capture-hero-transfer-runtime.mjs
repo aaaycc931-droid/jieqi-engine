@@ -33,7 +33,10 @@ const context=await browser.newContext({viewport:report.viewport,isMobile:true,h
 page.on('pageerror',e=>report.errors.push(e.message));page.on('requestfailed',r=>report.errors.push(r.url()));page.on('response',r=>{if(r.status()>=400)report.errors.push(`${r.status()} ${r.url()}`);});
 const pair=(hero,pieces=[],form='front',variant)=>({state:initializeFeatureGameState(gameState(pieces),{red:hero,black:'hunter'},undefined,{red:form},{red:variant}),secret:secretState()});
 const skill=(s,ability,rest={})=>({kind:'hero_ability',ability,actionId:`browser:${ability}:${s.revision}`,expectedRevision:s.revision,...rest});
-const load=async p=>{await page.waitForLoadState('networkidle');await page.reload({waitUntil:'networkidle'});await page.evaluate(({s,k})=>globalThis.__heroReview.load(s,k),{s:p.state,k:p.secret});await page.waitForLoadState('networkidle');};
+// The board is a CSS background loaded lazily when the game becomes visible.
+// Decode it before fixture navigation so reload cannot cancel its first request.
+const readyBoard=()=>page.evaluate(async()=>{const image=new Image();image.src=new URL('assets/gameplay-v4/runtime/board-clean-no-center.png',location.href).href;await image.decode();});
+const load=async p=>{await page.waitForLoadState('networkidle');await page.reload({waitUntil:'networkidle'});await readyBoard();await page.evaluate(({s,k})=>globalThis.__heroReview.load(s,k),{s:p.state,k:p.secret});await page.waitForLoadState('networkidle');};
 const read=()=>page.evaluate(()=>globalThis.__heroReview.read());
 const open=ability=>page.evaluate(a=>globalThis.__heroReview.open(a),ability);
 const confirm=()=>page.locator('#dialog-action').click();
@@ -41,6 +44,7 @@ const coordinates=async(x,y,i=0)=>{await page.getByLabel('目标列（0–8）',
 const done=name=>report.cases.push({name,passed:true});
 try {
  await page.goto(`http://127.0.0.1:${server.address().port}/web/`,{waitUntil:'networkidle'});
+ await readyBoard();
  await page.locator('#local-game-button').click();assert.equal(await page.locator('#hero-grid button').count(),19);done('nineteen hero selection entries');
  const n=pair('night',[covered('insight-target',0,6)]);n.secret.identities['insight-target']={color:'black',type:'cannon'};n.state.formalTurns.red=1;
  await load(n);await open('insight');await page.getByLabel('技能棋子',{exact:true}).selectOption('insight-target');await confirm();
