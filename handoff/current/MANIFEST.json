@@ -3,8 +3,8 @@
   "self_excluded": true,
   "files": {
     "00_READ_FIRST.md": {
-      "bytes": 2829,
-      "sha256": "d0ffedfe5d3959e7e78d7979d14b554c9339b734cad21aebcf174e26152d2c75"
+      "bytes": 2890,
+      "sha256": "4c5c8c34448475280dbd0ef9c3799bf4617a4060932b5125f9799174bfc1e24b"
     },
     "01_CURRENT_RULES.md": {
       "bytes": 30087,
@@ -27,8 +27,8 @@
       "sha256": "1d5d04a9a5ea16c09f67e7764fb16a13cd5b1fc4f710e7c9cfb8e82819f647e3"
     },
     "06_COLLABORATION.md": {
-      "bytes": 7898,
-      "sha256": "17b631c926363406e9a6b36e6a319df25a3f7adc600f2d500c6cffb52e33d3f7"
+      "bytes": 8164,
+      "sha256": "a78ee4882f30d25d6d84e783467f15704c34c113ac6884ac9b6a6c52ac874186"
     },
     "07_DESIGN_SCORING.md": {
       "bytes": 4854,
@@ -107,16 +107,16 @@
       "sha256": "9a0a9f908cb74eb7519e8f659f98cd8f36c87e31a5e58372023c538b1c22888d"
     },
     "NEW_DIALOGUE_PROMPT.txt": {
-      "bytes": 1218,
-      "sha256": "201428ff36356aad9beb0f6bcc67440481ee6a3bbe3a282c3357fd31856c1d92"
+      "bytes": 1413,
+      "sha256": "6750c423db32b1eef7a7cb523a02640f42ff9297280a231e86c0981076c2efd3"
     },
     "SOURCE_REGISTER.json": {
-      "bytes": 30621,
-      "sha256": "6d2c7c31aeb1987451f996b915b44d5129986c59ae3b2062e8d2d62d3c428813"
+      "bytes": 31191,
+      "sha256": "8f6f315a7c386eb8cce3f23ec72028f781c2cda3b96a7858ef8419dc62de10f0"
     },
     "STATE.json": {
-      "bytes": 64375,
-      "sha256": "6e366fed39b18016e0e88ee086ae6568312f8c3496f5a4f1f22f2aab4df7c23b"
+      "bytes": 66342,
+      "sha256": "5fc5106213377450de2ab3d6c4418bb1862e7359ccf9129f98200061462d1e40"
     },
     "assets/approved-home.png": {
       "bytes": 2157060,
@@ -137,6 +137,10 @@
     "qa/INVARIANTS.json": {
       "bytes": 45423,
       "sha256": "c6e4649ce5a028b5477090b87066dd5bb7a65ad3a5632d138a05bf972b89e1e3"
+    },
+    "26_CI_SCOPE_2026-10-08.md": {
+      "bytes": 4430,
+      "sha256": "0b43d3f8b14511e6c739c6ec75b913efe6ebc3d0eaa5053a2b9c70e237298567"
     }
   },
   "checks": {
@@ -166,6 +170,8 @@
     "project_collaboration_independent": true,
     "personal_main_document_modified": false,
     "product_tests_rerun_for_collaboration_document": false,
-    "ci_configuration_changed_for_collaboration_document": false
+    "ci_configuration_changed_for_collaboration_document": false,
+    "ci_scope_configuration_implemented_in_followup": true,
+    "runtime_rules_unchanged_by_ci_scope_round": true
   }
 }

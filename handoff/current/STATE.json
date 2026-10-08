@@ -1,6 +1,6 @@
 {
   "project": "乐子象棋 / jieqi-engine",
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-08-r5-collaboration",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-08-r5-ci-scope",
   "updated_at": "2026-10-08",
   "repository": "https://github.com/aaaycc931-droid/jieqi-engine",
   "working_branch": "codex/ui-android-apk-20261001",
@@ -639,11 +639,11 @@
     "automatic_import": false,
     "project_document": "handoff/current/06_COLLABORATION.md",
     "project_document_id": "LEZI-PROJECT-COLLAB",
-    "project_document_version": "1.0",
+    "project_document_version": "1.1",
     "independent_from_personal_main_document": true,
     "personal_main_document_modified": false,
     "verification_policy": "impact_selected_during_development_then_one_full_regression_per_completed_batch",
-    "ci_trigger_optimization": "documented_separate_configuration_task_not_implemented"
+    "ci_trigger_optimization": "implemented_current_change_scope_with_successful_predecessor_guard"
   },
   "next_action": "继续已确认来源的其他定点交叉审计；四项design-required须由正式设计来源补齐后再实现。旧整盘、主动技能整盘、模式独立适配、APK和最终视觉队列保持暂停。",
   "source_gap_register": "SOURCE_REGISTER.json",
@@ -1236,22 +1236,41 @@
   },
   "latest_document_round": {
     "authorization": {
-      "at": "2026-10-08T14:21:52+08:00",
-      "quote": "现在对本活动协作文档进行特别规划并写入协作文档，本项目相关协作文档应当独立于主协作文档，不能混在一起"
+      "at": "2026-10-08T16:20:48+08:00",
+      "quote": "继续推进项目"
     },
-    "classification": "independent_project_collaboration_and_verification_policy",
-    "report": "handoff/current/06_COLLABORATION.md",
-    "verified_remote_before_round": "3dd15770e1678388d2fc045048e2cf82a774219e",
+    "classification": "ci_scope_configuration_and_handoff",
+    "report": "handoff/current/26_CI_SCOPE_2026-10-08.md",
+    "verified_remote_before_round": "fe1bf6211e3cb168183865be426f7edb0c34adba",
+    "ci_configuration_commit": "9980f891c2a293a0f3862717b7bffb66a8d02ee3",
     "product_code_changed": false,
     "semantic_rules_changed": false,
-    "tests_rerun": false,
-    "web_rebuilt": false,
-    "browser_tests_run": false,
-    "physical_device_tests_run": false,
-    "apk_built": false,
-    "ci_configuration_changed": false,
+    "game_tests_added": 0,
+    "local_ci_scope_tests_passed": 7,
+    "local_game_tests_rerun": false,
+    "local_web_rebuilt": false,
+    "local_browser_tests_run": false,
+    "ci_configuration_changed": true,
     "personal_main_document_modified": false,
-    "existing_runtime_evidence": "unchanged_previous_product_70f19144f399b6fcf3742d4d49188fb17d78a9d7_not_executed_this_document_round"
+    "apk_built": false,
+    "rules_ci": {
+      "run_id": 37749743281,
+      "job_id": 113219761984,
+      "scope_tests_passed": 7,
+      "existing_game_tests_passed": 487,
+      "web_and_assets": "success"
+    },
+    "browser_ci": {
+      "run_id": 37749743252,
+      "job_id": 113219761188,
+      "hero_prepared_cases": 12,
+      "mode_preview_cases": 9,
+      "errors": 0
+    },
+    "ci_checkout": "edb710db69a2f637163f99317f7ea67a1df577cd",
+    "ci_source_digest": "326313adaaf3694e4e9b1b5ebd02e6a3ad5b4c3f3177540ab2c95a300bc9517f",
+    "documentation_skip_validation": "inspect_actual_workflow_steps_for_the_published_documentation_commit_not_prefilled",
+    "existing_product_reports": "preserved_original_execution_revision_no_new_timestamps"
   },
   "acceptance_gap_consolidation": {
     "status": "historical_r4_inventory_superseded_by_received_r5_transfer",
@@ -1415,6 +1434,35 @@
         "apk_built_this_round": false
       },
       "superseded_by_current_runtime": "25_HERO_DESCENT_BOUNDARY_2026-10-08.md"
+    },
+    {
+      "authorization": {
+        "at": "2026-10-08T14:21:52+08:00",
+        "quote": "现在对本活动协作文档进行特别规划并写入协作文档，本项目相关协作文档应当独立于主协作文档，不能混在一起"
+      },
+      "classification": "independent_project_collaboration_and_verification_policy",
+      "report": "handoff/current/06_COLLABORATION.md",
+      "verified_remote_before_round": "3dd15770e1678388d2fc045048e2cf82a774219e",
+      "product_code_changed": false,
+      "semantic_rules_changed": false,
+      "tests_rerun": false,
+      "web_rebuilt": false,
+      "browser_tests_run": false,
+      "physical_device_tests_run": false,
+      "apk_built": false,
+      "ci_configuration_changed": false,
+      "personal_main_document_modified": false,
+      "existing_runtime_evidence": "unchanged_previous_product_70f19144f399b6fcf3742d4d49188fb17d78a9d7_not_executed_this_document_round"
     }
-  ]
+  ],
+  "ci_scope_configuration": {
+    "path": "scripts/ci/select-scope.mjs",
+    "dedicated_test": "scripts/ci/select-scope.test.mjs",
+    "report": "handoff/current/26_CI_SCOPE_2026-10-08.md",
+    "commit": "9980f891c2a293a0f3862717b7bffb66a8d02ee3",
+    "unknown_or_failed_predecessor": "run_all",
+    "docs_only_with_successful_predecessor": "lightweight_only",
+    "no_gameplay_push_and_pr_duplicate": true,
+    "manual_full_checks_available": true
+  }
 }
