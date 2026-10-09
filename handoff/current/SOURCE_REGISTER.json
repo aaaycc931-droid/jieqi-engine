@@ -452,6 +452,14 @@
       "path": "rules/confirmed/RULE_UPDATE_2026-10-08_DRAGON_SCALE.md",
       "sha256": "b332cb7821f8d29f067882b4c491cd89a17a71d264674bc14b0e617ae02b61b0",
       "applied_scope": "龙鳞目标留位，地面进攻者返回结算落位，飞行降落受阻按既有规则窒息；已实现，引擎及准备态DOM/CI部分情景证据，非完整验收"
+    },
+    {
+      "id": "RULE:RULE_UPDATE_2026-10-09_WIND_FLOW_CASUALTY.md",
+      "kind": "current_user_confirmed_global_rule_delta",
+      "path": "rules/confirmed/RULE_UPDATE_2026-10-09_WIND_FLOW_CASUALTY.md",
+      "url": "https://github.com/aaaycc931-droid/jieqi-engine/blob/codex/ui-android-apk-20261001/rules/confirmed/RULE_UPDATE_2026-10-09_WIND_FLOW_CASUALTY.md",
+      "applied_scope": "三模式共享：01进攻终点特例与消灭记录、02 H10风【流】真实承载棋承伤、09模式共享继承；实现与评分仍未据此完成",
+      "embedded_original": false
     }
   ],
   "coverage": {
