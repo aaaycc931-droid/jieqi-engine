@@ -1,0 +1,9 @@
+# Replace hostname and email after a test host is available. No purchase here.
+# Direct Hong Kong DNS record (not proxied through Cloudflare) is needed for A/B.
+{
+    email YOUR_CERTIFICATE_CONTACT
+}
+YOUR_HONG_KONG_TEST_HOST {
+    reverse_proxy 127.0.0.1:8788
+    # Do not enable access logs containing the temporary test credential.
+}

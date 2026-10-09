@@ -1,0 +1,31 @@
+{
+  "checkedAt": "2026-10-09T07:01:51.459033+00:00",
+  "baseline": "8dadc67085ef8b4ff9b4bc7f5298dc857277c32d",
+  "scope": "existing_gameplay_audit_no_new_gameplay_cases",
+  "engine": {
+    "command": [
+      "npm",
+      "test"
+    ],
+    "exitCode": 0,
+    "seconds": 2.2347719669996877,
+    "newGameCases": 0,
+    "testSummary": [
+      "ℹ tests 514",
+      "ℹ pass 514",
+      "ℹ fail 0",
+      "ℹ cancelled 0",
+      "ℹ skipped 0",
+      "ℹ duration_ms 2012.324532"
+    ]
+  },
+  "web_build": {
+    "command": [
+      "node",
+      "scripts/build-web.ts"
+    ],
+    "exitCode": 0,
+    "seconds": 0.25135604100023556,
+    "newGameCases": 0
+  }
+}

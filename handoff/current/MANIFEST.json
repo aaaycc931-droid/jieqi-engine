@@ -3,8 +3,8 @@
   "self_excluded": true,
   "files": {
     "00_READ_FIRST.md": {
-      "bytes": 2551,
-      "sha256": "fba778ba5f1f07b8143a3f949183d9296c0b80ca9aa27f810015745af2101231"
+      "bytes": 4014,
+      "sha256": "fb004d5f35a1bb2c0bf19ed2e8246bd1fa904e8b56a675cb21729201221e5080"
     },
     "01_CURRENT_RULES.md": {
       "bytes": 30087,
@@ -23,8 +23,8 @@
       "sha256": "c133b4ee797b778ce4c88233437b2466255f27c30fcaec5b0941c766cc4bae00"
     },
     "05_PROGRESS_AND_NEXT.md": {
-      "bytes": 41664,
-      "sha256": "6b93d5de478ef91999071d1bc4f4ebf8cf67ca13868990c54030f1cb12635d31"
+      "bytes": 42169,
+      "sha256": "7eb84c97047be9e3409efa0267c0ff0b37f3643a0fa3105d5c8f8f30a4d01cf4"
     },
     "06_COLLABORATION.md": {
       "bytes": 8164,
@@ -131,12 +131,12 @@
       "sha256": "3ae6a73ae1451c4990a259b38b53345a7218cea29733b2343c6f344b6bcc39c8"
     },
     "SOURCE_REGISTER.json": {
-      "bytes": 34429,
-      "sha256": "b3f804e7d8f3defbc9ebb05819574fd5eddce834721b70e6d85734d57979ac87"
+      "bytes": 36281,
+      "sha256": "9c7c89c8b07fb25a62986bc45a4f953a178fa0c0f2f5cc5c1d8176f98e06859d"
     },
     "STATE.json": {
-      "bytes": 103785,
-      "sha256": "109965ccfea085b62a02b98581ff7446ba49e575467fbf8ac71d01790d8085e3"
+      "bytes": 111401,
+      "sha256": "6d794c2bfd5092c59cbc1f60922f58ef5f0c303aef1d8fb4ed9d731abac25755"
     },
     "assets/approved-home.png": {
       "bytes": 2157060,
@@ -157,6 +157,46 @@
     "qa/INVARIANTS.json": {
       "bytes": 45510,
       "sha256": "f09f83064cb2bff8cdd4d41130646733f751252fe4e534c75ab043160327baaa"
+    },
+    "32_NET-001_NETWORK_VALIDATION_2026-10-09.md": {
+      "bytes": 14817,
+      "sha256": "4074f36b9e213959a1caee2c328188c41d5c05e5b5a5f80dc67fceb0edb19084"
+    },
+    "net/input/DECISIONS.json": {
+      "bytes": 2758,
+      "sha256": "0ea1e5e1c2e2dece8bdb152808a78014f7ed25b0b04d6a704b0f3dbbf89b1cba"
+    },
+    "net/input/NET-001_WORK_HANDOFF.md": {
+      "bytes": 13211,
+      "sha256": "13d3624381a18afeec4ffc2ecaf34c63a14d0d407c94bb862fa0c9fbcc056309"
+    },
+    "net/input/WORK_START_PROMPT.txt": {
+      "bytes": 1678,
+      "sha256": "b04c88c742c02a13e18bc6ed0a0e0cbe4eefc15695da257f9a9c462b3bb20b3c"
+    },
+    "33_NET-REF-001_ASSESSMENT_2026-10-09.md": {
+      "bytes": 15336,
+      "sha256": "db005e2932adbbfb276c0e4ac1442ff6f513218a7f7aa064fe5a9a8a14b55960"
+    },
+    "net/input/NET-REF-001_USER_REFERENCE.md": {
+      "bytes": 7082,
+      "sha256": "76649fe1a1d3fde34ce2f2e721d424963590e05094017e801c144ed73c82018a"
+    },
+    "net/NET-REF-001.json": {
+      "bytes": 7762,
+      "sha256": "4ffec5a9bd4b56c7022943fb391a95e66f1e7ea9669b7a4ceb3a1e8a7b3786c3"
+    },
+    "34_PARALLEL_MODE_HERO_DESIGN_2026-10-09.md": {
+      "bytes": 10157,
+      "sha256": "bcc9963999e333965e012feaeaa04678194dca36df42328a4842cbbbd91c4675"
+    },
+    "MODE_DESIGN_PARALLEL.json": {
+      "bytes": 16862,
+      "sha256": "fdf234c9b73f583be3ea47c213244e0e79d12ad2089dc88b2e78c0aa294ccb61"
+    },
+    "MODE_DESIGN_NEW_DIALOGUE_PROMPT.txt": {
+      "bytes": 2698,
+      "sha256": "94375c074eac13a7033bdd02fafda0ecb399d0a422ea52e7f57ea5d2f9ac3c49"
     }
   },
   "checks": {

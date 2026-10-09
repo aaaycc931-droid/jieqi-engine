@@ -1,0 +1,54 @@
+{
+  "project": "乐子象棋",
+  "handoff_date": "2026-10-09",
+  "handoff_scope": "NET-001 networking and platform strategy",
+  "repo_reference_requires_verification": "https://github.com/aaaycc931-droid/jieqi-engine",
+  "this_conversation_modified_repository": false,
+  "decision_status": "user_confirmed_platform_direction_and_test_priority",
+  "platforms": {
+    "primary_future_release": "WeChat ecosystem; evaluate WeChat Mini Games first",
+    "wechat_may_be_only_release": true,
+    "android_and_web_current_role": "development and technical testing",
+    "android_and_web_future_release": "optional; retain possibility after applicable compliance preparation"
+  },
+  "current_stage": {
+    "task_id": "NET-001",
+    "purpose": "test low-cost overseas-hosted networking serving players on mainland China networks",
+    "candidate_a": "Cloudflare Workers / Durable Objects / possibly D1",
+    "candidate_b": "Hong Kong server node",
+    "test_dimensions": ["reachability", "round-trip latency", "P95 jitter/latency", "WebSocket stability", "reconnect", "cost", "WeChat network compatibility"],
+    "infrastructure_budget_cny_per_month_target_max": 50,
+    "mainland_network_performance_measured": false,
+    "production_host_selected": false,
+    "minimal_email_registration_for_testing_only": true
+  },
+  "architecture_constraints": {
+    "server_authoritative_game_state": true,
+    "game_rules_decoupled_from_client_platform": true,
+    "preserve_existing_engine_rules_and_implementation": true,
+    "future_wechat_identity_and_anti_addiction_integration": true,
+    "do_not_assume_wechat_controls_apply_to_other_clients": true
+  },
+  "deferred_to_release_preparation": [
+    "applicable APP filing",
+    "applicable online game publishing approvals",
+    "formal WeChat publishing and anti-addiction integration"
+  ],
+  "regulatory_exemption_asserted": false,
+  "work_next_task": "NET-001.1 audit existing repository, prior handoffs, and existing networking work",
+  "prohibited_assumptions": [
+    "Cloudflare is already verified low latency in mainland China",
+    "Hong Kong infrastructure price is already confirmed",
+    "email verification replaces real-name or anti-addiction obligations",
+    "overseas hosting guarantees filing or publishing exemption",
+    "prior design decisions are already implemented in code",
+    "three-platform production release is mandatory"
+  ],
+  "external_reference": {
+    "app": "围响",
+    "earlier_observation_email_delivery": "Amazon SES ap-northeast-1 (based on prior email-header screenshots)",
+    "earlier_observation_api_domain": "gatherpop.cc.cd",
+    "backend_hosting_provider": "unknown",
+    "note": "External anecdotal example, not a choice or a verified architecture for 乐子象棋"
+  }
+}

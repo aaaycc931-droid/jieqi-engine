@@ -1,0 +1,181 @@
+{
+  "meta": {
+    "run": 37899220202,
+    "job": 113717603039,
+    "commit": "ee8a8de935f3274c798207b0d565d6d6d8ea1233",
+    "checkout_commit": "865ea0435fc62b309588fb7dff8fed97c54dfb65",
+    "status": "success",
+    "passed": 9,
+    "failed": 0,
+    "scope": "actual_probe_page_DOM_on_CI_loopback_not_mainland_or_WeChat",
+    "source_digest": "231a7f050879c7d0cb976ce3afa6b17c308259d1e4dbaf1071d9616b0b387353",
+    "source_digest_matches_local": true,
+    "default_runtime_checks": true,
+    "wrangler_dry_run": true,
+    "actual_Chromium_DOM": true,
+    "artifact": {
+      "id": 11601657876,
+      "name": "net-001-probe-dom-evidence",
+      "size_bytes": 173456,
+      "digest": "sha256:306e9e91f6cea23dd5764be60c6016978ce8a864b2808c1e000298d135f72586",
+      "archive_downloaded": false
+    },
+    "source": "actual_GitHub_job_logs_and_artifact_metadata",
+    "run_url": "https://github.com/aaaycc931-droid/jieqi-engine/actions/runs/37899220202"
+  },
+  "evidence": {
+    "checkedAt": "2026-10-09T07:29:13.363Z",
+    "scope": "actual_probe_page_DOM_on_CI_loopback_not_mainland_or_WeChat",
+    "sourceDigest": "231a7f050879c7d0cb976ce3afa6b17c308259d1e4dbaf1071d9616b0b387353",
+    "errors": [],
+    "report": {
+      "schema": "LEZI-NET-PROBE-v1",
+      "startedAt": "2026-10-09T07:29:08.228Z",
+      "endpoint": "http://127.0.0.1:34065",
+      "metadata": {
+        "region": "CI loopback — no mainland location",
+        "carrier": "其他／未知",
+        "network": "家庭宽带 Wi-Fi",
+        "vpn": "未知",
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.8078.4 Safari/537.36",
+        "timezone": "UTC"
+      },
+      "config": {
+        "durationSeconds": 600,
+        "wsIntervalMs": 5000,
+        "httpIntervalMs": 60000,
+        "timeoutMs": 10000,
+        "payloadPaddingBytes": 64
+      },
+      "metricsDefinition": {
+        "median": "middle value or average of middle pair",
+        "p95": "nearest rank",
+        "variation": "maximum absolute delta between successive successful observations",
+        "plannedCancellations": "recorded separately; excluded from network failure denominator"
+      },
+      "evidenceScope": "loopback_functional_only",
+      "session": "91b55d5a-88fd-4314-9c76-4df81ee483b5",
+      "http": [
+        {
+          "at": "2026-10-09T07:29:08.228Z",
+          "ok": true,
+          "ms": 7
+        }
+      ],
+      "ws": [
+        {
+          "at": "2026-10-09T07:29:08.237Z",
+          "ok": true,
+          "ms": 3.3000000000174623
+        },
+        {
+          "at": "2026-10-09T07:29:13.243Z",
+          "ok": true,
+          "ms": 0.39999999999417923
+        }
+      ],
+      "cancelledProbes": [],
+      "connections": [
+        {
+          "at": "2026-10-09T07:29:08.229Z",
+          "ok": true,
+          "ms": 8.199999999982538,
+          "openElapsedMs": 9.699999999982538,
+          "closedElapsedMs": 68.10000000000582
+        },
+        {
+          "at": "2026-10-09T07:29:13.241Z",
+          "ok": true,
+          "ms": 2.2000000000116415,
+          "openElapsedMs": 5015.399999999994,
+          "closedElapsedMs": 5087.600000000006
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-10-09T07:29:08.282Z",
+          "elapsedMs": 54.39999999999418,
+          "kind": "planned_reconnect_requested"
+        },
+        {
+          "at": "2026-10-09T07:29:08.296Z",
+          "elapsedMs": 68.10000000000582,
+          "kind": "planned_close",
+          "code": 4000
+        },
+        {
+          "at": "2026-10-09T07:29:13.282Z",
+          "elapsedMs": 5054.1999999999825,
+          "kind": "network_restored_by_tester"
+        }
+      ],
+      "recoveries": [
+        {
+          "kind": "planned_close",
+          "detectedElapsedMs": 68.10000000000582,
+          "firstEchoAfterMs": 4947.799999999988
+        },
+        {
+          "kind": "tester_reported_restore",
+          "markedElapsedMs": 5054.1999999999825,
+          "firstEchoAfterMs": null
+        }
+      ],
+      "resourceTimings": [
+        {
+          "atPerformanceMs": 154.39999999999418,
+          "dnsMs": null,
+          "tlsMs": null,
+          "absentReason": "null means hidden/reused/not observable; not zero latency"
+        }
+      ],
+      "limitations": [
+        "Echo latency is not game-engine latency.",
+        "Echo timeouts are not measured TCP packet loss.",
+        "Carrier, location and VPN state are tester supplied.",
+        "Browser DNS/TLS timings may be unobservable or reused.",
+        "HTTPS success proves the combined path; it does not isolate DNS/TLS success rates.",
+        "Wi-Fi/mobile changes and background scheduling can alter observations."
+      ],
+      "endedAt": "2026-10-09T07:29:13.315Z",
+      "actualDurationMs": 5087.600000000006,
+      "stoppedByTester": true,
+      "summary": {
+        "http": {
+          "attempts": 1,
+          "successes": 1,
+          "failures": 0,
+          "successRate": 1,
+          "medianMs": 7,
+          "p95Ms": 7,
+          "maxMs": 7,
+          "maxConsecutiveSuccessfulDeltaMs": null
+        },
+        "ws": {
+          "attempts": 2,
+          "successes": 2,
+          "failures": 0,
+          "successRate": 1,
+          "medianMs": 1.8500000000058208,
+          "p95Ms": 3.3000000000174623,
+          "maxMs": 3.3000000000174623,
+          "maxConsecutiveSuccessfulDeltaMs": 2.900000000023283
+        },
+        "connections": {
+          "attempts": 2,
+          "successes": 2,
+          "failures": 0,
+          "successRate": 1,
+          "medianMs": 5.19999999999709,
+          "p95Ms": 8.199999999982538,
+          "maxMs": 8.199999999982538,
+          "maxConsecutiveSuccessfulDeltaMs": 5.999999999970896
+        },
+        "unexpectedDisconnects": 0,
+        "plannedCancelledProbes": 0,
+        "longestObservedConnectionMs": 72.20000000001164,
+        "recoveryIncomplete": 1
+      }
+    }
+  }
+}

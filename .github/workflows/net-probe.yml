@@ -1,0 +1,37 @@
+name: NET-001 isolated network probe
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main, codex/ui-android-apk-20261001]
+    paths: [net/probe/**, .github/workflows/net-probe.yml]
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    env:
+      WRANGLER_SEND_METRICS: 'false'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: net/probe/package-lock.json
+      - run: npm ci --no-fund --no-audit
+        working-directory: net/probe
+      - run: npm test && npm run cf:check
+        working-directory: net/probe
+      - run: npx playwright install --with-deps chromium
+        working-directory: net/probe
+      - run: npm run test:browser
+        working-directory: net/probe
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: net-001-probe-dom-evidence
+          path: |
+            review/net/BROWSER_REPORT.json
+            review/net/BROWSER_PAGE.png
+          if-no-files-found: warn
+          retention-days: 7

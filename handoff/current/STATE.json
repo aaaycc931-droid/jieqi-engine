@@ -1,9 +1,9 @@
 {
   "project": "乐子象棋 / jieqi-engine",
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-08-four-design-gaps-runtime",
-  "updated_at": "2026-10-08",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-09-NET-001",
+  "updated_at": "2026-10-09",
   "repository": "https://github.com/aaaycc931-droid/jieqi-engine",
-  "working_branch": "codex/ui-android-apk-20261001",
+  "working_branch": "codex/net-001-validation-20261009",
   "implementation_commit": "fd268f301cf8200993271bf1bc837fbbff7870ce",
   "implementation_tree": "2196ff13746ef6e00fc0a5b4820eae20d1a8a209",
   "draft_pr": 2,
@@ -900,7 +900,7 @@
     "ui_last",
     "no_apk",
     "no_main_merge",
-    "no_internet_deployment",
+    "no_game_internet_deployment_or_public_operation",
     "preserve_approved_home_and_v4_board",
     "no_invented_rarity_weights",
     "no_untransferred_hero_import",
@@ -919,7 +919,7 @@
     "verification_policy": "impact_selected_during_development_then_one_full_regression_per_completed_batch",
     "ci_trigger_optimization": "implemented_current_change_scope_with_successful_predecessor_guard"
   },
-  "next_action": "本轮统一实现与CI收束完成，等待用户的新英雄正式移交；先按最新r5及四增量核对确认差分，不自动恢复暂停队列。",
+  "next_action": "NET-001: 在用户授权的Cloudflare Free测试账号中部署独立口令保护echo技术节点，先收集大陆三网真实样本并核对云用量；未提供账号/测点前不虚构部署或性能结果。",
   "source_gap_register": "SOURCE_REGISTER.json",
   "apk_built_this_round": false,
   "previous_implementation_commit": "9ed5ff71590bf9658d1294def22bb669b195357b",
@@ -1000,7 +1000,7 @@
   "previous_rule_digest": "7a66bf0aaa9ab546402d1718196663e6251c19c7a1588adbe6f1b1613f1029b3",
   "rule_digest_algorithm": "sha256(concat(relative UTF-8 path + NUL + file bytes + NUL), STATE.current_rules order)",
   "paused_next_action": "Continue destiny bomb/hourglass full real matches, second Shadow cooldown/lifecycle, remaining private snapshot and cross-end clock intersections. Current five active families have sampled natural results; original Nozdormu/Prince and current 12-seat normal regression remain incomplete. Local timeout outcome not frozen; physical RFCOMM/WebView/two-phone pending. UI last; APK paused.",
-  "work_status": "four_design_gaps_confirmed_implemented_partial_engine_browser_CI_evidence_complete",
+  "work_status": "NET-001.1_completed_NET-001.2_local_probe_validation_cloud_and_mainland_pending",
   "game_modes": {
     "authority": "09_CURRENT_GAME_MODES.md",
     "base_rule_status": "confirmed",
@@ -2283,5 +2283,176 @@
     "browser_errors": 0,
     "browser_mode_foundation_status": "passed_shared_app_regression_9_retained",
     "ci_summary": "review/invariants/RULE_GAP_CI_2026-10-08.json"
-  }
+  },
+  "previous_work_status": "four_design_gaps_confirmed_implemented_partial_engine_browser_CI_evidence_complete",
+  "implementation_branch": "codex/ui-android-apk-20261001",
+  "networking_validation": {
+    "task_id": "NET-001",
+    "authority": "32_NET-001_NETWORK_VALIDATION_2026-10-09.md",
+    "inputs": [
+      "net/input/NET-001_WORK_HANDOFF.md",
+      "net/input/DECISIONS.json",
+      "net/input/WORK_START_PROMPT.txt"
+    ],
+    "source_read_status": "all_three_NET_package_files_read_in_full",
+    "authorized_by": "user_explicit_2026-10-09_acceptance_and_continue_from_NET-001.1",
+    "audit_baseline": {
+      "branch": "codex/ui-android-apk-20261001",
+      "sha": "8dadc67085ef8b4ff9b4bc7f5298dc857277c32d",
+      "main_sha": "c25749d4f21d394c3d94486cfba1d786864083b6",
+      "product_pr": 2,
+      "product_pr_state": "open_draft_unmerged",
+      "old_uploaded_snapshot_identical_files": 15,
+      "old_uploaded_snapshot_differences": 0
+    },
+    "working_branch": "codex/net-001-validation-20261009",
+    "draft_pr": 3,
+    "confirmed": {
+      "future_main_release": "WeChat ecosystem, evaluate Mini Games first; possibly only WeChat",
+      "apk_and_standalone_web": "development_and_technical_testing_optional_future_release",
+      "authoritative_rules_decoupled_from_platform": true,
+      "test_priority": "Cloudflare_first_Hong_Kong_fallback_same_protocol",
+      "target_budget_cny_per_month": 50,
+      "no_paid_purchase_or_public_game_release": true
+    },
+    "scope_override": {
+      "prior_internet_pause": "superseded_only_for_NET_technical_preparation_and_authorized_controlled_probe",
+      "old_CloudBase_first_choice": "historical_candidate_not_current_production_selection",
+      "game_online_entry": "still_disabled",
+      "other_paused_queues": "remain_paused"
+    },
+    "tasks": {
+      "NET-001.1": "completed_repository_and_prior_handoff_audit",
+      "NET-001.2": "local_and_CI_probe_passed_user_log_confirms_cloud_deployment_authenticated_cloud_echo_and_mainland_sampling_pending",
+      "NET-001.3": "partial_official_limits_and_explicit_scenario_model_checked_actual_usage_HK_quote_and_platform_costs_pending",
+      "NET-001.4": "pending_real_measurements_no_production_selection"
+    },
+    "tool_path": "net/probe/README.md",
+    "evidence_path": "review/net/PROBE_VALIDATION_2026-10-09.json",
+    "baseline_check": "review/net/BASELINE_AUDIT_2026-10-09.json",
+    "cost_model": "review/net/COST_SCENARIOS_2026-10-09.json",
+    "probe_gameplay_integration": false,
+    "cloud_deployed": true,
+    "cloud_account_available": true,
+    "mainland_performance_measured": false,
+    "mainland_samples": 0,
+    "hong_kong_node_available": false,
+    "production_host_selected": false,
+    "account_matchmaking_or_email_implemented": false,
+    "wechat_sdk_or_domain_certification_completed": false,
+    "browser_validation": {
+      "local": "blocked_missing_Chromium_corrupted_browser_download",
+      "ci": "passed_actual_Chromium_DOM_current_source"
+    },
+    "blocking_inputs": [
+      "verify_actual_Workers_Free_plan_and_shared_quota",
+      "configure_runtime_Secret_PROBE_TOKEN",
+      "real_mainland_carrier_devices_or_named_measurement_points",
+      "Hong_Kong_host_and_direct_hostname_if_A_B_needed"
+    ],
+    "acceptance_thresholds_user_locked": false,
+    "actual_monthly_cost_verified": false,
+    "paid_resources_purchased": false,
+    "limitation_audit": {
+      "gate": "L3_LIMITATION",
+      "risk_level": "medium",
+      "status": "partial",
+      "source_checked": true,
+      "reality_validation_scope": "local_and_CI_functional_plus_user_provided_cloud_deployment_evidence_no_mainland_performance",
+      "unverified": [
+        "mainland_routes",
+        "cloud_billing",
+        "Hong_Kong_purchase_quote",
+        "WeChat_official_requirements"
+      ]
+    },
+    "next_action": "NET-001: Cloudflare技术Worker已由用户日志确认部署；核对Workers Free与共享额度，配置运行时Secret PROBE_TOKEN，再从真实大陆设备测试页面可达性及1分钟鉴权HTTP/WS连接，随后收集三网10/60分钟样本并核对云用量。",
+    "draft_pr_url": "https://github.com/aaaycc931-droid/jieqi-engine/pull/3",
+    "ci_first_attempt": {
+      "run": 37897773882,
+      "job": 113712977075,
+      "status": "failure",
+      "passed": 8,
+      "failed": 1,
+      "reason": "planned_reconnect_pending_echo_classification_race_fixed"
+    },
+    "local_probe_checks": {
+      "tests": 9,
+      "passed": 9,
+      "failed": 0,
+      "source_digest": "231a7f050879c7d0cb976ce3afa6b17c308259d1e4dbaf1071d9616b0b387353",
+      "CLI_smoke": "passed_loopback_only_previous_cli_unchanged"
+    },
+    "previous_ci": {
+      "run": 37898366843,
+      "job": 113714880877,
+      "status": "success",
+      "source_commit": "d2e431a606fe52beb734de8dfa6550c5129c3345",
+      "scope": "9_local_default_runtime_checks_dry_run_and_actual_probe_DOM",
+      "applies_to_current_source": false,
+      "reason": "subsequent_report_immutability_median_and_test_cleanup_fixes"
+    },
+    "cloudflare_connection_discovery": {
+      "available_plugin_search_results": 0,
+      "credential_present": false,
+      "connection_verified": false
+    },
+    "current_ci": {
+      "run": 37899220202,
+      "job": 113717603039,
+      "commit": "ee8a8de935f3274c798207b0d565d6d6d8ea1233",
+      "checkout_commit": "865ea0435fc62b309588fb7dff8fed97c54dfb65",
+      "status": "success",
+      "passed": 9,
+      "failed": 0,
+      "scope": "actual_probe_page_DOM_on_CI_loopback_not_mainland_or_WeChat",
+      "source_digest": "231a7f050879c7d0cb976ce3afa6b17c308259d1e4dbaf1071d9616b0b387353",
+      "source_digest_matches_local": true,
+      "default_runtime_checks": true,
+      "wrangler_dry_run": true,
+      "actual_Chromium_DOM": true,
+      "artifact": {
+        "id": 11601657876,
+        "name": "net-001-probe-dom-evidence",
+        "size_bytes": 173456,
+        "digest": "sha256:306e9e91f6cea23dd5764be60c6016978ce8a864b2808c1e000298d135f72586",
+        "archive_downloaded": false
+      },
+      "source": "actual_GitHub_job_logs_and_artifact_metadata",
+      "run_url": "https://github.com/aaaycc931-droid/jieqi-engine/actions/runs/37899220202",
+      "evidence_path": "review/net/CI_PROBE_2026-10-09.json"
+    },
+    "external_references": [
+      {
+        "id": "NET-REF-001",
+        "kind": "external_technical_reference_not_architecture_decision",
+        "status": "registered_assessed_no_architecture_change",
+        "index": "net/NET-REF-001.json",
+        "assessment": "33_NET-REF-001_ASSESSMENT_2026-10-09.md",
+        "mainland_samples_added": 0
+      }
+    ],
+    "cloud_account_access_mode": "user_operates_dashboard_no_agent_credentials_or_plugin",
+    "cloud_deployment_evidence": "review/net/CLOUD_DEPLOYMENT_2026-10-09.json",
+    "cloud_runtime_HTTP_WS_verified": false,
+    "workers_free_plan_verified": false,
+    "runtime_secret_configured": null
+  },
+  "parallel_workstreams": [
+    {
+      "task_id": "MODE-DESIGN-001",
+      "scope": "parallel_two_mode_hero_adaptation_new_hero_and_new_mutation_design",
+      "status": "requested_design_not_yet_reported",
+      "authority": "34_PARALLEL_MODE_HERO_DESIGN_2026-10-09.md",
+      "index": "MODE_DESIGN_PARALLEL.json",
+      "design_differences_confirmed": 0,
+      "runtime_implementation_completed": false,
+      "design_scopes": [
+        "existing_hero_adaptation_two_new_modes",
+        "new_hero_design",
+        "new_mutation_design"
+      ],
+      "new_hero_and_mutation_confirmed_count": 0
+    }
+  ]
 }

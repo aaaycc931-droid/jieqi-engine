@@ -1,0 +1,151 @@
+{
+  "schema": "LEZI-NET-COST-v1",
+  "checkedAt": "2026-10-09",
+  "scenarios": [
+    {
+      "dau": 50,
+      "assumption": "2 matches/player/day, 20 min/match, 60 actions/match, 30s app heartbeat, 2 participants/match",
+      "daily": {
+        "matches": 50,
+        "incomingMessages": 7000,
+        "workerRequests": 600,
+        "doRequests": 450,
+        "doRowsWritten": 6000,
+        "d1RowsWritten": 200,
+        "d1RowsRead": 1000,
+        "doGBSecondsHibernationIllustration": 9.088000000000001,
+        "doGBSecondsAlwaysActiveUpper": 7680
+      },
+      "monthly": {
+        "outgoingPayloadGBAt2KBPerPlayerAction": 0.36864,
+        "newEventLogGBAt1KBPerAction": 0.09216,
+        "workersPlusDOUSDHibernationIllustration": 5,
+        "workersPlusDOUSDAlwaysActiveUpper": 5,
+        "workersPlusDOCNYHibernationIllustration": 36,
+        "workersPlusDOCNYAlwaysActiveUpper": 36
+      },
+      "freeLimitChecks": {
+        "workerRequests": true,
+        "doRequests": true,
+        "doRowsWritten": true,
+        "d1RowsWritten": true,
+        "d1RowsRead": true,
+        "durationIfHibernateIllustration": true,
+        "durationIfAlwaysActive": true
+      },
+      "assumptions": {
+        "fxCNYPerUSD": 7.2,
+        "fxIsIllustrativeNotLiveQuote": true,
+        "activeMsPerEvent": 10,
+        "storageAndIndexAmplificationUnmeasured": true
+      },
+      "exclusions": [
+        "Real rule-engine CPU/wall time and transactions",
+        "Peak-day load and retries",
+        "Accumulated storage above 5GB",
+        "Email provider, domain purchase/renewal, taxes and FX fees",
+        "Operations, backups and alerts",
+        "Any other usage sharing the Cloudflare account"
+      ],
+      "domainAndEmailUSD": null,
+      "mainlandPerformanceMeasured": false
+    },
+    {
+      "dau": 200,
+      "assumption": "2 matches/player/day, 20 min/match, 60 actions/match, 30s app heartbeat, 2 participants/match",
+      "daily": {
+        "matches": 200,
+        "incomingMessages": 28000,
+        "workerRequests": 2400,
+        "doRequests": 1800,
+        "doRowsWritten": 24000,
+        "d1RowsWritten": 800,
+        "d1RowsRead": 4000,
+        "doGBSecondsHibernationIllustration": 36.352000000000004,
+        "doGBSecondsAlwaysActiveUpper": 30720
+      },
+      "monthly": {
+        "outgoingPayloadGBAt2KBPerPlayerAction": 1.47456,
+        "newEventLogGBAt1KBPerAction": 0.36864,
+        "workersPlusDOUSDHibernationIllustration": 5,
+        "workersPlusDOUSDAlwaysActiveUpper": 17.5,
+        "workersPlusDOCNYHibernationIllustration": 36,
+        "workersPlusDOCNYAlwaysActiveUpper": 126
+      },
+      "freeLimitChecks": {
+        "workerRequests": true,
+        "doRequests": true,
+        "doRowsWritten": true,
+        "d1RowsWritten": true,
+        "d1RowsRead": true,
+        "durationIfHibernateIllustration": true,
+        "durationIfAlwaysActive": false
+      },
+      "assumptions": {
+        "fxCNYPerUSD": 7.2,
+        "fxIsIllustrativeNotLiveQuote": true,
+        "activeMsPerEvent": 10,
+        "storageAndIndexAmplificationUnmeasured": true
+      },
+      "exclusions": [
+        "Real rule-engine CPU/wall time and transactions",
+        "Peak-day load and retries",
+        "Accumulated storage above 5GB",
+        "Email provider, domain purchase/renewal, taxes and FX fees",
+        "Operations, backups and alerts",
+        "Any other usage sharing the Cloudflare account"
+      ],
+      "domainAndEmailUSD": null,
+      "mainlandPerformanceMeasured": false
+    },
+    {
+      "dau": 1000,
+      "assumption": "2 matches/player/day, 20 min/match, 60 actions/match, 30s app heartbeat, 2 participants/match",
+      "daily": {
+        "matches": 1000,
+        "incomingMessages": 140000,
+        "workerRequests": 12000,
+        "doRequests": 9000,
+        "doRowsWritten": 120000,
+        "d1RowsWritten": 4000,
+        "d1RowsRead": 20000,
+        "doGBSecondsHibernationIllustration": 181.76,
+        "doGBSecondsAlwaysActiveUpper": 153600
+      },
+      "monthly": {
+        "outgoingPayloadGBAt2KBPerPlayerAction": 7.3728,
+        "newEventLogGBAt1KBPerAction": 1.8432,
+        "workersPlusDOUSDHibernationIllustration": 5,
+        "workersPlusDOUSDAlwaysActiveUpper": 67.5,
+        "workersPlusDOCNYHibernationIllustration": 36,
+        "workersPlusDOCNYAlwaysActiveUpper": 486
+      },
+      "freeLimitChecks": {
+        "workerRequests": true,
+        "doRequests": true,
+        "doRowsWritten": false,
+        "d1RowsWritten": true,
+        "d1RowsRead": true,
+        "durationIfHibernateIllustration": true,
+        "durationIfAlwaysActive": false
+      },
+      "assumptions": {
+        "fxCNYPerUSD": 7.2,
+        "fxIsIllustrativeNotLiveQuote": true,
+        "activeMsPerEvent": 10,
+        "storageAndIndexAmplificationUnmeasured": true
+      },
+      "exclusions": [
+        "Real rule-engine CPU/wall time and transactions",
+        "Peak-day load and retries",
+        "Accumulated storage above 5GB",
+        "Email provider, domain purchase/renewal, taxes and FX fees",
+        "Operations, backups and alerts",
+        "Any other usage sharing the Cloudflare account"
+      ],
+      "domainAndEmailUSD": null,
+      "mainlandPerformanceMeasured": false
+    }
+  ],
+  "note": "A free plan rejects over-limit operations. Paid duration is rounded to billing units; USD 5 is not a spending cap."
+}

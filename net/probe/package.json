@@ -1,0 +1,16 @@
+{
+  "name": "lezi-net-001-probe",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "start": "node server.mjs",
+    "probe": "node cli.mjs",
+    "test": "node --test test/*.test.mjs",
+    "cf:dev": "wrangler dev --ip 127.0.0.1",
+    "cf:check": "wrangler deploy --dry-run --outdir .worker-build",
+    "test:browser": "node test-browser.mjs"
+  },
+  "dependencies": { "ws": "8.22.0" },
+  "devDependencies": { "wrangler": "4.149.0", "playwright": "1.64.0" }
+}

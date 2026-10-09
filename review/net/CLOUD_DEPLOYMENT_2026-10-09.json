@@ -1,0 +1,42 @@
+{
+  "task_id": "NET-001",
+  "recorded_at": "2026-10-09",
+  "evidence_source": "user_supplied_Cloudflare_build_log_and_screenshot_1000027863.jpg",
+  "independent_cloud_account_access": false,
+  "build_id": "14b9493d",
+  "branch": "codex/net-001-validation-20261009",
+  "commit": "eb8f8bd066bfa469d394df9795bf6fbec4e997c0",
+  "root_directory": "net/probe",
+  "build_started_at": "2026-10-09T11:05:45.455Z",
+  "build_completed_at": "2026-10-09T11:06:15.271Z",
+  "worker_name": "lezi-net-001-probe",
+  "url": "https://lezi-net-001-probe.aaaycc931.workers.dev",
+  "version_id": "ebaca3e8-93df-4794-bc1b-f58a4c639dfb",
+  "node_version": "24.21.0",
+  "wrangler_version": "4.149.0",
+  "static_assets_uploaded": [
+    "/page.mjs",
+    "/index.html",
+    "/runner.mjs"
+  ],
+  "binding": {
+    "name": "PROBE",
+    "class": "Probe",
+    "type": "Durable Object"
+  },
+  "status": "deployment_completed_as_shown_in_user_supplied_log",
+  "automatic_build_trigger_verified": true,
+  "warnings": [
+    "esbuild and workerd install scripts not yet covered by allowScripts; deployment nevertheless completed",
+    "Preview URLs enabled by default because preview_urls is not explicitly configured; distinct from branch Preview builds"
+  ],
+  "runtime_secret_configured": null,
+  "workers_free_plan_verified": false,
+  "authenticated_cloud_HTTP_echo_verified": false,
+  "authenticated_cloud_WS_echo_verified": false,
+  "mainland_sample_count": 0,
+  "fixed_Hong_Kong_location_verified": false,
+  "actual_monthly_cost_verified": false,
+  "subsequent_documentation_commits": "may_trigger_another_build_and_change_version; do not attribute later version to this observed build",
+  "next_action": "verify Workers Free, configure runtime Secret PROBE_TOKEN, then actual mainland device page reachability and 1 minute authenticated connection check before longer sampling"
+}

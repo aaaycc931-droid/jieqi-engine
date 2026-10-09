@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>乐子象棋 NET-001 网络验证</title>
+<link rel="icon" href="data:,">
+<style>body{font:16px system-ui,sans-serif;max-width:760px;margin:24px auto;padding:0 18px;color:#222;background:#f7f5f0}h1{font-size:23px}label{display:block;margin:14px 0}input,select,button{font:inherit;padding:9px;box-sizing:border-box}input{width:100%}button{margin:5px 5px 5px 0}pre{white-space:pre-wrap;background:white;padding:14px;border:1px solid #ddd}small{line-height:1.7;display:block}fieldset{border:1px solid #ccc}</style>
+<h1>乐子象棋 · NET-001 网络验证</h1>
+<p>仅发送合成 echo 消息，不进入棋局。结果保存在此设备；点击下载后将 JSON 交给项目开发者。</p>
+<small>请使用真实大陆网络，关闭 VPN／代理。分别在普通时段和 20:00–23:00 测试。60 分钟稳定性测试请保持页面在前台、屏幕亮着；切后台会影响计时。位置只需省／市，不填写地址或个人身份。</small>
+<form id="form"><fieldset id="inputs">
+<label>测试服务地址<input id="endpoint" type="url" required placeholder="https://实际测试域名"></label>
+<label>测试口令<input id="token" type="password" required autocomplete="off" placeholder="开发者提供；不保存到结果"></label>
+<label>省／市<input id="region" required placeholder="例如：广东深圳"></label>
+<label>运营商<select id="carrier"><option>中国电信</option><option>中国移动</option><option>中国联通</option><option>其他／未知</option></select></label>
+<label>网络<select id="network"><option>家庭宽带 Wi-Fi</option><option>移动数据 4G/5G</option><option>其他</option></select></label>
+<label>VPN／代理<select id="vpn"><option>关闭（自行确认）</option><option>开启</option><option>未知</option></select></label>
+<label>测试时长<select id="duration"><option value="600">10 分钟快速测试</option><option value="3600">60 分钟稳定性测试</option><option value="60">1 分钟连接检查</option></select></label>
+<label>消息大小<select id="payload"><option value="64">64 字节填充 · 小操作</option><option value="2048">2 KB 填充</option><option value="16384">16 KB 填充 · 快照参考</option></select></label>
+</fieldset><button id="start">开始测试</button><button type="button" id="stop" disabled>停止并保留结果</button></form>
+<button id="reconnect" disabled>练习断开再连</button><button id="restore" disabled>已恢复网络，记录时刻</button>
+<small>“练习断开再连”只验证程序重连。真实恢复测试：先断网约 10 秒，再恢复网络并按“已恢复网络”；按键时间有人工误差，报告会保留标记。</small>
+<pre id="status" aria-live="polite">尚未开始</pre><button id="download" disabled>下载测试 JSON</button>
+<script type="module" src="/page.mjs"></script></html>

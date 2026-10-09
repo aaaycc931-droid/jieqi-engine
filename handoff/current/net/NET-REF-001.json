@@ -1,0 +1,205 @@
+{
+  "id": "NET-REF-001",
+  "date": "2026-10-09",
+  "timezone": "Asia/Shanghai",
+  "kind": "external_technical_reference_not_architecture_decision",
+  "user_authorization": "register_reference_compare_with_existing_NET_continue_existing_priority",
+  "input": {
+    "path": "net/input/NET-REF-001_USER_REFERENCE.md",
+    "sha256": "76649fe1a1d3fde34ce2f2e721d424963590e05094017e801c144ed73c82018a",
+    "source": "full_user_pasted_reference_text",
+    "video_independently_reviewed_this_round": false,
+    "video_author_and_timestamps_available": false
+  },
+  "assessment": "33_NET-REF-001_ASSESSMENT_2026-10-09.md",
+  "audit_checkpoint": {
+    "net_head": "bcecc8299b6d0342a33ec29f65b56b030c00a2ac",
+    "product_head": "8dadc67085ef8b4ff9b4bc7f5298dc857277c32d",
+    "main_head": "c25749d4f21d394c3d94486cfba1d786864083b6",
+    "NET_PR": 3,
+    "NET_PR_state": "open_draft_unmerged",
+    "original_NET_inputs_byte_identical": 3,
+    "handoff_manifest_entries_verified_before_edit": 43
+  },
+  "tasks": {
+    "NET-REF-001.1": "completed_incremental_repository_and_handoff_check",
+    "NET-REF-001.2": "documentation_comparison_completed_runtime_and_platform_experiments_pending",
+    "NET-REF-001.3": "blocked_existing_NET_cloud_account_and_real_mainland_measurement_points_missing",
+    "NET-REF-001.4": "partial_explicit_model_and_optional_component_rates_not_actual_bill",
+    "NET-REF-001.5": "completed_bounded_reference_assessment_not_production_selection"
+  },
+  "architecture_decision_changed": false,
+  "NET_priority_changed": false,
+  "current_tool": "net/probe/README.md",
+  "reused_evidence": "review/net/CI_PROBE_2026-10-09.json",
+  "cost_scenarios_reused": "review/net/COST_SCENARIOS_2026-10-09.json",
+  "components": {
+    "GitHub": "reuse_existing_repository_and_CI",
+    "Workers": "reuse_echo_candidate_game_backend_adaptation_pending",
+    "Durable_Objects": "already_in_echo_probe_room_business_and_recovery_pending",
+    "Pages": "optional_no_current_need_Worker_static_assets_already_used",
+    "D1": "optional_account_records_not_realtime_room_service",
+    "R2": "optional_dynamic_or_large_assets_no_current_need_no_subscription",
+    "DNSHE": "new_optional_test_domain_candidate_not_registered",
+    "Cloudflare_DNS": "delegation_TLS_and_control_plane_activation_pending",
+    "AI_Agent": "existing_development_assistance_not_evidence_of_runtime_success"
+  },
+  "domain": {
+    "cc_cd_present_in_current_PSL_private_section": true,
+    "NS_supported_by_provider_documentation": true,
+    "default_one_year_and_free_renewal_provider_claim": true,
+    "Cloudflare_actual_zone_acceptance": false,
+    "nameservers_delegated": false,
+    "TLS_issued": false,
+    "independent_registrar_transfer_right_assumed": false,
+    "reliability_and_migration_cost_verified": false
+  },
+  "cost": {
+    "monthly_target_CNY": 50,
+    "total_cost_within_target_verified": false,
+    "fx_assumption_CNY_per_USD": 7.2,
+    "probe_assumption": {
+      "testers": 10,
+      "one_hour_sessions_per_day_per_tester": 2,
+      "WS_interval_seconds": 5,
+      "HTTP_interval_seconds": 60,
+      "approx_DO_billing_requests_per_day_without_retries": 1940,
+      "always_active_GB_seconds_per_day_illustration": 9216,
+      "real_cloud_usage": null
+    },
+    "R2_subscription_checkout_documented": true,
+    "R2_subscription_created": false,
+    "HK_actual_purchase_quote": null
+  },
+  "real_status": {
+    "additional_runtime_code_changes": 0,
+    "additional_cloud_deployments": 0,
+    "mainland_samples": 0,
+    "real_game_online_verified": false,
+    "wechat_runtime_verified": false,
+    "paid_resources_purchased": false,
+    "production_host_selected": false,
+    "filing_or_formal_release_started": false
+  },
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://developers.cloudflare.com/durable-objects/",
+      "checked_at": "2026-10-09",
+      "status": "primary_source_read",
+      "role": "platform_or_primary_list_documentation"
+    },
+    {
+      "id": "S2",
+      "url": "https://developers.cloudflare.com/workers/static-assets/",
+      "checked_at": "2026-10-09",
+      "status": "primary_source_read",
+      "role": "platform_or_primary_list_documentation"
+    },
+    {
+      "id": "S3",
+      "url": "https://developers.cloudflare.com/pages/functions/bindings/",
+      "checked_at": "2026-10-09",
+      "status": "primary_source_read",
+      "role": "platform_or_primary_list_documentation"
+    },
+    {
+      "id": "S4",
+      "url": "https://developers.cloudflare.com/pages/platform/limits/",
+      "checked_at": "2026-10-09",
+      "status": "primary_source_read",
+      "role": "platform_or_primary_list_documentation"
+    },
+    {
+      "id": "S5",
+      "url": "https://developers.cloudflare.com/r2/pricing/",
+      "checked_at": "2026-10-09",
+      "status": "primary_source_read",
+      "role": "platform_or_primary_list_documentation"
+    },
+    {
+      "id": "S6",
+      "url": "https://developers.cloudflare.com/r2/get-started/",
+      "checked_at": "2026-10-09",
+      "status": "primary_source_read",
+      "role": "platform_or_primary_list_documentation"
+    },
+    {
+      "id": "S7",
+      "url": "https://developers.cloudflare.com/durable-objects/reference/data-location/",
+      "checked_at": "2026-10-09",
+      "status": "primary_source_read",
+      "role": "platform_or_primary_list_documentation"
+    },
+    {
+      "id": "S8",
+      "url": "https://www.dnshe.com/",
+      "checked_at": "2026-10-09",
+      "status": "primary_source_read",
+      "role": "service_provider_statement_not_SLA_test"
+    },
+    {
+      "id": "S9",
+      "url": "https://my.dnshe.com/announcements/10/DNSHE-Domain-Name-Service-Terms-of-Service.html",
+      "checked_at": "2026-10-09",
+      "status": "primary_source_read",
+      "role": "service_provider_statement_not_SLA_test"
+    },
+    {
+      "id": "S10",
+      "url": "https://www.dnshe.com/tos.html",
+      "checked_at": "2026-10-09",
+      "status": "primary_source_read",
+      "role": "service_provider_statement_not_SLA_test"
+    },
+    {
+      "id": "S11",
+      "url": "https://publicsuffix.org/list/public_suffix_list.dat",
+      "checked_at": "2026-10-09",
+      "status": "primary_source_read",
+      "role": "platform_or_primary_list_documentation"
+    },
+    {
+      "id": "S12",
+      "url": "https://developers.cloudflare.com/dns/zone-setups/full-setup/setup/",
+      "checked_at": "2026-10-09",
+      "status": "primary_source_read",
+      "role": "platform_or_primary_list_documentation"
+    },
+    {
+      "id": "S13",
+      "url": "https://developers.weixin.qq.com/minigame/dev/api/network/websocket/wx.connectSocket.html",
+      "checked_at": "2026-10-09",
+      "status": "retrieval_failed_not_verified",
+      "role": "platform_or_primary_list_documentation"
+    },
+    {
+      "id": "S14",
+      "url": "https://developers.cloudflare.com/workers/platform/pricing/",
+      "checked_at": "2026-10-09",
+      "status": "primary_source_read",
+      "role": "platform_or_primary_list_documentation"
+    },
+    {
+      "id": "S15",
+      "url": "https://developers.cloudflare.com/durable-objects/platform/pricing/",
+      "checked_at": "2026-10-09",
+      "status": "primary_source_read",
+      "role": "platform_or_primary_list_documentation"
+    },
+    {
+      "id": "S16",
+      "url": "https://developers.cloudflare.com/d1/platform/pricing/",
+      "checked_at": "2026-10-09",
+      "status": "primary_source_read",
+      "role": "platform_or_primary_list_documentation"
+    }
+  ],
+  "limitation": {
+    "gate": "L3_LIMITATION",
+    "risk": "medium",
+    "status": "partial",
+    "same_AI_review_is_not_independent": true
+  },
+  "next_action": "unchanged_NET-001_deploy_authorized_Free_echo_node_collect_real_mainland_reports_then_HK_same_protocol_if_needed"
+}
