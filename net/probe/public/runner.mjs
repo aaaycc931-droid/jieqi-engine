@@ -39,12 +39,12 @@ export async function runProbe({ baseURL, token, metadata = {}, durationSeconds 
   const report = { schema: 'LEZI-NET-PROBE-v1', startedAt: stamp(), endpoint: base.origin,
     metadata, config: { durationSeconds, wsIntervalMs, httpIntervalMs, timeoutMs, payloadPaddingBytes: payloadBytes },
     evidenceScope: base.protocol === 'http:' ? 'loopback_functional_only' : 'tester_supplied_network_observation',
-    session: crypto.randomUUID(), http: [], ws: [], connections: [], events: [], recoveries: [], resourceTimings: [],
+    session: crypto.randomUUID(), http: [], ws: [], cancelledProbes: [], connections: [], events: [], recoveries: [], resourceTimings: [],
     limitations: ['Echo latency is not game-engine latency.', 'Echo timeouts are not measured TCP packet loss.',
       'Carrier, location and VPN state are tester supplied.', 'Browser DNS/TLS timings may be unobservable or reused.',
       'HTTPS success proves the combined path; it does not isolate DNS/TLS success rates.',
       'Wi-Fi/mobile changes and background scheduling can alter observations.'] };
-  const pending = new Map(); let ws, sequence = 0, outage, planned = false, nextRetryMs = 500;
+  const pending = new Map(), plannedSockets = new WeakSet(); let ws, sequence = 0, outage, nextRetryMs = 500;
   const elapsed = () => now() - started;
   const emit = () => onProgress({ elapsedMs: elapsed(), http: summarize(report.http), ws: summarize(report.ws), connections: report.connections.length });
   const event = (kind, extra = {}) => report.events.push({ at: stamp(), elapsedMs: elapsed(), kind, ...extra });
@@ -53,7 +53,7 @@ export async function runProbe({ baseURL, token, metadata = {}, durationSeconds 
   const canRun = () => !stop.signal.aborted && now() < deadline;
   const api = path => new URL(`${path}?session=${report.session}`, base);
 
-  control.reconnect = () => { if (ws?.readyState !== 1) return; planned = true; event('planned_reconnect_requested'); ws.close(4000, 'planned reconnect'); };
+  control.reconnect = () => { if (ws?.readyState !== 1) return; plannedSockets.add(ws); event('planned_reconnect_requested'); ws.close(4000, 'planned reconnect'); };
   control.mark = kind => {
     event(kind);
     if (kind === 'network_restored_by_tester') report.recoveries.push({ kind: 'tester_reported_restore', markedElapsedMs: elapsed(), firstEchoAfterMs: null });
@@ -92,10 +92,12 @@ export async function runProbe({ baseURL, token, metadata = {}, durationSeconds 
     socket.addEventListener('close', e => {
       sample.closedElapsedMs = elapsed();
       if (!canRun() || !sample.ok) return;
-      const kind = planned ? 'planned_close' : 'unexpected_close'; planned = false;
+      const isPlanned = plannedSockets.has(socket), kind = isPlanned ? 'planned_close' : 'unexpected_close';
       event(kind, { code: e.code });
       outage ??= { kind, detectedElapsedMs: elapsed(), firstEchoAfterMs: null };
-      for (const p of pending.values()) p.reject(Error('socket closed'));
+      for (const p of pending.values()) if (p.socket === socket) {
+        const error = Error('socket closed'); error.planned = isPlanned; p.reject(error);
+      }
     });
     await new Promise((resolve, reject) => {
       const cleanup = () => { clearTimeout(timer); stop.signal.removeEventListener('abort', aborted); socket.removeEventListener('open', opened); socket.removeEventListener('error', failed); socket.removeEventListener('close', failed); };
@@ -126,14 +128,17 @@ export async function runProbe({ baseURL, token, metadata = {}, durationSeconds 
           const cleanup = () => { clearTimeout(timer); pending.delete(m.id); stop.signal.removeEventListener('abort', aborted); };
           const aborted = () => { cleanup(); reject(Error('stopped')); };
           const timer = setTimeout(() => { cleanup(); event('echo_timeout'); reject(Error('echo timeout')); ws?.close(4001, 'echo timeout'); }, timeoutMs);
-          pending.set(m.id, { message: m, resolve: () => { cleanup(); resolve(); }, reject: e => { cleanup(); reject(e); } });
+          pending.set(m.id, { message: m, socket: ws, resolve: () => { cleanup(); resolve(); }, reject: e => { cleanup(); reject(e); } });
           stop.signal.addEventListener('abort', aborted, { once: true });
-          try { ws.send(JSON.stringify(m)); } catch (e) { cleanup(); reject(e); }
+          try { ws.send(JSON.stringify(m)); } catch (e) { cleanup(); e.planned = plannedSockets.has(ws); reject(e); }
         });
         report.ws.push({ at, ok: true, ms: now() - begin }); nextRetryMs = 500;
         if (outage) { outage.firstEchoAfterMs = elapsed() - outage.detectedElapsedMs; report.recoveries.push(outage); outage = null; }
         for (const recovery of report.recoveries) if (recovery.kind === 'tester_reported_restore' && recovery.firstEchoAfterMs === null) recovery.firstEchoAfterMs = elapsed() - recovery.markedElapsedMs;
-      } catch (e) { if (!stop.signal.aborted) { report.ws.push({ at, ok: false, ms: now() - begin, error: String(e.message) }); outage ??= { kind: 'echo_failure', detectedElapsedMs: elapsed(), firstEchoAfterMs: null }; } }
+      } catch (e) { if (!stop.signal.aborted) {
+        if (e.planned) report.cancelledProbes.push({ at, ms: now() - begin, kind: 'ws', reason: 'planned_reconnect' });
+        else { report.ws.push({ at, ok: false, ms: now() - begin, error: String(e.message) }); outage ??= { kind: 'echo_failure', detectedElapsedMs: elapsed(), firstEchoAfterMs: null }; }
+      } }
       emit(); await sleep(Math.min(wsIntervalMs, deadline - now()), stop.signal);
     }
   }
@@ -154,6 +159,7 @@ export async function runProbe({ baseURL, token, metadata = {}, durationSeconds 
       absentReason: 'null means hidden/reused/not observable; not zero latency' }));
   report.summary = { http: summarize(report.http), ws: summarize(report.ws), connections: summarize(report.connections),
     unexpectedDisconnects: report.events.filter(e => e.kind === 'unexpected_close').length,
+    plannedCancelledProbes: report.cancelledProbes.length,
     longestObservedConnectionMs: Math.max(0, ...report.connections.filter(c => c.ok).map(c => c.closedElapsedMs - c.openElapsedMs)),
     recoveryIncomplete: report.recoveries.filter(r => r.firstEchoAfterMs === null).length };
   emit(); return report;

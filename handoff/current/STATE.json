@@ -2306,7 +2306,7 @@
       "old_uploaded_snapshot_differences": 0
     },
     "working_branch": "codex/net-001-validation-20261009",
-    "draft_pr": null,
+    "draft_pr": 3,
     "confirmed": {
       "future_main_release": "WeChat ecosystem, evaluate Mini Games first; possibly only WeChat",
       "apk_and_standalone_web": "development_and_technical_testing_optional_future_release",
@@ -2342,7 +2342,7 @@
     "wechat_sdk_or_domain_certification_completed": false,
     "browser_validation": {
       "local": "blocked_missing_Chromium_corrupted_browser_download",
-      "ci": "pending_not_claimed_passed"
+      "ci": "first_run_failed_before_browser; fixed_source_CI_pending"
     },
     "blocking_inputs": [
       "authorized_Cloudflare_Free_test_account",
@@ -2366,6 +2366,22 @@
         "WeChat_official_requirements"
       ]
     },
-    "next_action": "NET-001: 在用户授权的Cloudflare Free测试账号中部署独立口令保护echo技术节点，先收集大陆三网真实样本并核对云用量；未提供账号/测点前不虚构部署或性能结果。"
+    "next_action": "NET-001: 在用户授权的Cloudflare Free测试账号中部署独立口令保护echo技术节点，先收集大陆三网真实样本并核对云用量；未提供账号/测点前不虚构部署或性能结果。",
+    "draft_pr_url": "https://github.com/aaaycc931-droid/jieqi-engine/pull/3",
+    "ci_first_attempt": {
+      "run": 37897773882,
+      "job": 113712977075,
+      "status": "failure",
+      "passed": 8,
+      "failed": 1,
+      "reason": "planned_reconnect_pending_echo_classification_race_fixed"
+    },
+    "local_probe_checks": {
+      "tests": 9,
+      "passed": 9,
+      "failed": 0,
+      "source_digest": "c37d1de070c2cd6ec6edbccfbd9eed2b5f82a8f30efa919b3f06e94bdd8c7d89",
+      "CLI_smoke": "passed_loopback_only"
+    }
   }
 }

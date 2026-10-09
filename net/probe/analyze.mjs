@@ -17,6 +17,7 @@ console.log(JSON.stringify({ schema: 'LEZI-NET-AGGREGATE-v1', acceptanceThreshol
     http: summarize(reports.flatMap(r => r.http)), ws: summarize(reports.flatMap(r => r.ws)),
     connections: summarize(reports.flatMap(r => r.connections)),
     unexpectedDisconnects: reports.reduce((n, r) => n + r.summary.unexpectedDisconnects, 0),
+    plannedCancellations: reports.flatMap(r => r.cancelledProbes ?? []),
     recoveryObservations: reports.flatMap(r => r.recoveries),
     hasLoopbackOnlyData: reports.some(r => r.evidenceScope === 'loopback_functional_only'),
     hasUnknownOrEnabledVPN: reports.some(r => !['off', '关闭（自行确认）'].includes(r.metadata.vpn)),

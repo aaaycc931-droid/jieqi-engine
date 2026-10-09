@@ -58,12 +58,19 @@ test('actual socket termination triggers automatic reconnection and preserves ou
   assert.ok(report.recoveries.some(r => r.firstEchoAfterMs !== null));
 });
 
-test('planned reconnect is separate from unexpected disconnections', async t => {
+test('planned reconnect during an in-flight echo preserves a cancellation instead of a fake network failure', async t => {
   const probe = await start(t), control = {}; let requested = false;
   const report = await runProbe({ baseURL: probe.baseURL, token, control, durationSeconds: 0.7, wsIntervalMs: 60, httpIntervalMs: 200, timeoutMs: 150,
-    onProgress: s => { if (!requested && s.ws.successes >= 1) { requested = true; control.reconnect(); } } });
+    onProgress: s => { if (!requested && s.ws.successes >= 1) {
+      requested = true;
+      // Next response deliberately triggers manual reconnect while the client
+      // is still awaiting that echo. This reproduces the CI timing race.
+      for (const socket of probe.sockets.clients) socket.send = () => control.reconnect();
+    } } });
   assert.ok(report.summary.connections.successes >= 2);
   assert.equal(report.summary.unexpectedDisconnects, 0);
+  assert.equal(report.summary.ws.failures, 0);
+  assert.equal(report.summary.plannedCancelledProbes, 1);
   assert.ok(report.events.some(e => e.kind === 'planned_close'));
 });
 

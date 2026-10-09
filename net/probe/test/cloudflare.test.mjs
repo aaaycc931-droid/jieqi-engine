@@ -29,7 +29,7 @@ test('actual local workerd: Worker, SQLite-backed DO and Hibernation WS echo int
   const report = await runProbe({ baseURL, token, control, durationSeconds: 1, wsIntervalMs: 80, httpIntervalMs: 200, timeoutMs: 500,
     onProgress: s => { if (!reconnect && s.ws.successes >= 2) { reconnect = true; control.reconnect(); } } });
   assert.ok(report.summary.http.successes >= 2); assert.ok(report.summary.ws.successes >= 3);
-  assert.equal(report.summary.http.failures, 0); assert.equal(report.summary.ws.failures, 0);
+  assert.equal(report.summary.http.failures, 0, JSON.stringify(report)); assert.equal(report.summary.ws.failures, 0, JSON.stringify(report));
   assert.ok(report.summary.connections.successes >= 2);
   assert.equal(report.summary.unexpectedDisconnects, 0);
 });
