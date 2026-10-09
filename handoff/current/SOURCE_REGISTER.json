@@ -597,6 +597,7 @@
       }
     ],
     "runtime_evidence": "review/net/PROBE_VALIDATION_2026-10-09.json",
-    "mainland_evidence": "none"
+    "mainland_evidence": "none",
+    "ci_evidence": "review/net/CI_PROBE_2026-10-09.json"
   }
 }

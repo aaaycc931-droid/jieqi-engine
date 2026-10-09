@@ -55,7 +55,8 @@
   "browser": {
     "local_status": "not_executed",
     "reason": "Chromium unavailable; archive download corrupt",
-    "ci_status": "pending"
+    "ci_status": "passed_actual_Chromium_DOM_current_source",
+    "ci_evidence": "review/net/CI_PROBE_2026-10-09.json"
   },
   "mainland_sample_count": 0,
   "cloud_deployed": false,
@@ -227,5 +228,29 @@
     "status": "environment_or_test_harness_failure",
     "cause": "workerd bind address already in use during interim recheck",
     "resolution": "isolated dynamic inspector and own-child-process-group cleanup; subsequent nine-case full run passed"
+  },
+  "ci_current": {
+    "run": 37899220202,
+    "job": 113717603039,
+    "commit": "ee8a8de935f3274c798207b0d565d6d6d8ea1233",
+    "checkout_commit": "865ea0435fc62b309588fb7dff8fed97c54dfb65",
+    "status": "success",
+    "passed": 9,
+    "failed": 0,
+    "scope": "actual_probe_page_DOM_on_CI_loopback_not_mainland_or_WeChat",
+    "source_digest": "231a7f050879c7d0cb976ce3afa6b17c308259d1e4dbaf1071d9616b0b387353",
+    "source_digest_matches_local": true,
+    "default_runtime_checks": true,
+    "wrangler_dry_run": true,
+    "actual_Chromium_DOM": true,
+    "artifact": {
+      "id": 11601657876,
+      "name": "net-001-probe-dom-evidence",
+      "size_bytes": 173456,
+      "digest": "sha256:306e9e91f6cea23dd5764be60c6016978ce8a864b2808c1e000298d135f72586",
+      "archive_downloaded": false
+    },
+    "source": "actual_GitHub_job_logs_and_artifact_metadata",
+    "run_url": "https://github.com/aaaycc931-droid/jieqi-engine/actions/runs/37899220202"
   }
 }

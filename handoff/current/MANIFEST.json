@@ -131,12 +131,12 @@
       "sha256": "3ae6a73ae1451c4990a259b38b53345a7218cea29733b2343c6f344b6bcc39c8"
     },
     "SOURCE_REGISTER.json": {
-      "bytes": 35302,
-      "sha256": "5a516a8265c71885f5285978454ea683e13e339928c50f2695ad33ce65cd2ed4"
+      "bytes": 35360,
+      "sha256": "d0b281693ad7cbeae23db336acb235313e59cc6f92385bfd53f89dfe9b9f7db6"
     },
     "STATE.json": {
-      "bytes": 108923,
-      "sha256": "0f31271939d8a1288bfa753608414d68960a8e48ccb6149f404b469fa2fef172"
+      "bytes": 109985,
+      "sha256": "81818b7f3dea269870036cdeaa4d4e881b1859a6e23090ece108fead45341f9b"
     },
     "assets/approved-home.png": {
       "bytes": 2157060,
@@ -159,8 +159,8 @@
       "sha256": "f09f83064cb2bff8cdd4d41130646733f751252fe4e534c75ab043160327baaa"
     },
     "32_NET-001_NETWORK_VALIDATION_2026-10-09.md": {
-      "bytes": 12696,
-      "sha256": "13897df4ed8310738f70b1ece7a373b6f12e6ec8cec60ff01730f342d41fe41f"
+      "bytes": 13490,
+      "sha256": "2ce586c636203cdefc700b55a3e0ecebfb2293afa716b25d3bbd83e0e18c0c92"
     },
     "net/input/DECISIONS.json": {
       "bytes": 2758,
