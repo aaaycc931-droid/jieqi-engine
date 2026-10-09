@@ -617,6 +617,8 @@
     "authority": "34_PARALLEL_MODE_HERO_DESIGN_2026-10-09.md",
     "index": "MODE_DESIGN_PARALLEL.json",
     "input_date": "2026-10-09",
-    "new_mode_rule_confirmed": false
+    "new_mode_rule_confirmed": false,
+    "additional_authorization": "new_hero_and_new_mutation_design_2026-10-09_17:15",
+    "new_hero_or_mutation_rules_confirmed": false
   }
 }

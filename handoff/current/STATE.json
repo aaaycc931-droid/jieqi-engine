@@ -2436,12 +2436,18 @@
   "parallel_workstreams": [
     {
       "task_id": "MODE-DESIGN-001",
-      "scope": "parallel_hero_balance_design_for_two_new_modes_only",
+      "scope": "parallel_two_mode_hero_adaptation_new_hero_and_new_mutation_design",
       "status": "requested_design_not_yet_reported",
       "authority": "34_PARALLEL_MODE_HERO_DESIGN_2026-10-09.md",
       "index": "MODE_DESIGN_PARALLEL.json",
       "design_differences_confirmed": 0,
-      "runtime_implementation_completed": false
+      "runtime_implementation_completed": false,
+      "design_scopes": [
+        "existing_hero_adaptation_two_new_modes",
+        "new_hero_design",
+        "new_mutation_design"
+      ],
+      "new_hero_and_mutation_confirmed_count": 0
     }
   ]
 }

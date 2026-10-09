@@ -3,7 +3,7 @@
   "date": "2026-10-09",
   "timezone": "Asia/Shanghai",
   "user_request": "我现在需要在另一个对话里面同时处理另外两个模式的英雄平衡适配问题",
-  "authorization_scope": "parallel_hero_balance_design_for_two_new_modes_only",
+  "authorization_scope": "parallel_two_mode_hero_adaptation_new_hero_and_new_mutation_design",
   "status": "requested_design_not_yet_reported",
   "authority": "34_PARALLEL_MODE_HERO_DESIGN_2026-10-09.md",
   "new_dialogue_prompt": "MODE_DESIGN_NEW_DIALOGUE_PROMPT.txt",
@@ -58,7 +58,7 @@
   },
   "parallel_with": "NET-001",
   "NET_next_action_changed": false,
-  "mutations_scope": "retain_and_review_dependencies_only_specific_rule_changes_require_confirmation",
+  "mutations_scope": "new_mutation_design_and_existing_dependency_review_existing_rule_changes_require_confirmation",
   "existing_jieqi_baseline_changes_authorized": false,
   "runtime_changes_authorized_this_handoff": false,
   "shared_branch_writes": "avoid_other_dialogue_uses_separate_design_outputs_and_separate_branch_if_repository_writes_required",
@@ -70,7 +70,9 @@
     "confirmed_mode_adaptation_differences": 0,
     "new_code_changes": 0,
     "new_functional_tests_executed": 0,
-    "real_balance_matches_recorded": 0
+    "real_balance_matches_recorded": 0,
+    "new_hero_drafts_received": 0,
+    "new_mutation_drafts_received": 0
   },
   "score_ledger_role": "original_mode_historical_design_model_not_target_not_new_mode_score_not_all_Oct08_addenda_rescored",
   "handoff_back_fields": [
@@ -563,5 +565,19 @@
         }
       ]
     }
-  ]
+  ],
+  "additional_user_request": "我还得设计新的畸变与新的英雄，这个交接包支持我进行这两件事吧",
+  "additional_request_time": "2026-10-09T17:15:41+08:00",
+  "design_scopes": [
+    "existing_hero_adaptation_two_new_modes",
+    "new_hero_design",
+    "new_mutation_design"
+  ],
+  "new_design_registers": {
+    "hero_drafts": [],
+    "mutation_drafts": [],
+    "target_mode_if_unspecified": "pending_user_confirmation",
+    "official_ids_assigned": false,
+    "rules_or_runtime_completed": false
+  }
 }
