@@ -1,0 +1,14 @@
+{
+  "run": 37253114598,
+  "artifact": 11321213561,
+  "associatedBranchCommit": "b64a2ca03a77b26b74313afb3ad65d0b86f35102",
+  "actualCheckoutCommit": "8ded300fc3aee52dd6515d71e89e69ee8d7b14dc",
+  "sourceDigest": "43be369c92651202fb004039080770a29048a6a6080a5088262aa34683a7b522",
+  "sourceDigestMatchesLocal": true,
+  "testSummary": {
+    "passed": 298,
+    "failed": 0,
+    "executionFailed": false
+  },
+  "zipSha256": "818cbf69191077aacf8e405097348f547e8e3cd5e7ba7fdf4b9076c62272bb10"
+}

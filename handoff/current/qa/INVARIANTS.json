@@ -1,0 +1,747 @@
+{
+  "authority": "test_contract_non_normative",
+  "normative_source": "01_CURRENT_RULES.md + 02_CURRENT_HEROES.md + 03_CURRENT_MUTATIONS.md + 04_CURRENT_UI_AND_FLOW.md",
+  "current_rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
+  "code_checkpoint": "830c180de6f60593c42fee427959e77cb7ffb189",
+  "counts": {
+    "retained_invariants": 69,
+    "retained_anti_invariants": 20,
+    "new_supplements": 20
+  },
+  "note": "以下进展句保留各轮历史时点，不以旧“缺专属测试”覆盖最后的当前状态。 保留69项原合同与20项反不变量；2026-10-06同步全局规则后修正INV-ACTION-001范围、补强姆诺兹多上一正式回合边界，并新增8项待验证补充。测试合同仍非规范源，不代表运行时已实现。 2026-10-06 r4新增5项暗置身份公共判定合同，均待运行时验证；不改变69原合同/20反不变量及旧执行证据。 2026-10-06获授权实现公共暗置身份后，5项暗置身份合同有具体情景证据；未验收所有来源、资源/UI或术士技能。r3的8项新增合同继续待运行时模型验证；完整合同验收数仍为0。 后续用户同意推进行动/回合时序：3项动作/阶段/持续合同已接入现有来源并新增情景验证，其他5项r3新增合同仍缺专属测试；未移交英雄及未来资源/培养不自动实现，完整合同验收仍为0。 2026-10-07用户在当前对话恢复实现，亡魂对象合同新增17项公共模型/既有普通来源情景证据；完整当前控制权限及完整表/里形态仍缺专属增量验证。里英雄生成、持续/收益未移交，不自动定义，完整验收仍0。 2026-10-07当前控制权限现有源码审计及15项情景证据完成，保留明确真实读取例外，补接口来源标记和投弹菜单弹药资格；仅完整表/里形态缺专属增量测试，未来来源/浏览器/实机与全称合同仍待，完整验收0。 2026-10-07表/里公共模型完成18项专属情景验证，十二表完整包、整局独立锁、旧快照表迁移与实际回溯/蓝牙编码/重连/再战已有部分证据；109合同106部分证据+0缺专属测试+3规范，完整验收仍0。未移交里包、全部交叉来源、浏览器及实体设备仍待，未新增形态选择UI或APK。 2026-10-07收到r7-clean完整英雄来源后同步r5合同，修正潜行者、刺杀、防御、猎人寿命及返回格旧控制陷阱。新增21英雄映射见HERO_TRANSFER_AUDIT.json，不将相关用例当作完整验收。",
+  "invariants": [
+    {
+      "id": "INV-BOARD-001",
+      "domain": "board_and_information",
+      "statement": "当前存活棋坐标必须为整数且 0≤x≤8, 0≤y≤9。",
+      "scope_and_exceptions": "历史事件中的旧坐标不属于当前存活棋。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-BOARD-002",
+      "domain": "board_and_information",
+      "statement": "同坐标的【地面】层最多一枚棋，【飞行】层最多一枚棋；一地面一飞行可以共存。",
+      "scope_and_exceptions": "未获得【飞行】的普通棋默认拥有【地面】。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-SETUP-001",
+      "domain": "board_and_information",
+      "statement": "标准新局为 32 个唯一棋子 ID：两枚明将帅固定，30 枚暗子占标准暗位，秘密身份池不含将帅。",
+      "scope_and_exceptions": "不适用于手工残局。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-COVERED-001",
+      "domain": "board_and_information",
+      "statement": "暗来源成功完成预定【移动】或【进攻】落位后，必须在同一原子行动中【揭示】。",
+      "scope_and_exceptions": "战士防御成功弹回表示未完成预定目标格落位，暗攻击者保持暗置。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-COVERED-002",
+      "domain": "board_and_information",
+      "statement": "当前已定义来源中，存活暗子离开标准暗位只能来自明确不揭示的来源流程；不得由普通【移动】/【进攻】产生。",
+      "scope_and_exceptions": "不是“任何未来【移置】都必须揭示”的全局规则。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-REVEAL-001",
+      "domain": "board_and_information",
+      "statement": "任何仍暗置的棋实际进入【消灭】时，必须同步死亡【揭示】真实身份，再进入已消灭记录。",
+      "scope_and_exceptions": "【混乱】按下一条例外。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-REVEAL-002",
+      "domain": "board_and_information",
+      "statement": "【混乱】中的未正常揭示暗子死亡时只公开真实兵种，不公开死亡时秘密阵营。",
+      "scope_and_exceptions": "先前已正常揭示并锁定阵营者照常记录公开阵营。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-DESTROYED-RECORD-001",
+      "domain": "board_and_information",
+      "statement": "所有实际【消灭】统一进入当前“已消灭棋子记录”，按被消灭棋身份/公开阵营归组，不按杀手归组。",
+      "scope_and_exceptions": "复活后从当前已消灭状态移除；历史事件仍可保留。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-SECRET-001",
+      "domain": "board_and_information",
+      "statement": "公共暗子对象不得泄露真实颜色/兵种；权威私有状态可持有秘密身份。",
+      "scope_and_exceptions": "本地双人需通过交接清屏达到同等隔离。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-LEGALITY-001",
+      "domain": "board_and_information",
+      "statement": "普通合法性与落点提示不得读取未公开暗身份。",
+      "scope_and_exceptions": "揭示/死亡结算在权威端可读取。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-CONTROL-001",
+      "domain": "board_and_information",
+      "statement": "暗子由标准位置所属方控制；正常【揭示】后按公开真实阵营控制。",
+      "scope_and_exceptions": "【混乱】使用其专属秘密阵营与锁定规则。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-CAPTURE-001",
+      "domain": "board_and_information",
+      "statement": "普通吃子流程不把将帅作为普通目标；将帅离场须来自裁决/背刺、碾碎、陷阱、感染、窒息、时间崩坏等明确来源。",
+      "scope_and_exceptions": "潜行者及暗影之舞专属刺杀明确禁止指定将帅；不能引用旧强击吃将例外。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-CAPTURE-002",
+      "domain": "board_and_information",
+      "statement": "基础自残只允许按合法几何进攻暗目标，不允许把己方明棋当普通目标。",
+      "scope_and_exceptions": "路径【碾碎】可作用于己方地面棋，不属于普通目标吃子。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-CAPTURE-003",
+      "domain": "board_and_information",
+      "statement": "暗目标被合法消灭后，其身份按揭示规则公开并记录；揭示出的同色/异色结果不回滚本次已合法发生的进攻。",
+      "scope_and_exceptions": "完整【回溯】恢复历史快照是另一个后续来源，不改变本次原子行动的后置条件。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-ACTION-001",
+      "domain": "action_resolution_terminal",
+      "statement": "普通棋子棋盘主行动的核心动作只有【移动】与【进攻】；来源专属【占步】/特殊主行动可占用主行动机会而不强行归入两者；“走棋”不是正式上位分类。",
+      "scope_and_exceptions": "【移动】/【进攻】是动作结算维度，Ⅰ/Ⅱ/Ⅲ级与技能衍生等是来源/层级维度；【移置】、【回溯】及来源专属操作按各自规则，不新增第三个通用核心动作词。",
+      "current_runtime_verification": "pending_rule_migration_after_2026_10_06_sync"
+    },
+    {
+      "id": "INV-ACTION-002",
+      "domain": "action_resolution_terminal",
+      "statement": "“将军”是棋盘威胁状态，不是【进攻】或【终结】。",
+      "scope_and_exceptions": "来源可让将军直接进入专属【终结】，但不改变其概念层级。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-KEYWORD-001",
+      "domain": "action_resolution_terminal",
+      "statement": "【吃子】不得作为与【移动】、【进攻】并列的正式行动词；普通吃子属于【进攻】。",
+      "scope_and_exceptions": "自然语言仍可写“吃子”。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-ACTION-PLAN-001",
+      "domain": "action_resolution_terminal",
+      "statement": "主行动类型在行动计划阶段按所选路线的主动杀伤性质确定；事后自动触发不反向改类。",
+      "scope_and_exceptions": "铁马路径必然尝试碾碎地面马腿时从一开始就是【进攻】。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-DISPLACEMENT-001",
+      "domain": "action_resolution_terminal",
+      "statement": "【移置】是存活棋的非【移动】、非【进攻】位置变化；成功落位默认结算正常落位效果。",
+      "scope_and_exceptions": "失败通常留原位；战士弹回、飞行降落有来源专属失败处理。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-REWIND-001",
+      "domain": "action_resolution_terminal",
+      "statement": "【回溯】恢复来源规定的历史快照；被恢复的变化不视为重新发生，也不拆成逐枚【移置】/复活。",
+      "scope_and_exceptions": "来源要求的回溯后重新行动另行记录。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-REVIVE-001",
+      "domain": "action_resolution_terminal",
+      "statement": "复活只恢复存活本体，不恢复死亡前临时状态。",
+      "scope_and_exceptions": "已【揭示】、时光勇士身份、已占用防御名额、技能次数等身份/历史/资源信息不因此重置。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-DESTROY-001",
+      "domain": "action_resolution_terminal",
+      "statement": "【消灭】是棋子级结果，不要求杀手，也不自动等于【终结】；不得默认先清除全部状态。",
+      "scope_and_exceptions": "只有来源明确规定消耗/清除/解除时才产生独立状态变化。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-TERMINAL-001",
+      "domain": "action_resolution_terminal",
+      "statement": "【终结】是对局流程标签，可有或没有先行【消灭】。",
+      "scope_and_exceptions": "将死、困毙、认输、断线等可直接终结。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-ATOMIC-001",
+      "domain": "action_resolution_terminal",
+      "statement": "原子结算统一使用“候选终局 → 原子闭合 → 正式【终结】”。",
+      "scope_and_exceptions": "认输、断线等无待闭合棋盘行动的直接终局可立即终结。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-ATOMIC-002",
+      "domain": "action_resolution_terminal",
+      "statement": "原子闭合前，即使将帅中途【消灭】，同一不可分割来源的已承诺步骤、强制落位/返回、直接落位触发、死亡揭示与记录仍须完成。",
+      "scope_and_exceptions": "与当前原子行动无关的新触发或玩家决策不在闭合范围。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-ATOMIC-003",
+      "domain": "action_resolution_terminal",
+      "statement": "原子闭合后双方将帅均【消灭】时，outcome reason 必须为 mutual_destruction，具体死亡来源保留在事件日志。",
+      "scope_and_exceptions": "不适用于不同动作或不同真实时间阈值的先后终局。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-END-001",
+      "domain": "action_resolution_terminal",
+      "statement": "正式【终结】后停止回合切换、持续时间正常递减、下一回合/回合末刷新、无关新触发、新技能机会和玩家决策。",
+      "scope_and_exceptions": "结果落盘、日志、版本、终局动画/UI 不算继续游戏。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-REASON-001",
+      "domain": "action_resolution_terminal",
+      "statement": "三层感染、窒息、时间崩坏、其他未命名杀将分别使用 infection、suffocation、time_collapse、general_destroyed。",
+      "scope_and_exceptions": "已有专属 reason 不被兜底覆盖；winner 与 reason 分离。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-IDEMPOTENCY-001",
+      "domain": "action_resolution_terminal",
+      "statement": "相同 actionId 重放不得再次改变权威状态。",
+      "scope_and_exceptions": "服务器自动终结可使用独立保留 actionId。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-PHASE-001",
+      "domain": "action_resolution_terminal",
+      "statement": "只有与房间当前阶段匹配的命令可执行。",
+      "scope_and_exceptions": "断线超时和重连管理命令在暂停层另行处理。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-INTANGIBLE-001",
+      "domain": "spatial_and_destroy_methods",
+      "statement": "【无形】只改变“能否被需要直接指定具体棋子的效果直接指定”，不改变空间存在。",
+      "scope_and_exceptions": "若仍有【地面】，仍占格、挡地面路径、作炮架/马腿/象眼并参与照面。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-INTANGIBLE-002",
+      "domain": "spatial_and_destroy_methods",
+      "statement": "系统从合法候选池【随机】抽取不属于直接指定；【无形】默认仍在池中。",
+      "scope_and_exceptions": "只有来源明确排除【无形】时才排除。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-INTANGIBLE-003",
+      "domain": "spatial_and_destroy_methods",
+      "statement": "通用【无形】保留正常攻击几何并原则上可形成有效将军。",
+      "scope_and_exceptions": "潜行者来源【无形】存续期间不产生有效将军；【飞行】另有“不能【进攻】”。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-FLIGHT-001",
+      "domain": "spatial_and_destroy_methods",
+      "statement": "【飞行】同时获得【无形】、失去【地面】、免疫【碾碎】、不能【进攻】；不占地面层。",
+      "scope_and_exceptions": "不自动改变原移动几何，也不自动绕过【封锁】。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-FLIGHT-002",
+      "domain": "spatial_and_destroy_methods",
+      "statement": "飞行降落：无地面棋则恢复【地面】；有地面棋则先尝试【碾碎】；地面棋仍存活时飞行棋【窒息】【消灭】。",
+      "scope_and_exceptions": "失败后继续飞行的旧规则已退役。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-CRUSH-001",
+      "domain": "spatial_and_destroy_methods",
+      "statement": "【碾碎】直接尝试使对象【消灭】，不要求直接指定，也不默认先清除状态。",
+      "scope_and_exceptions": "地面+无形可被碾碎；飞行免疫。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-SUFFOCATION-001",
+      "domain": "spatial_and_destroy_methods",
+      "statement": "【窒息】只用于来源强制占据/返回/降落到指定位置而空间冲突无法解除的明确场景。",
+      "scope_and_exceptions": "当前明确来源：战士弹回失败、飞行降落失败、風流归位地面占位；不得推广到所有非法落位。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-INFECTION-001",
+      "domain": "spatial_and_destroy_methods",
+      "statement": "【感染】绑定棋子；亡魂是格上的持续影响，不是单位。",
+      "scope_and_exceptions": "在有效感染影响格之间移动保持层数；到无有效影响格或失去【地面】时清除。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-INFECTION-002",
+      "domain": "spatial_and_destroy_methods",
+      "statement": "每个对应死亡骑士方正式回合末，对合格敌方地面棋 +1 感染；达到 3 层立即【消灭】。",
+      "scope_and_exceptions": "普通防御和铁甲不能阻止；地面+无形仍可感染。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-WARRIOR-001",
+      "domain": "hero_mutation_cross_rules",
+      "statement": "每局最多 3 枚不同己方非将帅明棋，在首次通过【移动】或【进攻】成功离开己方九宫时获得普通防御；名额与单棋资格不返还。",
+      "scope_and_exceptions": "死亡、复活、重入九宫均不重置资格。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-WARRIOR-002",
+      "domain": "hero_mutation_cross_rules",
+      "statement": "普通防御介入普通直接进攻；触发后防御耗尽、目标留位、进攻者弹回。",
+      "scope_and_exceptions": "来源专属刺杀无视普通防御；龙爪端点追加碾碎按来源结算，不能恢复旧通用强击模型。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-WARRIOR-003",
+      "domain": "hero_mutation_cross_rules",
+      "statement": "战士弹回原位是【堡垒】封锁的来源专属复位例外；若返回格空间不能容纳，进攻者【窒息】【消灭】。",
+      "scope_and_exceptions": "失败返回不先形成存活落位，因此不触发返回格落位效果。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-WARRIOR-004",
+      "domain": "hero_mutation_cross_rules",
+      "statement": "普通防御获得时有 3 层持续；每个敌方正式回合结束 -1，覆盖 3 个完整敌方正式回合。",
+      "scope_and_exceptions": "额外行动/应将不额外扣层。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-IRONARMOR-001",
+      "domain": "hero_mutation_cross_rules",
+      "statement": "铁甲只免疫一次背刺【终结】，不是普遍来源进攻或死亡免疫。",
+      "scope_and_exceptions": "对手回合拦截后不给战士额外回应；战士自己回合发生背刺并拦截时才授予一次【额外】+【强迫】应将。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-ROGUE-001",
+      "domain": "hero_mutation_cross_rules",
+      "statement": "每个刺杀来源每局一次且彼此独立；发动让当前己方明置非将帅棋合法普通移动或进攻。",
+      "scope_and_exceptions": "普通防御弹回时退还来源且不获得无形；成功存活且仍归己方才获得来源无形。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-ROGUE-002",
+      "domain": "hero_mutation_cross_rules",
+      "statement": "发动后保留两个未来己方正式回合的来源刺杀窗口；发动回合不消耗这两个未来窗口。",
+      "scope_and_exceptions": "专属刺杀按普通几何，可指定无形并无视普通防御，禁止将帅；不用刺杀而用该棋行动则结束，第二未来己方回合末到期。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-STRIKE-001",
+      "domain": "hero_mutation_cross_rules",
+      "statement": "刺杀是来源专属进攻规则，不能建立通用强击标签或默认可选将帅。",
+      "scope_and_exceptions": "潜行者及暗影之舞刺杀可选无形并无视普通防御；禁止将帅，不自动驱散，龙鳞交叉沿用已确认返回落位：目标留位，进攻者返回并处理正常落位，行动机会已消耗。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-TRAP-001",
+      "domain": "hero_mutation_cross_rules",
+      "statement": "通过【移动】、【进攻】、【移置】、复活落位或成功飞行降落而成为敌方陷阱格上的【地面】棋时进入陷阱检查。",
+      "scope_and_exceptions": "活棋还需落位前与结算时均由陷阱主人的敌方控制。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-TRAP-002",
+      "domain": "hero_mutation_cross_rules",
+      "statement": "每层陷阱寿命为12个敌方正式回合；包括第12回合在内均致死，闭合该回合原子后于回合末归零失效。",
+      "scope_and_exceptions": "额外、强迫、技能衍生子行动不单独扣寿命；不再有第10–12回合控制阶段。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-IRONSTEED-001",
+      "domain": "hero_mutation_cross_rules",
+      "statement": "铁马只检查唯一马腿格的【地面】层；有地面棋则尝试【碾碎】后继续马步。",
+      "scope_and_exceptions": "地面+无形算马腿；飞行不算且免疫碾碎。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-IRONSTEED-002",
+      "domain": "hero_mutation_cross_rules",
+      "statement": "若所选马步路线必然尝试碾碎地面马腿棋，主行动从计划阶段就是【进攻】。",
+      "scope_and_exceptions": "马腿为己方或免疫碾碎而存活不改类别。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-WARCHARIOT-001",
+      "domain": "hero_mutation_cross_rules",
+      "statement": "战车发动路径只统计起点与目标之间所有【地面】路径棋，恰好 1 枚才可发动并尝试碾碎它。",
+      "scope_and_exceptions": "地面+无形计数；飞行不计数且不受碾碎。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-WARCHARIOT-002",
+      "domain": "hero_mutation_cross_rules",
+      "statement": "若对敌将的唯一可执行路线必然同时碾碎己将、只能导致两败俱伤，则该路线不构成有效将军。",
+      "scope_and_exceptions": "若战车实际合法发动并同原子消灭双方将帅，仍以两败俱伤终结。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-CAVALRY-001",
+      "domain": "hero_mutation_cross_rules",
+      "statement": "每方真实身份为马的两枚棋在【揭示】为马后升级为【骑兵】。",
+      "scope_and_exceptions": "暗置无标记；与铁马互斥；正常马步仍保留。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-CAVALRY-002",
+      "domain": "hero_mutation_cross_rules",
+      "statement": "骑兵在己方半场额外前进 1 格；敌方半场额外前/左/右 1 格；“不能后退”只限制额外一步。",
+      "scope_and_exceptions": "额外一步按目标占用归类为【移动】或【进攻】。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-FORTRESS-001",
+      "domain": "hero_mutation_cross_rules",
+      "statement": "【堡垒】禁止敌方棋从九宫外通过【移动】、【进攻】落位、【移置】或复活落位进入该九宫。",
+      "scope_and_exceptions": "宫内可内移/离开；飞行、无形、来源进攻不自动绕过；完整【回溯】和战士专属弹回例外。 風流强制身份归位亦是明确例外；流舞不继承此封锁豁免。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-MUROZOND-001",
+      "domain": "time_and_prince",
+      "statement": "姆诺兹多只可选择对手紧接上一正式回合完成的合格Ⅰ级俗手对应且仍存活的棋；若上一正式回合没有合格Ⅰ级俗手，不得跳过该回合搜索更老行动。先【移置】回原位并结算返回格，再决定是否【操控】。",
+      "scope_and_exceptions": "返回失败或返回格结算中被消灭则不再操控。只有来源未来明确允许跨回合搜索时才能例外。有效陷阱致死并停止当前链。",
+      "current_runtime_verification": "pending_rule_migration_after_2026_10_06_sync"
+    },
+    {
+      "id": "INV-NOZDORMU-001",
+      "domain": "time_and_prince",
+      "statement": "诺兹多姆执行完整权威快照【回溯】，包括当时棋盘和双方英雄技能状态；“回溯已使用”是时间线外元状态。",
+      "scope_and_exceptions": "回溯后同一棋重新行动，不能【进攻】也不能形成将军；玩家既得信息不抹除。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-TIME-COLLAPSE-001",
+      "domain": "time_and_prince",
+      "statement": "诺兹多姆方棋通过合法结算成功成为有效时空扭曲格上的【地面】棋时获得时间崩坏。",
+      "scope_and_exceptions": "覆盖进攻/移置/复活落位和成功降落；普通主动移动到空扭曲格仍非法。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-TIME-COLLAPSE-002",
+      "domain": "time_and_prince",
+      "statement": "棋连续处于任一有效扭曲格时状态持续，从扭曲 A 到 B 不清除也不刷新截止点；离开或扭曲清除时解除。",
+      "scope_and_exceptions": "截止点是获得后诺兹多姆方下一正式回合结束。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-HOURGLASS-001",
+      "domain": "time_and_prince",
+      "statement": "时光沙漏顺序固定为：候选锁定 → 锚点合法性检查 → 群体回归/复活 → 各自落位效果 → 净化全部扭曲 → 无限龙装填。",
+      "scope_and_exceptions": "单个勇士落位后再次消灭不阻止后续全局步骤。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-MANIFESTED-001",
+      "domain": "time_and_prince",
+      "statement": "时光勇士第一次任何公开【揭示】即建立“已现身”；死亡【揭示】同样有效。",
+      "scope_and_exceptions": "该身份/历史状态不因死亡、复活或临时状态重置丢失；是否跨其他未明示时间线机制不得擅自外推。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-CAREFREE-001",
+      "domain": "time_and_prince",
+      "statement": "【无忧】有效时，敌棋可在太子方半场移动，但当前位于该半场时不得主动【进攻】；也不得通过【进攻】落入该半场。",
+      "scope_and_exceptions": "半场内敌棋不产生有效将军；半场外远程将军不自动失效。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-CAREFREE-002",
+      "domain": "time_and_prince",
+      "statement": "太子方在己方正式回合主动【进攻】并使最终目标【消灭】，或形成有效将军时，【无忧】暂失到太子方下一正式回合开始。",
+      "scope_and_exceptions": "被防御拦截且目标未消灭不触发；陷阱/感染等自动消灭不算主动争斗。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-VISIBILITY-001",
+      "domain": "online_visibility_disconnect",
+      "statement": "英雄选择与猜拳阶段，对手只能看见确认状态，不能看见具体英雄；英雄入场后双方公开。",
+      "scope_and_exceptions": "本地双人通过交接清屏实现。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-TRAP-VISIBILITY-001",
+      "domain": "online_visibility_disconnect",
+      "statement": "未触发陷阱坐标、叠层和剩余寿命只对主人和权威端可见。",
+      "scope_and_exceptions": "触发事件与触发坐标公开。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-DISCONNECT-001",
+      "domain": "online_visibility_disconnect",
+      "statement": "首次连接成功并进入英雄选择后，每名玩家独立累计本局断线时间，多段不清零；最早真实达到 60 秒者判负。",
+      "scope_and_exceptions": "首次配对失败不计；本地双人无此终局。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-DISCONNECT-002",
+      "domain": "online_visibility_disconnect",
+      "statement": "任一玩家断线时，双方操作、阶段计时、普通视觉计时和开场动画暂停；全员重连后按暂停时长顺延。",
+      "scope_and_exceptions": "断线累计自身不暂停。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "INV-DISCONNECT-003",
+      "domain": "online_visibility_disconnect",
+      "statement": "只有双方在同一真实阈值时刻达到 60 秒才判断线平局；延迟检查不得把错峰超时变成平局。",
+      "scope_and_exceptions": "与棋盘原子 mutual_destruction 原因分离。",
+      "current_runtime_verification": "pending_individual_evidence"
+    }
+  ],
+  "anti_invariants": [
+    {
+      "id": "REJ-001",
+      "prohibited_global_claim": "暗子可经过若干次正常移动仍保持暗置。",
+      "counterexample": "第一次成功完成预定移动/进攻落位即揭示。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "REJ-002",
+      "prohibited_global_claim": "所有占据同坐标的棋都阻挡地面路径、作炮架/马腿/象眼。",
+      "counterexample": "【飞行】失去【地面】，不参与地面空间判定；注意地面+无形仍参与。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "REJ-003",
+      "prohibited_global_claim": "所有【进攻】只能以对方控制棋为目标。",
+      "counterexample": "暗子自残规则允许合法进攻任意暗目标；路径碾碎还可作用于己方地面棋。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "REJ-004",
+      "prohibited_global_claim": "将帅只能因普通将死离场。",
+      "counterexample": "陷阱、碾碎、感染、窒息、时间崩坏等均可直接【消灭】将帅。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "REJ-005",
+      "prohibited_global_claim": "将帅在任何来源下都不能成为目标。",
+      "counterexample": "普通进攻与来源专属刺杀均不能以将帅为目标；明确消灭将帅的其他来源另行结算。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "REJ-006",
+      "prohibited_global_claim": "原子结算中先被移除的将帅先输。",
+      "counterexample": "原子闭合后统一检查；双方均消灭时两败俱伤。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "REJ-007",
+      "prohibited_global_claim": "【消灭】前必须先清除全部效果。",
+      "counterexample": "当前通用模板明确退役；消灭导致存活期状态终止，不等于逐项清除。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "REJ-008",
+      "prohibited_global_claim": "任一非法落位都会【窒息】。",
+      "counterexample": "窒息仅有来源明确的强制返回/降落空间冲突；普通非法移置通常留原位。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "REJ-009",
+      "prohibited_global_claim": "【无形】棋不挡路、不当炮架/马腿/象眼。",
+      "counterexample": "只要仍有【地面】就正常参与空间判定。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "REJ-010",
+      "prohibited_global_claim": "【无形】棋不能产生攻击范围或有效将军。",
+      "counterexample": "通用无形保留；只有潜行者来源无形等专属来源另行限制。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "REJ-011",
+      "prohibited_global_claim": "所有来源进攻天然穿透无形并自动清除状态。",
+      "counterexample": "普通进攻不能指定无形；潜行者来源刺杀明确可指定无形，仍不自动驱散。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "REJ-012",
+      "prohibited_global_claim": "飞行棋自动无视【封锁】。",
+      "counterexample": "飞行不自动绕过堡垒封锁。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "REJ-013",
+      "prohibited_global_claim": "飞行降落失败后继续飞行。",
+      "counterexample": "地面层无法腾空时飞行棋窒息并消灭。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "REJ-014",
+      "prohibited_global_claim": "战士普通防御只有两个名额、持续两个敌方回合。",
+      "counterexample": "当前为三个不同棋名额、三层持续。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "REJ-015",
+      "prohibited_global_claim": "猎人第10–12回合陷阱转为控制，或第12回合原子尚未闭合就失效。",
+      "counterexample": "12个敌方正式回合全部致死，最后回合原子结算后才在回合末到期。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "REJ-016",
+      "prohibited_global_claim": "骑兵固定由 1/3/5 路兵位获得。",
+      "counterexample": "当前由真实马在揭示为马后升级。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "REJ-017",
+      "prohibited_global_claim": "只能导致战车双将同死平局的路线仍构成有效将军。",
+      "counterexample": "当前明确不构成有效将军。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "REJ-018",
+      "prohibited_global_claim": "复活恢复死亡前完整状态。",
+      "counterexample": "复活不恢复感染、无形、飞行、防御、时间崩坏等临时状态。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "REJ-019",
+      "prohibited_global_claim": "完整回溯等价于逐枚移置或复活。",
+      "counterexample": "回溯恢复历史快照，被恢复变化不视为重新发生。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "REJ-020",
+      "prohibited_global_claim": "当前运行时代码就是全部最终规则。",
+      "counterexample": "多项 9 月 22–23 设计已确认但尚未实现，且部分运行时语义明确过时。",
+      "current_runtime_verification": "pending_individual_evidence"
+    }
+  ],
+  "supplements": [
+    {
+      "id": "ADD-SECRET-001",
+      "statement": "风影发动前后敌方公共视图、按钮状态、日志和动画不泄漏实际使用次数、冷却或承载者。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "ADD-WIND-001",
+      "statement": "风流目标地面占位导致真主帅窒息，占位棋保留、原承载者格为空，空中层不阻挡。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "ADD-WIND-002",
+      "statement": "风失败归位不触发落位效果、不授予流舞；非裁决消灭不自动授予流舞。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "ADD-WIND-003",
+      "statement": "流舞第一步可暂不安全、最多两步最终安全，失败原裁决成立，不改困毙；亲征不扩大舞步。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "ADD-JIANXIE-001",
+      "statement": "尖斜过河后只正前和两斜前一步，底线无动作不自动消灭。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "ADD-CLOCK-001",
+      "statement": "回溯重走限时使用历史落子前真实剩余时间与10秒的较小值。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "ADD-TWIST-001",
+      "statement": "返回格按统一落位管线结算；有效敌方陷阱致死，返回棋死亡即停止操控链。",
+      "current_runtime_verification": "pending_individual_evidence"
+    },
+    {
+      "id": "ADD-ACTION-TIER-001",
+      "statement": "动作关键词与行动层级为正交维度：技能衍生动作可按【移动】/【进攻】结算但不是Ⅰ级俗手；来源专属主行动可占主行动而非【移动】/【进攻】。",
+      "current_runtime_verification": "partial_named_case_evidence_pending_full_source_and_hero_integration",
+      "runtime_evidence": "review/invariants/LATEST.json",
+      "implementation_record": "handoff/current/14_ACTION_TURN_RUNTIME_2026-10-06.md"
+    },
+    {
+      "id": "ADD-TURN-PHASE-001",
+      "statement": "正常正式回合默认按回合开始结算→主行动前窗口→主行动→行动原子闭合→回合结束结算五阶段推进。",
+      "current_runtime_verification": "partial_named_case_evidence_pending_full_source_and_hero_integration",
+      "runtime_evidence": "review/invariants/LATEST.json",
+      "implementation_record": "handoff/current/14_ACTION_TURN_RUNTIME_2026-10-06.md"
+    },
+    {
+      "id": "ADD-DURATION-001",
+      "statement": "持续效果默认获得即生效、当回合即计时；额外/强迫/技能衍生子行动默认不推进正式回合计数、持续时间、培养、冷却或周期资源。",
+      "current_runtime_verification": "partial_named_case_evidence_pending_full_source_and_hero_integration",
+      "runtime_evidence": "review/invariants/LATEST.json",
+      "implementation_record": "handoff/current/14_ACTION_TURN_RUNTIME_2026-10-06.md"
+    },
+    {
+      "id": "ADD-RIVER-001",
+      "statement": "【河道】为来源专属特殊空间状态：进入失去【地面】，离开恢复【地面】，与【飞行】互斥；无明确读取权限的既有棋盘效果默认不读取河道空间或河道棋。",
+      "current_runtime_verification": "partial_named_case_evidence_pending_full_source_and_hero_integration",
+      "runtime_evidence": "review/invariants/LATEST.json",
+      "implementation_record": "handoff/current/16_RIVER_SPACE_RUNTIME_2026-10-06.md"
+    },
+    {
+      "id": "ADD-BATCH-001",
+      "statement": "来源明确为同时/同批【消灭】时，先闭合整个消灭批次与其死亡揭示/记录，再处理由该批死亡产生的新亡魂、复活、召回、生成或资源触发；后续对象不倒流加入已闭合批次。",
+      "current_runtime_verification": "partial_named_case_evidence_pending_full_source_and_hero_integration",
+      "runtime_evidence": "review/invariants/LATEST.json",
+      "implementation_record": "handoff/current/15_DESTRUCTION_BATCH_RUNTIME_2026-10-06.md"
+    },
+    {
+      "id": "ADD-GHOST-OBJECT-001",
+      "statement": "【亡魂】与【里·亡魂】是独立格上对象，可共格但不互相叠层/刷新/提供资源；精确名称清除只处理对应对象，普通棋子消灭不顺带清除。",
+      "current_runtime_verification": "partial_named_case_evidence_pending_full_source_and_hero_integration",
+      "runtime_evidence": "review/invariants/LATEST.json",
+      "implementation_record": "handoff/current/18_GHOST_OBJECT_RUNTIME_2026-10-07.md"
+    },
+    {
+      "id": "ADD-CURRENT-CONTROL-001",
+      "statement": "来源明确读取“当前控制方”时只读取对应时点控制关系，不读取原始真实阵营或【混乱】秘密阵营；无秘密读取权限的目标/资源/UI不得以秘密阵营作隐藏条件。",
+      "current_runtime_verification": "partial_named_case_evidence_pending_full_source_and_hero_integration",
+      "runtime_evidence": "review/invariants/LATEST.json",
+      "implementation_record": "handoff/current/19_CURRENT_CONTROL_AUDIT_2026-10-07.md"
+    },
+    {
+      "id": "ADD-HERO-FORM-001",
+      "statement": "表/里为同一英雄的完整形态包；默认一局只使用所选形态，不能中途机会主义切换或同时叠加；命名为英雄名｜【技能名】与里·英雄名｜【里·技能名】。",
+      "current_runtime_verification": "partial_named_case_evidence_pending_full_source_and_hero_integration",
+      "runtime_record": "handoff/current/20_HERO_FORM_RUNTIME_2026-10-07.md"
+    },
+    {
+      "id": "ADD-DARK-IDENTITY-001",
+      "statement": "未揭示棋子的默认当前兵种按当前位置对应基础棋位的【暗置身份】判定，与隐藏真实身份区分；相同位置和公开状态不同隐藏兵种不改变普通身份判定。",
+      "current_runtime_verification": "partial_named_case_evidence_pending_full_source_and_hero_integration",
+      "runtime_evidence": "review/invariants/LATEST.json",
+      "implementation_record": "handoff/current/13_DARK_IDENTITY_RUNTIME_2026-10-06.md"
+    },
+    {
+      "id": "ADD-DARK-IDENTITY-002",
+      "statement": "普通暗置身份判定不触发揭示、不改隐藏真实身份、不以真实兵种或秘密阵营决定公开资格/资源/UI；只有来源明确要求真实身份/隐藏真实兵种/揭示后身份或执行揭示时才读取隐藏真实身份。",
+      "current_runtime_verification": "partial_named_case_evidence_pending_full_source_and_hero_integration",
+      "runtime_evidence": "review/invariants/LATEST.json",
+      "implementation_record": "handoff/current/13_DARK_IDENTITY_RUNTIME_2026-10-06.md"
+    },
+    {
+      "id": "ADD-DARK-IDENTITY-003",
+      "statement": "正式揭示后不再使用暗置身份，后续当前兵种判定按已揭示真实兵种；该词条不自行改变控制方、阵营、揭示时机或原有行动机制。",
+      "current_runtime_verification": "partial_named_case_evidence_pending_full_source_and_hero_integration",
+      "runtime_evidence": "review/invariants/LATEST.json",
+      "implementation_record": "handoff/current/13_DARK_IDENTITY_RUNTIME_2026-10-06.md"
+    },
+    {
+      "id": "ADD-DARK-IDENTITY-004",
+      "statement": "特殊来源让暗子保持暗置并移至无法确定基础棋位的位置时，必须由该来源定义暗置身份处理；公共层不读取隐藏真实身份兜底、不创造统一暗子身份。",
+      "current_runtime_verification": "partial_named_case_evidence_pending_full_source_and_hero_integration",
+      "runtime_evidence": "review/invariants/LATEST.json",
+      "implementation_record": "handoff/current/13_DARK_IDENTITY_RUNTIME_2026-10-06.md"
+    },
+    {
+      "id": "ADD-DARK-IDENTITY-005",
+      "statement": "公共规则/判定层统一提供未揭示棋当前兵种判定，英雄/畸变/基础机制按来源权限共用；术士暗置中心与普通目标均引用暗置身份再映射兵1、士象2、马炮3、车4，不另设术士身份或所有暗子统一3级。",
+      "current_runtime_verification": "partial_named_case_evidence_pending_full_source_and_hero_integration",
+      "runtime_evidence": "review/invariants/LATEST.json",
+      "implementation_record": "handoff/current/13_DARK_IDENTITY_RUNTIME_2026-10-06.md"
+    }
+  ],
+  "previous_rule_revision": "LEZI-FUNCTION-2026-10-06-r4"
+}

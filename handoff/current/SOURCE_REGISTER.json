@@ -1,0 +1,587 @@
+{
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-08-four-design-gaps-runtime",
+  "rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
+  "code_checkpoint": "fd268f301cf8200993271bf1bc837fbbff7870ce",
+  "sources": [
+    {
+      "id": "RULE:CURRENT_RULE_DELTAS_2026-09-22.md",
+      "kind": "original_source_reference_only",
+      "path": "rules/confirmed/CURRENT_RULE_DELTAS_2026-09-22.md",
+      "url": "https://github.com/aaaycc931-droid/jieqi-engine/blob/b7b968b91196170beb0db4f26852c63920a3d3e8/rules/confirmed/CURRENT_RULE_DELTAS_2026-09-22.md",
+      "sha256": "1692a0159485a105a2647f3db27822e33a1cc43eef0be86ade6d7b5d9e67110d",
+      "applied_scope": "§§1–7 → 01；§§8–11,14.1–14.2,15 → 02；§§12–14.4 → 03；§4.3 → 04死亡记录；§16为已闭合，不复制历史状态",
+      "embedded_original": false
+    },
+    {
+      "id": "RULE:HERO-MUTATION-SPEC.md",
+      "kind": "original_source_reference_only",
+      "path": "rules/confirmed/HERO-MUTATION-SPEC.md",
+      "url": "https://github.com/aaaycc931-droid/jieqi-engine/blob/b7b968b91196170beb0db4f26852c63920a3d3e8/rules/confirmed/HERO-MUTATION-SPEC.md",
+      "sha256": "e16eae22edbb746a1c2907feb4ae71972871eee145452df342d53ecc5a480acd",
+      "applied_scope": "未被差分覆盖的英雄6A–6G、陷阱布置、畸变适用棋种、12A宿命参数；旧运行时说明、旧刺杀、旧骑兵、旧无形空间及旧崩坏绑定剔除",
+      "embedded_original": false
+    },
+    {
+      "id": "RULE:BALANCE_AND_RULE_UPDATES_2026-09-28.md",
+      "kind": "original_source_reference_only",
+      "path": "rules/confirmed/BALANCE_AND_RULE_UPDATES_2026-09-28.md",
+      "url": "https://github.com/aaaycc931-droid/jieqi-engine/blob/b7b968b91196170beb0db4f26852c63920a3d3e8/rules/confirmed/BALANCE_AND_RULE_UPDATES_2026-09-28.md",
+      "sha256": "9f55bb1032c846074e4f5372f079e8f8e2967224c1c2441bb5093e0d486a6bb4",
+      "applied_scope": "仅§7尖斜、§8秘密、§9风新增规则为玩法增量；§9.10记录于08。§1旧即刻强击不采纳，早期评分表不提升现行",
+      "embedded_original": false
+    },
+    {
+      "id": "RULE:KEYWORD_SYSTEM_CURRENT.md",
+      "kind": "original_source_reference_only",
+      "path": "rules/confirmed/KEYWORD_SYSTEM_CURRENT.md",
+      "url": "https://github.com/aaaycc931-droid/jieqi-engine/blob/b7b968b91196170beb0db4f26852c63920a3d3e8/rules/confirmed/KEYWORD_SYSTEM_CURRENT.md",
+      "sha256": "a2a7f1fecf7553d413517a658f8ac392840e08d951c16be896ff2f161ad5e7af",
+      "applied_scope": "01通用默认、标签与免疫封锁；原§15只两类窒息由r1扩充",
+      "embedded_original": false
+    },
+    {
+      "id": "RULE:ACTION-TIER-KEYWORDS.md",
+      "kind": "original_source_reference_only",
+      "path": "rules/confirmed/ACTION-TIER-KEYWORDS.md",
+      "url": "https://github.com/aaaycc931-droid/jieqi-engine/blob/b7b968b91196170beb0db4f26852c63920a3d3e8/rules/confirmed/ACTION-TIER-KEYWORDS.md",
+      "sha256": "2340a345644c920ce4213e3f8791d7d2cb12c5bf1d5f62e348945a0181ed5ab5",
+      "applied_scope": "01层级与主行动记录；原姆诺兹多示例的回溯词与新移置冲突以最新差分为准",
+      "embedded_original": false
+    },
+    {
+      "id": "RULE:CURRENT_RULE_DELTAS_2026-09-20.md",
+      "kind": "original_source_reference_only",
+      "path": "rules/confirmed/CURRENT_RULE_DELTAS_2026-09-20.md",
+      "url": "https://github.com/aaaycc931-droid/jieqi-engine/blob/b7b968b91196170beb0db4f26852c63920a3d3e8/rules/confirmed/CURRENT_RULE_DELTAS_2026-09-20.md",
+      "sha256": "47d4b6f8092cc11bd4e8036c7a041b7d72c09cb0bc184db64e4b710fdd843cef",
+      "applied_scope": "死亡骑士生成/寿命、评分记录和未确认骑兵状态；感染绑定格、旧铁甲额外回应与旧词表不采纳",
+      "embedded_original": false
+    },
+    {
+      "id": "RULE:STATE.json",
+      "kind": "original_source_reference_only",
+      "path": "rules/confirmed/STATE.json",
+      "url": "https://github.com/aaaycc931-droid/jieqi-engine/blob/b7b968b91196170beb0db4f26852c63920a3d3e8/rules/confirmed/STATE.json",
+      "sha256": "ef8b97232a8a82fbef0b560d803127ba855241ea1907f7eaec2b95f0c701330d",
+      "applied_scope": "仅设计数值与确认记录用于08；旧实现分支、144测试、待实现与next_stage不继承",
+      "embedded_original": false
+    },
+    {
+      "id": "RULE:PENDING_AUDIT_2026-09-22.md",
+      "kind": "original_source_reference_only",
+      "path": "rules/confirmed/PENDING_AUDIT_2026-09-22.md",
+      "url": "https://github.com/aaaycc931-droid/jieqi-engine/blob/b7b968b91196170beb0db4f26852c63920a3d3e8/rules/confirmed/PENDING_AUDIT_2026-09-22.md",
+      "sha256": "3ca268352f4673e60aa6483fdf50462fef3846ef7647813a301ac0f7f7f5780e",
+      "applied_scope": "来源闭合记录；不当仍待确认",
+      "embedded_original": false
+    },
+    {
+      "id": "RULE:CONFIRMED_DESIGN_BASELINE_2026-09-22.md",
+      "kind": "original_source_reference_only",
+      "path": "rules/confirmed/CONFIRMED_DESIGN_BASELINE_2026-09-22.md",
+      "url": "https://github.com/aaaycc931-droid/jieqi-engine/blob/b7b968b91196170beb0db4f26852c63920a3d3e8/rules/confirmed/CONFIRMED_DESIGN_BASELINE_2026-09-22.md",
+      "sha256": "092b6591495595704de27f740a2340e97db304047d64f3d121a98cd76011cacc",
+      "applied_scope": "来源保护，设计/实现分离；当前正文用最新差分表达",
+      "embedded_original": false
+    },
+    {
+      "id": "RULE:RULE_UPDATE_2026-10-04_WIND_RETURN.md",
+      "kind": "original_source_reference_only",
+      "path": "rules/confirmed/RULE_UPDATE_2026-10-04_WIND_RETURN.md",
+      "url": "https://github.com/aaaycc931-droid/jieqi-engine/blob/b7b968b91196170beb0db4f26852c63920a3d3e8/rules/confirmed/RULE_UPDATE_2026-10-04_WIND_RETURN.md",
+      "sha256": "197148bef2d4dedc409ee74eb871762b4fe1d7a1c09507ef97104795d134d811",
+      "applied_scope": "本轮用户确认全面折入01窒息、02风与qa合同",
+      "embedded_original": false
+    },
+    {
+      "id": "DOC:CONFIRMED_UI_PLAN.md",
+      "path": "CONFIRMED_UI_PLAN.md",
+      "url": "https://github.com/aaaycc931-droid/jieqi-engine/blob/b7b968b91196170beb0db4f26852c63920a3d3e8/CONFIRMED_UI_PLAN.md",
+      "sha256": "12a056e9aa7f8db5ae572ed6dcf528e246c48657255244fac6700c56e993367c",
+      "applied_scope": "全流程融合秘密、统一死亡记录、12英雄目录和UI最后指令 → 04",
+      "embedded_original": false
+    },
+    {
+      "id": "DOC:UI_SOURCE_OF_TRUTH.md",
+      "path": "UI_SOURCE_OF_TRUTH.md",
+      "url": "https://github.com/aaaycc931-droid/jieqi-engine/blob/b7b968b91196170beb0db4f26852c63920a3d3e8/UI_SOURCE_OF_TRUTH.md",
+      "sha256": "0f1774c2b3a45381c15872808c4c273f6377b2b571905881aeedc3f96e9260bb",
+      "applied_scope": "首页原图授权与素材批准范围 → 04；旧实现状态排除",
+      "embedded_original": false
+    },
+    {
+      "id": "DOC:ONLINE-ARCHITECTURE.md",
+      "path": "ONLINE-ARCHITECTURE.md",
+      "url": "https://github.com/aaaycc931-droid/jieqi-engine/blob/b7b968b91196170beb0db4f26852c63920a3d3e8/ONLINE-ARCHITECTURE.md",
+      "sha256": "20d2d334b48762dca62eadf4ffe10b98edaabd7573960f73e28c1163238301a6",
+      "applied_scope": "互联网架构留待未来，不部署；代码契约与原详细稿可定位",
+      "embedded_original": false
+    },
+    {
+      "id": "SCORING:v2.9",
+      "name": "乐子象棋_英雄技能评分规则_v2.9.md",
+      "library_file_id": "libfile_0d6ca509de0c8191854876029350eea9",
+      "sha256": "d22ec86641f9079623a4bf99cfdc65714d83ad385247c11f9ee60d13ffe2a4da",
+      "applied_scope": "方法正文§0–34 → 07；版本变更史不嵌入；理论ledger独立"
+    },
+    {
+      "id": "COLLAB:v1.8.0",
+      "name": "X_Collaboration_System-4.md",
+      "container_library_file_id": "libfile_ca1409ea4f608191b873da7ad56a8908",
+      "sha256": "492faf5d509e32f41fd68191873b0ec83d4ffc5803295ae3c97cbf1dc39ecd9b",
+      "applied_scope": "历史协作整理来源；主文档独立维护。项目现行执行约定见06_COLLABORATION.md v1.0，本次不复制或修改个人主文档。",
+      "kind": "historical_personal_document_reference_only"
+    },
+    {
+      "id": "QA:69",
+      "name": "乐子象棋_Rule_Invariants_机器规格_v0.1.json",
+      "container_library_file_id": "libfile_f4a017f286b08191a2880b6b9c2f5087",
+      "sha256": "5bf0bb777e6db692f419d4a8bccd9b9a5f135fc28c812538c9e51318c5329d0f",
+      "applied_scope": "全部69不变量+20反例保留为待验证合同；去除旧运行时评级，两条范围升级+7补充"
+    },
+    {
+      "id": "UI:HOME",
+      "path": "web/assets/menu-original/approved-menu.png",
+      "sha256": "5c0dae37bb4dd84054d566c5ae5da98545ca73f23544ded5090ec80f1fbe211e",
+      "applied_scope": "当前首页视觉母版，包内assets/approved-home.png"
+    },
+    {
+      "id": "UI:V4",
+      "name": "lezi-xiangqi-v4-ui-clean-review-2026-09-15.png",
+      "library_file_id": "libfile_a2040a7fdda48191a5d876aba15a9071",
+      "sha256": "63671bd146ce72a3c61f40dac457f83f882d7ada78c5f5f98efb7bb3ba5eac26",
+      "applied_scope": "V4棋盘参考，外围历史状态字段不覆盖04，包内assets/approved-v4-reference.png"
+    },
+    {
+      "id": "EVIDENCE:PUBLIC_TARGETS_AND_SNAPSHOT_2026-10-05",
+      "kind": "execution_evidence_non_normative",
+      "path": "review/invariants/ROUND_2026-10-05-targets.md",
+      "url": "https://github.com/aaaycc931-droid/jieqi-engine/blob/ffd2fb070c89d1d9eaae4d6cfce9112f151e5594/tests/public-target-contracts.test.ts",
+      "applied_scope": "公开目标资格、无形直接指定拒绝、五项对方资源回溯及11组预置DOM交互；不是全称合同/完整随机对局/设备验收",
+      "embedded_original": false
+    },
+    {
+      "id": "EVIDENCE:ACTIVE_REWIND_CLOCK_2026-10-05",
+      "kind": "execution_evidence_non_normative",
+      "path": "review/gameplay/ACTIVE_MATCH_2026-10-05.md",
+      "applied_scope": "回溯跨入口/非法路径、非盗贼暗影入口、准备正式时钟；316测试/13预置DOM/五类完整主动实战样本，未完成随机样本保留，不是全验收",
+      "embedded_original": false
+    },
+    {
+      "id": "USER:GAME_MODES_2026-10-05",
+      "kind": "explicit_current_conversation_confirmation",
+      "path": "handoff/current/09_CURRENT_GAME_MODES.md",
+      "confirmed_at": "2026-10-05T19:10:02+08:00",
+      "applied_scope": "新增普通象棋/半混乱基础模式，保留英雄畸变，未来模式独立适配；暂停旧验证；通用优先级和混乱交互不定案",
+      "embedded_original": false
+    },
+    {
+      "id": "EXECUTION:MODE_FOUNDATION_2026-10-05",
+      "kind": "implementation_and_execution_evidence_non_normative",
+      "path": "review/gameplay/MODE_FOUNDATION_2026-10-05.md",
+      "applied_scope": "r2 confirmed bases only, real opening preview and old-mode regression; no independent hero/mutation effects or full new mode acceptance",
+      "authorization": "user 2026-10-05 19:21 同意; follows 19:10 confirmed mode definitions"
+    },
+    {
+      "id": "USER:STAGE_CLOSE_2026-10-05_221840",
+      "kind": "explicit_user_stage_close_instruction",
+      "quote": "我得结束本阶段工作了",
+      "timestamp": "2026-10-05T22:18:40+08:00",
+      "applied_scope": "stop further implementation/design/validation; retain prior pauses, archive current rules and actual evidence, resume only under new user scope",
+      "path": "10_STAGE_CLOSE.md"
+    },
+    {
+      "id": "RULE:RULE_UPDATE_2026-10-06_GLOBAL_RULE_SYNC.md",
+      "kind": "user_confirmed_rule_delta",
+      "path": "rules/confirmed/RULE_UPDATE_2026-10-06_GLOBAL_RULE_SYNC.md",
+      "applied_scope": "2026-10-06用户明确要求将已确认全局规则写入游戏总规则；动作/层级正交、正式回合五阶段、河道空间、同批消灭、亡魂类精确语义、当前控制方秘密隔离、表/里形态 → 01；测试合同同步 → qa",
+      "embedded_original": false
+    },
+    {
+      "id": "RULE:RULE_UPDATE_2026-10-06_DARK_IDENTITY.md",
+      "kind": "user_confirmed_rule_delta",
+      "path": "rules/confirmed/RULE_UPDATE_2026-10-06_DARK_IDENTITY.md",
+      "confirmed_at": "2026-10-06T16:16:33+08:00",
+      "sha256": "3b801daf6e12de90d70d81065b6dd23328e2e717cbaed6128c8aa1fc9bf6531a",
+      "applied_scope": "公共基础暗置身份及特殊位置处理→01；术士引用/原暗置等级未决关闭→12；公共判定层实现要求与5项待验证合同→qa；不导入其他英雄、不改运行时。",
+      "embedded_original": false,
+      "followup_runtime_record": "handoff/current/13_DARK_IDENTITY_RUNTIME_2026-10-06.md"
+    },
+    {
+      "id": "EXECUTION:DARK_IDENTITY_RUNTIME_2026-10-06",
+      "kind": "implementation_and_execution_evidence_non_normative",
+      "path": "handoff/current/13_DARK_IDENTITY_RUNTIME_2026-10-06.md",
+      "implementation_commit": "70b9debba34be7a7f3ca119997b6e9e0ac266ff3",
+      "authorization": "user: 进行下一步推进",
+      "applied_scope": "公共暗置身份、现有基础/畸变兵种判断及毁灭普通候选；9项新用例、337引擎回归、Web构建和117资源字节一致；不是完整r3/r4、术士技能、浏览器或实体设备验收",
+      "embedded_original": false
+    },
+    {
+      "id": "EXECUTION:ACTION_TURN_RUNTIME_2026-10-06",
+      "kind": "implementation_and_execution_evidence_non_normative",
+      "path": "handoff/current/14_ACTION_TURN_RUNTIME_2026-10-06.md",
+      "implementation_commit": "62348cabf0da7fffa3f66368161d633e85bb4fde",
+      "authorization": "user 2026-10-06T17:32:45+08:00 同意继续行动历史与正式回合时序",
+      "applied_scope": "现有入口正交行动分类、正式主行动历史、五阶段、秦龙/太子/混乱开始结算及额外/子行动不推进计数；17新测试、354回归、118资源一致；不是未来英雄、完整r3/r4、浏览器或实体设备验收",
+      "embedded_original": false
+    },
+    {
+      "id": "EXECUTION:DESTRUCTION_BATCH_RUNTIME_2026-10-06",
+      "kind": "implementation_and_execution_evidence_non_normative",
+      "path": "handoff/current/15_DESTRUCTION_BATCH_RUNTIME_2026-10-06.md",
+      "implementation_commit": "a3b8dcaeac38cdb67f4a597ed23b483f16a661db",
+      "authorization": "user 2026-10-06T18:11:04+08:00 同意继续同批消灭闭合",
+      "applied_scope": "公共闭批入口/触发屏障、毁灭锁定成功集合、死亡公开快照及亡魂单次派生；13新用例、367引擎回归、Web构建与118资源一致。普通顺序来源保留，未来英雄/资源钩子与完整r3/r4、浏览器、实体设备未验收。",
+      "embedded_original": false
+    },
+    {
+      "id": "EXECUTION:RIVER_SPACE_RUNTIME_2026-10-06",
+      "kind": "implementation_and_execution_evidence_non_normative",
+      "path": "handoff/current/16_RIVER_SPACE_RUNTIME_2026-10-06.md",
+      "implementation_commit": "998a02ab58e231550c9c71598b8419cca06578a9",
+      "authorization": "外部续接消息同意，当前18:59用户追问进度后继续此前河道范围",
+      "applied_scope": "公共河道状态/转换与默认棋盘读取隔离，来源公开暗身份/控制接口；17新用例、384回归、Web构建及119资源一致。未启用江鹤等英雄进出资格/连通/容量/时长规则；完整r3/r4、浏览器与实体设备未验收。",
+      "embedded_original": false
+    },
+    {
+      "id": "HANDOFF:ACCOUNT_SWITCH_CLOSE_2026-10-06",
+      "kind": "stage_close_non_normative",
+      "path": "handoff/current/17_ACCOUNT_SWITCH_CLOSE_2026-10-06.md",
+      "authorization": "user 2026-10-06T23:14:24+08:00 我要更换账号了",
+      "implementation_commit_unchanged": "998a02ab58e231550c9c71598b8419cca06578a9",
+      "applied_scope": "仅收束交接和当前单一接续指令；不改运行时/规则、不重跑测试、不生成APK，旧对话停止产品写入",
+      "embedded_original": false
+    },
+    {
+      "id": "RUNTIME:GHOST_OBJECTS_2026-10-07",
+      "kind": "runtime_execution_evidence_non_normative",
+      "path": "handoff/current/18_GHOST_OBJECT_RUNTIME_2026-10-07.md",
+      "sha256": "4e2660c3b728ce4c0ee12760a913be5bfbf0b3d76cc3cbf2f4a26ecf220240ad",
+      "authorization": "user 2026-10-07T09:33:28+08:00 暂时无需更换账号，在当前对话继续",
+      "implementation_commit": "364b711f522be18c6c636e59a3df5e02844092c7",
+      "local_execution_checkpoint": "78034962d9ccd3ac5c950269b60f9e4e9b92faac",
+      "implementation_tree": "23ba3b24107432060ad6e067309248b26d7befb8",
+      "applied_scope": "公共两类独立对象与精确名称/归属/来源接口、既有普通死亡骑士感染与计时、批次屏障和协议/实际回溯；17专项测试，401通过，121资源；未导入里英雄生成/持续/收益，完整验收0",
+      "embedded_original": false
+    },
+    {
+      "id": "RUNTIME:CURRENT_CONTROL_AUDIT_2026-10-07",
+      "kind": "runtime_execution_evidence_non_normative",
+      "path": "handoff/current/19_CURRENT_CONTROL_AUDIT_2026-10-07.md",
+      "sha256": "041a02ee0cede1dcf44642dab431dcdbcb34548ad6296fcc812596869e4c8f0b",
+      "authorization": "user 2026-10-07T10:18:37+08:00 同意",
+      "implementation_commit": "af5e411d49099c2f5b936e6dde004b6f5e50059d",
+      "local_execution_checkpoint": "14de414e76862d2adb8d014f66eae6f80bc8da3c",
+      "implementation_tree": "d9b682eaae0de8dc497296af1d2784f0eeca66ad",
+      "applied_scope": "现有源码控制/秘密读取映射与15项情景验证、真实身份明确来源、无限龙公开弹药候选共用，旧实际菜单复现；416通过、121资源；保留风/宿命真实许可，未导入未来英雄，完整验收0",
+      "ui_reproduction": "review/invariants/CURRENT_CONTROL_UI_REPRO_2026-10-07.json",
+      "embedded_original": false
+    },
+    {
+      "id": "RUNTIME:HERO_FORM_2026-10-07",
+      "kind": "runtime_execution_evidence_non_normative",
+      "path": "handoff/current/20_HERO_FORM_RUNTIME_2026-10-07.md",
+      "sha256": "e8e110328bc946736289fda342378a394ab5deafe1ac1ebee92a33c580db752c",
+      "authorization": "user 2026-10-07T15:37:30+08:00 同意（继续表/里公共模型）",
+      "implementation_commit": "830c180de6f60593c42fee427959e77cb7ffb189",
+      "local_execution_checkpoint": "ba7a75ff4637c37f92142758d87199e43773ce81",
+      "implementation_tree": "669cb1165f38881d350de557d5aa759881120842",
+      "applied_scope": "十二已移交表完整包登记、命名和整局公共/权威锁、旧快照迁移、主被动分派与实际回溯/蓝牙编码/重连/再战；18新测试、434通过、122资源；里包明确不可用，无新UI/浏览器/实机/APK，完整验收0",
+      "embedded_original": false
+    },
+    {
+      "id": "EVIDENCE:ACCEPTANCE_GAP_CLOSE_2026-10-07",
+      "kind": "acceptance_gap_inventory_non_normative",
+      "path": "handoff/current/21_ACCEPTANCE_GAP_CLOSE_2026-10-07.md",
+      "sha256": "64e73e77e49daf53bbf1c2666f4870ce188f950ab996312bc0201c6aa594b7ab",
+      "authorization": "user 2026-10-07T17:14:00+08:00 同意，这一步结束后我会把新英雄设计提交给你",
+      "implementation_commit_unchanged": "830c180de6f60593c42fee427959e77cb7ffb189",
+      "applied_scope": "既有r4源/证据摘要和109合同映射核验、未验收范围分类及正式英雄稿接收流程；只读盘点，无运行时代码/新测试/规则更新/APK",
+      "embedded_original": false
+    },
+    {
+      "id": "EVIDENCE:ACCEPTANCE_GAP_INVENTORY_2026-10-07",
+      "kind": "acceptance_gap_inventory_non_normative",
+      "path": "handoff/current/qa/ACCEPTANCE_GAPS.json",
+      "sha256": "b476f6ba2696cb4a0185ac96da1ad976c7b43f37ff694b5bf86ccbc696cbc210",
+      "authorization": "user 2026-10-07T17:14:00+08:00 同意，这一步结束后我会把新英雄设计提交给你",
+      "implementation_commit_unchanged": "830c180de6f60593c42fee427959e77cb7ffb189",
+      "applied_scope": "Historical r4 acceptance inventory retained with explicit supersession annotation; current hero intake tracked separately.",
+      "embedded_original": false,
+      "previous_sha256": "590fc1f59fe17fca042a510a4cd884cc42f57252466438da6d468cc555c26abd",
+      "bytes": 114848
+    },
+    {
+      "id": "TRANSFER:2026-10-07:00_READ_FIRST.md",
+      "kind": "formal_hero_design_transfer",
+      "path": "rules/transferred/2026-10-07-r7-clean/00_READ_FIRST.md",
+      "sha256": "d74fb0ffcb67ca4a1fb0342b1d4c1eb6758f71ece4cbaa01d1f58af4534607b8",
+      "bytes": 1709,
+      "applied_scope": "Current source; gameplay only 01-03, scoring never changes gameplay."
+    },
+    {
+      "id": "TRANSFER:2026-10-07:01_CURRENT_RULES.md",
+      "kind": "formal_hero_design_transfer",
+      "path": "rules/transferred/2026-10-07-r7-clean/01_CURRENT_RULES.md",
+      "sha256": "98f2bdc1aa86527c11b05bf5f5fdcfa963eddfb784cb49fa0f9350aaaf8f192b",
+      "bytes": 29517,
+      "applied_scope": "Current source; gameplay only 01-03, scoring never changes gameplay."
+    },
+    {
+      "id": "TRANSFER:2026-10-07:02_CURRENT_HEROES.md",
+      "kind": "formal_hero_design_transfer",
+      "path": "rules/transferred/2026-10-07-r7-clean/02_CURRENT_HEROES.md",
+      "sha256": "da104122e8279e3bb9646059ad14783b2c64ef5816c98b2c97204ebb0457454b",
+      "bytes": 32591,
+      "applied_scope": "Current source; gameplay only 01-03, scoring never changes gameplay."
+    },
+    {
+      "id": "TRANSFER:2026-10-07:03_CURRENT_MUTATIONS.md",
+      "kind": "formal_hero_design_transfer",
+      "path": "rules/transferred/2026-10-07-r7-clean/03_CURRENT_MUTATIONS.md",
+      "sha256": "e68b3123042cf4ce2bb7411ee3cea4c1289b6c8875f564f4b4c39db6542affb1",
+      "bytes": 17178,
+      "applied_scope": "Current source; gameplay only 01-03, scoring never changes gameplay."
+    },
+    {
+      "id": "TRANSFER:2026-10-07:07_DESIGN_SCORING.md",
+      "kind": "non_normative_scoring_audit",
+      "path": "rules/transferred/2026-10-07-r7-clean/07_DESIGN_SCORING.md",
+      "sha256": "d0d7f6a2f3e6b2774ed03eb38c5199373d0fb887ad804b5db28fcd5ad2db293b",
+      "bytes": 4854,
+      "applied_scope": "Current source; gameplay only 01-03, scoring never changes gameplay."
+    },
+    {
+      "id": "TRANSFER:2026-10-07:08_SCORE_LEDGER.md",
+      "kind": "non_normative_scoring_audit",
+      "path": "rules/transferred/2026-10-07-r7-clean/08_SCORE_LEDGER.md",
+      "sha256": "1381656cb5dd9fbc1108faeb93e4bcd594f85a871d1f51530ca66bc1c0d04481",
+      "bytes": 35456,
+      "applied_scope": "Current source; gameplay only 01-03, scoring never changes gameplay."
+    },
+    {
+      "id": "TRANSFER:2026-10-07:WORK_MODE_IMPLEMENTATION_HANDOFF_2026-10-07.md",
+      "kind": "formal_hero_design_transfer",
+      "path": "rules/transferred/2026-10-07-r7-clean/WORK_MODE_IMPLEMENTATION_HANDOFF_2026-10-07.md",
+      "sha256": "211a0aab6ba6cb303a0c9c440534dd8ec815f60bac368174333f6dfd84d26e68",
+      "bytes": 10900,
+      "applied_scope": "Current source; gameplay only 01-03, scoring never changes gameplay."
+    },
+    {
+      "id": "RUNTIME:CROSS_SETTLEMENT:2026-10-08",
+      "kind": "execution_evidence_non_normative",
+      "path": "handoff/current/23_HERO_CROSS_SETTLEMENT_2026-10-08.md",
+      "sha256": "2eb9b7e34879843ce393ee5591845f2aba604404caffd808a644b8e50e69457b",
+      "applied_scope": "Three implementation corrections; eight engine scenarios and current CI evidence; no rule-source changes"
+    },
+    {
+      "id": "RUNTIME:CHILD_BOUNDARY:2026-10-08",
+      "kind": "execution_evidence_non_normative",
+      "path": "handoff/current/24_HERO_CHILD_BOUNDARY_2026-10-08.md",
+      "sha256": "682ea99dc274c671db2c248545bb19b4696510e92bf4a905b9527938b6b9e735",
+      "applied_scope": "Deferred barrier bounce runtime correction; three engine cases and one actual DOM scenario; no normative change"
+    },
+    {
+      "id": "RUNTIME:DESCENT_BOUNDARY:2026-10-08",
+      "kind": "execution_evidence_non_normative",
+      "path": "handoff/current/25_HERO_DESCENT_BOUNDARY_2026-10-08.md",
+      "sha256": "9a0a9f908cb74eb7519e8f659f98cd8f36c87e31a5e58372023c538b1c22888d",
+      "applied_scope": "Three descent runtime corrections; six engine cases and three actual DOM cases; no normative change"
+    },
+    {
+      "id": "COLLAB:LEZI-PROJECT-COLLAB-v1.1",
+      "kind": "current_project_collaboration_non_rule",
+      "path": "handoff/current/06_COLLABORATION.md",
+      "sha256": "a78ee4882f30d25d6d84e783467f15704c34c113ac6884ac9b6a6c52ac874186",
+      "applied_scope": "独立项目协作、授权与设计移交、按影响验证、重复执行控制、证据汇报与跨对话交接；不定义玩法",
+      "authorization": "本对话2026-10-08独立化与继续推进授权",
+      "personal_main_document_modified": false
+    },
+    {
+      "id": "CI:SCOPE-2026-10-08",
+      "kind": "ci_configuration_evidence_non_rule",
+      "path": "handoff/current/26_CI_SCOPE_2026-10-08.md",
+      "sha256": "0b43d3f8b14511e6c739c6ec75b913efe6ebc3d0eaa5053a2b9c70e237298567",
+      "applied_scope": "本次改动的CI范围选择、失败保护与独立配置验证；不更新玩法或产品验收状态"
+    },
+    {
+      "id": "RUNTIME:DESCENT-ATOM-2026-10-08",
+      "kind": "runtime_evidence_non_rule",
+      "path": "handoff/current/27_HERO_DESCENT_ATOM_2026-10-08.md",
+      "sha256": "1baae70fb55e3d85d770eb16ed99c4e25cad9074c6d361f5b16e6417c4c15631",
+      "applied_scope": "降临完整来源、死亡/亡魂记录与正式终结的7引擎和4新增DOM情景，不定义玩法"
+    },
+    {
+      "id": "RUNTIME:BOMB-TARGET-2026-10-08",
+      "kind": "runtime_evidence_non_rule",
+      "path": "handoff/current/28_BOMB_TARGET_BOUNDARY_2026-10-08.md",
+      "sha256": "a8f0ab4b13ba1579a55a75107ee6a748ee33f576fb3fc8adf7b5c7c4a38f18d4",
+      "applied_scope": "宿命投弹目标校验、非法请求事务与全军次数/主行动的4引擎和2新增DOM情景，不定义玩法"
+    },
+    {
+      "id": "RUNTIME:FLIGHT-TURN-2026-10-08",
+      "kind": "runtime_evidence_non_rule",
+      "path": "handoff/current/29_FLIGHT_TURN_BOUNDARY_2026-10-08.md",
+      "sha256": "cf37769700cd84e1b3a14e72f84b9496cb181387ccac1ac024c46d1d6b8849c0",
+      "applied_scope": "显式连带操控与下一正式强制降落、空地共格原棋选择的3引擎和2新增DOM情景，不定义玩法"
+    },
+    {
+      "id": "LEZI-H07-MIRROR-2026-10-08",
+      "kind": "explicit_user_confirmed_hero_rule_addendum",
+      "path": "rules/confirmed/RULE_UPDATE_2026-10-08_THIEF_MIRROR.md",
+      "sha256": "30775c14cfe15ede76737779abd564eb2621af34970cd58dcbfa9b97e1cf857e",
+      "applied_scope": "双窃时标准60/60；已实现，引擎及准备态DOM/CI部分情景证据，非完整验收"
+    },
+    {
+      "id": "LEZI-H12-GENERAL-THRESHOLD-2026-10-08",
+      "kind": "explicit_user_confirmed_hero_rule_addendum",
+      "path": "rules/confirmed/RULE_UPDATE_2026-10-08_FLAME_GENERAL.md",
+      "sha256": "56571e87875a63d9def9ba5b9b430d643ebc0263f561c4272d9eb7dc4e415c93",
+      "applied_scope": "普通中心>=3级消灭将帅；将帅中心范围全部普通棋与另一将帅同批消灭；已实现，引擎及准备态DOM/CI部分情景证据，非完整验收"
+    },
+    {
+      "id": "LEZI-H16-BRAWL-ENTRY-2026-10-08",
+      "kind": "explicit_user_confirmed_hero_rule_addendum",
+      "path": "rules/confirmed/RULE_UPDATE_2026-10-08_BRAWL_ENTRY.md",
+      "sha256": "caba373363d1aefa199ad140dc44e3cba6f8d5d51245e3b866d3a6adc5aed806",
+      "applied_scope": "主动先付6+5n，占主行动，己方暗子首刀，同棋暗子连斩，一链付费/共享n只一次；已实现，引擎及准备态DOM/CI部分情景证据，非完整验收"
+    },
+    {
+      "id": "LEZI-H21-DRAGON-SCALE-2026-10-08",
+      "kind": "explicit_user_confirmed_hero_rule_addendum",
+      "path": "rules/confirmed/RULE_UPDATE_2026-10-08_DRAGON_SCALE.md",
+      "sha256": "b332cb7821f8d29f067882b4c491cd89a17a71d264674bc14b0e617ae02b61b0",
+      "applied_scope": "龙鳞目标留位，地面进攻者返回结算落位，飞行降落受阻按既有规则窒息；已实现，引擎及准备态DOM/CI部分情景证据，非完整验收"
+    },
+    {
+      "id": "RULE:RULE_UPDATE_2026-10-09_WIND_FLOW_CASUALTY.md",
+      "kind": "current_user_confirmed_global_rule_delta",
+      "path": "rules/confirmed/RULE_UPDATE_2026-10-09_WIND_FLOW_CASUALTY.md",
+      "url": "https://github.com/aaaycc931-droid/jieqi-engine/blob/codex/ui-android-apk-20261001/rules/confirmed/RULE_UPDATE_2026-10-09_WIND_FLOW_CASUALTY.md",
+      "applied_scope": "三模式共享：01进攻终点特例与消灭记录、02 H10风【流】真实承载棋承伤、09模式共享继承；实现与评分仍未据此完成",
+      "embedded_original": false
+    }
+  ],
+  "coverage": {
+    "base_and_atomic": "01_CURRENT_RULES.md",
+    "heroes": {
+      "hunter": "02_CURRENT_HEROES.md",
+      "rogue": "02_CURRENT_HEROES.md",
+      "warrior": "02_CURRENT_HEROES.md",
+      "qin_long": "02_CURRENT_HEROES.md",
+      "murozond": "02_CURRENT_HEROES.md",
+      "nozdormu": "02_CURRENT_HEROES.md",
+      "murozond_minion": "02_CURRENT_HEROES.md",
+      "devout_zealot": "02_CURRENT_HEROES.md",
+      "prince": "02_CURRENT_HEROES.md",
+      "deathwing": "02_CURRENT_HEROES.md",
+      "death_knight": "02_CURRENT_HEROES.md",
+      "wind": "02_CURRENT_HEROES.md",
+      "shuffler": "02_CURRENT_HEROES.md",
+      "warlock": "02_CURRENT_HEROES.md",
+      "single_blade": "02_CURRENT_HEROES.md",
+      "night": "02_CURRENT_HEROES.md",
+      "sky_admiral": "02_CURRENT_HEROES.md",
+      "berserker": "02_CURRENT_HEROES.md",
+      "jiang_he": "02_CURRENT_HEROES.md"
+    },
+    "mutations": {
+      "iron_steed": "03_CURRENT_MUTATIONS.md",
+      "iron_wall": "03_CURRENT_MUTATIONS.md",
+      "shadow_dance": "03_CURRENT_MUTATIONS.md",
+      "war_chariot": "03_CURRENT_MUTATIONS.md",
+      "expedition": "03_CURRENT_MUTATIONS.md",
+      "cavalry": "03_CURRENT_MUTATIONS.md",
+      "chaos": "03_CURRENT_MUTATIONS.md",
+      "jian_xie": "03_CURRENT_MUTATIONS.md",
+      "end_time": "03_CURRENT_MUTATIONS.md"
+    },
+    "ui_and_bluetooth": "04_CURRENT_UI_AND_FLOW.md",
+    "implementation_evidence_and_gaps": "05_PROGRESS_AND_NEXT.md",
+    "parallel_design": "06_COLLABORATION.md",
+    "scoring_method": "07_DESIGN_SCORING.md",
+    "scores": "08_SCORE_LEDGER.md",
+    "invariant_contracts": "qa/INVARIANTS.json",
+    "game_modes": "09_CURRENT_GAME_MODES.md",
+    "hero_forms": "02_CURRENT_HEROES.md H18/H20; full independent packages",
+    "hero_transfer_audit": "qa/HERO_TRANSFER_AUDIT.json"
+  },
+  "source_gaps": [
+    {
+      "name": "原始独立《揭棋规则规格 v1》全文",
+      "status": "not_located_this_round",
+      "fallback": "当前固定源码/测试和已恢复差分；不声称原稿完整恢复",
+      "action": "涉及基础区域/跨河变更前定位原稿核对"
+    }
+  ],
+  "excluded_payloads": [
+    "所有旧ZIP与APK",
+    "旧UI生成变体",
+    "已覆盖的旧规则段落",
+    "旧STATE运行时分支/测试数/下一步",
+    "过时3英雄进度"
+  ],
+  "completeness_claim": "H07/H12已确认、运行时待接入；H16启动方式已确认，尚缺费用公式；H21龙鳞落位未确认，仍为2项设计缺口。501/20为增量前部分证据，完整验收0。",
+  "previous_code_checkpoint": "9ed5ff71590bf9658d1294def22bb669b195357b",
+  "runtime_evidence_index": "review/invariants/LATEST.json",
+  "gameplay_execution_evidence_index": "review/gameplay/runtime-browser-review-2026-10-05-modes.json",
+  "full_match_execution_evidence_index": "review/gameplay/full-match-browser-2026-10-05-active-regression-summary.json",
+  "active_skill_execution_evidence_index": "review/gameplay/active-match-browser-2026-10-05-summary.json",
+  "previous_rule_revision": "LEZI-FUNCTION-2026-10-06-r4",
+  "mode_foundation_evidence_index": "review/gameplay/mode-browser-review-2026-10-05.json",
+  "stage_close_index": "10_STAGE_CLOSE.md",
+  "rule_sync_index": "11_RULE_SYNC_2026-10-06.md",
+  "dark_identity_sync_index": "handoff/current/12_DARK_IDENTITY_SYNC_2026-10-06.md",
+  "dark_identity_runtime_index": "handoff/current/13_DARK_IDENTITY_RUNTIME_2026-10-06.md",
+  "runtime_mapping_index": "review/invariants/R4_RUNTIME_MAPPING_2026-10-06.md",
+  "action_turn_runtime_index": "handoff/current/14_ACTION_TURN_RUNTIME_2026-10-06.md",
+  "destruction_batch_runtime_index": "15_DESTRUCTION_BATCH_RUNTIME_2026-10-06.md",
+  "river_space_runtime_index": "16_RIVER_SPACE_RUNTIME_2026-10-06.md",
+  "account_switch_close_index": "17_ACCOUNT_SWITCH_CLOSE_2026-10-06.md",
+  "ghost_object_runtime_index": "18_GHOST_OBJECT_RUNTIME_2026-10-07.md",
+  "current_control_audit_index": "19_CURRENT_CONTROL_AUDIT_2026-10-07.md",
+  "hero_form_runtime_index": "20_HERO_FORM_RUNTIME_2026-10-07.md",
+  "acceptance_gap_close_index": "21_ACCEPTANCE_GAP_CLOSE_2026-10-07.md",
+  "acceptance_gap_inventory_index": "qa/ACCEPTANCE_GAPS.json",
+  "hero_transfer_index": "22_HERO_TRANSFER_2026-10-07.md",
+  "code_tree": "2196ff13746ef6e00fc0a5b4820eae20d1a8a209",
+  "local_execution_checkpoint": "f3ae349548970eaf94469c90d323b157777dbea8",
+  "qa_contract_checkpoint_role": "INVARIANTS.code_checkpoint is the prior product checkpoint used for the r5 diff, not a claim of current runtime acceptance.",
+  "hero_cross_settlement_index": "23_HERO_CROSS_SETTLEMENT_2026-10-08.md",
+  "hero_child_boundary_index": "24_HERO_CHILD_BOUNDARY_2026-10-08.md",
+  "hero_descent_boundary_index": "25_HERO_DESCENT_BOUNDARY_2026-10-08.md",
+  "ci_scope_index": {
+    "report": "handoff/current/26_CI_SCOPE_2026-10-08.md",
+    "configuration_commit": "9980f891c2a293a0f3862717b7bffb66a8d02ee3",
+    "runtime_checkpoint_unchanged": true
+  },
+  "hero_descent_atom_index": "27_HERO_DESCENT_ATOM_2026-10-08.md",
+  "current_hero_browser_evidence_index": "review/invariants/HERO_TRANSFER_BROWSER_2026-10-07.json",
+  "bomb_target_boundary_index": "28_BOMB_TARGET_BOUNDARY_2026-10-08.md",
+  "flight_turn_boundary_index": "29_FLIGHT_TURN_BOUNDARY_2026-10-08.md",
+  "confirmed_rule_addenda": [
+    {
+      "id": "LEZI-H07-MIRROR-2026-10-08",
+      "path": "rules/confirmed/RULE_UPDATE_2026-10-08_THIEF_MIRROR.md",
+      "sha256": "30775c14cfe15ede76737779abd564eb2621af34970cd58dcbfa9b97e1cf857e"
+    },
+    {
+      "id": "LEZI-H12-GENERAL-THRESHOLD-2026-10-08",
+      "path": "rules/confirmed/RULE_UPDATE_2026-10-08_FLAME_GENERAL.md",
+      "sha256": "56571e87875a63d9def9ba5b9b430d643ebc0263f561c4272d9eb7dc4e415c93"
+    },
+    {
+      "id": "LEZI-H16-BRAWL-ENTRY-2026-10-08",
+      "path": "rules/confirmed/RULE_UPDATE_2026-10-08_BRAWL_ENTRY.md",
+      "sha256": "caba373363d1aefa199ad140dc44e3cba6f8d5d51245e3b866d3a6adc5aed806"
+    },
+    {
+      "id": "LEZI-H21-DRAGON-SCALE-2026-10-08",
+      "path": "rules/confirmed/RULE_UPDATE_2026-10-08_DRAGON_SCALE.md",
+      "sha256": "b332cb7821f8d29f067882b4c491cd89a17a71d264674bc14b0e617ae02b61b0"
+    }
+  ],
+  "rule_gap_runtime_index": "30_RULE_GAP_RUNTIME_2026-10-08.md",
+  "local_assembled_publication_checkpoint": "83bfe5e1cf8d05373a6d2c846ad547afd4674215",
+  "current_ci_evidence_index": "review/invariants/RULE_GAP_CI_2026-10-08.json"
+}

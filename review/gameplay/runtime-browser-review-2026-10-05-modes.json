@@ -1,0 +1,72 @@
+{
+  "authority": "browser_execution_evidence_non_normative",
+  "sourceCommit": "8b985a8f2bf8cd4ab96fdf63ab73894292cc6f7a",
+  "appDigest": "ea04a8beaa5d45b94d7fd85d7482dc118d926a4c411789cea2564cab9809b424",
+  "browser": "145.0.7632.6",
+  "viewport": {
+    "width": 390,
+    "height": 845
+  },
+  "fixtureMethod": "Review-only response suffix supplies prepared authoritative states; all tested actions use original application DOM handlers.",
+  "limits": [
+    "These prepared-state interactions do not certify a full random match or every hero combination.",
+    "Local handoff visibility is tested; Bluetooth private-message transport and physical devices remain pending.",
+    "Local timer display is tested; formal network timeout/late-command/idempotency have separate engine tests. Local timeout outcome is unconfirmed.",
+    "No APK, deployment, UI artwork change or normative rule change."
+  ],
+  "cases": [
+    {
+      "name": "invoke-cancel-confirm-handoff",
+      "passed": true
+    },
+    {
+      "name": "timeline-invalid-rollback-then-control",
+      "passed": true
+    },
+    {
+      "name": "rewind-three-second-display-and-same-piece",
+      "passed": true
+    },
+    {
+      "name": "destiny-bomb-and-hourglass-revival",
+      "passed": true
+    },
+    {
+      "name": "wind-secret-shadow-and-private-trap-handoff",
+      "passed": true
+    },
+    {
+      "name": "deathwing-skill-settles-locked-targets",
+      "passed": true
+    },
+    {
+      "name": "flow-barrier-escape-keeps-clock-and-player",
+      "passed": true
+    },
+    {
+      "name": "flow-execution-return-two-step-escape",
+      "passed": true
+    },
+    {
+      "name": "flow-first-safe-step-ends-early",
+      "passed": true
+    },
+    {
+      "name": "shadow-target-list-excludes-invisible-and-current-general",
+      "passed": true
+    },
+    {
+      "name": "public-capture-marker-and-hidden-general-death",
+      "passed": true
+    },
+    {
+      "name": "rewind-restores-stealth-exit-guards-and-clears-replay",
+      "passed": true
+    },
+    {
+      "name": "non-rogue-shadow-dance-has-real-mutation-entry",
+      "passed": true
+    }
+  ],
+  "errors": []
+}

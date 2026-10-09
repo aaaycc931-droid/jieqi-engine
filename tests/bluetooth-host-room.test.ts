@@ -41,8 +41,6 @@ test("BTHOST-04 英雄、陷阱和私有坐标均通过房主单点结算", () =
     randomInt: () => 0,
     mode: { heroesEnabled: true, mutationsEnabled: true },
   });
-  room.handle(BLUETOOTH_HOST_PLAYER, { kind: "rps", choice: "rock", round: 1 });
-  room.handle(BLUETOOTH_GUEST_PLAYER, { kind: "rps", choice: "scissors", round: 1 });
   let views = room.views();
   assert.equal(views.publicRoom.phase, "hero_selection");
   assert.equal(views.guest.ownHeroChoice, undefined);
@@ -51,13 +49,24 @@ test("BTHOST-04 英雄、陷阱和私有坐标均通过房主单点结算", () =
   views = room.views();
   assert.equal(views.guest.ownHeroChoice, undefined, "guest cannot learn host hero early");
   views = room.handle(BLUETOOTH_GUEST_PLAYER, { kind: "hero", hero: "hunter" });
-  assert.equal(views.publicRoom.phase, "trap_setup");
+  assert.equal(views.publicRoom.phase, "rps");
+  assert.equal(views.guest.ownHeroChoice, "hunter");
+
+  room.handle(BLUETOOTH_HOST_PLAYER, { kind: "rps", choice: "rock", round: 1 });
+  views = room.handle(BLUETOOTH_GUEST_PLAYER, { kind: "rps", choice: "scissors", round: 1 });
+  assert.equal(views.publicRoom.phase, "hero_intro");
   assert.equal(views.publicRoom.features?.mutation, "iron_steed");
 
-  room.handle(BLUETOOTH_HOST_PLAYER, { kind: "traps", positions: [{ x: 0, y: 5 }, { x: 0, y: 5 }] });
+  room.handle(BLUETOOTH_HOST_PLAYER, { kind: "hero_intro_complete" });
+  views = room.handle(BLUETOOTH_GUEST_PLAYER, { kind: "hero_intro_complete" });
+  assert.equal(views.publicRoom.phase, "hero_preparation");
+
+  room.handle(BLUETOOTH_HOST_PLAYER, { kind: "trap_draft", positions: [{ x: 0, y: 5 }, { x: 0, y: 5 }] });
+  room.handle(BLUETOOTH_HOST_PLAYER, { kind: "preparation_ready" });
   views = room.views();
   assert.equal(views.guest.ownTraps?.length, 0, "guest cannot receive host trap coordinates");
-  views = room.handle(BLUETOOTH_GUEST_PLAYER, { kind: "traps", positions: [{ x: 0, y: 0 }, { x: 0, y: 0 }] });
+  room.handle(BLUETOOTH_GUEST_PLAYER, { kind: "trap_draft", positions: [{ x: 0, y: 0 }, { x: 0, y: 0 }] });
+  views = room.handle(BLUETOOTH_GUEST_PLAYER, { kind: "preparation_ready" });
   assert.equal(views.publicRoom.phase, "playing");
   assert.equal(views.host.ownTraps?.length, 2);
   assert.equal(views.guest.ownTraps?.length, 2);
@@ -78,4 +87,53 @@ test("BTHOST-05 来宾操作仍受回合、版本和房主规则引擎约束", (
     kind: "move",
     command: { from: { x: 0, y: 0 }, to: { x: 0, y: 1 }, expectedRevision: 0, actionId: "guest-too-early" },
   }), /还没有轮到/);
+});
+
+test("BTHOST-06 英雄选择起主动退出由房主立即权威判负", () => {
+  const room = new BluetoothHostRoom({
+    roomId: "bt-forfeit",
+    admissionSecret: "local-link",
+    now: () => 100,
+    mode: { heroesEnabled: true, mutationsEnabled: true },
+  });
+  const views = room.handle(BLUETOOTH_GUEST_PLAYER, { kind: "forfeit", actionId: "guest-exit" });
+  assert.equal(views.publicRoom.phase, "finished");
+  assert.equal(views.host.forfeitOutcome?.winnerPlayerId, BLUETOOTH_HOST_PLAYER);
+  assert.equal(views.guest.forfeitOutcome?.loserPlayerId, BLUETOOTH_GUEST_PLAYER);
+});
+
+test("BTHOST-07 再战邀请由房主计时并在对方接受后建立全新选英雄阶段", () => {
+  let now = 100;
+  const room = new BluetoothHostRoom({
+    roomId: "bt-rematch",
+    admissionSecret: "local-link",
+    now: () => now,
+    mode: { heroesEnabled: true, mutationsEnabled: true },
+  });
+  room.handle(BLUETOOTH_GUEST_PLAYER, { kind: "forfeit", actionId: "guest-exit" });
+  now = 200;
+  let views = room.handle(BLUETOOTH_HOST_PLAYER, { kind: "rematch_request", actionId: "again" });
+  assert.equal(views.guest.rematch?.requestedBy, BLUETOOTH_HOST_PLAYER);
+  assert.equal(views.guest.rematch?.deadlineAt, 30_200);
+  now = 300;
+  views = room.handle(BLUETOOTH_GUEST_PLAYER, { kind: "rematch_response", accept: true });
+  assert.equal(views.publicRoom.phase, "hero_selection");
+  assert.equal(views.publicRoom.state, undefined);
+  assert.equal(views.publicRoom.rematch, undefined);
+});
+
+test("BTHOST-08 双方聊天经房主权威同步且不阻塞行棋回合", () => {
+  let now = 100;
+  const room = new BluetoothHostRoom({ roomId: "bt-chat", admissionSecret: "local-link", now: () => now, randomInt: () => 0 });
+  room.handle(BLUETOOTH_HOST_PLAYER, { kind: "rps", choice: "rock", round: 1 });
+  room.handle(BLUETOOTH_GUEST_PLAYER, { kind: "rps", choice: "scissors", round: 1 });
+  now = 1_000;
+  let views = room.handle(BLUETOOTH_GUEST_PLAYER, { kind: "chat", messageId: "guest-chat", text: "好棋！" });
+  assert.equal(views.host.messages?.at(-1)?.senderSide, "black");
+  assert.equal(views.guest.messages?.at(-1)?.text, "好棋！");
+  assert.equal(views.publicRoom.state?.turn, "red");
+  assert.throws(
+    () => room.handle(BLUETOOTH_GUEST_PLAYER, { kind: "chat", messageId: "too-fast", text: "谢谢" }),
+    /发送过快/,
+  );
 });

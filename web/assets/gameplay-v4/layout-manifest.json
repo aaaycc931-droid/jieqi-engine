@@ -1,0 +1,75 @@
+{
+  "version": "4.0-approved-final",
+  "canvas": { "width": 852, "height": 1846 },
+  "background": {
+    "asset": "components/backgrounds/paper-background.png",
+    "x": 0,
+    "y": 0,
+    "width": 852,
+    "height": 1846
+  },
+  "modules": [
+    { "id": "player-blue", "asset": "components/header/player-blue-module.png", "x": 0, "y": 55, "width": 315, "height": 170 },
+    { "id": "player-red", "asset": "components/header/player-red-module.png", "x": 510, "y": 55, "width": 332, "height": 170 },
+    { "id": "timer", "asset": "components/header/timer-60.png", "x": 346, "y": 80, "width": 160, "height": 110 },
+    { "id": "mutation", "asset": "components/header/mutation-badge.png", "x": 355, "y": 197, "width": 150, "height": 65 },
+    { "id": "board", "asset": "components/board/board-clean-no-pieces-transparent.png", "x": 21, "y": 330, "width": 810, "height": 812 },
+    { "id": "captured", "asset": "components/panels/captured-panel-module.png", "x": 20, "y": 1142, "width": 812, "height": 155 },
+    { "id": "status-blue", "asset": "components/panels/status-panel-module.png", "x": 20, "y": 1307, "width": 812, "height": 150 },
+    { "id": "status-red", "asset": "components/panels/status-panel-module.png", "x": 20, "y": 1472, "width": 812, "height": 150 },
+    { "id": "message", "asset": "components/panels/message-panel-module.png", "x": 18, "y": 1667, "width": 690, "height": 125 },
+    { "id": "more", "asset": "components/controls/more-button.png", "x": 707, "y": 1663, "width": 130, "height": 132 }
+  ],
+  "sharedAssets": {
+    "avatarFrame": "components/controls/avatar-frame.png",
+    "statusPanel": "components/panels/status-panel-module.png",
+    "moreButtonBase": "components/controls/avatar-frame.png",
+    "skillRingOriginal": "components/controls/skill-ring-original.png",
+    "skillSlotEmpty": "components/controls/skill-slot-empty-display.png",
+    "skillSlotLabeled": "components/controls/skill-slot-labeled-display.png"
+  },
+  "board": {
+    "origin": { "x": 21, "y": 330 },
+    "size": { "width": 810, "height": 812 },
+    "ringDisplayBox": { "width": 68, "height": 68 },
+    "ringPlacementManifest": "source/ring-placement-manifest.tsv",
+    "ringCenters": [
+      [81, 57], [162, 57], [242, 57], [322, 57], [402, 57], [482, 57], [562, 57], [642, 57], [722, 57],
+      [162, 212], [642, 212],
+      [81, 289], [242, 289], [402, 289], [562, 289], [722, 289],
+      [81, 522], [242, 522], [402, 522], [562, 522], [722, 522],
+      [162, 599], [642, 599],
+      [81, 755], [162, 755], [242, 755], [322, 755], [402, 755], [482, 755], [562, 755], [642, 755], [722, 755]
+    ],
+    "revealedGlyphs": [
+      { "id": "black-general", "asset": "components/pieces/glyph-black-general-display.png", "x": 406, "y": 366, "width": 34, "height": 42 },
+      { "id": "red-marshal", "asset": "components/pieces/glyph-red-marshal-display.png", "x": 406, "y": 1064, "width": 34, "height": 42 }
+    ]
+  },
+  "capturedPanel": {
+    "capacityPerSide": 5,
+    "examplePieces": [
+      { "asset": "components/pieces/captured/piece-blue-soldier-centered.png", "x": 62, "y": 52, "width": 82, "height": 82 },
+      { "asset": "components/pieces/captured/piece-blue-rook-centered.png", "x": 149, "y": 52, "width": 82, "height": 82 },
+      { "asset": "components/pieces/captured/piece-red-soldier-centered.png", "x": 454, "y": 52, "width": 82, "height": 82 },
+      { "asset": "components/pieces/captured/piece-red-cannon-centered.png", "x": 541, "y": 52, "width": 82, "height": 82 }
+    ],
+    "expandArrow": { "asset": "components/controls/captured-expand-arrow.png", "x": 374, "y": 8, "width": 52, "height": 140 }
+  },
+  "statusPanel": {
+    "avatar": { "asset": "components/controls/avatar-frame.png", "x": 29, "y": 14, "width": 130, "height": 132 },
+    "skillSlots": [
+      { "asset": "components/controls/skill-slot-empty-display.png", "x": 197, "y": 32, "width": 96, "height": 96 },
+      { "asset": "components/controls/skill-slot-empty-display.png", "x": 357, "y": 32, "width": 96, "height": 96 },
+      { "asset": "components/controls/skill-slot-empty-display.png", "x": 515, "y": 32, "width": 96, "height": 96 },
+      { "asset": "components/controls/skill-slot-labeled-display.png", "x": 657, "y": 32, "width": 96, "height": 96 }
+    ]
+  },
+  "runtimeNotes": [
+    "棋盘组件不包含任何棋子墨圈。",
+    "32 个棋位逐个放置，禁止合并成整排贴图。",
+    "原始墨圈为 270x270；运行时优先使用已标准化的 68x68 显示版。",
+    "头像框安全透明边距必须保留，不裁边、不拉伸。",
+    "手机系统状态栏图标不属于游戏 UI 组件。"
+  ]
+}

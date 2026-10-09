@@ -1,33 +1,74 @@
 name: Verify rules and web build
 
 on:
+  workflow_dispatch:
+    inputs:
+      build_apk:
+        description: Explicitly resume APK packaging after UI review
+        required: true
+        type: boolean
+        default: false
   push:
     branches: [main]
   pull_request:
     branches: [main]
+
+permissions:
+  contents: read
+  actions: read
 
 jobs:
   rules-and-web:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 24
+      - name: Verify CI scope selection boundaries
+        run: node --test scripts/ci/select-scope.test.mjs
+      - name: Select checks for this update
+        id: scope
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/ci/select-scope.mjs
       - name: Run complete rule suite and build the WebView assets
-        run: node --test --test-reporter=spec tests/*.test.ts && node scripts/build-web.ts && node android/scripts/sync-web-assets.mjs
+        if: steps.scope.outputs.engine == 'true'
+        run: node scripts/review/verify-invariant-evidence.mjs && node scripts/build-web.ts && node android/scripts/sync-web-assets.mjs
+      - name: Keep per-contract execution evidence and explicit coverage gaps
+        if: always() && steps.scope.outputs.engine == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: invariant-execution-evidence
+          path: |
+            review/invariants/LATEST.json
+            review/invariants/LATEST.md
+          if-no-files-found: error
+          retention-days: 7
 
   android-apk:
+    # 2026-10-04: user paused APK generation while the remaining UI is revised.
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.build_apk }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Build and sync the current WebView assets
+        run: node scripts/build-web.ts && node android/scripts/sync-web-assets.mjs
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: "17"
-      - uses: android-actions/setup-android@v3
       - name: Install the declared Android SDK components
-        run: sdkmanager --install "platforms;android-36" "build-tools;36.0.0"
+        run: |
+          sdkmanager_path="$(find /usr/local/lib/android/sdk/cmdline-tools -type f -name sdkmanager -print -quit)"
+          test -n "$sdkmanager_path"
+          yes | "$sdkmanager_path" --licenses
+          "$sdkmanager_path" --install "platforms;android-36" "build-tools;36.0.0"
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: "9.7.1"

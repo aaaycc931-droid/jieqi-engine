@@ -4,160 +4,399 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#2d1a14" />
-    <title>揭棋 · 本地双人试玩</title>
+    <title>乐子象棋</title>
     <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./ui-refresh.css" />
+    <link rel="stylesheet" href="./home-menu.css" />
   </head>
   <body>
     <div class="app-shell">
-      <header class="topbar">
-        <a class="brand" href="#" aria-label="重新开始揭棋试玩">
-          <span class="brand-seal" aria-hidden="true">揭</span>
-          <span><strong>揭棋</strong><small>本地试玩 · 蓝牙双机</small></span>
+      <header class="topbar" hidden>
+        <a class="brand" href="#" aria-label="返回乐子象棋主界面">
+          <span class="brand-seal" aria-hidden="true">乐</span>
+          <span><strong>乐子象棋</strong><small>作者：流风舞影</small></span>
         </a>
         <button id="restart-button" class="quiet-button" type="button">重新开始</button>
       </header>
 
       <main>
-        <section id="lobby-view" class="setup-card" aria-labelledby="lobby-title">
-          <p class="eyebrow">选择对局方式</p>
-          <h1 id="lobby-title">揭棋双人对弈</h1>
-          <p id="bluetooth-status" class="setup-help">本机试玩无需联网；蓝牙模式使用已配对设备，由房主权威裁定每一步。</p>
-          <div class="lobby-actions">
-            <button id="local-game-button" class="primary-button" type="button">本机双人试玩</button>
-            <button id="bluetooth-host-button" class="quiet-button" type="button">创建蓝牙房间</button>
-          </div>
-          <div id="bluetooth-options" class="mode-picker" aria-label="蓝牙房间玩法设置">
-            <label>英雄模式<select id="bluetooth-heroes"><option value="on">开启</option><option value="off">关闭</option></select></label>
-            <label>畸变模式<select id="bluetooth-mutations"><option value="on">开启</option><option value="off">关闭</option></select></label>
-            <label>已配对设备<select id="bluetooth-device"><option value="">请先刷新</option></select></label>
-          </div>
-          <div class="lobby-actions bluetooth-actions">
-            <button id="bluetooth-refresh-button" class="quiet-button" type="button">刷新已配对设备</button>
-            <button id="bluetooth-join-button" class="quiet-button" type="button">加入蓝牙房间</button>
-          </div>
-          <p class="rule-note"><strong>蓝牙准备</strong><span>两台手机先在系统设置完成蓝牙配对；一台点“创建”，另一台选中房主设备后点“加入”。连接成功后双方各自在自己的手机上猜拳、选英雄和行棋。</span></p>
+        <section id="main-menu-view" class="main-menu-view" aria-labelledby="main-menu-title">
+          <svg class="reference-paper" viewBox="0 620 941 355" preserveAspectRatio="none" aria-hidden="true">
+            <image href="./assets/menu-original/approved-menu.png" width="941" height="1672" />
+          </svg>
+          <div class="reference-header" aria-hidden="true"><img src="./assets/menu-original/approved-menu.png" alt=""></div>
+          <div class="reference-footer" aria-hidden="true"><img src="./assets/menu-original/approved-menu.png" alt=""></div>
+          <button id="settings-menu-button" class="ink-icon-button settings-menu-button" type="button" aria-label="设置">
+            <img src="./assets/menu-v1/icon-settings.png" alt="" aria-hidden="true">
+          </button>
+          <header class="main-menu-heading">
+            <h1 id="main-menu-title" class="visually-hidden">乐子象棋</h1>
+            <p class="visually-hidden">作者：流风舞影</p>
+          </header>
+          <nav class="main-menu-actions" aria-label="主菜单">
+            <button id="local-game-button" class="ink-menu-button accent-blue" type="button"><span class="visually-hidden">本机双人</span></button>
+            <button id="bluetooth-menu-button" class="ink-menu-button accent-red" type="button"><span class="visually-hidden">蓝牙对局</span></button>
+            <button id="online-game-button" class="ink-menu-button unavailable" type="button" aria-disabled="true"><span class="visually-hidden">联机对战</span></button>
+            <button id="rules-menu-button" class="ink-menu-button compact" type="button"><span class="visually-hidden">玩法说明</span></button>
+          </nav>
         </section>
-        <section id="rps-view" class="setup-card" aria-labelledby="rps-title">
-          <p class="eyebrow">开局决定先手</p>
-          <h1 id="rps-title">玩家一，请秘密出拳</h1>
-          <p id="rps-help" class="setup-help">选择后把设备交给玩家二；胜者执红并先走。</p>
+
+        <section id="lobby-view" class="ink-page bluetooth-lobby-view" hidden aria-labelledby="lobby-title">
+          <img class="bluetooth-lobby-footer-decoration" src="./assets/menu-v1/decoration-footer.png" alt="" aria-hidden="true">
+          <button id="bluetooth-back-button" class="ink-icon-button page-back-button" type="button" aria-label="返回主菜单">
+            <img src="./assets/menu-v1/icon-back.png" alt="" aria-hidden="true">
+          </button>
+          <header class="ink-page-heading">
+            <p class="eyebrow">面对面对局</p>
+            <h1 id="lobby-title" class="visually-hidden">蓝牙对局</h1>
+            <img class="lobby-title-art" src="./assets/menu-v1/label-bluetooth.png" alt="" aria-hidden="true">
+          </header>
+          <p id="bluetooth-status" class="bluetooth-status" aria-live="polite">请选择创建对局或加入对局。</p>
+          <div id="bluetooth-state-actions" class="bluetooth-state-actions" hidden>
+            <button id="bluetooth-enable-button" class="ink-text-button primary" type="button" hidden>开启蓝牙</button>
+            <button id="bluetooth-permission-button" class="ink-text-button primary" type="button" hidden>允许蓝牙权限</button>
+            <button id="bluetooth-app-settings-button" class="ink-text-button primary" type="button" hidden>前往系统设置</button>
+          </div>
+          <div id="bluetooth-initial-actions" class="bluetooth-primary-actions">
+            <button id="bluetooth-host-button" class="ink-menu-button accent-blue" type="button"><img src="./assets/menu-v1/label-create.png" alt="" aria-hidden="true"><span class="visually-hidden">创建对局</span></button>
+            <button id="bluetooth-join-mode-button" class="ink-menu-button accent-red" type="button"><img src="./assets/menu-v1/label-join.png" alt="" aria-hidden="true"><span class="visually-hidden">加入对局</span></button>
+          </div>
+          <section id="bluetooth-join-panel" class="bluetooth-join-panel" hidden aria-label="选择已配对设备">
+            <label for="bluetooth-device">已配对设备</label>
+            <select id="bluetooth-device"><option value="">请先重新检测</option></select>
+            <div class="bluetooth-secondary-actions">
+              <button id="bluetooth-refresh-button" class="ink-text-button" type="button">重新检测</button>
+              <button id="bluetooth-join-button" class="ink-text-button primary" type="button">连接设备</button>
+            </div>
+            <button id="bluetooth-open-settings-button" class="ink-link-button" type="button">打开系统蓝牙设置</button>
+            <button id="bluetooth-join-cancel-button" class="ink-link-button" type="button">返回</button>
+          </section>
+          <section id="bluetooth-session-panel" class="bluetooth-session-panel" hidden aria-live="polite">
+            <p id="bluetooth-session-kicker" class="bluetooth-session-kicker">蓝牙房间</p>
+            <h2 id="bluetooth-session-title">正在准备</h2>
+            <p id="bluetooth-session-device" class="bluetooth-session-device" hidden></p>
+            <strong id="bluetooth-rematch-timer" class="bluetooth-rematch-timer" hidden>30</strong>
+            <p id="bluetooth-session-detail" class="bluetooth-session-detail"></p>
+            <div class="bluetooth-session-actions">
+              <button id="bluetooth-retry-button" class="ink-text-button primary" type="button" hidden>重试</button>
+              <button id="bluetooth-rematch-request-button" class="ink-text-button primary" type="button" hidden>再次邀请</button>
+              <button id="bluetooth-rematch-accept-button" class="ink-text-button primary" type="button" hidden>接受再战</button>
+              <button id="bluetooth-rematch-decline-button" class="ink-text-button" type="button" hidden>暂不继续</button>
+              <button id="bluetooth-cancel-button" class="ink-text-button" type="button">取消</button>
+              <button id="bluetooth-return-button" class="ink-text-button" type="button" hidden>返回</button>
+            </div>
+          </section>
+          <p class="bluetooth-help">两台手机需先在系统中完成蓝牙配对。连接成功后将直接进入英雄选择。</p>
+        </section>
+
+        <section id="settings-view" class="ink-page settings-view" hidden aria-labelledby="settings-title">
+          <img class="settings-footer-decoration" src="./assets/menu-v1/decoration-footer.png" alt="" aria-hidden="true">
+          <button id="settings-back-button" class="ink-icon-button page-back-button" type="button" aria-label="返回主菜单">
+            <img src="./assets/menu-v1/icon-back.png" alt="" aria-hidden="true">
+          </button>
+          <header class="ink-page-heading">
+            <h1 id="settings-title" class="visually-hidden">设置</h1>
+            <img class="settings-title-art" src="./assets/menu-v1/title-settings.png" alt="" aria-hidden="true">
+          </header>
+          <div class="settings-list">
+            <label class="settings-row" for="sound-setting"><span>音效</span><input id="sound-setting" type="checkbox" checked></label>
+            <label class="settings-row" for="haptics-setting"><span>触感反馈</span><input id="haptics-setting" type="checkbox" checked></label>
+            <label class="settings-row" for="reduce-motion-setting"><span>减少动画</span><input id="reduce-motion-setting" type="checkbox"></label>
+            <label class="settings-row" for="game-mode-setting"><span>游戏模式</span><select id="game-mode-setting" aria-describedby="game-mode-status"><option value="jieqi">现有揭棋</option><option value="half_chaos">半混乱揭棋</option><option value="xiangqi">普通象棋</option></select></label>
+            <p id="game-mode-status"></p>
+            <button id="game-mode-preview-button" class="ink-text-button" type="button">查看基础开局</button>
+          </div>
+          <button id="settings-reset-button" class="ink-menu-button compact settings-reset-button" type="button"><img src="./assets/menu-v1/label-reset.png" alt="" aria-hidden="true"><span class="visually-hidden">恢复默认</span></button>
+        </section>
+
+        <section id="rules-view" class="ink-page rules-view" hidden aria-labelledby="rules-title">
+          <img class="rules-footer-decoration" src="./assets/menu-v1/decoration-footer.png" alt="" aria-hidden="true">
+          <button id="rules-back-button" class="ink-icon-button page-back-button" type="button" aria-label="返回主菜单">
+            <img src="./assets/menu-v1/icon-back.png" alt="" aria-hidden="true">
+          </button>
+          <header class="ink-page-heading rules-page-heading">
+            <h1 id="rules-title" class="visually-hidden">玩法说明</h1>
+            <img class="rules-title-art" src="./assets/menu-v1/label-rules.png" alt="" aria-hidden="true">
+          </header>
+          <nav class="rules-tabs" aria-label="玩法说明分类" role="tablist">
+            <button class="rule-tab active" type="button" role="tab" aria-selected="true" data-rule-tab="basic">基础玩法</button>
+            <button class="rule-tab" type="button" role="tab" aria-selected="false" data-rule-tab="heroes">英雄技能</button>
+            <button class="rule-tab" type="button" role="tab" aria-selected="false" data-rule-tab="mutations">畸变规则</button>
+            <button class="rule-tab" type="button" role="tab" aria-selected="false" data-rule-tab="connection">联机规则</button>
+          </nav>
+          <div id="rules-scroll" class="rules-scroll">
+            <section class="rule-panel" data-rule-panel="basic">
+              <details open><summary>对局流程</summary><p>选择英雄后以石头剪刀布决定红方与先手；随后揭示本局畸变、播放英雄入场并完成英雄准备，再进入正式行棋。</p><ol class="rule-flow" aria-label="一局对战流程"><li>选择英雄</li><li>猜拳定红方</li><li>揭示畸变</li><li>英雄入场</li><li>英雄准备</li><li>正式行棋</li><li>终局结算</li><li>再战或返回</li></ol></details>
+              <details><summary>暗子与揭棋</summary><p>除将帅外的三十枚棋子会在标准暗子位置中全局洗牌。暗子第一步按所在位置对应兵种移动，落子后公开真实阵营与兵种，并由真实阵营控制。</p></details>
+              <details><summary>移动、自吃与吃子</summary><p>明棋按真实兵种行动。明棋可吃任意阵营的暗子，但不能吃己方明棋，也不能直接吃将帅；自吃暗子不会撤销，死亡揭示仍然有效。</p></details>
+              <details><summary>完整棋子走法图</summary><p>下图以中点为当前棋子，青墨点为可达方向，赭色点为马腿、象眼或炮架。点击任一棋子可放大并查看乐子象棋的现行差异。</p><div id="piece-movement-grid" class="piece-movement-grid" aria-label="七类棋子走法图"></div></details>
+              <details><summary>河界与九宫</summary><p>暗仕、暗相的首次移动受原位置限制；翻开后的仕与相按现行开放规则行动。兵卒方向与过河状态按真实阵营和当前位置判定。</p></details>
+              <details><summary>将军、应将与背刺</summary><p>公开攻击将帅时必须应将。暗子翻开后若异色身份立即攻击己方将帅，会触发背刺并按防御与终局规则结算。</p></details>
+              <details><summary>胜负与特殊终局</summary><p>将帅被裁决、伏击、碾碎、背刺或玩家认输均可结束对局；双方将帅在同一原子结算中同时消灭时为两败俱伤。</p></details>
+            </section>
+            <section class="rule-panel" data-rule-panel="heroes" hidden>
+              <details open><summary>猎人</summary><p>在英雄准备阶段于己方半场秘密布置两层陷阱，可放在棋子脚下或同格叠加。敌方棋子落入时消耗一层并被击杀。</p></details>
+              <details><summary>潜行者</summary><p>每来源每局一次：先普通移动或进攻，完成后进入无形并保留随后两个己方回合的刺杀机会；刺杀可指定无形、绕过普通防御，不能指定将帅。</p></details>
+              <details><summary>战士</summary><p>前两枚离开己方九宫的非将帅明棋获得一次防护壁垒；将帅的铁甲可拦截一次背刺并获得额外应将机会。</p></details>
+            </section>
+            <section class="rule-panel" data-rule-panel="mutations" hidden>
+              <details open><summary><span class="rarity rarity-common">普通</span>堡垒</summary><p>棋子不能从九宫外落入敌方九宫。</p></details>
+              <details><summary><span class="rarity rarity-rare">稀有</span>骑兵</summary><p>固定兵位获得前向马步；翻开后仍保留该移动能力。</p></details>
+              <details><summary><span class="rarity rarity-epic">史诗</span>亲征、铁马、暗影之舞</summary><p>史诗畸变分别改变将帅移动、马腿结算或提供独立潜行者刺杀来源。展开对局中的“本局畸变”可查看完整实时规则。</p></details>
+              <details><summary><span class="rarity rarity-legendary">传说</span>战车</summary><p>战车可隔一枚非隐身路径棋碾碎路径并继续结算目标；所有隐身路径棋也会被同时碾碎。</p></details>
+            </section>
+            <section class="rule-panel" data-rule-panel="connection" hidden>
+              <details open><summary>建立连接</summary><p>两台 Android 手机先在系统设置完成蓝牙配对。一方创建对局，另一方从已配对设备中选择房主并加入。</p></details>
+              <details><summary>流程</summary><p>首次连接成功后自动进入英雄选择，不增加准备按钮。房主进行权威结算，来宾提交操作并接收公开视图。</p></details>
+              <details><summary>同步与保密</summary><p>对方未确认的英雄、暗子真实身份和猎人陷阱坐标不会提前公开；公开棋盘和结算结果保持双方一致。</p></details>
+              <details><summary>断线重连</summary><p>断线时暂停当前阶段和双方操作，并自动尝试重连；恢复后从原剩余时间与原动画节点继续。</p></details>
+              <details><summary>断线胜负</summary><p>每名玩家在单局中独立累计断线时间，累计达到 <strong>60 秒</strong>判负；同时到达阈值时判平局。</p></details>
+            </section>
+          </div>
+        </section>
+
+        <section id="hero-view" class="hero-selection-view" hidden aria-labelledby="hero-selection-name">
+          <img class="hero-footer-decoration" src="./assets/menu-v1/decoration-footer.png" alt="" aria-hidden="true">
+          <button id="hero-back-button" class="ink-icon-button page-back-button hero-back-button" type="button" aria-label="退出并返回主菜单">
+            <img src="./assets/menu-v1/icon-back.png" alt="" aria-hidden="true">
+          </button>
+          <button id="hero-more-button" class="stage-more-button" type="button" aria-label="更多操作" aria-expanded="false"></button>
+          <div class="hero-detail-panel">
+            <div id="hero-detail-avatar" class="hero-art-placeholder detail-avatar" aria-label="英雄形象尚未定稿"></div>
+            <div class="hero-detail-copy">
+              <p class="hero-stage-label">秘密选择英雄</p>
+              <h1 id="hero-selection-name">请选择英雄</h1>
+              <div id="hero-skill-list" class="hero-skill-list" aria-label="英雄技能"></div>
+              <p id="hero-skill-description" class="hero-skill-description">选择下方英雄后查看技能。</p>
+            </div>
+            <div class="hero-selection-actions">
+              <span class="hero-timer-copy"><strong id="hero-selection-timer" class="phase-timer">60</strong><small>秒</small></span>
+              <span id="hero-opponent-status" aria-live="polite">对方选择中</span>
+              <button id="hero-confirm-button" class="ink-text-button primary hero-confirm" type="button" disabled>确定</button>
+            </div>
+          </div>
+          <section class="hero-roster-panel" aria-labelledby="hero-roster-title">
+            <header class="hero-roster-heading">
+              <h2 id="hero-roster-title">英雄名册</h2>
+              <span>确认前可随时更换</span>
+            </header>
+            <div id="hero-grid" class="hero-grid" aria-label="可选择英雄"></div>
+          </section>
+        </section>
+
+        <section id="rps-view" class="ink-page rps-view" hidden aria-labelledby="rps-title">
+          <img class="rps-footer-decoration" src="./assets/menu-v1/decoration-footer.png" alt="" aria-hidden="true">
+          <button id="rps-back-button" class="ink-icon-button page-back-button" type="button" aria-label="退出并返回主菜单">
+            <img src="./assets/menu-v1/icon-back.png" alt="" aria-hidden="true">
+          </button>
+          <button id="rps-more-button" class="stage-more-button" type="button" aria-label="更多操作" aria-expanded="false"></button>
+          <header class="rps-heading">
+            <p class="eyebrow">开局决定先手</p>
+            <h1 id="rps-title">玩家一，请秘密出拳</h1>
+            <p id="rps-help">选择一项后按“确定”；胜者执红并先走。</p>
+          </header>
+          <div class="rps-timing" aria-label="本轮剩余时间">
+            <strong id="rps-selection-timer" class="phase-timer">30</strong>
+            <span>秒</span>
+          </div>
           <div class="rps-choices" aria-label="石头剪刀布选择">
-            <button class="rps-choice" type="button" data-choice="rock">
-              <span aria-hidden="true">✊</span><b>石头</b>
+            <button class="rps-choice" type="button" data-choice="rock" aria-pressed="false">
+              <img src="./assets/rps-v1/gesture-rock.png" alt="" aria-hidden="true"><b>石头</b>
             </button>
-            <button class="rps-choice" type="button" data-choice="scissors">
-              <span aria-hidden="true">✌</span><b>剪刀</b>
+            <button class="rps-choice" type="button" data-choice="scissors" aria-pressed="false">
+              <img src="./assets/rps-v1/gesture-scissors.png" alt="" aria-hidden="true"><b>剪刀</b>
             </button>
-            <button class="rps-choice" type="button" data-choice="paper">
-              <span aria-hidden="true">✋</span><b>布</b>
+            <button class="rps-choice" type="button" data-choice="paper" aria-pressed="false">
+              <img src="./assets/rps-v1/gesture-paper.png" alt="" aria-hidden="true"><b>布</b>
             </button>
           </div>
-          <p id="rps-history" class="history" aria-live="polite"></p>
-          <div id="remote-hero-picker" class="hero-picker" hidden>
-            <p>请选择本局英雄（对方选择前不会公开）</p>
-            <div class="hero-choices">
-              <button type="button" data-hero="hunter">猎人 · 陷阱</button>
-              <button type="button" data-hero="rogue">潜行者 · 刺杀</button>
-              <button type="button" data-hero="warrior">战士 · 防护壁垒</button>
-            </div>
+          <div class="rps-confirm-panel">
+            <p id="rps-lock-status" aria-live="polite">先选择手势，再确认锁定。</p>
+            <button id="rps-confirm-button" class="ink-text-button primary" type="button" disabled>确定</button>
           </div>
-          <div class="mode-picker" aria-label="本地玩法设置">
-            <label>红方英雄<select id="red-hero"><option value="">无</option><option value="hunter">猎人</option><option value="rogue">潜行者</option><option value="warrior">战士</option></select></label>
-            <label>黑方英雄<select id="black-hero"><option value="">无</option><option value="hunter">猎人</option><option value="rogue">潜行者</option><option value="warrior">战士</option></select></label>
-            <label>畸变<select id="mutation"><option value="">无</option><option value="iron_steed">铁马</option><option value="iron_wall">铁壁</option><option value="shadow_dance">暗影之舞</option><option value="war_chariot">战车</option><option value="expedition">出征</option><option value="cavalry">骑兵</option></select></label>
-          </div>
-          <div class="rule-note">
-            <strong>试玩说明</strong>
-            <span>暗子按原始位置对应的兵种走第一步；落子后翻开，并按真实身份继续走。</span>
-          </div>
+          <p id="rps-history" class="rps-history" aria-live="polite"></p>
         </section>
 
-        <section id="game-view" hidden aria-label="揭棋棋局">
-          <div class="scoreboard">
-            <div class="player-card black-side">
-              <span>黑方</span><strong id="black-player">玩家二</strong>
-            </div>
-            <div id="turn-status" class="turn-status" aria-live="polite"></div>
-            <div class="player-card red-side">
-              <span>红方</span><strong id="red-player">玩家一</strong>
-            </div>
-          </div>
-
-          <div id="announcement" class="announcement" aria-live="polite"></div>
-
-          <div class="game-layout">
-            <section class="board-column" aria-label="中国象棋棋盘">
-              <div class="board-frame">
-                <div class="board-plane">
-                  <svg class="board-lines" viewBox="0 0 8 9" aria-hidden="true">
-                    <rect x="0.04" y="0.04" width="7.92" height="8.92" rx="0.08" />
-                    <g class="horizontal-lines">
-                      <line x1="0" y1="0" x2="8" y2="0" />
-                      <line x1="0" y1="1" x2="8" y2="1" />
-                      <line x1="0" y1="2" x2="8" y2="2" />
-                      <line x1="0" y1="3" x2="8" y2="3" />
-                      <line x1="0" y1="4" x2="8" y2="4" />
-                      <line x1="0" y1="5" x2="8" y2="5" />
-                      <line x1="0" y1="6" x2="8" y2="6" />
-                      <line x1="0" y1="7" x2="8" y2="7" />
-                      <line x1="0" y1="8" x2="8" y2="8" />
-                      <line x1="0" y1="9" x2="8" y2="9" />
-                    </g>
-                    <g class="vertical-lines">
-                      <line x1="0" y1="0" x2="0" y2="9" />
-                      <line x1="8" y1="0" x2="8" y2="9" />
-                      <line x1="1" y1="0" x2="1" y2="4" /><line x1="1" y1="5" x2="1" y2="9" />
-                      <line x1="2" y1="0" x2="2" y2="4" /><line x1="2" y1="5" x2="2" y2="9" />
-                      <line x1="3" y1="0" x2="3" y2="4" /><line x1="3" y1="5" x2="3" y2="9" />
-                      <line x1="4" y1="0" x2="4" y2="4" /><line x1="4" y1="5" x2="4" y2="9" />
-                      <line x1="5" y1="0" x2="5" y2="4" /><line x1="5" y1="5" x2="5" y2="9" />
-                      <line x1="6" y1="0" x2="6" y2="4" /><line x1="6" y1="5" x2="6" y2="9" />
-                      <line x1="7" y1="0" x2="7" y2="4" /><line x1="7" y1="5" x2="7" y2="9" />
-                    </g>
-                    <g class="palace-lines">
-                      <line x1="3" y1="0" x2="5" y2="2" /><line x1="5" y1="0" x2="3" y2="2" />
-                      <line x1="3" y1="7" x2="5" y2="9" /><line x1="5" y1="7" x2="3" y2="9" />
-                    </g>
-                    <g class="river-label"><text x="2" y="4.68">楚河</text><text x="6" y="4.68">汉界</text></g>
-                  </svg>
-                  <div id="board-points" class="board-points" aria-label="可点击棋盘"></div>
-                  <span id="execution-ghost" class="execution-ghost" aria-hidden="true" hidden></span>
-                  <div id="termination-effect" class="termination-effect" aria-hidden="true"></div>
-                </div>
-              </div>
-              <p id="move-hint" class="move-hint">红方先行。点选己方棋子，再点选落点。</p>
+        <section id="game-view" hidden aria-label="乐子象棋棋局">
+          <div id="battle-canvas" class="battle-v4-canvas">
+            <section class="v4-player-card v4-player-blue" aria-label="蓝方玩家">
+              <button id="black-hero-avatar" class="v4-player-avatar" type="button" data-side="black" aria-label="查看蓝方英雄详情"><span>头像</span></button>
+              <div class="v4-player-copy"><span>蓝方</span><strong id="black-player">玩家二</strong></div>
+            </section>
+            <section class="v4-player-card v4-player-red" aria-label="红方玩家">
+              <div class="v4-player-copy"><span>红方</span><strong id="red-player">玩家一</strong></div>
+              <button id="red-hero-avatar" class="v4-player-avatar" type="button" data-side="red" aria-label="查看红方英雄详情"><span>头像</span></button>
             </section>
 
-            <aside class="side-panel">
-              <section class="panel-section">
-                <h2>已吃棋子</h2>
-                <div class="capture-row"><span>红方吃掉</span><div id="red-captures" class="captures"></div></div>
-                <div class="capture-row"><span>黑方吃掉</span><div id="black-captures" class="captures"></div></div>
-              </section>
-              <section class="panel-section compact-rules">
-                <h2>本局要点</h2>
-                <p>暗子首步按所在兵种位走；吃子立即揭开。</p>
-                <p>暗子均可吃，包括己方暗子；己方明子不可吃。</p>
-                <p>翻出敌方棋子并直接将军，立即触发背刺。</p>
-                <p>明相/象、仕/士均可过河。</p>
-              </section>
-              <button id="resign-button" class="danger-button" type="button">当前方臣服</button>
+            <strong id="battle-turn-timer" class="v4-turn-timer" aria-label="本回合剩余秒数">60</strong>
+            <button id="battle-mutation-button" class="v4-mutation-badge" type="button" aria-label="查看本局畸变"><span id="battle-mutation-name">本局畸变</span></button>
+            <div id="turn-status" class="visually-hidden" aria-live="polite"></div>
+
+            <div id="opening-sequence" class="opening-sequence" hidden aria-live="polite">
+              <div id="mutation-reveal" class="mutation-reveal"></div>
+              <div id="hero-intro-stage" class="hero-intro-stage" hidden>
+                <div id="intro-black-hero" class="intro-hero intro-black"><span class="hero-art-placeholder">形象待绘</span><b></b></div>
+                <strong class="versus-mark">对战</strong>
+                <div id="intro-red-hero" class="intro-hero intro-red"><span class="hero-art-placeholder">形象待绘</span><b></b></div>
+              </div>
+            </div>
+
+            <section id="battle-board" class="v4-board" aria-label="中国象棋棋盘">
+              <div class="board-plane">
+                <div id="board-points" class="board-points" aria-label="可点击棋盘"></div>
+                <span id="execution-ghost" class="execution-ghost" aria-hidden="true" hidden></span>
+                <div id="termination-effect" class="termination-effect" aria-hidden="true"></div>
+              </div>
+            </section>
+            <div id="battle-event-cue" class="battle-event-cue" aria-live="polite" hidden></div>
+
+            <section id="hero-preparation-panel" class="hero-preparation-panel" hidden aria-labelledby="hero-preparation-title">
+              <div class="preparation-copy">
+                <span class="preparation-kicker">英雄准备</span>
+                <h2 id="hero-preparation-title">猎人·布置陷阱</h2>
+                <p id="hero-preparation-status" aria-live="polite"></p>
+              </div>
+              <strong id="hero-preparation-timer" class="visually-hidden">60</strong>
+              <div class="preparation-actions">
+                <button id="trap-undo-button" class="ink-preparation-button" type="button">撤回</button>
+                <button id="preparation-confirm-button" class="ink-preparation-button primary" type="button">锁定陷阱</button>
+              </div>
+            </section>
+
+            <section class="v4-status-panel v4-status-blue" aria-label="蓝方英雄与技能状态">
+              <div class="v4-status-avatar" aria-hidden="true"></div>
+              <span id="status-blue-hero-name" class="v4-status-name">英雄</span>
+              <button class="v4-skill-trigger" data-slot="0" type="button" aria-label="查看蓝方技能状态"></button>
+              <button class="v4-skill-trigger" data-slot="1" type="button" aria-label="查看蓝方技能状态"></button>
+              <button class="v4-skill-trigger" data-slot="2" type="button" aria-label="查看蓝方技能状态"></button>
+              <button id="black-captured-button" class="v4-captured-button" data-side="black" type="button" aria-label="查看蓝方已吃棋子"><span>已吃</span><strong id="black-captured-count">0</strong></button>
+            </section>
+            <section class="v4-status-panel v4-status-red" aria-label="红方英雄与技能状态">
+              <div class="v4-status-avatar" aria-hidden="true"></div>
+              <span id="status-red-hero-name" class="v4-status-name">英雄</span>
+              <button class="v4-skill-trigger" data-slot="0" type="button" aria-label="查看红方技能状态"></button>
+              <button class="v4-skill-trigger" data-slot="1" type="button" aria-label="查看红方技能状态"></button>
+              <button class="v4-skill-trigger" data-slot="2" type="button" aria-label="查看红方技能状态"></button>
+              <button id="red-captured-button" class="v4-captured-button" data-side="red" type="button" aria-label="查看红方已吃棋子"><span>已吃</span><strong id="red-captured-count">0</strong></button>
+            </section>
+
+            <section class="v4-message-panel" aria-label="对局消息">
+              <button id="message-panel-toggle" class="v4-message-toggle" type="button" aria-expanded="false" aria-controls="message-drawer">
+                <strong>消息</strong>
+                <span id="message-latest">对局开始，红方先行。</span>
+                <i id="message-unread-dot" hidden aria-label="有新消息"></i>
+              </button>
+              <p id="announcement" class="visually-hidden" aria-live="polite">等待下一步行动……</p>
+              <p id="move-hint" class="visually-hidden">红方先行。点选己方棋子，再点选落点。</p>
+            </section>
+            <button id="battle-more-button" class="v4-more-button" type="button" aria-label="更多操作" aria-expanded="false"></button>
+
+            <div id="battle-skill-panel" class="battle-skill-panel" hidden>
               <label class="skill-source" for="assassination-source">刺杀来源
                 <select id="assassination-source" aria-label="刺杀次数来源"></select>
               </label>
               <button id="assassination-button" class="quiet-button" type="button">发动刺杀</button>
-              <button id="strong-strike-button" class="quiet-button" type="button">发动强击</button>
-            </aside>
+              <button id="strong-strike-button" class="quiet-button" type="button">发动刺杀机会</button>
+            </div>
+
           </div>
         </section>
       </main>
     </div>
 
+    <section id="message-drawer" class="message-drawer" hidden aria-label="本局消息与棋谱">
+      <header class="message-drawer-heading">
+        <div><span>本局记录</span><strong>消息与棋谱</strong></div>
+        <button id="message-drawer-close" type="button" aria-label="收起消息面板">⌄</button>
+      </header>
+      <button id="message-new-button" class="message-new-button" type="button" hidden>有新消息</button>
+      <div id="message-history" class="message-history" role="log" aria-live="polite"></div>
+      <div id="quick-message-area" class="quick-message-area">
+        <div id="quick-message-grid" class="quick-message-grid" aria-label="快捷消息">
+          <button type="button">你好！</button><button type="button">好棋！</button>
+          <button type="button">走得漂亮</button><button type="button">真险</button>
+          <button type="button">我再想想</button><button type="button">稍等一下</button>
+          <button type="button">谢谢</button><button type="button">承让</button>
+        </div>
+        <form id="message-form" class="message-form">
+          <input id="message-input" type="text" enterkeyhint="send" autocomplete="off" placeholder="输入消息，最多 50 字" aria-label="输入消息">
+          <span id="message-character-count">0/50</span>
+          <button id="message-send" type="submit">发送</button>
+        </form>
+      </div>
+    </section>
+
+    <section id="match-menu-layer" class="match-menu-layer" hidden aria-label="对局操作菜单">
+      <button id="match-menu-scrim" class="match-menu-scrim" type="button" aria-label="关闭操作菜单"></button>
+      <nav id="battle-action-menu" class="battle-action-menu" aria-label="当前阶段操作">
+        <button id="battle-rules-button" class="match-menu-item" type="button">对局规则</button>
+        <button id="match-mutation-button" class="match-menu-item" type="button">本局畸变</button>
+        <button id="match-exit-button" class="match-menu-item danger" type="button">退出对局</button>
+        <button id="resign-button" class="match-menu-item danger" type="button">认输</button>
+      </nav>
+    </section>
+
+    <section id="match-detail-layer" class="match-detail-layer" hidden aria-modal="true" role="dialog" aria-labelledby="match-detail-title">
+      <div class="match-detail-panel">
+        <header class="match-detail-heading">
+          <p>乐子象棋</p>
+          <h2 id="match-detail-title">对局规则</h2>
+          <button id="match-detail-close" type="button">关闭</button>
+        </header>
+        <div id="match-detail-body" class="match-detail-body"></div>
+        <div id="match-detail-actions" class="match-detail-actions" hidden>
+          <button id="match-detail-cancel" class="ink-text-button" type="button">继续对局</button>
+          <button id="match-detail-confirm" class="ink-text-button primary" type="button">确认</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="match-result-layer" class="match-result-layer" hidden aria-modal="true" role="dialog" aria-labelledby="match-result-heading">
+      <div class="match-result-panel">
+        <p id="match-result-kicker" class="match-result-kicker">本局终了</p>
+        <h2 id="match-result-heading">胜利</h2>
+        <p id="match-result-type" class="match-result-type">裁决</p>
+        <p id="match-result-message" class="match-result-message"></p>
+        <section id="match-result-winner" class="match-result-winner" aria-label="获胜方信息">
+          <div id="match-result-avatar" class="match-result-avatar" aria-hidden="true"><span>英雄</span></div>
+          <div>
+            <span id="match-result-side">红方</span>
+            <strong id="match-result-player">玩家一</strong>
+            <small id="match-result-hero">猎人</small>
+          </div>
+        </section>
+        <div class="match-result-actions">
+          <button id="match-result-rematch" class="ink-text-button primary" type="button">再来一局</button>
+          <button id="match-result-main-menu" class="ink-text-button" type="button">返回主菜单</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="disconnect-layer" class="disconnect-layer" hidden aria-live="assertive" aria-labelledby="disconnect-title">
+      <div class="disconnect-panel">
+        <p class="eyebrow">蓝牙对局</p>
+        <h2 id="disconnect-title">连接中断，正在重连</h2>
+        <strong id="disconnect-timer" class="disconnect-countdown">60</strong>
+        <p id="disconnect-copy">对局已暂停，正在自动尝试恢复连接。</p>
+        <button id="disconnect-bluetooth-button" class="primary-button" type="button" hidden>请开启蓝牙</button>
+      </div>
+    </section>
+
+    <section id="rule-diagram-layer" class="rule-diagram-layer" hidden role="dialog" aria-modal="true" aria-labelledby="rule-diagram-title">
+      <button id="rule-diagram-scrim" class="rule-diagram-scrim" type="button" aria-label="关闭走法图"></button>
+      <div class="rule-diagram-panel">
+        <header><span>棋子走法</span><h2 id="rule-diagram-title">车</h2><button id="rule-diagram-close" type="button">关闭</button></header>
+        <div id="rule-diagram-art" class="rule-diagram-art"></div>
+        <p id="rule-diagram-description"></p>
+      </div>
+    </section>
+
     <dialog id="flow-dialog" aria-labelledby="dialog-title">
       <div class="dialog-content">
-        <p class="eyebrow">揭棋</p>
+        <p class="eyebrow">乐子象棋</p>
         <h2 id="dialog-title"></h2>
         <p id="dialog-text"></p>
+        <div id="dialog-extra" hidden></div>
         <button id="dialog-action" class="primary-button" type="button"></button>
       </div>
     </dialog>

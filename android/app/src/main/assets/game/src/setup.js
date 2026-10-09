@@ -1,4 +1,6 @@
 import { COVERED_SLOTS, createGeneral } from "./slots.js";
+import { normalizeGameMode } from "./modes.js";
+
 
 
 
@@ -69,17 +71,25 @@ export function shuffleIdentities(
 
 export function createInitialGame(
   randomInt            = secureRandomInt,
+  mode             = "jieqi",
 )                                            {
-  const shuffled = shuffleIdentities(createIdentityPool(), randomInt);
+  const gameMode = normalizeGameMode(mode);
+  const pool = createIdentityPool();
+  const shuffled = gameMode === "jieqi" ? shuffleIdentities(pool, randomInt)
+    : gameMode === "half_chaos" ? (["black", "red"]         ).flatMap(side =>
+      shuffleIdentities(pool.filter(identity => identity.color === side), randomInt)) : [];
   const identities                                 = {};
   const coveredPieces = COVERED_SLOTS.map((slot, index) => {
     const id = `covered-${String(index).padStart(2, "0")}`;
+    if (gameMode === "xiangqi") return { id, x: slot.x, y: slot.y, faceDown: false         , color: slot.side, type: slot.type };
     identities[id] = { ...shuffled[index] };
     return { id, x: slot.x, y: slot.y, faceDown: true          };
   });
 
   return {
     state: {
+      // 缺省棋局保持旧公开结构；新模式明确携带模式，恢复后走法不丢失。
+      ...(gameMode === "jieqi" ? {} : { gameMode }),
       status: "playing",
       turn: "red",
       revision: 0,

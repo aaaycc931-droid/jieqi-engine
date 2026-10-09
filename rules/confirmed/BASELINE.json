@@ -1,0 +1,59 @@
+{
+  "baseline_id": "LEZI-FUNCTION-2026-10-04-v1",
+  "frozen_at": "2026-10-04",
+  "runtime_commit": "4d985f8c1201aae386372460a02fa9d57e41ef2d",
+  "priority": [
+    "user_current_instructions",
+    "BALANCE_AND_RULE_UPDATES_2026-09-28.md:7-9_additive",
+    "CURRENT_RULE_DELTAS_2026-09-22.md",
+    "KEYWORD_SYSTEM_CURRENT.md",
+    "ACTION-TIER-KEYWORDS.md",
+    "STATE.json:design_updates_only",
+    "CURRENT_RULE_DELTAS_2026-09-20.md",
+    "HERO-MUTATION-SPEC.md"
+  ],
+  "files": {
+    "ACTION-TIER-KEYWORDS.md": "2340a345644c920ce4213e3f8791d7d2cb12c5bf1d5f62e348945a0181ed5ab5",
+    "BALANCE_AND_RULE_UPDATES_2026-09-28.md": "9f55bb1032c846074e4f5372f079e8f8e2967224c1c2441bb5093e0d486a6bb4",
+    "CONFIRMED_DESIGN_BASELINE_2026-09-22.md": "092b6591495595704de27f740a2340e97db304047d64f3d121a98cd76011cacc",
+    "CURRENT_RULE_DELTAS_2026-09-20.md": "47d4b6f8092cc11bd4e8036c7a041b7d72c09cb0bc184db64e4b710fdd843cef",
+    "CURRENT_RULE_DELTAS_2026-09-22.md": "1692a0159485a105a2647f3db27822e33a1cc43eef0be86ade6d7b5d9e67110d",
+    "HERO-MUTATION-SPEC.md": "e16eae22edbb746a1c2907feb4ae71972871eee145452df342d53ecc5a480acd",
+    "KEYWORD_SYSTEM_CURRENT.md": "a2a7f1fecf7553d413517a658f8ac392840e08d951c16be896ff2f161ad5e7af",
+    "PENDING_AUDIT_2026-09-22.md": "3ca268352f4673e60aa6483fdf50462fef3846ef7647813a301ac0f7f7f5780e",
+    "STATE.json": "ef8b97232a8a82fbef0b560d803127ba855241ea1907f7eaec2b95f0c701330d"
+  },
+  "heroes": [
+    "hunter",
+    "rogue",
+    "warrior",
+    "qin_long",
+    "murozond",
+    "nozdormu",
+    "murozond_minion",
+    "devout_zealot",
+    "prince",
+    "deathwing",
+    "death_knight",
+    "wind"
+  ],
+  "mutations": [
+    "iron_steed",
+    "iron_wall",
+    "shadow_dance",
+    "war_chariot",
+    "expedition",
+    "cavalry",
+    "chaos",
+    "jian_xie",
+    "end_time"
+  ],
+  "restrictions": [
+    "ui_last",
+    "no_apk",
+    "no_main_merge",
+    "no_internet_deployment",
+    "do_not_invent_rarity_weights"
+  ],
+  "baseline_digest": "4bcf9fb91f5c6e41f456e7424ebd7ed09c6c07b1595ec825604aa730fdad020b"
+}

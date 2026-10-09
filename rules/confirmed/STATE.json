@@ -1,0 +1,345 @@
+{
+  "project": "乐子象棋 / 揭棋联机版",
+  "handoff_generated_at": "2026-09-23",
+  "handoff_kind": "round_continuation_atomic_writeback_content_review_complete",
+  "repository": "https://github.com/aaaycc931-droid/jieqi-engine",
+  "checkout": {
+    "branch": "codex/phase2-mutation-rarity-20260918",
+    "remote_commit": "30ba8486cc9bdeaf9ceb7f5e0a379e1617fd3846",
+    "tree": "fa82406d9af669c037b064fceaec9b255e155405",
+    "parent_remote_commit": "cc4a1cb1b918cb14c23d71b179906f142b88f2e2",
+    "main_at_last_check": "c25749d4f21d394c3d94486cfba1d786864083b6",
+    "local_equivalent_commit": "081d0e741d8e60ca528ad4b5870f76cc58c76429",
+    "local_and_remote_tree_equal": true
+  },
+  "verification": {
+    "command": "npm run check",
+    "passed": 144,
+    "failed": 0,
+    "web_build": "passed",
+    "android_embedded_web_matches_dist": true,
+    "apk_built": false,
+    "apk_blocker": "current environment has neither Gradle nor Gradle Wrapper"
+  },
+  "completed_stages": [
+    "phase1_rogue_first_move_or_immediate_strong_strike_then_one_owner_turn_stealth",
+    "phase2_four_rarity_catalog_and_six_standard_assignments",
+    "phase2_public_room_rarity_sync",
+    "phase2_same_intensity_reveal_with_rarity_text_and_color",
+    "phase2_top_mutation_entry_opens_full_details",
+    "phase2_destiny_as_legendary_internal_candidate_interface",
+    "phase2_normal_60_plus_destiny_15_equals_75_constants"
+  ],
+  "transitional_behavior": [
+    "runtime_still_draws_original_six_standard_mutations_flat_until_outer_rarity_weights_and_new_mutation_runtime_are_implemented",
+    "destiny_candidate_interface_exists_but_end_time_runtime_is_not_implemented",
+    "action_tier_and_keyword_history_schema_is_confirmed_but_not_implemented"
+  ],
+  "next_stage": {
+    "id": "cumulative_disconnect_60_seconds",
+    "summary": "implement per-player cumulative disconnect timing, pause/resume checkpoints and disconnect terminal results",
+    "must_test_first": true,
+    "rules_source": "CONFIRMED_UI_PLAN.md section 14",
+    "unchanged_by_hero_balance_freeze": true
+  },
+  "intentional_deferred": [
+    "status_bar_geometry_and_button_positions",
+    "final_hero_portraits_and_skill_icons",
+    "destiny_reveal_visual_design",
+    "exact_outer_rarity_probabilities",
+    "internet_multiplayer"
+  ],
+  "undefined_content_do_not_invent": [
+    "other_destiny_ids_or_effects_beyond_end_time",
+    "exact_outer_rarity_probabilities"
+  ],
+  "restrictions": [
+    "do_not_restart_or_reconfirm_completed_planning",
+    "do_not_merge_main_without_explicit_authorization",
+    "do_not_deploy_internet_multiplayer",
+    "do_not_commit_apk_or_handoff_zip_to_repository",
+    "do_not_redraw_approved_ui_assets",
+    "do_not_fill_deferred_or_undefined_items",
+    "do_not_treat_confirmed_unimplemented_heroes_chaos_or_action_tagging_as_runtime_features"
+  ],
+  "confirmed_design_updates_2026_09_19": {
+    "hero_count_confirmed": 10,
+    "standard_mutation_count_confirmed": 7,
+    "runtime_standard_mutation_count_at_pinned_checkpoint": 6,
+    "scoring_rules_file": "乐子象棋_英雄技能评分规则_v2.9.md",
+    "hero_balance_baseline": {
+      "hunter": 49,
+      "rogue": 49,
+      "warrior": 52,
+      "qin_long": 52,
+      "murozond": "52-53",
+      "nozdormu": 51,
+      "murozond_minion": 61,
+      "devout_zealot": 53,
+      "prince": 53,
+      "deathwing": 55
+    },
+    "confirmed_not_implemented": [
+      "qin_long",
+      "murozond",
+      "nozdormu",
+      "murozond_minion",
+      "devout_zealot",
+      "prince",
+      "deathwing",
+      "chaos_mutation",
+      "action_tier_keyword_history",
+      "hunter_trap_lifecycle_9_lethal_then_10_12_control"
+    ],
+    "action_semantics": {
+      "tiers": [
+        "俗手",
+        "本手",
+        "妙手"
+      ],
+      "keywords": [
+        "耗费",
+        "触发",
+        "连带",
+        "操控",
+        "回溯",
+        "强迫",
+        "终结",
+        "占步",
+        "额外",
+        "揭示",
+        "随机"
+      ],
+      "murozond_target": "opponent_previous_move_must_be_俗手"
+    },
+    "chaos_mutation": {
+      "rarity": "传说",
+      "design_score": 95,
+      "runtime_implemented": false,
+      "rule": "each_turn_start_each_unrevealed_piece_secretly_independent_50pct_red_50pct_blue; pre_reveal_control_unchanged; normal_reveal_locks_and_reveals_current_side; captured_unrevealed_reveals_identity_not_secret_side"
+    },
+    "destiny": {
+      "id": "end_time",
+      "name": "时光之末",
+      "heroes": [
+        "nozdormu",
+        "murozond"
+      ],
+      "runtime_implemented": false
+    },
+    "qin_long": "after_15_complete_rounds_each_owner_turn_15pct_rain_if_legal_check_then_immediate_win",
+    "murozond": "once_only_if_opponent_previous_move_is_俗手_rewind_same_surviving_piece_position_then_control_same_piece_one_legal_move_no_other_history_restore",
+    "nozdormu": "once_first_10s_not_while_in_check_full_rewind_before_previous_owner_move_including_both_hero_skill_states_same_piece_replay_max_10s_no_capture_no_check; rewind_used_is_out_of_timeline_meta_state",
+    "hunter_lifecycle": "enemy_turns_1_9_lethal_remaining_layers_turns_10_12_control_then_expire"
+  },
+  "collaboration_protocol": {
+    "file": "X_Collaboration_System.md",
+    "version": "1.8.0",
+    "mandatory_precheck": true,
+    "project_tasks_show_gate_receipt": true,
+    "baseline_delta_check": true,
+    "time_sequence_opportunity_check_when_applicable": true
+  },
+  "current_session": {
+    "status": "content_review_complete_after_2026_09_23_writeback",
+    "stage": "keyword_rule_cross_mechanic_content_review_complete",
+    "last_confirmed_item": "terminal_reason_ids_and_ui_copy_for_infection_suffocation_time_collapse_general_death",
+    "resume_file": "HANDOVER.md",
+    "next_audit_item": null,
+    "round_close_handoff_generated": true,
+    "entire_content_review_completed": true
+  },
+  "source_priority": [
+    "CURRENT_RULE_DELTAS_2026-09-22.md",
+    "KEYWORD_SYSTEM_CURRENT.md",
+    "ACTION-TIER-KEYWORDS.md",
+    "STATE.json",
+    "CONFIRMED_UI_PLAN.md",
+    "CURRENT_RULE_DELTAS_2026-09-20.md",
+    "BALANCE_AND_RULE_UPDATES.md",
+    "HERO-MUTATION-SPEC.md"
+  ],
+  "design_updates_2026_09_20": {
+    "action_tiers": [
+      "俗手",
+      "本手",
+      "妙手"
+    ],
+    "action_keywords": [
+      "移动",
+      "进攻",
+      "耗费",
+      "触发",
+      "连带",
+      "操控",
+      "回溯",
+      "强迫",
+      "终结",
+      "占步",
+      "额外",
+      "揭示",
+      "随机"
+    ],
+    "upper_term_move": "historical_only; formal umbrella retired on 2026-09-22",
+    "removed_action_keyword": "吃子",
+    "effect_keywords": [
+      "无形",
+      "地面",
+      "飞行",
+      "免疫",
+      "封锁",
+      "移置",
+      "强击",
+      "碾碎",
+      "窒息",
+      "感染",
+      "消灭"
+    ],
+    "revive_keyword_status": "not_added; revive_vs_rewind_restore_semantics_confirmed",
+    "rogue_rule": "activation_turn_move_to_legal_empty_only_no_strong_strike; gain_无形; opponent_full_turn; next_owner_turn_may_strong_strike_by_normal_capture_geometry_including_general_marshal; successful_general_marshal_strong_strike_backstab; warrior_iron_armor_intercepts",
+    "death_knight": {
+      "hero": "死亡骑士",
+      "skill": "亡灵之力",
+      "status": "感染",
+      "visual_only": "凋零",
+      "score": 50,
+      "range": "46-54",
+      "confidence": "medium"
+    },
+    "cavalry_rule": "two_true_horses_each_side_upgrade_after_reveal; retain horse moves; own_half extra one_forward; enemy_half extra forward_left_right one_step; added_steps_no_backward; mutually_exclusive_with_iron_steed",
+    "cavalry_score_status": "40_rare_was_proposed_but_not_finally_confirmed",
+    "nozdormu_replay": "cannot_进攻_and_cannot_form_check",
+    "flight": "gain_无形 lose_地面 immune_碾碎 cannot_进攻; air_layer_one_piece; landing_attempt_crushes_ground_piece; if_ground_survives_then_flying_piece_窒息_and_消灭",
+    "infection_ground": "losing_地面_clears_all_infection_immediately",
+    "crush_terminal": "crush_them_rampage_mutual_destruction_bind_to_碾碎_result_not_specific_source",
+    "blockade": "source_defined_entry_or_landing_restriction; not_physical_obstacle; flight_or_non_ground_does_not_bypass",
+    "displacement": "current formal term is 移置; non-action position change; successful landing settles normal landing effects unless source says otherwise",
+    "status": "historical_snapshot_superseded_where_conflicting_by_design_updates_2026_09_22"
+  },
+  "implementation_roadmap_note": "Pinned implementation next stage remains cumulative disconnect 60 seconds unless user explicitly reprioritizes; 2026-09-23 content review closure does not change runtime implementation priority.",
+  "design_updates_2026_09_22": {
+    "formal_move_umbrella": "retired; natural-language use only",
+    "core_actions": [
+      "移动",
+      "进攻"
+    ],
+    "typed_terms": {
+      "skill_label": [
+        "占步"
+      ],
+      "action_labels": [
+        "额外",
+        "强迫"
+      ],
+      "settlement_labels": [
+        "触发",
+        "连带"
+      ],
+      "resource_label": [
+        "耗费"
+      ],
+      "control_label": [
+        "操控"
+      ],
+      "terminal_label": [
+        "终结"
+      ],
+      "information_label": [
+        "揭示"
+      ],
+      "generation_label": [
+        "随机"
+      ],
+      "rule_operation": [
+        "回溯"
+      ],
+      "position_effect": [
+        "移置"
+      ],
+      "attack_tag": [
+        "强击"
+      ],
+      "destroy_methods": [
+        "碾碎",
+        "窒息"
+      ],
+      "result": [
+        "消灭"
+      ],
+      "status": [
+        "感染"
+      ],
+      "spatial": [
+        "地面",
+        "飞行"
+      ],
+      "target_state": [
+        "无形"
+      ],
+      "resistance": [
+        "免疫"
+      ],
+      "restriction": [
+        "封锁"
+      ]
+    },
+    "destroy_terminal_separation": true,
+    "check_is_board_threat_only": true,
+    "noform_target_only_spatial_presence_preserved_with_ground": true,
+    "flight_failed_occupied_landing": "flying_piece_suffocates_and_is_destroyed",
+    "suffocation_keyword_added": true,
+    "universal_dark_death_reveal": true,
+    "chaos_death_reveal_exception": "reveal_true_piece_type_but_keep_secret_side_hidden",
+    "destroyed_piece_record": "unified_current_state_record_by_destroyed_piece_identity_not_killer",
+    "ui_record_label": "已消灭棋子",
+    "pre_destroy_clear_all_effects_template": "retired",
+    "revive_restores": "living_piece_only_not_predeath_temporary_status_snapshot",
+    "time_hourglass_order": "anchor_check_then_return_or_revive_then_landing_effects_then_cleanse_then_reload",
+    "war_chariot_draw_only_threat_is_check": false,
+    "fortress_blockade": "blocks_enemy_outside_to_inside_by_move_attack_landing_displacement_or_revive; full rewind exception",
+    "time_collapse": "persists_across_continuous_effective_distortion_area_without_refresh_between_distortion_squares",
+    "warrior_defense_slots": 3,
+    "warrior_defense_duration": "3 enemy formal turn ends",
+    "hunter_lifetime": "12 enemy formal turn ends; first9 lethal last3 control",
+    "prince_carefree": "enemy_inside_half_cannot_attack_or_form_effective_check; outside_to_inside_attack_landing_forbidden; owner_side temporary_loss_requires_successful_attack_destroying_final_target_or_effective_check",
+    "documentation_only": true,
+    "runtime_implemented": false,
+    "rogue_lifecycle": "each assassination source once; choose own controlled revealed non-general; activation turn only legal empty-square 移动, no 进攻/强击; after successful move gain 无形; opponent gets a full formal turn; on next owner formal turn the piece may use one 进攻+强击 by normal attack geometry including general; own-source 无形 ends before that piece starts its action; strong strike does not inherently penetrate 无形",
+    "murozond_return_trap_timing": "return uses 移置 and settles return-square effects; if return fails or target is destroyed during return settlement there is no subsequent control; a control-trap restriction gained on return applies on the relevant controller next formal turn and does not cancel Murozond immediate current control step",
+    "warrior_bounce_dark_reveal": "dark attacker successfully bounced back remains dark because intended attack landing failed; if it is destroyed by 窒息, universal death 揭示 applies; successful return settles return-square effects, while failed return does not create a living landing before 窒息",
+    "nozdormu_full_rewind": "complete authoritative snapshot restore includes board and hero skill states at snapshot; rewind-used meta remains out-of-timeline; player-acquired information is not erased",
+    "warrior_bounce_fortress_exception": "warrior ordinary defense return-to-pre-attack-origin displacement ignores fortress outside-to-inside blockade only for this source-specific restoration; occupancy conflict still suffocates attacker",
+    "time_collapse_arrival_coverage": "gain when Nozdormu-side piece successfully becomes ground on an effective distortion square via attack landing, displacement landing, resurrection landing, or successful flying landing; ordinary move to empty distortion remains illegal",
+    "noform_random_targeting": "random selection from a rule-defined candidate pool is not direct designation; noform remains eligible unless source explicitly excludes it",
+    "iron_steed_main_action": "if chosen horse route necessarily attempts crush on a ground horse-leg piece, primary action is attack from planning stage even when final landing is empty or crush is prevented"
+  },
+  "pending_content_review_2026_09_22": [],
+  "design_updates_2026_09_23": {
+    "noform_attack_and_check": "noform_preserves_normal_attack_geometry_and_can_form_effective_check_unless_source_specific_rule_says_otherwise",
+    "rogue_noform_check_exception": "rogue_skill_source_noform_preserves_attack_geometry_but_cannot_form_effective_check_while_source_noform_persists",
+    "atomic_terminal_checkpoint": "candidate_terminal_then_atomic_closure_then_formal_terminal; after_formal_terminal_stop_unrelated_game_progression",
+    "time_warrior_manifested": "any_public_reveal_including_universal_death_reveal_marks_time_warrior_manifested_as_persistent_historical_state",
+    "terminal_reason_ids": {
+      "infection": {
+        "ui_name": "感染",
+        "copy": "感染蔓延，将帅已被消灭！您获得胜利！"
+      },
+      "suffocation": {
+        "ui_name": "窒息",
+        "copy": "将帅因窒息被消灭！您获得胜利！"
+      },
+      "time_collapse": {
+        "ui_name": "时间崩坏",
+        "copy": "时间崩坏吞没了将帅！您获得胜利！"
+      },
+      "general_destroyed": {
+        "ui_name": "将帅陨落",
+        "copy": "敌方将帅已被消灭！您获得胜利！"
+      }
+    },
+    "mutual_destruction_precedence": "if_both_generals_destroyed_at_atomic_closure_outcome_reason_mutual_destruction_specific_causes_remain_in_event_log",
+    "history_correction_note": "keyword_system_had_noform_attack_check_text_before_item7_confirmation; formal_confirmation_completed_2026_09_23",
+    "documentation_only": true,
+    "runtime_implemented": false
+  }
+}

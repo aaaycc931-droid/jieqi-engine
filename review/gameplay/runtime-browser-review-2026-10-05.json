@@ -1,0 +1,56 @@
+{
+  "authority": "browser_execution_evidence_non_normative",
+  "sourceCommit": "b64a2ca03a77b26b74313afb3ad65d0b86f35102",
+  "appDigest": "54e3753498710bfdc0ecac690890a8ab60c55d1d46a9363ade5bd21d2fd31e2b",
+  "browser": "145.0.7632.6",
+  "viewport": {
+    "width": 390,
+    "height": 845
+  },
+  "fixtureMethod": "Review-only response suffix supplies prepared authoritative states; all tested actions use original application DOM handlers.",
+  "limits": [
+    "These prepared-state interactions do not certify a full random match or every hero combination.",
+    "Local handoff visibility is tested; Bluetooth private-message transport and physical devices remain pending.",
+    "Local timer display is tested; formal network timeout/late-command/idempotency have separate engine tests. Local timeout outcome is unconfirmed.",
+    "No APK, deployment, UI artwork change or normative rule change."
+  ],
+  "cases": [
+    {
+      "name": "invoke-cancel-confirm-handoff",
+      "passed": true
+    },
+    {
+      "name": "timeline-invalid-rollback-then-control",
+      "passed": true
+    },
+    {
+      "name": "rewind-three-second-display-and-same-piece",
+      "passed": true
+    },
+    {
+      "name": "destiny-bomb-and-hourglass-revival",
+      "passed": true
+    },
+    {
+      "name": "wind-secret-shadow-and-private-trap-handoff",
+      "passed": true
+    },
+    {
+      "name": "deathwing-skill-settles-locked-targets",
+      "passed": true
+    },
+    {
+      "name": "flow-barrier-escape-keeps-clock-and-player",
+      "passed": true
+    },
+    {
+      "name": "flow-execution-return-two-step-escape",
+      "passed": true
+    },
+    {
+      "name": "flow-first-safe-step-ends-early",
+      "passed": true
+    }
+  ],
+  "errors": []
+}

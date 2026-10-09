@@ -1,7 +1,7 @@
 import { RuleError } from "./errors.ts";
 
 /** Wire format shared by the Android RFCOMM layer and the WebView game host. */
-export const BLUETOOTH_PROTOCOL_VERSION = 1;
+export const BLUETOOTH_PROTOCOL_VERSION = 2;
 export const BLUETOOTH_MAX_MESSAGE_BYTES = 48 * 1024;
 
 export type BluetoothMessageType = "hello" | "action" | "snapshot" | "error" | "ping" | "pong";

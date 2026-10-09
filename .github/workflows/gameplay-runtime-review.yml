@@ -1,0 +1,99 @@
+name: Review gameplay runtime
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  gameplay-browser:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Select checks for this update
+        id: scope
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/ci/select-scope.mjs
+      - name: Build actual Web runtime without APK
+        if: steps.scope.outputs.hero == 'true' || steps.scope.outputs.mode == 'true'
+        run: node scripts/build-web.ts
+      - name: Install browser
+        if: steps.scope.outputs.hero == 'true' || steps.scope.outputs.mode == 'true'
+        run: npm install --no-save --package-lock=false playwright@1.58.2 && npx playwright install --with-deps chromium
+      - name: Exercise r5 transferred-hero prepared DOM controls
+        if: steps.scope.outputs.hero == 'true'
+        run: node scripts/review/capture-hero-transfer-runtime.mjs
+      - name: Check mode settings and real base opening previews
+        if: steps.scope.outputs.mode == 'true'
+        run: node scripts/review/capture-mode-runtime.mjs
+      - name: Keep mode foundation browser evidence
+        if: always() && steps.scope.outputs.mode == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: game-mode-runtime-browser-review
+          path: review-results/game-modes/
+          if-no-files-found: error
+          retention-days: 7
+      - name: Keep exact browser evidence and screenshots
+        if: always() && steps.scope.outputs.hero == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: hero-transfer-runtime-browser-review
+          path: review/invariants/HERO_TRANSFER_BROWSER_2026-10-07.json
+          if-no-files-found: error
+          retention-days: 7
+  full-match-browser:
+    # User paused the previous full-match validation queue to add modes (2026-10-05).
+    if: ${{ false }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Build actual Web runtime without APK
+        run: node scripts/build-web.ts
+      - name: Install browser
+        run: npm install --no-save --package-lock=false playwright@1.58.2 && npx playwright install --with-deps chromium
+      - name: Play twelve real setup and random-deal matches to natural results
+        run: node scripts/review/capture-full-match-runtime.mjs
+      - name: Keep complete match traces and terminal screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: full-match-runtime-browser-review
+          path: review-results/full-match-runtime/
+          if-no-files-found: error
+          retention-days: 7
+  active-match-browser:
+    # Resume only after the user returns to the paused validation queue.
+    if: ${{ false }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Build actual Web runtime without APK
+        run: node scripts/build-web.ts
+      - name: Install browser
+        run: npm install --no-save --package-lock=false playwright@1.58.2 && npx playwright install --with-deps chromium
+      - name: Play real active-skill setup-to-natural-result matches
+        run: node scripts/review/capture-active-match-runtime.mjs
+      - name: Keep skill commits, clocks, public traces and terminal screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: active-match-runtime-browser-review
+          path: review-results/active-match-runtime/
+          if-no-files-found: error
+          retention-days: 7

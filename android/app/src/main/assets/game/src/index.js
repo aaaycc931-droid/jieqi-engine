@@ -3,10 +3,29 @@ export * from "./bluetooth-protocol.js";
 export * from "./bluetooth-host-room.js";
 export * from "./sha256.js";
 export * from "./game.js";
+export * from "./mutations.js";
 export * from "./room.js";
 export * from "./remote-room.js";
 export * from "./rps.js";
 export * from "./rules.js";
 export * from "./setup.js";
+export * from "./modes.js";
 export * from "./slots.js";
 export * from "./types.js";
+export * from "./turns.js";
+export * from "./hero-actions.js";
+export * from "./settlement.js";
+export * from "./heroes.js";
+export * from "./spaces.js";
+export * from "./ghosts.js";
+export * from "./hero-forms.js";
+
+export * from "./hero-descent.js";
+
+export * from "./hero-progress.js";
+
+export * from "./hero-river.js";
+
+export * from "./hero-children.js";
+
+export * from "./hero-shuffle.js";

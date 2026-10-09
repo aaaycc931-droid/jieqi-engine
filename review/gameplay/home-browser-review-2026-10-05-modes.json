@@ -1,0 +1,313 @@
+{
+  "browser": "145.0.7632.6",
+  "render": "Chromium / live application JS",
+  "prototypeOnly": false,
+  "runtimePath": "dist/web/index.html",
+  "apkGenerated": false,
+  "minimumTouchTarget": 48,
+  "cases": [
+    {
+      "mode": "runtime",
+      "viewport": {
+        "name": "9x16",
+        "width": 360,
+        "height": 640
+      },
+      "boxes": {
+        "local-game-button": {
+          "x": 99.84375,
+          "y": 381,
+          "width": 159.90625,
+          "height": 48
+        },
+        "bluetooth-menu-button": {
+          "x": 99.84375,
+          "y": 438.765625,
+          "width": 159.90625,
+          "height": 48
+        },
+        "online-game-button": {
+          "x": 99.84375,
+          "y": 496.15625,
+          "width": 159.90625,
+          "height": 48
+        },
+        "rules-menu-button": {
+          "x": 118.203125,
+          "y": 574.96875,
+          "width": 123.5625,
+          "height": 48
+        },
+        "settings-menu-button": {
+          "x": 300,
+          "y": 12,
+          "width": 48,
+          "height": 48
+        }
+      },
+      "failures": []
+    },
+    {
+      "mode": "runtime",
+      "viewport": {
+        "name": "19.5x9",
+        "width": 390,
+        "height": 845
+      },
+      "boxes": {
+        "local-game-button": {
+          "x": 108.171875,
+          "y": 564.421875,
+          "width": 173.234375,
+          "height": 51.390625
+        },
+        "bluetooth-menu-button": {
+          "x": 108.171875,
+          "y": 627,
+          "width": 173.234375,
+          "height": 51.390625
+        },
+        "online-game-button": {
+          "x": 108.171875,
+          "y": 689.171875,
+          "width": 173.234375,
+          "height": 51.390625
+        },
+        "rules-menu-button": {
+          "x": 128.0625,
+          "y": 774.546875,
+          "width": 133.859375,
+          "height": 48
+        },
+        "settings-menu-button": {
+          "x": 330,
+          "y": 12,
+          "width": 48,
+          "height": 48
+        }
+      },
+      "failures": []
+    },
+    {
+      "mode": "runtime",
+      "viewport": {
+        "name": "20x9",
+        "width": 360,
+        "height": 800
+      },
+      "boxes": {
+        "local-game-button": {
+          "x": 99.84375,
+          "y": 541,
+          "width": 159.90625,
+          "height": 48
+        },
+        "bluetooth-menu-button": {
+          "x": 99.84375,
+          "y": 598.765625,
+          "width": 159.90625,
+          "height": 48
+        },
+        "online-game-button": {
+          "x": 99.84375,
+          "y": 656.15625,
+          "width": 159.90625,
+          "height": 48
+        },
+        "rules-menu-button": {
+          "x": 118.203125,
+          "y": 734.96875,
+          "width": 123.5625,
+          "height": 48
+        },
+        "settings-menu-button": {
+          "x": 300,
+          "y": 12,
+          "width": 48,
+          "height": 48
+        }
+      },
+      "failures": []
+    },
+    {
+      "mode": "runtime",
+      "viewport": {
+        "name": "short-320",
+        "width": 320,
+        "height": 568
+      },
+      "boxes": {
+        "local-game-button": {
+          "x": 88.75,
+          "y": 337.78125,
+          "width": 142.140625,
+          "height": 48
+        },
+        "bluetooth-menu-button": {
+          "x": 88.75,
+          "y": 389.125,
+          "width": 142.140625,
+          "height": 48
+        },
+        "online-game-button": {
+          "x": 88.75,
+          "y": 440.140625,
+          "width": 142.140625,
+          "height": 48
+        },
+        "rules-menu-button": {
+          "x": 105.078125,
+          "y": 510.1875,
+          "width": 109.828125,
+          "height": 48
+        },
+        "settings-menu-button": {
+          "x": 260,
+          "y": 12,
+          "width": 48,
+          "height": 48
+        }
+      },
+      "failures": []
+    },
+    {
+      "mode": "runtime",
+      "viewport": {
+        "name": "source-pixels",
+        "width": 941,
+        "height": 1672
+      },
+      "boxes": {
+        "local-game-button": {
+          "x": 261,
+          "y": 995,
+          "width": 418,
+          "height": 124
+        },
+        "bluetooth-menu-button": {
+          "x": 261,
+          "y": 1146,
+          "width": 418,
+          "height": 124
+        },
+        "online-game-button": {
+          "x": 261,
+          "y": 1296,
+          "width": 418,
+          "height": 124
+        },
+        "rules-menu-button": {
+          "x": 309,
+          "y": 1502,
+          "width": 323,
+          "height": 87.984375
+        },
+        "settings-menu-button": {
+          "x": 871,
+          "y": 12,
+          "width": 58,
+          "height": 58
+        }
+      },
+      "failures": []
+    },
+    {
+      "mode": "runtime",
+      "viewport": {
+        "name": "long-412",
+        "width": 412,
+        "height": 915
+      },
+      "boxes": {
+        "local-game-button": {
+          "x": 114.265625,
+          "y": 618.59375,
+          "width": 183,
+          "height": 54.28125
+        },
+        "bluetooth-menu-button": {
+          "x": 114.265625,
+          "y": 684.703125,
+          "width": 183,
+          "height": 54.28125
+        },
+        "online-game-button": {
+          "x": 114.265625,
+          "y": 750.375,
+          "width": 183,
+          "height": 54.28125
+        },
+        "rules-menu-button": {
+          "x": 135.28125,
+          "y": 840.578125,
+          "width": 141.40625,
+          "height": 48
+        },
+        "settings-menu-button": {
+          "x": 352,
+          "y": 12,
+          "width": 48,
+          "height": 48
+        }
+      },
+      "failures": []
+    },
+    {
+      "mode": "runtime",
+      "viewport": {
+        "name": "wide-window",
+        "width": 800,
+        "height": 600
+      },
+      "boxes": {
+        "local-game-button": {
+          "x": 324.8125,
+          "y": 357.0625,
+          "width": 149.984375,
+          "height": 48
+        },
+        "bluetooth-menu-button": {
+          "x": 324.8125,
+          "y": 411.25,
+          "width": 149.984375,
+          "height": 48
+        },
+        "online-game-button": {
+          "x": 324.8125,
+          "y": 465.078125,
+          "width": 149.984375,
+          "height": 48
+        },
+        "rules-menu-button": {
+          "x": 342.03125,
+          "y": 539,
+          "width": 115.90625,
+          "height": 48
+        },
+        "settings-menu-button": {
+          "x": 508.828125,
+          "y": 12,
+          "width": 48,
+          "height": 48
+        }
+      },
+      "failures": []
+    }
+  ],
+  "pixelComparison": {
+    "excluded": "confirmed later-added settings control",
+    "comparedPixels": 1567727,
+    "changedPixels": 0,
+    "changedFraction": 0,
+    "meanChannelDifference": 0,
+    "maximumPixelDifference": 0
+  },
+  "interactions": {
+    "onlineUnavailable": true,
+    "settings": true,
+    "settingsPersist": true,
+    "rules": true,
+    "bluetoothLobby": true,
+    "localHeroSelection": true
+  }
+}

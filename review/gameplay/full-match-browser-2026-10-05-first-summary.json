@@ -1,0 +1,219 @@
+{
+  "authority": "browser_execution_evidence_non_normative",
+  "sourceCommit": "55a3465e242cd53585366e7cba02ecc23ae5b075",
+  "appDigest": "678e7e58d31bbb44ea998ca750eba206bfdfea97826fcadc2ceda7c21de2649d",
+  "browser": "145.0.7632.6",
+  "viewport": {
+    "width": 390,
+    "height": 845
+  },
+  "method": "Actual homepage, hero selection, locked RPS, original random mutation/deal, hunter preparation and DOM board actions to natural result. Review response exposes public read-only snapshot/legal candidates only.",
+  "policy": "Random public legal action; prefer captures with probability 0.85, otherwise prefer unrepeated moves. No secret-informed choices. Fixed rock versus scissors assigns player one red. Hero pairs each tested twice with swapped seats.",
+  "actionCap": 300,
+  "limits": [
+    "Twelve randomly dealt local matches are sampled execution evidence, not exhaustive hero/mutation acceptance.",
+    "Active hero skills are not exercised by this match policy; prepared-state reviews cover selected skills separately.",
+    "Bluetooth transport, Android WebView, physical two-phone execution and timeout outcomes remain pending.",
+    "No APK, normative rule, production debug API or artwork change."
+  ],
+  "errors": [],
+  "run": 37261464508,
+  "artifact": 11324687985,
+  "jobConclusion": "failure",
+  "passed": 9,
+  "cappedIncomplete": 3,
+  "interactionErrors": 0,
+  "traceArchive": "full-match-browser-2026-10-05-first.json.gz",
+  "traceSHA256": "0b160a2206d2687d30d59da02f67886c325aad879cfa9cc4e4433155ec78b0dd",
+  "matches": [
+    {
+      "index": 1,
+      "heroes": [
+        "warrior",
+        "death_knight"
+      ],
+      "passed": true,
+      "mutation": "jian_xie",
+      "actions": 24,
+      "result": {
+        "winner": "black",
+        "reason": "infection",
+        "title": "感染",
+        "message": "您获得胜利！"
+      },
+      "errors": []
+    },
+    {
+      "index": 2,
+      "heroes": [
+        "qin_long",
+        "prince"
+      ],
+      "passed": false,
+      "mutation": "war_chariot",
+      "actions": 300,
+      "error": "AssertionError [ERR_ASSERTION]: No natural result after 300 actions\n+ actual - expected\n\n+ 'playing'\n- 'finished'\n\n    at file:///home/runner/work/jieqi-engine/jieqi-engine/scripts/review/capture-full-match-runtime.mjs:141:14",
+      "errors": []
+    },
+    {
+      "index": 3,
+      "heroes": [
+        "wind",
+        "hunter"
+      ],
+      "passed": false,
+      "mutation": "chaos",
+      "actions": 300,
+      "error": "AssertionError [ERR_ASSERTION]: No natural result after 300 actions\n+ actual - expected\n\n+ 'playing'\n- 'finished'\n\n    at file:///home/runner/work/jieqi-engine/jieqi-engine/scripts/review/capture-full-match-runtime.mjs:141:14",
+      "errors": []
+    },
+    {
+      "index": 4,
+      "heroes": [
+        "rogue",
+        "devout_zealot"
+      ],
+      "passed": true,
+      "mutation": "cavalry",
+      "actions": 98,
+      "result": {
+        "winner": "black",
+        "reason": "stalemate",
+        "title": "无处可逃",
+        "message": "对方已无路可走。您获得胜利！"
+      },
+      "errors": []
+    },
+    {
+      "index": 5,
+      "heroes": [
+        "nozdormu",
+        "murozond"
+      ],
+      "passed": true,
+      "mutation": "end_time",
+      "actions": 166,
+      "result": {
+        "winner": "black",
+        "reason": "stalemate",
+        "title": "无处可逃",
+        "message": "对方已无路可走。您获得胜利！"
+      },
+      "errors": []
+    },
+    {
+      "index": 6,
+      "heroes": [
+        "murozond_minion",
+        "deathwing"
+      ],
+      "passed": true,
+      "mutation": "war_chariot",
+      "actions": 41,
+      "result": {
+        "winner": "black",
+        "reason": "ambush",
+        "title": "背刺",
+        "message": "暗中潜行，破影而袭！您获得胜利！"
+      },
+      "errors": []
+    },
+    {
+      "index": 7,
+      "heroes": [
+        "death_knight",
+        "warrior"
+      ],
+      "passed": true,
+      "mutation": "cavalry",
+      "actions": 33,
+      "result": {
+        "winner": "black",
+        "reason": "ambush",
+        "title": "背刺",
+        "message": "暗中潜行，破影而袭！您获得胜利！"
+      },
+      "errors": []
+    },
+    {
+      "index": 8,
+      "heroes": [
+        "prince",
+        "qin_long"
+      ],
+      "passed": true,
+      "mutation": "cavalry",
+      "actions": 6,
+      "result": {
+        "winner": "red",
+        "reason": "ambush",
+        "title": "背刺",
+        "message": "暗中潜行，破影而袭！您获得胜利！"
+      },
+      "errors": []
+    },
+    {
+      "index": 9,
+      "heroes": [
+        "hunter",
+        "wind"
+      ],
+      "passed": true,
+      "mutation": "jian_xie",
+      "actions": 52,
+      "result": {
+        "winner": "black",
+        "reason": "stalemate",
+        "title": "无处可逃",
+        "message": "对方已无路可走。您获得胜利！"
+      },
+      "errors": []
+    },
+    {
+      "index": 10,
+      "heroes": [
+        "devout_zealot",
+        "rogue"
+      ],
+      "passed": true,
+      "mutation": "war_chariot",
+      "actions": 5,
+      "result": {
+        "winner": "black",
+        "reason": "ambush",
+        "title": "背刺",
+        "message": "暗中潜行，破影而袭！您获得胜利！"
+      },
+      "errors": []
+    },
+    {
+      "index": 11,
+      "heroes": [
+        "murozond",
+        "nozdormu"
+      ],
+      "passed": true,
+      "mutation": "war_chariot",
+      "actions": 300,
+      "result": {
+        "winner": "black",
+        "reason": "stalemate",
+        "title": "无处可逃",
+        "message": "对方已无路可走。您获得胜利！"
+      },
+      "errors": []
+    },
+    {
+      "index": 12,
+      "heroes": [
+        "deathwing",
+        "murozond_minion"
+      ],
+      "passed": false,
+      "mutation": "jian_xie",
+      "actions": 300,
+      "error": "AssertionError [ERR_ASSERTION]: No natural result after 300 actions\n+ actual - expected\n\n+ 'playing'\n- 'finished'\n\n    at file:///home/runner/work/jieqi-engine/jieqi-engine/scripts/review/capture-full-match-runtime.mjs:141:14",
+      "errors": []
+    }
+  ]
+}

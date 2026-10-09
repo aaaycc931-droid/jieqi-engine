@@ -1,5 +1,9 @@
+import { strongBladeSide } from "./hero-progress.js";
+import { selectedHeroId, validateHeroForms } from "./hero-forms.js";
+import { isBoardPiece, isGround, isRiver } from "./spaces.js";
 import {
   getController,
+  getCurrentPieceType,
   getMovementIdentity,
   isAcrossRiver,
   isInPalace,
@@ -25,15 +29,20 @@ import {
 
 
 
+                                       
+
+
+
+
 export function samePosition(first          , second          )          {
-  return first.x === second.x && first.y === second.y;
+  return !isRiver(first) && !isRiver(second) && first.x === second.x && first.y === second.y;
 }
 
 export function pieceAt(
   state                           ,
   position          ,
 )                          {
-  return state.pieces.find((piece) => samePosition(piece, position));
+  return state.pieces.find((piece) => isGround(piece) && samePosition(piece, position));
 }
 
 export function pieceById(
@@ -47,15 +56,16 @@ export function hasStealthEffect(
   state                                     ,
   pieceId        ,
 )          {
-  return Boolean(state.effectsByPieceId?.[pieceId]?.stealth);
+  return Boolean(state.effectsByPieceId?.[pieceId]?.stealth || state.effectsByPieceId?.[pieceId]?.intangible);
 }
 
 function blocksPath(
   state                                                ,
   position          ,
+  layer                  ,
 )          {
-  const piece = pieceAt(state, position);
-  return Boolean(piece && !hasStealthEffect(state, piece.id));
+  const piece = layer === "air" ? state.pieces.find(p => p.layer === "air" && samePosition(p, position)) : pieceAt(state, position);
+  return Boolean(piece);
 }
 
 function countPiecesBetween(
@@ -72,7 +82,7 @@ function countPiecesBetween(
   let x = from.x + dx;
   let y = from.y + dy;
   while (x !== to.x || y !== to.y) {
-    if (blocksPath(state, { x, y })) count += 1;
+    if (blocksPath(state, { x, y }, (from               ).layer)) count += 1;
     x += dx;
     y += dy;
   }
@@ -90,12 +100,13 @@ function isGeneralTarget(
 }
 
 function movementGeometryLegal(
-  state                                                                 ,
+  state                                                                              ,
   piece             ,
   to          ,
   forAttack = false,
+  stormAssault = false,
 )          {
-  if (!isInsideBoard(to) || samePosition(piece, to)) return false;
+  if (!isBoardPiece(piece) || !isInsideBoard(to) || samePosition(piece, to)) return false;
 
   const { side, type } = getMovementIdentity(piece);
   const mutation = state.featureRules?.mutation;
@@ -104,19 +115,17 @@ function movementGeometryLegal(
   const absX = Math.abs(dx);
   const absY = Math.abs(dy);
 
-  // 骑兵保留原本棋种走法，并额外拥有马步。暗兵位和翻开后的兵/卒
-  // 仍只能向真实前方使用马步；其余翻开棋种使用完整八方向马步。
-  if (state.effectsByPieceId?.[piece.id]?.cavalry && ((absX === 2 && absY === 1) || (absX === 1 && absY === 2))) {
-    if (piece.faceDown || type === "pawn") {
-      if ((side === "red" && dy >= 0) || (side === "black" && dy <= 0)) return false;
-    }
-    const leg = absX === 2
-      ? { x: piece.x + Math.sign(dx), y: piece.y }
-      : { x: piece.x, y: piece.y + Math.sign(dy) };
-    return !blocksPath(state, leg);
+  if (mutation === "cavalry" && !piece.faceDown && type === "horse") {
+    const forward = side === "red" ? -1 : 1;
+    if (dx === 0 && dy === forward || isAcrossRiver(piece, side) && absX === 1 && dy === 0) return true;
   }
 
   switch (type) {
+    case "storm_elemental": {
+      const distance = Math.max(absX, absY);
+      if (!(dx === 0 || dy === 0 || absX === absY) || distance < 1 || distance > (stormAssault ? 2 : 1)) return false;
+      return distance === 1 || !blocksPath(state, { x: piece.x + Math.sign(dx), y: piece.y + Math.sign(dy) });
+    }
     case "rook": {
       const between = countPiecesBetween(state, piece, to);
       if (between === 0) return true;
@@ -132,20 +141,20 @@ function movementGeometryLegal(
         absX === 2
           ? { x: piece.x + Math.sign(dx), y: piece.y }
           : { x: piece.x, y: piece.y + Math.sign(dy) };
-      return mutation === "iron_steed" || !blocksPath(state, leg);
+      return mutation === "iron_steed" || !blocksPath(state, leg, piece.layer);
     }
 
     case "cannon": {
       const between = countPiecesBetween(state, piece, to);
       if (between === undefined) return false;
-      const occupied = Boolean(pieceAt(state, to));
+      const occupied = piece.layer !== "air" && Boolean(pieceAt(state, to));
       return occupied || forAttack ? between === 1 : between === 0;
     }
 
     case "pawn": {
       const forward = side === "red" ? -1 : 1;
       if (dx === 0 && dy === forward) return true;
-      if (isAcrossRiver(piece, side) && absX === 1 && dy === 0) return true;
+      if (isAcrossRiver(piece, side) && absX === 1 && (mutation === "jian_xie" ? dy === forward : dy === 0)) return true;
       return false;
     }
 
@@ -167,13 +176,14 @@ function movementGeometryLegal(
 
     case "advisor": {
       if (absX !== 1 || absY !== 1) return false;
-      return piece.faceDown ? isInPalace(to, side) : true;
+      return piece.faceDown || state.gameMode === "xiangqi" ? isInPalace(to, side) : true;
     }
 
     case "elephant": {
       if (absX !== 2 || absY !== 2) return false;
+      if (state.gameMode === "xiangqi" && isAcrossRiver(to, side)) return false;
       const eye = { x: piece.x + dx / 2, y: piece.y + dy / 2 };
-      return !blocksPath(state, eye);
+      return !blocksPath(state, eye, piece.layer);
     }
 
     default: {
@@ -184,20 +194,23 @@ function movementGeometryLegal(
 }
 
 function targetEligible(
-  state                                                                 ,
+  state                                                                                  ,
   source             ,
   to          ,
   options                    = {},
 )          {
-  const target = pieceAt(state, to);
+  if (source.layer === "air") return !state.pieces.some(p => p.layer === "air" && samePosition(p, to));
+  const target = source.layer === "air" ? undefined : pieceAt(state, to);
   if (!target) return true;
   if (hasStealthEffect(state, target.id) && !options.allowStealthTarget) return false;
   // 自残只限暗子：暗子身份未知，始终可吃；己方已揭明子不可吃。
   if (target.faceDown) return true;
   if (target.type === "general") {
+    if (options.allowGeneralTarget && selectedHeroId(state, target.color) === "wind") return false;
+    if (options.allowGeneralTarget) return getController(target) !== getController(source);
     // 战车的隔子冲锋是路径碾碎终局的唯一例外：允许把敌将帅作为终点，
     // 以便与路径上的己方将帅形成两败俱伤。
-    return state.featureRules?.mutation === "war_chariot" && getMovementIdentity(source).type === "rook" && getController(target) !== getController(source);
+    return state.featureRules?.mutation === "war_chariot" && getCurrentPieceType(source) === "rook" && getController(target) !== getController(source);
   }
   return getController(target) !== getController(source);
 }
@@ -206,8 +219,9 @@ export function getPseudoMoves(
   state           ,
   pieceId        ,
 )             {
+  validateHeroForms(state);
   const source = pieceById(state, pieceId);
-  if (!source) return [];
+  if (!source || !isBoardPiece(source)) return [];
   const result             = [];
   for (let y = 0; y <= 9; y += 1) {
     for (let x = 0; x <= 8; x += 1) {
@@ -224,12 +238,23 @@ export function getPseudoMoves(
 }
 
 export function canRevealedPieceAttack(
-  state                                                                 ,
+  state                                                                                  ,
   piece               ,
   position          ,
 )          {
-  if (hasStealthEffect(state, piece.id)) return false;
-  if (state.featureRules?.mutation === "iron_steed" && getMovementIdentity(piece).type === "horse") {
+  validateHeroForms(state);
+  // 潜行者来源无形不产生有效将军；一般无形仅限制直接选取。
+  if (!isGround(piece) || isRiver(position) || state.effectsByPieceId?.[piece.id]?.stealth) return false;
+  if (princeProtects(state             , otherSide(piece.color)) && ownHalf(otherSide(piece.color), piece)) return false;
+  if (hasStealthEffect(state, pieceAt(state, position)?.id ?? "")) return false;
+  if (state.featureRules?.mutation === "war_chariot" && getCurrentPieceType(piece) === "rook") {
+    const ownGeneral = state.pieces.find(p => isGround(p) && !p.faceDown && p.color === piece.color && p.type === "general");
+    const dx = Math.sign(position.x - piece.x), dy = Math.sign(position.y - piece.y);
+    if (ownGeneral && countPiecesBetween(state, piece, position) === 1 &&
+      (dx === 0 && ownGeneral.x === piece.x && (ownGeneral.y - piece.y) * dy > 0 && (position.y - ownGeneral.y) * dy > 0 ||
+       dy === 0 && ownGeneral.y === piece.y && (ownGeneral.x - piece.x) * dx > 0 && (position.x - ownGeneral.x) * dx > 0)) return false;
+  }
+  if (state.featureRules?.mutation === "iron_steed" && getCurrentPieceType(piece) === "horse") {
     const dx = position.x - piece.x;
     const dy = position.y - piece.y;
     // 敌将帅处在马腿格时，只要该方向至少有一个可完成的日字落点，
@@ -252,18 +277,18 @@ export function canRevealedPieceAttack(
 }
 
 export function isSquareAttacked(
-  state                                                                 ,
+  state                                                                                  ,
   position          ,
   bySide      ,
 )          {
   return state.pieces.some((piece) => {
-    if (piece.faceDown || piece.color !== bySide || hasStealthEffect(state, piece.id)) return false;
+    if (piece.faceDown || piece.color !== bySide) return false;
     return canRevealedPieceAttack(state, piece, position);
   });
 }
 
 export function findGeneral(
-  state                                                                 ,
+  state                                                                                  ,
   side      ,
 )                {
   const general = state.pieces.find(
@@ -275,10 +300,11 @@ export function findGeneral(
 }
 
 export function isGeneralInCheck(
-  state                                                                 ,
+  state                                                                                  ,
   side      ,
 )          {
   const general = findGeneral(state, side);
+  if (isRiver(general)) return false;
   return isSquareAttacked(state, general, otherSide(side));
 }
 
@@ -287,7 +313,8 @@ function simulatePublicMove(
   source             ,
   to          ,
 )            {
-  const target = pieceAt(state, to);
+  const target = source.layer === "air" ? undefined : pieceAt(state, to);
+  if (target && state.effectsByPieceId?.[target.id]?.dragonScale) return state;
   const moved              = { ...source, x: to.x, y: to.y };
   return {
     ...state,
@@ -311,6 +338,7 @@ export function validatePublicMove(
   actingSide       = state.turn,
   options                    = {},
 )                 {
+  validateHeroForms(state);
   if (state.status !== "playing") {
     return { ok: false, code: "GAME_FINISHED", message: "对局已经结束" };
   }
@@ -324,22 +352,39 @@ export function validatePublicMove(
     return { ok: false, code: "SAME_SQUARE", message: "起点和终点相同" };
   }
 
-  const source = pieceAt(state, move.from);
+  const source = move.pieceId ? pieceById(state, move.pieceId) : pieceAt(state, move.from);
   if (!source) {
     return { ok: false, code: "NO_PIECE", message: "起点没有棋子" };
   }
+  if (!isBoardPiece(source)) return { ok: false, code: "RIVER_ACTION_REQUIRED", message: "河道棋须按来源专属规则行动" };
+  if (!samePosition(source, move.from)) return { ok: false, code: "INVALID_SOURCE", message: "棋子ID与起点不符" };
   if (getController(source) !== actingSide) {
     return { ok: false, code: "NOT_CONTROLLED", message: "该棋子不由行动方控制" };
+  }
+  if (!options.allowLinkedControl && state.pieces.some(p => p.layer === "air" && getController(p) === actingSide && state.effectsByPieceId?.[p.id]?.flight?.forcedLanding)) return { ok: false, code: "FORCED_LANDING_REQUIRED", message: "第四个控制方回合必须原地降落" };
+  if (selectedHeroId(state, actingSide) === "single_blade" && state.heroRuntime?.[actingSide]?.blade && source.x !== 4 && !strongBladeSide(state, actingSide, source.x) && Math.abs(move.to.x - 4) > Math.abs(source.x - 4)) return { ok: false, code: "WEAK_BLADE_OUTWARD", message: "弱侧普通行动不能离中轴更远" };
+  const effects = state.effectsByPieceId?.[source.id];
+  const target = source.layer === "air" ? undefined : pieceAt(state, move.to);
+  if (!options.allowLinkedControl && effects?.controlTrap && effects.controlTrap.controller === actingSide &&
+    effects.controlTrap.blockedFormalTurn === (state.formalTurns?.[actingSide] ?? 0) + 1) {
+    return { ok: false, code: "CONTROL_TRAP", message: "该棋下一正式回合被封锁行动" };
+  }
+  if (source.layer === "air" && options.requireCapture) return { ok: false, code: "FLIGHT_NO_ATTACK", message: "飞行棋不能进攻" };
+  if (target && princeProtects(state, otherSide(actingSide)) && (ownHalf(otherSide(actingSide), source) || ownHalf(otherSide(actingSide), move.to))) {
+    return { ok: false, code: "CAREFREE", message: "无忧领域阻止此次进攻" };
+  }
+  if (!target && state.featureRules?.mutation === "end_time" && selectedHeroId(state, actingSide) === "nozdormu" && state.warps?.some(p => samePosition(p, move.to))) {
+    return { ok: false, code: "WARP_EMPTY", message: "不能普通移动到空的时空扭曲格" };
   }
   if (state.featureRules?.mutation === "iron_wall") {
     const destinationOwner = actingSide;
     const startsInsideEnemy = isInPalace(move.from, otherSide(destinationOwner));
     const endsInsideEnemy = isInPalace(move.to, otherSide(destinationOwner));
     if (!startsInsideEnemy && endsInsideEnemy) {
-      return { ok: false, code: "IRON_WALL", message: "铁壁阻止从九宫外进入敌方九宫" };
+      return { ok: false, code: "IRON_WALL", message: "堡垒阻止从九宫外进入敌方九宫" };
     }
   }
-  if (hasStealthEffect(state, source.id) && !options.allowStealthSource) {
+  if (hasStealthEffect(state, source.id) && source.layer !== "air" && !options.allowStealthSource) {
     return { ok: false, code: "STEALTH_ACTION_REQUIRED", message: "隐身棋必须通过刺杀行动移动" };
   }
   if (!targetEligible(state, source, move.to, options)) {
@@ -348,12 +393,12 @@ export function validatePublicMove(
   if (options.requireCapture && !pieceAt(state, move.to)) {
     return { ok: false, code: "STRONG_STRIKE_NEEDS_TARGET", message: "强击必须选择一个目标棋子" };
   }
-  if (!movementGeometryLegal(state, source, move.to)) {
+  if (!movementGeometryLegal(state, source, move.to, false, options.stormAssault)) {
     return { ok: false, code: "ILLEGAL_MOVEMENT", message: "棋子走法不合法" };
   }
 
   const simulated = simulatePublicMove(state, source, move.to);
-  if (isGeneralInCheck(simulated, actingSide)) {
+  if (!options.allowIntermediateCheck && isGeneralInCheck(simulated, actingSide)) {
     return { ok: false, code: "SELF_CHECK", message: "该步会令己方将帅受攻击" };
   }
 
@@ -364,11 +409,13 @@ export function getLegalMoves(
   state           ,
   pieceId        ,
   actingSide       = state.turn,
+  options                    = {},
 )             {
+  validateHeroForms(state);
   const source = pieceById(state, pieceId);
-  if (!source || getController(source) !== actingSide) return [];
+  if (!source || !isBoardPiece(source) || getController(source) !== actingSide) return [];
   return getPseudoMoves(state, pieceId).filter(
-    (to) => validatePublicMove(state, { from: source, to }, actingSide).ok,
+    (to) => validatePublicMove(state, { from: source, to, pieceId: source.id }, actingSide, options).ok,
   );
 }
 
@@ -380,18 +427,24 @@ export function getLegalAssassinationMoves(
   useStrongStrike         ,
   actingSide       = state.turn,
 )             {
+  validateHeroForms(state);
   const source = pieceById(state, pieceId);
-  if (!source || getController(source) !== actingSide) return [];
+  if (!source || !isBoardPiece(source) || getController(source) !== actingSide) return [];
   if (source.faceDown || source.type === "general") return [];
+  const activePieceId = state.assassination?.[actingSide]?.activePieceId;
+  const continuing = activePieceId === source.id;
+  if (activePieceId && !continuing) return [];
   const legal             = [];
   for (let y = 0; y <= 9; y += 1) {
     for (let x = 0; x <= 8; x += 1) {
       const to = { x, y };
       const target = pieceAt(state, to);
-      if (useStrongStrike && (!target || (!target.faceDown && target.type === "general"))) continue;
+      if (!continuing && useStrongStrike) continue;
+      if (useStrongStrike && (!target || !target.faceDown && target.type === "general")) continue;
       if (validatePublicMove(state, { from: source, to }, actingSide, {
         allowStealthSource: hasStealthEffect(state, source.id),
         allowStealthTarget: useStrongStrike,
+        allowGeneralTarget: false,
         requireCapture: useStrongStrike,
       }).ok) legal.push(to);
     }
@@ -400,10 +453,20 @@ export function getLegalAssassinationMoves(
 }
 
 export function hasAnyLegalMove(state           , side      )          {
+  // 已确认的占步技能与强制降落也是正式主行动机会；不能先按普通走子裁定困毙。
+  const hero = selectedHeroId(state, side), runtime = state.heroRuntime?.[side];
+  if (state.pieces.some(p => p.layer === "air" && getController(p) === side && state.effectsByPieceId?.[p.id]?.flight?.source === "sky_admiral")) return true;
+  if (hero === "deathwing" && !runtime?.used) return true;
+  if (hero === "devout_zealot" && (runtime?.invokeCount ?? 0) < 4 && !isGeneralInCheck(state, side)) return true;
+  if (hero === "warlock" && !runtime?.used && state.pieces.some(p => isBoardPiece(p) && getController(p) === side)) return true;
+  const selection = state.featureRules?.heroSelections?.[side];
+  if (selection?.heroId === "death_knight" && selection.form === "inner" && !runtime?.used) return true;
+  if (selection?.heroId === "jiang_he" && (selection.form === "front" || !runtime?.used) && state.pieces.some(p => getController(p) === side && (isRiver(p) || isGround(p) && [4,5].includes(p.y) && state.effectsByPieceId?.[p.id]?.riverQualified))) return true;
+
   const stateForSide            = { ...state, status: "playing", turn: side };
   return stateForSide.pieces.some(
     (piece) =>
-      getController(piece) === side &&
+      isBoardPiece(piece) && getController(piece) === side &&
       getLegalMoves(stateForSide, piece.id, side).length > 0,
   );
 }
@@ -417,5 +480,10 @@ export function isStalemate(state           , side      )          {
 }
 
 export function getPieceTypeForMovement(piece             )            {
-  return getMovementIdentity(piece).type;
+  return getCurrentPieceType(piece);
+}
+
+function ownHalf(side      , position          )          { return side === "red" ? position.y >= 5 : position.y <= 4; }
+export function princeProtects(state           , side      )          {
+  return selectedHeroId(state, side) === "prince" && Math.min(state.formalTurns?.red ?? 0, state.formalTurns?.black ?? 0) < 9 && !state.heroRuntime?.[side]?.carefreeSuspended;
 }

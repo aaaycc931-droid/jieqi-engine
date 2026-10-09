@@ -1,32 +1,54 @@
+import { submitRemoteHeroPreparationChoice } from "./remote-room.ts";
 import { RuleError } from "./errors.ts";
 import {
+  advanceRemoteRoomTime,
+  completeRemoteHeroIntro,
+  completeRemoteHeroPreparation,
   createRemoteRoom,
+  disconnectRemotePlayer,
   joinRemoteRoom,
+  forfeitRemoteRoom,
+  reconnectRemotePlayer,
+  requestRemoteRematch,
+  respondRemoteRematch,
   playerRoomView,
   publicRemoteRoom,
   submitRemoteAssassination,
+  submitRemoteHeroAbility,
   submitRemoteHeroSelection,
+  submitRemoteChat,
   submitRemoteMove,
   submitRemoteRps,
   submitRemoteTrapSetup,
+  updateRemoteTrapDraft,
   surrenderRemoteRoom,
   type PlayerRemoteRoomView,
   type PublicRemoteRoom,
   type RemoteRoom,
 } from "./remote-room.ts";
-import type { AssassinationCommand, HeroId, MoveCommand, OptionalModeConfig, Position, RandomInt } from "./types.ts";
+import type { AssassinationCommand, HeroAbilityCommand, HeroId, MoveCommand, OptionalModeConfig, Position, RandomInt } from "./types.ts";
+import { normalizeGameMode } from "./modes.ts";
 import type { RpsChoice } from "./rps.ts";
 
 export const BLUETOOTH_HOST_PLAYER = "bluetooth:host";
 export const BLUETOOTH_GUEST_PLAYER = "bluetooth:guest";
 
 export type BluetoothRoomAction =
+  | { kind: "hero"; hero: HeroId; form?: import("./types.ts").HeroForm; variant?: import("./types.ts").GalakrondForm }
+  | { kind: "hero_preparation_choice"; blade?: "left" | "right"; trainingType?: import("./types.ts").PieceType }
   | { kind: "rps"; choice: RpsChoice; round: number }
-  | { kind: "hero"; hero: HeroId }
+  | { kind: "hero_intro_complete" }
+  | { kind: "trap_draft"; positions: readonly Position[] }
+  | { kind: "preparation_ready" }
   | { kind: "traps"; positions: readonly Position[] }
   | { kind: "move"; command: MoveCommand }
   | { kind: "assassination"; command: AssassinationCommand }
-  | { kind: "resign"; expectedRevision: number; actionId: string };
+  | { kind: "hero_ability"; command: HeroAbilityCommand }
+  | { kind: "chat"; messageId: string; text: string }
+  | { kind: "forfeit"; actionId: string }
+  | { kind: "resign"; expectedRevision: number; actionId: string }
+  | { kind: "rematch_request"; actionId: string }
+  | { kind: "rematch_response"; accept: boolean };
 
 export interface BluetoothRoomViews {
   publicRoom: PublicRemoteRoom;
@@ -51,6 +73,9 @@ export class BluetoothHostRoom {
     /** Physical RFCOMM admission replaces a human-entered invite token. */
     admissionSecret: string;
   }) {
+    if (normalizeGameMode(options.mode?.baseMode) !== "jieqi") {
+      throw new RuleError("MODE_TRANSPORT_PENDING", "新模式尚待英雄畸变与蓝牙协议适配，暂未开放蓝牙对局");
+    }
     this.randomInt = options.randomInt;
     this.now = options.now ?? (() => Date.now());
     const initial = createRemoteRoom(options.roomId, BLUETOOTH_HOST_PLAYER, options.admissionSecret, this.now(), options.mode);
@@ -58,6 +83,7 @@ export class BluetoothHostRoom {
   }
 
   views(): BluetoothRoomViews {
+    this.room = advanceRemoteRoomTime(this.room, this.randomInt, this.now());
     return {
       publicRoom: publicRemoteRoom(this.room),
       host: playerRoomView(this.room, BLUETOOTH_HOST_PLAYER),
@@ -67,12 +93,24 @@ export class BluetoothHostRoom {
 
   handle(playerId: typeof BLUETOOTH_HOST_PLAYER | typeof BLUETOOTH_GUEST_PLAYER, action: BluetoothRoomAction): BluetoothRoomViews {
     const now = this.now();
+    this.room = advanceRemoteRoomTime(this.room, this.randomInt, now);
     switch (action.kind) {
       case "rps":
         this.room = submitRemoteRps(this.room, playerId, action.choice, action.round, this.randomInt, now);
         break;
       case "hero":
-        this.room = submitRemoteHeroSelection(this.room, playerId, action.hero, this.randomInt, now);
+        this.room = submitRemoteHeroSelection(this.room, playerId, action.hero, this.randomInt, now, { form: action.form, variant: action.variant });
+        break;
+      case "hero_preparation_choice":
+        this.room = submitRemoteHeroPreparationChoice(this.room, playerId, action, now, this.randomInt); break;
+      case "hero_intro_complete":
+        this.room = completeRemoteHeroIntro(this.room, playerId, now);
+        break;
+      case "trap_draft":
+        this.room = updateRemoteTrapDraft(this.room, playerId, action.positions, now);
+        break;
+      case "preparation_ready":
+        this.room = completeRemoteHeroPreparation(this.room, playerId, now);
         break;
       case "traps":
         this.room = submitRemoteTrapSetup(this.room, playerId, action.positions, now);
@@ -83,12 +121,42 @@ export class BluetoothHostRoom {
       case "assassination":
         this.room = submitRemoteAssassination(this.room, playerId, action.command, now).room;
         break;
+      case "hero_ability":
+        this.room = submitRemoteHeroAbility(this.room, playerId, action.command, now, this.randomInt).room;
+        break;
+      case "chat":
+        this.room = submitRemoteChat(this.room, playerId, action.messageId, action.text, now).room;
+        break;
+      case "forfeit":
+        this.room = forfeitRemoteRoom(this.room, playerId, action.actionId, now).room;
+        break;
       case "resign":
         this.room = surrenderRemoteRoom(this.room, playerId, action.expectedRevision, action.actionId, now).room;
+        break;
+      case "rematch_request":
+        this.room = requestRemoteRematch(this.room, playerId, action.actionId, now).room;
+        break;
+      case "rematch_response":
+        this.room = respondRemoteRematch(this.room, playerId, action.accept, now);
         break;
       default:
         throw new RuleError("INVALID_BLUETOOTH_ACTION", "未知蓝牙房间操作");
     }
+    return this.views();
+  }
+
+  disconnect(playerId: typeof BLUETOOTH_HOST_PLAYER | typeof BLUETOOTH_GUEST_PLAYER): BluetoothRoomViews {
+    this.room = disconnectRemotePlayer(this.room, playerId, this.now());
+    return this.views();
+  }
+
+  reconnect(playerId: typeof BLUETOOTH_HOST_PLAYER | typeof BLUETOOTH_GUEST_PLAYER): BluetoothRoomViews {
+    this.room = reconnectRemotePlayer(this.room, playerId, this.now());
+    return this.views();
+  }
+
+  advance(): BluetoothRoomViews {
+    this.room = advanceRemoteRoomTime(this.room, this.randomInt, this.now());
     return this.views();
   }
 }

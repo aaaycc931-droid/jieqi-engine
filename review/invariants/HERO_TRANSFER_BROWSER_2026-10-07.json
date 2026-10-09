@@ -1,0 +1,129 @@
+{
+  "authority": "prepared_browser_execution_non_normative",
+  "ruleRevision": "LEZI-FUNCTION-2026-10-07-r5",
+  "sourceCommitAtRun": "10cc079ef6dc292182f29c2b7aca43b9a4303752",
+  "workingTreeDirty": false,
+  "appDigest": "102928b45dbaf9d11894afc5ec67094f316513de0863a2894a1bb2b68290e1ee",
+  "browser": "145.0.7632.6",
+  "viewport": {
+    "width": 390,
+    "height": 845
+  },
+  "cases": [
+    {
+      "name": "nineteen hero selection entries",
+      "passed": true
+    },
+    {
+      "name": "public insight fee, private result and device handoff clearing",
+      "passed": true
+    },
+    {
+      "name": "blade displacement child ends only its original formal turn",
+      "passed": true
+    },
+    {
+      "name": "charge barrier bounce closes parent turn and durations once",
+      "passed": true
+    },
+    {
+      "name": "river arbitrary distance horizontal operation",
+      "passed": true
+    },
+    {
+      "name": "inner ghost committed pulse operation",
+      "passed": true
+    },
+    {
+      "name": "nightmare descent deployment and main opportunity preservation",
+      "passed": true
+    },
+    {
+      "name": "fel descent deployment and main opportunity preservation",
+      "passed": true
+    },
+    {
+      "name": "storm descent deployment and main opportunity preservation",
+      "passed": true
+    },
+    {
+      "name": "nightmare fortress seal rejects deployment without consuming its window",
+      "passed": true
+    },
+    {
+      "name": "nightmare final check is evaluated after landing trap destruction",
+      "passed": true
+    },
+    {
+      "name": "storm summons killed on landing release the normal main opportunity",
+      "passed": true
+    },
+    {
+      "name": "storm candidate terminal waits for second assault attack",
+      "passed": true
+    },
+    {
+      "name": "storm candidate terminal waits for second assault skip",
+      "passed": true
+    },
+    {
+      "name": "storm preserves both death events and generates both unticked ghosts",
+      "passed": true
+    },
+    {
+      "name": "storm exhausted source checks final unavoidable check before normal main",
+      "passed": true
+    },
+    {
+      "name": "bomb rejects fractional DOM target without spending ammo and accepts a range-three retry",
+      "passed": true
+    },
+    {
+      "name": "bomb army quota rejects a different dragon without spending its ammo",
+      "passed": true
+    },
+    {
+      "name": "next-turn flight obligation preserves timeline ground control then requires formal landing",
+      "passed": true
+    },
+    {
+      "name": "timeline controls the original flyer above ground objects then next formal main lands it",
+      "passed": true
+    },
+    {
+      "name": "active brawl DOM pays once and same-piece allied allied enemy chain closes one formal turn",
+      "passed": true
+    },
+    {
+      "name": "brawl DOM refuses borrowing first kill resources without committing state",
+      "passed": true
+    },
+    {
+      "name": "flame pawn center DOM spares neighboring general",
+      "passed": true
+    },
+    {
+      "name": "flame horse center DOM eliminates neighboring general",
+      "passed": true
+    },
+    {
+      "name": "general flame center DOM includes rook and both generals in one mutual destruction batch",
+      "passed": true
+    },
+    {
+      "name": "ordinary board attack consumes dragon scale and returns attacker to origin",
+      "passed": true
+    },
+    {
+      "name": "forced landing DOM consumes ground scale and suffocates flyer without retry",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "limits": [
+    "Synthetic prepared fixtures exercise actual compiled DOM controls and authority calls.",
+    "Not natural full matches, Bluetooth transport, physical devices or complete hero acceptance.",
+    "No product debug API, APK or paused random-match queue."
+  ],
+  "passed": true
+}

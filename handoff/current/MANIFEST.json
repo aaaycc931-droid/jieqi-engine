@@ -1,0 +1,219 @@
+{
+  "format": "sha256",
+  "self_excluded": true,
+  "files": {
+    "00_READ_FIRST.md": {
+      "bytes": 2551,
+      "sha256": "fba778ba5f1f07b8143a3f949183d9296c0b80ca9aa27f810015745af2101231"
+    },
+    "01_CURRENT_RULES.md": {
+      "bytes": 30087,
+      "sha256": "c0fb3bfb9269a7bbe9b227287bbd4ddcefc663c30ae28c75006129af794c101c"
+    },
+    "02_CURRENT_HEROES.md": {
+      "bytes": 34879,
+      "sha256": "416e8105777fe81d3e7076727c30fa455fce5bcee01cfee7184a7f1f7268c643"
+    },
+    "03_CURRENT_MUTATIONS.md": {
+      "bytes": 17178,
+      "sha256": "e68b3123042cf4ce2bb7411ee3cea4c1289b6c8875f564f4b4c39db6542affb1"
+    },
+    "04_CURRENT_UI_AND_FLOW.md": {
+      "bytes": 18891,
+      "sha256": "c133b4ee797b778ce4c88233437b2466255f27c30fcaec5b0941c766cc4bae00"
+    },
+    "05_PROGRESS_AND_NEXT.md": {
+      "bytes": 41664,
+      "sha256": "6b93d5de478ef91999071d1bc4f4ebf8cf67ca13868990c54030f1cb12635d31"
+    },
+    "06_COLLABORATION.md": {
+      "bytes": 8164,
+      "sha256": "a78ee4882f30d25d6d84e783467f15704c34c113ac6884ac9b6a6c52ac874186"
+    },
+    "07_DESIGN_SCORING.md": {
+      "bytes": 4854,
+      "sha256": "d0d7f6a2f3e6b2774ed03eb38c5199373d0fb887ad804b5db28fcd5ad2db293b"
+    },
+    "08_SCORE_LEDGER.md": {
+      "bytes": 35456,
+      "sha256": "1381656cb5dd9fbc1108faeb93e4bcd594f85a871d1f51530ca66bc1c0d04481"
+    },
+    "09_CURRENT_GAME_MODES.md": {
+      "bytes": 4749,
+      "sha256": "fee5f89a60880cb94aa80f1d39e2d692518c5226ed047f5c722590f4baee7bf1"
+    },
+    "10_STAGE_CLOSE.md": {
+      "bytes": 6815,
+      "sha256": "784b23ed108851b63a6399f2e37c10e6e95c60deaf0282686c3799ac06e8011f"
+    },
+    "11_RULE_SYNC_2026-10-06.md": {
+      "bytes": 1979,
+      "sha256": "c81ce01d78b0c366e5426bdcbede92b2e70388a520c41ea518f7f18ff16ef150"
+    },
+    "12_DARK_IDENTITY_SYNC_2026-10-06.md": {
+      "bytes": 2313,
+      "sha256": "20a31047d8a9b194a4af74119777a7dcb749afdcc763046401f405019d815c8a"
+    },
+    "13_DARK_IDENTITY_RUNTIME_2026-10-06.md": {
+      "bytes": 4582,
+      "sha256": "fdbb96ff031ebdc6d9a8a1b2619b52f36188aa57dd6c88ee29c8301a8f8a2c9a"
+    },
+    "14_ACTION_TURN_RUNTIME_2026-10-06.md": {
+      "bytes": 6512,
+      "sha256": "08683ee700366cf619fe601fbc60512eaf625516f40636683c616c0d61e41d69"
+    },
+    "15_DESTRUCTION_BATCH_RUNTIME_2026-10-06.md": {
+      "bytes": 5448,
+      "sha256": "497fbb2351b704030874d8863008263e2aecf42d402362f67830a73b7c6b534f"
+    },
+    "16_RIVER_SPACE_RUNTIME_2026-10-06.md": {
+      "bytes": 5835,
+      "sha256": "231159d06aea0be82eff0d76a8156004b81796fe314a681f00716681dcf95e61"
+    },
+    "17_ACCOUNT_SWITCH_CLOSE_2026-10-06.md": {
+      "bytes": 4056,
+      "sha256": "5daaaebe00a8d29f027bfd0d441e03f66b159972a2368cabd0655aaaef880e23"
+    },
+    "18_GHOST_OBJECT_RUNTIME_2026-10-07.md": {
+      "bytes": 5145,
+      "sha256": "4e2660c3b728ce4c0ee12760a913be5bfbf0b3d76cc3cbf2f4a26ecf220240ad"
+    },
+    "19_CURRENT_CONTROL_AUDIT_2026-10-07.md": {
+      "bytes": 7967,
+      "sha256": "041a02ee0cede1dcf44642dab431dcdbcb34548ad6296fcc812596869e4c8f0b"
+    },
+    "20_HERO_FORM_RUNTIME_2026-10-07.md": {
+      "bytes": 5356,
+      "sha256": "e8e110328bc946736289fda342378a394ab5deafe1ac1ebee92a33c580db752c"
+    },
+    "21_ACCEPTANCE_GAP_CLOSE_2026-10-07.md": {
+      "bytes": 8107,
+      "sha256": "64e73e77e49daf53bbf1c2666f4870ce188f950ab996312bc0201c6aa594b7ab"
+    },
+    "22_HERO_TRANSFER_2026-10-07.md": {
+      "bytes": 6857,
+      "sha256": "4a64b0a71207cecf09709ff0dc6af6c9e3262b9ef2fa820fcfa86b8f9aca35ee"
+    },
+    "23_HERO_CROSS_SETTLEMENT_2026-10-08.md": {
+      "bytes": 4532,
+      "sha256": "2eb9b7e34879843ce393ee5591845f2aba604404caffd808a644b8e50e69457b"
+    },
+    "24_HERO_CHILD_BOUNDARY_2026-10-08.md": {
+      "bytes": 4960,
+      "sha256": "682ea99dc274c671db2c248545bb19b4696510e92bf4a905b9527938b6b9e735"
+    },
+    "25_HERO_DESCENT_BOUNDARY_2026-10-08.md": {
+      "bytes": 4973,
+      "sha256": "9a0a9f908cb74eb7519e8f659f98cd8f36c87e31a5e58372023c538b1c22888d"
+    },
+    "26_CI_SCOPE_2026-10-08.md": {
+      "bytes": 4430,
+      "sha256": "0b43d3f8b14511e6c739c6ec75b913efe6ebc3d0eaa5053a2b9c70e237298567"
+    },
+    "27_HERO_DESCENT_ATOM_2026-10-08.md": {
+      "bytes": 5318,
+      "sha256": "1baae70fb55e3d85d770eb16ed99c4e25cad9074c6d361f5b16e6417c4c15631"
+    },
+    "28_BOMB_TARGET_BOUNDARY_2026-10-08.md": {
+      "bytes": 5535,
+      "sha256": "a8f0ab4b13ba1579a55a75107ee6a748ee33f576fb3fc8adf7b5c7c4a38f18d4"
+    },
+    "29_FLIGHT_TURN_BOUNDARY_2026-10-08.md": {
+      "bytes": 4890,
+      "sha256": "cf37769700cd84e1b3a14e72f84b9496cb181387ccac1ac024c46d1d6b8849c0"
+    },
+    "30_RULE_GAP_RUNTIME_2026-10-08.md": {
+      "bytes": 5739,
+      "sha256": "cfb7f8c33922e1e4efaa06a0f0cffeb3127e60bd982281d58d23a8e412999a9b"
+    },
+    "NEW_DIALOGUE_PROMPT.txt": {
+      "bytes": 2667,
+      "sha256": "3ae6a73ae1451c4990a259b38b53345a7218cea29733b2343c6f344b6bcc39c8"
+    },
+    "SOURCE_REGISTER.json": {
+      "bytes": 34429,
+      "sha256": "b3f804e7d8f3defbc9ebb05819574fd5eddce834721b70e6d85734d57979ac87"
+    },
+    "STATE.json": {
+      "bytes": 103785,
+      "sha256": "109965ccfea085b62a02b98581ff7446ba49e575467fbf8ac71d01790d8085e3"
+    },
+    "assets/approved-home.png": {
+      "bytes": 2157060,
+      "sha256": "5c0dae37bb4dd84054d566c5ae5da98545ca73f23544ded5090ec80f1fbe211e"
+    },
+    "assets/approved-v4-reference.png": {
+      "bytes": 1282661,
+      "sha256": "63671bd146ce72a3c61f40dac457f83f882d7ada78c5f5f98efb7bb3ba5eac26"
+    },
+    "qa/ACCEPTANCE_GAPS.json": {
+      "bytes": 114880,
+      "sha256": "9714d648a41f2d034530248d838dcb7b8892aa73c681d6414ae31d55119371d4"
+    },
+    "qa/HERO_TRANSFER_AUDIT.json": {
+      "bytes": 31721,
+      "sha256": "598d805db7d696033ea20c7ba83e382ace8cf84997746a22d3ea87cd29c0ba7c"
+    },
+    "qa/INVARIANTS.json": {
+      "bytes": 45510,
+      "sha256": "f09f83064cb2bff8cdd4d41130646733f751252fe4e534c75ab043160327baaa"
+    }
+  },
+  "checks": {
+    "current_rule_revision_r5": true,
+    "hero_source_r7_clean_archived_exactly": true,
+    "heroes_19_front_2_inner_5_fixed_variants": true,
+    "source_entries_H01_H21": true,
+    "mutations_9_present": true,
+    "qa_69_plus_20_and_20_supplements_preserved": true,
+    "new_hero_sources_imported_this_round": false,
+    "full_contracts_accepted": false,
+    "hero_full_matches_accepted": false,
+    "physical_devices_accepted": false,
+    "apk_built": false,
+    "remote_and_execution_product_trees_equal": false,
+    "historical_r4_inventory_preserved": true,
+    "cross_settlement_8_new_cases_passed": true,
+    "rule_sources_unchanged_this_round": false,
+    "child_boundary_3_new_cases_passed": true,
+    "first_browser_failure_preserved": true,
+    "descent_boundary_6_new_cases_passed": true,
+    "project_collaboration_independent": true,
+    "personal_main_document_modified": false,
+    "product_tests_rerun_for_collaboration_document": false,
+    "ci_configuration_changed_for_collaboration_document": false,
+    "ci_scope_configuration_implemented_in_followup": true,
+    "runtime_rules_unchanged_by_ci_scope_round": true,
+    "historical_engine_487_passed": true,
+    "historical_browser_12_prepared_operations_passed": true,
+    "historical_browser_9_mode_foundation_cases_passed": true,
+    "descent_atom_7_new_cases_passed": true,
+    "historical_engine_494_passed": true,
+    "historical_browser_16_prepared_operations_passed": true,
+    "bomb_target_4_new_cases_passed": true,
+    "historical_engine_498_passed": true,
+    "historical_browser_18_prepared_operations_passed": true,
+    "historical_mode_foundation_9_failure_fallback_cases_passed": true,
+    "flight_turn_boundary_3_new_cases_passed": true,
+    "historical_design_required_branches": 4,
+    "design_required_branches": 0,
+    "H07_mirror_confirmed_runtime_pending": false,
+    "product_tests_rerun_for_H07_confirmation": false,
+    "H12_ordinary_center_general_threshold_confirmed_runtime_pending": false,
+    "H12_general_center_ordinary_targets_confirmed_runtime_pending": false,
+    "H12_design_gap_closed_runtime_pending": false,
+    "H16_entry_confirmed_fee_pending": false,
+    "four_design_gaps_confirmed_implemented": true,
+    "engine_514_passed": true,
+    "android_assets_128_equal": true,
+    "historical_android_assets_127_equal": true,
+    "historical_engine_501_passed": true,
+    "historical_browser_20_prepared_operations_passed": true,
+    "historical_mode_foundation_skipped_this_round": true,
+    "browser_27_prepared_operations_passed": true,
+    "mode_foundation_9_shared_app_cases_passed": true,
+    "current_source_contract_app_digests_match_actual_CI": true,
+    "publication_tree_matches_local_assembled": true,
+    "publication_tree_matches_source_execution": false
+  }
+}
