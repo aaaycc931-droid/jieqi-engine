@@ -3,8 +3,8 @@
   "self_excluded": true,
   "files": {
     "00_READ_FIRST.md": {
-      "bytes": 3627,
-      "sha256": "534f0b3f6c14babd865fbf50f6dd7026d83bf20ea1aa2ed85514bc1138c25c3b"
+      "bytes": 3963,
+      "sha256": "0ae7cc19df3d3ab9a04703ebe5f83edf0b699e6a88818a320cda132a816e7ac5"
     },
     "01_CURRENT_RULES.md": {
       "bytes": 30087,
@@ -131,12 +131,12 @@
       "sha256": "3ae6a73ae1451c4990a259b38b53345a7218cea29733b2343c6f344b6bcc39c8"
     },
     "SOURCE_REGISTER.json": {
-      "bytes": 35818,
-      "sha256": "fa25f61d9fcf48754097f94f9c7932e4c1a699063ced1083a937e8f1beee3700"
+      "bytes": 36145,
+      "sha256": "3db0a942480bfa0c2117786b8fd7e63a2db2447a248e402056670df98a52e034"
     },
     "STATE.json": {
-      "bytes": 110346,
-      "sha256": "43aa9c289a0c1ee06634bc920d3eb3c8c6d1ecd3e3a918e867841a94dd8d8bfa"
+      "bytes": 110748,
+      "sha256": "952d1ab2577399664b61a4b7fb09e76671fd7ede6a9e60dac5bf3ae6610d9b41"
     },
     "assets/approved-home.png": {
       "bytes": 2157060,
@@ -185,6 +185,18 @@
     "net/NET-REF-001.json": {
       "bytes": 7762,
       "sha256": "4ffec5a9bd4b56c7022943fb391a95e66f1e7ea9669b7a4ceb3a1e8a7b3786c3"
+    },
+    "34_PARALLEL_MODE_HERO_DESIGN_2026-10-09.md": {
+      "bytes": 7079,
+      "sha256": "aa6445af0b37a4157d2ba03aa56b3c8cb9a95e52df0949acfb3cab629e906a6f"
+    },
+    "MODE_DESIGN_PARALLEL.json": {
+      "bytes": 16234,
+      "sha256": "26917838b37a2d00f4c2a647489631faed2af757eb5b4508f929d6c8689520af"
+    },
+    "MODE_DESIGN_NEW_DIALOGUE_PROMPT.txt": {
+      "bytes": 1966,
+      "sha256": "44a33c86162cd7d5ad1abd72e8ac1aca0beaca4eba6be44d117feac4116bc607"
     }
   },
   "checks": {

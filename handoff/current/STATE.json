@@ -2432,5 +2432,16 @@
         "mainland_samples_added": 0
       }
     ]
-  }
+  },
+  "parallel_workstreams": [
+    {
+      "task_id": "MODE-DESIGN-001",
+      "scope": "parallel_hero_balance_design_for_two_new_modes_only",
+      "status": "requested_design_not_yet_reported",
+      "authority": "34_PARALLEL_MODE_HERO_DESIGN_2026-10-09.md",
+      "index": "MODE_DESIGN_PARALLEL.json",
+      "design_differences_confirmed": 0,
+      "runtime_implementation_completed": false
+    }
+  ]
 }

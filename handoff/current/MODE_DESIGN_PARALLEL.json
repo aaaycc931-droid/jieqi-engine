@@ -1,0 +1,567 @@
+{
+  "task_id": "MODE-DESIGN-001",
+  "date": "2026-10-09",
+  "timezone": "Asia/Shanghai",
+  "user_request": "我现在需要在另一个对话里面同时处理另外两个模式的英雄平衡适配问题",
+  "authorization_scope": "parallel_hero_balance_design_for_two_new_modes_only",
+  "status": "requested_design_not_yet_reported",
+  "authority": "34_PARALLEL_MODE_HERO_DESIGN_2026-10-09.md",
+  "new_dialogue_prompt": "MODE_DESIGN_NEW_DIALOGUE_PROMPT.txt",
+  "modes": [
+    "standard_xiangqi",
+    "half_chaos_jieqi"
+  ],
+  "baseline": {
+    "rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
+    "NET_head_at_start": "7da028e61e234e237ad5203ecf4fc2b2d0b34853",
+    "product_head_at_start": "8dadc67085ef8b4ff9b4bc7f5298dc857277c32d",
+    "current_sources": [
+      {
+        "path": "01_CURRENT_RULES.md",
+        "sha256": "c0fb3bfb9269a7bbe9b227287bbd4ddcefc663c30ae28c75006129af794c101c"
+      },
+      {
+        "path": "02_CURRENT_HEROES.md",
+        "sha256": "416e8105777fe81d3e7076727c30fa455fce5bcee01cfee7184a7f1f7268c643"
+      },
+      {
+        "path": "03_CURRENT_MUTATIONS.md",
+        "sha256": "e68b3123042cf4ce2bb7411ee3cea4c1289b6c8875f564f4b4c39db6542affb1"
+      },
+      {
+        "path": "07_DESIGN_SCORING.md",
+        "sha256": "d0d7f6a2f3e6b2774ed03eb38c5199373d0fb887ad804b5db28fcd5ad2db293b"
+      },
+      {
+        "path": "09_CURRENT_GAME_MODES.md",
+        "sha256": "fee5f89a60880cb94aa80f1d39e2d692518c5226ed047f5c722590f4baee7bf1"
+      }
+    ],
+    "addenda": [
+      {
+        "path": "rules/confirmed/RULE_UPDATE_2026-10-08_BRAWL_ENTRY.md",
+        "sha256": "caba373363d1aefa199ad140dc44e3cba6f8d5d51245e3b866d3a6adc5aed806"
+      },
+      {
+        "path": "rules/confirmed/RULE_UPDATE_2026-10-08_DRAGON_SCALE.md",
+        "sha256": "b332cb7821f8d29f067882b4c491cd89a17a71d264674bc14b0e617ae02b61b0"
+      },
+      {
+        "path": "rules/confirmed/RULE_UPDATE_2026-10-08_FLAME_GENERAL.md",
+        "sha256": "56571e87875a63d9def9ba5b9b430d643ebc0263f561c4272d9eb7dc4e415c93"
+      },
+      {
+        "path": "rules/confirmed/RULE_UPDATE_2026-10-08_THIEF_MIRROR.md",
+        "sha256": "30775c14cfe15ede76737779abd564eb2621af34970cd58dcbfa9b97e1cf857e"
+      }
+    ]
+  },
+  "parallel_with": "NET-001",
+  "NET_next_action_changed": false,
+  "mutations_scope": "retain_and_review_dependencies_only_specific_rule_changes_require_confirmation",
+  "existing_jieqi_baseline_changes_authorized": false,
+  "runtime_changes_authorized_this_handoff": false,
+  "shared_branch_writes": "avoid_other_dialogue_uses_separate_design_outputs_and_separate_branch_if_repository_writes_required",
+  "other_paused_queues_resumed": false,
+  "current_status": {
+    "new_modes_base_foundation_implemented": true,
+    "hero_adaptation_completed": false,
+    "new_modes_full_play_enabled": false,
+    "confirmed_mode_adaptation_differences": 0,
+    "new_code_changes": 0,
+    "new_functional_tests_executed": 0,
+    "real_balance_matches_recorded": 0
+  },
+  "score_ledger_role": "original_mode_historical_design_model_not_target_not_new_mode_score_not_all_Oct08_addenda_rescored",
+  "handoff_back_fields": [
+    "mode_id",
+    "source_id",
+    "baseline_hash",
+    "current_rule",
+    "conflict",
+    "proposal",
+    "user_confirmation",
+    "mode_rule",
+    "timing_and_action_economy",
+    "targets_and_secret_fields",
+    "failure_and_terminal_rules",
+    "cross_interactions",
+    "score_assumptions_and_confidence",
+    "implementation_status",
+    "required_verification"
+  ],
+  "adaptation_matrix": [
+    {
+      "mode_id": "standard_xiangqi",
+      "source_id": "H01",
+      "name": "猎人｜陷阱",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "standard_xiangqi",
+      "source_id": "H02",
+      "name": "潜行者｜刺杀",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "standard_xiangqi",
+      "source_id": "H03",
+      "name": "战士｜防护壁垒 / 将帅铁甲",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "standard_xiangqi",
+      "source_id": "H04",
+      "name": "秦龙｜雨夜",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "standard_xiangqi",
+      "source_id": "H05",
+      "name": "姆诺兹多｜扭曲时间线",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "standard_xiangqi",
+      "source_id": "H06",
+      "name": "诺兹多姆｜回溯",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "standard_xiangqi",
+      "source_id": "H07",
+      "name": "姆诺兹多的爪牙｜窃时",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "standard_xiangqi",
+      "source_id": "H08",
+      "name": "太子｜无忧",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "standard_xiangqi",
+      "source_id": "H09",
+      "name": "死亡之翼｜毁灭",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "standard_xiangqi",
+      "source_id": "H10",
+      "name": "风｜影 → 流 → 流·舞",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "standard_xiangqi",
+      "source_id": "H11",
+      "name": "代号1｜洗牌",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "standard_xiangqi",
+      "source_id": "H12",
+      "name": "术士｜燃烧烈焰",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "standard_xiangqi",
+      "source_id": "H13",
+      "name": "单刃｜偏锋",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "standard_xiangqi",
+      "source_id": "H14",
+      "name": "夜｜洞察 / 瞳力",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "standard_xiangqi",
+      "source_id": "H15",
+      "name": "天空上将｜征兵 / 飞行",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "standard_xiangqi",
+      "source_id": "H16",
+      "name": "狂战｜冲锋；混乱下替换为乱斗",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "standard_xiangqi",
+      "source_id": "H17",
+      "name": "江鹤｜清波",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "standard_xiangqi",
+      "source_id": "H18",
+      "name": "里·江鹤｜里·清波",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "standard_xiangqi",
+      "source_id": "H19",
+      "name": "死亡骑士｜纠缠怨念",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "standard_xiangqi",
+      "source_id": "H20",
+      "name": "里·死亡骑士｜里·纠缠怨念",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "standard_xiangqi",
+      "source_id": "H21",
+      "name": "虔信狂徒｜祈求迦拉克隆",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": [
+        {
+          "name": "梦魇之力",
+          "status": "not_assessed",
+          "user_confirmed": false
+        },
+        {
+          "name": "无敌之力",
+          "status": "not_assessed",
+          "user_confirmed": false
+        },
+        {
+          "name": "邪火之力",
+          "status": "not_assessed",
+          "user_confirmed": false
+        },
+        {
+          "name": "风暴之力",
+          "status": "not_assessed",
+          "user_confirmed": false
+        },
+        {
+          "name": "讳言之力",
+          "status": "not_assessed",
+          "user_confirmed": false
+        }
+      ]
+    },
+    {
+      "mode_id": "half_chaos_jieqi",
+      "source_id": "H01",
+      "name": "猎人｜陷阱",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "half_chaos_jieqi",
+      "source_id": "H02",
+      "name": "潜行者｜刺杀",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "half_chaos_jieqi",
+      "source_id": "H03",
+      "name": "战士｜防护壁垒 / 将帅铁甲",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "half_chaos_jieqi",
+      "source_id": "H04",
+      "name": "秦龙｜雨夜",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "half_chaos_jieqi",
+      "source_id": "H05",
+      "name": "姆诺兹多｜扭曲时间线",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "half_chaos_jieqi",
+      "source_id": "H06",
+      "name": "诺兹多姆｜回溯",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "half_chaos_jieqi",
+      "source_id": "H07",
+      "name": "姆诺兹多的爪牙｜窃时",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "half_chaos_jieqi",
+      "source_id": "H08",
+      "name": "太子｜无忧",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "half_chaos_jieqi",
+      "source_id": "H09",
+      "name": "死亡之翼｜毁灭",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "half_chaos_jieqi",
+      "source_id": "H10",
+      "name": "风｜影 → 流 → 流·舞",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "half_chaos_jieqi",
+      "source_id": "H11",
+      "name": "代号1｜洗牌",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "half_chaos_jieqi",
+      "source_id": "H12",
+      "name": "术士｜燃烧烈焰",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "half_chaos_jieqi",
+      "source_id": "H13",
+      "name": "单刃｜偏锋",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "half_chaos_jieqi",
+      "source_id": "H14",
+      "name": "夜｜洞察 / 瞳力",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "half_chaos_jieqi",
+      "source_id": "H15",
+      "name": "天空上将｜征兵 / 飞行",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "half_chaos_jieqi",
+      "source_id": "H16",
+      "name": "狂战｜冲锋；混乱下替换为乱斗",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "half_chaos_jieqi",
+      "source_id": "H17",
+      "name": "江鹤｜清波",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "half_chaos_jieqi",
+      "source_id": "H18",
+      "name": "里·江鹤｜里·清波",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "half_chaos_jieqi",
+      "source_id": "H19",
+      "name": "死亡骑士｜纠缠怨念",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "half_chaos_jieqi",
+      "source_id": "H20",
+      "name": "里·死亡骑士｜里·纠缠怨念",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": []
+    },
+    {
+      "mode_id": "half_chaos_jieqi",
+      "source_id": "H21",
+      "name": "虔信狂徒｜祈求迦拉克隆",
+      "status": "not_assessed",
+      "proposal": null,
+      "user_confirmed": false,
+      "implementation_status": "not_adapted",
+      "subforms": [
+        {
+          "name": "梦魇之力",
+          "status": "not_assessed",
+          "user_confirmed": false
+        },
+        {
+          "name": "无敌之力",
+          "status": "not_assessed",
+          "user_confirmed": false
+        },
+        {
+          "name": "邪火之力",
+          "status": "not_assessed",
+          "user_confirmed": false
+        },
+        {
+          "name": "风暴之力",
+          "status": "not_assessed",
+          "user_confirmed": false
+        },
+        {
+          "name": "讳言之力",
+          "status": "not_assessed",
+          "user_confirmed": false
+        }
+      ]
+    }
+  ]
+}

@@ -610,5 +610,13 @@
         "video_independently_reviewed": false
       }
     ]
+  },
+  "parallel_mode_design_index": {
+    "task_id": "MODE-DESIGN-001",
+    "source_kind": "explicit_user_parallel_design_authorization_not_game_rule",
+    "authority": "34_PARALLEL_MODE_HERO_DESIGN_2026-10-09.md",
+    "index": "MODE_DESIGN_PARALLEL.json",
+    "input_date": "2026-10-09",
+    "new_mode_rule_confirmed": false
   }
 }

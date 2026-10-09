@@ -4,6 +4,8 @@
 
 外部技术参考 NET-REF-001 已登记：[33号差异评估](33_NET-REF-001_ASSESSMENT_2026-10-09.md)，机器索引 `net/NET-REF-001.json`。仅增加候选组件比较与免费测试域名线索；不改变NET任务顺序、正式平台或架构决定。
 
+并行设计工作线：用户授权另一个对话开展两个新增模式的英雄平衡适配设计。交接与写入边界见 [34号文档](34_PARALLEL_MODE_HERO_DESIGN_2026-10-09.md)、`MODE_DESIGN_PARALLEL.json` 与 `MODE_DESIGN_NEW_DIALOGUE_PROMPT.txt`；不代表模式适配实现或验收完成，本对话NET主线保持。
+
 现行规则 **LEZI-FUNCTION-2026-10-07-r5 + 2026-10-08四项明确确认增量**。H07双窃时标准60/60；H12普通中心至少3级消灭范围将帅，将帅中心消灭范围普通棋及另一将帅同批裁决；H16最终选择主动乱斗，先付6+5n、占主行动、己方控制暗子首刀、同棋暗子连斩；H21龙鳞目标留位、地面进攻者返回结算落位，飞行降落受阻仍按已有基础规则窒息。四项设计缺口已关闭并统一实现；原r7-clean保留原文，未新增整版r6。
 
 先读独立06_COLLABORATION.md、STATE.json、30_RULE_GAP_RUNTIME_2026-10-08.md及qa/HERO_TRANSFER_AUDIT.json，再读01/02/03、04/09和四份rules/confirmed/RULE_UPDATE_2026-10-08_*增量。SOURCE_REGISTER登记来源，MANIFEST核对交接，qa/INVARIANTS合同与review/invariants/LATEST记录具体执行。13–29号记录为历史时点。
