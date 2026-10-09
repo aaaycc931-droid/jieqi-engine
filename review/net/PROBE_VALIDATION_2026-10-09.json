@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-09T07:19:07.465228+00:00",
+  "checkedAt": "2026-10-09T07:26:26.806984+00:00",
   "baseline": "8dadc67085ef8b4ff9b4bc7f5298dc857277c32d",
   "scope": "loopback_functional_only_no_cloud_deployment_or_mainland_measurement",
   "default_startup_first_attempt": {
@@ -16,11 +16,26 @@
         "test"
       ],
       "exitCode": 0,
-      "node_test_reported_duration_ms": 10571.98316,
-      "test_count": 9,
-      "passed": 9,
-      "failed": 0,
-      "reason_for_retest": "CI exposed planned reconnect in-flight cancellation classification race; deterministic fixture and runtime fixed"
+      "seconds": 5.8690143430003445,
+      "summary": [
+        "✔ actual local workerd: Worker, SQLite-backed DO and Hibernation WS echo interoperate (5561.065296ms)",
+        "✔ measurement keeps failures and uses nearest-rank P95, not averages (2.792061ms)",
+        "✔ missing token disables the service; HTTP requires authorization and rejects oversized echo (47.210013ms)",
+        "✔ same runner uses real HTTP and WS; reports do not contain the tester token (611.294963ms)",
+        "✔ actual socket termination triggers automatic reconnection and preserves outage evidence (801.702099ms)",
+        "✔ planned reconnect during an in-flight echo preserves a cancellation instead of a fake network failure (701.572292ms)",
+        "✔ WS and HTTP authentication failures stay failures rather than fake zero latency (255.021744ms)",
+        "✔ stopping an active run preserves completed observations and cleans timers (55.788982ms)",
+        "✔ cost model exposes free duration limits and paid duration billing-unit rounding (0.487442ms)",
+        "ℹ tests 9",
+        "ℹ suites 0",
+        "ℹ pass 9",
+        "ℹ fail 0",
+        "ℹ cancelled 0",
+        "ℹ skipped 0",
+        "ℹ todo 0",
+        "ℹ duration_ms 5667.805484"
+      ]
     },
     "cf_dry_run": {
       "command": [
@@ -29,16 +44,14 @@
         "cf:check"
       ],
       "exitCode": 0,
-      "duration_seconds": null,
-      "reason_for_recheck": "new public measurement asset"
-    },
-    "cli_and_aggregate_smoke": {
-      "exitCode": 0,
-      "scope": "1s loopback HTTP/WS; CLI output, aggregate scope and token exclusion"
+      "seconds": 6.255257307000647,
+      "summary": [
+        "--dry-run: exiting now."
+      ]
     }
   },
-  "source_digest": "c37d1de070c2cd6ec6edbccfbd9eed2b5f82a8f30efa919b3f06e94bdd8c7d89",
-  "source_digest_algorithm": "SHA256(sorted relative code/config/html paths + NUL + bytes + NUL), README excluded",
+  "source_digest": "231a7f050879c7d0cb976ce3afa6b17c308259d1e4dbaf1071d9616b0b387353",
+  "source_digest_algorithm": "SHA256(lexicographically sorted POSIX relative path strings + NUL + bytes + NUL); README excluded",
   "browser": {
     "local_status": "not_executed",
     "reason": "Chromium unavailable; archive download corrupt",
@@ -91,7 +104,89 @@
           ]
         }
       },
+      "applies_to_current_source": false,
+      "source_digest_algorithm": "Python pathlib component ordering + NUL + bytes + NUL"
+    },
+    {
+      "checkedAt": "2026-10-09T07:19:07.465228+00:00",
+      "source_digest": "c37d1de070c2cd6ec6edbccfbd9eed2b5f82a8f30efa919b3f06e94bdd8c7d89",
+      "source_digest_algorithm": "Python pathlib component ordering + NUL + bytes + NUL",
+      "checks": {
+        "probe_tests": {
+          "command": [
+            "npm",
+            "test"
+          ],
+          "exitCode": 0,
+          "node_test_reported_duration_ms": 10571.98316,
+          "test_count": 9,
+          "passed": 9,
+          "failed": 0,
+          "reason_for_retest": "CI exposed planned reconnect in-flight cancellation classification race; deterministic fixture and runtime fixed"
+        },
+        "cf_dry_run": {
+          "command": [
+            "npm",
+            "run",
+            "cf:check"
+          ],
+          "exitCode": 0,
+          "duration_seconds": null,
+          "reason_for_recheck": "new public measurement asset"
+        },
+        "cli_and_aggregate_smoke": {
+          "exitCode": 0,
+          "scope": "1s loopback HTTP/WS; CLI output, aggregate scope and token exclusion"
+        }
+      },
       "applies_to_current_source": false
+    },
+    {
+      "checkedAt": "2026-10-09T07:24:45.979094+00:00",
+      "source_digest": "00e38af589a0e8a9d2192701872ee642dfd39e5927a092e3f1dea8840b1d279d",
+      "checks": {
+        "probe_tests": {
+          "command": [
+            "npm",
+            "test"
+          ],
+          "exitCode": 0,
+          "seconds": 10.684858493999855,
+          "summary": [
+            "✔ actual local workerd: Worker, SQLite-backed DO and Hibernation WS echo interoperate (5439.622501ms)",
+            "✔ measurement keeps failures and uses nearest-rank P95, not averages (2.207374ms)",
+            "✔ missing token disables the service; HTTP requires authorization and rejects oversized echo (45.378997ms)",
+            "✔ same runner uses real HTTP and WS; reports do not contain the tester token (608.60498ms)",
+            "✔ actual socket termination triggers automatic reconnection and preserves outage evidence (801.459106ms)",
+            "✔ planned reconnect during an in-flight echo preserves a cancellation instead of a fake network failure (705.73384ms)",
+            "✔ WS and HTTP authentication failures stay failures rather than fake zero latency (254.764365ms)",
+            "✔ stopping an active run preserves completed observations and cleans timers (55.748947ms)",
+            "✔ cost model exposes free duration limits and paid duration billing-unit rounding (0.454943ms)",
+            "ℹ tests 9",
+            "ℹ suites 0",
+            "ℹ pass 9",
+            "ℹ fail 0",
+            "ℹ cancelled 0",
+            "ℹ skipped 0",
+            "ℹ todo 0",
+            "ℹ duration_ms 10503.448665"
+          ]
+        },
+        "cf_dry_run": {
+          "command": [
+            "npm",
+            "run",
+            "cf:check"
+          ],
+          "exitCode": 0,
+          "seconds": 6.080875638999714,
+          "summary": [
+            "--dry-run: exiting now."
+          ]
+        }
+      },
+      "applies_to_current_source": false,
+      "source_digest_algorithm": "Python pathlib component ordering + NUL + bytes + NUL"
     }
   ],
   "ci_history": [
@@ -106,6 +201,31 @@
       "failure": "planned reconnect could interrupt pending echo and count as fake network failure",
       "browser_status": "skipped_by_failed_probe_step",
       "source": "actual_GitHub_job_logs"
+    },
+    {
+      "run": 37898366843,
+      "job": 113714880877,
+      "commit": "d2e431a606fe52beb734de8dfa6550c5129c3345",
+      "checkoutCommit": "2ec18d0214221b4c83d5bd2089a875507ca4d20e",
+      "status": "success",
+      "passed": 9,
+      "failed": 0,
+      "sourceDigest": "b5f771f66666ad1efd694dce37512d580b7d1b01e526fd86a675e75a9d525a6c",
+      "sourceDigestMatchesLocal": true,
+      "scope": "actual_probe_page_DOM_on_CI_loopback_not_mainland_or_WeChat",
+      "artifact": {
+        "id": 11601322444,
+        "digest": "sha256:c04d460478412d5af9dc6defe107614120fe4101cc89373589218a4c0b6d69fd",
+        "archivesDownloaded": false
+      },
+      "appliesToCurrentSource": false,
+      "remainingIssueFoundInRawReport": "late close callback could mutate finalized connection data; now fixed and rechecking; median changed from nearest-rank P50 to ordinary median"
     }
-  ]
+  ],
+  "reason_for_recheck": "raw CI DOM report exposed post-return close mutation; freeze observation boundary and use conventional median; deterministic regression added within nine cases",
+  "local_intermediate_startup_failure": {
+    "status": "environment_or_test_harness_failure",
+    "cause": "workerd bind address already in use during interim recheck",
+    "resolution": "isolated dynamic inspector and own-child-process-group cleanup; subsequent nine-case full run passed"
+  }
 }

@@ -18,6 +18,7 @@ test('measurement keeps failures and uses nearest-rank P95, not averages', () =>
   const samples = [{ ok: true, ms: 10 }, { ok: false, ms: 999 }, { ok: true, ms: 50 }, { ok: true, ms: 30 }];
   assert.deepEqual(summarize(samples), { attempts: 4, successes: 3, failures: 1, successRate: 0.75, medianMs: 30, p95Ms: 50, maxMs: 50, maxConsecutiveSuccessfulDeltaMs: 40 });
   assert.equal(summarize([]).successRate, null);
+  assert.equal(summarize([{ ok: true, ms: 10 }, { ok: true, ms: 30 }]).medianMs, 20);
   assert.throws(() => validateTarget('http://public.example'));
   assert.throws(() => validateTarget('https://host.example?token=secret'));
   assert.throws(() => echo(JSON.stringify({ ...message, id: '../bad' }), 'local'));
@@ -88,6 +89,10 @@ test('stopping an active run preserves completed observations and cleans timers'
     wsIntervalMs: 60, httpIntervalMs: 100, timeoutMs: 150, onProgress: s => { if (s.ws.successes >= 1) controller.abort(); } });
   assert.equal(report.stoppedByTester, true); assert.ok(report.actualDurationMs < 2000);
   assert.ok(report.summary.ws.successes > 0);
+  const finalized = JSON.stringify(report);
+  await new Promise(resolve => setTimeout(resolve, 50));
+  assert.equal(JSON.stringify(report), finalized, 'late socket close must not mutate a completed report');
+  assert.ok(report.connections.every(c => c.closedElapsedMs <= report.actualDurationMs));
 });
 
 test('cost model exposes free duration limits and paid duration billing-unit rounding', () => {

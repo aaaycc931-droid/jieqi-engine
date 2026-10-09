@@ -1,0 +1,170 @@
+{
+  "meta": {
+    "run": 37898366843,
+    "job": 113714880877,
+    "commit": "d2e431a606fe52beb734de8dfa6550c5129c3345",
+    "checkoutCommit": "2ec18d0214221b4c83d5bd2089a875507ca4d20e",
+    "status": "success",
+    "passed": 9,
+    "failed": 0,
+    "sourceDigest": "b5f771f66666ad1efd694dce37512d580b7d1b01e526fd86a675e75a9d525a6c",
+    "sourceDigestMatchesLocal": true,
+    "scope": "actual_probe_page_DOM_on_CI_loopback_not_mainland_or_WeChat",
+    "artifact": {
+      "id": 11601322444,
+      "digest": "sha256:c04d460478412d5af9dc6defe107614120fe4101cc89373589218a4c0b6d69fd",
+      "archivesDownloaded": false
+    },
+    "appliesToCurrentSource": false,
+    "remainingIssueFoundInRawReport": "late close callback could mutate finalized connection data; now fixed and rechecking; median changed from nearest-rank P50 to ordinary median"
+  },
+  "evidence": {
+    "checkedAt": "2026-10-09T07:20:20.004Z",
+    "scope": "actual_probe_page_DOM_on_CI_loopback_not_mainland_or_WeChat",
+    "sourceDigest": "b5f771f66666ad1efd694dce37512d580b7d1b01e526fd86a675e75a9d525a6c",
+    "errors": [],
+    "report": {
+      "schema": "LEZI-NET-PROBE-v1",
+      "startedAt": "2026-10-09T07:20:14.868Z",
+      "endpoint": "http://127.0.0.1:42217",
+      "metadata": {
+        "region": "CI loopback — no mainland location",
+        "carrier": "其他／未知",
+        "network": "家庭宽带 Wi-Fi",
+        "vpn": "未知",
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.8078.4 Safari/537.36",
+        "timezone": "UTC"
+      },
+      "config": {
+        "durationSeconds": 600,
+        "wsIntervalMs": 5000,
+        "httpIntervalMs": 60000,
+        "timeoutMs": 10000,
+        "payloadPaddingBytes": 64
+      },
+      "evidenceScope": "loopback_functional_only",
+      "session": "8daf3ca8-c9e7-4654-aff3-eaa2c7fd3e00",
+      "http": [
+        {
+          "at": "2026-10-09T07:20:14.869Z",
+          "ok": true,
+          "ms": 6.399999999994179
+        }
+      ],
+      "ws": [
+        {
+          "at": "2026-10-09T07:20:14.875Z",
+          "ok": true,
+          "ms": 2.2999999999956344
+        },
+        {
+          "at": "2026-10-09T07:20:19.880Z",
+          "ok": true,
+          "ms": 0.4000000000014552
+        }
+      ],
+      "cancelledProbes": [],
+      "connections": [
+        {
+          "at": "2026-10-09T07:20:14.869Z",
+          "ok": true,
+          "ms": 5.200000000004366,
+          "openElapsedMs": 6.200000000004366,
+          "closedElapsedMs": 72.40000000000146
+        },
+        {
+          "at": "2026-10-09T07:20:19.877Z",
+          "ok": true,
+          "ms": 2.1999999999970896,
+          "openElapsedMs": 5011.0999999999985,
+          "closedElapsedMs": 5105.700000000004
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-10-09T07:20:14.926Z",
+          "elapsedMs": 58,
+          "kind": "planned_reconnect_requested"
+        },
+        {
+          "at": "2026-10-09T07:20:14.941Z",
+          "elapsedMs": 72.40000000000146,
+          "kind": "planned_close",
+          "code": 4000
+        },
+        {
+          "at": "2026-10-09T07:20:19.927Z",
+          "elapsedMs": 5058.200000000004,
+          "kind": "network_restored_by_tester"
+        }
+      ],
+      "recoveries": [
+        {
+          "kind": "planned_close",
+          "detectedElapsedMs": 72.40000000000146,
+          "firstEchoAfterMs": 4939.0999999999985
+        },
+        {
+          "kind": "tester_reported_restore",
+          "markedElapsedMs": 5058.200000000004,
+          "firstEchoAfterMs": null
+        }
+      ],
+      "resourceTimings": [
+        {
+          "atPerformanceMs": 123.80000000000291,
+          "dnsMs": null,
+          "tlsMs": null,
+          "absentReason": "null means hidden/reused/not observable; not zero latency"
+        }
+      ],
+      "limitations": [
+        "Echo latency is not game-engine latency.",
+        "Echo timeouts are not measured TCP packet loss.",
+        "Carrier, location and VPN state are tester supplied.",
+        "Browser DNS/TLS timings may be unobservable or reused.",
+        "HTTPS success proves the combined path; it does not isolate DNS/TLS success rates.",
+        "Wi-Fi/mobile changes and background scheduling can alter observations."
+      ],
+      "endedAt": "2026-10-09T07:20:19.960Z",
+      "actualDurationMs": 5091.0999999999985,
+      "stoppedByTester": true,
+      "summary": {
+        "http": {
+          "attempts": 1,
+          "successes": 1,
+          "failures": 0,
+          "successRate": 1,
+          "medianMs": 6.399999999994179,
+          "p95Ms": 6.399999999994179,
+          "maxMs": 6.399999999994179,
+          "maxConsecutiveSuccessfulDeltaMs": null
+        },
+        "ws": {
+          "attempts": 2,
+          "successes": 2,
+          "failures": 0,
+          "successRate": 1,
+          "medianMs": 0.4000000000014552,
+          "p95Ms": 2.2999999999956344,
+          "maxMs": 2.2999999999956344,
+          "maxConsecutiveSuccessfulDeltaMs": 1.8999999999941792
+        },
+        "connections": {
+          "attempts": 2,
+          "successes": 2,
+          "failures": 0,
+          "successRate": 1,
+          "medianMs": 2.1999999999970896,
+          "p95Ms": 5.200000000004366,
+          "maxMs": 5.200000000004366,
+          "maxConsecutiveSuccessfulDeltaMs": 3.000000000007276
+        },
+        "unexpectedDisconnects": 0,
+        "plannedCancelledProbes": 0,
+        "longestObservedConnectionMs": 80,
+        "recoveryIncomplete": 1
+      }
+    }
+  }
+}

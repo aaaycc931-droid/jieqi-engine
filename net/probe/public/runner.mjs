@@ -10,10 +10,12 @@ export function summarize(samples) {
   const values = samples.filter(x => x.ok).map(x => x.ms);
   const sorted = [...values].sort((a, b) => a - b);
   const percentile = p => sorted.length ? sorted[Math.ceil(sorted.length * p) - 1] : null;
+  const middle = Math.floor(sorted.length / 2);
+  const median = !sorted.length ? null : sorted.length % 2 ? sorted[middle] : (sorted[middle - 1] + sorted[middle]) / 2;
   const deltas = values.slice(1).map((x, i) => Math.abs(x - values[i]));
   return { attempts: samples.length, successes: values.length, failures: samples.length - values.length,
     successRate: samples.length ? values.length / samples.length : null,
-    medianMs: percentile(0.5), p95Ms: percentile(0.95), maxMs: sorted.at(-1) ?? null,
+    medianMs: median, p95Ms: percentile(0.95), maxMs: sorted.at(-1) ?? null,
     maxConsecutiveSuccessfulDeltaMs: deltas.length ? Math.max(...deltas) : null };
 }
 
@@ -38,16 +40,19 @@ export async function runProbe({ baseURL, token, metadata = {}, durationSeconds 
   const started = now(), deadline = started + durationSeconds * 1000;
   const report = { schema: 'LEZI-NET-PROBE-v1', startedAt: stamp(), endpoint: base.origin,
     metadata, config: { durationSeconds, wsIntervalMs, httpIntervalMs, timeoutMs, payloadPaddingBytes: payloadBytes },
+    metricsDefinition: { median: 'middle value or average of middle pair', p95: 'nearest rank',
+      variation: 'maximum absolute delta between successive successful observations',
+      plannedCancellations: 'recorded separately; excluded from network failure denominator' },
     evidenceScope: base.protocol === 'http:' ? 'loopback_functional_only' : 'tester_supplied_network_observation',
     session: crypto.randomUUID(), http: [], ws: [], cancelledProbes: [], connections: [], events: [], recoveries: [], resourceTimings: [],
     limitations: ['Echo latency is not game-engine latency.', 'Echo timeouts are not measured TCP packet loss.',
       'Carrier, location and VPN state are tester supplied.', 'Browser DNS/TLS timings may be unobservable or reused.',
       'HTTPS success proves the combined path; it does not isolate DNS/TLS success rates.',
       'Wi-Fi/mobile changes and background scheduling can alter observations.'] };
-  const pending = new Map(), plannedSockets = new WeakSet(); let ws, sequence = 0, outage, nextRetryMs = 500;
+  const pending = new Map(), plannedSockets = new WeakSet(); let ws, sequence = 0, outage, nextRetryMs = 500, finalized = false;
   const elapsed = () => now() - started;
   const emit = () => onProgress({ elapsedMs: elapsed(), http: summarize(report.http), ws: summarize(report.ws), connections: report.connections.length });
-  const event = (kind, extra = {}) => report.events.push({ at: stamp(), elapsedMs: elapsed(), kind, ...extra });
+  const event = (kind, extra = {}) => { if (!finalized) report.events.push({ at: stamp(), elapsedMs: elapsed(), kind, ...extra }); };
   const message = () => ({ v: 1, kind: 'echo', id: `m${++sequence}`, sentAt: Date.now(), padding: 'x'.repeat(payloadBytes) });
   const check = (r, m) => r?.v === 1 && r.kind === 'echo' && r.id === m.id && r.sentAt === m.sentAt && r.padding === m.padding && Number.isFinite(r.serverAt);
   const canRun = () => !stop.signal.aborted && now() < deadline;
@@ -90,6 +95,7 @@ export async function runProbe({ baseURL, token, metadata = {}, durationSeconds 
       } catch { event('malformed_reply'); }
     });
     socket.addEventListener('close', e => {
+      if (finalized) return;
       sample.closedElapsedMs = elapsed();
       if (!canRun() || !sample.ok) return;
       const isPlanned = plannedSockets.has(socket), kind = isPlanned ? 'planned_close' : 'unexpected_close';
@@ -149,9 +155,10 @@ export async function runProbe({ baseURL, token, metadata = {}, durationSeconds 
     for (const p of pending.values()) p.reject(Error('finished')); ws?.close(1000, 'finished');
     delete control.reconnect; delete control.mark;
   }
+  const endedElapsed = elapsed(); finalized = true;
   if (outage) report.recoveries.push(outage);
-  for (const c of report.connections) if (c.ok && c.closedElapsedMs === null) c.closedElapsedMs = elapsed();
-  report.endedAt = stamp(); report.actualDurationMs = elapsed(); report.stoppedByTester = externalSignal?.aborted ?? false;
+  for (const c of report.connections) if (c.ok && c.closedElapsedMs === null) c.closedElapsedMs = endedElapsed;
+  report.endedAt = stamp(); report.actualDurationMs = endedElapsed; report.stoppedByTester = externalSignal?.aborted ?? false;
   if (typeof performance.getEntriesByType === 'function') report.resourceTimings = performance.getEntriesByType('resource')
     .filter(e => e.name.startsWith(base.origin + '/echo') && e.startTime >= started).map(e => ({
       atPerformanceMs: e.startTime, dnsMs: e.domainLookupEnd > e.domainLookupStart ? e.domainLookupEnd - e.domainLookupStart : null,

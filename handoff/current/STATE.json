@@ -2342,7 +2342,7 @@
     "wechat_sdk_or_domain_certification_completed": false,
     "browser_validation": {
       "local": "blocked_missing_Chromium_corrupted_browser_download",
-      "ci": "first_run_failed_before_browser; fixed_source_CI_pending"
+      "ci": "previous_real_DOM_passed; final_source_CI_pending"
     },
     "blocking_inputs": [
       "authorized_Cloudflare_Free_test_account",
@@ -2380,8 +2380,22 @@
       "tests": 9,
       "passed": 9,
       "failed": 0,
-      "source_digest": "c37d1de070c2cd6ec6edbccfbd9eed2b5f82a8f30efa919b3f06e94bdd8c7d89",
-      "CLI_smoke": "passed_loopback_only"
+      "source_digest": "231a7f050879c7d0cb976ce3afa6b17c308259d1e4dbaf1071d9616b0b387353",
+      "CLI_smoke": "passed_loopback_only_previous_cli_unchanged"
+    },
+    "previous_ci": {
+      "run": 37898366843,
+      "job": 113714880877,
+      "status": "success",
+      "source_commit": "d2e431a606fe52beb734de8dfa6550c5129c3345",
+      "scope": "9_local_default_runtime_checks_dry_run_and_actual_probe_DOM",
+      "applies_to_current_source": false,
+      "reason": "subsequent_report_immutability_median_and_test_cleanup_fixes"
+    },
+    "cloudflare_connection_discovery": {
+      "available_plugin_search_results": 0,
+      "credential_present": false,
+      "connection_verified": false
     }
   }
 }

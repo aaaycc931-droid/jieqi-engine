@@ -10,10 +10,15 @@ test('actual local workerd: Worker, SQLite-backed DO and Hibernation WS echo int
   const port = reservation.address().port; await new Promise(resolve => reservation.close(resolve));
   const token = 'local-test-token-000000000000000000';
   const preload = process.env.NET_TEST_OS_INTERFACE_WORKAROUND === '1' ? ['--import', './test/loopback-interfaces.mjs'] : [];
-  const child = spawn(process.execPath, [...preload, 'node_modules/wrangler/bin/wrangler.js', 'dev', '--local', '--ip', '127.0.0.1', '--port', String(port), '--var', `PROBE_TOKEN:${token}`],
-    { cwd: new URL('..', import.meta.url), env: { ...process.env, WRANGLER_SEND_METRICS: 'false', CI: 'true' }, stdio: ['ignore', 'pipe', 'pipe'] });
+  const child = spawn(process.execPath, [...preload, 'node_modules/wrangler/bin/wrangler.js', 'dev', '--local', '--ip', '127.0.0.1', '--port', String(port), '--inspector-port', '0', '--var', `PROBE_TOKEN:${token}`],
+    { cwd: new URL('..', import.meta.url), detached: process.platform !== 'win32', env: { ...process.env, WRANGLER_SEND_METRICS: 'false', CI: 'true' }, stdio: ['ignore', 'pipe', 'pipe'] });
   let output = ''; child.stdout.on('data', d => { output += d; }); child.stderr.on('data', d => { output += d; });
-  t.after(async () => { if (child.exitCode === null) { child.kill('SIGTERM'); await Promise.race([new Promise(resolve => child.once('exit', resolve)), delay(5000)]); if (child.exitCode === null) child.kill('SIGKILL'); } });
+  const kill = signal => { try { if (process.platform !== 'win32') process.kill(-child.pid, signal); else child.kill(signal); } catch (e) { if (e.code !== 'ESRCH') throw e; } };
+  t.after(async () => {
+    kill('SIGTERM');
+    if (child.exitCode === null && child.signalCode === null) await Promise.race([new Promise(resolve => child.once('exit', resolve)), delay(5000, undefined, { ref: false })]);
+    kill('SIGKILL'); // Also reap any remaining descendants in our own process group.
+  });
   const baseURL = `http://127.0.0.1:${port}`;
   let ready = false;
   for (let i = 0; i < 150; i++) {

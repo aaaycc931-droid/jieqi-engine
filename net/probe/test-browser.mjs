@@ -27,6 +27,7 @@ try {
   assert.equal(report.summary.unexpectedDisconnects, 0); assert.equal(report.stoppedByTester, true);
   assert.ok(report.events.some(e => e.kind === 'planned_close'));
   assert.ok(report.events.some(e => e.kind === 'network_restored_by_tester'));
+  assert.ok(report.connections.every(c => c.closedElapsedMs <= report.actualDurationMs));
   assert.equal(raw.includes(token), false); assert.equal(await page.locator('#token').inputValue(), '');
   assert.deepEqual(errors, []);
   const out = new URL('../../review/net/', import.meta.url); await mkdir(out, { recursive: true });
