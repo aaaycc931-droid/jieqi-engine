@@ -3,8 +3,8 @@
   "self_excluded": true,
   "files": {
     "00_READ_FIRST.md": {
-      "bytes": 3367,
-      "sha256": "ff2f9b57c1d1caa79610be1d36979f95bccbbbdb8bfe8b1b89d77bb9219ffc99"
+      "bytes": 3627,
+      "sha256": "534f0b3f6c14babd865fbf50f6dd7026d83bf20ea1aa2ed85514bc1138c25c3b"
     },
     "01_CURRENT_RULES.md": {
       "bytes": 30087,
@@ -131,12 +131,12 @@
       "sha256": "3ae6a73ae1451c4990a259b38b53345a7218cea29733b2343c6f344b6bcc39c8"
     },
     "SOURCE_REGISTER.json": {
-      "bytes": 35360,
-      "sha256": "d0b281693ad7cbeae23db336acb235313e59cc6f92385bfd53f89dfe9b9f7db6"
+      "bytes": 35818,
+      "sha256": "fa25f61d9fcf48754097f94f9c7932e4c1a699063ced1083a937e8f1beee3700"
     },
     "STATE.json": {
-      "bytes": 109985,
-      "sha256": "81818b7f3dea269870036cdeaa4d4e881b1859a6e23090ece108fead45341f9b"
+      "bytes": 110346,
+      "sha256": "43aa9c289a0c1ee06634bc920d3eb3c8c6d1ecd3e3a918e867841a94dd8d8bfa"
     },
     "assets/approved-home.png": {
       "bytes": 2157060,
@@ -159,8 +159,8 @@
       "sha256": "f09f83064cb2bff8cdd4d41130646733f751252fe4e534c75ab043160327baaa"
     },
     "32_NET-001_NETWORK_VALIDATION_2026-10-09.md": {
-      "bytes": 13490,
-      "sha256": "2ce586c636203cdefc700b55a3e0ecebfb2293afa716b25d3bbd83e0e18c0c92"
+      "bytes": 13841,
+      "sha256": "f0ce11d6412c23d2153a64cd75ccbfed40436ce4824dc342c69b9aeaaedaa2c6"
     },
     "net/input/DECISIONS.json": {
       "bytes": 2758,
@@ -173,6 +173,18 @@
     "net/input/WORK_START_PROMPT.txt": {
       "bytes": 1678,
       "sha256": "b04c88c742c02a13e18bc6ed0a0e0cbe4eefc15695da257f9a9c462b3bb20b3c"
+    },
+    "33_NET-REF-001_ASSESSMENT_2026-10-09.md": {
+      "bytes": 15336,
+      "sha256": "db005e2932adbbfb276c0e4ac1442ff6f513218a7f7aa064fe5a9a8a14b55960"
+    },
+    "net/input/NET-REF-001_USER_REFERENCE.md": {
+      "bytes": 7082,
+      "sha256": "76649fe1a1d3fde34ce2f2e721d424963590e05094017e801c144ed73c82018a"
+    },
+    "net/NET-REF-001.json": {
+      "bytes": 7762,
+      "sha256": "4ffec5a9bd4b56c7022943fb391a95e66f1e7ea9669b7a4ceb3a1e8a7b3786c3"
     }
   },
   "checks": {

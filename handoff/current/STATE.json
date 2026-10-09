@@ -2421,6 +2421,16 @@
       "source": "actual_GitHub_job_logs_and_artifact_metadata",
       "run_url": "https://github.com/aaaycc931-droid/jieqi-engine/actions/runs/37899220202",
       "evidence_path": "review/net/CI_PROBE_2026-10-09.json"
-    }
+    },
+    "external_references": [
+      {
+        "id": "NET-REF-001",
+        "kind": "external_technical_reference_not_architecture_decision",
+        "status": "registered_assessed_no_architecture_change",
+        "index": "net/NET-REF-001.json",
+        "assessment": "33_NET-REF-001_ASSESSMENT_2026-10-09.md",
+        "mainland_samples_added": 0
+      }
+    ]
   }
 }

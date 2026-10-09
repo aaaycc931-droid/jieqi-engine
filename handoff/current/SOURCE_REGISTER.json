@@ -598,6 +598,17 @@
     ],
     "runtime_evidence": "review/net/PROBE_VALIDATION_2026-10-09.json",
     "mainland_evidence": "none",
-    "ci_evidence": "review/net/CI_PROBE_2026-10-09.json"
+    "ci_evidence": "review/net/CI_PROBE_2026-10-09.json",
+    "external_references": [
+      {
+        "id": "NET-REF-001",
+        "input_path": "net/input/NET-REF-001_USER_REFERENCE.md",
+        "sha256": "76649fe1a1d3fde34ce2f2e721d424963590e05094017e801c144ed73c82018a",
+        "kind": "external_technical_reference_not_architecture_decision",
+        "assessment": "33_NET-REF-001_ASSESSMENT_2026-10-09.md",
+        "index": "net/NET-REF-001.json",
+        "video_independently_reviewed": false
+      }
+    ]
   }
 }
