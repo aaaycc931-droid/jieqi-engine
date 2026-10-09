@@ -1,5 +1,7 @@
 # 乐子象棋｜当前实现交接入口
 
+**当前任务（2026-10-09）：NET-001。** 完整来源为 `net/input/NET-001_WORK_HANDOFF.md` 与 `DECISIONS.json`；先读 [32_NET-001_NETWORK_VALIDATION_2026-10-09.md](32_NET-001_NETWORK_VALIDATION_2026-10-09.md)、`STATE.json.networking_validation`、独立06协作。未来主要正式方向微信小游戏，APK/网页当前用于开发测试；CF先测、香港备选、预算尽量≤50元。现状审计完成，独立工具已准备；云部署、大陆性能、生产选型未完成。NET分支从既有实现分支隔离，不改游戏规则；旧互联网绝对暂停仅在NET技术验证范围内被本轮明确授权替代。PR2、游戏入口、APK/main/完整对局/最终UI与模式适配边界保留。下文为已完成的游戏产品基线，不表示本轮主任务仍等待英雄移交。
+
 现行规则 **LEZI-FUNCTION-2026-10-07-r5 + 2026-10-08四项明确确认增量**。H07双窃时标准60/60；H12普通中心至少3级消灭范围将帅，将帅中心消灭范围普通棋及另一将帅同批裁决；H16最终选择主动乱斗，先付6+5n、占主行动、己方控制暗子首刀、同棋暗子连斩；H21龙鳞目标留位、地面进攻者返回结算落位，飞行降落受阻仍按已有基础规则窒息。四项设计缺口已关闭并统一实现；原r7-clean保留原文，未新增整版r6。
 
 先读独立06_COLLABORATION.md、STATE.json、30_RULE_GAP_RUNTIME_2026-10-08.md及qa/HERO_TRANSFER_AUDIT.json，再读01/02/03、04/09和四份rules/confirmed/RULE_UPDATE_2026-10-08_*增量。SOURCE_REGISTER登记来源，MANIFEST核对交接，qa/INVARIANTS合同与review/invariants/LATEST记录具体执行。13–29号记录为历史时点。

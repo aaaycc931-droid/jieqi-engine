@@ -1,0 +1,62 @@
+{
+  "checkedAt": "2026-10-09T07:09:38.399217+00:00",
+  "baseline": "8dadc67085ef8b4ff9b4bc7f5298dc857277c32d",
+  "scope": "loopback_functional_only_no_cloud_deployment_or_mainland_measurement",
+  "default_startup_first_attempt": {
+    "status": "failed",
+    "cause": "Wrangler uv_interface_addresses blocked in restricted container",
+    "tests_passed": 8,
+    "tests_failed": 1
+  },
+  "environment_workaround": "opt-in test-only empty interface enumeration, explicit 127.0.0.1 binding; no fabricated network addresses",
+  "checks": {
+    "probe_tests": {
+      "command": [
+        "npm",
+        "test"
+      ],
+      "exitCode": 0,
+      "seconds": 10.677737727000022,
+      "summary": [
+        "✔ actual local workerd: Worker, SQLite-backed DO and Hibernation WS echo interoperate (5411.242226ms)",
+        "✔ measurement keeps failures and uses nearest-rank P95, not averages (2.571149ms)",
+        "✔ missing token disables the service; HTTP requires authorization and rejects oversized echo (45.225629ms)",
+        "✔ same runner uses real HTTP and WS; reports do not contain the tester token (613.530479ms)",
+        "✔ actual socket termination triggers automatic reconnection and preserves outage evidence (804.878534ms)",
+        "✔ planned reconnect is separate from unexpected disconnections (703.163919ms)",
+        "✔ WS and HTTP authentication failures stay failures rather than fake zero latency (254.90621ms)",
+        "✔ stopping an active run preserves completed observations and cleans timers (5.667452ms)",
+        "✔ cost model exposes free duration limits and paid duration billing-unit rounding (0.431147ms)",
+        "ℹ tests 9",
+        "ℹ suites 0",
+        "ℹ pass 9",
+        "ℹ fail 0",
+        "ℹ cancelled 0",
+        "ℹ skipped 0",
+        "ℹ todo 0",
+        "ℹ duration_ms 10475.844127"
+      ]
+    },
+    "cf_dry_run": {
+      "command": [
+        "npm",
+        "run",
+        "cf:check"
+      ],
+      "exitCode": 0,
+      "seconds": 6.2870996249998825,
+      "summary": [
+        "--dry-run: exiting now."
+      ]
+    }
+  },
+  "source_digest": "2abdd7e1ab80af8be0589f35682e80ed278e1fd821d72452eaf20ef7b337b4e7",
+  "source_digest_algorithm": "SHA256(sorted relative code/config/html paths + NUL + bytes + NUL), README excluded",
+  "browser": {
+    "local_status": "not_executed",
+    "reason": "Chromium unavailable; archive download corrupt",
+    "ci_status": "pending"
+  },
+  "mainland_sample_count": 0,
+  "cloud_deployed": false
+}

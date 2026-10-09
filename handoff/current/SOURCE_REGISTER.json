@@ -1,5 +1,5 @@
 {
-  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-08-four-design-gaps-runtime",
+  "handoff_revision": "LEZI-HANDOFF-CURRENT-2026-10-09-NET-001",
   "rule_revision": "LEZI-FUNCTION-2026-10-07-r5",
   "code_checkpoint": "fd268f301cf8200993271bf1bc837fbbff7870ce",
   "sources": [
@@ -575,5 +575,28 @@
   ],
   "rule_gap_runtime_index": "30_RULE_GAP_RUNTIME_2026-10-08.md",
   "local_assembled_publication_checkpoint": "83bfe5e1cf8d05373a6d2c846ad547afd4674215",
-  "current_ci_evidence_index": "review/invariants/RULE_GAP_CI_2026-10-08.json"
+  "current_ci_evidence_index": "review/invariants/RULE_GAP_CI_2026-10-08.json",
+  "networking_validation_index": {
+    "authority": "32_NET-001_NETWORK_VALIDATION_2026-10-09.md",
+    "input_kind": "user_confirmed_planning_and_execution_scope_not_game_rules",
+    "sources": [
+      {
+        "path": "net/input/NET-001_WORK_HANDOFF.md",
+        "sha256": "13d3624381a18afeec4ffc2ecaf34c63a14d0d407c94bb862fa0c9fbcc056309",
+        "original_bytes_preserved": true
+      },
+      {
+        "path": "net/input/WORK_START_PROMPT.txt",
+        "sha256": "b04c88c742c02a13e18bc6ed0a0e0cbe4eefc15695da257f9a9c462b3bb20b3c",
+        "original_bytes_preserved": true
+      },
+      {
+        "path": "net/input/DECISIONS.json",
+        "sha256": "0ea1e5e1c2e2dece8bdb152808a78014f7ed25b0b04d6a704b0f3dbbf89b1cba",
+        "original_bytes_preserved": true
+      }
+    ],
+    "runtime_evidence": "review/net/PROBE_VALIDATION_2026-10-09.json",
+    "mainland_evidence": "none"
+  }
 }

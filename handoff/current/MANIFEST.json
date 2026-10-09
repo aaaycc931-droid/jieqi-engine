@@ -3,8 +3,8 @@
   "self_excluded": true,
   "files": {
     "00_READ_FIRST.md": {
-      "bytes": 2551,
-      "sha256": "fba778ba5f1f07b8143a3f949183d9296c0b80ca9aa27f810015745af2101231"
+      "bytes": 3367,
+      "sha256": "ff2f9b57c1d1caa79610be1d36979f95bccbbbdb8bfe8b1b89d77bb9219ffc99"
     },
     "01_CURRENT_RULES.md": {
       "bytes": 30087,
@@ -23,8 +23,8 @@
       "sha256": "c133b4ee797b778ce4c88233437b2466255f27c30fcaec5b0941c766cc4bae00"
     },
     "05_PROGRESS_AND_NEXT.md": {
-      "bytes": 41664,
-      "sha256": "6b93d5de478ef91999071d1bc4f4ebf8cf67ca13868990c54030f1cb12635d31"
+      "bytes": 42169,
+      "sha256": "7eb84c97047be9e3409efa0267c0ff0b37f3643a0fa3105d5c8f8f30a4d01cf4"
     },
     "06_COLLABORATION.md": {
       "bytes": 8164,
@@ -131,12 +131,12 @@
       "sha256": "3ae6a73ae1451c4990a259b38b53345a7218cea29733b2343c6f344b6bcc39c8"
     },
     "SOURCE_REGISTER.json": {
-      "bytes": 34429,
-      "sha256": "b3f804e7d8f3defbc9ebb05819574fd5eddce834721b70e6d85734d57979ac87"
+      "bytes": 35302,
+      "sha256": "5a516a8265c71885f5285978454ea683e13e339928c50f2695ad33ce65cd2ed4"
     },
     "STATE.json": {
-      "bytes": 103785,
-      "sha256": "109965ccfea085b62a02b98581ff7446ba49e575467fbf8ac71d01790d8085e3"
+      "bytes": 107816,
+      "sha256": "4e04054681b8adfe0f6cff99ac9ec85886925133660f0098874f01bc86214657"
     },
     "assets/approved-home.png": {
       "bytes": 2157060,
@@ -157,6 +157,22 @@
     "qa/INVARIANTS.json": {
       "bytes": 45510,
       "sha256": "f09f83064cb2bff8cdd4d41130646733f751252fe4e534c75ab043160327baaa"
+    },
+    "32_NET-001_NETWORK_VALIDATION_2026-10-09.md": {
+      "bytes": 11202,
+      "sha256": "97bfb319191f2c1a105ca553dc51c3573da62d488b8932139d7e874ebe995010"
+    },
+    "net/input/DECISIONS.json": {
+      "bytes": 2758,
+      "sha256": "0ea1e5e1c2e2dece8bdb152808a78014f7ed25b0b04d6a704b0f3dbbf89b1cba"
+    },
+    "net/input/NET-001_WORK_HANDOFF.md": {
+      "bytes": 13211,
+      "sha256": "13d3624381a18afeec4ffc2ecaf34c63a14d0d407c94bb862fa0c9fbcc056309"
+    },
+    "net/input/WORK_START_PROMPT.txt": {
+      "bytes": 1678,
+      "sha256": "b04c88c742c02a13e18bc6ed0a0e0cbe4eefc15695da257f9a9c462b3bb20b3c"
     }
   },
   "checks": {
