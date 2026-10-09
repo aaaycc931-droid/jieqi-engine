@@ -2323,7 +2323,7 @@
     },
     "tasks": {
       "NET-001.1": "completed_repository_and_prior_handoff_audit",
-      "NET-001.2": "local_probe_implemented_cloud_deployment_and_mainland_sampling_pending",
+      "NET-001.2": "local_and_CI_probe_passed_user_log_confirms_cloud_deployment_authenticated_cloud_echo_and_mainland_sampling_pending",
       "NET-001.3": "partial_official_limits_and_explicit_scenario_model_checked_actual_usage_HK_quote_and_platform_costs_pending",
       "NET-001.4": "pending_real_measurements_no_production_selection"
     },
@@ -2332,8 +2332,8 @@
     "baseline_check": "review/net/BASELINE_AUDIT_2026-10-09.json",
     "cost_model": "review/net/COST_SCENARIOS_2026-10-09.json",
     "probe_gameplay_integration": false,
-    "cloud_deployed": false,
-    "cloud_account_available": false,
+    "cloud_deployed": true,
+    "cloud_account_available": true,
     "mainland_performance_measured": false,
     "mainland_samples": 0,
     "hong_kong_node_available": false,
@@ -2345,8 +2345,8 @@
       "ci": "passed_actual_Chromium_DOM_current_source"
     },
     "blocking_inputs": [
-      "authorized_Cloudflare_Free_test_account",
-      "actual_test_hostname_after_deployment",
+      "verify_actual_Workers_Free_plan_and_shared_quota",
+      "configure_runtime_Secret_PROBE_TOKEN",
       "real_mainland_carrier_devices_or_named_measurement_points",
       "Hong_Kong_host_and_direct_hostname_if_A_B_needed"
     ],
@@ -2358,7 +2358,7 @@
       "risk_level": "medium",
       "status": "partial",
       "source_checked": true,
-      "reality_validation_scope": "loopback_functional_only_not_mainland_performance",
+      "reality_validation_scope": "local_and_CI_functional_plus_user_provided_cloud_deployment_evidence_no_mainland_performance",
       "unverified": [
         "mainland_routes",
         "cloud_billing",
@@ -2366,7 +2366,7 @@
         "WeChat_official_requirements"
       ]
     },
-    "next_action": "NET-001: 在用户授权的Cloudflare Free测试账号中部署独立口令保护echo技术节点，先收集大陆三网真实样本并核对云用量；未提供账号/测点前不虚构部署或性能结果。",
+    "next_action": "NET-001: Cloudflare技术Worker已由用户日志确认部署；核对Workers Free与共享额度，配置运行时Secret PROBE_TOKEN，再从真实大陆设备测试页面可达性及1分钟鉴权HTTP/WS连接，随后收集三网10/60分钟样本并核对云用量。",
     "draft_pr_url": "https://github.com/aaaycc931-droid/jieqi-engine/pull/3",
     "ci_first_attempt": {
       "run": 37897773882,
@@ -2431,7 +2431,12 @@
         "assessment": "33_NET-REF-001_ASSESSMENT_2026-10-09.md",
         "mainland_samples_added": 0
       }
-    ]
+    ],
+    "cloud_account_access_mode": "user_operates_dashboard_no_agent_credentials_or_plugin",
+    "cloud_deployment_evidence": "review/net/CLOUD_DEPLOYMENT_2026-10-09.json",
+    "cloud_runtime_HTTP_WS_verified": false,
+    "workers_free_plan_verified": false,
+    "runtime_secret_configured": null
   },
   "parallel_workstreams": [
     {

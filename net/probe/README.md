@@ -1,6 +1,6 @@
 # NET-001 最小网络探测工具
 
-状态（2026-10-09）：代码与本地功能验证已完成；用户已创建 Cloudflare 账号并配置 Git 构建，**NET 探测代码的云端部署尚未核验、未取得中国大陆线路测量、未确定生产服务商**。控制台部署记录与排障见 [CLOUDFLARE_BUILDS](./CLOUDFLARE_BUILDS.md)，当前任务与仓库审计见 [32_NET-001](../../handoff/current/32_NET-001_NETWORK_VALIDATION_2026-10-09.md)。游戏本体、已确认规则与既有蓝牙成果保持原样。
+状态（2026-10-09）：代码与本地功能验证已完成；用户提供的构建日志与截图已确认 NET 探测 Worker 云端部署成功，**运行时口令与云端 HTTP/WS 功能尚未核验、未取得中国大陆线路测量、未确定生产服务商**。控制台部署记录与排障见 [CLOUDFLARE_BUILDS](./CLOUDFLARE_BUILDS.md)，当前任务与仓库审计见 [32_NET-001](../../handoff/current/32_NET-001_NETWORK_VALIDATION_2026-10-09.md)。游戏本体、已确认规则与既有蓝牙成果保持原样。
 
 ## 1. 工具与证据范围
 
@@ -56,7 +56,7 @@ node cli.mjs http://127.0.0.1:8788 --region loopback --carrier none --duration 1
 
 ## 3. Cloudflare 技术测试部署准备
 
-用户正在通过 Cloudflare 控制台的 Git 构建进行技术测试部署；下面的 CLI 命令尚未执行。开展云端探测前，仍需核对该账号为 Workers **Free**、其他服务共享配额、实际 workers.dev 地址与运行时口令设置。不开通 Paid，不绑定付款方式，不创建 D1，不接入游戏或公开运营。
+用户已通过 Cloudflare 控制台的 Git 构建完成技术测试部署（构建 `14b9493d`、提交 `eb8f8bd`）；下面的 CLI 命令尚未执行。开展云端探测前，仍需核对该账号为 Workers **Free**、其他服务共享配额、实际 workers.dev 地址与运行时口令设置。不开通 Paid，不绑定付款方式，不创建 D1，不接入游戏或公开运营。
 
 账号就绪后，仅部署受口令保护的 echo 技术服务：
 
