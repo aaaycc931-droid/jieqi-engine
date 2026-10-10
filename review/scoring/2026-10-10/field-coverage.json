@@ -1,0 +1,21 @@
+{
+  "field_count": 85,
+  "full_contract_location": "authoritative attempt rows: fields[group][field]",
+  "public_and_private_visibility": "Separate existing product projections; no authority field objects in player channels.",
+  "empirical_stage_deferred_fields": [
+    "arrival_policy_id",
+    "canonical_cause_id",
+    "cluster_id",
+    "cost_already_in_outcome",
+    "remaining_lawful_constraints",
+    "sampling_weight",
+    "unassigned_U",
+    "value_estimator_version"
+  ],
+  "null_reason_required": true,
+  "q": null,
+  "H": null,
+  "I": null,
+  "B": null,
+  "formal_scoring_status": "frozen"
+}

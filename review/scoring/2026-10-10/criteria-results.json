@@ -1,0 +1,152 @@
+{
+  "criteria": [
+    {
+      "id": "AC01",
+      "title": "版本与范围",
+      "status": "passed",
+      "evidence": [
+        "source-state.json"
+      ]
+    },
+    {
+      "id": "AC02",
+      "title": "成功B计数",
+      "status": "passed",
+      "evidence": [
+        "JF03/authoritative.jsonl",
+        "TX-B/authoritative.jsonl"
+      ]
+    },
+    {
+      "id": "AC03",
+      "title": "B阶段隔离",
+      "status": "passed",
+      "evidence": [
+        "JF03/authoritative.jsonl",
+        "TX-B/authoritative.jsonl"
+      ]
+    },
+    {
+      "id": "AC04",
+      "title": "A与正常grant",
+      "status": "passed",
+      "evidence": [
+        "JF02/authoritative.jsonl"
+      ]
+    },
+    {
+      "id": "AC05",
+      "title": "B跳过",
+      "status": "passed",
+      "evidence": [
+        "JF04/authoritative.jsonl",
+        "TX-SKIP/authoritative.jsonl"
+      ]
+    },
+    {
+      "id": "AC06",
+      "title": "提交与重放",
+      "status": "passed",
+      "evidence": [
+        "TX-B/authoritative.jsonl"
+      ]
+    },
+    {
+      "id": "AC07",
+      "title": "失败与过期",
+      "status": "passed",
+      "evidence": [
+        "TX-B/authoritative.jsonl",
+        "TX-CLOCK/authoritative.jsonl"
+      ]
+    },
+    {
+      "id": "AC08",
+      "title": "可见信息",
+      "status": "passed",
+      "evidence": [
+        "JF03/public.jsonl",
+        "JF06/public.jsonl",
+        "JF06/actor_A_private.jsonl",
+        "JF06/actor_B_private.jsonl"
+      ]
+    },
+    {
+      "id": "AC09",
+      "title": "映射与记忆",
+      "status": "passed",
+      "evidence": [
+        "JF03/authoritative.jsonl"
+      ]
+    },
+    {
+      "id": "AC10",
+      "title": "资源与费用",
+      "status": "passed",
+      "evidence": [
+        "JF02/authoritative.jsonl",
+        "JF03/authoritative.jsonl",
+        "JF06/authoritative.jsonl",
+        "JF09/authoritative.jsonl"
+      ]
+    },
+    {
+      "id": "AC11",
+      "title": "日志持久化",
+      "status": "passed",
+      "evidence": [
+        "HISTORY/manifest.json",
+        "JF03/manifest.json",
+        "validation/scoring-mechanism.tap"
+      ]
+    },
+    {
+      "id": "AC12",
+      "title": "九份验收",
+      "status": "passed",
+      "evidence": [
+        "runtime-results.json"
+      ]
+    },
+    {
+      "id": "AC13",
+      "title": "随机与重放",
+      "status": "passed",
+      "evidence": [
+        "JF03/random-tape.json",
+        "validation/scoring-mechanism.tap"
+      ]
+    },
+    {
+      "id": "AC14",
+      "title": "时钟与观察",
+      "status": "passed",
+      "evidence": [
+        "TX-SKIP/authoritative.jsonl",
+        "TX-B/authoritative.jsonl",
+        "validation/scoring-mechanism.tap"
+      ]
+    },
+    {
+      "id": "AC15",
+      "title": "模式与暂停范围",
+      "status": "passed",
+      "evidence": [
+        "source-state.json",
+        "validation/related-regression.tap"
+      ]
+    },
+    {
+      "id": "AC16",
+      "title": "评分冻结",
+      "status": "passed",
+      "evidence": [
+        "field-coverage.json",
+        "JF03/manifest.json",
+        "RETURN_CONTRACT.json"
+      ]
+    }
+  ],
+  "scope": "Controlled mechanism acceptance; no empirical score validation",
+  "formal_scoring_status": "frozen"
+}
