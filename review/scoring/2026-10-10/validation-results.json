@@ -1,0 +1,29 @@
+{
+  "scoring_mechanism": {
+    "command": "node --test --test-reporter=tap tests/scoring-mechanism.test.ts",
+    "exit_code": 0,
+    "evidence_path": "validation/scoring-mechanism.tap",
+    "sha256": "684d5bebb82affc56b5c42736f3cb2b40ce97c8308936ca6b328a480c4f3ce31",
+    "node_version": "v24.19.0",
+    "tests": 19,
+    "passed": 19,
+    "failed": 0
+  },
+  "related_regression": {
+    "command": "node --test --test-reporter=tap tests/design-gap-runtime.test.ts tests/action-turn-contracts.test.ts tests/time-line-contracts.test.ts tests/game-modes.test.ts tests/hero-forms.test.ts tests/remote-room.test.ts tests/bluetooth-private-contracts.test.ts tests/mutation-rarity.test.ts",
+    "exit_code": 0,
+    "evidence_path": "validation/related-regression.tap",
+    "sha256": "bc923cb101e98dd59ffd64d8218504950e674d19eab3951c39bb63cea694e417",
+    "node_version": "v24.19.0",
+    "tests": 102,
+    "passed": 102,
+    "failed": 0
+  },
+  "build_web": {
+    "command": "node scripts/build-web.ts",
+    "exit_code": 0,
+    "evidence_path": "validation/build-web.log",
+    "sha256": "d3ce848ad207f67fd1ce9d968e4835ede81891bfedf2e6228aa3c7e7888a7fb0",
+    "node_version": "v24.19.0"
+  }
+}

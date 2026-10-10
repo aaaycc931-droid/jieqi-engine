@@ -1,0 +1,801 @@
+{
+  "base_fields": 79,
+  "B_count_delta_fields": 6,
+  "total_fields": 85,
+  "empirical_stage_deferred_fields": [
+    "arrival_policy_id",
+    "canonical_cause_id",
+    "cluster_id",
+    "cost_already_in_outcome",
+    "remaining_lawful_constraints",
+    "sampling_weight",
+    "unassigned_U",
+    "value_estimator_version"
+  ],
+  "fields": [
+    {
+      "group": "study_cluster",
+      "field": "study_id",
+      "access": "research_only",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "study_cluster",
+      "field": "cluster_id",
+      "access": "research_only",
+      "phase": "empirical_calibration_deferred",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "study_cluster",
+      "field": "world_id",
+      "access": "research_only",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "study_cluster",
+      "field": "source_mask",
+      "access": "research_only",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "study_cluster",
+      "field": "external_RPS_result",
+      "access": "research_only",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "study_cluster",
+      "field": "actor_id_to_final_side",
+      "access": "research_only",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "study_cluster",
+      "field": "rule_hash",
+      "access": "research_only",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "study_cluster",
+      "field": "policy_version",
+      "access": "research_only",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "study_cluster",
+      "field": "random_law_id",
+      "access": "research_only",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "study_cluster",
+      "field": "random_event_keys",
+      "access": "research_only",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "study_cluster",
+      "field": "sampling_weight",
+      "access": "research_only",
+      "phase": "empirical_calibration_deferred",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "formal_window",
+      "field": "formal_turn_id",
+      "access": "public_and_authoritative_separate",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "formal_window",
+      "field": "own_turn_ordinal",
+      "access": "public_and_authoritative_separate",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "formal_window",
+      "field": "atomic_action_id",
+      "access": "public_and_authoritative_separate",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "formal_window",
+      "field": "phase",
+      "access": "public_and_authoritative_separate",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "formal_window",
+      "field": "pending_shuffle_window",
+      "access": "public_and_authoritative_separate",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "formal_window",
+      "field": "window_reached",
+      "access": "public_and_authoritative_separate",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "formal_window",
+      "field": "legality_status",
+      "access": "public_and_authoritative_separate",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "formal_window",
+      "field": "terminal_status",
+      "access": "public_and_authoritative_separate",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "formal_window",
+      "field": "chosen_action",
+      "access": "public_and_authoritative_separate",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "formal_window",
+      "field": "no_action_reason",
+      "access": "public_and_authoritative_separate",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "formal_window",
+      "field": "arrival_policy_id",
+      "access": "public_and_authoritative_separate",
+      "phase": "empirical_calibration_deferred",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H14_resources",
+      "field": "pupil_before",
+      "access": "according_to_current_source_visibility",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H14_resources",
+      "field": "periodic_grant",
+      "access": "according_to_current_source_visibility",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H14_resources",
+      "field": "pupil_after",
+      "access": "according_to_current_source_visibility",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H14_resources",
+      "field": "successful_insight_n_before",
+      "access": "according_to_current_source_visibility",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H14_resources",
+      "field": "n_after",
+      "access": "according_to_current_source_visibility",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H14_resources",
+      "field": "quoted_cost",
+      "access": "according_to_current_source_visibility",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H14_resources",
+      "field": "actually_charged_cost",
+      "access": "according_to_current_source_visibility",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H14_resources",
+      "field": "insight_attempt_id",
+      "access": "according_to_current_source_visibility",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H14_resources",
+      "field": "success",
+      "access": "according_to_current_source_visibility",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H14_resources",
+      "field": "failure_reason",
+      "access": "according_to_current_source_visibility",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H14_resources",
+      "field": "normal_or_secret",
+      "access": "according_to_current_source_visibility",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H14_observation",
+      "field": "viewer_id",
+      "access": "private_or_authoritative_only",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H14_observation",
+      "field": "observation_id",
+      "access": "private_or_authoritative_only",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H14_observation",
+      "field": "target_piece_or_slot_id",
+      "access": "private_or_authoritative_only",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H14_observation",
+      "field": "payload_access_permission",
+      "access": "private_or_authoritative_only",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H14_observation",
+      "field": "public_payload_projection",
+      "access": "private_or_authoritative_only",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H14_observation",
+      "field": "true_type_snapshot",
+      "access": "private_or_authoritative_only",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H14_observation",
+      "field": "original_side_snapshot_if_source_permits",
+      "access": "private_or_authoritative_only",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H14_observation",
+      "field": "M07_affiliation_snapshot",
+      "access": "private_or_authoritative_only",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H14_observation",
+      "field": "mapping_epoch",
+      "access": "private_or_authoritative_only",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H14_observation",
+      "field": "affiliation_refresh_epoch",
+      "access": "private_or_authoritative_only",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H14_observation",
+      "field": "observed_at_revision",
+      "access": "private_or_authoritative_only",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H14_observation",
+      "field": "exact_mapping_validity",
+      "access": "private_or_authoritative_only",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H14_observation",
+      "field": "public_insight_mark",
+      "access": "private_or_authoritative_only",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H11_reset",
+      "field": "window_A_or_B",
+      "access": "public_event_private_mapping_separate",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H11_reset",
+      "field": "opening_snapshot_hash",
+      "access": "public_event_private_mapping_separate",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H11_reset",
+      "field": "initial_piece_set",
+      "access": "public_event_private_mapping_separate",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H11_reset",
+      "field": "restored_piece_set",
+      "access": "public_event_private_mapping_separate",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H11_reset",
+      "field": "old_mapping_epoch",
+      "access": "public_event_private_mapping_separate",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H11_reset",
+      "field": "new_mapping_epoch",
+      "access": "public_event_private_mapping_separate",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H11_reset",
+      "field": "timeline_epoch_before_after",
+      "access": "public_event_private_mapping_separate",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H11_reset",
+      "field": "attachment_transfer_source",
+      "access": "public_event_private_mapping_separate",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H11_reset",
+      "field": "ground_effects_before_after",
+      "access": "public_event_private_mapping_separate",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H11_reset",
+      "field": "resources_before_after",
+      "access": "public_event_private_mapping_separate",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H11_reset",
+      "field": "clock_before_after",
+      "access": "public_event_private_mapping_separate",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H11_reset",
+      "field": "H14_marks_cleared",
+      "access": "public_event_private_mapping_separate",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H11_reset",
+      "field": "observations_invalidated",
+      "access": "public_event_private_mapping_separate",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "private_memory",
+      "field": "viewer_id",
+      "access": "player_private_only",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "private_memory",
+      "field": "history_observation_id",
+      "access": "player_private_only",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "private_memory",
+      "field": "observed_epoch",
+      "access": "player_private_only",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "private_memory",
+      "field": "remembered_payload",
+      "access": "player_private_only",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "private_memory",
+      "field": "current_precision_status",
+      "access": "player_private_only",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "private_memory",
+      "field": "invalidation_reason",
+      "access": "player_private_only",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "private_memory",
+      "field": "remaining_lawful_constraints",
+      "access": "player_private_only",
+      "phase": "empirical_calibration_deferred",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "trajectory_result",
+      "field": "winner",
+      "access": "public_outcome_research_attribution",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "trajectory_result",
+      "field": "reason",
+      "access": "public_outcome_research_attribution",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "trajectory_result",
+      "field": "draw_reason",
+      "access": "public_outcome_research_attribution",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "trajectory_result",
+      "field": "actor_result_point",
+      "access": "public_outcome_research_attribution",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "trajectory_result",
+      "field": "censored",
+      "access": "public_outcome_research_attribution",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "trajectory_result",
+      "field": "censor_reason",
+      "access": "public_outcome_research_attribution",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "trajectory_result",
+      "field": "pending_rule_dependency",
+      "access": "public_outcome_research_attribution",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "trajectory_result",
+      "field": "terminal_revision",
+      "access": "public_outcome_research_attribution",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "trajectory_result",
+      "field": "source_event_chain_id",
+      "access": "public_outcome_research_attribution",
+      "phase": "mechanism_acceptance_when_applicable",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "trajectory_result",
+      "field": "canonical_cause_id",
+      "access": "public_outcome_research_attribution",
+      "phase": "empirical_calibration_deferred",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "trajectory_result",
+      "field": "cost_already_in_outcome",
+      "access": "public_outcome_research_attribution",
+      "phase": "empirical_calibration_deferred",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "trajectory_result",
+      "field": "unassigned_U",
+      "access": "public_outcome_research_attribution",
+      "phase": "empirical_calibration_deferred",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "trajectory_result",
+      "field": "value_estimator_version",
+      "access": "public_outcome_research_attribution",
+      "phase": "empirical_calibration_deferred",
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H11_B_count_delta",
+      "field": "formal_counter_before",
+      "access": "authoritative_study_event_public_projection_per_existing_rules",
+      "phase": "mechanism_acceptance_when_applicable",
+      "expected_when_successful_B": {
+        "black": 1
+      },
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H11_B_count_delta",
+      "field": "formal_counter_after",
+      "access": "authoritative_study_event_public_projection_per_existing_rules",
+      "phase": "mechanism_acceptance_when_applicable",
+      "expected_when_successful_B": {
+        "black": 2
+      },
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H11_B_count_delta",
+      "field": "counts_as_formal_turn",
+      "access": "authoritative_study_event_public_projection_per_existing_rules",
+      "phase": "mechanism_acceptance_when_applicable",
+      "expected_when_successful_B": true,
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H11_B_count_delta",
+      "field": "regular_turn_begin_executed",
+      "access": "authoritative_study_event_public_projection_per_existing_rules",
+      "phase": "mechanism_acceptance_when_applicable",
+      "expected_when_successful_B": false,
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H11_B_count_delta",
+      "field": "ordinary_main_action_executed",
+      "access": "authoritative_study_event_public_projection_per_existing_rules",
+      "phase": "mechanism_acceptance_when_applicable",
+      "expected_when_successful_B": false,
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    },
+    {
+      "group": "H11_B_count_delta",
+      "field": "regular_turn_end_executed",
+      "access": "authoritative_study_event_public_projection_per_existing_rules",
+      "phase": "mechanism_acceptance_when_applicable",
+      "expected_when_successful_B": false,
+      "current_value": null,
+      "implementation_status": "not_started",
+      "null_reason_required": true
+    }
+  ],
+  "method": "observer snapshots and event metadata export; not 85 added product-state properties",
+  "context_rules": [
+    "机制研究study_id可使用fixture batch ID；夹具run_id/fixture_id单列，不能将run当独立评分cluster。",
+    "policy_version在本阶段是声明的脚本前缀/执行器版本，不伪称训练玩家策略。",
+    "random_law_id说明固定合法实现和生成方法；抽样权重保持null，不宣称指定映射是经验分布。",
+    "原始阵营、M07快照和权限不适用字段必须null＋原因；本批无M07不能生成M07概率。",
+    "机制夹具停在playing只记stop原因，不作为和局、零收益或完成评分样本。"
+  ],
+  "formal_scoring_status": "frozen"
+}

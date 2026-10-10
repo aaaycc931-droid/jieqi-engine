@@ -4,6 +4,7 @@ import { selectedHeroId } from "./hero-forms.ts";
 import { shuffleIdentities } from "./setup.ts";
 import { reconcileGhostInfections } from "./ghosts.ts";
 import { copy, advanceToFormalTurn, beginFormalTurn } from "./settlement.ts";
+import { emitMechanismEvent } from "./mechanism-observer.ts";
 import type { GameState, HeroAbilityCommand, MoveResult, RandomInt, SecretIdentity, SecretState, Side } from "./types.ts";
 export function saveShuffleOpening(state: GameState, secret: SecretState): void {
   if (secret.shuffleOpening || !["red", "black"].some(side => selectedHeroId(state, side as Side) === "shuffler")) return;
@@ -77,7 +78,16 @@ export function applyShuffleAction(state: GameState, secret: SecretState, comman
     k.timelineEpoch = (k.timelineEpoch ?? 0) + 1;
     delete s.turnLifecycle; delete s.lastMove; delete s.turnStartedAt; delete s.turnDeadlineAt; delete s.formalClock;
     s.automaticEvents = [{ kind: "shuffle", side: "black" }]; s.destructionBatches = []; s.landingEvents = [];
-    s.turn = "red"; advanceToFormalTurn(s, k, "red", random);
+    // Window B replaces black's second formal turn without running its ordinary
+    // begin/main/end callbacks. The authority entry deduplicates this transaction.
+    const blackBefore = s.formalTurns?.black ?? 0;
+    if (pending.window === "B") {
+      s.formalTurns ??= { red: 0, black: 0 };
+      s.formalTurns.black += 1;
+    }
+    s.turn = "red";
+    emitMechanismEvent("shuffle_reset", s, k, { window: pending.window, countsAsFormalTurn: pending.window === "B", blackBefore, blackAfter: s.formalTurns?.black ?? 0 });
+    advanceToFormalTurn(s, k, "red", random);
   }
   s.revision++; k.processedActions[command.actionId] = s.revision;
   return { state: s, secret: k, duplicate: false };

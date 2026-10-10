@@ -1,0 +1,32 @@
+{
+  "task_id": "MODE-SCORE-MODEL-001",
+  "date": "2026-10-10",
+  "timezone": "Asia/Shanghai",
+  "user_words": "按正式回合计数",
+  "status": "confirmed_design_pending_implementation_acceptance",
+  "mode_id": "original_jieqi",
+  "engine_mode_id": "jieqi",
+  "source_id": "H11",
+  "window": "B",
+  "counts_as_formal_turn": true,
+  "formal_counter_before": {
+    "black": 1
+  },
+  "formal_counter_after": {
+    "black": 2
+  },
+  "ordinary_black_actions_completed": 1,
+  "regular_turn_begin_executed": false,
+  "ordinary_main_action_executed": false,
+  "regular_turn_end_executed": false,
+  "black_turn_continues": false,
+  "next_side": "red",
+  "ordinary_callbacks_status": "preserve previously specified B window before regular turn begin; confirmation addresses numeric count, no new callback or resource rule",
+  "window_A_additional_formal_count": 0,
+  "window_A_black_counter_after": 1,
+  "formal_scoring_status": "frozen",
+  "empirical_parameters_approved": false,
+  "repository_modified": false,
+  "implementation_status": "not_written_or_runtime_verified_in_this_task",
+  "source_snapshot_observation": "Pinned a3704459 src/hero-shuffle.ts does not explicitly increment black formalTurns on wash; not a claim about newer repository HEAD"
+}

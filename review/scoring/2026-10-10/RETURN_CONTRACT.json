@@ -1,0 +1,402 @@
+{
+  "task_id": "MODE-SCORE-MODEL-001",
+  "status": "controlled_mechanism_acceptance_passed",
+  "source_branch": "codex/score-mechanism-20261010",
+  "source_commit": "ad735385929d61fa10def6f3e3bf877ef68299b1",
+  "changed_files": [
+    "docs/rules/2026-10-10-H11-B-formal-count.md",
+    "package.json",
+    "scripts/scoring/README.md",
+    "scripts/scoring/fixture-runner.ts",
+    "scripts/scoring/research-log.ts",
+    "scripts/scoring/run-acceptance.ts",
+    "scripts/scoring/validate.ts",
+    "src/hero-actions.ts",
+    "src/hero-shuffle.ts",
+    "src/mechanism-observer.ts",
+    "src/settlement.ts",
+    "tests/fixtures/scoring/ACCEPTANCE_CRITERIA.json",
+    "tests/fixtures/scoring/CONFIRMATION_H11_B_COUNT.json",
+    "tests/fixtures/scoring/FIXTURE_SPECIFICATIONS.json",
+    "tests/fixtures/scoring/INITIAL_LAYOUT.json",
+    "tests/fixtures/scoring/LOG_FIELD_PLAN.json",
+    "tests/fixtures/scoring/RESET_REALIZATION.json",
+    "tests/fixtures/scoring/RETURN_CONTRACT.json",
+    "tests/scoring-mechanism.test.ts"
+  ],
+  "run_commands": [
+    "node --test --test-reporter=tap tests/scoring-mechanism.test.ts",
+    "node --test --test-reporter=tap tests/design-gap-runtime.test.ts tests/action-turn-contracts.test.ts tests/time-line-contracts.test.ts tests/game-modes.test.ts tests/hero-forms.test.ts tests/remote-room.test.ts tests/bluetooth-private-contracts.test.ts tests/mutation-rarity.test.ts",
+    "node scripts/build-web.ts",
+    "node scripts/scoring/run-acceptance.ts <output>"
+  ],
+  "runtime_results": [
+    {
+      "fixture_id": "JF01",
+      "status": "passed",
+      "evidence_path": "JF01/manifest.json",
+      "failure_or_blocker": null,
+      "authority_submissions": 1,
+      "formal_turns": {
+        "red": 0,
+        "black": 0
+      },
+      "terminal_status": "playing",
+      "winner": null,
+      "q": null,
+      "H": null,
+      "I": null,
+      "B": null,
+      "replay_matches": true,
+      "observer_is_passive": true
+    },
+    {
+      "fixture_id": "JF02",
+      "status": "passed",
+      "evidence_path": "JF02/manifest.json",
+      "failure_or_blocker": null,
+      "authority_submissions": 3,
+      "formal_turns": {
+        "red": 1,
+        "black": 1
+      },
+      "terminal_status": "playing",
+      "winner": null,
+      "q": null,
+      "H": null,
+      "I": null,
+      "B": null,
+      "replay_matches": true,
+      "observer_is_passive": true
+    },
+    {
+      "fixture_id": "JF03",
+      "status": "passed",
+      "evidence_path": "JF03/manifest.json",
+      "failure_or_blocker": null,
+      "authority_submissions": 6,
+      "formal_turns": {
+        "red": 2,
+        "black": 2
+      },
+      "terminal_status": "playing",
+      "winner": null,
+      "q": null,
+      "H": null,
+      "I": null,
+      "B": null,
+      "replay_matches": true,
+      "observer_is_passive": true
+    },
+    {
+      "fixture_id": "JF04",
+      "status": "passed",
+      "evidence_path": "JF04/manifest.json",
+      "failure_or_blocker": null,
+      "authority_submissions": 6,
+      "formal_turns": {
+        "red": 2,
+        "black": 1
+      },
+      "terminal_status": "playing",
+      "winner": null,
+      "q": null,
+      "H": null,
+      "I": null,
+      "B": null,
+      "replay_matches": true,
+      "observer_is_passive": true
+    },
+    {
+      "fixture_id": "JF05",
+      "status": "passed",
+      "evidence_path": "JF05/manifest.json",
+      "failure_or_blocker": null,
+      "authority_submissions": 4,
+      "formal_turns": {
+        "red": 1,
+        "black": 1
+      },
+      "terminal_status": "playing",
+      "winner": null,
+      "q": null,
+      "H": null,
+      "I": null,
+      "B": null,
+      "replay_matches": true,
+      "observer_is_passive": true
+    },
+    {
+      "fixture_id": "JF06",
+      "status": "passed",
+      "evidence_path": "JF06/manifest.json",
+      "failure_or_blocker": null,
+      "authority_submissions": 9,
+      "formal_turns": {
+        "red": 3,
+        "black": 3
+      },
+      "terminal_status": "playing",
+      "winner": null,
+      "q": null,
+      "H": null,
+      "I": null,
+      "B": null,
+      "replay_matches": true,
+      "observer_is_passive": true
+    },
+    {
+      "fixture_id": "JF07",
+      "status": "passed",
+      "evidence_path": "JF07/manifest.json",
+      "failure_or_blocker": null,
+      "authority_submissions": 10,
+      "formal_turns": {
+        "red": 3,
+        "black": 3
+      },
+      "terminal_status": "playing",
+      "winner": null,
+      "q": null,
+      "H": null,
+      "I": null,
+      "B": null,
+      "replay_matches": true,
+      "observer_is_passive": true
+    },
+    {
+      "fixture_id": "JF08",
+      "status": "passed",
+      "evidence_path": "JF08/manifest.json",
+      "failure_or_blocker": null,
+      "authority_submissions": 4,
+      "formal_turns": {
+        "red": 1,
+        "black": 1
+      },
+      "terminal_status": "playing",
+      "winner": null,
+      "q": null,
+      "H": null,
+      "I": null,
+      "B": null,
+      "replay_matches": true,
+      "observer_is_passive": true
+    },
+    {
+      "fixture_id": "JF09",
+      "status": "passed",
+      "evidence_path": "JF09/manifest.json",
+      "failure_or_blocker": null,
+      "authority_submissions": 12,
+      "formal_turns": {
+        "red": 4,
+        "black": 4
+      },
+      "terminal_status": "playing",
+      "winner": null,
+      "q": null,
+      "H": null,
+      "I": null,
+      "B": null,
+      "replay_matches": true,
+      "observer_is_passive": true
+    }
+  ],
+  "criteria_results": [
+    {
+      "id": "AC01",
+      "title": "版本与范围",
+      "status": "passed",
+      "evidence": [
+        "source-state.json"
+      ]
+    },
+    {
+      "id": "AC02",
+      "title": "成功B计数",
+      "status": "passed",
+      "evidence": [
+        "JF03/authoritative.jsonl",
+        "TX-B/authoritative.jsonl"
+      ]
+    },
+    {
+      "id": "AC03",
+      "title": "B阶段隔离",
+      "status": "passed",
+      "evidence": [
+        "JF03/authoritative.jsonl",
+        "TX-B/authoritative.jsonl"
+      ]
+    },
+    {
+      "id": "AC04",
+      "title": "A与正常grant",
+      "status": "passed",
+      "evidence": [
+        "JF02/authoritative.jsonl"
+      ]
+    },
+    {
+      "id": "AC05",
+      "title": "B跳过",
+      "status": "passed",
+      "evidence": [
+        "JF04/authoritative.jsonl",
+        "TX-SKIP/authoritative.jsonl"
+      ]
+    },
+    {
+      "id": "AC06",
+      "title": "提交与重放",
+      "status": "passed",
+      "evidence": [
+        "TX-B/authoritative.jsonl"
+      ]
+    },
+    {
+      "id": "AC07",
+      "title": "失败与过期",
+      "status": "passed",
+      "evidence": [
+        "TX-B/authoritative.jsonl",
+        "TX-CLOCK/authoritative.jsonl"
+      ]
+    },
+    {
+      "id": "AC08",
+      "title": "可见信息",
+      "status": "passed",
+      "evidence": [
+        "JF03/public.jsonl",
+        "JF06/public.jsonl",
+        "JF06/actor_A_private.jsonl",
+        "JF06/actor_B_private.jsonl"
+      ]
+    },
+    {
+      "id": "AC09",
+      "title": "映射与记忆",
+      "status": "passed",
+      "evidence": [
+        "JF03/authoritative.jsonl"
+      ]
+    },
+    {
+      "id": "AC10",
+      "title": "资源与费用",
+      "status": "passed",
+      "evidence": [
+        "JF02/authoritative.jsonl",
+        "JF03/authoritative.jsonl",
+        "JF06/authoritative.jsonl",
+        "JF09/authoritative.jsonl"
+      ]
+    },
+    {
+      "id": "AC11",
+      "title": "日志持久化",
+      "status": "passed",
+      "evidence": [
+        "HISTORY/manifest.json",
+        "JF03/manifest.json",
+        "validation/scoring-mechanism.tap"
+      ]
+    },
+    {
+      "id": "AC12",
+      "title": "九份验收",
+      "status": "passed",
+      "evidence": [
+        "runtime-results.json"
+      ]
+    },
+    {
+      "id": "AC13",
+      "title": "随机与重放",
+      "status": "passed",
+      "evidence": [
+        "JF03/random-tape.json",
+        "validation/scoring-mechanism.tap"
+      ]
+    },
+    {
+      "id": "AC14",
+      "title": "时钟与观察",
+      "status": "passed",
+      "evidence": [
+        "TX-SKIP/authoritative.jsonl",
+        "TX-B/authoritative.jsonl",
+        "validation/scoring-mechanism.tap"
+      ]
+    },
+    {
+      "id": "AC15",
+      "title": "模式与暂停范围",
+      "status": "passed",
+      "evidence": [
+        "source-state.json",
+        "validation/related-regression.tap"
+      ]
+    },
+    {
+      "id": "AC16",
+      "title": "评分冻结",
+      "status": "passed",
+      "evidence": [
+        "field-coverage.json",
+        "JF03/manifest.json",
+        "RETURN_CONTRACT.json"
+      ]
+    }
+  ],
+  "authority_entry_used": "submitRemoteMove / submitRemoteHeroAbility after actual hero selection and RPS; post-command advanceRemoteRoomTime mirrors product views",
+  "clock_contract": "Existing authority receipt times; explicit post-command advanceRemoteRoomTime mirrors BluetoothHostRoom.views. Logger never advances time.",
+  "random_tape_reference": "<fixture_id>/random-tape.json",
+  "public_log": "<fixture_id>/public.jsonl",
+  "actor_A_private_log": "<fixture_id>/actor_A_private.jsonl",
+  "actor_B_private_log": "<fixture_id>/actor_B_private.jsonl",
+  "authoritative_log": "<fixture_id>/authoritative.jsonl",
+  "manifest": "<fixture_id>/manifest.json",
+  "field_coverage_report": "field-coverage.json",
+  "remaining_dependencies": [
+    "Empirical player-policy definition and independent cluster sampling",
+    "Mode-specific parameter calibration",
+    "q estimator and mutation-impact encoder validation",
+    "Ordinary xiangqi/half-chaos feature adaptation remains guarded"
+  ],
+  "formal_scoring_status": "frozen",
+  "empirical_parameters_approved": false,
+  "actual_hero_scores": [],
+  "actual_mutation_scores": [],
+  "actual_bias_scores": [],
+  "no_auto_merge_deploy_or_score_release": true,
+  "tested_source_hash": "cea2f4ce2f6af3c032cfe0ca7b96b73c8e671de6ca23ef46ad66266d1afe2aae",
+  "supplemental_results": [
+    {
+      "id": "TX-B",
+      "status": "passed",
+      "evidence_path": "TX-B/manifest.json",
+      "failure_or_blocker": null
+    },
+    {
+      "id": "TX-SKIP",
+      "status": "passed",
+      "evidence_path": "TX-SKIP/manifest.json",
+      "failure_or_blocker": null
+    },
+    {
+      "id": "TX-CLOCK",
+      "status": "passed",
+      "evidence_path": "TX-CLOCK/manifest.json",
+      "failure_or_blocker": null
+    },
+    {
+      "id": "HISTORY",
+      "status": "passed",
+      "evidence_path": "HISTORY/manifest.json",
+      "failure_or_blocker": null
+    }
+  ]
+}

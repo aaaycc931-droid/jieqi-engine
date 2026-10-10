@@ -1,0 +1,563 @@
+{
+  "schema": "lezi.fixture_layout_spec.v1",
+  "mode_id": "original_jieqi",
+  "engine_mode_id": "jieqi",
+  "status": "specified_not_loaded",
+  "not_a_complete_GameState": true,
+  "coordinates": "x0..8；黑底y0，红底y9",
+  "public_pieces": [
+    {
+      "id": "black-general",
+      "x": 4,
+      "y": 0,
+      "faceDown": false,
+      "color": "black",
+      "type": "general"
+    },
+    {
+      "id": "red-general",
+      "x": 4,
+      "y": 9,
+      "faceDown": false,
+      "color": "red",
+      "type": "general"
+    },
+    {
+      "id": "covered-00",
+      "x": 0,
+      "y": 0,
+      "faceDown": true
+    },
+    {
+      "id": "covered-01",
+      "x": 1,
+      "y": 0,
+      "faceDown": true
+    },
+    {
+      "id": "covered-02",
+      "x": 2,
+      "y": 0,
+      "faceDown": true
+    },
+    {
+      "id": "covered-03",
+      "x": 3,
+      "y": 0,
+      "faceDown": true
+    },
+    {
+      "id": "covered-04",
+      "x": 5,
+      "y": 0,
+      "faceDown": true
+    },
+    {
+      "id": "covered-05",
+      "x": 6,
+      "y": 0,
+      "faceDown": true
+    },
+    {
+      "id": "covered-06",
+      "x": 7,
+      "y": 0,
+      "faceDown": true
+    },
+    {
+      "id": "covered-07",
+      "x": 8,
+      "y": 0,
+      "faceDown": true
+    },
+    {
+      "id": "covered-08",
+      "x": 1,
+      "y": 2,
+      "faceDown": true
+    },
+    {
+      "id": "covered-09",
+      "x": 7,
+      "y": 2,
+      "faceDown": true
+    },
+    {
+      "id": "covered-10",
+      "x": 0,
+      "y": 3,
+      "faceDown": true
+    },
+    {
+      "id": "covered-11",
+      "x": 2,
+      "y": 3,
+      "faceDown": true
+    },
+    {
+      "id": "covered-12",
+      "x": 4,
+      "y": 3,
+      "faceDown": true
+    },
+    {
+      "id": "covered-13",
+      "x": 6,
+      "y": 3,
+      "faceDown": true
+    },
+    {
+      "id": "covered-14",
+      "x": 8,
+      "y": 3,
+      "faceDown": true
+    },
+    {
+      "id": "covered-15",
+      "x": 0,
+      "y": 9,
+      "faceDown": true
+    },
+    {
+      "id": "covered-16",
+      "x": 1,
+      "y": 9,
+      "faceDown": true
+    },
+    {
+      "id": "covered-17",
+      "x": 2,
+      "y": 9,
+      "faceDown": true
+    },
+    {
+      "id": "covered-18",
+      "x": 3,
+      "y": 9,
+      "faceDown": true
+    },
+    {
+      "id": "covered-19",
+      "x": 5,
+      "y": 9,
+      "faceDown": true
+    },
+    {
+      "id": "covered-20",
+      "x": 6,
+      "y": 9,
+      "faceDown": true
+    },
+    {
+      "id": "covered-21",
+      "x": 7,
+      "y": 9,
+      "faceDown": true
+    },
+    {
+      "id": "covered-22",
+      "x": 8,
+      "y": 9,
+      "faceDown": true
+    },
+    {
+      "id": "covered-23",
+      "x": 1,
+      "y": 7,
+      "faceDown": true
+    },
+    {
+      "id": "covered-24",
+      "x": 7,
+      "y": 7,
+      "faceDown": true
+    },
+    {
+      "id": "covered-25",
+      "x": 0,
+      "y": 6,
+      "faceDown": true
+    },
+    {
+      "id": "covered-26",
+      "x": 2,
+      "y": 6,
+      "faceDown": true
+    },
+    {
+      "id": "covered-27",
+      "x": 4,
+      "y": 6,
+      "faceDown": true
+    },
+    {
+      "id": "covered-28",
+      "x": 6,
+      "y": 6,
+      "faceDown": true
+    },
+    {
+      "id": "covered-29",
+      "x": 8,
+      "y": 6,
+      "faceDown": true
+    }
+  ],
+  "public_initial_slots": [
+    {
+      "id": "covered-00",
+      "x": 0,
+      "y": 0,
+      "public_side": "black",
+      "public_type": "rook"
+    },
+    {
+      "id": "covered-01",
+      "x": 1,
+      "y": 0,
+      "public_side": "black",
+      "public_type": "horse"
+    },
+    {
+      "id": "covered-02",
+      "x": 2,
+      "y": 0,
+      "public_side": "black",
+      "public_type": "elephant"
+    },
+    {
+      "id": "covered-03",
+      "x": 3,
+      "y": 0,
+      "public_side": "black",
+      "public_type": "advisor"
+    },
+    {
+      "id": "covered-04",
+      "x": 5,
+      "y": 0,
+      "public_side": "black",
+      "public_type": "advisor"
+    },
+    {
+      "id": "covered-05",
+      "x": 6,
+      "y": 0,
+      "public_side": "black",
+      "public_type": "elephant"
+    },
+    {
+      "id": "covered-06",
+      "x": 7,
+      "y": 0,
+      "public_side": "black",
+      "public_type": "horse"
+    },
+    {
+      "id": "covered-07",
+      "x": 8,
+      "y": 0,
+      "public_side": "black",
+      "public_type": "rook"
+    },
+    {
+      "id": "covered-08",
+      "x": 1,
+      "y": 2,
+      "public_side": "black",
+      "public_type": "cannon"
+    },
+    {
+      "id": "covered-09",
+      "x": 7,
+      "y": 2,
+      "public_side": "black",
+      "public_type": "cannon"
+    },
+    {
+      "id": "covered-10",
+      "x": 0,
+      "y": 3,
+      "public_side": "black",
+      "public_type": "pawn"
+    },
+    {
+      "id": "covered-11",
+      "x": 2,
+      "y": 3,
+      "public_side": "black",
+      "public_type": "pawn"
+    },
+    {
+      "id": "covered-12",
+      "x": 4,
+      "y": 3,
+      "public_side": "black",
+      "public_type": "pawn"
+    },
+    {
+      "id": "covered-13",
+      "x": 6,
+      "y": 3,
+      "public_side": "black",
+      "public_type": "pawn"
+    },
+    {
+      "id": "covered-14",
+      "x": 8,
+      "y": 3,
+      "public_side": "black",
+      "public_type": "pawn"
+    },
+    {
+      "id": "covered-15",
+      "x": 0,
+      "y": 9,
+      "public_side": "red",
+      "public_type": "rook"
+    },
+    {
+      "id": "covered-16",
+      "x": 1,
+      "y": 9,
+      "public_side": "red",
+      "public_type": "horse"
+    },
+    {
+      "id": "covered-17",
+      "x": 2,
+      "y": 9,
+      "public_side": "red",
+      "public_type": "elephant"
+    },
+    {
+      "id": "covered-18",
+      "x": 3,
+      "y": 9,
+      "public_side": "red",
+      "public_type": "advisor"
+    },
+    {
+      "id": "covered-19",
+      "x": 5,
+      "y": 9,
+      "public_side": "red",
+      "public_type": "advisor"
+    },
+    {
+      "id": "covered-20",
+      "x": 6,
+      "y": 9,
+      "public_side": "red",
+      "public_type": "elephant"
+    },
+    {
+      "id": "covered-21",
+      "x": 7,
+      "y": 9,
+      "public_side": "red",
+      "public_type": "horse"
+    },
+    {
+      "id": "covered-22",
+      "x": 8,
+      "y": 9,
+      "public_side": "red",
+      "public_type": "rook"
+    },
+    {
+      "id": "covered-23",
+      "x": 1,
+      "y": 7,
+      "public_side": "red",
+      "public_type": "cannon"
+    },
+    {
+      "id": "covered-24",
+      "x": 7,
+      "y": 7,
+      "public_side": "red",
+      "public_type": "cannon"
+    },
+    {
+      "id": "covered-25",
+      "x": 0,
+      "y": 6,
+      "public_side": "red",
+      "public_type": "pawn"
+    },
+    {
+      "id": "covered-26",
+      "x": 2,
+      "y": 6,
+      "public_side": "red",
+      "public_type": "pawn"
+    },
+    {
+      "id": "covered-27",
+      "x": 4,
+      "y": 6,
+      "public_side": "red",
+      "public_type": "pawn"
+    },
+    {
+      "id": "covered-28",
+      "x": 6,
+      "y": 6,
+      "public_side": "red",
+      "public_type": "pawn"
+    },
+    {
+      "id": "covered-29",
+      "x": 8,
+      "y": 6,
+      "public_side": "red",
+      "public_type": "pawn"
+    }
+  ],
+  "authoritative_private_identities": {
+    "covered-00": {
+      "color": "black",
+      "type": "rook"
+    },
+    "covered-01": {
+      "color": "black",
+      "type": "horse"
+    },
+    "covered-02": {
+      "color": "black",
+      "type": "elephant"
+    },
+    "covered-03": {
+      "color": "black",
+      "type": "advisor"
+    },
+    "covered-04": {
+      "color": "black",
+      "type": "advisor"
+    },
+    "covered-05": {
+      "color": "black",
+      "type": "elephant"
+    },
+    "covered-06": {
+      "color": "black",
+      "type": "horse"
+    },
+    "covered-07": {
+      "color": "black",
+      "type": "rook"
+    },
+    "covered-08": {
+      "color": "black",
+      "type": "cannon"
+    },
+    "covered-09": {
+      "color": "black",
+      "type": "cannon"
+    },
+    "covered-10": {
+      "color": "red",
+      "type": "cannon"
+    },
+    "covered-11": {
+      "color": "black",
+      "type": "pawn"
+    },
+    "covered-12": {
+      "color": "black",
+      "type": "pawn"
+    },
+    "covered-13": {
+      "color": "black",
+      "type": "pawn"
+    },
+    "covered-14": {
+      "color": "black",
+      "type": "pawn"
+    },
+    "covered-15": {
+      "color": "red",
+      "type": "rook"
+    },
+    "covered-16": {
+      "color": "red",
+      "type": "horse"
+    },
+    "covered-17": {
+      "color": "red",
+      "type": "elephant"
+    },
+    "covered-18": {
+      "color": "red",
+      "type": "advisor"
+    },
+    "covered-19": {
+      "color": "red",
+      "type": "advisor"
+    },
+    "covered-20": {
+      "color": "red",
+      "type": "elephant"
+    },
+    "covered-21": {
+      "color": "red",
+      "type": "horse"
+    },
+    "covered-22": {
+      "color": "red",
+      "type": "rook"
+    },
+    "covered-23": {
+      "color": "black",
+      "type": "pawn"
+    },
+    "covered-24": {
+      "color": "red",
+      "type": "cannon"
+    },
+    "covered-25": {
+      "color": "red",
+      "type": "pawn"
+    },
+    "covered-26": {
+      "color": "red",
+      "type": "pawn"
+    },
+    "covered-27": {
+      "color": "red",
+      "type": "pawn"
+    },
+    "covered-28": {
+      "color": "red",
+      "type": "pawn"
+    },
+    "covered-29": {
+      "color": "red",
+      "type": "pawn"
+    }
+  },
+  "actor_sources": {
+    "A": "H14/night",
+    "B": "H11/shuffler"
+  },
+  "external_RPS_sides": {
+    "A": "black",
+    "B": "red"
+  },
+  "final_sides_after_single_H11_swap": {
+    "A": "red",
+    "B": "black"
+  },
+  "mutation_id": "jian_xie",
+  "mutation_condition": "条件研究指定本局尖斜，不改变产品随机抽取律或确认稀有度权重",
+  "initial_resources_rule": "H14初始瞳力0，共享成功n0；按合法前缀获得，禁止直接注入6或12",
+  "initial_captured": [],
+  "initial_effects": {},
+  "initial_public_insight_marks": [],
+  "initial_private_observations": [],
+  "sampling_weight": null,
+  "random_tape": null,
+  "clock_timestamps": null,
+  "layout_probability_not_estimated": true
+}

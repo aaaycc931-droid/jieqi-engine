@@ -1,0 +1,204 @@
+{
+  "results": [
+    {
+      "fixture_id": "JF01",
+      "status": "passed",
+      "evidence_path": "JF01/manifest.json",
+      "failure_or_blocker": null,
+      "authority_submissions": 1,
+      "formal_turns": {
+        "red": 0,
+        "black": 0
+      },
+      "terminal_status": "playing",
+      "winner": null,
+      "q": null,
+      "H": null,
+      "I": null,
+      "B": null,
+      "replay_matches": true,
+      "observer_is_passive": true
+    },
+    {
+      "fixture_id": "JF02",
+      "status": "passed",
+      "evidence_path": "JF02/manifest.json",
+      "failure_or_blocker": null,
+      "authority_submissions": 3,
+      "formal_turns": {
+        "red": 1,
+        "black": 1
+      },
+      "terminal_status": "playing",
+      "winner": null,
+      "q": null,
+      "H": null,
+      "I": null,
+      "B": null,
+      "replay_matches": true,
+      "observer_is_passive": true
+    },
+    {
+      "fixture_id": "JF03",
+      "status": "passed",
+      "evidence_path": "JF03/manifest.json",
+      "failure_or_blocker": null,
+      "authority_submissions": 6,
+      "formal_turns": {
+        "red": 2,
+        "black": 2
+      },
+      "terminal_status": "playing",
+      "winner": null,
+      "q": null,
+      "H": null,
+      "I": null,
+      "B": null,
+      "replay_matches": true,
+      "observer_is_passive": true
+    },
+    {
+      "fixture_id": "JF04",
+      "status": "passed",
+      "evidence_path": "JF04/manifest.json",
+      "failure_or_blocker": null,
+      "authority_submissions": 6,
+      "formal_turns": {
+        "red": 2,
+        "black": 1
+      },
+      "terminal_status": "playing",
+      "winner": null,
+      "q": null,
+      "H": null,
+      "I": null,
+      "B": null,
+      "replay_matches": true,
+      "observer_is_passive": true
+    },
+    {
+      "fixture_id": "JF05",
+      "status": "passed",
+      "evidence_path": "JF05/manifest.json",
+      "failure_or_blocker": null,
+      "authority_submissions": 4,
+      "formal_turns": {
+        "red": 1,
+        "black": 1
+      },
+      "terminal_status": "playing",
+      "winner": null,
+      "q": null,
+      "H": null,
+      "I": null,
+      "B": null,
+      "replay_matches": true,
+      "observer_is_passive": true
+    },
+    {
+      "fixture_id": "JF06",
+      "status": "passed",
+      "evidence_path": "JF06/manifest.json",
+      "failure_or_blocker": null,
+      "authority_submissions": 9,
+      "formal_turns": {
+        "red": 3,
+        "black": 3
+      },
+      "terminal_status": "playing",
+      "winner": null,
+      "q": null,
+      "H": null,
+      "I": null,
+      "B": null,
+      "replay_matches": true,
+      "observer_is_passive": true
+    },
+    {
+      "fixture_id": "JF07",
+      "status": "passed",
+      "evidence_path": "JF07/manifest.json",
+      "failure_or_blocker": null,
+      "authority_submissions": 10,
+      "formal_turns": {
+        "red": 3,
+        "black": 3
+      },
+      "terminal_status": "playing",
+      "winner": null,
+      "q": null,
+      "H": null,
+      "I": null,
+      "B": null,
+      "replay_matches": true,
+      "observer_is_passive": true
+    },
+    {
+      "fixture_id": "JF08",
+      "status": "passed",
+      "evidence_path": "JF08/manifest.json",
+      "failure_or_blocker": null,
+      "authority_submissions": 4,
+      "formal_turns": {
+        "red": 1,
+        "black": 1
+      },
+      "terminal_status": "playing",
+      "winner": null,
+      "q": null,
+      "H": null,
+      "I": null,
+      "B": null,
+      "replay_matches": true,
+      "observer_is_passive": true
+    },
+    {
+      "fixture_id": "JF09",
+      "status": "passed",
+      "evidence_path": "JF09/manifest.json",
+      "failure_or_blocker": null,
+      "authority_submissions": 12,
+      "formal_turns": {
+        "red": 4,
+        "black": 4
+      },
+      "terminal_status": "playing",
+      "winner": null,
+      "q": null,
+      "H": null,
+      "I": null,
+      "B": null,
+      "replay_matches": true,
+      "observer_is_passive": true
+    }
+  ],
+  "supplemental_results": [
+    {
+      "id": "TX-B",
+      "status": "passed",
+      "evidence_path": "TX-B/manifest.json",
+      "failure_or_blocker": null
+    },
+    {
+      "id": "TX-SKIP",
+      "status": "passed",
+      "evidence_path": "TX-SKIP/manifest.json",
+      "failure_or_blocker": null
+    },
+    {
+      "id": "TX-CLOCK",
+      "status": "passed",
+      "evidence_path": "TX-CLOCK/manifest.json",
+      "failure_or_blocker": null
+    },
+    {
+      "id": "HISTORY",
+      "status": "passed",
+      "evidence_path": "HISTORY/manifest.json",
+      "failure_or_blocker": null
+    }
+  ],
+  "accepted_runtime_fixtures": 9,
+  "formal_scoring_status": "frozen",
+  "empirical_parameters_approved": false
+}

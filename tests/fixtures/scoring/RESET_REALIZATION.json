@@ -1,0 +1,137 @@
+{
+  "status": "lawful_mapping_candidate_not_engine_sample",
+  "initial_piece_positions_restore": true,
+  "initial_generals_remain_revealed": true,
+  "non_general_hidden_count": 30,
+  "authoritative_private_identities": {
+    "covered-00": {
+      "color": "red",
+      "type": "pawn"
+    },
+    "covered-01": {
+      "color": "red",
+      "type": "pawn"
+    },
+    "covered-02": {
+      "color": "red",
+      "type": "pawn"
+    },
+    "covered-03": {
+      "color": "red",
+      "type": "pawn"
+    },
+    "covered-04": {
+      "color": "red",
+      "type": "pawn"
+    },
+    "covered-05": {
+      "color": "red",
+      "type": "cannon"
+    },
+    "covered-06": {
+      "color": "black",
+      "type": "pawn"
+    },
+    "covered-07": {
+      "color": "red",
+      "type": "rook"
+    },
+    "covered-08": {
+      "color": "red",
+      "type": "horse"
+    },
+    "covered-09": {
+      "color": "red",
+      "type": "elephant"
+    },
+    "covered-10": {
+      "color": "red",
+      "type": "advisor"
+    },
+    "covered-11": {
+      "color": "red",
+      "type": "advisor"
+    },
+    "covered-12": {
+      "color": "red",
+      "type": "elephant"
+    },
+    "covered-13": {
+      "color": "red",
+      "type": "horse"
+    },
+    "covered-14": {
+      "color": "red",
+      "type": "rook"
+    },
+    "covered-15": {
+      "color": "black",
+      "type": "pawn"
+    },
+    "covered-16": {
+      "color": "black",
+      "type": "pawn"
+    },
+    "covered-17": {
+      "color": "black",
+      "type": "pawn"
+    },
+    "covered-18": {
+      "color": "black",
+      "type": "pawn"
+    },
+    "covered-19": {
+      "color": "red",
+      "type": "cannon"
+    },
+    "covered-20": {
+      "color": "black",
+      "type": "cannon"
+    },
+    "covered-21": {
+      "color": "black",
+      "type": "cannon"
+    },
+    "covered-22": {
+      "color": "black",
+      "type": "rook"
+    },
+    "covered-23": {
+      "color": "black",
+      "type": "horse"
+    },
+    "covered-24": {
+      "color": "black",
+      "type": "elephant"
+    },
+    "covered-25": {
+      "color": "black",
+      "type": "advisor"
+    },
+    "covered-26": {
+      "color": "black",
+      "type": "advisor"
+    },
+    "covered-27": {
+      "color": "black",
+      "type": "elephant"
+    },
+    "covered-28": {
+      "color": "black",
+      "type": "horse"
+    },
+    "covered-29": {
+      "color": "black",
+      "type": "rook"
+    }
+  },
+  "additional_anchors": [],
+  "resource_refund": false,
+  "successful_insight_n_reset": false,
+  "old_observations_retained_as_history": true,
+  "old_exact_mapping_invalidated": true,
+  "public_insight_marks_cleared": true,
+  "random_tape": null,
+  "sampling_weight": null,
+  "warning": "该完整映射只给出一个可审查实现候选。运行转换/随机tape/边缘律未验收；映射偶然不变也必须使旧精确观测失效，不能要求所有身份必须变化。"
+}

@@ -1,0 +1,103 @@
+{
+  "status": "expected_criteria_not_test_results",
+  "criteria": [
+    {
+      "id": "AC01",
+      "title": "版本与范围",
+      "expected": "记录实际HEAD/本地差分；读取最新确认。只读快照不覆盖现有实现，不新建游戏项目。",
+      "status": "not_executed"
+    },
+    {
+      "id": "AC02",
+      "title": "成功B计数",
+      "expected": "原揭棋B成功：black formalTurns 1→2，同一actionId仅一次，普通黑行动数仍1。",
+      "status": "not_executed"
+    },
+    {
+      "id": "AC03",
+      "title": "B阶段隔离",
+      "expected": "B成功不执行普通begin、主行动或finish；不触发额外资源/冷却/持续结算。",
+      "status": "not_executed"
+    },
+    {
+      "id": "AC04",
+      "title": "A与正常grant",
+      "expected": "A成功不额外计黑回合，仍1；reset阶段夜资源不返还，随后红2正常grant6分开记录。",
+      "status": "not_executed"
+    },
+    {
+      "id": "AC05",
+      "title": "B跳过",
+      "expected": "B跳过进入黑第二普通回合开始；普通行动未完成前完成计数仍1，随后普通行动正常计数。",
+      "status": "not_executed"
+    },
+    {
+      "id": "AC06",
+      "title": "提交与重放",
+      "expected": "通过真实权威入口重复成功actionId不重复改状态/费用/计数；attempt与有效commit区别可追溯。",
+      "status": "not_executed"
+    },
+    {
+      "id": "AC07",
+      "title": "失败与过期",
+      "expected": "JF失败及过期提交不推进正式计数、不额外耗资源或增加成功n；失败原因记录。",
+      "status": "not_executed"
+    },
+    {
+      "id": "AC08",
+      "title": "可见信息",
+      "expected": "普通目标/标记公开但身份只夜可见；秘密目标/身份不公共；权限投影不得读取未经来源允许的隐藏状态。",
+      "status": "not_executed"
+    },
+    {
+      "id": "AC09",
+      "title": "映射与记忆",
+      "expected": "洗牌清标记、旧精确观测失效、历史记忆保留，pupil支出及成功n不回滚；身份偶然相同也不沿用旧映射精确性。",
+      "status": "not_executed"
+    },
+    {
+      "id": "AC10",
+      "title": "资源与费用",
+      "expected": "JF03 6→2/n0→1；B后红3仍2/n1；JF06 12→5/n1；JF09红5无grant、普通费8/秘密费13。每笔grant/费用一次。",
+      "status": "not_executed"
+    },
+    {
+      "id": "AC11",
+      "title": "日志持久化",
+      "expected": "完整事件链在近期history超过8和洗牌清空后仍可读回；清单hash与事件顺序验证，失败尝试保留。",
+      "status": "not_executed"
+    },
+    {
+      "id": "AC12",
+      "title": "九份验收",
+      "expected": "JF01..JF09都有实际结果与证据引用，失败/阻断不隐藏；机制通过不写成真实英雄或畸变评分通过。",
+      "status": "not_executed"
+    },
+    {
+      "id": "AC13",
+      "title": "随机与重放",
+      "expected": "固定映射多重集/生成接口范围正确，保存tape且可重放；logger不改变调用序列；不宣称其是群体样本。",
+      "status": "not_executed"
+    },
+    {
+      "id": "AC14",
+      "title": "时钟与观察",
+      "expected": "时钟按照现有来源流程记录；日志读状态不推进阶段/回合、不重启clock，不增加随机抽取。",
+      "status": "not_executed"
+    },
+    {
+      "id": "AC15",
+      "title": "模式与暂停范围",
+      "expected": "不绕过新模式保护，不把普通象棋/半混乱全部能力写成ready，不恢复NET/UI/APK或其他暂停队列。",
+      "status": "not_executed"
+    },
+    {
+      "id": "AC16",
+      "title": "评分冻结",
+      "expected": "H/I/B与真实q无输入仍null、正式评分frozen，候选参数不自动批准；本轮输出仅机制实现与日志验收证据。",
+      "status": "not_executed"
+    }
+  ],
+  "criteria_count": 16,
+  "formal_scoring_status": "frozen"
+}

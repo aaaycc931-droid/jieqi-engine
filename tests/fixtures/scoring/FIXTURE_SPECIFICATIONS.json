@@ -1,0 +1,1261 @@
+{
+  "status": "concrete_specifications_not_runtime_accepted",
+  "fixture_count": 9,
+  "accepted_runtime_fixtures": 0,
+  "fixtures": [
+    {
+      "id": "JF01",
+      "protocol_ids": [
+        "JP01"
+      ],
+      "title": "初始瞳力不足",
+      "initial_layout": "INITIAL_LAYOUT.json",
+      "entry_stage": "red_1_before_main",
+      "prefix": [],
+      "actions": [
+        {
+          "kind": "insight_attempt",
+          "side": "red",
+          "normal_or_secret": "normal",
+          "target_piece_id": "covered-10",
+          "expected_commit": false,
+          "expected_error_code_from_pinned_source": "INSUFFICIENT_PUPIL",
+          "target_public_xy": [
+            0,
+            3
+          ]
+        }
+      ],
+      "expected": {
+        "pupil_before": 0,
+        "pupil_after": 0,
+        "n_before": 0,
+        "n_after": 0,
+        "observation_added": false,
+        "main_opportunity_consumed": false
+      },
+      "legal_prefix_manual_review": "selected_public_horse_geometry_and_nonterminal_witnesses_checked; no engine acceptance",
+      "runtime_status": "not_loaded_not_executed",
+      "engine_command_ids": null,
+      "engine_expected_revisions": null,
+      "wall_clock_schedule": null,
+      "result_H": null,
+      "result_I": null,
+      "result_B": null,
+      "formal_scoring_status": "frozen"
+    },
+    {
+      "id": "JF02",
+      "protocol_ids": [
+        "JP06",
+        "JP08"
+      ],
+      "title": "A洗牌后的回合资源",
+      "initial_layout": "INITIAL_LAYOUT.json",
+      "entry_stage": "black_1_A",
+      "prefix": [
+        {
+          "kind": "ordinary_move",
+          "side": "red",
+          "piece_id": "covered-16",
+          "from_xy": [
+            1,
+            9
+          ],
+          "to_xy": [
+            2,
+            7
+          ],
+          "horse_leg_xy": [
+            1,
+            8
+          ],
+          "own_formal_turn": 1,
+          "expected_revealed_identity": {
+            "color": "red",
+            "type": "horse"
+          },
+          "intended_no_capture": true
+        },
+        {
+          "kind": "ordinary_move",
+          "side": "black",
+          "piece_id": "covered-01",
+          "from_xy": [
+            1,
+            0
+          ],
+          "to_xy": [
+            2,
+            2
+          ],
+          "horse_leg_xy": [
+            1,
+            1
+          ],
+          "own_formal_turn": 1,
+          "expected_revealed_identity": {
+            "color": "black",
+            "type": "horse"
+          },
+          "intended_no_capture": true
+        }
+      ],
+      "actions": [
+        {
+          "kind": "shuffle_choice",
+          "window": "A",
+          "side": "black",
+          "choice": "wash",
+          "reset_realization": "RESET_REALIZATION.json"
+        }
+      ],
+      "expected": {
+        "paid_insights_before": 0,
+        "pupil_immediately_after_reset_before_red_start": 0,
+        "pupil_after_red_2_start": 6,
+        "periodic_grant": 6,
+        "refund": 0,
+        "successful_n": 0,
+        "next_red_own_turn": 2,
+        "no_later_B": true,
+        "normative_black_counter_after_A_wash": 1,
+        "A_additional_formal_count": 0
+      },
+      "legal_prefix_manual_review": "selected_public_horse_geometry_and_nonterminal_witnesses_checked; no engine acceptance",
+      "runtime_status": "not_loaded_not_executed",
+      "engine_command_ids": null,
+      "engine_expected_revisions": null,
+      "wall_clock_schedule": null,
+      "result_H": null,
+      "result_I": null,
+      "result_B": null,
+      "formal_scoring_status": "frozen"
+    },
+    {
+      "id": "JF03",
+      "protocol_ids": [
+        "JP02",
+        "JP07",
+        "JP08"
+      ],
+      "title": "B普通洞察与旧映射失效",
+      "initial_layout": "INITIAL_LAYOUT.json",
+      "entry_stage": "red_2_before_main",
+      "prefix": [
+        {
+          "kind": "ordinary_move",
+          "side": "red",
+          "piece_id": "covered-16",
+          "from_xy": [
+            1,
+            9
+          ],
+          "to_xy": [
+            2,
+            7
+          ],
+          "horse_leg_xy": [
+            1,
+            8
+          ],
+          "own_formal_turn": 1,
+          "expected_revealed_identity": {
+            "color": "red",
+            "type": "horse"
+          },
+          "intended_no_capture": true
+        },
+        {
+          "kind": "ordinary_move",
+          "side": "black",
+          "piece_id": "covered-01",
+          "from_xy": [
+            1,
+            0
+          ],
+          "to_xy": [
+            2,
+            2
+          ],
+          "horse_leg_xy": [
+            1,
+            1
+          ],
+          "own_formal_turn": 1,
+          "expected_revealed_identity": {
+            "color": "black",
+            "type": "horse"
+          },
+          "intended_no_capture": true
+        },
+        {
+          "kind": "shuffle_choice",
+          "window": "A",
+          "side": "black",
+          "choice": "skip"
+        }
+      ],
+      "actions": [
+        {
+          "kind": "insight_attempt",
+          "side": "red",
+          "normal_or_secret": "normal",
+          "target_piece_id": "covered-10",
+          "expected_commit": true,
+          "expected_error_code_from_pinned_source": null,
+          "target_public_xy": [
+            0,
+            3
+          ]
+        },
+        {
+          "kind": "ordinary_move",
+          "side": "red",
+          "piece_id": "covered-21",
+          "from_xy": [
+            7,
+            9
+          ],
+          "to_xy": [
+            6,
+            7
+          ],
+          "horse_leg_xy": [
+            7,
+            8
+          ],
+          "own_formal_turn": 2,
+          "expected_revealed_identity": {
+            "color": "red",
+            "type": "horse"
+          },
+          "intended_no_capture": true
+        },
+        {
+          "kind": "shuffle_choice",
+          "window": "B",
+          "side": "black",
+          "choice": "wash",
+          "reset_realization": "RESET_REALIZATION.json"
+        }
+      ],
+      "expected": {
+        "pupil_before_purchase": 6,
+        "pupil_after_purchase": 2,
+        "n_after_purchase": 1,
+        "private_payload": {
+          "color": "red",
+          "type": "cannon"
+        },
+        "public_target": "covered-10",
+        "public_mark_before_wash": true,
+        "target_still_hidden_before_wash": true,
+        "pupil_after_wash_and_red_3_start": 2,
+        "periodic_grant_at_red_3": 0,
+        "n_after_wash": 1,
+        "public_mark_after_wash": false,
+        "old_observation_retained": true,
+        "old_exact_mapping_valid": false,
+        "ordinary_black_actions_completed_before_B": 1,
+        "normative_black_counter_after_B_wash": 2,
+        "normative_black_counter_before_B_wash": 1,
+        "B_wash_counts_as_formal_turn": true,
+        "B_regular_turn_begin_executed": false,
+        "B_ordinary_main_action_executed": false,
+        "B_regular_turn_end_executed": false
+      },
+      "legal_prefix_manual_review": "selected_public_horse_geometry_and_nonterminal_witnesses_checked; no engine acceptance",
+      "runtime_status": "not_loaded_not_executed",
+      "engine_command_ids": null,
+      "engine_expected_revisions": null,
+      "wall_clock_schedule": null,
+      "result_H": null,
+      "result_I": null,
+      "result_B": null,
+      "formal_scoring_status": "frozen"
+    },
+    {
+      "id": "JF04",
+      "protocol_ids": [
+        "JP07",
+        "JP08"
+      ],
+      "title": "B放弃保留情报",
+      "initial_layout": "INITIAL_LAYOUT.json",
+      "entry_stage": "red_2_before_main",
+      "prefix": [
+        {
+          "kind": "ordinary_move",
+          "side": "red",
+          "piece_id": "covered-16",
+          "from_xy": [
+            1,
+            9
+          ],
+          "to_xy": [
+            2,
+            7
+          ],
+          "horse_leg_xy": [
+            1,
+            8
+          ],
+          "own_formal_turn": 1,
+          "expected_revealed_identity": {
+            "color": "red",
+            "type": "horse"
+          },
+          "intended_no_capture": true
+        },
+        {
+          "kind": "ordinary_move",
+          "side": "black",
+          "piece_id": "covered-01",
+          "from_xy": [
+            1,
+            0
+          ],
+          "to_xy": [
+            2,
+            2
+          ],
+          "horse_leg_xy": [
+            1,
+            1
+          ],
+          "own_formal_turn": 1,
+          "expected_revealed_identity": {
+            "color": "black",
+            "type": "horse"
+          },
+          "intended_no_capture": true
+        },
+        {
+          "kind": "shuffle_choice",
+          "window": "A",
+          "side": "black",
+          "choice": "skip"
+        }
+      ],
+      "actions": [
+        {
+          "kind": "insight_attempt",
+          "side": "red",
+          "normal_or_secret": "normal",
+          "target_piece_id": "covered-10",
+          "expected_commit": true,
+          "expected_error_code_from_pinned_source": null,
+          "target_public_xy": [
+            0,
+            3
+          ]
+        },
+        {
+          "kind": "ordinary_move",
+          "side": "red",
+          "piece_id": "covered-21",
+          "from_xy": [
+            7,
+            9
+          ],
+          "to_xy": [
+            6,
+            7
+          ],
+          "horse_leg_xy": [
+            7,
+            8
+          ],
+          "own_formal_turn": 2,
+          "expected_revealed_identity": {
+            "color": "red",
+            "type": "horse"
+          },
+          "intended_no_capture": true
+        },
+        {
+          "kind": "shuffle_choice",
+          "window": "B",
+          "side": "black",
+          "choice": "skip"
+        }
+      ],
+      "expected": {
+        "wash_used": false,
+        "next_side": "black",
+        "black_ordinary_start_ordinal": 2,
+        "pupil_red": 2,
+        "n_red": 1,
+        "public_mark_retained": true,
+        "observation_exact_mapping_valid": true
+      },
+      "legal_prefix_manual_review": "selected_public_horse_geometry_and_nonterminal_witnesses_checked; no engine acceptance",
+      "runtime_status": "not_loaded_not_executed",
+      "engine_command_ids": null,
+      "engine_expected_revisions": null,
+      "wall_clock_schedule": null,
+      "result_H": null,
+      "result_I": null,
+      "result_B": null,
+      "formal_scoring_status": "frozen"
+    },
+    {
+      "id": "JF05",
+      "protocol_ids": [
+        "JP01",
+        "JP02"
+      ],
+      "title": "红2秘密洞察付不起",
+      "initial_layout": "INITIAL_LAYOUT.json",
+      "entry_stage": "red_2_before_main",
+      "prefix": [
+        {
+          "kind": "ordinary_move",
+          "side": "red",
+          "piece_id": "covered-16",
+          "from_xy": [
+            1,
+            9
+          ],
+          "to_xy": [
+            2,
+            7
+          ],
+          "horse_leg_xy": [
+            1,
+            8
+          ],
+          "own_formal_turn": 1,
+          "expected_revealed_identity": {
+            "color": "red",
+            "type": "horse"
+          },
+          "intended_no_capture": true
+        },
+        {
+          "kind": "ordinary_move",
+          "side": "black",
+          "piece_id": "covered-01",
+          "from_xy": [
+            1,
+            0
+          ],
+          "to_xy": [
+            2,
+            2
+          ],
+          "horse_leg_xy": [
+            1,
+            1
+          ],
+          "own_formal_turn": 1,
+          "expected_revealed_identity": {
+            "color": "black",
+            "type": "horse"
+          },
+          "intended_no_capture": true
+        },
+        {
+          "kind": "shuffle_choice",
+          "window": "A",
+          "side": "black",
+          "choice": "skip"
+        }
+      ],
+      "actions": [
+        {
+          "kind": "insight_attempt",
+          "side": "red",
+          "normal_or_secret": "secret",
+          "target_piece_id": "covered-10",
+          "expected_commit": false,
+          "expected_error_code_from_pinned_source": "INSUFFICIENT_PUPIL",
+          "target_public_xy": [
+            0,
+            3
+          ]
+        }
+      ],
+      "expected": {
+        "pupil_before": 6,
+        "pupil_after": 6,
+        "n_before": 0,
+        "n_after": 0,
+        "observation_added": false,
+        "public_target_disclosure": false,
+        "main_opportunity_consumed": false
+      },
+      "legal_prefix_manual_review": "selected_public_horse_geometry_and_nonterminal_witnesses_checked; no engine acceptance",
+      "runtime_status": "not_loaded_not_executed",
+      "engine_command_ids": null,
+      "engine_expected_revisions": null,
+      "wall_clock_schedule": null,
+      "result_H": null,
+      "result_I": null,
+      "result_B": null,
+      "formal_scoring_status": "frozen"
+    },
+    {
+      "id": "JF06",
+      "protocol_ids": [
+        "JP01",
+        "JP02"
+      ],
+      "title": "红4首次秘密洞察",
+      "initial_layout": "INITIAL_LAYOUT.json",
+      "entry_stage": "red_4_before_main",
+      "prefix": [
+        {
+          "kind": "ordinary_move",
+          "side": "red",
+          "piece_id": "covered-16",
+          "from_xy": [
+            1,
+            9
+          ],
+          "to_xy": [
+            2,
+            7
+          ],
+          "horse_leg_xy": [
+            1,
+            8
+          ],
+          "own_formal_turn": 1,
+          "expected_revealed_identity": {
+            "color": "red",
+            "type": "horse"
+          },
+          "intended_no_capture": true
+        },
+        {
+          "kind": "ordinary_move",
+          "side": "black",
+          "piece_id": "covered-01",
+          "from_xy": [
+            1,
+            0
+          ],
+          "to_xy": [
+            2,
+            2
+          ],
+          "horse_leg_xy": [
+            1,
+            1
+          ],
+          "own_formal_turn": 1,
+          "expected_revealed_identity": {
+            "color": "black",
+            "type": "horse"
+          },
+          "intended_no_capture": true
+        },
+        {
+          "kind": "shuffle_choice",
+          "window": "A",
+          "side": "black",
+          "choice": "skip"
+        },
+        {
+          "kind": "ordinary_move",
+          "side": "red",
+          "piece_id": "covered-21",
+          "from_xy": [
+            7,
+            9
+          ],
+          "to_xy": [
+            6,
+            7
+          ],
+          "horse_leg_xy": [
+            7,
+            8
+          ],
+          "own_formal_turn": 2,
+          "expected_revealed_identity": {
+            "color": "red",
+            "type": "horse"
+          },
+          "intended_no_capture": true
+        },
+        {
+          "kind": "shuffle_choice",
+          "window": "B",
+          "side": "black",
+          "choice": "skip"
+        },
+        {
+          "kind": "ordinary_move",
+          "side": "black",
+          "piece_id": "covered-06",
+          "from_xy": [
+            7,
+            0
+          ],
+          "to_xy": [
+            6,
+            2
+          ],
+          "horse_leg_xy": [
+            7,
+            1
+          ],
+          "own_formal_turn": 2,
+          "expected_revealed_identity": {
+            "color": "black",
+            "type": "horse"
+          },
+          "intended_no_capture": true
+        },
+        {
+          "kind": "ordinary_move",
+          "side": "red",
+          "piece_id": "covered-16",
+          "from_xy": [
+            2,
+            7
+          ],
+          "to_xy": [
+            1,
+            9
+          ],
+          "horse_leg_xy": [
+            2,
+            8
+          ],
+          "own_formal_turn": 3,
+          "expected_revealed_identity": {
+            "color": "red",
+            "type": "horse"
+          },
+          "intended_no_capture": true
+        },
+        {
+          "kind": "ordinary_move",
+          "side": "black",
+          "piece_id": "covered-01",
+          "from_xy": [
+            2,
+            2
+          ],
+          "to_xy": [
+            1,
+            0
+          ],
+          "horse_leg_xy": [
+            2,
+            1
+          ],
+          "own_formal_turn": 3,
+          "expected_revealed_identity": {
+            "color": "black",
+            "type": "horse"
+          },
+          "intended_no_capture": true
+        }
+      ],
+      "actions": [
+        {
+          "kind": "insight_attempt",
+          "side": "red",
+          "normal_or_secret": "secret",
+          "target_piece_id": "covered-10",
+          "expected_commit": true,
+          "expected_error_code_from_pinned_source": null,
+          "target_public_xy": [
+            0,
+            3
+          ]
+        }
+      ],
+      "expected": {
+        "pupil_before": 12,
+        "pupil_after": 5,
+        "n_before": 0,
+        "n_after": 1,
+        "private_payload": {
+          "color": "red",
+          "type": "cannon"
+        },
+        "public_operation_and_cost": true,
+        "public_target_disclosure": false,
+        "public_insight_mark": false,
+        "main_opportunity_consumed": false
+      },
+      "legal_prefix_manual_review": "selected_public_horse_geometry_and_nonterminal_witnesses_checked; no engine acceptance",
+      "runtime_status": "not_loaded_not_executed",
+      "engine_command_ids": null,
+      "engine_expected_revisions": null,
+      "wall_clock_schedule": null,
+      "result_H": null,
+      "result_I": null,
+      "result_B": null,
+      "formal_scoring_status": "frozen"
+    },
+    {
+      "id": "JF07",
+      "protocol_ids": [
+        "JP01",
+        "JP02"
+      ],
+      "title": "同回合第二次洞察拒绝",
+      "initial_layout": "INITIAL_LAYOUT.json",
+      "entry_stage": "red_4_before_main",
+      "prefix": [
+        {
+          "kind": "ordinary_move",
+          "side": "red",
+          "piece_id": "covered-16",
+          "from_xy": [
+            1,
+            9
+          ],
+          "to_xy": [
+            2,
+            7
+          ],
+          "horse_leg_xy": [
+            1,
+            8
+          ],
+          "own_formal_turn": 1,
+          "expected_revealed_identity": {
+            "color": "red",
+            "type": "horse"
+          },
+          "intended_no_capture": true
+        },
+        {
+          "kind": "ordinary_move",
+          "side": "black",
+          "piece_id": "covered-01",
+          "from_xy": [
+            1,
+            0
+          ],
+          "to_xy": [
+            2,
+            2
+          ],
+          "horse_leg_xy": [
+            1,
+            1
+          ],
+          "own_formal_turn": 1,
+          "expected_revealed_identity": {
+            "color": "black",
+            "type": "horse"
+          },
+          "intended_no_capture": true
+        },
+        {
+          "kind": "shuffle_choice",
+          "window": "A",
+          "side": "black",
+          "choice": "skip"
+        },
+        {
+          "kind": "ordinary_move",
+          "side": "red",
+          "piece_id": "covered-21",
+          "from_xy": [
+            7,
+            9
+          ],
+          "to_xy": [
+            6,
+            7
+          ],
+          "horse_leg_xy": [
+            7,
+            8
+          ],
+          "own_formal_turn": 2,
+          "expected_revealed_identity": {
+            "color": "red",
+            "type": "horse"
+          },
+          "intended_no_capture": true
+        },
+        {
+          "kind": "shuffle_choice",
+          "window": "B",
+          "side": "black",
+          "choice": "skip"
+        },
+        {
+          "kind": "ordinary_move",
+          "side": "black",
+          "piece_id": "covered-06",
+          "from_xy": [
+            7,
+            0
+          ],
+          "to_xy": [
+            6,
+            2
+          ],
+          "horse_leg_xy": [
+            7,
+            1
+          ],
+          "own_formal_turn": 2,
+          "expected_revealed_identity": {
+            "color": "black",
+            "type": "horse"
+          },
+          "intended_no_capture": true
+        },
+        {
+          "kind": "ordinary_move",
+          "side": "red",
+          "piece_id": "covered-16",
+          "from_xy": [
+            2,
+            7
+          ],
+          "to_xy": [
+            1,
+            9
+          ],
+          "horse_leg_xy": [
+            2,
+            8
+          ],
+          "own_formal_turn": 3,
+          "expected_revealed_identity": {
+            "color": "red",
+            "type": "horse"
+          },
+          "intended_no_capture": true
+        },
+        {
+          "kind": "ordinary_move",
+          "side": "black",
+          "piece_id": "covered-01",
+          "from_xy": [
+            2,
+            2
+          ],
+          "to_xy": [
+            1,
+            0
+          ],
+          "horse_leg_xy": [
+            2,
+            1
+          ],
+          "own_formal_turn": 3,
+          "expected_revealed_identity": {
+            "color": "black",
+            "type": "horse"
+          },
+          "intended_no_capture": true
+        },
+        {
+          "kind": "insight_attempt",
+          "side": "red",
+          "normal_or_secret": "secret",
+          "target_piece_id": "covered-10",
+          "expected_commit": true,
+          "expected_error_code_from_pinned_source": null,
+          "target_public_xy": [
+            0,
+            3
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "kind": "insight_attempt",
+          "side": "red",
+          "normal_or_secret": "normal",
+          "target_piece_id": "covered-25",
+          "expected_commit": false,
+          "expected_error_code_from_pinned_source": "INSIGHT_TURN_LIMIT",
+          "target_public_xy": [
+            0,
+            6
+          ]
+        }
+      ],
+      "expected": {
+        "pupil_before": 5,
+        "pupil_after": 5,
+        "n_before": 1,
+        "n_after": 1,
+        "new_observation_added": false,
+        "main_opportunity_consumed": false
+      },
+      "legal_prefix_manual_review": "selected_public_horse_geometry_and_nonterminal_witnesses_checked; no engine acceptance",
+      "runtime_status": "not_loaded_not_executed",
+      "engine_command_ids": null,
+      "engine_expected_revisions": null,
+      "wall_clock_schedule": null,
+      "result_H": null,
+      "result_I": null,
+      "result_B": null,
+      "formal_scoring_status": "frozen"
+    },
+    {
+      "id": "JF08",
+      "protocol_ids": [
+        "JP01",
+        "JP02"
+      ],
+      "title": "已揭示目标拒绝",
+      "initial_layout": "INITIAL_LAYOUT.json",
+      "entry_stage": "red_2_before_main",
+      "prefix": [
+        {
+          "kind": "ordinary_move",
+          "side": "red",
+          "piece_id": "covered-16",
+          "from_xy": [
+            1,
+            9
+          ],
+          "to_xy": [
+            2,
+            7
+          ],
+          "horse_leg_xy": [
+            1,
+            8
+          ],
+          "own_formal_turn": 1,
+          "expected_revealed_identity": {
+            "color": "red",
+            "type": "horse"
+          },
+          "intended_no_capture": true
+        },
+        {
+          "kind": "ordinary_move",
+          "side": "black",
+          "piece_id": "covered-01",
+          "from_xy": [
+            1,
+            0
+          ],
+          "to_xy": [
+            2,
+            2
+          ],
+          "horse_leg_xy": [
+            1,
+            1
+          ],
+          "own_formal_turn": 1,
+          "expected_revealed_identity": {
+            "color": "black",
+            "type": "horse"
+          },
+          "intended_no_capture": true
+        },
+        {
+          "kind": "shuffle_choice",
+          "window": "A",
+          "side": "black",
+          "choice": "skip"
+        }
+      ],
+      "actions": [
+        {
+          "kind": "insight_attempt",
+          "side": "red",
+          "normal_or_secret": "normal",
+          "target_piece_id": "covered-16",
+          "expected_commit": false,
+          "expected_error_code_from_pinned_source": "INVALID_INSIGHT_TARGET",
+          "target_public_xy": [
+            1,
+            9
+          ]
+        }
+      ],
+      "expected": {
+        "target_position": [
+          2,
+          7
+        ],
+        "target_revealed": true,
+        "pupil_before": 6,
+        "pupil_after": 6,
+        "n_before": 0,
+        "n_after": 0,
+        "observation_added": false,
+        "main_opportunity_consumed": false
+      },
+      "legal_prefix_manual_review": "selected_public_horse_geometry_and_nonterminal_witnesses_checked; no engine acceptance",
+      "runtime_status": "not_loaded_not_executed",
+      "engine_command_ids": null,
+      "engine_expected_revisions": null,
+      "wall_clock_schedule": null,
+      "result_H": null,
+      "result_I": null,
+      "result_B": null,
+      "formal_scoring_status": "frozen"
+    },
+    {
+      "id": "JF09",
+      "protocol_ids": [
+        "JP01",
+        "JP02"
+      ],
+      "title": "共享n与下一回合费用",
+      "initial_layout": "INITIAL_LAYOUT.json",
+      "entry_stage": "red_5_before_main",
+      "prefix": [
+        {
+          "kind": "ordinary_move",
+          "side": "red",
+          "piece_id": "covered-16",
+          "from_xy": [
+            1,
+            9
+          ],
+          "to_xy": [
+            2,
+            7
+          ],
+          "horse_leg_xy": [
+            1,
+            8
+          ],
+          "own_formal_turn": 1,
+          "expected_revealed_identity": {
+            "color": "red",
+            "type": "horse"
+          },
+          "intended_no_capture": true
+        },
+        {
+          "kind": "ordinary_move",
+          "side": "black",
+          "piece_id": "covered-01",
+          "from_xy": [
+            1,
+            0
+          ],
+          "to_xy": [
+            2,
+            2
+          ],
+          "horse_leg_xy": [
+            1,
+            1
+          ],
+          "own_formal_turn": 1,
+          "expected_revealed_identity": {
+            "color": "black",
+            "type": "horse"
+          },
+          "intended_no_capture": true
+        },
+        {
+          "kind": "shuffle_choice",
+          "window": "A",
+          "side": "black",
+          "choice": "skip"
+        },
+        {
+          "kind": "ordinary_move",
+          "side": "red",
+          "piece_id": "covered-21",
+          "from_xy": [
+            7,
+            9
+          ],
+          "to_xy": [
+            6,
+            7
+          ],
+          "horse_leg_xy": [
+            7,
+            8
+          ],
+          "own_formal_turn": 2,
+          "expected_revealed_identity": {
+            "color": "red",
+            "type": "horse"
+          },
+          "intended_no_capture": true
+        },
+        {
+          "kind": "shuffle_choice",
+          "window": "B",
+          "side": "black",
+          "choice": "skip"
+        },
+        {
+          "kind": "ordinary_move",
+          "side": "black",
+          "piece_id": "covered-06",
+          "from_xy": [
+            7,
+            0
+          ],
+          "to_xy": [
+            6,
+            2
+          ],
+          "horse_leg_xy": [
+            7,
+            1
+          ],
+          "own_formal_turn": 2,
+          "expected_revealed_identity": {
+            "color": "black",
+            "type": "horse"
+          },
+          "intended_no_capture": true
+        },
+        {
+          "kind": "ordinary_move",
+          "side": "red",
+          "piece_id": "covered-16",
+          "from_xy": [
+            2,
+            7
+          ],
+          "to_xy": [
+            1,
+            9
+          ],
+          "horse_leg_xy": [
+            2,
+            8
+          ],
+          "own_formal_turn": 3,
+          "expected_revealed_identity": {
+            "color": "red",
+            "type": "horse"
+          },
+          "intended_no_capture": true
+        },
+        {
+          "kind": "ordinary_move",
+          "side": "black",
+          "piece_id": "covered-01",
+          "from_xy": [
+            2,
+            2
+          ],
+          "to_xy": [
+            1,
+            0
+          ],
+          "horse_leg_xy": [
+            2,
+            1
+          ],
+          "own_formal_turn": 3,
+          "expected_revealed_identity": {
+            "color": "black",
+            "type": "horse"
+          },
+          "intended_no_capture": true
+        },
+        {
+          "kind": "insight_attempt",
+          "side": "red",
+          "normal_or_secret": "secret",
+          "target_piece_id": "covered-10",
+          "expected_commit": true,
+          "expected_error_code_from_pinned_source": null,
+          "target_public_xy": [
+            0,
+            3
+          ]
+        },
+        {
+          "kind": "ordinary_move",
+          "side": "red",
+          "piece_id": "covered-16",
+          "from_xy": [
+            1,
+            9
+          ],
+          "to_xy": [
+            2,
+            7
+          ],
+          "horse_leg_xy": [
+            1,
+            8
+          ],
+          "own_formal_turn": 4,
+          "expected_revealed_identity": {
+            "color": "red",
+            "type": "horse"
+          },
+          "intended_no_capture": true
+        },
+        {
+          "kind": "ordinary_move",
+          "side": "black",
+          "piece_id": "covered-06",
+          "from_xy": [
+            6,
+            2
+          ],
+          "to_xy": [
+            7,
+            0
+          ],
+          "horse_leg_xy": [
+            6,
+            1
+          ],
+          "own_formal_turn": 4,
+          "expected_revealed_identity": {
+            "color": "black",
+            "type": "horse"
+          },
+          "intended_no_capture": true
+        }
+      ],
+      "actions": [
+        {
+          "kind": "insight_attempt",
+          "side": "red",
+          "normal_or_secret": "normal",
+          "target_piece_id": "covered-10",
+          "expected_commit": false,
+          "expected_error_code_from_pinned_source": "INSUFFICIENT_PUPIL",
+          "target_public_xy": [
+            0,
+            3
+          ]
+        }
+      ],
+      "expected": {
+        "pupil_before": 5,
+        "pupil_after": 5,
+        "own_turn": 5,
+        "no_new_periodic_grant": true,
+        "n_before": 1,
+        "n_after": 1,
+        "normal_quote": 8,
+        "secret_quote": 13,
+        "resource_shortfall_expected": true
+      },
+      "legal_prefix_manual_review": "selected_public_horse_geometry_and_nonterminal_witnesses_checked; no engine acceptance",
+      "runtime_status": "not_loaded_not_executed",
+      "engine_command_ids": null,
+      "engine_expected_revisions": null,
+      "wall_clock_schedule": null,
+      "result_H": null,
+      "result_I": null,
+      "result_B": null,
+      "formal_scoring_status": "frozen"
+    }
+  ],
+  "negative_attempts_are_intentionally_rejected_not_legal_successes": true,
+  "action_error_codes_are_snapshot_expectations_not_new_rules": true,
+  "confirmation_reference": "CONFIRMATION_H11_B_COUNT.json"
+}

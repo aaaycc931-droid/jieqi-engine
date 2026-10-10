@@ -1,0 +1,162 @@
+{
+  "task_id": "MODE-SCORE-MODEL-001",
+  "status": "unfilled_implementation_return_template",
+  "source_branch": null,
+  "source_commit": null,
+  "changed_files": [],
+  "run_commands": [],
+  "runtime_results": [
+    {
+      "fixture_id": "JF01",
+      "status": "not_run",
+      "evidence_path": null,
+      "failure_or_blocker": null
+    },
+    {
+      "fixture_id": "JF02",
+      "status": "not_run",
+      "evidence_path": null,
+      "failure_or_blocker": null
+    },
+    {
+      "fixture_id": "JF03",
+      "status": "not_run",
+      "evidence_path": null,
+      "failure_or_blocker": null
+    },
+    {
+      "fixture_id": "JF04",
+      "status": "not_run",
+      "evidence_path": null,
+      "failure_or_blocker": null
+    },
+    {
+      "fixture_id": "JF05",
+      "status": "not_run",
+      "evidence_path": null,
+      "failure_or_blocker": null
+    },
+    {
+      "fixture_id": "JF06",
+      "status": "not_run",
+      "evidence_path": null,
+      "failure_or_blocker": null
+    },
+    {
+      "fixture_id": "JF07",
+      "status": "not_run",
+      "evidence_path": null,
+      "failure_or_blocker": null
+    },
+    {
+      "fixture_id": "JF08",
+      "status": "not_run",
+      "evidence_path": null,
+      "failure_or_blocker": null
+    },
+    {
+      "fixture_id": "JF09",
+      "status": "not_run",
+      "evidence_path": null,
+      "failure_or_blocker": null
+    }
+  ],
+  "criteria_results": [
+    {
+      "id": "AC01",
+      "status": "not_run",
+      "evidence": null
+    },
+    {
+      "id": "AC02",
+      "status": "not_run",
+      "evidence": null
+    },
+    {
+      "id": "AC03",
+      "status": "not_run",
+      "evidence": null
+    },
+    {
+      "id": "AC04",
+      "status": "not_run",
+      "evidence": null
+    },
+    {
+      "id": "AC05",
+      "status": "not_run",
+      "evidence": null
+    },
+    {
+      "id": "AC06",
+      "status": "not_run",
+      "evidence": null
+    },
+    {
+      "id": "AC07",
+      "status": "not_run",
+      "evidence": null
+    },
+    {
+      "id": "AC08",
+      "status": "not_run",
+      "evidence": null
+    },
+    {
+      "id": "AC09",
+      "status": "not_run",
+      "evidence": null
+    },
+    {
+      "id": "AC10",
+      "status": "not_run",
+      "evidence": null
+    },
+    {
+      "id": "AC11",
+      "status": "not_run",
+      "evidence": null
+    },
+    {
+      "id": "AC12",
+      "status": "not_run",
+      "evidence": null
+    },
+    {
+      "id": "AC13",
+      "status": "not_run",
+      "evidence": null
+    },
+    {
+      "id": "AC14",
+      "status": "not_run",
+      "evidence": null
+    },
+    {
+      "id": "AC15",
+      "status": "not_run",
+      "evidence": null
+    },
+    {
+      "id": "AC16",
+      "status": "not_run",
+      "evidence": null
+    }
+  ],
+  "authority_entry_used": null,
+  "clock_contract": null,
+  "random_tape_reference": null,
+  "public_log": null,
+  "actor_A_private_log": null,
+  "actor_B_private_log": null,
+  "authoritative_log": null,
+  "manifest": null,
+  "field_coverage_report": null,
+  "remaining_dependencies": [],
+  "formal_scoring_status": "frozen",
+  "empirical_parameters_approved": false,
+  "actual_hero_scores": [],
+  "actual_mutation_scores": [],
+  "actual_bias_scores": [],
+  "no_auto_merge_deploy_or_score_release": true
+}
