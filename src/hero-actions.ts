@@ -1,4 +1,5 @@
 import { applyShuffleAction } from "./hero-shuffle.ts";
+import { emitMechanismEvent } from "./mechanism-observer.ts";
 import { applyHeroChild } from "./hero-children.ts";
 import { applyBrawlStart } from "./hero-brawl.ts";
 import { applyRiverAbility } from "./hero-river.ts";
@@ -43,6 +44,7 @@ export function startFormalClock(state: GameState, now: number, secret?: SecretS
   state.formalClock = { side: state.turn, number };
   state.turnStartedAt = now;
   state.turnDeadlineAt = now + formalTurnDurationMs(state, state.turn);
+  if (secret) emitMechanismEvent("formal_clock_start", state, secret, { side: state.turn, number, start: state.turnStartedAt, deadline: state.turnDeadlineAt });
 }
 function endSkillTurn(state: GameState, secret: SecretState, side: Side, randomInt: RandomInt): void {
   settleLandings(state, secret);
@@ -133,6 +135,7 @@ export function applyHeroAbility(state: GameState, secret: SecretState, command:
       if (!command.secretInsight) { s.effectsByPieceId ??= {}; (s.effectsByPieceId[p.id] ??= {}).insightMark = true; }
       // Secret mode publishes operation and cost, never its target.
       const record = s.actionRecords?.at(-1); if (record && !command.secretInsight) record.pieceId = p.id;
+      emitMechanismEvent("insight_spend", s, k, { side, number, amount: cost, before: (runtime.pupil ?? 0) + cost, after: runtime.pupil, nBefore: n, nAfter: runtime.insightCount, secretInsight: Boolean(command.secretInsight), pieceId: p.id });
       break;
     }
     case "burning_flame": {

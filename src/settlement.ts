@@ -1,4 +1,5 @@
 import { saveShuffleOpening, openShuffleB } from "./hero-shuffle.ts";
+import { emitMechanismEvent } from "./mechanism-observer.ts";
 import { advanceTraining, settleTrainingDeaths, settleHeroDeathResources, TRAINING_COST } from "./hero-progress.ts";
 import { ascendGalakrond } from "./hero-descent.ts";
 import { initializeHeroForms, selectedHeroId, selectedHeroSelection, validateHeroForms } from "./hero-forms.ts";
@@ -321,7 +322,11 @@ export function beginFormalTurn(state: GameState, secret?: SecretState, randomIn
     if (hero === "night") {
       state.heroRuntime ??= {}; const runtime = state.heroRuntime[side] ??= {};
       runtime.pupil ??= 0; runtime.insightCount ??= 0;
-      if (number % 2 === 0) runtime.pupil += 6;
+      if (number % 2 === 0) {
+        const before = runtime.pupil;
+        runtime.pupil += 6;
+        if (secret) emitMechanismEvent("pupil_grant", state, secret, { side, number, amount: 6, before, after: runtime.pupil });
+      }
     }
     if (hero === "prince") {
       state.heroRuntime ??= {};
@@ -331,6 +336,7 @@ export function beginFormalTurn(state: GameState, secret?: SecretState, randomIn
     if (secret) ascendGalakrond(state, secret, side, randomInt);
     if (state.status !== "playing" || state.pendingDescent) return;
     enterTurnPhase(state, "before_main");
+    if (secret) emitMechanismEvent("formal_turn_begin", state, secret, { side, number });
   }
 
 }
@@ -371,6 +377,7 @@ export function finishFormalTurn(state: GameState, secret: SecretState, actingSi
   }
   state.formalTurns ??= { red: 0, black: 0 };
   state.formalTurns[actingSide] += 1;
+  emitMechanismEvent("formal_turn_end", state, secret, { side: actingSide, number: state.formalTurns[actingSide] });
   let newEventStart = state.automaticEvents?.length ?? 0;
   for (const [id, e] of Object.entries(state.effectsByPieceId ?? {})) {
     const p = state.pieces.find(p => p.id === id);

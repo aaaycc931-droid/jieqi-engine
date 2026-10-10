@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "node --test --test-reporter=spec tests/*.test.ts",
+    "test:scoring": "node scripts/scoring/validate.ts",
     "dev": "node scripts/build-web.ts && node scripts/serve-web.ts",
     "build:web": "node scripts/build-web.ts",
     "serve:web": "node scripts/build-web.ts && node scripts/serve-web.ts",
