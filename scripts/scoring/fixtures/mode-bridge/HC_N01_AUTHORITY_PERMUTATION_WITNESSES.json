@@ -1,0 +1,488 @@
+{
+  "schema": "lezi.hc_n01.concrete_witness.v1",
+  "evidence_class": "synthetic_static_reference_not_engine_runtime",
+  "mode_id": "half_chaos_jieqi",
+  "engine_mode_id": "half_chaos",
+  "source_snapshot": "2026-10-10 packaged src/setup.ts + slots.ts + game-modes.test.ts",
+  "slot_order": [
+    {
+      "id": "covered-00",
+      "side": "black",
+      "original_side": "black",
+      "x": 0,
+      "y": 0,
+      "slot_geometry_type": "rook"
+    },
+    {
+      "id": "covered-01",
+      "side": "black",
+      "original_side": "black",
+      "x": 1,
+      "y": 0,
+      "slot_geometry_type": "horse"
+    },
+    {
+      "id": "covered-02",
+      "side": "black",
+      "original_side": "black",
+      "x": 2,
+      "y": 0,
+      "slot_geometry_type": "elephant"
+    },
+    {
+      "id": "covered-03",
+      "side": "black",
+      "original_side": "black",
+      "x": 3,
+      "y": 0,
+      "slot_geometry_type": "advisor"
+    },
+    {
+      "id": "covered-04",
+      "side": "black",
+      "original_side": "black",
+      "x": 5,
+      "y": 0,
+      "slot_geometry_type": "advisor"
+    },
+    {
+      "id": "covered-05",
+      "side": "black",
+      "original_side": "black",
+      "x": 6,
+      "y": 0,
+      "slot_geometry_type": "elephant"
+    },
+    {
+      "id": "covered-06",
+      "side": "black",
+      "original_side": "black",
+      "x": 7,
+      "y": 0,
+      "slot_geometry_type": "horse"
+    },
+    {
+      "id": "covered-07",
+      "side": "black",
+      "original_side": "black",
+      "x": 8,
+      "y": 0,
+      "slot_geometry_type": "rook"
+    },
+    {
+      "id": "covered-08",
+      "side": "black",
+      "original_side": "black",
+      "x": 1,
+      "y": 2,
+      "slot_geometry_type": "cannon"
+    },
+    {
+      "id": "covered-09",
+      "side": "black",
+      "original_side": "black",
+      "x": 7,
+      "y": 2,
+      "slot_geometry_type": "cannon"
+    },
+    {
+      "id": "covered-10",
+      "side": "black",
+      "original_side": "black",
+      "x": 0,
+      "y": 3,
+      "slot_geometry_type": "pawn"
+    },
+    {
+      "id": "covered-11",
+      "side": "black",
+      "original_side": "black",
+      "x": 2,
+      "y": 3,
+      "slot_geometry_type": "pawn"
+    },
+    {
+      "id": "covered-12",
+      "side": "black",
+      "original_side": "black",
+      "x": 4,
+      "y": 3,
+      "slot_geometry_type": "pawn"
+    },
+    {
+      "id": "covered-13",
+      "side": "black",
+      "original_side": "black",
+      "x": 6,
+      "y": 3,
+      "slot_geometry_type": "pawn"
+    },
+    {
+      "id": "covered-14",
+      "side": "black",
+      "original_side": "black",
+      "x": 8,
+      "y": 3,
+      "slot_geometry_type": "pawn"
+    },
+    {
+      "id": "covered-15",
+      "side": "red",
+      "original_side": "red",
+      "x": 0,
+      "y": 9,
+      "slot_geometry_type": "rook"
+    },
+    {
+      "id": "covered-16",
+      "side": "red",
+      "original_side": "red",
+      "x": 1,
+      "y": 9,
+      "slot_geometry_type": "horse"
+    },
+    {
+      "id": "covered-17",
+      "side": "red",
+      "original_side": "red",
+      "x": 2,
+      "y": 9,
+      "slot_geometry_type": "elephant"
+    },
+    {
+      "id": "covered-18",
+      "side": "red",
+      "original_side": "red",
+      "x": 3,
+      "y": 9,
+      "slot_geometry_type": "advisor"
+    },
+    {
+      "id": "covered-19",
+      "side": "red",
+      "original_side": "red",
+      "x": 5,
+      "y": 9,
+      "slot_geometry_type": "advisor"
+    },
+    {
+      "id": "covered-20",
+      "side": "red",
+      "original_side": "red",
+      "x": 6,
+      "y": 9,
+      "slot_geometry_type": "elephant"
+    },
+    {
+      "id": "covered-21",
+      "side": "red",
+      "original_side": "red",
+      "x": 7,
+      "y": 9,
+      "slot_geometry_type": "horse"
+    },
+    {
+      "id": "covered-22",
+      "side": "red",
+      "original_side": "red",
+      "x": 8,
+      "y": 9,
+      "slot_geometry_type": "rook"
+    },
+    {
+      "id": "covered-23",
+      "side": "red",
+      "original_side": "red",
+      "x": 1,
+      "y": 7,
+      "slot_geometry_type": "cannon"
+    },
+    {
+      "id": "covered-24",
+      "side": "red",
+      "original_side": "red",
+      "x": 7,
+      "y": 7,
+      "slot_geometry_type": "cannon"
+    },
+    {
+      "id": "covered-25",
+      "side": "red",
+      "original_side": "red",
+      "x": 0,
+      "y": 6,
+      "slot_geometry_type": "pawn"
+    },
+    {
+      "id": "covered-26",
+      "side": "red",
+      "original_side": "red",
+      "x": 2,
+      "y": 6,
+      "slot_geometry_type": "pawn"
+    },
+    {
+      "id": "covered-27",
+      "side": "red",
+      "original_side": "red",
+      "x": 4,
+      "y": 6,
+      "slot_geometry_type": "pawn"
+    },
+    {
+      "id": "covered-28",
+      "side": "red",
+      "original_side": "red",
+      "x": 6,
+      "y": 6,
+      "slot_geometry_type": "pawn"
+    },
+    {
+      "id": "covered-29",
+      "side": "red",
+      "original_side": "red",
+      "x": 8,
+      "y": 6,
+      "slot_geometry_type": "pawn"
+    }
+  ],
+  "authority_worlds": [
+    {
+      "world_id": "P",
+      "true_type_by_stable_piece_id": {
+        "covered-00": "rook",
+        "covered-01": "horse",
+        "covered-02": "elephant",
+        "covered-03": "advisor",
+        "covered-04": "advisor",
+        "covered-05": "elephant",
+        "covered-06": "horse",
+        "covered-07": "rook",
+        "covered-08": "cannon",
+        "covered-09": "cannon",
+        "covered-10": "pawn",
+        "covered-11": "pawn",
+        "covered-12": "pawn",
+        "covered-13": "pawn",
+        "covered-14": "pawn",
+        "covered-15": "pawn",
+        "covered-16": "horse",
+        "covered-17": "elephant",
+        "covered-18": "advisor",
+        "covered-19": "advisor",
+        "covered-20": "elephant",
+        "covered-21": "horse",
+        "covered-22": "rook",
+        "covered-23": "cannon",
+        "covered-24": "cannon",
+        "covered-25": "rook",
+        "covered-26": "pawn",
+        "covered-27": "pawn",
+        "covered-28": "pawn",
+        "covered-29": "pawn"
+      },
+      "all_initial_pieces_original_side": {
+        "covered-00": "black",
+        "covered-01": "black",
+        "covered-02": "black",
+        "covered-03": "black",
+        "covered-04": "black",
+        "covered-05": "black",
+        "covered-06": "black",
+        "covered-07": "black",
+        "covered-08": "black",
+        "covered-09": "black",
+        "covered-10": "black",
+        "covered-11": "black",
+        "covered-12": "black",
+        "covered-13": "black",
+        "covered-14": "black",
+        "covered-15": "red",
+        "covered-16": "red",
+        "covered-17": "red",
+        "covered-18": "red",
+        "covered-19": "red",
+        "covered-20": "red",
+        "covered-21": "red",
+        "covered-22": "red",
+        "covered-23": "red",
+        "covered-24": "red",
+        "covered-25": "red",
+        "covered-26": "red",
+        "covered-27": "red",
+        "covered-28": "red",
+        "covered-29": "red"
+      },
+      "public_projection_sha256": "78b4138d376b94d02457659c1cf4870f3034e19eed86ffe32bb9f6a25ef2ca72"
+    },
+    {
+      "world_id": "Q",
+      "true_type_by_stable_piece_id": {
+        "covered-00": "pawn",
+        "covered-01": "horse",
+        "covered-02": "elephant",
+        "covered-03": "advisor",
+        "covered-04": "advisor",
+        "covered-05": "elephant",
+        "covered-06": "horse",
+        "covered-07": "rook",
+        "covered-08": "cannon",
+        "covered-09": "cannon",
+        "covered-10": "rook",
+        "covered-11": "pawn",
+        "covered-12": "pawn",
+        "covered-13": "pawn",
+        "covered-14": "pawn",
+        "covered-15": "pawn",
+        "covered-16": "horse",
+        "covered-17": "elephant",
+        "covered-18": "advisor",
+        "covered-19": "advisor",
+        "covered-20": "elephant",
+        "covered-21": "horse",
+        "covered-22": "rook",
+        "covered-23": "cannon",
+        "covered-24": "cannon",
+        "covered-25": "rook",
+        "covered-26": "pawn",
+        "covered-27": "pawn",
+        "covered-28": "pawn",
+        "covered-29": "pawn"
+      },
+      "all_initial_pieces_original_side": {
+        "covered-00": "black",
+        "covered-01": "black",
+        "covered-02": "black",
+        "covered-03": "black",
+        "covered-04": "black",
+        "covered-05": "black",
+        "covered-06": "black",
+        "covered-07": "black",
+        "covered-08": "black",
+        "covered-09": "black",
+        "covered-10": "black",
+        "covered-11": "black",
+        "covered-12": "black",
+        "covered-13": "black",
+        "covered-14": "black",
+        "covered-15": "red",
+        "covered-16": "red",
+        "covered-17": "red",
+        "covered-18": "red",
+        "covered-19": "red",
+        "covered-20": "red",
+        "covered-21": "red",
+        "covered-22": "red",
+        "covered-23": "red",
+        "covered-24": "red",
+        "covered-25": "red",
+        "covered-26": "red",
+        "covered-27": "red",
+        "covered-28": "red",
+        "covered-29": "red"
+      },
+      "public_projection_sha256": "78b4138d376b94d02457659c1cf4870f3034e19eed86ffe32bb9f6a25ef2ca72"
+    },
+    {
+      "world_id": "R",
+      "true_type_by_stable_piece_id": {
+        "covered-00": "rook",
+        "covered-01": "horse",
+        "covered-02": "elephant",
+        "covered-03": "advisor",
+        "covered-04": "advisor",
+        "covered-05": "elephant",
+        "covered-06": "horse",
+        "covered-07": "rook",
+        "covered-08": "cannon",
+        "covered-09": "cannon",
+        "covered-10": "pawn",
+        "covered-11": "pawn",
+        "covered-12": "pawn",
+        "covered-13": "pawn",
+        "covered-14": "pawn",
+        "covered-15": "pawn",
+        "covered-16": "horse",
+        "covered-17": "elephant",
+        "covered-18": "advisor",
+        "covered-19": "advisor",
+        "covered-20": "elephant",
+        "covered-21": "horse",
+        "covered-22": "rook",
+        "covered-23": "cannon",
+        "covered-24": "cannon",
+        "covered-25": "pawn",
+        "covered-26": "pawn",
+        "covered-27": "rook",
+        "covered-28": "pawn",
+        "covered-29": "pawn"
+      },
+      "all_initial_pieces_original_side": {
+        "covered-00": "black",
+        "covered-01": "black",
+        "covered-02": "black",
+        "covered-03": "black",
+        "covered-04": "black",
+        "covered-05": "black",
+        "covered-06": "black",
+        "covered-07": "black",
+        "covered-08": "black",
+        "covered-09": "black",
+        "covered-10": "black",
+        "covered-11": "black",
+        "covered-12": "black",
+        "covered-13": "black",
+        "covered-14": "black",
+        "covered-15": "red",
+        "covered-16": "red",
+        "covered-17": "red",
+        "covered-18": "red",
+        "covered-19": "red",
+        "covered-20": "red",
+        "covered-21": "red",
+        "covered-22": "red",
+        "covered-23": "red",
+        "covered-24": "red",
+        "covered-25": "red",
+        "covered-26": "red",
+        "covered-27": "red",
+        "covered-28": "red",
+        "covered-29": "red"
+      },
+      "public_projection_sha256": "78b4138d376b94d02457659c1cf4870f3034e19eed86ffe32bb9f6a25ef2ca72"
+    }
+  ],
+  "pairs": [
+    {
+      "pair": [
+        "P",
+        "Q"
+      ],
+      "condition": "same all red secrets, black swaps only (0,0) rook with (0,3) pawn",
+      "equivalent_through": "first red reveal",
+      "first_valid_public_divergence": "black normal reveal of covered-10"
+    },
+    {
+      "pair": [
+        "P",
+        "R"
+      ],
+      "condition": "red private rook at covered-25 varies, unknown to player before move",
+      "equivalent_through": "initial decision",
+      "first_valid_public_divergence": "red normal reveal of covered-25"
+    }
+  ],
+  "generals": [
+    {
+      "side": "black",
+      "x": 4,
+      "y": 0
+    },
+    {
+      "side": "red",
+      "x": 4,
+      "y": 9
+    }
+  ],
+  "disclaimer": "Secret truth is only present in fixture-authority arrays, not in player observation; do not expose to policy. The source implementation was not run."
+}

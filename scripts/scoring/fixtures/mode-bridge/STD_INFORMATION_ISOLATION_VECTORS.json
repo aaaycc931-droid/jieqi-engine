@@ -1,0 +1,159 @@
+{
+  "schema": "lezi.standard_information_noninterference_v1",
+  "mode_id": "standard_xiangqi",
+  "status": "deterministic_design_vectors_no_policy_runtime",
+  "fixture_id": "STD-NI-01",
+  "depends_on": [
+    "STD-FX-01",
+    "STD-FX-02",
+    "MAIN-J02",
+    "MAIN-J04"
+  ],
+  "public_prefix": {
+    "id": "STD-NI-P02",
+    "two_plies": [
+      {
+        "ply": 1,
+        "actor_side": "red",
+        "from": {
+          "x": 4,
+          "y": 6
+        },
+        "to": {
+          "x": 4,
+          "y": 5
+        },
+        "result": "QUIET",
+        "before_board_sha256": "ed2de3b606d8e243e1ceff9562b0a862b0d09f391c9a19f2fb2bdcea3b7d49ee",
+        "after_board_sha256": "a7dde62db0ff7c006391b3bd2af0d7d25e39bb70847cb9f5b1e91c1d2bc6c9b3",
+        "engine_observed": null
+      },
+      {
+        "ply": 2,
+        "actor_side": "black",
+        "from": {
+          "x": 0,
+          "y": 3
+        },
+        "to": {
+          "x": 0,
+          "y": 4
+        },
+        "result": "QUIET",
+        "before_board_sha256": "a7dde62db0ff7c006391b3bd2af0d7d25e39bb70847cb9f5b1e91c1d2bc6c9b3",
+        "after_board_sha256": "f9428fea3b79cd9ce163c216e0181a1a9d32bbc45dc86be7a2a03b397391d0ba",
+        "engine_observed": null
+      }
+    ],
+    "end_public_board_sha256": "f9428fea3b79cd9ce163c216e0181a1a9d32bbc45dc86be7a2a03b397391d0ba",
+    "next_side": "red",
+    "preparation_qualification": "requires actual H01 legal preparation receipts, true actor mappings, legal clocks; none currently run"
+  },
+  "worlds": [
+    {
+      "world_id": "W-TRAP",
+      "black_owner_H01_private_trap_layers": [
+        {
+          "x": 4,
+          "y": 4,
+          "layers": 1
+        },
+        {
+          "x": 5,
+          "y": 4,
+          "layers": 1
+        }
+      ],
+      "red_view_secret_positions": null,
+      "same_public_prefix": true
+    },
+    {
+      "world_id": "W-OTHER",
+      "black_owner_H01_private_trap_layers": [
+        {
+          "x": 3,
+          "y": 4,
+          "layers": 1
+        },
+        {
+          "x": 5,
+          "y": 4,
+          "layers": 1
+        }
+      ],
+      "red_view_secret_positions": null,
+      "same_public_prefix": true
+    }
+  ],
+  "shared_conditions": {
+    "actor_red": "actor_A",
+    "actor_black": "actor_B",
+    "hero_owner": "actor_B black H01",
+    "red_own_private_state": "identical",
+    "red_public_history": "identical",
+    "public_clock": "identical",
+    "decision_budget": "same frozen budget (numeric pending)",
+    "policy_rng_bytes": "identical supplied sequence (execution ref pending)",
+    "initial_memory": "identical authorized memory",
+    "player_visible_seq": "identical",
+    "unlisted_secret_fields": "denied"
+  },
+  "assertions": [
+    {
+      "id": "STD-NI-01-PRE",
+      "phase": "before red intent",
+      "expected_design": "equal red visible_history, own_private, command_catalog, view_local_hash, delivery_seq, clock view, policy intent, nextMemory, decisionUsage under same rng; authority traps differ only outside red scope",
+      "observed_runtime": null
+    },
+    {
+      "id": "STD-NI-01-BENIGN",
+      "phase": "red ordinary advisor (3,9)->(4,8) followed by unchanged public authorized outcome",
+      "expected_design": "both worlds accept identical move and deliver identical red projection/receipts/seq/hash/clock and policy continuation; black private history may differ",
+      "offline_base_move_legal": true,
+      "observed_runtime": null
+    },
+    {
+      "id": "STD-NI-01-TRIGGER",
+      "phase": "red pawn (4,5)->(4,4) actual submitted attempt, NOT prevalidated with authority trap",
+      "expected_design": "both worlds offer same VISIBLE move attempt pre-submit; post-submit trap world may consume layer and destroy pawn while other world pawn survives; divergence after authorized event is permitted; exact receipt reveal fields need product whitelist review",
+      "offline_base_move_legal": true,
+      "observed_runtime": null
+    },
+    {
+      "id": "STD-NI-01-CANARY",
+      "phase": "attempt to inject opponent trap coordinate into policy input/catalog/hash/seq/timing",
+      "expected_design": "pre-policy schema/whitelist rejects and flags leakage, no hidden secret prefilter, no extra simulation oracle; identical secret-related computation does not alter budget",
+      "observed_runtime": null
+    },
+    {
+      "id": "STD-NI-01-OWNER",
+      "phase": "black owner view",
+      "expected_design": "black own-private trap placement differs legitimately; do not require black owner policy outputs identical",
+      "observed_runtime": null
+    },
+    {
+      "id": "STD-NI-01-NONSOURCE",
+      "phase": "H01 off world",
+      "expected_design": "actor B H01 off removes whole source private traps, placement UI/receipts/source counters; cannot leak on/off research label as extra signal to actor A, preserve independently active sources",
+      "observed_runtime": null
+    }
+  ],
+  "forbidden_player_fields": [
+    "authority_game_state",
+    "opponent_trap_coords",
+    "opponent_trap_layers",
+    "authority_secret_state",
+    "authority_hash/previous_hash/sequence",
+    "other_world_or_cluster_metadata",
+    "true_secret_filtered_legal_moves",
+    "authority_rng_handle"
+  ],
+  "public_only_attempt_catalog": true,
+  "expected_source_references": [
+    "reference/basis/readiness/evidence/design/STANDARD_MAIN_DIALOGUE_HANDOFF.md §3",
+    "main_old/POLICY_INTERFACE_CONTRACT.json attempt_catalog",
+    "SHARED_INTERFACE_ALIGNMENT.json JR01/JR02",
+    "source 02_CURRENT_HEROES.md H01"
+  ],
+  "observed_runtime": null
+}

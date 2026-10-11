@@ -1,0 +1,332 @@
+{
+  "schema": "lezi.standard_fx01_opening_proof.v1",
+  "fixture_id": "STD-FX-01",
+  "mode_id": "standard_xiangqi",
+  "engine_mode_id": "xiangqi",
+  "status": "offline_reference_proof_pending_product_adapter",
+  "assumptions": [
+    "red moves first in this study stratum; RPS/hero swap is handled separately",
+    "standard ground-layer movement without unconfirmed hero/mutation sources",
+    "reference checker is a separate restricted-scope Xiangqi legality checker, not product GameState or product acceptance"
+  ],
+  "board_coordinates": "x=0..8, black back y=0, red back y=9",
+  "board_sha256": "ed2de3b606d8e243e1ceff9562b0a862b0d09f391c9a19f2fb2bdcea3b7d49ee",
+  "public_board_state": [
+    {
+      "id": "black-rook-x0-y0",
+      "color": "black",
+      "type": "rook",
+      "x": 0,
+      "y": 0,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "black-horse-x1-y0",
+      "color": "black",
+      "type": "horse",
+      "x": 1,
+      "y": 0,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "black-elephant-x2-y0",
+      "color": "black",
+      "type": "elephant",
+      "x": 2,
+      "y": 0,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "black-advisor-x3-y0",
+      "color": "black",
+      "type": "advisor",
+      "x": 3,
+      "y": 0,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "black-general-x4-y0",
+      "color": "black",
+      "type": "general",
+      "x": 4,
+      "y": 0,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "black-advisor-x5-y0",
+      "color": "black",
+      "type": "advisor",
+      "x": 5,
+      "y": 0,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "black-elephant-x6-y0",
+      "color": "black",
+      "type": "elephant",
+      "x": 6,
+      "y": 0,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "black-horse-x7-y0",
+      "color": "black",
+      "type": "horse",
+      "x": 7,
+      "y": 0,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "black-rook-x8-y0",
+      "color": "black",
+      "type": "rook",
+      "x": 8,
+      "y": 0,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "black-cannon-x1-y2",
+      "color": "black",
+      "type": "cannon",
+      "x": 1,
+      "y": 2,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "black-cannon-x7-y2",
+      "color": "black",
+      "type": "cannon",
+      "x": 7,
+      "y": 2,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "black-pawn-x0-y3",
+      "color": "black",
+      "type": "pawn",
+      "x": 0,
+      "y": 3,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "black-pawn-x2-y3",
+      "color": "black",
+      "type": "pawn",
+      "x": 2,
+      "y": 3,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "black-pawn-x4-y3",
+      "color": "black",
+      "type": "pawn",
+      "x": 4,
+      "y": 3,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "black-pawn-x6-y3",
+      "color": "black",
+      "type": "pawn",
+      "x": 6,
+      "y": 3,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "black-pawn-x8-y3",
+      "color": "black",
+      "type": "pawn",
+      "x": 8,
+      "y": 3,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "red-pawn-x0-y6",
+      "color": "red",
+      "type": "pawn",
+      "x": 0,
+      "y": 6,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "red-pawn-x2-y6",
+      "color": "red",
+      "type": "pawn",
+      "x": 2,
+      "y": 6,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "red-pawn-x4-y6",
+      "color": "red",
+      "type": "pawn",
+      "x": 4,
+      "y": 6,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "red-pawn-x6-y6",
+      "color": "red",
+      "type": "pawn",
+      "x": 6,
+      "y": 6,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "red-pawn-x8-y6",
+      "color": "red",
+      "type": "pawn",
+      "x": 8,
+      "y": 6,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "red-cannon-x1-y7",
+      "color": "red",
+      "type": "cannon",
+      "x": 1,
+      "y": 7,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "red-cannon-x7-y7",
+      "color": "red",
+      "type": "cannon",
+      "x": 7,
+      "y": 7,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "red-rook-x0-y9",
+      "color": "red",
+      "type": "rook",
+      "x": 0,
+      "y": 9,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "red-horse-x1-y9",
+      "color": "red",
+      "type": "horse",
+      "x": 1,
+      "y": 9,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "red-elephant-x2-y9",
+      "color": "red",
+      "type": "elephant",
+      "x": 2,
+      "y": 9,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "red-advisor-x3-y9",
+      "color": "red",
+      "type": "advisor",
+      "x": 3,
+      "y": 9,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "red-general-x4-y9",
+      "color": "red",
+      "type": "general",
+      "x": 4,
+      "y": 9,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "red-advisor-x5-y9",
+      "color": "red",
+      "type": "advisor",
+      "x": 5,
+      "y": 9,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "red-elephant-x6-y9",
+      "color": "red",
+      "type": "elephant",
+      "x": 6,
+      "y": 9,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "red-horse-x7-y9",
+      "color": "red",
+      "type": "horse",
+      "x": 7,
+      "y": 9,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "red-rook-x8-y9",
+      "color": "red",
+      "type": "rook",
+      "x": 8,
+      "y": 9,
+      "faceDown": false,
+      "layer": "ground"
+    }
+  ],
+  "expected_design": {
+    "piece_count": 32,
+    "face_down_count": 0,
+    "public_types_visible": true,
+    "fixed_identity_layout_across_seeds": true,
+    "red_general": {
+      "x": 4,
+      "y": 9
+    },
+    "black_general": {
+      "x": 4,
+      "y": 0
+    },
+    "opening_check_red": false,
+    "opening_check_black": false,
+    "mode_hero_guard_must_remain_when_unadapted": true,
+    "private_traps_not_in_player_public_projection": true
+  },
+  "geometry_source_reference": "original_jieqi INITIAL_LAYOUT.json public_initial_slots + two general positions, used only for location/type matching; xiangqi product engine init still needs independent runtime evidence",
+  "observed_runtime": null,
+  "offline_assertions_passed": [
+    "piece_count_32",
+    "faceup_32",
+    "material_inventory",
+    "not_in_check",
+    "each_side_has_move",
+    "original_slot_geometry_32_matches"
+  ]
+}

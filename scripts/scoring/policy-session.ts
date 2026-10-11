@@ -4,8 +4,8 @@ import { join } from "node:path";
 import { captureMechanismEvents } from "../../src/mechanism-observer.ts";
 import { withResearchSources, type ResearchSourceContext } from "../../src/research-source-context.ts";
 import { createRemoteRoom, joinRemoteRoom, submitRemoteHeroSelection, submitRemoteRps, completeRemoteHeroIntro,
-  advanceRemoteRoomTime, submitRemoteMove, submitRemoteHeroAbility, surrenderRemoteRoom, type RemoteRoom } from "../../src/remote-room.ts";
-import type { RandomInt, MoveCommand, HeroAbilityCommand } from "../../src/types.ts";
+  advanceRemoteRoomTime, submitRemoteMove, submitRemoteHeroAbility, submitRemoteAssassination, updateRemoteTrapDraft, completeRemoteHeroPreparation, surrenderRemoteRoom, type RemoteRoom } from "../../src/remote-room.ts";
+import type { RandomInt, MoveCommand, HeroAbilityCommand, GameModeId, Position } from "../../src/types.ts";
 import { MUTATION_IDS } from "../../src/mutations.ts";
 import { ObservationBroker, type DecisionConfig, type Intent, policyProjection } from "./policy-observation.ts";
 import { decideIsolated } from "./policy-process.ts";
@@ -15,6 +15,12 @@ import { digest, verifyPolicyArchive } from "./policy-archive.ts";
 export type WorldMask = "00" | "10" | "01" | "11";
 export type RpsStratum = "A_initial_black" | "A_initial_red";
 export const P0_CONFIG: DecisionConfig = Object.freeze({ profile: "P0", maxAttempts: 128, workerTimeoutMs: 1500, maxInputBytes: 4_000_000, maxCatalogEntries: 2000 });
+export interface ModeQualificationPlan {
+  mode: "xiangqi" | "half_chaos";
+  sources: Record<"A" | "B", "hunter" | "rogue" | "shuffler">;
+  traps?: Partial<Record<"A" | "B", readonly Position[]>>;
+}
+export const MODE_BRIDGE_VERSION = "mode_scoped_P0_v0.2";
 function snapshot(room: RemoteRoom) {
   if (!room.game) return structuredClone(room);
   const { history, ...secret } = room.game.secret;
@@ -33,6 +39,7 @@ export class PolicySession {
   readonly mask: WorldMask;
   readonly stratum: RpsStratum;
   readonly config: DecisionConfig;
+  readonly mode: GameModeId;
   #context: ResearchSourceContext;
   #commands = new Map<string, { actor: string; payload: string }>();
   #decisionSequences = new Map<string, number>();
@@ -43,7 +50,7 @@ export class PolicySession {
   #failure: string | undefined;
   #observer: boolean;
 
-  constructor(options: { mask?: WorldMask; stratum?: RpsStratum; ruleSeed: string; policySeed: string; initialRandom?: RandomInt; config?: DecisionConfig; observer?: boolean }) {
+  constructor(options: { mask?: WorldMask; stratum?: RpsStratum; ruleSeed: string; policySeed: string; initialRandom?: RandomInt; config?: DecisionConfig; observer?: boolean; modeQualification?: ModeQualificationPlan }) {
     this.mask = options.mask ?? "11"; this.stratum = options.stratum ?? "A_initial_black";
     if (!["00", "10", "01", "11"].includes(this.mask) || !["A_initial_red", "A_initial_black"].includes(this.stratum)) throw new Error("Invalid research condition");
     Object.defineProperty(this, "mask", { value: this.mask, writable: false, configurable: false });
@@ -52,14 +59,22 @@ export class PolicySession {
     for (const key of ["maxAttempts", "workerTimeoutMs", "maxInputBytes", "maxCatalogEntries"] as const) if (!Number.isSafeInteger(this.config[key]) || this.config[key] < 1) throw new Error("Invalid finite policy budget");
     if (this.config.profile !== "P0" || !options.policySeed) throw new Error("P1 not qualified / policy seed missing");
     this.#policySeed = options.policySeed; this.random = new SemanticRandom(options.ruleSeed); this.#observer = options.observer !== false;
-    this.#context = { roomId: "policy-qualification", actors: { A: { hero: "night", enabled: this.mask[0] === "1" }, B: { hero: "shuffler", enabled: this.mask[1] === "1" } } };
-    this.room = createRemoteRoom(this.#context.roomId, "A", "research-admission", this.now++, { baseMode: "jieqi", heroesEnabled: true, mutationsEnabled: true });
+    const plan = options.modeQualification ? structuredClone(options.modeQualification) : undefined;
+    this.mode = plan?.mode ?? "jieqi";
+    Object.defineProperty(this, "mode", { value: this.mode, writable: false, configurable: false });
+    this.#context = { roomId: "policy-qualification", ...(plan ? { mode: plan.mode } : {}), actors: { A: { hero: plan?.sources.A ?? "night", enabled: this.mask[0] === "1" }, B: { hero: plan?.sources.B ?? "shuffler", enabled: this.mask[1] === "1" } } };
+    this.room = withResearchSources(this.#context, () => createRemoteRoom(this.#context.roomId, "A", "research-admission", this.now++, { baseMode: this.mode, heroesEnabled: true, mutationsEnabled: !plan }));
     this.#deliver();
     this.#prepare("join", () => joinRemoteRoom(this.room, "B", "research-admission", this.now++).room);
-    this.#prepare("select_A", () => submitRemoteHeroSelection(this.room, "A", "night", undefined, this.now++));
-    this.#prepare("select_B", () => submitRemoteHeroSelection(this.room, "B", "shuffler", undefined, this.now++));
+    this.#prepare("select_A", () => submitRemoteHeroSelection(this.room, "A", this.#context.actors.A.hero, undefined, this.now++));
+    this.#prepare("select_B", () => submitRemoteHeroSelection(this.room, "B", this.#context.actors.B.hero, undefined, this.now++));
     const initial = this.random.transaction("initial_layout"); let count = 0;
-    const initialRandom: RandomInt = options.initialRandom ?? (max => {
+    const fixtureDraws: Array<{ max_exclusive: number; value: number }> = [];
+    const initialRandom: RandomInt = options.initialRandom ? max => { const value = options.initialRandom!(max); fixtureDraws.push({ max_exclusive: max, value }); return value; } : (max => {
+      if (plan) {
+        if (this.mode !== "half_chaos" || count >= 28 || max !== 15 - count % 14) throw new Error("Mode initial Fisher-Yates domain changed");
+        count++; return initial.next(max);
+      }
       if (count < 29) { if (max !== 30 - count) throw new Error("Initial Fisher-Yates domain changed"); count++; return initial.next(max); }
       count++;
       if (count !== 30 || max !== MUTATION_IDS.length) throw new Error("Unexpected initial random domain");
@@ -70,9 +85,16 @@ export class PolicySession {
     this.#prepare("rps_A", () => submitRemoteRps(this.room, "A", choiceA, 1, initialRandom, this.now++));
     this.#prepare("rps_B", () => submitRemoteRps(this.room, "B", choiceB, 1, initialRandom, this.now++));
     initial.commit();
-    if (this.room.game?.state.featureRules?.mutation !== "jian_xie") throw new Error("Research background mismatch");
+    if (options.initialRandom) this.journal.push({ kind: "fixed_fixture_random", draws: fixtureDraws, empirical_population: false });
+    if (this.room.game?.state.featureRules?.mutation !== (plan ? undefined : "jian_xie")) throw new Error("Research background mismatch");
     this.#prepare("intro_A", () => completeRemoteHeroIntro(this.room, "A", this.now++));
     this.#prepare("intro_B", () => completeRemoteHeroIntro(this.room, "B", this.now++));
+    if (this.room.phase === "hero_preparation") {
+      for (const actor of actors) if (this.#context.actors[actor].enabled && this.#context.actors[actor].hero === "hunter") {
+        this.#prepare(`traps_${actor}`, () => updateRemoteTrapDraft(this.room, actor, plan?.traps?.[actor] ?? [], this.now++));
+        this.#prepare(`ready_${actor}`, () => completeRemoteHeroPreparation(this.room, actor, this.now++));
+      }
+    }
     this.tick(this.now++);
   }
   #deliver(receiptActor?: string, receipt?: unknown) {
@@ -89,7 +111,7 @@ export class PolicySession {
   tick(at = this.now + 1) {
     if (!Number.isSafeInteger(at) || at < this.now - 1) throw new Error("Invalid research clock");
     const before = snapshot(this.room), random = this.random.transaction("normal_clock_start");
-    const captured = this.#capture(() => advanceRemoteRoomTime(this.room, random.next, at));
+    const captured = this.#capture(() => withResearchSources(this.#context, () => advanceRemoteRoomTime(this.room, random.next, at)));
     this.room = captured.result; this.now = Math.max(this.now, at); if (random.draws.length) random.commit();
     this.journal.push({ kind: "clock_tick", at, before, after: snapshot(this.room), source_events: captured.events }); this.#deliver();
   }
@@ -116,7 +138,7 @@ export class PolicySession {
     const registered = this.#commands.get(actionId);
     const random = this.random.transaction(`hero_rule:${intent.kind}${intent.kind === "shuffle" ? intent.skip ? ":skip" : ":wash" : ""}:${actor}`);
     const before = snapshot(this.room);
-    const captured = this.#capture(() => {
+    const captured = this.#capture(() => withResearchSources(this.#context, () => {
       try {
         if (registered && (registered.actor !== actor || registered.payload !== payload)) return { outcome: "rejected", code: "RESEARCH_ACTION_ID_CONFLICT" };
         this.#commands.set(actionId, { actor, payload });
@@ -124,6 +146,9 @@ export class PolicySession {
         if (intent.kind === "move") {
           const command: MoveCommand = { from: intent.from, to: intent.to, pieceId: intent.pieceId, expectedRevision, actionId };
           result = submitRemoteMove(this.room, actor, command, at);
+        } else if (intent.kind === "assassination") {
+          if (this.mode !== "xiangqi") return { outcome: "rejected", code: "RESEARCH_SOURCE_DISABLED" };
+          result = submitRemoteAssassination(this.room, actor, { ...intent, expectedRevision, actionId }, at);
         } else if (intent.kind === "insight" || intent.kind === "shuffle") {
           const side = this.input(actor).projection.viewer_side;
           const source = side ? this.room.game?.state.featureRules?.heroes?.[side] : undefined;
@@ -133,15 +158,14 @@ export class PolicySession {
           result = submitRemoteHeroAbility(this.room, actor, command, at, options.random ?? random.next);
         } else if (intent.kind === "resign") {
           // Trusted explicit input only; P0 never offers or chooses resignation.
-          this.room = surrenderRemoteRoom(this.room, actor, at); this.#commands.set(actionId, { actor, payload });
-          return { outcome: "committed", code: null };
+          result = surrenderRemoteRoom(this.room, actor, expectedRevision, actionId, at);
         } else return { outcome: "not_committed", code: "wait" };
         this.room = result.room;
         const committed = this.room.game?.secret.processedActions[actionId] !== undefined;
         if (committed) this.#commands.set(actionId, { actor, payload });
         return { outcome: result.duplicate ? "duplicate" : committed ? "committed" : "not_committed", code: null };
       } catch (error) { return { outcome: "rejected", code: ruleError(error) }; }
-    });
+    }));
     if (captured.result.outcome === "committed") random.commit();
     if (captured.result.code === "invalid_execution") this.#failure = "invalid_execution";
     const receipt = { action_id: actionId, ...captured.result };
@@ -166,7 +190,7 @@ export class PolicySession {
     if (s?.status === "finished") {
       const reason = s.reason ?? s.drawReason;
       if (!["ambush", "checkmate", "stalemate", "resign", "timeout"].includes(reason ?? "")) return { status: "blocked", reason: "blocked_pending_terminal_rule", result: null };
-      return { status: "legal_terminal", rule_id: `pinned_original_jieqi:${reason}`, reason, winner_actor: s.winner ? this.room.game!.players[s.winner] : null, result: null };
+      return { status: "legal_terminal", rule_id: `pinned_${this.mode === "jieqi" ? "original_jieqi" : this.mode}:${reason}`, reason, winner_actor: s.winner ? this.room.game!.players[s.winner] : null, result: null };
     }
     if (s?.status === "execution") return { status: "blocked", reason: "unresolved_execution", result: null };
     return { status: "censored", reason: "controlled_flow_prefix_limit", result: null };
@@ -180,7 +204,7 @@ export class PolicySession {
       writeFileSync(p, text, { mode: 0o600 }); chmodSync(p, 0o600);
       files[`${name}.jsonl`] = { sha256: digest(text), bytes: Buffer.byteLength(text), rows: content.length, access: name === "actor_A_private" ? "A_only" : name === "actor_B_private" ? "B_only" : "authority_only" };
     }
-    const manifest = { schema: "lezi.policy_flow_archive.v0.1", source_commit: sourceCommit, mask: this.mask, stratum: this.stratum, config: this.config,
+    const manifest = { schema: "lezi.policy_flow_archive.v0.1", source_commit: sourceCommit, interface_version: this.mode === "jieqi" ? "original_jieqi_P0_v0.1" : MODE_BRIDGE_VERSION, mode: this.mode, mask: this.mask, stratum: this.stratum, config: this.config,
       qualification: "P0_flow_only_not_strength", classification: this.classify(), files, q: null, H: null, I: null, B: null, J: null, formal_scoring_status: "frozen", empirical_parameters_approved: false };
     writeFileSync(join(directory, "manifest.json"), JSON.stringify(manifest, null, 2) + "\n", { mode: 0o600 }); chmodSync(join(directory, "manifest.json"), 0o600);
     verifyPolicyArchive(directory); return manifest;

@@ -1,4 +1,5 @@
 import { RuleError } from "./errors.ts";
+import { emitMechanismEvent } from "./mechanism-observer.ts";
 import type { ActionClassification, ActionRecord, FormalActionSnapshot, FormalTurnPhase, GameState, SecretState, Side } from "./types.ts";
 
 export function enterTurnPhase(state: GameState, phase: FormalTurnPhase): void {
@@ -24,6 +25,7 @@ export function recordAction(state: GameState, action: ActionRecord): void {
     state.turnLifecycle.mainPieceId = action.pieceId;
     enterTurnPhase(state, "main_action");
     state.actionRecords = [structuredClone(action)];
+    emitMechanismEvent("formal_main_action", state, undefined, { side: action.actingSide, number: state.turnLifecycle.number, action });
   } else if (action.opportunity === "before_main") {
     if (state.turnLifecycle?.phase !== "before_main") throw new RuleError("INVALID_PRE_MAIN_WINDOW", "只能在主行动前发动");
     state.actionRecords = [structuredClone(action)];

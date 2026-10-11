@@ -1,8 +1,10 @@
 import { playerRoomView, type RemoteRoom } from "../../src/remote-room.ts";
-import { getLegalMoves } from "../../src/rules.ts";
+import { getLegalMoves, getLegalAssassinationMoves } from "../../src/rules.ts";
+import { MODE_RESEARCH_SOURCES } from "../../src/research-source-context.ts";
 import type { GameState, Side } from "../../src/types.ts";
 
 export type Intent = { kind: "move"; pieceId: string; from: { x: number; y: number }; to: { x: number; y: number } }
+  | { kind: "assassination"; pieceId: string; from: { x: number; y: number }; to: { x: number; y: number }; useStrongStrike: boolean; source?: "hero" }
   | { kind: "insight"; pieceId: string; secretInsight: boolean }
   | { kind: "shuffle"; skip: boolean } | { kind: "resign" } | { kind: "wait" };
 const pick = (value: any, fields: readonly string[]) => Object.fromEntries(fields.filter(k => value?.[k] !== undefined).map(k => [k, value[k]]));
@@ -17,23 +19,29 @@ export function freezeTree<T>(v: T): T {
 /** EP-HH-01 whitelist. New fields/sources require a new review, not spread-copy. */
 export function policyProjection(room: RemoteRoom, actor: string) {
   const view = playerRoomView(room, actor), s = view.state;
-  if (s && ((s.gameMode ?? "jieqi") !== "jieqi" || s.featureRules?.mutation !== "jian_xie" ||
-      Object.values(s.featureRules?.heroes ?? {}).some(h => h !== "night" && h !== "shuffler") ||
+  const mode = s?.gameMode ?? room.mode.baseMode ?? "jieqi";
+  const modeScope = mode !== "jieqi";
+  const permitted = modeScope ? MODE_RESEARCH_SOURCES[mode] : ["night", "shuffler"];
+  if (s && (s.featureRules?.mutation !== (modeScope ? undefined : "jian_xie") ||
+      Object.values(s.featureRules?.heroes ?? {}).some(h => !(permitted as readonly string[]).includes(h)) ||
       s.pendingHeroChild || s.pendingDescent || s.flowDance || s.forcedDefense)) {
     throw new Error("blocked_supported_scope");
   }
   const selections = Object.fromEntries(Object.entries(s?.featureRules?.heroSelections ?? {}).map(([side, source]) => [side, pick(source, ["heroId", "form", "packageId"])]));
   const publicState = s ? {
-    ...pick(s, ["status", "turn", "revision", "winner", "reason", "drawReason", "turnStartedAt", "turnDeadlineAt"]),
+    ...pick(s, ["gameMode", "status", "turn", "revision", "winner", "reason", "drawReason", "turnStartedAt", "turnDeadlineAt"]),
     ...(s.formalTurns ? { formalTurns: pick(s.formalTurns, ["red", "black"]) } : {}),
     ...(s.formalClock ? { formalClock: pick(s.formalClock, ["side", "number"]) } : {}),
     ...(s.pendingShuffle ? { pendingShuffle: pick(s.pendingShuffle, ["side", "window"]) } : {}),
     pieces: s.pieces.map(p => ({ ...pick(p, ["id", "x", "y", "faceDown"]), ...(!p.faceDown ? pick(p, ["type", "color"]) : {}) })),
     captured: s.captured.map(p => ({ ...pick(p, ["id", "color", "type", "capturedBy", "moveNumber", "cause"]), ...(p.position ? { position: pick(p.position, ["x", "y"]) } : {}) })),
-    featureRules: { heroes: pick(s.featureRules?.heroes, ["red", "black"]), heroSelections: selections, mutation: "jian_xie" },
+    featureRules: { heroes: pick(s.featureRules?.heroes, ["red", "black"]), heroSelections: selections, ...(!modeScope ? { mutation: "jian_xie" } : {}) },
     heroFormLock: selections,
     heroRuntime: Object.fromEntries(Object.entries(s.heroRuntime ?? {}).map(([side, runtime]) => [side, pick(runtime, ["used", "pupil", "insightCount", "insightTurn", "shuffleWindow", "shuffleLost"])])),
-    effectsByPieceId: Object.fromEntries(Object.entries(s.effectsByPieceId ?? {}).map(([id, effect]) => [id, pick(effect, ["insightMark"])]).filter(([,effect]) => Object.keys(effect).length)),
+    effectsByPieceId: Object.fromEntries(Object.entries(s.effectsByPieceId ?? {}).map(([id, effect]) => [id, {
+      ...pick(effect, ["insightMark"]), ...(mode === "xiangqi" && effect.stealth ? { stealth: pick(effect.stealth, ["owner", "remainingOwnerTurns", "activatedOnFormalTurn", "strongStrikeAvailable", "source"]) } : {}),
+    }]).filter(([,effect]) => Object.keys(effect).length)),
+    ...(mode === "xiangqi" && s.assassination ? { assassination: Object.fromEntries(Object.entries(s.assassination).map(([side, value]) => [side, pick(value, ["heroChargeAvailable", "activePieceId"])])) } : {}),
     ...(s.turnLifecycle ? { turnLifecycle: pick(s.turnLifecycle, ["side", "number", "phase", "phases", "mainPieceId"]) } : {}),
     ...(s.lastCompletedFormalTurn ? { lastCompletedFormalTurn: pick(s.lastCompletedFormalTurn, ["side", "number", "phase", "phases", "mainPieceId"]) } : {}),
     ...(s.lastMove ? { lastMove: { ...pick(s.lastMove, ["pieceId", "actingSide", "landed", "tier", "keywords", "source", "opportunity", "countsAsFormalTurn"]),
@@ -46,7 +54,8 @@ export function policyProjection(room: RemoteRoom, actor: string) {
   } : undefined;
   return copy({ phase: view.phase, ...(view.viewerSide ? { viewer_side: view.viewerSide } : {}),
     ...(publicState ? { public_state: publicState } : {}),
-    public_rule_descriptor: { mode_id: "original_jieqi", engine_mode_id: "jieqi", background: "jian_xie", effective_sources: selections },
+    public_rule_descriptor: { mode_id: mode === "xiangqi" ? "standard_xiangqi" : mode === "half_chaos" ? "half_chaos_jieqi" : "original_jieqi", engine_mode_id: mode, background: modeScope ? "none" : "jian_xie", effective_sources: selections },
+    ...(mode === "xiangqi" && view.ownTraps ? { own_traps: view.ownTraps.map(t => ({ ...pick(t, ["id", "owner", "opponentTurnsRemaining"]), position: pick(t.position, ["x", "y"]) })) } : {}),
     ...(view.ownHeroChoice ? { own_source: view.ownHeroChoice } : {}),
     ...(view.ownHeroSecrets?.insights ? { own_insights: view.ownHeroSecrets.insights.map(i => ({ ...pick(i, ["pieceId", "revision", "valid"]), identity: pick(i.identity, ["type", "color"]) })) } : {}),
     ...(view.rps ? { rps: { ...pick(view.rps, ["status", "round", "submitted", "assignments"]) } } : {}),
@@ -61,6 +70,13 @@ export function attemptCatalog(projection: ReturnType<typeof policyProjection>):
   const intents: Intent[] = [];
   for (const p of s.pieces) for (const to of getLegalMoves(s, p.id, side)) {
     intents.push({ kind: "move", pieceId: p.id, from: { x: p.x, y: p.y }, to });
+  }
+  if (s.gameMode === "xiangqi" && s.featureRules?.heroes?.[side] === "rogue") {
+    const active = s.assassination?.[side]?.activePieceId;
+    for (const p of s.pieces) for (const useStrongStrike of [false, true]) {
+      if (active ? p.id !== active : !s.assassination?.[side]?.heroChargeAvailable) continue;
+      for (const to of getLegalAssassinationMoves(s, p.id, useStrongStrike, side)) intents.push({ kind: "assassination", pieceId: p.id, from: { x: p.x, y: p.y }, to, useStrongStrike, ...(!active ? { source: "hero" as const } : {}) });
+    }
   }
   if (s.featureRules?.heroes?.[side] === "night" && s.turnLifecycle?.phase === "before_main") {
     const r = s.heroRuntime?.[side], number = (s.formalTurns?.[side] ?? 0) + 1;

@@ -1,0 +1,801 @@
+{
+  "schema": "lezi.hc_n02.h11_acceptance_inputs.v1",
+  "authority": "mode_specific_expected_design_not_rule_change",
+  "mode_id": "half_chaos_jieqi",
+  "engine_mode_id": "half_chaos",
+  "status": "prepared_not_run",
+  "rule_delta": 0,
+  "JR03": true,
+  "preconditions": {
+    "source_version": "2026-10-11 main joint review + inherited half chaos design handoff",
+    "source_H11_enabled_only_for_final_black_actor": true,
+    "non_H11_sources_off": true,
+    "mode_guard_unmodified": true,
+    "turn_preconditions_not_assumed_valid_until_engine_accepted": true
+  },
+  "cases": [
+    {
+      "fixture_id": "HC-F03",
+      "kind": "H11_A_success",
+      "input_world": "P unless noted; RPS actors P1 red/P2 black, P1 H11 single swap -> final P1 black",
+      "candidate_legal_prefix": [
+        "RPS P1:red P2:black",
+        "H11 P1 swap -> P1:black",
+        "red covered-25 (0,6)->(0,5)",
+        "black covered-10 (0,3)->(0,4)",
+        "black normal complete",
+        "H11-A wash accepted"
+      ],
+      "fields": [
+        {
+          "field": "mode_id",
+          "expected_design": "half_chaos_jieqi",
+          "expected_source_reference": "SHARED_INTERFACE_ALIGNMENT.json:common_fields,mode_specific.half_chaos_jieqi",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": ""
+        },
+        {
+          "field": "engine_mode_id",
+          "expected_design": "half_chaos",
+          "expected_source_reference": "SHARED_INTERFACE_ALIGNMENT.json:common_fields,mode_specific.half_chaos_jieqi",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": ""
+        },
+        {
+          "field": "actor_id_stable",
+          "expected_design": true,
+          "expected_source_reference": "SHARED_INTERFACE_ALIGNMENT.json:common_fields,mode_specific.half_chaos_jieqi",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "RPS/H11 exchange remaps side, not the actor id"
+        },
+        {
+          "field": "pre_swap_actor_to_side",
+          "expected_design": {
+            "P1": "red",
+            "P2": "black"
+          },
+          "expected_source_reference": "inputs/lezi_half_chaos_scoring_return_2026-10-11.zip/HALF_CHAOS_INCREMENTAL_CALIBRATION_v0.2.md:§3",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "example RPS outcome only, must remain fixed across policy worlds"
+        },
+        {
+          "field": "H11_owner_id",
+          "expected_design": "P1",
+          "expected_source_reference": "inputs/lezi_half_chaos_scoring_return_2026-10-11.zip/HALF_CHAOS_INCREMENTAL_CALIBRATION_v0.2.md:§3",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "P1 has an odd one-source swap, so final black"
+        },
+        {
+          "field": "post_swap_actor_to_side",
+          "expected_design": {
+            "P1": "black",
+            "P2": "red"
+          },
+          "expected_source_reference": "inputs/lezi_half_chaos_scoring_return_2026-10-11.zip/HALF_CHAOS_INCREMENTAL_CALIBRATION_v0.2.md:§3",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": ""
+        },
+        {
+          "field": "opening_general_exposed",
+          "expected_design": {
+            "black": [
+              4,
+              0
+            ],
+            "red": [
+              4,
+              9
+            ]
+          },
+          "expected_source_reference": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": ""
+        },
+        {
+          "field": "initial_hidden_per_original_side",
+          "expected_design": 15,
+          "expected_source_reference": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": ""
+        },
+        {
+          "field": "first_red_ordinary_move",
+          "expected_design": "covered-25:[0,6]->[0,5]",
+          "expected_source_reference": "HC_N01_LEGAL_PREFIXES.json:prefix_steps[0]",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "candidate until engine acceptance"
+        },
+        {
+          "field": "first_black_ordinary_move",
+          "expected_design": "covered-10:[0,3]->[0,4]",
+          "expected_source_reference": "HC_N01_LEGAL_PREFIXES.json:prefix_steps[1]",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "candidate until engine acceptance"
+        },
+        {
+          "field": "first_black_turn_all_ordinary_hooks_finished_before_A",
+          "expected_design": true,
+          "expected_source_reference": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": ""
+        },
+        {
+          "field": "black_first_action_finishes_before_window_A",
+          "expected_design": true,
+          "expected_source_reference": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": ""
+        },
+        {
+          "field": "no_terminal_before_window",
+          "expected_design": true,
+          "expected_source_reference": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "explicit fixture assumption requiring engine result"
+        },
+        {
+          "field": "on_wash_resurrect_all_initial_covered_pieces",
+          "expected_design": 30,
+          "expected_source_reference": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "15 each original_side; death-state restoring requires separately qualified capture prefix"
+        },
+        {
+          "field": "on_wash_return_to_slots",
+          "expected_design": "15_original_black+15_original_red",
+          "expected_source_reference": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": ""
+        },
+        {
+          "field": "on_wash_shuffle_boundary",
+          "expected_design": "within_original_side_only",
+          "expected_source_reference": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": ""
+        },
+        {
+          "field": "on_wash_mapping_epoch_delta",
+          "expected_design": 1,
+          "expected_source_reference": "SHARED_INTERFACE_ALIGNMENT.json:common_fields,mode_specific.half_chaos_jieqi",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "advance once on successful wash, not on skip/reject/duplicate"
+        },
+        {
+          "field": "on_wash_refresh_epoch_delta",
+          "expected_design": 0,
+          "expected_source_reference": "SHARED_INTERFACE_ALIGNMENT.json:common_fields,mode_specific.half_chaos_jieqi",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "no M07 in A/B base fixture; with M07 no refresh during wash"
+        },
+        {
+          "field": "on_wash_move_attack_landing_events",
+          "expected_design": 0,
+          "expected_source_reference": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": ""
+        },
+        {
+          "field": "on_wash_skill_use_and_resources_rollback",
+          "expected_design": false,
+          "expected_source_reference": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": ""
+        },
+        {
+          "field": "on_wash_ground_effect_position_delta",
+          "expected_design": "none_due_to_wash",
+          "expected_source_reference": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "ground effect fixture independently requires source qualification"
+        },
+        {
+          "field": "on_wash_next_actor_side",
+          "expected_design": "red",
+          "expected_source_reference": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "P2 in sample post-swap mapping; not automatically P1"
+        },
+        {
+          "field": "on_wash_previous_mapping_reliable",
+          "expected_design": false,
+          "expected_source_reference": "SHARED_INTERFACE_ALIGNMENT.json:common_fields,mode_specific.half_chaos_jieqi",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": ""
+        },
+        {
+          "field": "observed_runtime_source_commit",
+          "expected_design": null,
+          "expected_source_reference": "JOINT_REVIEW.json:JR03",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "must bind evidence to MAIN published exact commit"
+        },
+        {
+          "field": "observed_runtime_interface_version",
+          "expected_design": null,
+          "expected_source_reference": "JOINT_REVIEW.json:JR03",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": ""
+        },
+        {
+          "field": "run_in_product_feature_guard_bypassed",
+          "expected_design": false,
+          "expected_source_reference": "src/modes.ts:requireModeFeatureAdaptation",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "Do not change featuresReady to claim qualification"
+        },
+        {
+          "field": "eligible_black_ordinal",
+          "expected_design": 1,
+          "expected_source_reference": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": ""
+        },
+        {
+          "field": "A_window_position",
+          "expected_design": "after_black_first_ordinary_action_and_settlements",
+          "expected_source_reference": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": ""
+        },
+        {
+          "field": "A_invocation_result",
+          "expected_design": "wash_success",
+          "expected_source_reference": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "only if source-adapted and actual engine accepts"
+        },
+        {
+          "field": "B_window_remaining_after_A_success",
+          "expected_design": false,
+          "expected_source_reference": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": ""
+        },
+        {
+          "field": "ordinary_hooks_first_black_turn",
+          "expected_design": "begin+main+end_completed_before_A",
+          "expected_source_reference": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "record begin/main/end counts separately; no fabricated numeric time value"
+        },
+        {
+          "field": "formal_completed_count_A_post_wash",
+          "expected_design": null,
+          "expected_source_reference": "JOINT_REVIEW.json:JR03",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "exact half_chaos runtime numeric absent; no inference from original_jieqi"
+        },
+        {
+          "field": "real_time_clock_delta_A",
+          "expected_design": null,
+          "expected_source_reference": "JOINT_REVIEW.json:JR03",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "must observe without inventing clock value"
+        }
+      ],
+      "engine_test_status": "not_run",
+      "observed_runtime": null,
+      "required_shared_interfaces": [
+        "MAIN-J02",
+        "MAIN-J04",
+        "mode_H11_qualified"
+      ],
+      "limitations": [
+        "H11 with no M07/H10/H14/H15 and no unfinished sources; runtime nonterminal must be checked"
+      ]
+    },
+    {
+      "fixture_id": "HC-F04",
+      "kind": "H11_B_success",
+      "input_world": "P unless noted; RPS actors P1 red/P2 black, P1 H11 single swap -> final P1 black",
+      "candidate_legal_prefix": [
+        "RPS P1:red P2:black",
+        "H11 P1 swap -> P1:black",
+        "red covered-25 (0,6)->(0,5)",
+        "black covered-10 (0,3)->(0,4)",
+        "A explicitly declined",
+        "red covered-26 (2,6)->(2,5)",
+        "black second formal opportunity before ordinary begin",
+        "H11-B wash accepted"
+      ],
+      "fields": [
+        {
+          "field": "mode_id",
+          "expected_design": "half_chaos_jieqi",
+          "expected_source_reference": "SHARED_INTERFACE_ALIGNMENT.json:common_fields,mode_specific.half_chaos_jieqi",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": ""
+        },
+        {
+          "field": "engine_mode_id",
+          "expected_design": "half_chaos",
+          "expected_source_reference": "SHARED_INTERFACE_ALIGNMENT.json:common_fields,mode_specific.half_chaos_jieqi",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": ""
+        },
+        {
+          "field": "actor_id_stable",
+          "expected_design": true,
+          "expected_source_reference": "SHARED_INTERFACE_ALIGNMENT.json:common_fields,mode_specific.half_chaos_jieqi",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "RPS/H11 exchange remaps side, not the actor id"
+        },
+        {
+          "field": "pre_swap_actor_to_side",
+          "expected_design": {
+            "P1": "red",
+            "P2": "black"
+          },
+          "expected_source_reference": "inputs/lezi_half_chaos_scoring_return_2026-10-11.zip/HALF_CHAOS_INCREMENTAL_CALIBRATION_v0.2.md:§3",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "example RPS outcome only, must remain fixed across policy worlds"
+        },
+        {
+          "field": "H11_owner_id",
+          "expected_design": "P1",
+          "expected_source_reference": "inputs/lezi_half_chaos_scoring_return_2026-10-11.zip/HALF_CHAOS_INCREMENTAL_CALIBRATION_v0.2.md:§3",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "P1 has an odd one-source swap, so final black"
+        },
+        {
+          "field": "post_swap_actor_to_side",
+          "expected_design": {
+            "P1": "black",
+            "P2": "red"
+          },
+          "expected_source_reference": "inputs/lezi_half_chaos_scoring_return_2026-10-11.zip/HALF_CHAOS_INCREMENTAL_CALIBRATION_v0.2.md:§3",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": ""
+        },
+        {
+          "field": "opening_general_exposed",
+          "expected_design": {
+            "black": [
+              4,
+              0
+            ],
+            "red": [
+              4,
+              9
+            ]
+          },
+          "expected_source_reference": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": ""
+        },
+        {
+          "field": "initial_hidden_per_original_side",
+          "expected_design": 15,
+          "expected_source_reference": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": ""
+        },
+        {
+          "field": "first_red_ordinary_move",
+          "expected_design": "covered-25:[0,6]->[0,5]",
+          "expected_source_reference": "HC_N01_LEGAL_PREFIXES.json:prefix_steps[0]",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "candidate until engine acceptance"
+        },
+        {
+          "field": "first_black_ordinary_move",
+          "expected_design": "covered-10:[0,3]->[0,4]",
+          "expected_source_reference": "HC_N01_LEGAL_PREFIXES.json:prefix_steps[1]",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "candidate until engine acceptance"
+        },
+        {
+          "field": "first_black_turn_all_ordinary_hooks_finished_before_A",
+          "expected_design": true,
+          "expected_source_reference": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": ""
+        },
+        {
+          "field": "black_first_action_finishes_before_window_A",
+          "expected_design": true,
+          "expected_source_reference": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": ""
+        },
+        {
+          "field": "no_terminal_before_window",
+          "expected_design": true,
+          "expected_source_reference": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "explicit fixture assumption requiring engine result"
+        },
+        {
+          "field": "on_wash_resurrect_all_initial_covered_pieces",
+          "expected_design": 30,
+          "expected_source_reference": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "15 each original_side; death-state restoring requires separately qualified capture prefix"
+        },
+        {
+          "field": "on_wash_return_to_slots",
+          "expected_design": "15_original_black+15_original_red",
+          "expected_source_reference": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": ""
+        },
+        {
+          "field": "on_wash_shuffle_boundary",
+          "expected_design": "within_original_side_only",
+          "expected_source_reference": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": ""
+        },
+        {
+          "field": "on_wash_mapping_epoch_delta",
+          "expected_design": 1,
+          "expected_source_reference": "SHARED_INTERFACE_ALIGNMENT.json:common_fields,mode_specific.half_chaos_jieqi",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "advance once on successful wash, not on skip/reject/duplicate"
+        },
+        {
+          "field": "on_wash_refresh_epoch_delta",
+          "expected_design": 0,
+          "expected_source_reference": "SHARED_INTERFACE_ALIGNMENT.json:common_fields,mode_specific.half_chaos_jieqi",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "no M07 in A/B base fixture; with M07 no refresh during wash"
+        },
+        {
+          "field": "on_wash_move_attack_landing_events",
+          "expected_design": 0,
+          "expected_source_reference": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": ""
+        },
+        {
+          "field": "on_wash_skill_use_and_resources_rollback",
+          "expected_design": false,
+          "expected_source_reference": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": ""
+        },
+        {
+          "field": "on_wash_ground_effect_position_delta",
+          "expected_design": "none_due_to_wash",
+          "expected_source_reference": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "ground effect fixture independently requires source qualification"
+        },
+        {
+          "field": "on_wash_next_actor_side",
+          "expected_design": "red",
+          "expected_source_reference": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "P2 in sample post-swap mapping; not automatically P1"
+        },
+        {
+          "field": "on_wash_previous_mapping_reliable",
+          "expected_design": false,
+          "expected_source_reference": "SHARED_INTERFACE_ALIGNMENT.json:common_fields,mode_specific.half_chaos_jieqi",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": ""
+        },
+        {
+          "field": "observed_runtime_source_commit",
+          "expected_design": null,
+          "expected_source_reference": "JOINT_REVIEW.json:JR03",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "must bind evidence to MAIN published exact commit"
+        },
+        {
+          "field": "observed_runtime_interface_version",
+          "expected_design": null,
+          "expected_source_reference": "JOINT_REVIEW.json:JR03",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": ""
+        },
+        {
+          "field": "run_in_product_feature_guard_bypassed",
+          "expected_design": false,
+          "expected_source_reference": "src/modes.ts:requireModeFeatureAdaptation",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "Do not change featuresReady to claim qualification"
+        },
+        {
+          "field": "A_window_result",
+          "expected_design": "declined",
+          "expected_source_reference": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": ""
+        },
+        {
+          "field": "second_red_ordinary_move",
+          "expected_design": "covered-26:[2,6]->[2,5]",
+          "expected_source_reference": "HC_N01_LEGAL_PREFIXES.json:prefix_steps[2]",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "candidate until engine acceptance"
+        },
+        {
+          "field": "eligible_black_ordinal",
+          "expected_design": 2,
+          "expected_source_reference": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "second black formal opportunity; do not confuse with global ply index"
+        },
+        {
+          "field": "B_window_position",
+          "expected_design": "before_black_second_ordinary_begin_settlement",
+          "expected_source_reference": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": ""
+        },
+        {
+          "field": "B_invocation_result",
+          "expected_design": "wash_success",
+          "expected_source_reference": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "only if source-adapted and actual engine accepts"
+        },
+        {
+          "field": "ordinary_begin_delta_for_black_B",
+          "expected_design": 0,
+          "expected_source_reference": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "B completes without normal begin effect"
+        },
+        {
+          "field": "ordinary_main_delta_for_black_B",
+          "expected_design": 0,
+          "expected_source_reference": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "B completes without normal main action"
+        },
+        {
+          "field": "ordinary_end_delta_for_black_B",
+          "expected_design": 0,
+          "expected_source_reference": "JOINT_REVIEW.json:JR03",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "explicitly test suppressed end, not just begin/main"
+        },
+        {
+          "field": "formal_counter_value_before_B",
+          "expected_design": null,
+          "expected_source_reference": "JOINT_REVIEW.json:JR03",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "capture actual pre-window numeric; do not import original mode"
+        },
+        {
+          "field": "formal_counter_value_after_B",
+          "expected_design": null,
+          "expected_source_reference": "JOINT_REVIEW.json:JR03",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "per-mode value unresolved; actual observation never defines the rule"
+        },
+        {
+          "field": "formal_counter_delta_during_B",
+          "expected_design": null,
+          "expected_source_reference": "JOINT_REVIEW.json:JR03",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "pending mode-specific interpretation/confirmed source and runtime evidence"
+        },
+        {
+          "field": "ordinary_begin_timestamp_B",
+          "expected_design": null,
+          "expected_source_reference": "JOINT_REVIEW.json:JR03",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "must remain absent if no begin callback; means not observed, not zero seconds"
+        },
+        {
+          "field": "ordinary_end_timestamp_B",
+          "expected_design": null,
+          "expected_source_reference": "JOINT_REVIEW.json:JR03",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "must remain absent if no end callback"
+        },
+        {
+          "field": "real_time_clock_delta_B",
+          "expected_design": null,
+          "expected_source_reference": "JOINT_REVIEW.json:JR03",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": "time accounting independent from ordinary callback"
+        },
+        {
+          "field": "B_window_remaining_after_success",
+          "expected_design": false,
+          "expected_source_reference": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+          "observed_runtime": null,
+          "runtime_status": "not_run",
+          "notes": ""
+        }
+      ],
+      "engine_test_status": "not_run",
+      "observed_runtime": null,
+      "required_shared_interfaces": [
+        "MAIN-J02",
+        "MAIN-J04",
+        "mode_H11_qualified"
+      ],
+      "limitations": [
+        "formal count numeric intentionally unresolved; contract alone does not settle exact increment",
+        "do not replay original_jieqi B=1->2 as half_chaos observation"
+      ]
+    }
+  ],
+  "negative_and_boundary_cases": [
+    {
+      "id": "HC-H11-NG01",
+      "premise": "final H11 actor is red",
+      "expected_design": {
+        "wash_A": false,
+        "wash_B": false
+      },
+      "source": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+      "runtime": null
+    },
+    {
+      "id": "HC-H11-NG02",
+      "premise": "A accepted once then B requested",
+      "expected_design": {
+        "B_available": false,
+        "mapping_epoch_second_delta": 0
+      },
+      "source": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+      "runtime": null
+    },
+    {
+      "id": "HC-H11-NG03",
+      "premise": "A declined, B declined",
+      "expected_design": {
+        "wash_available_after_B": false,
+        "mapping_epoch_delta": 0
+      },
+      "source": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+      "runtime": null
+    },
+    {
+      "id": "HC-H11-NG04",
+      "premise": "game terminal before A or B respective window",
+      "expected_design": {
+        "wash_accepted": false
+      },
+      "source": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+      "runtime": null
+    },
+    {
+      "id": "HC-H11-NG05",
+      "premise": "same action ID replay or rejected command",
+      "expected_design": {
+        "mapping_epoch_delta": 0,
+        "new_random_shuffle_events": 0
+      },
+      "source": "SHARED_INTERFACE_ALIGNMENT.json:common_fields,mode_specific.half_chaos_jieqi",
+      "runtime": null
+    },
+    {
+      "id": "HC-H11-NG06",
+      "premise": "P1 and P2 both have H11 and swaps cancel",
+      "expected_design": {
+        "final_actor_to_side": "original_RPS_mapping",
+        "wash_only_if_actor_final_black_and_has_source": true
+      },
+      "source": "inputs/lezi_half_chaos_scoring_return_2026-10-11.zip/HALF_CHAOS_INCREMENTAL_CALIBRATION_v0.2.md:§3",
+      "runtime": null
+    },
+    {
+      "id": "HC-H11-NG07",
+      "premise": "H11 successfully washes after legal death on each side",
+      "expected_design": {
+        "red_initial_pieces": 15,
+        "black_initial_pieces": 15,
+        "resurrected_original_side_preserved": true
+      },
+      "source": "reference/basis/readiness/evidence/design/HALF_CHAOS_HANDOFF.md:§1,§2 CONF-HC-H11-01",
+      "runtime": null,
+      "requires": "HC-F05 legal both-side capture prefix"
+    },
+    {
+      "id": "HC-H11-NG08",
+      "premise": "H11 success with M07; pre-refresh special secret read",
+      "expected_design": {
+        "refresh_events_at_wash": 0,
+        "pending_normal_refresh": true,
+        "special_secret_read": "blocked_pending_rule"
+      },
+      "source": "HALF_CHAOS_HANDOFF.md:CONF-HC-H11-M07-01",
+      "runtime": null
+    },
+    {
+      "id": "HC-H11-NG09",
+      "premise": "H11 x H15 flight/ground intersection",
+      "expected_design": {
+        "test_status": "blocked_pending_rule",
+        "hypothesis_A_accepted": false
+      },
+      "source": "HALF_CHAOS_HANDOFF.md:§4",
+      "runtime": null
+    }
+  ],
+  "formal_count_and_callbacks_separated": {
+    "black_first_formal_turn": "normal begin+main+end occur before A",
+    "black_second_formal_turn_at_B": "B before normal begin, ordinary begin/main/end should not run",
+    "formal_ordinal_B": 2,
+    "authoritative_formal_counter_B": null,
+    "counter_delta_at_B": null,
+    "reference": "JOINT_REVIEW.json:JR03; half mode needs source-confirmed numeric, original passed state insufficient"
+  },
+  "runtime_status": null,
+  "q": null,
+  "H": null,
+  "I": null,
+  "B": null,
+  "J": null
+}

@@ -54,8 +54,19 @@ export function applyShuffleAction(state: GameState, secret: SecretState, comman
       if (!candidates.length) throw new RuleError("SHUFFLE_WIND_ANCHOR", "阵营锚定身份不足");
       const chosen = candidates[random(candidates.length)]; k.identities[id] = pool.splice(chosen.index, 1)[0];
     }
-    const shuffled = shuffleIdentities(pool, random); let index = 0;
-    for (const p of rebuilt) if (p.faceDown && !anchors.has(p.id)) k.identities[p.id] = shuffled[index++];
+    if (s.gameMode === "half_chaos") {
+      // CONF-HC-H11-01: independent original-side pools, never a global redeal.
+      for (const side of ["black", "red"] as const) {
+        const shuffled = shuffleIdentities(pool.filter(i => i.color === side), random);
+        const slots = rebuilt.filter(p => p.faceDown && !anchors.has(p.id) && (side === "red" ? p.y >= 5 : p.y <= 4));
+        if (slots.length !== shuffled.length) throw new RuleError("SHUFFLE_SIDE_POOL", "开局阵营暗池不完整");
+        slots.forEach((p, i) => { k.identities[p.id] = shuffled[i]; });
+      }
+    } else {
+      // Standard Xiangqi has no hidden pool: fixed opening, zero random draws.
+      const shuffled = shuffleIdentities(pool, random); let index = 0;
+      for (const p of rebuilt) if (p.faceDown && !anchors.has(p.id)) k.identities[p.id] = shuffled[index++];
+    }
     const initialIds = new Set(rebuilt.map(p => p.id));
     s.pieces = rebuilt; s.captured = s.captured.filter(p => !initialIds.has(p.id));
     // 恢复开局公开将帅结构时同步其权威引用，技能次数/冷却和有效宿主不回滚。
