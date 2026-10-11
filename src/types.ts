@@ -20,7 +20,7 @@ export type MutationId =
   | "cavalry" | "chaos" | "jian_xie" | "end_time";
 
 export interface FeatureRules {
-  /** 本地试玩可只启用一方英雄；联机开始后的房间始终同时具备两方选择。 */
+  /** 本地试玩可只启用一方英雄；联机产品双方选择。受控研究会话可在锁定前关闭指定来源。 */
   heroes?: Partial<Record<Side, HeroId>>;
   /** 单方单一完整形态包；缺省的旧英雄ID只对应现有表包。 */
   heroSelections?: HeroSelections;

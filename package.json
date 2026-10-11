@@ -6,6 +6,7 @@
   "scripts": {
     "test": "node --test --test-reporter=spec tests/*.test.ts",
     "test:scoring": "node scripts/scoring/validate.ts",
+    "test:policy": "node --test --test-reporter=spec tests/scoring-policy-adapter.test.ts",
     "dev": "node scripts/build-web.ts && node scripts/serve-web.ts",
     "build:web": "node scripts/build-web.ts",
     "serve:web": "node scripts/build-web.ts && node scripts/serve-web.ts",
