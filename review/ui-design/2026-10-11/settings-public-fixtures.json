@@ -1,0 +1,936 @@
+{
+  "schema": "lezi.ui_settings_public_fixture.v1",
+  "source_commit": "ac8c25c4adddf429bcd73c99129793efb6f96f7d",
+  "derived_by": "createInitialGame(undefined, mode) -> faceDown: label only; revealed: public glyph and color",
+  "modes": {
+    "jieqi": {
+      "name": "现有揭棋",
+      "description": "双方30枚非将帅全局混洗，揭示后可能倒戈。",
+      "featuresReady": true
+    },
+    "half_chaos": {
+      "name": "半混乱揭棋",
+      "description": "双方各自混洗15枚非将帅暗棋，基础揭示不倒戈。",
+      "featuresReady": false
+    },
+    "xiangqi": {
+      "name": "普通象棋",
+      "description": "全棋明置，固定布局；士限九宫，象不过河。",
+      "featuresReady": false
+    }
+  },
+  "boards": {
+    "jieqi": [
+      [
+        {
+          "label": "暗"
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": "将",
+          "publicColor": "black"
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": "暗"
+        }
+      ],
+      [
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        }
+      ],
+      [
+        {
+          "label": ""
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": ""
+        }
+      ],
+      [
+        {
+          "label": "暗"
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": "暗"
+        }
+      ],
+      [
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        }
+      ],
+      [
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        }
+      ],
+      [
+        {
+          "label": "暗"
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": "暗"
+        }
+      ],
+      [
+        {
+          "label": ""
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": ""
+        }
+      ],
+      [
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        }
+      ],
+      [
+        {
+          "label": "暗"
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": "帅",
+          "publicColor": "red"
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": "暗"
+        }
+      ]
+    ],
+    "half_chaos": [
+      [
+        {
+          "label": "暗"
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": "将",
+          "publicColor": "black"
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": "暗"
+        }
+      ],
+      [
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        }
+      ],
+      [
+        {
+          "label": ""
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": ""
+        }
+      ],
+      [
+        {
+          "label": "暗"
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": "暗"
+        }
+      ],
+      [
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        }
+      ],
+      [
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        }
+      ],
+      [
+        {
+          "label": "暗"
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": "暗"
+        }
+      ],
+      [
+        {
+          "label": ""
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": ""
+        }
+      ],
+      [
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        }
+      ],
+      [
+        {
+          "label": "暗"
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": "帅",
+          "publicColor": "red"
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": "暗"
+        },
+        {
+          "label": "暗"
+        }
+      ]
+    ],
+    "xiangqi": [
+      [
+        {
+          "label": "車",
+          "publicColor": "black"
+        },
+        {
+          "label": "馬",
+          "publicColor": "black"
+        },
+        {
+          "label": "象",
+          "publicColor": "black"
+        },
+        {
+          "label": "士",
+          "publicColor": "black"
+        },
+        {
+          "label": "将",
+          "publicColor": "black"
+        },
+        {
+          "label": "士",
+          "publicColor": "black"
+        },
+        {
+          "label": "象",
+          "publicColor": "black"
+        },
+        {
+          "label": "馬",
+          "publicColor": "black"
+        },
+        {
+          "label": "車",
+          "publicColor": "black"
+        }
+      ],
+      [
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        }
+      ],
+      [
+        {
+          "label": ""
+        },
+        {
+          "label": "砲",
+          "publicColor": "black"
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": "砲",
+          "publicColor": "black"
+        },
+        {
+          "label": ""
+        }
+      ],
+      [
+        {
+          "label": "卒",
+          "publicColor": "black"
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": "卒",
+          "publicColor": "black"
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": "卒",
+          "publicColor": "black"
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": "卒",
+          "publicColor": "black"
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": "卒",
+          "publicColor": "black"
+        }
+      ],
+      [
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        }
+      ],
+      [
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        }
+      ],
+      [
+        {
+          "label": "兵",
+          "publicColor": "red"
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": "兵",
+          "publicColor": "red"
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": "兵",
+          "publicColor": "red"
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": "兵",
+          "publicColor": "red"
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": "兵",
+          "publicColor": "red"
+        }
+      ],
+      [
+        {
+          "label": ""
+        },
+        {
+          "label": "炮",
+          "publicColor": "red"
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": "炮",
+          "publicColor": "red"
+        },
+        {
+          "label": ""
+        }
+      ],
+      [
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        }
+      ],
+      [
+        {
+          "label": "车",
+          "publicColor": "red"
+        },
+        {
+          "label": "马",
+          "publicColor": "red"
+        },
+        {
+          "label": "相",
+          "publicColor": "red"
+        },
+        {
+          "label": "仕",
+          "publicColor": "red"
+        },
+        {
+          "label": "帅",
+          "publicColor": "red"
+        },
+        {
+          "label": "仕",
+          "publicColor": "red"
+        },
+        {
+          "label": "相",
+          "publicColor": "red"
+        },
+        {
+          "label": "马",
+          "publicColor": "red"
+        },
+        {
+          "label": "车",
+          "publicColor": "red"
+        }
+      ]
+    ]
+  }
+}
