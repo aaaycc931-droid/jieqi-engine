@@ -134,7 +134,7 @@ export type LegendaryMutationCandidate =
 
 export function isDestinyUnlocked(
   definition: DestinyMutationDefinition,
-  heroes: Record<Side, HeroId>,
+  heroes: Partial<Record<Side, HeroId>>,
 ): boolean {
   const [first, second] = definition.heroBond;
   return (heroes.red === first && heroes.black === second)
@@ -143,7 +143,7 @@ export function isDestinyUnlocked(
 
 /** Build the internal legendary pool after the outer draw chose legendary. */
 export function legendaryMutationCandidates(
-  heroes: Record<Side, HeroId>,
+  heroes: Partial<Record<Side, HeroId>>,
   destinyDefinitions: readonly DestinyMutationDefinition[] = DESTINY_MUTATION_DEFINITIONS,
 ): readonly LegendaryMutationCandidate[] {
   return [
@@ -153,7 +153,7 @@ export function legendaryMutationCandidates(
 }
 
 /** 精确外层权重尚未确认：保留兼容抽取，不伪造最终概率；宿命只在传说内部加入。 */
-export function drawRuntimeMutation(randomInt: (max: number) => number, heroes?: Record<Side, HeroId>): MutationId {
+export function drawRuntimeMutation(randomInt: (max: number) => number, heroes?: Partial<Record<Side, HeroId>>): MutationId {
   const outer = randomInt(MUTATION_IDS.length);
   if (!Number.isInteger(outer) || outer < 0 || outer >= MUTATION_IDS.length) throw new RangeError("畸变随机数超出范围");
   const standard = MUTATION_IDS[outer];

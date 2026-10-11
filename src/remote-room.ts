@@ -4,6 +4,7 @@ import { HERO_IDS } from "./heroes.ts";
 import { applyHeroAbility, ownerHeroSecrets, startFormalClock } from "./hero-actions.ts";
 import { copy, initializeFeatureSecret } from "./settlement.ts";
 import { RuleError } from "./errors.ts";
+import { effectiveResearchHero, researchSources } from "./research-source-context.ts";
 import { equalHex, sha256Hex } from "./sha256.ts";
 import {
   applyAutomaticExecution,
@@ -163,7 +164,7 @@ export interface TrapTrigger {
 
 export interface RoomFeaturePublicState {
   heroSelections?: import("./types.ts").HeroSelections;
-  heroes?: Record<Side, HeroId>;
+  heroes?: Partial<Record<Side, HeroId>>;
   mutation?: MutationId;
   mutationRarity?: MutationRarity;
   heroSelection?: HeroSelectionPublicState;
@@ -608,8 +609,8 @@ function beginHeroPreparation(room: RemoteRoom, now: number): RemoteRoom {
   const heroes = room.features?.heroes;
   if (!heroes) return { ...room, phase: "playing", updatedAt: now };
   const ready: Record<Side, boolean> = {
-    red: !["hunter", "single_blade", "sky_admiral"].includes(heroes.red),
-    black: !["hunter", "single_blade", "sky_admiral"].includes(heroes.black),
+    red: !heroes.red || !["hunter", "single_blade", "sky_admiral"].includes(heroes.red),
+    black: !heroes.black || !["hunter", "single_blade", "sky_admiral"].includes(heroes.black),
   };
   if (ready.red && ready.black) {
     return {
@@ -638,12 +639,15 @@ function createGameAfterSetup(
   room: RemoteRoom,
   randomInt: RandomInt | undefined,
   now: number,
-  heroes?: Record<Side, HeroId>,
+  heroes?: Partial<Record<Side, HeroId>>,
   selections?: import("./types.ts").HeroSelections,
 ): RemoteRoom {
   const assignments = assignmentsFor(room);
   const initial = createInitialGame(randomInt, room.mode.baseMode);
   const mutation = room.mode.mutationsEnabled ? drawRuntimeMutation(randomInt ?? cryptoRandomInt, heroes) : undefined;
+  if (researchSources(room.roomId, room.mode) && mutation !== "jian_xie") {
+    throw new RuleError("RESEARCH_SCOPE_INVALID", "当前研究来源开关仅验收尖斜背景");
+  }
   const features: RoomFeaturePublicState = {
     ...(heroes ? { heroes: { ...heroes } } : {}),
     ...(mutation ? { mutation, mutationRarity: mutationDefinition(mutation).rarity } : {}),
@@ -832,22 +836,26 @@ export function submitRemoteRps(
     rpsDeadlineAt: undefined,
     updatedAt: now,
   };
-  let heroes: Record<Side, HeroId> | undefined;
+  let heroes: Partial<Record<Side, HeroId>> | undefined;
   if (room.mode.heroesEnabled) {
     const choices = room.featureSecret?.heroSelection?.choices;
     const redHero = choices?.[assignments.red];
     const blackHero = choices?.[assignments.black];
-    if (!redHero || !blackHero) {
+    const research = researchSources(room.roomId, room.mode);
+    if ((!redHero || !blackHero) && !research) {
       throw new RuleError("MISSING_HERO_SELECTION", "猜拳前双方必须先确定英雄");
     }
-    heroes = { red: redHero, black: blackHero };
+    if (research && !roomPlayerIds(room).every(id => room.features?.heroSelection?.confirmed[id])) {
+      throw new RuleError("MISSING_HERO_SELECTION", "研究来源仍须完成双方准备确认");
+    }
+    heroes = { ...(redHero ? { red: redHero } : {}), ...(blackHero ? { black: blackHero } : {}) };
   }
   return createGameAfterSetup(
     { ...resolvedRoom, features: undefined, featureSecret: undefined },
     randomInt,
     now,
     heroes,
-    heroes ? { red: packages?.[assignments.red] ?? getHeroPackage(heroes.red), black: packages?.[assignments.black] ?? getHeroPackage(heroes.black) } : undefined,
+    heroes ? { ...(heroes.red ? { red: packages?.[assignments.red] ?? getHeroPackage(heroes.red) } : {}), ...(heroes.black ? { black: packages?.[assignments.black] ?? getHeroPackage(heroes.black) } : {}) } : undefined,
   );
 }
 
@@ -879,11 +887,12 @@ export function submitRemoteHeroSelection(
   }
 
   const confirmed = { ...publicSelection.confirmed, [playerId]: true };
-  const choices = { ...secretSelection.choices, [playerId]: hero };
+  const effective = effectiveResearchHero(room.roomId, room.mode, playerId, hero);
+  const choices = { ...secretSelection.choices, ...(effective ? { [playerId]: effective } : {}) };
   const waitingRoom: RemoteRoom = {
     ...room,
     features: { heroSelection: { ...publicSelection, confirmed } },
-    featureSecret: { ...room.featureSecret, heroSelection: { choices, packages: { ...secretSelection.packages, [playerId]: selection } } },
+    featureSecret: { ...room.featureSecret, heroSelection: { choices, packages: { ...secretSelection.packages, ...(effective ? { [playerId]: selection } : {}) } } },
     updatedAt: now,
   };
   return roomPlayerIds(room).every((id) => confirmed[id])
