@@ -1,5 +1,6 @@
 import { RuleError } from "./errors.ts";
 import type { FeatureRules, GameModeId } from "./types.ts";
+import { modeResearchPermits } from "./research-source-context.ts";
 
 export const GAME_MODE_IDS: readonly GameModeId[] = ["jieqi", "half_chaos", "xiangqi"];
 export const GAME_MODES = {
@@ -14,15 +15,16 @@ export function normalizeGameMode(value: unknown): GameModeId {
   return value as GameModeId;
 }
 
-export function requireModeAdaptationReady(mode: unknown): void {
+export function requireModeAdaptationReady(mode: unknown, roomId?: string): void {
   const id = normalizeGameMode(mode);
-  if (!GAME_MODES[id].featuresReady) {
+  if (!GAME_MODES[id].featuresReady && !(roomId !== undefined && modeResearchPermits(id, undefined, roomId))) {
     throw new RuleError("MODE_ADAPTATION_PENDING", "该模式的英雄与畸变尚待独立适配，暂未开放完整对局");
   }
 }
 
 /** 新模式保留系统，完整适配未确认时拒绝启动组合，不自行决定技能效果。 */
 export function requireModeFeatureAdaptation(mode: unknown, rules: FeatureRules = {}): void {
-  normalizeGameMode(mode);
+  const id = normalizeGameMode(mode);
+  if (modeResearchPermits(id, rules)) return;
   if (rules.mutation || Object.values(rules.heroes ?? {}).some(Boolean) || Object.values(rules.heroSelections ?? {}).some(Boolean)) requireModeAdaptationReady(mode);
 }

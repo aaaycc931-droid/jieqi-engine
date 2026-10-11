@@ -1,0 +1,126 @@
+{
+  "schema": "lezi.hc_n01.legal_prefix.v1",
+  "evidence_class": "static_geometry_and_occupancy_candidate_not_engine_accepted",
+  "source_snapshot": "2026-10-10 packaged game-modes.test.ts MODE-02/03, src/setup.ts, slots.ts, game.ts",
+  "initial": {
+    "mode_id": "half_chaos_jieqi",
+    "pieces": 32,
+    "covered_each_side": 15,
+    "black_general": [
+      4,
+      0
+    ],
+    "red_general": [
+      4,
+      9
+    ],
+    "red_to_move": true,
+    "kings_not_facing": true
+  },
+  "prefix_steps": [
+    {
+      "index": 1,
+      "actor_side": "red",
+      "piece_id": "covered-25",
+      "from": [
+        0,
+        6
+      ],
+      "to": [
+        0,
+        5
+      ],
+      "public_geometry": "covered pawn-slot forward one; no secret type gate",
+      "land_square_initially_empty": true,
+      "full_engine_legality": null,
+      "revealed_world_P": "rook",
+      "revealed_world_Q": "rook"
+    },
+    {
+      "index": 2,
+      "actor_side": "black",
+      "piece_id": "covered-10",
+      "from": [
+        0,
+        3
+      ],
+      "to": [
+        0,
+        4
+      ],
+      "public_geometry": "covered pawn-slot forward one; no secret type gate",
+      "land_square_initially_empty": true,
+      "full_engine_legality": null,
+      "revealed_world_P": "pawn",
+      "revealed_world_Q": "rook"
+    },
+    {
+      "index": 3,
+      "actor_side": "red",
+      "piece_id": "covered-26",
+      "from": [
+        2,
+        6
+      ],
+      "to": [
+        2,
+        5
+      ],
+      "public_geometry": "covered pawn-slot forward one; no secret type gate",
+      "land_square_initially_empty": true,
+      "full_engine_legality": null,
+      "revealed_world_P": "pawn",
+      "revealed_world_Q": "pawn"
+    }
+  ],
+  "checkpoints": [
+    {
+      "fixture": "HC-F01",
+      "stage": "after_step_1",
+      "candidate_source_world": "P",
+      "expected": {
+        "moved_piece_revealed_type": "rook",
+        "revealed_side": "red",
+        "turn": "black",
+        "red_inventory_initial": {
+          "rook": 2,
+          "horse": 2,
+          "elephant": 2,
+          "advisor": 2,
+          "cannon": 2,
+          "pawn": 5
+        }
+      }
+    },
+    {
+      "fixture": "HC-F03",
+      "stage": "after_step_2",
+      "expected": {
+        "black_first_ordinary_action_complete_if_engine_accepted": true,
+        "eligible_H11_A_if_final_black_and_nonterminal": true
+      }
+    },
+    {
+      "fixture": "HC-F04",
+      "stage": "after_step_3_before_black_second_ordinary_begin",
+      "expected": {
+        "eligible_H11_B_if_A_declined_and_nonterminal": true,
+        "ordinary_begin_before_H11_B": false
+      }
+    }
+  ],
+  "manual_checks": {
+    "occupancy": "pass_in_static_reference",
+    "pawn_slot_geometry": "pass_in_static_reference",
+    "non_facing_generals": "pass_in_static_reference",
+    "actual_complete_authoritative_legal_move": null,
+    "terminal_nonterminal_runtime": null,
+    "mode_source_adaptation": null
+  },
+  "cautions": [
+    "Each step must be fed as an actual authoritative command and accepted by the engine when interface published",
+    "H11 A/B can be blocked by earlier terminal; no engine proof yet",
+    "A second step after red rook reveal is not a secret-free proof of all later moves",
+    "No testing guard was bypassed"
+  ]
+}

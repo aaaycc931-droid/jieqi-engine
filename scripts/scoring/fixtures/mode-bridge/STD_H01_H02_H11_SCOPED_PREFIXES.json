@@ -1,0 +1,310 @@
+{
+  "schema": "lezi.standard_scoped_hero_prefix_inputs.v1",
+  "status": "offline_ordinary_geometry_only_future_mechanism_qualification",
+  "mode_id": "standard_xiangqi",
+  "H01": {
+    "prefix_id": "STD-H01-TRAP-IN-P03",
+    "target_fixture": "STD-FX-03",
+    "owner_black_prepared_secret_traps": [
+      {
+        "x": 4,
+        "y": 4,
+        "layers": 1
+      },
+      {
+        "x": 5,
+        "y": 4,
+        "layers": 1
+      }
+    ],
+    "trap_sites_are_in_black_home_half": true,
+    "steps": [
+      {
+        "ply": 1,
+        "actor_side": "red",
+        "piece_type": "pawn",
+        "piece_id": "red-pawn-x4-y6",
+        "from": {
+          "x": 4,
+          "y": 6
+        },
+        "to": {
+          "x": 4,
+          "y": 5
+        },
+        "ordinary_result": "QUIET",
+        "before_board_sha256": "ed2de3b606d8e243e1ceff9562b0a862b0d09f391c9a19f2fb2bdcea3b7d49ee",
+        "after_board_sha256": "a7dde62db0ff7c006391b3bd2af0d7d25e39bb70847cb9f5b1e91c1d2bc6c9b3",
+        "observed_product_runtime": null
+      },
+      {
+        "ply": 2,
+        "actor_side": "black",
+        "piece_type": "pawn",
+        "piece_id": "black-pawn-x0-y3",
+        "from": {
+          "x": 0,
+          "y": 3
+        },
+        "to": {
+          "x": 0,
+          "y": 4
+        },
+        "ordinary_result": "QUIET",
+        "before_board_sha256": "a7dde62db0ff7c006391b3bd2af0d7d25e39bb70847cb9f5b1e91c1d2bc6c9b3",
+        "after_board_sha256": "f9428fea3b79cd9ce163c216e0181a1a9d32bbc45dc86be7a2a03b397391d0ba",
+        "observed_product_runtime": null
+      },
+      {
+        "ply": 3,
+        "actor_side": "red",
+        "piece_type": "pawn",
+        "piece_id": "red-pawn-x4-y6",
+        "from": {
+          "x": 4,
+          "y": 5
+        },
+        "to": {
+          "x": 4,
+          "y": 4
+        },
+        "ordinary_result": "QUIET",
+        "before_board_sha256": "f9428fea3b79cd9ce163c216e0181a1a9d32bbc45dc86be7a2a03b397391d0ba",
+        "after_board_sha256": "0efffff853196acb668153ce9e0b95f0174272f6db53f0499a71c971cee6139e",
+        "observed_product_runtime": null
+      }
+    ],
+    "design_expectation": {
+      "first_red_entering_4_4": "one trap layer consumed, only that red pawn actually destroyed",
+      "enemy_completed_formal_count_at_trigger": 2,
+      "ordinary_move_target_geometry_valid": true,
+      "exact_canonical_cause_id": "needs source event ID from runtime"
+    },
+    "H01_hero_pregame_and_resolution_receipts": null,
+    "observed_runtime": null,
+    "blocked_by": [
+      "STD-B01",
+      "MAIN-J02",
+      "MAIN-J04"
+    ]
+  },
+  "H02": {
+    "prefix_id": "STD-H02-CANNON-P03",
+    "target_fixture": "STD-FX-06",
+    "owner_red_source": "H02 rogue, source available once; red cannon begins publicly revealed non-general",
+    "steps": [
+      {
+        "ply": 1,
+        "actor_side": "red",
+        "piece_type": "cannon",
+        "piece_id": "red-cannon-x1-y7",
+        "from": {
+          "x": 1,
+          "y": 7
+        },
+        "to": {
+          "x": 4,
+          "y": 7
+        },
+        "ordinary_result": "QUIET",
+        "before_board_sha256": "ed2de3b606d8e243e1ceff9562b0a862b0d09f391c9a19f2fb2bdcea3b7d49ee",
+        "after_board_sha256": "ef52647281e6aea6c7e43e1b8a1708ee93b31d19bf9ef676dad2e86771e5c39d",
+        "observed_product_runtime": null
+      },
+      {
+        "ply": 2,
+        "actor_side": "black",
+        "piece_type": "pawn",
+        "piece_id": "black-pawn-x0-y3",
+        "from": {
+          "x": 0,
+          "y": 3
+        },
+        "to": {
+          "x": 0,
+          "y": 4
+        },
+        "ordinary_result": "QUIET",
+        "before_board_sha256": "ef52647281e6aea6c7e43e1b8a1708ee93b31d19bf9ef676dad2e86771e5c39d",
+        "after_board_sha256": "dcd01575ba3dd24c0dfd3104d2cb3c0f45944a6d9b9121c0b0ed3f22e4178fe7",
+        "observed_product_runtime": null
+      },
+      {
+        "ply": 3,
+        "actor_side": "red",
+        "piece_type": "cannon",
+        "piece_id": "red-cannon-x1-y7",
+        "from": {
+          "x": 4,
+          "y": 7
+        },
+        "to": {
+          "x": 4,
+          "y": 3
+        },
+        "ordinary_result": "CAPTURE",
+        "before_board_sha256": "dcd01575ba3dd24c0dfd3104d2cb3c0f45944a6d9b9121c0b0ed3f22e4178fe7",
+        "after_board_sha256": "fbb72728a6c037bee3e79228382c94f42a0df2d23050ecd6a02e1f95aa443e21",
+        "observed_product_runtime": null
+      }
+    ],
+    "design_expectation": {
+      "red_formal_1": "H02 activates with ordinary move cannon (1,7)->(4,7), original valid action",
+      "black_formal_1": "black pawn advances, ordinary round complete",
+      "red_formal_2": "same red cannon has first of two next-self-formal windows, (4,7)->(4,3) capture of non-general pawn via sole screen red pawn at (4,6); may select source assassination",
+      "assassination_does_not_target_general": true,
+      "not_auto_free_second_action": true
+    },
+    "hero_activation_state_and_receipts": null,
+    "observed_runtime": null,
+    "blocked_by": [
+      "STD-B01",
+      "MAIN-J02",
+      "MAIN-J04"
+    ]
+  },
+  "H11_A": {
+    "prefix_id": "STD-H11-WINDOW-A-P02",
+    "target_fixture": "STD-FX-09",
+    "owner_black_H11": "requires pre-RPS actor/source mapping and legally assigned black",
+    "steps": [
+      {
+        "ply": 1,
+        "actor_side": "red",
+        "piece_type": "cannon",
+        "piece_id": "red-cannon-x1-y7",
+        "from": {
+          "x": 1,
+          "y": 7
+        },
+        "to": {
+          "x": 1,
+          "y": 0
+        },
+        "ordinary_result": "CAPTURE",
+        "before_board_sha256": "ed2de3b606d8e243e1ceff9562b0a862b0d09f391c9a19f2fb2bdcea3b7d49ee",
+        "after_board_sha256": "59c268537674637397ab9fde37305113a4b049c4588add8ecbcf0e9c64e4a700",
+        "observed_product_runtime": null
+      },
+      {
+        "ply": 2,
+        "actor_side": "black",
+        "piece_type": "rook",
+        "piece_id": "black-rook-x0-y0",
+        "from": {
+          "x": 0,
+          "y": 0
+        },
+        "to": {
+          "x": 1,
+          "y": 0
+        },
+        "ordinary_result": "CAPTURE",
+        "before_board_sha256": "59c268537674637397ab9fde37305113a4b049c4588add8ecbcf0e9c64e4a700",
+        "after_board_sha256": "5e99d5f65687b9061797bf123ae0ffdd31382061c6b73662eaa0d773ca17e4c6",
+        "observed_product_runtime": null
+      }
+    ],
+    "design_expectation": {
+      "opening_count": 32,
+      "after_2_halfmoves_count": 30,
+      "killed_pieces": [
+        "black horse x1 y0",
+        "red cannon x1 y7"
+      ],
+      "before_A_red_formal_completed": 1,
+      "before_A_black_formal_completed": 1,
+      "window_A": "post black1 complete and not terminal",
+      "after_A_wash": "all original 32 identities/positions restored faceup; no new identities or random re-deal, next red to act",
+      "red_and_black_formal_counts_unchanged_by_A": true
+    },
+    "wash_execution_and_historical_death_receipts": null,
+    "observed_runtime": null,
+    "blocked_by": [
+      "STD-B01",
+      "MAIN-J02",
+      "MAIN-J04"
+    ]
+  },
+  "H11_B": {
+    "prefix_id": "STD-H11-WINDOW-B-P03",
+    "target_fixture": "STD-FX-10",
+    "owner_black_H11": "same conditional pre-RPS mapping; A must have been legitimately declined",
+    "steps": [
+      {
+        "ply": 1,
+        "actor_side": "red",
+        "piece_type": "cannon",
+        "piece_id": "red-cannon-x1-y7",
+        "from": {
+          "x": 1,
+          "y": 7
+        },
+        "to": {
+          "x": 1,
+          "y": 0
+        },
+        "ordinary_result": "CAPTURE",
+        "before_board_sha256": "ed2de3b606d8e243e1ceff9562b0a862b0d09f391c9a19f2fb2bdcea3b7d49ee",
+        "after_board_sha256": "59c268537674637397ab9fde37305113a4b049c4588add8ecbcf0e9c64e4a700",
+        "observed_product_runtime": null
+      },
+      {
+        "ply": 2,
+        "actor_side": "black",
+        "piece_type": "rook",
+        "piece_id": "black-rook-x0-y0",
+        "from": {
+          "x": 0,
+          "y": 0
+        },
+        "to": {
+          "x": 1,
+          "y": 0
+        },
+        "ordinary_result": "CAPTURE",
+        "before_board_sha256": "59c268537674637397ab9fde37305113a4b049c4588add8ecbcf0e9c64e4a700",
+        "after_board_sha256": "5e99d5f65687b9061797bf123ae0ffdd31382061c6b73662eaa0d773ca17e4c6",
+        "observed_product_runtime": null
+      },
+      {
+        "ply": 3,
+        "actor_side": "red",
+        "piece_type": "pawn",
+        "piece_id": "red-pawn-x4-y6",
+        "from": {
+          "x": 4,
+          "y": 6
+        },
+        "to": {
+          "x": 4,
+          "y": 5
+        },
+        "ordinary_result": "QUIET",
+        "before_board_sha256": "5e99d5f65687b9061797bf123ae0ffdd31382061c6b73662eaa0d773ca17e4c6",
+        "after_board_sha256": "5bb3421206f3b2bc3016087daa2270e247d56311d38dc9c637f849cdaad3c5fa",
+        "observed_product_runtime": null
+      }
+    ],
+    "design_expectation": {
+      "before_B_red_formal_completed": 2,
+      "before_B_black_formal_completed": 1,
+      "window_B": "immediately at black2 formal start BEFORE ordinary begin/main/end callbacks",
+      "after_B_black_formal_completed": 2,
+      "after_B_red_formal_completed": 2,
+      "ordinary_begin_black2_called": false,
+      "ordinary_main_black2_called": false,
+      "ordinary_end_black2_called": false,
+      "post_wash_piece_count": 32,
+      "post_wash_next_side": "red",
+      "usage_and_lifetime_do_not_rewind": true
+    },
+    "time_witness_semantics": "separate formal ordinal vs ordinary callbacks; black2 consumes one formal turn but no regular begin/end; must observe actual versioned hooks",
+    "observed_runtime": null,
+    "blocked_by": [
+      "STD-B01",
+      "MAIN-J02",
+      "MAIN-J04"
+    ]
+  }
+}

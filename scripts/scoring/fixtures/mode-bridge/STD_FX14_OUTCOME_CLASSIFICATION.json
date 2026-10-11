@@ -1,0 +1,113 @@
+{
+  "schema": "lezi.standard_fx14_outcome_gate.v1",
+  "fixture_id": "STD-FX-14",
+  "status": "synthetic_classification_contract_not_engine_test",
+  "result_to_r": {
+    "legal_win": 1,
+    "legal_loss": 0,
+    "legal_draw_with_confirmed_rule_reference": 0.5
+  },
+  "nonterminal_not_assigned_r": [
+    "censored_bounds_only",
+    "blocked_pending_rule",
+    "invalid_execution"
+  ],
+  "classification_vectors": [
+    {
+      "id": "FX14-A",
+      "input": {
+        "authority_terminal": true,
+        "terminal_rule_id": "approved_rule_win",
+        "winner_actor": "A",
+        "viewpoint_actor": "A"
+      },
+      "expected_class": "legal_win",
+      "expected_r": 1,
+      "requires_runtime_rule_proof": true
+    },
+    {
+      "id": "FX14-B",
+      "input": {
+        "authority_terminal": true,
+        "terminal_rule_id": "approved_rule_loss",
+        "winner_actor": "B",
+        "viewpoint_actor": "A"
+      },
+      "expected_class": "legal_loss",
+      "expected_r": 0,
+      "requires_runtime_rule_proof": true
+    },
+    {
+      "id": "FX14-C",
+      "input": {
+        "authority_terminal": true,
+        "terminal_rule_id": "CONFIRMED_DRAW_RULE_ID_REQUIRED",
+        "rule_id_is_approved": false
+      },
+      "expected_class": "blocked_pending_rule",
+      "expected_r": null,
+      "reason": "Do NOT convert an unconfirmed draw proposal into 0.5"
+    },
+    {
+      "id": "FX14-D",
+      "input": {
+        "repetition_case": true,
+        "rule_version_confirmed": false
+      },
+      "expected_class": "blocked_pending_rule",
+      "expected_r": null
+    },
+    {
+      "id": "FX14-E",
+      "input": {
+        "long_check_or_long_chase": true,
+        "rule_version_confirmed": false
+      },
+      "expected_class": "blocked_pending_rule",
+      "expected_r": null
+    },
+    {
+      "id": "FX14-F",
+      "input": {
+        "study_cap_hit": true,
+        "authority_terminal": false
+      },
+      "expected_class": "censored_bounds_only",
+      "expected_r": null,
+      "conditional_outcome_bounds": [
+        0,
+        1
+      ]
+    },
+    {
+      "id": "FX14-G",
+      "input": {
+        "failed_replay_or_corrupt_authority_state": true
+      },
+      "expected_class": "invalid_execution",
+      "expected_r": null
+    },
+    {
+      "id": "FX14-H",
+      "input": {
+        "authority_terminal": true,
+        "terminal_rule_id": "actual_approved_draw_rule_id",
+        "rule_id_is_approved": true
+      },
+      "expected_class": "legal_draw_with_confirmed_rule_reference",
+      "expected_r": 0.5,
+      "activation": "conditional_only; no claim specific draw rule has been approved"
+    }
+  ],
+  "denominator_contract": "Retain clusters and original sampling weights; never silently drop blocked or censored records then renormalize. Report supported terminal subset separately from unresolved mass; do not present subset as full population estimate.",
+  "terminal_witness_required": [
+    "ruleset_commit/version",
+    "actual_approved_terminal_rule_id",
+    "game_result_actor",
+    "complete_pre/post_commit_event_log",
+    "status_and_censor_reason"
+  ],
+  "draw_rule_actual_version": null,
+  "complete_games_run": 0,
+  "observed_runtime": null
+}

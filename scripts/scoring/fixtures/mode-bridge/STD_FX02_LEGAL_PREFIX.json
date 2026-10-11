@@ -1,0 +1,589 @@
+{
+  "schema": "lezi.standard_fx02_prefix_proof.v1",
+  "fixture_id": "STD-FX-02",
+  "mode_id": "standard_xiangqi",
+  "engine_mode_id": "xiangqi",
+  "status": "offline_reference_proof_pending_product_adapter",
+  "opening_board_sha256": "ed2de3b606d8e243e1ceff9562b0a862b0d09f391c9a19f2fb2bdcea3b7d49ee",
+  "prefix_id": "STD-FX-02-P08",
+  "prefix_total_plies": 8,
+  "red_formal_turns_completed": 4,
+  "black_formal_turns_completed": 4,
+  "next_side": "red",
+  "prefix": [
+    {
+      "ply": 1,
+      "actor_side": "red",
+      "piece_id": "red-advisor-x3-y9",
+      "piece_type": "advisor",
+      "from": {
+        "x": 3,
+        "y": 9
+      },
+      "to": {
+        "x": 4,
+        "y": 8
+      },
+      "result": "QUIET",
+      "before_board_sha256": "ed2de3b606d8e243e1ceff9562b0a862b0d09f391c9a19f2fb2bdcea3b7d49ee",
+      "after_board_sha256": "1b40cc59f7bbd268fa81d66ad5342b84d276a6cd3dd55ec822acad2136c319aa",
+      "self_check_after": false,
+      "general_facing_after": false,
+      "next_side_has_legal_move": true,
+      "engine_observed": null
+    },
+    {
+      "ply": 2,
+      "actor_side": "black",
+      "piece_id": "black-pawn-x0-y3",
+      "piece_type": "pawn",
+      "from": {
+        "x": 0,
+        "y": 3
+      },
+      "to": {
+        "x": 0,
+        "y": 4
+      },
+      "result": "QUIET",
+      "before_board_sha256": "1b40cc59f7bbd268fa81d66ad5342b84d276a6cd3dd55ec822acad2136c319aa",
+      "after_board_sha256": "23e6bc7f97a615d294d14e146e85b4b2624c63ac943b4f9aac1ed614f62e09d5",
+      "self_check_after": false,
+      "general_facing_after": false,
+      "next_side_has_legal_move": true,
+      "engine_observed": null
+    },
+    {
+      "ply": 3,
+      "actor_side": "red",
+      "piece_id": "red-advisor-x3-y9",
+      "piece_type": "advisor",
+      "from": {
+        "x": 4,
+        "y": 8
+      },
+      "to": {
+        "x": 5,
+        "y": 7
+      },
+      "result": "QUIET",
+      "before_board_sha256": "23e6bc7f97a615d294d14e146e85b4b2624c63ac943b4f9aac1ed614f62e09d5",
+      "after_board_sha256": "2e071f0f216578c070cae8c75a83df77c31e9b3f6774e2c2d0e1ff318908434f",
+      "self_check_after": false,
+      "general_facing_after": false,
+      "next_side_has_legal_move": true,
+      "engine_observed": null
+    },
+    {
+      "ply": 4,
+      "actor_side": "black",
+      "piece_id": "black-pawn-x2-y3",
+      "piece_type": "pawn",
+      "from": {
+        "x": 2,
+        "y": 3
+      },
+      "to": {
+        "x": 2,
+        "y": 4
+      },
+      "result": "QUIET",
+      "before_board_sha256": "2e071f0f216578c070cae8c75a83df77c31e9b3f6774e2c2d0e1ff318908434f",
+      "after_board_sha256": "9d3277cf246bb2f420ef67c6c5d3e39f7261f8f5d18489554224d2f3cee0f5ba",
+      "self_check_after": false,
+      "general_facing_after": false,
+      "next_side_has_legal_move": true,
+      "engine_observed": null
+    },
+    {
+      "ply": 5,
+      "actor_side": "red",
+      "piece_id": "red-elephant-x2-y9",
+      "piece_type": "elephant",
+      "from": {
+        "x": 2,
+        "y": 9
+      },
+      "to": {
+        "x": 4,
+        "y": 7
+      },
+      "result": "QUIET",
+      "before_board_sha256": "9d3277cf246bb2f420ef67c6c5d3e39f7261f8f5d18489554224d2f3cee0f5ba",
+      "after_board_sha256": "a8c29fbfb13f73ec8a4eeedfccdb4dbc798a3be05557b5becae093e52f2624df",
+      "self_check_after": false,
+      "general_facing_after": false,
+      "next_side_has_legal_move": true,
+      "engine_observed": null
+    },
+    {
+      "ply": 6,
+      "actor_side": "black",
+      "piece_id": "black-pawn-x4-y3",
+      "piece_type": "pawn",
+      "from": {
+        "x": 4,
+        "y": 3
+      },
+      "to": {
+        "x": 4,
+        "y": 4
+      },
+      "result": "QUIET",
+      "before_board_sha256": "a8c29fbfb13f73ec8a4eeedfccdb4dbc798a3be05557b5becae093e52f2624df",
+      "after_board_sha256": "69e206894ac601e59a69ca7164e509d0487eac98420b0820737a75c2804a14ba",
+      "self_check_after": false,
+      "general_facing_after": false,
+      "next_side_has_legal_move": true,
+      "engine_observed": null
+    },
+    {
+      "ply": 7,
+      "actor_side": "red",
+      "piece_id": "red-elephant-x2-y9",
+      "piece_type": "elephant",
+      "from": {
+        "x": 4,
+        "y": 7
+      },
+      "to": {
+        "x": 6,
+        "y": 5
+      },
+      "result": "QUIET",
+      "before_board_sha256": "69e206894ac601e59a69ca7164e509d0487eac98420b0820737a75c2804a14ba",
+      "after_board_sha256": "38fdafccbcd3c686df3a943c6032af094f1917454e523e01a380b21fc651256b",
+      "self_check_after": false,
+      "general_facing_after": false,
+      "next_side_has_legal_move": true,
+      "engine_observed": null
+    },
+    {
+      "ply": 8,
+      "actor_side": "black",
+      "piece_id": "black-pawn-x6-y3",
+      "piece_type": "pawn",
+      "from": {
+        "x": 6,
+        "y": 3
+      },
+      "to": {
+        "x": 6,
+        "y": 4
+      },
+      "result": "QUIET",
+      "before_board_sha256": "38fdafccbcd3c686df3a943c6032af094f1917454e523e01a380b21fc651256b",
+      "after_board_sha256": "ebdaa7528078b4e73d48eb130470e0f2c1eff32d4f20b1aaab61c27dadc4b7e6",
+      "self_check_after": false,
+      "general_facing_after": false,
+      "next_side_has_legal_move": true,
+      "engine_observed": null
+    }
+  ],
+  "end_board_sha256": "ebdaa7528078b4e73d48eb130470e0f2c1eff32d4f20b1aaab61c27dadc4b7e6",
+  "end_public_board": [
+    {
+      "id": "black-rook-x0-y0",
+      "color": "black",
+      "type": "rook",
+      "x": 0,
+      "y": 0,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "black-horse-x1-y0",
+      "color": "black",
+      "type": "horse",
+      "x": 1,
+      "y": 0,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "black-elephant-x2-y0",
+      "color": "black",
+      "type": "elephant",
+      "x": 2,
+      "y": 0,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "black-advisor-x3-y0",
+      "color": "black",
+      "type": "advisor",
+      "x": 3,
+      "y": 0,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "black-general-x4-y0",
+      "color": "black",
+      "type": "general",
+      "x": 4,
+      "y": 0,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "black-advisor-x5-y0",
+      "color": "black",
+      "type": "advisor",
+      "x": 5,
+      "y": 0,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "black-elephant-x6-y0",
+      "color": "black",
+      "type": "elephant",
+      "x": 6,
+      "y": 0,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "black-horse-x7-y0",
+      "color": "black",
+      "type": "horse",
+      "x": 7,
+      "y": 0,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "black-rook-x8-y0",
+      "color": "black",
+      "type": "rook",
+      "x": 8,
+      "y": 0,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "black-cannon-x1-y2",
+      "color": "black",
+      "type": "cannon",
+      "x": 1,
+      "y": 2,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "black-cannon-x7-y2",
+      "color": "black",
+      "type": "cannon",
+      "x": 7,
+      "y": 2,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "black-pawn-x8-y3",
+      "color": "black",
+      "type": "pawn",
+      "x": 8,
+      "y": 3,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "black-pawn-x0-y3",
+      "color": "black",
+      "type": "pawn",
+      "x": 0,
+      "y": 4,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "black-pawn-x2-y3",
+      "color": "black",
+      "type": "pawn",
+      "x": 2,
+      "y": 4,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "black-pawn-x4-y3",
+      "color": "black",
+      "type": "pawn",
+      "x": 4,
+      "y": 4,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "black-pawn-x6-y3",
+      "color": "black",
+      "type": "pawn",
+      "x": 6,
+      "y": 4,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "red-elephant-x2-y9",
+      "color": "red",
+      "type": "elephant",
+      "x": 6,
+      "y": 5,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "red-pawn-x0-y6",
+      "color": "red",
+      "type": "pawn",
+      "x": 0,
+      "y": 6,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "red-pawn-x2-y6",
+      "color": "red",
+      "type": "pawn",
+      "x": 2,
+      "y": 6,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "red-pawn-x4-y6",
+      "color": "red",
+      "type": "pawn",
+      "x": 4,
+      "y": 6,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "red-pawn-x6-y6",
+      "color": "red",
+      "type": "pawn",
+      "x": 6,
+      "y": 6,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "red-pawn-x8-y6",
+      "color": "red",
+      "type": "pawn",
+      "x": 8,
+      "y": 6,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "red-cannon-x1-y7",
+      "color": "red",
+      "type": "cannon",
+      "x": 1,
+      "y": 7,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "red-advisor-x3-y9",
+      "color": "red",
+      "type": "advisor",
+      "x": 5,
+      "y": 7,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "red-cannon-x7-y7",
+      "color": "red",
+      "type": "cannon",
+      "x": 7,
+      "y": 7,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "red-rook-x0-y9",
+      "color": "red",
+      "type": "rook",
+      "x": 0,
+      "y": 9,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "red-horse-x1-y9",
+      "color": "red",
+      "type": "horse",
+      "x": 1,
+      "y": 9,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "red-general-x4-y9",
+      "color": "red",
+      "type": "general",
+      "x": 4,
+      "y": 9,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "red-advisor-x5-y9",
+      "color": "red",
+      "type": "advisor",
+      "x": 5,
+      "y": 9,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "red-elephant-x6-y9",
+      "color": "red",
+      "type": "elephant",
+      "x": 6,
+      "y": 9,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "red-horse-x7-y9",
+      "color": "red",
+      "type": "horse",
+      "x": 7,
+      "y": 9,
+      "faceDown": false,
+      "layer": "ground"
+    },
+    {
+      "id": "red-rook-x8-y9",
+      "color": "red",
+      "type": "rook",
+      "x": 8,
+      "y": 9,
+      "faceDown": false,
+      "layer": "ground"
+    }
+  ],
+  "probes": [
+    {
+      "id": "STD-FX-02-ADV-OUTSIDE",
+      "fixture_id": "STD-FX-02",
+      "prefix_id": "STD-FX-02-P08",
+      "input_board_sha256": "ebdaa7528078b4e73d48eb130470e0f2c1eff32d4f20b1aaab61c27dadc4b7e6",
+      "actor_side": "red",
+      "from": {
+        "x": 5,
+        "y": 7
+      },
+      "to": {
+        "x": 6,
+        "y": 8
+      },
+      "expected_accept": false,
+      "expected_reason_class": "ADVISOR_PALACE",
+      "expected_reason_not_product_error_code": true,
+      "proof_note": "advisor has correct diagonal, target empty, only palace condition fails",
+      "design_check": true,
+      "observed_runtime": null
+    },
+    {
+      "id": "STD-FX-02-ADV-VALID",
+      "fixture_id": "STD-FX-02",
+      "prefix_id": "STD-FX-02-P08",
+      "input_board_sha256": "ebdaa7528078b4e73d48eb130470e0f2c1eff32d4f20b1aaab61c27dadc4b7e6",
+      "actor_side": "red",
+      "from": {
+        "x": 5,
+        "y": 7
+      },
+      "to": {
+        "x": 4,
+        "y": 8
+      },
+      "expected_accept": true,
+      "expected_reason_class": "QUIET",
+      "expected_reason_not_product_error_code": true,
+      "proof_note": "legal advisor diagonal, empty palace target",
+      "design_check": true,
+      "observed_runtime": null
+    },
+    {
+      "id": "STD-FX-02-ELE-CROSS",
+      "fixture_id": "STD-FX-02",
+      "prefix_id": "STD-FX-02-P08",
+      "input_board_sha256": "ebdaa7528078b4e73d48eb130470e0f2c1eff32d4f20b1aaab61c27dadc4b7e6",
+      "actor_side": "red",
+      "from": {
+        "x": 6,
+        "y": 5
+      },
+      "to": {
+        "x": 8,
+        "y": 3
+      },
+      "expected_accept": false,
+      "expected_reason_class": "ELEPHANT_RIVER",
+      "expected_reason_not_product_error_code": true,
+      "proof_note": "2x2 path, eye (7,4) empty, enemy pawn on (8,3) but forbidden river destination",
+      "design_check": true,
+      "observed_runtime": null
+    },
+    {
+      "id": "STD-FX-02-ELE-VALID",
+      "fixture_id": "STD-FX-02",
+      "prefix_id": "STD-FX-02-P08",
+      "input_board_sha256": "ebdaa7528078b4e73d48eb130470e0f2c1eff32d4f20b1aaab61c27dadc4b7e6",
+      "actor_side": "red",
+      "from": {
+        "x": 6,
+        "y": 5
+      },
+      "to": {
+        "x": 8,
+        "y": 7
+      },
+      "expected_accept": true,
+      "expected_reason_class": "QUIET",
+      "expected_reason_not_product_error_code": true,
+      "proof_note": "2x2 path and empty eye (7,6), stays red bank",
+      "design_check": true,
+      "observed_runtime": null
+    },
+    {
+      "id": "STD-FX-02-TURN-NEG",
+      "fixture_id": "STD-FX-02",
+      "prefix_id": "STD-FX-02-P08",
+      "input_board_sha256": "ebdaa7528078b4e73d48eb130470e0f2c1eff32d4f20b1aaab61c27dadc4b7e6",
+      "actor_side": "black",
+      "from": {
+        "x": 0,
+        "y": 0
+      },
+      "to": {
+        "x": 0,
+        "y": 1
+      },
+      "expected_accept": false,
+      "expected_reason_class": "WRONG_SIDE_TO_MOVE",
+      "expected_reason_not_product_error_code": true,
+      "proof_note": "black attempts on red turn",
+      "design_check": true,
+      "observed_runtime": null
+    }
+  ],
+  "design_evidence": [
+    "each halfmove starts from preceding state; alternates red and black",
+    "each move uses actual board piece and has legal shape/empty leg/eye and target; no self-check or exposed kings",
+    "both generals survive, 32 pieces remain, active side has an ordinary move",
+    "negative and positive probes are on independent clones of the same red-to-move board",
+    "potential state fields such as revision/formal epoch and RPS are placeholders until actual versioned adapter"
+  ],
+  "engine_observed": null
+}

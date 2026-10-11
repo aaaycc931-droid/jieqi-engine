@@ -311,9 +311,14 @@ function clonePublic<T>(value: T): T {
 
 function normalizeModeConfig(
   mode: Partial<OptionalModeConfig> | undefined,
+  roomId: string,
 ): OptionalModeConfig {
   const baseMode = normalizeGameMode(mode?.baseMode);
-  if (mode?.heroesEnabled || mode?.mutationsEnabled) requireModeAdaptationReady(baseMode);
+  if (mode?.heroesEnabled || mode?.mutationsEnabled) {
+    // The source-qualified gate stays room-bound; background is also checked.
+    requireModeAdaptationReady(baseMode, roomId);
+    researchSources(roomId, { baseMode, heroesEnabled: Boolean(mode?.heroesEnabled), mutationsEnabled: Boolean(mode?.mutationsEnabled) });
+  }
   return {
     ...(baseMode === "jieqi" ? {} : { baseMode }),
     heroesEnabled: mode?.heroesEnabled ?? DEFAULT_OPTIONAL_MODE_CONFIG.heroesEnabled,
@@ -645,7 +650,8 @@ function createGameAfterSetup(
   const assignments = assignmentsFor(room);
   const initial = createInitialGame(randomInt, room.mode.baseMode);
   const mutation = room.mode.mutationsEnabled ? drawRuntimeMutation(randomInt ?? cryptoRandomInt, heroes) : undefined;
-  if (researchSources(room.roomId, room.mode) && mutation !== "jian_xie") {
+  const research = researchSources(room.roomId, room.mode);
+  if (research && mutation !== (research.mode ? undefined : "jian_xie")) {
     throw new RuleError("RESEARCH_SCOPE_INVALID", "当前研究来源开关仅验收尖斜背景");
   }
   const features: RoomFeaturePublicState = {
@@ -734,7 +740,7 @@ export function createRemoteRoom(
     roomId,
     inviteTokenHash: hashInviteToken(inviteToken),
     seats: { host: makeSeat(hostPlayerId, now) },
-    mode: normalizeModeConfig(mode),
+    mode: normalizeModeConfig(mode, roomId),
     phase: "waiting",
     updatedAt: now,
   };

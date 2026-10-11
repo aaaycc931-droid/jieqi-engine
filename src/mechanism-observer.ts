@@ -1,9 +1,9 @@
 import type { GameState, SecretState } from "./types.ts";
 
 export interface MechanismEvent {
-  kind: "formal_turn_begin" | "formal_turn_end" | "formal_clock_start" | "pupil_grant" | "insight_spend" | "shuffle_reset";
+  kind: "formal_turn_begin" | "formal_main_action" | "formal_turn_end" | "formal_clock_start" | "pupil_grant" | "insight_spend" | "shuffle_reset";
   state: GameState;
-  secret: SecretState;
+  secret?: SecretState;
   details: Record<string, unknown>;
 }
 
@@ -17,7 +17,7 @@ function freezeTree(value: unknown): void {
   Object.freeze(value);
 }
 
-export function emitMechanismEvent(kind: MechanismEvent["kind"], state: GameState, secret: SecretState, details: Record<string, unknown> = {}): void {
+export function emitMechanismEvent(kind: MechanismEvent["kind"], state: GameState, secret: SecretState | undefined, details: Record<string, unknown> = {}): void {
   const events = captures.at(-1);
   if (!events) return;
   const event = structuredClone({ kind, state, secret, details });

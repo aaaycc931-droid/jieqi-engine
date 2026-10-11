@@ -1,0 +1,136 @@
+{
+  "schema": "lezi.hc_n01.noninterference_inputs.v1",
+  "status": "reference_inputs_ready_shared_adapter_not_implemented",
+  "JR01": "catalog visible attempts, not secret-filtered authoritative legal moves",
+  "JR02": "same visible authorized history + actor memory + config + identical policy RNG bytes must yield identical intent,nextMemory,decisionUsage",
+  "pairs": [
+    {
+      "worlds": [
+        "P",
+        "Q"
+      ],
+      "stage": "initial",
+      "viewer_actor": "red",
+      "public_state_hash": "78b4138d376b94d02457659c1cf4870f3034e19eed86ffe32bb9f6a25ef2ca72",
+      "public_state_equal": true,
+      "same_visible_history": true,
+      "catalog_equal_reference": true,
+      "policy_input_seed": 1031,
+      "memory_input": {
+        "epoch": 0
+      },
+      "reference_decision_equal": true,
+      "shared_interface_runtime_observed": null
+    },
+    {
+      "worlds": [
+        "P",
+        "R"
+      ],
+      "stage": "initial",
+      "viewer_actor": "red",
+      "public_state_hash": "78b4138d376b94d02457659c1cf4870f3034e19eed86ffe32bb9f6a25ef2ca72",
+      "public_state_equal": true,
+      "same_visible_history": true,
+      "catalog_equal_reference": true,
+      "policy_input_seed": 1031,
+      "memory_input": {
+        "epoch": 0
+      },
+      "reference_decision_equal": true,
+      "shared_interface_runtime_observed": null
+    },
+    {
+      "worlds": [
+        "P",
+        "Q"
+      ],
+      "stage": "after_red_reveal",
+      "viewer_actor": "black",
+      "public_state_hash": "11746fcab26385a48e78c7cfd54b5d8bf5c2c431a89978a2414f173321bd18cc",
+      "public_state_equal": true,
+      "same_visible_history": true,
+      "catalog_equal_reference": true,
+      "policy_input_seed": 1031,
+      "memory_input": {},
+      "reference_decision_equal": true,
+      "shared_interface_runtime_observed": null
+    }
+  ],
+  "required_actual_adapter_capture": {
+    "inputs": [
+      "actor_id",
+      "viewer_side",
+      "visible_history",
+      "public_rule_descriptor",
+      "own_private_history",
+      "mapping_epoch",
+      "refresh_epoch",
+      "policy_rng_bytes",
+      "memory"
+    ],
+    "outputs": [
+      "visible_command_catalog",
+      "intent",
+      "nextMemory",
+      "decisionUsage",
+      "public_history_hash",
+      "public_event_ordinal",
+      "authorized_receipt",
+      "time_budget_used"
+    ],
+    "check_status": null
+  },
+  "attack_vectors": [
+    "secret-identity-dependent catalog availability",
+    "rejected-command reason / latency / cost exposes secret",
+    "hidden identity in public history hash",
+    "private H14 insight visible to opponent",
+    "counter or event ordinal gap from secret events",
+    "unauthorized receipt or post-shuffle stale memory interpreted as current"
+  ],
+  "negative_control": {
+    "intentional_bad_oracle_field": "hidden black type at (0,0)",
+    "P_value": "rook",
+    "Q_value": "pawn",
+    "must_be_rejected": true
+  },
+  "valid_divergence_control": {
+    "pair": [
+      "P",
+      "R"
+    ],
+    "trigger": "red normal reveal covered-25",
+    "after_reveal_player_observation_may_differ": true
+  },
+  "probability_note": {
+    "conditions": "uniform 15-slot Fisher-Yates per original_side; no secret-dependent rejection or information filtering",
+    "initial_red_at_0_6": {
+      "rook": "2/15",
+      "pawn": "5/15"
+    },
+    "initial_black_at_0_0": {
+      "rook": "2/15",
+      "pawn": "5/15"
+    },
+    "after_red_0_6_revealed_rook": {
+      "remaining_red_pool_slots": 14,
+      "red_rook_for_other_unobserved_red_slot": "1/14",
+      "black_rook_for_any_unobserved_black_slot": "2/15"
+    },
+    "qualifications": [
+      "actual generator must be unbiased; Fisher-Yates RNG rejection sampling has uniform indices under unbiased raw uniform32",
+      "after conditional observations or secret-dependent selection, uniformity may fail",
+      "duplicate observation of one piece deducts once",
+      "H11 mapping_epoch invalidates old slot deductions",
+      "M07 secret affiliation is not original_side"
+    ]
+  },
+  "not_proven": [
+    "actual game getLegalMoves catalog secret noninterference",
+    "real adapter intent/nextMemory/decisionUsage equality",
+    "real runtime authorization receipts, time cost or hash equality",
+    "actual policy RNG stream",
+    "mode scoped H11/M07 engine"
+  ]
+}
