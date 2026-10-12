@@ -59,7 +59,7 @@ function assertSamePolicy(l: PolicySession, r: PolicySession, actor: string) {
   return { player_input_hash: digest(JSON.stringify(a)), command_catalog_hash: digest(JSON.stringify(a.command_catalog)), policy_output_hash: digest(JSON.stringify(da)), delivery_count: a.visible_history.length, decision_usage: da.decisionUsage };
 }
 function standardH11(ctx: CaseContext) { return make(ctx, "xiangqi", { mask: "01", sources: { A: "shuffler", B: "shuffler" }, stratum: "A_initial_black" }); }
-function halfH11(ctx: CaseContext) { return make(ctx, "half_chaos", { mask: "01", sources: { A: "shuffler", B: "shuffler" }, stratum: "A_initial_black", world: "P" }); }
+function halfH11(ctx: CaseContext, observer = true) { return make(ctx, "half_chaos", { mask: "01", sources: { A: "shuffler", B: "shuffler" }, stratum: "A_initial_black", world: "P", observer }); }
 const wash = (s: PolicySession, skip = false, options: any = {}) => s.submit(s.room.game!.players.black, { kind: "shuffle", skip }, options);
 
 export const MODE_QUALIFICATION_CASES: Array<{ id: string; run: (ctx: CaseContext) => unknown }> = [
@@ -202,14 +202,60 @@ export const MODE_QUALIFICATION_CASES: Array<{ id: string; run: (ctx: CaseContex
     const newDraws=s.random.audit.slice(draws); assert.deepEqual(newDraws.map(d=>d.max_exclusive),[...Array.from({length:14},(_,i)=>15-i),...Array.from({length:14},(_,i)=>15-i)]);
     return { covered_each_original_side:15,side_pools_preserved:true,shuffle_draws:28,formal_before:before,formal_after:s.room.game!.state.formalTurns,mapping_epoch:1 };
   } },
-  { id: "HC-F04-H11-B-runtime-only-count-pending-source", run(ctx) {
+  { id: "HC-F04-H11-B-confirmed-count-and-clock", run(ctx) {
     const s=halfH11(ctx); replay(s,hcPrefix.slice(0,2)); assert.equal(wash(s,true).outcome,"committed"); replay(s,hcPrefix.slice(2));
     assert.equal(s.room.game!.state.pendingShuffle!.window,"B"); const before=clone(s.room.game!.state.formalTurns),at=s.now;
-    assert.equal(wash(s).outcome,"committed"); sidePool(s);
+    const decisionStart=s.room.game!.state.turnStartedAt!,decisionDeadline=s.room.game!.state.turnDeadlineAt!;
+    assert.equal(before!.black,1);assert.equal(decisionStart,at);assert.equal(decisionDeadline-decisionStart,60_000);
+    assert.deepEqual(callbackCounts(s,"black",2),{formal_turn_begin:0,formal_main_action:0,formal_turn_end:0});
+    assert.equal(wash(s,false,{at:at+1700}).outcome,"committed"); sidePool(s);
     assert.deepEqual(callbackCounts(s,"black",2),{formal_turn_begin:0,formal_main_action:0,formal_turn_end:0});
     assert.equal(s.room.game!.state.turn,"red"); assert.equal(s.input("A").mapping_epoch,1);
-    // Numeric observation is recorded, never compared with original-jieqi expectations.
-    return { qualification:"partial_numeric_rule_pending",expected_formal_counter_delta:null,observed_formal_before:before,observed_formal_after:s.room.game!.state.formalTurns, black_2_callbacks:callbackCounts(s,"black",2),receipt_clock_delta:s.now-at,numeric_rule_accepted:false };
+    assert.deepEqual(s.room.game!.state.formalTurns,{red:2,black:2});
+    assert.equal(s.room.game!.state.turnStartedAt,at+1700);assert.equal(s.room.game!.state.turnDeadlineAt,at+1700+60_000);
+    assert.deepEqual(s.room.game!.state.formalClock,{side:"red",number:3});
+    const silent=halfH11(ctx,false);replay(silent,hcPrefix.slice(0,2));wash(silent,true);replay(silent,hcPrefix.slice(2));
+    wash(silent,false,{at:at+1700});assert.deepEqual(silent.room,s.room);assert.deepEqual(silent.random.audit,s.random.audit);
+    return { qualification:"scoped_count_and_clock",confirmation:"CONF-HC-H11-B-20261012",expected_formal_counter_delta:1,observed_formal_before:before,observed_formal_after:s.room.game!.state.formalTurns,black_2_callbacks:callbackCounts(s,"black",2),decision_clock_start:decisionStart,decision_clock_deadline:decisionDeadline,red_clock_start:s.room.game!.state.turnStartedAt,red_clock_deadline:s.room.game!.state.turnDeadlineAt,receipt_clock_delta:s.now-at,receipt_delta_is_fixture_input_not_rule_constant:true,numeric_rule_accepted:true,observer_passivity:true,full_match_qualified:false };
+  } },
+  { id: "HC-F04-H11-B-skip-preserves-remaining-clock", run(ctx) {
+    const s=halfH11(ctx);replay(s,hcPrefix.slice(0,2));assert.equal(wash(s,true).outcome,"committed");replay(s,hcPrefix.slice(2));
+    const start=s.room.game!.state.turnStartedAt!,deadline=s.room.game!.state.turnDeadlineAt!;
+    s.tick(start+2100);assert.equal(s.room.game!.state.turnDeadlineAt,deadline);
+    assert.deepEqual(callbackCounts(s,"black",2),{formal_turn_begin:0,formal_main_action:0,formal_turn_end:0});
+    assert.equal(wash(s,true,{at:start+3500}).outcome,"committed");
+    assert.equal(s.room.game!.state.turnStartedAt,start);assert.equal(s.room.game!.state.turnDeadlineAt,deadline);
+    assert.equal(s.room.game!.state.pendingShuffle,undefined);assert.equal(s.room.game!.state.formalTurns!.black,1);
+    assert.deepEqual(callbackCounts(s,"black",2),{formal_turn_begin:1,formal_main_action:0,formal_turn_end:0});
+    assert.equal(actualMove(s,[0,4],[0,5]).outcome,"committed");assert.equal(s.room.game!.state.formalTurns!.black,2);
+    assert.deepEqual(callbackCounts(s,"black",2),{formal_turn_begin:1,formal_main_action:1,formal_turn_end:1});
+    return { shared_deadline:deadline,decision_elapsed_ms:3500,remaining_after_skip_ms:deadline-(start+3500),skip_does_not_complete_black_turn:true,ordinary_action_completes_black_turn:true };
+  } },
+  { id: "HC-F04-H11-B-deadline-and-late-action", run(ctx) {
+    const rows=[];
+    for(const lateAction of [false,true]){
+      const s=halfH11(ctx);replay(s,hcPrefix.slice(0,2));wash(s,true);replay(s,hcPrefix.slice(2));
+      const deadline=s.room.game!.state.turnDeadlineAt!;s.tick(deadline-1);assert.equal(s.room.phase,"playing");
+      if(lateAction){assert.equal(wash(s,false,{at:deadline}).outcome,"not_committed");assert.equal(s.room.game!.state.heroRuntime!.black!.used,false);}
+      else s.tick(deadline);
+      assert.equal(s.room.phase,"finished");assert.equal(s.room.game!.state.reason,"timeout");assert.equal(s.room.game!.state.winner,"red");
+      assert.equal(s.room.game!.state.formalTurns!.black,1);assert.deepEqual(callbackCounts(s,"black",2),{formal_turn_begin:0,formal_main_action:0,formal_turn_end:0});
+      rows.push({late_action:lateAction,deadline,timeout_side:"black",wash_committed:false});
+    }
+    return { deadline_exclusive_for_action:true,rows };
+  } },
+  { id: "HC-F04-H11-B-rejection-and-retry-keep-clock", run(ctx) {
+    const s=halfH11(ctx);replay(s,hcPrefix.slice(0,2));wash(s,true);replay(s,hcPrefix.slice(2));
+    const start=s.room.game!.state.turnStartedAt!,deadline=s.room.game!.state.turnDeadlineAt!;
+    assert.equal(wash(s,false,{expectedRevision:s.room.game!.state.revision-1,at:start+800}).code,"STALE_REVISION");
+    assert.equal(s.room.game!.state.turnStartedAt,start);assert.equal(s.room.game!.state.turnDeadlineAt,deadline);assert.equal(s.room.game!.state.formalTurns!.black,1);
+    const actionId="hc-B-confirmed-once",expectedRevision=s.room.game!.state.revision;
+    assert.equal(wash(s,false,{actionId,expectedRevision,at:start+1600}).outcome,"committed");
+    const after=clone(s.room.game),draws=s.random.audit.length;
+    assert.equal(wash(s,false,{actionId,expectedRevision,at:start+1700}).outcome,"duplicate");
+    assert.equal(wash(s,true,{actionId,expectedRevision,at:start+1800}).code,"RESEARCH_ACTION_ID_CONFLICT");
+    assert.deepEqual(s.room.game,after);assert.equal(s.random.audit.length,draws);
+    return { stale_rejection_preserves_B_deadline:true,exact_retry_preserves_new_red_deadline:true,one_counter_increment:true,conflicting_retry_rejected:true };
   } },
   { id: "HC-F05-dual-death-restoration-subcheck-and-retry", run(ctx) {
     const s=halfH11(ctx),opening=clone(s.room.game!.state.pieces);
@@ -290,8 +336,8 @@ export const MODE_QUALIFICATION_CASES: Array<{ id: string; run: (ctx: CaseContex
 ];
 
 export function modeQualificationMetadata() {
-  return { schema:"lezi.mode_bridge_qualification.v0.2",interface_version:MODE_BRIDGE_VERSION,rule_delta:0, qualification_environment:"trusted_room_bound_source_allowlist_not_product_release",product_featuresReady:{xiangqi:false,half_chaos:false},formal_scoring_status:"frozen",q:null,H:null,I:null,B:null,J:null,independent_empirical_n:0,
-    blocked:["HC_H11_B_numeric_source_confirmation","H03_candidate","H11_x_H15","M07_and_pre_refresh_secret_read","unconfirmed_repetition_draw_rules","P1","full_match_qualification","population_sampling"],
-    scope:{xiangqi:["baseline","H01","H02","H11_A","H11_B"],half_chaos:["baseline","H11_A","H11_B_diagnostic_only"]},
+  return { schema:"lezi.mode_bridge_qualification.v0.3",interface_version:MODE_BRIDGE_VERSION,rule_delta:1, confirmation:"CONF-HC-H11-B-20261012",qualification_environment:"trusted_room_bound_source_allowlist_not_product_release",product_featuresReady:{xiangqi:false,half_chaos:false},formal_scoring_status:"frozen",q:null,H:null,I:null,B:null,J:null,independent_empirical_n:0,
+    blocked:["H03_candidate","H11_x_H15","M07_and_pre_refresh_secret_read","unconfirmed_repetition_draw_rules","P1","full_match_qualification","population_sampling"],
+    scope:{xiangqi:["baseline","H01","H02","H11_A","H11_B"],half_chaos:["baseline","H11_A","H11_B_scoped_count_and_clock"]},
   };
 }

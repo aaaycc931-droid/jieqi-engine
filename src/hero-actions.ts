@@ -37,14 +37,18 @@ export function formalTurnDurationMs(state: GameState, side: Side): number {
   return !hasThief && !otherThief ? 60_000 : hasThief ? 75_000 : 45_000;
 }
 export function startFormalClock(state: GameState, now: number, secret?: SecretState, randomInt?: RandomInt): void {
-  if (state.status !== "playing" || state.forcedDefense || state.flowDance || state.pendingShuffle) return;
-  beginFormalTurn(state, secret, randomInt);
+  if (state.status !== "playing" || state.forcedDefense || state.flowDance) return;
+  const shuffleDecision = state.gameMode === "half_chaos" && state.pendingShuffle?.window === "B";
+  if (state.pendingShuffle && !shuffleDecision) return;
+  // CONF-HC-H11-B-20261012: the B decision consumes the same timed opportunity
+  // as a subsequent ordinary move, but never starts ordinary begin callbacks.
+  if (!shuffleDecision) beginFormalTurn(state, secret, randomInt);
   const number = formalTurn(state, state.turn) + 1;
   if (state.formalClock?.side === state.turn && state.formalClock.number === number && state.turnDeadlineAt !== undefined) return;
   state.formalClock = { side: state.turn, number };
   state.turnStartedAt = now;
   state.turnDeadlineAt = now + formalTurnDurationMs(state, state.turn);
-  if (secret) emitMechanismEvent("formal_clock_start", state, secret, { side: state.turn, number, start: state.turnStartedAt, deadline: state.turnDeadlineAt });
+  if (secret) emitMechanismEvent(shuffleDecision ? "shuffle_window_clock_start" : "formal_clock_start", state, secret, { side: state.turn, number, start: state.turnStartedAt, deadline: state.turnDeadlineAt });
 }
 function endSkillTurn(state: GameState, secret: SecretState, side: Side, randomInt: RandomInt): void {
   settleLandings(state, secret);

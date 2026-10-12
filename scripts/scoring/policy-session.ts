@@ -20,7 +20,7 @@ export interface ModeQualificationPlan {
   sources: Record<"A" | "B", "hunter" | "rogue" | "shuffler">;
   traps?: Partial<Record<"A" | "B", readonly Position[]>>;
 }
-export const MODE_BRIDGE_VERSION = "mode_scoped_P0_v0.2";
+export const MODE_BRIDGE_VERSION = "mode_scoped_P0_v0.3";
 function snapshot(room: RemoteRoom) {
   if (!room.game) return structuredClone(room);
   const { history, ...secret } = room.game.secret;
