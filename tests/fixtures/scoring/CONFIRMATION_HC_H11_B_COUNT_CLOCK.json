@@ -1,0 +1,49 @@
+{
+  "schema": "lezi.mode_rule_confirmation.v1",
+  "id": "CONF-HC-H11-B-20261012",
+  "date_local": "2026-10-12",
+  "timezone": "Asia/Shanghai",
+  "mode_id": "half_chaos_jieqi",
+  "engine_mode_id": "half_chaos",
+  "source_type": "user_statement_in_main_dialogue",
+  "proposal_context": [
+    "成功发动B洗牌算黑方第2次正式回合，计数1→2；普通回合开始、行动、结束结算仍不触发。",
+    "进入B选择窗口就开始倒计时；跳过后承接剩余时间，成功洗牌后红方重新计时，等待超时按现有规则处理。"
+  ],
+  "user_confirmation_quote": "同意",
+  "user_confirmation_at_local": "2026-10-12T13:27:09+08:00",
+  "formal_counter_before_black": 1,
+  "formal_counter_after_success_black": 2,
+  "ordinary_black_begin_main_end_on_success": [0, 0, 0],
+  "decision_clock": {
+    "start": "authority time when B window is entered",
+    "duration": "existing mode formal turn duration; no new duration value",
+    "ordinary_begin_runs_at_start": false,
+    "skip": "ordinary black action inherits start and deadline; no fresh countdown",
+    "success": "red next ordinary turn starts a fresh clock at successful authority submission time",
+    "expiry": "existing timeout adjudication; deadline is exclusive for a new action",
+    "receipt_timestamp_delta": "input elapsed time, never a constant +1 rule"
+  },
+  "rule_change_classification": {
+    "counter": "mode-local confirmation of applicability; existing counter code unchanged",
+    "decision_timer": "modification: half-chaos B waiting previously had no active formal clock"
+  },
+  "unchanged_scope": [
+    "H11 window A",
+    "original_jieqi and standard_xiangqi decision clock behavior",
+    "mode-specific redeal and restoration",
+    "hero resources and ordinary callback rules"
+  ],
+  "not_granted": [
+    "HC-F05 ground effects",
+    "M07",
+    "H11 x H15",
+    "pre-refresh secret reads",
+    "all hero interactions",
+    "P1 and complete matches",
+    "empirical scoring",
+    "product featuresReady"
+  ],
+  "independent_empirical_n": 0,
+  "formal_scoring_status": "frozen"
+}

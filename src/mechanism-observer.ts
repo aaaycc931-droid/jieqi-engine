@@ -1,7 +1,7 @@
 import type { GameState, SecretState } from "./types.ts";
 
 export interface MechanismEvent {
-  kind: "formal_turn_begin" | "formal_main_action" | "formal_turn_end" | "formal_clock_start" | "pupil_grant" | "insight_spend" | "shuffle_reset";
+  kind: "formal_turn_begin" | "formal_main_action" | "formal_turn_end" | "formal_clock_start" | "shuffle_window_clock_start" | "pupil_grant" | "insight_spend" | "shuffle_reset";
   state: GameState;
   secret?: SecretState;
   details: Record<string, unknown>;
