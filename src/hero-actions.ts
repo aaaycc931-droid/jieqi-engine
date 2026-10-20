@@ -256,6 +256,7 @@ export function applyHeroAbility(state: GameState, secret: SecretState, command:
       requireRule(!k.processedActions[`bomb:turn:${side}:${formalTurn(s, side)}`], "BOMB_TURN_LIMIT", "每个正式回合全军最多投放一枚");
       const to = command.to;
       requireRule(isInsideBoard(to) && !samePosition(p, to) && Math.abs(p.x - to.x) + Math.abs(p.y - to.y) <= 3 && !s.warps?.some(w => samePosition(w, to)), "INVALID_BOMB_TARGET", "目标须为棋盘整数格，在曼哈顿距离3内且非自身或已有扭曲");
+      requireRule(!isGeneralInCheck(s, side), "IN_CHECK", "被将军时不能投弹");
       s.effectsByPieceId![p.id].ammunition = 0;
       s.warps ??= []; s.warps.push({ ...to });
       k.processedActions[`bomb:turn:${side}:${formalTurn(s, side)}`] = s.revision + 1;
