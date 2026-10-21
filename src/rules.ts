@@ -261,8 +261,8 @@ export function canRevealedPieceAttack(
     // 铁马即可在路径上碾碎它，构成有效将军。
     if ((Math.abs(dx) === 1 && dy === 0) || (dx === 0 && Math.abs(dy) === 1)) {
       const endpoints = Math.abs(dx) === 1
-        ? [{ x: piece.x + dx, y: piece.y - 2 }, { x: piece.x + dx, y: piece.y + 2 }]
-        : [{ x: piece.x - 2, y: piece.y + dy }, { x: piece.x + 2, y: piece.y + dy }];
+        ? [{ x: piece.x + 2 * dx, y: piece.y - 1 }, { x: piece.x + 2 * dx, y: piece.y + 1 }]
+        : [{ x: piece.x - 1, y: piece.y + 2 * dy }, { x: piece.x + 1, y: piece.y + 2 * dy }];
       return endpoints.some((endpoint) => {
         if (!isInsideBoard(endpoint)) return false;
         const landing = pieceAt(state, endpoint);
