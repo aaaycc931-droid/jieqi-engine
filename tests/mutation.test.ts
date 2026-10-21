@@ -103,3 +103,34 @@ test("MUT-12 骑兵只给明马额外一步，保留八方向普通马跳", () =
  assert.equal(getLegalMoves(state, "horse").some(p => p.x === 4 && p.y === 5), true);
  assert.equal(getLegalMoves(state, "pawn").some(p => p.x === 1 && p.y === 8), false);
 });
+
+// Public synthetic component positions, not the half-chaos PD03 natural
+// replay. Manual route tables exercise the shared move geometry separately
+// from the threat query; no production/replay state or hidden identity is rewritten.
+const ironSteedLegDirections = [
+  { id: "E", horse: [3, 1], royal: [4, 1], routes: [[5, 0], [5, 2]], unrelated: [[4, 3]] },
+  { id: "W", horse: [5, 1], royal: [4, 1], routes: [[3, 0], [3, 2]], unrelated: [[4, 3]] },
+  { id: "S", horse: [4, 0], royal: [4, 1], routes: [[3, 2], [5, 2]], unrelated: [[2, 1], [6, 1]] },
+  { id: "N", horse: [4, 2], royal: [4, 1], routes: [[3, 0], [5, 0]], unrelated: [[2, 1], [6, 1]] },
+  { id: "TOP-EDGE-E", horse: [3, 0], royal: [4, 0], routes: [[5, 1]], unrelated: [[4, 2]] },
+];
+
+for (const fixture of ironSteedLegDirections) {
+  for (const threatened of [false, true]) {
+    test(`R38-LEG-${fixture.id}-${threatened ? 'missed' : 'false'}-check uses a completable route through the royal leg`, () => {
+      const blocked = threatened ? fixture.unrelated : fixture.routes;
+      const state = initializeFeatureGameState(gameState([
+        revealed("horse", "red", "horse", fixture.horse[0], fixture.horse[1]),
+        // Keep the two real royals in their palaces and block their file.
+        revealed("royal-file-blocker", "red", "pawn", 4, 5),
+        ...blocked.map(([x, y], i) => revealed(`route-blocker-${i}`, "red", "pawn", x, y)),
+      ], { turn: "black", redGeneral: { x: 4, y: 9 }, blackGeneral: { x: fixture.royal[0], y: fixture.royal[1] } }), undefined, "iron_steed");
+      const before = structuredClone(state);
+      const moves = getLegalMoves({ ...state, turn: "red" }, "horse");
+      const hasCompletableRoute = fixture.routes.some(([x, y]) => moves.some(to => to.x === x && to.y === y));
+      assert.equal(hasCompletableRoute, threatened, "existing ordinary move eligibility must agree with the manual route witness");
+      assert.equal(isGeneralInCheck(state, "black"), threatened);
+      assert.deepEqual(state, before, "the public threat query must not alter pieces or resources");
+    });
+  }
+}
