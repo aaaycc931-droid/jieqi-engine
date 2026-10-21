@@ -1,5 +1,6 @@
 import { applyShuffleAction } from "./hero-shuffle.ts";
-import { emitMechanismEvent } from "./mechanism-observer.ts";
+import { emitMechanismEvent, withIsolatedMechanismEvents } from "./mechanism-observer.ts";
+import { requireClosedDestructionBatch } from "./settlement-context.ts";
 import { applyHeroChild } from "./hero-children.ts";
 import { applyBrawlStart } from "./hero-brawl.ts";
 import { applyRiverAbility } from "./hero-river.ts";
@@ -17,6 +18,20 @@ import type { ActionClassification, GameState, HeroAbilityCommand, MoveResult, R
 
 function requireRule(ok: unknown, code: string, text: string): asserts ok {
   if (!ok) throw new RuleError(code, text);
+}
+/** Internal coverage failure, never a new player-facing legality verdict. */
+function unsupportedHourglass(): never {
+  const error = new Error("沙漏隔离结算遇到未覆盖的来源");
+  error.name = "HourglassCoverageError";
+  throw error;
+}
+function requireHourglassRoyalSafety(state: GameState, secret: SecretState, side: Side): void {
+  for (const owner of ["red", "black"] as const) {
+    const id = secret.trueGenerals?.[owner];
+    const royal = state.pieces.find(p => id ? p.id === id : !p.faceDown && p.color === owner && p.type === "general");
+    if (!royal || !isGround(royal) || royal.faceDown || royal.color !== owner || royal.type !== "general") unsupportedHourglass();
+  }
+  requireRule(!isGeneralInCheck(state, side), "IN_CHECK", "本次沙漏完整结算后将帅仍不安全");
 }
 /** 明子模式直接指定目标；当前承载者 ID 只能由拥有者的私有视图提供。 */
 export function getShadowRevealedTargets(state: GameState, side: Side, currentGeneralId?: string) {
@@ -75,8 +90,20 @@ export function applyHeroAbility(state: GameState, secret: SecretState, command:
   if (state.pendingDescent) return applyDescentAction(state, secret, command, now);
   requireRule(command.expectedRevision === state.revision, "STALE_REVISION", "客户端棋局版本已经过期");
   requireRule(state.status === "playing" && !state.forcedDefense && !state.flowDance, "INVALID_PHASE", "只能在自己的正式回合开始发动技能");
+  if (command.ability === "hourglass") {
+    // WeakMap batch identity belongs to the original authority, not its clone.
+    requireClosedDestructionBatch(state);
+    const candidateCommand = Object.freeze(copy(command));
+    const candidateRandom = selectedHeroId(state, state.turn) === "nozdormu" && state.featureRules?.mutation === "end_time" ? unsupportedHourglass : randomInt;
+    return withIsolatedMechanismEvents(() => applyFreshHeroAbility(state, secret, candidateCommand, now, candidateRandom));
+  }
+  return applyFreshHeroAbility(state, secret, command, now, randomInt);
+}
+
+/** One execution owns the candidate, its full closure and the returned result. */
+function applyFreshHeroAbility(state: GameState, secret: SecretState, command: HeroAbilityCommand, now: number, randomInt: RandomInt): MoveResult {
   const s = copy(state), k = copy(secret), side = s.turn, hero = selectedHeroId(s, side);
-  initializeFeatureSecret(s, k);
+  initializeFeatureSecret(s, k, command.ability === "hourglass" ? randomInt : undefined);
   beginFormalTurn(s, k, randomInt);
   requireRule(s.turnLifecycle?.phase === "before_main", "INVALID_PRE_MAIN_WINDOW", "只能在正式回合主行动前发动技能");
   const forcedFlyer = s.pieces.find(p => p.layer === "air" && getController(p) === side && s.effectsByPieceId?.[p.id]?.flight?.forcedLanding);
@@ -226,20 +253,26 @@ export function applyHeroAbility(state: GameState, secret: SecretState, command:
     case "hourglass": {
       requireRule(hero === "nozdormu" && s.featureRules?.mutation === "end_time", "NO_DESTINY", "只有时光之末诺兹多姆可使用沙漏");
       requireRule((s.hourglasses ?? 0) > 0, "SKILL_USED", "沙漏已耗尽");
+      // D01's fixed pair has no wind/training RNG or arbitrary hero callbacks.
+      // Do not silently execute incompatible saved contexts as a safe branch.
+      if (selectedHeroId(s, otherSide(side)) !== "murozond" || Object.values(k.training ?? {}).some(Boolean) || Object.values(k.wind ?? {}).some(Boolean)) unsupportedHourglass();
       s.hourglasses!--;
       // 候选和锚点合法性先冻结；不在净化后重试被扭曲或占据的锚点。
       const candidates = Object.entries(k.destinyIdentities ?? {}).filter(([id, d]) => d.kind === "time_warrior" && d.shown && !s.pieces.some(p => p.id === id && !isBoardPiece(p)));
       const eligible = candidates.filter(([id, d]) => !s.pieces.some(p => isBoardPiece(p) && samePosition(p, d.anchor)) && !s.warps?.some(w => samePosition(w, d.anchor)) && placementAllowed(s, { id, ...d.anchor, faceDown: false, ...d.identity }, d.anchor));
       for (const [id, d] of eligible) {
         const living = s.pieces.find(p => p.id === id);
+        const from = living ? { x: living.x, y: living.y } : undefined;
+        const beforeController = living ? getController(living) : d.identity.color;
         if (living) { living.x = d.anchor.x; living.y = d.anchor.y; }
         else {
           s.pieces.push({ id, ...d.anchor, faceDown: false, ...d.identity });
           s.captured = s.captured.filter(p => p.id !== id);
           delete k.identities[id];
         }
-        s.effectsByPieceId ??= {}; s.effectsByPieceId[id] = { destiny: "time_warrior" };
-        queueLanding(s, s.pieces.find(p => p.id === id)!, side, living ? "hourglass_return" : "revival");
+        s.effectsByPieceId ??= {};
+        s.effectsByPieceId[id] = { ...(living ? s.effectsByPieceId[id] : {}), destiny: "time_warrior" };
+        queueLanding(s, s.pieces.find(p => p.id === id)!, beforeController, living ? "hourglass_return" : "revival", from);
       }
       settleLandings(s, k);
       s.warps = [];
@@ -289,6 +322,10 @@ export function applyHeroAbility(state: GameState, secret: SecretState, command:
         closeMainActionAtom(s, command.actionId);
         s.pendingHeroChild = { kind: "inner_wave", side, pieceId: command.pieceId!, parent: copy(s.lastMove) };
       } else endSkillTurn(s, k, side, randomInt);
+    } else if (command.ability === "hourglass") {
+      // Complete the original aftermath once; never execute a second skill to commit.
+      const terminal = closeDirectDeaths(s, k, side, randomInt);
+      if (!terminal) requireHourglassRoyalSafety(s, k, side);
     } else closeDirectDeaths(s, k, side);
   }
   k.processedActions[command.actionId] = s.revision;
