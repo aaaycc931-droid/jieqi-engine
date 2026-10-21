@@ -205,7 +205,7 @@ export function settleLandings(state: GameState, secret: SecretState): void {
   }
 }
 
-export function closeDirectDeaths(state: GameState, secret: SecretState, actingSide: Side): boolean {
+export function closeDirectDeaths(state: GameState, secret: SecretState, actingSide: Side, randomInt: RandomInt = max => Math.floor(Math.random() * max)): boolean {
   requireClosedDestructionBatch(state);
   // 每种调用来源都先闭合死亡派生，再判断解将/终局；不能依赖某个走子入口。
   resolveWindReturn(state, secret);
@@ -213,7 +213,7 @@ export function closeDirectDeaths(state: GameState, secret: SecretState, actingS
   // 但资源入账与正式终结要等整个公开窗口关闭，不能截断剩余机会。
   if (state.pendingDescent) return false;
   settleHeroDeathResources(state);
-  settleTrainingDeaths(state, secret, max => Math.floor(Math.random() * max));
+  settleTrainingDeaths(state, secret, randomInt);
   const alive = (side: Side) => {
     const wind = secret.wind?.[side];
     const id = wind?.hostId ?? secret.trueGenerals?.[side];

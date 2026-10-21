@@ -1,8 +1,9 @@
 import { configureHeroPreparation } from "./hero-progress.ts";
-import { getHeroPackage } from "./hero-forms.ts";
+import { getHeroPackage, validateHeroForms } from "./hero-forms.ts";
 import { HERO_IDS } from "./heroes.ts";
 import { applyHeroAbility, ownerHeroSecrets, startFormalClock } from "./hero-actions.ts";
 import { copy, initializeFeatureSecret } from "./settlement.ts";
+import { requireClosedDestructionBatch } from "./settlement-context.ts";
 import { RuleError } from "./errors.ts";
 import { effectiveResearchHero, researchSources } from "./research-source-context.ts";
 import { equalHex, sha256Hex } from "./sha256.ts";
@@ -1505,6 +1506,15 @@ export function submitRemoteHeroAbility(room: RemoteRoom, playerId: string, comm
   if (expired) return expired;
   const side = sideForPlayer(room.game, playerId);
   if (room.game.secret.processedActions[command.actionId] === undefined && room.game.state.turn !== side) throw new RuleError("WRONG_TURN", "还没有轮到该玩家");
+  const state = room.game.state;
+  // Keep the existing revision/phase and special-window refusals ahead of the
+  // new barrier. A fresh eligible entry must check the authority before copy.
+  if (command.ability === "hourglass" && room.game.secret.processedActions[command.actionId] === undefined &&
+    !state.pendingShuffle && !state.pendingHeroChild && !state.pendingDescent &&
+    command.expectedRevision === state.revision && state.status === "playing" && !state.forcedDefense && !state.flowDance) {
+    validateHeroForms(state, room.game.secret);
+    requireClosedDestructionBatch(state);
+  }
   const game = gameWithPrivateTraps(room);
   const result = applyHeroAbility(game.state, game.secret, command, now, randomInt);
   if (result.duplicate) return { room, duplicate: true };
