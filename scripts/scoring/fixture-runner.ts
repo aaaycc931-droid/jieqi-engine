@@ -1,6 +1,5 @@
 import assert from "node:assert/strict";
 import { readdirSync, readFileSync } from "node:fs";
-import { captureMechanismEvents } from "../../src/mechanism-observer.ts";
 import { createIdentityPool } from "../../src/setup.ts";
 import { MUTATION_IDS } from "../../src/mutations.ts";
 import { advanceRemoteRoomTime, completeRemoteHeroIntro, createRemoteRoom, joinRemoteRoom, submitRemoteHeroAbility, submitRemoteHeroSelection, submitRemoteMove, submitRemoteRps, type RemoteRoom } from "../../src/remote-room.ts";
@@ -86,7 +85,7 @@ export class FixtureRunner {
     this.log.record(this.room, this.room, { attemptId: `${id}:initialization`, outcome: "initialization", now: this.now - 1, randomKeys: this.random.recorded.map(r => r.event_key) }, start.events);
   }
 
-  private observe<T>(operation: () => T) { return this.observerEnabled ? captureMechanismEvents(operation) : { result: operation(), events: [] }; }
+  private observe<T>(operation: () => T) { return this.log.evidence.capture(operation, this.observerEnabled); }
 
   commandFor(action: any, suffix?: string): HeroAbilityCommand | MoveCommand {
     const actionId = suffix ?? `${this.log.fixtureId}:command:${++this.counter}`;
@@ -163,6 +162,7 @@ export class FixtureRunner {
 }
 
 export function verifyFixture(fixture: any, runner: FixtureRunner) {
+  runner.log.evidence.requireValid();
   const state = runner.room.game!.state, secret = runner.room.game!.secret;
   const expected = fixture.expected;
   const pupil = state.heroRuntime!.red!.pupil, n = state.heroRuntime!.red!.insightCount;
@@ -186,3 +186,4 @@ export function verifyFixture(fixture: any, runner: FixtureRunner) {
   if (last.outcome === "rejected") assert.deepEqual(last.after, last.before);
   if (fixture.id.startsWith("JF") && fixture.id !== "JF02" && fixture.id !== "JF03" && fixture.id !== "JF04") assert.equal(state.turnLifecycle!.phase, "before_main");
 }
+

@@ -3,6 +3,7 @@ import { chmodSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { publicRemoteRoom, playerRoomView, type RemoteRoom } from "../../src/remote-room.ts";
 import type { MechanismEvent } from "../../src/mechanism-observer.ts";
+import { MechanismEvidence } from "./mechanism-evidence.ts";
 
 export const inputDirectory = new URL("../../tests/fixtures/scoring/", import.meta.url);
 export const readInput = (name: string) => JSON.parse(readFileSync(new URL(name, inputDirectory), "utf8"));
@@ -23,6 +24,7 @@ export class ResearchLog {
   readonly rows: Record<Channel, any[]> = Object.fromEntries(channels.map(c => [c, []])) as Record<Channel, any[]>;
   readonly observations = new Map<string, { id: string; epoch: number }>();
   readonly ruleHash: string;
+  readonly evidence = new MechanismEvidence();
 
   constructor(fixtureId: string, ruleHash: string) { this.fixtureId = fixtureId; this.ruleHash = ruleHash; }
 
@@ -41,8 +43,8 @@ export class ResearchLog {
     const cmd = context.command;
     const isInsight = cmd?.ability === "insight";
     const committed = context.outcome === "committed";
-    const reset = committed ? events.find(e => e.kind === "shuffle_reset") : undefined;
-    const sourceEvents = committed || context.outcome === "initialization" ? events : [];
+    const sourceEvents = this.evidence.valid && (committed || context.outcome === "initialization") ? events : [];
+    const reset = committed ? sourceEvents.find(e => e.kind === "shuffle_reset") : undefined;
     const grant = sourceEvents.filter(e => e.kind === "pupil_grant").reduce((n, e) => n + Number(e.details.amount), 0);
     const spent = sourceEvents.filter(e => e.kind === "insight_spend").reduce((n, e) => n + Number(e.details.amount), 0);
     const nBefore = a.state.heroRuntime?.red?.insightCount ?? 0;
@@ -80,7 +82,10 @@ export class ResearchLog {
     if (memories.length) set("private_memory", { viewer_id: "A", history_observation_id: memories.map(m => m.observation_id), observed_epoch: memories.map(m => m.observed_epoch), remembered_payload: memories.map(m => m.payload), current_precision_status: memories.map(m => m.valid), invalidation_reason: memories.some(m => !m.valid) ? "mapping_epoch_reset" : null });
     const naturalTerminal = b.state.status === "finished";
     set("trajectory_result", { winner: naturalTerminal ? b.state.winner : null, reason: naturalTerminal ? b.state.reason : null, draw_reason: naturalTerminal ? b.state.drawReason : null, censored: !naturalTerminal, censor_reason: !naturalTerminal ? "controlled_mechanism_prefix_only" : null, source_event_chain_id: this.fixtureId });
-    const attempt = { event_id: context.attemptId, kind: "attempt", command: cmd ?? null, actor_id: context.actorId ?? null, at_ms: context.now, outcome: context.outcome, failure_reason: context.errorCode ?? null, before: authoritySnapshot(before), after: authoritySnapshot(after), fields, committed_source_events: sourceEvents.map(e => ({ kind: e.kind, details: e.details, state: e.state, ...(e.secret ? { secret: authoritySnapshot({ ...after, game: { ...b, state: e.state, secret: e.secret } }).secret } : {}) })) };
+    if (!this.evidence.valid) for (const group of Object.values(fields)) for (const field of Object.values(group)) {
+      field.value = null; field.null_reason = "mechanism_evidence_invalid";
+    }
+    const attempt = { event_id: context.attemptId, kind: "attempt", command: cmd ?? null, actor_id: context.actorId ?? null, at_ms: context.now, outcome: context.outcome, failure_reason: context.errorCode ?? null, evidence_valid: this.evidence.valid, before: authoritySnapshot(before), after: authoritySnapshot(after), fields, committed_source_events: sourceEvents.map(e => ({ kind: e.kind, details: e.details, state: e.state, ...(e.secret ? { secret: authoritySnapshot({ ...after, game: { ...b, state: e.state, secret: e.secret } }).secret } : {}) })) };
     this.append("authoritative", attempt);
     if (committed || context.outcome === "timeout") this.append("authoritative", { event_id: `${context.attemptId}:commit`, kind: context.outcome === "timeout" ? "timeout_commit" : "commit", action_id: cmd?.actionId, attempt_id: context.attemptId, revision: b.state.revision });
     for (const channel of channels.filter(c => c !== "authoritative")) {
@@ -107,7 +112,7 @@ export class ResearchLog {
     writeFileSync(join(directory, "random-tape.json"), tapeText);
     chmodSync(join(directory, "random-tape.json"), 0o600);
     files["random-tape.json"] = { sha256: sha256(tapeText), bytes: Buffer.byteLength(tapeText), access: "authoritative_only" };
-    const manifest = { completion: "controlled_prefix_completed", ...metadata, schema: "lezi.mechanism_archive.v1", fixture_id: this.fixtureId, rule_hash: this.ruleHash, formal_scoring_status: "frozen", empirical_parameters_approved: false, q: null, H: null, I: null, B: null, sampled_population: false, fields: 85, deferred_fields: plan.empirical_stage_deferred_fields, files };
+    const manifest = { completion: "controlled_prefix_completed", ...metadata, evidence_valid: this.evidence.valid, ...(!this.evidence.valid ? { completion: "invalid_evidence" } : {}), schema: "lezi.mechanism_archive.v1", fixture_id: this.fixtureId, rule_hash: this.ruleHash, formal_scoring_status: "frozen", empirical_parameters_approved: false, q: null, H: null, I: null, B: null, sampled_population: false, fields: 85, deferred_fields: plan.empirical_stage_deferred_fields, files };
     writeFileSync(join(directory, "manifest.json"), JSON.stringify(manifest, null, 2) + "\n");
     verifyArchive(directory);
     return manifest;
@@ -132,3 +137,4 @@ export function verifyArchive(directory: string) {
   }
   return manifest;
 }
+

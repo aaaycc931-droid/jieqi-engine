@@ -1,7 +1,7 @@
 import { createHmac } from "node:crypto";
 import { mkdirSync, chmodSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { captureMechanismEvents } from "../../src/mechanism-observer.ts";
+import { MechanismEvidence } from "./mechanism-evidence.ts";
 import { withResearchSources, type ResearchSourceContext } from "../../src/research-source-context.ts";
 import { createRemoteRoom, joinRemoteRoom, submitRemoteHeroSelection, submitRemoteRps, completeRemoteHeroIntro,
   advanceRemoteRoomTime, submitRemoteMove, submitRemoteHeroAbility, submitRemoteAssassination, updateRemoteTrapDraft, completeRemoteHeroPreparation, surrenderRemoteRoom, type RemoteRoom } from "../../src/remote-room.ts";
@@ -49,6 +49,7 @@ export class PolicySession {
   #ownAttempts = new Map<string, number>();
   #failure: string | undefined;
   #observer: boolean;
+  #evidence = new MechanismEvidence();
 
   constructor(options: { mask?: WorldMask; stratum?: RpsStratum; ruleSeed: string; policySeed: string; initialRandom?: RandomInt; config?: DecisionConfig; observer?: boolean; modeQualification?: ModeQualificationPlan }) {
     this.mask = options.mask ?? "11"; this.stratum = options.stratum ?? "A_initial_black";
@@ -100,12 +101,12 @@ export class PolicySession {
   #deliver(receiptActor?: string, receipt?: unknown) {
     for (const actor of actors) if (this.room.seats.host.playerId === actor || this.room.seats.guest?.playerId === actor) this.broker.deliver(this.room, actor, actor === receiptActor ? receipt : undefined);
   }
-  #capture<T>(op: () => T) { return this.#observer ? captureMechanismEvents(op) : { result: op(), events: [] }; }
+  #capture<T>(op: () => T) { return this.#evidence.capture(op, this.#observer); }
   #prepare(label: string, op: () => RemoteRoom) {
     const before = snapshot(this.room);
     const captured = this.#capture(() => withResearchSources(this.#context, op));
     this.room = captured.result;
-    this.journal.push({ kind: "prepare", label, before, after: snapshot(this.room), source_events: captured.events });
+    this.journal.push({ kind: "prepare", label, before, after: snapshot(this.room), evidence_valid: captured.evidenceValid, source_events: captured.events });
     this.#deliver();
   }
   tick(at = this.now + 1) {
@@ -113,7 +114,7 @@ export class PolicySession {
     const before = snapshot(this.room), random = this.random.transaction("normal_clock_start");
     const captured = this.#capture(() => withResearchSources(this.#context, () => advanceRemoteRoomTime(this.room, random.next, at)));
     this.room = captured.result; this.now = Math.max(this.now, at); if (random.draws.length) random.commit();
-    this.journal.push({ kind: "clock_tick", at, before, after: snapshot(this.room), source_events: captured.events }); this.#deliver();
+    this.journal.push({ kind: "clock_tick", at, before, after: snapshot(this.room), evidence_valid: captured.evidenceValid, source_events: captured.events }); this.#deliver();
   }
   input(actor: string) { return this.broker.input(this.room, actor, this.config); }
   decide(actor: string) {
@@ -170,7 +171,7 @@ export class PolicySession {
     if (captured.result.code === "invalid_execution") this.#failure = "invalid_execution";
     const receipt = { action_id: actionId, ...captured.result };
     this.journal.push({ kind: "attempt", actor, actionId, intent: structuredClone(intent), at, outcome: captured.result.outcome, code: captured.result.code,
-      before, after: snapshot(this.room), source_events: captured.result.outcome === "committed" ? captured.events : [] });
+      before, after: snapshot(this.room), evidence_valid: captured.evidenceValid, source_events: captured.result.outcome === "committed" ? captured.events : [] });
     this.#deliver(actor, receipt);
     // Explicit declared receipt-clock tick, including failed attempts. Observer is passive.
     this.tick(at);
@@ -178,13 +179,14 @@ export class PolicySession {
   }
   runP0(decisions: number) {
     if (!Number.isSafeInteger(decisions) || decisions < 1 || decisions > this.config.maxAttempts) throw new Error("Invalid flow budget");
-    for (let i = 0; i < decisions && this.room.phase === "playing" && !this.#failure; i++) {
+    for (let i = 0; i < decisions && this.room.phase === "playing" && !this.#failure && this.#evidence.valid; i++) {
       const actor = this.room.game!.players[this.room.game!.state.turn];
       const result = this.decide(actor); this.submit(actor, result.intent);
     }
     return this.classify();
   }
   classify() {
+    if (!this.#evidence.valid) return { status: "invalid_execution", reason: "mechanism_evidence_invalid", result: null };
     const s = this.room.game?.state;
     if (this.#failure) return { status: this.#failure === "attempt_budget" ? "censored" : "invalid_execution", reason: this.#failure, result: null };
     if (s?.status === "finished") {
@@ -195,6 +197,7 @@ export class PolicySession {
     if (s?.status === "execution") return { status: "blocked", reason: "unresolved_execution", result: null };
     return { status: "censored", reason: "controlled_flow_prefix_limit", result: null };
   }
+  requireValidEvidence(): void { this.#evidence.requireValid(); }
   save(directory: string, sourceCommit: string) {
     mkdirSync(directory, { recursive: true, mode: 0o700 }); chmodSync(directory, 0o700);
     const rows = { authoritative: this.journal, actor_A_private: this.input("A").visible_history, actor_B_private: this.input("B").visible_history, rule_random: this.random.audit };
@@ -205,8 +208,9 @@ export class PolicySession {
       files[`${name}.jsonl`] = { sha256: digest(text), bytes: Buffer.byteLength(text), rows: content.length, access: name === "actor_A_private" ? "A_only" : name === "actor_B_private" ? "B_only" : "authority_only" };
     }
     const manifest = { schema: "lezi.policy_flow_archive.v0.1", source_commit: sourceCommit, interface_version: this.mode === "jieqi" ? "original_jieqi_P0_v0.1" : MODE_BRIDGE_VERSION, mode: this.mode, mask: this.mask, stratum: this.stratum, config: this.config,
-      qualification: "P0_flow_only_not_strength", classification: this.classify(), files, q: null, H: null, I: null, B: null, J: null, formal_scoring_status: "frozen", empirical_parameters_approved: false };
+      qualification: "P0_flow_only_not_strength", classification: this.classify(), evidence_valid: this.#evidence.valid, files, q: null, H: null, I: null, B: null, J: null, formal_scoring_status: "frozen", empirical_parameters_approved: false };
     writeFileSync(join(directory, "manifest.json"), JSON.stringify(manifest, null, 2) + "\n", { mode: 0o600 }); chmodSync(join(directory, "manifest.json"), 0o600);
     verifyPolicyArchive(directory); return manifest;
   }
 }
+
