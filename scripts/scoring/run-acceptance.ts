@@ -36,6 +36,7 @@ for (const fixture of fixtures) {
       assert(values.every(v => v.value !== null && v.null_reason === null || v.value === null && typeof v.null_reason === "string"));
       for (const field of fieldPlan.fields.filter(f => f.phase === "empirical_calibration_deferred")) assert.equal(row.fields[field.group][field.field].value, null);
     }
+    runner.log.evidence.requireValid();
     runner.log.save(join(output, fixture.id), runner.random.recorded, metadata);
     runners.set(fixture.id, runner);
     results.push({ fixture_id: fixture.id, status: "passed", evidence_path: `${fixture.id}/manifest.json`, failure_or_blocker: null, authority_submissions: runner.attempts.length, formal_turns: runner.room.game!.state.formalTurns, terminal_status: runner.room.game!.state.status, winner: null, q: null, H: null, I: null, B: null, replay_matches: true, observer_is_passive: true });
@@ -51,7 +52,7 @@ const extraResults: any[] = [];
 function extra(id: string, run: (runner: FixtureRunner) => void, prepare: (runner: FixtureRunner) => void = () => {}) {
   const runner = new FixtureRunner(id);
   try {
-    prepare(runner); run(runner);
+    prepare(runner); run(runner); runner.log.evidence.requireValid();
     runner.log.save(join(output, id), runner.random.recorded, metadata);
     extraResults.push({ id, status: "passed", evidence_path: `${id}/manifest.json`, failure_or_blocker: null });
   } catch (error) {
@@ -136,3 +137,4 @@ const template = readInput("RETURN_CONTRACT.json");
 write("RETURN_CONTRACT.json", { ...template, status: failed ? "mechanism_acceptance_incomplete" : "controlled_mechanism_acceptance_passed", source_branch: metadata.source_branch, source_commit: metadata.source_commit, tested_source_hash: ruleHash, changed_files: changedFiles, run_commands: [validation.scoring_mechanism.command, validation.related_regression.command, validation.build_web.command, "node scripts/scoring/run-acceptance.ts <output>"], runtime_results: results, supplemental_results: extraResults, criteria_results: criteria, authority_entry_used: "submitRemoteMove / submitRemoteHeroAbility after actual hero selection and RPS; post-command advanceRemoteRoomTime mirrors product views", clock_contract: metadata.clock_contract, random_tape_reference: "<fixture_id>/random-tape.json", public_log: "<fixture_id>/public.jsonl", actor_A_private_log: "<fixture_id>/actor_A_private.jsonl", actor_B_private_log: "<fixture_id>/actor_B_private.jsonl", authoritative_log: "<fixture_id>/authoritative.jsonl", manifest: "<fixture_id>/manifest.json", field_coverage_report: "field-coverage.json", remaining_dependencies: ["Empirical player-policy definition and independent cluster sampling", "Mode-specific parameter calibration", "q estimator and mutation-impact encoder validation", "Ordinary xiangqi/half-chaos feature adaptation remains guarded"] });
 console.log(JSON.stringify({ fixtures_passed: results.filter(r => r.status === "passed").length, supplemental_passed: extraResults.filter(r => r.status === "passed").length, criteria: criteria.length, formal_scoring_status: "frozen", output }, null, 2));
 if (failed) process.exitCode = 1;
+
