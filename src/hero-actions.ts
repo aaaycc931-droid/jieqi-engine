@@ -1,5 +1,5 @@
 import { applyShuffleAction } from "./hero-shuffle.ts";
-import { emitMechanismEvent, withIsolatedMechanismEvents } from "./mechanism-observer.ts";
+import { emitMechanismEvent, emitMainActionAtomClosed, withIsolatedMechanismEvents } from "./mechanism-observer.ts";
 import { requireClosedDestructionBatch } from "./settlement-context.ts";
 import { applyHeroChild } from "./hero-children.ts";
 import { applyBrawlStart } from "./hero-brawl.ts";
@@ -68,13 +68,15 @@ export function startFormalClock(state: GameState, now: number, secret?: SecretS
 function endSkillTurn(state: GameState, secret: SecretState, side: Side, randomInt: RandomInt): void {
   settleLandings(state, secret);
   if (state.lastMove) closeMainActionAtom(state, state.lastMove.actionId);
-  if (closeDirectDeaths(state, secret, side)) return;
+  if (closeDirectDeaths(state, secret, side)) { emitMainActionAtomClosed(state, secret, side, true); return; }
   generateGhosts(state);
   // 占步技能应将失败的结果在整个锁定集合结算完成后裁决。
   if (isGeneralInCheck(state, side)) {
     state.status = "execution"; state.winner = otherSide(side); state.turn = otherSide(side); state.reason = "checkmate";
+    emitMainActionAtomClosed(state, secret, side, true);
     return;
   }
+  emitMainActionAtomClosed(state, secret, side);
   finishFormalTurn(state, secret, side, randomInt);
   if (state.status === "finished") return;
   advanceToFormalTurn(state, secret, otherSide(side), randomInt);

@@ -1,5 +1,5 @@
 import { saveShuffleOpening, openShuffleB } from "./hero-shuffle.ts";
-import { emitMechanismEvent } from "./mechanism-observer.ts";
+import { emitMechanismEvent, emitAuthorityCheckpoint } from "./mechanism-observer.ts";
 import { advanceTraining, settleTrainingDeaths, settleHeroDeathResources, TRAINING_COST } from "./hero-progress.ts";
 import { ascendGalakrond } from "./hero-descent.ts";
 import { initializeHeroForms, selectedHeroId, selectedHeroSelection, validateHeroForms } from "./hero-forms.ts";
@@ -378,6 +378,7 @@ export function finishFormalTurn(state: GameState, secret: SecretState, actingSi
   state.formalTurns ??= { red: 0, black: 0 };
   state.formalTurns[actingSide] += 1;
   emitMechanismEvent("formal_turn_end", state, secret, { side: actingSide, number: state.formalTurns[actingSide] });
+  const settled = () => emitAuthorityCheckpoint("formal_turn_settled", state, secret, { side: actingSide, number: state.formalTurns![actingSide], sourceTerminal: state.status === "finished" });
   let newEventStart = state.automaticEvents?.length ?? 0;
   for (const [id, e] of Object.entries(state.effectsByPieceId ?? {})) {
     const p = state.pieces.find(p => p.id === id);
@@ -403,7 +404,7 @@ export function finishFormalTurn(state: GameState, secret: SecretState, actingSi
     if (e.timeCollapse && getController(p) === actingSide && e.timeCollapse.expiresAtOwnerTurnEnd <= formalTurn(state, actingSide)) destroyPiece(state, secret, id, otherSide(actingSide), "time_collapse");
   }
   resolveWindReturn(state, secret);
-  if (closeDirectDeaths(state, secret, actingSide)) return;
+  if (closeDirectDeaths(state, secret, actingSide)) { settled(); return; }
   generateGhosts(state, newEventStart);
   newEventStart = state.automaticEvents?.length ?? 0;
   for (const g of getGhostObjects(state, { kind: "ghost", owner: actingSide })) {
@@ -420,9 +421,10 @@ export function finishFormalTurn(state: GameState, secret: SecretState, actingSi
   generateGhosts(state, newEventStart);
   reconcileGhostInfections(state);
   resolveWindReturn(state, secret);
-  if (closeDirectDeaths(state, secret, actingSide)) return;
+  if (closeDirectDeaths(state, secret, actingSide)) { settled(); return; }
   secret.traps = secret.traps?.filter(t => t.owner === actingSide || --t.opponentTurnsRemaining > 0);
   if (state.heroRuntime?.[actingSide]) state.heroRuntime[actingSide]!.rainActive = false;
+  settled();
 }
 
 export function landFlyingPiece(state: GameState, secret: SecretState, id: string): void {

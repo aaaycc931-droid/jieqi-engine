@@ -13,6 +13,7 @@ import {
   getAutomaticExecutionPlan,
   publicStateSnapshot,
   reassessAfterTrapResolution,
+  requirePathMoveBatchClosed,
 } from "./game.ts";
 import {
   applyRoomAssassination,
@@ -1037,6 +1038,22 @@ export function advanceRemoteRoomTime(
   if (room.phase === "playing" && room.game && room.disconnects?.pausedAt === undefined) {
     const timed = copy(room);
     if (timed.game!.state.turnDeadlineAt === undefined) startFormalClock(timed.game!.state, now, timed.game!.secret, randomInt);
+    if (timed.game!.state.pendingShuffle?.window === "A" && timed.game!.state.turnDeadlineAt !== undefined && now >= timed.game!.state.turnDeadlineAt) {
+      const state = timed.game!.state;
+      const skipped = applyHeroAbility(state, timed.game!.secret, {
+        kind: "hero_ability", ability: "shuffle", skip: true,
+        actionId: `server:shuffle-A-expiry:${state.revision}:${state.turnDeadlineAt}`,
+        expectedRevision: state.revision,
+      }, now, randomInt);
+      timed.game = { ...timed.game!, state: skipped.state, secret: skipped.secret };
+      if (timed.game.state.status === "execution") {
+        const finished = applyAutomaticExecution(timed.game.state, timed.game.secret, `server:shuffle-A-expiry-terminal:${state.revision}`);
+        timed.game = { ...timed.game, state: finished.state, secret: finished.secret };
+      }
+      if (timed.game.state.status === "finished") timed.phase = "finished";
+      timed.featureSecret = { ...(timed.featureSecret ?? { traps: [] }), traps: timed.game.secret.traps ?? [] };
+      startFormalClock(timed.game.state, now, timed.game.secret, randomInt);
+    }
     if (timed.game!.state.status === "playing" && now >= (timed.game!.state.turnDeadlineAt ?? Infinity)) {
       timed.game!.state.status = "finished"; timed.game!.state.winner = otherSide(timed.game!.state.turn); timed.game!.state.reason = "timeout"; timed.game!.state.revision += 1; timed.phase = "finished";
     }
@@ -1212,7 +1229,11 @@ function expiredFormalAction(room: RemoteRoom, playerId: string, actionId: strin
   if (room.game.secret.processedActions[actionId] !== undefined) return undefined;
   if (room.disconnects?.pausedAt !== undefined || room.game.state.turnDeadlineAt === undefined || now < room.game.state.turnDeadlineAt) return undefined;
   const timed = advanceRemoteRoomTime(room, undefined, now);
-  return timed.phase === "finished" ? { room: timed, duplicate: false } : undefined;
+  // A expiry preserves the already committed black main and automatically
+  // declines only the optional decision. A late command must not run on the
+  // pre-expiry authority after this handoff.
+  return timed.phase === "finished" || room.game.state.pendingShuffle?.window === "A" && !timed.game?.state.pendingShuffle
+    ? { room: timed, duplicate: false } : undefined;
 }
 
 /**
@@ -1232,6 +1253,9 @@ export function submitRemoteMove(
   const expired = expiredFormalAction(room, playerId, command.actionId, now);
   if (expired) return expired;
 
+  if (room.game.players[room.game.state.turn] === playerId) {
+    requirePathMoveBatchClosed(room.game.state, room.game.secret, command);
+  }
   const moved = applyRoomMove(gameWithPrivateTraps(room), playerId, command, now);
   if (moved.duplicate) return { room, duplicate: true };
   const trapped = roomWithResolvedTraps(room, moved.room, now);

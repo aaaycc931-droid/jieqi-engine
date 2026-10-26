@@ -1,4 +1,6 @@
 import { openShuffleA } from "./hero-shuffle.ts";
+import { emitMainActionAtomClosed, withIsolatedMechanismEvents } from "./mechanism-observer.ts";
+import { requireClosedDestructionBatch } from "./settlement-context.ts";
 import { openHeroChild } from "./hero-children.ts";
 import { qualifyRiverArrival } from "./hero-progress.ts";
 import { createHeroSelections, initializeHeroForms, selectedHeroId, validateHeroForms } from "./hero-forms.ts";
@@ -15,6 +17,7 @@ import {
   pieceAt,
   pieceById,
   validatePublicMove,
+  validatePublicMoveSourceGeometry,
 } from "./rules.ts";
 import { getController, getCurrentPieceType, isInPalace, otherSide } from "./slots.ts";
 import type {
@@ -143,11 +146,16 @@ function pathPiecesForSpecialMove(state: GameState, source: PublicPiece, to: { x
   return [];
 }
 
-function finishDirectDeaths(state: GameState, actingSide: Side, secret: SecretState): boolean {
+function finishDirectDeaths(state: GameState, actingSide: Side, secret: SecretState, completePathClosure = false): boolean {
   settleLandings(state, secret);
   resolveWindReturn(state, secret);
   if (state.lastMove) closeMainActionAtom(state, state.lastMove.actionId);
-  return closeDirectDeaths(state, secret, actingSide);
+  const terminal = closeDirectDeaths(state, secret, actingSide);
+  if (!terminal && completePathClosure && isGeneralInCheck(state, actingSide)) {
+    throw new RuleError("SELF_CHECK", "路径、返回与落位完整结算后己方将帅仍受攻击");
+  }
+  if (terminal) emitMainActionAtomClosed(state, secret, actingSide, true);
+  return terminal;
 }
 
 function clearAssassinationForPiece(state: GameState, pieceId: string): void {
@@ -221,11 +229,15 @@ function finishAfterPlayerAction(
   const rainWin = nextState.heroRuntime?.[actingSide]?.rainActive && hadCheck;
   if (rainWin) {
     nextState.status = "finished"; nextState.winner = actingSide; nextState.reason = "rain_night";
+    emitMainActionAtomClosed(nextState, nextSecret, actingSide, true);
     nextSecret.processedActions[command.actionId] = nextState.revision; return;
   }
   qualifyRiverArrival(nextState, actingSide);
   generateGhosts(nextState);
   if (!isInfiniteSting && openHeroChild(nextState, actingSide)) { nextSecret.processedActions[command.actionId] = nextState.revision; return; }
+  // Child sources and backstab/forced-defense chains have their own completion;
+  // do not label an intermediate parent as the final main atom.
+  if (!isInfiniteSting) emitMainActionAtomClosed(nextState, nextSecret, actingSide);
   // 原主行动完成一个正式回合；铁甲提供的额外应将不另计回合。
   const ironArmor = isInfiniteSting && nextState.warrior?.[actingSide].ironArmorAvailable;
   if (!isInfiniteSting || ironArmor) finishFormalTurn(nextState, nextSecret, actingSide);
@@ -377,6 +389,27 @@ function validateRewindReplay(state: GameState, secret: SecretState, command: Mo
   }
 }
 
+function coveredPathMove(state: GameState, command: MoveCommand): boolean {
+  const source = command.pieceId ? pieceById(state, command.pieceId) : pieceAt(state, command.from);
+  const mutation = state.featureRules?.mutation;
+  // First bounded source family: HC-SAFE-03's original H04(red)/H03(black)
+  // M01/M04 ground main. Other queries, rosters, covered moves and children
+  // retain the old public preflight until separately qualified.
+  return state.status === "playing" && !state.pendingShuffle && !state.pendingHeroChild && !state.pendingDescent && !state.forcedDefense && !state.flowDance &&
+    selectedHeroId(state, "red") === "qin_long" && selectedHeroId(state, "black") === "warrior" &&
+    Math.min(state.formalTurns?.red ?? 0, state.formalTurns?.black ?? 0) < 15 &&
+    Boolean(source && !source.faceDown && (!source.layer || source.layer === "ground") &&
+    (mutation === "iron_steed" && source.type === "horse" || mutation === "war_chariot" && source.type === "rook"));
+}
+
+/** The remote entry uses this on the original authority before copying traps. */
+export function requirePathMoveBatchClosed(state: GameState, secret: SecretState, command: MoveCommand): void {
+  validateHeroForms(state, secret);
+  if (secret.processedActions[command.actionId] === undefined && command.expectedRevision === state.revision && coveredPathMove(state, command)) {
+    requireClosedDestructionBatch(state);
+  }
+}
+
 export function applyAuthoritativeMove(
   state: GameState,
   secret: SecretState,
@@ -384,6 +417,24 @@ export function applyAuthoritativeMove(
   deferTurnEnd = false,
   now = Date.now(),
   childAction?: { parentActionId?: string; stormAssault?: boolean; mainClassification?: ActionClassification },
+): MoveResult {
+  validateHeroForms(state, secret);
+  const completePathClosure = !deferTurnEnd && !childAction && coveredPathMove(state, command);
+  if (completePathClosure && secret.processedActions[command.actionId] === undefined && command.expectedRevision === state.revision) {
+    requireClosedDestructionBatch(state);
+    return withIsolatedMechanismEvents(() => applyFreshAuthoritativeMove(state, secret, command, deferTurnEnd, now, childAction, true));
+  }
+  return applyFreshAuthoritativeMove(state, secret, command, deferTurnEnd, now, childAction);
+}
+
+function applyFreshAuthoritativeMove(
+  state: GameState,
+  secret: SecretState,
+  command: MoveCommand,
+  deferTurnEnd = false,
+  now = Date.now(),
+  childAction?: { parentActionId?: string; stormAssault?: boolean; mainClassification?: ActionClassification },
+  completePathClosure = false,
 ): MoveResult {
   validateHeroForms(state, secret);
   if (state.flowDance && !deferTurnEnd) return applyFlowDance(state, secret, command);
@@ -406,7 +457,8 @@ export function applyAuthoritativeMove(
   if (nextState.pendingHeroChild) throw new RuleError("HERO_CHILD_ACTION_REQUIRED", "须先处理当前衍生行动窗口");
   if (nextState.pendingDescent && !childAction?.stormAssault) throw new RuleError("DESCENT_ACTION_REQUIRED", "须先完成降临结算");
   validateRewindReplay(nextState, nextSecret, command);
-  const validation = validatePublicMove(nextState, command, state.turn, { allowLinkedControl: deferTurnEnd && !childAction?.mainClassification, stormAssault: childAction?.stormAssault, allowIntermediateCheck: childAction?.stormAssault });
+  const validate = completePathClosure ? validatePublicMoveSourceGeometry : validatePublicMove;
+  const validation = validate(nextState, command, state.turn, { allowLinkedControl: deferTurnEnd && !childAction?.mainClassification, stormAssault: childAction?.stormAssault, allowIntermediateCheck: childAction?.stormAssault });
   if (!validation.ok && !(validation.code === "SELF_CHECK" && permitsSelfCrushingGeneral(state, command, state.turn))) {
     validationError(validation.code, validation.message);
   }
@@ -455,7 +507,7 @@ export function applyAuthoritativeMove(
       ...actionFields(classification),
     };
     queueLanding(nextState, source, actingSide, barrier ? "warrior_return" : "dragon_scale_return");
-    if (finishDirectDeaths(nextState, actingSide, nextSecret)) {
+    if (finishDirectDeaths(nextState, actingSide, nextSecret, completePathClosure)) {
       nextSecret.processedActions[command.actionId] = nextState.revision;
       return { state: nextState, secret: nextSecret, duplicate: false };
     }
@@ -512,7 +564,7 @@ export function applyAuthoritativeMove(
   };
 
 
-  if (finishDirectDeaths(nextState, actingSide, nextSecret)) {
+  if (finishDirectDeaths(nextState, actingSide, nextSecret, completePathClosure)) {
     nextSecret.processedActions[command.actionId] = nextState.revision;
     return { state: nextState, secret: nextSecret, duplicate: false };
   }

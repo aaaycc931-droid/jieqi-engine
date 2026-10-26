@@ -1,7 +1,7 @@
-import type { GameState, SecretState } from "./types.ts";
+import type { GameState, SecretState, Side } from "./types.ts";
 
 export interface MechanismEvent {
-  kind: "formal_turn_begin" | "formal_main_action" | "formal_turn_end" | "formal_clock_start" | "shuffle_window_clock_start" | "pupil_grant" | "insight_spend" | "shuffle_reset";
+  kind: "formal_turn_begin" | "formal_main_action" | "formal_turn_end" | "formal_clock_start" | "shuffle_window_clock_start" | "pupil_grant" | "insight_spend" | "shuffle_reset" | "main_action_atom_closed" | "formal_turn_settled";
   state: GameState;
   secret?: SecretState;
   details: Record<string, unknown>;
@@ -34,6 +34,19 @@ export function emitMechanismEvent(kind: MechanismEvent["kind"], state: GameStat
     capture.events.length = 0;
     capture.evidenceValid = false;
   }
+}
+
+/** New authority checkpoints are passive even if their snapshot cannot be made. */
+export function emitAuthorityCheckpoint(kind: "main_action_atom_closed" | "formal_turn_settled", state: GameState, secret: SecretState, details: Record<string, unknown>): void {
+  if (!captures.at(-1)) return;
+  withIsolatedMechanismEvents(() => emitMechanismEvent(kind, state, secret, details));
+}
+
+/** Call only after this main source's direct aftermath/children have closed. */
+export function emitMainActionAtomClosed(state: GameState, secret: SecretState, side: Side, sourceTerminal = false): void {
+  const action = state.lastMove;
+  if (!action?.countsAsFormalTurn || action.classification?.opportunity !== "main") return;
+  emitAuthorityCheckpoint("main_action_atom_closed", state, secret, { side, actionId: action.actionId, sourceTerminal });
 }
 
 /** Buffer candidate events until the same synchronous operation succeeds. */

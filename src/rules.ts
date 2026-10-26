@@ -338,6 +338,20 @@ export function validatePublicMove(
   actingSide: Side = state.turn,
   options: PublicMoveOptions = {},
 ): MoveValidation {
+  return validateMovePhase(state, move, actingSide, options, true);
+}
+
+/** Internal authority preflight; no client/wire flag can select this phase. */
+export function validatePublicMoveSourceGeometry(
+  state: GameState,
+  move: MoveLike,
+  actingSide: Side,
+  options: PublicMoveOptions = {},
+): MoveValidation {
+  return validateMovePhase(state, move, actingSide, options, false);
+}
+
+function validateMovePhase(state: GameState, move: MoveLike, actingSide: Side, options: PublicMoveOptions, checkRoyalSafety: boolean): MoveValidation {
   validateHeroForms(state);
   if (state.status !== "playing") {
     return { ok: false, code: "GAME_FINISHED", message: "对局已经结束" };
@@ -397,8 +411,7 @@ export function validatePublicMove(
     return { ok: false, code: "ILLEGAL_MOVEMENT", message: "棋子走法不合法" };
   }
 
-  const simulated = simulatePublicMove(state, source, move.to);
-  if (!options.allowIntermediateCheck && isGeneralInCheck(simulated, actingSide)) {
+  if (checkRoyalSafety && !options.allowIntermediateCheck && isGeneralInCheck(simulatePublicMove(state, source, move.to), actingSide)) {
     return { ok: false, code: "SELF_CHECK", message: "该步会令己方将帅受攻击" };
   }
 
