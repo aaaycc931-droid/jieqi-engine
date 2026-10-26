@@ -197,7 +197,7 @@ for (const remote of [false, true]) test(`R38-HG07 ${remote ? 'room' : 'direct'}
   }
 });
 
-test('R38-HG09 explicit death RNG is consumed once instead of falling back to Math.random', () => {
+test('H15 confirmed pregraduation death consumes neither explicit nor fallback RNG', () => {
   const state = gameState([revealed('replacement', 'red', 'horse', 0, 6)]), secret = secretState();
   secret.training = { red: { type: 'horse', pieceId: 'dead-trainee', progress: 4 } };
   let explicit = 0, production = 0; const previous = Math.random;
@@ -205,8 +205,9 @@ test('R38-HG09 explicit death RNG is consumed once instead of falling back to Ma
   try {
     closeDirectDeaths(state, secret, 'red', max => { explicit++; assert.equal(max, 1); return 0; });
   } finally { Math.random = previous; }
-  assert.equal(explicit, 1); assert.equal(production, 0);
-  assert.equal(secret.training.red!.pieceId, 'replacement');
+  assert.equal(explicit, 0); assert.equal(production, 0);
+  assert.equal(secret.training.red!.pieceId, 'dead-trainee');
+  assert.equal(secret.training.red!.failed, true);
 });
 
 for (const ready of [true, false]) test(`R38-HG09 unsupported training context ${ready ? 'after' : 'during'} begin cannot draw production RNG or commit a candidate`, () => {
@@ -220,13 +221,14 @@ for (const ready of [true, false]) test(`R38-HG09 unsupported training context $
   assert.equal(draws, 0); assert.deepEqual(a, before);
 });
 
-test('R38-HG09 legacy three-argument death closure retains its default RNG behavior', () => {
+test('H15 three-argument death closure also preserves sticky failure without RNG', () => {
   const state = gameState([revealed('replacement', 'red', 'horse', 0, 6)]), secret = secretState();
   secret.training = { red: { type: 'horse', pieceId: 'dead-trainee', progress: 4 } };
   let draws = 0; const previous = Math.random;
   Math.random = () => { draws++; return 0; };
   try { closeDirectDeaths(state, secret, 'red'); } finally { Math.random = previous; }
-  assert.equal(draws, 1); assert.equal(secret.training.red!.pieceId, 'replacement');
+  assert.equal(draws, 0); assert.equal(secret.training.red!.pieceId, 'dead-trainee');
+  assert.equal(secret.training.red!.failureCause, 'pregraduation_death');
 });
 
 test('R38-HG10 rejected lazy-begin events stay isolated; the next accepted begin is captured once', () => {

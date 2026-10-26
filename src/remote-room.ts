@@ -992,7 +992,7 @@ export function completeRemoteHeroPreparation(
     throw new RuleError("INVALID_TRAP_COUNT", "猎人必须布置两个陷阱层后才能完成准备");
   }
   const hero = room.features?.heroes?.[side], runtime = room.game.state.heroRuntime?.[side];
-  if (hero === "single_blade" && !runtime?.blade || hero === "sky_admiral" && !runtime?.trainingType) throw new RuleError("HERO_PREPARATION_REQUIRED", "必须先确定英雄准备选项");
+  if (hero === "single_blade" && !runtime?.blade) throw new RuleError("HERO_PREPARATION_REQUIRED", "必须先确定英雄准备选项");
   const addedTraps = draft.map((position, index): TrapLayer => ({
     id: `trap:${side}:${index}`,
     owner: side,
@@ -1543,6 +1543,9 @@ export function submitRemoteHeroAbility(room: RemoteRoom, playerId: string, comm
   const result = applyHeroAbility(game.state, game.secret, command, now, randomInt);
   if (result.duplicate) return { room, duplicate: true };
   let next: RemoteRoom = { ...room, game: { ...game, state: result.state, secret: result.secret }, updatedAt: now };
+  if (command.ability === "training") {
+    next.messages = [...(room.messages ?? []), { id: `system:training:${command.actionId}`, kind: "system", text: `${side === "red" ? "红方" : "黑方"}已选择${trainingTypeLabel(command.trainingType, side)}并成功启动本局训练。`, createdAt: now }];
+  }
   if (command.ability === "shadow") return { room: { ...next, updatedAt: room.updatedAt }, duplicate: false };
   next.featureSecret = { ...(room.featureSecret ?? { traps: [] }), traps: result.secret.traps ?? [] };
   if (result.state.status === "execution") {
@@ -1554,11 +1557,16 @@ export function submitRemoteHeroAbility(room: RemoteRoom, playerId: string, comm
   return { room: next, duplicate: false };
 }
 
+function trainingTypeLabel(type: import("./types.ts").PieceType | undefined, side: Side): string {
+  return ({ rook: "车", horse: "马", cannon: "炮", pawn: side === "red" ? "兵" : "卒", advisor: "士", elephant: "象", general: "将帅", storm_elemental: "风暴元素" })[type ?? "pawn"];
+}
+
 export function submitRemoteHeroPreparationChoice(room: RemoteRoom, playerId: string, choice: { blade?: "left" | "right"; trainingType?: import("./types.ts").PieceType }, now = Date.now(), randomInt: RandomInt = cryptoRandomInt): RemoteRoom {
   ensurePhase(room, "hero_preparation"); requireRemotePlayer(room, playerId);
   if (!room.game) throw new RuleError("MISSING_GAME", "棋局不存在");
   const side = sideForPlayer(room.game, playerId);
   if (room.features?.heroPreparation?.ready[side]) throw new RuleError("PREPARATION_LOCKED", "准备已确认");
   const next = copy(room); configureHeroPreparation(next.game!.state, next.game!.secret, side, choice, randomInt);
+  if (choice.trainingType !== undefined) next.messages = [...(room.messages ?? []), { id: `system:training:opening:${side}`, kind: "system", text: `${side === "red" ? "红方" : "黑方"}已选择${trainingTypeLabel(choice.trainingType, side)}并成功启动本局训练。`, createdAt: now }];
   next.updatedAt = now; return next;
 }

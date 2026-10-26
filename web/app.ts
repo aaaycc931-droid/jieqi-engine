@@ -2352,7 +2352,7 @@ function completeLocalHeroPreparation(): void {
   if (!localPreparationActive || !trapSetupSide) return;
   const hero = localHeroes[trapSetupSide];
   if (hero === "hunter" && localTrapDraft.length !== 2) return showToast("请先布置完两层陷阱。");
-  if (hero === "single_blade" && !gameState?.heroRuntime?.[trapSetupSide]?.blade || hero === "sky_admiral" && !gameState?.heroRuntime?.[trapSetupSide]?.trainingType) return showToast("请先确定英雄准备选项。");
+  if (hero === "single_blade" && !gameState?.heroRuntime?.[trapSetupSide]?.blade) return showToast("请先确定英雄准备选项。");
   const completedSide = trapSetupSide;
   if (localHeroes[completedSide] === "hunter") commitLocalTrapDraft(completedSide);
   trapSetupSide = trapSetupQueue.shift();
@@ -3863,6 +3863,7 @@ function renderTransferredHeroControls(): void {
         if (bluetooth) return handleBluetoothAction({ kind: "hero_preparation_choice", ...choice });
         try { configureHeroPreparation(gameState!, gameSecret!, side, choice); renderGame(); } catch (e) { showToast(e instanceof RuleError ? e.message : "准备失败"); }
       });
+      if (hero === "sky_admiral") addButton("暂不启动训练，完成准备", () => { if (bluetooth) handleBluetoothAction({ kind: "preparation_ready" }); else completeLocalHeroPreparation(); });
     } else addButton("完成英雄准备", () => { if (bluetooth) handleBluetoothAction({ kind: "preparation_ready" }); else completeLocalHeroPreparation(); });
     return;
   }
@@ -3879,13 +3880,21 @@ function renderTransferredHeroControls(): void {
   }
   const forced = gameState.pieces.find(p => p.layer === "air" && getController(p) === side && gameState!.effectsByPieceId?.[p.id]?.flight?.forcedLanding);
   if (forced) addButton("飞行期限已到：原地降落", () => runTransferredHeroCommand({ kind: "hero_ability", ability: "landing", pieceId: forced.id, expectedRevision: gameState!.revision, actionId: nextActionId() }));
-  const secrets = bluetooth ? bluetooth.view?.ownHeroSecrets : { insights: gameSecret?.insights?.[side], training: gameSecret?.training?.[side] };
+  const secrets = bluetooth ? bluetooth.view?.ownHeroSecrets : { insights: gameSecret?.insights?.[side] };
   if (hero === "night") {
     const p = document.createElement("p"); p.textContent = `瞳力 ${gameState.heroRuntime?.[side]?.pupil ?? 0}｜已成功洞察 ${gameState.heroRuntime?.[side]?.insightCount ?? 0} 次`;
     panel.append(p); panel.hidden = false;
     for (const insight of secrets?.insights ?? []) { const line = document.createElement("p"); line.textContent = `${insight.valid ? "洞察快照" : "历史情报（已失效）"}：第 ${insight.revision} 手时 ${insight.pieceId}，${insight.identity.color === "red" ? "红方" : "黑方"}${pieceLabel[insight.identity.color][insight.identity.type]}`; panel.append(line); }
   }
-  if (secrets?.training) { const p = document.createElement("p"); p.textContent = secrets.training.failed ? "征兵无合法候选，培养失败" : `私有受训对象 ${secrets.training.pieceId ?? "无"}｜进度 ${secrets.training.progress}${secrets.training.graduated ? "｜已毕业" : ""}`; panel.append(p); panel.hidden = false; }
+  if (hero === "sky_admiral") {
+    const runtime = gameState.heroRuntime?.[side];
+    if (runtime?.trainingType) { const p = document.createElement("p"); p.textContent = `已选择征兵兵种：${({pawn:"兵/卒",advisor:"士/仕",elephant:"相/象",horse:"马",cannon:"炮",rook:"车"})[runtime.trainingType]}｜本局训练机会已用`; panel.append(p); panel.hidden = false; }
+    else if (!pending && !descent && !gameState.pendingShuffle && !gameState.forcedDefense && !gameState.flowDance) {
+      const select = document.createElement("select"); select.setAttribute("aria-label", "征兵兵种");
+      for (const [value,label] of [["pawn","兵/卒"],["advisor","士/仕"],["elephant","相/象"],["horse","马"],["cannon","炮"],["rook","车"]]) select.add(new Option(label,value));
+      panel.append(select); addButton("启动本局唯一训练", () => runTransferredHeroCommand({kind:"hero_ability",ability:"training",trainingType:select.value as PieceType,actionId:nextActionId(),expectedRevision:gameState!.revision}));
+    }
+  }
   if (hero === "berserker") { const p = document.createElement("p"); p.textContent = `战意 ${gameState.heroRuntime?.[side]?.will ?? 0}｜冲锋／乱斗次数 ${gameState.heroRuntime?.[side]?.chargeCount ?? 0}`; panel.append(p); panel.hidden = false; }
   if (gameState.heroRuntime?.[side]?.omen) { const p = document.createElement("p"); p.textContent = "降临预兆：对方完成本次回应后，下一己方回合开始自动降临。"; panel.append(p); panel.hidden = false; }
   for (const flyer of gameState.pieces.filter(p => p.layer === "air" && getController(p) === side)) addButton(`选择飞行棋 ${flyer.id}`, () => { selectedPieceId = flyer.id; renderGame(); });

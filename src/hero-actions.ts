@@ -5,6 +5,7 @@ import { applyHeroChild } from "./hero-children.ts";
 import { applyBrawlStart } from "./hero-brawl.ts";
 import { applyRiverAbility } from "./hero-river.ts";
 import { applyDescentAction } from "./hero-descent.ts";
+import { startTraining, reconcileTrainingRewind } from "./hero-progress.ts";
 import { selectedHeroId, selectedHeroSelection, validateHeroForms } from "./hero-forms.ts";
 import { getGhostObjects, clearGhostObjects, reconcileGhostInfections } from "./ghosts.ts";
 import { isBoardPiece, isGround } from "./spaces.ts";
@@ -92,6 +93,9 @@ export function applyHeroAbility(state: GameState, secret: SecretState, command:
   if (state.pendingDescent) return applyDescentAction(state, secret, command, now);
   requireRule(command.expectedRevision === state.revision, "STALE_REVISION", "客户端棋局版本已经过期");
   requireRule(state.status === "playing" && !state.forcedDefense && !state.flowDance, "INVALID_PHASE", "只能在自己的正式回合开始发动技能");
+  if (command.ability === "training" || command.ability === "rewind") {
+    return withIsolatedMechanismEvents(() => applyFreshHeroAbility(state, secret, command, now, randomInt));
+  }
   if (command.ability === "hourglass") {
     // WeakMap batch identity belongs to the original authority, not its clone.
     requireClosedDestructionBatch(state);
@@ -124,6 +128,10 @@ function applyFreshHeroAbility(state: GameState, secret: SecretState, command: H
   const ordinaryTime = () => requireRule(s.featureRules?.mutation !== "end_time", "DESTINY_REPLACED", "宿命已替换普通时间技能");
   let endsTurn = false, secretOnly = false;
   switch (command.ability) {
+    case "training":
+      if (isGeneralInCheck(s, side)) { const error = new Error("H15受将启动许可未覆盖"); error.name = "TrainingCoverageError"; throw error; }
+      startTraining(s, k, side, command.trainingType, randomInt);
+      break;
     case "invoke":
       requireRule(hero === "devout_zealot", "WRONG_HERO", "英雄没有祈求技能");
       requireRule(!isGeneralInCheck(s, side), "IN_CHECK", "被将军时不能祈求");
@@ -232,10 +240,12 @@ function applyFreshHeroAbility(state: GameState, secret: SecretState, command: H
       validateHeroForms(previous.state, previous.secret);
       const formLock = copy(k.heroFormLock);
       const processed = copy(k.processedActions), used = { ...k.rewindUsed, [side]: true as const }, history = k.history;
+      const currentState = copy(s), currentSecret = copy(k);
       for (const key of Object.keys(s)) delete (s as unknown as Record<string, unknown>)[key];
       Object.assign(s, copy(previous.state));
       const knowledge = copy(k.insights);
       const restoredSecret = copy(previous.secret);
+      reconcileTrainingRewind(currentState, currentSecret, s, restoredSecret);
       if (knowledge) {
         restoredSecret.insights ??= {};
         for (const owner of ["red", "black"] as const) {
@@ -335,5 +345,6 @@ function applyFreshHeroAbility(state: GameState, secret: SecretState, command: H
 }
 
 export function ownerHeroSecrets(secret: SecretState, side: Side) {
-  return { ...(secret.wind?.[side] ? { wind: copy(secret.wind[side]) } : {}), ...(secret.training?.[side] ? { training: copy(secret.training[side]) } : {}), ...(secret.insights?.[side] ? { insights: copy(secret.insights[side]) } : {}) };
+  // H15 binding, progress and live failure are authority-only for BOTH players.
+  return { ...(secret.wind?.[side] ? { wind: copy(secret.wind[side]) } : {}), ...(secret.insights?.[side] ? { insights: copy(secret.insights[side]) } : {}) };
 }

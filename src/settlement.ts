@@ -1,6 +1,6 @@
 import { saveShuffleOpening, openShuffleB } from "./hero-shuffle.ts";
 import { emitMechanismEvent, emitAuthorityCheckpoint } from "./mechanism-observer.ts";
-import { advanceTraining, settleTrainingDeaths, settleHeroDeathResources, TRAINING_COST } from "./hero-progress.ts";
+import { advanceTraining, initializeTrainingOrigins, settleTrainingDeaths, settleHeroDeathResources, TRAINING_COST } from "./hero-progress.ts";
 import { ascendGalakrond } from "./hero-descent.ts";
 import { initializeHeroForms, selectedHeroId, selectedHeroSelection, validateHeroForms } from "./hero-forms.ts";
 import { openDestructionBatches, requireClosedDestructionBatch } from "./settlement-context.ts";
@@ -58,6 +58,7 @@ export function initializeFeatureSecret(state: GameState, secret: SecretState, r
   validateHeroForms(state, secret);
   requireModeFeatureAdaptation(state.gameMode, state.featureRules);
   initializeHeroForms(state, secret);
+  initializeTrainingOrigins(state, secret);
   saveShuffleOpening(state, secret);
   secret.trueGenerals ??= {};
   for (const side of ["red", "black"] as const) {

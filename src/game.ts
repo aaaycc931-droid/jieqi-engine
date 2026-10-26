@@ -3,7 +3,8 @@ import { emitMainActionAtomClosed, withIsolatedMechanismEvents } from "./mechani
 import { requireClosedDestructionBatch } from "./settlement-context.ts";
 import { openHeroChild } from "./hero-children.ts";
 import { qualifyRiverArrival } from "./hero-progress.ts";
-import { createHeroSelections, initializeHeroForms, selectedHeroId, validateHeroForms } from "./hero-forms.ts";
+import { createHeroSelections, initializeHeroForms, selectedHeroId, selectedHeroSelection, validateHeroForms } from "./hero-forms.ts";
+import { isGround } from "./spaces.ts";
 import { copy, initializeFeatureSecret, destroyPiece, consumeDragonScale, markRevealed, queueLanding, settleLandings, closeDirectDeaths, generateGhosts, beginFormalTurn, advanceToFormalTurn, finishFormalTurn, rememberAction, resolveWindReturn } from "./settlement.ts";
 import { actionFields, closeMainActionAtom, movementClassification, recordAction } from "./turns.ts";
 import { RuleError } from "./errors.ts";
@@ -687,6 +688,22 @@ export function applyAuthoritativeAssassination(
   const sourceWasCovered = source.faceDown;
   const pathVictims = pathPiecesForSpecialMove(nextState, source, command.to);
   if (source.layer === "air" && pathVictims.length) throw new RuleError("FLIGHT_NO_ATTACK", "飞行棋不能主动路径碾碎");
+  // Exact approved AS scope. This does not turn every failed activation into a
+  // refund, and never restores an already-held assassination opportunity.
+  const unmodifiedGround = (p: PublicPiece) => !p.faceDown && isGround(p) && p.type !== "general"
+    && getController(p) === p.color;
+  const endpointEffects = target && state.effectsByPieceId?.[target.id];
+  const guardedActivationScale = !continuing && command.source === "hero" && !secret.replay && !state.forcedDefense
+    && selectedHeroSelection(state, actingSide)?.heroId === "rogue"
+    && selectedHeroSelection(state, otherSide(actingSide))?.heroId === "devout_zealot"
+    && selectedHeroSelection(state, otherSide(actingSide))?.variant === "invincible"
+    && state.featureRules?.mutation === "war_chariot" && source.type === "rook" && unmodifiedGround(source)
+    && !Object.keys(state.effectsByPieceId?.[source.id] ?? {}).length
+    && pathVictims.length === 1 && unmodifiedGround(pathVictims[0]) && getController(pathVictims[0]) !== actingSide
+    && !Object.keys(state.effectsByPieceId?.[pathVictims[0].id] ?? {}).length
+    && target && unmodifiedGround(target) && getController(target) !== actingSide
+    && endpointEffects?.dragonScale === 1 && Object.keys(endpointEffects).every(k => k === "dragonScale" || k === "dragonClaw")
+    && !state.ghosts?.length && !state.warps?.length && !secret.traps?.length;
   const pathCrushed = pathVictims.flatMap((pathVictim) => {
     const captured = captureByCrush(nextState, nextSecret, pathVictim.id, actingSide);
     return captured ? [captured] : [];
@@ -758,7 +775,11 @@ export function applyAuthoritativeAssassination(
     return { state: nextState, secret: nextSecret, duplicate: false };
   }
 
-  const entersStealth = !continuing && nextState.pieces.some(p => p.id === source.id && getController(p) === actingSide);
+  const retainedActivationSource = guardedActivationScale && scaleBounced && pathCrushed.length === 1
+    && nextState.pieces.some(p => p.id === source.id && getController(p) === actingSide && p.x === command.from.x && p.y === command.from.y)
+    && !isGeneralInCheck(nextState, actingSide) && !isGeneralInCheck(nextState, otherSide(actingSide));
+  if (retainedActivationSource) nextState.assassination![actingSide].heroChargeAvailable = true;
+  const entersStealth = !continuing && !retainedActivationSource && nextState.pieces.some(p => p.id === source.id && getController(p) === actingSide);
   if (continuing) endStealth(nextState, source.id);
   if (entersStealth) {
     const skillState = nextState.assassination?.[actingSide];

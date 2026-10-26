@@ -3,6 +3,7 @@ import { RuleError } from "./errors.ts";
 import { selectedHeroId } from "./hero-forms.ts";
 import { shuffleIdentities } from "./setup.ts";
 import { reconcileGhostInfections } from "./ghosts.ts";
+import { rebindTrainingAfterShuffle } from "./hero-progress.ts";
 import { copy, advanceToFormalTurn, beginFormalTurn } from "./settlement.ts";
 import { emitMechanismEvent } from "./mechanism-observer.ts";
 import type { GameState, HeroAbilityCommand, MoveResult, RandomInt, SecretIdentity, SecretState, Side } from "./types.ts";
@@ -102,6 +103,7 @@ export function applyShuffleAction(state: GameState, secret: SecretState, comman
       s.formalTurns.black += 1;
     }
     s.turn = "red";
+    rebindTrainingAfterShuffle(s, k, random);
     emitMechanismEvent("shuffle_reset", s, k, { window: pending.window, countsAsFormalTurn: pending.window === "B", blackBefore, blackAfter: s.formalTurns?.black ?? 0 });
     advanceToFormalTurn(s, k, "red", random);
   }
