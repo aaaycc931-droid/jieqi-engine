@@ -6,12 +6,18 @@ import { isGeneralInCheck, pieceAt } from "./rules.ts";
 import { advanceToFormalTurn, closeDirectDeaths, copy, destroyPieceBatch, formalTurn, generateGhosts, markRevealed, placementAllowed, queueLanding, settleLandings } from "./settlement.ts";
 import { enterTurnPhase, recordAction } from "./turns.ts";
 import { applyAuthoritativeMove } from "./game.ts";
+import { emitAuthorityCheckpoint } from "./mechanism-observer.ts";
 import type { GameState, HeroAbilityCommand, MoveResult, Position, PublicPiece, RandomInt, SecretState, Side } from "./types.ts";
 const requireRule = (ok: unknown, code: string, message: string) => { if (!ok) throw new RuleError(code, message); };
-function choose<T>(items: T[], count: number, random: RandomInt): T[] {
-  const pool = [...items], result: T[] = [];
-  while (pool.length && result.length < count) result.push(...pool.splice(random(pool.length), 1));
-  return result;
+function choose<T extends { id: string }>(items: T[], count: number, random: RandomInt) {
+  const pool = [...items], selected: T[] = [], draws: Array<{ orderedCandidateIds: string[]; maxExclusive: number; index: number; selectedId: string }> = [];
+  while (pool.length && selected.length < count) {
+    const index = random(pool.length);
+    if (!Number.isInteger(index) || index < 0 || index >= pool.length) throw new RangeError("Descent RNG index outside candidate pool");
+    draws.push({ orderedCandidateIds: pool.map(p => p.id), maxExclusive: pool.length, index, selectedId: pool[index].id });
+    selected.push(...pool.splice(index, 1));
+  }
+  return { selected, draws };
 }
 function reveal(state: GameState, secret: SecretState, id: string): void {
   const p = state.pieces.find(p => p.id === id)!;
@@ -20,17 +26,23 @@ function reveal(state: GameState, secret: SecretState, id: string): void {
 export function ascendGalakrond(state: GameState, secret: SecretState, side: Side, random: RandomInt): void {
   const runtime = state.heroRuntime?.[side], selection = selectedHeroSelection(state, side);
   if (selection?.heroId !== "devout_zealot" || !runtime?.omen || runtime.descended || state.status !== "playing") return;
-  delete runtime.omen; runtime.descended = true;
   const variant = selection.variant ?? "unspeakable";
+  // Validate the full draw sequence before committing descent state. Evidence is
+  // passive and authority-only; inactive capture adds no RNG calls.
+  const selectionDraw = variant === "unspeakable" || variant === "invincible" ? choose(state.pieces.filter(p =>
+    isBoardPiece(p) && (variant === "unspeakable" ? !p.faceDown && getController(p) !== side && p.type !== "general"
+      : getController(p) === side && (p.faceDown || p.type !== "general"))), 4, random) : undefined;
+  if (variant === "invincible") for (const p of selectionDraw!.selected) if (p.faceDown) requireRule(secret.identities[p.id], "MISSING_SECRET", "揭示身份缺失");
+  delete runtime.omen; runtime.descended = true;
   const atom = `galakrond:${side}:${formalTurn(state, side) + 1}`;
   state.automaticEvents = []; state.destructionBatches = []; state.landingEvents = [];
   (state.automaticEvents ??= []).push({ kind: `galakrond:${variant}`, side });
+  for (const draw of selectionDraw?.draws ?? []) emitAuthorityCheckpoint("authority_random_draw", state, secret,
+    { source: "galakrond", side, variant, atom, ...draw });
   if (variant === "unspeakable") {
-    const pool = state.pieces.filter(p => isBoardPiece(p) && !p.faceDown && getController(p) !== side && p.type !== "general");
-    destroyPieceBatch(state, secret, atom, "galakrond:unspeakable", choose(pool, 4, random).map(p => ({ pieceId: p.id, by: side, cause: "unspeakable" })));
+    destroyPieceBatch(state, secret, atom, "galakrond:unspeakable", selectionDraw!.selected.map(p => ({ pieceId: p.id, by: side, cause: "unspeakable" })));
   } else if (variant === "invincible") {
-    const pool = state.pieces.filter(p => isBoardPiece(p) && getController(p) === side && (p.faceDown || p.type !== "general"));
-    for (const p of choose(pool, 4, random)) {
+    for (const p of selectionDraw!.selected) {
       reveal(state, secret, p.id); state.effectsByPieceId ??= {};
       Object.assign(state.effectsByPieceId[p.id] ??= {}, { dragonClaw: true, dragonScale: 1 });
     }

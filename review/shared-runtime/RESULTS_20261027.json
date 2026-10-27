@@ -1,0 +1,1153 @@
+{
+  "schema": "lezi.shared_runtime.public_execution_summary.v1",
+  "date_local": "2026-10-27",
+  "engine_parent": "b28535780a7c7427c0d715b46b0362d35a696d8f",
+  "handoff_input_commit": "d1c946452532e58fbf23342ef200f2bee5ce5270",
+  "related_tests": {
+    "files": 50,
+    "passed": 710,
+    "failures": 0
+  },
+  "original_replays": 12,
+  "original_requests": 110,
+  "normal_mains": 100,
+  "before_main_attempts": 10,
+  "main_atom_checkpoints": 100,
+  "formal_settled_checkpoints": 100,
+  "paired_families": 2,
+  "paired_post_request_checkpoints": 14,
+  "paired_view_comparisons": 42,
+  "normalization": "Known generated room/player/action/system IDs only; no game fields or clocks removed.",
+  "authority_raw_sha256": "ccea6579108af5f2547d8b4f8bc1179239967784411de135028e85277cc59259",
+  "authority_raw_visibility": "owner-only research artifact; excluded from public GitHub",
+  "replays": [
+    {
+      "replay_id": "MA-PD01",
+      "tuple_id": "HC-ADM-PD-M04",
+      "world_id": "IW-0eaace9ad2c1699d",
+      "requests": 5,
+      "planned_requests": 5,
+      "status": "ORIGINAL_REQUEST_SEQUENCE_EXECUTED",
+      "ledger_matched": true,
+      "requests_checked": [
+        {
+          "id": "MA-PD01:R1:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD01:B1:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD01:R2:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD01:B2:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD01:R3:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        }
+      ]
+    },
+    {
+      "replay_id": "MA-PD04",
+      "tuple_id": "HC-ADM-PD-M04",
+      "world_id": "IW-4fb3ac123360c7d4",
+      "requests": 10,
+      "planned_requests": 10,
+      "status": "ORIGINAL_REQUEST_SEQUENCE_EXECUTED",
+      "ledger_matched": true,
+      "requests_checked": [
+        {
+          "id": "MA-PD04:R1:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD04:B1:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD04:R2:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD04:B2:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD04:R3:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD04:B3:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD04:R4:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD04:B4:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD04:R5:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD04:B5:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        }
+      ]
+    },
+    {
+      "replay_id": "MA-PD05-A",
+      "tuple_id": "HC-ADM-PD-M04",
+      "world_id": "IW-b069ebc9db68ef3e",
+      "requests": 7,
+      "planned_requests": 7,
+      "status": "ORIGINAL_REQUEST_SEQUENCE_EXECUTED",
+      "ledger_matched": true,
+      "requests_checked": [
+        {
+          "id": "MA-PD05-A:R1:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD05-A:B1:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD05-A:R2:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD05-A:B2:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD05-A:R3:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD05-A:B3:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD05-A:R4:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        }
+      ]
+    },
+    {
+      "replay_id": "MA-PD05-B",
+      "tuple_id": "HC-ADM-PD-M04",
+      "world_id": "IW-40b431632b89dc78",
+      "requests": 7,
+      "planned_requests": 7,
+      "status": "ORIGINAL_REQUEST_SEQUENCE_EXECUTED",
+      "ledger_matched": true,
+      "requests_checked": [
+        {
+          "id": "MA-PD05-B:R1:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD05-B:B1:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD05-B:R2:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD05-B:B2:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD05-B:R3:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD05-B:B3:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD05-B:R4:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        }
+      ]
+    },
+    {
+      "replay_id": "MA-PD02",
+      "tuple_id": "HC-ADM-PD-M01",
+      "world_id": "IW-b069ebc9db68ef3e",
+      "requests": 9,
+      "planned_requests": 9,
+      "status": "ORIGINAL_REQUEST_SEQUENCE_EXECUTED",
+      "ledger_matched": true,
+      "requests_checked": [
+        {
+          "id": "MA-PD02:R1:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD02:B1:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD02:R2:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD02:B2:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD02:R3:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD02:B3:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD02:R4:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD02:B4:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD02:R5:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        }
+      ]
+    },
+    {
+      "replay_id": "MA-PD03",
+      "tuple_id": "HC-ADM-PD-M01",
+      "world_id": "IW-b069ebc9db68ef3e",
+      "requests": 13,
+      "planned_requests": 13,
+      "status": "ORIGINAL_REQUEST_SEQUENCE_EXECUTED",
+      "ledger_matched": true,
+      "requests_checked": [
+        {
+          "id": "MA-PD03:R1:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD03:B1:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD03:R2:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD03:B2:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD03:R3:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD03:B3:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD03:R4:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD03:B4:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD03:R5:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD03:B5:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD03:R6:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD03:B6:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD03:R7:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        }
+      ]
+    },
+    {
+      "replay_id": "MA-PD06-A",
+      "tuple_id": "HC-ADM-PD-M01",
+      "world_id": "IW-168cb617da30889f",
+      "requests": 7,
+      "planned_requests": 7,
+      "status": "ORIGINAL_REQUEST_SEQUENCE_EXECUTED",
+      "ledger_matched": true,
+      "requests_checked": [
+        {
+          "id": "MA-PD06-A:R1:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD06-A:B1:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD06-A:R2:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD06-A:B2:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD06-A:R3:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD06-A:B3:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD06-A:R4:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        }
+      ]
+    },
+    {
+      "replay_id": "MA-PD06-B",
+      "tuple_id": "HC-ADM-PD-M01",
+      "world_id": "IW-d158bccabffc5f23",
+      "requests": 7,
+      "planned_requests": 7,
+      "status": "ORIGINAL_REQUEST_SEQUENCE_EXECUTED",
+      "ledger_matched": true,
+      "requests_checked": [
+        {
+          "id": "MA-PD06-B:R1:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD06-B:B1:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD06-B:R2:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD06-B:B2:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD06-B:R3:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD06-B:B3:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-PD06-B:R4:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        }
+      ]
+    },
+    {
+      "replay_id": "MA-DS01-02",
+      "tuple_id": "HC-ADM-DS-D01",
+      "world_id": "IW-b66071aa72ba8a72",
+      "requests": 12,
+      "planned_requests": 12,
+      "status": "ORIGINAL_REQUEST_SEQUENCE_EXECUTED",
+      "ledger_matched": true,
+      "requests_checked": [
+        {
+          "id": "MA-DS01-02:R1:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-DS01-02:B1:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-DS01-02:R2:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-DS01-02:B2:pre-1",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 0,
+          "formal_settled_checkpoints": 0
+        },
+        {
+          "id": "MA-DS01-02:B2:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-DS01-02:R3:pre-1",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 0,
+          "formal_settled_checkpoints": 0
+        },
+        {
+          "id": "MA-DS01-02:R3:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-DS01-02:B3:pre-1",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 0,
+          "formal_settled_checkpoints": 0
+        },
+        {
+          "id": "MA-DS01-02:B3:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-DS01-02:R4:pre-1",
+          "disposition": "rejected",
+          "error_code": "IN_CHECK",
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 0,
+          "formal_settled_checkpoints": 0
+        },
+        {
+          "id": "MA-DS01-02:R4:pre-2",
+          "disposition": "rejected",
+          "error_code": "IN_CHECK",
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 0,
+          "formal_settled_checkpoints": 0
+        },
+        {
+          "id": "MA-DS01-02:R4:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        }
+      ]
+    },
+    {
+      "replay_id": "MA-DS03",
+      "tuple_id": "HC-ADM-DS-D01",
+      "world_id": "IW-bdcfe63226360aaa",
+      "requests": 8,
+      "planned_requests": 8,
+      "status": "ORIGINAL_REQUEST_SEQUENCE_EXECUTED",
+      "ledger_matched": true,
+      "requests_checked": [
+        {
+          "id": "MA-DS03:R1:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-DS03:B1:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-DS03:R2:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-DS03:B2:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-DS03:R3:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-DS03:B3:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-DS03:R4:pre-1",
+          "disposition": "rejected",
+          "error_code": "IN_CHECK",
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 0,
+          "formal_settled_checkpoints": 0
+        },
+        {
+          "id": "MA-DS03:R4:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        }
+      ]
+    },
+    {
+      "replay_id": "MA-DS04",
+      "tuple_id": "HC-ADM-DS-D01",
+      "world_id": "IW-61790bfc01eccf12",
+      "requests": 10,
+      "planned_requests": 10,
+      "status": "ORIGINAL_REQUEST_SEQUENCE_EXECUTED",
+      "ledger_matched": true,
+      "requests_checked": [
+        {
+          "id": "MA-DS04:R1:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-DS04:B1:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-DS04:R2:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-DS04:B2:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-DS04:R3:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-DS04:B3:pre-1",
+          "disposition": "rejected",
+          "error_code": "IN_CHECK",
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 0,
+          "formal_settled_checkpoints": 0
+        },
+        {
+          "id": "MA-DS04:B3:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-DS04:R4:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-DS04:B4:pre-1",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 0,
+          "formal_settled_checkpoints": 0
+        },
+        {
+          "id": "MA-DS04:B4:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        }
+      ]
+    },
+    {
+      "replay_id": "MA-DS05",
+      "tuple_id": "HC-ADM-DS-D01",
+      "world_id": "IW-95b0bb66f0ced10a",
+      "requests": 15,
+      "planned_requests": 15,
+      "status": "ORIGINAL_REQUEST_SEQUENCE_EXECUTED",
+      "ledger_matched": true,
+      "requests_checked": [
+        {
+          "id": "MA-DS05:R1:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-DS05:B1:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-DS05:R2:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-DS05:B2:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-DS05:R3:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-DS05:B3:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-DS05:R4:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-DS05:B4:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-DS05:R5:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-DS05:B5:pre-1",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 0,
+          "formal_settled_checkpoints": 0
+        },
+        {
+          "id": "MA-DS05:B5:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-DS05:R6:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-DS05:B6:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        },
+        {
+          "id": "MA-DS05:R7:pre-1",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 0,
+          "formal_settled_checkpoints": 0
+        },
+        {
+          "id": "MA-DS05:R7:main",
+          "disposition": "accepted",
+          "error_code": null,
+          "outcome_issues": [],
+          "evidence_valid": true,
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1
+        }
+      ]
+    }
+  ],
+  "original_64_acceptance": "UNRUN_INDIVIDUAL_OBLIGATIONS_NOT_DISCHARGED",
+  "original_210_field_matrix": "NOT_INDIVIDUALLY_DISCHARGED",
+  "independent_QA": false,
+  "product_release": false,
+  "scoring": "frozen",
+  "NET": "paused"
+}

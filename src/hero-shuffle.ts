@@ -3,6 +3,7 @@ import { RuleError } from "./errors.ts";
 import { selectedHeroId } from "./hero-forms.ts";
 import { shuffleIdentities } from "./setup.ts";
 import { reconcileGhostInfections } from "./ghosts.ts";
+import { rebindTrainingAfterShuffle } from "./hero-progress.ts";
 import { copy, advanceToFormalTurn, beginFormalTurn } from "./settlement.ts";
 import { emitMechanismEvent } from "./mechanism-observer.ts";
 import type { GameState, HeroAbilityCommand, MoveResult, RandomInt, SecretIdentity, SecretState, Side } from "./types.ts";
@@ -15,7 +16,8 @@ export function openShuffleA(state: GameState, side: Side): boolean {
   const runtime = state.heroRuntime?.black;
   if (side !== "black" || selectedHeroId(state, "black") !== "shuffler" || runtime?.used || runtime?.shuffleLost || state.formalTurns?.black !== 1 || runtime?.shuffleWindow) return false;
   if (!state.heroRuntime?.red?.omen) { const probe = copy(state); probe.turn = "red"; beginFormalTurn(probe, undefined, () => 99); if (isCheckmate(probe, "red") || isStalemate(probe, "red")) return false; }
-  delete state.turnStartedAt; delete state.turnDeadlineAt; delete state.formalClock;
+  // A is a post-action decision within black's first timed opportunity.
+  // Preserve that authority deadline; it is not a fresh formal clock.
   (state.heroRuntime!.black ??= {}).shuffleWindow = "A";
   state.pendingShuffle = { window: "A", side: "black" }; return true;
 }
@@ -31,7 +33,11 @@ export function applyShuffleAction(state: GameState, secret: SecretState, comman
   if (command.expectedRevision !== s.revision) throw new RuleError("STALE_REVISION", "客户端版本過期");
   const runtime = s.heroRuntime!.black!; delete s.pendingShuffle;
   if (command.skip) {
-    if (pending.window === "A") { runtime.shuffleWindow = "B"; advanceToFormalTurn(s, k, "red", random); }
+    if (pending.window === "A") {
+      runtime.shuffleWindow = "B";
+      delete s.turnStartedAt; delete s.turnDeadlineAt; delete s.formalClock;
+      advanceToFormalTurn(s, k, "red", random);
+    }
     else { runtime.shuffleLost = true; delete runtime.shuffleWindow; advanceToFormalTurn(s, k, "black", random); }
   } else {
     if (!k.shuffleOpening) throw new RuleError("MISSING_SHUFFLE_OPENING", "没有开局权威结构");
@@ -97,6 +103,7 @@ export function applyShuffleAction(state: GameState, secret: SecretState, comman
       s.formalTurns.black += 1;
     }
     s.turn = "red";
+    rebindTrainingAfterShuffle(s, k, random);
     emitMechanismEvent("shuffle_reset", s, k, { window: pending.window, countsAsFormalTurn: pending.window === "B", blackBefore, blackAfter: s.formalTurns?.black ?? 0 });
     advanceToFormalTurn(s, k, "red", random);
   }

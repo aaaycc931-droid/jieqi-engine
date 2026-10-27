@@ -316,7 +316,9 @@ export interface SecretState {
   processedActions: Record<string, number>;
   shuffleOpening?: { pieces: PublicPiece[]; identities: Record<string, SecretIdentity> };
   timelineEpoch?: number;
-  training?: Partial<Record<Side, { type: Exclude<PieceType, "general">; pieceId?: string; progress: number; graduated?: true; failed?: true }>>;
+  /** Original recruitment side, distinct from M07's mutable hidden color. */
+  trainingOriginalSides?: Record<string, Side>;
+  training?: Partial<Record<Side, { type: Exclude<PieceType, "general">; pieceId?: string; progress: number; graduated?: true; failed?: true; failureCause?: "pregraduation_death" }>>;
   insights?: Partial<Record<Side, Array<{ pieceId: string; identity: SecretIdentity; revision: number; valid: boolean }>>>;
   traps?: Array<{ id: string; owner: Side; position: Position; opponentTurnsRemaining: number }>;
   trueGenerals?: Partial<Record<Side, string>>;
@@ -340,13 +342,14 @@ export interface MoveCommand {
 
 export interface HeroAbilityCommand {
   kind: "hero_ability";
-  ability: "invoke" | "unspeakable" | "destruction" | "timeline_twist" | "rewind" | "hourglass" | "bomb" | "shadow" | "burning_flame" | "insight" | "inner_ghost_burst" | "ascension" | "storm_assault" | "river_enter" | "river_move" | "river_exit" | "inner_wave" | "landing" | "blade_shift" | "charge_move" | "charge_attack" | "wave_move" | "skip_child" | "shuffle" | "brawl" | "brawl_attack";
+  ability: "invoke" | "unspeakable" | "destruction" | "timeline_twist" | "rewind" | "hourglass" | "bomb" | "shadow" | "burning_flame" | "insight" | "inner_ghost_burst" | "ascension" | "storm_assault" | "river_enter" | "river_move" | "river_exit" | "inner_wave" | "landing" | "blade_shift" | "charge_move" | "charge_attack" | "wave_move" | "skip_child" | "shuffle" | "brawl" | "brawl_attack" | "training";
   actionId: string;
   expectedRevision: number;
   pieceId?: string;
   to?: Position;
   randomCovered?: boolean;
   secretInsight?: boolean;
+  trainingType?: PieceType;
   placements?: Array<{ pieceId: string; to: Position }>;
   skip?: boolean;
 }

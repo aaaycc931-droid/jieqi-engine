@@ -1,0 +1,3812 @@
+{
+  "schema": "lezi.hc_initialization_witness_data.v1",
+  "revision": "HC-DESIGN-03-20261017-r26",
+  "task": "NEXT-HC-INITIALIZATION-WITNESS-DATA",
+  "status": "DATA_PREPARED_AND_OFFLINE_CHECKED_ENGINE_UNRUN",
+  "handoff_source_commit": "76a4279586ca40db88198e40d371de32c3766b11",
+  "source_scope_file": {
+    "path": "worklines/half_chaos/ACCEPTANCE_SCOPE.json",
+    "git_blob_sha": "758549d8f8692160bcec3768fdffe89eba4d4120"
+  },
+  "engine_source": {
+    "repository": "aaaycc931-droid/jieqi-engine",
+    "commit": "14b306fe1cf9f459ef54e22d9ffa4ce2e83db510",
+    "branch": "codex/half-chaos-h11-b-clock-20261012",
+    "PR": 7,
+    "branch_and_PR_head_rechecked": true,
+    "files": {
+      "src/setup.ts": "15df513e8204d48464c097453c7bf9b83748c9f5",
+      "src/slots.ts": "84971b8e5f52f6ea1e20ee4ddbe2e4c8b736f911",
+      "scripts/scoring/mode-fixture-loader.ts": "f6dfb963bfbae035740003955f094824f661aea8"
+    }
+  },
+  "scope": "Synthetic planned opening identity/world and legal shuffle witness data; not executable replay fixtures, runtime evidence, gameplay approval or mode admission.",
+  "visibility_boundary": "Expected authority-side fixture input. Public repository publication of synthetic data does not authorize sending live hidden identity or anchors to either player projection.",
+  "identity_boundary": "covered-NN maps the fixed-source initial slot/body only. No generic stable lifecycle identity, H11/H06 restoration or new production identifier is established.",
+  "initial_contract": {
+    "mode": "half_chaos",
+    "turn": "red",
+    "nonroyals": 30,
+    "nonroyals_face_down": true,
+    "royals": [
+      {
+        "id": "black-general",
+        "side": "black",
+        "type": "general",
+        "x": 4,
+        "y": 0,
+        "face_down": false
+      },
+      {
+        "id": "red-general",
+        "side": "red",
+        "type": "general",
+        "x": 4,
+        "y": 9,
+        "face_down": false
+      }
+    ],
+    "per_side_pool_counts": {
+      "rook": 2,
+      "horse": 2,
+      "elephant": 2,
+      "advisor": 2,
+      "cannon": 2,
+      "pawn": 5
+    },
+    "original_side_equals_initial_slot_side": true,
+    "pool_order_per_side": [
+      "rook",
+      "rook",
+      "horse",
+      "horse",
+      "elephant",
+      "elephant",
+      "advisor",
+      "advisor",
+      "cannon",
+      "cannon",
+      "pawn",
+      "pawn",
+      "pawn",
+      "pawn",
+      "pawn"
+    ],
+    "side_shuffle_order": [
+      "black",
+      "red"
+    ],
+    "draw_bounds_per_side": [
+      15,
+      14,
+      13,
+      12,
+      11,
+      10,
+      9,
+      8,
+      7,
+      6,
+      5,
+      4,
+      3,
+      2
+    ],
+    "draws_per_plan": 28,
+    "witness_method": "For each side and i=14..1, choose the first pool index j<=i whose type equals desired[i], record randomInt(i+1)=j, swap pool[i]/pool[j]. Original loader uses this method; duplicate types have no new production identity."
+  },
+  "initial_slots": [
+    {
+      "side": "black",
+      "x": 0,
+      "y": 0,
+      "slot_type": "rook",
+      "id": "covered-00",
+      "face_down": true
+    },
+    {
+      "side": "black",
+      "x": 1,
+      "y": 0,
+      "slot_type": "horse",
+      "id": "covered-01",
+      "face_down": true
+    },
+    {
+      "side": "black",
+      "x": 2,
+      "y": 0,
+      "slot_type": "elephant",
+      "id": "covered-02",
+      "face_down": true
+    },
+    {
+      "side": "black",
+      "x": 3,
+      "y": 0,
+      "slot_type": "advisor",
+      "id": "covered-03",
+      "face_down": true
+    },
+    {
+      "side": "black",
+      "x": 5,
+      "y": 0,
+      "slot_type": "advisor",
+      "id": "covered-04",
+      "face_down": true
+    },
+    {
+      "side": "black",
+      "x": 6,
+      "y": 0,
+      "slot_type": "elephant",
+      "id": "covered-05",
+      "face_down": true
+    },
+    {
+      "side": "black",
+      "x": 7,
+      "y": 0,
+      "slot_type": "horse",
+      "id": "covered-06",
+      "face_down": true
+    },
+    {
+      "side": "black",
+      "x": 8,
+      "y": 0,
+      "slot_type": "rook",
+      "id": "covered-07",
+      "face_down": true
+    },
+    {
+      "side": "black",
+      "x": 1,
+      "y": 2,
+      "slot_type": "cannon",
+      "id": "covered-08",
+      "face_down": true
+    },
+    {
+      "side": "black",
+      "x": 7,
+      "y": 2,
+      "slot_type": "cannon",
+      "id": "covered-09",
+      "face_down": true
+    },
+    {
+      "side": "black",
+      "x": 0,
+      "y": 3,
+      "slot_type": "pawn",
+      "id": "covered-10",
+      "face_down": true
+    },
+    {
+      "side": "black",
+      "x": 2,
+      "y": 3,
+      "slot_type": "pawn",
+      "id": "covered-11",
+      "face_down": true
+    },
+    {
+      "side": "black",
+      "x": 4,
+      "y": 3,
+      "slot_type": "pawn",
+      "id": "covered-12",
+      "face_down": true
+    },
+    {
+      "side": "black",
+      "x": 6,
+      "y": 3,
+      "slot_type": "pawn",
+      "id": "covered-13",
+      "face_down": true
+    },
+    {
+      "side": "black",
+      "x": 8,
+      "y": 3,
+      "slot_type": "pawn",
+      "id": "covered-14",
+      "face_down": true
+    },
+    {
+      "side": "red",
+      "x": 0,
+      "y": 9,
+      "slot_type": "rook",
+      "id": "covered-15",
+      "face_down": true
+    },
+    {
+      "side": "red",
+      "x": 1,
+      "y": 9,
+      "slot_type": "horse",
+      "id": "covered-16",
+      "face_down": true
+    },
+    {
+      "side": "red",
+      "x": 2,
+      "y": 9,
+      "slot_type": "elephant",
+      "id": "covered-17",
+      "face_down": true
+    },
+    {
+      "side": "red",
+      "x": 3,
+      "y": 9,
+      "slot_type": "advisor",
+      "id": "covered-18",
+      "face_down": true
+    },
+    {
+      "side": "red",
+      "x": 5,
+      "y": 9,
+      "slot_type": "advisor",
+      "id": "covered-19",
+      "face_down": true
+    },
+    {
+      "side": "red",
+      "x": 6,
+      "y": 9,
+      "slot_type": "elephant",
+      "id": "covered-20",
+      "face_down": true
+    },
+    {
+      "side": "red",
+      "x": 7,
+      "y": 9,
+      "slot_type": "horse",
+      "id": "covered-21",
+      "face_down": true
+    },
+    {
+      "side": "red",
+      "x": 8,
+      "y": 9,
+      "slot_type": "rook",
+      "id": "covered-22",
+      "face_down": true
+    },
+    {
+      "side": "red",
+      "x": 1,
+      "y": 7,
+      "slot_type": "cannon",
+      "id": "covered-23",
+      "face_down": true
+    },
+    {
+      "side": "red",
+      "x": 7,
+      "y": 7,
+      "slot_type": "cannon",
+      "id": "covered-24",
+      "face_down": true
+    },
+    {
+      "side": "red",
+      "x": 0,
+      "y": 6,
+      "slot_type": "pawn",
+      "id": "covered-25",
+      "face_down": true
+    },
+    {
+      "side": "red",
+      "x": 2,
+      "y": 6,
+      "slot_type": "pawn",
+      "id": "covered-26",
+      "face_down": true
+    },
+    {
+      "side": "red",
+      "x": 4,
+      "y": 6,
+      "slot_type": "pawn",
+      "id": "covered-27",
+      "face_down": true
+    },
+    {
+      "side": "red",
+      "x": 6,
+      "y": 6,
+      "slot_type": "pawn",
+      "id": "covered-28",
+      "face_down": true
+    },
+    {
+      "side": "red",
+      "x": 8,
+      "y": 6,
+      "slot_type": "pawn",
+      "id": "covered-29",
+      "face_down": true
+    }
+  ],
+  "world_reuse_boundary": "Identical identity/witness payloads are shared by reference. Every replay remains an independent fresh opening, except DS02 is the continuation inside MA-DS01-02; sharing data never shares game state or evidence.",
+  "worlds": [
+    {
+      "id": "IW-0eaace9ad2c1699d",
+      "true_type_by_stable_piece_id": {
+        "covered-00": "advisor",
+        "covered-01": "horse",
+        "covered-02": "elephant",
+        "covered-03": "rook",
+        "covered-04": "advisor",
+        "covered-05": "elephant",
+        "covered-06": "horse",
+        "covered-07": "rook",
+        "covered-08": "cannon",
+        "covered-09": "cannon",
+        "covered-10": "pawn",
+        "covered-11": "pawn",
+        "covered-12": "pawn",
+        "covered-13": "pawn",
+        "covered-14": "pawn",
+        "covered-15": "cannon",
+        "covered-16": "horse",
+        "covered-17": "elephant",
+        "covered-18": "advisor",
+        "covered-19": "advisor",
+        "covered-20": "elephant",
+        "covered-21": "horse",
+        "covered-22": "rook",
+        "covered-23": "rook",
+        "covered-24": "cannon",
+        "covered-25": "pawn",
+        "covered-26": "pawn",
+        "covered-27": "pawn",
+        "covered-28": "pawn",
+        "covered-29": "pawn"
+      },
+      "all_initial_pieces_original_side": {
+        "covered-00": "black",
+        "covered-01": "black",
+        "covered-02": "black",
+        "covered-03": "black",
+        "covered-04": "black",
+        "covered-05": "black",
+        "covered-06": "black",
+        "covered-07": "black",
+        "covered-08": "black",
+        "covered-09": "black",
+        "covered-10": "black",
+        "covered-11": "black",
+        "covered-12": "black",
+        "covered-13": "black",
+        "covered-14": "black",
+        "covered-15": "red",
+        "covered-16": "red",
+        "covered-17": "red",
+        "covered-18": "red",
+        "covered-19": "red",
+        "covered-20": "red",
+        "covered-21": "red",
+        "covered-22": "red",
+        "covered-23": "red",
+        "covered-24": "red",
+        "covered-25": "red",
+        "covered-26": "red",
+        "covered-27": "red",
+        "covered-28": "red",
+        "covered-29": "red"
+      },
+      "fisher_yates_draw_witness": [
+        {
+          "call": 1,
+          "side": "black",
+          "bound": 15,
+          "value": 10
+        },
+        {
+          "call": 2,
+          "side": "black",
+          "bound": 14,
+          "value": 10
+        },
+        {
+          "call": 3,
+          "side": "black",
+          "bound": 13,
+          "value": 10
+        },
+        {
+          "call": 4,
+          "side": "black",
+          "bound": 12,
+          "value": 10
+        },
+        {
+          "call": 5,
+          "side": "black",
+          "bound": 11,
+          "value": 10
+        },
+        {
+          "call": 6,
+          "side": "black",
+          "bound": 10,
+          "value": 8
+        },
+        {
+          "call": 7,
+          "side": "black",
+          "bound": 9,
+          "value": 8
+        },
+        {
+          "call": 8,
+          "side": "black",
+          "bound": 8,
+          "value": 0
+        },
+        {
+          "call": 9,
+          "side": "black",
+          "bound": 7,
+          "value": 2
+        },
+        {
+          "call": 10,
+          "side": "black",
+          "bound": 6,
+          "value": 4
+        },
+        {
+          "call": 11,
+          "side": "black",
+          "bound": 5,
+          "value": 0
+        },
+        {
+          "call": 12,
+          "side": "black",
+          "bound": 4,
+          "value": 1
+        },
+        {
+          "call": 13,
+          "side": "black",
+          "bound": 3,
+          "value": 0
+        },
+        {
+          "call": 14,
+          "side": "black",
+          "bound": 2,
+          "value": 1
+        },
+        {
+          "call": 15,
+          "side": "red",
+          "bound": 15,
+          "value": 10
+        },
+        {
+          "call": 16,
+          "side": "red",
+          "bound": 14,
+          "value": 10
+        },
+        {
+          "call": 17,
+          "side": "red",
+          "bound": 13,
+          "value": 10
+        },
+        {
+          "call": 18,
+          "side": "red",
+          "bound": 12,
+          "value": 10
+        },
+        {
+          "call": 19,
+          "side": "red",
+          "bound": 11,
+          "value": 10
+        },
+        {
+          "call": 20,
+          "side": "red",
+          "bound": 10,
+          "value": 8
+        },
+        {
+          "call": 21,
+          "side": "red",
+          "bound": 9,
+          "value": 0
+        },
+        {
+          "call": 22,
+          "side": "red",
+          "bound": 8,
+          "value": 1
+        },
+        {
+          "call": 23,
+          "side": "red",
+          "bound": 7,
+          "value": 2
+        },
+        {
+          "call": 24,
+          "side": "red",
+          "bound": 6,
+          "value": 4
+        },
+        {
+          "call": 25,
+          "side": "red",
+          "bound": 5,
+          "value": 1
+        },
+        {
+          "call": 26,
+          "side": "red",
+          "bound": 4,
+          "value": 2
+        },
+        {
+          "call": 27,
+          "side": "red",
+          "bound": 3,
+          "value": 1
+        },
+        {
+          "call": 28,
+          "side": "red",
+          "bound": 2,
+          "value": 1
+        }
+      ],
+      "per_side_counts": {
+        "black": {
+          "advisor": 2,
+          "horse": 2,
+          "elephant": 2,
+          "rook": 2,
+          "cannon": 2,
+          "pawn": 5
+        },
+        "red": {
+          "cannon": 2,
+          "horse": 2,
+          "elephant": 2,
+          "advisor": 2,
+          "rook": 2,
+          "pawn": 5
+        }
+      },
+      "identity_sha256": "0eaace9ad2c1699d5748768b8928e341e004b20a2adb970dec5540c60669bf3a"
+    },
+    {
+      "id": "IW-b069ebc9db68ef3e",
+      "true_type_by_stable_piece_id": {
+        "covered-00": "advisor",
+        "covered-01": "horse",
+        "covered-02": "elephant",
+        "covered-03": "rook",
+        "covered-04": "advisor",
+        "covered-05": "elephant",
+        "covered-06": "horse",
+        "covered-07": "rook",
+        "covered-08": "cannon",
+        "covered-09": "cannon",
+        "covered-10": "pawn",
+        "covered-11": "pawn",
+        "covered-12": "pawn",
+        "covered-13": "pawn",
+        "covered-14": "pawn",
+        "covered-15": "rook",
+        "covered-16": "horse",
+        "covered-17": "elephant",
+        "covered-18": "advisor",
+        "covered-19": "advisor",
+        "covered-20": "elephant",
+        "covered-21": "horse",
+        "covered-22": "rook",
+        "covered-23": "cannon",
+        "covered-24": "cannon",
+        "covered-25": "pawn",
+        "covered-26": "pawn",
+        "covered-27": "pawn",
+        "covered-28": "pawn",
+        "covered-29": "pawn"
+      },
+      "all_initial_pieces_original_side": {
+        "covered-00": "black",
+        "covered-01": "black",
+        "covered-02": "black",
+        "covered-03": "black",
+        "covered-04": "black",
+        "covered-05": "black",
+        "covered-06": "black",
+        "covered-07": "black",
+        "covered-08": "black",
+        "covered-09": "black",
+        "covered-10": "black",
+        "covered-11": "black",
+        "covered-12": "black",
+        "covered-13": "black",
+        "covered-14": "black",
+        "covered-15": "red",
+        "covered-16": "red",
+        "covered-17": "red",
+        "covered-18": "red",
+        "covered-19": "red",
+        "covered-20": "red",
+        "covered-21": "red",
+        "covered-22": "red",
+        "covered-23": "red",
+        "covered-24": "red",
+        "covered-25": "red",
+        "covered-26": "red",
+        "covered-27": "red",
+        "covered-28": "red",
+        "covered-29": "red"
+      },
+      "fisher_yates_draw_witness": [
+        {
+          "call": 1,
+          "side": "black",
+          "bound": 15,
+          "value": 10
+        },
+        {
+          "call": 2,
+          "side": "black",
+          "bound": 14,
+          "value": 10
+        },
+        {
+          "call": 3,
+          "side": "black",
+          "bound": 13,
+          "value": 10
+        },
+        {
+          "call": 4,
+          "side": "black",
+          "bound": 12,
+          "value": 10
+        },
+        {
+          "call": 5,
+          "side": "black",
+          "bound": 11,
+          "value": 10
+        },
+        {
+          "call": 6,
+          "side": "black",
+          "bound": 10,
+          "value": 8
+        },
+        {
+          "call": 7,
+          "side": "black",
+          "bound": 9,
+          "value": 8
+        },
+        {
+          "call": 8,
+          "side": "black",
+          "bound": 8,
+          "value": 0
+        },
+        {
+          "call": 9,
+          "side": "black",
+          "bound": 7,
+          "value": 2
+        },
+        {
+          "call": 10,
+          "side": "black",
+          "bound": 6,
+          "value": 4
+        },
+        {
+          "call": 11,
+          "side": "black",
+          "bound": 5,
+          "value": 0
+        },
+        {
+          "call": 12,
+          "side": "black",
+          "bound": 4,
+          "value": 1
+        },
+        {
+          "call": 13,
+          "side": "black",
+          "bound": 3,
+          "value": 0
+        },
+        {
+          "call": 14,
+          "side": "black",
+          "bound": 2,
+          "value": 1
+        },
+        {
+          "call": 15,
+          "side": "red",
+          "bound": 15,
+          "value": 10
+        },
+        {
+          "call": 16,
+          "side": "red",
+          "bound": 14,
+          "value": 10
+        },
+        {
+          "call": 17,
+          "side": "red",
+          "bound": 13,
+          "value": 10
+        },
+        {
+          "call": 18,
+          "side": "red",
+          "bound": 12,
+          "value": 10
+        },
+        {
+          "call": 19,
+          "side": "red",
+          "bound": 11,
+          "value": 10
+        },
+        {
+          "call": 20,
+          "side": "red",
+          "bound": 10,
+          "value": 8
+        },
+        {
+          "call": 21,
+          "side": "red",
+          "bound": 9,
+          "value": 8
+        },
+        {
+          "call": 22,
+          "side": "red",
+          "bound": 8,
+          "value": 0
+        },
+        {
+          "call": 23,
+          "side": "red",
+          "bound": 7,
+          "value": 2
+        },
+        {
+          "call": 24,
+          "side": "red",
+          "bound": 6,
+          "value": 4
+        },
+        {
+          "call": 25,
+          "side": "red",
+          "bound": 5,
+          "value": 0
+        },
+        {
+          "call": 26,
+          "side": "red",
+          "bound": 4,
+          "value": 2
+        },
+        {
+          "call": 27,
+          "side": "red",
+          "bound": 3,
+          "value": 0
+        },
+        {
+          "call": 28,
+          "side": "red",
+          "bound": 2,
+          "value": 0
+        }
+      ],
+      "per_side_counts": {
+        "black": {
+          "advisor": 2,
+          "horse": 2,
+          "elephant": 2,
+          "rook": 2,
+          "cannon": 2,
+          "pawn": 5
+        },
+        "red": {
+          "rook": 2,
+          "horse": 2,
+          "elephant": 2,
+          "advisor": 2,
+          "cannon": 2,
+          "pawn": 5
+        }
+      },
+      "identity_sha256": "b069ebc9db68ef3e145e7d56af3e85a3c22673c5e95b957d40f8920a338754a7"
+    },
+    {
+      "id": "IW-4fb3ac123360c7d4",
+      "true_type_by_stable_piece_id": {
+        "covered-00": "advisor",
+        "covered-01": "horse",
+        "covered-02": "elephant",
+        "covered-03": "advisor",
+        "covered-04": "rook",
+        "covered-05": "elephant",
+        "covered-06": "horse",
+        "covered-07": "rook",
+        "covered-08": "cannon",
+        "covered-09": "cannon",
+        "covered-10": "pawn",
+        "covered-11": "pawn",
+        "covered-12": "pawn",
+        "covered-13": "pawn",
+        "covered-14": "pawn",
+        "covered-15": "cannon",
+        "covered-16": "horse",
+        "covered-17": "elephant",
+        "covered-18": "advisor",
+        "covered-19": "advisor",
+        "covered-20": "elephant",
+        "covered-21": "horse",
+        "covered-22": "rook",
+        "covered-23": "rook",
+        "covered-24": "cannon",
+        "covered-25": "pawn",
+        "covered-26": "pawn",
+        "covered-27": "pawn",
+        "covered-28": "pawn",
+        "covered-29": "pawn"
+      },
+      "all_initial_pieces_original_side": {
+        "covered-00": "black",
+        "covered-01": "black",
+        "covered-02": "black",
+        "covered-03": "black",
+        "covered-04": "black",
+        "covered-05": "black",
+        "covered-06": "black",
+        "covered-07": "black",
+        "covered-08": "black",
+        "covered-09": "black",
+        "covered-10": "black",
+        "covered-11": "black",
+        "covered-12": "black",
+        "covered-13": "black",
+        "covered-14": "black",
+        "covered-15": "red",
+        "covered-16": "red",
+        "covered-17": "red",
+        "covered-18": "red",
+        "covered-19": "red",
+        "covered-20": "red",
+        "covered-21": "red",
+        "covered-22": "red",
+        "covered-23": "red",
+        "covered-24": "red",
+        "covered-25": "red",
+        "covered-26": "red",
+        "covered-27": "red",
+        "covered-28": "red",
+        "covered-29": "red"
+      },
+      "fisher_yates_draw_witness": [
+        {
+          "call": 1,
+          "side": "black",
+          "bound": 15,
+          "value": 10
+        },
+        {
+          "call": 2,
+          "side": "black",
+          "bound": 14,
+          "value": 10
+        },
+        {
+          "call": 3,
+          "side": "black",
+          "bound": 13,
+          "value": 10
+        },
+        {
+          "call": 4,
+          "side": "black",
+          "bound": 12,
+          "value": 10
+        },
+        {
+          "call": 5,
+          "side": "black",
+          "bound": 11,
+          "value": 10
+        },
+        {
+          "call": 6,
+          "side": "black",
+          "bound": 10,
+          "value": 8
+        },
+        {
+          "call": 7,
+          "side": "black",
+          "bound": 9,
+          "value": 8
+        },
+        {
+          "call": 8,
+          "side": "black",
+          "bound": 8,
+          "value": 0
+        },
+        {
+          "call": 9,
+          "side": "black",
+          "bound": 7,
+          "value": 2
+        },
+        {
+          "call": 10,
+          "side": "black",
+          "bound": 6,
+          "value": 4
+        },
+        {
+          "call": 11,
+          "side": "black",
+          "bound": 5,
+          "value": 1
+        },
+        {
+          "call": 12,
+          "side": "black",
+          "bound": 4,
+          "value": 0
+        },
+        {
+          "call": 13,
+          "side": "black",
+          "bound": 3,
+          "value": 1
+        },
+        {
+          "call": 14,
+          "side": "black",
+          "bound": 2,
+          "value": 0
+        },
+        {
+          "call": 15,
+          "side": "red",
+          "bound": 15,
+          "value": 10
+        },
+        {
+          "call": 16,
+          "side": "red",
+          "bound": 14,
+          "value": 10
+        },
+        {
+          "call": 17,
+          "side": "red",
+          "bound": 13,
+          "value": 10
+        },
+        {
+          "call": 18,
+          "side": "red",
+          "bound": 12,
+          "value": 10
+        },
+        {
+          "call": 19,
+          "side": "red",
+          "bound": 11,
+          "value": 10
+        },
+        {
+          "call": 20,
+          "side": "red",
+          "bound": 10,
+          "value": 8
+        },
+        {
+          "call": 21,
+          "side": "red",
+          "bound": 9,
+          "value": 0
+        },
+        {
+          "call": 22,
+          "side": "red",
+          "bound": 8,
+          "value": 1
+        },
+        {
+          "call": 23,
+          "side": "red",
+          "bound": 7,
+          "value": 2
+        },
+        {
+          "call": 24,
+          "side": "red",
+          "bound": 6,
+          "value": 4
+        },
+        {
+          "call": 25,
+          "side": "red",
+          "bound": 5,
+          "value": 1
+        },
+        {
+          "call": 26,
+          "side": "red",
+          "bound": 4,
+          "value": 2
+        },
+        {
+          "call": 27,
+          "side": "red",
+          "bound": 3,
+          "value": 1
+        },
+        {
+          "call": 28,
+          "side": "red",
+          "bound": 2,
+          "value": 1
+        }
+      ],
+      "per_side_counts": {
+        "black": {
+          "advisor": 2,
+          "horse": 2,
+          "elephant": 2,
+          "rook": 2,
+          "cannon": 2,
+          "pawn": 5
+        },
+        "red": {
+          "cannon": 2,
+          "horse": 2,
+          "elephant": 2,
+          "advisor": 2,
+          "rook": 2,
+          "pawn": 5
+        }
+      },
+      "identity_sha256": "4fb3ac123360c7d466e0cfd517ff430261011cff5b38e4d07a5dd690679b6be5"
+    },
+    {
+      "id": "IW-40b431632b89dc78",
+      "true_type_by_stable_piece_id": {
+        "covered-00": "advisor",
+        "covered-01": "horse",
+        "covered-02": "elephant",
+        "covered-03": "rook",
+        "covered-04": "advisor",
+        "covered-05": "elephant",
+        "covered-06": "horse",
+        "covered-07": "rook",
+        "covered-08": "cannon",
+        "covered-09": "cannon",
+        "covered-10": "pawn",
+        "covered-11": "pawn",
+        "covered-12": "pawn",
+        "covered-13": "pawn",
+        "covered-14": "pawn",
+        "covered-15": "horse",
+        "covered-16": "rook",
+        "covered-17": "elephant",
+        "covered-18": "advisor",
+        "covered-19": "advisor",
+        "covered-20": "elephant",
+        "covered-21": "horse",
+        "covered-22": "rook",
+        "covered-23": "cannon",
+        "covered-24": "cannon",
+        "covered-25": "pawn",
+        "covered-26": "pawn",
+        "covered-27": "pawn",
+        "covered-28": "pawn",
+        "covered-29": "pawn"
+      },
+      "all_initial_pieces_original_side": {
+        "covered-00": "black",
+        "covered-01": "black",
+        "covered-02": "black",
+        "covered-03": "black",
+        "covered-04": "black",
+        "covered-05": "black",
+        "covered-06": "black",
+        "covered-07": "black",
+        "covered-08": "black",
+        "covered-09": "black",
+        "covered-10": "black",
+        "covered-11": "black",
+        "covered-12": "black",
+        "covered-13": "black",
+        "covered-14": "black",
+        "covered-15": "red",
+        "covered-16": "red",
+        "covered-17": "red",
+        "covered-18": "red",
+        "covered-19": "red",
+        "covered-20": "red",
+        "covered-21": "red",
+        "covered-22": "red",
+        "covered-23": "red",
+        "covered-24": "red",
+        "covered-25": "red",
+        "covered-26": "red",
+        "covered-27": "red",
+        "covered-28": "red",
+        "covered-29": "red"
+      },
+      "fisher_yates_draw_witness": [
+        {
+          "call": 1,
+          "side": "black",
+          "bound": 15,
+          "value": 10
+        },
+        {
+          "call": 2,
+          "side": "black",
+          "bound": 14,
+          "value": 10
+        },
+        {
+          "call": 3,
+          "side": "black",
+          "bound": 13,
+          "value": 10
+        },
+        {
+          "call": 4,
+          "side": "black",
+          "bound": 12,
+          "value": 10
+        },
+        {
+          "call": 5,
+          "side": "black",
+          "bound": 11,
+          "value": 10
+        },
+        {
+          "call": 6,
+          "side": "black",
+          "bound": 10,
+          "value": 8
+        },
+        {
+          "call": 7,
+          "side": "black",
+          "bound": 9,
+          "value": 8
+        },
+        {
+          "call": 8,
+          "side": "black",
+          "bound": 8,
+          "value": 0
+        },
+        {
+          "call": 9,
+          "side": "black",
+          "bound": 7,
+          "value": 2
+        },
+        {
+          "call": 10,
+          "side": "black",
+          "bound": 6,
+          "value": 4
+        },
+        {
+          "call": 11,
+          "side": "black",
+          "bound": 5,
+          "value": 0
+        },
+        {
+          "call": 12,
+          "side": "black",
+          "bound": 4,
+          "value": 1
+        },
+        {
+          "call": 13,
+          "side": "black",
+          "bound": 3,
+          "value": 0
+        },
+        {
+          "call": 14,
+          "side": "black",
+          "bound": 2,
+          "value": 1
+        },
+        {
+          "call": 15,
+          "side": "red",
+          "bound": 15,
+          "value": 10
+        },
+        {
+          "call": 16,
+          "side": "red",
+          "bound": 14,
+          "value": 10
+        },
+        {
+          "call": 17,
+          "side": "red",
+          "bound": 13,
+          "value": 10
+        },
+        {
+          "call": 18,
+          "side": "red",
+          "bound": 12,
+          "value": 10
+        },
+        {
+          "call": 19,
+          "side": "red",
+          "bound": 11,
+          "value": 10
+        },
+        {
+          "call": 20,
+          "side": "red",
+          "bound": 10,
+          "value": 8
+        },
+        {
+          "call": 21,
+          "side": "red",
+          "bound": 9,
+          "value": 8
+        },
+        {
+          "call": 22,
+          "side": "red",
+          "bound": 8,
+          "value": 0
+        },
+        {
+          "call": 23,
+          "side": "red",
+          "bound": 7,
+          "value": 2
+        },
+        {
+          "call": 24,
+          "side": "red",
+          "bound": 6,
+          "value": 4
+        },
+        {
+          "call": 25,
+          "side": "red",
+          "bound": 5,
+          "value": 0
+        },
+        {
+          "call": 26,
+          "side": "red",
+          "bound": 4,
+          "value": 2
+        },
+        {
+          "call": 27,
+          "side": "red",
+          "bound": 3,
+          "value": 0
+        },
+        {
+          "call": 28,
+          "side": "red",
+          "bound": 2,
+          "value": 1
+        }
+      ],
+      "per_side_counts": {
+        "black": {
+          "advisor": 2,
+          "horse": 2,
+          "elephant": 2,
+          "rook": 2,
+          "cannon": 2,
+          "pawn": 5
+        },
+        "red": {
+          "horse": 2,
+          "rook": 2,
+          "elephant": 2,
+          "advisor": 2,
+          "cannon": 2,
+          "pawn": 5
+        }
+      },
+      "identity_sha256": "40b431632b89dc786df3e9ef24b98c204467fe659c2e535f89938b195715553f"
+    },
+    {
+      "id": "IW-168cb617da30889f",
+      "true_type_by_stable_piece_id": {
+        "covered-00": "advisor",
+        "covered-01": "horse",
+        "covered-02": "elephant",
+        "covered-03": "advisor",
+        "covered-04": "rook",
+        "covered-05": "elephant",
+        "covered-06": "horse",
+        "covered-07": "rook",
+        "covered-08": "cannon",
+        "covered-09": "cannon",
+        "covered-10": "pawn",
+        "covered-11": "pawn",
+        "covered-12": "pawn",
+        "covered-13": "pawn",
+        "covered-14": "pawn",
+        "covered-15": "rook",
+        "covered-16": "horse",
+        "covered-17": "elephant",
+        "covered-18": "advisor",
+        "covered-19": "advisor",
+        "covered-20": "elephant",
+        "covered-21": "horse",
+        "covered-22": "rook",
+        "covered-23": "cannon",
+        "covered-24": "cannon",
+        "covered-25": "pawn",
+        "covered-26": "pawn",
+        "covered-27": "pawn",
+        "covered-28": "pawn",
+        "covered-29": "pawn"
+      },
+      "all_initial_pieces_original_side": {
+        "covered-00": "black",
+        "covered-01": "black",
+        "covered-02": "black",
+        "covered-03": "black",
+        "covered-04": "black",
+        "covered-05": "black",
+        "covered-06": "black",
+        "covered-07": "black",
+        "covered-08": "black",
+        "covered-09": "black",
+        "covered-10": "black",
+        "covered-11": "black",
+        "covered-12": "black",
+        "covered-13": "black",
+        "covered-14": "black",
+        "covered-15": "red",
+        "covered-16": "red",
+        "covered-17": "red",
+        "covered-18": "red",
+        "covered-19": "red",
+        "covered-20": "red",
+        "covered-21": "red",
+        "covered-22": "red",
+        "covered-23": "red",
+        "covered-24": "red",
+        "covered-25": "red",
+        "covered-26": "red",
+        "covered-27": "red",
+        "covered-28": "red",
+        "covered-29": "red"
+      },
+      "fisher_yates_draw_witness": [
+        {
+          "call": 1,
+          "side": "black",
+          "bound": 15,
+          "value": 10
+        },
+        {
+          "call": 2,
+          "side": "black",
+          "bound": 14,
+          "value": 10
+        },
+        {
+          "call": 3,
+          "side": "black",
+          "bound": 13,
+          "value": 10
+        },
+        {
+          "call": 4,
+          "side": "black",
+          "bound": 12,
+          "value": 10
+        },
+        {
+          "call": 5,
+          "side": "black",
+          "bound": 11,
+          "value": 10
+        },
+        {
+          "call": 6,
+          "side": "black",
+          "bound": 10,
+          "value": 8
+        },
+        {
+          "call": 7,
+          "side": "black",
+          "bound": 9,
+          "value": 8
+        },
+        {
+          "call": 8,
+          "side": "black",
+          "bound": 8,
+          "value": 0
+        },
+        {
+          "call": 9,
+          "side": "black",
+          "bound": 7,
+          "value": 2
+        },
+        {
+          "call": 10,
+          "side": "black",
+          "bound": 6,
+          "value": 4
+        },
+        {
+          "call": 11,
+          "side": "black",
+          "bound": 5,
+          "value": 1
+        },
+        {
+          "call": 12,
+          "side": "black",
+          "bound": 4,
+          "value": 0
+        },
+        {
+          "call": 13,
+          "side": "black",
+          "bound": 3,
+          "value": 1
+        },
+        {
+          "call": 14,
+          "side": "black",
+          "bound": 2,
+          "value": 0
+        },
+        {
+          "call": 15,
+          "side": "red",
+          "bound": 15,
+          "value": 10
+        },
+        {
+          "call": 16,
+          "side": "red",
+          "bound": 14,
+          "value": 10
+        },
+        {
+          "call": 17,
+          "side": "red",
+          "bound": 13,
+          "value": 10
+        },
+        {
+          "call": 18,
+          "side": "red",
+          "bound": 12,
+          "value": 10
+        },
+        {
+          "call": 19,
+          "side": "red",
+          "bound": 11,
+          "value": 10
+        },
+        {
+          "call": 20,
+          "side": "red",
+          "bound": 10,
+          "value": 8
+        },
+        {
+          "call": 21,
+          "side": "red",
+          "bound": 9,
+          "value": 8
+        },
+        {
+          "call": 22,
+          "side": "red",
+          "bound": 8,
+          "value": 0
+        },
+        {
+          "call": 23,
+          "side": "red",
+          "bound": 7,
+          "value": 2
+        },
+        {
+          "call": 24,
+          "side": "red",
+          "bound": 6,
+          "value": 4
+        },
+        {
+          "call": 25,
+          "side": "red",
+          "bound": 5,
+          "value": 0
+        },
+        {
+          "call": 26,
+          "side": "red",
+          "bound": 4,
+          "value": 2
+        },
+        {
+          "call": 27,
+          "side": "red",
+          "bound": 3,
+          "value": 0
+        },
+        {
+          "call": 28,
+          "side": "red",
+          "bound": 2,
+          "value": 0
+        }
+      ],
+      "per_side_counts": {
+        "black": {
+          "advisor": 2,
+          "horse": 2,
+          "elephant": 2,
+          "rook": 2,
+          "cannon": 2,
+          "pawn": 5
+        },
+        "red": {
+          "rook": 2,
+          "horse": 2,
+          "elephant": 2,
+          "advisor": 2,
+          "cannon": 2,
+          "pawn": 5
+        }
+      },
+      "identity_sha256": "168cb617da30889f8f881abcba373d370a970994b41880fcd784bf8b02be51dc"
+    },
+    {
+      "id": "IW-d158bccabffc5f23",
+      "true_type_by_stable_piece_id": {
+        "covered-00": "advisor",
+        "covered-01": "horse",
+        "covered-02": "elephant",
+        "covered-03": "advisor",
+        "covered-04": "rook",
+        "covered-05": "elephant",
+        "covered-06": "horse",
+        "covered-07": "rook",
+        "covered-08": "cannon",
+        "covered-09": "cannon",
+        "covered-10": "pawn",
+        "covered-11": "pawn",
+        "covered-12": "pawn",
+        "covered-13": "pawn",
+        "covered-14": "pawn",
+        "covered-15": "rook",
+        "covered-16": "pawn",
+        "covered-17": "elephant",
+        "covered-18": "advisor",
+        "covered-19": "advisor",
+        "covered-20": "elephant",
+        "covered-21": "horse",
+        "covered-22": "rook",
+        "covered-23": "cannon",
+        "covered-24": "cannon",
+        "covered-25": "pawn",
+        "covered-26": "pawn",
+        "covered-27": "pawn",
+        "covered-28": "pawn",
+        "covered-29": "horse"
+      },
+      "all_initial_pieces_original_side": {
+        "covered-00": "black",
+        "covered-01": "black",
+        "covered-02": "black",
+        "covered-03": "black",
+        "covered-04": "black",
+        "covered-05": "black",
+        "covered-06": "black",
+        "covered-07": "black",
+        "covered-08": "black",
+        "covered-09": "black",
+        "covered-10": "black",
+        "covered-11": "black",
+        "covered-12": "black",
+        "covered-13": "black",
+        "covered-14": "black",
+        "covered-15": "red",
+        "covered-16": "red",
+        "covered-17": "red",
+        "covered-18": "red",
+        "covered-19": "red",
+        "covered-20": "red",
+        "covered-21": "red",
+        "covered-22": "red",
+        "covered-23": "red",
+        "covered-24": "red",
+        "covered-25": "red",
+        "covered-26": "red",
+        "covered-27": "red",
+        "covered-28": "red",
+        "covered-29": "red"
+      },
+      "fisher_yates_draw_witness": [
+        {
+          "call": 1,
+          "side": "black",
+          "bound": 15,
+          "value": 10
+        },
+        {
+          "call": 2,
+          "side": "black",
+          "bound": 14,
+          "value": 10
+        },
+        {
+          "call": 3,
+          "side": "black",
+          "bound": 13,
+          "value": 10
+        },
+        {
+          "call": 4,
+          "side": "black",
+          "bound": 12,
+          "value": 10
+        },
+        {
+          "call": 5,
+          "side": "black",
+          "bound": 11,
+          "value": 10
+        },
+        {
+          "call": 6,
+          "side": "black",
+          "bound": 10,
+          "value": 8
+        },
+        {
+          "call": 7,
+          "side": "black",
+          "bound": 9,
+          "value": 8
+        },
+        {
+          "call": 8,
+          "side": "black",
+          "bound": 8,
+          "value": 0
+        },
+        {
+          "call": 9,
+          "side": "black",
+          "bound": 7,
+          "value": 2
+        },
+        {
+          "call": 10,
+          "side": "black",
+          "bound": 6,
+          "value": 4
+        },
+        {
+          "call": 11,
+          "side": "black",
+          "bound": 5,
+          "value": 1
+        },
+        {
+          "call": 12,
+          "side": "black",
+          "bound": 4,
+          "value": 0
+        },
+        {
+          "call": 13,
+          "side": "black",
+          "bound": 3,
+          "value": 1
+        },
+        {
+          "call": 14,
+          "side": "black",
+          "bound": 2,
+          "value": 0
+        },
+        {
+          "call": 15,
+          "side": "red",
+          "bound": 15,
+          "value": 2
+        },
+        {
+          "call": 16,
+          "side": "red",
+          "bound": 14,
+          "value": 2
+        },
+        {
+          "call": 17,
+          "side": "red",
+          "bound": 13,
+          "value": 2
+        },
+        {
+          "call": 18,
+          "side": "red",
+          "bound": 12,
+          "value": 2
+        },
+        {
+          "call": 19,
+          "side": "red",
+          "bound": 11,
+          "value": 2
+        },
+        {
+          "call": 20,
+          "side": "red",
+          "bound": 10,
+          "value": 8
+        },
+        {
+          "call": 21,
+          "side": "red",
+          "bound": 9,
+          "value": 8
+        },
+        {
+          "call": 22,
+          "side": "red",
+          "bound": 8,
+          "value": 0
+        },
+        {
+          "call": 23,
+          "side": "red",
+          "bound": 7,
+          "value": 3
+        },
+        {
+          "call": 24,
+          "side": "red",
+          "bound": 6,
+          "value": 4
+        },
+        {
+          "call": 25,
+          "side": "red",
+          "bound": 5,
+          "value": 0
+        },
+        {
+          "call": 26,
+          "side": "red",
+          "bound": 4,
+          "value": 3
+        },
+        {
+          "call": 27,
+          "side": "red",
+          "bound": 3,
+          "value": 0
+        },
+        {
+          "call": 28,
+          "side": "red",
+          "bound": 2,
+          "value": 0
+        }
+      ],
+      "per_side_counts": {
+        "black": {
+          "advisor": 2,
+          "horse": 2,
+          "elephant": 2,
+          "rook": 2,
+          "cannon": 2,
+          "pawn": 5
+        },
+        "red": {
+          "rook": 2,
+          "pawn": 5,
+          "elephant": 2,
+          "advisor": 2,
+          "horse": 2,
+          "cannon": 2
+        }
+      },
+      "identity_sha256": "d158bccabffc5f235810b6ca6f3711504c67c3a2a4b34e8690cfc626d2869bfa"
+    },
+    {
+      "id": "IW-b66071aa72ba8a72",
+      "true_type_by_stable_piece_id": {
+        "covered-00": "cannon",
+        "covered-01": "horse",
+        "covered-02": "elephant",
+        "covered-03": "advisor",
+        "covered-04": "advisor",
+        "covered-05": "elephant",
+        "covered-06": "horse",
+        "covered-07": "rook",
+        "covered-08": "rook",
+        "covered-09": "cannon",
+        "covered-10": "pawn",
+        "covered-11": "pawn",
+        "covered-12": "pawn",
+        "covered-13": "pawn",
+        "covered-14": "pawn",
+        "covered-15": "rook",
+        "covered-16": "horse",
+        "covered-17": "elephant",
+        "covered-18": "pawn",
+        "covered-19": "advisor",
+        "covered-20": "elephant",
+        "covered-21": "horse",
+        "covered-22": "rook",
+        "covered-23": "cannon",
+        "covered-24": "cannon",
+        "covered-25": "pawn",
+        "covered-26": "pawn",
+        "covered-27": "pawn",
+        "covered-28": "pawn",
+        "covered-29": "advisor"
+      },
+      "all_initial_pieces_original_side": {
+        "covered-00": "black",
+        "covered-01": "black",
+        "covered-02": "black",
+        "covered-03": "black",
+        "covered-04": "black",
+        "covered-05": "black",
+        "covered-06": "black",
+        "covered-07": "black",
+        "covered-08": "black",
+        "covered-09": "black",
+        "covered-10": "black",
+        "covered-11": "black",
+        "covered-12": "black",
+        "covered-13": "black",
+        "covered-14": "black",
+        "covered-15": "red",
+        "covered-16": "red",
+        "covered-17": "red",
+        "covered-18": "red",
+        "covered-19": "red",
+        "covered-20": "red",
+        "covered-21": "red",
+        "covered-22": "red",
+        "covered-23": "red",
+        "covered-24": "red",
+        "covered-25": "red",
+        "covered-26": "red",
+        "covered-27": "red",
+        "covered-28": "red",
+        "covered-29": "red"
+      },
+      "fisher_yates_draw_witness": [
+        {
+          "call": 1,
+          "side": "black",
+          "bound": 15,
+          "value": 10
+        },
+        {
+          "call": 2,
+          "side": "black",
+          "bound": 14,
+          "value": 10
+        },
+        {
+          "call": 3,
+          "side": "black",
+          "bound": 13,
+          "value": 10
+        },
+        {
+          "call": 4,
+          "side": "black",
+          "bound": 12,
+          "value": 10
+        },
+        {
+          "call": 5,
+          "side": "black",
+          "bound": 11,
+          "value": 10
+        },
+        {
+          "call": 6,
+          "side": "black",
+          "bound": 10,
+          "value": 8
+        },
+        {
+          "call": 7,
+          "side": "black",
+          "bound": 9,
+          "value": 0
+        },
+        {
+          "call": 8,
+          "side": "black",
+          "bound": 8,
+          "value": 1
+        },
+        {
+          "call": 9,
+          "side": "black",
+          "bound": 7,
+          "value": 2
+        },
+        {
+          "call": 10,
+          "side": "black",
+          "bound": 6,
+          "value": 4
+        },
+        {
+          "call": 11,
+          "side": "black",
+          "bound": 5,
+          "value": 1
+        },
+        {
+          "call": 12,
+          "side": "black",
+          "bound": 4,
+          "value": 2
+        },
+        {
+          "call": 13,
+          "side": "black",
+          "bound": 3,
+          "value": 1
+        },
+        {
+          "call": 14,
+          "side": "black",
+          "bound": 2,
+          "value": 1
+        },
+        {
+          "call": 15,
+          "side": "red",
+          "bound": 15,
+          "value": 6
+        },
+        {
+          "call": 16,
+          "side": "red",
+          "bound": 14,
+          "value": 6
+        },
+        {
+          "call": 17,
+          "side": "red",
+          "bound": 13,
+          "value": 6
+        },
+        {
+          "call": 18,
+          "side": "red",
+          "bound": 12,
+          "value": 6
+        },
+        {
+          "call": 19,
+          "side": "red",
+          "bound": 11,
+          "value": 6
+        },
+        {
+          "call": 20,
+          "side": "red",
+          "bound": 10,
+          "value": 8
+        },
+        {
+          "call": 21,
+          "side": "red",
+          "bound": 9,
+          "value": 8
+        },
+        {
+          "call": 22,
+          "side": "red",
+          "bound": 8,
+          "value": 0
+        },
+        {
+          "call": 23,
+          "side": "red",
+          "bound": 7,
+          "value": 2
+        },
+        {
+          "call": 24,
+          "side": "red",
+          "bound": 6,
+          "value": 4
+        },
+        {
+          "call": 25,
+          "side": "red",
+          "bound": 5,
+          "value": 0
+        },
+        {
+          "call": 26,
+          "side": "red",
+          "bound": 4,
+          "value": 2
+        },
+        {
+          "call": 27,
+          "side": "red",
+          "bound": 3,
+          "value": 0
+        },
+        {
+          "call": 28,
+          "side": "red",
+          "bound": 2,
+          "value": 0
+        }
+      ],
+      "per_side_counts": {
+        "black": {
+          "cannon": 2,
+          "horse": 2,
+          "elephant": 2,
+          "advisor": 2,
+          "rook": 2,
+          "pawn": 5
+        },
+        "red": {
+          "rook": 2,
+          "horse": 2,
+          "elephant": 2,
+          "pawn": 5,
+          "advisor": 2,
+          "cannon": 2
+        }
+      },
+      "identity_sha256": "b66071aa72ba8a7284e14c40f3322870b5184fc50480fccbacfcd27e565aca4f"
+    },
+    {
+      "id": "IW-bdcfe63226360aaa",
+      "true_type_by_stable_piece_id": {
+        "covered-00": "cannon",
+        "covered-01": "horse",
+        "covered-02": "elephant",
+        "covered-03": "advisor",
+        "covered-04": "advisor",
+        "covered-05": "elephant",
+        "covered-06": "horse",
+        "covered-07": "rook",
+        "covered-08": "rook",
+        "covered-09": "cannon",
+        "covered-10": "pawn",
+        "covered-11": "pawn",
+        "covered-12": "pawn",
+        "covered-13": "pawn",
+        "covered-14": "pawn",
+        "covered-15": "rook",
+        "covered-16": "horse",
+        "covered-17": "elephant",
+        "covered-18": "advisor",
+        "covered-19": "advisor",
+        "covered-20": "elephant",
+        "covered-21": "horse",
+        "covered-22": "rook",
+        "covered-23": "cannon",
+        "covered-24": "pawn",
+        "covered-25": "pawn",
+        "covered-26": "pawn",
+        "covered-27": "pawn",
+        "covered-28": "pawn",
+        "covered-29": "cannon"
+      },
+      "all_initial_pieces_original_side": {
+        "covered-00": "black",
+        "covered-01": "black",
+        "covered-02": "black",
+        "covered-03": "black",
+        "covered-04": "black",
+        "covered-05": "black",
+        "covered-06": "black",
+        "covered-07": "black",
+        "covered-08": "black",
+        "covered-09": "black",
+        "covered-10": "black",
+        "covered-11": "black",
+        "covered-12": "black",
+        "covered-13": "black",
+        "covered-14": "black",
+        "covered-15": "red",
+        "covered-16": "red",
+        "covered-17": "red",
+        "covered-18": "red",
+        "covered-19": "red",
+        "covered-20": "red",
+        "covered-21": "red",
+        "covered-22": "red",
+        "covered-23": "red",
+        "covered-24": "red",
+        "covered-25": "red",
+        "covered-26": "red",
+        "covered-27": "red",
+        "covered-28": "red",
+        "covered-29": "red"
+      },
+      "fisher_yates_draw_witness": [
+        {
+          "call": 1,
+          "side": "black",
+          "bound": 15,
+          "value": 10
+        },
+        {
+          "call": 2,
+          "side": "black",
+          "bound": 14,
+          "value": 10
+        },
+        {
+          "call": 3,
+          "side": "black",
+          "bound": 13,
+          "value": 10
+        },
+        {
+          "call": 4,
+          "side": "black",
+          "bound": 12,
+          "value": 10
+        },
+        {
+          "call": 5,
+          "side": "black",
+          "bound": 11,
+          "value": 10
+        },
+        {
+          "call": 6,
+          "side": "black",
+          "bound": 10,
+          "value": 8
+        },
+        {
+          "call": 7,
+          "side": "black",
+          "bound": 9,
+          "value": 0
+        },
+        {
+          "call": 8,
+          "side": "black",
+          "bound": 8,
+          "value": 1
+        },
+        {
+          "call": 9,
+          "side": "black",
+          "bound": 7,
+          "value": 2
+        },
+        {
+          "call": 10,
+          "side": "black",
+          "bound": 6,
+          "value": 4
+        },
+        {
+          "call": 11,
+          "side": "black",
+          "bound": 5,
+          "value": 1
+        },
+        {
+          "call": 12,
+          "side": "black",
+          "bound": 4,
+          "value": 2
+        },
+        {
+          "call": 13,
+          "side": "black",
+          "bound": 3,
+          "value": 1
+        },
+        {
+          "call": 14,
+          "side": "black",
+          "bound": 2,
+          "value": 1
+        },
+        {
+          "call": 15,
+          "side": "red",
+          "bound": 15,
+          "value": 8
+        },
+        {
+          "call": 16,
+          "side": "red",
+          "bound": 14,
+          "value": 8
+        },
+        {
+          "call": 17,
+          "side": "red",
+          "bound": 13,
+          "value": 8
+        },
+        {
+          "call": 18,
+          "side": "red",
+          "bound": 12,
+          "value": 8
+        },
+        {
+          "call": 19,
+          "side": "red",
+          "bound": 11,
+          "value": 8
+        },
+        {
+          "call": 20,
+          "side": "red",
+          "bound": 10,
+          "value": 8
+        },
+        {
+          "call": 21,
+          "side": "red",
+          "bound": 9,
+          "value": 8
+        },
+        {
+          "call": 22,
+          "side": "red",
+          "bound": 8,
+          "value": 0
+        },
+        {
+          "call": 23,
+          "side": "red",
+          "bound": 7,
+          "value": 2
+        },
+        {
+          "call": 24,
+          "side": "red",
+          "bound": 6,
+          "value": 4
+        },
+        {
+          "call": 25,
+          "side": "red",
+          "bound": 5,
+          "value": 0
+        },
+        {
+          "call": 26,
+          "side": "red",
+          "bound": 4,
+          "value": 2
+        },
+        {
+          "call": 27,
+          "side": "red",
+          "bound": 3,
+          "value": 0
+        },
+        {
+          "call": 28,
+          "side": "red",
+          "bound": 2,
+          "value": 0
+        }
+      ],
+      "per_side_counts": {
+        "black": {
+          "cannon": 2,
+          "horse": 2,
+          "elephant": 2,
+          "advisor": 2,
+          "rook": 2,
+          "pawn": 5
+        },
+        "red": {
+          "rook": 2,
+          "horse": 2,
+          "elephant": 2,
+          "advisor": 2,
+          "cannon": 2,
+          "pawn": 5
+        }
+      },
+      "identity_sha256": "bdcfe63226360aaaf2a7382e401690cb219f982acb9c17ac334e8b9e1c465f4a"
+    },
+    {
+      "id": "IW-61790bfc01eccf12",
+      "true_type_by_stable_piece_id": {
+        "covered-00": "rook",
+        "covered-01": "horse",
+        "covered-02": "elephant",
+        "covered-03": "pawn",
+        "covered-04": "advisor",
+        "covered-05": "elephant",
+        "covered-06": "horse",
+        "covered-07": "rook",
+        "covered-08": "cannon",
+        "covered-09": "cannon",
+        "covered-10": "pawn",
+        "covered-11": "pawn",
+        "covered-12": "pawn",
+        "covered-13": "pawn",
+        "covered-14": "advisor",
+        "covered-15": "cannon",
+        "covered-16": "horse",
+        "covered-17": "elephant",
+        "covered-18": "advisor",
+        "covered-19": "advisor",
+        "covered-20": "elephant",
+        "covered-21": "horse",
+        "covered-22": "rook",
+        "covered-23": "rook",
+        "covered-24": "cannon",
+        "covered-25": "pawn",
+        "covered-26": "pawn",
+        "covered-27": "pawn",
+        "covered-28": "pawn",
+        "covered-29": "pawn"
+      },
+      "all_initial_pieces_original_side": {
+        "covered-00": "black",
+        "covered-01": "black",
+        "covered-02": "black",
+        "covered-03": "black",
+        "covered-04": "black",
+        "covered-05": "black",
+        "covered-06": "black",
+        "covered-07": "black",
+        "covered-08": "black",
+        "covered-09": "black",
+        "covered-10": "black",
+        "covered-11": "black",
+        "covered-12": "black",
+        "covered-13": "black",
+        "covered-14": "black",
+        "covered-15": "red",
+        "covered-16": "red",
+        "covered-17": "red",
+        "covered-18": "red",
+        "covered-19": "red",
+        "covered-20": "red",
+        "covered-21": "red",
+        "covered-22": "red",
+        "covered-23": "red",
+        "covered-24": "red",
+        "covered-25": "red",
+        "covered-26": "red",
+        "covered-27": "red",
+        "covered-28": "red",
+        "covered-29": "red"
+      },
+      "fisher_yates_draw_witness": [
+        {
+          "call": 1,
+          "side": "black",
+          "bound": 15,
+          "value": 6
+        },
+        {
+          "call": 2,
+          "side": "black",
+          "bound": 14,
+          "value": 6
+        },
+        {
+          "call": 3,
+          "side": "black",
+          "bound": 13,
+          "value": 6
+        },
+        {
+          "call": 4,
+          "side": "black",
+          "bound": 12,
+          "value": 6
+        },
+        {
+          "call": 5,
+          "side": "black",
+          "bound": 11,
+          "value": 6
+        },
+        {
+          "call": 6,
+          "side": "black",
+          "bound": 10,
+          "value": 8
+        },
+        {
+          "call": 7,
+          "side": "black",
+          "bound": 9,
+          "value": 8
+        },
+        {
+          "call": 8,
+          "side": "black",
+          "bound": 8,
+          "value": 0
+        },
+        {
+          "call": 9,
+          "side": "black",
+          "bound": 7,
+          "value": 2
+        },
+        {
+          "call": 10,
+          "side": "black",
+          "bound": 6,
+          "value": 4
+        },
+        {
+          "call": 11,
+          "side": "black",
+          "bound": 5,
+          "value": 0
+        },
+        {
+          "call": 12,
+          "side": "black",
+          "bound": 4,
+          "value": 2
+        },
+        {
+          "call": 13,
+          "side": "black",
+          "bound": 3,
+          "value": 0
+        },
+        {
+          "call": 14,
+          "side": "black",
+          "bound": 2,
+          "value": 0
+        },
+        {
+          "call": 15,
+          "side": "red",
+          "bound": 15,
+          "value": 10
+        },
+        {
+          "call": 16,
+          "side": "red",
+          "bound": 14,
+          "value": 10
+        },
+        {
+          "call": 17,
+          "side": "red",
+          "bound": 13,
+          "value": 10
+        },
+        {
+          "call": 18,
+          "side": "red",
+          "bound": 12,
+          "value": 10
+        },
+        {
+          "call": 19,
+          "side": "red",
+          "bound": 11,
+          "value": 10
+        },
+        {
+          "call": 20,
+          "side": "red",
+          "bound": 10,
+          "value": 8
+        },
+        {
+          "call": 21,
+          "side": "red",
+          "bound": 9,
+          "value": 0
+        },
+        {
+          "call": 22,
+          "side": "red",
+          "bound": 8,
+          "value": 1
+        },
+        {
+          "call": 23,
+          "side": "red",
+          "bound": 7,
+          "value": 2
+        },
+        {
+          "call": 24,
+          "side": "red",
+          "bound": 6,
+          "value": 4
+        },
+        {
+          "call": 25,
+          "side": "red",
+          "bound": 5,
+          "value": 1
+        },
+        {
+          "call": 26,
+          "side": "red",
+          "bound": 4,
+          "value": 2
+        },
+        {
+          "call": 27,
+          "side": "red",
+          "bound": 3,
+          "value": 1
+        },
+        {
+          "call": 28,
+          "side": "red",
+          "bound": 2,
+          "value": 1
+        }
+      ],
+      "per_side_counts": {
+        "black": {
+          "rook": 2,
+          "horse": 2,
+          "elephant": 2,
+          "pawn": 5,
+          "advisor": 2,
+          "cannon": 2
+        },
+        "red": {
+          "cannon": 2,
+          "horse": 2,
+          "elephant": 2,
+          "advisor": 2,
+          "rook": 2,
+          "pawn": 5
+        }
+      },
+      "identity_sha256": "61790bfc01eccf126734ff131cffd380c82a25e6a9fe0ef0d5e4a41721a0c87f"
+    },
+    {
+      "id": "IW-95b0bb66f0ced10a",
+      "true_type_by_stable_piece_id": {
+        "covered-00": "cannon",
+        "covered-01": "horse",
+        "covered-02": "elephant",
+        "covered-03": "advisor",
+        "covered-04": "advisor",
+        "covered-05": "elephant",
+        "covered-06": "horse",
+        "covered-07": "rook",
+        "covered-08": "rook",
+        "covered-09": "pawn",
+        "covered-10": "pawn",
+        "covered-11": "pawn",
+        "covered-12": "pawn",
+        "covered-13": "pawn",
+        "covered-14": "cannon",
+        "covered-15": "rook",
+        "covered-16": "horse",
+        "covered-17": "elephant",
+        "covered-18": "pawn",
+        "covered-19": "advisor",
+        "covered-20": "elephant",
+        "covered-21": "horse",
+        "covered-22": "rook",
+        "covered-23": "cannon",
+        "covered-24": "cannon",
+        "covered-25": "pawn",
+        "covered-26": "pawn",
+        "covered-27": "pawn",
+        "covered-28": "pawn",
+        "covered-29": "advisor"
+      },
+      "all_initial_pieces_original_side": {
+        "covered-00": "black",
+        "covered-01": "black",
+        "covered-02": "black",
+        "covered-03": "black",
+        "covered-04": "black",
+        "covered-05": "black",
+        "covered-06": "black",
+        "covered-07": "black",
+        "covered-08": "black",
+        "covered-09": "black",
+        "covered-10": "black",
+        "covered-11": "black",
+        "covered-12": "black",
+        "covered-13": "black",
+        "covered-14": "black",
+        "covered-15": "red",
+        "covered-16": "red",
+        "covered-17": "red",
+        "covered-18": "red",
+        "covered-19": "red",
+        "covered-20": "red",
+        "covered-21": "red",
+        "covered-22": "red",
+        "covered-23": "red",
+        "covered-24": "red",
+        "covered-25": "red",
+        "covered-26": "red",
+        "covered-27": "red",
+        "covered-28": "red",
+        "covered-29": "red"
+      },
+      "fisher_yates_draw_witness": [
+        {
+          "call": 1,
+          "side": "black",
+          "bound": 15,
+          "value": 8
+        },
+        {
+          "call": 2,
+          "side": "black",
+          "bound": 14,
+          "value": 8
+        },
+        {
+          "call": 3,
+          "side": "black",
+          "bound": 13,
+          "value": 8
+        },
+        {
+          "call": 4,
+          "side": "black",
+          "bound": 12,
+          "value": 8
+        },
+        {
+          "call": 5,
+          "side": "black",
+          "bound": 11,
+          "value": 8
+        },
+        {
+          "call": 6,
+          "side": "black",
+          "bound": 10,
+          "value": 8
+        },
+        {
+          "call": 7,
+          "side": "black",
+          "bound": 9,
+          "value": 0
+        },
+        {
+          "call": 8,
+          "side": "black",
+          "bound": 8,
+          "value": 1
+        },
+        {
+          "call": 9,
+          "side": "black",
+          "bound": 7,
+          "value": 2
+        },
+        {
+          "call": 10,
+          "side": "black",
+          "bound": 6,
+          "value": 4
+        },
+        {
+          "call": 11,
+          "side": "black",
+          "bound": 5,
+          "value": 1
+        },
+        {
+          "call": 12,
+          "side": "black",
+          "bound": 4,
+          "value": 2
+        },
+        {
+          "call": 13,
+          "side": "black",
+          "bound": 3,
+          "value": 1
+        },
+        {
+          "call": 14,
+          "side": "black",
+          "bound": 2,
+          "value": 1
+        },
+        {
+          "call": 15,
+          "side": "red",
+          "bound": 15,
+          "value": 6
+        },
+        {
+          "call": 16,
+          "side": "red",
+          "bound": 14,
+          "value": 6
+        },
+        {
+          "call": 17,
+          "side": "red",
+          "bound": 13,
+          "value": 6
+        },
+        {
+          "call": 18,
+          "side": "red",
+          "bound": 12,
+          "value": 6
+        },
+        {
+          "call": 19,
+          "side": "red",
+          "bound": 11,
+          "value": 6
+        },
+        {
+          "call": 20,
+          "side": "red",
+          "bound": 10,
+          "value": 8
+        },
+        {
+          "call": 21,
+          "side": "red",
+          "bound": 9,
+          "value": 8
+        },
+        {
+          "call": 22,
+          "side": "red",
+          "bound": 8,
+          "value": 0
+        },
+        {
+          "call": 23,
+          "side": "red",
+          "bound": 7,
+          "value": 2
+        },
+        {
+          "call": 24,
+          "side": "red",
+          "bound": 6,
+          "value": 4
+        },
+        {
+          "call": 25,
+          "side": "red",
+          "bound": 5,
+          "value": 0
+        },
+        {
+          "call": 26,
+          "side": "red",
+          "bound": 4,
+          "value": 2
+        },
+        {
+          "call": 27,
+          "side": "red",
+          "bound": 3,
+          "value": 0
+        },
+        {
+          "call": 28,
+          "side": "red",
+          "bound": 2,
+          "value": 0
+        }
+      ],
+      "per_side_counts": {
+        "black": {
+          "cannon": 2,
+          "horse": 2,
+          "elephant": 2,
+          "advisor": 2,
+          "rook": 2,
+          "pawn": 5
+        },
+        "red": {
+          "rook": 2,
+          "horse": 2,
+          "elephant": 2,
+          "pawn": 5,
+          "advisor": 2,
+          "cannon": 2
+        }
+      },
+      "identity_sha256": "95b0bb66f0ced10aa5264404091f8c4eef47a27b2244a43379f7c50243ae4a69"
+    }
+  ],
+  "replay_bindings": [
+    {
+      "replay_id": "MA-PD01",
+      "world_id": "IW-0eaace9ad2c1699d",
+      "action_source": {
+        "commit": "2f663252f0d1b5ab8eea7f780502f287bb7dd595",
+        "path": "worklines/half_chaos/WORKING.md",
+        "section": "8.42.2",
+        "git_blob_sha": "007fdba76089c849937f1e464cf161a1318e3ff9"
+      },
+      "heroes": {
+        "red": "H04",
+        "black": "H03"
+      },
+      "mutation": "M04",
+      "initial_true_kind_swaps": [
+        {
+          "side": "red",
+          "initial_true_kind_swap_positions": [
+            [
+              0,
+              9
+            ],
+            [
+              1,
+              7
+            ]
+          ]
+        },
+        {
+          "side": "black",
+          "initial_true_kind_swap_positions": [
+            [
+              0,
+              0
+            ],
+            [
+              3,
+              0
+            ]
+          ]
+        }
+      ],
+      "execution_status": "UNRUN",
+      "execution_count": 0,
+      "runtime_admission": "BLOCKED_EI01_EI04",
+      "initialization_application_status": "NOT_APPLIED_TO_ENGINE"
+    },
+    {
+      "replay_id": "MA-PD02",
+      "world_id": "IW-b069ebc9db68ef3e",
+      "action_source": {
+        "commit": "2f663252f0d1b5ab8eea7f780502f287bb7dd595",
+        "path": "worklines/half_chaos/WORKING.md",
+        "section": "8.42.3",
+        "git_blob_sha": "007fdba76089c849937f1e464cf161a1318e3ff9"
+      },
+      "heroes": {
+        "red": "H04",
+        "black": "H03"
+      },
+      "mutation": "M01",
+      "initial_true_kind_swaps": [
+        {
+          "side": "black",
+          "initial_true_kind_swap_positions": [
+            [
+              0,
+              0
+            ],
+            [
+              3,
+              0
+            ]
+          ]
+        }
+      ],
+      "execution_status": "UNRUN",
+      "execution_count": 0,
+      "runtime_admission": "BLOCKED_EI01_EI04",
+      "initialization_application_status": "NOT_APPLIED_TO_ENGINE"
+    },
+    {
+      "replay_id": "MA-PD03",
+      "world_id": "IW-b069ebc9db68ef3e",
+      "action_source": {
+        "commit": "2f663252f0d1b5ab8eea7f780502f287bb7dd595",
+        "path": "worklines/half_chaos/WORKING.md",
+        "section": "8.42.4",
+        "git_blob_sha": "007fdba76089c849937f1e464cf161a1318e3ff9"
+      },
+      "heroes": {
+        "red": "H04",
+        "black": "H03"
+      },
+      "mutation": "M01",
+      "initial_true_kind_swaps": [
+        {
+          "side": "black",
+          "initial_true_kind_swap_positions": [
+            [
+              0,
+              0
+            ],
+            [
+              3,
+              0
+            ]
+          ]
+        }
+      ],
+      "execution_status": "UNRUN",
+      "execution_count": 0,
+      "runtime_admission": "BLOCKED_EI01_EI04",
+      "initialization_application_status": "NOT_APPLIED_TO_ENGINE"
+    },
+    {
+      "replay_id": "MA-PD04",
+      "world_id": "IW-4fb3ac123360c7d4",
+      "action_source": {
+        "commit": "2f663252f0d1b5ab8eea7f780502f287bb7dd595",
+        "path": "worklines/half_chaos/WORKING.md",
+        "section": "8.42.5",
+        "git_blob_sha": "007fdba76089c849937f1e464cf161a1318e3ff9"
+      },
+      "heroes": {
+        "red": "H04",
+        "black": "H03"
+      },
+      "mutation": "M04",
+      "initial_true_kind_swaps": [
+        {
+          "side": "red",
+          "initial_true_kind_swap_positions": [
+            [
+              0,
+              9
+            ],
+            [
+              1,
+              7
+            ]
+          ]
+        },
+        {
+          "side": "black",
+          "initial_true_kind_swap_positions": [
+            [
+              0,
+              0
+            ],
+            [
+              5,
+              0
+            ]
+          ]
+        }
+      ],
+      "execution_status": "UNRUN",
+      "execution_count": 0,
+      "runtime_admission": "BLOCKED_EI01_EI04",
+      "initialization_application_status": "NOT_APPLIED_TO_ENGINE"
+    },
+    {
+      "replay_id": "MA-PD05-A",
+      "world_id": "IW-b069ebc9db68ef3e",
+      "action_source": {
+        "commit": "2f663252f0d1b5ab8eea7f780502f287bb7dd595",
+        "path": "worklines/half_chaos/WORKING.md",
+        "section": "8.42.6",
+        "git_blob_sha": "007fdba76089c849937f1e464cf161a1318e3ff9"
+      },
+      "heroes": {
+        "red": "H04",
+        "black": "H03"
+      },
+      "mutation": "M04",
+      "initial_true_kind_swaps": [
+        {
+          "side": "black",
+          "initial_true_kind_swap_positions": [
+            [
+              0,
+              0
+            ],
+            [
+              3,
+              0
+            ]
+          ]
+        }
+      ],
+      "execution_status": "UNRUN",
+      "execution_count": 0,
+      "runtime_admission": "BLOCKED_EI01_EI04",
+      "initialization_application_status": "NOT_APPLIED_TO_ENGINE"
+    },
+    {
+      "replay_id": "MA-PD05-B",
+      "world_id": "IW-40b431632b89dc78",
+      "action_source": {
+        "commit": "2f663252f0d1b5ab8eea7f780502f287bb7dd595",
+        "path": "worklines/half_chaos/WORKING.md",
+        "section": "8.42.6",
+        "git_blob_sha": "007fdba76089c849937f1e464cf161a1318e3ff9"
+      },
+      "heroes": {
+        "red": "H04",
+        "black": "H03"
+      },
+      "mutation": "M04",
+      "initial_true_kind_swaps": [
+        {
+          "side": "black",
+          "initial_true_kind_swap_positions": [
+            [
+              0,
+              0
+            ],
+            [
+              3,
+              0
+            ]
+          ]
+        },
+        {
+          "side": "red",
+          "initial_true_kind_swap_positions": [
+            [
+              0,
+              9
+            ],
+            [
+              1,
+              9
+            ]
+          ]
+        }
+      ],
+      "execution_status": "UNRUN",
+      "execution_count": 0,
+      "runtime_admission": "BLOCKED_EI01_EI04",
+      "initialization_application_status": "NOT_APPLIED_TO_ENGINE"
+    },
+    {
+      "replay_id": "MA-PD06-A",
+      "world_id": "IW-168cb617da30889f",
+      "action_source": {
+        "commit": "2f663252f0d1b5ab8eea7f780502f287bb7dd595",
+        "path": "worklines/half_chaos/WORKING.md",
+        "section": "8.42.7",
+        "git_blob_sha": "007fdba76089c849937f1e464cf161a1318e3ff9"
+      },
+      "heroes": {
+        "red": "H04",
+        "black": "H03"
+      },
+      "mutation": "M01",
+      "initial_true_kind_swaps": [
+        {
+          "side": "black",
+          "initial_true_kind_swap_positions": [
+            [
+              0,
+              0
+            ],
+            [
+              5,
+              0
+            ]
+          ]
+        }
+      ],
+      "execution_status": "UNRUN",
+      "execution_count": 0,
+      "runtime_admission": "BLOCKED_EI01_EI04",
+      "initialization_application_status": "NOT_APPLIED_TO_ENGINE"
+    },
+    {
+      "replay_id": "MA-PD06-B",
+      "world_id": "IW-d158bccabffc5f23",
+      "action_source": {
+        "commit": "2f663252f0d1b5ab8eea7f780502f287bb7dd595",
+        "path": "worklines/half_chaos/WORKING.md",
+        "section": "8.42.7",
+        "git_blob_sha": "007fdba76089c849937f1e464cf161a1318e3ff9"
+      },
+      "heroes": {
+        "red": "H04",
+        "black": "H03"
+      },
+      "mutation": "M01",
+      "initial_true_kind_swaps": [
+        {
+          "side": "black",
+          "initial_true_kind_swap_positions": [
+            [
+              0,
+              0
+            ],
+            [
+              5,
+              0
+            ]
+          ]
+        },
+        {
+          "side": "red",
+          "initial_true_kind_swap_positions": [
+            [
+              1,
+              9
+            ],
+            [
+              8,
+              6
+            ]
+          ]
+        }
+      ],
+      "execution_status": "UNRUN",
+      "execution_count": 0,
+      "runtime_admission": "BLOCKED_EI01_EI04",
+      "initialization_application_status": "NOT_APPLIED_TO_ENGINE"
+    },
+    {
+      "replay_id": "MA-DS01-02",
+      "world_id": "IW-b66071aa72ba8a72",
+      "action_source": {
+        "commit": "2f663252f0d1b5ab8eea7f780502f287bb7dd595",
+        "path": "worklines/half_chaos/WORKING.md",
+        "section": "8.40.2—8.40.3",
+        "git_blob_sha": "007fdba76089c849937f1e464cf161a1318e3ff9"
+      },
+      "heroes": {
+        "red": "H06",
+        "black": "H05"
+      },
+      "mutation": "D01",
+      "initial_true_kind_swaps": [
+        {
+          "side": "red",
+          "initial_true_kind_swap_positions": [
+            [
+              8,
+              6
+            ],
+            [
+              3,
+              9
+            ]
+          ]
+        },
+        {
+          "side": "black",
+          "initial_true_kind_swap_positions": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              2
+            ]
+          ]
+        }
+      ],
+      "execution_status": "UNRUN",
+      "execution_count": 0,
+      "runtime_admission": "BLOCKED_EI01_EI04",
+      "initialization_application_status": "NOT_APPLIED_TO_ENGINE",
+      "source_defined_initial_body_bindings": {
+        "red_warriors": [
+          {
+            "initial_piece_id": "covered-18",
+            "initial_anchor": {
+              "x": 3,
+              "y": 9
+            }
+          },
+          {
+            "initial_piece_id": "covered-25",
+            "initial_anchor": {
+              "x": 0,
+              "y": 6
+            }
+          },
+          {
+            "initial_piece_id": "covered-26",
+            "initial_anchor": {
+              "x": 2,
+              "y": 6
+            }
+          },
+          {
+            "initial_piece_id": "covered-27",
+            "initial_anchor": {
+              "x": 4,
+              "y": 6
+            }
+          },
+          {
+            "initial_piece_id": "covered-28",
+            "initial_anchor": {
+              "x": 6,
+              "y": 6
+            }
+          }
+        ],
+        "black_dragons": [
+          {
+            "initial_piece_id": "covered-10",
+            "initial_anchor": {
+              "x": 0,
+              "y": 3
+            }
+          },
+          {
+            "initial_piece_id": "covered-11",
+            "initial_anchor": {
+              "x": 2,
+              "y": 3
+            }
+          },
+          {
+            "initial_piece_id": "covered-12",
+            "initial_anchor": {
+              "x": 4,
+              "y": 3
+            }
+          },
+          {
+            "initial_piece_id": "covered-13",
+            "initial_anchor": {
+              "x": 6,
+              "y": 3
+            }
+          },
+          {
+            "initial_piece_id": "covered-14",
+            "initial_anchor": {
+              "x": 8,
+              "y": 3
+            }
+          }
+        ]
+      },
+      "offline_prefix_aliases": {
+        "W": "covered-18",
+        "U": "covered-25",
+        "D": "covered-10"
+      },
+      "binding_boundary": "Offline expected opening bindings only; no shown/ammo/death/pollution/resource injection. DS01-02 remains one continuous game."
+    },
+    {
+      "replay_id": "MA-DS03",
+      "world_id": "IW-bdcfe63226360aaa",
+      "action_source": {
+        "commit": "2f663252f0d1b5ab8eea7f780502f287bb7dd595",
+        "path": "worklines/half_chaos/WORKING.md",
+        "section": "8.40.4",
+        "git_blob_sha": "007fdba76089c849937f1e464cf161a1318e3ff9"
+      },
+      "heroes": {
+        "red": "H06",
+        "black": "H05"
+      },
+      "mutation": "D01",
+      "initial_true_kind_swaps": [
+        {
+          "side": "red",
+          "initial_true_kind_swap_positions": [
+            [
+              8,
+              6
+            ],
+            [
+              7,
+              7
+            ]
+          ]
+        },
+        {
+          "side": "black",
+          "initial_true_kind_swap_positions": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              2
+            ]
+          ]
+        }
+      ],
+      "execution_status": "UNRUN",
+      "execution_count": 0,
+      "runtime_admission": "BLOCKED_EI01_EI04",
+      "initialization_application_status": "NOT_APPLIED_TO_ENGINE",
+      "source_defined_initial_body_bindings": {
+        "red_warriors": [
+          {
+            "initial_piece_id": "covered-24",
+            "initial_anchor": {
+              "x": 7,
+              "y": 7
+            }
+          },
+          {
+            "initial_piece_id": "covered-25",
+            "initial_anchor": {
+              "x": 0,
+              "y": 6
+            }
+          },
+          {
+            "initial_piece_id": "covered-26",
+            "initial_anchor": {
+              "x": 2,
+              "y": 6
+            }
+          },
+          {
+            "initial_piece_id": "covered-27",
+            "initial_anchor": {
+              "x": 4,
+              "y": 6
+            }
+          },
+          {
+            "initial_piece_id": "covered-28",
+            "initial_anchor": {
+              "x": 6,
+              "y": 6
+            }
+          }
+        ],
+        "black_dragons": [
+          {
+            "initial_piece_id": "covered-10",
+            "initial_anchor": {
+              "x": 0,
+              "y": 3
+            }
+          },
+          {
+            "initial_piece_id": "covered-11",
+            "initial_anchor": {
+              "x": 2,
+              "y": 3
+            }
+          },
+          {
+            "initial_piece_id": "covered-12",
+            "initial_anchor": {
+              "x": 4,
+              "y": 3
+            }
+          },
+          {
+            "initial_piece_id": "covered-13",
+            "initial_anchor": {
+              "x": 6,
+              "y": 3
+            }
+          },
+          {
+            "initial_piece_id": "covered-14",
+            "initial_anchor": {
+              "x": 8,
+              "y": 3
+            }
+          }
+        ]
+      },
+      "offline_prefix_aliases": {
+        "W": "covered-24",
+        "D": "covered-10"
+      },
+      "binding_boundary": "Offline expected opening bindings only; no shown/ammo/death/pollution/resource injection. DS01-02 remains one continuous game."
+    },
+    {
+      "replay_id": "MA-DS04",
+      "world_id": "IW-61790bfc01eccf12",
+      "action_source": {
+        "commit": "2f663252f0d1b5ab8eea7f780502f287bb7dd595",
+        "path": "worklines/half_chaos/WORKING.md",
+        "section": "8.40.5",
+        "git_blob_sha": "007fdba76089c849937f1e464cf161a1318e3ff9"
+      },
+      "heroes": {
+        "red": "H06",
+        "black": "H05"
+      },
+      "mutation": "D01",
+      "initial_true_kind_swaps": [
+        {
+          "side": "red",
+          "initial_true_kind_swap_positions": [
+            [
+              0,
+              9
+            ],
+            [
+              1,
+              7
+            ]
+          ]
+        },
+        {
+          "side": "black",
+          "initial_true_kind_swap_positions": [
+            [
+              8,
+              3
+            ],
+            [
+              3,
+              0
+            ]
+          ]
+        }
+      ],
+      "execution_status": "UNRUN",
+      "execution_count": 0,
+      "runtime_admission": "BLOCKED_EI01_EI04",
+      "initialization_application_status": "NOT_APPLIED_TO_ENGINE",
+      "source_defined_initial_body_bindings": {
+        "red_warriors": [
+          {
+            "initial_piece_id": "covered-25",
+            "initial_anchor": {
+              "x": 0,
+              "y": 6
+            }
+          },
+          {
+            "initial_piece_id": "covered-26",
+            "initial_anchor": {
+              "x": 2,
+              "y": 6
+            }
+          },
+          {
+            "initial_piece_id": "covered-27",
+            "initial_anchor": {
+              "x": 4,
+              "y": 6
+            }
+          },
+          {
+            "initial_piece_id": "covered-28",
+            "initial_anchor": {
+              "x": 6,
+              "y": 6
+            }
+          },
+          {
+            "initial_piece_id": "covered-29",
+            "initial_anchor": {
+              "x": 8,
+              "y": 6
+            }
+          }
+        ],
+        "black_dragons": [
+          {
+            "initial_piece_id": "covered-03",
+            "initial_anchor": {
+              "x": 3,
+              "y": 0
+            }
+          },
+          {
+            "initial_piece_id": "covered-10",
+            "initial_anchor": {
+              "x": 0,
+              "y": 3
+            }
+          },
+          {
+            "initial_piece_id": "covered-11",
+            "initial_anchor": {
+              "x": 2,
+              "y": 3
+            }
+          },
+          {
+            "initial_piece_id": "covered-12",
+            "initial_anchor": {
+              "x": 4,
+              "y": 3
+            }
+          },
+          {
+            "initial_piece_id": "covered-13",
+            "initial_anchor": {
+              "x": 6,
+              "y": 3
+            }
+          }
+        ]
+      },
+      "offline_prefix_aliases": {
+        "D": "covered-03"
+      },
+      "binding_boundary": "Offline expected opening bindings only; no shown/ammo/death/pollution/resource injection. DS01-02 remains one continuous game."
+    },
+    {
+      "replay_id": "MA-DS05",
+      "world_id": "IW-95b0bb66f0ced10a",
+      "action_source": {
+        "commit": "2f663252f0d1b5ab8eea7f780502f287bb7dd595",
+        "path": "worklines/half_chaos/WORKING.md",
+        "section": "8.40.6",
+        "git_blob_sha": "007fdba76089c849937f1e464cf161a1318e3ff9"
+      },
+      "heroes": {
+        "red": "H06",
+        "black": "H05"
+      },
+      "mutation": "D01",
+      "initial_true_kind_swaps": [
+        {
+          "side": "red",
+          "initial_true_kind_swap_positions": [
+            [
+              8,
+              6
+            ],
+            [
+              3,
+              9
+            ]
+          ]
+        },
+        {
+          "side": "black",
+          "initial_true_kind_swap_positions": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              2
+            ]
+          ]
+        },
+        {
+          "side": "black",
+          "initial_true_kind_swap_positions": [
+            [
+              8,
+              3
+            ],
+            [
+              7,
+              2
+            ]
+          ]
+        }
+      ],
+      "execution_status": "UNRUN",
+      "execution_count": 0,
+      "runtime_admission": "BLOCKED_EI01_EI04",
+      "initialization_application_status": "NOT_APPLIED_TO_ENGINE",
+      "source_defined_initial_body_bindings": {
+        "red_warriors": [
+          {
+            "initial_piece_id": "covered-18",
+            "initial_anchor": {
+              "x": 3,
+              "y": 9
+            }
+          },
+          {
+            "initial_piece_id": "covered-25",
+            "initial_anchor": {
+              "x": 0,
+              "y": 6
+            }
+          },
+          {
+            "initial_piece_id": "covered-26",
+            "initial_anchor": {
+              "x": 2,
+              "y": 6
+            }
+          },
+          {
+            "initial_piece_id": "covered-27",
+            "initial_anchor": {
+              "x": 4,
+              "y": 6
+            }
+          },
+          {
+            "initial_piece_id": "covered-28",
+            "initial_anchor": {
+              "x": 6,
+              "y": 6
+            }
+          }
+        ],
+        "black_dragons": [
+          {
+            "initial_piece_id": "covered-09",
+            "initial_anchor": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          {
+            "initial_piece_id": "covered-10",
+            "initial_anchor": {
+              "x": 0,
+              "y": 3
+            }
+          },
+          {
+            "initial_piece_id": "covered-11",
+            "initial_anchor": {
+              "x": 2,
+              "y": 3
+            }
+          },
+          {
+            "initial_piece_id": "covered-12",
+            "initial_anchor": {
+              "x": 4,
+              "y": 3
+            }
+          },
+          {
+            "initial_piece_id": "covered-13",
+            "initial_anchor": {
+              "x": 6,
+              "y": 3
+            }
+          }
+        ]
+      },
+      "offline_prefix_aliases": {
+        "W": "covered-18",
+        "U0": "covered-25",
+        "U2": "covered-26",
+        "U6": "covered-28",
+        "D": "covered-09",
+        "black_central_dragon": "covered-12"
+      },
+      "binding_boundary": "Offline expected opening bindings only; no shown/ammo/death/pollution/resource injection. DS01-02 remains one continuous game."
+    }
+  ],
+  "paired_secret_differences": [
+    {
+      "pair_id": "PAIR-PD05",
+      "replay_ids": [
+        "MA-PD05-A",
+        "MA-PD05-B"
+      ],
+      "changed_initial_ids": [
+        "covered-15",
+        "covered-16"
+      ],
+      "public_initial_layout_equal": true,
+      "all_original_sides_equal": true,
+      "gameplay_public_projection_comparison": "UNRUN"
+    },
+    {
+      "pair_id": "PAIR-PD06",
+      "replay_ids": [
+        "MA-PD06-A",
+        "MA-PD06-B"
+      ],
+      "changed_initial_ids": [
+        "covered-16",
+        "covered-29"
+      ],
+      "public_initial_layout_equal": true,
+      "all_original_sides_equal": true,
+      "gameplay_public_projection_comparison": "UNRUN"
+    }
+  ],
+  "verification_boundary": {
+    "game_engine_imports": 0,
+    "engine_runs": 0,
+    "client_runs": 0,
+    "business_code_changes": 0,
+    "new_rule_approvals": 0,
+    "new_game_specs": 0,
+    "old_specs": 64,
+    "old_specs_status": "UNRUN",
+    "scoring_frozen": true,
+    "NET": "paused",
+    "independent_review": false
+  },
+  "remaining": [
+    "EI01-EI07 retained; all12 replays remain blocked/UNRUN",
+    "No action/window/authority/view/clock/dedup adapter established",
+    "No initial-world application or live identity/anchor observation",
+    "No full natural-prefix legality, complete response/terminal/pressure/repetition-key validation",
+    "Source-specific return-space/extra-landing and same-window second-unsafe-glass natural positives still missing"
+  ],
+  "next_task": {
+    "id": "NEXT-HC-REPLAY-ACTION-DATA",
+    "action": "Prepare source-linked declarative action/request order and semantic observation checkpoint data for the12 plans; preserve DS01-02 continuity and paired public-action equality; no business code, engine import/run or mode-gate bypass."
+  }
+}

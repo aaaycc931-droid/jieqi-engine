@@ -5,7 +5,7 @@ import { applyHeroAbility, ownerHeroSecrets, startFormalClock } from "./hero-act
 import { copy, initializeFeatureSecret } from "./settlement.ts";
 import { requireClosedDestructionBatch } from "./settlement-context.ts";
 import { RuleError } from "./errors.ts";
-import { effectiveResearchHero, researchSources } from "./research-source-context.ts";
+import { effectiveResearchHero, researchSources, requireExactResearchCreate, requireExactResearchRoom, requireExactResearchAssignments } from "./research-source-context.ts";
 import { equalHex, sha256Hex } from "./sha256.ts";
 import {
   applyAutomaticExecution,
@@ -13,6 +13,7 @@ import {
   getAutomaticExecutionPlan,
   publicStateSnapshot,
   reassessAfterTrapResolution,
+  requirePathMoveBatchClosed,
 } from "./game.ts";
 import {
   applyRoomAssassination,
@@ -649,6 +650,7 @@ function createGameAfterSetup(
   selections?: import("./types.ts").HeroSelections,
 ): RemoteRoom {
   const assignments = assignmentsFor(room);
+  requireExactResearchAssignments(assignments,heroes);
   const initial = createInitialGame(randomInt, room.mode.baseMode);
   const mutation = room.mode.mutationsEnabled ? drawRuntimeMutation(randomInt ?? cryptoRandomInt, heroes) : undefined;
   const research = researchSources(room.roomId, room.mode);
@@ -736,6 +738,7 @@ export function createRemoteRoom(
   now = Date.now(),
   mode?: Partial<OptionalModeConfig>,
 ): RemoteRoom {
+  requireExactResearchCreate(roomId,hostPlayerId);
   requireText(roomId, "INVALID_ROOM", "房间 ID 不能为空");
   return {
     roomId,
@@ -753,6 +756,7 @@ export function joinRemoteRoom(
   inviteToken: string,
   now = Date.now(),
 ): JoinRoomResult {
+  requireExactResearchRoom(room,guestPlayerId);
   requireText(guestPlayerId, "INVALID_PLAYER", "玩家 ID 不能为空");
   if (!hasMatchingInvite(room, inviteToken)) {
     throw new RuleError("INVALID_INVITE", "邀请链接无效");
@@ -808,6 +812,7 @@ export function submitRemoteRps(
   randomInt?: RandomInt,
   now = Date.now(),
 ): RemoteRoom {
+  requireExactResearchRoom(room);
   ensurePhase(room, "rps");
   if (!room.rps || !room.rpsSecret) {
     throw new RuleError("MISSING_RPS", "房间缺少猜拳状态");
@@ -874,6 +879,7 @@ export function submitRemoteHeroSelection(
   now = Date.now(),
   options?: { form?: import("./types.ts").HeroForm; variant?: import("./types.ts").GalakrondForm },
 ): RemoteRoom {
+  requireExactResearchRoom(room);
   ensurePhase(room, "hero_selection");
   requireRemotePlayer(room, playerId);
   if (!isHeroId(hero)) {
@@ -912,6 +918,7 @@ export function completeRemoteHeroIntro(
   playerId: string,
   now = Date.now(),
 ): RemoteRoom {
+  requireExactResearchRoom(room);
   ensurePhase(room, "hero_intro");
   requireRemotePlayer(room, playerId);
   const intro = room.features?.heroIntro;
@@ -991,7 +998,7 @@ export function completeRemoteHeroPreparation(
     throw new RuleError("INVALID_TRAP_COUNT", "猎人必须布置两个陷阱层后才能完成准备");
   }
   const hero = room.features?.heroes?.[side], runtime = room.game.state.heroRuntime?.[side];
-  if (hero === "single_blade" && !runtime?.blade || hero === "sky_admiral" && !runtime?.trainingType) throw new RuleError("HERO_PREPARATION_REQUIRED", "必须先确定英雄准备选项");
+  if (hero === "single_blade" && !runtime?.blade) throw new RuleError("HERO_PREPARATION_REQUIRED", "必须先确定英雄准备选项");
   const addedTraps = draft.map((position, index): TrapLayer => ({
     id: `trap:${side}:${index}`,
     owner: side,
@@ -1034,9 +1041,26 @@ export function advanceRemoteRoomTime(
   randomInt?: RandomInt,
   now = Date.now(),
 ): RemoteRoom {
+  requireExactResearchRoom(room);
   if (room.phase === "playing" && room.game && room.disconnects?.pausedAt === undefined) {
     const timed = copy(room);
     if (timed.game!.state.turnDeadlineAt === undefined) startFormalClock(timed.game!.state, now, timed.game!.secret, randomInt);
+    if (timed.game!.state.pendingShuffle?.window === "A" && timed.game!.state.turnDeadlineAt !== undefined && now >= timed.game!.state.turnDeadlineAt) {
+      const state = timed.game!.state;
+      const skipped = applyHeroAbility(state, timed.game!.secret, {
+        kind: "hero_ability", ability: "shuffle", skip: true,
+        actionId: `server:shuffle-A-expiry:${state.revision}:${state.turnDeadlineAt}`,
+        expectedRevision: state.revision,
+      }, now, randomInt);
+      timed.game = { ...timed.game!, state: skipped.state, secret: skipped.secret };
+      if (timed.game.state.status === "execution") {
+        const finished = applyAutomaticExecution(timed.game.state, timed.game.secret, `server:shuffle-A-expiry-terminal:${state.revision}`);
+        timed.game = { ...timed.game, state: finished.state, secret: finished.secret };
+      }
+      if (timed.game.state.status === "finished") timed.phase = "finished";
+      timed.featureSecret = { ...(timed.featureSecret ?? { traps: [] }), traps: timed.game.secret.traps ?? [] };
+      startFormalClock(timed.game.state, now, timed.game.secret, randomInt);
+    }
     if (timed.game!.state.status === "playing" && now >= (timed.game!.state.turnDeadlineAt ?? Infinity)) {
       timed.game!.state.status = "finished"; timed.game!.state.winner = otherSide(timed.game!.state.turn); timed.game!.state.reason = "timeout"; timed.game!.state.revision += 1; timed.phase = "finished";
     }
@@ -1212,7 +1236,11 @@ function expiredFormalAction(room: RemoteRoom, playerId: string, actionId: strin
   if (room.game.secret.processedActions[actionId] !== undefined) return undefined;
   if (room.disconnects?.pausedAt !== undefined || room.game.state.turnDeadlineAt === undefined || now < room.game.state.turnDeadlineAt) return undefined;
   const timed = advanceRemoteRoomTime(room, undefined, now);
-  return timed.phase === "finished" ? { room: timed, duplicate: false } : undefined;
+  // A expiry preserves the already committed black main and automatically
+  // declines only the optional decision. A late command must not run on the
+  // pre-expiry authority after this handoff.
+  return timed.phase === "finished" || room.game.state.pendingShuffle?.window === "A" && !timed.game?.state.pendingShuffle
+    ? { room: timed, duplicate: false } : undefined;
 }
 
 /**
@@ -1226,12 +1254,16 @@ export function submitRemoteMove(
   command: MoveCommand,
   now = Date.now(),
 ): RemoteActionResult {
+  requireExactResearchRoom(room);
   ensurePhase(room, "playing");
   reserveServerActionId(command.actionId);
   if (!room.game) throw new RuleError("MISSING_GAME", "房间尚未开始棋局");
   const expired = expiredFormalAction(room, playerId, command.actionId, now);
   if (expired) return expired;
 
+  if (room.game.players[room.game.state.turn] === playerId) {
+    requirePathMoveBatchClosed(room.game.state, room.game.secret, command);
+  }
   const moved = applyRoomMove(gameWithPrivateTraps(room), playerId, command, now);
   if (moved.duplicate) return { room, duplicate: true };
   const trapped = roomWithResolvedTraps(room, moved.room, now);
@@ -1500,6 +1532,7 @@ export function requireRemotePlayer(room: RemoteRoom, playerId: string): void {
 }
 
 export function submitRemoteHeroAbility(room: RemoteRoom, playerId: string, command: HeroAbilityCommand, now = Date.now(), randomInt?: RandomInt): RemoteActionResult {
+  requireExactResearchRoom(room);
   ensurePhase(room, "playing"); reserveServerActionId(command.actionId);
   if (!room.game) throw new RuleError("MISSING_GAME", "房间尚未开始棋局");
   const expired = expiredFormalAction(room, playerId, command.actionId, now);
@@ -1519,6 +1552,9 @@ export function submitRemoteHeroAbility(room: RemoteRoom, playerId: string, comm
   const result = applyHeroAbility(game.state, game.secret, command, now, randomInt);
   if (result.duplicate) return { room, duplicate: true };
   let next: RemoteRoom = { ...room, game: { ...game, state: result.state, secret: result.secret }, updatedAt: now };
+  if (command.ability === "training") {
+    next.messages = [...(room.messages ?? []), { id: `system:training:${command.actionId}`, kind: "system", text: `${side === "red" ? "红方" : "黑方"}已选择${trainingTypeLabel(command.trainingType, side)}并成功启动本局训练。`, createdAt: now }];
+  }
   if (command.ability === "shadow") return { room: { ...next, updatedAt: room.updatedAt }, duplicate: false };
   next.featureSecret = { ...(room.featureSecret ?? { traps: [] }), traps: result.secret.traps ?? [] };
   if (result.state.status === "execution") {
@@ -1530,11 +1566,16 @@ export function submitRemoteHeroAbility(room: RemoteRoom, playerId: string, comm
   return { room: next, duplicate: false };
 }
 
+function trainingTypeLabel(type: import("./types.ts").PieceType | undefined, side: Side): string {
+  return ({ rook: "车", horse: "马", cannon: "炮", pawn: side === "red" ? "兵" : "卒", advisor: "士", elephant: "象", general: "将帅", storm_elemental: "风暴元素" })[type ?? "pawn"];
+}
+
 export function submitRemoteHeroPreparationChoice(room: RemoteRoom, playerId: string, choice: { blade?: "left" | "right"; trainingType?: import("./types.ts").PieceType }, now = Date.now(), randomInt: RandomInt = cryptoRandomInt): RemoteRoom {
   ensurePhase(room, "hero_preparation"); requireRemotePlayer(room, playerId);
   if (!room.game) throw new RuleError("MISSING_GAME", "棋局不存在");
   const side = sideForPlayer(room.game, playerId);
   if (room.features?.heroPreparation?.ready[side]) throw new RuleError("PREPARATION_LOCKED", "准备已确认");
   const next = copy(room); configureHeroPreparation(next.game!.state, next.game!.secret, side, choice, randomInt);
+  if (choice.trainingType !== undefined) next.messages = [...(room.messages ?? []), { id: `system:training:opening:${side}`, kind: "system", text: `${side === "red" ? "红方" : "黑方"}已选择${trainingTypeLabel(choice.trainingType, side)}并成功启动本局训练。`, createdAt: now }];
   next.updatedAt = now; return next;
 }
