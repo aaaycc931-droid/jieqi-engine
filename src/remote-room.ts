@@ -5,7 +5,7 @@ import { applyHeroAbility, ownerHeroSecrets, startFormalClock } from "./hero-act
 import { copy, initializeFeatureSecret } from "./settlement.ts";
 import { requireClosedDestructionBatch } from "./settlement-context.ts";
 import { RuleError } from "./errors.ts";
-import { effectiveResearchHero, researchSources } from "./research-source-context.ts";
+import { effectiveResearchHero, researchSources, requireExactResearchCreate, requireExactResearchRoom, requireExactResearchAssignments } from "./research-source-context.ts";
 import { equalHex, sha256Hex } from "./sha256.ts";
 import {
   applyAutomaticExecution,
@@ -650,6 +650,7 @@ function createGameAfterSetup(
   selections?: import("./types.ts").HeroSelections,
 ): RemoteRoom {
   const assignments = assignmentsFor(room);
+  requireExactResearchAssignments(assignments,heroes);
   const initial = createInitialGame(randomInt, room.mode.baseMode);
   const mutation = room.mode.mutationsEnabled ? drawRuntimeMutation(randomInt ?? cryptoRandomInt, heroes) : undefined;
   const research = researchSources(room.roomId, room.mode);
@@ -737,6 +738,7 @@ export function createRemoteRoom(
   now = Date.now(),
   mode?: Partial<OptionalModeConfig>,
 ): RemoteRoom {
+  requireExactResearchCreate(roomId,hostPlayerId);
   requireText(roomId, "INVALID_ROOM", "房间 ID 不能为空");
   return {
     roomId,
@@ -754,6 +756,7 @@ export function joinRemoteRoom(
   inviteToken: string,
   now = Date.now(),
 ): JoinRoomResult {
+  requireExactResearchRoom(room,guestPlayerId);
   requireText(guestPlayerId, "INVALID_PLAYER", "玩家 ID 不能为空");
   if (!hasMatchingInvite(room, inviteToken)) {
     throw new RuleError("INVALID_INVITE", "邀请链接无效");
@@ -809,6 +812,7 @@ export function submitRemoteRps(
   randomInt?: RandomInt,
   now = Date.now(),
 ): RemoteRoom {
+  requireExactResearchRoom(room);
   ensurePhase(room, "rps");
   if (!room.rps || !room.rpsSecret) {
     throw new RuleError("MISSING_RPS", "房间缺少猜拳状态");
@@ -875,6 +879,7 @@ export function submitRemoteHeroSelection(
   now = Date.now(),
   options?: { form?: import("./types.ts").HeroForm; variant?: import("./types.ts").GalakrondForm },
 ): RemoteRoom {
+  requireExactResearchRoom(room);
   ensurePhase(room, "hero_selection");
   requireRemotePlayer(room, playerId);
   if (!isHeroId(hero)) {
@@ -913,6 +918,7 @@ export function completeRemoteHeroIntro(
   playerId: string,
   now = Date.now(),
 ): RemoteRoom {
+  requireExactResearchRoom(room);
   ensurePhase(room, "hero_intro");
   requireRemotePlayer(room, playerId);
   const intro = room.features?.heroIntro;
@@ -1035,6 +1041,7 @@ export function advanceRemoteRoomTime(
   randomInt?: RandomInt,
   now = Date.now(),
 ): RemoteRoom {
+  requireExactResearchRoom(room);
   if (room.phase === "playing" && room.game && room.disconnects?.pausedAt === undefined) {
     const timed = copy(room);
     if (timed.game!.state.turnDeadlineAt === undefined) startFormalClock(timed.game!.state, now, timed.game!.secret, randomInt);
@@ -1247,6 +1254,7 @@ export function submitRemoteMove(
   command: MoveCommand,
   now = Date.now(),
 ): RemoteActionResult {
+  requireExactResearchRoom(room);
   ensurePhase(room, "playing");
   reserveServerActionId(command.actionId);
   if (!room.game) throw new RuleError("MISSING_GAME", "房间尚未开始棋局");
@@ -1524,6 +1532,7 @@ export function requireRemotePlayer(room: RemoteRoom, playerId: string): void {
 }
 
 export function submitRemoteHeroAbility(room: RemoteRoom, playerId: string, command: HeroAbilityCommand, now = Date.now(), randomInt?: RandomInt): RemoteActionResult {
+  requireExactResearchRoom(room);
   ensurePhase(room, "playing"); reserveServerActionId(command.actionId);
   if (!room.game) throw new RuleError("MISSING_GAME", "房间尚未开始棋局");
   const expired = expiredFormalAction(room, playerId, command.actionId, now);

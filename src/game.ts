@@ -62,7 +62,7 @@ export function initializeFeatureGameState(
 ): GameState {
   if (state.heroFormLock !== undefined || state.featureRules !== undefined || state.revision !== 0 || state.lastMove || Object.values(state.formalTurns ?? {}).some(n => n !== 0)) throw new RuleError("HERO_FORM_LOCKED", "英雄形态只能在新局开局时配置，不能重置本局资源");
   const heroSelections = createHeroSelections(heroes, forms, variants);
-  requireModeFeatureAdaptation(state.gameMode, { heroes, mutation });
+  requireModeFeatureAdaptation(state.gameMode, { heroes, heroSelections, mutation });
   const nextState = cloneState(state);
   const assassination = emptyAssassinationStates();
   for (const side of ["red", "black"] as const) {

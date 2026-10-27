@@ -1,5 +1,78 @@
 import { RuleError } from "./errors.ts";
-import type { FeatureRules, GameModeId, HeroId, OptionalModeConfig } from "./types.ts";
+import { sha256Hex } from "./sha256.ts";
+import type { FeatureRules, GameModeId, HeroId, MutationId, OptionalModeConfig, Side } from "./types.ts";
+
+// Internal source qualification only. No client field, serialized capability,
+// disabled source mask, or product readiness flag grants this authority.
+export const HALF_CHAOS_RESEARCH_TUPLES = Object.freeze({
+  "HC-ADM-PD-M01": Object.freeze({ red: "qin_long", black: "warrior", mutation: "iron_steed" }),
+  "HC-ADM-PD-M04": Object.freeze({ red: "qin_long", black: "warrior", mutation: "war_chariot" }),
+  "HC-ADM-DS-D01": Object.freeze({ red: "nozdormu", black: "murozond", mutation: "end_time" }),
+} satisfies Record<string, { red: HeroId; black: HeroId; mutation: MutationId }>);
+export type HalfChaosResearchTupleId = keyof typeof HALF_CHAOS_RESEARCH_TUPLES;
+interface ExactTupleContext { roomId: string; tupleId: HalfChaosResearchTupleId; players: Record<Side, string> }
+const issuedTupleCapabilities = new WeakSet<object>();
+const issuedTupleRooms = new WeakMap<object, Readonly<ExactTupleContext>>();
+let exactScope: Readonly<ExactTupleContext> | undefined;
+
+/** Issuer used only by the internal original-input driver, never a wire API. */
+export function issueOriginalHalfChaosTuple(context: ExactTupleContext, initializationText: string, replayText: string, replayId: string): Readonly<ExactTupleContext> {
+  const ids = context.tupleId === "HC-ADM-PD-M01" ? ["MA-PD02","MA-PD03","MA-PD06-A","MA-PD06-B"]
+    : context.tupleId === "HC-ADM-PD-M04" ? ["MA-PD01","MA-PD04","MA-PD05-A","MA-PD05-B"] : ["MA-DS01-02","MA-DS03","MA-DS04","MA-DS05"];
+  if (!HALF_CHAOS_RESEARCH_TUPLES[context.tupleId] || !ids.includes(replayId) ||
+      sha256Hex(initializationText) !== "ba8f0a40e19230176df732e267d14b6070778d74886f4c007ea0ff1be4084836" ||
+      sha256Hex(replayText) !== "1e213fe2c6db48ab54d15a599023f57ab50f1ecda50e30601ae555fbf88fda68")
+    throw new RuleError("RESEARCH_SCOPE_INVALID", "原始研究能力必须绑定精确tuple、回放及不可变输入");
+  const issued = Object.freeze({ roomId:context.roomId,tupleId:context.tupleId,players:Object.freeze({...context.players}) });
+  issuedTupleCapabilities.add(issued); return issued;
+}
+
+/** Only the internal room-owning driver calls this, around one synchronous API. */
+export function withExactHalfChaosTuple<T>(context: ExactTupleContext, operation: () => T): T {
+  if (!issuedTupleCapabilities.has(context) || scopes.length || exactScope || !HALF_CHAOS_RESEARCH_TUPLES[context.tupleId] || !context.roomId ||
+      !context.players.red || !context.players.black || context.players.red === context.players.black ||
+      Object.keys(context.players).sort().join(",") !== "black,red") throw new RuleError("RESEARCH_SCOPE_INVALID", "研究组合与两个稳定玩家必须精确绑定且不可嵌套");
+  exactScope = context;
+  try {
+    const result = operation();
+    if (result && typeof (result as { then?: unknown }).then === "function") throw new TypeError("Exact research scope must be synchronous");
+    return result;
+  } finally { exactScope = undefined; }
+}
+
+function exactMode(roomId: string, mode: OptionalModeConfig | undefined): void {
+  if (exactScope && (roomId !== exactScope.roomId || mode?.baseMode !== "half_chaos" || !mode?.heroesEnabled || !mode?.mutationsEnabled))
+    throw new RuleError("RESEARCH_SCOPE_INVALID", "受限研究不能用于其他房间、模式或来源开关");
+}
+
+export function requireExactResearchCreate(roomId: string, host: string): void {
+  if (exactScope && (roomId !== exactScope.roomId || host !== exactScope.players.red)) throw new RuleError("RESEARCH_SCOPE_INVALID", "原始研究建房必须匹配房间与房主");
+}
+/** Called by the internal driver only after validating an actual API return. */
+export function registerExactResearchRoom(room: object): void {
+  if (!exactScope) throw new RuleError("RESEARCH_SCOPE_INVALID", "权威房间注册必须在内部同步能力内完成");
+  issuedTupleRooms.set(room,exactScope);
+}
+export function requireExactResearchRoom(room: {roomId:string;mode:OptionalModeConfig;seats:{host:{playerId:string};guest?:{playerId:string}};game?:{state:{gameMode?:GameModeId;featureRules?:FeatureRules}}}, joiningPlayer?: string): void {
+  if (!exactScope) {
+    const rules = room.game?.state.featureRules;
+    const halfFeatures = (room.mode?.baseMode === "half_chaos" || room.game?.state.gameMode === "half_chaos") &&
+      (room.mode?.heroesEnabled || room.mode?.mutationsEnabled || rules?.mutation || Object.values(rules?.heroes ?? {}).some(Boolean) || Object.values(rules?.heroSelections ?? {}).some(Boolean));
+    if (issuedTupleRooms.has(room) || halfFeatures && !modeResearchPermits("half_chaos",rules,room.roomId))
+      throw new RuleError("MODE_ADAPTATION_PENDING", "受限半混乱房间不能脱离内部同步研究能力继续调用");
+    return;
+  }
+  exactMode(room.roomId,room.mode);
+  if (issuedTupleRooms.get(room)!==exactScope || room.seats.host.playerId!==exactScope.players.red ||
+      room.seats.guest && room.seats.guest.playerId!==exactScope.players.black || joiningPlayer!==undefined && joiningPlayer!==exactScope.players.black)
+    throw new RuleError("RESEARCH_SCOPE_INVALID", "研究入口拒绝未登记权威实例、复制房间或错误席位");
+}
+export function requireExactResearchAssignments(players: Record<Side,string>, heroes: Partial<Record<Side,HeroId>> | undefined): void {
+  if (!exactScope) return;
+  const tuple = HALF_CHAOS_RESEARCH_TUPLES[exactScope.tupleId];
+  if ((["red","black"] as const).some(side=>players[side]!==exactScope!.players[side] || heroes?.[side]!==tuple[side]))
+    throw new RuleError("RESEARCH_SCOPE_INVALID", "真实猜拳红黑分配必须匹配原始tuple，不能换边入局");
+}
 
 /** Trusted, synchronous harness capability. Never read from room/client JSON. */
 export interface ResearchSourceContext {
@@ -12,6 +85,16 @@ export const MODE_RESEARCH_SOURCES = Object.freeze({ xiangqi: Object.freeze(["hu
 
 /** Explicit source qualification capability; does not change product readiness. */
 export function modeResearchPermits(mode: GameModeId, rules?: FeatureRules, roomId?: string): boolean {
+  if (exactScope) {
+    if (mode !== "half_chaos" || roomId !== undefined && roomId !== exactScope.roomId) return false;
+    if (!rules) return true;
+    const tuple = HALF_CHAOS_RESEARCH_TUPLES[exactScope.tupleId];
+    if (rules.mutation !== tuple.mutation || Object.keys(rules.heroes ?? {}).sort().join(",") !== "black,red" ||
+        Object.keys(rules.heroSelections ?? {}).sort().join(",") !== "black,red") return false;
+    return (["red", "black"] as const).every(side => rules.heroes![side] === tuple[side] &&
+      rules.heroSelections![side]?.heroId === tuple[side] && rules.heroSelections![side]?.form === "front" &&
+      rules.heroSelections![side]?.packageId === `${tuple[side]}:front:v1` && rules.heroSelections![side]?.variant === undefined);
+  }
   const scope = scopes.at(-1);
   if (!scope?.mode || scope.mode !== mode || roomId !== undefined && scope.roomId !== roomId) return false;
   if (!rules) return true;
@@ -21,7 +104,7 @@ export function modeResearchPermits(mode: GameModeId, rules?: FeatureRules, room
 }
 
 export function withResearchSources<T>(context: ResearchSourceContext, operation: () => T): T {
-  if (scopes.length) throw new RuleError("RESEARCH_SCOPE_INVALID", "研究上下文不能嵌套覆盖");
+  if (scopes.length || exactScope) throw new RuleError("RESEARCH_SCOPE_INVALID", "研究上下文不能嵌套覆盖");
   if (!context.roomId || Object.keys(context.actors).length !== 2 ||
       (context.mode ? !MODE_RESEARCH_SOURCES[context.mode] || Object.values(context.actors).some(s => !(MODE_RESEARCH_SOURCES[context.mode] as readonly string[]).includes(s.hero)) :
         Object.values(context.actors).filter(s => s.hero === "night").length !== 1 || Object.values(context.actors).filter(s => s.hero === "shuffler").length !== 1) ||
@@ -40,6 +123,7 @@ export function withResearchSources<T>(context: ResearchSourceContext, operation
 }
 
 export function researchSources(roomId: string, mode: OptionalModeConfig): ResearchSourceContext | undefined {
+  if (exactScope) { exactMode(roomId, mode); return undefined; }
   const scope = scopes.at(-1);
   if (!scope) return undefined;
   if (scope.roomId !== roomId || (mode.baseMode ?? "jieqi") !== (scope.mode ?? "jieqi") || !mode.heroesEnabled ||
@@ -50,6 +134,12 @@ export function researchSources(roomId: string, mode: OptionalModeConfig): Resea
 }
 
 export function effectiveResearchHero(roomId: string, mode: OptionalModeConfig, actor: string, hero: HeroId): HeroId | undefined {
+  if (exactScope) {
+    exactMode(roomId, mode);
+    const side = (["red", "black"] as const).find(side => exactScope!.players[side] === actor);
+    if (!side || HALF_CHAOS_RESEARCH_TUPLES[exactScope.tupleId][side] !== hero) throw new RuleError("RESEARCH_SOURCE_MISMATCH", "研究英雄必须匹配玩家的原红黑来源");
+    return hero;
+  }
   const context = researchSources(roomId, mode);
   if (!context) return hero;
   const source = context.actors[actor];
