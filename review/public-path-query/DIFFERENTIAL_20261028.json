@@ -1,0 +1,543 @@
+{
+  "schema": "lezi.public_path_query.differential.v1",
+  "date_local": "2026-10-28",
+  "baseline_engine_commit": "680966fff6484b418c25c9afb8b6759b7a44b594",
+  "summary": {
+    "baselineQueryAuthorityMismatches": 12,
+    "currentQueryAuthorityMismatches": 0,
+    "unsafeCandidatesCorrectlyRemoved": 6,
+    "safeCheckerRemovalCasesRestored": 6,
+    "sourceControlsPreserved": 6,
+    "terminalCasesCompared": 3,
+    "originalRequestsAuthorityEventsViewsRNGUnchanged": 37
+  },
+  "rows": [
+    {
+      "version": "baseline",
+      "witness": "W01_SELF_CHECK_FALSE_ACCEPT_LAND",
+      "kind": "move",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "validator": true,
+      "marker": true,
+      "authorityAccepted": false,
+      "authorityCode": "SELF_CHECK",
+      "queryMatchesAuthority": false
+    },
+    {
+      "version": "baseline",
+      "witness": "W01_SELF_CHECK_FALSE_ACCEPT_LAND",
+      "kind": "activation",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "validator": true,
+      "marker": true,
+      "authorityAccepted": false,
+      "authorityCode": "SELF_CHECK",
+      "queryMatchesAuthority": false
+    },
+    {
+      "version": "baseline",
+      "witness": "W01_SELF_CHECK_FALSE_ACCEPT_LAND",
+      "kind": "continuing",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "validator": true,
+      "marker": true,
+      "authorityAccepted": false,
+      "authorityCode": "SELF_CHECK",
+      "queryMatchesAuthority": false
+    },
+    {
+      "version": "baseline",
+      "witness": "W02_SELF_CHECK_FALSE_ACCEPT_BOUNCE",
+      "kind": "move",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "validator": true,
+      "marker": true,
+      "authorityAccepted": false,
+      "authorityCode": "SELF_CHECK",
+      "queryMatchesAuthority": false
+    },
+    {
+      "version": "baseline",
+      "witness": "W02_SELF_CHECK_FALSE_ACCEPT_BOUNCE",
+      "kind": "activation",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "validator": true,
+      "marker": true,
+      "authorityAccepted": false,
+      "authorityCode": "SELF_CHECK",
+      "queryMatchesAuthority": false
+    },
+    {
+      "version": "baseline",
+      "witness": "W02_SELF_CHECK_FALSE_ACCEPT_BOUNCE",
+      "kind": "continuing",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "validator": true,
+      "marker": true,
+      "authorityAccepted": false,
+      "authorityCode": "SELF_CHECK",
+      "queryMatchesAuthority": false
+    },
+    {
+      "version": "baseline",
+      "witness": "W03_PATH_SCALE_NO_CRUSH_CONTRAST",
+      "kind": "move",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "validator": true,
+      "marker": true,
+      "authorityAccepted": true,
+      "queryMatchesAuthority": true
+    },
+    {
+      "version": "baseline",
+      "witness": "W03_PATH_SCALE_NO_CRUSH_CONTRAST",
+      "kind": "activation",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "validator": true,
+      "marker": true,
+      "authorityAccepted": true,
+      "queryMatchesAuthority": true
+    },
+    {
+      "version": "baseline",
+      "witness": "W03_PATH_SCALE_NO_CRUSH_CONTRAST",
+      "kind": "continuing",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "validator": true,
+      "marker": true,
+      "authorityAccepted": true,
+      "queryMatchesAuthority": true
+    },
+    {
+      "version": "baseline",
+      "witness": "W04_NEW_CHECK_VS_ENEMY_ONLY",
+      "kind": "move",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "validator": true,
+      "marker": true,
+      "authorityAccepted": true,
+      "queryMatchesAuthority": true
+    },
+    {
+      "version": "baseline",
+      "witness": "W04_NEW_CHECK_VS_ENEMY_ONLY",
+      "kind": "activation",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "validator": true,
+      "marker": true,
+      "authorityAccepted": true,
+      "queryMatchesAuthority": true
+    },
+    {
+      "version": "baseline",
+      "witness": "W04_NEW_CHECK_VS_ENEMY_ONLY",
+      "kind": "continuing",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "validator": true,
+      "marker": true,
+      "authorityAccepted": true,
+      "queryMatchesAuthority": true
+    },
+    {
+      "version": "baseline",
+      "witness": "checker-removal-scale-false",
+      "kind": "move",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "validator": false,
+      "marker": false,
+      "authorityAccepted": true,
+      "queryMatchesAuthority": false
+    },
+    {
+      "version": "baseline",
+      "witness": "checker-removal-scale-false",
+      "kind": "activation",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "validator": false,
+      "marker": false,
+      "authorityAccepted": true,
+      "queryMatchesAuthority": false
+    },
+    {
+      "version": "baseline",
+      "witness": "checker-removal-scale-false",
+      "kind": "continuing",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "validator": false,
+      "marker": false,
+      "authorityAccepted": true,
+      "queryMatchesAuthority": false
+    },
+    {
+      "version": "baseline",
+      "witness": "checker-removal-scale-true",
+      "kind": "move",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "validator": false,
+      "marker": false,
+      "authorityAccepted": true,
+      "queryMatchesAuthority": false
+    },
+    {
+      "version": "baseline",
+      "witness": "checker-removal-scale-true",
+      "kind": "activation",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "validator": false,
+      "marker": false,
+      "authorityAccepted": true,
+      "queryMatchesAuthority": false
+    },
+    {
+      "version": "baseline",
+      "witness": "checker-removal-scale-true",
+      "kind": "continuing",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "validator": false,
+      "marker": false,
+      "authorityAccepted": true,
+      "queryMatchesAuthority": false
+    },
+    {
+      "version": "current",
+      "witness": "W01_SELF_CHECK_FALSE_ACCEPT_LAND",
+      "kind": "move",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "validator": false,
+      "marker": false,
+      "authorityAccepted": false,
+      "authorityCode": "SELF_CHECK",
+      "queryMatchesAuthority": true
+    },
+    {
+      "version": "current",
+      "witness": "W01_SELF_CHECK_FALSE_ACCEPT_LAND",
+      "kind": "activation",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "validator": false,
+      "marker": false,
+      "authorityAccepted": false,
+      "authorityCode": "SELF_CHECK",
+      "queryMatchesAuthority": true
+    },
+    {
+      "version": "current",
+      "witness": "W01_SELF_CHECK_FALSE_ACCEPT_LAND",
+      "kind": "continuing",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "validator": false,
+      "marker": false,
+      "authorityAccepted": false,
+      "authorityCode": "SELF_CHECK",
+      "queryMatchesAuthority": true
+    },
+    {
+      "version": "current",
+      "witness": "W02_SELF_CHECK_FALSE_ACCEPT_BOUNCE",
+      "kind": "move",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "validator": false,
+      "marker": false,
+      "authorityAccepted": false,
+      "authorityCode": "SELF_CHECK",
+      "queryMatchesAuthority": true
+    },
+    {
+      "version": "current",
+      "witness": "W02_SELF_CHECK_FALSE_ACCEPT_BOUNCE",
+      "kind": "activation",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "validator": false,
+      "marker": false,
+      "authorityAccepted": false,
+      "authorityCode": "SELF_CHECK",
+      "queryMatchesAuthority": true
+    },
+    {
+      "version": "current",
+      "witness": "W02_SELF_CHECK_FALSE_ACCEPT_BOUNCE",
+      "kind": "continuing",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "validator": false,
+      "marker": false,
+      "authorityAccepted": false,
+      "authorityCode": "SELF_CHECK",
+      "queryMatchesAuthority": true
+    },
+    {
+      "version": "current",
+      "witness": "W03_PATH_SCALE_NO_CRUSH_CONTRAST",
+      "kind": "move",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "validator": true,
+      "marker": true,
+      "authorityAccepted": true,
+      "queryMatchesAuthority": true
+    },
+    {
+      "version": "current",
+      "witness": "W03_PATH_SCALE_NO_CRUSH_CONTRAST",
+      "kind": "activation",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "validator": true,
+      "marker": true,
+      "authorityAccepted": true,
+      "queryMatchesAuthority": true
+    },
+    {
+      "version": "current",
+      "witness": "W03_PATH_SCALE_NO_CRUSH_CONTRAST",
+      "kind": "continuing",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "validator": true,
+      "marker": true,
+      "authorityAccepted": true,
+      "queryMatchesAuthority": true
+    },
+    {
+      "version": "current",
+      "witness": "W04_NEW_CHECK_VS_ENEMY_ONLY",
+      "kind": "move",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "validator": true,
+      "marker": true,
+      "authorityAccepted": true,
+      "queryMatchesAuthority": true
+    },
+    {
+      "version": "current",
+      "witness": "W04_NEW_CHECK_VS_ENEMY_ONLY",
+      "kind": "activation",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "validator": true,
+      "marker": true,
+      "authorityAccepted": true,
+      "queryMatchesAuthority": true
+    },
+    {
+      "version": "current",
+      "witness": "W04_NEW_CHECK_VS_ENEMY_ONLY",
+      "kind": "continuing",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "validator": true,
+      "marker": true,
+      "authorityAccepted": true,
+      "queryMatchesAuthority": true
+    },
+    {
+      "version": "current",
+      "witness": "checker-removal-scale-false",
+      "kind": "move",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "validator": true,
+      "marker": true,
+      "authorityAccepted": true,
+      "queryMatchesAuthority": true
+    },
+    {
+      "version": "current",
+      "witness": "checker-removal-scale-false",
+      "kind": "activation",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "validator": true,
+      "marker": true,
+      "authorityAccepted": true,
+      "queryMatchesAuthority": true
+    },
+    {
+      "version": "current",
+      "witness": "checker-removal-scale-false",
+      "kind": "continuing",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "validator": true,
+      "marker": true,
+      "authorityAccepted": true,
+      "queryMatchesAuthority": true
+    },
+    {
+      "version": "current",
+      "witness": "checker-removal-scale-true",
+      "kind": "move",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "validator": true,
+      "marker": true,
+      "authorityAccepted": true,
+      "queryMatchesAuthority": true
+    },
+    {
+      "version": "current",
+      "witness": "checker-removal-scale-true",
+      "kind": "activation",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "validator": true,
+      "marker": true,
+      "authorityAccepted": true,
+      "queryMatchesAuthority": true
+    },
+    {
+      "version": "current",
+      "witness": "checker-removal-scale-true",
+      "kind": "continuing",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "validator": true,
+      "marker": true,
+      "authorityAccepted": true,
+      "queryMatchesAuthority": true
+    }
+  ],
+  "terminalRows": [
+    {
+      "version": "baseline",
+      "id": "only-leg-evasion",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "inCheck": true,
+      "anyLegal": false,
+      "checkmate": true,
+      "stalemate": false
+    },
+    {
+      "version": "baseline",
+      "id": "only-unsafe-bounces",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "inCheck": false,
+      "anyLegal": true,
+      "checkmate": false,
+      "stalemate": false
+    },
+    {
+      "version": "baseline",
+      "id": "only-H02-continuing-evasion",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "inCheck": true,
+      "anyLegal": false,
+      "checkmate": true,
+      "stalemate": false
+    },
+    {
+      "version": "current",
+      "id": "only-leg-evasion",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "inCheck": true,
+      "anyLegal": true,
+      "checkmate": false,
+      "stalemate": false
+    },
+    {
+      "version": "current",
+      "id": "only-unsafe-bounces",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "inCheck": false,
+      "anyLegal": false,
+      "checkmate": false,
+      "stalemate": true
+    },
+    {
+      "version": "current",
+      "id": "only-H02-continuing-evasion",
+      "synthetic": true,
+      "natural32ReachabilityProved": false,
+      "inCheck": true,
+      "anyLegal": true,
+      "checkmate": false,
+      "stalemate": false
+    }
+  ],
+  "prefixRows": [
+    {
+      "version": "baseline",
+      "branch": "AS",
+      "actualRequests": 11,
+      "allAfterAuthorityEventsAndViewsSha256": "24281b76e4eebeb098898d32fbbdc37bf901e04c164d926edd2098cd493dfce4",
+      "RNGSha256": "d0d4f48d66223d3e0dd0b9cdf2e72dcb2ff4a06185af7e808549216a6f8f2fae",
+      "rawBodiesPublished": false
+    },
+    {
+      "version": "baseline",
+      "branch": "AP",
+      "actualRequests": 13,
+      "allAfterAuthorityEventsAndViewsSha256": "51bc8e1a6b7278143d9b5bdda08a89e8031814cc8abfb8169bc53148a7d1a258",
+      "RNGSha256": "85264b91a3e80d245c45aab0db5258247a7bcc83950d00968730cc97ab830d19",
+      "rawBodiesPublished": false
+    },
+    {
+      "version": "baseline",
+      "branch": "ES",
+      "actualRequests": 13,
+      "allAfterAuthorityEventsAndViewsSha256": "4efb415199a49c34dac6c9dbdd779c8b315b210bb601465da38aa8ef38306c1c",
+      "RNGSha256": "d0d4f48d66223d3e0dd0b9cdf2e72dcb2ff4a06185af7e808549216a6f8f2fae",
+      "rawBodiesPublished": false
+    },
+    {
+      "version": "current",
+      "branch": "AS",
+      "actualRequests": 11,
+      "allAfterAuthorityEventsAndViewsSha256": "24281b76e4eebeb098898d32fbbdc37bf901e04c164d926edd2098cd493dfce4",
+      "RNGSha256": "d0d4f48d66223d3e0dd0b9cdf2e72dcb2ff4a06185af7e808549216a6f8f2fae",
+      "rawBodiesPublished": false
+    },
+    {
+      "version": "current",
+      "branch": "AP",
+      "actualRequests": 13,
+      "allAfterAuthorityEventsAndViewsSha256": "51bc8e1a6b7278143d9b5bdda08a89e8031814cc8abfb8169bc53148a7d1a258",
+      "RNGSha256": "85264b91a3e80d245c45aab0db5258247a7bcc83950d00968730cc97ab830d19",
+      "rawBodiesPublished": false
+    },
+    {
+      "version": "current",
+      "branch": "ES",
+      "actualRequests": 13,
+      "allAfterAuthorityEventsAndViewsSha256": "4efb415199a49c34dac6c9dbdd779c8b315b210bb601465da38aa8ef38306c1c",
+      "RNGSha256": "d0d4f48d66223d3e0dd0b9cdf2e72dcb2ff4a06185af7e808549216a6f8f2fae",
+      "rawBodiesPublished": false
+    }
+  ],
+  "independentQA": false,
+  "formalModeQualification": false,
+  "limits": [
+    "18 symbolic cases and three symbolic terminal boards are component evidence, not naturally reachable 32-piece histories.",
+    "The original 37 real-room requests use declared conditional tapes, not production random sampling.",
+    "Hidden touched identities, unrelated rosters/effects/spaces, late rain, child/forced windows and full search remain outside the new projection."
+  ]
+}

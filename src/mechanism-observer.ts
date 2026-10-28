@@ -16,6 +16,18 @@ interface Capture {
 }
 const captures: Capture[] = [];
 
+/** Read-only candidate queries must neither publish nor invalidate evidence. */
+export function withoutMechanismEvents<T>(operation: () => T): T {
+  captures.push({ events: [], evidenceValid: false, isolateFailures: true });
+  try {
+    const result = operation();
+    if (result && typeof (result as { then?: unknown }).then === "function") throw new TypeError("Mechanism suppression requires a synchronous operation");
+    return result;
+  } finally {
+    captures.pop();
+  }
+}
+
 function freezeTree(value: unknown): void {
   if (!value || typeof value !== "object" || Object.isFrozen(value)) return;
   for (const child of Object.values(value)) freezeTree(child);
@@ -38,7 +50,7 @@ export function emitMechanismEvent(kind: MechanismEvent["kind"], state: GameStat
 
 /** New authority checkpoints are passive even if their snapshot cannot be made. */
 export function emitAuthorityCheckpoint(kind: "main_action_atom_closed" | "formal_turn_settled" | "authority_random_draw", state: GameState, secret: SecretState, details: Record<string, unknown>): void {
-  if (!captures.at(-1)) return;
+  if (!captures.at(-1)?.evidenceValid) return;
   withIsolatedMechanismEvents(() => emitMechanismEvent(kind, state, secret, details));
 }
 

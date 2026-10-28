@@ -1,5 +1,5 @@
 import { openShuffleA } from "./hero-shuffle.ts";
-import { emitMainActionAtomClosed, withIsolatedMechanismEvents } from "./mechanism-observer.ts";
+import { emitMainActionAtomClosed, withIsolatedMechanismEvents, withoutMechanismEvents } from "./mechanism-observer.ts";
 import { requireClosedDestructionBatch } from "./settlement-context.ts";
 import { openHeroChild } from "./hero-children.ts";
 import { qualifyRiverArrival } from "./hero-progress.ts";
@@ -20,6 +20,7 @@ import {
   validatePublicMove,
   validatePublicMoveSourceGeometry,
 } from "./rules.ts";
+import type { PublicMoveOptions } from "./rules.ts";
 import { getController, getCurrentPieceType, isInPalace, otherSide } from "./slots.ts";
 import type {
   CapturedPiece,
@@ -34,6 +35,7 @@ import type {
   LastMove,
   MoveCommand,
   MoveResult,
+  MoveValidation,
   PublicPiece,
   RandomInt,
   RevealedPiece,
@@ -148,11 +150,11 @@ function pathPiecesForSpecialMove(state: GameState, source: PublicPiece, to: { x
   return [];
 }
 
-function finishDirectDeaths(state: GameState, actingSide: Side, secret: SecretState, completePathClosure = false): boolean {
+function finishDirectDeaths(state: GameState, actingSide: Side, secret: SecretState, completePathClosure = false, randomInt?: RandomInt): boolean {
   settleLandings(state, secret);
   resolveWindReturn(state, secret);
   if (state.lastMove) closeMainActionAtom(state, state.lastMove.actionId);
-  const terminal = closeDirectDeaths(state, secret, actingSide);
+  const terminal = closeDirectDeaths(state, secret, actingSide, randomInt);
   if (!terminal && completePathClosure && isGeneralInCheck(state, actingSide)) {
     throw new RuleError("SELF_CHECK", "路径、返回与落位完整结算后己方将帅仍受攻击");
   }
@@ -397,7 +399,8 @@ function coveredPathMove(state: GameState, command: MoveCommand): boolean {
   const mutation = state.featureRules?.mutation;
   // Qualified families: original early H04/H03 M01/M04 ground mains and the
   // ordinary NP32 H02/H21-invincible M04 prefix through its two H02 windows.
-  // Public move/search queries and all other sources remain separate work.
+  // Read-only queries reuse this family predicate, with additional public-data
+  // coverage checks below. Other authority sources retain their prior path.
   const halfFamily = selectedHeroId(state, "red") === "qin_long" && selectedHeroId(state, "black") === "warrior" &&
     Math.min(state.formalTurns?.red ?? 0, state.formalTurns?.black ?? 0) < 15;
   const npFamily = state.gameMode === "xiangqi" && selectedHeroId(state, "red") === "rogue" &&
@@ -407,6 +410,65 @@ function coveredPathMove(state: GameState, command: MoveCommand): boolean {
     (halfFamily || npFamily) &&
     Boolean(source && !source.faceDown && (!source.layer || source.layer === "ground") &&
     (mutation === "iron_steed" && source.type === "horse" || mutation === "war_chariot" && source.type === "rook"));
+}
+
+/** Public data sufficient for this exact action family; no private stand-ins. */
+export function supportsClosedPublicPathQuery(state: GameState, pieceId: string, side: Side = state.turn): boolean {
+  if (!Array.isArray(state.captured) || !Number.isInteger(state.revision) || state.status !== "playing") return false;
+  const source = pieceById(state, pieceId);
+  if (!source || !coveredPathMove({ ...state, turn: side }, { pieceId, from: source, to: source, actionId: "", expectedRevision: state.revision })) return false;
+  if (state.ghosts?.length || state.warps?.length || state.landingEvents?.length || state.heroRuntime?.red?.rainActive || state.heroRuntime?.black?.rainActive) return false;
+  if (state.pieces.some(p => !isGround(p) || !p.faceDown && getController(p) !== p.color)) return false;
+  const effects = state.effectsByPieceId ?? {};
+  if (Object.entries(effects).some(([id, value]) => Object.keys(value).some(key =>
+    !["barrier", "dragonScale", "dragonClaw", "stealth"].includes(key) ||
+    key === "stealth" && (selectedHeroId(state, value.stealth!.owner) !== "rogue" || state.assassination?.[value.stealth!.owner]?.activePieceId !== id)))) return false;
+  // A general cannot receive these defenses in either qualified source.
+  return (["red", "black"] as const).every(color => {
+    const generals = state.pieces.filter(p => !p.faceDown && p.type === "general" && p.color === color);
+    return generals.length === 1 && !Object.keys(effects[generals[0].id] ?? {}).length;
+  });
+}
+
+interface PublicPathQueryPhase { attackTarget?: boolean }
+const forbidQueryRandom: RandomInt = () => { throw new Error("Public path query attempted random sampling"); };
+
+/** Internal projection, never a command entry or a mode-admission capability.
+ * The same action implementation stops after direct closure/H02 transition,
+ * before formal end, children, adjudication, clocks or the next begin.
+ * rules.ts and game.ts already meet through settlement; these function-only
+ * imports are deliberately lazy, with no module-load registration or hooks.
+ */
+export function projectClosedPublicPathAction(
+  state: GameState,
+  move: Pick<MoveCommand, "from" | "to" | "pieceId">,
+  side: Side,
+  options: PublicMoveOptions = {},
+): { validation: MoveValidation; state?: GameState } | undefined {
+  const source = move.pieceId ? pieceById(state, move.pieceId) : pieceAt(state, move.from);
+  if (!source || !supportsClosedPublicPathQuery(state, source.id, side) || options.allowIntermediateCheck || options.allowLinkedControl || options.stormAssault) return;
+  // The WeakMap batch marker belongs to the original object, before any copy.
+  requireClosedDestructionBatch(state);
+  const touched = [...pathPiecesForSpecialMove(state, source, move.to), pieceAt(state, move.to)].filter(Boolean) as PublicPiece[];
+  if (touched.some(p => p.faceDown)) return;
+  const command = { ...move, pieceId: source.id, expectedRevision: state.revision, actionId: "__public_path_projection__" };
+  const secret: SecretState = { identities: {}, processedActions: {}, trueGenerals: {
+    red: findGeneral(state, "red").id, black: findGeneral(state, "black").id,
+  } };
+  const queryState = options.allowGeneralTarget ? { ...state, turn: side } : state;
+  const assassination = options.assassination ?? (options.allowStealthSource && state.assassination?.[side]?.activePieceId === source.id
+    ? { useStrongStrike: Boolean(options.requireCapture) } : undefined);
+  return withoutMechanismEvents(() => {
+    try {
+      const result = assassination
+        ? applyFreshAuthoritativeAssassination(queryState, secret, { ...command, kind: "assassination", ...assassination }, 0, forbidQueryRandom, true, {})
+        : applyFreshAuthoritativeMove(queryState, secret, command, false, 0, undefined, true, forbidQueryRandom, { attackTarget: options.allowGeneralTarget });
+      return { validation: { ok: true }, state: result.state };
+    } catch (error) {
+      if (!(error instanceof RuleError)) throw error;
+      return { validation: { ok: false, code: error.code, message: error.message } };
+    }
+  });
 }
 
 /** The remote entry uses this on the original authority before copying traps. */
@@ -445,6 +507,7 @@ function applyFreshAuthoritativeMove(
   childAction?: { parentActionId?: string; stormAssault?: boolean; mainClassification?: ActionClassification },
   completePathClosure = false,
   randomInt?: RandomInt,
+  query?: PublicPathQueryPhase,
 ): MoveResult {
   validateHeroForms(state, secret);
   if (state.flowDance && !deferTurnEnd) return applyFlowDance(state, secret, command);
@@ -461,14 +524,20 @@ function applyFreshAuthoritativeMove(
 
   const nextState = cloneState(state);
   const nextSecret = cloneSecret(secret);
-  initializeFeatureSecret(nextState, nextSecret, randomInt);
-  if (!deferTurnEnd && !state.forcedDefense) beginFormalTurn(nextState, nextSecret, randomInt);
+  if (query) {
+    // A geometric/adjudication probe is a prospective main, not a replay of
+    // an already-spent action and not an invocation of turn-start effects.
+    nextState.turnLifecycle = { side: state.turn, number: (state.formalTurns?.[state.turn] ?? 0) + 1, phase: "before_main", phases: ["turn_start", "before_main"] };
+  } else {
+    initializeFeatureSecret(nextState, nextSecret, randomInt);
+    if (!deferTurnEnd && !state.forcedDefense) beginFormalTurn(nextState, nextSecret, randomInt);
+  }
   if (nextState.pendingShuffle) throw new RuleError("SHUFFLE_ACTION_REQUIRED", "须先处理洗牌窗口");
   if (nextState.pendingHeroChild) throw new RuleError("HERO_CHILD_ACTION_REQUIRED", "须先处理当前衍生行动窗口");
   if (nextState.pendingDescent && !childAction?.stormAssault) throw new RuleError("DESCENT_ACTION_REQUIRED", "须先完成降临结算");
   validateRewindReplay(nextState, nextSecret, command);
   const validate = completePathClosure ? validatePublicMoveSourceGeometry : validatePublicMove;
-  const validation = validate(nextState, command, state.turn, { allowLinkedControl: deferTurnEnd && !childAction?.mainClassification, stormAssault: childAction?.stormAssault, allowIntermediateCheck: childAction?.stormAssault });
+  const validation = validate(nextState, command, state.turn, { allowLinkedControl: deferTurnEnd && !childAction?.mainClassification, stormAssault: childAction?.stormAssault, allowIntermediateCheck: childAction?.stormAssault, allowGeneralTarget: query?.attackTarget });
   if (!validation.ok && !(validation.code === "SELF_CHECK" && permitsSelfCrushingGeneral(state, command, state.turn))) {
     validationError(validation.code, validation.message);
   }
@@ -517,11 +586,11 @@ function applyFreshAuthoritativeMove(
       ...actionFields(classification),
     };
     queueLanding(nextState, source, actingSide, barrier ? "warrior_return" : "dragon_scale_return");
-    if (finishDirectDeaths(nextState, actingSide, nextSecret, completePathClosure)) {
+    if (finishDirectDeaths(nextState, actingSide, nextSecret, completePathClosure, query ? forbidQueryRandom : undefined)) {
       nextSecret.processedActions[command.actionId] = nextState.revision;
       return { state: nextState, secret: nextSecret, duplicate: false };
     }
-    if (deferTurnEnd) {
+    if (deferTurnEnd || query) {
       nextSecret.processedActions[command.actionId] = nextState.revision;
       return { state: nextState, secret: nextSecret, duplicate: false };
     }
@@ -574,12 +643,12 @@ function applyFreshAuthoritativeMove(
   };
 
 
-  if (finishDirectDeaths(nextState, actingSide, nextSecret, completePathClosure)) {
+  if (finishDirectDeaths(nextState, actingSide, nextSecret, completePathClosure, query ? forbidQueryRandom : undefined)) {
     nextSecret.processedActions[command.actionId] = nextState.revision;
     return { state: nextState, secret: nextSecret, duplicate: false };
   }
 
-  if (deferTurnEnd) {
+  if (deferTurnEnd || query) {
     nextSecret.processedActions[command.actionId] = nextState.revision;
     return { state: nextState, secret: nextSecret, duplicate: false };
   }
@@ -637,6 +706,7 @@ function applyFreshAuthoritativeAssassination(
   now: number,
   randomInt?: RandomInt,
   completePathClosure = false,
+  query?: PublicPathQueryPhase,
 ): MoveResult {
   validateHeroForms(state, secret);
   if (secret.processedActions[command.actionId] !== undefined) {
@@ -648,8 +718,12 @@ function applyFreshAuthoritativeAssassination(
   if (state.flowDance) throw new RuleError("FLOW_ACTION_REQUIRED", "须先完成流·舞归位结算");
   const nextState = cloneState(state);
   const nextSecret = cloneSecret(secret);
-  initializeFeatureSecret(nextState, nextSecret, randomInt);
-  if (!state.forcedDefense) beginFormalTurn(nextState, nextSecret, randomInt);
+  if (query) {
+    nextState.turnLifecycle = { side: state.turn, number: (state.formalTurns?.[state.turn] ?? 0) + 1, phase: "before_main", phases: ["turn_start", "before_main"] };
+  } else {
+    initializeFeatureSecret(nextState, nextSecret, randomInt);
+    if (!state.forcedDefense) beginFormalTurn(nextState, nextSecret, randomInt);
+  }
   if (nextState.pendingShuffle) throw new RuleError("SHUFFLE_ACTION_REQUIRED", "须先处理洗牌窗口");
   if (nextState.pendingHeroChild) throw new RuleError("HERO_CHILD_ACTION_REQUIRED", "须先处理当前衍生行动窗口");
   if (nextState.pendingDescent) throw new RuleError("DESCENT_ACTION_REQUIRED", "须先完成降临结算");
@@ -754,10 +828,11 @@ function applyFreshAuthoritativeAssassination(
     };
     if (continuing) endStealth(nextState, source.id);
     queueLanding(nextState, source, actingSide, "warrior_return");
-    if (finishDirectDeaths(nextState, actingSide, nextSecret, completePathClosure)) {
+    if (finishDirectDeaths(nextState, actingSide, nextSecret, completePathClosure, query ? forbidQueryRandom : undefined)) {
       nextSecret.processedActions[command.actionId] = nextState.revision;
       return { state: nextState, secret: nextSecret, duplicate: false };
     }
+    if (query) return { state: nextState, secret: nextSecret, duplicate: false };
     finishAfterPlayerAction(nextState, nextSecret, command, actingSide, false, source, false, randomInt);
     return { state: nextState, secret: nextSecret, duplicate: false };
   }
@@ -796,7 +871,7 @@ function applyFreshAuthoritativeAssassination(
   awardWarriorBarrier(nextState, actingSide, source.id, command.from, command.to, movedPiece);
 
 
-  if (finishDirectDeaths(nextState, actingSide, nextSecret)) {
+  if (finishDirectDeaths(nextState, actingSide, nextSecret, false, query ? forbidQueryRandom : undefined)) {
     nextSecret.processedActions[command.actionId] = nextState.revision;
     return { state: nextState, secret: nextSecret, duplicate: false };
   }
@@ -830,6 +905,8 @@ function applyFreshAuthoritativeAssassination(
   delete nextSecret.replay;
 
   if (completePathClosure && isGeneralInCheck(nextState, actingSide)) throw new RuleError("SELF_CHECK", "路径、终点、返位和刺杀来源状态闭合后己方将帅仍受攻击");
+
+  if (query) return { state: nextState, secret: nextSecret, duplicate: false };
 
   finishAfterPlayerAction(
     nextState,

@@ -1,0 +1,163 @@
+{
+  "baseline_engine_commit": "680966fff6484b418c25c9afb8b6759b7a44b594",
+  "source_and_np_fixture_files_verified": 39,
+  "files": [
+    {
+      "path": "scripts/research/standard-np32.ts",
+      "sha": "194dca46612dedb27d0195a7983f1ac2c4d4751a"
+    },
+    {
+      "path": "src/bluetooth-host-room.ts",
+      "sha": "80659ebf86c6bfbe678f67cd7aff9f01a8fa151c"
+    },
+    {
+      "path": "src/bluetooth-protocol.ts",
+      "sha": "d3d665f53588d30dc1b6e3a31fd3f300043cd7cd"
+    },
+    {
+      "path": "src/errors.ts",
+      "sha": "4abef6f0c9296cad333b10aa5c9e24b56c6f624f"
+    },
+    {
+      "path": "src/game.ts",
+      "sha": "1cd1b4f5829a495ee1cf490b2843f221235de390"
+    },
+    {
+      "path": "src/ghosts.ts",
+      "sha": "a24ef4bf971cb89825c442e9f51e29e2359f8ec1"
+    },
+    {
+      "path": "src/hero-actions.ts",
+      "sha": "2de406812dd1737ff0b861655cf6dcce1a474fb7"
+    },
+    {
+      "path": "src/hero-brawl.ts",
+      "sha": "a6b583b4bc563f24dbda710c5d63eae1df2bba6d"
+    },
+    {
+      "path": "src/hero-children.ts",
+      "sha": "2c5ef5b0afdf7975f3a71d1c94ba2035ed912416"
+    },
+    {
+      "path": "src/hero-descent.ts",
+      "sha": "fc3146acb9476f6b6537fc64f4055cc46444c0f8"
+    },
+    {
+      "path": "src/hero-forms.ts",
+      "sha": "e42cb0854bd71dfaf4004268ec79e11c115c692d"
+    },
+    {
+      "path": "src/hero-progress.ts",
+      "sha": "4a2fa1742283cf14781b51f6e43169aa37ec856e"
+    },
+    {
+      "path": "src/hero-river.ts",
+      "sha": "9954e51d12f7d2c218e70cc42a18988a787ffa2c"
+    },
+    {
+      "path": "src/hero-shuffle.ts",
+      "sha": "316973714c38e642d68f188ec978fd9c46fb754d"
+    },
+    {
+      "path": "src/heroes.ts",
+      "sha": "0958d1e16103de4b808a96d4fb825bf446a45e59"
+    },
+    {
+      "path": "src/index.ts",
+      "sha": "0da17345288bc7f398044c40c2fc2fc7f874f166"
+    },
+    {
+      "path": "src/mechanism-observer.ts",
+      "sha": "932317fe7471fdb6b79382a31aec35c127e4a6ec"
+    },
+    {
+      "path": "src/modes.ts",
+      "sha": "cb05c2fcfb0c617b6310e08ef8593e1d12ad95cc"
+    },
+    {
+      "path": "src/mutations.ts",
+      "sha": "a433d6f562686a3e654dd9d003db562a4e30a424"
+    },
+    {
+      "path": "src/proposal-review.ts",
+      "sha": "a2d8a463b556bf26183383a9fdbc6fa12a45013d"
+    },
+    {
+      "path": "src/remote-room.ts",
+      "sha": "37194aac340d8fed5d6ac02e0001bf4bfd65784b"
+    },
+    {
+      "path": "src/research-source-context.ts",
+      "sha": "b7bf2f759f4422729abec1eb84bbbc6c956d6858"
+    },
+    {
+      "path": "src/room.ts",
+      "sha": "687ce619fb798224e0b80c593c955a25b38b32f0"
+    },
+    {
+      "path": "src/rps.ts",
+      "sha": "ce158c5252b4ce4fd8a3b57815f052d276384666"
+    },
+    {
+      "path": "src/rules.ts",
+      "sha": "a5e1edb11debd2b7ebd62620248c8eb1eda23a3f"
+    },
+    {
+      "path": "src/settlement-context.ts",
+      "sha": "58052bee1c08392f887fbf1e7f1ec7501c2d8cf4"
+    },
+    {
+      "path": "src/settlement.ts",
+      "sha": "6655e6c0a3b319992bc23e0d216a502bf252702d"
+    },
+    {
+      "path": "src/setup.ts",
+      "sha": "15df513e8204d48464c097453c7bf9b83748c9f5"
+    },
+    {
+      "path": "src/sha256.ts",
+      "sha": "d9c0326f753dc5ef3fcf3a021e5b9258c0f068e8"
+    },
+    {
+      "path": "src/shan-board.ts",
+      "sha": "0a3d0767f3040a84fef643762cc58b1e5d0dacdc"
+    },
+    {
+      "path": "src/shan-core.ts",
+      "sha": "9c7a82ff1ef04334fe3a0e29a0b25dfe885598fc"
+    },
+    {
+      "path": "src/slots.ts",
+      "sha": "84971b8e5f52f6ea1e20ee4ddbe2e4c8b736f911"
+    },
+    {
+      "path": "src/spaces.ts",
+      "sha": "cc4db990fe5683a44b6a95ba50620370a242f49d"
+    },
+    {
+      "path": "src/turns.ts",
+      "sha": "325eea5b12ad36ec7b1fc8bdd50c1a56833f0612"
+    },
+    {
+      "path": "src/types.ts",
+      "sha": "75e987b74186440d3d2b2f20addb43a5fcbf43e5"
+    },
+    {
+      "path": "tests/fixtures/standard-np32/M04_SYMBOLIC_WITNESSES.json",
+      "sha": "b2b43503877bd4db3c29dd450ed14e1fc1f74efc"
+    },
+    {
+      "path": "tests/fixtures/standard-np32/NP_CONTRACT.json",
+      "sha": "4fb70b4d29a9b077ce799e4c00375982d1f7a066"
+    },
+    {
+      "path": "tests/fixtures/standard-np32/OBSERVATION_GUARD_MATRIX.json",
+      "sha": "294c988f9c1cfa78eb76129b93371f819d2ffb1b"
+    },
+    {
+      "path": "tests/fixtures/standard-np32/RNG_CONTRACT.json",
+      "sha": "4be095dd7d9799062b1f23f4fb3421f5231c2133"
+    }
+  ],
+  "missing": []
+}
