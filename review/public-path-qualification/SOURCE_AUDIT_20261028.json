@@ -1,0 +1,78 @@
+{
+  "schema": "lezi.public_path_qualification.source_audit.v1",
+  "date_local": "2026-10-28",
+  "handoff_commit": "c1ce9268f2b45feb8f834436ff6850cba08bd97d",
+  "engine_parent": "765a6bc6799ac823c9ba6e1ed6b10fd0c0705608",
+  "sources": [
+    {
+      "path": "worklines/standard/rules/shared/01_CURRENT_RULES.md",
+      "blob": "e6daf86145453a0ff8ad20d68facc39d07c46778"
+    },
+    {
+      "path": "worklines/standard/rules/shared/03_CURRENT_MUTATIONS.md",
+      "blob": "f1355ee129febb3a39caec4fefca73c9687bae9b"
+    },
+    {
+      "path": "worklines/standard/sources/standard/inherited_dispatch/baseline/audit/integrity/evidence/pinned_repo/rules/confirmed/RULE_UPDATE_2026-10-06_DARK_IDENTITY.md",
+      "blob": "0a6a31748ecdfaee440e7c7037f26bddb29c3b30"
+    },
+    {
+      "path": "worklines/main/ADJUDICATION.json",
+      "blob": "1cd5261b961a8e0e4e37c2cfde97c709f611c6fc"
+    },
+    {
+      "path": "worklines/main/R38_PATH_CLOSURE_PLAN.md",
+      "blob": "2ab0268e8f15c3d2437ebb6ad0ddfc61da6e1800"
+    }
+  ],
+  "decisions": [
+    {
+      "id": "DARK-BASE-01",
+      "scope": "Public current-type/controller qualification uses existing position-defined identity; actual reveal unchanged.",
+      "basis": [
+        "01_CURRENT_RULES.md#4.3-4.4",
+        "RULE_UPDATE_2026-10-06_DARK_IDENTITY.md#1"
+      ],
+      "adopted": "No private identity, private insight or arbitrary type/side fallback in the new API."
+    },
+    {
+      "id": "DARK-REVEAL-02",
+      "scope": "Actual covered destruction performs source-authorized real reveal and death records.",
+      "basis": [
+        "01_CURRENT_RULES.md#4.1-4.2"
+      ],
+      "adopted": "The public projection still excludes covered mover/contact; no fabricated death identity or captured record."
+    },
+    {
+      "id": "M04-SCALE-REVEALED-ONLY",
+      "scope": "The2026-10-17 continuation confirmation explicitly bounds the path and endpoint to revealed pieces; hidden/defense/control/history variants are separate.",
+      "basis": [
+        "03_CURRENT_MUTATIONS.md#2026-10-17 M04唯一路径棋由龙鳞存活"
+      ],
+      "adopted": "Even a synthetic hidden protected survivor is uncovered, not automatically admitted by the general dark-identity definition."
+    },
+    {
+      "id": "CHASE-SPECIAL-EXCLUSION",
+      "scope": "The ordinary hidden chase/protection hypothetical identity contract excludes hero/mutation special results.",
+      "basis": [
+        "ADJUDICATION.json#ordinary_hidden_chase_classification_contract"
+      ],
+      "adopted": "Do not borrow a pre-action hypothetical identity from chase to qualify M01/M04/H02 real path closure."
+    },
+    {
+      "id": "CLOSURE-COVERAGE-ONLY",
+      "scope": "Original R38 explicitly keeps dark defection, private aftermath, random/terminal and unsupported sources separate.",
+      "basis": [
+        "R38_PATH_CLOSURE_PLAN.md#选定技术路径与实施顺序"
+      ],
+      "adopted": "Three-state additive diagnostic, same closed action only where qualified; old boolean and actual submission policy retained."
+    }
+  ],
+  "implementation": "No new gameplay confirmation, public disclosure rule, mode admission, source-line adoption or score change.",
+  "open": [
+    "Covered mover actual reveal/defection",
+    "Covered path or endpoint real death/reveal records",
+    "Private traps and unrelated effects/spaces/children/late windows",
+    "Public/room/UI consumers must explicitly handle uncovered; they are not automatically migrated by this export."
+  ]
+}

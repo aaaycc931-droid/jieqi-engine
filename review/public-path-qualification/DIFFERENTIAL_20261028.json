@@ -1,0 +1,257 @@
+{
+  "schema": "lezi.public_path_qualification.differential.v1",
+  "date_local": "2026-10-28",
+  "baseline_engine_commit": "765a6bc6799ac823c9ba6e1ed6b10fd0c0705608",
+  "summary": {
+    "qualifiedSymbolicSources": 18,
+    "destinationsCompared": 1620,
+    "newDecisions": {
+      "legal": 126,
+      "illegal": 1494
+    },
+    "existingValidationAndMarkersUnchanged": true,
+    "explicitUncoveredLegacyTrueExamples": 5,
+    "originalFullOpeningRequestsComparedOldNew": 37,
+    "originalAuthorityEventsViewsAndRNGEqual": true
+  },
+  "qualifiedBoards": [
+    {
+      "witness": "W01_SELF_CHECK_FALSE_ACCEPT_LAND",
+      "kind": "move",
+      "destinations": 90,
+      "resultsSha256": "32fef50363cc86b08d47843b4f6d1b01e7ad0314b23ae64c8ff0b34be2095db7",
+      "synthetic": true,
+      "naturalReachabilityProved": false
+    },
+    {
+      "witness": "W01_SELF_CHECK_FALSE_ACCEPT_LAND",
+      "kind": "activation",
+      "destinations": 90,
+      "resultsSha256": "32fef50363cc86b08d47843b4f6d1b01e7ad0314b23ae64c8ff0b34be2095db7",
+      "synthetic": true,
+      "naturalReachabilityProved": false
+    },
+    {
+      "witness": "W01_SELF_CHECK_FALSE_ACCEPT_LAND",
+      "kind": "continuing",
+      "destinations": 90,
+      "resultsSha256": "da126be3071be5c0edd8252b4f9ecedf03de29a5aa065e0a4eeb7566f2bce001",
+      "synthetic": true,
+      "naturalReachabilityProved": false
+    },
+    {
+      "witness": "W02_SELF_CHECK_FALSE_ACCEPT_BOUNCE",
+      "kind": "move",
+      "destinations": 90,
+      "resultsSha256": "32fef50363cc86b08d47843b4f6d1b01e7ad0314b23ae64c8ff0b34be2095db7",
+      "synthetic": true,
+      "naturalReachabilityProved": false
+    },
+    {
+      "witness": "W02_SELF_CHECK_FALSE_ACCEPT_BOUNCE",
+      "kind": "activation",
+      "destinations": 90,
+      "resultsSha256": "32fef50363cc86b08d47843b4f6d1b01e7ad0314b23ae64c8ff0b34be2095db7",
+      "synthetic": true,
+      "naturalReachabilityProved": false
+    },
+    {
+      "witness": "W02_SELF_CHECK_FALSE_ACCEPT_BOUNCE",
+      "kind": "continuing",
+      "destinations": 90,
+      "resultsSha256": "da126be3071be5c0edd8252b4f9ecedf03de29a5aa065e0a4eeb7566f2bce001",
+      "synthetic": true,
+      "naturalReachabilityProved": false
+    },
+    {
+      "witness": "W03_PATH_SCALE_NO_CRUSH_CONTRAST",
+      "kind": "move",
+      "destinations": 90,
+      "resultsSha256": "e7b8aea6b5b504de7be03eb28b5f750b9ea51f3adcbebc1131ddc638dabc5f72",
+      "synthetic": true,
+      "naturalReachabilityProved": false
+    },
+    {
+      "witness": "W03_PATH_SCALE_NO_CRUSH_CONTRAST",
+      "kind": "activation",
+      "destinations": 90,
+      "resultsSha256": "e7b8aea6b5b504de7be03eb28b5f750b9ea51f3adcbebc1131ddc638dabc5f72",
+      "synthetic": true,
+      "naturalReachabilityProved": false
+    },
+    {
+      "witness": "W03_PATH_SCALE_NO_CRUSH_CONTRAST",
+      "kind": "continuing",
+      "destinations": 90,
+      "resultsSha256": "abb5a78d363761518c73c3a9ac7c1d66680d0d494e7f4255c70f166bfc40438d",
+      "synthetic": true,
+      "naturalReachabilityProved": false
+    },
+    {
+      "witness": "W04_NEW_CHECK_VS_ENEMY_ONLY",
+      "kind": "move",
+      "destinations": 90,
+      "resultsSha256": "d8955f1fa6940142932707c4ce7104309b34ac87869d743636adcc466391153d",
+      "synthetic": true,
+      "naturalReachabilityProved": false
+    },
+    {
+      "witness": "W04_NEW_CHECK_VS_ENEMY_ONLY",
+      "kind": "activation",
+      "destinations": 90,
+      "resultsSha256": "d8955f1fa6940142932707c4ce7104309b34ac87869d743636adcc466391153d",
+      "synthetic": true,
+      "naturalReachabilityProved": false
+    },
+    {
+      "witness": "W04_NEW_CHECK_VS_ENEMY_ONLY",
+      "kind": "continuing",
+      "destinations": 90,
+      "resultsSha256": "2849c3f35a4d5dd75d453866c4ba1e8efa4466190747738b0dee63750bc0c20b",
+      "synthetic": true,
+      "naturalReachabilityProved": false
+    },
+    {
+      "witness": "checker-scale-false",
+      "kind": "move",
+      "destinations": 90,
+      "resultsSha256": "bd3ae6aeef222da36328342524f257a1c36c8de530909217eab616ab53ebfd6f",
+      "synthetic": true,
+      "naturalReachabilityProved": false
+    },
+    {
+      "witness": "checker-scale-false",
+      "kind": "activation",
+      "destinations": 90,
+      "resultsSha256": "bd3ae6aeef222da36328342524f257a1c36c8de530909217eab616ab53ebfd6f",
+      "synthetic": true,
+      "naturalReachabilityProved": false
+    },
+    {
+      "witness": "checker-scale-false",
+      "kind": "continuing",
+      "destinations": 90,
+      "resultsSha256": "6c8387e885619c5f69e3dce44cbfec9efab77e9c63e5c837f2ea018077f90255",
+      "synthetic": true,
+      "naturalReachabilityProved": false
+    },
+    {
+      "witness": "checker-scale-true",
+      "kind": "move",
+      "destinations": 90,
+      "resultsSha256": "bd3ae6aeef222da36328342524f257a1c36c8de530909217eab616ab53ebfd6f",
+      "synthetic": true,
+      "naturalReachabilityProved": false
+    },
+    {
+      "witness": "checker-scale-true",
+      "kind": "activation",
+      "destinations": 90,
+      "resultsSha256": "bd3ae6aeef222da36328342524f257a1c36c8de530909217eab616ab53ebfd6f",
+      "synthetic": true,
+      "naturalReachabilityProved": false
+    },
+    {
+      "witness": "checker-scale-true",
+      "kind": "continuing",
+      "destinations": 90,
+      "resultsSha256": "6c8387e885619c5f69e3dce44cbfec9efab77e9c63e5c837f2ea018077f90255",
+      "synthetic": true,
+      "naturalReachabilityProved": false
+    }
+  ],
+  "gapRows": [
+    {
+      "id": "hidden-path-scale-false",
+      "legacyBoolean": true,
+      "qualification": {
+        "status": "uncovered",
+        "reason": "COVERED_CONTACT_NOT_QUALIFIED"
+      },
+      "synthetic": true,
+      "naturalReachabilityProved": false,
+      "boundary": "Real destruction/reveal is not simulated with a fabricated private identity."
+    },
+    {
+      "id": "hidden-path-scale-true",
+      "legacyBoolean": true,
+      "qualification": {
+        "status": "uncovered",
+        "reason": "COVERED_CONTACT_NOT_QUALIFIED"
+      },
+      "synthetic": true,
+      "naturalReachabilityProved": false,
+      "boundary": "Protected hidden state does not expand the revealed-only confirmation."
+    },
+    {
+      "id": "hidden-endpoint-scale-false",
+      "legacyBoolean": true,
+      "qualification": {
+        "status": "uncovered",
+        "reason": "COVERED_CONTACT_NOT_QUALIFIED"
+      },
+      "synthetic": true,
+      "naturalReachabilityProved": false,
+      "boundary": "Real destruction/reveal is not simulated with a fabricated private identity."
+    },
+    {
+      "id": "hidden-endpoint-scale-true",
+      "legacyBoolean": true,
+      "qualification": {
+        "status": "uncovered",
+        "reason": "COVERED_CONTACT_NOT_QUALIFIED"
+      },
+      "synthetic": true,
+      "naturalReachabilityProved": false,
+      "boundary": "Protected hidden state does not expand the revealed-only confirmation."
+    },
+    {
+      "id": "hidden-mover",
+      "legacyBoolean": true,
+      "qualification": {
+        "status": "uncovered",
+        "reason": "COVERED_MOVER_NOT_QUALIFIED"
+      },
+      "synthetic": true,
+      "naturalReachabilityProved": false
+    }
+  ],
+  "prefixRows": [
+    {
+      "branch": "AS",
+      "requests": 11,
+      "oldNewAuthorityEventsViewsEqual": true,
+      "oldNewRNGEqual": true,
+      "traceSha256": "88ba4eb701535d69e1453b81d88d3860c3e2a1ce4b8aeb7f0fd72980f8291bfd",
+      "RNGSha256": "d0d4f48d66223d3e0dd0b9cdf2e72dcb2ff4a06185af7e808549216a6f8f2fae",
+      "rawBodiesPublished": false
+    },
+    {
+      "branch": "AP",
+      "requests": 13,
+      "oldNewAuthorityEventsViewsEqual": true,
+      "oldNewRNGEqual": true,
+      "traceSha256": "9b53cea12e38719eb8086ad90777f6be9ef4ac903019feb1f8b626ac1b906d45",
+      "RNGSha256": "85264b91a3e80d245c45aab0db5258247a7bcc83950d00968730cc97ab830d19",
+      "rawBodiesPublished": false
+    },
+    {
+      "branch": "ES",
+      "requests": 13,
+      "oldNewAuthorityEventsViewsEqual": true,
+      "oldNewRNGEqual": true,
+      "traceSha256": "0f3b4ed708c5003a61a3bafd03bc9a16782f851c50aee1a8f50abadde7db7ee1",
+      "RNGSha256": "d0d4f48d66223d3e0dd0b9cdf2e72dcb2ff4a06185af7e808549216a6f8f2fae",
+      "rawBodiesPublished": false
+    }
+  ],
+  "independentQA": false,
+  "formalModeQualification": false,
+  "limits": [
+    "The1620 destinations share18 symbolic sources; they are not1620 independent samples or naturally reachable histories.",
+    "Public preflight error code identifies its own basis, not the authoritative command first-error ordering.",
+    "The new API does not migrate room/UI/terminal consumers or change actual submission/reveal policy.",
+    "Original37 requests use declared conditional tapes, not production random sampling.",
+    "Covered movers/contacts, special effects/windows/spaces and broader source qualification remain open."
+  ]
+}
