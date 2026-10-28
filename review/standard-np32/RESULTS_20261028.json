@@ -1,0 +1,676 @@
+{
+  "schema": "lezi.standard_np32.public_execution_summary.v1",
+  "id": "MAIN-STD-NP32-20261028",
+  "date_local": "2026-10-28",
+  "source_handoff_commit": "f631bad61b11f06070f5631a8a0ded7ea660bab1",
+  "engine_parent": "570fdf189867ec93355f0eca66362deb72cca53c",
+  "engine_source_identity": "Resolve containing commit from Git; exact tested source/input identities below, no prefilled own commit SHA.",
+  "changes": "Exact source-bound ordinary NP32 room capability, normal/assassination RNG plumbing, first-eight-turn H02/H21-invincible M04 closed-authority safety.",
+  "source_files": [
+    {
+      "path": "src/research-source-context.ts",
+      "git_blob_sha": "b7bf2f759f4422729abec1eb84bbbc6c956d6858",
+      "sha256": "ae6e9b2a937e00744fe6f3ff9e5fadddebcdfb34289661bcb01e85683d17e1d0",
+      "bytes": 13625
+    },
+    {
+      "path": "src/game.ts",
+      "git_blob_sha": "1cd1b4f5829a495ee1cf490b2843f221235de390",
+      "sha256": "2a03c60d25f2bf283d0322cd2b86ade73b06d2be522bd9c37b38ed1a080cf940",
+      "bytes": 51668
+    },
+    {
+      "path": "src/room.ts",
+      "git_blob_sha": "687ce619fb798224e0b80c593c955a25b38b32f0",
+      "sha256": "ac87e304d37f10ab4230c23f18f9fdda774d23df87a77e17cc295294f1e6b18e",
+      "bytes": 2914
+    },
+    {
+      "path": "src/remote-room.ts",
+      "git_blob_sha": "37194aac340d8fed5d6ac02e0001bf4bfd65784b",
+      "sha256": "0cce9e1a7f0ca7b1adbc1bb27542753d588ad6b10d039bec74ba05b62109769e",
+      "bytes": 62698
+    },
+    {
+      "path": "scripts/research/standard-np32.ts",
+      "git_blob_sha": "194dca46612dedb27d0195a7983f1ac2c4d4751a",
+      "sha256": "36412047b5d688552f608cbab4e40f6400ed833496ff71516148d0fb2c6df008",
+      "bytes": 13939
+    },
+    {
+      "path": "tests/standard-np32-research.test.ts",
+      "git_blob_sha": "f40c65d316b19ed4cc257ed5e6b50708efcb7219",
+      "sha256": "4e0a46551b222231b50ad4acb09ac7ff2f0f150f3042307621ba73160438d8f5",
+      "bytes": 20450
+    },
+    {
+      "path": "tests/fixtures/standard-np32/NP_CONTRACT.json",
+      "git_blob_sha": "4fb70b4d29a9b077ce799e4c00375982d1f7a066",
+      "sha256": "be1a9aff0b0f9e3f088afd0ee99c19a140f4690208cedf93f3fe39c3c61c945f",
+      "bytes": 12223
+    },
+    {
+      "path": "tests/fixtures/standard-np32/RNG_CONTRACT.json",
+      "git_blob_sha": "4be095dd7d9799062b1f23f4fb3421f5231c2133",
+      "sha256": "99c58b51bc473cb58793b2ea7f3e5481e27a24608522d9d1da71a579a4ad0e55",
+      "bytes": 14976
+    },
+    {
+      "path": "tests/fixtures/standard-np32/OBSERVATION_GUARD_MATRIX.json",
+      "git_blob_sha": "294c988f9c1cfa78eb76129b93371f819d2ffb1b",
+      "sha256": "91fb32892405ca7ecbe74d2666707dc50060302fb2f3947e2f1fb41f4bb34ae5",
+      "bytes": 25466
+    },
+    {
+      "path": "tests/fixtures/standard-np32/M04_SYMBOLIC_WITNESSES.json",
+      "git_blob_sha": "b2b43503877bd4db3c29dd450ed14e1fc1f74efc",
+      "sha256": "477dc8534a3d97292f96e89d750fe0aa6a160e6c7fa38cd59b1fe6c71c37ccb3",
+      "bytes": 24861
+    }
+  ],
+  "validation": {
+    "node": "v24.22.1",
+    "related_files": 51,
+    "related_passed": 749,
+    "related_failed": 0,
+    "new_focused_tests_in_related_run": 39,
+    "command_record": "review/standard-np32/COMMAND_20261028.json",
+    "tap": "review/standard-np32/related-final-20261028.tap",
+    "independent_QA": false,
+    "full_typecheck": "NOT_RUN",
+    "UI_build_and_device_acceptance": "NOT_RUN"
+  },
+  "actual_source_prefixes": 3,
+  "actual_requests": 37,
+  "event_counts": {
+    "formal_main_action": 37,
+    "main_action_atom_closed": 37,
+    "formal_turn_end": 37,
+    "formal_turn_settled": 37,
+    "formal_turn_begin": 37,
+    "formal_clock_start": 37,
+    "authority_random_draw": 12
+  },
+  "replays": [
+    {
+      "branch": "AS",
+      "status": "ORIGINAL_NP32_CONDITIONAL_TAPE_PREFIX_EXECUTED",
+      "requests": 11,
+      "initial_pieces": 32,
+      "all_initial_public": true,
+      "initial_deal_rng_calls": 0,
+      "actual_random_calls_including_mutation": 5,
+      "source_conditional_tape": true,
+      "production_random_sample": false,
+      "bounded_branch_oracle_issues": [],
+      "request_evidence": [
+        {
+          "request_id": "NP-AS:R1:main",
+          "kind": "move",
+          "disposition": "accepted",
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1,
+          "random_draw_receipts": 0
+        },
+        {
+          "request_id": "NP-AS:B1:main",
+          "kind": "invoke",
+          "disposition": "accepted",
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1,
+          "random_draw_receipts": 0
+        },
+        {
+          "request_id": "NP-AS:R2:main",
+          "kind": "move",
+          "disposition": "accepted",
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1,
+          "random_draw_receipts": 0
+        },
+        {
+          "request_id": "NP-AS:B2:main",
+          "kind": "invoke",
+          "disposition": "accepted",
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1,
+          "random_draw_receipts": 0
+        },
+        {
+          "request_id": "NP-AS:R3:main",
+          "kind": "move",
+          "disposition": "accepted",
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1,
+          "random_draw_receipts": 0
+        },
+        {
+          "request_id": "NP-AS:B3:main",
+          "kind": "invoke",
+          "disposition": "accepted",
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1,
+          "random_draw_receipts": 0
+        },
+        {
+          "request_id": "NP-AS:R4:main",
+          "kind": "move",
+          "disposition": "accepted",
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1,
+          "random_draw_receipts": 0
+        },
+        {
+          "request_id": "NP-AS:B4:main",
+          "kind": "invoke",
+          "disposition": "accepted",
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1,
+          "random_draw_receipts": 0
+        },
+        {
+          "request_id": "NP-AS:R5:main",
+          "kind": "move",
+          "disposition": "accepted",
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1,
+          "random_draw_receipts": 4
+        },
+        {
+          "request_id": "NP-AS:B5:main",
+          "kind": "move",
+          "disposition": "accepted",
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1,
+          "random_draw_receipts": 0
+        },
+        {
+          "request_id": "NP-AS:R6:main",
+          "kind": "assassination",
+          "disposition": "accepted",
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1,
+          "random_draw_receipts": 0
+        }
+      ]
+    },
+    {
+      "branch": "AP",
+      "status": "ORIGINAL_NP32_CONDITIONAL_TAPE_PREFIX_EXECUTED",
+      "requests": 13,
+      "initial_pieces": 32,
+      "all_initial_public": true,
+      "initial_deal_rng_calls": 0,
+      "actual_random_calls_including_mutation": 5,
+      "source_conditional_tape": true,
+      "production_random_sample": false,
+      "bounded_branch_oracle_issues": [],
+      "request_evidence": [
+        {
+          "request_id": "NP-AP:R1:main",
+          "kind": "move",
+          "disposition": "accepted",
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1,
+          "random_draw_receipts": 0
+        },
+        {
+          "request_id": "NP-AP:B1:main",
+          "kind": "invoke",
+          "disposition": "accepted",
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1,
+          "random_draw_receipts": 0
+        },
+        {
+          "request_id": "NP-AP:R2:main",
+          "kind": "move",
+          "disposition": "accepted",
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1,
+          "random_draw_receipts": 0
+        },
+        {
+          "request_id": "NP-AP:B2:main",
+          "kind": "invoke",
+          "disposition": "accepted",
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1,
+          "random_draw_receipts": 0
+        },
+        {
+          "request_id": "NP-AP:R3:main",
+          "kind": "move",
+          "disposition": "accepted",
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1,
+          "random_draw_receipts": 0
+        },
+        {
+          "request_id": "NP-AP:B3:main",
+          "kind": "invoke",
+          "disposition": "accepted",
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1,
+          "random_draw_receipts": 0
+        },
+        {
+          "request_id": "NP-AP:R4:main",
+          "kind": "move",
+          "disposition": "accepted",
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1,
+          "random_draw_receipts": 0
+        },
+        {
+          "request_id": "NP-AP:B4:main",
+          "kind": "invoke",
+          "disposition": "accepted",
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1,
+          "random_draw_receipts": 0
+        },
+        {
+          "request_id": "NP-AP:R5:main",
+          "kind": "move",
+          "disposition": "accepted",
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1,
+          "random_draw_receipts": 4
+        },
+        {
+          "request_id": "NP-AP:B5:main",
+          "kind": "move",
+          "disposition": "accepted",
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1,
+          "random_draw_receipts": 0
+        },
+        {
+          "request_id": "NP-AP:R6:main",
+          "kind": "assassination",
+          "disposition": "accepted",
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1,
+          "random_draw_receipts": 0
+        },
+        {
+          "request_id": "NP-AP:B6:main",
+          "kind": "move",
+          "disposition": "accepted",
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1,
+          "random_draw_receipts": 0
+        },
+        {
+          "request_id": "NP-AP:R7:main",
+          "kind": "assassination",
+          "disposition": "accepted",
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1,
+          "random_draw_receipts": 0
+        }
+      ]
+    },
+    {
+      "branch": "ES",
+      "status": "ORIGINAL_NP32_CONDITIONAL_TAPE_PREFIX_EXECUTED",
+      "requests": 13,
+      "initial_pieces": 32,
+      "all_initial_public": true,
+      "initial_deal_rng_calls": 0,
+      "actual_random_calls_including_mutation": 5,
+      "source_conditional_tape": true,
+      "production_random_sample": false,
+      "bounded_branch_oracle_issues": [],
+      "request_evidence": [
+        {
+          "request_id": "NP-ES:R1:main",
+          "kind": "move",
+          "disposition": "accepted",
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1,
+          "random_draw_receipts": 0
+        },
+        {
+          "request_id": "NP-ES:B1:main",
+          "kind": "invoke",
+          "disposition": "accepted",
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1,
+          "random_draw_receipts": 0
+        },
+        {
+          "request_id": "NP-ES:R2:main",
+          "kind": "move",
+          "disposition": "accepted",
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1,
+          "random_draw_receipts": 0
+        },
+        {
+          "request_id": "NP-ES:B2:main",
+          "kind": "invoke",
+          "disposition": "accepted",
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1,
+          "random_draw_receipts": 0
+        },
+        {
+          "request_id": "NP-ES:R3:main",
+          "kind": "move",
+          "disposition": "accepted",
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1,
+          "random_draw_receipts": 0
+        },
+        {
+          "request_id": "NP-ES:B3:main",
+          "kind": "invoke",
+          "disposition": "accepted",
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1,
+          "random_draw_receipts": 0
+        },
+        {
+          "request_id": "NP-ES:R4:main",
+          "kind": "move",
+          "disposition": "accepted",
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1,
+          "random_draw_receipts": 0
+        },
+        {
+          "request_id": "NP-ES:B4:main",
+          "kind": "invoke",
+          "disposition": "accepted",
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1,
+          "random_draw_receipts": 0
+        },
+        {
+          "request_id": "NP-ES:R5:main",
+          "kind": "move",
+          "disposition": "accepted",
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1,
+          "random_draw_receipts": 4
+        },
+        {
+          "request_id": "NP-ES:B5:main",
+          "kind": "move",
+          "disposition": "accepted",
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1,
+          "random_draw_receipts": 0
+        },
+        {
+          "request_id": "NP-ES:R6:main",
+          "kind": "assassination",
+          "disposition": "accepted",
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1,
+          "random_draw_receipts": 0
+        },
+        {
+          "request_id": "NP-ES:B6:main",
+          "kind": "move",
+          "disposition": "accepted",
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1,
+          "random_draw_receipts": 0
+        },
+        {
+          "request_id": "NP-ES:R7:main",
+          "kind": "assassination",
+          "disposition": "accepted",
+          "main_atom_checkpoints": 1,
+          "formal_settled_checkpoints": 1,
+          "random_draw_receipts": 0
+        }
+      ]
+    }
+  ],
+  "source_baseline_differential": {
+    "original_game_commit": "570fdf189867ec93355f0eca66362deb72cca53c",
+    "original_game_blob": "d4f027fb3dae649a95485eefdd9960139ff57c71",
+    "admission_shim": "Current exact research context supplied to both versions only for lower-level synthetic source probes; original baseline game/rules/settlement bytes unchanged. Not an original product admission or natural 32 baseline run.",
+    "old_unsafe_components_accepted": 6,
+    "new_unsafe_components_rejected": 6,
+    "synthetic": true,
+    "natural32_reachability_proved": false,
+    "rows": [
+      {
+        "version": "baseline-np32",
+        "witness": "W01_SELF_CHECK_FALSE_ACCEPT_LAND",
+        "kind": "move",
+        "synthetic": true,
+        "natural32ReachabilityProved": false,
+        "preSelfCheck": false,
+        "disposition": "accepted",
+        "postSelfCheck": true
+      },
+      {
+        "version": "baseline-np32",
+        "witness": "W01_SELF_CHECK_FALSE_ACCEPT_LAND",
+        "kind": "activation",
+        "synthetic": true,
+        "natural32ReachabilityProved": false,
+        "preSelfCheck": false,
+        "disposition": "accepted",
+        "postSelfCheck": true
+      },
+      {
+        "version": "baseline-np32",
+        "witness": "W01_SELF_CHECK_FALSE_ACCEPT_LAND",
+        "kind": "continuing",
+        "synthetic": true,
+        "natural32ReachabilityProved": false,
+        "preSelfCheck": false,
+        "disposition": "accepted",
+        "postSelfCheck": true
+      },
+      {
+        "version": "baseline-np32",
+        "witness": "W02_SELF_CHECK_FALSE_ACCEPT_BOUNCE",
+        "kind": "move",
+        "synthetic": true,
+        "natural32ReachabilityProved": false,
+        "preSelfCheck": false,
+        "disposition": "accepted",
+        "postSelfCheck": true
+      },
+      {
+        "version": "baseline-np32",
+        "witness": "W02_SELF_CHECK_FALSE_ACCEPT_BOUNCE",
+        "kind": "activation",
+        "synthetic": true,
+        "natural32ReachabilityProved": false,
+        "preSelfCheck": false,
+        "disposition": "accepted",
+        "postSelfCheck": true
+      },
+      {
+        "version": "baseline-np32",
+        "witness": "W02_SELF_CHECK_FALSE_ACCEPT_BOUNCE",
+        "kind": "continuing",
+        "synthetic": true,
+        "natural32ReachabilityProved": false,
+        "preSelfCheck": false,
+        "disposition": "accepted",
+        "postSelfCheck": true
+      },
+      {
+        "version": "engine",
+        "witness": "W01_SELF_CHECK_FALSE_ACCEPT_LAND",
+        "kind": "move",
+        "synthetic": true,
+        "natural32ReachabilityProved": false,
+        "preSelfCheck": false,
+        "disposition": "rejected",
+        "code": "SELF_CHECK"
+      },
+      {
+        "version": "engine",
+        "witness": "W01_SELF_CHECK_FALSE_ACCEPT_LAND",
+        "kind": "activation",
+        "synthetic": true,
+        "natural32ReachabilityProved": false,
+        "preSelfCheck": false,
+        "disposition": "rejected",
+        "code": "SELF_CHECK"
+      },
+      {
+        "version": "engine",
+        "witness": "W01_SELF_CHECK_FALSE_ACCEPT_LAND",
+        "kind": "continuing",
+        "synthetic": true,
+        "natural32ReachabilityProved": false,
+        "preSelfCheck": false,
+        "disposition": "rejected",
+        "code": "SELF_CHECK"
+      },
+      {
+        "version": "engine",
+        "witness": "W02_SELF_CHECK_FALSE_ACCEPT_BOUNCE",
+        "kind": "move",
+        "synthetic": true,
+        "natural32ReachabilityProved": false,
+        "preSelfCheck": false,
+        "disposition": "rejected",
+        "code": "SELF_CHECK"
+      },
+      {
+        "version": "engine",
+        "witness": "W02_SELF_CHECK_FALSE_ACCEPT_BOUNCE",
+        "kind": "activation",
+        "synthetic": true,
+        "natural32ReachabilityProved": false,
+        "preSelfCheck": false,
+        "disposition": "rejected",
+        "code": "SELF_CHECK"
+      },
+      {
+        "version": "engine",
+        "witness": "W02_SELF_CHECK_FALSE_ACCEPT_BOUNCE",
+        "kind": "continuing",
+        "synthetic": true,
+        "natural32ReachabilityProved": false,
+        "preSelfCheck": false,
+        "disposition": "rejected",
+        "code": "SELF_CHECK"
+      }
+    ]
+  },
+  "original_negative_matrix": [
+    {
+      "id": "NG-01",
+      "status": "BOUNDED_COMPONENT_VERIFIED",
+      "evidence_and_limits": "Synthetic checked H21 prayer refuses with no source/counter mutation; not a natural checked-NP history."
+    },
+    {
+      "id": "NG-02",
+      "status": "ACTUAL_PREFIX_VERIFIED",
+      "evidence_and_limits": "All three actual B4 prayers create omen, no descent or selection RNG in B4."
+    },
+    {
+      "id": "NG-03",
+      "status": "PARTIAL_ACTUAL_TIMEOUT_ROUTE",
+      "evidence_and_limits": "Real 32-piece prefix to R5 then timeout: no B5 descent/draw. Other terminal mechanisms not exhaustively covered."
+    },
+    {
+      "id": "NG-04",
+      "status": "ACTUAL_DUPLICATE_AND_COMPONENT_VERIFIED",
+      "evidence_and_limits": "Actual R5 duplicate preserves room/revision/clock/draws; existing RNG01 descent idempotence regression reused."
+    },
+    {
+      "id": "NG-05",
+      "status": "PARTIAL_RUNTIME_AND_COMPONENT_VERIFIED",
+      "evidence_and_limits": "Actual R5 injected RNG exception rolls back candidate; existing malformed-index guards pass; source pool order verified but arbitrary changed-order natural probes not supplied."
+    },
+    {
+      "id": "NG-06",
+      "status": "BOUNDED_EXISTING_COMPONENTS_VERIFIED",
+      "evidence_and_limits": "Existing RNG01 N=0/1/3/4/15 plus RNG04 mixed air/river/covered/current-controller tests rerun successfully; not new natural samples."
+    },
+    {
+      "id": "NG-07",
+      "status": "PARTIAL_INHERITED_GEOMETRY_COMPONENTS",
+      "evidence_and_limits": "Existing assassination/mutation geometry tests rerun; full natural NP negative request families remain separate."
+    },
+    {
+      "id": "NG-08",
+      "status": "PARTIAL_INHERITED_STAGE_GUARDS",
+      "evidence_and_limits": "Original AS/AP/ES use distinct actual activation/later commands; inherited source-stage guards rerun, not every natural wrong-stage sequence."
+    },
+    {
+      "id": "NG-09",
+      "status": "BOUNDED_EXISTING_AS_COMPONENT",
+      "evidence_and_limits": "Existing AS02 protected-path case retains its original outside-AS-guard interpretation; no general failed-activation refund policy."
+    },
+    {
+      "id": "NG-10",
+      "status": "PARTIAL_DISTINCT_BRANCH_ORACLES",
+      "evidence_and_limits": "Three original conditional branches independently matched exact shield/oracle states; no claim of all altered endpoint histories."
+    },
+    {
+      "id": "NG-11",
+      "status": "OUT_OF_SCOPE_UNRUN",
+      "evidence_and_limits": "H10, multiple defenses, return-space conflicts, other control/air/river/history combinations not qualified by NP32."
+    },
+    {
+      "id": "NG-12",
+      "status": "PARTIAL_FIRST_WINDOW_ACTUAL",
+      "evidence_and_limits": "AP/ES R7 actual first subsequent window consumed; full natural R8 second-window/expiry branch not newly executed."
+    },
+    {
+      "id": "NG-13",
+      "status": "BOUNDED_AUTHORITY_FIXED_QUERIES_OPEN",
+      "evidence_and_limits": "Six formerly unsafe synthetic ordinary/activation/continuing cases reject; six direct-check evasion controls succeed; public legal/search query migration still open."
+    },
+    {
+      "id": "NG-14",
+      "status": "ACTUAL_PREFIX_AND_COMPONENT_VERIFIED",
+      "evidence_and_limits": "37 exact atom/end snapshots and path-vs-endpoint death oracles; survival control does not invent path death; source-terminal component keeps original outcome."
+    },
+    {
+      "id": "NG-15",
+      "status": "PARTIAL_ACTUAL_CLOCK_AND_DUPLICATE",
+      "evidence_and_limits": "37 main/end/begin/clock identities, actual duplicate and timeout checked; unrelated child/forced-defense sources remain outside this slice."
+    }
+  ],
+  "authority_evidence": {
+    "filename": "lezi-main-np32-evidence-20261028.zip",
+    "raw_filename": "authority-trace.json",
+    "raw_sha256": "d32a7ec3c7622ddb6b937e27c37aa6e90b335df8046c238ba861c66c076e3c33",
+    "raw_bytes": 31192909,
+    "visibility": "Owner-only artifact, raw authority/secret/transport/RNG records excluded from public GitHub."
+  },
+  "current_blocker_dispositions": {
+    "G00_MAIN_READ_RECEIPT": "Actual source/confirmation reads, current receipt written in main handoff.",
+    "G01_MODE_ADMISSION": "Research-only exact tuple implemented; formal product qualification remains CLOSED.",
+    "G02_H02_AS_SOURCE": "PR14 retained bounded patch; this phase original AS prefix actually executed and source retention/no stealth verified.",
+    "G03_M04_ROYAL_SAFETY": "Bounded ordinary+H02 authority closure fixed; public queries, full rosters/search still OPEN.",
+    "G04_H21_PRAYER": "B1-B4/R5/B5 actual timing/counters verified for three prefixes; old invoke-omission allegation stays withdrawn.",
+    "G05_H21_RANDOM": "Actual ordered-pool draw receipts and deterministic original-tape replay; production law/quality and count-policy adoption remain UNKNOWN.",
+    "G06_FORMAL_NP_RUNS": "Three original full-opening conditional-tape research prefixes executed; formal product/independent QA acceptance remains OPEN.",
+    "G07_ENGINE_PUBLICATION": "Independent child draft on PR14; not merged or deployed."
+  },
+  "limits": [
+    "Controlled RNG tapes are from the old source contract; these are not production random samples or proof of a probability law.",
+    "Synthetic safety counterexamples are not claimed reachable from the natural NP32 opening.",
+    "Public getLegalMoves/checkmate/stalemate query migration and later/other sources remain open.",
+    "Exact room-stage player/client capture, full private/public delivery, all negative matrix branches and independent QA remain open.",
+    "Other mode rules/design/source-line working drafts and score ledgers untouched; H03 pilot not run."
+  ],
+  "protected": {
+    "xiangqi_featuresReady": false,
+    "half_chaos_featuresReady": false,
+    "scoring": "frozen",
+    "NET": "paused",
+    "engine_main_merged": false,
+    "APK_built": false,
+    "hero_design_changed": false,
+    "new_gameplay_confirmation": false
+  }
+}

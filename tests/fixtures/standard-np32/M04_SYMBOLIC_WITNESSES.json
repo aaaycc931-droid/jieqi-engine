@@ -1,0 +1,803 @@
+{
+  "schema": "lezi.standard.m04.path_crush_royal_safety_symbolic_witnesses.v1",
+  "id": "STD-NP-M04-PATH-CRUSH-ROYAL-SAFETY-SYMBOLIC-WITNESSES-20261026",
+  "task": "NEXT-STD-NP-PATH-CRUSH-ROYAL-SAFETY-SYMBOLIC-WITNESSES",
+  "pinned_handoff_head": "9799365314aeac83963d0124b56f9b590bcb5dc3",
+  "pinned_engine_sha": "3f98bc9fb89a2a209209c424c4bf1bbd2cf6aca7",
+  "sources": {
+    "rules": "worklines/standard/rules/shared/03_CURRENT_MUTATIONS.md#M04",
+    "core": "worklines/standard/rules/shared/01_CURRENT_RULES.md#royal_safety",
+    "earlier_contract": "worklines/standard/specs/NP_AS_AP_ES_OBSERVATION_GUARD_MATRIX_20261025.json",
+    "earlier_review": "worklines/standard/reviews/NP_H21_RNG_STATIC_INTEGRATION_PREFLIGHT_20261025.md",
+    "engine_rules": "src/rules.ts:103-131; src/rules.ts:234-260; src/rules.ts:310-334; src/rules.ts:335-406",
+    "engine_moves": "src/game.ts:113-143; src/game.ts:431-465; src/game.ts:635-704",
+    "engine_settlement": "src/settlement.ts:106-144; src/settlement.ts:300-340"
+  },
+  "error_correction": {
+    "incorrect_prior_claim": "P0-H21-invoke-omitted-from-isMain-and-formal-turn-skipped",
+    "verified_source": "engine@3f98bc9/src/hero-actions.ts:108-115 includes 'invoke' in isMain, yields main/countsAsFormalTurn true; src/hero-actions.ts:317-331 endSkillTurn uses lastMove classification",
+    "verdict": "RETRACT previous P0 claim; source-based diagnosis was inaccurate; actual B1-B5 still UNRUN and not thereby passed",
+    "other_p0": "AS hero charge consumed before endpoint dragonScale interception remains a separate still-open static source-vs-confirmed-rule mismatch"
+  },
+  "witnesses": [
+    {
+      "id": "W01_SELF_CHECK_FALSE_ACCEPT_LAND",
+      "kind": "self_check",
+      "description": "rook crush removes one of two blockers on opposing x4 war-chariot attack line, endpoint killed and actor lands off checking file",
+      "input": {
+        "attackerRookId": "covered-15",
+        "victimId": "covered-12",
+        "endpointId": "covered-01",
+        "source": [
+          0,
+          4
+        ],
+        "destination": [
+          6,
+          4
+        ],
+        "pathVictim": [
+          4,
+          4
+        ],
+        "otherBlocker": [
+          4,
+          6
+        ],
+        "gates": [
+          "gameMode='xiangqi', featureRules.mutation='war_chariot', and no other mutation",
+          "exactly one ground blocking body between acting rook and occupied hostile endpoint, no stealth/air paths",
+          "source and target controlled by their stated sides and real revealed ground identity",
+          "no unrelated check, terminal, timing, shield or trap; complete atomic closure",
+          "both observed rook and its own general must NOT trigger special M04 own-general-between no-check exception",
+          "neither this symbolic state nor full NP prefix has been admitted by formal ordinary mode gate"
+        ],
+        "observerRookId": "covered-00",
+        "observerTargetKingId": "red-general",
+        "pathShield": false,
+        "endpointShield": false
+      },
+      "pieces": [
+        {
+          "id": "red-general",
+          "color": "red",
+          "type": "general",
+          "x": 4,
+          "y": 9
+        },
+        {
+          "id": "black-general",
+          "color": "black",
+          "type": "general",
+          "x": 5,
+          "y": 0
+        },
+        {
+          "id": "covered-15",
+          "color": "red",
+          "type": "rook",
+          "x": 0,
+          "y": 4,
+          "role": "M04 attacking rook"
+        },
+        {
+          "id": "covered-00",
+          "color": "black",
+          "type": "rook",
+          "x": 4,
+          "y": 1,
+          "role": "opposing x4-file threat rook"
+        },
+        {
+          "id": "covered-12",
+          "color": "black",
+          "type": "pawn",
+          "x": 4,
+          "y": 4,
+          "role": "M04 crush path victim"
+        },
+        {
+          "id": "covered-27",
+          "color": "red",
+          "type": "pawn",
+          "x": 4,
+          "y": 6,
+          "role": "second x4-line blocker"
+        },
+        {
+          "id": "covered-01",
+          "color": "black",
+          "type": "horse",
+          "x": 6,
+          "y": 4,
+          "role": "actual endpoint target"
+        }
+      ],
+      "expected": {
+        "pre_opposing_king_attack": false,
+        "naive_sim_opposing_king_attack": false,
+        "after_closed_opposing_king_attack": true,
+        "implication": "reject as self-check if exact premise is legal, no artificial acceptance"
+      },
+      "origin_eligibility": "SYMBOLIC_ONLY_NOT_PROVEN_REACHABLE_FROM_STANDARD_32",
+      "np_prefix_match": false,
+      "symbolic_coordinate_counts": {
+        "path_piece_count": 1,
+        "base_path_id": "covered-12",
+        "before_blockers": 2,
+        "before_ids": [
+          "covered-12",
+          "covered-27"
+        ],
+        "simulated_blockers": 2,
+        "sim_ids": [
+          "covered-12",
+          "covered-27"
+        ],
+        "closed_blockers": 1,
+        "closed_ids": [
+          "covered-27"
+        ],
+        "pre_threat": false,
+        "sim_threat": false,
+        "post_threat": true,
+        "missed_new_check": true,
+        "final_piece_locations": [
+          {
+            "id": "red-general",
+            "position": [
+              4,
+              9
+            ]
+          },
+          {
+            "id": "black-general",
+            "position": [
+              5,
+              0
+            ]
+          },
+          {
+            "id": "covered-15",
+            "position": [
+              6,
+              4
+            ]
+          },
+          {
+            "id": "covered-00",
+            "position": [
+              4,
+              1
+            ]
+          },
+          {
+            "id": "covered-27",
+            "position": [
+              4,
+              6
+            ]
+          }
+        ],
+        "self_checked_source": "miniature independent coordinate counting only; not imported engine behavior"
+      }
+    },
+    {
+      "id": "W02_SELF_CHECK_FALSE_ACCEPT_BOUNCE",
+      "kind": "self_check",
+      "description": "endpoint H21 dragonScale causes rook return; independent path pawn nevertheless dies and x4 royal line is opened",
+      "input": {
+        "attackerRookId": "covered-15",
+        "victimId": "covered-12",
+        "endpointId": "covered-01",
+        "source": [
+          0,
+          4
+        ],
+        "destination": [
+          6,
+          4
+        ],
+        "pathVictim": [
+          4,
+          4
+        ],
+        "otherBlocker": [
+          4,
+          6
+        ],
+        "gates": [
+          "gameMode='xiangqi', featureRules.mutation='war_chariot', and no other mutation",
+          "exactly one ground blocking body between acting rook and occupied hostile endpoint, no stealth/air paths",
+          "source and target controlled by their stated sides and real revealed ground identity",
+          "no unrelated check, terminal, timing, shield or trap; complete atomic closure",
+          "both observed rook and its own general must NOT trigger special M04 own-general-between no-check exception",
+          "neither this symbolic state nor full NP prefix has been admitted by formal ordinary mode gate"
+        ],
+        "observerRookId": "covered-00",
+        "observerTargetKingId": "red-general",
+        "pathShield": false,
+        "endpointShield": true
+      },
+      "pieces": [
+        {
+          "id": "red-general",
+          "color": "red",
+          "type": "general",
+          "x": 4,
+          "y": 9
+        },
+        {
+          "id": "black-general",
+          "color": "black",
+          "type": "general",
+          "x": 5,
+          "y": 0
+        },
+        {
+          "id": "covered-15",
+          "color": "red",
+          "type": "rook",
+          "x": 0,
+          "y": 4,
+          "role": "M04 attacking rook"
+        },
+        {
+          "id": "covered-00",
+          "color": "black",
+          "type": "rook",
+          "x": 4,
+          "y": 1,
+          "role": "opposing x4-file threat rook"
+        },
+        {
+          "id": "covered-12",
+          "color": "black",
+          "type": "pawn",
+          "x": 4,
+          "y": 4,
+          "role": "M04 crush path victim"
+        },
+        {
+          "id": "covered-27",
+          "color": "red",
+          "type": "pawn",
+          "x": 4,
+          "y": 6,
+          "role": "second x4-line blocker"
+        },
+        {
+          "id": "covered-01",
+          "color": "black",
+          "type": "horse",
+          "x": 6,
+          "y": 4,
+          "role": "actual endpoint target",
+          "dragonScale": 1
+        }
+      ],
+      "expected": {
+        "pre_opposing_king_attack": false,
+        "naive_sim_opposing_king_attack": false,
+        "after_closed_opposing_king_attack": true,
+        "implication": "reject on full post-atom king safety; return does not rewind path kill"
+      },
+      "origin_eligibility": "SYMBOLIC_ONLY_NOT_PROVEN_REACHABLE_FROM_STANDARD_32_AND_H21_DRAW",
+      "np_prefix_match": false,
+      "symbolic_coordinate_counts": {
+        "path_piece_count": 1,
+        "base_path_id": "covered-12",
+        "before_blockers": 2,
+        "before_ids": [
+          "covered-12",
+          "covered-27"
+        ],
+        "simulated_blockers": 2,
+        "sim_ids": [
+          "covered-12",
+          "covered-27"
+        ],
+        "closed_blockers": 1,
+        "closed_ids": [
+          "covered-27"
+        ],
+        "pre_threat": false,
+        "sim_threat": false,
+        "post_threat": true,
+        "missed_new_check": true,
+        "final_piece_locations": [
+          {
+            "id": "red-general",
+            "position": [
+              4,
+              9
+            ]
+          },
+          {
+            "id": "black-general",
+            "position": [
+              5,
+              0
+            ]
+          },
+          {
+            "id": "covered-15",
+            "position": [
+              0,
+              4
+            ]
+          },
+          {
+            "id": "covered-00",
+            "position": [
+              4,
+              1
+            ]
+          },
+          {
+            "id": "covered-27",
+            "position": [
+              4,
+              6
+            ]
+          },
+          {
+            "id": "covered-01",
+            "position": [
+              6,
+              4
+            ]
+          }
+        ],
+        "self_checked_source": "miniature independent coordinate counting only; not imported engine behavior"
+      }
+    },
+    {
+      "id": "W03_PATH_SCALE_NO_CRUSH_CONTRAST",
+      "kind": "shield_countercontrol",
+      "description": "same geometry; one H21 path dragonScale absorbs crush so both blockers remain and the opponent rook still does not check red general",
+      "input": {
+        "attackerRookId": "covered-15",
+        "victimId": "covered-12",
+        "endpointId": "covered-01",
+        "source": [
+          0,
+          4
+        ],
+        "destination": [
+          6,
+          4
+        ],
+        "pathVictim": [
+          4,
+          4
+        ],
+        "otherBlocker": [
+          4,
+          6
+        ],
+        "gates": [
+          "gameMode='xiangqi', featureRules.mutation='war_chariot', and no other mutation",
+          "exactly one ground blocking body between acting rook and occupied hostile endpoint, no stealth/air paths",
+          "source and target controlled by their stated sides and real revealed ground identity",
+          "no unrelated check, terminal, timing, shield or trap; complete atomic closure",
+          "both observed rook and its own general must NOT trigger special M04 own-general-between no-check exception",
+          "neither this symbolic state nor full NP prefix has been admitted by formal ordinary mode gate"
+        ],
+        "observerRookId": "covered-00",
+        "observerTargetKingId": "red-general",
+        "pathShield": true,
+        "endpointShield": false
+      },
+      "pieces": [
+        {
+          "id": "red-general",
+          "color": "red",
+          "type": "general",
+          "x": 4,
+          "y": 9
+        },
+        {
+          "id": "black-general",
+          "color": "black",
+          "type": "general",
+          "x": 5,
+          "y": 0
+        },
+        {
+          "id": "covered-15",
+          "color": "red",
+          "type": "rook",
+          "x": 0,
+          "y": 4,
+          "role": "M04 attacking rook"
+        },
+        {
+          "id": "covered-00",
+          "color": "black",
+          "type": "rook",
+          "x": 4,
+          "y": 1,
+          "role": "opposing x4-file threat rook"
+        },
+        {
+          "id": "covered-12",
+          "color": "black",
+          "type": "pawn",
+          "x": 4,
+          "y": 4,
+          "role": "M04 crush path victim",
+          "dragonScale": 1
+        },
+        {
+          "id": "covered-27",
+          "color": "red",
+          "type": "pawn",
+          "x": 4,
+          "y": 6,
+          "role": "second x4-line blocker"
+        },
+        {
+          "id": "covered-01",
+          "color": "black",
+          "type": "horse",
+          "x": 6,
+          "y": 4,
+          "role": "actual endpoint target"
+        }
+      ],
+      "expected": {
+        "pre_opposing_king_attack": false,
+        "naive_sim_opposing_king_attack": false,
+        "after_closed_opposing_king_attack": false,
+        "implication": "do not synthesize nonexistent path death; only legality of this one threat checked"
+      },
+      "origin_eligibility": "SYMBOLIC_ONLY_NOT_PROVEN_REACHABLE_FROM_STANDARD_32_AND_H21_DRAW",
+      "np_prefix_match": false,
+      "symbolic_coordinate_counts": {
+        "path_piece_count": 1,
+        "base_path_id": "covered-12",
+        "before_blockers": 2,
+        "before_ids": [
+          "covered-12",
+          "covered-27"
+        ],
+        "simulated_blockers": 2,
+        "sim_ids": [
+          "covered-12",
+          "covered-27"
+        ],
+        "closed_blockers": 2,
+        "closed_ids": [
+          "covered-12",
+          "covered-27"
+        ],
+        "pre_threat": false,
+        "sim_threat": false,
+        "post_threat": false,
+        "missed_new_check": false,
+        "final_piece_locations": [
+          {
+            "id": "red-general",
+            "position": [
+              4,
+              9
+            ]
+          },
+          {
+            "id": "black-general",
+            "position": [
+              5,
+              0
+            ]
+          },
+          {
+            "id": "covered-15",
+            "position": [
+              6,
+              4
+            ]
+          },
+          {
+            "id": "covered-00",
+            "position": [
+              4,
+              1
+            ]
+          },
+          {
+            "id": "covered-12",
+            "position": [
+              4,
+              4
+            ]
+          },
+          {
+            "id": "covered-27",
+            "position": [
+              4,
+              6
+            ]
+          }
+        ],
+        "self_checked_source": "miniature independent coordinate counting only; not imported engine behavior"
+      }
+    },
+    {
+      "id": "W04_NEW_CHECK_VS_ENEMY_ONLY",
+      "kind": "post_king_check",
+      "description": "a red second rook uses war-chariot one-path line to black king only after a red attack rook independently crushes black path pawn",
+      "input": {
+        "attackerRookId": "covered-15",
+        "victimId": "covered-12",
+        "endpointId": "covered-01",
+        "source": [
+          0,
+          4
+        ],
+        "destination": [
+          6,
+          4
+        ],
+        "pathVictim": [
+          4,
+          4
+        ],
+        "otherBlocker": [
+          4,
+          6
+        ],
+        "gates": [
+          "gameMode='xiangqi', featureRules.mutation='war_chariot', and no other mutation",
+          "exactly one ground blocking body between acting rook and occupied hostile endpoint, no stealth/air paths",
+          "source and target controlled by their stated sides and real revealed ground identity",
+          "no unrelated check, terminal, timing, shield or trap; complete atomic closure",
+          "both observed rook and its own general must NOT trigger special M04 own-general-between no-check exception",
+          "neither this symbolic state nor full NP prefix has been admitted by formal ordinary mode gate"
+        ],
+        "observerRookId": "covered-22",
+        "observerTargetKingId": "black-general",
+        "pathShield": false,
+        "endpointShield": false
+      },
+      "pieces": [
+        {
+          "id": "red-general",
+          "color": "red",
+          "type": "general",
+          "x": 5,
+          "y": 9
+        },
+        {
+          "id": "black-general",
+          "color": "black",
+          "type": "general",
+          "x": 4,
+          "y": 0
+        },
+        {
+          "id": "covered-15",
+          "color": "red",
+          "type": "rook",
+          "x": 0,
+          "y": 4,
+          "role": "M04 acting rook"
+        },
+        {
+          "id": "covered-22",
+          "color": "red",
+          "type": "rook",
+          "x": 4,
+          "y": 8,
+          "role": "red x4-file threat rook"
+        },
+        {
+          "id": "covered-12",
+          "color": "black",
+          "type": "pawn",
+          "x": 4,
+          "y": 4,
+          "role": "M04 path victim"
+        },
+        {
+          "id": "covered-27",
+          "color": "red",
+          "type": "pawn",
+          "x": 4,
+          "y": 6,
+          "role": "second line blocker"
+        },
+        {
+          "id": "covered-01",
+          "color": "black",
+          "type": "horse",
+          "x": 6,
+          "y": 4,
+          "role": "enemy endpoint"
+        }
+      ],
+      "expected": {
+        "pre_opposing_king_attack": false,
+        "naive_sim_opposing_king_attack": false,
+        "after_closed_opposing_king_attack": true,
+        "implication": "do not mislabel as red self-check; post-atom newly delivering check to enemy requires correct opponent-response and timing evaluation"
+      },
+      "origin_eligibility": "SYMBOLIC_ONLY_NOT_PROVEN_REACHABLE_FROM_STANDARD_32",
+      "np_prefix_match": false,
+      "symbolic_coordinate_counts": {
+        "path_piece_count": 1,
+        "base_path_id": "covered-12",
+        "before_blockers": 2,
+        "before_ids": [
+          "covered-27",
+          "covered-12"
+        ],
+        "simulated_blockers": 2,
+        "sim_ids": [
+          "covered-27",
+          "covered-12"
+        ],
+        "closed_blockers": 1,
+        "closed_ids": [
+          "covered-27"
+        ],
+        "pre_threat": false,
+        "sim_threat": false,
+        "post_threat": true,
+        "missed_new_check": true,
+        "final_piece_locations": [
+          {
+            "id": "red-general",
+            "position": [
+              5,
+              9
+            ]
+          },
+          {
+            "id": "black-general",
+            "position": [
+              4,
+              0
+            ]
+          },
+          {
+            "id": "covered-15",
+            "position": [
+              6,
+              4
+            ]
+          },
+          {
+            "id": "covered-22",
+            "position": [
+              4,
+              8
+            ]
+          },
+          {
+            "id": "covered-27",
+            "position": [
+              4,
+              6
+            ]
+          }
+        ],
+        "self_checked_source": "miniature independent coordinate counting only; not imported engine behavior"
+      }
+    }
+  ],
+  "negative_guard_cases": [
+    {
+      "id": "GN01",
+      "label": "one initial blocker only",
+      "source": "W01 remove covered-27",
+      "oracle": "initial state already checking red general under M04 rook one-block rule, cannot count as neutral prestate"
+    },
+    {
+      "id": "GN02",
+      "label": "two or more attackers' path blockers",
+      "source": "insert any second piece on (0,4)→(6,4)",
+      "oracle": "this is not a legal M04 one-ground-path charge; no result oracle"
+    },
+    {
+      "id": "GN03",
+      "label": "no actual endpoint",
+      "source": "delete covered-01 and attack (6,4)",
+      "oracle": "war-chariot charged attack at empty endpoint prohibited"
+    },
+    {
+      "id": "GN04",
+      "label": "opposing rook own general on shot line",
+      "source": "position observer's same-color general between rook and enemy general in the special no-check sequence",
+      "oracle": "respect existing M04 mutual-destruction/own-general exception; W01 threat oracle no longer valid"
+    },
+    {
+      "id": "GN05",
+      "label": "path shield consumed, path pawn remains",
+      "source": "W03",
+      "oracle": "no pathDeath; no opening of x4 file, no king check solely due imaginary death"
+    },
+    {
+      "id": "GN06",
+      "label": "endpoint shielded, return",
+      "source": "W02",
+      "oracle": "simple simulate returning prior state is not a valid post-atom oracle; retain independent path kill"
+    },
+    {
+      "id": "GN07",
+      "label": "target rook projection based only on x4 line but further blockers exist",
+      "source": "insert third blocker on observer→target king x4 file",
+      "oracle": "post count could stay >=2; no claimed newly exposed attack"
+    },
+    {
+      "id": "GN08",
+      "label": "current NP R6/R7 direct fixture",
+      "source": "NP black pawn path (0,3) not x4 witness blocker",
+      "oracle": "do not assign W01—W04 to executed AS/AP/ES NP without independent legal-position construction"
+    },
+    {
+      "id": "GN09",
+      "label": "king coordinates or move/side inconsistent",
+      "source": "red general outside palace/invalid forced response",
+      "oracle": "mark hypothetical invalid; don't call it a lawful match"
+    },
+    {
+      "id": "GN10",
+      "label": "missing atom closure",
+      "source": "terminal barrier/return landing/trap/control/death derivative pending",
+      "oracle": "delay terminal/royal oracle until all sources close and stable final board is known"
+    },
+    {
+      "id": "GN11",
+      "label": "gameMode feature gate closed",
+      "source": "engine src/modes.ts xiangqi.featuresReady=false",
+      "oracle": "not runnable as ordinary official hero+M04 encounter; research exception cannot be promoted to qualification"
+    }
+  ],
+  "interpretation": {
+    "level": "V2 source-verified code references and V1 independent miniature coordinate-count self-check",
+    "not_engine_tests": true,
+    "fixtures_constructed_from_standard_32_positions_proved": false,
+    "legal_reachability_PROVEN": false,
+    "real_np_r6_r7_match": false,
+    "feature_gate": "xiangqi.featuresReady=false",
+    "royal_attack_details": "Existing M04 source says 0 path ordinary rook threat, 1 path M04 threat, >=2 none; special own-general-in-between exception must be checked. Threat ≠ immediate terminal victory.",
+    "naive_precheck": "simulatePublicMove does not remove M04 path piece; endpoint dragonScale returns original state; validatePublicMove uses simulated isGeneralInCheck for acting side only",
+    "result_oracle": "only fully settled piece occupancy, path actual death versus dragonScale spend, landing/return, legal king exposure, and existing terminal timing count",
+    "not_claimed": [
+      "four symbolic fixtures are reachable by natural standard opening",
+      "actual validatePublicMove accepted them in engine",
+      "real engine rejected or accepted them",
+      "the H21 invocation defect previously alleged is real",
+      "this creates a new M04 permission or changes royal/suicide rules",
+      "source code modified",
+      "mode feature gate bypassed"
+    ]
+  },
+  "handoff": {
+    "standard_completed": "symbolic threat counterexamples and negative case oracle only",
+    "main_owner": [
+      "use full atom-closure royal safety simulation and compare preflight to actual",
+      "decide how to validate conditional lawful standard starting-board reachability",
+      "fix AS charge discrepancy under existing approved guard",
+      "check H21 counting at runtime without resurrecting the retracted static allegation",
+      "qualify ordinary mode before any genuine real-engine tests",
+      "add authenticated RNG trace and test coverage"
+    ],
+    "next_unstarted": "NEXT-STD-NP-MAIN-IMPLEMENTATION-READBACK-AND-EXECUTION-GATE"
+  },
+  "verification": {
+    "witnesses": 4,
+    "negative_cases": 11,
+    "internal_coordinate_checks": "PASS 4 of 4 in miniature independent arithmetic; no engine API used",
+    "formal_tests": "UNRUN",
+    "engine_runs": 0,
+    "independent_qa": false,
+    "full_32_game_replay": false,
+    "scoring": "frozen",
+    "NET": "paused",
+    "ordinary_confirmations": 31,
+    "direct_shared_confirmations": 13,
+    "rule_delta": 0
+  }
+}

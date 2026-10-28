@@ -5,7 +5,7 @@ import { applyHeroAbility, ownerHeroSecrets, startFormalClock } from "./hero-act
 import { copy, initializeFeatureSecret } from "./settlement.ts";
 import { requireClosedDestructionBatch } from "./settlement-context.ts";
 import { RuleError } from "./errors.ts";
-import { effectiveResearchHero, researchSources, requireExactResearchCreate, requireExactResearchRoom, requireExactResearchAssignments } from "./research-source-context.ts";
+import { effectiveResearchHero, researchSources, requireExactResearchCreate, requireExactResearchRoom, requireExactResearchAssignments, requireExactResearchSelection } from "./research-source-context.ts";
 import { equalHex, sha256Hex } from "./sha256.ts";
 import {
   applyAutomaticExecution,
@@ -887,6 +887,7 @@ export function submitRemoteHeroSelection(
   }
   const pkg = getHeroPackage(hero, options?.form, options?.variant);
   const selection = { heroId: pkg.heroId, form: pkg.form, packageId: pkg.packageId, ...(pkg.variant ? { variant: pkg.variant } : {}) };
+  requireExactResearchSelection(room.roomId, playerId, selection);
   const publicSelection = room.features?.heroSelection;
   const secretSelection = room.featureSecret?.heroSelection;
   if (!publicSelection || !secretSelection) {
@@ -1253,6 +1254,7 @@ export function submitRemoteMove(
   playerId: string,
   command: MoveCommand,
   now = Date.now(),
+  randomInt?: RandomInt,
 ): RemoteActionResult {
   requireExactResearchRoom(room);
   ensurePhase(room, "playing");
@@ -1264,7 +1266,7 @@ export function submitRemoteMove(
   if (room.game.players[room.game.state.turn] === playerId) {
     requirePathMoveBatchClosed(room.game.state, room.game.secret, command);
   }
-  const moved = applyRoomMove(gameWithPrivateTraps(room), playerId, command, now);
+  const moved = applyRoomMove(gameWithPrivateTraps(room), playerId, command, now, randomInt);
   if (moved.duplicate) return { room, duplicate: true };
   const trapped = roomWithResolvedTraps(room, moved.room, now);
   if (trapped.room.game?.state.status === "finished") {
@@ -1312,14 +1314,17 @@ export function submitRemoteAssassination(
   playerId: string,
   command: AssassinationCommand,
   now = Date.now(),
+  randomInt?: RandomInt,
 ): RemoteActionResult {
+  requireExactResearchRoom(room);
   ensurePhase(room, "playing");
   reserveServerActionId(command.actionId);
   if (!room.game) throw new RuleError("MISSING_GAME", "房间尚未开始棋局");
   const expired = expiredFormalAction(room, playerId, command.actionId, now);
   if (expired) return expired;
 
-  const moved = applyRoomAssassination(gameWithPrivateTraps(room), playerId, command, now);
+  if (room.game.players[room.game.state.turn] === playerId) requirePathMoveBatchClosed(room.game.state, room.game.secret, command);
+  const moved = applyRoomAssassination(gameWithPrivateTraps(room), playerId, command, now, randomInt);
   if (moved.duplicate) return { room, duplicate: true };
   const trapped = roomWithResolvedTraps(room, moved.room, now);
   const skill = command.useStrongStrike ? "刺杀机会" as const : "刺杀" as const;

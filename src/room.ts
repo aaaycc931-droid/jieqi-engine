@@ -10,6 +10,7 @@ import type {
   MoveCommand,
   SecretState,
   Side,
+  RandomInt,
 } from "./types.ts";
 
 export interface RoomGame {
@@ -34,6 +35,7 @@ export function applyRoomMove(
   playerId: string,
   command: MoveCommand,
   now = Date.now(),
+  randomInt?: RandomInt,
 ): { room: RoomGame; duplicate: boolean } {
   const side = sideForPlayer(room, playerId);
   const alreadyProcessed =
@@ -41,7 +43,7 @@ export function applyRoomMove(
   if (!alreadyProcessed && room.state.turn !== side) {
     throw new RuleError("WRONG_TURN", "还没有轮到该玩家");
   }
-  const result = applyAuthoritativeMove(room.state, room.secret, command, false, now);
+  const result = applyAuthoritativeMove(room.state, room.secret, command, false, now, undefined, randomInt);
   return {
     room: {
       players: { ...room.players },
@@ -57,13 +59,14 @@ export function applyRoomAssassination(
   playerId: string,
   command: AssassinationCommand,
   now = Date.now(),
+  randomInt?: RandomInt,
 ): { room: RoomGame; duplicate: boolean } {
   const side = sideForPlayer(room, playerId);
   const alreadyProcessed = room.secret.processedActions[command.actionId] !== undefined;
   if (!alreadyProcessed && room.state.turn !== side) {
     throw new RuleError("WRONG_TURN", "还没有轮到该玩家");
   }
-  const result = applyAuthoritativeAssassination(room.state, room.secret, command, now);
+  const result = applyAuthoritativeAssassination(room.state, room.secret, command, now, randomInt);
   return {
     room: {
       players: { ...room.players },
