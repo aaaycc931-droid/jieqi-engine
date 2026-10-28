@@ -1,0 +1,86 @@
+{
+  "schema": "lezi.main.public_path_qualification.results.v1",
+  "id": "MAIN-PUBLIC-PATH-COVERAGE-20261028",
+  "date_local": "2026-10-28",
+  "handoff_read_head": "c1ce9268f2b45feb8f834436ff6850cba08bd97d",
+  "engine_parent": "765a6bc6799ac823c9ba6e1ed6b10fd0c0705608",
+  "status": "EXPLICIT_THREE_STATE_QUALIFICATION_IMPLEMENTED_AND_TESTED",
+  "shared_sources": [
+    "src/game.ts",
+    "src/index.ts",
+    "src/public-path-qualification.ts"
+  ],
+  "new_tests": 39,
+  "targeted_passed": 136,
+  "related_files": 53,
+  "related_passed": 821,
+  "related_failed": 0,
+  "baseline_source_and_input_blobs_verified": 39,
+  "symbolic_sources_enumerated": 18,
+  "destinations_compared_with_real_authority": 1620,
+  "destination_samples_independent": false,
+  "legacy_boolean_and_marker_behavior_unchanged": true,
+  "legacy_true_but_explicit_uncovered_examples": 5,
+  "original_requests_compared_old_new": 37,
+  "interleaved_qualification_original_requests": 37,
+  "returned_authority_events_views_RNG_equal": true,
+  "query_real_RNG_calls": 0,
+  "query_wall_clock_calls": 0,
+  "query_events_or_outer_invalidations": 0,
+  "full_typecheck": "NOT_RUN",
+  "UI_build_device_bluetooth": "NOT_RUN",
+  "formal_mode_qualification": false,
+  "independent_QA": false,
+  "new_gameplay_confirmations": 0,
+  "product_submission_policy_changed": false,
+  "public_or_private_disclosure_policy_changed": false,
+  "room_UI_terminal_consumers_migrated": false,
+  "mode_gates_changed": false,
+  "scoring": "frozen",
+  "NET": "paused",
+  "raw_authority_bodies_published": false,
+  "owner_raw_archive_created": false,
+  "decisions": [
+    "Deterministic public-source geometry failure is illegal on that basis; it does not promise command first-error priority.",
+    "Only the existing complete public-authority projection yields legal/closed illegal; legacy booleans are never used as the qualification proof.",
+    "Covered mover/contact, undefined public identity and unsupported source stay uncovered without a secret/type/color fallback.",
+    "A missing private dependency is uncovered, not mislabeled illegal; unexpected program failures still surface.",
+    "The revealed-only M04 path-scale and non-special public-chase scopes are retained; no hidden protected-state expansion was authorized or implemented."
+  ],
+  "open": [
+    "Covered mover reveal/defection and covered path/endpoint true death records",
+    "Other rosters/effects/spaces/children/late rain and full search",
+    "Explicit downstream room/UI/terminal consumer migration, separate from this additive export",
+    "Ordinary R8 complete natural second-window/expiry and NG11 combinations",
+    "HC64 formal acceptance, exact56 view/client slots and independentQA"
+  ],
+  "source_audit": "review/public-path-qualification/SOURCE_AUDIT_20261028.json",
+  "next_action": "MAIN-STD-R8-NATURAL-WINDOW-20261028",
+  "artifacts": [
+    {
+      "path": "review/public-path-qualification/SOURCE_AUDIT_20261028.json",
+      "bytes": 3498,
+      "sha256": "56730d6449aa593fe99c92cb6a20981106e802842e14d831ec1d6524de9163dc"
+    },
+    {
+      "path": "review/public-path-qualification/DIFFERENTIAL_20261028.json",
+      "bytes": 8797,
+      "sha256": "510cb10e80539faa3e6be2d69d4b1e42599e112d6119fd95b2ee3c9602beb66a"
+    },
+    {
+      "path": "review/public-path-qualification/BASELINE_INTEGRITY_20261028.json",
+      "bytes": 4352,
+      "sha256": "3f4c8f794d5830ceecfd73dadf4ffe306b520f9615d82b91946f4ed27bf2312a"
+    },
+    {
+      "path": "review/public-path-qualification/COMMAND_20261028.json",
+      "bytes": 2327,
+      "sha256": "39540813973c99067bc7cd6961d510e164fa98a05299c7ed29e54c45a489e2bd"
+    },
+    {
+      "path": "review/public-path-qualification/related-final-20261028.tap",
+      "bytes": 192887,
+      "sha256": "3806c666f7f821ebca649b024b9a3a0e1712d35ae449c484c64cfd1c5704d530"
+    }
+  ]
+}

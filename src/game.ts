@@ -433,6 +433,27 @@ export function supportsClosedPublicPathQuery(state: GameState, pieceId: string,
 interface PublicPathQueryPhase { attackTarget?: boolean }
 const forbidQueryRandom: RandomInt = () => { throw new Error("Public path query attempted random sampling"); };
 
+export type ClosedPublicPathQueryGap = "SOURCE_BOUNDARY_NOT_QUALIFIED" | "COVERED_MOVER_NOT_QUALIFIED" | "COVERED_CONTACT_NOT_QUALIFIED" | "QUERY_VARIANT_NOT_QUALIFIED";
+
+/** Diagnostic form of the existing guard; an uncovered projection is not an
+ * illegal action. No hidden identity is read, synthesized or substituted. */
+export function getClosedPublicPathQueryGap(
+  state: GameState,
+  move: Pick<MoveCommand, "from" | "to" | "pieceId">,
+  side: Side,
+  options: PublicMoveOptions = {},
+): ClosedPublicPathQueryGap | undefined {
+  const source = move.pieceId ? pieceById(state, move.pieceId) : pieceAt(state, move.from);
+  if (!source || !supportsClosedPublicPathQuery(state, source.id, side)) return source?.faceDown ? "COVERED_MOVER_NOT_QUALIFIED" : "SOURCE_BOUNDARY_NOT_QUALIFIED";
+  if (options.allowIntermediateCheck || options.allowLinkedControl || options.stormAssault) return "QUERY_VARIANT_NOT_QUALIFIED";
+  // Preserve the original object's barrier even when touched identity later
+  // makes the query uncovered. A copied object cannot carry this WeakMap key.
+  requireClosedDestructionBatch(state);
+  const touched = [...pathPiecesForSpecialMove(state, source, move.to), pieceAt(state, move.to)].filter(Boolean) as PublicPiece[];
+  if (touched.some(p => p.faceDown)) return "COVERED_CONTACT_NOT_QUALIFIED";
+  return;
+}
+
 /** Internal projection, never a command entry or a mode-admission capability.
  * The same action implementation stops after direct closure/H02 transition,
  * before formal end, children, adjudication, clocks or the next begin.
@@ -446,11 +467,7 @@ export function projectClosedPublicPathAction(
   options: PublicMoveOptions = {},
 ): { validation: MoveValidation; state?: GameState } | undefined {
   const source = move.pieceId ? pieceById(state, move.pieceId) : pieceAt(state, move.from);
-  if (!source || !supportsClosedPublicPathQuery(state, source.id, side) || options.allowIntermediateCheck || options.allowLinkedControl || options.stormAssault) return;
-  // The WeakMap batch marker belongs to the original object, before any copy.
-  requireClosedDestructionBatch(state);
-  const touched = [...pathPiecesForSpecialMove(state, source, move.to), pieceAt(state, move.to)].filter(Boolean) as PublicPiece[];
-  if (touched.some(p => p.faceDown)) return;
+  if (!source || getClosedPublicPathQueryGap(state, move, side, options)) return;
   const command = { ...move, pieceId: source.id, expectedRevision: state.revision, actionId: "__public_path_projection__" };
   const secret: SecretState = { identities: {}, processedActions: {}, trueGenerals: {
     red: findGeneral(state, "red").id, black: findGeneral(state, "black").id,

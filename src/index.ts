@@ -8,6 +8,7 @@ export * from "./room.ts";
 export * from "./remote-room.ts";
 export * from "./rps.ts";
 export * from "./rules.ts";
+export * from "./public-path-qualification.ts";
 export * from "./setup.ts";
 export * from "./modes.ts";
 export * from "./slots.ts";
