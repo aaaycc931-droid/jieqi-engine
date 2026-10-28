@@ -1,0 +1,467 @@
+{
+  "schema": "lezi.standard.static_reproduction_contract.v1",
+  "id": "STD-NP-H02-M04-H21-AS-AP-ES-20261020",
+  "created_local_date": "2026-10-20",
+  "kind": "DESIGN_ONLY_UNEXECUTED_LOGICAL_CONTRACT",
+  "source_ref": "worklines/standard/reviews/H02_M04_H21_NATURAL_PREFIX_STATIC_REVIEW_20261020.md",
+  "coordinate_system": {
+    "x": "0..8 left-to-right viewed from black top",
+    "y": "0..9 top-to-bottom",
+    "black_king": [
+      4,
+      0
+    ],
+    "red_king": [
+      4,
+      9
+    ]
+  },
+  "rules": {
+    "mode": "standard_xiangqi",
+    "opening": "standard public 32-piece fixed initial placement",
+    "hero_red": "H02",
+    "hero_black": "H21(invincible)",
+    "mutations": [
+      "M04"
+    ],
+    "no_extra_hero": true,
+    "no_extra_mutation": true
+  },
+  "full_prefix": [
+    {
+      "formal_turn": "R1",
+      "type": "normal_move",
+      "piece": "red_pawn_0",
+      "from": [
+        0,
+        6
+      ],
+      "to": [
+        0,
+        5
+      ]
+    },
+    {
+      "formal_turn": "B1",
+      "type": "H21_prayer",
+      "prayer_index": 1,
+      "consumes_main_action": true
+    },
+    {
+      "formal_turn": "R2",
+      "type": "normal_move",
+      "piece": "red_pawn_0",
+      "from": [
+        0,
+        5
+      ],
+      "to": [
+        0,
+        4
+      ]
+    },
+    {
+      "formal_turn": "B2",
+      "type": "H21_prayer",
+      "prayer_index": 2,
+      "consumes_main_action": true
+    },
+    {
+      "formal_turn": "R3",
+      "type": "normal_move",
+      "piece": "red_pawn_0",
+      "from": [
+        0,
+        4
+      ],
+      "to": [
+        1,
+        4
+      ]
+    },
+    {
+      "formal_turn": "B3",
+      "type": "H21_prayer",
+      "prayer_index": 3,
+      "consumes_main_action": true
+    },
+    {
+      "formal_turn": "R4",
+      "type": "normal_move",
+      "piece": "red_rook_0",
+      "from": [
+        0,
+        9
+      ],
+      "to": [
+        0,
+        5
+      ]
+    },
+    {
+      "formal_turn": "B4",
+      "type": "H21_prayer",
+      "prayer_index": 4,
+      "consumes_main_action": true,
+      "creates_public_portent": true,
+      "descent_now": false
+    },
+    {
+      "formal_turn": "R5",
+      "type": "normal_move",
+      "piece": "red_pawn_2",
+      "from": [
+        2,
+        6
+      ],
+      "to": [
+        2,
+        5
+      ],
+      "is_full_counter_turn": true
+    },
+    {
+      "formal_turn": "B5.start",
+      "type": "H21_invincible_descent",
+      "portent_removed": true,
+      "normal_main_action_consumed": false,
+      "rng_draw": "CONDITIONAL_UNPROVEN_OUTCOME_ONLY",
+      "eligible_pool_count_candidate": 15,
+      "selected_count_not_authoritatively_fixed": true
+    },
+    {
+      "formal_turn": "B5.action",
+      "type": "normal_move",
+      "piece": "black_horse_1",
+      "from": [
+        1,
+        0
+      ],
+      "to": [
+        0,
+        2
+      ]
+    }
+  ],
+  "selection_branches": {
+    "endpoint_scale": {
+      "selected": [
+        "black_horse_1",
+        "black_elephant_2",
+        "black_advisor_3",
+        "black_rook_8"
+      ],
+      "excluded": [
+        "black_pawn_0"
+      ],
+      "conditional_only": true,
+      "not_claimed_reachable_by_actual_rng": true
+    },
+    "path_scale": {
+      "selected": [
+        "black_pawn_0",
+        "black_elephant_2",
+        "black_advisor_3",
+        "black_rook_8"
+      ],
+      "excluded": [
+        "black_horse_1"
+      ],
+      "conditional_only": true,
+      "not_claimed_reachable_by_actual_rng": true
+    }
+  },
+  "branches": {
+    "AS": {
+      "selection": "endpoint_scale",
+      "actions": [
+        {
+          "formal_turn": "R6",
+          "type": "H02_activation_attempt_with_normal_M04_attack",
+          "source_rook": [
+            0,
+            5
+          ],
+          "path_piece": "black_pawn_0",
+          "path": [
+            0,
+            3
+          ],
+          "target_piece": "black_horse_1",
+          "target": [
+            0,
+            2
+          ]
+        }
+      ],
+      "preconditions": [
+        "H02_hero_source_unused",
+        "no_other_active_H02_stealth_source",
+        "legally_available_activation_window",
+        "exactly_one_ground_enemy_path_piece",
+        "path_has_no_crush_defense",
+        "target_only_one_dragon_scale",
+        "rook_return_square_remains_available",
+        "all_royal_safety_guards"
+      ],
+      "expected": {
+        "black_pawn_0": {
+          "alive": false,
+          "location": null
+        },
+        "black_horse_1": {
+          "alive": true,
+          "location": [
+            0,
+            2
+          ],
+          "dragon_scale_remaining": 0
+        },
+        "red_rook_0": {
+          "alive": true,
+          "location": [
+            0,
+            5
+          ],
+          "H02_source_intangibility": false
+        },
+        "H02_hero_source_used": false,
+        "H02_later_assassination_opportunity": false,
+        "consumed_main_action": true,
+        "no_refunds": true,
+        "red_and_black_kings_alive": true,
+        "no_final_royal_check": true
+      }
+    },
+    "AP": {
+      "selection": "path_scale",
+      "actions": [
+        {
+          "formal_turn": "R6",
+          "type": "H02_successful_activation_normal_rook_move",
+          "source_rook": [
+            0,
+            5
+          ],
+          "to": [
+            0,
+            4
+          ]
+        },
+        {
+          "formal_turn": "B6",
+          "type": "normal_move",
+          "piece": "black_pawn_8",
+          "from": [
+            8,
+            3
+          ],
+          "to": [
+            8,
+            4
+          ]
+        },
+        {
+          "formal_turn": "R7",
+          "type": "H02_later_assassination_with_M04_path",
+          "source_rook": [
+            0,
+            4
+          ],
+          "path_piece": "black_pawn_0",
+          "path": [
+            0,
+            3
+          ],
+          "target_piece": "black_horse_1",
+          "target": [
+            0,
+            2
+          ]
+        }
+      ],
+      "preconditions": [
+        "R6_activation_completed_without_attack_and_rook_survived",
+        "R7_is_first_of_two_own_formal_turn_windows",
+        "exactly_one_ground_enemy_path_piece_with_one_dragon_scale",
+        "target_no_defense_or_intervention",
+        "legal_rook_placement_at_target",
+        "all_royal_safety_guards"
+      ],
+      "expected": {
+        "black_pawn_0": {
+          "alive": true,
+          "location": [
+            0,
+            3
+          ],
+          "dragon_scale_remaining": 0
+        },
+        "black_horse_1": {
+          "alive": false,
+          "location": null
+        },
+        "red_rook_0": {
+          "alive": true,
+          "location": [
+            0,
+            2
+          ],
+          "H02_source_intangibility": false
+        },
+        "H02_later_assassination_opportunity": false,
+        "consumed_main_action": true,
+        "no_repeat_path_crush": true,
+        "no_refunds": true,
+        "red_and_black_kings_alive": true,
+        "no_final_royal_check": true
+      }
+    },
+    "ES": {
+      "selection": "endpoint_scale",
+      "actions": [
+        {
+          "formal_turn": "R6",
+          "type": "H02_successful_activation_normal_rook_move",
+          "source_rook": [
+            0,
+            5
+          ],
+          "to": [
+            0,
+            4
+          ]
+        },
+        {
+          "formal_turn": "B6",
+          "type": "normal_move",
+          "piece": "black_pawn_8",
+          "from": [
+            8,
+            3
+          ],
+          "to": [
+            8,
+            4
+          ]
+        },
+        {
+          "formal_turn": "R7",
+          "type": "H02_later_assassination_with_M04_path",
+          "source_rook": [
+            0,
+            4
+          ],
+          "path_piece": "black_pawn_0",
+          "path": [
+            0,
+            3
+          ],
+          "target_piece": "black_horse_1",
+          "target": [
+            0,
+            2
+          ]
+        }
+      ],
+      "preconditions": [
+        "R6_activation_completed_without_attack_and_rook_survived",
+        "R7_is_first_of_two_own_formal_turn_windows",
+        "path_no_crush_defense",
+        "target_only_one_dragon_scale",
+        "return_square_remains_available",
+        "all_royal_safety_guards"
+      ],
+      "expected": {
+        "black_pawn_0": {
+          "alive": false,
+          "location": null
+        },
+        "black_horse_1": {
+          "alive": true,
+          "location": [
+            0,
+            2
+          ],
+          "dragon_scale_remaining": 0
+        },
+        "red_rook_0": {
+          "alive": true,
+          "location": [
+            0,
+            4
+          ],
+          "H02_source_intangibility": false
+        },
+        "H02_later_assassination_opportunity": false,
+        "consumed_main_action": true,
+        "no_refunds": true,
+        "red_and_black_kings_alive": true,
+        "no_final_royal_check": true
+      }
+    }
+  },
+  "logical_observation_contract_not_game_engine_api": [
+    "match_id,mode,unique_mutation,hero_lock_and_reveal_phase",
+    "formal_turn_index,side,phase,main_action_kind,action_tier",
+    "board_piece_stable_id,current_control,ground_status,alive,coordinate",
+    "H21_form_locked,prayer_count,portent,descent_timing,eligible_pool_count",
+    "H21_rng_algorithm_identity_and_version,seed_or_replay_reference_if_actual_engine_provides_one,drawn_stable_ids",
+    "M04_route_path_id,crush_source_result,endpoint_attack_or_assassination_source",
+    "H21_scale_owner_id,scale_before,scale_consumed,scale_after",
+    "H02_source_owner_id,activation_outcome,active_window_index,opportunity_before_and_after,intangibility_before_and_after",
+    "rook_position_pre_action,endpoint_fate,return_or_landing_result,main_action_cost",
+    "atomic_close_id,final_king_safety_evaluation,terminal_reason_if_any,state_hash_or_snapshot_reference",
+    "authoritative_private_view_and_per_player_public_projection_diff_only_after_current_rules_review"
+  ],
+  "required_negative_cases": [
+    "B4_prayer_must_not_descend_in_same_action",
+    "no_B5_descent_if_game_formally_ended_during_R5",
+    "H21_cannot_pray_while_in_check",
+    "R7_first_later_own_turn_and_R8_second_later_own_turn_can_still_be_valid_if_opportunity_unused; expire_after_second_window_ends_per_H02",
+    "path_count_zero_normal_rook_route_vs_path_count_two_or_more_no_M04_charge",
+    "cannot_target_king_or_empty_square_with_H02_later_assassination",
+    "endpoint_scale_not_selected_or_count_undefined_blocks_asserted_AS_ES_fixture_before_draw_verification",
+    "multiple_shields_or_H10_or_landing_conflict_must_not_inherit_exact_AP_AS_ES_result",
+    "do_not_refund_main_action_or_restore_used_later_H02_opportunity",
+    "intermediate_atomic_observations_not_invented_as_external_turn"
+  ],
+  "explicit_gaps": [
+    {
+      "id": "RNG-COUNT",
+      "source": "H21 says 随机选择最多4枚",
+      "unknown": "whether exactly 4 when >=4 eligible and zero/lesser-count behavior",
+      "severity": "blocks unconditional draw fixture"
+    },
+    {
+      "id": "RNG-DISTRIBUTION",
+      "unknown": "exact distribution, subset support, replay algorithm/seed, draw order; exact listed selection outcomes not independently proven reachable",
+      "severity": "blocks probability and real-engine reproducibility"
+    },
+    {
+      "id": "RNG-STABLE-ID",
+      "unknown": "implementation stable IDs and exclusion/eligibility semantics; 15 count is for this particular unchanged black side under visible ordinary state",
+      "severity": "needs source/code-read-only inspection"
+    },
+    {
+      "id": "EVENT-ORDER",
+      "unknown": "engine's internal event fields and observer hooks vs rule-level required atomic close",
+      "severity": "cannot mandate exact internal order"
+    },
+    {
+      "id": "ENGINE",
+      "unknown": "actual game engine/app fixtures and replay have not been run; no implementation authority",
+      "severity": "formal tests UNRUN"
+    }
+  ],
+  "execution": {
+    "design_only": true,
+    "all_formal_specs": "UNRUN",
+    "game_engine_runs": 0,
+    "game_code_changes": 0,
+    "independent_qa": false,
+    "score": "frozen",
+    "NET": "paused",
+    "user_approved_new_game_rule": false
+  }
+}

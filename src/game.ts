@@ -35,6 +35,7 @@ import type {
   MoveCommand,
   MoveResult,
   PublicPiece,
+  RandomInt,
   RevealedPiece,
   SecretIdentity,
   SecretState,
@@ -202,12 +203,13 @@ function finishAfterPlayerAction(
   sourceWasCovered: boolean,
   movedPiece: RevealedPiece | PublicPiece,
   enteredStealth: boolean,
+  randomInt?: RandomInt,
 ): void {
   if (nextState.forcedDefense?.responder === actingSide) {
     const resumeTurn = nextState.forcedDefense.resumeTurn;
     delete nextState.forcedDefense;
     if (nextState.lastMove) nextState.lastMove.countsAsFormalTurn = false;
-    advanceToFormalTurn(nextState, nextSecret, resumeTurn);
+    advanceToFormalTurn(nextState, nextSecret, resumeTurn, randomInt);
     nextSecret.processedActions[command.actionId] = nextState.revision;
     return;
   }
@@ -241,7 +243,7 @@ function finishAfterPlayerAction(
   if (!isInfiniteSting) emitMainActionAtomClosed(nextState, nextSecret, actingSide);
   // 原主行动完成一个正式回合；铁甲提供的额外应将不另计回合。
   const ironArmor = isInfiniteSting && nextState.warrior?.[actingSide].ironArmorAvailable;
-  if (!isInfiniteSting || ironArmor) finishFormalTurn(nextState, nextSecret, actingSide);
+  if (!isInfiniteSting || ironArmor) finishFormalTurn(nextState, nextSecret, actingSide, randomInt);
   if (nextState.status === "finished") { nextSecret.processedActions[command.actionId] = nextState.revision; return; }
   if (ironArmor) {
     nextState.warrior![actingSide].ironArmorAvailable = false;
@@ -266,7 +268,7 @@ function finishAfterPlayerAction(
     nextState.winner = nextSide;
     nextState.reason = "ambush";
   } else {
-    if (!openShuffleA(nextState, actingSide)) advanceToFormalTurn(nextState, nextSecret, nextSide);
+    if (!openShuffleA(nextState, actingSide)) advanceToFormalTurn(nextState, nextSecret, nextSide, randomInt);
   }
   nextSecret.processedActions[command.actionId] = nextState.revision;
 }
@@ -393,12 +395,16 @@ function validateRewindReplay(state: GameState, secret: SecretState, command: Mo
 function coveredPathMove(state: GameState, command: MoveCommand): boolean {
   const source = command.pieceId ? pieceById(state, command.pieceId) : pieceAt(state, command.from);
   const mutation = state.featureRules?.mutation;
-  // First bounded source family: HC-SAFE-03's original H04(red)/H03(black)
-  // M01/M04 ground main. Other queries, rosters, covered moves and children
-  // retain the old public preflight until separately qualified.
+  // Qualified families: original early H04/H03 M01/M04 ground mains and the
+  // ordinary NP32 H02/H21-invincible M04 prefix through its two H02 windows.
+  // Public move/search queries and all other sources remain separate work.
+  const halfFamily = selectedHeroId(state, "red") === "qin_long" && selectedHeroId(state, "black") === "warrior" &&
+    Math.min(state.formalTurns?.red ?? 0, state.formalTurns?.black ?? 0) < 15;
+  const npFamily = state.gameMode === "xiangqi" && selectedHeroId(state, "red") === "rogue" &&
+    selectedHeroSelection(state, "black")?.heroId === "devout_zealot" && selectedHeroSelection(state, "black")?.variant === "invincible" &&
+    mutation === "war_chariot" && (state.formalTurns?.[state.turn] ?? 0) < 8 && Math.max(state.formalTurns?.red ?? 0, state.formalTurns?.black ?? 0) <= 8;
   return state.status === "playing" && !state.pendingShuffle && !state.pendingHeroChild && !state.pendingDescent && !state.forcedDefense && !state.flowDance &&
-    selectedHeroId(state, "red") === "qin_long" && selectedHeroId(state, "black") === "warrior" &&
-    Math.min(state.formalTurns?.red ?? 0, state.formalTurns?.black ?? 0) < 15 &&
+    (halfFamily || npFamily) &&
     Boolean(source && !source.faceDown && (!source.layer || source.layer === "ground") &&
     (mutation === "iron_steed" && source.type === "horse" || mutation === "war_chariot" && source.type === "rook"));
 }
@@ -418,13 +424,15 @@ export function applyAuthoritativeMove(
   deferTurnEnd = false,
   now = Date.now(),
   childAction?: { parentActionId?: string; stormAssault?: boolean; mainClassification?: ActionClassification },
+  randomInt?: RandomInt,
 ): MoveResult {
   validateHeroForms(state, secret);
   const completePathClosure = !deferTurnEnd && !childAction && coveredPathMove(state, command);
   if (completePathClosure && secret.processedActions[command.actionId] === undefined && command.expectedRevision === state.revision) {
     requireClosedDestructionBatch(state);
-    return withIsolatedMechanismEvents(() => applyFreshAuthoritativeMove(state, secret, command, deferTurnEnd, now, childAction, true));
+    return withIsolatedMechanismEvents(() => applyFreshAuthoritativeMove(state, secret, command, deferTurnEnd, now, childAction, true, randomInt));
   }
+  if (randomInt) return withIsolatedMechanismEvents(() => applyFreshAuthoritativeMove(state, secret, command, deferTurnEnd, now, childAction, false, randomInt));
   return applyFreshAuthoritativeMove(state, secret, command, deferTurnEnd, now, childAction);
 }
 
@@ -436,6 +444,7 @@ function applyFreshAuthoritativeMove(
   now = Date.now(),
   childAction?: { parentActionId?: string; stormAssault?: boolean; mainClassification?: ActionClassification },
   completePathClosure = false,
+  randomInt?: RandomInt,
 ): MoveResult {
   validateHeroForms(state, secret);
   if (state.flowDance && !deferTurnEnd) return applyFlowDance(state, secret, command);
@@ -452,8 +461,8 @@ function applyFreshAuthoritativeMove(
 
   const nextState = cloneState(state);
   const nextSecret = cloneSecret(secret);
-  initializeFeatureSecret(nextState, nextSecret);
-  if (!deferTurnEnd && !state.forcedDefense) beginFormalTurn(nextState, nextSecret);
+  initializeFeatureSecret(nextState, nextSecret, randomInt);
+  if (!deferTurnEnd && !state.forcedDefense) beginFormalTurn(nextState, nextSecret, randomInt);
   if (nextState.pendingShuffle) throw new RuleError("SHUFFLE_ACTION_REQUIRED", "须先处理洗牌窗口");
   if (nextState.pendingHeroChild) throw new RuleError("HERO_CHILD_ACTION_REQUIRED", "须先处理当前衍生行动窗口");
   if (nextState.pendingDescent && !childAction?.stormAssault) throw new RuleError("DESCENT_ACTION_REQUIRED", "须先完成降临结算");
@@ -516,7 +525,7 @@ function applyFreshAuthoritativeMove(
       nextSecret.processedActions[command.actionId] = nextState.revision;
       return { state: nextState, secret: nextSecret, duplicate: false };
     }
-    finishAfterPlayerAction(nextState, nextSecret, command, actingSide, false, source, false);
+    finishAfterPlayerAction(nextState, nextSecret, command, actingSide, false, source, false, randomInt);
     return { state: nextState, secret: nextSecret, duplicate: false };
   }
 
@@ -582,6 +591,7 @@ function applyFreshAuthoritativeMove(
     sourceWasCovered,
     movedPiece,
     false,
+    randomInt,
   );
   return { state: nextState, secret: nextSecret, duplicate: false };
 }
@@ -611,6 +621,22 @@ export function applyAuthoritativeAssassination(
   secret: SecretState,
   command: AssassinationCommand,
   now = Date.now(),
+  randomInt?: RandomInt,
+): MoveResult {
+  validateHeroForms(state, secret);
+  const completePathClosure = coveredPathMove(state, command);
+  if (completePathClosure && secret.processedActions[command.actionId] === undefined && command.expectedRevision === state.revision) requireClosedDestructionBatch(state);
+  if (completePathClosure || randomInt) return withIsolatedMechanismEvents(() => applyFreshAuthoritativeAssassination(state, secret, command, now, randomInt, completePathClosure));
+  return applyFreshAuthoritativeAssassination(state, secret, command, now);
+}
+
+function applyFreshAuthoritativeAssassination(
+  state: GameState,
+  secret: SecretState,
+  command: AssassinationCommand,
+  now: number,
+  randomInt?: RandomInt,
+  completePathClosure = false,
 ): MoveResult {
   validateHeroForms(state, secret);
   if (secret.processedActions[command.actionId] !== undefined) {
@@ -622,8 +648,8 @@ export function applyAuthoritativeAssassination(
   if (state.flowDance) throw new RuleError("FLOW_ACTION_REQUIRED", "须先完成流·舞归位结算");
   const nextState = cloneState(state);
   const nextSecret = cloneSecret(secret);
-  initializeFeatureSecret(nextState, nextSecret);
-  if (!state.forcedDefense) beginFormalTurn(nextState, nextSecret);
+  initializeFeatureSecret(nextState, nextSecret, randomInt);
+  if (!state.forcedDefense) beginFormalTurn(nextState, nextSecret, randomInt);
   if (nextState.pendingShuffle) throw new RuleError("SHUFFLE_ACTION_REQUIRED", "须先处理洗牌窗口");
   if (nextState.pendingHeroChild) throw new RuleError("HERO_CHILD_ACTION_REQUIRED", "须先处理当前衍生行动窗口");
   if (nextState.pendingDescent) throw new RuleError("DESCENT_ACTION_REQUIRED", "须先完成降临结算");
@@ -664,7 +690,7 @@ export function applyAuthoritativeAssassination(
 
   const assassinationTarget = pieceAt(nextState, command.to);
   if (command.useStrongStrike && assassinationTarget && !assassinationTarget.faceDown && assassinationTarget.type === "general") throw new RuleError("ILLEGAL_TARGET", "刺杀机会不能指定将帅");
-  const validation = validatePublicMove(nextState, command, actingSide, {
+  const validation = (completePathClosure ? validatePublicMoveSourceGeometry : validatePublicMove)(nextState, command, actingSide, {
     allowStealthSource: continuing,
     allowStealthTarget: command.useStrongStrike,
     allowGeneralTarget: false,
@@ -728,11 +754,11 @@ export function applyAuthoritativeAssassination(
     };
     if (continuing) endStealth(nextState, source.id);
     queueLanding(nextState, source, actingSide, "warrior_return");
-    if (finishDirectDeaths(nextState, actingSide, nextSecret)) {
+    if (finishDirectDeaths(nextState, actingSide, nextSecret, completePathClosure)) {
       nextSecret.processedActions[command.actionId] = nextState.revision;
       return { state: nextState, secret: nextSecret, duplicate: false };
     }
-    finishAfterPlayerAction(nextState, nextSecret, command, actingSide, false, source, false);
+    finishAfterPlayerAction(nextState, nextSecret, command, actingSide, false, source, false, randomInt);
     return { state: nextState, secret: nextSecret, duplicate: false };
   }
 
@@ -803,6 +829,8 @@ export function applyAuthoritativeAssassination(
   if (nextSecret.replay && isGeneralInCheck(nextState, otherSide(actingSide))) throw new RuleError("REWIND_REPLAY_CHECK", "回溯重走不能形成将军");
   delete nextSecret.replay;
 
+  if (completePathClosure && isGeneralInCheck(nextState, actingSide)) throw new RuleError("SELF_CHECK", "路径、终点、返位和刺杀来源状态闭合后己方将帅仍受攻击");
+
   finishAfterPlayerAction(
     nextState,
     nextSecret,
@@ -811,6 +839,7 @@ export function applyAuthoritativeAssassination(
     sourceWasCovered,
     movedPiece,
     entersStealth,
+    randomInt,
   );
   return { state: nextState, secret: nextSecret, duplicate: false };
 }

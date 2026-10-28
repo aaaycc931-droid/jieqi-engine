@@ -1,0 +1,814 @@
+{
+  "schema": "lezi.standard.np_observation_guard_matrix.v1",
+  "id": "STD-NP-AS-AP-ES-OBSERVATION-GUARD-MATRIX-20261025",
+  "kind": "SOURCE_CHECKED_CONTRACT_NOT_EXECUTED",
+  "source_handoff_commit": "bab2ac020ff508d4e33accf9178a21a2d355d45b",
+  "source_engine_commit": "3f98bc9fb89a2a209209c424c4bf1bbd2cf6aca7",
+  "engine_ref": "jieqi-engine PR13 draft (not merged at source read)",
+  "source_documents": {
+    "NP": "worklines/standard/specs/NP_H02_M04_H21_AS_AP_ES_CONTRACT_20261020.json",
+    "RNG": "worklines/standard/specs/H21_RNG_REPLAY_CONTRACT_20261024.json",
+    "static": "worklines/standard/reviews/NP_H21_RNG_STATIC_INTEGRATION_PREFLIGHT_20261025.md",
+    "AS": "worklines/standard/rules/confirmed/H02_M04_ACTIVATION_ENDPOINT_DRAGON_SCALE_CONFIRMATION_20261019.json",
+    "AP": "worklines/standard/rules/confirmed/H02_M04_PATH_DRAGON_SCALE_CONTINUATION_CONFIRMATION_20261018.json",
+    "geometry": "worklines/standard/rules/confirmed/H02_M04_ASSASSINATION_GEOMETRY_CONFIRMATION_20261017.json",
+    "hero": "worklines/standard/rules/shared/02_CURRENT_HEROES.md",
+    "mutation": "worklines/standard/rules/shared/03_CURRENT_MUTATIONS.md",
+    "core": "worklines/standard/rules/shared/01_CURRENT_RULES.md"
+  },
+  "source_status": {
+    "confirmed_ordinary_count": 31,
+    "confirmed_direct_shared_count": 13,
+    "gameplay_rule_delta": 0,
+    "mode_gate": "xiangqi.featuresReady=false",
+    "tests": "UNRUN",
+    "engine_runs": 0,
+    "game_code_changes": 0,
+    "score": "frozen",
+    "NET": "paused",
+    "main_actual_receipt": null,
+    "main_actual_adoption": null
+  },
+  "authority_scope": {
+    "modes": [
+      "xiangqi only"
+    ],
+    "heroes": {
+      "red": "rogue / H02",
+      "black": "devout_zealot / H21 invincible"
+    },
+    "mutation": "war_chariot / M04 one mutation",
+    "player_controlled_random_selection": false,
+    "official_mode_playable": false
+  },
+  "stable_id_adapter": {
+    "red_rook": "covered-15",
+    "red_pawn0": "covered-25",
+    "red_pawn2": "covered-26",
+    "black_horse": "covered-01",
+    "black_pawn0": "covered-10",
+    "black_pawn8": "covered-14",
+    "black_elephant": "covered-02",
+    "black_advisor": "covered-03",
+    "black_rook": "covered-07",
+    "red_general": "red-general",
+    "black_general": "black-general"
+  },
+  "shared_np_preconditions": [
+    "mode must be exactly 'xiangqi'; mode.featuresReady=false presently BLOCKS official hero/mutation entry; research exception is NOT formal admission",
+    "initial state 32 revealed pieces; heroes red rogue(H02), black devout_zealot invincible(H21); exactly one mutation war_chariot(M04)",
+    "initial hero lock, current controller, alive and ground and no special defense/interference; original game rules still govern",
+    "R1-B4 full turns under approved H21 'invoke' each occupying main action, with R5 red complete counter-turn",
+    "B4 prayer produces omen without same-action descent, B5.start removes omen/descends without consuming black B5 main action, B5.action black horse [1,0]->[0,2]",
+    "before B5 selection black eligible 15 current live on-board controlled non-general pieces in stable order; no hidden control/space drift",
+    "original selected IDs via authoritative RNG tape must be validated, no forced target selection masquerading as natural draw",
+    "previous action atom fully closed; no illegal king check, time expiry, forced response, incomplete pending child or pending descent"
+  ],
+  "observation_fields": {
+    "existing_public": [
+      "state.gameMode",
+      "state.status",
+      "state.turn",
+      "state.revision",
+      "state.pieces[].id/x/y/faceDown/color/type/layer",
+      "state.effectsByPieceId[id].dragonScale/dragonClaw/stealth",
+      "state.heroRuntime[side].invokeCount/omen/descended",
+      "state.assassination[side].heroChargeAvailable/mutationChargeAvailable/activePieceId",
+      "state.formalTurns.red/black",
+      "state.turnLifecycle.side/number/phase/mainActionId",
+      "state.lastCompletedFormalTurn",
+      "state.lastMove.actionId/pieceId/from/to/landed/pathCrushed/bouncedAgainstPieceId/captured/classification",
+      "state.captured[]",
+      "state.destructionBatches[]",
+      "state.automaticEvents[]",
+      "state.landingEvents[]",
+      "state.heroFormLock",
+      "state.featureRules",
+      "state.turnDeadlineAt"
+    ],
+    "existing_authoritative_private": [
+      "secret.processedActions[actionId]",
+      "secret.formalStart",
+      "secret.heroFormLock"
+    ],
+    "derived_oracle_not_single_field": [
+      "piece_alive_by_id_after_atom",
+      "same_piece_id_at_coordinate",
+      "getController_at_authoritative_state",
+      "complete_royal_safety_after_atomic_close",
+      "effective_path_ground_count_before_action",
+      "normal_main_action_consumed_only_once",
+      "source_stealth_window_valid_until_owner_formal_end"
+    ],
+    "proposed_not_implemented": [
+      "authority_only_rng_pool_ordered_ids",
+      "rng_bounds_and_draw_indices",
+      "rng_version_and_trusted_replay_id",
+      "atomic_pre_post_snapshot_hash",
+      "per_branch_guard_decision_trace",
+      "private/public_projection_diff_classification"
+    ]
+  },
+  "timeline_expectations": [
+    {
+      "turn": "B1",
+      "prayer": 1,
+      "action": {
+        "opportunity": "main",
+        "keywords": [
+          "占步"
+        ],
+        "countsAsFormalTurn": true
+      },
+      "blackFormalTurnAfter": 1
+    },
+    {
+      "turn": "B2",
+      "prayer": 2,
+      "action": {
+        "opportunity": "main",
+        "keywords": [
+          "占步"
+        ],
+        "countsAsFormalTurn": true
+      },
+      "blackFormalTurnAfter": 2
+    },
+    {
+      "turn": "B3",
+      "prayer": 3,
+      "action": {
+        "opportunity": "main",
+        "keywords": [
+          "占步"
+        ],
+        "countsAsFormalTurn": true
+      },
+      "blackFormalTurnAfter": 3
+    },
+    {
+      "turn": "B4",
+      "prayer": 4,
+      "omenAfter": true,
+      "descendedAfter": false,
+      "blackFormalTurnAfter": 4
+    },
+    {
+      "turn": "R5",
+      "fullCounterTurn": true,
+      "blackDescended": false
+    },
+    {
+      "turn": "B5.start",
+      "descendedAfter": true,
+      "omenAfter": false,
+      "consumesMainAction": false,
+      "blackFormalTurnIndex": 5
+    },
+    {
+      "turn": "B5.action",
+      "actor": "covered-01",
+      "from": [
+        1,
+        0
+      ],
+      "to": [
+        0,
+        2
+      ],
+      "mainActionConsumed": true
+    }
+  ],
+  "h21_selection": {
+    "status": "CONDITIONAL_ONLY_NOT_REAL_DRAW",
+    "candidate_ids_order_expected_before_draw": [
+      "covered-00",
+      "covered-01",
+      "covered-02",
+      "covered-03",
+      "covered-04",
+      "covered-05",
+      "covered-06",
+      "covered-07",
+      "covered-08",
+      "covered-09",
+      "covered-10",
+      "covered-11",
+      "covered-12",
+      "covered-13",
+      "covered-14"
+    ],
+    "assert_black_pool_count_only_when_exact_state": true,
+    "AS_ES": {
+      "indices": [
+        1,
+        1,
+        1,
+        4
+      ],
+      "required_ids": [
+        "covered-01",
+        "covered-02",
+        "covered-03",
+        "covered-07"
+      ],
+      "excluded": "covered-10"
+    },
+    "AP": {
+      "indices": [
+        10,
+        2,
+        2,
+        5
+      ],
+      "required_ids": [
+        "covered-10",
+        "covered-02",
+        "covered-03",
+        "covered-07"
+      ],
+      "excluded": "covered-01"
+    },
+    "bounds": [
+      15,
+      14,
+      13,
+      12
+    ],
+    "algorithm_in_code": "min(4,N) without replacement",
+    "rule_wording": "at most 4",
+    "probability_claimed": false,
+    "new_runtime_rng_audit_fields_available": false
+  },
+  "branch_cases": [
+    {
+      "case_id": "AS",
+      "approval_scope": "exact 2026-10-19 activation-endpoint-dragon-scale A",
+      "source_confirmation": "worklines/standard/rules/confirmed/H02_M04_ACTIVATION_ENDPOINT_DRAGON_SCALE_CONFIRMATION_20261019.json",
+      "selected_set": "endpoint_scale",
+      "authoritative_test_indices_if_pinned_pool": [
+        1,
+        1,
+        1,
+        4
+      ],
+      "actions": [
+        {
+          "turn": "R6",
+          "command": "assassination",
+          "source": "hero",
+          "useStrongStrike": false,
+          "actor": "covered-15",
+          "from": [
+            0,
+            5
+          ],
+          "to": [
+            0,
+            2
+          ],
+          "one_ground_path": {
+            "id": "covered-10",
+            "position": [
+              0,
+              3
+            ]
+          },
+          "target": {
+            "id": "covered-01",
+            "position": [
+              0,
+              2
+            ]
+          }
+        }
+      ],
+      "guards": [
+        "H02 hero charge available=true, no active stealth (and no other source), original activation window valid",
+        "R6 is activation ordinary attack, not the already-granted later strong strike",
+        "actor covered-15 is live controlled revealed real ground rook; exactly one enemy revealed ground pawn on M04 path, unshielded/killable",
+        "endpoint covered-01 is live revealed non-general enemy horse with exactly one valid H21 dragonScale and no other shield",
+        "both generals safe through full source preflight and after path kill/scale bounce/return; return origin remains available",
+        "no H10 substitution, other defense, return trap, flight, river, history rewrite or control change"
+      ],
+      "before": {
+        "red_rook": {
+          "id": "covered-15",
+          "at": [
+            0,
+            5
+          ],
+          "stealth": false
+        },
+        "path_pawn": {
+          "id": "covered-10",
+          "at": [
+            0,
+            3
+          ],
+          "alive": true,
+          "dragonScale": 0
+        },
+        "horse": {
+          "id": "covered-01",
+          "at": [
+            0,
+            2
+          ],
+          "alive": true,
+          "dragonScale": 1
+        },
+        "heroChargeAvailable": true,
+        "activePieceId": null,
+        "mainActionAvailable": true
+      },
+      "oracle": {
+        "path_pawn": {
+          "alive": false,
+          "at": null,
+          "destroyed_cause": "crush",
+          "record_expected": true
+        },
+        "horse": {
+          "alive": true,
+          "at": [
+            0,
+            2
+          ],
+          "dragonScale": 0
+        },
+        "red_rook": {
+          "alive": true,
+          "at": [
+            0,
+            5
+          ],
+          "stealth": false
+        },
+        "heroChargeAvailable": true,
+        "activePieceId": null,
+        "laterStrongStrikeCreated": false,
+        "mainActionConsumed": true,
+        "lastMove": {
+          "landed": false,
+          "bouncedAgainstPieceId": "covered-01",
+          "pathCrushed_contains": "covered-10"
+        },
+        "noExtraTurn": true,
+        "noRefund": true,
+        "noDeadlineRefresh": true,
+        "royalSafety": "both alive and no illegal final check"
+      },
+      "known_static_mismatch": [
+        "engine: game.ts:670 consumes hero charge before dragonScale bounce",
+        "engine: game.ts:709-724 can create stealth and activePieceId despite failed activation"
+      ],
+      "evidence_status": "approved_rule_V2__static_mismatch_V2__runtime_UNRUN"
+    },
+    {
+      "case_id": "AP",
+      "approval_scope": "exact 2026-10-18 later-assassination single path-scale A",
+      "source_confirmation": "worklines/standard/rules/confirmed/H02_M04_PATH_DRAGON_SCALE_CONTINUATION_CONFIRMATION_20261018.json",
+      "selected_set": "path_scale",
+      "authoritative_test_indices_if_pinned_pool": [
+        10,
+        2,
+        2,
+        5
+      ],
+      "actions": [
+        {
+          "turn": "R6",
+          "command": "assassination",
+          "source": "hero",
+          "useStrongStrike": false,
+          "actor": "covered-15",
+          "from": [
+            0,
+            5
+          ],
+          "to": [
+            0,
+            4
+          ],
+          "result": "successful activation; live controlled rook gains stealth, source charge spent"
+        },
+        {
+          "turn": "B6",
+          "command": "normal_move",
+          "actor": "covered-14",
+          "from": [
+            8,
+            3
+          ],
+          "to": [
+            8,
+            4
+          ]
+        },
+        {
+          "turn": "R7",
+          "command": "assassination",
+          "source": null,
+          "useStrongStrike": true,
+          "actor": "covered-15",
+          "from": [
+            0,
+            4
+          ],
+          "to": [
+            0,
+            2
+          ],
+          "one_ground_path": {
+            "id": "covered-10",
+            "position": [
+              0,
+              3
+            ]
+          },
+          "target": {
+            "id": "covered-01",
+            "position": [
+              0,
+              2
+            ]
+          }
+        }
+      ],
+      "guards": [
+        "R6 successful ordinary empty-square rook move, living same actor, H02 stealth established and ongoing",
+        "R7 first of only two subsequent own formal turns, original valid one-time strong strike, activePieceId=covered-15",
+        "exact one enemy ground pawn with a single H21 dragonScale; no other crush immunity, shield, control or special space",
+        "endpoint live revealed enemy horse with no defense and no dragonScale, legal assassination target",
+        "both generals legal in action and after full atomic path/endpoint and landing; no H10/other event"
+      ],
+      "before": {
+        "red_rook": {
+          "id": "covered-15",
+          "at": [
+            0,
+            4
+          ],
+          "stealth": true,
+          "strongStrikeAvailable": true
+        },
+        "path_pawn": {
+          "id": "covered-10",
+          "at": [
+            0,
+            3
+          ],
+          "alive": true,
+          "dragonScale": 1
+        },
+        "horse": {
+          "id": "covered-01",
+          "at": [
+            0,
+            2
+          ],
+          "alive": true,
+          "dragonScale": 0
+        },
+        "heroChargeAvailable": false,
+        "activePieceId": "covered-15",
+        "mainActionAvailable": true
+      },
+      "oracle": {
+        "path_pawn": {
+          "alive": true,
+          "at": [
+            0,
+            3
+          ],
+          "dragonScale": 0,
+          "noDeathEvent": true
+        },
+        "horse": {
+          "alive": false,
+          "at": null,
+          "destroyed_cause": "assassination",
+          "record_expected": true
+        },
+        "red_rook": {
+          "alive": true,
+          "at": [
+            0,
+            2
+          ],
+          "stealth": false
+        },
+        "heroChargeAvailable": false,
+        "activePieceId": null,
+        "laterStrongStrikeCreated": false,
+        "mainActionConsumed": true,
+        "lastMove": {
+          "landed": true,
+          "bouncedAgainstPieceId": null,
+          "pathCrushed_contains": null,
+          "captured_id": "covered-01"
+        },
+        "noSecondCrush": true,
+        "noExtraTurn": true,
+        "noRefund": true,
+        "noDeadlineRefresh": true,
+        "royalSafety": "both alive and no illegal final check"
+      },
+      "known_static_mismatch": [],
+      "evidence_status": "approved_rule_V2__static_direction_concordant_V1__runtime_UNRUN"
+    },
+    {
+      "case_id": "ES",
+      "approval_scope": "later assassination with endpoint single scale (existing source application, not new blanket permission)",
+      "source_confirmation": "worklines/standard/rules/confirmed/H02_M04_ASSASSINATION_GEOMETRY_CONFIRMATION_20261017.json",
+      "selected_set": "endpoint_scale",
+      "authoritative_test_indices_if_pinned_pool": [
+        1,
+        1,
+        1,
+        4
+      ],
+      "actions": [
+        {
+          "turn": "R6",
+          "command": "assassination",
+          "source": "hero",
+          "useStrongStrike": false,
+          "actor": "covered-15",
+          "from": [
+            0,
+            5
+          ],
+          "to": [
+            0,
+            4
+          ],
+          "result": "successful activation; stealth established"
+        },
+        {
+          "turn": "B6",
+          "command": "normal_move",
+          "actor": "covered-14",
+          "from": [
+            8,
+            3
+          ],
+          "to": [
+            8,
+            4
+          ]
+        },
+        {
+          "turn": "R7",
+          "command": "assassination",
+          "source": null,
+          "useStrongStrike": true,
+          "actor": "covered-15",
+          "from": [
+            0,
+            4
+          ],
+          "to": [
+            0,
+            2
+          ],
+          "one_ground_path": {
+            "id": "covered-10",
+            "position": [
+              0,
+              3
+            ]
+          },
+          "target": {
+            "id": "covered-01",
+            "position": [
+              0,
+              2
+            ]
+          }
+        }
+      ],
+      "guards": [
+        "R6 successful and valid; R7 is first subsequent owner formal turn and spends already granted strong strike",
+        "R7 path enemy pawn no dragonScale or other protection, actually destroyed by independent M04 crush",
+        "endpoint horse only one H21 dragonScale and no second shield/exception, scale blocks endpoint H02 assassination",
+        "rook returns to still-available [0,4] while living and normally controlled",
+        "royal safety and all original route/geometry/source/privacy/landing guards hold"
+      ],
+      "before": {
+        "red_rook": {
+          "id": "covered-15",
+          "at": [
+            0,
+            4
+          ],
+          "stealth": true,
+          "strongStrikeAvailable": true
+        },
+        "path_pawn": {
+          "id": "covered-10",
+          "at": [
+            0,
+            3
+          ],
+          "alive": true,
+          "dragonScale": 0
+        },
+        "horse": {
+          "id": "covered-01",
+          "at": [
+            0,
+            2
+          ],
+          "alive": true,
+          "dragonScale": 1
+        },
+        "heroChargeAvailable": false,
+        "activePieceId": "covered-15",
+        "mainActionAvailable": true
+      },
+      "oracle": {
+        "path_pawn": {
+          "alive": false,
+          "at": null,
+          "destroyed_cause": "crush",
+          "record_expected": true
+        },
+        "horse": {
+          "alive": true,
+          "at": [
+            0,
+            2
+          ],
+          "dragonScale": 0
+        },
+        "red_rook": {
+          "alive": true,
+          "at": [
+            0,
+            4
+          ],
+          "stealth": false
+        },
+        "heroChargeAvailable": false,
+        "activePieceId": null,
+        "laterStrongStrikeCreated": false,
+        "mainActionConsumed": true,
+        "lastMove": {
+          "landed": false,
+          "bouncedAgainstPieceId": "covered-01",
+          "pathCrushed_contains": "covered-10"
+        },
+        "noExtraTurn": true,
+        "noRefund": true,
+        "noDeadlineRefresh": true,
+        "royalSafety": "both alive and no illegal final check"
+      },
+      "known_static_mismatch": [],
+      "evidence_status": "guarded_existing_source_composition_V2_V1__runtime_UNRUN"
+    }
+  ],
+  "negative_guard_cases": [
+    {
+      "id": "NG-01",
+      "scope": "H21",
+      "condition": "black in check at prayer",
+      "required": "reject prayer; no invokeCount increment; no turn/main-action consumption by rejected command; do not assume B4 omen"
+    },
+    {
+      "id": "NG-02",
+      "scope": "H21",
+      "condition": "B4 fourth prayer",
+      "required": "omen created only; no same-action descent, no premature eligible pool or random draw"
+    },
+    {
+      "id": "NG-03",
+      "scope": "H21",
+      "condition": "R5 game ended before B5",
+      "required": "no B5 descent or selected IDs; check original terminal statuses"
+    },
+    {
+      "id": "NG-04",
+      "scope": "H21",
+      "condition": "repeat same B5.begin/duplicate action",
+      "required": "no extra random draws, no extra dragonScale, no revision/clock refresh"
+    },
+    {
+      "id": "NG-05",
+      "scope": "H21",
+      "condition": "tape size/index invalid or candidate order changed",
+      "required": "STOP invalid fixture; never inject unbounded invalid index into current choose; record source/ordering mismatch"
+    },
+    {
+      "id": "NG-06",
+      "scope": "H21",
+      "condition": "N=0,1,3,4,15 eligible pool with different control, river or air",
+      "required": "only apply prior H21-RNG contract under exact authoritative eligibility and order; no forced four on small pool; air/river source rules remain separate"
+    },
+    {
+      "id": "NG-07",
+      "scope": "H02",
+      "condition": "zero or two-plus ground path pieces, empty endpoint or target general",
+      "required": "do not evaluate as AS/AP/ES M04 one-path confirmed case; normal zero-path legality evaluated independently"
+    },
+    {
+      "id": "NG-08",
+      "scope": "H02",
+      "condition": "wrong command stage e.g. AS useStrongStrike=true or AP hero source reselected",
+      "required": "reject unapproved source or action window; do not restore or reconsume charges"
+    },
+    {
+      "id": "NG-09",
+      "scope": "H02",
+      "condition": "AS path pawn has scale or other crush immunity",
+      "required": "AS guard fails; no assertion that path pawn dies or hero charge remains under this exact approved AS case"
+    },
+    {
+      "id": "NG-10",
+      "scope": "H02",
+      "condition": "AP endpoint gets scale, or ES endpoint loses scale",
+      "required": "branch oracle cannot be recycled; redispatch using exact endpoint/path shield snapshot"
+    },
+    {
+      "id": "NG-11",
+      "scope": "H02",
+      "condition": "double shield, H10 substitution, air/river, hidden, control trap or occupied return square",
+      "required": "outside current narrow confirmation; mark separate source review, not PASS"
+    },
+    {
+      "id": "NG-12",
+      "scope": "H02",
+      "condition": "R7 after opportunity expired at end of second subsequent owner formal turn",
+      "required": "reject/expire based on source windows; R8 can be second window only if not already consumed"
+    },
+    {
+      "id": "NG-13",
+      "scope": "royal_safety",
+      "condition": "M04 path crush removes a blocker revealing a check; pre-move simulation ignored path",
+      "required": "compare authority closed final board and original precheck; no success merely from validatePublicMove simulated initial board"
+    },
+    {
+      "id": "NG-14",
+      "scope": "atom",
+      "condition": "dragonScale prevents actual death or path death is recorded before return/landing",
+      "required": "verify real captured/deathRecords separately from attempted crush, require full atom closure before terminal judgment"
+    },
+    {
+      "id": "NG-15",
+      "scope": "timing",
+      "condition": "skill child, forced defense, repeated formal-start or elapsed time",
+      "required": "do not count extra formal turn or refresh deadline; external terminal only after approved source closure"
+    }
+  ],
+  "phase_required_order": [
+    "official adaptation qualification by main before any real ordinary hero+M04 match",
+    "main verification of B1–B5 formal counting as UNRUN (old claimed static P0 corrected), and AS H02 charge retention implementation",
+    "main RNG validation/instrumentation and authorized controlled test entry if approved",
+    "actual full NP prefix replay from initial public 32 pieces including checks and turn counters",
+    "fix/source evidence for atomic M04 path, endpoint response, return, public-private trace and final king safety",
+    "independent QA/negative matrix execution and real-authority RNG replay before PASS"
+  ],
+  "handoff": {
+    "main_owner": [
+      "shared engine fixes",
+      "formal mode admission",
+      "actual RNG evidence/validation",
+      "full atomic/royal-safety verification",
+      "test execution and QA"
+    ],
+    "standard_owner": [
+      "source-backed branch contract and negative cases",
+      "branch observation matrix",
+      "preserve approval scope and source links"
+    ],
+    "next_unstarted": "NEXT-STD-NP-PATH-CRUSH-ROYAL-SAFETY-SYMBOLIC-WITNESSES"
+  },
+  "verification": {
+    "documentation_schema_and_cross_case_self_consistency": "authored self-review, no independent test",
+    "source_rule_and_code_read": "V2 scoped",
+    "conditional_logic": "V1",
+    "engine_runs": 0,
+    "tests_executed": [],
+    "formal_tests": "UNRUN",
+    "independent_qa": false,
+    "mode_enabled": false
+  },
+  "not_claimed": [
+    "test fixtures have been executed",
+    "all guards hold in actual runtime",
+    "AS/AP/ES marked PASS",
+    "RNG natural event captured or uniformly distributed",
+    "research bypass qualifies ordinary mode",
+    "this publication means another dialogue has read or adopted it",
+    "new H02/H21/M04 gameplay rules approved"
+  ],
+  "source_erratum_20261026": {
+    "applies_to": "previous preflight P0 H21 invoke misread",
+    "supersedes": "P0-H21-invoke-classified-before_main-formal-count-skipped",
+    "actual_pinned_code": "src/hero-actions.ts:108-115 includes invoke in isMain",
+    "status": "WITHDRAWN_NOT_AN_ENGINE_FAILURE",
+    "formal_tests": "UNRUN",
+    "report": "worklines/standard/reviews/M04_PATH_CRUSH_ROYAL_SAFETY_SYMBOLIC_WITNESSES_20261026.md"
+  }
+}

@@ -1,0 +1,496 @@
+{
+  "schema": "lezi.standard.h21.rng.reproducibility_contract.v1",
+  "id": "STD-H21-RNG-REPLAY-CONTRACT-20261024",
+  "phase": "DESIGN_ONLY_READY_FOR_FUTURE_TEST_ADAPTER",
+  "source_handoff_commit": "3aafee91830173aa89bfc5e60bd5179d7fe4de7f",
+  "source_engine_commit": "3f98bc9fb89a2a209209c424c4bf1bbd2cf6aca7",
+  "source_engine_branch": "codex/main-evidence-validity-20261024",
+  "source_engine_pr": "https://github.com/aaaycc931-droid/jieqi-engine/pull/13",
+  "unmerged_pr": true,
+  "prior_NP_contract": "specs/NP_H02_M04_H21_AS_AP_ES_CONTRACT_20261020.json",
+  "prior_trace": "reviews/H21_RNG_SOURCE_TRACE.md",
+  "source_paths": {
+    "code": [
+      "src/hero-descent.ts:11-14,20-36",
+      "src/settlement.ts:301-337",
+      "src/setup.ts:72-85",
+      "src/slots.ts:10-52",
+      "src/game.ts:475-496",
+      "src/spaces.ts:1-9",
+      "src/remote-room.ts:1032-1040,1502-1530",
+      "src/hero-actions.ts:54-60,83-107",
+      "src/modes.ts:5-31"
+    ],
+    "approved": [
+      "rules/shared/02_CURRENT_HEROES.md#H21",
+      "work/LEZI_STD_DESIGN_03_WORKING_20261014.md#H21"
+    ],
+    "related_tests": [
+      "tests/hero-transfer-r5.test.ts:R5-H21-06",
+      "tests/hero-descent-boundaries.test.ts",
+      "tests/game-modes.test.ts:MODE-10"
+    ]
+  },
+  "separation": {
+    "approved_semantics": "randomly choose at most 4 legally controlled on-board non-generals when H21 invincible descends; no pre-lock or player handpicking",
+    "code_facts": "choose(pool,4,random): four index draws if N>=4, else N; no replacement; source pool filters isBoardPiece/controller/not general",
+    "code_vs_rule_gap": "approved 'at most four' does not explicitly prescribe count=min(4,N) nor probability law; no new rule adopted",
+    "actual_mode_gate": "xiangqi featuresReady=false unless properly scoped authorized research permits; no full mode run",
+    "not_claimed": [
+      "naturally sampled exact four-set in full game",
+      "uniformity in deployed runtime",
+      "persisted RNG seed/tape",
+      "real product replay",
+      "engine/NP/AS/AP/ES/RE PASS",
+      "independent QA"
+    ]
+  },
+  "random_api": {
+    "signature": "RandomInt(maxExclusive: integer) -> integer in [0,maxExclusive)",
+    "call_sequence_bounds": "N,N-1,...,N-min(4,N)+1",
+    "contract_requirement": "valid indices; range and integer prechecked by future adapter; invalid input cannot be submitted directly to unguarded choose",
+    "known_unguarded_choose_failure": "splice silently coerces negative/fractional indices; repeated out-of-bounds positive index can leave pool unchanged and loop non-terminating",
+    "source_quality": "H21 paths may receive settlement/hero-actions Math.random defaults when caller supplies no RandomInt; secureRandomInt/cryptoRandomInt exist elsewhere but not globally guaranteed by existence",
+    "distribution": "only conditional on uniform independent index calls can unordered k-set probability be 1/C(N,k); not gameplay-approved probability"
+  },
+  "board_id_adapter": {
+    "mode": "xiangqi",
+    "at": "B5.turn_start.before H21 descent; after R5 complete counter-turn",
+    "actual_black_eligible_IDs_in_array_order": [
+      "covered-00",
+      "covered-01",
+      "covered-02",
+      "covered-03",
+      "covered-04",
+      "covered-05",
+      "covered-06",
+      "covered-07",
+      "covered-08",
+      "covered-09",
+      "covered-10",
+      "covered-11",
+      "covered-12",
+      "covered-13",
+      "covered-14"
+    ],
+    "warning": "NP symbolic names are not real engine piece IDs; translate via createInitialGame, slots and initial black order, and verify actual pool ID order from authoritative state before consuming any tape",
+    "mappings": [
+      {
+        "np": "black_horse_1",
+        "position_before_B5": [
+          1,
+          0
+        ],
+        "position_after_B5_normal_action": [
+          0,
+          2
+        ],
+        "id": "covered-01"
+      },
+      {
+        "np": "black_elephant_2",
+        "position": [
+          2,
+          0
+        ],
+        "id": "covered-02"
+      },
+      {
+        "np": "black_advisor_3",
+        "position": [
+          3,
+          0
+        ],
+        "id": "covered-03"
+      },
+      {
+        "np": "black_rook_8",
+        "position": [
+          8,
+          0
+        ],
+        "id": "covered-07"
+      },
+      {
+        "np": "black_pawn_0",
+        "position": [
+          0,
+          3
+        ],
+        "id": "covered-10"
+      }
+    ],
+    "selection_tapes": {
+      "endpoint_scale": [
+        {
+          "maxExclusive": 15,
+          "index": 1,
+          "selected_id": "covered-01"
+        },
+        {
+          "maxExclusive": 14,
+          "index": 1,
+          "selected_id": "covered-02"
+        },
+        {
+          "maxExclusive": 13,
+          "index": 1,
+          "selected_id": "covered-03"
+        },
+        {
+          "maxExclusive": 12,
+          "index": 4,
+          "selected_id": "covered-07"
+        }
+      ],
+      "path_scale": [
+        {
+          "maxExclusive": 15,
+          "index": 10,
+          "selected_id": "covered-10"
+        },
+        {
+          "maxExclusive": 14,
+          "index": 2,
+          "selected_id": "covered-02"
+        },
+        {
+          "maxExclusive": 13,
+          "index": 2,
+          "selected_id": "covered-03"
+        },
+        {
+          "maxExclusive": 12,
+          "index": 5,
+          "selected_id": "covered-07"
+        }
+      ]
+    },
+    "note": "R1-R5 red moves append red pieces in current move code, preserving relative black array order under the documented no-capture conditional prefix; do not reuse these index tapes after a different history or mutation"
+  },
+  "proposed_fixtures": [
+    {
+      "id": "H21-RNG-00",
+      "label": "empty eligible pool",
+      "mode": "xiangqi",
+      "fixture_type": "synthetic_isolated",
+      "eligible_ids": [],
+      "input_indices": [],
+      "expected_call_bounds": [],
+      "expected_selected_ids": [],
+      "count_in_code": 0,
+      "guard": "zero calls; no selected effects; prestate must still qualify for H21 descent",
+      "runtime": "UNRUN"
+    },
+    {
+      "id": "H21-RNG-01",
+      "label": "single candidate",
+      "mode": "xiangqi",
+      "fixture_type": "synthetic_isolated",
+      "eligible_ids": [
+        "own-A"
+      ],
+      "input_indices": [
+        0
+      ],
+      "expected_call_bounds": [
+        1
+      ],
+      "expected_selected_ids": [
+        "own-A"
+      ],
+      "count_in_code": 1,
+      "runtime": "UNRUN"
+    },
+    {
+      "id": "H21-RNG-03",
+      "label": "three candidates",
+      "mode": "xiangqi",
+      "fixture_type": "synthetic_isolated",
+      "eligible_ids": [
+        "own-A",
+        "own-B",
+        "own-C"
+      ],
+      "input_indices": [
+        2,
+        0,
+        0
+      ],
+      "expected_call_bounds": [
+        3,
+        2,
+        1
+      ],
+      "expected_selected_ids": [
+        "own-C",
+        "own-A",
+        "own-B"
+      ],
+      "count_in_code": 3,
+      "runtime": "UNRUN"
+    },
+    {
+      "id": "H21-RNG-04",
+      "label": "four candidates",
+      "mode": "xiangqi",
+      "fixture_type": "synthetic_isolated",
+      "eligible_ids": [
+        "own-A",
+        "own-B",
+        "own-C",
+        "own-D"
+      ],
+      "input_indices": [
+        3,
+        1,
+        1,
+        0
+      ],
+      "expected_call_bounds": [
+        4,
+        3,
+        2,
+        1
+      ],
+      "expected_selected_ids": [
+        "own-D",
+        "own-B",
+        "own-C",
+        "own-A"
+      ],
+      "count_in_code": 4,
+      "runtime": "UNRUN"
+    },
+    {
+      "id": "H21-RNG-15-E",
+      "label": "normal NP B5 endpoint-scale selection",
+      "mode": "xiangqi",
+      "fixture_type": "opening_NP_conditional",
+      "eligible_ids": [
+        "covered-00",
+        "covered-01",
+        "covered-02",
+        "covered-03",
+        "covered-04",
+        "covered-05",
+        "covered-06",
+        "covered-07",
+        "covered-08",
+        "covered-09",
+        "covered-10",
+        "covered-11",
+        "covered-12",
+        "covered-13",
+        "covered-14"
+      ],
+      "input_indices": [
+        1,
+        1,
+        1,
+        4
+      ],
+      "expected_call_bounds": [
+        15,
+        14,
+        13,
+        12
+      ],
+      "expected_selected_ids": [
+        "covered-01",
+        "covered-02",
+        "covered-03",
+        "covered-07"
+      ],
+      "excluded_ids": [
+        "covered-10"
+      ],
+      "count_in_code": 4,
+      "NP_branches": [
+        "AS",
+        "ES"
+      ],
+      "runtime": "UNRUN"
+    },
+    {
+      "id": "H21-RNG-15-P",
+      "label": "normal NP B5 path-scale selection",
+      "mode": "xiangqi",
+      "fixture_type": "opening_NP_conditional",
+      "eligible_ids": [
+        "covered-00",
+        "covered-01",
+        "covered-02",
+        "covered-03",
+        "covered-04",
+        "covered-05",
+        "covered-06",
+        "covered-07",
+        "covered-08",
+        "covered-09",
+        "covered-10",
+        "covered-11",
+        "covered-12",
+        "covered-13",
+        "covered-14"
+      ],
+      "input_indices": [
+        10,
+        2,
+        2,
+        5
+      ],
+      "expected_call_bounds": [
+        15,
+        14,
+        13,
+        12
+      ],
+      "expected_selected_ids": [
+        "covered-10",
+        "covered-02",
+        "covered-03",
+        "covered-07"
+      ],
+      "excluded_ids": [
+        "covered-01"
+      ],
+      "count_in_code": 4,
+      "NP_branches": [
+        "AP"
+      ],
+      "runtime": "UNRUN"
+    }
+  ],
+  "mixed_pool_gates": [
+    {
+      "id": "H21-RNG-MIX-STD",
+      "mode": "xiangqi",
+      "fixture": "red H21; two controlled revealed ground non-generals, one controlled revealed air non-general, one red general, one enemy ground non-general, one controlled river piece",
+      "expected_eligible": "three on-board controlled non-generals including air; exclude general, enemy and river",
+      "expected_count_code": 3,
+      "precondition": "synthetic unit fixture, not a legal natural xiangqi snapshot proof",
+      "runtime": "UNRUN"
+    },
+    {
+      "id": "H21-RNG-MIX-DARK",
+      "mode": "jieqi/half_chaos",
+      "fixture": "controlled faceDown on-board + revealed own on-board and opponent faceDown; include a river stored old coordinate",
+      "expected": "pool by current public controller; eligible faceDown reveals only if selected; exclusions per source; no hidden identity selection shortcut",
+      "scope": "cross-mode technical source check only, not standard-line approval of other mode policies",
+      "runtime": "UNRUN"
+    }
+  ],
+  "replay_matrix": [
+    {
+      "id": "R-01",
+      "level": "unit_deterministic",
+      "needed": [
+        "pinned source commit",
+        "pre-descent authoritative state with ordered pool IDs",
+        "exact injected index sequence and bounds"
+      ],
+      "expected": "identical selected IDs, dragonScale=1 and dragonClaw=true on chosen IDs; no duplicate chosen IDs",
+      "claim_if_pass": "bounded deterministic function replay only"
+    },
+    {
+      "id": "R-02",
+      "level": "idempotent_begin",
+      "needed": [
+        "same real turn-start initial state",
+        "two repeated begin calls with stable formal turn marker",
+        "counting RNG adapter"
+      ],
+      "expected": "first actual begin consumes min(4,N) RNG calls, duplicate begin consumes zero extra H21 draw calls and grants no extra scale",
+      "claim_if_pass": "bounded start-transition behavior only"
+    },
+    {
+      "id": "R-03",
+      "level": "NP_connected",
+      "needed": [
+        "authorized xiangqi feature gate and full 32-piece legal prefix",
+        "verified ordered ID mapping and injected tape",
+        "all H02/M04 guards and real royal-safety pipeline"
+      ],
+      "expected": "AS/AP/ES results per previous NP original, no forced target outcome or changes to rule confirmations",
+      "claim_if_pass": "only tested end-to-end version/cases"
+    },
+    {
+      "id": "R-04",
+      "level": "natural_replay",
+      "needed": [
+        "existing trusted real game trace",
+        "authoritative pre-descent state and array ordering",
+        "RNG sequence/seed that actually drove that run",
+        "implementation version and replay transaction provenance",
+        "permission-safe storage and integrity protection"
+      ],
+      "expected": "same selected IDs/events and original state transition with no added public secret leakage",
+      "claim_if_pass": "specific logged natural-run replay only"
+    }
+  ],
+  "stop_gates": [
+    {
+      "id": "GATE-NONTERMINATION",
+      "trigger": "bad injected out-of-range index",
+      "response": "reject at test adapter before choosing; do not run unbounded faulty callback against production choose until fixed"
+    },
+    {
+      "id": "GATE-MODE",
+      "trigger": "xiangqi feature gate false",
+      "response": "do not bypass as real acceptance; any isolated research probe separately labeled"
+    },
+    {
+      "id": "GATE-FIXTURE",
+      "trigger": "pool count/order/IDs differ from B5 expected",
+      "response": "fixture-inapplicable, not gameplay failure; never force extra draw"
+    },
+    {
+      "id": "GATE-DISTRIBUTION",
+      "trigger": "distribution or actual seed unknown",
+      "response": "keep numeric probability conditional, not observed fact"
+    },
+    {
+      "id": "GATE-PRIVACY",
+      "trigger": "would expose secret identities, host, private RNG tape or unauthorized authority state",
+      "response": "only scoped authority record; release through existing permission projection, no player-facing debug interface"
+    },
+    {
+      "id": "GATE-SCOPE",
+      "trigger": "rule ambiguous vs implementation count",
+      "response": "raise exact divergence to main then user if gameplay change is proposed; no automatic approval"
+    }
+  ],
+  "execution": {
+    "source_checked": true,
+    "mathematical_tape_derivation_checked": true,
+    "engine_runs": 0,
+    "formal_tests": "UNRUN",
+    "new_game_code": 0,
+    "independent_QA": false,
+    "net": "paused",
+    "scoring": "frozen",
+    "new_confirmations": 0
+  },
+  "main_owner_request": {
+    "id": "MAIN-H21-RNG-INSTRUMENTATION-DECISION",
+    "requested": "Decide if/when to add validated RandomInt adapter and authority-only draw receipt for reproducible H21 testing; trace actual call path quality; do not silently amend gameplay or enable standard mode.",
+    "interface_semantics_only": [
+      "source_commit",
+      "mode",
+      "authority_state_reference",
+      "side",
+      "formal_turn",
+      "source_atom",
+      "candidate_ordered_ids",
+      "sample_count",
+      "draw_calls(maxExclusive,index)",
+      "selected_ids",
+      "post_state_or_effects_reference",
+      "privacy_scope",
+      "algorithm_version_or_random_stream_reference"
+    ],
+    "privacy": "do not publish private draw tape / secret identity or give players ability to choose outcome",
+    "status": "PENDING_MAIN_REAL_READING_AND_ACTION"
+  }
+}
