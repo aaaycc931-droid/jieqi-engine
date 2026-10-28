@@ -185,7 +185,7 @@ function symbolic(w:any,kind:'move'|'activation'|'continuing'){
 for(const w of witnesses.slice(0,2))for(const kind of ['move','activation','continuing'] as const)test(`NP32 symbolic ${w.id}/${kind}: unsafe closed path/endpoint/return rejects original candidate`,()=>{
   const a=symbolic(w,kind),before=structuredClone({state:a.state,secret:a.secret});
   assert.equal(isGeneralInCheck(a.state,'red'),false);
-  assert.equal(validatePublicMove(a.state,a.move,'red',{allowStealthSource:kind==='continuing',requireCapture:kind==='continuing'}).ok,true);
+  assert.equal(validatePublicMove(a.state,a.move,'red',{allowStealthSource:kind==='continuing',requireCapture:kind==='continuing'}).code,'SELF_CHECK');
   const c=captureMechanismEvents(()=>assert.throws(a.execute,code('SELF_CHECK')));
   assert.deepEqual(c.events,[]);assert.deepEqual({state:a.state,secret:a.secret},before);
 });
@@ -213,7 +213,7 @@ for(const shield of [false,true])for(const kind of ['move','activation','continu
     {id:'covered-01',color:'black',type:'horse',x:6,y:7,...(shield?{dragonScale:1}:{})},
   ]};
   const a=symbolic(w,kind);assert.equal(isGeneralInCheck(a.state,'red'),true);
-  assert.equal(validatePublicMove(a.state,a.move,'red',{allowStealthSource:kind==='continuing',requireCapture:kind==='continuing'}).code,'SELF_CHECK');
+  assert.equal(validatePublicMove(a.state,a.move,'red',{allowStealthSource:kind==='continuing',requireCapture:kind==='continuing'}).ok,true);
   const r=a.execute();assert.equal(isGeneralInCheck(r.state,'red'),false);
   assert.equal(r.state.captured.filter(p=>p.id==='covered-00').length,1);
   assert.equal(r.state.lastMove!.landed,!shield);assert.equal(r.state.formalTurns!.red,kind==='continuing'?7:1);

@@ -1,0 +1,87 @@
+{
+  "schema": "lezi.main.public_path_query.results.v1",
+  "date_local": "2026-10-28",
+  "id": "MAIN-SAFETY-QUERY-CLOSED-AUTHORITY-20261028",
+  "engine_parent": "680966fff6484b418c25c9afb8b6759b7a44b594",
+  "handoff_read_head": "72dc9b59b961529c60200e37e0538a80d3312e3d",
+  "status": "BOUNDED_READ_ONLY_PUBLIC_QUERY_IMPLEMENTED_TESTED",
+  "shared_source_files_changed": [
+    "src/game.ts",
+    "src/rules.ts",
+    "src/mechanism-observer.ts"
+  ],
+  "new_tests": 33,
+  "targeted_tests": 88,
+  "targeted_failed": 0,
+  "related_files": 52,
+  "related_passed": 782,
+  "related_failed": 0,
+  "baseline_immutable_source_and_fixture_files_verified": 39,
+  "baseline_query_authority_mismatches": 12,
+  "current_query_authority_mismatches": 0,
+  "unsafe_cases_removed": 6,
+  "safe_evasions_restored": 6,
+  "legal_controls_preserved": 6,
+  "synthetic_terminal_boards_compared": 3,
+  "original_requests_compared_old_new": 37,
+  "interleaved_public_queries_request_count": 37,
+  "original_authority_events_views_and_RNG_identical": true,
+  "query_real_RNG_calls": 0,
+  "query_wall_clock_calls": 0,
+  "query_events_or_outer_invalidations": 0,
+  "source_natural_reachability_of_synthetic_components": "UNPROVED",
+  "production_random_sampling": false,
+  "formal_ordinary_qualification": false,
+  "independent_QA": false,
+  "full_typecheck": "NOT_RUN",
+  "UI_build_device_bluetooth": "NOT_RUN",
+  "mode_gates_changed": false,
+  "new_gameplay_confirmations": 0,
+  "scoring": "frozen",
+  "NET": "paused",
+  "raw_authority_bodies_published": false,
+  "reuse_original_owner_evidence": "lezi-main-np32-evidence-20261028.zip (previous NP32 authority, not relabeled as this phase run)",
+  "coverage": [
+    "Original early H04/H03 M01/M04 revealed ground mover with public touched identities",
+    "Original ordinary NP32 H02/H21 invincible M04 before actor completed turn8 and max counter8",
+    "Ordinary and H02 activation/continuing markers plus bounded move-existence/checkmate/stalemate",
+    "Public royal threat direct terminal projection, preserving own-general source terminal authority"
+  ],
+  "uncovered": [
+    "Hidden path or endpoint identities; original queries retained without fabricated secrets",
+    "Other hero rosters, pending child/descent/shuffle, forced defense/flow, special spaces and unrelated effects",
+    "Late rain and broader search/full mode qualification",
+    "Ordinary NG11 combinations and R8 full natural second opportunity/expiry",
+    "HC64 formal acceptance, exact56 view/client slots and independentQA"
+  ],
+  "implementation": [
+    "Same fresh authoritative move/assassination implementation with private query phase; no public command can select it",
+    "Query initializes prospective before_main only on clone, not beginFormalTurn; shared action closure and H02 transitions stop before finishAfterPlayerAction",
+    "No supplied or inferred real secret; public identity coverage and original WeakMap batch barrier before copying",
+    "Synchronous observer sink does not snapshot, publish, or invalidate outer captures; injected errors restore observer",
+    "Royal threat uses complete terminal projection in bounded public slice; execution/unsupported states retain legacy path"
+  ],
+  "test_design_limits": "Same-author test design plus actual execution and immutable-baseline byte checks; not independent QA. Three terminal boards and18 components are synthetic, separate from real32 conditional prefixes.",
+  "artifacts": [
+    {
+      "path": "review/public-path-query/related-final-20261028.tap",
+      "sha256": "dc4597b3770efeb61af2795f97428316b32a758febc51bb543b7a3c720c1e374",
+      "bytes": 182834
+    },
+    {
+      "path": "review/public-path-query/COMMAND_20261028.json",
+      "sha256": "38633dcde04603d676fd07a967ad30321a00a1b35b2105f0fd27892e18cd3d5e",
+      "bytes": 2280
+    },
+    {
+      "path": "review/public-path-query/BASELINE_INTEGRITY_20261028.json",
+      "sha256": "58d20e956bc6bc92cac512a877e5119b88a83132228145b96f2c418d6aaf669b",
+      "bytes": 4352
+    },
+    {
+      "path": "review/public-path-query/DIFFERENTIAL_20261028.json",
+      "sha256": "7def0e49afd917b0f0b580c77e172d8a85df497f693503d67a4143ef069e5817",
+      "bytes": 15846
+    }
+  ]
+}

@@ -1,0 +1,4706 @@
+TAP version 13
+# Subtest: R4-ACTION-01 普通移动和进攻均可为Ⅰ级，历史和公开记录分别保留关键词
+ok 1 - R4-ACTION-01 普通移动和进攻均可为Ⅰ级，历史和公开记录分别保留关键词
+  ---
+  duration_ms: 11.136348
+  type: 'test'
+  ...
+# Subtest: R4-ACTION-02 壁垒弹回仍记录Ⅰ级进攻，不因未吃掉目标丢失分类
+ok 2 - R4-ACTION-02 壁垒弹回仍记录Ⅰ级进攻，不因未吃掉目标丢失分类
+  ---
+  duration_ms: 1.870259
+  type: 'test'
+  ...
+# Subtest: R4-ACTION-03 时间线占步与衍生移动分开记录，子行动是Ⅲ级且不新增历史或回合
+ok 3 - R4-ACTION-03 时间线占步与衍生移动分开记录，子行动是Ⅲ级且不新增历史或回合
+  ---
+  duration_ms: 10.147393
+  type: 'test'
+  ...
+# Subtest: R4-ACTION-04 上一正式回合只有占步技能时，时间线不跳回更早的Ⅰ级棋
+ok 4 - R4-ACTION-04 上一正式回合只有占步技能时，时间线不跳回更早的Ⅰ级棋
+  ---
+  duration_ms: 10.456757
+  type: 'test'
+  ...
+# Subtest: R4-ACTION-05 缺少历史层级时拒绝猜成俗手，拒绝不消耗英雄资源
+ok 5 - R4-ACTION-05 缺少历史层级时拒绝猜成俗手，拒绝不消耗英雄资源
+  ---
+  duration_ms: 2.871723
+  type: 'test'
+  ...
+# Subtest: R4-TURN-01 铁甲额外强迫应将不进入历史，不推进任何第二次正式计时
+ok 6 - R4-TURN-01 铁甲额外强迫应将不进入历史，不推进任何第二次正式计时
+  ---
+  duration_ms: 7.89495
+  type: 'test'
+  ...
+# Subtest: R4-TURN-02 实际裁决后的流舞保持额外Ⅲ级与原正式历史，不生成正式阶段
+ok 7 - R4-TURN-02 实际裁决后的流舞保持额外Ⅲ级与原正式历史，不生成正式阶段
+  ---
+  duration_ms: 7.971064
+  type: 'test'
+  ...
+# Subtest: R4-TURN-03 秦龙开始结算只运行一次，回合末/重复观察不能提前或重复抽取
+ok 8 - R4-TURN-03 秦龙开始结算只运行一次，回合末/重复观察不能提前或重复抽取
+  ---
+  duration_ms: 0.878039
+  type: 'test'
+  ...
+# Subtest: R4-TURN-04 混乱在开始刷新一次，公开时钟/窗口重复/回合末均不重掷
+ok 9 - R4-TURN-04 混乱在开始刷新一次，公开时钟/窗口重复/回合末均不重掷
+  ---
+  duration_ms: 0.712
+  type: 'test'
+  ...
+# Subtest: R4-TURN-05 当回合飞行持续时间参与首次回合末，不向后额外延长一回合
+ok 10 - R4-TURN-05 当回合飞行持续时间参与首次回合末，不向后额外延长一回合
+  ---
+  duration_ms: 1.95707
+  type: 'test'
+  ...
+# Subtest: R4-TURN-06 潜行者明确例外：发动回合不清隐身，下一己方正式行动才退出
+ok 11 - R4-TURN-06 潜行者明确例外：发动回合不清隐身，下一己方正式行动才退出
+  ---
+  duration_ms: 6.095275
+  type: 'test'
+  ...
+# Subtest: R4-TURN-07 占步技能消耗主行动并走完五阶段，不伪造移动或进攻
+ok 12 - R4-TURN-07 占步技能消耗主行动并走完五阶段，不伪造移动或进攻
+  ---
+  duration_ms: 1.408225
+  type: 'test'
+  ...
+# Subtest: R4-TURN-08 沙漏主行动前使用不推进计时，后续普通主行动仅结束一次
+ok 13 - R4-TURN-08 沙漏主行动前使用不推进计时，后续普通主行动仅结束一次
+  ---
+  duration_ms: 3.426587
+  type: 'test'
+  ...
+# Subtest: R4-TURN-09 终局在原子闭合停止，不推进回合末或下一回合开始
+ok 14 - R4-TURN-09 终局在原子闭合停止，不推进回合末或下一回合开始
+  ---
+  duration_ms: 1.562808
+  type: 'test'
+  ...
+# Subtest: R4-TURN-10 回溯恢复主行动前阶段；重新行动标Ⅲ级并仅结算一次正式回合
+ok 15 - R4-TURN-10 回溯恢复主行动前阶段；重新行动标Ⅲ级并仅结算一次正式回合
+  ---
+  duration_ms: 7.729501
+  type: 'test'
+  ...
+# Subtest: R4-TURN-11 重复行动与重复回合末结算不再次消耗持续时间或推进正式计数
+ok 16 - R4-TURN-11 重复行动与重复回合末结算不再次消耗持续时间或推进正式计数
+  ---
+  duration_ms: 1.495897
+  type: 'test'
+  ...
+# Subtest: R4-TURN-12 普通裁决候选不运行败方下一回合的秦龙抽签
+ok 17 - R4-TURN-12 普通裁决候选不运行败方下一回合的秦龙抽签
+  ---
+  duration_ms: 1.832393
+  type: 'test'
+  ...
+# Subtest: AS01 confirmed first activation into endpoint scale retains unused hero source but consumes this main
+ok 18 - AS01 confirmed first activation into endpoint scale retains unused hero source but consumes this main
+  ---
+  duration_ms: 15.268114
+  type: 'test'
+  ...
+# Subtest: AP01 already-held opportunity with path scale does not receive an AS refund
+ok 19 - AP01 already-held opportunity with path scale does not receive an AS refund
+  ---
+  duration_ms: 3.291724
+  type: 'test'
+  ...
+# Subtest: ES01 already-held opportunity into endpoint scale remains spent after return
+ok 20 - ES01 already-held opportunity into endpoint scale remains spent after return
+  ---
+  duration_ms: 5.642836
+  type: 'test'
+  ...
+# Subtest: AS02 a surviving protected path is outside the confirmed AS retention guard
+ok 21 - AS02 a surviving protected path is outside the confirmed AS retention guard
+  ---
+  duration_ms: 3.253677
+  type: 'test'
+  ...
+# Subtest: ROGUE-01 刺杀首步消耗英雄次数，棋子进入公开隐身并保留强击
+ok 22 - ROGUE-01 刺杀首步消耗英雄次数，棋子进入公开隐身并保留强击
+  ---
+  duration_ms: 10.584549
+  type: 'test'
+  ...
+# Subtest: ROGUE-02 无形地面棋仍挡路径，不能直接进攻
+ok 23 - ROGUE-02 无形地面棋仍挡路径，不能直接进攻
+  ---
+  duration_ms: 2.278182
+  type: 'test'
+  ...
+# Subtest: ROGUE-03 刺杀机会可以直接指定无形目标
+ok 24 - ROGUE-03 刺杀机会可以直接指定无形目标
+  ---
+  duration_ms: 3.120207
+  type: 'test'
+  ...
+# Subtest: ROGUE-04 两个己方窗口后隐身退出，普通入口不能绕过来源
+ok 25 - ROGUE-04 两个己方窗口后隐身退出，普通入口不能绕过来源
+  ---
+  duration_ms: 15.437289
+  type: 'test'
+  ...
+# Subtest: ROGUE-05 发动可普通进攻但不能立即使用刺杀机会；资源失败不消耗
+ok 26 - ROGUE-05 发动可普通进攻但不能立即使用刺杀机会；资源失败不消耗
+  ---
+  duration_ms: 1.028014
+  type: 'test'
+  ...
+# Subtest: ROGUE-06 首次立即强击仍不能以将帅为目标
+ok 27 - ROGUE-06 首次立即强击仍不能以将帅为目标
+  ---
+  duration_ms: 0.840182
+  type: 'test'
+  ...
+# Subtest: ROGUE-07 强击与战车同一原子行动会先碾碎路径，再处决最终目标
+ok 28 - ROGUE-07 强击与战车同一原子行动会先碾碎路径，再处决最终目标
+  ---
+  duration_ms: 2.737241
+  type: 'test'
+  ...
+# Subtest: ROGUE-08 英雄与暗影之舞来源独立消耗，并共享新刺杀规则
+ok 29 - ROGUE-08 英雄与暗影之舞来源独立消耗，并共享新刺杀规则
+  ---
+  duration_ms: 9.355954
+  type: 'test'
+  ...
+# Subtest: ROGUE-09 暗影之舞进入隐身时保留同一步获得的战士壁垒
+ok 30 - ROGUE-09 暗影之舞进入隐身时保留同一步获得的战士壁垒
+  ---
+  duration_ms: 1.785171
+  type: 'test'
+  ...
+# Subtest: BTDISC-07 real host preserves formal clock after RPS and expires at shifted deadline
+ok 31 - BTDISC-07 real host preserves formal clock after RPS and expires at shifted deadline
+  ---
+  duration_ms: 10.245841
+  type: 'test'
+  ...
+# Subtest: BTDISC-01 断线期间暂停英雄选择倒计时，重连后从原剩余时间继续
+ok 32 - BTDISC-01 断线期间暂停英雄选择倒计时，重连后从原剩余时间继续
+  ---
+  duration_ms: 0.980914
+  type: 'test'
+  ...
+# Subtest: BTDISC-02 同一玩家多次断线累计达到 60 秒后直接判负
+ok 33 - BTDISC-02 同一玩家多次断线累计达到 60 秒后直接判负
+  ---
+  duration_ms: 4.235372
+  type: 'test'
+  ...
+# Subtest: BTDISC-03 任一玩家断线后锁定双方全部游戏操作
+ok 34 - BTDISC-03 任一玩家断线后锁定双方全部游戏操作
+  ---
+  duration_ms: 1.146772
+  type: 'test'
+  ...
+# Subtest: BTDISC-04 双方在同一检查点均累计达到 60 秒时判为断线平局
+ok 35 - BTDISC-04 双方在同一检查点均累计达到 60 秒时判为断线平局
+  ---
+  duration_ms: 3.104353
+  type: 'test'
+  ...
+# Subtest: BTDISC-05 成功重连会永久保留累计断线时间并增加重连历史计数
+ok 36 - BTDISC-05 成功重连会永久保留累计断线时间并增加重连历史计数
+  ---
+  duration_ms: 1.677079
+  type: 'test'
+  ...
+# Subtest: BTDISC-06 延迟检查时按实际到达 60 秒的先后裁定，不把错开的超时误判为平局
+ok 37 - BTDISC-06 延迟检查时按实际到达 60 秒的先后裁定，不把错开的超时误判为平局
+  ---
+  duration_ms: 2.717623
+  type: 'test'
+  ...
+# Subtest: BTHOST-01 SHA-256 邀请口令哈希在 Node 与 WebView 使用相同标准结果
+ok 38 - BTHOST-01 SHA-256 邀请口令哈希在 Node 与 WebView 使用相同标准结果
+  ---
+  duration_ms: 3.997235
+  type: 'test'
+  ...
+# Subtest: BTHOST-02 物理连接后只有房主保存完整房间，来宾只收到公开 RPS 状态
+ok 39 - BTHOST-02 物理连接后只有房主保存完整房间，来宾只收到公开 RPS 状态
+  ---
+  duration_ms: 3.317663
+  type: 'test'
+  ...
+# Subtest: BTHOST-03 双方猜拳后由房主权威建局，并向来宾发送揭示后仍安全的公开棋盘
+ok 40 - BTHOST-03 双方猜拳后由房主权威建局，并向来宾发送揭示后仍安全的公开棋盘
+  ---
+  duration_ms: 6.275733
+  type: 'test'
+  ...
+# Subtest: BTHOST-04 英雄、陷阱和私有坐标均通过房主单点结算
+ok 41 - BTHOST-04 英雄、陷阱和私有坐标均通过房主单点结算
+  ---
+  duration_ms: 35.61279
+  type: 'test'
+  ...
+# Subtest: BTHOST-05 来宾操作仍受回合、版本和房主规则引擎约束
+ok 42 - BTHOST-05 来宾操作仍受回合、版本和房主规则引擎约束
+  ---
+  duration_ms: 1.539442
+  type: 'test'
+  ...
+# Subtest: BTHOST-06 英雄选择起主动退出由房主立即权威判负
+ok 43 - BTHOST-06 英雄选择起主动退出由房主立即权威判负
+  ---
+  duration_ms: 5.855616
+  type: 'test'
+  ...
+# Subtest: BTHOST-07 再战邀请由房主计时并在对方接受后建立全新选英雄阶段
+ok 44 - BTHOST-07 再战邀请由房主计时并在对方接受后建立全新选英雄阶段
+  ---
+  duration_ms: 2.441067
+  type: 'test'
+  ...
+# Subtest: BTHOST-08 双方聊天经房主权威同步且不阻塞行棋回合
+ok 45 - BTHOST-08 双方聊天经房主权威同步且不阻塞行棋回合
+  ---
+  duration_ms: 6.58389
+  type: 'test'
+  ...
+# Subtest: BT-PRIVATE-01 actual Wind/Hunter setup and shadow change only the owner's serialized view
+ok 46 - BT-PRIVATE-01 actual Wind/Hunter setup and shadow change only the owner's serialized view
+  ---
+  duration_ms: 22.939724
+  type: 'test'
+  ...
+# Subtest: BT-PRIVATE-02 wrong-turn shadow is rejected without consuming or leaking private state
+ok 47 - BT-PRIVATE-02 wrong-turn shadow is rejected without consuming or leaking private state
+  ---
+  duration_ms: 19.130816
+  type: 'test'
+  ...
+# Subtest: BT-PRIVATE-03 reconnect preserves owner-only secrets and shifts the shared deadline once
+ok 48 - BT-PRIVATE-03 reconnect preserves owner-only secrets and shifts the shared deadline once
+  ---
+  duration_ms: 8.723393
+  type: 'test'
+  ...
+# Subtest: BT-01 协议消息可编码并在接收端无损解析
+ok 49 - BT-01 协议消息可编码并在接收端无损解析
+  ---
+  duration_ms: 2.042869
+  type: 'test'
+  ...
+# Subtest: BT-02 错误版本、未知类型与非对象消息在规则层之前被拒绝
+ok 50 - BT-02 错误版本、未知类型与非对象消息在规则层之前被拒绝
+  ---
+  duration_ms: 0.647012
+  type: 'test'
+  ...
+# Subtest: BT-03 超出 RFCOMM 单消息上限的数据不会被编码或接收
+ok 51 - BT-03 超出 RFCOMM 单消息上限的数据不会被编码或接收
+  ---
+  duration_ms: 0.511108
+  type: 'test'
+  ...
+# Subtest: BT-04 快照只接收调用方提供的公开视图，并保留幂等 id
+ok 52 - BT-04 快照只接收调用方提供的公开视图，并保留幂等 id
+  ---
+  duration_ms: 0.310276
+  type: 'test'
+  ...
+# Subtest: R5-BOMB-TARGET-01 fractional columns and rows never create off-grid warps or consume a bomb
+ok 53 - R5-BOMB-TARGET-01 fractional columns and rows never create off-grid warps or consume a bomb
+  ---
+  duration_ms: 8.471696
+  type: 'test'
+  ...
+# Subtest: R5-BOMB-TARGET-02 coerced, incomplete and non-finite wire coordinates are rejected transactionally
+ok 54 - R5-BOMB-TARGET-02 coerced, incomplete and non-finite wire coordinates are rejected transactionally
+  ---
+  duration_ms: 8.480388
+  type: 'test'
+  ...
+# Subtest: R5-BOMB-TARGET-03 board, range, self and existing-warp boundaries reject without consuming the turn quota
+ok 55 - R5-BOMB-TARGET-03 board, range, self and existing-warp boundaries reject without consuming the turn quota
+  ---
+  duration_ms: 9.388113
+  type: 'test'
+  ...
+# Subtest: R5-BOMB-TARGET-04 exact range-three hit preserves normal main action, replay is free and army quota is shared
+ok 56 - R5-BOMB-TARGET-04 exact range-three hit preserves normal main action, replay is free and army quota is shared
+  ---
+  duration_ms: 7.96238
+  type: 'test'
+  ...
+# Subtest: R38-BOMB-CHECK-01 either checked side is refused before ammo, quota, pollution, history or clock changes
+ok 57 - R38-BOMB-CHECK-01 either checked side is refused before ammo, quota, pollution, history or clock changes
+  ---
+  duration_ms: 5.364187
+  type: 'test'
+  ...
+# Subtest: R38-BOMB-CHECK-02 ordinary evasion closes the old window and a later safe window can bomb without resetting its deadline
+ok 58 - R38-BOMB-CHECK-02 ordinary evasion closes the old window and a later safe window can bomb without resetting its deadline
+  ---
+  duration_ms: 13.779048
+  type: 'test'
+  ...
+# Subtest: R38-BOMB-CHECK-03 original actor, revision, caster, quota and target refusals retain precedence
+ok 59 - R38-BOMB-CHECK-03 original actor, revision, caster, quota and target refusals retain precedence
+  ---
+  duration_ms: 8.758231
+  type: 'test'
+  ...
+# Subtest: R38-BOMB-CHECK-04 an expired room request still follows the existing timeout path before the bomb gate
+ok 60 - R38-BOMB-CHECK-04 an expired room request still follows the existing timeout path before the bomb gate
+  ---
+  duration_ms: 1.169487
+  type: 'test'
+  ...
+# Subtest: CHECK-01 受到明子将军时不能走无关棋
+ok 61 - CHECK-01 受到明子将军时不能走无关棋
+  ---
+  duration_ms: 3.326016
+  type: 'test'
+  ...
+# Subtest: CHECK-02 不能移动阻挡棋造成将帅照面
+ok 62 - CHECK-02 不能移动阻挡棋造成将帅照面
+  ---
+  duration_ms: 0.424297
+  type: 'test'
+  ...
+# Subtest: CHECK-03 红暗炮位翻出黑车直攻红帅触发背刺并自动终结
+ok 63 - CHECK-03 红暗炮位翻出黑车直攻红帅触发背刺并自动终结
+  ---
+  duration_ms: 6.773715
+  type: 'test'
+  ...
+# Subtest: CHECK-04 黑暗马位翻出红马直攻黑将触发背刺
+ok 64 - CHECK-04 黑暗马位翻出红马直攻黑将触发背刺
+  ---
+  duration_ms: 0.773542
+  type: 'test'
+  ...
+# Subtest: CHECK-05 异色炮没有恰好一个炮架时不触发背刺
+ok 65 - CHECK-05 异色炮没有恰好一个炮架时不触发背刺
+  ---
+  duration_ms: 2.679134
+  type: 'test'
+  ...
+# Subtest: CHECK-06 异色车攻击路线被挡时不触发背刺
+ok 66 - CHECK-06 异色车攻击路线被挡时不触发背刺
+  ---
+  duration_ms: 16.544032
+  type: 'test'
+  ...
+# Subtest: CHECK-07 同色棋翻开后攻击对方将帅属于普通将军
+ok 67 - CHECK-07 同色棋翻开后攻击对方将帅属于普通将军
+  ---
+  duration_ms: 1.352011
+  type: 'test'
+  ...
+# Subtest: CHECK-08 背刺后败方不能应将，系统将自动终结
+ok 68 - CHECK-08 背刺后败方不能应将，系统将自动终结
+  ---
+  duration_ms: 2.163009
+  type: 'test'
+  ...
+# Subtest: CHECK-09 落子前的公开状态与提示不暴露背刺身份
+ok 69 - CHECK-09 落子前的公开状态与提示不暴露背刺身份
+  ---
+  duration_ms: 0.41254
+  type: 'test'
+  ...
+# Subtest: END-01 将死进入裁决并自动吃掉将军
+ok 70 - END-01 将死进入裁决并自动吃掉将军
+  ---
+  duration_ms: 2.085352
+  type: 'test'
+  ...
+# Subtest: END-02 普通将军且对方无合法应对即为将死
+ok 71 - END-02 普通将军且对方无合法应对即为将死
+  ---
+  duration_ms: 0.740973
+  type: 'test'
+  ...
+# Subtest: END-03 未被将军但没有合法棋即为无处可逃
+ok 72 - END-03 未被将军但没有合法棋即为无处可逃
+  ---
+  duration_ms: 0.478029
+  type: 'test'
+  ...
+# Subtest: END-04 玩家臣服后对方获胜
+ok 73 - END-04 玩家臣服后对方获胜
+  ---
+  duration_ms: 0.435825
+  type: 'test'
+  ...
+# Subtest: NET-01 非当前行动方不能提交落子
+ok 74 - NET-01 非当前行动方不能提交落子
+  ---
+  duration_ms: 0.789346
+  type: 'test'
+  ...
+# Subtest: NET-02 非房间玩家不能提交落子
+ok 75 - NET-02 非房间玩家不能提交落子
+  ---
+  duration_ms: 0.202404
+  type: 'test'
+  ...
+# Subtest: NET-03 过期棋局版本被拒绝
+ok 76 - NET-03 过期棋局版本被拒绝
+  ---
+  duration_ms: 0.238488
+  type: 'test'
+  ...
+# Subtest: NET-04 同一actionId重复提交不会重复执行
+ok 77 - NET-04 同一actionId重复提交不会重复执行
+  ---
+  duration_ms: 0.656176
+  type: 'test'
+  ...
+# Subtest: NET-05 同一版本的两个操作只有一个成功
+ok 78 - NET-05 同一版本的两个操作只有一个成功
+  ---
+  duration_ms: 5.446221
+  type: 'test'
+  ...
+# Subtest: NET-06 公开房间序列化后可恢复相同状态
+ok 79 - NET-06 公开房间序列化后可恢复相同状态
+  ---
+  duration_ms: 0.250566
+  type: 'test'
+  ...
+# Subtest: NET-07 所有公开数据都不包含未揭身份
+ok 80 - NET-07 所有公开数据都不包含未揭身份
+  ---
+  duration_ms: 1.619282
+  type: 'test'
+  ...
+# Subtest: RULE-9A delayed assassination rejects generals after a complete enemy turn
+ok 81 - RULE-9A delayed assassination rejects generals after a complete enemy turn
+  ---
+  duration_ms: 6.974427
+  type: 'test'
+  ...
+# Subtest: RULE-9 assassination rejection does not spend general armor
+ok 82 - RULE-9 assassination rejection does not spend general armor
+  ---
+  duration_ms: 0.976597
+  type: 'test'
+  ...
+# Subtest: RULE-10 late trap is lethal instead of granting control lock
+ok 83 - RULE-10 late trap is lethal instead of granting control lock
+  ---
+  duration_ms: 7.783782
+  type: 'test'
+  ...
+# Subtest: RULE-10 hunter trap lifetime boundary 12
+ok 84 - RULE-10 hunter trap lifetime boundary 12
+  ---
+  duration_ms: 2.19017
+  type: 'test'
+  ...
+# Subtest: RULE-10 hunter trap lifetime boundary 4
+ok 85 - RULE-10 hunter trap lifetime boundary 4
+  ---
+  duration_ms: 1.572502
+  type: 'test'
+  ...
+# Subtest: RULE-10 hunter trap lifetime boundary 3
+ok 86 - RULE-10 hunter trap lifetime boundary 3
+  ---
+  duration_ms: 6.027044
+  type: 'test'
+  ...
+# Subtest: RULE-10 hunter trap lifetime boundary 1
+ok 87 - RULE-10 hunter trap lifetime boundary 1
+  ---
+  duration_ms: 4.069433
+  type: 'test'
+  ...
+# Subtest: RULE-10 trap cannot probe friendly covered identity before control transfer
+ok 88 - RULE-10 trap cannot probe friendly covered identity before control transfer
+  ---
+  duration_ms: 2.611252
+  type: 'test'
+  ...
+# Subtest: RULE-11 ghost is a non-unit, infects intangible ground pieces, third opportunity kills
+ok 89 - RULE-11 ghost is a non-unit, infects intangible ground pieces, third opportunity kills
+  ---
+  duration_ms: 2.181126
+  type: 'test'
+  ...
+# Subtest: RULE-11 entering a late ghost has too few opportunities for lethal infection
+ok 90 - RULE-11 entering a late ghost has too few opportunities for lethal infection
+  ---
+  duration_ms: 0.9121
+  type: 'test'
+  ...
+# Subtest: RULE-11 moving between active ghosts preserves infection without an immediate stack
+ok 91 - RULE-11 moving between active ghosts preserves infection without an immediate stack
+  ---
+  duration_ms: 0.573742
+  type: 'test'
+  ...
+# Subtest: RULE-5 failed flight landing on crush immune victim suffocates; victim is unchanged
+ok 92 - RULE-5 failed flight landing on crush immune victim suffocates; victim is unchanged
+  ---
+  duration_ms: 0.719901
+  type: 'test'
+  ...
+# Subtest: HERO deathwing random draws are independent, reveal dead covered identity and preserve generals
+ok 93 - HERO deathwing random draws are independent, reveal dead covered identity and preserve generals
+  ---
+  duration_ms: 6.929768
+  type: 'test'
+  ...
+# Subtest: HERO zealot fourth invocation grants omen then next owner begin automatically destroys up to four
+ok 94 - HERO zealot fourth invocation grants omen then next owner begin automatically destroys up to four
+  ---
+  duration_ms: 5.540733
+  type: 'test'
+  ...
+# Subtest: HERO prince permits empty movement in domain but denies attacking from or into it
+ok 95 - HERO prince permits empty movement in domain but denies attacking from or into it
+  ---
+  duration_ms: 0.717067
+  type: 'test'
+  ...
+# Subtest: HERO thief redistributes seconds and mirror transfers cancel
+ok 96 - HERO thief redistributes seconds and mirror transfers cancel
+  ---
+  duration_ms: 0.361052
+  type: 'test'
+  ...
+# Subtest: HERO full rewind restores piece death/reveal and both skill resources, keeps used metadata and revision monotonic
+ok 97 - HERO full rewind restores piece death/reveal and both skill resources, keeps used metadata and revision monotonic
+  ---
+  duration_ms: 5.29211
+  type: 'test'
+  ...
+# Subtest: HERO shadow activation leaves every public field unchanged; enemy view cannot reveal uses or host
+ok 98 - HERO shadow activation leaves every public field unchanged; enemy view cannot reveal uses or host
+  ---
+  duration_ms: 3.173847
+  type: 'test'
+  ...
+# Subtest: HERO shadow cooldown excludes activation and all seven following owner turns
+ok 99 - HERO shadow cooldown excludes activation and all seven following owner turns
+  ---
+  duration_ms: 3.796122
+  type: 'test'
+  ...
+# Subtest: CHAOS dead covered piece reveals kind without publishing secret faction
+ok 100 - CHAOS dead covered piece reveals kind without publishing secret faction
+  ---
+  duration_ms: 0.292369
+  type: 'test'
+  ...
+# Subtest: DESTINY shown dead warrior revival and frozen blocked-anchor eligibility; cleanup and dragon reload still occur
+ok 101 - DESTINY shown dead warrior revival and frozen blocked-anchor eligibility; cleanup and dragon reload still occur
+  ---
+  duration_ms: 2.535509
+  type: 'test'
+  ...
+# Subtest: DESTINY bomb attacks one square at range3, ends no formal action, and global once-per-turn applies
+ok 102 - DESTINY bomb attacks one square at range3, ends no formal action, and global once-per-turn applies
+  ---
+  duration_ms: 1.5376
+  type: 'test'
+  ...
+# Subtest: ATOMIC both generals destroyed in one committed set yields draw and preserves causes
+ok 103 - ATOMIC both generals destroyed in one committed set yields draw and preserves causes
+  ---
+  duration_ms: 0.429024
+  type: 'test'
+  ...
+# Subtest: HERO timeline twist moves only the prior enemy ordinary mover, keeps earlier victims dead
+ok 104 - HERO timeline twist moves only the prior enemy ordinary mover, keeps earlier victims dead
+  ---
+  duration_ms: 6.268285
+  type: 'test'
+  ...
+# Subtest: HERO timeline twist refuses a prior skill-tier action
+ok 105 - HERO timeline twist refuses a prior skill-tier action
+  ---
+  duration_ms: 2.967598
+  type: 'test'
+  ...
+# Subtest: HERO rain unlocks after fifteen completed pairs, not fifteen single turns
+ok 106 - HERO rain unlocks after fifteen completed pairs, not fifteen single turns
+  ---
+  duration_ms: 0.593782
+  type: 'test'
+  ...
+# Subtest: HERO revealed hidden true general dies by ordinary piece eligibility, never rescues by flow
+ok 107 - HERO revealed hidden true general dies by ordinary piece eligibility, never rescues by flow
+  ---
+  duration_ms: 0.777278
+  type: 'test'
+  ...
+# Subtest: HERO non-execution decoy death returns true general, clears host states and grants no dance
+ok 108 - HERO non-execution decoy death returns true general, clears host states and grants no dance
+  ---
+  duration_ms: 0.82567
+  type: 'test'
+  ...
+# Subtest: HERO decoy and hidden true general dying in same atomic chain does not flow
+ok 109 - HERO decoy and hidden true general dying in same atomic chain does not flow
+  ---
+  duration_ms: 0.591018
+  type: 'test'
+  ...
+# Subtest: HERO checkmate execution returns attacker then offers palace-only flow dance without formal ticks
+ok 110 - HERO checkmate execution returns attacker then offers palace-only flow dance without formal ticks
+  ---
+  duration_ms: 2.679224
+  type: 'test'
+  ...
+# Subtest: DESTINY is reachable only inside legendary pool with matching time-hero bond
+ok 111 - DESTINY is reachable only inside legendary pool with matching time-hero bond
+  ---
+  duration_ms: 0.307922
+  type: 'test'
+  ...
+# Subtest: RULES ground intangible rook still gives ordinary check, air rook does not
+ok 112 - RULES ground intangible rook still gives ordinary check, air rook does not
+  ---
+  duration_ms: 0.402124
+  type: 'test'
+  ...
+# Subtest: CLOCK network formal turn expiry gives timeout and stays stable on later observations
+ok 113 - CLOCK network formal turn expiry gives timeout and stays stable on later observations
+  ---
+  duration_ms: 0.712811
+  type: 'test'
+  ...
+# Subtest: FLIGHT air layer can move above a ground piece without capturing it; air destination occupancy is enforced
+ok 114 - FLIGHT air layer can move above a ground piece without capturing it; air destination occupancy is enforced
+  ---
+  duration_ms: 2.601388
+  type: 'test'
+  ...
+# Subtest: RAIN legal check wins at atomic closure without ticking unrelated ghosts or formal turns
+ok 115 - RAIN legal check wins at atomic closure without ticking unrelated ghosts or formal turns
+  ---
+  duration_ms: 1.005931
+  type: 'test'
+  ...
+# Subtest: WIND war chariot endpoint occupancy suffocates the returning true general and commits the attack
+ok 116 - WIND war chariot endpoint occupancy suffocates the returning true general and commits the attack
+  ---
+  duration_ms: 3.079305
+  type: 'test'
+  ...
+# Subtest: FLOW first step markers allow intermediate check; stale commands cannot alter a special dance
+ok 117 - FLOW first step markers allow intermediate check; stale commands cannot alter a special dance
+  ---
+  duration_ms: 0.855876
+  type: 'test'
+  ...
+# Subtest: CLOCK a move received at the exact deadline settles timeout instead of renewing the turn
+ok 118 - CLOCK a move received at the exact deadline settles timeout instead of renewing the turn
+  ---
+  duration_ms: 0.534242
+  type: 'test'
+  ...
+# Subtest: WIND flight landing crushes decoy then suffocates returning true general without bouncing the flyer
+ok 119 - WIND flight landing crushes decoy then suffocates returning true general without bouncing the flyer
+  ---
+  duration_ms: 0.84499
+  type: 'test'
+  ...
+# Subtest: WIND red ground occupancy stays in place while returning general suffocates
+ok 120 - WIND red ground occupancy stays in place while returning general suffocates
+  ---
+  duration_ms: 0.690067
+  type: 'test'
+  ...
+# Subtest: WIND black ground occupancy stays in place while returning general suffocates
+ok 121 - WIND black ground occupancy stays in place while returning general suffocates
+  ---
+  duration_ms: 0.622115
+  type: 'test'
+  ...
+# Subtest: WIND covered ground occupant is retained without exposing its identity
+ok 122 - WIND covered ground occupant is retained without exposing its identity
+  ---
+  duration_ms: 0.826732
+  type: 'test'
+  ...
+# Subtest: WIND air-only occupancy does not block ground return or cause suffocation
+ok 123 - WIND air-only occupancy does not block ground return or cause suffocation
+  ---
+  duration_ms: 0.703587
+  type: 'test'
+  ...
+# Subtest: CROSS-BOARD-01 invalid displacement coordinates leave the living piece and secret state unchanged
+ok 124 - CROSS-BOARD-01 invalid displacement coordinates leave the living piece and secret state unchanged
+  ---
+  duration_ms: 2.49665
+  type: 'test'
+  ...
+# Subtest: CROSS-PLAN-01 iron steed attacking an immune friendly leg is still an attack before any kill
+ok 125 - CROSS-PLAN-01 iron steed attacking an immune friendly leg is still an attack before any kill
+  ---
+  duration_ms: 7.78219
+  type: 'test'
+  ...
+# Subtest: CROSS-PLAN-02 automatic landing trap does not reclassify an empty move as attack
+ok 126 - CROSS-PLAN-02 automatic landing trap does not reclassify an empty move as attack
+  ---
+  duration_ms: 3.948251
+  type: 'test'
+  ...
+# Subtest: CROSS-CHARIOT-01 a sole route crushing both generals gives no effective check
+ok 127 - CROSS-CHARIOT-01 a sole route crushing both generals gives no effective check
+  ---
+  duration_ms: 0.609916
+  type: 'test'
+  ...
+# Subtest: CROSS-COLLAPSE-01 displacement between warps preserves deadline and leaving removes collapse
+ok 128 - CROSS-COLLAPSE-01 displacement between warps preserves deadline and leaving removes collapse
+  ---
+  duration_ms: 0.806441
+  type: 'test'
+  ...
+# Subtest: CROSS-CAREFREE-01 final-target kill suspends protection for enemy turn then restores it
+ok 129 - CROSS-CAREFREE-01 final-target kill suspends protection for enemy turn then restores it
+  ---
+  duration_ms: 5.26556
+  type: 'test'
+  ...
+# Subtest: CROSS-CAREFREE-02 barrier bounce without final-target kill or check keeps protection
+ok 130 - CROSS-CAREFREE-02 barrier bounce without final-target kill or check keeps protection
+  ---
+  duration_ms: 4.518442
+  type: 'test'
+  ...
+# Subtest: CROSS-DISPLACE-01 occupied ordinary displacement fails in place without suffocation or landing
+ok 131 - CROSS-DISPLACE-01 occupied ordinary displacement fails in place without suffocation or landing
+  ---
+  duration_ms: 0.540602
+  type: 'test'
+  ...
+# Subtest: CROSS-FORTRESS-01 flight cannot enter enemy palace through movement or displacement
+ok 132 - CROSS-FORTRESS-01 flight cannot enter enemy palace through movement or displacement
+  ---
+  duration_ms: 1.162456
+  type: 'test'
+  ...
+# Subtest: CROSS-JIANXIE-01 red crossed pawn uses only forward and diagonals; baseline pawn survives immobility
+ok 133 - CROSS-JIANXIE-01 red crossed pawn uses only forward and diagonals; baseline pawn survives immobility
+  ---
+  duration_ms: 1.399662
+  type: 'test'
+  ...
+# Subtest: CROSS-JIANXIE-01 black crossed pawn uses only forward and diagonals; baseline pawn survives immobility
+ok 134 - CROSS-JIANXIE-01 black crossed pawn uses only forward and diagonals; baseline pawn survives immobility
+  ---
+  duration_ms: 0.626361
+  type: 'test'
+  ...
+# Subtest: CROSS-ATOMIC-01 destruction keeps its locked draw set after killing Wind's true host
+ok 135 - CROSS-ATOMIC-01 destruction keeps its locked draw set after killing Wind's true host
+  ---
+  duration_ms: 3.770173
+  type: 'test'
+  ...
+# Subtest: CROSS-REVIVE-01 hourglass revives a shown warrior without temporary states and preserves public identity
+ok 136 - CROSS-REVIVE-01 hourglass revives a shown warrior without temporary states and preserves public identity
+  ---
+  duration_ms: 2.125283
+  type: 'test'
+  ...
+# (node:99) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: R4-CONTROL-01 暗棋当前位置决定控制方，原始/混乱秘密阵营不参与
+ok 137 - R4-CONTROL-01 暗棋当前位置决定控制方，原始/混乱秘密阵营不参与
+  ---
+  duration_ms: 1.438161
+  type: 'test'
+  ...
+# Subtest: R4-CONTROL-02 普通及强击目标提示、非法来源错误不以秘密阵营变化
+ok 138 - R4-CONTROL-02 普通及强击目标提示、非法来源错误不以秘密阵营变化
+  ---
+  duration_ms: 11.178783
+  type: 'test'
+  ...
+# Subtest: R4-CONTROL-03 普通进攻的公开死亡记录按当前控制方，秘密阵营不泄露
+ok 139 - R4-CONTROL-03 普通进攻的公开死亡记录按当前控制方，秘密阵营不泄露
+  ---
+  duration_ms: 6.693234
+  type: 'test'
+  ...
+# Subtest: R4-CONTROL-04 落位陷阱明确读取进入前和揭示后的控制方
+ok 140 - R4-CONTROL-04 落位陷阱明确读取进入前和揭示后的控制方
+  ---
+  duration_ms: 3.837614
+  type: 'test'
+  ...
+# Subtest: R4-CONTROL-05 暗置移置后落位重新读取当前控制，不沿用旧棋位或秘密色
+ok 141 - R4-CONTROL-05 暗置移置后落位重新读取当前控制，不沿用旧棋位或秘密色
+  ---
+  duration_ms: 0.718239
+  type: 'test'
+  ...
+# Subtest: R4-CONTROL-06 亡魂归属冻结死亡时控制，后续派生不重读秘密
+ok 142 - R4-CONTROL-06 亡魂归属冻结死亡时控制，后续派生不重读秘密
+  ---
+  duration_ms: 0.519731
+  type: 'test'
+  ...
+# Subtest: R4-CONTROL-07 普通感染按地面棋当前控制，秘密同色不提供免疫
+ok 143 - R4-CONTROL-07 普通感染按地面棋当前控制，秘密同色不提供免疫
+  ---
+  duration_ms: 1.017708
+  type: 'test'
+  ...
+# Subtest: R4-CONTROL-08 持续计时读取当前控制方，飞行与死亡归属不偷读秘密
+ok 144 - R4-CONTROL-08 持续计时读取当前控制方，飞行与死亡归属不偷读秘密
+  ---
+  duration_ms: 1.036477
+  type: 'test'
+  ...
+# Subtest: R4-CONTROL-09 资源和房间/双方私有视图对未授权秘密阵营编码一致
+ok 145 - R4-CONTROL-09 资源和房间/双方私有视图对未授权秘密阵营编码一致
+  ---
+  duration_ms: 3.331083
+  type: 'test'
+  ...
+# Subtest: R4-CONTROL-10 真实身份接口拒绝缺少/伪造来源，拒绝前不触碰秘密
+ok 146 - R4-CONTROL-10 真实身份接口拒绝缺少/伪造来源，拒绝前不触碰秘密
+  ---
+  duration_ms: 0.713852
+  type: 'test'
+  ...
+# Subtest: R4-CONTROL-11 风暗子池保留明确真实归属例外，不改为棋位控制
+ok 147 - R4-CONTROL-11 风暗子池保留明确真实归属例外，不改为棋位控制
+  ---
+  duration_ms: 4.351225
+  type: 'test'
+  ...
+# Subtest: R4-CONTROL-12 宿命初始化保留真实兵归属例外，未现身时不泄露分类
+ok 148 - R4-CONTROL-12 宿命初始化保留真实兵归属例外，未现身时不泄露分类
+  ---
+  duration_ms: 1.218871
+  type: 'test'
+  ...
+# Subtest: R4-CONTROL-13 无限龙公开资格排除空弹、暗棋、另一控制方和河道，权威共用
+ok 149 - R4-CONTROL-13 无限龙公开资格排除空弹、暗棋、另一控制方和河道，权威共用
+  ---
+  duration_ms: 2.484512
+  type: 'test'
+  ...
+# Subtest: R4-CONTROL-14 实际投弹菜单遵守公开弹药资格且不读取隐藏身份
+ok 150 - R4-CONTROL-14 实际投弹菜单遵守公开弹药资格且不读取隐藏身份
+  ---
+  duration_ms: 5.084057
+  type: 'test'
+  ...
+# Subtest: R4-CONTROL-15 实际影菜单不以秘密池可用性探测暗阵营，只使用拥有者许可标记
+ok 151 - R4-CONTROL-15 实际影菜单不以秘密池可用性探测暗阵营，只使用拥有者许可标记
+  ---
+  duration_ms: 3.360147
+  type: 'test'
+  ...
+# Subtest: R4-DARK-01 两方全部30个基础暗子棋位使用位置兵种
+ok 152 - R4-DARK-01 两方全部30个基础暗子棋位使用位置兵种
+  ---
+  duration_ms: 1.196838
+  type: 'test'
+  ...
+# Subtest: R4-DARK-02 当前坐标决定兵种，不固定在原始棋位或棋子ID
+ok 153 - R4-DARK-02 当前坐标决定兵种，不固定在原始棋位或棋子ID
+  ---
+  duration_ms: 0.164927
+  type: 'test'
+  ...
+# Subtest: R4-DARK-03 普通判定不读附带真实身份、不揭示、不改变公开或秘密状态
+ok 154 - R4-DARK-03 普通判定不读附带真实身份、不揭示、不改变公开或秘密状态
+  ---
+  duration_ms: 1.229417
+  type: 'test'
+  ...
+# Subtest: R4-DARK-04 相同公开状态的不同隐藏身份不改变普通走法资格，揭示才读取真实身份
+ok 155 - R4-DARK-04 相同公开状态的不同隐藏身份不改变普通走法资格，揭示才读取真实身份
+  ---
+  duration_ms: 22.839012
+  type: 'test'
+  ...
+# Subtest: R4-DARK-05 明棋位于任何位置都使用公开真实兵种，不继续套暗置棋位
+ok 156 - R4-DARK-05 明棋位于任何位置都使用公开真实兵种，不继续套暗置棋位
+  ---
+  duration_ms: 0.82522
+  type: 'test'
+  ...
+# Subtest: R4-DARK-06 非基础棋位明确缺少来源定义，绝不以真实兵种或统一身份兜底
+ok 157 - R4-DARK-06 非基础棋位明确缺少来源定义，绝不以真实兵种或统一身份兜底
+  ---
+  duration_ms: 1.364059
+  type: 'test'
+  ...
+# Subtest: R4-DARK-07 铁马的暗马位资格和马腿碾碎使用公共身份，随后揭示真实车
+ok 158 - R4-DARK-07 铁马的暗马位资格和马腿碾碎使用公共身份，随后揭示真实车
+  ---
+  duration_ms: 10.692472
+  type: 'test'
+  ...
+# Subtest: R4-DARK-08 战车的暗车位资格和路径碾碎使用公共身份，随后揭示真实兵
+ok 159 - R4-DARK-08 战车的暗车位资格和路径碾碎使用公共身份，随后揭示真实兵
+  ---
+  duration_ms: 1.386934
+  type: 'test'
+  ...
+# Subtest: R4-DARK-09 毁灭的非将帅候选判定使用公共兵种，未消灭暗子不要求读取真实身份
+ok 160 - R4-DARK-09 毁灭的非将帅候选判定使用公共兵种，未消灭暗子不要求读取真实身份
+  ---
+  duration_ms: 15.17914
+  type: 'test'
+  ...
+# Subtest: GAP-H07-01 mirror clock is 60/60, single transfer and explicit destiny first-turn clock remain intact
+ok 161 - GAP-H07-01 mirror clock is 60/60, single transfer and explicit destiny first-turn clock remain intact
+  ---
+  duration_ms: 3.061499
+  type: 'test'
+  ...
+# Subtest: GAP-H12-01 only public ordinary ranks at least three eliminate a non-center general
+ok 162 - GAP-H12-01 only public ordinary ranks at least three eliminate a non-center general
+  ---
+  duration_ms: 27.647847
+  type: 'test'
+  ...
+# Subtest: GAP-H12-02 general center closes one batch including rook, air and both generals before mutual destruction
+ok 163 - GAP-H12-02 general center closes one batch including rook, air and both generals before mutual destruction
+  ---
+  duration_ms: 3.114819
+  type: 'test'
+  ...
+# Subtest: GAP-H16-01 paid main starts same-piece chain; children earn current-controller resources and finish only one formal turn
+ok 164 - GAP-H16-01 paid main starts same-piece chain; children earn current-controller resources and finish only one formal turn
+  ---
+  duration_ms: 8.58098
+  type: 'test'
+  ...
+# Subtest: GAP-H16-02 insufficient upfront balance cannot borrow first kill, invalid first targets preserve state
+ok 165 - GAP-H16-02 insufficient upfront balance cannot borrow first kill, invalid first targets preserve state
+  ---
+  duration_ms: 2.578714
+  type: 'test'
+  ...
+# Subtest: GAP-H16-03 chain rejects another actor, revealed target and new main; skip closes parent and durations once
+ok 166 - GAP-H16-03 chain rejects another actor, revealed target and new main; skip closes parent and durations once
+  ---
+  duration_ms: 6.095606
+  type: 'test'
+  ...
+# Subtest: GAP-H16-04 shared successful count scales one activation fee; ordinary allied capture never opens brawl
+ok 167 - GAP-H16-04 shared successful count scales one activation fee; ordinary allied capture never opens brawl
+  ---
+  duration_ms: 4.089653
+  type: 'test'
+  ...
+# Subtest: GAP-H16-05 first dark actor revealing enemy closes chain without granting a second main
+ok 168 - GAP-H16-05 first dark actor revealing enemy closes chain without granting a second main
+  ---
+  duration_ms: 3.206447
+  type: 'test'
+  ...
+# Subtest: GAP-H21-01 one scale stops combined attack and dragon claw; origin landing trap kills returning attacker only
+ok 169 - GAP-H21-01 one scale stops combined attack and dragon claw; origin landing trap kills returning attacker only
+  ---
+  duration_ms: 2.790462
+  type: 'test'
+  ...
+# Subtest: GAP-H21-02 strong assassination returns to origin, spends opportunity and cannot bypass scale
+ok 170 - GAP-H21-02 strong assassination returns to origin, spends opportunity and cannot bypass scale
+  ---
+  duration_ms: 3.412947
+  type: 'test'
+  ...
+# Subtest: GAP-H21-03 blocked landing consumes ground scale then suffocates flyer instead of keeping air retry
+ok 171 - GAP-H21-03 blocked landing consumes ground scale then suffocates flyer instead of keeping air retry
+  ---
+  duration_ms: 1.487565
+  type: 'test'
+  ...
+# Subtest: GAP-H21-04 protected checker cannot be virtually removed to legalize a bouncing attack
+ok 172 - GAP-H21-04 protected checker cannot be virtually removed to legalize a bouncing attack
+  ---
+  duration_ms: 1.274785
+  type: 'test'
+  ...
+# Subtest: GAP-H21-05 blocked crush batch never reads dark true identity and scale does not block flame range death
+ok 173 - GAP-H21-05 blocked crush batch never reads dark true identity and scale does not block flame range death
+  ---
+  duration_ms: 1.136127
+  type: 'test'
+  ...
+# Subtest: R4-BATCH-01 整批死亡揭示和记录闭合后才生成亡魂，重读不刷新旧死亡
+ok 174 - R4-BATCH-01 整批死亡揭示和记录闭合后才生成亡魂，重读不刷新旧死亡
+  ---
+  duration_ms: 5.02628
+  type: 'test'
+  ...
+# Subtest: R4-BATCH-02 开放批次屏障禁止提前亡魂、召回、落位、回合末或终局
+ok 175 - R4-BATCH-02 开放批次屏障禁止提前亡魂、召回、落位、回合末或终局
+  ---
+  duration_ms: 2.741568
+  type: 'test'
+  ...
+# Subtest: R4-BATCH-03 冻结目标不受中途外部列表追加影响，闭合后移入与复活不倒流
+ok 176 - R4-BATCH-03 冻结目标不受中途外部列表追加影响，闭合后移入与复活不倒流
+  ---
+  duration_ms: 1.117548
+  type: 'test'
+  ...
+# Subtest: R4-BATCH-04 批次死亡缺失秘密身份时预检失败，不留下半批死亡
+ok 177 - R4-BATCH-04 批次死亡缺失秘密身份时预检失败，不留下半批死亡
+  ---
+  duration_ms: 0.569085
+  type: 'test'
+  ...
+# Subtest: R4-BATCH-05 重复目标与批次ID冲突拒绝，空批和已死目标可闭合
+ok 178 - R4-BATCH-05 重复目标与批次ID冲突拒绝，空批和已死目标可闭合
+  ---
+  duration_ms: 0.493912
+  type: 'test'
+  ...
+# Subtest: R4-BATCH-06 同批双方真将帅死亡按闭合后两败俱伤，不抢先单方获胜
+ok 179 - R4-BATCH-06 同批双方真将帅死亡按闭合后两败俱伤，不抢先单方获胜
+  ---
+  duration_ms: 0.971229
+  type: 'test'
+  ...
+# Subtest: R4-BATCH-07 风影武者与承载者同批死亡不能提前召回，存活承载者批后才归位
+ok 180 - R4-BATCH-07 风影武者与承载者同批死亡不能提前召回，存活承载者批后才归位
+  ---
+  duration_ms: 1.41804
+  type: 'test'
+  ...
+# Subtest: R4-BATCH-08 混乱批次死亡只公开兵种，亡魂按死亡时公开控制方生成
+ok 181 - R4-BATCH-08 混乱批次死亡只公开兵种，亡魂按死亡时公开控制方生成
+  ---
+  duration_ms: 0.919101
+  type: 'test'
+  ...
+# Subtest: R4-BATCH-09 批次不先驱散、保留碾碎免疫和非地面资格
+ok 182 - R4-BATCH-09 批次不先驱散、保留碾碎免疫和非地面资格
+  ---
+  duration_ms: 0.63232
+  type: 'test'
+  ...
+# Subtest: R4-BATCH-10 毁灭先完成锁定集合独立判定，再闭合成功结果与亡魂
+ok 183 - R4-BATCH-10 毁灭先完成锁定集合独立判定，再闭合成功结果与亡魂
+  ---
+  duration_ms: 10.99068
+  type: 'test'
+  ...
+# Subtest: R4-BATCH-11 同ID复活后新死亡独立派生，不借旧将帅记录判断新兵种
+ok 184 - R4-BATCH-11 同ID复活后新死亡独立派生，不借旧将帅记录判断新兵种
+  ---
+  duration_ms: 0.496696
+  type: 'test'
+  ...
+# Subtest: R4-BATCH-12 普通进攻仍按来源顺序结算，不自动套用同批消灭
+ok 185 - R4-BATCH-12 普通进攻仍按来源顺序结算，不自动套用同批消灭
+  ---
+  duration_ms: 2.590732
+  type: 'test'
+  ...
+# Subtest: R4-BATCH-13 公共蓝牙快照保留闭合与消费标记，恢复不重触发或泄露秘密
+ok 186 - R4-BATCH-13 公共蓝牙快照保留闭合与消费标记，恢复不重触发或泄露秘密
+  ---
+  duration_ms: 1.395967
+  type: 'test'
+  ...
+# Subtest: EX-TIME-01 occupied timeline return spends once, leaves both pieces and skips controlled action
+ok 187 - EX-TIME-01 occupied timeline return spends once, leaves both pieces and skips controlled action
+  ---
+  duration_ms: 15.943385
+  type: 'test'
+  ...
+# Subtest: EX-TIME-02 returned bottom-rank pawn with no legal move refuses the whole skill
+ok 188 - EX-TIME-02 returned bottom-rank pawn with no legal move refuses the whole skill
+  ---
+  duration_ms: 5.524277
+  type: 'test'
+  ...
+# Subtest: EX-WARRIOR-01 three different slots persist after death, re-entry and restored piece identity
+ok 189 - EX-WARRIOR-01 three different slots persist after death, re-entry and restored piece identity
+  ---
+  duration_ms: 22.912277
+  type: 'test'
+  ...
+# Subtest: EX-WARRIOR-02 fortress allows original-square barrier bounce but blocks other returns
+ok 190 - EX-WARRIOR-02 fortress allows original-square barrier bounce but blocks other returns
+  ---
+  duration_ms: 4.742554
+  type: 'test'
+  ...
+# Subtest: EX-CLOCK-01 formal turn pause preserves remaining time and rejects expiry exactly
+ok 191 - EX-CLOCK-01 formal turn pause preserves remaining time and rejects expiry exactly
+  ---
+  duration_ms: 2.041246
+  type: 'test'
+  ...
+# Subtest: EX-CLOCK-01 rewind replay pause preserves remaining time and rejects expiry exactly
+ok 192 - EX-CLOCK-01 rewind replay pause preserves remaining time and rejects expiry exactly
+  ---
+  duration_ms: 0.650848
+  type: 'test'
+  ...
+# Subtest: EX-CLOCK-02 overlapping disconnects shift once when the final player reconnects
+ok 193 - EX-CLOCK-02 overlapping disconnects shift once when the final player reconnects
+  ---
+  duration_ms: 0.393981
+  type: 'test'
+  ...
+# Subtest: EX-END-01 finished game rejects rewind without changing resources
+ok 194 - EX-END-01 finished game rejects rewind without changing resources
+  ---
+  duration_ms: 0.513652
+  type: 'test'
+  ...
+# Subtest: EX-END-01 finished game rejects timeline_twist without changing resources
+ok 195 - EX-END-01 finished game rejects timeline_twist without changing resources
+  ---
+  duration_ms: 0.388373
+  type: 'test'
+  ...
+# Subtest: EX-END-01 finished game rejects hourglass without changing resources
+ok 196 - EX-END-01 finished game rejects hourglass without changing resources
+  ---
+  duration_ms: 0.602756
+  type: 'test'
+  ...
+# Subtest: R5-FLIGHT-TURN-01 next-turn landing obligation does not cancel the opponent timeline ground-piece child
+ok 197 - R5-FLIGHT-TURN-01 next-turn landing obligation does not cancel the opponent timeline ground-piece child
+  ---
+  duration_ms: 75.782415
+  type: 'test'
+  ...
+# Subtest: R5-FLIGHT-TURN-02 timeline child may move the due flyer without restarting its lifetime or consuming its next main
+ok 198 - R5-FLIGHT-TURN-02 timeline child may move the due flyer without restarting its lifetime or consuming its next main
+  ---
+  duration_ms: 25.521365
+  type: 'test'
+  ...
+# Subtest: R5-FLIGHT-TURN-03 linked-control exemption still rejects illegal geometry and occupied air destinations transactionally
+ok 199 - R5-FLIGHT-TURN-03 linked-control exemption still rejects illegal geometry and occupied air destinations transactionally
+  ---
+  duration_ms: 30.554367
+  type: 'test'
+  ...
+# Subtest: FLOW-DEFENSE-01 ordinary barrier bounces first dance attack and can be consumed before second capture
+ok 200 - FLOW-DEFENSE-01 ordinary barrier bounces first dance attack and can be consumed before second capture
+  ---
+  duration_ms: 11.595527
+  type: 'test'
+  ...
+# Subtest: FLOW-DEFENSE-02 second-step markers do not treat a protected capture as safe escape
+ok 201 - FLOW-DEFENSE-02 second-step markers do not treat a protected capture as safe escape
+  ---
+  duration_ms: 2.791223
+  type: 'test'
+  ...
+# Subtest: FLOW-DEFENSE-03 bounce triggers the original-square trap, never the protected target trap
+ok 202 - FLOW-DEFENSE-03 bounce triggers the original-square trap, never the protected target trap
+  ---
+  duration_ms: 0.856076
+  type: 'test'
+  ...
+# Subtest: FLOW-ATOMIC-01 actual execution return and two-step escape preserve formal counters and idempotency
+ok 203 - FLOW-ATOMIC-01 actual execution return and two-step escape preserve formal counters and idempotency
+  ---
+  duration_ms: 16.746485
+  type: 'test'
+  ...
+# Subtest: FLOW-FAIL-01 wrong first branch with no safe continuation retains original execution outcome
+ok 204 - FLOW-FAIL-01 wrong first branch with no safe continuation retains original execution outcome
+  ---
+  duration_ms: 1.542998
+  type: 'test'
+  ...
+# Subtest: FLOW-REGION-01 expedition still restricts dance to one orthogonal palace step
+ok 205 - FLOW-REGION-01 expedition still restricts dance to one orthogonal palace step
+  ---
+  duration_ms: 2.029579
+  type: 'test'
+  ...
+# Subtest: FLOW-DEATH-01 dance capture creates Death Knight ghost without aging formal-turn durations
+ok 206 - FLOW-DEATH-01 dance capture creates Death Knight ghost without aging formal-turn durations
+  ---
+  duration_ms: 0.986883
+  type: 'test'
+  ...
+# Subtest: FLOW-SECRET-01 covered capture reveals death identity and clears private identity exactly once
+ok 207 - FLOW-SECRET-01 covered capture reveals death identity and clears private identity exactly once
+  ---
+  duration_ms: 0.768134
+  type: 'test'
+  ...
+# Subtest: FLOW-DEATH-02 lethal trap during actual returned dance stops before second step without formal tick
+ok 208 - FLOW-DEATH-02 lethal trap during actual returned dance stops before second step without formal tick
+  ---
+  duration_ms: 9.718447
+  type: 'test'
+  ...
+# Subtest: FLOW-CLOCK-01 room two-step escape preserves its formal deadline and next ordinary move starts the next clock
+ok 209 - FLOW-CLOCK-01 room two-step escape preserves its formal deadline and next ordinary move starts the next clock
+  ---
+  duration_ms: 10.635481
+  type: 'test'
+  ...
+# Subtest: MODE-01 默认开局仍全局混洗，旧快照缺省模式不变化
+ok 210 - MODE-01 默认开局仍全局混洗，旧快照缺省模式不变化
+  ---
+  duration_ms: 2.211202
+  type: 'test'
+  ...
+# Subtest: MODE-02 半混乱在多种随机洗牌下保持各方完整身份库存
+ok 211 - MODE-02 半混乱在多种随机洗牌下保持各方完整身份库存
+  ---
+  duration_ms: 2.974318
+  type: 'test'
+  ...
+# Subtest: MODE-03 半混乱实际首步按暗位行动，揭示保留阵营和幂等
+ok 212 - MODE-03 半混乱实际首步按暗位行动，揭示保留阵营和幂等
+  ---
+  duration_ms: 12.778054
+  type: 'test'
+  ...
+# Subtest: MODE-04 普通象棋全明固定布局，开局不消耗随机数或保留暗身份
+ok 213 - MODE-04 普通象棋全明固定布局，开局不消耗随机数或保留暗身份
+  ---
+  duration_ms: 0.379991
+  type: 'test'
+  ...
+# Subtest: MODE-05 普通象棋实际行棋不揭示，JSON恢复后仍保留区域规则
+ok 214 - MODE-05 普通象棋实际行棋不揭示，JSON恢复后仍保留区域规则
+  ---
+  duration_ms: 7.012013
+  type: 'test'
+  ...
+# Subtest: MODE-06 普通象棋士限九宫，不改变旧揭棋和半混乱明士
+ok 215 - MODE-06 普通象棋士限九宫，不改变旧揭棋和半混乱明士
+  ---
+  duration_ms: 1.365491
+  type: 'test'
+  ...
+# Subtest: MODE-07 普通象棋红黑象不过河，象眼与公开攻击判定一致
+ok 216 - MODE-07 普通象棋红黑象不过河，象眼与公开攻击判定一致
+  ---
+  duration_ms: 1.107604
+  type: 'test'
+  ...
+# Subtest: MODE-08 普通象棋保留炮架、马腿与兵卒方向且不能吃己方明棋
+ok 217 - MODE-08 普通象棋保留炮架、马腿与兵卒方向且不能吃己方明棋
+  ---
+  duration_ms: 1.760255
+  type: 'test'
+  ...
+# Subtest: MODE-09 未知模式不静默降级，创建前拒绝且不使用随机数
+ok 218 - MODE-09 未知模式不静默降级，创建前拒绝且不使用随机数
+  ---
+  duration_ms: 1.069937
+  type: 'test'
+  ...
+# Subtest: MODE-10 新模式未适配组合拒绝且不改基础棋局、身份或次数
+ok 219 - MODE-10 新模式未适配组合拒绝且不改基础棋局、身份或次数
+  ---
+  duration_ms: 1.288395
+  type: 'test'
+  ...
+# Subtest: MODE-11 房间基础开局与双方公开/私有快照保存模式，不泄露暗身份
+ok 220 - MODE-11 房间基础开局与双方公开/私有快照保存模式，不泄露暗身份
+  ---
+  duration_ms: 2.339965
+  type: 'test'
+  ...
+# Subtest: MODE-12 未适配新模式不会经蓝牙房主接口开放到旧协议
+ok 221 - MODE-12 未适配新模式不会经蓝牙房主接口开放到旧协议
+  ---
+  duration_ms: 0.267832
+  type: 'test'
+  ...
+# Subtest: R4-GHOST-01 两类同格独立保存归属、来源、层数和寿命
+ok 222 - R4-GHOST-01 两类同格独立保存归属、来源、层数和寿命
+  ---
+  duration_ms: 4.173924
+  type: 'test'
+  ...
+# Subtest: R4-GHOST-02 普通死亡只刷新普通亡魂，保留共格里亡魂及对方对象
+ok 223 - R4-GHOST-02 普通死亡只刷新普通亡魂，保留共格里亡魂及对方对象
+  ---
+  duration_ms: 1.975097
+  type: 'test'
+  ...
+# Subtest: R4-GHOST-03 冲突策略由来源指定，同类叠层不能借其他来源或另一类
+ok 224 - R4-GHOST-03 冲突策略由来源指定，同类叠层不能借其他来源或另一类
+  ---
+  duration_ms: 0.939812
+  type: 'test'
+  ...
+# Subtest: R4-GHOST-04 无种类旧快照只按普通亡魂兼容，新写入必须明确来源与种类
+ok 225 - R4-GHOST-04 无种类旧快照只按普通亡魂兼容，新写入必须明确来源与种类
+  ---
+  duration_ms: 0.400582
+  type: 'test'
+  ...
+# Subtest: R4-GHOST-05 精确清普通亡魂保留里亡魂和另一归属，里亡魂不维持普通感染
+ok 226 - R4-GHOST-05 精确清普通亡魂保留里亡魂和另一归属，里亡魂不维持普通感染
+  ---
+  duration_ms: 0.381744
+  type: 'test'
+  ...
+# Subtest: R4-GHOST-06 精确清里亡魂不改普通寿命、层数或现有感染
+ok 227 - R4-GHOST-06 精确清里亡魂不改普通寿命、层数或现有感染
+  ---
+  duration_ms: 0.549455
+  type: 'test'
+  ...
+# Subtest: R4-GHOST-07 只有显式所有亡魂类入口清双类，仍尊重归属与棋格过滤
+ok 228 - R4-GHOST-07 只有显式所有亡魂类入口清双类，仍尊重归属与棋格过滤
+  ---
+  duration_ms: 1.474475
+  type: 'test'
+  ...
+# Subtest: R4-GHOST-08 普通正式回合末只让普通亡魂感染及减寿，里亡魂无默认时钟
+ok 229 - R4-GHOST-08 普通正式回合末只让普通亡魂感染及减寿，里亡魂无默认时钟
+  ---
+  duration_ms: 1.644901
+  type: 'test'
+  ...
+# Subtest: R4-GHOST-09 只有里亡魂的格不感染、普通到期也不借里亡魂保留感染
+ok 230 - R4-GHOST-09 只有里亡魂的格不感染、普通到期也不借里亡魂保留感染
+  ---
+  duration_ms: 0.782846
+  type: 'test'
+  ...
+# Subtest: R4-GHOST-10 落位到里亡魂格不立即感染，原有普通感染不能跨类维持
+ok 231 - R4-GHOST-10 落位到里亡魂格不立即感染，原有普通感染不能跨类维持
+  ---
+  duration_ms: 0.768014
+  type: 'test'
+  ...
+# Subtest: R4-GHOST-11 来源显式计时仅改点名类、归属和来源，不能替另一类刷新
+ok 232 - R4-GHOST-11 来源显式计时仅改点名类、归属和来源，不能替另一类刷新
+  ---
+  duration_ms: 0.710117
+  type: 'test'
+  ...
+# Subtest: R4-GHOST-12 资源读取必须指定种类及公开归属，不混层、不奖励且返回副本
+ok 233 - R4-GHOST-12 资源读取必须指定种类及公开归属，不混层、不奖励且返回副本
+  ---
+  duration_ms: 0.784329
+  type: 'test'
+  ...
+# Subtest: R4-GHOST-13 普通棋子进攻与消灭不删除共格亡魂对象，也不把它们当棋子
+ok 234 - R4-GHOST-13 普通棋子进攻与消灭不删除共格亡魂对象，也不把它们当棋子
+  ---
+  duration_ms: 7.502209
+  type: 'test'
+  ...
+# Subtest: R4-GHOST-14 开放死亡批次禁止精确读取、清除、生成、资源和计时
+ok 235 - R4-GHOST-14 开放死亡批次禁止精确读取、清除、生成、资源和计时
+  ---
+  duration_ms: 1.005871
+  type: 'test'
+  ...
+# Subtest: R4-GHOST-15 标准格亡魂不读河道锚点、飞行棋或隐藏真实阵营
+ok 236 - R4-GHOST-15 标准格亡魂不读河道锚点、飞行棋或隐藏真实阵营
+  ---
+  duration_ms: 3.081974
+  type: 'test'
+  ...
+# Subtest: R4-GHOST-16 公共蓝牙快照保留两类来源层数寿命，旧对象兼容且无秘密字段
+ok 237 - R4-GHOST-16 公共蓝牙快照保留两类来源层数寿命，旧对象兼容且无秘密字段
+  ---
+  duration_ms: 0.506912
+  type: 'test'
+  ...
+# Subtest: R4-GHOST-17 实际回溯恢复两类完整对象及感染，不由另一类推算资源
+ok 238 - R4-GHOST-17 实际回溯恢复两类完整对象及感染，不由另一类推算资源
+  ---
+  duration_ms: 9.661478
+  type: 'test'
+  ...
+# Subtest: H11A01 real black first move retains original 10000..70000 clock and does not restart
+ok 239 - H11A01 real black first move retains original 10000..70000 clock and does not restart
+  ---
+  duration_ms: 30.49688
+  type: 'test'
+  ...
+# Subtest: H11A02 accepted choice at 69999 finishes reset and starts a fresh red turn immediately
+ok 240 - H11A02 accepted choice at 69999 finishes reset and starts a fresh red turn immediately
+  ---
+  duration_ms: 18.107755
+  type: 'test'
+  ...
+# Subtest: H11A03 late activation at 70000 auto-declines without losing completed main
+ok 241 - H11A03 late activation at 70000 auto-declines without losing completed main
+  ---
+  duration_ms: 24.315385
+  type: 'test'
+  ...
+# Subtest: H11A03 late activation at 71000 auto-declines without losing completed main
+ok 242 - H11A03 late activation at 71000 auto-declines without losing completed main
+  ---
+  duration_ms: 15.554646
+  type: 'test'
+  ...
+# Subtest: H11A04 time tick auto-declines and does not replay black begin/main/end
+ok 243 - H11A04 time tick auto-declines and does not replay black begin/main/end
+  ---
+  duration_ms: 12.911694
+  type: 'test'
+  ...
+# Subtest: H11A05 manual decline hands off immediately and removes the old A clock
+ok 244 - H11A05 manual decline hands off immediately and removes the old A clock
+  ---
+  duration_ms: 10.429076
+  type: 'test'
+  ...
+# Subtest: H11A06 main not completed at deadline keeps ordinary timeout rule
+ok 245 - H11A06 main not completed at deadline keeps ordinary timeout rule
+  ---
+  duration_ms: 16.054766
+  type: 'test'
+  ...
+# Subtest: H11A07 failed and duplicate requests do not refresh the A deadline
+ok 246 - H11A07 failed and duplicate requests do not refresh the A deadline
+  ---
+  duration_ms: 12.258314
+  type: 'test'
+  ...
+# Subtest: H11A08 disconnect pause shifts inherited A deadline rather than giving a new decision clock
+ok 247 - H11A08 disconnect pause shifts inherited A deadline rather than giving a new decision clock
+  ---
+  duration_ms: 14.508833
+  type: 'test'
+  ...
+# Subtest: H11A09 inherited 45-second source duration is not normalized to 60 seconds
+ok 248 - H11A09 inherited 45-second source duration is not normalized to 60 seconds
+  ---
+  duration_ms: 12.062289
+  type: 'test'
+  ...
+# (node:174) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: H15-01 real pregraduation death fails once without recruiting another cannon
+ok 249 - H15-01 real pregraduation death fails once without recruiting another cannon
+  ---
+  duration_ms: 16.121576
+  type: 'test'
+  ...
+# Subtest: H15-02 same public capture with another legitimate recruitment has identical two-player projections
+ok 250 - H15-02 same public capture with another legitimate recruitment has identical two-player projections
+  ---
+  duration_ms: 13.952374
+  type: 'test'
+  ...
+# Subtest: H15-03 real A shuffle restores board but never restarts failed lineage
+ok 251 - H15-03 real A shuffle restores board but never restarts failed lineage
+  ---
+  duration_ms: 22.091504
+  type: 'test'
+  ...
+# Subtest: H15-04 active A rebind preserves progress at reset, then increments only at actual red begin
+ok 252 - H15-04 active A rebind preserves progress at reset, then increments only at actual red begin
+  ---
+  duration_ms: 12.613617
+  type: 'test'
+  ...
+# Subtest: H15-05 no opening start retains unused opportunity through H11
+ok 253 - H15-05 no opening start retains unused opportunity through H11
+  ---
+  duration_ms: 15.103248
+  type: 'test'
+  ...
+# Subtest: H15-06 actual B-window death pair distinguishes hidden failure without leaking it
+ok 254 - H15-06 actual B-window death pair distinguishes hidden failure without leaking it
+  ---
+  duration_ms: 49.784187
+  type: 'test'
+  ...
+# Subtest: H15-07 a later legitimate start is free, starts at zero, keeps deadline and the normal main
+ok 255 - H15-07 a later legitimate start is free, starts at zero, keeps deadline and the normal main
+  ---
+  duration_ms: 10.652581
+  type: 'test'
+  ...
+# Subtest: H15-08 source-exact duplicate training/shuffle does not recruit or mutate twice
+ok 256 - H15-08 source-exact duplicate training/shuffle does not recruit or mutate twice
+  ---
+  duration_ms: 13.388791
+  type: 'test'
+  ...
+# Subtest: H15-09 pregraduation death closure never samples replacement RNG
+ok 257 - H15-09 pregraduation death closure never samples replacement RNG
+  ---
+  duration_ms: 1.655347
+  type: 'test'
+  ...
+# Subtest: H15-10 initial original side remains distinct from a later M07 secret color
+ok 258 - H15-10 initial original side remains distinct from a later M07 secret color
+  ---
+  duration_ms: 1.166862
+  type: 'test'
+  ...
+# Subtest: H15-11 local and room hero-control renderer never prints trainee/progress/failure
+ok 259 - H15-11 local and room hero-control renderer never prints trainee/progress/failure
+  ---
+  duration_ms: 46.1211
+  type: 'test'
+  ...
+# Subtest: H15-12 actual H06 pre-start snapshot restores unused and later start may recruit another valid body
+ok 260 - H15-12 actual H06 pre-start snapshot restores unused and later start may recruit another valid body
+  ---
+  duration_ms: 17.304424
+  type: 'test'
+  ...
+# Subtest: H15-13 actual H06 continuous live snapshot restores original body and earlier progress without reroll
+ok 261 - H15-13 actual H06 continuous live snapshot restores original body and earlier progress without reroll
+  ---
+  duration_ms: 134.198373
+  type: 'test'
+  ...
+# Subtest: H15-14 actual trainee capture then H06 restores board while failure and used opportunity persist
+ok 262 - H15-14 actual trainee capture then H06 restores board while failure and used opportunity persist
+  ---
+  duration_ms: 68.807602
+  type: 'test'
+  ...
+# Subtest: H15-15 invalid recruitment index -1 rejects without committing original room
+ok 263 - H15-15 invalid recruitment index -1 rejects without committing original room
+  ---
+  duration_ms: 2.585845
+  type: 'test'
+  ...
+# Subtest: H15-15 invalid recruitment index 2 rejects without committing original room
+ok 264 - H15-15 invalid recruitment index 2 rejects without committing original room
+  ---
+  duration_ms: 1.215956
+  type: 'test'
+  ...
+# Subtest: H15-15 invalid recruitment index 0.5 rejects without committing original room
+ok 265 - H15-15 invalid recruitment index 0.5 rejects without committing original room
+  ---
+  duration_ms: 1.678862
+  type: 'test'
+  ...
+# Subtest: H15-15 invalid recruitment index NaN rejects without committing original room
+ok 266 - H15-15 invalid recruitment index NaN rejects without committing original room
+  ---
+  duration_ms: 1.373694
+  type: 'test'
+  ...
+# Subtest: H15-15 invalid recruitment index Infinity rejects without committing original room
+ok 267 - H15-15 invalid recruitment index Infinity rejects without committing original room
+  ---
+  duration_ms: 2.028146
+  type: 'test'
+  ...
+# Subtest: RNG01 N=0 selection records actual ordered pools, bounds and IDs once
+ok 268 - RNG01 N=0 selection records actual ordered pools, bounds and IDs once
+  ---
+  duration_ms: 4.988513
+  type: 'test'
+  ...
+# Subtest: RNG01 N=1 selection records actual ordered pools, bounds and IDs once
+ok 269 - RNG01 N=1 selection records actual ordered pools, bounds and IDs once
+  ---
+  duration_ms: 1.470439
+  type: 'test'
+  ...
+# Subtest: RNG01 N=3 selection records actual ordered pools, bounds and IDs once
+ok 270 - RNG01 N=3 selection records actual ordered pools, bounds and IDs once
+  ---
+  duration_ms: 0.502245
+  type: 'test'
+  ...
+# Subtest: RNG01 N=4 selection records actual ordered pools, bounds and IDs once
+ok 271 - RNG01 N=4 selection records actual ordered pools, bounds and IDs once
+  ---
+  duration_ms: 0.520402
+  type: 'test'
+  ...
+# Subtest: RNG01 N=15 selection records actual ordered pools, bounds and IDs once
+ok 272 - RNG01 N=15 selection records actual ordered pools, bounds and IDs once
+  ---
+  duration_ms: 1.355576
+  type: 'test'
+  ...
+# Subtest: RNG02 malformed index -1 is rejected finitely before descent state mutation
+ok 273 - RNG02 malformed index -1 is rejected finitely before descent state mutation
+  ---
+  duration_ms: 0.683527
+  type: 'test'
+  ...
+# Subtest: RNG02 malformed index 99 is rejected finitely before descent state mutation
+ok 274 - RNG02 malformed index 99 is rejected finitely before descent state mutation
+  ---
+  duration_ms: 0.284167
+  type: 'test'
+  ...
+# Subtest: RNG02 malformed index 0.5 is rejected finitely before descent state mutation
+ok 275 - RNG02 malformed index 0.5 is rejected finitely before descent state mutation
+  ---
+  duration_ms: 0.481143
+  type: 'test'
+  ...
+# Subtest: RNG02 malformed index NaN is rejected finitely before descent state mutation
+ok 276 - RNG02 malformed index NaN is rejected finitely before descent state mutation
+  ---
+  duration_ms: 0.409585
+  type: 'test'
+  ...
+# Subtest: RNG02 malformed index Infinity is rejected finitely before descent state mutation
+ok 277 - RNG02 malformed index Infinity is rejected finitely before descent state mutation
+  ---
+  duration_ms: 0.565129
+  type: 'test'
+  ...
+# Subtest: RNG03 observation enabled and disabled preserve the same selected identities and authority result
+ok 278 - RNG03 observation enabled and disabled preserve the same selected identities and authority result
+  ---
+  duration_ms: 1.493483
+  type: 'test'
+  ...
+# Subtest: RNG04 mixed public ground/air/river/covered pool follows current controller, not secret color
+ok 279 - RNG04 mixed public ground/air/river/covered pool follows current controller, not secret color
+  ---
+  duration_ms: 1.418611
+  type: 'test'
+  ...
+# Subtest: RNG05 snapshot failure invalidates evidence while preserving actual descent result and draw count
+ok 280 - RNG05 snapshot failure invalidates evidence while preserving actual descent result and draw count
+  ---
+  duration_ms: 0.655725
+  type: 'test'
+  ...
+# Subtest: R5-CHILD-01 charge attack bounced by barrier closes its parent formal turn exactly once
+ok 281 - R5-CHILD-01 charge attack bounced by barrier closes its parent formal turn exactly once
+  ---
+  duration_ms: 25.521006
+  type: 'test'
+  ...
+# Subtest: R5-CHILD-02 deferred barrier bounce never starts the next formal turn inside the move primitive
+ok 282 - R5-CHILD-02 deferred barrier bounce never starts the next formal turn inside the move primitive
+  ---
+  duration_ms: 16.979484
+  type: 'test'
+  ...
+# Subtest: R5-CHILD-03 ordinary barrier bounce still completes one ordinary formal turn
+ok 283 - R5-CHILD-03 ordinary barrier bounce still completes one ordinary formal turn
+  ---
+  duration_ms: 5.134273
+  type: 'test'
+  ...
+# Subtest: R5-CROSS-01 river expiry records opponent Berserker will before the next action clears events
+ok 284 - R5-CROSS-01 river expiry records opponent Berserker will before the next action clears events
+  ---
+  duration_ms: 5.211498
+  type: 'test'
+  ...
+# Subtest: R5-CROSS-02 one closed destruction batch credits 3+2+1 to the public opponent only once
+ok 285 - R5-CROSS-02 one closed destruction batch credits 3+2+1 to the public opponent only once
+  ---
+  duration_ms: 1.251891
+  type: 'test'
+  ...
+# Subtest: R5-CROSS-03 open batch forbids Wind return and resource settlement without mutation
+ok 286 - R5-CROSS-03 open batch forbids Wind return and resource settlement without mutation
+  ---
+  duration_ms: 1.719634
+  type: 'test'
+  ...
+# Subtest: R5-CROSS-04 inner pulse closes Wind return before judging whether the skill relieved check
+ok 287 - R5-CROSS-04 inner pulse closes Wind return before judging whether the skill relieved check
+  ---
+  duration_ms: 9.192398
+  type: 'test'
+  ...
+# Subtest: R5-CROSS-05 pulse destroying decoy and carrier in one batch never resurrects a true general
+ok 288 - R5-CROSS-05 pulse destroying decoy and carrier in one batch never resurrects a true general
+  ---
+  duration_ms: 1.342837
+  type: 'test'
+  ...
+# Subtest: R5-CROSS-06 first execution return retains dance; second safe return resumes a normal turn without dance
+ok 289 - R5-CROSS-06 first execution return retains dance; second safe return resumes a normal turn without dance
+  ---
+  duration_ms: 4.485188
+  type: 'test'
+  ...
+# Subtest: R5-CROSS-07 second return with no legal reply finishes execution and deduplicates the original command
+ok 290 - R5-CROSS-07 second return with no legal reply finishes execution and deduplicates the original command
+  ---
+  duration_ms: 2.82262
+  type: 'test'
+  ...
+# Subtest: R5-CROSS-08 failed first dance also records the outer execution command for retries
+ok 291 - R5-CROSS-08 failed first dance also records the outer execution command for retries
+  ---
+  duration_ms: 3.970174
+  type: 'test'
+  ...
+# Subtest: R5-DESCENT-ATOM-01 first assault destroys the Wind carrier but second committed opportunity completes before terminal closure
+ok 292 - R5-DESCENT-ATOM-01 first assault destroys the Wind carrier but second committed opportunity completes before terminal closure
+  ---
+  duration_ms: 30.701056
+  type: 'test'
+  ...
+# Subtest: R5-DESCENT-ATOM-02 skipping the remaining assault closes a candidate terminal without advancing formal time
+ok 293 - R5-DESCENT-ATOM-02 skipping the remaining assault closes a candidate terminal without advancing formal time
+  ---
+  duration_ms: 3.21483
+  type: 'test'
+  ...
+# Subtest: R5-DESCENT-ATOM-03 both assaults retain one source event history and do not tick formal durations
+ok 294 - R5-DESCENT-ATOM-03 both assaults retain one source event history and do not tick formal durations
+  ---
+  duration_ms: 8.699248
+  type: 'test'
+  ...
+# Subtest: R5-DESCENT-ATOM-04 surviving enemy check is still rejected atomically and the parent window is preserved
+ok 295 - R5-DESCENT-ATOM-04 surviving enemy check is still rejected atomically and the parent window is preserved
+  ---
+  duration_ms: 1.436548
+  type: 'test'
+  ...
+# Subtest: R5-DESCENT-ATOM-05 assault deaths generate each Death Knight ghost exactly once without ticking its lifetime
+ok 296 - R5-DESCENT-ATOM-05 assault deaths generate each Death Knight ghost exactly once without ticking its lifetime
+  ---
+  duration_ms: 3.168219
+  type: 'test'
+  ...
+# Subtest: R5-DESCENT-ATOM-06 storm may settle while checked and leaves legal check response to the normal main action
+ok 297 - R5-DESCENT-ATOM-06 storm may settle while checked and leaves legal check response to the normal main action
+  ---
+  duration_ms: 15.176677
+  type: 'test'
+  ...
+# Subtest: R5-DESCENT-ATOM-07 checkmate after both assault skips is evaluated at source closure instead of leaving an unusable main window
+ok 298 - R5-DESCENT-ATOM-07 checkmate after both assault skips is evaluated at source closure instead of leaving an unusable main window
+  ---
+  duration_ms: 3.520628
+  type: 'test'
+  ...
+# Subtest: R5-DESCENT-01 nightmare cannot enter a fortress-sealed opposing palace; rejection is atomic
+ok 299 - R5-DESCENT-01 nightmare cannot enter a fortress-sealed opposing palace; rejection is atomic
+  ---
+  duration_ms: 10.535105
+  type: 'test'
+  ...
+# Subtest: R5-DESCENT-02 fortress still permits a piece already inside the opposing palace to redeploy inside
+ok 300 - R5-DESCENT-02 fortress still permits a piece already inside the opposing palace to redeploy inside
+  ---
+  duration_ms: 6.878697
+  type: 'test'
+  ...
+# Subtest: R5-DESCENT-03 nightmare checks the final landing state: a checking rook destroyed by a landing trap does not invalidate deployment
+ok 301 - R5-DESCENT-03 nightmare checks the final landing state: a checking rook destroyed by a landing trap does not invalidate deployment
+  ---
+  duration_ms: 2.621453
+  type: 'test'
+  ...
+# Subtest: R5-DESCENT-04 nightmare still rejects a surviving final check without consuming the pending deployment
+ok 302 - R5-DESCENT-04 nightmare still rejects a surviving final check without consuming the pending deployment
+  ---
+  duration_ms: 1.085711
+  type: 'test'
+  ...
+# Subtest: R5-DESCENT-05 storm with both summons killed on landing closes its empty assault window and permits the normal main action
+ok 303 - R5-DESCENT-05 storm with both summons killed on landing closes its empty assault window and permits the normal main action
+  ---
+  duration_ms: 8.975913
+  type: 'test'
+  ...
+# Subtest: R5-DESCENT-06 storm with one surviving summon retains exactly its one optional assault
+ok 304 - R5-DESCENT-06 storm with one surviving summon retains exactly its one optional assault
+  ---
+  duration_ms: 6.842969
+  type: 'test'
+  ...
+# Subtest: R4-FORM-01 nineteen transferred front packages retain complete catalog and exact naming
+ok 305 - R4-FORM-01 nineteen transferred front packages retain complete catalog and exact naming
+  ---
+  duration_ms: 5.436015
+  type: 'test'
+  ...
+# Subtest: R4-FORM-02 inner naming is grammar only and never registers an unavailable package
+ok 306 - R4-FORM-02 inner naming is grammar only and never registers an unavailable package
+  ---
+  duration_ms: 0.711799
+  type: 'test'
+  ...
+# Subtest: R4-FORM-03 inner opening is rejected atomically without touching public or secret state
+ok 307 - R4-FORM-03 inner opening is rejected atomically without touching public or secret state
+  ---
+  duration_ms: 0.659801
+  type: 'test'
+  ...
+# Subtest: R4-FORM-04 unknown form, two forms, unknown hero and a form without hero fail closed
+ok 308 - R4-FORM-04 unknown form, two forms, unknown hero and a form without hero fail closed
+  ---
+  duration_ms: 0.302034
+  type: 'test'
+  ...
+# Subtest: R4-FORM-05 partial hero opening fixes only the chosen side and independently owns the lock
+ok 309 - R4-FORM-05 partial hero opening fixes only the chosen side and independently owns the lock
+  ---
+  duration_ms: 0.616406
+  type: 'test'
+  ...
+# Subtest: R4-FORM-06 legacy front snapshots migrate at public projection and authoritative move without input mutation
+ok 310 - R4-FORM-06 legacy front snapshots migrate at public projection and authoritative move without input mutation
+  ---
+  duration_ms: 8.945277
+  type: 'test'
+  ...
+# Subtest: R4-FORM-07 canonical-only selection resolves the whole front package for passives and skills
+ok 311 - R4-FORM-07 canonical-only selection resolves the whole front package for passives and skills
+  ---
+  duration_ms: 3.289412
+  type: 'test'
+  ...
+# Subtest: R4-FORM-08 alias mismatch, wrong package ID and malformed multi-package snapshot are rejected
+ok 312 - R4-FORM-08 alias mismatch, wrong package ID and malformed multi-package snapshot are rejected
+  ---
+  duration_ms: 0.287522
+  type: 'test'
+  ...
+# Subtest: R4-FORM-09 public per-game lock forbids switching, removal or adding another hero
+ok 313 - R4-FORM-09 public per-game lock forbids switching, removal or adding another hero
+  ---
+  duration_ms: 0.433822
+  type: 'test'
+  ...
+# Subtest: R4-FORM-10 authoritative independent lock rejects even a consistent replacement of all public package fields
+ok 314 - R4-FORM-10 authoritative independent lock rejects even a consistent replacement of all public package fields
+  ---
+  duration_ms: 0.646612
+  type: 'test'
+  ...
+# Subtest: R4-FORM-11 inner snapshot never falls back to front passive, clock, target, death or active skill
+ok 315 - R4-FORM-11 inner snapshot never falls back to front passive, clock, target, death or active skill
+  ---
+  duration_ms: 0.590777
+  type: 'test'
+  ...
+# Subtest: R4-FORM-12 reinitialization cannot reset skills or switch before or after the first action
+ok 316 - R4-FORM-12 reinitialization cannot reset skills or switch before or after the first action
+  ---
+  duration_ms: 3.586097
+  type: 'test'
+  ...
+# Subtest: R4-FORM-13 actual rewind restores history while keeping the entire selected form fixed
+ok 317 - R4-FORM-13 actual rewind restores history while keeping the entire selected form fixed
+  ---
+  duration_ms: 6.968137
+  type: 'test'
+  ...
+# Subtest: R4-FORM-14 a tampered historical package cannot replace the current authoritative game lock
+ok 318 - R4-FORM-14 a tampered historical package cannot replace the current authoritative game lock
+  ---
+  duration_ms: 5.090687
+  type: 'test'
+  ...
+# Subtest: R4-FORM-15 mutation-only and no-hero old snapshots normalize without inventing a hero
+ok 319 - R4-FORM-15 mutation-only and no-hero old snapshots normalize without inventing a hero
+  ---
+  duration_ms: 0.257497
+  type: 'test'
+  ...
+# Subtest: R4-FORM-16 duplicate packets preserve the lock and cannot bypass authoritative mismatch checks
+ok 320 - R4-FORM-16 duplicate packets preserve the lock and cannot bypass authoritative mismatch checks
+  ---
+  duration_ms: 2.408157
+  type: 'test'
+  ...
+# Subtest: R4-FORM-17 actual Bluetooth setup, encoded owner views and reconnect retain public form metadata
+ok 321 - R4-FORM-17 actual Bluetooth setup, encoded owner views and reconnect retain public form metadata
+  ---
+  duration_ms: 8.680332
+  type: 'test'
+  ...
+# Subtest: R4-FORM-18 rematch creates a new game with fresh selections without unlocking the previous game
+ok 322 - R4-FORM-18 rematch creates a new game with fresh selections without unlocking the previous game
+  ---
+  duration_ms: 5.649582
+  type: 'test'
+  ...
+# Subtest: R5-H02-01 activation attack is ordinary and barrier interception refunds the source
+ok 323 - R5-H02-01 activation attack is ordinary and barrier interception refunds the source
+  ---
+  duration_ms: 12.373887
+  type: 'test'
+  ...
+# Subtest: R5-H02-02 activation cannot target intangible but a later source attack can bypass it and barrier
+ok 324 - R5-H02-02 activation cannot target intangible but a later source attack can bypass it and barrier
+  ---
+  duration_ms: 2.871764
+  type: 'test'
+  ...
+# Subtest: R5-H02-03 activation carrier killed by landing trap does not retain a dangling stealth state
+ok 325 - R5-H02-03 activation carrier killed by landing trap does not retain a dangling stealth state
+  ---
+  duration_ms: 3.06893
+  type: 'test'
+  ...
+# Subtest: R5-H09-01 in-check destruction closes both batches before ghost triggers
+ok 326 - R5-H09-01 in-check destruction closes both batches before ghost triggers
+  ---
+  duration_ms: 3.272966
+  type: 'test'
+  ...
+# Subtest: R5-H09-02 normal destruction has no self-clear penalty and duplicate preserves the committed draws
+ok 327 - R5-H09-02 normal destruction has no self-clear penalty and duplicate preserves the committed draws
+  ---
+  duration_ms: 2.224741
+  type: 'test'
+  ...
+# Subtest: R5-H12-01 flame uses public positional rank for covered center and targets, never their real rank
+ok 328 - R5-H12-01 flame uses public positional rank for covered center and targets, never their real rank
+  ---
+  duration_ms: 2.018742
+  type: 'test'
+  ...
+# Subtest: R5-H12-02 low public rank spares higher rank and general center destroys itself and ordinary targets
+ok 329 - R5-H12-02 low public rank spares higher rank and general center destroys itself and ordinary targets
+  ---
+  duration_ms: 4.316745
+  type: 'test'
+  ...
+# Subtest: R5-H14-01 even owner begin grants six only once; secret insight publishes fee without target
+ok 330 - R5-H14-01 even owner begin grants six only once; secret insight publishes fee without target
+  ---
+  duration_ms: 2.678083
+  type: 'test'
+  ...
+# Subtest: R5-H14-02 normal insight marks target, shares increasing cost, and read does not reveal
+ok 331 - R5-H14-02 normal insight marks target, shares increasing cost, and read does not reveal
+  ---
+  duration_ms: 1.606383
+  type: 'test'
+  ...
+# Subtest: R5-H14-03 private room views and public serialization contain only the owner's insight result
+ok 332 - R5-H14-03 private room views and public serialization contain only the owner's insight result
+  ---
+  duration_ms: 1.604029
+  type: 'test'
+  ...
+# Subtest: R5-H13-01 weak side rejects outward ordinary action; strong-side move opens one child window
+ok 333 - R5-H13-01 weak side rejects outward ordinary action; strong-side move opens one child window
+  ---
+  duration_ms: 5.144118
+  type: 'test'
+  ...
+# Subtest: R5-H13-02 attack does not grant shift, displacement ignores weak restriction, illegal child has no side effects
+ok 334 - R5-H13-02 attack does not grant shift, displacement ignores weak restriction, illegal child has no side effects
+  ---
+  duration_ms: 5.908536
+  type: 'test'
+  ...
+# Subtest: R5-H16-01 normal I main enemy kill earns three and one paid child attack does not create a formal turn
+ok 335 - R5-H16-01 normal I main enemy kill earns three and one paid child attack does not create a formal turn
+  ---
+  duration_ms: 2.275549
+  type: 'test'
+  ...
+# Subtest: R5-H16-02 insufficient will is atomic and source skipping cannot reopen a charge
+ok 336 - R5-H16-02 insufficient will is atomic and source skipping cannot reopen a charge
+  ---
+  duration_ms: 3.012956
+  type: 'test'
+  ...
+# Subtest: R5-H17-01 ordinary shore qualifies, entry counts current turn, arbitrary clear horizontal main and same-file exit
+ok 337 - R5-H17-01 ordinary shore qualifies, entry counts current turn, arbitrary clear horizontal main and same-file exit
+  ---
+  duration_ms: 15.966994
+  type: 'test'
+  ...
+# Subtest: R5-H17-02 displace to shore does not qualify; occupied river blocks distant crossing atomically
+ok 338 - R5-H17-02 displace to shore does not qualify; occupied river blocks distant crossing atomically
+  ---
+  duration_ms: 16.952079
+  type: 'test'
+  ...
+# Subtest: R5-H18-01 inner package never dispatches front, traverses then grants optional move without advancing extra turn
+ok 339 - R5-H18-01 inner package never dispatches front, traverses then grants optional move without advancing extra turn
+  ---
+  duration_ms: 17.56243
+  type: 'test'
+  ...
+# Subtest: R5-H19-01 entering from outside gets one infection per atom, supported-to-supported preserves, new ghost underfoot does not count entry
+ok 340 - R5-H19-01 entering from outside gets one infection per atom, supported-to-supported preserves, new ghost underfoot does not count entry
+  ---
+  duration_ms: 0.956497
+  type: 'test'
+  ...
+# Subtest: R5-H20-01 inner ghost air death makes persistent layer and ignores normal ticks
+ok 341 - R5-H20-01 inner ghost air death makes persistent layer and ignores normal ticks
+  ---
+  duration_ms: 0.723867
+  type: 'test'
+  ...
+# Subtest: R5-H20-02 pulse is cross5 only, no lasting sublethal infection, committed layers consumed
+ok 342 - R5-H20-02 pulse is cross5 only, no lasting sublethal infection, committed layers consumed
+  ---
+  duration_ms: 2.338132
+  type: 'test'
+  ...
+# Subtest: R5-H21-01 fixed variants lock before RPS and first intro publishes only selected package
+ok 343 - R5-H21-01 fixed variants lock before RPS and first intro publishes only selected package
+  ---
+  duration_ms: 4.329354
+  type: 'test'
+  ...
+# Subtest: R5-H21-02 unspeakable chooses up to four current revealed nonGenerals as one batch and leaves main opportunity
+ok 344 - R5-H21-02 unspeakable chooses up to four current revealed nonGenerals as one batch and leaves main opportunity
+  ---
+  duration_ms: 2.626315
+  type: 'test'
+  ...
+# Subtest: R5-H21-03 nightmare deployment rejects final check and places selected pieces as atomic displacements
+ok 345 - R5-H21-03 nightmare deployment rejects final check and places selected pieces as atomic displacements
+  ---
+  duration_ms: 2.600306
+  type: 'test'
+  ...
+# Subtest: R5-H21-04 fel creates four genuine objects of allowed fixed own types and landings fire normally
+ok 346 - R5-H21-04 fel creates four genuine objects of allowed fixed own types and landings fire normally
+  ---
+  duration_ms: 1.412632
+  type: 'test'
+  ...
+# Subtest: R5-H21-05 storm new geometry is eight directions one step and two assaults are sequential child opportunities
+ok 347 - R5-H21-05 storm new geometry is eight directions one step and two assaults are sequential child opportunities
+  ---
+  duration_ms: 7.271383
+  type: 'test'
+  ...
+# Subtest: R5-H21-06 invincible scale blocks once and returns ordinary attacker to origin
+ok 348 - R5-H21-06 invincible scale blocks once and returns ordinary attacker to origin
+  ---
+  duration_ms: 2.679976
+  type: 'test'
+  ...
+# Subtest: R5-H15-01 true owner training is secret, advances on own begins, graduates then forces fourth flight turn landing
+ok 349 - R5-H15-01 true owner training is secret, advances on own begins, graduates then forces fourth flight turn landing
+  ---
+  duration_ms: 19.664228
+  type: 'test'
+  ...
+# Subtest: R5-H15-02 confirmed once-only death failure replaces historical reroll and stays authority-private
+ok 350 - R5-H15-02 confirmed once-only death failure replaces historical reroll and stays authority-private
+  ---
+  duration_ms: 0.438658
+  type: 'test'
+  ...
+# Subtest: R5-H11-01 shuffler swaps final colors once and two shufflers cancel
+ok 351 - R5-H11-01 shuffler swaps final colors once and two shufflers cancel
+  ---
+  duration_ms: 3.658255
+  type: 'test'
+  ...
+# Subtest: R5-H11-02 window A restores all initial dead, invalidates insight, preserves resources, and creates timeline break
+ok 352 - R5-H11-02 window A restores all initial dead, invalidates insight, preserves resources, and creates timeline break
+  ---
+  duration_ms: 5.630938
+  type: 'test'
+  ...
+# Subtest: R5-H11-03 skipping A preserves B before ordinary begin resources, B skip permanently loses shuffle
+ok 353 - R5-H11-03 skipping A preserves B before ordinary begin resources, B skip permanently loses shuffle
+  ---
+  duration_ms: 5.67182
+  type: 'test'
+  ...
+# Subtest: R5-CLOCK-01 blade child window and repeated UI clock calls retain the original budget
+ok 354 - R5-CLOCK-01 blade child window and repeated UI clock calls retain the original budget
+  ---
+  duration_ms: 0.880482
+  type: 'test'
+  ...
+# Subtest: R5-H01-01 last trap turn stays lethal through an optional movement child
+ok 355 - R5-H01-01 last trap turn stays lethal through an optional movement child
+  ---
+  duration_ms: 2.422489
+  type: 'test'
+  ...
+# Subtest: R5-H21-07 dragon claw endpoint crush still resolves after ordinary barrier bounce
+ok 356 - R5-H21-07 dragon claw endpoint crush still resolves after ordinary barrier bounce
+  ---
+  duration_ms: 1.946063
+  type: 'test'
+  ...
+# Subtest: R5-H11-04 shuffle after completed Wind return restores opening general references without refunding Shadow
+ok 357 - R5-H11-04 shuffle after completed Wind return restores opening general references without refunding Shadow
+  ---
+  duration_ms: 9.97884
+  type: 'test'
+  ...
+# Subtest: R5-H21-08 fourth invocation publishes omen then actual enemy formal reply triggers automatic descent
+ok 358 - R5-H21-08 fourth invocation publishes omen then actual enemy formal reply triggers automatic descent
+  ---
+  duration_ms: 19.780772
+  type: 'test'
+  ...
+# Subtest: R38-HG01-red return itself resolves check and preserves the original opportunity/deadline
+ok 359 - R38-HG01-red return itself resolves check and preserves the original opportunity/deadline
+  ---
+  duration_ms: 11.051696
+  type: 'test'
+  ...
+# Subtest: R38-HG02-red return exposing the royal rejects the entire candidate on each new request
+ok 360 - R38-HG02-red return exposing the royal rejects the entire candidate on each new request
+  ---
+  duration_ms: 7.525694
+  type: 'test'
+  ...
+# Subtest: R38-HG01-black return itself resolves check and preserves the original opportunity/deadline
+ok 361 - R38-HG01-black return itself resolves check and preserves the original opportunity/deadline
+  ---
+  duration_ms: 1.888457
+  type: 'test'
+  ...
+# Subtest: R38-HG02-black return exposing the royal rejects the entire candidate on each new request
+ok 362 - R38-HG02-black return exposing the royal rejects the entire candidate on each new request
+  ---
+  duration_ms: 7.877749
+  type: 'test'
+  ...
+# Subtest: R38-HG01-revival a shown dead warrior can itself resolve check without inheriting temporary effects
+ok 363 - R38-HG01-revival a shown dead warrior can itself resolve check without inheriting temporary effects
+  ---
+  duration_ms: 2.617151
+  type: 'test'
+  ...
+# Subtest: R38-HG02 a still-checked result cannot cleanse now and rely on another skill or the main action
+ok 364 - R38-HG02 a still-checked result cannot cleanse now and rely on another skill or the main action
+  ---
+  duration_ms: 0.970628
+  type: 'test'
+  ...
+# Subtest: R38-HG03 landing death reopens check: no trap, death, cleansing or ammunition result is committed
+ok 365 - R38-HG03 landing death reopens check: no trap, death, cleansing or ammunition result is committed
+  ---
+  duration_ms: 2.606264
+  type: 'test'
+  ...
+# Subtest: R38-HG04 frozen polluted anchors require a separate paid use; fifth use completes and sixth rejects
+ok 366 - R38-HG04 frozen polluted anchors require a separate paid use; fifth use completes and sixth rejects
+  ---
+  duration_ms: 2.441357
+  type: 'test'
+  ...
+# Subtest: R38-HG04 occupied anchors stay ineligible even when that occupant also returns
+ok 367 - R38-HG04 occupied anchors stay ineligible even when that occupant also returns
+  ---
+  duration_ms: 1.467835
+  type: 'test'
+  ...
+# Subtest: R38-HG05 empty appeared set still spends and cleanses/reloads without reviving unshown/dead objects
+ok 368 - R38-HG05 empty appeared set still spends and cleanses/reloads without reviving unshown/dead objects
+  ---
+  duration_ms: 1.418081
+  type: 'test'
+  ...
+# Subtest: R38-HG06 living return preserves effects and crossing the same ghost region does not add infection
+ok 369 - R38-HG06 living return preserves effects and crossing the same ghost region does not add infection
+  ---
+  duration_ms: 5.348233
+  type: 'test'
+  ...
+# Subtest: R38-HG06 newly entering a ghost region still applies its landing effect exactly once
+ok 370 - R38-HG06 newly entering a ghost region still applies its landing effect exactly once
+  ---
+  duration_ms: 1.199111
+  type: 'test'
+  ...
+# Subtest: R38-HG07 direct checks the original batch context before copying
+ok 371 - R38-HG07 direct checks the original batch context before copying
+  ---
+  duration_ms: 1.420914
+  type: 'test'
+  ...
+# Subtest: R38-HG07 room checks the original batch context before copying
+ok 372 - R38-HG07 room checks the original batch context before copying
+  ---
+  duration_ms: 1.289778
+  type: 'test'
+  ...
+# Subtest: R38-HG08 successful duplicate returns the original room even when a later batch is open
+ok 373 - R38-HG08 successful duplicate returns the original room even when a later batch is open
+  ---
+  duration_ms: 1.760985
+  type: 'test'
+  ...
+# Subtest: R38-HG07 direct preserves stale/phase/special-window errors even with an open original batch
+ok 374 - R38-HG07 direct preserves stale/phase/special-window errors even with an open original batch
+  ---
+  duration_ms: 3.544855
+  type: 'test'
+  ...
+# Subtest: R38-HG07 room preserves stale/phase/special-window errors even with an open original batch
+ok 375 - R38-HG07 room preserves stale/phase/special-window errors even with an open original batch
+  ---
+  duration_ms: 2.794138
+  type: 'test'
+  ...
+# Subtest: H15 confirmed pregraduation death consumes neither explicit nor fallback RNG
+ok 376 - H15 confirmed pregraduation death consumes neither explicit nor fallback RNG
+  ---
+  duration_ms: 0.265489
+  type: 'test'
+  ...
+# Subtest: R38-HG09 unsupported training context after begin cannot draw production RNG or commit a candidate
+ok 377 - R38-HG09 unsupported training context after begin cannot draw production RNG or commit a candidate
+  ---
+  duration_ms: 2.717623
+  type: 'test'
+  ...
+# Subtest: R38-HG09 unsupported training context during begin cannot draw production RNG or commit a candidate
+ok 378 - R38-HG09 unsupported training context during begin cannot draw production RNG or commit a candidate
+  ---
+  duration_ms: 0.8183
+  type: 'test'
+  ...
+# Subtest: H15 three-argument death closure also preserves sticky failure without RNG
+ok 379 - H15 three-argument death closure also preserves sticky failure without RNG
+  ---
+  duration_ms: 0.170075
+  type: 'test'
+  ...
+# Subtest: R38-HG10 rejected lazy-begin events stay isolated; the next accepted begin is captured once
+ok 380 - R38-HG10 rejected lazy-begin events stay isolated; the next accepted begin is captured once
+  ---
+  duration_ms: 2.271031
+  type: 'test'
+  ...
+# Subtest: R38-HG10 observer clone failure invalidates evidence without changing accepted business output
+ok 381 - R38-HG10 observer clone failure invalidates evidence without changing accepted business output
+  ---
+  duration_ms: 2.996852
+  type: 'test'
+  ...
+# Subtest: R38-HG10 observer freeze failure invalidates evidence without changing accepted business output
+ok 382 - R38-HG10 observer freeze failure invalidates evidence without changing accepted business output
+  ---
+  duration_ms: 4.737165
+  type: 'test'
+  ...
+# Subtest: R38-HG10 business failures still propagate and restore the enclosing capture
+ok 383 - R38-HG10 business failures still propagate and restore the enclosing capture
+  ---
+  duration_ms: 0.869737
+  type: 'test'
+  ...
+# Subtest: R38-HG10 nested candidate failure discards only its buffered events and restores both parents
+ok 384 - R38-HG10 nested candidate failure discards only its buffered events and restores both parents
+  ---
+  duration_ms: 1.35096
+  type: 'test'
+  ...
+# Subtest: R38-HG10 disabled observation creates no event snapshots and matches observed business output
+ok 385 - R38-HG10 disabled observation creates no event snapshots and matches observed business output
+  ---
+  duration_ms: 3.376672
+  type: 'test'
+  ...
+# Subtest: R38-HG10 isolation rejects asynchronous use with and without an enclosing capture
+ok 386 - R38-HG10 isolation rejects asynchronous use with and without an enclosing capture
+  ---
+  duration_ms: 0.289125
+  type: 'test'
+  ...
+# Subtest: R38-HG11 original actor/revision/window/expiry gates retain their ordering and do not commit skill resources
+ok 387 - R38-HG11 original actor/revision/window/expiry gates retain their ordering and do not commit skill resources
+  ---
+  duration_ms: 4.439017
+  type: 'test'
+  ...
+# Subtest: R38-HG12 original direct-death terminal remains a separate source path, not a royal-safety verdict
+ok 388 - R38-HG12 original direct-death terminal remains a separate source path, not a royal-safety verdict
+  ---
+  duration_ms: 0.93862
+  type: 'test'
+  ...
+# Subtest: R38-HG12 unsupported royal space cannot be treated as a safe candidate
+ok 389 - R38-HG12 unsupported royal space cannot be treated as a safe candidate
+  ---
+  duration_ms: 0.752931
+  type: 'test'
+  ...
+# Subtest: PATH01 real iron-steed leg death and public query agree on safe check evasion
+ok 390 - PATH01 real iron-steed leg death and public query agree on safe check evasion
+  ---
+  duration_ms: 17.889042
+  type: 'test'
+  ...
+# Subtest: PATH02 path death exposes own king: reject whole authority candidate and all evidence
+ok 391 - PATH02 path death exposes own king: reject whole authority candidate and all evidence
+  ---
+  duration_ms: 11.818994
+  type: 'test'
+  ...
+# Subtest: PATH03 barrier return keeps path death, and refuses unsafe final board
+ok 392 - PATH03 barrier return keeps path death, and refuses unsafe final board
+  ---
+  duration_ms: 2.302018
+  type: 'test'
+  ...
+# Subtest: PATH03 dragonScale return keeps path death, and refuses unsafe final board
+ok 393 - PATH03 dragonScale return keeps path death, and refuses unsafe final board
+  ---
+  duration_ms: 1.490078
+  type: 'test'
+  ...
+# Subtest: PATH04 path scale survival leaves king screen and does not manufacture its death
+ok 394 - PATH04 path scale survival leaves king screen and does not manufacture its death
+  ---
+  duration_ms: 14.748653
+  type: 'test'
+  ...
+# Subtest: PATH05 committed return landing death is included before royal safety
+ok 395 - PATH05 committed return landing death is included before royal safety
+  ---
+  duration_ms: 2.63656
+  type: 'test'
+  ...
+# Subtest: PATH06 a safe return commits path death once and no extra formal action
+ok 396 - PATH06 a safe return commits path death once and no extra formal action
+  ---
+  duration_ms: 3.623633
+  type: 'test'
+  ...
+# Subtest: PATH07 open original authority batch refuses before clone and preserves source
+ok 397 - PATH07 open original authority batch refuses before clone and preserves source
+  ---
+  duration_ms: 0.467432
+  type: 'test'
+  ...
+# Subtest: PATH08 explicit own-royal path death preserves its source terminal
+ok 398 - PATH08 explicit own-royal path death preserves its source terminal
+  ---
+  duration_ms: 2.272413
+  type: 'test'
+  ...
+# Subtest: OBS01 main closure sees path outcome before counter/end, settled sees expired barrier before next begin
+ok 399 - OBS01 main closure sees path outcome before counter/end, settled sees expired barrier before next begin
+  ---
+  duration_ms: 2.788959
+  type: 'test'
+  ...
+# Subtest: OBS02 failure in a new checkpoint invalidates evidence without changing committed authority
+ok 400 - OBS02 failure in a new checkpoint invalidates evidence without changing committed authority
+  ---
+  duration_ms: 5.652181
+  type: 'test'
+  ...
+# Subtest: OBS03 stale requests and unsupported query scope do not gain a safety bypass
+ok 401 - OBS03 stale requests and unsupported query scope do not gain a safety bypass
+  ---
+  duration_ms: 0.913272
+  type: 'test'
+  ...
+# Subtest: OBS04 fixed PR13 invoke is already a counted main action, and new seams preserve that fact
+ok 402 - OBS04 fixed PR13 invoke is already a counted main action, and new seams preserve that fact
+  ---
+  duration_ms: 3.444564
+  type: 'test'
+  ...
+# Subtest: PATH09 remote authority checks the original batch before private-trap copying
+ok 403 - PATH09 remote authority checks the original batch before private-trap copying
+  ---
+  duration_ms: 0.653632
+  type: 'test'
+  ...
+# Subtest: PATH10 unsafe early source candidate does not sample the production RNG
+ok 404 - PATH10 unsafe early source candidate does not sample the production RNG
+  ---
+  duration_ms: 1.181204
+  type: 'test'
+  ...
+# Subtest: OBS05 post-end checkpoint failure invalidates evidence and preserves authority output
+ok 405 - OBS05 post-end checkpoint failure invalidates evidence and preserves authority output
+  ---
+  duration_ms: 7.819096
+  type: 'test'
+  ...
+# Subtest: DARK-01 暗车位可以沿空路径横直移动
+ok 406 - DARK-01 暗车位可以沿空路径横直移动
+  ---
+  duration_ms: 2.760717
+  type: 'test'
+  ...
+# Subtest: DARK-02 暗车位不能越过棋子
+ok 407 - DARK-02 暗车位不能越过棋子
+  ---
+  duration_ms: 1.001204
+  type: 'test'
+  ...
+# Subtest: DARK-03 暗马位受马腿阻挡
+ok 408 - DARK-03 暗马位受马腿阻挡
+  ---
+  duration_ms: 0.23981
+  type: 'test'
+  ...
+# Subtest: DARK-04 暗炮位不吃子时路径必须为空
+ok 409 - DARK-04 暗炮位不吃子时路径必须为空
+  ---
+  duration_ms: 0.25965
+  type: 'test'
+  ...
+# Subtest: DARK-05 暗炮位隔一枚炮架可以吃子
+ok 410 - DARK-05 暗炮位隔一枚炮架可以吃子
+  ---
+  duration_ms: 0.303596
+  type: 'test'
+  ...
+# Subtest: DARK-06 暗炮位吃子时零枚或两枚炮架均非法
+ok 411 - DARK-06 暗炮位吃子时零枚或两枚炮架均非法
+  ---
+  duration_ms: 0.342154
+  type: 'test'
+  ...
+# Subtest: DARK-07 红暗兵第一步只能向y减一
+ok 412 - DARK-07 红暗兵第一步只能向y减一
+  ---
+  duration_ms: 0.517097
+  type: 'test'
+  ...
+# Subtest: DARK-08 黑暗卒第一步只能向y加一
+ok 413 - DARK-08 黑暗卒第一步只能向y加一
+  ---
+  duration_ms: 0.313211
+  type: 'test'
+  ...
+# Subtest: DARK-09 暗仕位第一步不能走出位置方九宫
+ok 414 - DARK-09 暗仕位第一步不能走出位置方九宫
+  ---
+  duration_ms: 0.369525
+  type: 'test'
+  ...
+# Subtest: DARK-10 暗相位第一步终点自然留在本方并落地翻开
+ok 415 - DARK-10 暗相位第一步终点自然留在本方并落地翻开
+  ---
+  duration_ms: 6.414956
+  type: 'test'
+  ...
+# Subtest: DARK-11 暗相位受象眼阻挡
+ok 416 - DARK-11 暗相位受象眼阻挡
+  ---
+  duration_ms: 0.417226
+  type: 'test'
+  ...
+# Subtest: DARK-12 暗子非吃子移动后立即公开身份
+ok 417 - DARK-12 暗子非吃子移动后立即公开身份
+  ---
+  duration_ms: 0.924619
+  type: 'test'
+  ...
+# Subtest: CAP-01 红明子可以吃红方位置上的暗子
+ok 418 - CAP-01 红明子可以吃红方位置上的暗子
+  ---
+  duration_ms: 2.542479
+  type: 'test'
+  ...
+# Subtest: CAP-02 红明子可以吃黑方位置上的暗子
+ok 419 - CAP-02 红明子可以吃黑方位置上的暗子
+  ---
+  duration_ms: 0.946732
+  type: 'test'
+  ...
+# Subtest: CAP-03 自残只允许吃暗子，不能吃己方明子
+ok 420 - CAP-03 自残只允许吃暗子，不能吃己方明子
+  ---
+  duration_ms: 0.164196
+  type: 'test'
+  ...
+# Subtest: CAP-03A 不能直接吃将帅
+ok 421 - CAP-03A 不能直接吃将帅
+  ---
+  duration_ms: 0.176435
+  type: 'test'
+  ...
+# Subtest: CAP-04 红方暗子可以吃另一枚红方暗子
+ok 422 - CAP-04 红方暗子可以吃另一枚红方暗子
+  ---
+  duration_ms: 1.102706
+  type: 'test'
+  ...
+# Subtest: CAP-05 被吃暗子真实同色也不会撤销吃子
+ok 423 - CAP-05 被吃暗子真实同色也不会撤销吃子
+  ---
+  duration_ms: 0.737468
+  type: 'test'
+  ...
+# Subtest: CAP-06 被吃暗子真实异色也不产生额外回合
+ok 424 - CAP-06 被吃暗子真实异色也不产生额外回合
+  ---
+  duration_ms: 0.596486
+  type: 'test'
+  ...
+# Subtest: CAP-07 暗来源翻成被吃明子的同色后仍保留吃子结果
+ok 425 - CAP-07 暗来源翻成被吃明子的同色后仍保留吃子结果
+  ---
+  duration_ms: 0.654343
+  type: 'test'
+  ...
+# Subtest: CTRL-01 红方暗子翻出红棋后仍由红方控制
+ok 426 - CTRL-01 红方暗子翻出红棋后仍由红方控制
+  ---
+  duration_ms: 0.712421
+  type: 'test'
+  ...
+# Subtest: CTRL-02 红方暗子翻出黑棋后立即由黑方控制
+ok 427 - CTRL-02 红方暗子翻出黑棋后立即由黑方控制
+  ---
+  duration_ms: 0.949596
+  type: 'test'
+  ...
+# Subtest: CTRL-03 黑方暗子翻出红棋后立即由红方控制
+ok 428 - CTRL-03 黑方暗子翻出红棋后立即由红方控制
+  ---
+  duration_ms: 0.576647
+  type: 'test'
+  ...
+# Subtest: CTRL-04 倒戈但未触发背刺时正常换手
+ok 429 - CTRL-04 倒戈但未触发背刺时正常换手
+  ---
+  duration_ms: 0.494553
+  type: 'test'
+  ...
+# Subtest: OPEN-01 明仕士可以在九宫外斜走一格
+ok 430 - OPEN-01 明仕士可以在九宫外斜走一格
+  ---
+  duration_ms: 0.267111
+  type: 'test'
+  ...
+# Subtest: OPEN-02 明仕士不能横走或直走
+ok 431 - OPEN-02 明仕士不能横走或直走
+  ---
+  duration_ms: 0.101613
+  type: 'test'
+  ...
+# Subtest: OPEN-02A 中路仕挡住将帅照面时不能移开
+ok 432 - OPEN-02A 中路仕挡住将帅照面时不能移开
+  ---
+  duration_ms: 0.341343
+  type: 'test'
+  ...
+# Subtest: OPEN-03 明相象可以跨河走田字
+ok 433 - OPEN-03 明相象可以跨河走田字
+  ---
+  duration_ms: 0.346911
+  type: 'test'
+  ...
+# Subtest: OPEN-04 明相象跨河仍受象眼阻挡
+ok 434 - OPEN-04 明相象跨河仍受象眼阻挡
+  ---
+  duration_ms: 0.100992
+  type: 'test'
+  ...
+# Subtest: OPEN-05 红兵位翻出黑卒后按黑方方向移动
+ok 435 - OPEN-05 红兵位翻出黑卒后按黑方方向移动
+  ---
+  duration_ms: 0.723516
+  type: 'test'
+  ...
+# Subtest: OPEN-06 黑卒位翻出红兵后按红方方向移动
+ok 436 - OPEN-06 黑卒位翻出红兵后按红方方向移动
+  ---
+  duration_ms: 0.726742
+  type: 'test'
+  ...
+# Subtest: OPEN-07 异色兵翻开时已过真实河界即可横走
+ok 437 - OPEN-07 异色兵翻开时已过真实河界即可横走
+  ---
+  duration_ms: 0.110106
+  type: 'test'
+  ...
+# Subtest: RARITY-01 六项畸变按确认稿映射到四种稀有度
+ok 438 - RARITY-01 六项畸变按确认稿映射到四种稀有度
+  ---
+  duration_ms: 2.084692
+  type: 'test'
+  ...
+# Subtest: RARITY-02 稀有度池保留全部标准畸变且不重复
+ok 439 - RARITY-02 稀有度池保留全部标准畸变且不重复
+  ---
+  duration_ms: 0.489516
+  type: 'test'
+  ...
+# Subtest: DESTINY-01 未定义具体宿命时传说池只包含普通传说畸变
+ok 440 - DESTINY-01 未定义具体宿命时传说池只包含普通传说畸变
+  ---
+  duration_ms: 0.253601
+  type: 'test'
+  ...
+# Subtest: DESTINY-02 宿命候选只在对应英雄羁绊成立后加入传说内部池
+ok 441 - DESTINY-02 宿命候选只在对应英雄羁绊成立后加入传说内部池
+  ---
+  duration_ms: 0.192248
+  type: 'test'
+  ...
+# Subtest: DESTINY-03 宿命只定义首个正式回合增加十五秒的时间边界
+ok 442 - DESTINY-03 宿命只定义首个正式回合增加十五秒的时间边界
+  ---
+  duration_ms: 0.17954
+  type: 'test'
+  ...
+# Subtest: MUT-01 堡垒禁止从宫外落入敌方九宫
+ok 443 - MUT-01 堡垒禁止从宫外落入敌方九宫
+  ---
+  duration_ms: 2.651192
+  type: 'test'
+  ...
+# Subtest: MUT-02 亲征将帅获得车式移动
+ok 444 - MUT-02 亲征将帅获得车式移动
+  ---
+  duration_ms: 2.475879
+  type: 'test'
+  ...
+# Subtest: MUT-03 骑兵暗置时不启用额外马步，不按兵位授予
+ok 445 - MUT-03 骑兵暗置时不启用额外马步，不按兵位授予
+  ---
+  duration_ms: 0.790107
+  type: 'test'
+  ...
+# Subtest: MUT-04 铁马无视马腿阻挡
+ok 446 - MUT-04 铁马无视马腿阻挡
+  ---
+  duration_ms: 0.584578
+  type: 'test'
+  ...
+# Subtest: MUT-05 铁马碾碎马腿棋并继续落位
+ok 447 - MUT-05 铁马碾碎马腿棋并继续落位
+  ---
+  duration_ms: 6.105181
+  type: 'test'
+  ...
+# Subtest: MUT-06 战车隔一枚棋子碾碎路径后吃掉目标
+ok 448 - MUT-06 战车隔一枚棋子碾碎路径后吃掉目标
+  ---
+  duration_ms: 2.381551
+  type: 'test'
+  ...
+# Subtest: MUT-07 铁马碾碎敌方将帅时触发碾碎他们终局
+ok 449 - MUT-07 铁马碾碎敌方将帅时触发碾碎他们终局
+  ---
+  duration_ms: 0.5993
+  type: 'test'
+  ...
+# Subtest: MUT-08 铁马误伤己方将帅时触发乱杀失败
+ok 450 - MUT-08 铁马误伤己方将帅时触发乱杀失败
+  ---
+  duration_ms: 0.516916
+  type: 'test'
+  ...
+# Subtest: MUT-09 战车碾碎己方将帅并击杀敌将时两败俱伤
+ok 451 - MUT-09 战车碾碎己方将帅并击杀敌将时两败俱伤
+  ---
+  duration_ms: 0.479981
+  type: 'test'
+  ...
+# Subtest: MUT-10 铁马可把敌将帅作为马腿路径将军
+ok 452 - MUT-10 铁马可把敌将帅作为马腿路径将军
+  ---
+  duration_ms: 0.438779
+  type: 'test'
+  ...
+# Subtest: MUT-11 战车路径包含无形地面棋的实体计数
+ok 453 - MUT-11 战车路径包含无形地面棋的实体计数
+  ---
+  duration_ms: 1.94399
+  type: 'test'
+  ...
+# Subtest: MUT-12 骑兵只给明马额外一步，保留八方向普通马跳
+ok 454 - MUT-12 骑兵只给明马额外一步，保留八方向普通马跳
+  ---
+  duration_ms: 0.804698
+  type: 'test'
+  ...
+# Subtest: R38-LEG-E-false-check uses a completable route through the royal leg
+ok 455 - R38-LEG-E-false-check uses a completable route through the royal leg
+  ---
+  duration_ms: 0.853162
+  type: 'test'
+  ...
+# Subtest: R38-LEG-E-missed-check uses a completable route through the royal leg
+ok 456 - R38-LEG-E-missed-check uses a completable route through the royal leg
+  ---
+  duration_ms: 0.400712
+  type: 'test'
+  ...
+# Subtest: R38-LEG-W-false-check uses a completable route through the royal leg
+ok 457 - R38-LEG-W-false-check uses a completable route through the royal leg
+  ---
+  duration_ms: 0.368684
+  type: 'test'
+  ...
+# Subtest: R38-LEG-W-missed-check uses a completable route through the royal leg
+ok 458 - R38-LEG-W-missed-check uses a completable route through the royal leg
+  ---
+  duration_ms: 0.513561
+  type: 'test'
+  ...
+# Subtest: R38-LEG-S-false-check uses a completable route through the royal leg
+ok 459 - R38-LEG-S-false-check uses a completable route through the royal leg
+  ---
+  duration_ms: 0.255233
+  type: 'test'
+  ...
+# Subtest: R38-LEG-S-missed-check uses a completable route through the royal leg
+ok 460 - R38-LEG-S-missed-check uses a completable route through the royal leg
+  ---
+  duration_ms: 0.457216
+  type: 'test'
+  ...
+# Subtest: R38-LEG-N-false-check uses a completable route through the royal leg
+ok 461 - R38-LEG-N-false-check uses a completable route through the royal leg
+  ---
+  duration_ms: 0.575214
+  type: 'test'
+  ...
+# Subtest: R38-LEG-N-missed-check uses a completable route through the royal leg
+ok 462 - R38-LEG-N-missed-check uses a completable route through the royal leg
+  ---
+  duration_ms: 0.910177
+  type: 'test'
+  ...
+# Subtest: R38-LEG-TOP-EDGE-E-false-check uses a completable route through the royal leg
+ok 463 - R38-LEG-TOP-EDGE-E-false-check uses a completable route through the royal leg
+  ---
+  duration_ms: 0.356415
+  type: 'test'
+  ...
+# Subtest: R38-LEG-TOP-EDGE-E-missed-check uses a completable route through the royal leg
+ok 464 - R38-LEG-TOP-EDGE-E-missed-check uses a completable route through the royal leg
+  ---
+  duration_ms: 0.290526
+  type: 'test'
+  ...
+# Subtest: original HC MA-PD01: actual source requests, closed atom/end observations and intermediate oracle
+ok 465 - original HC MA-PD01: actual source requests, closed atom/end observations and intermediate oracle
+  ---
+  duration_ms: 105.815438
+  type: 'test'
+  ...
+# Subtest: original HC MA-PD02: actual source requests, closed atom/end observations and intermediate oracle
+ok 466 - original HC MA-PD02: actual source requests, closed atom/end observations and intermediate oracle
+  ---
+  duration_ms: 140.651686
+  type: 'test'
+  ...
+# Subtest: original HC MA-PD03: actual source requests, closed atom/end observations and intermediate oracle
+ok 467 - original HC MA-PD03: actual source requests, closed atom/end observations and intermediate oracle
+  ---
+  duration_ms: 245.273349
+  type: 'test'
+  ...
+# Subtest: original HC MA-PD04: actual source requests, closed atom/end observations and intermediate oracle
+ok 468 - original HC MA-PD04: actual source requests, closed atom/end observations and intermediate oracle
+  ---
+  duration_ms: 215.678009
+  type: 'test'
+  ...
+# Subtest: original HC MA-PD05-A: actual source requests, closed atom/end observations and intermediate oracle
+ok 469 - original HC MA-PD05-A: actual source requests, closed atom/end observations and intermediate oracle
+  ---
+  duration_ms: 118.845601
+  type: 'test'
+  ...
+# Subtest: original HC MA-PD05-B: actual source requests, closed atom/end observations and intermediate oracle
+ok 470 - original HC MA-PD05-B: actual source requests, closed atom/end observations and intermediate oracle
+  ---
+  duration_ms: 84.464986
+  type: 'test'
+  ...
+# Subtest: original HC MA-PD06-A: actual source requests, closed atom/end observations and intermediate oracle
+ok 471 - original HC MA-PD06-A: actual source requests, closed atom/end observations and intermediate oracle
+  ---
+  duration_ms: 76.238368
+  type: 'test'
+  ...
+# Subtest: original HC MA-PD06-B: actual source requests, closed atom/end observations and intermediate oracle
+ok 472 - original HC MA-PD06-B: actual source requests, closed atom/end observations and intermediate oracle
+  ---
+  duration_ms: 78.506981
+  type: 'test'
+  ...
+# Subtest: original HC MA-DS01-02: actual source requests, closed atom/end observations and intermediate oracle
+ok 473 - original HC MA-DS01-02: actual source requests, closed atom/end observations and intermediate oracle
+  ---
+  duration_ms: 137.77146
+  type: 'test'
+  ...
+# Subtest: original HC MA-DS03: actual source requests, closed atom/end observations and intermediate oracle
+ok 474 - original HC MA-DS03: actual source requests, closed atom/end observations and intermediate oracle
+  ---
+  duration_ms: 99.179008
+  type: 'test'
+  ...
+# Subtest: original HC MA-DS04: actual source requests, closed atom/end observations and intermediate oracle
+ok 475 - original HC MA-DS04: actual source requests, closed atom/end observations and intermediate oracle
+  ---
+  duration_ms: 175.485906
+  type: 'test'
+  ...
+# Subtest: original HC MA-DS05: actual source requests, closed atom/end observations and intermediate oracle
+ok 476 - original HC MA-DS05: actual source requests, closed atom/end observations and intermediate oracle
+  ---
+  duration_ms: 203.613132
+  type: 'test'
+  ...
+# Subtest: client JSON, missing capability and source input changes never open the product mode
+ok 477 - client JSON, missing capability and source input changes never open the product mode
+  ---
+  duration_ms: 7.641688
+  type: 'test'
+  ...
+# Subtest: exact source capability rejects nested, asynchronous, wrong room and wrong mode; finally clears it
+ok 478 - exact source capability rejects nested, asynchronous, wrong room and wrong mode; finally clears it
+  ---
+  duration_ms: 6.9336
+  type: 'test'
+  ...
+# Subtest: authority instance provenance, seats, locked actor hero and real RPS mapping are checked before draw
+ok 479 - authority instance provenance, seats, locked actor hero and real RPS mapping are checked before draw
+  ---
+  duration_ms: 6.506864
+  type: 'test'
+  ...
+# Subtest: exact tuple cannot gain mutation/side/disabled-package drift
+ok 480 - exact tuple cannot gain mutation/side/disabled-package drift
+  ---
+  duration_ms: 5.56539
+  type: 'test'
+  ...
+# Subtest: real session retains original authority on outsider, stale, wrong turn and duplicate requests; caller snapshots cannot mutate it
+ok 481 - real session retains original authority on outsider, stale, wrong turn and duplicate requests; caller snapshots cannot mutate it
+  ---
+  duration_ms: 19.73916
+  type: 'test'
+  ...
+# Subtest: actual MA-PD05 paired red/black/public outputs equal after identity-only transport normalization
+ok 482 - actual MA-PD05 paired red/black/public outputs equal after identity-only transport normalization
+  ---
+  duration_ms: 180.907469
+  type: 'test'
+  ...
+# Subtest: actual MA-PD06 paired red/black/public outputs equal after identity-only transport normalization
+ok 483 - actual MA-PD06 paired red/black/public outputs equal after identity-only transport normalization
+  ---
+  duration_ms: 164.616063
+  type: 'test'
+  ...
+# Subtest: actual DS03 safety rejection retains hourglasses, body screen, revision, clock and next main
+ok 484 - actual DS03 safety rejection retains hourglasses, body screen, revision, clock and next main
+  ---
+  duration_ms: 91.999915
+  type: 'test'
+  ...
+# Subtest: actual DS04 B3 refusal is free; new safe B4 bomb spends one ammo/quota and preserves main/deadline
+ok 485 - actual DS04 B3 refusal is free; new safe B4 bomb spends one ammo/quota and preserves main/deadline
+  ---
+  duration_ms: 105.479112
+  type: 'test'
+  ...
+# Subtest: DESIGN draft is retained as draft, never auto-applied
+ok 486 - DESIGN draft is retained as draft, never auto-applied
+  ---
+  duration_ms: 1.197438
+  type: 'test'
+  ...
+# Subtest: DESIGN mismatched baseline cannot silently supersede formal rules
+ok 487 - DESIGN mismatched baseline cannot silently supersede formal rules
+  ---
+  duration_ms: 0.240671
+  type: 'test'
+  ...
+# Subtest: DESIGN overlapping parent/child rule changes are conflicts
+ok 488 - DESIGN overlapping parent/child rule changes are conflicts
+  ---
+  duration_ms: 0.131687
+  type: 'test'
+  ...
+# Subtest: DESIGN disjoint hero design may continue independently
+ok 489 - DESIGN disjoint hero design may continue independently
+  ---
+  duration_ms: 0.104878
+  type: 'test'
+  ...
+# Subtest: DESIGN confirmed status requires confirmation evidence and no open questions
+ok 490 - DESIGN confirmed status requires confirmation evidence and no open questions
+  ---
+  duration_ms: 0.133451
+  type: 'test'
+  ...
+# Subtest: DESIGN existing hero cannot masquerade as a new id
+ok 491 - DESIGN existing hero cannot masquerade as a new id
+  ---
+  duration_ms: 0.127712
+  type: 'test'
+  ...
+# Subtest: QUERY original W01_SELF_CHECK_FALSE_ACCEPT_LAND/move: marker, validator and authority agree
+ok 492 - QUERY original W01_SELF_CHECK_FALSE_ACCEPT_LAND/move: marker, validator and authority agree
+  ---
+  duration_ms: 62.032064
+  type: 'test'
+  ...
+# Subtest: QUERY original W01_SELF_CHECK_FALSE_ACCEPT_LAND/activation: marker, validator and authority agree
+ok 493 - QUERY original W01_SELF_CHECK_FALSE_ACCEPT_LAND/activation: marker, validator and authority agree
+  ---
+  duration_ms: 50.279195
+  type: 'test'
+  ...
+# Subtest: QUERY original W01_SELF_CHECK_FALSE_ACCEPT_LAND/continuing: marker, validator and authority agree
+ok 494 - QUERY original W01_SELF_CHECK_FALSE_ACCEPT_LAND/continuing: marker, validator and authority agree
+  ---
+  duration_ms: 13.284115
+  type: 'test'
+  ...
+# Subtest: QUERY original W02_SELF_CHECK_FALSE_ACCEPT_BOUNCE/move: marker, validator and authority agree
+ok 495 - QUERY original W02_SELF_CHECK_FALSE_ACCEPT_BOUNCE/move: marker, validator and authority agree
+  ---
+  duration_ms: 23.048921
+  type: 'test'
+  ...
+# Subtest: QUERY original W02_SELF_CHECK_FALSE_ACCEPT_BOUNCE/activation: marker, validator and authority agree
+ok 496 - QUERY original W02_SELF_CHECK_FALSE_ACCEPT_BOUNCE/activation: marker, validator and authority agree
+  ---
+  duration_ms: 30.193656
+  type: 'test'
+  ...
+# Subtest: QUERY original W02_SELF_CHECK_FALSE_ACCEPT_BOUNCE/continuing: marker, validator and authority agree
+ok 497 - QUERY original W02_SELF_CHECK_FALSE_ACCEPT_BOUNCE/continuing: marker, validator and authority agree
+  ---
+  duration_ms: 12.306545
+  type: 'test'
+  ...
+# Subtest: QUERY original W03_PATH_SCALE_NO_CRUSH_CONTRAST/move: marker, validator and authority agree
+ok 498 - QUERY original W03_PATH_SCALE_NO_CRUSH_CONTRAST/move: marker, validator and authority agree
+  ---
+  duration_ms: 27.951442
+  type: 'test'
+  ...
+# Subtest: QUERY original W03_PATH_SCALE_NO_CRUSH_CONTRAST/activation: marker, validator and authority agree
+ok 499 - QUERY original W03_PATH_SCALE_NO_CRUSH_CONTRAST/activation: marker, validator and authority agree
+  ---
+  duration_ms: 37.07026
+  type: 'test'
+  ...
+# Subtest: QUERY original W03_PATH_SCALE_NO_CRUSH_CONTRAST/continuing: marker, validator and authority agree
+ok 500 - QUERY original W03_PATH_SCALE_NO_CRUSH_CONTRAST/continuing: marker, validator and authority agree
+  ---
+  duration_ms: 16.45458
+  type: 'test'
+  ...
+# Subtest: QUERY original W04_NEW_CHECK_VS_ENEMY_ONLY/move: marker, validator and authority agree
+ok 501 - QUERY original W04_NEW_CHECK_VS_ENEMY_ONLY/move: marker, validator and authority agree
+  ---
+  duration_ms: 28.967059
+  type: 'test'
+  ...
+# Subtest: QUERY original W04_NEW_CHECK_VS_ENEMY_ONLY/activation: marker, validator and authority agree
+ok 502 - QUERY original W04_NEW_CHECK_VS_ENEMY_ONLY/activation: marker, validator and authority agree
+  ---
+  duration_ms: 25.168345
+  type: 'test'
+  ...
+# Subtest: QUERY original W04_NEW_CHECK_VS_ENEMY_ONLY/continuing: marker, validator and authority agree
+ok 503 - QUERY original W04_NEW_CHECK_VS_ENEMY_ONLY/continuing: marker, validator and authority agree
+  ---
+  duration_ms: 16.518253
+  type: 'test'
+  ...
+# Subtest: QUERY checker crushed/move/endpoint scale=false: safe evasion is advertised
+ok 504 - QUERY checker crushed/move/endpoint scale=false: safe evasion is advertised
+  ---
+  duration_ms: 44.507691
+  type: 'test'
+  ...
+# Subtest: QUERY checker crushed/activation/endpoint scale=false: safe evasion is advertised
+ok 505 - QUERY checker crushed/activation/endpoint scale=false: safe evasion is advertised
+  ---
+  duration_ms: 28.850752
+  type: 'test'
+  ...
+# Subtest: QUERY checker crushed/continuing/endpoint scale=false: safe evasion is advertised
+ok 506 - QUERY checker crushed/continuing/endpoint scale=false: safe evasion is advertised
+  ---
+  duration_ms: 11.341606
+  type: 'test'
+  ...
+# Subtest: QUERY checker crushed/move/endpoint scale=true: safe evasion is advertised
+ok 507 - QUERY checker crushed/move/endpoint scale=true: safe evasion is advertised
+  ---
+  duration_ms: 21.38992
+  type: 'test'
+  ...
+# Subtest: QUERY checker crushed/activation/endpoint scale=true: safe evasion is advertised
+ok 508 - QUERY checker crushed/activation/endpoint scale=true: safe evasion is advertised
+  ---
+  duration_ms: 28.790376
+  type: 'test'
+  ...
+# Subtest: QUERY checker crushed/continuing/endpoint scale=true: safe evasion is advertised
+ok 509 - QUERY checker crushed/continuing/endpoint scale=true: safe evasion is advertised
+  ---
+  duration_ms: 25.29058
+  type: 'test'
+  ...
+# Subtest: QUERY terminal search: the only iron-steed leg evasion prevents false checkmate
+ok 510 - QUERY terminal search: the only iron-steed leg evasion prevents false checkmate
+  ---
+  duration_ms: 17.808835
+  type: 'test'
+  ...
+# Subtest: QUERY terminal search: only unsafe shield returns do not prevent stalemate
+ok 511 - QUERY terminal search: only unsafe shield returns do not prevent stalemate
+  ---
+  duration_ms: 76.045876
+  type: 'test'
+  ...
+# Subtest: QUERY terminal search includes a real H02 continuing main instead of ordinary-only markers
+ok 512 - QUERY terminal search includes a real H02 continuing main instead of ordinary-only markers
+  ---
+  duration_ms: 60.453344
+  type: 'test'
+  ...
+# Subtest: QUERY H02 activation requires its real charge and continuing requires its real stealth opportunity
+ok 513 - QUERY H02 activation requires its real charge and continuing requires its real stealth opportunity
+  ---
+  duration_ms: 9.709905
+  type: 'test'
+  ...
+# Subtest: QUERY exact projection matches authoritative atom state, before counters and next begin
+ok 514 - QUERY exact projection matches authoritative atom state, before counters and next begin
+  ---
+  duration_ms: 57.130916
+  type: 'test'
+  ...
+# Subtest: QUERY exact early M01 and M04 royal threats preserve path/endpoint terminal semantics
+ok 515 - QUERY exact early M01 and M04 royal threats preserve path/endpoint terminal semantics
+  ---
+  duration_ms: 3.469922
+  type: 'test'
+  ...
+# Subtest: QUERY explicit own-general path death remains legal terminal, not a safe ordinary board
+ok 516 - QUERY explicit own-general path death remains legal terminal, not a safe ordinary board
+  ---
+  duration_ms: 1.961066
+  type: 'test'
+  ...
+# Subtest: QUERY open original batch refuses before any clone, including terminal search
+ok 517 - QUERY open original batch refuses before any clone, including terminal search
+  ---
+  duration_ms: 2.793346
+  type: 'test'
+  ...
+# Subtest: QUERY public-only coverage refuses hidden touched identities and unrelated effects without inventing a secret
+ok 518 - QUERY public-only coverage refuses hidden touched identities and unrelated effects without inventing a secret
+  ---
+  duration_ms: 15.475156
+  type: 'test'
+  ...
+# Subtest: QUERY suppression restores the outer observer after errors and never invalidates it
+ok 519 - QUERY suppression restores the outer observer after errors and never invalidates it
+  ---
+  duration_ms: 4.416263
+  type: 'test'
+  ...
+# Subtest: QUERY suppression avoids event snapshots, including direct terminal checkpoints
+ok 520 - QUERY suppression avoids event snapshots, including direct terminal checkpoints
+  ---
+  duration_ms: 1.015986
+  type: 'test'
+  ...
+# Subtest: QUERY unrelated rosters, late rain, child windows and special spaces retain their old query route
+ok 521 - QUERY unrelated rosters, late rain, child windows and special spaces retain their old query route
+  ---
+  duration_ms: 1.282096
+  type: 'test'
+  ...
+# Subtest: QUERY AS: interleaved public search preserves all original real requests, RNG and evidence
+ok 522 - QUERY AS: interleaved public search preserves all original real requests, RNG and evidence
+  ---
+  duration_ms: 1775.364769
+  type: 'test'
+  ...
+# Subtest: QUERY AP: interleaved public search preserves all original real requests, RNG and evidence
+ok 523 - QUERY AP: interleaved public search preserves all original real requests, RNG and evidence
+  ---
+  duration_ms: 1775.40042
+  type: 'test'
+  ...
+# Subtest: QUERY ES: interleaved public search preserves all original real requests, RNG and evidence
+ok 524 - QUERY ES: interleaved public search preserves all original real requests, RNG and evidence
+  ---
+  duration_ms: 1638.977945
+  type: 'test'
+  ...
+# Subtest: TARGET-SHADOW-01 actual Wind Shadow Dance cannot directly select its invisible piece and rolls back
+ok 525 - TARGET-SHADOW-01 actual Wind Shadow Dance cannot directly select its invisible piece and rolls back
+  ---
+  duration_ms: 23.812716
+  type: 'test'
+  ...
+# Subtest: TARGET-WIND-01 ordinary capture markers and check ignore the concealed true general identity
+ok 526 - TARGET-WIND-01 ordinary capture markers and check ignore the concealed true general identity
+  ---
+  duration_ms: 29.731195
+  type: 'test'
+  ...
+# Subtest: TARGET-WIND-02 delayed strong strike targets a normal-looking carrier, excludes public Wind generals with or without shadow
+ok 527 - TARGET-WIND-02 delayed strong strike targets a normal-looking carrier, excludes public Wind generals with or without shadow
+  ---
+  duration_ms: 17.076956
+  type: 'test'
+  ...
+# Subtest: TARGET-RANDOM-01 a sole invisible carrier remains a legal random execution target
+ok 528 - TARGET-RANDOM-01 a sole invisible carrier remains a legal random execution target
+  ---
+  duration_ms: 6.549289
+  type: 'test'
+  ...
+# Subtest: TARGET-RANDOM-02 destruction includes a covered carrier and finishes every locked draw after its death
+ok 529 - TARGET-RANDOM-02 destruction includes a covered carrier and finishes every locked draw after its death
+  ---
+  duration_ms: 5.424268
+  type: 'test'
+  ...
+# Subtest: TARGET-PRIVATE-01 opponent serialized view and public legality stay identical after secret shadow
+ok 530 - TARGET-PRIVATE-01 opponent serialized view and public legality stay identical after secret shadow
+  ---
+  duration_ms: 11.206755
+  type: 'test'
+  ...
+# Subtest: ONLINE-01 邀请口令只能供加入验证，永不进入公开房间
+ok 531 - ONLINE-01 邀请口令只能供加入验证，永不进入公开房间
+  ---
+  duration_ms: 2.177281
+  type: 'test'
+  ...
+# Subtest: ONLINE-02 第二位玩家加入后自动开始秘密猜拳，重复加入幂等
+ok 532 - ONLINE-02 第二位玩家加入后自动开始秘密猜拳，重复加入幂等
+  ---
+  duration_ms: 1.092632
+  type: 'test'
+  ...
+# Subtest: ONLINE-03 猜拳胜者为红方，红方先走，未决选择不公开
+ok 533 - ONLINE-03 猜拳胜者为红方，红方先走，未决选择不公开
+  ---
+  duration_ms: 3.098084
+  type: 'test'
+  ...
+# Subtest: CHAT-01 正式对局消息由房主校验、公开同步并共用两秒冷却
+ok 534 - CHAT-01 正式对局消息由房主校验、公开同步并共用两秒冷却
+  ---
+  duration_ms: 1.853244
+  type: 'test'
+  ...
+# Subtest: ONLINE-03A 猜拳三十秒到时由房主权威随机补齐且秘密结算
+ok 535 - ONLINE-03A 猜拳三十秒到时由房主权威随机补齐且秘密结算
+  ---
+  duration_ms: 0.862025
+  type: 'test'
+  ...
+# Subtest: ONLINE-03B 进入英雄选择后主动退出会立即形成公开判负结果
+ok 536 - ONLINE-03B 进入英雄选择后主动退出会立即形成公开判负结果
+  ---
+  duration_ms: 0.950407
+  type: 'test'
+  ...
+# Subtest: ONLINE-03C 再战邀请公开等待三十秒，拒绝或超时后允许再次邀请
+ok 537 - ONLINE-03C 再战邀请公开等待三十秒，拒绝或超时后允许再次邀请
+  ---
+  duration_ms: 0.490006
+  type: 'test'
+  ...
+# Subtest: ONLINE-03D 接受再战会清除上一局并重新进入秘密英雄选择
+ok 538 - ONLINE-03D 接受再战会清除上一局并重新进入秘密英雄选择
+  ---
+  duration_ms: 0.681373
+  type: 'test'
+  ...
+# Subtest: ONLINE-04 云端自动结算裁决，仅公开动画路线和最终状态
+ok 539 - ONLINE-04 云端自动结算裁决，仅公开动画路线和最终状态
+  ---
+  duration_ms: 13.02883
+  type: 'test'
+  ...
+# Subtest: ONLINE-05 客户端不能伪造服务端专用终局操作 ID
+ok 540 - ONLINE-05 客户端不能伪造服务端专用终局操作 ID
+  ---
+  duration_ms: 0.768775
+  type: 'test'
+  ...
+# Subtest: MODE-01 猜拳前双方确定英雄，只公开确认状态且本人可恢复选择
+ok 541 - MODE-01 猜拳前双方确定英雄，只公开确认状态且本人可恢复选择
+  ---
+  duration_ms: 2.212183
+  type: 'test'
+  ...
+# Subtest: MODE-02 英雄入场后双猎人同时准备，秘密锁定陷阱后才进入走棋
+ok 542 - MODE-02 英雄入场后双猎人同时准备，秘密锁定陷阱后才进入走棋
+  ---
+  duration_ms: 2.069819
+  type: 'test'
+  ...
+# Subtest: MODE-03 非猎人和越界坐标不能布置陷阱
+ok 543 - MODE-03 非猎人和越界坐标不能布置陷阱
+  ---
+  duration_ms: 0.782025
+  type: 'test'
+  ...
+# Subtest: MODE-05 英雄选择六十秒超时只随机未确认玩家并进入猜拳
+ok 544 - MODE-05 英雄选择六十秒超时只随机未确认玩家并进入猜拳
+  ---
+  duration_ms: 0.28638
+  type: 'test'
+  ...
+# Subtest: MODE-06 猎人准备超时保留草稿并随机补齐剩余层
+ok 545 - MODE-06 猎人准备超时保留草稿并随机补齐剩余层
+  ---
+  duration_ms: 1.294435
+  type: 'test'
+  ...
+# Subtest: MODE-04 联机刺杀经房间事务结算，公开状态同步技能次数与隐身标记
+ok 546 - MODE-04 联机刺杀经房间事务结算，公开状态同步技能次数与隐身标记
+  ---
+  duration_ms: 8.80117
+  type: 'test'
+  ...
+# Subtest: HUNTER-01 敌方落点触发一层陷阱，公开触发结果而不公开剩余坐标
+ok 547 - HUNTER-01 敌方落点触发一层陷阱，公开触发结果而不公开剩余坐标
+  ---
+  duration_ms: 2.710235
+  type: 'test'
+  ...
+# Subtest: HUNTER-02 第十个敌方正式回合结束后未触发陷阱失效
+ok 548 - HUNTER-02 第十个敌方正式回合结束后未触发陷阱失效
+  ---
+  duration_ms: 1.625401
+  type: 'test'
+  ...
+# Subtest: HUNTER-03 将帅踏入敌方陷阱时直接以伏击结束
+ok 549 - HUNTER-03 将帅踏入敌方陷阱时直接以伏击结束
+  ---
+  duration_ms: 1.062506
+  type: 'test'
+  ...
+# Subtest: HUNTER-04 壁垒弹回属于移置，触发起点的正常落位陷阱
+ok 550 - HUNTER-04 壁垒弹回属于移置，触发起点的正常落位陷阱
+  ---
+  duration_ms: 4.551092
+  type: 'test'
+  ...
+# Subtest: HUNTER-05 战士铁甲后的额外应将不消耗陷阱回合
+ok 551 - HUNTER-05 战士铁甲后的额外应将不消耗陷阱回合
+  ---
+  duration_ms: 5.940474
+  type: 'test'
+  ...
+# Subtest: HUNTER-06 同格叠层一次只触发一层，其余层照常扣除本次敌方回合
+ok 552 - HUNTER-06 同格叠层一次只触发一层，其余层照常扣除本次敌方回合
+  ---
+  duration_ms: 1.394655
+  type: 'test'
+  ...
+# Subtest: HUNTER-07 暗子翻成陷阱主人控制的棋子时不触发，用于避免低成本验身
+ok 553 - HUNTER-07 暗子翻成陷阱主人控制的棋子时不触发，用于避免低成本验身
+  ---
+  duration_ms: 1.834065
+  type: 'test'
+  ...
+# Subtest: EVID01 fixture initialization failure blocks verification despite retained authority state
+ok 554 - EVID01 fixture initialization failure blocks verification despite retained authority state
+  ---
+  duration_ms: 38.617544
+  type: 'test'
+  ...
+# Subtest: EVID02 invalid fixture events cannot become zero-valued evidence or a completed archive
+ok 555 - EVID02 invalid fixture events cannot become zero-valued evidence or a completed archive
+  ---
+  duration_ms: 64.542706
+  type: 'test'
+  ...
+# Subtest: EVID03 policy initialization evidence failure cannot qualify a prefix
+ok 556 - EVID03 policy initialization evidence failure cannot qualify a prefix
+  ---
+  duration_ms: 54.297376
+  type: 'test'
+  ...
+# Subtest: EVID04 policy retains a committed receipt and RNG while invalidating the research archive
+ok 557 - EVID04 policy retains a committed receipt and RNG while invalidating the research archive
+  ---
+  duration_ms: 81.667294
+  type: 'test'
+  ...
+# Subtest: EVID05 a discarded candidate's failed observation does not poison committed evidence
+ok 558 - EVID05 a discarded candidate's failed observation does not poison committed evidence
+  ---
+  duration_ms: 8.144674
+  type: 'test'
+  ...
+# Subtest: EVID06 a later timeout cannot turn invalid policy evidence into a legal terminal
+ok 559 - EVID06 a later timeout cannot turn invalid policy evidence into a legal terminal
+  ---
+  duration_ms: 7.745775
+  type: 'test'
+  ...
+# Subtest: REPLAY-ACTION-01 mutation assassination cannot substitute another piece during actual rewind
+ok 560 - REPLAY-ACTION-01 mutation assassination cannot substitute another piece during actual rewind
+  ---
+  duration_ms: 22.526306
+  type: 'test'
+  ...
+# Subtest: REPLAY-ACTION-02 restored stealth carrier cannot capture with strong strike during replay
+ok 561 - REPLAY-ACTION-02 restored stealth carrier cannot capture with strong strike during replay
+  ---
+  duration_ms: 28.119329
+  type: 'test'
+  ...
+# Subtest: REPLAY-ACTION-03 restored stealth replay to empty square clears pending replay and preserves spent charge
+ok 562 - REPLAY-ACTION-03 restored stealth replay to empty square clears pending replay and preserves spent charge
+  ---
+  duration_ms: 13.772367
+  type: 'test'
+  ...
+# Subtest: REPLAY-ACTION-04 restored stealth cannot exit with a move that gives check during replay
+ok 563 - REPLAY-ACTION-04 restored stealth cannot exit with a move that gives check during replay
+  ---
+  duration_ms: 12.039165
+  type: 'test'
+  ...
+# Subtest: REPLAY-ACTION-05 same-piece empty assassination obeys replay completion and spends only mutation charge
+ok 564 - REPLAY-ACTION-05 same-piece empty assassination obeys replay completion and spends only mutation charge
+  ---
+  duration_ms: 7.853637
+  type: 'test'
+  ...
+# Subtest: REPLAY-ACTION-06 room receipt at exact replay deadline settles timeout before consuming assassination
+ok 565 - REPLAY-ACTION-06 room receipt at exact replay deadline settles timeout before consuming assassination
+  ---
+  duration_ms: 6.55782
+  type: 'test'
+  ...
+# Subtest: REPLAY-ACTION-07 malformed chariot replay destinations reject without path walk or state change
+ok 566 - REPLAY-ACTION-07 malformed chariot replay destinations reject without path walk or state change
+  ---
+  duration_ms: 13.960114
+  type: 'test'
+  ...
+# Subtest: R4-RIVER-01 独立河道状态不占地面，不把保留棋盘位置当河格或第11行
+ok 567 - R4-RIVER-01 独立河道状态不占地面，不把保留棋盘位置当河格或第11行
+  ---
+  duration_ms: 3.310483
+  type: 'test'
+  ...
+# Subtest: R4-RIVER-02 河道与飞行互斥，飞行降落入口不能把河道棋自动拉回地面
+ok 568 - R4-RIVER-02 河道与飞行互斥，飞行降落入口不能把河道棋自动拉回地面
+  ---
+  duration_ms: 0.645099
+  type: 'test'
+  ...
+# Subtest: R4-RIVER-03 入河即时清除地面依赖感染与崩坏，保留无额外驱散的状态
+ok 569 - R4-RIVER-03 入河即时清除地面依赖感染与崩坏，保留无额外驱散的状态
+  ---
+  duration_ms: 0.294643
+  type: 'test'
+  ...
+# Subtest: R4-RIVER-04 普通主行动与刺杀不可通过ID或旧坐标操纵河道棋
+ok 570 - R4-RIVER-04 普通主行动与刺杀不可通过ID或旧坐标操纵河道棋
+  ---
+  duration_ms: 2.529219
+  type: 'test'
+  ...
+# Subtest: R4-RIVER-05 河道棋不作车路阻挡、炮架、马腿或象眼
+ok 571 - R4-RIVER-05 河道棋不作车路阻挡、炮架、马腿或象眼
+  ---
+  duration_ms: 1.589487
+  type: 'test'
+  ...
+# Subtest: R4-RIVER-06 河道目标不被普通进攻与路径碾碎读取
+ok 572 - R4-RIVER-06 河道目标不被普通进攻与路径碾碎读取
+  ---
+  duration_ms: 6.09831
+  type: 'test'
+  ...
+# Subtest: R4-RIVER-07 河道棋不形成棋盘将军；存活河道将帅不读旧锚点受攻击
+ok 573 - R4-RIVER-07 河道棋不形成棋盘将军；存活河道将帅不读旧锚点受攻击
+  ---
+  duration_ms: 1.415025
+  type: 'test'
+  ...
+# Subtest: R4-RIVER-08 既有陷阱、亡魂、扭曲落位与回合末不读取河道棋
+ok 574 - R4-RIVER-08 既有陷阱、亡魂、扭曲落位与回合末不读取河道棋
+  ---
+  duration_ms: 5.7054
+  type: 'test'
+  ...
+# Subtest: R4-RIVER-09 出河恢复地面再触发陷阱；占位或堡垒冲突不自动窒息
+ok 575 - R4-RIVER-09 出河恢复地面再触发陷阱；占位或堡垒冲突不自动窒息
+  ---
+  duration_ms: 1.328155
+  type: 'test'
+  ...
+# Subtest: R4-RIVER-10 暗置河道身份与控制须由来源定义，不读真实身份或旧棋位
+ok 576 - R4-RIVER-10 暗置河道身份与控制须由来源定义，不读真实身份或旧棋位
+  ---
+  duration_ms: 4.873175
+  type: 'test'
+  ...
+# Subtest: R4-RIVER-11 全场毁灭与讳言随机池默认排除河道棋，不能读取未定义暗身份
+ok 577 - R4-RIVER-11 全场毁灭与讳言随机池默认排除河道棋，不能读取未定义暗身份
+  ---
+  duration_ms: 12.420877
+  type: 'test'
+  ...
+# Subtest: R4-RIVER-12 风的明/暗承载池与混乱开始刷新默认排除河道棋
+ok 578 - R4-RIVER-12 风的明/暗承载池与混乱开始刷新默认排除河道棋
+  ---
+  duration_ms: 3.56147
+  type: 'test'
+  ...
+# Subtest: R4-RIVER-13 时光之末沙漏不召回河道勇士、不给河道龙补弹
+ok 579 - R4-RIVER-13 时光之末沙漏不召回河道勇士、不给河道龙补弹
+  ---
+  duration_ms: 2.495669
+  type: 'test'
+  ...
+# Subtest: R4-RIVER-14 消灭默认无河道权限；明确来源批次只记录河道死亡，不在旧锚点生亡魂
+ok 580 - R4-RIVER-14 消灭默认无河道权限；明确来源批次只记录河道死亡，不在旧锚点生亡魂
+  ---
+  duration_ms: 0.961003
+  type: 'test'
+  ...
+# Subtest: R4-RIVER-15 河道状态可公共协议恢复，消费层不创造同格容量或连通规则
+ok 581 - R4-RIVER-15 河道状态可公共协议恢复，消费层不创造同格容量或连通规则
+  ---
+  duration_ms: 0.834334
+  type: 'test'
+  ...
+# Subtest: R4-RIVER-16 时间线不把河道目标退回棋盘，投弹不读取河道龙或旧锚点
+ok 582 - R4-RIVER-16 时间线不把河道目标退回棋盘，投弹不读取河道龙或旧锚点
+  ---
+  duration_ms: 9.795819
+  type: 'test'
+  ...
+# Subtest: R4-RIVER-17 风归位不能把河道承载者拉回普通棋盘；出河允许与空中层共存
+ok 583 - R4-RIVER-17 风归位不能把河道承载者拉回普通棋盘；出河允许与空中层共存
+  ---
+  duration_ms: 2.664082
+  type: 'test'
+  ...
+# Subtest: SCORE JF01: 初始瞳力不足
+ok 584 - SCORE JF01: 初始瞳力不足
+  ---
+  duration_ms: 44.244435
+  type: 'test'
+  ...
+# Subtest: SCORE JF02: A洗牌后的回合资源
+ok 585 - SCORE JF02: A洗牌后的回合资源
+  ---
+  duration_ms: 182.595245
+  type: 'test'
+  ...
+# Subtest: SCORE JF03: B普通洞察与旧映射失效
+ok 586 - SCORE JF03: B普通洞察与旧映射失效
+  ---
+  duration_ms: 178.380799
+  type: 'test'
+  ...
+# Subtest: SCORE JF04: B放弃保留情报
+ok 587 - SCORE JF04: B放弃保留情报
+  ---
+  duration_ms: 140.878066
+  type: 'test'
+  ...
+# Subtest: SCORE JF05: 红2秘密洞察付不起
+ok 588 - SCORE JF05: 红2秘密洞察付不起
+  ---
+  duration_ms: 81.326903
+  type: 'test'
+  ...
+# Subtest: SCORE JF06: 红4首次秘密洞察
+ok 589 - SCORE JF06: 红4首次秘密洞察
+  ---
+  duration_ms: 264.022223
+  type: 'test'
+  ...
+# Subtest: SCORE JF07: 同回合第二次洞察拒绝
+ok 590 - SCORE JF07: 同回合第二次洞察拒绝
+  ---
+  duration_ms: 263.739753
+  type: 'test'
+  ...
+# Subtest: SCORE JF08: 已揭示目标拒绝
+ok 591 - SCORE JF08: 已揭示目标拒绝
+  ---
+  duration_ms: 76.360207
+  type: 'test'
+  ...
+# Subtest: SCORE JF09: 共享n与下一回合费用
+ok 592 - SCORE JF09: 共享n与下一回合费用
+  ---
+  duration_ms: 334.137726
+  type: 'test'
+  ...
+# Subtest: SCORE B stale/wrong actor/invalid ability reject, successful action replays exactly once
+ok 593 - SCORE B stale/wrong actor/invalid ability reject, successful action replays exactly once
+  ---
+  duration_ms: 61.810957
+  type: 'test'
+  ...
+# Subtest: SCORE A never adds a formal turn; skipped B counts only after its actual ordinary action
+ok 594 - SCORE A never adds a formal turn; skipped B counts only after its actual ordinary action
+  ---
+  duration_ms: 89.480921
+  type: 'test'
+  ...
+# Subtest: SCORE observer is passive: all nine final states, RNG tapes and clock values match with capture disabled
+ok 595 - SCORE observer is passive: all nine final states, RNG tapes and clock values match with capture disabled
+  ---
+  duration_ms: 922.792304
+  type: 'test'
+  ...
+# Subtest: SCORE private targets/payloads stay in owner and authority projections
+ok 596 - SCORE private targets/payloads stay in owner and authority projections
+  ---
+  duration_ms: 344.404287
+  type: 'test'
+  ...
+# Subtest: SCORE journal survives history truncation and B reset; persisted archive detects corruption
+ok 597 - SCORE journal survives history truncation and B reset; persisted archive detects corruption
+  ---
+  duration_ms: 579.408877
+  type: 'test'
+  ...
+# Subtest: SCORE legal permutation ranges and new mode guards remain enforced
+ok 598 - SCORE legal permutation ranges and new mode guards remain enforced
+  ---
+  duration_ms: 2.266605
+  type: 'test'
+  ...
+# Subtest: SCORE clock expiry rejects insight without advancing counters, paying cost or incrementing n
+ok 599 - SCORE clock expiry rejects insight without advancing counters, paying cost or incrementing n
+  ---
+  duration_ms: 7.988389
+  type: 'test'
+  ...
+# Subtest: SCORE insight does not restart its clock; B has no black ordinary clock and starts red3 once
+ok 600 - SCORE insight does not restart its clock; B has no black ordinary clock and starts red3 once
+  ---
+  duration_ms: 198.28567
+  type: 'test'
+  ...
+# Subtest: SCORE all 85 fields have values or explicit reasons; empirical and outcome estimates remain unknown
+ok 601 - SCORE all 85 fields have values or explicit reasons; empirical and outcome estimates remain unknown
+  ---
+  duration_ms: 67.301975
+  type: 'test'
+  ...
+# Subtest: SCORE captured snapshots are immutable, detached and scope cleanup survives errors
+ok 602 - SCORE captured snapshots are immutable, detached and scope cleanup survives errors
+  ---
+  duration_ms: 61.35916
+  type: 'test'
+  ...
+# Subtest: STD-FX-01-fixed-opening
+ok 603 - STD-FX-01-fixed-opening
+  ---
+  duration_ms: 48.799453
+  type: 'test'
+  ...
+# Subtest: STD-FX-02-eight-plies-and-isolated-probes
+ok 604 - STD-FX-02-eight-plies-and-isolated-probes
+  ---
+  duration_ms: 773.745719
+  type: 'test'
+  ...
+# Subtest: STD-NI-01-private-traps-process-noninterference
+ok 605 - STD-NI-01-private-traps-process-noninterference
+  ---
+  duration_ms: 652.334134
+  type: 'test'
+  ...
+# Subtest: STD-FX-03-H01-one-layer-canonical-death
+ok 606 - STD-FX-03-H01-one-layer-canonical-death
+  ---
+  duration_ms: 88.2948
+  type: 'test'
+  ...
+# Subtest: STD-FX-05-H01-twelfth-enemy-turn-expiry
+ok 607 - STD-FX-05-H01-twelfth-enemy-turn-expiry
+  ---
+  duration_ms: 598.418696
+  type: 'test'
+  ...
+# Subtest: STD-FX-06-H02-activation-delayed-strike
+ok 608 - STD-FX-06-H02-activation-delayed-strike
+  ---
+  duration_ms: 258.70096
+  type: 'test'
+  ...
+# Subtest: STD-H02-two-future-formal-windows
+ok 609 - STD-H02-two-future-formal-windows
+  ---
+  duration_ms: 145.585341
+  type: 'test'
+  ...
+# Subtest: STD-FX-09-H11-A-restores-both-captures
+ok 610 - STD-FX-09-H11-A-restores-both-captures
+  ---
+  duration_ms: 97.565576
+  type: 'test'
+  ...
+# Subtest: STD-FX-10-H11-B-count-and-callback-separation
+ok 611 - STD-FX-10-H11-B-count-and-callback-separation
+  ---
+  duration_ms: 110.674997
+  type: 'test'
+  ...
+# Subtest: HC-F01-F02-legal-initial-worlds-and-first-reveal
+ok 612 - HC-F01-F02-legal-initial-worlds-and-first-reveal
+  ---
+  duration_ms: 123.245104
+  type: 'test'
+  ...
+# Subtest: HC-NI-real-process-matched-history
+ok 613 - HC-NI-real-process-matched-history
+  ---
+  duration_ms: 850.692351
+  type: 'test'
+  ...
+# Subtest: HC-F03-H11-A-per-side-redeal
+ok 614 - HC-F03-H11-A-per-side-redeal
+  ---
+  duration_ms: 34.339032
+  type: 'test'
+  ...
+# Subtest: HC-F04-H11-B-confirmed-count-and-clock
+ok 615 - HC-F04-H11-B-confirmed-count-and-clock
+  ---
+  duration_ms: 113.187702
+  type: 'test'
+  ...
+# Subtest: HC-F04-H11-B-skip-preserves-remaining-clock
+ok 616 - HC-F04-H11-B-skip-preserves-remaining-clock
+  ---
+  duration_ms: 63.872213
+  type: 'test'
+  ...
+# Subtest: HC-F04-H11-B-deadline-and-late-action
+ok 617 - HC-F04-H11-B-deadline-and-late-action
+  ---
+  duration_ms: 90.436807
+  type: 'test'
+  ...
+# Subtest: HC-F04-H11-B-rejection-and-retry-keep-clock
+ok 618 - HC-F04-H11-B-rejection-and-retry-keep-clock
+  ---
+  duration_ms: 68.211341
+  type: 'test'
+  ...
+# Subtest: HC-F05-dual-death-restoration-subcheck-and-retry
+ok 619 - HC-F05-dual-death-restoration-subcheck-and-retry
+  ---
+  duration_ms: 34.141716
+  type: 'test'
+  ...
+# Subtest: MODE-four-source-worlds-pre-RPS-strata
+ok 620 - MODE-four-source-worlds-pre-RPS-strata
+  ---
+  duration_ms: 217.869305
+  type: 'test'
+  ...
+# Subtest: MODE-product-gates-room-source-mutation-protection
+ok 621 - MODE-product-gates-room-source-mutation-protection
+  ---
+  duration_ms: 1.213323
+  type: 'test'
+  ...
+# Subtest: MODE-H11-red-ineligible-used-and-declined-windows
+ok 622 - MODE-H11-red-ineligible-used-and-declined-windows
+  ---
+  duration_ms: 247.347021
+  type: 'test'
+  ...
+# Subtest: MODE-actual-terminal-clock-and-censor-gate
+ok 623 - MODE-actual-terminal-clock-and-censor-gate
+  ---
+  duration_ms: 41.097152
+  type: 'test'
+  ...
+# Subtest: MODE-observer-passivity-and-short-P0-flow
+ok 624 - MODE-observer-passivity-and-short-P0-flow
+  ---
+  duration_ms: 1540.086369
+  type: 'test'
+  ...
+# Subtest: POLICY Q01/Q19-Q24: four whole-source worlds retain actor identity and both pre-RPS strata
+ok 625 - POLICY Q01/Q19-Q24: four whole-source worlds retain actor identity and both pre-RPS strata
+  ---
+  duration_ms: 127.823286
+  type: 'test'
+  ...
+# Subtest: POLICY Q22: 11 initialization and complete JF03 authority trajectory match unchanged product APIs
+ok 626 - POLICY Q22: 11 initialization and complete JF03 authority trajectory match unchanged product APIs
+  ---
+  duration_ms: 151.38567
+  type: 'test'
+  ...
+# Subtest: POLICY Q03-Q11 authority routing reuses legal JF01 prefix
+ok 627 - POLICY Q03-Q11 authority routing reuses legal JF01 prefix
+  ---
+  duration_ms: 30.927117
+  type: 'test'
+  ...
+# Subtest: POLICY Q03-Q11 authority routing reuses legal JF02 prefix
+ok 628 - POLICY Q03-Q11 authority routing reuses legal JF02 prefix
+  ---
+  duration_ms: 46.802853
+  type: 'test'
+  ...
+# Subtest: POLICY Q03-Q11 authority routing reuses legal JF03 prefix
+ok 629 - POLICY Q03-Q11 authority routing reuses legal JF03 prefix
+  ---
+  duration_ms: 80.148333
+  type: 'test'
+  ...
+# Subtest: POLICY Q03-Q11 authority routing reuses legal JF04 prefix
+ok 630 - POLICY Q03-Q11 authority routing reuses legal JF04 prefix
+  ---
+  duration_ms: 91.765001
+  type: 'test'
+  ...
+# Subtest: POLICY Q03-Q11 authority routing reuses legal JF05 prefix
+ok 631 - POLICY Q03-Q11 authority routing reuses legal JF05 prefix
+  ---
+  duration_ms: 78.648359
+  type: 'test'
+  ...
+# Subtest: POLICY Q03-Q11 authority routing reuses legal JF06 prefix
+ok 632 - POLICY Q03-Q11 authority routing reuses legal JF06 prefix
+  ---
+  duration_ms: 145.144956
+  type: 'test'
+  ...
+# Subtest: POLICY Q03-Q11 authority routing reuses legal JF07 prefix
+ok 633 - POLICY Q03-Q11 authority routing reuses legal JF07 prefix
+  ---
+  duration_ms: 160.648573
+  type: 'test'
+  ...
+# Subtest: POLICY Q03-Q11 authority routing reuses legal JF08 prefix
+ok 634 - POLICY Q03-Q11 authority routing reuses legal JF08 prefix
+  ---
+  duration_ms: 44.993866
+  type: 'test'
+  ...
+# Subtest: POLICY Q03-Q11 authority routing reuses legal JF09 prefix
+ok 635 - POLICY Q03-Q11 authority routing reuses legal JF09 prefix
+  ---
+  duration_ms: 224.648033
+  type: 'test'
+  ...
+# Subtest: POLICY Q09-Q11/Q28: A count, B replacement callbacks and receipt clocks stay distinct
+ok 636 - POLICY Q09-Q11/Q28: A count, B replacement callbacks and receipt clocks stay distinct
+  ---
+  duration_ms: 189.162525
+  type: 'test'
+  ...
+# Subtest: POLICY Q02/Q15/Q18/Q37: unseen identity permutations and authority metadata cannot reach process input
+ok 637 - POLICY Q02/Q15/Q18/Q37: unseen identity permutations and authority metadata cannot reach process input
+  ---
+  duration_ms: 306.457129
+  type: 'test'
+  ...
+# Subtest: POLICY Q06/Q16: secret target and private payload do not change peer history, catalog, budget or process decision
+ok 638 - POLICY Q06/Q16: secret target and private payload do not change peer history, catalog, budget or process decision
+  ---
+  duration_ms: 920.265739
+  type: 'test'
+  ...
+# Subtest: POLICY Q12/Q14: exact retry, changed payload, cross-actor ID and failed attempts have bounded transaction effects
+ok 639 - POLICY Q12/Q14: exact retry, changed payload, cross-actor ID and failed attempts have bounded transaction effects
+  ---
+  duration_ms: 66.023795
+  type: 'test'
+  ...
+# Subtest: POLICY Q13/Q17/Q36: memory preserves known-then payload while wash invalidates current slot constraints
+ok 640 - POLICY Q13/Q17/Q36: memory preserves known-then payload while wash invalidates current slot constraints
+  ---
+  duration_ms: 423.182206
+  type: 'test'
+  ...
+# Subtest: POLICY Q23: scope is synchronous, room-bound, fixed-source, and does not change normal product or mode guards
+ok 641 - POLICY Q23: scope is synchronous, room-bound, fixed-source, and does not change normal product or mode guards
+  ---
+  duration_ms: 5.746703
+  type: 'test'
+  ...
+# Subtest: POLICY Q25/Q38: semantic RNG ranges, repeatability, domain separation and rollback
+ok 642 - POLICY Q25/Q38: semantic RNG ranges, repeatability, domain separation and rollback
+  ---
+  duration_ms: 1.308525
+  type: 'test'
+  ...
+# Subtest: POLICY Q28/Q30/Q33-Q35: P0 real engine flow, passive observer, unknown endpoints and finite budget never produce scores
+ok 643 - POLICY Q28/Q30/Q33-Q35: P0 real engine flow, passive observer, unknown endpoints and finite budget never produce scores
+  ---
+  duration_ms: 14629.257821
+  type: 'test'
+  ...
+# Subtest: POLICY Q34: private durable journal retains prep/attempt/callback witnesses with frozen manifest
+ok 644 - POLICY Q34: private durable journal retains prep/attempt/callback witnesses with frozen manifest
+  ---
+  duration_ms: 89.493189
+  type: 'test'
+  ...
+# Subtest: POLICY Q26/Q27: related worlds keep legal marginals, isolated sessions and one cluster identity across splits
+ok 645 - POLICY Q26/Q27: related worlds keep legal marginals, isolated sessions and one cluster identity across splits
+  ---
+  duration_ms: 52.943773
+  type: 'test'
+  ...
+# Subtest: SET-01 将帅固定在标准位置
+ok 646 - SET-01 将帅固定在标准位置
+  ---
+  duration_ms: 2.850031
+  type: 'test'
+  ...
+# Subtest: SET-02 秘密池恰好30枚且不含将帅
+ok 647 - SET-02 秘密池恰好30枚且不含将帅
+  ---
+  duration_ms: 0.261613
+  type: 'test'
+  ...
+# Subtest: SET-03 每种颜色的棋子数量正确
+ok 648 - SET-03 每种颜色的棋子数量正确
+  ---
+  duration_ms: 0.26589
+  type: 'test'
+  ...
+# Subtest: SET-04 全局洗牌允许红黑棋进入对方位置
+ok 649 - SET-04 全局洗牌允许红黑棋进入对方位置
+  ---
+  duration_ms: 0.381713
+  type: 'test'
+  ...
+# Subtest: SET-05 32个棋子ID唯一且没有遗漏
+ok 650 - SET-05 32个棋子ID唯一且没有遗漏
+  ---
+  duration_ms: 0.311448
+  type: 'test'
+  ...
+# Subtest: SET-06 公开暗子不含真实颜色与兵种
+ok 651 - SET-06 公开暗子不含真实颜色与兵种
+  ---
+  duration_ms: 0.349535
+  type: 'test'
+  ...
+# Subtest: SET-07 相同随机源可稳定复现映射
+ok 652 - SET-07 相同随机源可稳定复现映射
+  ---
+  duration_ms: 0.547663
+  type: 'test'
+  ...
+# Subtest: SET-08 所有存活暗子都在标准暗子位置
+ok 653 - SET-08 所有存活暗子都在标准暗子位置
+  ---
+  duration_ms: 0.498759
+  type: 'test'
+  ...
+# Subtest: RPS-01 单方选择只公开已提交状态
+ok 654 - RPS-01 单方选择只公开已提交状态
+  ---
+  duration_ms: 0.441924
+  type: 'test'
+  ...
+# Subtest: RPS-02 正确判定胜者并分配红方
+ok 655 - RPS-02 正确判定胜者并分配红方
+  ---
+  duration_ms: 0.420802
+  type: 'test'
+  ...
+# Subtest: RPS-03 正确判定胜者并分配红方
+ok 656 - RPS-03 正确判定胜者并分配红方
+  ---
+  duration_ms: 0.174292
+  type: 'test'
+  ...
+# Subtest: RPS-04 正确判定胜者并分配红方
+ok 657 - RPS-04 正确判定胜者并分配红方
+  ---
+  duration_ms: 0.116365
+  type: 'test'
+  ...
+# Subtest: RPS-05 平局后轮次加一并重新选择
+ok 658 - RPS-05 平局后轮次加一并重新选择
+  ---
+  duration_ms: 0.257497
+  type: 'test'
+  ...
+# Subtest: RPS-06 同一轮不能覆盖已经锁定的选择
+ok 659 - RPS-06 同一轮不能覆盖已经锁定的选择
+  ---
+  duration_ms: 0.575505
+  type: 'test'
+  ...
+# Subtest: RPS-07 胜者成为红方且正式棋局红方先走
+ok 660 - RPS-07 胜者成为红方且正式棋局红方先走
+  ---
+  duration_ms: 0.655375
+  type: 'test'
+  ...
+# Subtest: B01 paper coordinates and red/black rook geometry use y=9-row
+ok 661 - B01 paper coordinates and red/black rook geometry use y=9-row
+  ---
+  duration_ms: 3.993308
+  type: 'test'
+  ...
+# Subtest: B01 actual horse leg, pawn direction, palace advisor and elephant eye/river
+ok 662 - B01 actual horse leg, pawn direction, palace advisor and elephant eye/river
+  ---
+  duration_ms: 3.4283
+  type: 'test'
+  ...
+# Subtest: B02 intervening real advisor block clears a ray; recapture rechecks and enemy quiet step lowers once
+ok 663 - B02 intervening real advisor block clears a ray; recapture rechecks and enemy quiet step lowers once
+  ---
+  duration_ms: 1.242026
+  type: 'test'
+  ...
+# Subtest: B02 cleared/recreated ray is counted from both-side samples, not enemy-only snapshots
+ok 664 - B02 cleared/recreated ray is counted from both-side samples, not enemy-only snapshots
+  ---
+  duration_ms: 0.95163
+  type: 'test'
+  ...
+# Subtest: B03 W02 quiet pawn and W09 same rook ray keep identical generated key and lethal level
+ok 665 - B03 W02 quiet pawn and W09 same rook ray keep identical generated key and lethal level
+  ---
+  duration_ms: 3.677755
+  type: 'test'
+  ...
+# Subtest: B03 same-ray dedup is also used for dead-owner execution progress
+ok 666 - B03 same-ray dedup is also used for dead-owner execution progress
+  ---
+  duration_ms: 0.992881
+  type: 'test'
+  ...
+# Subtest: B04 horse uncovers rook and simultaneously checks: two real sources, one level increment
+ok 667 - B04 horse uncovers rook and simultaneously checks: two real sources, one level increment
+  ---
+  duration_ms: 8.149181
+  type: 'test'
+  ...
+# Subtest: B05 persistent rook plus a genuinely new horse source adds exactly one
+ok 668 - B05 persistent rook plus a genuinely new horse source adds exactly one
+  ---
+  duration_ms: 0.435965
+  type: 'test'
+  ...
+# Subtest: B06 owner general fixed; enemy general still uses normal palace movement
+ok 669 - B06 owner general fixed; enemy general still uses normal palace movement
+  ---
+  duration_ms: 0.58605
+  type: 'test'
+  ...
+# Subtest: B06 normal self-check rejected; gamble only relaxes final self-check and keeps geometry/targets
+ok 670 - B06 normal self-check rejected; gamble only relaxes final self-check and keeps geometry/targets
+  ---
+  duration_ms: 0.750508
+  type: 'test'
+  ...
+# Subtest: B06 special choice when not checked is rejected
+ok 671 - B06 special choice when not checked is rejected
+  ---
+  duration_ms: 0.230947
+  type: 'test'
+  ...
+# Subtest: B07 remote advisor, enemy advisor and non-advisor cannot pay guard
+ok 672 - B07 remote advisor, enemy advisor and non-advisor cannot pay guard
+  ---
+  duration_ms: 0.617919
+  type: 'test'
+  ...
+# Subtest: B07 covered, temporary-control, absent provenance and live revived IDs propagate unknown
+ok 673 - B07 covered, temporary-control, absent provenance and live revived IDs propagate unknown
+  ---
+  duration_ms: 3.060998
+  type: 'test'
+  ...
+# Subtest: B08 diagonal guard works for each color and is removed only in returned occupancy candidate
+ok 674 - B08 diagonal guard works for each color and is removed only in returned occupancy candidate
+  ---
+  duration_ms: 0.834363
+  type: 'test'
+  ...
+# Subtest: B08 removing guard really opens a rook path before validating the move
+ok 675 - B08 removing guard really opens a rook path before validating the move
+  ---
+  duration_ms: 0.383145
+  type: 'test'
+  ...
+# Subtest: B08 removal changes actual horse leg; invalid or sacrificed source leaves all originals unchanged
+ok 676 - B08 removal changes actual horse leg; invalid or sacrificed source leaves all originals unchanged
+  ---
+  duration_ms: 0.454803
+  type: 'test'
+  ...
+# Subtest: B08 removing an advisor can expose a second real attack; guard cost never keeps its old blocking square
+ok 677 - B08 removing an advisor can expose a second real attack; guard cost never keeps its old blocking square
+  ---
+  duration_ms: 0.403356
+  type: 'test'
+  ...
+# Subtest: B09 quota zero still permits a genuine rook block; query does not manufacture no_reply
+ok 678 - B09 quota zero still permits a genuine rook block; query does not manufacture no_reply
+  ---
+  duration_ms: 4.209603
+  type: 'test'
+  ...
+# Subtest: B09 exhausted quota and no ordinary evasion yields a preview-validated no_reply fact
+ok 679 - B09 exhausted quota and no ordinary evasion yields a preview-validated no_reply fact
+  ---
+  duration_ms: 4.368932
+  type: 'test'
+  ...
+# Subtest: B10 resources alone cannot create an action when only fixed general remains
+ok 680 - B10 resources alone cannot create an action when only fixed general remains
+  ---
+  duration_ms: 0.208063
+  type: 'test'
+  ...
+# Subtest: B10 actual pawn action creates special replies, while no-check immobility is not no_reply
+ok 681 - B10 actual pawn action creates special replies, while no-check immobility is not no_reply
+  ---
+  duration_ms: 9.046824
+  type: 'test'
+  ...
+# Subtest: B11 static ordinary cannon check recognized; changed screen is unknown even if final check clears
+ok 682 - B11 static ordinary cannon check recognized; changed screen is unknown even if final check clears
+  ---
+  duration_ms: 5.867934
+  type: 'test'
+  ...
+# Subtest: B11 static cannon and unchanged screen keep continuity on unrelated ordinary moves
+ok 683 - B11 static cannon and unchanged screen keep continuity on unrelated ordinary moves
+  ---
+  duration_ms: 0.270416
+  type: 'test'
+  ...
+# Subtest: B11 open original WeakMap batch is caught before clone; context cannot bless an open batch
+ok 684 - B11 open original WeakMap batch is caught before clone; context cannot bless an open batch
+  ---
+  duration_ms: 0.356195
+  type: 'test'
+  ...
+# Subtest: B11 special layer, effects, mode, pending atom and unattested closure never mean safe or no replies
+ok 685 - B11 special layer, effects, mode, pending atom and unattested closure never mean safe or no replies
+  ---
+  duration_ms: 0.393872
+  type: 'test'
+  ...
+# Subtest: B11 invalid/missing/duplicate generals and moved owner general are not ordinary safety proofs
+ok 686 - B11 invalid/missing/duplicate generals and moved owner general are not ordinary safety proofs
+  ---
+  duration_ms: 0.297948
+  type: 'test'
+  ...
+# Subtest: B12 adapter ignores forged client facts and calls core using freshly derived threats
+ok 687 - B12 adapter ignores forged client facts and calls core using freshly derived threats
+  ---
+  duration_ms: 0.443977
+  type: 'test'
+  ...
+# Subtest: B12 queries leave board, private component and unrelated secret unchanged and consume no random/time
+ok 688 - B12 queries leave board, private component and unrelated secret unchanged and consume no random/time
+  ---
+  duration_ms: 10.787965
+  type: 'test'
+  ...
+# Subtest: B12 stale board revision, stale threat snapshots and used guard are rejected without consumption
+ok 689 - B12 stale board revision, stale threat snapshots and used guard are rejected without consumption
+  ---
+  duration_ms: 0.410106
+  type: 'test'
+  ...
+# Subtest: B12 ordinary attack query differs from ordinary capture-general eligibility
+ok 690 - B12 ordinary attack query differs from ordinary capture-general eligibility
+  ---
+  duration_ms: 0.176725
+  type: 'test'
+  ...
+# Subtest: B11 same-ID color/type changes are unknown even when ordinary-looking final occupancy is supplied
+ok 691 - B11 same-ID color/type changes are unknown even when ordinary-looking final occupancy is supplied
+  ---
+  duration_ms: 1.243458
+  type: 'test'
+  ...
+# Subtest: B01 black pawn direction and black advisor palace are read from engine rules
+ok 692 - B01 black pawn direction and black advisor palace are read from engine rules
+  ---
+  duration_ms: 0.298959
+  type: 'test'
+  ...
+# Subtest: B12 real ordinary checkmate is derived rather than accepted as a client flag
+ok 693 - B12 real ordinary checkmate is derived rather than accepted as a client flag
+  ---
+  duration_ms: 0.288864
+  type: 'test'
+  ...
+# Subtest: B12 core-invalid state cannot be accepted as an empty exhaustive reply proof
+ok 694 - B12 core-invalid state cannot be accepted as an empty exhaustive reply proof
+  ---
+  duration_ms: 0.431458
+  type: 'test'
+  ...
+# Subtest: A01 initial levels, six probability bands and levels beyond six
+ok 695 - A01 initial levels, six probability bands and levels beyond six
+  ---
+  duration_ms: 4.927863
+  type: 'test'
+  ...
+# Subtest: A02 unchanged same-rook checking ray, double check and new additional threat
+ok 696 - A02 unchanged same-rook checking ray, double check and new additional threat
+  ---
+  duration_ms: 0.782145
+  type: 'test'
+  ...
+# Subtest: A02 checking threat cleared on owner action can be recreated by the same rook
+ok 697 - A02 checking threat cleared on owner action can be recreated by the same rook
+  ---
+  duration_ms: 0.366971
+  type: 'test'
+  ...
+# Subtest: A03 no-check enemy action lowers exactly one level and floors at zero
+ok 698 - A03 no-check enemy action lowers exactly one level and floors at zero
+  ---
+  duration_ms: 0.799091
+  type: 'test'
+  ...
+# Subtest: A04 red diagonal adjacent advisor costs once without RNG or level reset
+ok 699 - A04 red diagonal adjacent advisor costs once without RNG or level reset
+  ---
+  duration_ms: 1.021635
+  type: 'test'
+  ...
+# Subtest: A04 black diagonal adjacent advisor costs once without RNG or level reset
+ok 700 - A04 black diagonal adjacent advisor costs once without RNG or level reset
+  ---
+  duration_ms: 0.443976
+  type: 'test'
+  ...
+# Subtest: A04 remote, enemy, non-advisor and missing guards are rejected atomically
+ok 701 - A04 remote, enemy, non-advisor and missing guards are rejected atomically
+  ---
+  duration_ms: 0.921454
+  type: 'test'
+  ...
+# Subtest: A04 action invalid after actual sacrifice cost does not consume guard
+ok 702 - A04 action invalid after actual sacrifice cost does not consume guard
+  ---
+  duration_ms: 0.296255
+  type: 'test'
+  ...
+# Subtest: A05 every death threshold has exact boundary behavior and one draw
+ok 703 - A05 every death threshold has exact boundary behavior and one draw
+  ---
+  duration_ms: 1.41758
+  type: 'test'
+  ...
+# Subtest: A05 missing or malformed random sampler never mutates the input
+ok 704 - A05 missing or malformed random sampler never mutates the input
+  ---
+  duration_ms: 0.895565
+  type: 'test'
+  ...
+# Subtest: A06 death establishes 6/2/0 once; replay never refreshes or resamples
+ok 705 - A06 death establishes 6/2/0 once; replay never refreshes or resamples
+  ---
+  duration_ms: 0.416135
+  type: 'test'
+  ...
+# Subtest: A06 previously used guard stays used after death
+ok 706 - A06 previously used guard stays used after death
+  ---
+  duration_ms: 1.671371
+  type: 'test'
+  ...
+# Subtest: A07 death-triggering countercheck is excluded; ordinary checkmate still wins
+ok 707 - A07 death-triggering countercheck is excluded; ordinary checkmate still wins
+  ---
+  duration_ms: 1.613374
+  type: 'test'
+  ...
+# Subtest: A08 third special attempt rejected; no-reply adjudication terminates before another move
+ok 708 - A08 third special attempt rejected; no-reply adjudication terminates before another move
+  ---
+  duration_ms: 0.713812
+  type: 'test'
+  ...
+# Subtest: A08 zero special quota preserves ordinary evasion and an already unused guard cannot add quota
+ok 709 - A08 zero special quota preserves ordinary evasion and an already unused guard cannot add quota
+  ---
+  duration_ms: 0.481613
+  type: 'test'
+  ...
+# Subtest: A08 post-death guard costs one special evasion, one turn and no random draw
+ok 710 - A08 post-death guard costs one special evasion, one turn and no random draw
+  ---
+  duration_ms: 0.229004
+  type: 'test'
+  ...
+# Subtest: A09 sixth own turn fourth effective check wins before timeout, double check adds one
+ok 711 - A09 sixth own turn fourth effective check wins before timeout, double check adds one
+  ---
+  duration_ms: 0.680592
+  type: 'test'
+  ...
+# Subtest: A09 sixth-turn normal checkmate wins even without four checks
+ok 712 - A09 sixth-turn normal checkmate wins even without four checks
+  ---
+  duration_ms: 0.473662
+  type: 'test'
+  ...
+# Subtest: A09 no winning result on sixth turn loses; neither side can play after terminal
+ok 713 - A09 no winning result on sixth turn loses; neither side can play after terminal
+  ---
+  duration_ms: 0.620452
+  type: 'test'
+  ...
+# Subtest: A09 four early checks win immediately without waiting until turn six
+ok 714 - A09 four early checks win immediately without waiting until turn six
+  ---
+  duration_ms: 0.367462
+  type: 'test'
+  ...
+# Subtest: A10 preview is pure, retry at a later revision is duplicate, reused ID cannot change payload
+ok 715 - A10 preview is pure, retry at a later revision is duplicate, reused ID cannot change payload
+  ---
+  duration_ms: 0.462605
+  type: 'test'
+  ...
+# Subtest: A10 stale revision, wrong actor, bad geometry, general movement and normal self-check reject before RNG
+ok 716 - A10 stale revision, wrong actor, bad geometry, general movement and normal self-check reject before RNG
+  ---
+  duration_ms: 0.523937
+  type: 'test'
+  ...
+# Subtest: A10 equivalent threat-array order is retry-equivalent and accepted inputs stay immutable
+ok 717 - A10 equivalent threat-array order is retry-equivalent and accepted inputs stay immutable
+  ---
+  duration_ms: 0.27311
+  type: 'test'
+  ...
+# Subtest: A11 live/dead paired branches expose no module projection to opponent
+ok 718 - A11 live/dead paired branches expose no module projection to opponent
+  ---
+  duration_ms: 0.402264
+  type: 'test'
+  ...
+# Subtest: A11 owner projection contains no action history, IDs or mutable state reference
+ok 719 - A11 owner projection contains no action history, IDs or mutable state reference
+  ---
+  duration_ms: 0.170306
+  type: 'test'
+  ...
+# Subtest: A12 unknown effects, unconfirmed guard sources and malformed facts fail without consumption
+ok 720 - A12 unknown effects, unconfirmed guard sources and malformed facts fail without consumption
+  ---
+  duration_ms: 0.551628
+  type: 'test'
+  ...
+# Subtest: A12 malformed state or facts cannot manufacture death resources
+ok 721 - A12 malformed state or facts cannot manufacture death resources
+  ---
+  duration_ms: 0.276635
+  type: 'test'
+  ...
+# Subtest: SNAP-RESOURCE-01 rewind restores destruction charge, deaths and reveal after a committed random set
+ok 722 - SNAP-RESOURCE-01 rewind restores destruction charge, deaths and reveal after a committed random set
+  ---
+  duration_ms: 18.22751
+  type: 'test'
+  ...
+# Subtest: SNAP-RESOURCE-02 rewind restores invocation progress and formal counts
+ok 723 - SNAP-RESOURCE-02 rewind restores invocation progress and formal counts
+  ---
+  duration_ms: 9.680111
+  type: 'test'
+  ...
+# Subtest: SNAP-RESOURCE-03 rewind restores assassination charge and removes newly activated stealth
+ok 724 - SNAP-RESOURCE-03 rewind restores assassination charge and removes newly activated stealth
+  ---
+  duration_ms: 6.50417
+  type: 'test'
+  ...
+# Subtest: SNAP-RESOURCE-04 rewind restores Warrior qualification IDs and removes a newly earned barrier
+ok 725 - SNAP-RESOURCE-04 rewind restores Warrior qualification IDs and removes a newly earned barrier
+  ---
+  duration_ms: 5.713732
+  type: 'test'
+  ...
+# Subtest: SNAP-RESOURCE-05 rewind restores self-captured covered identity and erases a newly generated ghost
+ok 726 - SNAP-RESOURCE-05 rewind restores self-captured covered identity and erases a newly generated ghost
+  ---
+  duration_ms: 6.266523
+  type: 'test'
+  ...
+# Subtest: NP32 AS: actual full 32-piece original prefix and original branch oracle
+ok 727 - NP32 AS: actual full 32-piece original prefix and original branch oracle
+  ---
+  duration_ms: 269.571148
+  type: 'test'
+  ...
+# Subtest: NP32 AP: actual full 32-piece original prefix and original branch oracle
+ok 728 - NP32 AP: actual full 32-piece original prefix and original branch oracle
+  ---
+  duration_ms: 216.005882
+  type: 'test'
+  ...
+# Subtest: NP32 ES: actual full 32-piece original prefix and original branch oracle
+ok 729 - NP32 ES: actual full 32-piece original prefix and original branch oracle
+  ---
+  duration_ms: 191.954909
+  type: 'test'
+  ...
+# Subtest: NP32 AS: B1-B4 prayer, full R5 response, real B5 draw order and free main
+ok 730 - NP32 AS: B1-B4 prayer, full R5 response, real B5 draw order and free main
+  ---
+  duration_ms: 150.256578
+  type: 'test'
+  ...
+# Subtest: NP32 AP: B1-B4 prayer, full R5 response, real B5 draw order and free main
+ok 731 - NP32 AP: B1-B4 prayer, full R5 response, real B5 draw order and free main
+  ---
+  duration_ms: 172.408018
+  type: 'test'
+  ...
+# Subtest: NP32 ES: B1-B4 prayer, full R5 response, real B5 draw order and free main
+ok 732 - NP32 ES: B1-B4 prayer, full R5 response, real B5 draw order and free main
+  ---
+  duration_ms: 165.887141
+  type: 'test'
+  ...
+# Subtest: NP32 client JSON and legacy general source scopes never enable the product tuple
+ok 733 - NP32 client JSON and legacy general source scopes never enable the product tuple
+  ---
+  duration_ms: 1.63741
+  type: 'test'
+  ...
+# Subtest: NP32 immutable contract, RNG and observation sources reject any local tampering
+ok 734 - NP32 immutable contract, RNG and observation sources reject any local tampering
+  ---
+  duration_ms: 0.465659
+  type: 'test'
+  ...
+# Subtest: NP32 capabilities reject copies, cross-mode nesting, foreign room and asynchronous use; finally clears
+ok 735 - NP32 capabilities reject copies, cross-mode nesting, foreign room and asynchronous use; finally clears
+  ---
+  duration_ms: 1.566403
+  type: 'test'
+  ...
+# Subtest: NP32 pre-RPS package selection and actual assignments reject drift before the first draw
+ok 736 - NP32 pre-RPS package selection and actual assignments reject drift before the first draw
+  ---
+  duration_ms: 1.849298
+  type: 'test'
+  ...
+# Subtest: NP32 snapshot isolation, outsiders, stale versions, wrong actor and escaped assassination entry
+ok 737 - NP32 snapshot isolation, outsiders, stale versions, wrong actor and escaped assassination entry
+  ---
+  duration_ms: 5.05955
+  type: 'test'
+  ...
+# Subtest: NP32 actual R5 descent RNG exception refuses entire normal move without state or observer commit
+ok 738 - NP32 actual R5 descent RNG exception refuses entire normal move without state or observer commit
+  ---
+  duration_ms: 98.589258
+  type: 'test'
+  ...
+# Subtest: NP32 actual R5 duplicate does not redraw, repeat begin, change revision or refresh clock
+ok 739 - NP32 actual R5 duplicate does not redraw, repeat begin, change revision or refresh clock
+  ---
+  duration_ms: 117.778093
+  type: 'test'
+  ...
+# Subtest: NP32 AS: observation on/off preserves every returned authority and exact RNG calls
+ok 740 - NP32 AS: observation on/off preserves every returned authority and exact RNG calls
+  ---
+  duration_ms: 315.505166
+  type: 'test'
+  ...
+# Subtest: NP32 AP: observation on/off preserves every returned authority and exact RNG calls
+ok 741 - NP32 AP: observation on/off preserves every returned authority and exact RNG calls
+  ---
+  duration_ms: 335.317986
+  type: 'test'
+  ...
+# Subtest: NP32 ES: observation on/off preserves every returned authority and exact RNG calls
+ok 742 - NP32 ES: observation on/off preserves every returned authority and exact RNG calls
+  ---
+  duration_ms: 275.572952
+  type: 'test'
+  ...
+# Subtest: NP32 actual player/public views contain no authority RNG receipts or private source maps
+ok 743 - NP32 actual player/public views contain no authority RNG receipts or private source maps
+  ---
+  duration_ms: 471.897104
+  type: 'test'
+  ...
+# Subtest: NP32 symbolic W01_SELF_CHECK_FALSE_ACCEPT_LAND/move: unsafe closed path/endpoint/return rejects original candidate
+ok 744 - NP32 symbolic W01_SELF_CHECK_FALSE_ACCEPT_LAND/move: unsafe closed path/endpoint/return rejects original candidate
+  ---
+  duration_ms: 5.545149
+  type: 'test'
+  ...
+# Subtest: NP32 symbolic W01_SELF_CHECK_FALSE_ACCEPT_LAND/activation: unsafe closed path/endpoint/return rejects original candidate
+ok 745 - NP32 symbolic W01_SELF_CHECK_FALSE_ACCEPT_LAND/activation: unsafe closed path/endpoint/return rejects original candidate
+  ---
+  duration_ms: 3.419537
+  type: 'test'
+  ...
+# Subtest: NP32 symbolic W01_SELF_CHECK_FALSE_ACCEPT_LAND/continuing: unsafe closed path/endpoint/return rejects original candidate
+ok 746 - NP32 symbolic W01_SELF_CHECK_FALSE_ACCEPT_LAND/continuing: unsafe closed path/endpoint/return rejects original candidate
+  ---
+  duration_ms: 3.479546
+  type: 'test'
+  ...
+# Subtest: NP32 symbolic W02_SELF_CHECK_FALSE_ACCEPT_BOUNCE/move: unsafe closed path/endpoint/return rejects original candidate
+ok 747 - NP32 symbolic W02_SELF_CHECK_FALSE_ACCEPT_BOUNCE/move: unsafe closed path/endpoint/return rejects original candidate
+  ---
+  duration_ms: 3.589272
+  type: 'test'
+  ...
+# Subtest: NP32 symbolic W02_SELF_CHECK_FALSE_ACCEPT_BOUNCE/activation: unsafe closed path/endpoint/return rejects original candidate
+ok 748 - NP32 symbolic W02_SELF_CHECK_FALSE_ACCEPT_BOUNCE/activation: unsafe closed path/endpoint/return rejects original candidate
+  ---
+  duration_ms: 3.687709
+  type: 'test'
+  ...
+# Subtest: NP32 symbolic W02_SELF_CHECK_FALSE_ACCEPT_BOUNCE/continuing: unsafe closed path/endpoint/return rejects original candidate
+ok 749 - NP32 symbolic W02_SELF_CHECK_FALSE_ACCEPT_BOUNCE/continuing: unsafe closed path/endpoint/return rejects original candidate
+  ---
+  duration_ms: 3.823593
+  type: 'test'
+  ...
+# Subtest: NP32 symbolic W03_PATH_SCALE_NO_CRUSH_CONTRAST/move: shield-survival or enemy-check control remains legal
+ok 750 - NP32 symbolic W03_PATH_SCALE_NO_CRUSH_CONTRAST/move: shield-survival or enemy-check control remains legal
+  ---
+  duration_ms: 4.297215
+  type: 'test'
+  ...
+# Subtest: NP32 symbolic W03_PATH_SCALE_NO_CRUSH_CONTRAST/activation: shield-survival or enemy-check control remains legal
+ok 751 - NP32 symbolic W03_PATH_SCALE_NO_CRUSH_CONTRAST/activation: shield-survival or enemy-check control remains legal
+  ---
+  duration_ms: 6.210754
+  type: 'test'
+  ...
+# Subtest: NP32 symbolic W03_PATH_SCALE_NO_CRUSH_CONTRAST/continuing: shield-survival or enemy-check control remains legal
+ok 752 - NP32 symbolic W03_PATH_SCALE_NO_CRUSH_CONTRAST/continuing: shield-survival or enemy-check control remains legal
+  ---
+  duration_ms: 6.826283
+  type: 'test'
+  ...
+# Subtest: NP32 symbolic W04_NEW_CHECK_VS_ENEMY_ONLY/move: shield-survival or enemy-check control remains legal
+ok 753 - NP32 symbolic W04_NEW_CHECK_VS_ENEMY_ONLY/move: shield-survival or enemy-check control remains legal
+  ---
+  duration_ms: 8.949162
+  type: 'test'
+  ...
+# Subtest: NP32 symbolic W04_NEW_CHECK_VS_ENEMY_ONLY/activation: shield-survival or enemy-check control remains legal
+ok 754 - NP32 symbolic W04_NEW_CHECK_VS_ENEMY_ONLY/activation: shield-survival or enemy-check control remains legal
+  ---
+  duration_ms: 8.936564
+  type: 'test'
+  ...
+# Subtest: NP32 symbolic W04_NEW_CHECK_VS_ENEMY_ONLY/continuing: shield-survival or enemy-check control remains legal
+ok 755 - NP32 symbolic W04_NEW_CHECK_VS_ENEMY_ONLY/continuing: shield-survival or enemy-check control remains legal
+  ---
+  duration_ms: 8.514158
+  type: 'test'
+  ...
+# Subtest: NP32 original authority open batch refuses both main and assassination before cloning
+ok 756 - NP32 original authority open batch refuses both main and assassination before cloning
+  ---
+  duration_ms: 7.2563
+  type: 'test'
+  ...
+# Subtest: NP32 synthetic checking path rook removal/move/endpoint scale=false: real closure resolves check
+ok 757 - NP32 synthetic checking path rook removal/move/endpoint scale=false: real closure resolves check
+  ---
+  duration_ms: 6.592112
+  type: 'test'
+  ...
+# Subtest: NP32 synthetic checking path rook removal/activation/endpoint scale=false: real closure resolves check
+ok 758 - NP32 synthetic checking path rook removal/activation/endpoint scale=false: real closure resolves check
+  ---
+  duration_ms: 5.114613
+  type: 'test'
+  ...
+# Subtest: NP32 synthetic checking path rook removal/continuing/endpoint scale=false: real closure resolves check
+ok 759 - NP32 synthetic checking path rook removal/continuing/endpoint scale=false: real closure resolves check
+  ---
+  duration_ms: 4.421552
+  type: 'test'
+  ...
+# Subtest: NP32 synthetic checking path rook removal/move/endpoint scale=true: real closure resolves check
+ok 760 - NP32 synthetic checking path rook removal/move/endpoint scale=true: real closure resolves check
+  ---
+  duration_ms: 4.205047
+  type: 'test'
+  ...
+# Subtest: NP32 synthetic checking path rook removal/activation/endpoint scale=true: real closure resolves check
+ok 761 - NP32 synthetic checking path rook removal/activation/endpoint scale=true: real closure resolves check
+  ---
+  duration_ms: 4.568513
+  type: 'test'
+  ...
+# Subtest: NP32 synthetic checking path rook removal/continuing/endpoint scale=true: real closure resolves check
+ok 762 - NP32 synthetic checking path rook removal/continuing/endpoint scale=true: real closure resolves check
+  ---
+  duration_ms: 5.24572
+  type: 'test'
+  ...
+# Subtest: NP32 actual R5 timeout ends match before any B5 descent or extra random calls
+ok 763 - NP32 actual R5 timeout ends match before any B5 descent or extra random calls
+  ---
+  duration_ms: 110.357467
+  type: 'test'
+  ...
+# Subtest: NP32 symbolic H21 prayer while checked refuses before resource or formal-counter mutation
+ok 764 - NP32 symbolic H21 prayer while checked refuses before resource or formal-counter mutation
+  ---
+  duration_ms: 6.319572
+  type: 'test'
+  ...
+# Subtest: NP32 synthetic deliberate own-general path death keeps its original terminal result
+ok 765 - NP32 synthetic deliberate own-general path death keeps its original terminal result
+  ---
+  duration_ms: 3.522912
+  type: 'test'
+  ...
+# Subtest: TIME-TRAP-01 late return trap is lethal and stops linked control
+ok 766 - TIME-TRAP-01 late return trap is lethal and stops linked control
+  ---
+  duration_ms: 14.472629
+  type: 'test'
+  ...
+# Subtest: TIME-TIER-01 timeline rewrite is tier III in history and public action record
+ok 767 - TIME-TIER-01 timeline rewrite is tier III in history and public action record
+  ---
+  duration_ms: 4.309113
+  type: 'test'
+  ...
+# Subtest: TIME-TIER-02 opposing Murozond cannot treat a completed rewrite as an ordinary prior action
+ok 768 - TIME-TIER-02 opposing Murozond cannot treat a completed rewrite as an ordinary prior action
+  ---
+  duration_ms: 10.1487
+  type: 'test'
+  ...
+# Subtest: TIME-TRAP-02 lethal return trap closes the skill without executing its selected move
+ok 769 - TIME-TRAP-02 lethal return trap closes the skill without executing its selected move
+  ---
+  duration_ms: 7.271137
+  type: 'test'
+  ...
+# Subtest: TIME-TRAP-03 invalid controlled destination rolls back resource, trap and history changes
+ok 770 - TIME-TRAP-03 invalid controlled destination rolls back resource, trap and history changes
+  ---
+  duration_ms: 4.528402
+  type: 'test'
+  ...
+# Subtest: TIME-CLOCK-01 rewind replay budget uses historical 3000ms remaining
+ok 771 - TIME-CLOCK-01 rewind replay budget uses historical 3000ms remaining
+  ---
+  duration_ms: 4.028902
+  type: 'test'
+  ...
+# Subtest: TIME-CLOCK-01 rewind replay budget uses historical 10000ms remaining
+ok 772 - TIME-CLOCK-01 rewind replay budget uses historical 10000ms remaining
+  ---
+  duration_ms: 3.878556
+  type: 'test'
+  ...
+# Subtest: TIME-CLOCK-01 rewind replay budget uses historical 42000ms remaining
+ok 773 - TIME-CLOCK-01 rewind replay budget uses historical 42000ms remaining
+  ---
+  duration_ms: 3.283652
+  type: 'test'
+  ...
+# Subtest: TIME-CLOCK-02 room receipt time is authoritative for rewind, including exact replay expiry
+ok 774 - TIME-CLOCK-02 room receipt time is authoritative for rewind, including exact replay expiry
+  ---
+  duration_ms: 9.392749
+  type: 'test'
+  ...
+# Subtest: TIME-CLOCK-03 missing historical clock evidence refuses rewind without consuming it
+ok 775 - TIME-CLOCK-03 missing historical clock evidence refuses rewind without consuming it
+  ---
+  duration_ms: 4.922515
+  type: 'test'
+  ...
+# Subtest: TIME-SNAPSHOT-01 rewind restores opponent secret skill resources and trap durations without re-landing
+ok 776 - TIME-SNAPSHOT-01 rewind restores opponent secret skill resources and trap durations without re-landing
+  ---
+  duration_ms: 3.736673
+  type: 'test'
+  ...
+# Subtest: WARRIOR-01 明棋离开己方九宫获得一次公开壁垒
+ok 777 - WARRIOR-01 明棋离开己方九宫获得一次公开壁垒
+  ---
+  duration_ms: 13.426509
+  type: 'test'
+  ...
+# Subtest: WARRIOR-02 普通吃子撞壁垒会弹回并消耗防御
+ok 778 - WARRIOR-02 普通吃子撞壁垒会弹回并消耗防御
+  ---
+  duration_ms: 3.072926
+  type: 'test'
+  ...
+# Subtest: WARRIOR-03 将帅铁甲会拦截一次背刺并交给己方额外应将
+ok 779 - WARRIOR-03 将帅铁甲会拦截一次背刺并交给己方额外应将
+  ---
+  duration_ms: 3.539697
+  type: 'test'
+  ...
+# Subtest: WARRIOR-04 壁垒按三个敌方正式回合结束衰减，不按自身走棋次数
+ok 780 - WARRIOR-04 壁垒按三个敌方正式回合结束衰减，不按自身走棋次数
+  ---
+  duration_ms: 13.387163
+  type: 'test'
+  ...
+# Subtest: WARRIOR-05 铁甲挡下背刺但无合法应将时，立即转为裁决
+ok 781 - WARRIOR-05 铁甲挡下背刺但无合法应将时，立即转为裁决
+  ---
+  duration_ms: 2.647437
+  type: 'test'
+  ...
+# Subtest: WARRIOR-06 普通防御被消耗只移除壁垒，不会误删棋子上的骑兵效果
+ok 782 - WARRIOR-06 普通防御被消耗只移除壁垒，不会误删棋子上的骑兵效果
+  ---
+  duration_ms: 1.850079
+  type: 'test'
+  ...
+1..782
+# tests 782
+# suites 0
+# pass 782
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 23376.881331

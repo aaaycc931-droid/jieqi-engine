@@ -19,11 +19,11 @@ function exposing() {
 }
 const command = () => ({...move({x:0,y:7},{x:6,y:7},'path'),pieceId:'actor'});
 
-test('PATH01 real iron-steed leg death resolves check that public simulation still rejects', () => {
+test('PATH01 real iron-steed leg death and public query agree on safe check evasion', () => {
   const a=pair([revealed('actor','red','horse',3,7),revealed('checker','black','rook',4,7)],'iron_steed');
   const cmd={...move({x:3,y:7},{x:5,y:8},'leg'),pieceId:'actor'};
   assert.equal(isGeneralInCheck(a.state,'red'),true);
-  assert.equal(validatePublicMove(a.state,cmd).code,'SELF_CHECK'); // Legacy query remains scoped.
+  assert.equal(validatePublicMove(a.state,cmd).ok,true);
   const before=structuredClone(a), r=applyAuthoritativeMove(a.state,a.secret,cmd);
   assert.equal(isGeneralInCheck(r.state,'red'),false);
   assert.equal(r.state.captured.filter(p=>p.id==='checker').length,1);
@@ -32,7 +32,7 @@ test('PATH01 real iron-steed leg death resolves check that public simulation sti
 });
 test('PATH02 path death exposes own king: reject whole authority candidate and all evidence', () => {
   const a=exposing(),before=structuredClone(a);
-  assert.equal(validatePublicMove(a.state,command()).ok,true);
+  assert.equal(validatePublicMove(a.state,command()).code,'SELF_CHECK');
   const c=captureMechanismEvents(()=>{
     assert.throws(()=>applyAuthoritativeMove(a.state,a.secret,command()),(e:any)=>e.code==='SELF_CHECK');
     return 'rejected';

@@ -1,6 +1,8 @@
 import { strongBladeSide } from "./hero-progress.ts";
 import { selectedHeroId, validateHeroForms } from "./hero-forms.ts";
 import { isBoardPiece, isGround, isRiver } from "./spaces.ts";
+import { projectClosedPublicPathAction, supportsClosedPublicPathQuery } from "./game.ts";
+import { requireClosedDestructionBatch } from "./settlement-context.ts";
 import {
   getController,
   getCurrentPieceType,
@@ -19,6 +21,7 @@ import type {
   PublicPiece,
   RevealedPiece,
   Side,
+  SkillSource,
 } from "./types.ts";
 
 type MoveLike = Pick<MoveCommand, "from" | "to" | "pieceId">;
@@ -32,6 +35,8 @@ export interface PublicMoveOptions {
   /** 权威来源的当前连带操控；不删除下一正式主行动的控制陷阱或强制降落。 */
   allowLinkedControl?: boolean;
   stormAssault?: boolean;
+  /** Read-only marker intent, not a command or an authority bypass. */
+  assassination?: { source?: SkillSource; useStrongStrike: boolean };
 }
 
 export function samePosition(first: Position, second: Position): boolean {
@@ -254,6 +259,27 @@ export function canRevealedPieceAttack(
       (dx === 0 && ownGeneral.x === piece.x && (ownGeneral.y - piece.y) * dy > 0 && (position.y - ownGeneral.y) * dy > 0 ||
        dy === 0 && ownGeneral.y === piece.y && (ownGeneral.x - piece.x) * dx > 0 && (position.x - ownGeneral.x) * dx > 0)) return false;
   }
+  // Royal threats in the qualified public slice use the same direct terminal
+  // closure. They stop before self-check recursion, formal end or next begin.
+  const target = pieceAt(state, position);
+  if (target && !target.faceDown && target.type === "general" && target.color !== piece.color && supportsClosedPublicPathQuery(state as GameState, piece.id, piece.color)) {
+    const dx = position.x - piece.x, dy = position.y - piece.y;
+    const leg = state.featureRules?.mutation === "iron_steed" && getCurrentPieceType(piece) === "horse" &&
+      (Math.abs(dx) === 1 && dy === 0 || dx === 0 && Math.abs(dy) === 1);
+    const endpoints = leg
+      ? Math.abs(dx) === 1
+        ? [{ x: piece.x + 2 * dx, y: piece.y - 1 }, { x: piece.x + 2 * dx, y: piece.y + 1 }]
+        : [{ x: piece.x - 1, y: piece.y + 2 * dy }, { x: piece.x + 1, y: piece.y + 2 * dy }]
+      : [position];
+    let covered = true;
+    for (const to of endpoints.filter(isInsideBoard)) {
+      const projection = projectClosedPublicPathAction(state as GameState, { from: piece, to, pieceId: piece.id }, piece.color, { allowGeneralTarget: true });
+      if (!projection) { covered = false; continue; }
+      if (projection.validation.ok && projection.state && !projection.state.pieces.some(p => p.id === target.id) &&
+        projection.state.pieces.some(p => !p.faceDown && p.type === "general" && p.color === piece.color)) return true;
+    }
+    if (covered) return false;
+  }
   if (state.featureRules?.mutation === "iron_steed" && getCurrentPieceType(piece) === "horse") {
     const dx = position.x - piece.x;
     const dy = position.y - piece.y;
@@ -411,8 +437,12 @@ function validateMovePhase(state: GameState, move: MoveLike, actingSide: Side, o
     return { ok: false, code: "ILLEGAL_MOVEMENT", message: "棋子走法不合法" };
   }
 
-  if (checkRoyalSafety && !options.allowIntermediateCheck && isGeneralInCheck(simulatePublicMove(state, source, move.to), actingSide)) {
-    return { ok: false, code: "SELF_CHECK", message: "该步会令己方将帅受攻击" };
+  if (checkRoyalSafety && !options.allowIntermediateCheck) {
+    const projection = projectClosedPublicPathAction(state, move, actingSide, options);
+    if (projection) return projection.validation;
+    if (isGeneralInCheck(simulatePublicMove(state, source, move.to), actingSide)) {
+      return { ok: false, code: "SELF_CHECK", message: "该步会令己方将帅受攻击" };
+    }
   }
 
   return { ok: true };
@@ -459,6 +489,9 @@ export function getLegalAssassinationMoves(
         allowStealthTarget: useStrongStrike,
         allowGeneralTarget: false,
         requireCapture: useStrongStrike,
+        assassination: { useStrongStrike, ...(continuing ? {} : {
+          source: state.assassination?.[actingSide]?.heroChargeAvailable ? "hero" : state.assassination?.[actingSide]?.mutationChargeAvailable ? "mutation" : undefined,
+        }) },
       }).ok) legal.push(to);
     }
   }
@@ -466,6 +499,7 @@ export function getLegalAssassinationMoves(
 }
 
 export function hasAnyLegalMove(state: GameState, side: Side): boolean {
+  if (state.pieces.some(p => supportsClosedPublicPathQuery(state, p.id, side))) requireClosedDestructionBatch(state);
   // 已确认的占步技能与强制降落也是正式主行动机会；不能先按普通走子裁定困毙。
   const hero = selectedHeroId(state, side), runtime = state.heroRuntime?.[side];
   if (state.pieces.some(p => p.layer === "air" && getController(p) === side && state.effectsByPieceId?.[p.id]?.flight?.source === "sky_admiral")) return true;
@@ -480,7 +514,9 @@ export function hasAnyLegalMove(state: GameState, side: Side): boolean {
   return stateForSide.pieces.some(
     (piece) =>
       isBoardPiece(piece) && getController(piece) === side &&
-      getLegalMoves(stateForSide, piece.id, side).length > 0,
+      (getLegalMoves(stateForSide, piece.id, side).length > 0 ||
+       supportsClosedPublicPathQuery(stateForSide, piece.id, side) &&
+       (getLegalAssassinationMoves(stateForSide, piece.id, false, side).length > 0 || getLegalAssassinationMoves(stateForSide, piece.id, true, side).length > 0)),
   );
 }
 
