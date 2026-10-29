@@ -1,0 +1,8 @@
+{
+  "source_commit": "760caf57d454af0db3be92d5b52ffc3cc9078d06",
+  "full_web_git_blob": "0ffd81fb73cf8e62eb4faaff4aa1751f9338557e",
+  "full_web_sha256": "f43d8507706c7329432fd1e9bc4f5078a5b2e7069fe762b980ff42bdc9f5ef29",
+  "executable_slice_sha256": "92eb184fa2e6f5fb97c130e502f9b8c59d2a4cad2cd70a006552f73b320d3f7a",
+  "fixture_sha256": "f2007d05deb3b6b027ae1912ff7f22056329f676c48856f39409b6c44231a7bd",
+  "note": "Verbatim complete channel functions plus unexecuted next-function anchor; no copied implementation or altered logic."
+}

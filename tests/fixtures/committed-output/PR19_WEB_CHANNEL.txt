@@ -1,0 +1,71 @@
+function sendBluetoothEnvelope<T>(envelope: { v: typeof BLUETOOTH_PROTOCOL_VERSION; type: "hello" | "action" | "snapshot" | "error" | "ping" | "pong"; id?: string; payload?: T }): void {
+  const bridge = nativeBluetooth();
+  if (!bridge) throw new Error("此设备没有蓝牙桥接能力");
+  bridge.send(encodeBluetoothEnvelope(envelope));
+}
+
+function refreshBluetoothHostViews(sendGuest: boolean): void {
+  if (!bluetooth?.hostRoom) return;
+  const views = bluetooth.hostRoom.views();
+  applyBluetoothView(views.host);
+  if (sendGuest && bluetooth.nativeState === "CONNECTED") {
+    sendBluetoothEnvelope(createBluetoothSnapshot(`snapshot-${views.publicRoom.updatedAt}-${views.publicRoom.phase}`, views.guest));
+  }
+}
+
+function publishBluetoothViews(): void {
+  refreshBluetoothHostViews(true);
+}
+
+function handleBluetoothAction(action: BluetoothRoomAction): void {
+  if (!bluetooth) return;
+  if (isBluetoothTransportInterrupted()) return showToast("连接正在恢复，当前操作已锁定。");
+  if (bluetooth.pendingAction) return showToast("正在等待房主确认上一项操作。");
+  if (bluetooth.role === "host") {
+    try {
+      bluetooth.hostRoom!.handle(BLUETOOTH_HOST_PLAYER, action);
+      publishBluetoothViews();
+    } catch (error) {
+      showToast(error instanceof RuleError ? error.message : "房主裁定失败，请重试。");
+    }
+    return;
+  }
+  try {
+    bluetooth.pendingAction = true;
+    sendBluetoothEnvelope({ v: BLUETOOTH_PROTOCOL_VERSION, type: "action", id: bluetoothActionId(), payload: action });
+    showToast("操作已发送，等待房主裁定。");
+  } catch (error) {
+    bluetooth.pendingAction = false;
+    showToast(error instanceof Error ? error.message : "蓝牙发送失败。");
+  }
+}
+
+function handleIncomingBluetoothMessage(raw: string): void {
+  if (!bluetooth) return;
+  try {
+    const envelope = parseBluetoothEnvelope(raw);
+    if (bluetooth.role === "host" && envelope.type === "action") {
+      const action = envelope.payload as BluetoothRoomAction;
+      try {
+        bluetooth.hostRoom!.handle(BLUETOOTH_GUEST_PLAYER, action);
+        publishBluetoothViews();
+      } catch (error) {
+        const message = error instanceof RuleError ? error.message : "房主拒绝了此操作。";
+        sendBluetoothEnvelope({ v: BLUETOOTH_PROTOCOL_VERSION, type: "error", id: envelope.id, payload: { message } });
+        if (action.kind !== "chat") showToast(message);
+      }
+    } else if (bluetooth.role === "guest" && envelope.type === "snapshot") {
+      applyBluetoothView(envelope.payload as PlayerRemoteRoomView);
+    } else if (envelope.type === "error") {
+      bluetooth.pendingAction = false;
+      const payload = envelope.payload as { message?: string } | undefined;
+      if (!envelope.id?.startsWith("chat:")) showToast(payload?.message ?? "房主拒绝了此操作。");
+    } else if (envelope.type === "ping") {
+      sendBluetoothEnvelope({ v: BLUETOOTH_PROTOCOL_VERSION, type: "pong", id: envelope.id });
+    }
+  } catch (error) {
+    showToast(error instanceof RuleError ? error.message : "收到的蓝牙消息无效。");
+  }
+}
+
+function beginBluetoothHost()

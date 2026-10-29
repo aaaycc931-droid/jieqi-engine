@@ -1262,6 +1262,14 @@ function publishBluetoothViews(): void {
   refreshBluetoothHostViews(true);
 }
 
+function publishBluetoothViewsAfterAction(): void {
+  try {
+    publishBluetoothViews();
+  } catch (error) {
+    showToast(error instanceof RuleError ? error.message : "房间同步失败，请重试。");
+  }
+}
+
 function handleBluetoothAction(action: BluetoothRoomAction): void {
   if (!bluetooth) return;
   if (isBluetoothTransportInterrupted()) return showToast("连接正在恢复，当前操作已锁定。");
@@ -1269,10 +1277,10 @@ function handleBluetoothAction(action: BluetoothRoomAction): void {
   if (bluetooth.role === "host") {
     try {
       bluetooth.hostRoom!.handle(BLUETOOTH_HOST_PLAYER, action);
-      publishBluetoothViews();
     } catch (error) {
       showToast(error instanceof RuleError ? error.message : "房主裁定失败，请重试。");
     }
+    publishBluetoothViewsAfterAction();
     return;
   }
   try {
@@ -1293,12 +1301,12 @@ function handleIncomingBluetoothMessage(raw: string): void {
       const action = envelope.payload as BluetoothRoomAction;
       try {
         bluetooth.hostRoom!.handle(BLUETOOTH_GUEST_PLAYER, action);
-        publishBluetoothViews();
       } catch (error) {
         const message = error instanceof RuleError ? error.message : "房主拒绝了此操作。";
         sendBluetoothEnvelope({ v: BLUETOOTH_PROTOCOL_VERSION, type: "error", id: envelope.id, payload: { message } });
         if (action.kind !== "chat") showToast(message);
       }
+      publishBluetoothViewsAfterAction();
     } else if (bluetooth.role === "guest" && envelope.type === "snapshot") {
       applyBluetoothView(envelope.payload as PlayerRemoteRoomView);
     } else if (envelope.type === "error") {
