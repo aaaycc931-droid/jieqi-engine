@@ -1,0 +1,2475 @@
+{
+  "schema": "lezi.hc.pair_view_and_missing_stimulus_contract.v1",
+  "revision": "HC-51-PAIR-VIEW-MISSING-STIMULUS-20261027-r51",
+  "date_local": "2026-10-27",
+  "scope": "Half-chaos original public/private paired-output comparison and eight missing source stimuli source/document-only contract",
+  "source_handoff_head": "ea70da1e001f0262409facc9dbb9e98303c22687",
+  "engine_pin": "3f98bc9fb89a2a209209c424c4bf1bbd2cf6aca7",
+  "source_blobs": {
+    "REPLAY_ACTION_DATA.json": "d8453df0104ffdef95fd22f705cf355d53b8d027",
+    "INITIALIZATION_WITNESS_DATA.json": "83b1e80eea254d17d3c3f9fee1e978c4aa284965",
+    "ASSERTION_EVIDENCE_MATRIX.json": "e46a29f3e69cc2b005dd7633a60c888a5882b8ce",
+    "HC49_ALL_REPLAYS_API_BINDING.json": "9f91119b17354d91c94ac443cbbe2733902d9002",
+    "HC50_ORIGINAL_210_EVIDENCE_PRIVACY_AUDIT.json": "d801ef23325beea568b6d2f9e5074cfcfada8320",
+    "OBSERVATION_FIELD_MAPPING.json": "be63d62bf94e029042e49089455af41b2b81b5a4",
+    "RESIDUAL_EVIDENCE_GAP_CONTRACT_PROPOSAL.json": "2e1131d48f6f97adbab25d8bfe07b828109760f7",
+    "DELIVERY_EVIDENCE_CONTRACT_PROPOSAL.json": "9afe3a724b141d46893da14f7dff1678c877fcea"
+  },
+  "engine_entry_source": "src/remote-room.ts@3f98bc9fb89a2a209209c424c4bf1bbd2cf6aca7",
+  "validation": {
+    "grade": "V2_SOURCE_ONLY",
+    "checks": 25,
+    "passed": 25,
+    "items": {
+      "source_head_report_r49": true,
+      "source_head_report_r50": true,
+      "totals_immutable": true,
+      "original_all_unrun": true,
+      "original_8_gap_entries": true,
+      "original_paired_declarations": true,
+      "pair_source_PAIR-PD05": true,
+      "pair_opening_PAIR-PD05": true,
+      "pair_hidden_world_two_slots_PAIR-PD05": true,
+      "pair_declared_turns_matching_PAIR-PD05": true,
+      "pair_source_PAIR-PD06": true,
+      "pair_opening_PAIR-PD06": true,
+      "pair_hidden_world_two_slots_PAIR-PD06": true,
+      "pair_declared_turns_matching_PAIR-PD06": true,
+      "pair_56_side_stage_slots": true,
+      "pair_all_unique": true,
+      "pair_checkpoint_in_r50_source": true,
+      "pair_side_balance": true,
+      "pair_stage_balance": true,
+      "privacy_policy_complete": true,
+      "all_8_individually_source_backed": true,
+      "cross_mode_dedup_not_collapsed": true,
+      "missing_source_spec_associations": true,
+      "abstract_PD_S32_separate": true,
+      "source_12_and_64_unrun_again": true
+    },
+    "pair_comparison_slots": 56,
+    "per_slot_original_checkpoints_verified": true,
+    "missing_cases_checked": 8,
+    "engine_executed": false,
+    "player_output_seen": false,
+    "independent_QA": false
+  },
+  "pair_source_readiness": {
+    "pairs": [
+      {
+        "id": "PAIR-PD05",
+        "replay_ids": [
+          "MA-PD05-A",
+          "MA-PD05-B"
+        ],
+        "world_ids": [
+          "IW-b069ebc9db68ef3e",
+          "IW-40b431632b89dc78"
+        ],
+        "mutation": "M04",
+        "heroes": {
+          "red": "H04",
+          "black": "H03"
+        },
+        "secret_initial_slot_disagreements_count": 2,
+        "secret_identity_values_redacted_from_new_report": true,
+        "canonical_side_pool_counts_equal": true,
+        "source_semantic_action_and_expected_outcome_equal": true,
+        "source_main_requests_each": 7,
+        "source_step_checkpoint_pairs": [
+          {
+            "step": "R1",
+            "stage": "main:closed",
+            "cpA": "MA-PD05-A:R1:main:closed",
+            "cpB": "MA-PD05-B:R1:main:closed"
+          },
+          {
+            "step": "R1",
+            "stage": "normal-end",
+            "cpA": "MA-PD05-A:R1:normal-end",
+            "cpB": "MA-PD05-B:R1:normal-end"
+          },
+          {
+            "step": "B1",
+            "stage": "main:closed",
+            "cpA": "MA-PD05-A:B1:main:closed",
+            "cpB": "MA-PD05-B:B1:main:closed"
+          },
+          {
+            "step": "B1",
+            "stage": "normal-end",
+            "cpA": "MA-PD05-A:B1:normal-end",
+            "cpB": "MA-PD05-B:B1:normal-end"
+          },
+          {
+            "step": "R2",
+            "stage": "main:closed",
+            "cpA": "MA-PD05-A:R2:main:closed",
+            "cpB": "MA-PD05-B:R2:main:closed"
+          },
+          {
+            "step": "R2",
+            "stage": "normal-end",
+            "cpA": "MA-PD05-A:R2:normal-end",
+            "cpB": "MA-PD05-B:R2:normal-end"
+          },
+          {
+            "step": "B2",
+            "stage": "main:closed",
+            "cpA": "MA-PD05-A:B2:main:closed",
+            "cpB": "MA-PD05-B:B2:main:closed"
+          },
+          {
+            "step": "B2",
+            "stage": "normal-end",
+            "cpA": "MA-PD05-A:B2:normal-end",
+            "cpB": "MA-PD05-B:B2:normal-end"
+          },
+          {
+            "step": "R3",
+            "stage": "main:closed",
+            "cpA": "MA-PD05-A:R3:main:closed",
+            "cpB": "MA-PD05-B:R3:main:closed"
+          },
+          {
+            "step": "R3",
+            "stage": "normal-end",
+            "cpA": "MA-PD05-A:R3:normal-end",
+            "cpB": "MA-PD05-B:R3:normal-end"
+          },
+          {
+            "step": "B3",
+            "stage": "main:closed",
+            "cpA": "MA-PD05-A:B3:main:closed",
+            "cpB": "MA-PD05-B:B3:main:closed"
+          },
+          {
+            "step": "B3",
+            "stage": "normal-end",
+            "cpA": "MA-PD05-A:B3:normal-end",
+            "cpB": "MA-PD05-B:B3:normal-end"
+          },
+          {
+            "step": "R4",
+            "stage": "main:closed",
+            "cpA": "MA-PD05-A:R4:main:closed",
+            "cpB": "MA-PD05-B:R4:main:closed"
+          },
+          {
+            "step": "R4",
+            "stage": "normal-end",
+            "cpA": "MA-PD05-A:R4:normal-end",
+            "cpB": "MA-PD05-B:R4:normal-end"
+          }
+        ],
+        "permissible_comparison": "Assess each authorized raw player view and permitted revealed differences at actual semantic checkpoints; paired inputs do not imply paired outputs must be equal.",
+        "observed_outputs": "NONE_UNRUN",
+        "required_viewer_slots": 28
+      },
+      {
+        "id": "PAIR-PD06",
+        "replay_ids": [
+          "MA-PD06-A",
+          "MA-PD06-B"
+        ],
+        "world_ids": [
+          "IW-168cb617da30889f",
+          "IW-d158bccabffc5f23"
+        ],
+        "mutation": "M01",
+        "heroes": {
+          "red": "H04",
+          "black": "H03"
+        },
+        "secret_initial_slot_disagreements_count": 2,
+        "secret_identity_values_redacted_from_new_report": true,
+        "canonical_side_pool_counts_equal": true,
+        "source_semantic_action_and_expected_outcome_equal": true,
+        "source_main_requests_each": 7,
+        "source_step_checkpoint_pairs": [
+          {
+            "step": "R1",
+            "stage": "main:closed",
+            "cpA": "MA-PD06-A:R1:main:closed",
+            "cpB": "MA-PD06-B:R1:main:closed"
+          },
+          {
+            "step": "R1",
+            "stage": "normal-end",
+            "cpA": "MA-PD06-A:R1:normal-end",
+            "cpB": "MA-PD06-B:R1:normal-end"
+          },
+          {
+            "step": "B1",
+            "stage": "main:closed",
+            "cpA": "MA-PD06-A:B1:main:closed",
+            "cpB": "MA-PD06-B:B1:main:closed"
+          },
+          {
+            "step": "B1",
+            "stage": "normal-end",
+            "cpA": "MA-PD06-A:B1:normal-end",
+            "cpB": "MA-PD06-B:B1:normal-end"
+          },
+          {
+            "step": "R2",
+            "stage": "main:closed",
+            "cpA": "MA-PD06-A:R2:main:closed",
+            "cpB": "MA-PD06-B:R2:main:closed"
+          },
+          {
+            "step": "R2",
+            "stage": "normal-end",
+            "cpA": "MA-PD06-A:R2:normal-end",
+            "cpB": "MA-PD06-B:R2:normal-end"
+          },
+          {
+            "step": "B2",
+            "stage": "main:closed",
+            "cpA": "MA-PD06-A:B2:main:closed",
+            "cpB": "MA-PD06-B:B2:main:closed"
+          },
+          {
+            "step": "B2",
+            "stage": "normal-end",
+            "cpA": "MA-PD06-A:B2:normal-end",
+            "cpB": "MA-PD06-B:B2:normal-end"
+          },
+          {
+            "step": "R3",
+            "stage": "main:closed",
+            "cpA": "MA-PD06-A:R3:main:closed",
+            "cpB": "MA-PD06-B:R3:main:closed"
+          },
+          {
+            "step": "R3",
+            "stage": "normal-end",
+            "cpA": "MA-PD06-A:R3:normal-end",
+            "cpB": "MA-PD06-B:R3:normal-end"
+          },
+          {
+            "step": "B3",
+            "stage": "main:closed",
+            "cpA": "MA-PD06-A:B3:main:closed",
+            "cpB": "MA-PD06-B:B3:main:closed"
+          },
+          {
+            "step": "B3",
+            "stage": "normal-end",
+            "cpA": "MA-PD06-A:B3:normal-end",
+            "cpB": "MA-PD06-B:B3:normal-end"
+          },
+          {
+            "step": "R4",
+            "stage": "main:closed",
+            "cpA": "MA-PD06-A:R4:main:closed",
+            "cpB": "MA-PD06-B:R4:main:closed"
+          },
+          {
+            "step": "R4",
+            "stage": "normal-end",
+            "cpA": "MA-PD06-A:R4:normal-end",
+            "cpB": "MA-PD06-B:R4:normal-end"
+          }
+        ],
+        "permissible_comparison": "Assess each authorized raw player view and permitted revealed differences at actual semantic checkpoints; paired inputs do not imply paired outputs must be equal.",
+        "observed_outputs": "NONE_UNRUN",
+        "required_viewer_slots": 28
+      }
+    ],
+    "comparison_slots": [
+      {
+        "comparison_id": "PAIR-PD05:R1:main:closed:red",
+        "pair_id": "PAIR-PD05",
+        "turn_label": "R1",
+        "turn_ordinal": 1,
+        "semantic_request_actor": "red",
+        "semantic_request_from": [
+          0,
+          6
+        ],
+        "semantic_request_to": [
+          0,
+          5
+        ],
+        "stage": "main:closed",
+        "viewer_side": "red",
+        "original_left_checkpoint": "MA-PD05-A:R1:main:closed",
+        "original_right_checkpoint": "MA-PD05-B:R1:main:closed",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_RED_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD05:R1:main:closed:black",
+        "pair_id": "PAIR-PD05",
+        "turn_label": "R1",
+        "turn_ordinal": 1,
+        "semantic_request_actor": "red",
+        "semantic_request_from": [
+          0,
+          6
+        ],
+        "semantic_request_to": [
+          0,
+          5
+        ],
+        "stage": "main:closed",
+        "viewer_side": "black",
+        "original_left_checkpoint": "MA-PD05-A:R1:main:closed",
+        "original_right_checkpoint": "MA-PD05-B:R1:main:closed",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_BLACK_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD05:R1:normal-end:red",
+        "pair_id": "PAIR-PD05",
+        "turn_label": "R1",
+        "turn_ordinal": 1,
+        "semantic_request_actor": "red",
+        "semantic_request_from": [
+          0,
+          6
+        ],
+        "semantic_request_to": [
+          0,
+          5
+        ],
+        "stage": "normal-end",
+        "viewer_side": "red",
+        "original_left_checkpoint": "MA-PD05-A:R1:normal-end",
+        "original_right_checkpoint": "MA-PD05-B:R1:normal-end",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_RED_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD05:R1:normal-end:black",
+        "pair_id": "PAIR-PD05",
+        "turn_label": "R1",
+        "turn_ordinal": 1,
+        "semantic_request_actor": "red",
+        "semantic_request_from": [
+          0,
+          6
+        ],
+        "semantic_request_to": [
+          0,
+          5
+        ],
+        "stage": "normal-end",
+        "viewer_side": "black",
+        "original_left_checkpoint": "MA-PD05-A:R1:normal-end",
+        "original_right_checkpoint": "MA-PD05-B:R1:normal-end",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_BLACK_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD05:B1:main:closed:red",
+        "pair_id": "PAIR-PD05",
+        "turn_label": "B1",
+        "turn_ordinal": 2,
+        "semantic_request_actor": "black",
+        "semantic_request_from": [
+          3,
+          0
+        ],
+        "semantic_request_to": [
+          4,
+          1
+        ],
+        "stage": "main:closed",
+        "viewer_side": "red",
+        "original_left_checkpoint": "MA-PD05-A:B1:main:closed",
+        "original_right_checkpoint": "MA-PD05-B:B1:main:closed",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_RED_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD05:B1:main:closed:black",
+        "pair_id": "PAIR-PD05",
+        "turn_label": "B1",
+        "turn_ordinal": 2,
+        "semantic_request_actor": "black",
+        "semantic_request_from": [
+          3,
+          0
+        ],
+        "semantic_request_to": [
+          4,
+          1
+        ],
+        "stage": "main:closed",
+        "viewer_side": "black",
+        "original_left_checkpoint": "MA-PD05-A:B1:main:closed",
+        "original_right_checkpoint": "MA-PD05-B:B1:main:closed",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_BLACK_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD05:B1:normal-end:red",
+        "pair_id": "PAIR-PD05",
+        "turn_label": "B1",
+        "turn_ordinal": 2,
+        "semantic_request_actor": "black",
+        "semantic_request_from": [
+          3,
+          0
+        ],
+        "semantic_request_to": [
+          4,
+          1
+        ],
+        "stage": "normal-end",
+        "viewer_side": "red",
+        "original_left_checkpoint": "MA-PD05-A:B1:normal-end",
+        "original_right_checkpoint": "MA-PD05-B:B1:normal-end",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_RED_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD05:B1:normal-end:black",
+        "pair_id": "PAIR-PD05",
+        "turn_label": "B1",
+        "turn_ordinal": 2,
+        "semantic_request_actor": "black",
+        "semantic_request_from": [
+          3,
+          0
+        ],
+        "semantic_request_to": [
+          4,
+          1
+        ],
+        "stage": "normal-end",
+        "viewer_side": "black",
+        "original_left_checkpoint": "MA-PD05-A:B1:normal-end",
+        "original_right_checkpoint": "MA-PD05-B:B1:normal-end",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_BLACK_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD05:R2:main:closed:red",
+        "pair_id": "PAIR-PD05",
+        "turn_label": "R2",
+        "turn_ordinal": 3,
+        "semantic_request_actor": "red",
+        "semantic_request_from": [
+          0,
+          5
+        ],
+        "semantic_request_to": [
+          0,
+          4
+        ],
+        "stage": "main:closed",
+        "viewer_side": "red",
+        "original_left_checkpoint": "MA-PD05-A:R2:main:closed",
+        "original_right_checkpoint": "MA-PD05-B:R2:main:closed",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_RED_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD05:R2:main:closed:black",
+        "pair_id": "PAIR-PD05",
+        "turn_label": "R2",
+        "turn_ordinal": 3,
+        "semantic_request_actor": "red",
+        "semantic_request_from": [
+          0,
+          5
+        ],
+        "semantic_request_to": [
+          0,
+          4
+        ],
+        "stage": "main:closed",
+        "viewer_side": "black",
+        "original_left_checkpoint": "MA-PD05-A:R2:main:closed",
+        "original_right_checkpoint": "MA-PD05-B:R2:main:closed",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_BLACK_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD05:R2:normal-end:red",
+        "pair_id": "PAIR-PD05",
+        "turn_label": "R2",
+        "turn_ordinal": 3,
+        "semantic_request_actor": "red",
+        "semantic_request_from": [
+          0,
+          5
+        ],
+        "semantic_request_to": [
+          0,
+          4
+        ],
+        "stage": "normal-end",
+        "viewer_side": "red",
+        "original_left_checkpoint": "MA-PD05-A:R2:normal-end",
+        "original_right_checkpoint": "MA-PD05-B:R2:normal-end",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_RED_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD05:R2:normal-end:black",
+        "pair_id": "PAIR-PD05",
+        "turn_label": "R2",
+        "turn_ordinal": 3,
+        "semantic_request_actor": "red",
+        "semantic_request_from": [
+          0,
+          5
+        ],
+        "semantic_request_to": [
+          0,
+          4
+        ],
+        "stage": "normal-end",
+        "viewer_side": "black",
+        "original_left_checkpoint": "MA-PD05-A:R2:normal-end",
+        "original_right_checkpoint": "MA-PD05-B:R2:normal-end",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_BLACK_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD05:B2:main:closed:red",
+        "pair_id": "PAIR-PD05",
+        "turn_label": "B2",
+        "turn_ordinal": 4,
+        "semantic_request_actor": "black",
+        "semantic_request_from": [
+          4,
+          1
+        ],
+        "semantic_request_to": [
+          0,
+          1
+        ],
+        "stage": "main:closed",
+        "viewer_side": "red",
+        "original_left_checkpoint": "MA-PD05-A:B2:main:closed",
+        "original_right_checkpoint": "MA-PD05-B:B2:main:closed",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_RED_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD05:B2:main:closed:black",
+        "pair_id": "PAIR-PD05",
+        "turn_label": "B2",
+        "turn_ordinal": 4,
+        "semantic_request_actor": "black",
+        "semantic_request_from": [
+          4,
+          1
+        ],
+        "semantic_request_to": [
+          0,
+          1
+        ],
+        "stage": "main:closed",
+        "viewer_side": "black",
+        "original_left_checkpoint": "MA-PD05-A:B2:main:closed",
+        "original_right_checkpoint": "MA-PD05-B:B2:main:closed",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_BLACK_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD05:B2:normal-end:red",
+        "pair_id": "PAIR-PD05",
+        "turn_label": "B2",
+        "turn_ordinal": 4,
+        "semantic_request_actor": "black",
+        "semantic_request_from": [
+          4,
+          1
+        ],
+        "semantic_request_to": [
+          0,
+          1
+        ],
+        "stage": "normal-end",
+        "viewer_side": "red",
+        "original_left_checkpoint": "MA-PD05-A:B2:normal-end",
+        "original_right_checkpoint": "MA-PD05-B:B2:normal-end",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_RED_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD05:B2:normal-end:black",
+        "pair_id": "PAIR-PD05",
+        "turn_label": "B2",
+        "turn_ordinal": 4,
+        "semantic_request_actor": "black",
+        "semantic_request_from": [
+          4,
+          1
+        ],
+        "semantic_request_to": [
+          0,
+          1
+        ],
+        "stage": "normal-end",
+        "viewer_side": "black",
+        "original_left_checkpoint": "MA-PD05-A:B2:normal-end",
+        "original_right_checkpoint": "MA-PD05-B:B2:normal-end",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_BLACK_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD05:R3:main:closed:red",
+        "pair_id": "PAIR-PD05",
+        "turn_label": "R3",
+        "turn_ordinal": 5,
+        "semantic_request_actor": "red",
+        "semantic_request_from": [
+          0,
+          4
+        ],
+        "semantic_request_to": [
+          0,
+          3
+        ],
+        "stage": "main:closed",
+        "viewer_side": "red",
+        "original_left_checkpoint": "MA-PD05-A:R3:main:closed",
+        "original_right_checkpoint": "MA-PD05-B:R3:main:closed",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_RED_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD05:R3:main:closed:black",
+        "pair_id": "PAIR-PD05",
+        "turn_label": "R3",
+        "turn_ordinal": 5,
+        "semantic_request_actor": "red",
+        "semantic_request_from": [
+          0,
+          4
+        ],
+        "semantic_request_to": [
+          0,
+          3
+        ],
+        "stage": "main:closed",
+        "viewer_side": "black",
+        "original_left_checkpoint": "MA-PD05-A:R3:main:closed",
+        "original_right_checkpoint": "MA-PD05-B:R3:main:closed",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_BLACK_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD05:R3:normal-end:red",
+        "pair_id": "PAIR-PD05",
+        "turn_label": "R3",
+        "turn_ordinal": 5,
+        "semantic_request_actor": "red",
+        "semantic_request_from": [
+          0,
+          4
+        ],
+        "semantic_request_to": [
+          0,
+          3
+        ],
+        "stage": "normal-end",
+        "viewer_side": "red",
+        "original_left_checkpoint": "MA-PD05-A:R3:normal-end",
+        "original_right_checkpoint": "MA-PD05-B:R3:normal-end",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_RED_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD05:R3:normal-end:black",
+        "pair_id": "PAIR-PD05",
+        "turn_label": "R3",
+        "turn_ordinal": 5,
+        "semantic_request_actor": "red",
+        "semantic_request_from": [
+          0,
+          4
+        ],
+        "semantic_request_to": [
+          0,
+          3
+        ],
+        "stage": "normal-end",
+        "viewer_side": "black",
+        "original_left_checkpoint": "MA-PD05-A:R3:normal-end",
+        "original_right_checkpoint": "MA-PD05-B:R3:normal-end",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_BLACK_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD05:B3:main:closed:red",
+        "pair_id": "PAIR-PD05",
+        "turn_label": "B3",
+        "turn_ordinal": 6,
+        "semantic_request_actor": "black",
+        "semantic_request_from": [
+          8,
+          3
+        ],
+        "semantic_request_to": [
+          8,
+          4
+        ],
+        "stage": "main:closed",
+        "viewer_side": "red",
+        "original_left_checkpoint": "MA-PD05-A:B3:main:closed",
+        "original_right_checkpoint": "MA-PD05-B:B3:main:closed",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_RED_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD05:B3:main:closed:black",
+        "pair_id": "PAIR-PD05",
+        "turn_label": "B3",
+        "turn_ordinal": 6,
+        "semantic_request_actor": "black",
+        "semantic_request_from": [
+          8,
+          3
+        ],
+        "semantic_request_to": [
+          8,
+          4
+        ],
+        "stage": "main:closed",
+        "viewer_side": "black",
+        "original_left_checkpoint": "MA-PD05-A:B3:main:closed",
+        "original_right_checkpoint": "MA-PD05-B:B3:main:closed",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_BLACK_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD05:B3:normal-end:red",
+        "pair_id": "PAIR-PD05",
+        "turn_label": "B3",
+        "turn_ordinal": 6,
+        "semantic_request_actor": "black",
+        "semantic_request_from": [
+          8,
+          3
+        ],
+        "semantic_request_to": [
+          8,
+          4
+        ],
+        "stage": "normal-end",
+        "viewer_side": "red",
+        "original_left_checkpoint": "MA-PD05-A:B3:normal-end",
+        "original_right_checkpoint": "MA-PD05-B:B3:normal-end",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_RED_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD05:B3:normal-end:black",
+        "pair_id": "PAIR-PD05",
+        "turn_label": "B3",
+        "turn_ordinal": 6,
+        "semantic_request_actor": "black",
+        "semantic_request_from": [
+          8,
+          3
+        ],
+        "semantic_request_to": [
+          8,
+          4
+        ],
+        "stage": "normal-end",
+        "viewer_side": "black",
+        "original_left_checkpoint": "MA-PD05-A:B3:normal-end",
+        "original_right_checkpoint": "MA-PD05-B:B3:normal-end",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_BLACK_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD05:R4:main:closed:red",
+        "pair_id": "PAIR-PD05",
+        "turn_label": "R4",
+        "turn_ordinal": 7,
+        "semantic_request_actor": "red",
+        "semantic_request_from": [
+          0,
+          9
+        ],
+        "semantic_request_to": [
+          0,
+          1
+        ],
+        "stage": "main:closed",
+        "viewer_side": "red",
+        "original_left_checkpoint": "MA-PD05-A:R4:main:closed",
+        "original_right_checkpoint": "MA-PD05-B:R4:main:closed",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_RED_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD05:R4:main:closed:black",
+        "pair_id": "PAIR-PD05",
+        "turn_label": "R4",
+        "turn_ordinal": 7,
+        "semantic_request_actor": "red",
+        "semantic_request_from": [
+          0,
+          9
+        ],
+        "semantic_request_to": [
+          0,
+          1
+        ],
+        "stage": "main:closed",
+        "viewer_side": "black",
+        "original_left_checkpoint": "MA-PD05-A:R4:main:closed",
+        "original_right_checkpoint": "MA-PD05-B:R4:main:closed",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_BLACK_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD05:R4:normal-end:red",
+        "pair_id": "PAIR-PD05",
+        "turn_label": "R4",
+        "turn_ordinal": 7,
+        "semantic_request_actor": "red",
+        "semantic_request_from": [
+          0,
+          9
+        ],
+        "semantic_request_to": [
+          0,
+          1
+        ],
+        "stage": "normal-end",
+        "viewer_side": "red",
+        "original_left_checkpoint": "MA-PD05-A:R4:normal-end",
+        "original_right_checkpoint": "MA-PD05-B:R4:normal-end",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_RED_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD05:R4:normal-end:black",
+        "pair_id": "PAIR-PD05",
+        "turn_label": "R4",
+        "turn_ordinal": 7,
+        "semantic_request_actor": "red",
+        "semantic_request_from": [
+          0,
+          9
+        ],
+        "semantic_request_to": [
+          0,
+          1
+        ],
+        "stage": "normal-end",
+        "viewer_side": "black",
+        "original_left_checkpoint": "MA-PD05-A:R4:normal-end",
+        "original_right_checkpoint": "MA-PD05-B:R4:normal-end",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_BLACK_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD06:R1:main:closed:red",
+        "pair_id": "PAIR-PD06",
+        "turn_label": "R1",
+        "turn_ordinal": 1,
+        "semantic_request_actor": "red",
+        "semantic_request_from": [
+          0,
+          6
+        ],
+        "semantic_request_to": [
+          0,
+          5
+        ],
+        "stage": "main:closed",
+        "viewer_side": "red",
+        "original_left_checkpoint": "MA-PD06-A:R1:main:closed",
+        "original_right_checkpoint": "MA-PD06-B:R1:main:closed",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_RED_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD06:R1:main:closed:black",
+        "pair_id": "PAIR-PD06",
+        "turn_label": "R1",
+        "turn_ordinal": 1,
+        "semantic_request_actor": "red",
+        "semantic_request_from": [
+          0,
+          6
+        ],
+        "semantic_request_to": [
+          0,
+          5
+        ],
+        "stage": "main:closed",
+        "viewer_side": "black",
+        "original_left_checkpoint": "MA-PD06-A:R1:main:closed",
+        "original_right_checkpoint": "MA-PD06-B:R1:main:closed",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_BLACK_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD06:R1:normal-end:red",
+        "pair_id": "PAIR-PD06",
+        "turn_label": "R1",
+        "turn_ordinal": 1,
+        "semantic_request_actor": "red",
+        "semantic_request_from": [
+          0,
+          6
+        ],
+        "semantic_request_to": [
+          0,
+          5
+        ],
+        "stage": "normal-end",
+        "viewer_side": "red",
+        "original_left_checkpoint": "MA-PD06-A:R1:normal-end",
+        "original_right_checkpoint": "MA-PD06-B:R1:normal-end",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_RED_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD06:R1:normal-end:black",
+        "pair_id": "PAIR-PD06",
+        "turn_label": "R1",
+        "turn_ordinal": 1,
+        "semantic_request_actor": "red",
+        "semantic_request_from": [
+          0,
+          6
+        ],
+        "semantic_request_to": [
+          0,
+          5
+        ],
+        "stage": "normal-end",
+        "viewer_side": "black",
+        "original_left_checkpoint": "MA-PD06-A:R1:normal-end",
+        "original_right_checkpoint": "MA-PD06-B:R1:normal-end",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_BLACK_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD06:B1:main:closed:red",
+        "pair_id": "PAIR-PD06",
+        "turn_label": "B1",
+        "turn_ordinal": 2,
+        "semantic_request_actor": "black",
+        "semantic_request_from": [
+          5,
+          0
+        ],
+        "semantic_request_to": [
+          4,
+          1
+        ],
+        "stage": "main:closed",
+        "viewer_side": "red",
+        "original_left_checkpoint": "MA-PD06-A:B1:main:closed",
+        "original_right_checkpoint": "MA-PD06-B:B1:main:closed",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_RED_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD06:B1:main:closed:black",
+        "pair_id": "PAIR-PD06",
+        "turn_label": "B1",
+        "turn_ordinal": 2,
+        "semantic_request_actor": "black",
+        "semantic_request_from": [
+          5,
+          0
+        ],
+        "semantic_request_to": [
+          4,
+          1
+        ],
+        "stage": "main:closed",
+        "viewer_side": "black",
+        "original_left_checkpoint": "MA-PD06-A:B1:main:closed",
+        "original_right_checkpoint": "MA-PD06-B:B1:main:closed",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_BLACK_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD06:B1:normal-end:red",
+        "pair_id": "PAIR-PD06",
+        "turn_label": "B1",
+        "turn_ordinal": 2,
+        "semantic_request_actor": "black",
+        "semantic_request_from": [
+          5,
+          0
+        ],
+        "semantic_request_to": [
+          4,
+          1
+        ],
+        "stage": "normal-end",
+        "viewer_side": "red",
+        "original_left_checkpoint": "MA-PD06-A:B1:normal-end",
+        "original_right_checkpoint": "MA-PD06-B:B1:normal-end",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_RED_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD06:B1:normal-end:black",
+        "pair_id": "PAIR-PD06",
+        "turn_label": "B1",
+        "turn_ordinal": 2,
+        "semantic_request_actor": "black",
+        "semantic_request_from": [
+          5,
+          0
+        ],
+        "semantic_request_to": [
+          4,
+          1
+        ],
+        "stage": "normal-end",
+        "viewer_side": "black",
+        "original_left_checkpoint": "MA-PD06-A:B1:normal-end",
+        "original_right_checkpoint": "MA-PD06-B:B1:normal-end",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_BLACK_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD06:R2:main:closed:red",
+        "pair_id": "PAIR-PD06",
+        "turn_label": "R2",
+        "turn_ordinal": 3,
+        "semantic_request_actor": "red",
+        "semantic_request_from": [
+          2,
+          6
+        ],
+        "semantic_request_to": [
+          2,
+          5
+        ],
+        "stage": "main:closed",
+        "viewer_side": "red",
+        "original_left_checkpoint": "MA-PD06-A:R2:main:closed",
+        "original_right_checkpoint": "MA-PD06-B:R2:main:closed",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_RED_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD06:R2:main:closed:black",
+        "pair_id": "PAIR-PD06",
+        "turn_label": "R2",
+        "turn_ordinal": 3,
+        "semantic_request_actor": "red",
+        "semantic_request_from": [
+          2,
+          6
+        ],
+        "semantic_request_to": [
+          2,
+          5
+        ],
+        "stage": "main:closed",
+        "viewer_side": "black",
+        "original_left_checkpoint": "MA-PD06-A:R2:main:closed",
+        "original_right_checkpoint": "MA-PD06-B:R2:main:closed",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_BLACK_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD06:R2:normal-end:red",
+        "pair_id": "PAIR-PD06",
+        "turn_label": "R2",
+        "turn_ordinal": 3,
+        "semantic_request_actor": "red",
+        "semantic_request_from": [
+          2,
+          6
+        ],
+        "semantic_request_to": [
+          2,
+          5
+        ],
+        "stage": "normal-end",
+        "viewer_side": "red",
+        "original_left_checkpoint": "MA-PD06-A:R2:normal-end",
+        "original_right_checkpoint": "MA-PD06-B:R2:normal-end",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_RED_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD06:R2:normal-end:black",
+        "pair_id": "PAIR-PD06",
+        "turn_label": "R2",
+        "turn_ordinal": 3,
+        "semantic_request_actor": "red",
+        "semantic_request_from": [
+          2,
+          6
+        ],
+        "semantic_request_to": [
+          2,
+          5
+        ],
+        "stage": "normal-end",
+        "viewer_side": "black",
+        "original_left_checkpoint": "MA-PD06-A:R2:normal-end",
+        "original_right_checkpoint": "MA-PD06-B:R2:normal-end",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_BLACK_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD06:B2:main:closed:red",
+        "pair_id": "PAIR-PD06",
+        "turn_label": "B2",
+        "turn_ordinal": 4,
+        "semantic_request_actor": "black",
+        "semantic_request_from": [
+          4,
+          1
+        ],
+        "semantic_request_to": [
+          3,
+          1
+        ],
+        "stage": "main:closed",
+        "viewer_side": "red",
+        "original_left_checkpoint": "MA-PD06-A:B2:main:closed",
+        "original_right_checkpoint": "MA-PD06-B:B2:main:closed",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_RED_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD06:B2:main:closed:black",
+        "pair_id": "PAIR-PD06",
+        "turn_label": "B2",
+        "turn_ordinal": 4,
+        "semantic_request_actor": "black",
+        "semantic_request_from": [
+          4,
+          1
+        ],
+        "semantic_request_to": [
+          3,
+          1
+        ],
+        "stage": "main:closed",
+        "viewer_side": "black",
+        "original_left_checkpoint": "MA-PD06-A:B2:main:closed",
+        "original_right_checkpoint": "MA-PD06-B:B2:main:closed",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_BLACK_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD06:B2:normal-end:red",
+        "pair_id": "PAIR-PD06",
+        "turn_label": "B2",
+        "turn_ordinal": 4,
+        "semantic_request_actor": "black",
+        "semantic_request_from": [
+          4,
+          1
+        ],
+        "semantic_request_to": [
+          3,
+          1
+        ],
+        "stage": "normal-end",
+        "viewer_side": "red",
+        "original_left_checkpoint": "MA-PD06-A:B2:normal-end",
+        "original_right_checkpoint": "MA-PD06-B:B2:normal-end",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_RED_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD06:B2:normal-end:black",
+        "pair_id": "PAIR-PD06",
+        "turn_label": "B2",
+        "turn_ordinal": 4,
+        "semantic_request_actor": "black",
+        "semantic_request_from": [
+          4,
+          1
+        ],
+        "semantic_request_to": [
+          3,
+          1
+        ],
+        "stage": "normal-end",
+        "viewer_side": "black",
+        "original_left_checkpoint": "MA-PD06-A:B2:normal-end",
+        "original_right_checkpoint": "MA-PD06-B:B2:normal-end",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_BLACK_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD06:R3:main:closed:red",
+        "pair_id": "PAIR-PD06",
+        "turn_label": "R3",
+        "turn_ordinal": 5,
+        "semantic_request_actor": "red",
+        "semantic_request_from": [
+          6,
+          6
+        ],
+        "semantic_request_to": [
+          6,
+          5
+        ],
+        "stage": "main:closed",
+        "viewer_side": "red",
+        "original_left_checkpoint": "MA-PD06-A:R3:main:closed",
+        "original_right_checkpoint": "MA-PD06-B:R3:main:closed",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_RED_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD06:R3:main:closed:black",
+        "pair_id": "PAIR-PD06",
+        "turn_label": "R3",
+        "turn_ordinal": 5,
+        "semantic_request_actor": "red",
+        "semantic_request_from": [
+          6,
+          6
+        ],
+        "semantic_request_to": [
+          6,
+          5
+        ],
+        "stage": "main:closed",
+        "viewer_side": "black",
+        "original_left_checkpoint": "MA-PD06-A:R3:main:closed",
+        "original_right_checkpoint": "MA-PD06-B:R3:main:closed",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_BLACK_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD06:R3:normal-end:red",
+        "pair_id": "PAIR-PD06",
+        "turn_label": "R3",
+        "turn_ordinal": 5,
+        "semantic_request_actor": "red",
+        "semantic_request_from": [
+          6,
+          6
+        ],
+        "semantic_request_to": [
+          6,
+          5
+        ],
+        "stage": "normal-end",
+        "viewer_side": "red",
+        "original_left_checkpoint": "MA-PD06-A:R3:normal-end",
+        "original_right_checkpoint": "MA-PD06-B:R3:normal-end",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_RED_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD06:R3:normal-end:black",
+        "pair_id": "PAIR-PD06",
+        "turn_label": "R3",
+        "turn_ordinal": 5,
+        "semantic_request_actor": "red",
+        "semantic_request_from": [
+          6,
+          6
+        ],
+        "semantic_request_to": [
+          6,
+          5
+        ],
+        "stage": "normal-end",
+        "viewer_side": "black",
+        "original_left_checkpoint": "MA-PD06-A:R3:normal-end",
+        "original_right_checkpoint": "MA-PD06-B:R3:normal-end",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_BLACK_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD06:B3:main:closed:red",
+        "pair_id": "PAIR-PD06",
+        "turn_label": "B3",
+        "turn_ordinal": 6,
+        "semantic_request_actor": "black",
+        "semantic_request_from": [
+          3,
+          1
+        ],
+        "semantic_request_to": [
+          3,
+          8
+        ],
+        "stage": "main:closed",
+        "viewer_side": "red",
+        "original_left_checkpoint": "MA-PD06-A:B3:main:closed",
+        "original_right_checkpoint": "MA-PD06-B:B3:main:closed",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_RED_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD06:B3:main:closed:black",
+        "pair_id": "PAIR-PD06",
+        "turn_label": "B3",
+        "turn_ordinal": 6,
+        "semantic_request_actor": "black",
+        "semantic_request_from": [
+          3,
+          1
+        ],
+        "semantic_request_to": [
+          3,
+          8
+        ],
+        "stage": "main:closed",
+        "viewer_side": "black",
+        "original_left_checkpoint": "MA-PD06-A:B3:main:closed",
+        "original_right_checkpoint": "MA-PD06-B:B3:main:closed",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_BLACK_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD06:B3:normal-end:red",
+        "pair_id": "PAIR-PD06",
+        "turn_label": "B3",
+        "turn_ordinal": 6,
+        "semantic_request_actor": "black",
+        "semantic_request_from": [
+          3,
+          1
+        ],
+        "semantic_request_to": [
+          3,
+          8
+        ],
+        "stage": "normal-end",
+        "viewer_side": "red",
+        "original_left_checkpoint": "MA-PD06-A:B3:normal-end",
+        "original_right_checkpoint": "MA-PD06-B:B3:normal-end",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_RED_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD06:B3:normal-end:black",
+        "pair_id": "PAIR-PD06",
+        "turn_label": "B3",
+        "turn_ordinal": 6,
+        "semantic_request_actor": "black",
+        "semantic_request_from": [
+          3,
+          1
+        ],
+        "semantic_request_to": [
+          3,
+          8
+        ],
+        "stage": "normal-end",
+        "viewer_side": "black",
+        "original_left_checkpoint": "MA-PD06-A:B3:normal-end",
+        "original_right_checkpoint": "MA-PD06-B:B3:normal-end",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_BLACK_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD06:R4:main:closed:red",
+        "pair_id": "PAIR-PD06",
+        "turn_label": "R4",
+        "turn_ordinal": 7,
+        "semantic_request_actor": "red",
+        "semantic_request_from": [
+          1,
+          9
+        ],
+        "semantic_request_to": [
+          3,
+          8
+        ],
+        "stage": "main:closed",
+        "viewer_side": "red",
+        "original_left_checkpoint": "MA-PD06-A:R4:main:closed",
+        "original_right_checkpoint": "MA-PD06-B:R4:main:closed",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_RED_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD06:R4:main:closed:black",
+        "pair_id": "PAIR-PD06",
+        "turn_label": "R4",
+        "turn_ordinal": 7,
+        "semantic_request_actor": "red",
+        "semantic_request_from": [
+          1,
+          9
+        ],
+        "semantic_request_to": [
+          3,
+          8
+        ],
+        "stage": "main:closed",
+        "viewer_side": "black",
+        "original_left_checkpoint": "MA-PD06-A:R4:main:closed",
+        "original_right_checkpoint": "MA-PD06-B:R4:main:closed",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_BLACK_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD06:R4:normal-end:red",
+        "pair_id": "PAIR-PD06",
+        "turn_label": "R4",
+        "turn_ordinal": 7,
+        "semantic_request_actor": "red",
+        "semantic_request_from": [
+          1,
+          9
+        ],
+        "semantic_request_to": [
+          3,
+          8
+        ],
+        "stage": "normal-end",
+        "viewer_side": "red",
+        "original_left_checkpoint": "MA-PD06-A:R4:normal-end",
+        "original_right_checkpoint": "MA-PD06-B:R4:normal-end",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_RED_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      },
+      {
+        "comparison_id": "PAIR-PD06:R4:normal-end:black",
+        "pair_id": "PAIR-PD06",
+        "turn_label": "R4",
+        "turn_ordinal": 7,
+        "semantic_request_actor": "red",
+        "semantic_request_from": [
+          1,
+          9
+        ],
+        "semantic_request_to": [
+          3,
+          8
+        ],
+        "stage": "normal-end",
+        "viewer_side": "black",
+        "original_left_checkpoint": "MA-PD06-A:R4:normal-end",
+        "original_right_checkpoint": "MA-PD06-B:R4:normal-end",
+        "declared_same_semantic_move": true,
+        "declared_expected_action_outcome_same": true,
+        "bound_player_id_for_view": "ACTUAL_ROOM_GAME_PLAYERS_BLACK_AFTER_RPS_REQUIRED",
+        "original_worlds_distinct": true,
+        "source_hidden_kind_values_transmitted": false,
+        "client_channel_observed": false,
+        "source_last_actual_evidence": "UNRUN",
+        "requires": [
+          "left+right lawful original post-stage checkpoint; if unattainable mark missing not synthetic",
+          "both actual authenticated playerRoomView(own side) snapshots with captured raw bytes and hashes",
+          "publicRemoteRoom/serializePublicRemoteRoom and actual app/server delivery plus messages/error receipts",
+          "field-by-field public permission for any differences incl lawful reveal or new turn effects",
+          "internal-only authority+secret proof stored separately, never attached to player output"
+        ],
+        "differences_policy": "NO_DEFAULT_BYTE_EQUALITY_OR_UNCONDITIONAL_IGNORE"
+      }
+    ],
+    "typed_surface": [
+      {
+        "path": "source_declaration.actor_from_to_and_order",
+        "class": "MUST_MATCH_AS_DECLARED",
+        "rule": "Only semantic actor/from/to ordering and original turn ordinal. Distinct room players/actionIds do not need byte equivalence"
+      },
+      {
+        "path": "publicRemoteRoom.mode_phase_rps_features_and_state",
+        "class": "COMPARE_FIELD_BY_FIELD",
+        "rule": "Correctly align red/black side and turn/stage; compare the public projection actually seen and label lawful differences, not wholesale JSON"
+      },
+      {
+        "path": "publicRemoteRoom.state.pieces_visible_covered_revealed_and_effects",
+        "class": "CONDITIONAL_SOURCE_RULE_PERMISSION",
+        "rule": "Before an actual lawful reveal, never expose an unrevealed true kind. At lawful reveal/death effects compare permission, effects and observed value; not an a priori equality assertion"
+      },
+      {
+        "path": "publicRemoteRoom.messages_terminalAnimation_lastTrapTrigger",
+        "class": "COMPARE_FIELD_BY_FIELD",
+        "rule": "Messages and action history may include actual lawful reveals/deaths and event order; check serialization to both players, not authority journals"
+      },
+      {
+        "path": "playerRoomView.viewerSide_ownHeroChoice_ownHeroSelection_ownHeroSecrets",
+        "class": "OWNER_ONLY_OR_CONTEXT",
+        "rule": "Bound to actual player identity, not source actor; owner-only fields must not be copied into opponent view. Fixed chosen hero facts cannot justify secret piece leaks"
+      },
+      {
+        "path": "playerRoomView.ownTrapDraft_ownTraps",
+        "class": "CONDITIONAL_SCOPE_HUNTER_ONLY",
+        "rule": "For this H04/H03 pair do not assume traps are always present; if fields exist follow authenticated owner only"
+      },
+      {
+        "path": "serialized_json_action_result_error_receipt",
+        "class": "CHANNEL_PROOF_PENDING",
+        "rule": "Actual caller-visible success/duplicate/error serialization and ordering must be separately captured. No inferred product error codes"
+      },
+      {
+        "path": "client_buttons_hints_legal_targets_clock_displays",
+        "class": "CLIENT_PROOF_PENDING",
+        "rule": "Actual UI/client channels are not proven by remote-room.ts alone; nontrivial differences must be reviewed not normalized away"
+      },
+      {
+        "path": "roomId_actionId_playerIds_timestamps_revision_and_deadline",
+        "class": "CONTEXTUAL_NOT_BLIND_IGNORABLE",
+        "rule": "Distinct rooms/players/times cannot be compared literally; any normalization requires proof field is not carrying secret-state information"
+      },
+      {
+        "path": "authority_secret.identities_destiny_body_map_processedActions_internal_trace",
+        "class": "NEVER_PLAYER_VISIBLE",
+        "rule": "Controlled internal evidence only; comparisons to player outputs detect leak, not disclose source secrets or raw fixture values"
+      }
+    ],
+    "source_code_evidence": {
+      "public_room": "src/remote-room.ts publicRemoteRoom lines1433-1455; state publicStateSnapshot, features, phase, rps, messages, terminalAnimation and other public fields",
+      "serialization": "src/remote-room.ts serializePublicRemoteRoom lines1457-1459 (not confirmation of external delivery)",
+      "viewer": "src/remote-room.ts playerRoomView lines1461-1490, viewerSide/authenticated player, ownHeroChoice/ownHeroSelection/ownHeroSecrets",
+      "owner_auth": "src/room.ts sideForPlayer lines26-30, authenticated playerId matches room.game.players",
+      "no_client_proof": "No proven client code, transport serialization of errors, buttons, legality hints or rule-authorized normalization from these functions alone"
+    },
+    "evidence_only": "2 pairs × 7 steps × 2 exact semantic boundaries × 2 viewer sides = 56 future per-view comparison slots; 112 underlying per-world per-view snapshots would be needed, none exists",
+    "guard": "Equal semantic move requests and declared expected result is NOT raw view equality nor legality or privacy pass. Distinct rooms/IDs/times must not be ignored without proof; rightful reveal outcomes may differ.",
+    "original_secret": "Pair worlds differ at 2 initial true-kind stable slots each. Only disclose count and source references here, not confidential true-kind mappings; all original witnesses remain source-only and no raw engine secret gets sent to player."
+  },
+  "uncovered_original_eight": {
+    "count": 8,
+    "items": [
+      {
+        "spec_id": "PD-S02",
+        "coverage_type": "GEOMETRY_NEGATIVE_SOURCE_STIMULUS",
+        "missing_evidence_kind": "NEW_UNDECLARED_NEGATIVE_MOVE",
+        "source_original_requirement": "PD01 R3路线 | 实际敌终点＋恰一地面路径炮；不得当普通受阻车或空位冲锋",
+        "preexisting_declared_replays": [
+          "MA-PD01"
+        ],
+        "existing_direct_source_checkpoints": [
+          "MA-PD01:B2:main:closed",
+          "MA-PD01:R3:main:closed"
+        ],
+        "source_original_limit": "独立空终点/两路径否定操作",
+        "source_safety_boundary": "现有M04正向路径不能证明未给出的负向分支",
+        "why_current_evidence_cannot_substitute": "An original M04 positive path does not prove a separate empty endpoint/two-path negative attempt",
+        "ownership": "main_shared_legality",
+        "half_chaos_immediate_action": "Document classification and original witness links only; preserve old specification unchanged.",
+        "future_conditional_requirement": "Main owner must independently define legal source route/observer/transport stimulus and authorization; after actual lawful run verify original negative/alternate case.",
+        "new_game_commands_created": 0,
+        "source_status": "NOT_INCLUDED_IN_12_SOURCE_REPLAY_INPUTS",
+        "original_spec_status": "UNRUN"
+      },
+      {
+        "spec_id": "PD-S12",
+        "coverage_type": "ALTERNATE_HORSE_ATTACK_LEGALITY",
+        "missing_evidence_kind": "NEW_UNDECLARED_ALTERNATE_MOVE_OR_QUERY",
+        "source_original_requirement": "PD03 R6/B6 | 以可完成合法马步的将帅马腿形成威胁，黑将具体回(4,0)应将",
+        "preexisting_declared_replays": [
+          "MA-PD03"
+        ],
+        "existing_direct_source_checkpoints": [
+          "MA-PD03:R6:main:closed",
+          "MA-PD03:B6:main:closed"
+        ],
+        "source_original_limit": "铁马替代马步/马腿真实威胁请求",
+        "source_safety_boundary": "静态推理不等于独立马请求或完整来源一致",
+        "why_current_evidence_cannot_substitute": "A hypothetical horse-leg threat is not the actually issued horse action or a proved complete threat search",
+        "ownership": "main_shared_legality",
+        "half_chaos_immediate_action": "Document classification and original witness links only; preserve old specification unchanged.",
+        "future_conditional_requirement": "Main owner must independently define legal source route/observer/transport stimulus and authorization; after actual lawful run verify original negative/alternate case.",
+        "new_game_commands_created": 0,
+        "source_status": "NOT_INCLUDED_IN_12_SOURCE_REPLAY_INPUTS",
+        "original_spec_status": "UNRUN"
+      },
+      {
+        "spec_id": "PD-S17",
+        "coverage_type": "ROYAL_SAFETY_NEGATIVE_QUERY",
+        "missing_evidence_kind": "NEW_UNDECLARED_NEGATIVE_MOVE_OR_QUERY",
+        "source_original_requirement": "PD04 R1/R2 | 第0行两阻挡，M04不能提前虚造对将冲锋",
+        "preexisting_declared_replays": [
+          "MA-PD04"
+        ],
+        "existing_direct_source_checkpoints": [
+          "MA-PD04:R1:main:closed",
+          "MA-PD04:R2:main:closed"
+        ],
+        "source_original_limit": "禁止提前王威胁的独立负向查询/请求",
+        "source_safety_boundary": "既有两枚阻挡路径示例不证明额外否定操作",
+        "why_current_evidence_cannot_substitute": "Two blocker examples do not establish an unissued premature king-threat rejection",
+        "ownership": "main_shared_legality",
+        "half_chaos_immediate_action": "Document classification and original witness links only; preserve old specification unchanged.",
+        "future_conditional_requirement": "Main owner must independently define legal source route/observer/transport stimulus and authorization; after actual lawful run verify original negative/alternate case.",
+        "new_game_commands_created": 0,
+        "source_status": "NOT_INCLUDED_IN_12_SOURCE_REPLAY_INPUTS",
+        "original_spec_status": "UNRUN"
+      },
+      {
+        "spec_id": "PD-S35",
+        "coverage_type": "PRODUCT_DEDUP_CONFLICT",
+        "missing_evidence_kind": "NEW_TRANSPORT_PROTOCOL_STIMULUS",
+        "source_original_requirement": "信息／本体／去重 | 路径死亡揭示与暗源未揭示分别处理；实际视图、稳定本体、去重均未验收",
+        "preexisting_declared_replays": [
+          "MA-PD01",
+          "MA-PD02",
+          "MA-PD03",
+          "MA-PD04",
+          "MA-PD05-A",
+          "MA-PD05-B",
+          "MA-PD06-A",
+          "MA-PD06-B"
+        ],
+        "existing_direct_source_checkpoints": [
+          "MA-PD01:R3:main:closed",
+          "MA-PD02:R5:main:closed",
+          "MA-PD03:R7:main:closed",
+          "MA-PD04:R5:main:closed",
+          "MA-PD05-A:R4:main:closed",
+          "MA-PD05-B:R4:main:closed",
+          "MA-PD06-A:R4:main:closed",
+          "MA-PD06-B:R4:main:closed"
+        ],
+        "source_original_limit": "产品同命令重传和同ID异actor/payload冲突",
+        "source_safety_boundary": "按WP04区分真实wire行为；不以研究冲突码冒充产品协议",
+        "why_current_evidence_cannot_substitute": "Existing unique action IDs are not same-message retransmission or same-ID different payload/actor",
+        "ownership": "main_shared_room_protocol",
+        "half_chaos_immediate_action": "Document classification and original witness links only; preserve old specification unchanged.",
+        "future_conditional_requirement": "Main owner must independently define legal source route/observer/transport stimulus and authorization; after actual lawful run verify original negative/alternate case.",
+        "new_game_commands_created": 0,
+        "source_status": "NOT_INCLUDED_IN_12_SOURCE_REPLAY_INPUTS",
+        "original_spec_status": "UNRUN"
+      },
+      {
+        "spec_id": "DS-S01",
+        "coverage_type": "PRE_MOVE_VIEW",
+        "missing_evidence_kind": "NEW_SETUP_PHASE_OBSERVATION",
+        "source_original_requirement": "DS01两方真种交换仍合法本方15池，暗士位真兵的锚为(3,9)，准备期不向玩家揭映射",
+        "preexisting_declared_replays": [
+          "MA-DS01-02"
+        ],
+        "existing_direct_source_checkpoints": [
+          "MA-DS01-02:R2:main:closed"
+        ],
+        "source_original_limit": "准备阶段、首走棋前真实双方玩家视图检查点",
+        "source_safety_boundary": "R2后的当前观察不能代替开局准备视图",
+        "why_current_evidence_cannot_substitute": "Actual two-player view before first move is missing; later R2 cannot substitute",
+        "ownership": "main_shared_observer",
+        "half_chaos_immediate_action": "Document classification and original witness links only; preserve old specification unchanged.",
+        "future_conditional_requirement": "Main owner must independently define legal source route/observer/transport stimulus and authorization; after actual lawful run verify original negative/alternate case.",
+        "new_game_commands_created": 0,
+        "source_status": "NOT_INCLUDED_IN_12_SOURCE_REPLAY_INPUTS",
+        "original_spec_status": "UNRUN"
+      },
+      {
+        "spec_id": "DS-S06",
+        "coverage_type": "ALTERNATE_ROOK_EVASION",
+        "missing_evidence_kind": "NEW_UNDECLARED_ALTERNATE_LEGAL_REPLY",
+        "source_original_requirement": "DS01沙漏不复原黑车位置/红马损失，不当作H06快照；普通红暗车本可捕获将军车，不能仅因技能搜索未实现就宣称将死",
+        "preexisting_declared_replays": [
+          "MA-DS01-02"
+        ],
+        "existing_direct_source_checkpoints": [
+          "MA-DS01-02:B2:main:closed",
+          "MA-DS01-02:R3:pre-1:observation"
+        ],
+        "source_original_limit": "第二种普通车解将分支实际选择",
+        "source_safety_boundary": "当前合法主动作不同，反事实不作为已执行",
+        "why_current_evidence_cannot_substitute": "Current selected rook reply cannot establish the alternate legal evasion",
+        "ownership": "main_shared_legality",
+        "half_chaos_immediate_action": "Document classification and original witness links only; preserve old specification unchanged.",
+        "future_conditional_requirement": "Main owner must independently define legal source route/observer/transport stimulus and authorization; after actual lawful run verify original negative/alternate case.",
+        "new_game_commands_created": 0,
+        "source_status": "NOT_INCLUDED_IN_12_SOURCE_REPLAY_INPUTS",
+        "original_spec_status": "UNRUN"
+      },
+      {
+        "spec_id": "DS-S12",
+        "coverage_type": "PRODUCT_DEDUP_CONFLICT",
+        "missing_evidence_kind": "NEW_TRANSPORT_PROTOCOL_STIMULUS",
+        "source_original_requirement": "DS02相同未变化状态重试/重复递送不修改任何棋盘/资源/窗口；精确去重及错误载荷仍须实际接口验证",
+        "preexisting_declared_replays": [
+          "MA-DS01-02"
+        ],
+        "existing_direct_source_checkpoints": [
+          "MA-DS01-02:R4:pre-1:observation",
+          "MA-DS01-02:R4:pre-2:observation"
+        ],
+        "source_original_limit": "真实产品原命令重传及actor/payload冲突",
+        "source_safety_boundary": "同不安全状态两次新请求与重传严格不同",
+        "why_current_evidence_cannot_substitute": "Two NEW requests under unchanged unsafe state are not retransmission, replay or conflicting-ID delivery",
+        "ownership": "main_shared_room_protocol",
+        "half_chaos_immediate_action": "Document classification and original witness links only; preserve old specification unchanged.",
+        "future_conditional_requirement": "Main owner must independently define legal source route/observer/transport stimulus and authorization; after actual lawful run verify original negative/alternate case.",
+        "new_game_commands_created": 0,
+        "source_status": "NOT_INCLUDED_IN_12_SOURCE_REPLAY_INPUTS",
+        "original_spec_status": "UNRUN"
+      },
+      {
+        "spec_id": "DS-S20",
+        "coverage_type": "POST_MAIN_BOMB_WINDOW",
+        "missing_evidence_kind": "NEW_UNDECLARED_POST_MAIN_SKILL_ATTEMPT",
+        "source_original_requirement": "DS04黑暗车普通捕获将军车能合法应将，完成主行动后不能因名额未用而重开投弹窗口",
+        "preexisting_declared_replays": [
+          "MA-DS04"
+        ],
+        "existing_direct_source_checkpoints": [
+          "MA-DS04:B3:pre-1:observation",
+          "MA-DS04:B3:main:closed",
+          "MA-DS04:B3:normal-end"
+        ],
+        "source_original_limit": "正常主行动后在旧窗口再次尝试投弹的真实请求",
+        "source_safety_boundary": "下一合法B4窗口投弹不能证明旧窗口拒绝",
+        "why_current_evidence_cannot_substitute": "The next black turn B4 valid bomb does not prove old B3 post-main illegal reopening",
+        "ownership": "main_shared_phase_and_skill",
+        "half_chaos_immediate_action": "Document classification and original witness links only; preserve old specification unchanged.",
+        "future_conditional_requirement": "Main owner must independently define legal source route/observer/transport stimulus and authorization; after actual lawful run verify original negative/alternate case.",
+        "new_game_commands_created": 0,
+        "source_status": "NOT_INCLUDED_IN_12_SOURCE_REPLAY_INPUTS",
+        "original_spec_status": "UNRUN"
+      }
+    ],
+    "shared_product_wire_family": [
+      "PD-S35",
+      "DS-S12"
+    ],
+    "separate_uncovered_abstract_spec": {
+      "id": "PD-S32",
+      "role": "outside the source-defined eight",
+      "reason": "No natural positive occupied/conflicting return; no direct original checkpoint; leave abstract UNRUN and do not fabricate a ninth declared stimulus."
+    }
+  },
+  "execution_and_publish_guards": {
+    "original12_executed": 0,
+    "original64": "UNRUN",
+    "actual210_observed": 0,
+    "views_observed": 0,
+    "client_issues_tested": 0,
+    "featuresReady": false,
+    "scoring": "FROZEN",
+    "NET": "PAUSED",
+    "engine_runs": 0,
+    "shared_code_edits": 0,
+    "other_worklines_edited": 0,
+    "new_stimulus_added": 0,
+    "new_game_rule_approvals": 0,
+    "main_receiver_adoption": "NOT_VERIFIED",
+    "old_source_files_edited": 0
+  },
+  "next": {
+    "id": "NEXT-HC-INDEPENDENT-SPEC-64-COMPLETENESS-AND-DEFERRED-OBLIGATION-TRIAGE",
+    "status": "READY_DOCUMENT_ONLY",
+    "scope": "Create full original64 source obligation tier/coverage appendix, distinguish satisfiable source contract vs genuinely requires original new stimulus vs main shared-engine implementation. Don't make new moves/specs.",
+    "blocked_main": "NEXT-HC-VERIFY-MAIN-EXACT-TUPLE-RUNNER-AND-PILOTS"
+  }
+}

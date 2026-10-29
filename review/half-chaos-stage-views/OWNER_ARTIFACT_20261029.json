@@ -1,0 +1,13 @@
+{
+  "bytes": 303333,
+  "sha256": "d27699139cd98cf06134b694a06dc63c94dff21b1531f07eabf0f1dca12f484d",
+  "source_raw_bytes": 13372495,
+  "source_raw_sha256": "189de829f9e0cb1918a255d1396bb15370c54002fe0c408ac68fe6d516c8ee6a",
+  "requests": 110,
+  "stage_checkpoints": 200,
+  "owner_only": true,
+  "zip_readback_verified": true,
+  "file_name": "lezi-main-hc56-stage-evidence-20261029.zip",
+  "raw_private_payload_in_repo": false,
+  "separate_from_original_NP32_and_HC_runtime_archives": true
+}

@@ -1,0 +1,1125 @@
+{
+  "schema": "lezi.hc.exact_stage_projection.differential.v1",
+  "executedLocalDate": "2026-10-29",
+  "baselineCommit": "099eca44dbaab39bdedb02a9986f7d54e9761121",
+  "originalRequestsCompared": 110,
+  "versions": [
+    "immutable_parent",
+    "new_default_no_projection",
+    "new_exact_projection",
+    "new_without_any_observation"
+  ],
+  "parentVsDefaultRequestPairs": 110,
+  "projectionVsDefaultRequestPairs": 110,
+  "noObservationRequestPairs": 110,
+  "newProjectionFieldsExcludedFromEventComparisonOnly": true,
+  "exactProjectionCount": 200,
+  "ambientRandomCalls": 0,
+  "ambientClockCalls": 0,
+  "normalization": "Only exact declared room/player/request identifier prefixes and associated object keys; no clock/RNG/authority/event/secret/history/source field omitted. New checkpointProjection is compared separately and is the sole additional event field.",
+  "rows": [
+    {
+      "replayId": "MA-PD01",
+      "declarationId": "MA-PD01:R1:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "427939c15fdd0ef8556d155fc2754c6403415b81eb957a5bb457d7814858ee65",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD01",
+      "declarationId": "MA-PD01:B1:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "20601bd8c56b96a90e0e0c7b5b3de363803118b4279940b86b36fe0f1e7eb63c",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD01",
+      "declarationId": "MA-PD01:R2:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "ad0d681fac531e3f1dea10c08bbbff37ab8759a9417a1b10f8a267c171c3a0de",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD01",
+      "declarationId": "MA-PD01:B2:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "106093127adf5b49975e7d0e73bda5b615c0b2c92b2c1a6f8b80c2f8f4a2fdff",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD01",
+      "declarationId": "MA-PD01:R3:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "19e45f5b1d86212c5cae7d6c167fb2a26d9f0f62329dedaea14474877f6b1378",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD02",
+      "declarationId": "MA-PD02:R1:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "313f6f2ab6eebaa7221752ae543b220f4ecccb275170c8cd5a82d7344ba84213",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD02",
+      "declarationId": "MA-PD02:B1:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "339ffde16d96778f127c2a868a9d8fed3ebf1cf0d6a688f060d3982c8b8c1c0b",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD02",
+      "declarationId": "MA-PD02:R2:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "e620996ee5134cf5913010858333b5e6f2cc58d96764ee20a1a5a7d372d6c481",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD02",
+      "declarationId": "MA-PD02:B2:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "ed03387bf1d694ad6876e2c9732f60bc21d62b0814bbeb74bb3f9c7567ed6ab8",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD02",
+      "declarationId": "MA-PD02:R3:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "9c6e4a0b5560cfa2001cc836fec0bddf67158f2109f02a95ba1a4d080ac899d7",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD02",
+      "declarationId": "MA-PD02:B3:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "11c15740cf5d9ab9eeb43b31378cfe143cfbf1924577b884e21b961e1d58ead7",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD02",
+      "declarationId": "MA-PD02:R4:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "6e96a88b0f3c55add6d557f6d7ec4fd6e3a55a9a9e8ca3eee22ca993021621a0",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD02",
+      "declarationId": "MA-PD02:B4:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "f392961f54f4a635fd0794faf59fbefce127e5c94163be72839fb55a2062a609",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD02",
+      "declarationId": "MA-PD02:R5:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "7e46e23a783bfebb1d5fd23784f3f7beee8a2b82e6908834abad4d3f71f62ff5",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD03",
+      "declarationId": "MA-PD03:R1:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "2c4948036c774a6f9557b9e50919d09ff117e358578c21ce128d9a533c2b14da",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD03",
+      "declarationId": "MA-PD03:B1:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "557faaf026152621785ed237b3b3cfce66f1fe6695c6ea9efbcedecf7a0f6544",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD03",
+      "declarationId": "MA-PD03:R2:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "4da6dcf1ca322835bfd2b6e71605bbe6ba06949785d99f9883d42ec6423fb34c",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD03",
+      "declarationId": "MA-PD03:B2:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "9f1645e6cece109ed036190222bbcbce590baf90d5aeab08ead5eb4a153309c9",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD03",
+      "declarationId": "MA-PD03:R3:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "7347fda03ba8bae65034445dd4980226530e5a4d367e3cbdf3651d327e6d6adc",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD03",
+      "declarationId": "MA-PD03:B3:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "367d86ad76ecddc10e892522e271329fee1384edffad955f80c482f366c33e77",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD03",
+      "declarationId": "MA-PD03:R4:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "68d00bf714a488769b3ae637bf86d3b913d1526874dce4c5879d2e32c053d01d",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD03",
+      "declarationId": "MA-PD03:B4:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "b3070f6cacdfd3c60915d7ecb2842fdb4d0f90bc32f00c8607cd23a59d5c83c2",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD03",
+      "declarationId": "MA-PD03:R5:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "1e1ffa2428677ac996c23b30920f7d7e0a686a45f0457f48a71bf8afabe42aa6",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD03",
+      "declarationId": "MA-PD03:B5:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "eec2626506a1a6c7d57bab06465e31f0621c8b6032e3507403a0aa66de1454f1",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD03",
+      "declarationId": "MA-PD03:R6:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "8352e48a11596efbf31ed2decc25e51ab822837ae6263e3bb10c5d9c6b96dbea",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD03",
+      "declarationId": "MA-PD03:B6:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "879cbf9090dc72e0dc7ccca4b75ef9c0bbe6025a53368576befba69822f5b17b",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD03",
+      "declarationId": "MA-PD03:R7:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "31499a779ed4a3c4c9dca9de1399fb8fe5952642c7315aebcd24e0cee8def33b",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD04",
+      "declarationId": "MA-PD04:R1:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "2c755c8c781a157e388e284ad637545037102e153d5381253688cac1c1983180",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD04",
+      "declarationId": "MA-PD04:B1:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "96f0c41800658b5d0ec7446e8fda93b7739d3f45f705021f653809ecf0e8aef6",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD04",
+      "declarationId": "MA-PD04:R2:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "8a395b0a2fed51a62052c641461f203d6aae60a01656b30b1e07557c267c8726",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD04",
+      "declarationId": "MA-PD04:B2:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "8096b77f0c795b6ee805d3c80577d361bc90d6b1ed3160edf5d741c74c0a5b52",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD04",
+      "declarationId": "MA-PD04:R3:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "3a9e19a0bb0aa33a71248ad90f075804922e4b07b226ce5cf1e715ff9678decf",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD04",
+      "declarationId": "MA-PD04:B3:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "dc67977a1bda2431b6ce78b9582969a05a8061653a6fb4baab16f556e2091d4d",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD04",
+      "declarationId": "MA-PD04:R4:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "395a9bd0efd132c2a4b3a2a365e5532221ce09597cb805004a94920cec6e6fbb",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD04",
+      "declarationId": "MA-PD04:B4:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "d64c471b314257862121896dd4065282a5f878c7c75f0a6ed7a3aff658ad20ab",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD04",
+      "declarationId": "MA-PD04:R5:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "42f6309308a0953912a02cca9d3c8c7d1d31492d26bf951bf96d59164a0feaa8",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD04",
+      "declarationId": "MA-PD04:B5:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "ad4a9cd082f45ffad06bd5b8832db64d3a397a6232334b3ee10212d39a0e8477",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD05-A",
+      "declarationId": "MA-PD05-A:R1:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "12dc5c001077c1f0c015c1b8e6477848d85f4cae734f72352db34e6e42eb3546",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD05-A",
+      "declarationId": "MA-PD05-A:B1:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "eec92cfc2d15c029f4a06c0ea19661b563f3443eaa6a3e4640ab896e07a95848",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD05-A",
+      "declarationId": "MA-PD05-A:R2:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "c6d4e36d5d3670793bc006a29006a7f0dd470ab47bbb2b12251ff45963f8f0eb",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD05-A",
+      "declarationId": "MA-PD05-A:B2:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "9c685c1e2b719fc45a451811db00b689bac87f8f384815362102c670b1b9a228",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD05-A",
+      "declarationId": "MA-PD05-A:R3:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "f18f6141a97cd88b1d0d7c0d739fc4da6f64ad0b8be9838b29168d87c88895b8",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD05-A",
+      "declarationId": "MA-PD05-A:B3:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "367102b46c126998a8eba1bd9ac010c0e93d235f22aee2ac61f2efbdd3e2cac5",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD05-A",
+      "declarationId": "MA-PD05-A:R4:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "9674db553c4cb7dbcd78af2a3503fb0a4f354f5875c30e0db4766d5cedf24283",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD05-B",
+      "declarationId": "MA-PD05-B:R1:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "e889fc9f41395555174337e74d89b471a86d8b8e5291f688f68a851827744ae2",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD05-B",
+      "declarationId": "MA-PD05-B:B1:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "a3cb2f462ffdc548c3ebd6877450338f4ff676908d21e5bbc9e5af62ade3f704",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD05-B",
+      "declarationId": "MA-PD05-B:R2:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "87bd4b56289d94f08c4591921e73c4867cf0e1afcb6abf2de499b2c8dd6e27dc",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD05-B",
+      "declarationId": "MA-PD05-B:B2:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "bf8af34bfed53edfadd071adf01f82681edd3215504bde5d6a84b9747b6c01a2",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD05-B",
+      "declarationId": "MA-PD05-B:R3:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "67b9e0d819bb8b25129490b8136cee42f9250e9bb3de4744d56e46e45d651d85",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD05-B",
+      "declarationId": "MA-PD05-B:B3:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "7a8fa86dc5afd845670d8378347c0659eecb4fb72a9941212cc422df6ba5a7f2",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD05-B",
+      "declarationId": "MA-PD05-B:R4:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "ef204f9506a8551fa10a839ed2211224f8e8fe2a34e3b7caf1702df06a13c1df",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD06-A",
+      "declarationId": "MA-PD06-A:R1:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "ec0bc4e6624c0500afcd91a5fb849f1433c88df294d088d756e3dc50532ef1be",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD06-A",
+      "declarationId": "MA-PD06-A:B1:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "0af7230d88e43eaba808c3b51966e9ab37d58bc604b2cdba61271255fad8ce05",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD06-A",
+      "declarationId": "MA-PD06-A:R2:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "1aa5e8021a40a887356456d564dae2ae6341763e117637219ab66b85307f50a1",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD06-A",
+      "declarationId": "MA-PD06-A:B2:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "742a86f7714b5bc099fa2906e03ae381b1fee846e412a6e40ec181c3cf568763",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD06-A",
+      "declarationId": "MA-PD06-A:R3:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "fc559f8f22310bb37e040c93341c6dfe16c3c4d8514b8287b479b53c335cfb93",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD06-A",
+      "declarationId": "MA-PD06-A:B3:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "4cee209edde27837507d634ee08fdfb256c857c6ba317601ae0865b0840debcb",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD06-A",
+      "declarationId": "MA-PD06-A:R4:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "4adda5c891ab330aaf736c27243ef27fc05cf2c8bcf146bdc3f0e3391fc24413",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD06-B",
+      "declarationId": "MA-PD06-B:R1:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "b0913479feeadca163583a460b9597e849124b45c839c992cb32ddd57fc58b33",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD06-B",
+      "declarationId": "MA-PD06-B:B1:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "70a055c0317358e70d025957f8c2c6393cd38a31d325c460a9df7abb6e7665a6",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD06-B",
+      "declarationId": "MA-PD06-B:R2:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "3cab4fdb8b00a29a81eac4bc33e997d2d0e74caa81ba41a3caee2e61eeeddc33",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD06-B",
+      "declarationId": "MA-PD06-B:B2:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "d07b31619534a6e07bdba544fdd342d98775d6c11336b7f799c70b805323f12e",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD06-B",
+      "declarationId": "MA-PD06-B:R3:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "cb6f6cad69426d18215f828d16b8a3f0849ea2c7e95f925015121fcbd1c828c4",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD06-B",
+      "declarationId": "MA-PD06-B:B3:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "f2e846d5a32f485511c32ad3f98c072b35b77ecaec189ac582106b9ae28df453",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-PD06-B",
+      "declarationId": "MA-PD06-B:R4:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "cab6ed998f66ff30ee1a41ccf704d42ff81613807e94a6b359512896d2f186f5",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-DS01-02",
+      "declarationId": "MA-DS01-02:R1:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "d91defabec738f1b13ed45e9e90133610c564f5da187e4d77116d552440b9766",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-DS01-02",
+      "declarationId": "MA-DS01-02:B1:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "877f486121f931afc6e669f2c135e99a2461f657c3bc4a8f6330dc06b3d32307",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-DS01-02",
+      "declarationId": "MA-DS01-02:R2:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "3d2488e15e919d477409b51cb121a43319cc7a184ae2f296bf65cdc625bae51c",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-DS01-02",
+      "declarationId": "MA-DS01-02:B2:pre-1",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "865006c7cfa8a9dafe66f7cf43c0dc26c84e644dcc9c1350ab8191b87b415e98",
+      "projectionCount": 0
+    },
+    {
+      "replayId": "MA-DS01-02",
+      "declarationId": "MA-DS01-02:B2:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "2e67e5232362d7534276ef188adcfcbb6d1e356e8a20cfebf5cbd7cb55f075cc",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-DS01-02",
+      "declarationId": "MA-DS01-02:R3:pre-1",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "dcb896b67ec22b3b596b1939d7b20eebc4dda27db4acb31bf32536e5e4f51f3e",
+      "projectionCount": 0
+    },
+    {
+      "replayId": "MA-DS01-02",
+      "declarationId": "MA-DS01-02:R3:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "ae2e5406d70f8bdf72252d887b001aee3a1dd39e41ac38d5b5fcad7b002db358",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-DS01-02",
+      "declarationId": "MA-DS01-02:B3:pre-1",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "0f96323a804e9a8de39a09f0e716f790ab5ee307cd112b94c2f5c73263a60a09",
+      "projectionCount": 0
+    },
+    {
+      "replayId": "MA-DS01-02",
+      "declarationId": "MA-DS01-02:B3:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "9aeaf02c0abaa12f1331bdef1afe24abe6012805f74b293915e94b8b44ea2b46",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-DS01-02",
+      "declarationId": "MA-DS01-02:R4:pre-1",
+      "disposition": "rejected",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "6d41c74ff60649140f4875f41d4481d512b638fd291b328148770ffeaef64e51",
+      "projectionCount": 0
+    },
+    {
+      "replayId": "MA-DS01-02",
+      "declarationId": "MA-DS01-02:R4:pre-2",
+      "disposition": "rejected",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "b29a03a6564556f080b4c4e77e1434276537d6274ff99a1b97918d027a298c4f",
+      "projectionCount": 0
+    },
+    {
+      "replayId": "MA-DS01-02",
+      "declarationId": "MA-DS01-02:R4:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "4229f65e4d00967ca5f2da51e6c3944fe567b0d85fad3d0b92f6bb05cbaf13bb",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-DS03",
+      "declarationId": "MA-DS03:R1:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "f725d48dd8fb384e1d68b40773131ff384f93696ef533d7417f637a3a6c023e6",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-DS03",
+      "declarationId": "MA-DS03:B1:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "084e926f949b6ae190fedfc84c01c6c501d8f3dbd87d835f1d5bfce6488fbcc2",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-DS03",
+      "declarationId": "MA-DS03:R2:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "46ffc04931bd348523b1c2149c0ec17bfda362085a30bee710daaa95c3ad55db",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-DS03",
+      "declarationId": "MA-DS03:B2:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "58be72d5c1fc458ee390c89fea805050c3a2eafe44c83f7679e764d30dbbbf14",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-DS03",
+      "declarationId": "MA-DS03:R3:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "97a9a155452a6042a705e83c112b8394e74f4a2c55ec337c1facb855f41403fe",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-DS03",
+      "declarationId": "MA-DS03:B3:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "dbef62e1506076f8a714fb333a9358438b741cb2c4649221dbdcbfc56b0ff9a3",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-DS03",
+      "declarationId": "MA-DS03:R4:pre-1",
+      "disposition": "rejected",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "23cede5ee70773804360c0d455ce268f86aeaa499da4935a23f04ac837945357",
+      "projectionCount": 0
+    },
+    {
+      "replayId": "MA-DS03",
+      "declarationId": "MA-DS03:R4:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "37299004609775d8d4f1b1388f8132650146e7105d4755a27173f51b666e743e",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-DS04",
+      "declarationId": "MA-DS04:R1:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "496fb70dd649dd88848b1827e81cec2ad100fd95a06029ab87d821246b0619bb",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-DS04",
+      "declarationId": "MA-DS04:B1:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "60df652c2b5cdc7ac9cb48d3dfc0256b9d261fce45b72cf690a9bbe6e0df633c",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-DS04",
+      "declarationId": "MA-DS04:R2:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "a516f0845a45a8d4ff807d44c306bdf21d8c76f3986afcfc711fb312f3fd2d0b",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-DS04",
+      "declarationId": "MA-DS04:B2:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "6dc81921c2c0eae4cad0d015687bc703cc88ab81a63af56b8d23821439b87c2b",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-DS04",
+      "declarationId": "MA-DS04:R3:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "454d12e6fe0ced5625de92a2945fb3c00e2f14486f83c7fce35031382353d52d",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-DS04",
+      "declarationId": "MA-DS04:B3:pre-1",
+      "disposition": "rejected",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "2c9f294bf854bca66c01a42ad556b95d415c2453e885a0be9634176ac5858057",
+      "projectionCount": 0
+    },
+    {
+      "replayId": "MA-DS04",
+      "declarationId": "MA-DS04:B3:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "8ce82bb2cde5d2207b2fe47e633a39f1f2867e92c0966501b2cd366a4ed00dab",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-DS04",
+      "declarationId": "MA-DS04:R4:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "d83c3b9d27e273f3a6032a1ee41784e94f1d167d19e6f0949e5fe979c2e6ba32",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-DS04",
+      "declarationId": "MA-DS04:B4:pre-1",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "514007ac1d17440e5702f633bc92a288714cdf97996ffb1cfaa5af026e3d567c",
+      "projectionCount": 0
+    },
+    {
+      "replayId": "MA-DS04",
+      "declarationId": "MA-DS04:B4:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "a416cc985952087dc5776434c5666ebabd4c0ec970e5377b680234b9f7a95f06",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-DS05",
+      "declarationId": "MA-DS05:R1:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "d7bb30bcadfda6beb768acbcca5e63ad06f250424e3d387249d052a07b34243f",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-DS05",
+      "declarationId": "MA-DS05:B1:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "7cdfad6042ae2f0671f09a379973063cd8baca393de022527e459730c6e78ffe",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-DS05",
+      "declarationId": "MA-DS05:R2:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "d39798dbc4e8dfedecf38d60a7420ba43fa1dc2c99027aabdb251271377bde16",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-DS05",
+      "declarationId": "MA-DS05:B2:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "43110d86d89f3e0fb0a7ce54314161e501c0a9511f8c43b3e22046c2312385c5",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-DS05",
+      "declarationId": "MA-DS05:R3:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "8a19de22c81379fa0907abf8bcc41f19e7ee62260f26fe9edf202c9e705cd615",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-DS05",
+      "declarationId": "MA-DS05:B3:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "c61a11a8006e184c7b8e7e07f40d4e9933a7bebf5899402819da12000c810c4d",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-DS05",
+      "declarationId": "MA-DS05:R4:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "06235640ded1c626024cb61df7ad86da443fd37abdf2d5fd692cddcd7fb23e38",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-DS05",
+      "declarationId": "MA-DS05:B4:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "0beb050c68f8c8bca72551a323fc145524394a92a06a23e2bff1e53f201c24e8",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-DS05",
+      "declarationId": "MA-DS05:R5:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "e708c6701c5c38dee7b8ea3ec4a0dfe8d51c4c067b21e2e6029340ce08e8f5ad",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-DS05",
+      "declarationId": "MA-DS05:B5:pre-1",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "8e4ea88791fe5b7e3c90ea841f78ff4e43ea479f9bd96b3858c0622cc63b3d2b",
+      "projectionCount": 0
+    },
+    {
+      "replayId": "MA-DS05",
+      "declarationId": "MA-DS05:B5:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "670d17a2a7239ad90a3090148c03b71d5aecf1093848d1cdd93d8bfe31a98be1",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-DS05",
+      "declarationId": "MA-DS05:R6:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "740b9ff7028e9e84fdbb8b68ef34138ba4e240b794a43a4aa02c37651510e222",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-DS05",
+      "declarationId": "MA-DS05:B6:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "c971e2628e4fcef1ea078cfc8b6cd8ee99df46778408abc802059ae769af08d8",
+      "projectionCount": 2
+    },
+    {
+      "replayId": "MA-DS05",
+      "declarationId": "MA-DS05:R7:pre-1",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "34b3dae7fb3e0366088fed828795522569336cfe82996fe0370a19c4788c305c",
+      "projectionCount": 0
+    },
+    {
+      "replayId": "MA-DS05",
+      "declarationId": "MA-DS05:R7:main",
+      "disposition": "accepted",
+      "parentVsDefaultAllReturnedFieldsEqual": true,
+      "projectionVsDefaultAllReturnedFieldsEqualExcludingOnlyNewProjectionField": true,
+      "noObservationAuthorityViewsCommandOutcomeClockEqual": true,
+      "normalizedOriginalResultSha256": "66e2ae5e541b07244594b83b7aa58b5956ccfd872d0abbc807394355c1ef156e",
+      "projectionCount": 2
+    }
+  ],
+  "rawAuthoritySecretAndPlayerBodiesComparedInMemoryOnly": true,
+  "independentQA": false,
+  "formal64Accepted": 0
+}

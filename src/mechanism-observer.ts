@@ -5,7 +5,11 @@ export interface MechanismEvent {
   state: GameState;
   secret?: SecretState;
   details: Record<string, unknown>;
+  /** Opt-in research output from this immutable checkpoint, never player wire state. */
+  checkpointProjection?: unknown;
 }
+
+export type AuthorityCheckpointProjector = (checkpoint: Readonly<MechanismEvent>) => unknown;
 
 // Opt-in, synchronous research capture. Nothing is attached to product state or
 // player projections. Inactive hooks do not clone, read clocks or consume RNG.
@@ -13,6 +17,7 @@ interface Capture {
   events: MechanismEvent[];
   evidenceValid: boolean;
   isolateFailures: boolean;
+  projectCheckpoint?: AuthorityCheckpointProjector;
 }
 const captures: Capture[] = [];
 
@@ -40,7 +45,13 @@ export function emitMechanismEvent(kind: MechanismEvent["kind"], state: GameStat
   try {
     const event = structuredClone({ kind, state, secret, details });
     freezeTree(event);
-    capture.events.push(event);
+    if (capture.projectCheckpoint && (kind === "main_action_atom_closed" || kind === "formal_turn_settled")) {
+      const projected = withoutMechanismEvents(() => capture.projectCheckpoint!(event));
+      if (projected && typeof (projected as { then?: unknown }).then === "function") throw new TypeError("Checkpoint projection must be synchronous");
+      const projection = structuredClone(projected);
+      freezeTree(projection);
+      capture.events.push(Object.freeze({ ...event, checkpointProjection: projection }));
+    } else capture.events.push(event);
   } catch (error) {
     if (!capture.isolateFailures) throw error;
     capture.events.length = 0;
@@ -69,7 +80,8 @@ export function withIsolatedMechanismEvents<T>(operation: () => T): T {
     if (result && typeof (result as { then?: unknown }).then === "function") throw new TypeError("Mechanism isolation requires a synchronous operation");
     return result;
   }
-  const candidate: Capture = { events: [], evidenceValid: true, isolateFailures: true };
+  const candidate: Capture = { events: [], evidenceValid: true, isolateFailures: true,
+    ...(parent.evidenceValid && parent.projectCheckpoint ? { projectCheckpoint: parent.projectCheckpoint } : {}) };
   captures.push(candidate);
   try {
     const result = operation();
@@ -87,8 +99,8 @@ export function withIsolatedMechanismEvents<T>(operation: () => T): T {
 }
 
 /** The operation must be synchronous; captured snapshots never alias the game. */
-export function captureMechanismEvents<T>(operation: () => T): { result: T; events: readonly MechanismEvent[]; evidenceValid?: false } {
-  const capture: Capture = { events: [], evidenceValid: true, isolateFailures: false };
+export function captureMechanismEvents<T>(operation: () => T, options: { projectCheckpoint?: AuthorityCheckpointProjector } = {}): { result: T; events: readonly MechanismEvent[]; evidenceValid?: false } {
+  const capture: Capture = { events: [], evidenceValid: true, isolateFailures: false, projectCheckpoint: options.projectCheckpoint };
   captures.push(capture);
   try {
     const result = operation();
