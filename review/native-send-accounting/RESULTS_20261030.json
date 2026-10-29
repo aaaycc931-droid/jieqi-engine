@@ -1,0 +1,287 @@
+{
+  "schema": "lezi.main.native_send_accounting.v1",
+  "id": "MAIN-BLUETOOTH-SEND-FAILURE-ACCOUNTING-20261030",
+  "date_local": "2026-10-30",
+  "engine_parent": "96fa7394f0371ab966b8b3572bf3f21b9bfe0da3",
+  "sourceWebSha256": "f75b134dea69ef7b90e6535814c58088b6c201a2fadcc8c1d5aaab8dbb0cc9e1",
+  "nativeProductionSourceSha256": {
+    "BluetoothGameSession.java": "53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0",
+    "GameWebBridge.java": "a0b337b40ddbdeb47155af438c3b76b071278230bcb9f2ed4111486e934bbcb7"
+  },
+  "JVMChecks": 16,
+  "parentActualNativeFaultControls": 3,
+  "channelCases": [
+    {
+      "mode": "success",
+      "kind": "EXPLICIT_JVM_WRITER_FAULT_AND_RECORDED_WEB_BOUNDARY",
+      "afterSend": {
+        "pending": true,
+        "unknown": false,
+        "attempts": 2
+      },
+      "afterHostFrames": {
+        "pending": false,
+        "unknown": false
+      },
+      "nativeCalls": [
+        {
+          "type": "action",
+          "status": "written",
+          "mode": "success"
+        },
+        {
+          "type": "ping",
+          "status": "written",
+          "mode": "success"
+        }
+      ],
+      "authorityChoice": "shuffler",
+      "afterNativeCallbacks": {
+        "pending": false,
+        "nativeState": "CONNECTED"
+      },
+      "uncertainActionAutomaticallyRetried": false,
+      "actualAndroidOrRadio": false
+    },
+    {
+      "mode": "no_session",
+      "kind": "EXPLICIT_JVM_WRITER_FAULT_AND_RECORDED_WEB_BOUNDARY",
+      "afterSend": {
+        "pending": false,
+        "unknown": false,
+        "attempts": 1
+      },
+      "afterHostFrames": {
+        "pending": false,
+        "unknown": false
+      },
+      "nativeCalls": [
+        {
+          "type": "action",
+          "status": "not_sent",
+          "mode": "no_session"
+        }
+      ],
+      "authorityChoice": null,
+      "afterNativeCallbacks": {
+        "pending": false,
+        "nativeState": "CONNECTED"
+      },
+      "uncertainActionAutomaticallyRetried": false,
+      "actualAndroidOrRadio": false
+    },
+    {
+      "mode": "not_connected",
+      "kind": "EXPLICIT_JVM_WRITER_FAULT_AND_RECORDED_WEB_BOUNDARY",
+      "afterSend": {
+        "pending": false,
+        "unknown": false,
+        "attempts": 1
+      },
+      "afterHostFrames": {
+        "pending": false,
+        "unknown": false
+      },
+      "nativeCalls": [
+        {
+          "type": "action",
+          "status": "not_sent",
+          "mode": "not_connected"
+        }
+      ],
+      "authorityChoice": null,
+      "afterNativeCallbacks": {
+        "pending": false,
+        "nativeState": "CONNECTED"
+      },
+      "uncertainActionAutomaticallyRetried": false,
+      "actualAndroidOrRadio": false
+    },
+    {
+      "mode": "write_zero",
+      "kind": "EXPLICIT_JVM_WRITER_FAULT_AND_RECORDED_WEB_BOUNDARY",
+      "afterSend": {
+        "pending": true,
+        "unknown": true,
+        "attempts": 1
+      },
+      "afterHostFrames": {
+        "pending": true,
+        "unknown": true
+      },
+      "nativeCalls": [
+        {
+          "type": "action",
+          "status": "unknown",
+          "mode": "write_zero"
+        }
+      ],
+      "authorityChoice": null,
+      "afterNativeCallbacks": {
+        "pending": false,
+        "nativeState": "DISCONNECTED"
+      },
+      "uncertainActionAutomaticallyRetried": false,
+      "actualAndroidOrRadio": false
+    },
+    {
+      "mode": "partial",
+      "kind": "EXPLICIT_JVM_WRITER_FAULT_AND_RECORDED_WEB_BOUNDARY",
+      "afterSend": {
+        "pending": true,
+        "unknown": true,
+        "attempts": 1
+      },
+      "afterHostFrames": {
+        "pending": true,
+        "unknown": true
+      },
+      "nativeCalls": [
+        {
+          "type": "action",
+          "status": "unknown",
+          "mode": "partial"
+        }
+      ],
+      "authorityChoice": null,
+      "afterNativeCallbacks": {
+        "pending": false,
+        "nativeState": "DISCONNECTED"
+      },
+      "uncertainActionAutomaticallyRetried": false,
+      "actualAndroidOrRadio": false
+    },
+    {
+      "mode": "newline",
+      "kind": "EXPLICIT_JVM_WRITER_FAULT_AND_RECORDED_WEB_BOUNDARY",
+      "afterSend": {
+        "pending": true,
+        "unknown": true,
+        "attempts": 1
+      },
+      "afterHostFrames": {
+        "pending": true,
+        "unknown": true
+      },
+      "nativeCalls": [
+        {
+          "type": "action",
+          "status": "unknown",
+          "mode": "newline"
+        }
+      ],
+      "authorityChoice": null,
+      "afterNativeCallbacks": {
+        "pending": false,
+        "nativeState": "DISCONNECTED"
+      },
+      "uncertainActionAutomaticallyRetried": false,
+      "actualAndroidOrRadio": false
+    },
+    {
+      "mode": "flush",
+      "kind": "EXPLICIT_JVM_WRITER_FAULT_AND_RECORDED_WEB_BOUNDARY",
+      "afterSend": {
+        "pending": true,
+        "unknown": true,
+        "attempts": 1
+      },
+      "afterHostFrames": {
+        "pending": true,
+        "unknown": true
+      },
+      "nativeCalls": [
+        {
+          "type": "action",
+          "status": "unknown",
+          "mode": "flush"
+        }
+      ],
+      "authorityChoice": "shuffler",
+      "afterNativeCallbacks": {
+        "pending": false,
+        "nativeState": "DISCONNECTED"
+      },
+      "uncertainActionAutomaticallyRetried": false,
+      "actualAndroidOrRadio": false
+    },
+    {
+      "mode": "old_writer",
+      "kind": "EXPLICIT_JVM_WRITER_FAULT_AND_RECORDED_WEB_BOUNDARY",
+      "afterSend": {
+        "pending": true,
+        "unknown": true,
+        "attempts": 1
+      },
+      "afterHostFrames": {
+        "pending": true,
+        "unknown": true
+      },
+      "nativeCalls": [
+        {
+          "type": "action",
+          "status": "unknown",
+          "mode": "old_writer"
+        }
+      ],
+      "authorityChoice": null,
+      "afterNativeCallbacks": {
+        "pending": true,
+        "nativeState": "CONNECTED"
+      },
+      "uncertainActionAutomaticallyRetried": false,
+      "actualAndroidOrRadio": false
+    }
+  ],
+  "pingCases": [
+    {
+      "mode": "write_zero",
+      "actionWasWritten": true,
+      "afterSend": {
+        "pending": true,
+        "unknown": false,
+        "attempts": 2
+      },
+      "pendingAfterActualHostFrames": true,
+      "meaning": "missing pong keeps pending before native lifecycle callbacks",
+      "actualAcceptanceACK": false
+    },
+    {
+      "mode": "flush",
+      "actionWasWritten": true,
+      "afterSend": {
+        "pending": true,
+        "unknown": false,
+        "attempts": 2
+      },
+      "pendingAfterActualHostFrames": false,
+      "meaning": "complete ping may produce an actual matching pong; prior action write was known",
+      "actualAcceptanceACK": false
+    },
+    {
+      "mode": "not_connected",
+      "actionWasWritten": true,
+      "afterSend": {
+        "pending": true,
+        "unknown": false,
+        "attempts": 2
+      },
+      "pendingAfterActualHostFrames": true,
+      "meaning": "missing pong keeps pending before native lifecycle callbacks",
+      "actualAcceptanceACK": false
+    }
+  ],
+  "actualBoundary": "full production Java classes with explicit Android/JSON/writer/UI substitutes; actual Web functions + true room use exact recorded input/result/complete writer lines, not live JNI",
+  "resultMeaning": {
+    "not_sent": "write not attempted",
+    "written": "local write/newLine/flush returned, not remote acceptance",
+    "unknown": "write may have partially or fully reached peer; no automatic retry, action ping suppressed"
+  },
+  "compatibility": "old void send remains; missing sendChecked preserves legacy path with original delivery-knowledge gap. Checked result malformed/throw never falls back to void send.",
+  "remaining": [
+    "Actual Android/WebView callback scheduling, socket/radio/device and complete DOM/QA unverified.",
+    "Disconnect/reconnect resets UI wait under existing policy; not a receipt for prior unknown action. Cross-connection stale callbacks and true result reconciliation remain open.",
+    "Original half/ordinary gates and complete56/64 acceptance unchanged; no APK/merge/deployment, scoring frozen/NET paused."
+  ],
+  "rawAuthorityPublished": false
+}

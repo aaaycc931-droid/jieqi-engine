@@ -104,6 +104,27 @@ public final class GameWebBridge implements BluetoothGameSession.Listener {
     }
   }
 
+  /** Local stream-write accounting only; never a remote game acceptance ACK. */
+  @JavascriptInterface
+  public String sendChecked(String rawMessage) {
+    if (session == null) return sendResult("not_sent", "此设备不支持蓝牙");
+    try {
+      session.send(new JSONObject(rawMessage));
+      return sendResult("written", null);
+    } catch (JSONException error) {
+      return sendResult("not_sent", "发送消息格式无效");
+    } catch (BluetoothGameSession.SendFailure error) {
+      return sendResult(error.writeAttempted ? "unknown" : "not_sent", error.getMessage());
+    } catch (IOException error) {
+      return sendResult("unknown", error.getMessage());
+    }
+  }
+
+  private static String sendResult(String status, String detail) {
+    return "{\"status\":" + JSONObject.quote(status)
+      + (detail == null ? "" : ",\"detail\":" + JSONObject.quote(detail)) + "}";
+  }
+
   @JavascriptInterface
   public void disconnect() {
     if (session != null) session.disconnect();

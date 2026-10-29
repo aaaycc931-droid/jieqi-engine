@@ -1,0 +1,42 @@
+{
+  "new_Node_checks": 21,
+  "related_files": 60,
+  "related_checks_passed": 935,
+  "failed": 0,
+  "concurrency": 1,
+  "separate_existing_Web_static_passed": 50,
+  "native_JVM_checks_passed": 16,
+  "parent_native_fault_controls_passed": 3,
+  "full_current_and_parent_native_classes": 2,
+  "Android_JSON_writer_UI": "explicit offline substitutes, not Android SDK/JNI/radio/device",
+  "production_code_transform_modules": 37,
+  "binary_asset_checks_NOT_RUN": 4,
+  "full_typecheck_APK_DOM_independent_QA": false,
+  "initial_full_attempt": {
+    "files": 60,
+    "tests": 935,
+    "passed": 934,
+    "failed": 1,
+    "failure": "unchanged scoring-policy isolated child invalid_policy_execution",
+    "concurrency": 1,
+    "root_cause": "unverified",
+    "all_16_scoring_sources_match_parent": true,
+    "isolated_file_rerun_passed": 21
+  },
+  "isolated_frozen_policy_rerun": {
+    "command": [
+      "node",
+      "--test",
+      "--test-reporter=tap",
+      "tests/scoring-policy-adapter.test.ts"
+    ],
+    "exit_code": 0,
+    "passed": 21
+  },
+  "full_serial_rerun": {
+    "exit_code": 0,
+    "passed": 935
+  },
+  "failure_root_cause": "unverified; no score source/budget changes",
+  "native_command": "python scripts/research/native_send_jvm.py --parent-source-root=/immutable/engine-at-96fa739 --output=review/native-send-accounting/JVM_RESULTS_20261030.json"
+}
