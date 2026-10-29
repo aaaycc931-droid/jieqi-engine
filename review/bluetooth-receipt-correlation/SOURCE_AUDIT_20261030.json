@@ -7,42 +7,42 @@
       "git_blob": "cf472df631893eb7d630e8ddd339de4313d683f8",
       "bytes": 188138,
       "sha256": "fb8263432499d9ec6b2e6d174da94df241c7a05dc11ca098977f7945007a0ad8",
-      "actual_read_scope": "complete targeted source body"
+      "actual_read_scope": "complete parent file retrieved/hash-verified; reviewed BluetoothSession, applyBluetoothView, chat/ID, channel functions and relevant native-event lifecycle; not a full UI-body review"
     },
     {
       "path": "src/bluetooth-host-room.ts",
       "git_blob": "80659ebf86c6bfbe678f67cd7aff9f01a8fa151c",
       "bytes": 6525,
       "sha256": "060ecc33488909f5ad72702cc40835e46e64d6ee3d3b71ac24216ab4207fbc9f",
-      "actual_read_scope": "complete targeted source body"
+      "actual_read_scope": "complete targeted TypeScript body reviewed; byte identity verified against immutable parent"
     },
     {
       "path": "src/bluetooth-protocol.ts",
       "git_blob": "d3d665f53588d30dc1b6e3a31fd3f300043cd7cd",
       "bytes": 2868,
       "sha256": "adb87d2d9336c976f13bbb77b23a79eb26d321907b293ca1ecac1f68092fb5da",
-      "actual_read_scope": "complete targeted source body"
+      "actual_read_scope": "complete targeted TypeScript body reviewed; byte identity verified against immutable parent"
     },
     {
       "path": "android/app/src/main/java/com/jieqi/bluetooth/GameWebBridge.java",
       "git_blob": "dacdffd64365f1ef4859c0f4a24293a2eb6dc86c",
       "bytes": 6507,
       "sha256": "28b623c8b7fd0672bc54936b34a50a155a91b0cffb1b13476c7715ca4175ef9d",
-      "actual_read_scope": "complete targeted source body"
+      "actual_read_scope": "complete file retrieved/hash-verified; actual reviewed scope send/onMessage/emit and state callback; no device execution"
     },
     {
       "path": "android/app/src/main/java/com/jieqi/bluetooth/BluetoothGameSession.java",
       "git_blob": "067f11abbccbc694901231458a1ba1c447c587b4",
       "bytes": 11499,
       "sha256": "1e16852a27e61f89185588a41094b739f014cfc911ee73c4c97329b36e5f35e2",
-      "actual_read_scope": "complete targeted source body"
+      "actual_read_scope": "complete file retrieved/hash-verified; actual reviewed scope send/write lock/readLoop/post and transport failure ordering; no radio execution"
     },
     {
       "path": "scripts/research/committed-output-channel.ts",
       "git_blob": "2f83344b18fd20bc0d8bfbedafbe895916e0d869",
       "bytes": 6334,
       "sha256": "d5c0caa089167c531765cd93fe3b6eeb20587f6a1b89d5bc1c54dc94f1eca1a5",
-      "actual_read_scope": "complete targeted source body"
+      "actual_read_scope": "complete targeted TypeScript body reviewed; byte identity verified against immutable parent"
     }
   ],
   "fixture_sha256": "aa5160edbcd66e561f9a47f29723c26e86f3a0b9e79c67ffae70b55a4546bb91",
