@@ -1,0 +1,18 @@
+{
+  "command": [
+    "node",
+    "--test",
+    "--test-reporter=tap",
+    "--test-skip-pattern=^(UI-MENU-05|UI-RPS-01|UI-V4-04|UI-V4-11)",
+    "tests/web-layout.test.ts",
+    "tests/web-gameplay-v4.test.ts"
+  ],
+  "exit_code": 0,
+  "unchanged_binary_checks_NOT_RUN": [
+    "UI-MENU-05",
+    "UI-RPS-01",
+    "UI-V4-04",
+    "UI-V4-11"
+  ],
+  "full_DOM": false
+}

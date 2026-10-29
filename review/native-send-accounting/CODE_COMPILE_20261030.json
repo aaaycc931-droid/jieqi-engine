@@ -1,0 +1,9 @@
+{
+  "status": "PRODUCTION_CODE_TRANSFORM_PASSED_FULL_ASSET_PACKAGE_NOT_RUN",
+  "compiled_modules": 37,
+  "source_compiler_git_blob": "c180950214ac54366b506096cc9ee455ceff4d33",
+  "same_production_transform": true,
+  "full_typecheck": false,
+  "native_full_classes_compiled_with_explicit_stubs": true,
+  "Android_SDK_APK_radio": false
+}

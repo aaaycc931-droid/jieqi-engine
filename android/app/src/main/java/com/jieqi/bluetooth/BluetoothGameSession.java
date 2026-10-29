@@ -176,16 +176,41 @@ public final class BluetoothGameSession implements Closeable {
     });
   }
 
+  /** Whether a failed send reached the stream-write attempt. */
+  public static final class SendFailure extends IOException {
+    public final boolean writeAttempted;
+
+    private SendFailure(String detail, boolean writeAttempted, IOException cause) {
+      super(detail, cause);
+      this.writeAttempted = writeAttempted;
+    }
+  }
+
   /** Sends one newline-delimited protocol envelope. May be called from the UI thread. */
   public void send(JSONObject message) throws IOException, JSONException {
     validateEnvelope(message);
-    byte[] encoded = message.toString().getBytes(StandardCharsets.UTF_8);
-    if (encoded.length > MAX_MESSAGE_BYTES) throw new IOException("消息超过大小上限");
+    String raw = message.toString();
+    byte[] encoded = raw.getBytes(StandardCharsets.UTF_8);
+    if (encoded.length > MAX_MESSAGE_BYTES) throw new SendFailure("消息超过大小上限", false, null);
     synchronized (writeLock) {
-      if (writer == null || state != State.CONNECTED) throw new IOException("蓝牙房间尚未连接");
-      writer.write(message.toString());
-      writer.newLine();
-      writer.flush();
+      BufferedWriter output = writer;
+      if (output == null || state != State.CONNECTED) throw new SendFailure("蓝牙房间尚未连接", false, null);
+      try {
+        output.write(raw);
+        output.newLine();
+        output.flush();
+      } catch (IOException error) {
+        synchronized (this) {
+          // A failed old writer must not close a replacement connection.
+          if (writer == output) {
+            closeSocket();
+            writer = null;
+            emit(State.DISCONNECTED, "发送结果未知，连接正在恢复");
+            scheduleReconnect();
+          }
+        }
+        throw new SendFailure(safeMessage(error), true, error);
+      }
     }
   }
 

@@ -357,6 +357,7 @@ interface BluetoothNativeBridge {
   host(): void;
   join(address: string): void;
   send(message: string): void;
+  sendChecked?(message: string): string;
   disconnect(): void;
   reconnect(): void;
   openBluetoothSettings(): void;
@@ -393,6 +394,7 @@ interface BluetoothSession {
   nativeState: string;
   pendingAction: boolean;
   pendingActionId?: string;
+  pendingActionWriteUnknown?: boolean;
   playedTerminalEventId?: string;
   shownFinishRevision?: number;
   trapDraft: Position[];
@@ -1246,7 +1248,28 @@ function showCurrentMutationDetails(): void {
 function sendBluetoothEnvelope<T>(envelope: { v: typeof BLUETOOTH_PROTOCOL_VERSION; type: "hello" | "action" | "snapshot" | "error" | "ping" | "pong"; id?: string; payload?: T }): void {
   const bridge = nativeBluetooth();
   if (!bridge) throw new Error("此设备没有蓝牙桥接能力");
-  bridge.send(encodeBluetoothEnvelope(envelope));
+  const raw = encodeBluetoothEnvelope(envelope);
+  if (typeof bridge.sendChecked !== "function") {
+    // Legacy bridge has no write result; preserve its existing compatibility path.
+    bridge.send(raw);
+    return;
+  }
+  let result: { status?: string; detail?: string };
+  try {
+    result = JSON.parse(bridge.sendChecked(raw));
+    if (!result || typeof result !== "object" || Array.isArray(result)) throw new Error();
+  } catch {
+    throw bluetoothSendFailure("unknown");
+  }
+  if (result.status === "written") return;
+  if (result.status === "not_sent") throw bluetoothSendFailure("not_sent", typeof result.detail === "string" ? result.detail : undefined);
+  throw bluetoothSendFailure("unknown");
+}
+
+function bluetoothSendFailure(status: "not_sent" | "unknown", detail?: string): Error {
+  return Object.assign(new Error(status === "unknown"
+    ? "发送结果未知，未自动重试。请恢复连接后核对棋盘。"
+    : detail ?? "消息尚未发送，请检查连接。"), { bluetoothSendStatus: status });
 }
 
 function refreshBluetoothHostViews(sendGuest: boolean): void {
@@ -1288,10 +1311,15 @@ function handleBluetoothAction(action: BluetoothRoomAction): void {
     requestId = bluetoothActionId();
     bluetooth.pendingAction = true;
     bluetooth.pendingActionId = requestId;
+    bluetooth.pendingActionWriteUnknown = false;
     sendBluetoothEnvelope({ v: BLUETOOTH_PROTOCOL_VERSION, type: "action", id: requestId, payload: action });
   } catch (error) {
-    bluetooth.pendingAction = false;
-    bluetooth.pendingActionId = undefined;
+    if ((error as { bluetoothSendStatus?: string } | null)?.bluetoothSendStatus !== "unknown") {
+      bluetooth.pendingAction = false;
+      bluetooth.pendingActionId = undefined;
+    } else {
+      bluetooth.pendingActionWriteUnknown = true;
+    }
     showToast(error instanceof Error ? error.message : "蓝牙发送失败。");
     return;
   }
@@ -1326,9 +1354,11 @@ function handleIncomingBluetoothMessage(raw: string): void {
       if (!envelope.id?.startsWith("chat:")) showToast(payload?.message ?? "房主拒绝了此操作。");
     } else if (bluetooth.role === "guest" && envelope.type === "pong"
       && bluetooth.pendingAction && bluetooth.pendingActionId !== undefined
+      && !bluetooth.pendingActionWriteUnknown
       && envelope.id === bluetooth.pendingActionId) {
       bluetooth.pendingAction = false;
       bluetooth.pendingActionId = undefined;
+      bluetooth.pendingActionWriteUnknown = false;
       if (bluetooth.view) applyBluetoothView(bluetooth.view);
     } else if (envelope.type === "ping") {
       sendBluetoothEnvelope({ v: BLUETOOTH_PROTOCOL_VERSION, type: "pong", id: envelope.id });
@@ -3629,6 +3659,7 @@ window.addEventListener("jieqi-bluetooth", ((event: CustomEvent<BluetoothEventDe
       bluetooth.everConnected = true;
       bluetooth.pendingAction = false;
       bluetooth.pendingActionId = undefined;
+      bluetooth.pendingActionWriteUnknown = false;
       setBluetoothStatus(restoring ? "连接已恢复。" : "蓝牙已连接，正在同步房间。");
 
       if (!restoring && !wasEstablished) {
@@ -3679,6 +3710,7 @@ window.addEventListener("jieqi-bluetooth", ((event: CustomEvent<BluetoothEventDe
     if ((detail.state === "DISCONNECTED" || detail.state === "ERROR") && wasEstablished) {
       bluetooth.pendingAction = false;
       bluetooth.pendingActionId = undefined;
+      bluetooth.pendingActionWriteUnknown = false;
       const awaitingRematch = bluetooth.view?.phase === "finished" && !bluetoothLobbyView.hidden;
       if (awaitingRematch) {
         disconnectLayer.hidden = true;

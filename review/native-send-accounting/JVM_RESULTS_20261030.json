@@ -1,0 +1,401 @@
+{
+  "schema": "lezi.native_send.jvm_probe.v1",
+  "production_classes": [
+    "BluetoothGameSession",
+    "GameWebBridge"
+  ],
+  "cases": [
+    {
+      "mode": "success",
+      "status": "written",
+      "actual": {
+        "result": "{\"status\":\"written\"}",
+        "wire": "{\"v\":2,\"type\":\"action\",\"id\":\"recorded:1\",\"payload\":{\"kind\":\"hero\",\"hero\":\"shuffler\"}}\n",
+        "writeCalls": 1,
+        "flushCalls": 1,
+        "callbacks": [],
+        "state": "CONNECTED",
+        "writerCleared": false,
+        "socketClosed": false,
+        "replacementPreserved": false,
+        "queuedCallbacksBeforeDrain": 0,
+        "callbacksAfterDrain": 0,
+        "secondResult": null
+      },
+      "inputSha256": "5e8c5322596867da65582713f891e21b223581cad3c4f9a47889662c99aeedab"
+    },
+    {
+      "mode": "no_session",
+      "status": "not_sent",
+      "actual": {
+        "result": "{\"status\":\"not_sent\",\"detail\":\"此设备不支持蓝牙\"}",
+        "wire": "",
+        "writeCalls": 0,
+        "flushCalls": 0,
+        "callbacks": [],
+        "state": "NO_SESSION",
+        "writerCleared": false,
+        "socketClosed": false,
+        "replacementPreserved": false,
+        "queuedCallbacksBeforeDrain": 0,
+        "callbacksAfterDrain": 0,
+        "secondResult": null
+      },
+      "inputSha256": "5e8c5322596867da65582713f891e21b223581cad3c4f9a47889662c99aeedab"
+    },
+    {
+      "mode": "not_connected",
+      "status": "not_sent",
+      "actual": {
+        "result": "{\"status\":\"not_sent\",\"detail\":\"蓝牙房间尚未连接\"}",
+        "wire": "",
+        "writeCalls": 0,
+        "flushCalls": 0,
+        "callbacks": [],
+        "state": "DISCONNECTED",
+        "writerCleared": false,
+        "socketClosed": false,
+        "replacementPreserved": false,
+        "queuedCallbacksBeforeDrain": 0,
+        "callbacksAfterDrain": 0,
+        "secondResult": null
+      },
+      "inputSha256": "5e8c5322596867da65582713f891e21b223581cad3c4f9a47889662c99aeedab"
+    },
+    {
+      "mode": "bad_json",
+      "status": "not_sent",
+      "actual": {
+        "result": "{\"status\":\"not_sent\",\"detail\":\"发送消息格式无效\"}",
+        "wire": "",
+        "writeCalls": 0,
+        "flushCalls": 0,
+        "callbacks": [],
+        "state": "CONNECTED",
+        "writerCleared": false,
+        "socketClosed": false,
+        "replacementPreserved": false,
+        "queuedCallbacksBeforeDrain": 0,
+        "callbacksAfterDrain": 0,
+        "secondResult": null
+      },
+      "inputSha256": "0c21a879c732a67910d80988df4919d794f6a070aab610ef865032a28046b021"
+    },
+    {
+      "mode": "bad_version",
+      "status": "not_sent",
+      "actual": {
+        "result": "{\"status\":\"not_sent\",\"detail\":\"发送消息格式无效\"}",
+        "wire": "",
+        "writeCalls": 0,
+        "flushCalls": 0,
+        "callbacks": [],
+        "state": "CONNECTED",
+        "writerCleared": false,
+        "socketClosed": false,
+        "replacementPreserved": false,
+        "queuedCallbacksBeforeDrain": 0,
+        "callbacksAfterDrain": 0,
+        "secondResult": null
+      },
+      "inputSha256": "9e8a8bc6db3adaa28fe95cf227d68905638684cb89caa433e96e172d96690423"
+    },
+    {
+      "mode": "oversize",
+      "status": "not_sent",
+      "actual": {
+        "result": "{\"status\":\"not_sent\",\"detail\":\"消息超过大小上限\"}",
+        "wire": "",
+        "writeCalls": 0,
+        "flushCalls": 0,
+        "callbacks": [],
+        "state": "CONNECTED",
+        "writerCleared": false,
+        "socketClosed": false,
+        "replacementPreserved": false,
+        "queuedCallbacksBeforeDrain": 0,
+        "callbacksAfterDrain": 0,
+        "secondResult": null
+      },
+      "inputSha256": "7f93890583ef64880fcaeba5924de1cf9f038f4c43b6b5a05cd87a46047e5b69"
+    },
+    {
+      "mode": "write_zero",
+      "status": "unknown",
+      "actual": {
+        "result": "{\"status\":\"unknown\",\"detail\":\"injected before bytes\"}",
+        "wire": "",
+        "writeCalls": 1,
+        "flushCalls": 0,
+        "callbacks": [
+          "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"NONE\\\",\\\"state\\\":\\\"DISCONNECTED\\\",\\\"adapterEnabled\\\":true,\\\"detail\\\":\\\"发送结果未知，连接正在恢复\\\"}\")}));"
+        ],
+        "state": "DISCONNECTED",
+        "writerCleared": true,
+        "socketClosed": true,
+        "replacementPreserved": false,
+        "queuedCallbacksBeforeDrain": 1,
+        "callbacksAfterDrain": 1,
+        "secondResult": "{\"status\":\"not_sent\",\"detail\":\"蓝牙房间尚未连接\"}"
+      },
+      "inputSha256": "5e8c5322596867da65582713f891e21b223581cad3c4f9a47889662c99aeedab"
+    },
+    {
+      "mode": "partial",
+      "status": "unknown",
+      "actual": {
+        "result": "{\"status\":\"unknown\",\"detail\":\"injected partial\"}",
+        "wire": "{\"v\":2,",
+        "writeCalls": 1,
+        "flushCalls": 0,
+        "callbacks": [
+          "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"NONE\\\",\\\"state\\\":\\\"DISCONNECTED\\\",\\\"adapterEnabled\\\":true,\\\"detail\\\":\\\"发送结果未知，连接正在恢复\\\"}\")}));"
+        ],
+        "state": "DISCONNECTED",
+        "writerCleared": true,
+        "socketClosed": true,
+        "replacementPreserved": false,
+        "queuedCallbacksBeforeDrain": 1,
+        "callbacksAfterDrain": 1,
+        "secondResult": "{\"status\":\"not_sent\",\"detail\":\"蓝牙房间尚未连接\"}"
+      },
+      "inputSha256": "5e8c5322596867da65582713f891e21b223581cad3c4f9a47889662c99aeedab"
+    },
+    {
+      "mode": "newline",
+      "status": "unknown",
+      "actual": {
+        "result": "{\"status\":\"unknown\",\"detail\":\"injected newline\"}",
+        "wire": "{\"v\":2,\"type\":\"action\",\"id\":\"recorded:1\",\"payload\":{\"kind\":\"hero\",\"hero\":\"shuffler\"}}",
+        "writeCalls": 1,
+        "flushCalls": 0,
+        "callbacks": [
+          "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"NONE\\\",\\\"state\\\":\\\"DISCONNECTED\\\",\\\"adapterEnabled\\\":true,\\\"detail\\\":\\\"发送结果未知，连接正在恢复\\\"}\")}));"
+        ],
+        "state": "DISCONNECTED",
+        "writerCleared": true,
+        "socketClosed": true,
+        "replacementPreserved": false,
+        "queuedCallbacksBeforeDrain": 1,
+        "callbacksAfterDrain": 1,
+        "secondResult": "{\"status\":\"not_sent\",\"detail\":\"蓝牙房间尚未连接\"}"
+      },
+      "inputSha256": "5e8c5322596867da65582713f891e21b223581cad3c4f9a47889662c99aeedab"
+    },
+    {
+      "mode": "flush",
+      "status": "unknown",
+      "actual": {
+        "result": "{\"status\":\"unknown\",\"detail\":\"injected flush after complete frame\"}",
+        "wire": "{\"v\":2,\"type\":\"action\",\"id\":\"recorded:1\",\"payload\":{\"kind\":\"hero\",\"hero\":\"shuffler\"}}\n",
+        "writeCalls": 1,
+        "flushCalls": 1,
+        "callbacks": [
+          "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"NONE\\\",\\\"state\\\":\\\"DISCONNECTED\\\",\\\"adapterEnabled\\\":true,\\\"detail\\\":\\\"发送结果未知，连接正在恢复\\\"}\")}));"
+        ],
+        "state": "DISCONNECTED",
+        "writerCleared": true,
+        "socketClosed": true,
+        "replacementPreserved": false,
+        "queuedCallbacksBeforeDrain": 1,
+        "callbacksAfterDrain": 1,
+        "secondResult": "{\"status\":\"not_sent\",\"detail\":\"蓝牙房间尚未连接\"}"
+      },
+      "inputSha256": "5e8c5322596867da65582713f891e21b223581cad3c4f9a47889662c99aeedab"
+    },
+    {
+      "mode": "old_writer",
+      "status": "unknown",
+      "actual": {
+        "result": "{\"status\":\"unknown\",\"detail\":\"injected old writer\"}",
+        "wire": "",
+        "writeCalls": 1,
+        "flushCalls": 0,
+        "callbacks": [],
+        "state": "CONNECTED",
+        "writerCleared": false,
+        "socketClosed": false,
+        "replacementPreserved": true,
+        "queuedCallbacksBeforeDrain": 0,
+        "callbacksAfterDrain": 0,
+        "secondResult": null
+      },
+      "inputSha256": "5e8c5322596867da65582713f891e21b223581cad3c4f9a47889662c99aeedab"
+    },
+    {
+      "mode": "legacy_failure",
+      "status": "legacy_void",
+      "actual": {
+        "result": null,
+        "wire": "{\"v\":2,",
+        "writeCalls": 1,
+        "flushCalls": 0,
+        "callbacks": [
+          "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-error\\\",\\\"detail\\\":\\\"injected partial\\\"}\")}));",
+          "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"NONE\\\",\\\"state\\\":\\\"DISCONNECTED\\\",\\\"adapterEnabled\\\":true,\\\"detail\\\":\\\"发送结果未知，连接正在恢复\\\"}\")}));"
+        ],
+        "state": "DISCONNECTED",
+        "writerCleared": true,
+        "socketClosed": true,
+        "replacementPreserved": false,
+        "queuedCallbacksBeforeDrain": 2,
+        "callbacksAfterDrain": 2,
+        "secondResult": null
+      },
+      "inputSha256": "5e8c5322596867da65582713f891e21b223581cad3c4f9a47889662c99aeedab"
+    }
+  ],
+  "ping_cases": [
+    {
+      "mode": "success",
+      "status": "written",
+      "actual": {
+        "result": "{\"status\":\"written\"}",
+        "wire": "{\"v\":2,\"type\":\"ping\",\"id\":\"recorded:1\"}\n",
+        "writeCalls": 1,
+        "flushCalls": 1,
+        "callbacks": [],
+        "state": "CONNECTED",
+        "writerCleared": false,
+        "socketClosed": false,
+        "replacementPreserved": false,
+        "queuedCallbacksBeforeDrain": 0,
+        "callbacksAfterDrain": 0,
+        "secondResult": null
+      },
+      "inputSha256": "a13ef2991c2d748f7a368acbbaf5a4b7a549700e73ec1c1f32d8e8ed0d4137ce"
+    },
+    {
+      "mode": "write_zero",
+      "status": "unknown",
+      "actual": {
+        "result": "{\"status\":\"unknown\",\"detail\":\"injected before bytes\"}",
+        "wire": "",
+        "writeCalls": 1,
+        "flushCalls": 0,
+        "callbacks": [
+          "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"NONE\\\",\\\"state\\\":\\\"DISCONNECTED\\\",\\\"adapterEnabled\\\":true,\\\"detail\\\":\\\"发送结果未知，连接正在恢复\\\"}\")}));"
+        ],
+        "state": "DISCONNECTED",
+        "writerCleared": true,
+        "socketClosed": true,
+        "replacementPreserved": false,
+        "queuedCallbacksBeforeDrain": 1,
+        "callbacksAfterDrain": 1,
+        "secondResult": "{\"status\":\"not_sent\",\"detail\":\"蓝牙房间尚未连接\"}"
+      },
+      "inputSha256": "a13ef2991c2d748f7a368acbbaf5a4b7a549700e73ec1c1f32d8e8ed0d4137ce"
+    },
+    {
+      "mode": "flush",
+      "status": "unknown",
+      "actual": {
+        "result": "{\"status\":\"unknown\",\"detail\":\"injected flush after complete frame\"}",
+        "wire": "{\"v\":2,\"type\":\"ping\",\"id\":\"recorded:1\"}\n",
+        "writeCalls": 1,
+        "flushCalls": 1,
+        "callbacks": [
+          "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"NONE\\\",\\\"state\\\":\\\"DISCONNECTED\\\",\\\"adapterEnabled\\\":true,\\\"detail\\\":\\\"发送结果未知，连接正在恢复\\\"}\")}));"
+        ],
+        "state": "DISCONNECTED",
+        "writerCleared": true,
+        "socketClosed": true,
+        "replacementPreserved": false,
+        "queuedCallbacksBeforeDrain": 1,
+        "callbacksAfterDrain": 1,
+        "secondResult": "{\"status\":\"not_sent\",\"detail\":\"蓝牙房间尚未连接\"}"
+      },
+      "inputSha256": "a13ef2991c2d748f7a368acbbaf5a4b7a549700e73ec1c1f32d8e8ed0d4137ce"
+    },
+    {
+      "mode": "not_connected",
+      "status": "not_sent",
+      "actual": {
+        "result": "{\"status\":\"not_sent\",\"detail\":\"蓝牙房间尚未连接\"}",
+        "wire": "",
+        "writeCalls": 0,
+        "flushCalls": 0,
+        "callbacks": [],
+        "state": "DISCONNECTED",
+        "writerCleared": false,
+        "socketClosed": false,
+        "replacementPreserved": false,
+        "queuedCallbacksBeforeDrain": 0,
+        "callbacksAfterDrain": 0,
+        "secondResult": null
+      },
+      "inputSha256": "a13ef2991c2d748f7a368acbbaf5a4b7a549700e73ec1c1f32d8e8ed0d4137ce"
+    }
+  ],
+  "passed": 16,
+  "failed": 0,
+  "parent_native_fault_controls": [
+    {
+      "mode": "write_zero",
+      "actual": {
+        "result": null,
+        "wire": "{\"v\":2,\"type\":\"ping\",\"id\":\"recorded:1\"}\n",
+        "writeCalls": 2,
+        "flushCalls": 1,
+        "callbacks": [
+          "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-error\\\",\\\"detail\\\":\\\"injected before bytes\\\"}\")}));"
+        ],
+        "state": "CONNECTED",
+        "writerCleared": false,
+        "socketClosed": false,
+        "replacementPreserved": false,
+        "queuedCallbacksBeforeDrain": 1,
+        "callbacksAfterDrain": 1,
+        "secondResult": null
+      },
+      "interpretation": "explicit writer fault injection in actual parent classes; void result, later ping attempted without quarantine"
+    },
+    {
+      "mode": "partial",
+      "actual": {
+        "result": null,
+        "wire": "{\"v\":2,{\"v\":2,\"type\":\"ping\",\"id\":\"recorded:1\"}\n",
+        "writeCalls": 2,
+        "flushCalls": 1,
+        "callbacks": [
+          "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-error\\\",\\\"detail\\\":\\\"injected partial\\\"}\")}));"
+        ],
+        "state": "CONNECTED",
+        "writerCleared": false,
+        "socketClosed": false,
+        "replacementPreserved": false,
+        "queuedCallbacksBeforeDrain": 1,
+        "callbacksAfterDrain": 1,
+        "secondResult": null
+      },
+      "interpretation": "explicit writer fault injection in actual parent classes; void result, later ping attempted without quarantine"
+    },
+    {
+      "mode": "flush",
+      "actual": {
+        "result": null,
+        "wire": "{\"v\":2,\"type\":\"action\",\"id\":\"recorded:1\",\"payload\":{\"kind\":\"hero\",\"hero\":\"shuffler\"}}\n{\"v\":2,\"type\":\"ping\",\"id\":\"recorded:1\"}\n",
+        "writeCalls": 2,
+        "flushCalls": 2,
+        "callbacks": [
+          "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-error\\\",\\\"detail\\\":\\\"injected flush after complete frame\\\"}\")}));"
+        ],
+        "state": "CONNECTED",
+        "writerCleared": false,
+        "socketClosed": false,
+        "replacementPreserved": false,
+        "queuedCallbacksBeforeDrain": 1,
+        "callbacksAfterDrain": 1,
+        "secondResult": null
+      },
+      "interpretation": "explicit writer fault injection in actual parent classes; void result, later ping attempted without quarantine"
+    }
+  ],
+  "environment": "OpenJDK17 full production classes; Android/org.json/UI/writer explicit shims; no Android SDK/JNI/radio/device",
+  "source_sha256": {
+    "BluetoothGameSession.java": "53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0",
+    "GameWebBridge.java": "a0b337b40ddbdeb47155af438c3b76b071278230bcb9f2ed4111486e934bbcb7"
+  },
+  "shim_sha256": "07efabba1c5f748943409fc506056e889f6e8869f3ad9a61b04bb9e39521541f",
+  "rawAuthorityPublished": false
+}

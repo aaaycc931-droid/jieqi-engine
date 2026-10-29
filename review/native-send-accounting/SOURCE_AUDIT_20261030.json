@@ -1,0 +1,78 @@
+{
+  "schema": "lezi.native_send.source_audit.v1",
+  "engine_parent": "96fa7394f0371ab966b8b3572bf3f21b9bfe0da3",
+  "source_reads": [
+    {
+      "path": "web/app.ts",
+      "parent_blob": "497d92ba91b6680d77648397efc33cef4ffe13cc",
+      "sha256": "1e1e4b8eb425d1065625d2f5932bf7c290a41851823e62d7b00664883d716d0f",
+      "read_scope": "full byte identity verified; targeted send/callback/lifecycle consumer functions reviewed, no claim full UI/Android framework review"
+    },
+    {
+      "path": "android/app/src/main/java/com/jieqi/bluetooth/BluetoothGameSession.java",
+      "parent_blob": "067f11abbccbc694901231458a1ba1c447c587b4",
+      "sha256": "1e16852a27e61f89185588a41094b739f014cfc911ee73c4c97329b36e5f35e2",
+      "read_scope": "full byte identity verified; targeted send/callback/lifecycle consumer functions reviewed, no claim full UI/Android framework review"
+    },
+    {
+      "path": "android/app/src/main/java/com/jieqi/bluetooth/GameWebBridge.java",
+      "parent_blob": "dacdffd64365f1ef4859c0f4a24293a2eb6dc86c",
+      "sha256": "28b623c8b7fd0672bc54936b34a50a155a91b0cffb1b13476c7715ca4175ef9d",
+      "read_scope": "full byte identity verified; targeted send/callback/lifecycle consumer functions reviewed, no claim full UI/Android framework review"
+    },
+    {
+      "path": "scripts/research/bluetooth-receipt-channel.ts",
+      "parent_blob": "02a66a822e7e280edcf0d60f68f405d4afe38fe2",
+      "sha256": "a5b4daa3a0ea41138c1ef2df40f8a96cff55dfd949ab190772cdfc70605b12f3",
+      "read_scope": "full byte identity verified; targeted send/callback/lifecycle consumer functions reviewed, no claim full UI/Android framework review"
+    },
+    {
+      "path": "src/bluetooth-host-room.ts",
+      "parent_blob": "80659ebf86c6bfbe678f67cd7aff9f01a8fa151c",
+      "sha256": "060ecc33488909f5ad72702cc40835e46e64d6ee3d3b71ac24216ab4207fbc9f",
+      "read_scope": "full byte identity verified; targeted send/callback/lifecycle consumer functions reviewed, no claim full UI/Android framework review"
+    },
+    {
+      "path": "src/bluetooth-protocol.ts",
+      "parent_blob": "d3d665f53588d30dc1b6e3a31fd3f300043cd7cd",
+      "sha256": "adb87d2d9336c976f13bbb77b23a79eb26d321907b293ca1ecac1f68092fb5da",
+      "read_scope": "full byte identity verified; targeted send/callback/lifecycle consumer functions reviewed, no claim full UI/Android framework review"
+    }
+  ],
+  "actual_executed": [
+    "complete parent and current native classes compiled; send/sendChecked + failure/bridge callbacks executed with explicit Android/JSON/writer substitutes",
+    "production send/action/incoming/applyBluetoothView and native event listener executed; final DOM renderer and native-JS relay recorded",
+    "exact JVM input/result/complete writer lines relayed into true eligible BluetoothHostRoom"
+  ],
+  "source_only_not_runtime": [
+    "real Android JavascriptInterface dispatch and permission/adapter framework",
+    "RFCOMM socket and BufferedReader/readLoop/auto reconnect timing",
+    "full DOM/device/UI and independent QA"
+  ],
+  "compatibility": {
+    "old_void_send": "retained; new native Session quarantines failed current stream",
+    "newWeb_newBridge": "checked statuses used; no legacy fallback after unknown/malformed result",
+    "newWeb_oldBridge": "legacy path retained with original no-write-result limitation",
+    "v2_wire_schema": "unchanged"
+  },
+  "result_semantics": {
+    "not_sent": "validation/prewrite failure; zero write attempt",
+    "written": "only local write/newLine/flush returned",
+    "unknown": "write attempt may have completed partly or fully, or checked result missing/malformed/threw"
+  },
+  "native_cases": 16,
+  "parent_actual_native_controls": 3,
+  "writer_replacement": "explicit reflection fault control; no claim naturally reachable Android race",
+  "callbacks": "actual GameWebBridge script/JSON decoded and passed to actual Web event listener, not live JNI",
+  "known_remaining": "existing disconnect/reconnect UI reset is not per-request result reconciliation; no automatic uncertain retry or acceptance/duplicate ACK",
+  "protected": {
+    "src_gameplay_delta": 0,
+    "v2_schema_delta": 0,
+    "mode_gates_changed": false,
+    "hero_UI_assets_H03_changed": false,
+    "scoring": "frozen",
+    "NET": "paused",
+    "APK": false,
+    "merged": false
+  }
+}

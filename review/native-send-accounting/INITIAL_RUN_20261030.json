@@ -1,0 +1,11 @@
+{
+  "files": 60,
+  "tests": 935,
+  "passed": 934,
+  "failed": 1,
+  "failure": "unchanged scoring-policy isolated child invalid_policy_execution",
+  "concurrency": 1,
+  "root_cause": "unverified",
+  "all_16_scoring_sources_match_parent": true,
+  "isolated_file_rerun_passed": 21
+}
