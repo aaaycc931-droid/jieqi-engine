@@ -1,0 +1,274 @@
+// Verbatim PR20 function spans; empty functions are nonexecuted extraction anchors.
+function sendBluetoothChat(rawText: string, clearInput: boolean): void {
+  if (!bluetooth?.view || bluetooth.view.phase !== "playing") return;
+  if (isBluetoothTransportInterrupted() || Date.now() < localChatCooldownUntil) return;
+  const text = rawText.trim();
+  if (!text || /\r|\n/.test(text) || Array.from(text).length > CHAT_MAX_CHARACTERS) return;
+  const messageId = bluetoothActionId();
+  const action: BluetoothRoomAction = { kind: "chat", messageId, text };
+  try {
+    if (bluetooth.role === "host") {
+      bluetooth.hostRoom!.handle(BLUETOOTH_HOST_PLAYER, action);
+      publishBluetoothViews();
+    } else {
+      sendBluetoothEnvelope({ v: BLUETOOTH_PROTOCOL_VERSION, type: "action", id: `chat:${messageId}`, payload: action });
+    }
+    beginChatCooldown();
+    if (clearInput) messageInput.value = "";
+    renderMessagePanel();
+    if (clearInput) messageInput.focus({ preventScroll: true });
+  } catch {
+    // Chat send failures stay silent; the preserved draft can be retried after reconnect.
+  }
+}
+
+function nextActionId() {}
+
+function applyBluetoothView(view: PlayerRemoteRoomView): void {
+  if (!bluetooth) return;
+  const prior = bluetooth.view;
+  bluetooth.view = view;
+  bluetooth.pendingAction = false;
+  rpsPublic = view.rps ?? rpsPublic;
+  gameState = view.state;
+  gameSecret = undefined;
+  selectedPieceId = undefined;
+  assassinationArmed = false;
+  strongStrikeArmed = false;
+  if (view.phase === "hero_preparation") {
+    bluetooth.trapDraft = view.ownTrapDraft?.map((position) => ({ ...position })) ?? bluetooth.trapDraft;
+  } else if (view.phase !== "hero_intro") {
+    bluetooth.trapDraft = [];
+  }
+  const assignments = view.rps?.assignments;
+  if (assignments) {
+    rpsPublic = view.rps!;
+  }
+  if (prior?.state && view.state && prior.state.lastMove?.actionId !== view.state.lastMove?.actionId) {
+    const actionHistory = view.messages?.find((message) => message.id === `system:${view.state?.lastMove?.actionId}`)?.text ?? "";
+    const skillCue = actionHistory.includes("发动刺杀机会") ? "刺杀机会发动" : actionHistory.includes("发动刺杀") ? "刺杀发动" : undefined;
+    queueFormalEventCues(view.state, view.lastTrapTrigger?.actionId === view.state.lastMove?.actionId, skillCue);
+  }
+
+  if (prior?.phase === "finished" && view.phase !== "finished") {
+    resetMessageUi(true);
+    closeMatchResult();
+    bluetooth.openingStarted = false;
+    bluetooth.playedTerminalEventId = undefined;
+    bluetooth.shownFinishRevision = undefined;
+    bluetooth.shownForfeitActionId = undefined;
+    bluetooth.shownDisconnectOutcomeKey = undefined;
+  }
+
+  if (view.phase === "finished" && view.rematch) {
+    showBluetoothRematchLobby(view);
+    return;
+  }
+
+  const heroSelectionTimedOut = prior?.phase === "hero_selection"
+    && view.phase === "rps"
+    && Date.now() >= (prior.features?.heroSelection?.deadlineAt ?? Number.POSITIVE_INFINITY)
+    && Boolean(view.ownHeroChoice);
+  if (heroSelectionTimedOut) {
+    bluetoothLobbyView.hidden = true;
+    mainMenuView.hidden = true;
+    settingsView.hidden = true;
+    heroView.hidden = false;
+    rpsView.hidden = true;
+    gameView.hidden = true;
+    renderHeroSelection({
+      selected: view.ownHeroChoice,
+      confirmed: true,
+      opponentConfirmed: true,
+      deadlineAt: prior?.features?.heroSelection?.deadlineAt,
+    });
+    showToast("选择超时，系统已为未确认玩家随机英雄。");
+    window.setTimeout(() => {
+      if (bluetooth?.view?.phase !== "rps") return;
+      heroView.hidden = true;
+      rpsView.hidden = false;
+      renderRps();
+    }, 800);
+    return;
+  }
+
+  if (view.phase === "hero_selection") {
+    bluetoothLobbyView.hidden = true;
+    mainMenuView.hidden = true;
+    settingsView.hidden = true;
+    heroView.hidden = false;
+    rpsView.hidden = true;
+    gameView.hidden = true;
+    renderHeroSelection();
+  } else if (view.phase === "rps") {
+    bluetoothLobbyView.hidden = true;
+    mainMenuView.hidden = true;
+    settingsView.hidden = true;
+    heroView.hidden = true;
+    rpsView.hidden = false;
+    gameView.hidden = true;
+    renderRps();
+  } else if (view.state) {
+    bluetoothLobbyView.hidden = true;
+    mainMenuView.hidden = true;
+    settingsView.hidden = true;
+    heroView.hidden = true;
+    rpsView.hidden = true;
+    gameView.hidden = false;
+    latestAnnouncement = bluetoothAnnouncement(view);
+    renderGame();
+    if (view.phase === "hero_intro" && !bluetooth.openingStarted) {
+      bluetooth.openingStarted = true;
+      runOpeningSequence(() => handleBluetoothAction({ kind: "hero_intro_complete" }));
+    }
+  }
+
+  const ownPlayerId = ownBluetoothPlayerId();
+  const forfeitOutcome = view.forfeitOutcome;
+  if (forfeitOutcome && ownPlayerId && bluetooth.shownForfeitActionId !== forfeitOutcome.actionId) {
+    bluetooth.shownForfeitActionId = forfeitOutcome.actionId;
+    const lost = forfeitOutcome.loserPlayerId === ownPlayerId;
+    setBattleActionMenu(false);
+    closeMatchDetail();
+    window.setTimeout(() => showDialog(
+      lost ? "已退出对局" : "对方已退出",
+      lost ? "你已退出当前对局，本局判负。" : "对方已臣服于您，获得胜利！",
+      "返回主菜单",
+      () => {
+        nativeBluetooth()?.disconnect();
+        bluetooth = undefined;
+        showMainMenu();
+      },
+    ), 50);
+    return;
+  }
+  const disconnectOutcome = view.disconnectOutcome;
+  if (disconnectOutcome && ownPlayerId && disconnectOutcome.timedOutPlayerIds.includes(ownPlayerId)) {
+    messageInput.value = "";
+    const key = `lost:${[...disconnectOutcome.timedOutPlayerIds].sort().join("|")}`;
+    if (bluetooth.nativeState === "CONNECTED" && bluetooth.shownDisconnectOutcomeKey !== key) {
+      bluetooth.shownDisconnectOutcomeKey = key;
+      const draw = disconnectOutcome.timedOutPlayerIds.length > 1;
+      window.setTimeout(() => showDialog(
+        draw ? "断线平局" : "断线超时",
+        draw ? "双方累计断线均达到 60 秒，本局平局。" : "你的累计断线时间达到 60 秒，本局判负。",
+        "返回主菜单",
+        () => {
+          nativeBluetooth()?.disconnect();
+          bluetooth = undefined;
+          showMainMenu();
+        },
+      ), 50);
+    }
+    return;
+  }
+  if (disconnectOutcome && ownPlayerId && disconnectOutcome.winnerPlayerId === ownPlayerId && !view.state) {
+    const key = `won:${disconnectOutcome.timedOutPlayerIds.join("|")}`;
+    if (bluetooth.shownDisconnectOutcomeKey !== key) {
+      bluetooth.shownDisconnectOutcomeKey = key;
+      disconnectLayer.hidden = true;
+      window.setTimeout(() => showDialog(
+        "流放",
+        "对方被流放至扭曲虚空。您获得胜利！",
+        "返回蓝牙页",
+        () => {
+          nativeBluetooth()?.disconnect();
+          bluetooth = undefined;
+          showMainMenu();
+        },
+      ), 50);
+    }
+    return;
+  }
+
+  if (view.terminalAnimation && bluetooth.playedTerminalEventId !== view.terminalAnimation.eventId) {
+    bluetooth.playedTerminalEventId = view.terminalAnimation.eventId;
+    playRemoteTerminalAnimation(view.terminalAnimation);
+  } else if (view.state?.status === "finished" && prior?.state?.revision !== view.state.revision
+    && bluetooth.shownFinishRevision !== view.state.revision) {
+    bluetooth.shownFinishRevision = view.state.revision;
+    window.setTimeout(showMatchResult, 50);
+  }
+}
+
+function showBluetoothRematchLobby() {}
+
+function sendBluetoothEnvelope<T>(envelope: { v: typeof BLUETOOTH_PROTOCOL_VERSION; type: "hello" | "action" | "snapshot" | "error" | "ping" | "pong"; id?: string; payload?: T }): void {
+  const bridge = nativeBluetooth();
+  if (!bridge) throw new Error("此设备没有蓝牙桥接能力");
+  bridge.send(encodeBluetoothEnvelope(envelope));
+}
+
+function refreshBluetoothHostViews(sendGuest: boolean): void {
+  if (!bluetooth?.hostRoom) return;
+  const views = bluetooth.hostRoom.views();
+  applyBluetoothView(views.host);
+  if (sendGuest && bluetooth.nativeState === "CONNECTED") {
+    sendBluetoothEnvelope(createBluetoothSnapshot(`snapshot-${views.publicRoom.updatedAt}-${views.publicRoom.phase}`, views.guest));
+  }
+}
+
+function publishBluetoothViews(): void {
+  refreshBluetoothHostViews(true);
+}
+
+function publishBluetoothViewsAfterAction(): void {
+  try {
+    publishBluetoothViews();
+  } catch (error) {
+    showToast(error instanceof RuleError ? error.message : "房间同步失败，请重试。");
+  }
+}
+
+function handleBluetoothAction(action: BluetoothRoomAction): void {
+  if (!bluetooth) return;
+  if (isBluetoothTransportInterrupted()) return showToast("连接正在恢复，当前操作已锁定。");
+  if (bluetooth.pendingAction) return showToast("正在等待房主确认上一项操作。");
+  if (bluetooth.role === "host") {
+    try {
+      bluetooth.hostRoom!.handle(BLUETOOTH_HOST_PLAYER, action);
+    } catch (error) {
+      showToast(error instanceof RuleError ? error.message : "房主裁定失败，请重试。");
+    }
+    publishBluetoothViewsAfterAction();
+    return;
+  }
+  try {
+    bluetooth.pendingAction = true;
+    sendBluetoothEnvelope({ v: BLUETOOTH_PROTOCOL_VERSION, type: "action", id: bluetoothActionId(), payload: action });
+    showToast("操作已发送，等待房主裁定。");
+  } catch (error) {
+    bluetooth.pendingAction = false;
+    showToast(error instanceof Error ? error.message : "蓝牙发送失败。");
+  }
+}
+
+function handleIncomingBluetoothMessage(raw: string): void {
+  if (!bluetooth) return;
+  try {
+    const envelope = parseBluetoothEnvelope(raw);
+    if (bluetooth.role === "host" && envelope.type === "action") {
+      const action = envelope.payload as BluetoothRoomAction;
+      try {
+        bluetooth.hostRoom!.handle(BLUETOOTH_GUEST_PLAYER, action);
+      } catch (error) {
+        const message = error instanceof RuleError ? error.message : "房主拒绝了此操作。";
+        sendBluetoothEnvelope({ v: BLUETOOTH_PROTOCOL_VERSION, type: "error", id: envelope.id, payload: { message } });
+        if (action.kind !== "chat") showToast(message);
+      }
+      publishBluetoothViewsAfterAction();
+    } else if (bluetooth.role === "guest" && envelope.type === "snapshot") {
+      applyBluetoothView(envelope.payload as PlayerRemoteRoomView);
+    } else if (envelope.type === "error") {
+      bluetooth.pendingAction = false;
+      const payload = envelope.payload as { message?: string } | undefined;
+      if (!envelope.id?.startsWith("chat:")) showToast(payload?.message ?? "房主拒绝了此操作。");
+    } else if (envelope.type === "ping") {
+      sendBluetoothEnvelope({ v: BLUETOOTH_PROTOCOL_VERSION, type: "pong", id: envelope.id });
+    }
+  } catch (error) {
+    showToast(error instanceof RuleError ? error.message : "收到的蓝牙消息无效。");
+  }
+}
+
+function beginBluetoothHost() {}

@@ -1,0 +1,28 @@
+{
+  "new_tests": 19,
+  "final_related_files": 59,
+  "final_related_passed": 914,
+  "final_failed": 0,
+  "final_concurrency": 1,
+  "separate_web_static_passed": 50,
+  "binary_asset_checks_NOT_RUN": 4,
+  "compiled_code_modules": 37,
+  "full_asset_package_typecheck_APK_radio_DOM_independent_QA": false,
+  "initial_attempt": {
+    "exit_code": 1,
+    "tests": 914,
+    "passed": 913,
+    "failed": 1,
+    "failure": "unchanged scoring policy Q28/Q30/Q33-Q35 invalid_policy_execution under concurrency4; exact cause not independently verified"
+  },
+  "initial_failure_source_unchanged": true,
+  "failure_cause": "unconfirmed; isolation process has a finite timeout. Serial rerun passed; do not assert a measured root cause.",
+  "no_scoring_source_or_scores_changed": true,
+  "research_totals": {
+    "naturalFifoParentCurrentSchedules": 4,
+    "H15H11ParentCurrentComparisons": 6,
+    "complete56Discharged": 0,
+    "formal64Accepted": 0,
+    "actualDevices": 0
+  }
+}

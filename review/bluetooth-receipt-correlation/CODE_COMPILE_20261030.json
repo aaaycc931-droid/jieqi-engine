@@ -1,0 +1,8 @@
+{
+  "status": "PRODUCTION_CODE_TRANSFORM_PASSED_ASSET_PACKAGE_NOT_RUN",
+  "compiled_modules": 37,
+  "source_compiler_git_blob": "c180950214ac54366b506096cc9ee455ceff4d33",
+  "same_production_strip_transform": true,
+  "full_asset_package": false,
+  "full_TypeScript_check": false
+}
