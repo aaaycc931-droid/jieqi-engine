@@ -1,0 +1,431 @@
+{
+  "schema": "lezi.main.bluetooth_receipt_correlation.v1",
+  "id": "MAIN-BLUETOOTH-RECEIPT-CORRELATION-20261029",
+  "executed_local_date": "2026-10-30",
+  "engine_parent": "8161c348abeba3a99fa5a5b514252e69218f28fd",
+  "sourceIdentity": {
+    "currentWebSha256": "1e1e4b8eb425d1065625d2f5932bf7c290a41851823e62d7b00664883d716d0f",
+    "parentFixtureSha256": "aa5160edbcd66e561f9a47f29723c26e86f3a0b9e79c67ffae70b55a4546bb91"
+  },
+  "implementation": "Only current-id pong releases single-flight wait; action then same-id ping in the inspected ordered v2 caller. Snapshot/error payloads and IDs unchanged.",
+  "compatibility": [
+    "new guest / current host",
+    "new guest / PR20 host",
+    "PR20 guest / current host"
+  ],
+  "periodic": [
+    {
+      "source": "PR20",
+      "schedule": "FIFO delayed periodic snapshot, before any action delivery",
+      "pendingBefore": true,
+      "pendingAfterDelayedSnapshot": false,
+      "authorityHadChoiceAtDelayedSnapshot": false,
+      "pendingAfterDrain": false,
+      "delivered": [
+        {
+          "direction": "host→guest",
+          "type": "snapshot",
+          "id": "snapshot-1000-hero_selection"
+        },
+        {
+          "direction": "host→guest",
+          "type": "snapshot",
+          "id": "snapshot-1000-hero_selection"
+        },
+        {
+          "direction": "guest→host",
+          "type": "action",
+          "id": "recorded:1"
+        },
+        {
+          "direction": "host→guest",
+          "type": "snapshot",
+          "id": "snapshot-1000-hero_selection"
+        }
+      ]
+    },
+    {
+      "source": "current",
+      "schedule": "FIFO delayed periodic snapshot, before any action delivery",
+      "pendingBefore": true,
+      "pendingAfterDelayedSnapshot": true,
+      "authorityHadChoiceAtDelayedSnapshot": false,
+      "pendingAfterDrain": false,
+      "delivered": [
+        {
+          "direction": "host→guest",
+          "type": "snapshot",
+          "id": "snapshot-1000-hero_selection"
+        },
+        {
+          "direction": "host→guest",
+          "type": "snapshot",
+          "id": "snapshot-1000-hero_selection"
+        },
+        {
+          "direction": "guest→host",
+          "type": "action",
+          "id": "recorded:1"
+        },
+        {
+          "direction": "guest→host",
+          "type": "ping",
+          "id": "recorded:1"
+        },
+        {
+          "direction": "host→guest",
+          "type": "snapshot",
+          "id": "snapshot-1000-hero_selection"
+        },
+        {
+          "direction": "host→guest",
+          "type": "pong",
+          "id": "recorded:1"
+        }
+      ]
+    }
+  ],
+  "chat": [
+    {
+      "source": "PR20",
+      "schedule": "two actual locally valid sendBluetoothChat calls at10000/12001; FIFO host delivery at20001; following game action withheld",
+      "realClientCooldownMs": 2000,
+      "serverOutcome": "first accepted; second CHAT_COOLDOWN (message-only wire error)",
+      "gameActionHadReachedAuthority": false,
+      "pendingWhileGameActionWithheld": false,
+      "timeline": [
+        {
+          "type": "snapshot",
+          "id": "snapshot-20001-playing",
+          "pendingAfter": false
+        },
+        {
+          "type": "error",
+          "id": "chat:recorded:2",
+          "pendingAfter": false
+        },
+        {
+          "type": "snapshot",
+          "id": "snapshot-20001-playing",
+          "pendingAfter": false
+        }
+      ]
+    },
+    {
+      "source": "current",
+      "schedule": "two actual locally valid sendBluetoothChat calls at10000/12001; FIFO host delivery at20001; following game action withheld",
+      "realClientCooldownMs": 2000,
+      "serverOutcome": "first accepted; second CHAT_COOLDOWN (message-only wire error)",
+      "gameActionHadReachedAuthority": false,
+      "pendingWhileGameActionWithheld": true,
+      "timeline": [
+        {
+          "type": "snapshot",
+          "id": "snapshot-20001-playing",
+          "pendingAfter": true
+        },
+        {
+          "type": "error",
+          "id": "chat:recorded:2",
+          "pendingAfter": true
+        },
+        {
+          "type": "snapshot",
+          "id": "snapshot-20001-playing",
+          "pendingAfter": true
+        }
+      ]
+    }
+  ],
+  "channelCases": [
+    {
+      "source": "original CH06/PR14 H15/H11 seed476, source-qualified recruitment0/1",
+      "recruit": 0,
+      "deadline": 65000,
+      "delta": -1,
+      "authorityAndRngUnchanged": true,
+      "originalSnapshotErrorBytesUnchanged": true,
+      "lastAuthorizedViewUnchanged": true,
+      "authoritySha256": "6e4bb54706842262ead3d75b055d31d1bf21282bb6cc6dfc5b2a6b212430fc1b",
+      "drawsSha256": "af36215664705fc973909fa46f8e38026d64652f8a1a25730cd02cd02b968638",
+      "parentTimeline": [
+        {
+          "type": "snapshot",
+          "id": "snapshot-64999-playing",
+          "pendingAfter": false
+        }
+      ],
+      "currentTimeline": [
+        {
+          "type": "snapshot",
+          "id": "snapshot-64999-playing",
+          "pendingAfter": true
+        },
+        {
+          "type": "pong",
+          "id": "recorded:1",
+          "pendingAfter": false
+        }
+      ],
+      "parentGuestSendTypes": [
+        "action"
+      ],
+      "currentGuestSendTypes": [
+        "action",
+        "ping"
+      ],
+      "actualRadioOrDOM": false
+    },
+    {
+      "source": "original CH06/PR14 H15/H11 seed476, source-qualified recruitment0/1",
+      "recruit": 0,
+      "deadline": 65000,
+      "delta": 0,
+      "authorityAndRngUnchanged": true,
+      "originalSnapshotErrorBytesUnchanged": true,
+      "lastAuthorizedViewUnchanged": true,
+      "authoritySha256": "24f04fd5c2c495ba906bb2fdba8e86a043c1f0719947f9b09085c6b7e9ad94a7",
+      "drawsSha256": "0c122c081a348e4266f5c94b09a4eb9f43375bf944e60831788c3b4c4595a47f",
+      "parentTimeline": [
+        {
+          "type": "error",
+          "id": "recorded:1",
+          "pendingAfter": false
+        },
+        {
+          "type": "snapshot",
+          "id": "snapshot-10000-playing",
+          "pendingAfter": false
+        }
+      ],
+      "currentTimeline": [
+        {
+          "type": "error",
+          "id": "recorded:1",
+          "pendingAfter": true
+        },
+        {
+          "type": "snapshot",
+          "id": "snapshot-10000-playing",
+          "pendingAfter": true
+        },
+        {
+          "type": "pong",
+          "id": "recorded:1",
+          "pendingAfter": false
+        }
+      ],
+      "parentGuestSendTypes": [
+        "action"
+      ],
+      "currentGuestSendTypes": [
+        "action",
+        "ping"
+      ],
+      "actualRadioOrDOM": false
+    },
+    {
+      "source": "original CH06/PR14 H15/H11 seed476, source-qualified recruitment0/1",
+      "recruit": 0,
+      "deadline": 65000,
+      "delta": 1,
+      "authorityAndRngUnchanged": true,
+      "originalSnapshotErrorBytesUnchanged": true,
+      "lastAuthorizedViewUnchanged": true,
+      "authoritySha256": "697e6c78f87cd2af1034dd9d9a4fbf351d214295de75a264d86a32fb9b952ba7",
+      "drawsSha256": "0c122c081a348e4266f5c94b09a4eb9f43375bf944e60831788c3b4c4595a47f",
+      "parentTimeline": [
+        {
+          "type": "error",
+          "id": "recorded:1",
+          "pendingAfter": false
+        },
+        {
+          "type": "snapshot",
+          "id": "snapshot-10000-playing",
+          "pendingAfter": false
+        }
+      ],
+      "currentTimeline": [
+        {
+          "type": "error",
+          "id": "recorded:1",
+          "pendingAfter": true
+        },
+        {
+          "type": "snapshot",
+          "id": "snapshot-10000-playing",
+          "pendingAfter": true
+        },
+        {
+          "type": "pong",
+          "id": "recorded:1",
+          "pendingAfter": false
+        }
+      ],
+      "parentGuestSendTypes": [
+        "action"
+      ],
+      "currentGuestSendTypes": [
+        "action",
+        "ping"
+      ],
+      "actualRadioOrDOM": false
+    },
+    {
+      "source": "original CH06/PR14 H15/H11 seed476, source-qualified recruitment0/1",
+      "recruit": 1,
+      "deadline": 65000,
+      "delta": -1,
+      "authorityAndRngUnchanged": true,
+      "originalSnapshotErrorBytesUnchanged": true,
+      "lastAuthorizedViewUnchanged": true,
+      "authoritySha256": "c539d513da2c1dbbff37de64ac7b445c06c1df6db55c8529646c85a653418825",
+      "drawsSha256": "5da9e252ed49b45cf1a3fbcb83188772c05ea418fba9c57fcbd1a3f5c572a3a8",
+      "parentTimeline": [
+        {
+          "type": "snapshot",
+          "id": "snapshot-64999-playing",
+          "pendingAfter": false
+        }
+      ],
+      "currentTimeline": [
+        {
+          "type": "snapshot",
+          "id": "snapshot-64999-playing",
+          "pendingAfter": true
+        },
+        {
+          "type": "pong",
+          "id": "recorded:1",
+          "pendingAfter": false
+        }
+      ],
+      "parentGuestSendTypes": [
+        "action"
+      ],
+      "currentGuestSendTypes": [
+        "action",
+        "ping"
+      ],
+      "actualRadioOrDOM": false
+    },
+    {
+      "source": "original CH06/PR14 H15/H11 seed476, source-qualified recruitment0/1",
+      "recruit": 1,
+      "deadline": 65000,
+      "delta": 0,
+      "authorityAndRngUnchanged": true,
+      "originalSnapshotErrorBytesUnchanged": true,
+      "lastAuthorizedViewUnchanged": true,
+      "authoritySha256": "b75e2f7b2d0a91f167d211535450690c9f665da4cd3b1f9059f6ca2f74d293f6",
+      "drawsSha256": "1feb8f93793b429af7554a1dd46b98b4919b2c1cc538fed5388acc32eceb04a4",
+      "parentTimeline": [
+        {
+          "type": "error",
+          "id": "recorded:1",
+          "pendingAfter": false
+        },
+        {
+          "type": "snapshot",
+          "id": "snapshot-10000-playing",
+          "pendingAfter": false
+        }
+      ],
+      "currentTimeline": [
+        {
+          "type": "error",
+          "id": "recorded:1",
+          "pendingAfter": true
+        },
+        {
+          "type": "snapshot",
+          "id": "snapshot-10000-playing",
+          "pendingAfter": true
+        },
+        {
+          "type": "pong",
+          "id": "recorded:1",
+          "pendingAfter": false
+        }
+      ],
+      "parentGuestSendTypes": [
+        "action"
+      ],
+      "currentGuestSendTypes": [
+        "action",
+        "ping"
+      ],
+      "actualRadioOrDOM": false
+    },
+    {
+      "source": "original CH06/PR14 H15/H11 seed476, source-qualified recruitment0/1",
+      "recruit": 1,
+      "deadline": 65000,
+      "delta": 1,
+      "authorityAndRngUnchanged": true,
+      "originalSnapshotErrorBytesUnchanged": true,
+      "lastAuthorizedViewUnchanged": true,
+      "authoritySha256": "68f424aeaf712afe76d6970c45e49903904ff60550d9fac634d6128255a5e0ab",
+      "drawsSha256": "1feb8f93793b429af7554a1dd46b98b4919b2c1cc538fed5388acc32eceb04a4",
+      "parentTimeline": [
+        {
+          "type": "error",
+          "id": "recorded:1",
+          "pendingAfter": false
+        },
+        {
+          "type": "snapshot",
+          "id": "snapshot-10000-playing",
+          "pendingAfter": false
+        }
+      ],
+      "currentTimeline": [
+        {
+          "type": "error",
+          "id": "recorded:1",
+          "pendingAfter": true
+        },
+        {
+          "type": "snapshot",
+          "id": "snapshot-10000-playing",
+          "pendingAfter": true
+        },
+        {
+          "type": "pong",
+          "id": "recorded:1",
+          "pendingAfter": false
+        }
+      ],
+      "parentGuestSendTypes": [
+        "action"
+      ],
+      "currentGuestSendTypes": [
+        "action",
+        "ping"
+      ],
+      "actualRadioOrDOM": false
+    }
+  ],
+  "knownFailureControl": {
+    "kind": "EXPLICIT_FAULT_INJECTION_NOT_NATURAL_SOURCE_REPLAY",
+    "injected": "recording bridge silently drops action but sends ping, modeling native swallowed send failure only",
+    "pendingCleared": true,
+    "actionReachedAuthority": false,
+    "pongIsAcceptanceAck": false,
+    "actualNativeErrorCallbackExecuted": false
+  },
+  "evidenceTotals": {
+    "naturalFifoParentCurrentSchedules": 4,
+    "H15H11ParentCurrentComparisons": 6,
+    "complete56Discharged": 0,
+    "formal64Accepted": 0,
+    "actualDevices": 0
+  },
+  "limits": [
+    "Actual complete production applyBluetoothView executes, final DOM render functions are recorders. Native send is a FIFO recording endpoint, not Java/radio runtime.",
+    "No acceptance or duplicate ACK added. A pong orders delivered messages only; swallowed/partial native send, cross-connection delivery, arbitrary replay resistance and full client QA remain open.",
+    "No half-chaos or ordinary transport admission, gameplay/scoring/NET/hero/assets changes. Prior owner evidence artifacts remain unchanged."
+  ],
+  "rawAuthorityPublished": false
+}

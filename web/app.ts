@@ -392,6 +392,7 @@ interface BluetoothSession {
   view?: PlayerRemoteRoomView;
   nativeState: string;
   pendingAction: boolean;
+  pendingActionId?: string;
   playedTerminalEventId?: string;
   shownFinishRevision?: number;
   trapDraft: Position[];
@@ -987,7 +988,6 @@ function applyBluetoothView(view: PlayerRemoteRoomView): void {
   if (!bluetooth) return;
   const prior = bluetooth.view;
   bluetooth.view = view;
-  bluetooth.pendingAction = false;
   rpsPublic = view.rps ?? rpsPublic;
   gameState = view.state;
   gameSecret = undefined;
@@ -1283,13 +1283,25 @@ function handleBluetoothAction(action: BluetoothRoomAction): void {
     publishBluetoothViewsAfterAction();
     return;
   }
+  let requestId: string;
   try {
+    requestId = bluetoothActionId();
     bluetooth.pendingAction = true;
-    sendBluetoothEnvelope({ v: BLUETOOTH_PROTOCOL_VERSION, type: "action", id: bluetoothActionId(), payload: action });
-    showToast("操作已发送，等待房主裁定。");
+    bluetooth.pendingActionId = requestId;
+    sendBluetoothEnvelope({ v: BLUETOOTH_PROTOCOL_VERSION, type: "action", id: requestId, payload: action });
   } catch (error) {
     bluetooth.pendingAction = false;
+    bluetooth.pendingActionId = undefined;
     showToast(error instanceof Error ? error.message : "蓝牙发送失败。");
+    return;
+  }
+  // Existing v2 hosts echo ping after handling preceding messages on this link.
+  // This orders the waiting UI; pong is not an acceptance or duplicate receipt.
+  try {
+    sendBluetoothEnvelope({ v: BLUETOOTH_PROTOCOL_VERSION, type: "ping", id: requestId });
+    showToast("操作已发送，等待房主裁定。");
+  } catch {
+    showToast("操作已发送，确认消息发送失败，请等待连接恢复。");
   }
 }
 
@@ -1310,9 +1322,14 @@ function handleIncomingBluetoothMessage(raw: string): void {
     } else if (bluetooth.role === "guest" && envelope.type === "snapshot") {
       applyBluetoothView(envelope.payload as PlayerRemoteRoomView);
     } else if (envelope.type === "error") {
-      bluetooth.pendingAction = false;
       const payload = envelope.payload as { message?: string } | undefined;
       if (!envelope.id?.startsWith("chat:")) showToast(payload?.message ?? "房主拒绝了此操作。");
+    } else if (bluetooth.role === "guest" && envelope.type === "pong"
+      && bluetooth.pendingAction && bluetooth.pendingActionId !== undefined
+      && envelope.id === bluetooth.pendingActionId) {
+      bluetooth.pendingAction = false;
+      bluetooth.pendingActionId = undefined;
+      if (bluetooth.view) applyBluetoothView(bluetooth.view);
     } else if (envelope.type === "ping") {
       sendBluetoothEnvelope({ v: BLUETOOTH_PROTOCOL_VERSION, type: "pong", id: envelope.id });
     }
@@ -3611,6 +3628,7 @@ window.addEventListener("jieqi-bluetooth", ((event: CustomEvent<BluetoothEventDe
       const restoring = wasEstablished && previousState !== "CONNECTED";
       bluetooth.everConnected = true;
       bluetooth.pendingAction = false;
+      bluetooth.pendingActionId = undefined;
       setBluetoothStatus(restoring ? "连接已恢复。" : "蓝牙已连接，正在同步房间。");
 
       if (!restoring && !wasEstablished) {
@@ -3660,6 +3678,7 @@ window.addEventListener("jieqi-bluetooth", ((event: CustomEvent<BluetoothEventDe
 
     if ((detail.state === "DISCONNECTED" || detail.state === "ERROR") && wasEstablished) {
       bluetooth.pendingAction = false;
+      bluetooth.pendingActionId = undefined;
       const awaitingRematch = bluetooth.view?.phase === "finished" && !bluetoothLobbyView.hidden;
       if (awaitingRematch) {
         disconnectLayer.hidden = true;
