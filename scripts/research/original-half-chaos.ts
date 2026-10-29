@@ -3,7 +3,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
 import { HALF_CHAOS_RESEARCH_TUPLES, issueOriginalHalfChaosTuple, registerExactResearchRoom, withExactHalfChaosTuple, type HalfChaosResearchTupleId } from '../../src/research-source-context.ts';
 import { createRemoteRoom, joinRemoteRoom, submitRemoteHeroSelection, submitRemoteRps, completeRemoteHeroIntro,
-  advanceRemoteRoomTime, submitRemoteMove, submitRemoteHeroAbility, playerRoomView, publicRemoteRoom, type RemoteRoom } from '../../src/remote-room.ts';
+  advanceRemoteRoomTime, submitRemoteMove, submitRemoteHeroAbility, playerRoomView, publicRemoteRoom, serializePublicRemoteRoom, type RemoteRoom } from '../../src/remote-room.ts';
 import { captureMechanismEvents, withIsolatedMechanismEvents } from '../../src/mechanism-observer.ts';
 import { validateHeroForms } from '../../src/hero-forms.ts';
 import type { HeroAbilityCommand, MoveCommand, Side } from '../../src/types.ts';
@@ -24,7 +24,8 @@ const replayTuples: Record<string, HalfChaosResearchTupleId> = {
 let nextRoom = 0;
 
 /** Internal harness: owns real authority instances; accepts no room JSON or RNG callback. */
-export function createOriginalHalfChaosSession(initializationText: string, replayText: string, replayId: string) {
+export function createOriginalHalfChaosSession(initializationText: string, replayText: string, replayId: string,
+  probe: {stageProjections?:boolean;withoutObservation?:boolean} = {}) {
   if (hash(initializationText) !== ORIGINAL_HC_SOURCE.initializationSha256 || hash(replayText) !== ORIGINAL_HC_SOURCE.replaySha256)
     fail('immutable input hash mismatch');
   const tupleId = replayTuples[replayId]; if (!tupleId) fail('replay not in original twelve');
@@ -109,10 +110,23 @@ export function createOriginalHalfChaosSession(initializationText: string, repla
       } else return fail('unknown source ability');
       try {
         let duplicate = false;
-        const captured = captureMechanismEvents(()=>withIsolatedMechanismEvents(()=>invoke(()=>{
+        let operationReturned = false;
+        const operation = ()=>{const result=withIsolatedMechanismEvents(()=>invoke(()=>{
           const r = 'ability' in command ? submitRemoteHeroAbility(current,playerId,command,now,random) : submitRemoteMove(current,playerId,command,now);
           duplicate = r.duplicate; return r.room;
-        })));
+        }));operationReturned=true;return result;};
+        const captured = probe.withoutObservation ? {result:operation(),events:[],evidenceValid:true} : captureMechanismEvents(operation,
+          probe.stageProjections ? { projectCheckpoint: checkpoint=>{
+            if(operationReturned || !checkpoint.secret)fail('checkpoint is not a synchronous authority snapshot');
+            // The game snapshot is exact. Outer room history/timestamps are the
+            // actual request-entry envelope, NOT a newly committed room packet.
+            const envelope:RemoteRoom={...before,game:{...before.game!,state:checkpoint.state,secret:checkpoint.secret}};
+            return {schema:'lezi.original_hc.exact_game_stage_projection.v1',replayId,checkpointKind:checkpoint.kind,
+              emittedBeforeRequestReturn:true,envelopeBasis:'ACTUAL_REQUEST_ENTRY_METADATA_NOT_COMMITTED_ROOM_DELIVERY',
+              envelopeUpdatedAt:before.updatedAt,actualClientDelivery:false,
+              publicJson:serializePublicRemoteRoom(envelope),
+              redJson:JSON.stringify(playerRoomView(envelope,players.red)),blackJson:JSON.stringify(playerRoomView(envelope,players.black))};
+          }} : {});
         return {declarationId,playerId,now,command,disposition:'accepted' as const,duplicate,before,after:structuredClone(room!),events:captured.events,evidenceValid:captured.evidenceValid!==false,views:views()};
       } catch(error) {
         if (JSON.stringify(room!)!==JSON.stringify(before)) fail('refusal mutated original authority');

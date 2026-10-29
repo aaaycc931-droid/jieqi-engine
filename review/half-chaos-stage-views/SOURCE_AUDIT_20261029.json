@@ -1,0 +1,77 @@
+{
+  "schema": "lezi.main.hc56.source_audit.v1",
+  "source_handoff_commit": "3828d0fbf2930ef4247589bf0f9324261767f05f",
+  "engine_parent": "099eca44dbaab39bdedb02a9986f7d54e9761121",
+  "source_refs": [
+    {
+      "path": "worklines/half_chaos/HC51_PAIR_VIEW_MISSING_STIMULUS_CONTRACT.json",
+      "git_blob_sha": "22abe23c22ab0032aa014e6a4afbf6f3f128b66f",
+      "sha256": "5080e34bb93a640827acefb79d60a57f58049eef630d1e918b6ba3836c1388f0"
+    },
+    {
+      "path": "worklines/half_chaos/OBSERVATION_FIELD_MAPPING.json",
+      "git_blob_sha": "be63d62bf94e029042e49089455af41b2b81b5a4",
+      "sha256": "53b8c0f9de6fd60f3c9985f944f422ffe5e83b0696c3020898eecd6570318cda"
+    },
+    {
+      "path": "worklines/half_chaos/ASSERTION_EVIDENCE_MATRIX.json",
+      "git_blob_sha": "e46a29f3e69cc2b005dd7633a60c888a5882b8ce",
+      "sha256": "3c3da34ef64de3adb9c7dc5cae4094cccfb32fd5df32cd8eae62a07d5199180b"
+    }
+  ],
+  "read_scopes": [
+    "HC51 all56 slot metadata, exact comparison requirements and typed surfaces",
+    "OBSERVATION_FIELD_MAPPING checkpoint/field surfaces; not blanket adoption of all historical findings",
+    "ASSERTION_EVIDENCE_MATRIX input/reference structure; no new complete64 acceptance",
+    "Main HC_EVIDENCE_ACCOUNTING scope and exact-view limits",
+    "Actual remote-room public/player projection, observer, original source driver and public-state snapshot code"
+  ],
+  "exact_slot_semantic_binding_checks": 112,
+  "exact_slot_semantic_binding_failures": 0,
+  "semantic_audit_basis": "Original saved actual stage lastMove actor/from/to/main classification against both left/right HC51 slot declarations; no synthetic board or rewritten requests",
+  "runtime": {
+    "original_replays": 12,
+    "requests": 110,
+    "exact_game_checkpoints": 200,
+    "public_json": 200,
+    "player_json": 400,
+    "paired_comparisons": 56,
+    "paired_underlying_player_json": 112,
+    "paired_visible_fields_equal": 56,
+    "different_hidden_initial_slots_per_pair": 2
+  },
+  "normalization": "Exact issued ID values and enumerated context paths only; timestamps/revision/deadlines/text/effects/piece values preserved",
+  "projection_boundary": {
+    "game_snapshot": "actual immutable at synchronous emission before next begin",
+    "outer_room": "actual request-entry metadata and message history, not a committed mid-action room",
+    "actual_client_delivery": false,
+    "complete_original56_slots_discharged": 0,
+    "formal_original64_accepted": 0
+  },
+  "validation": {
+    "new_tests": 25,
+    "focused_passed": 52,
+    "related_files": 55,
+    "related_passed": 873,
+    "failed": 0,
+    "parent_default_projection_no_observation_request_pairs_each": 110,
+    "ambient_random_calls": 0,
+    "ambient_wall_clock_calls": 0
+  },
+  "not_run": [
+    "complete room/channel stage packets",
+    "actual caller-visible error/duplicate delivery and ordering",
+    "buttons/hints/targets/clock display on actual client",
+    "full TypeScript check",
+    "independent QA/full mode acceptance"
+  ],
+  "protected": {
+    "rules": true,
+    "mode_gates": true,
+    "three_worklines": true,
+    "heroes_UI_H03": true,
+    "scoring": "frozen",
+    "NET": "paused"
+  },
+  "owner_only_raw_source_sha256": "189de829f9e0cb1918a255d1396bb15370c54002fe0c408ac68fe6d516c8ee6a"
+}
