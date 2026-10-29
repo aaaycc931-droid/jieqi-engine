@@ -1,0 +1,721 @@
+{
+  "schema": "lezi.standard_np32.window_differential.v1",
+  "executedLocalDate": "2026-10-29",
+  "baselineCommit": "1bda5bc9f7840d0d601a85fb0faeda842753a199",
+  "originalRequestPairs": 37,
+  "observationOnOffRequestPairs": 92,
+  "normalization": "Only declared room/player identifiers, including object keys. No game, clock, event, secret, RNG, history or source field omitted.",
+  "originals": [
+    {
+      "branch": "AS",
+      "requests": 11,
+      "checks": [
+        {
+          "id": "NP-AS:R1:main",
+          "allReturnedFieldsEqual": true,
+          "normalizedResultSha256": "a559bb3b88c778dd4dba0d0ae9f5ad8961442202ce81f53075e2168f00a50484"
+        },
+        {
+          "id": "NP-AS:B1:main",
+          "allReturnedFieldsEqual": true,
+          "normalizedResultSha256": "85836749e54f4571080e7fca154f3801385a20b4345537a26a99796168a48863"
+        },
+        {
+          "id": "NP-AS:R2:main",
+          "allReturnedFieldsEqual": true,
+          "normalizedResultSha256": "671d5e0c66d16dd654d4d865f7d068f86f3160dae2d60509e4ffd7273c2c0749"
+        },
+        {
+          "id": "NP-AS:B2:main",
+          "allReturnedFieldsEqual": true,
+          "normalizedResultSha256": "bb1372580a0713a943097679fdefcd63920d44e5d22585aa2f6b046202bc48bc"
+        },
+        {
+          "id": "NP-AS:R3:main",
+          "allReturnedFieldsEqual": true,
+          "normalizedResultSha256": "84b2649c48c6976702b4eac45f9f52edc92ce4f41286fdc77b69d61482ae3f13"
+        },
+        {
+          "id": "NP-AS:B3:main",
+          "allReturnedFieldsEqual": true,
+          "normalizedResultSha256": "0d79ed94ebb75e6cf39c9a557da2c635e70f4a9df3dcee92c1b8eb650a124661"
+        },
+        {
+          "id": "NP-AS:R4:main",
+          "allReturnedFieldsEqual": true,
+          "normalizedResultSha256": "3eb1ce2d5438f7c602d2cf59532cf5e29f9187e792e10e45f9f25534d48137fd"
+        },
+        {
+          "id": "NP-AS:B4:main",
+          "allReturnedFieldsEqual": true,
+          "normalizedResultSha256": "53ccde33a3e1620aff56c3d5107ba7af2dbc999c960eecffc26073c24b8f69da"
+        },
+        {
+          "id": "NP-AS:R5:main",
+          "allReturnedFieldsEqual": true,
+          "normalizedResultSha256": "5cab7264eac97f6bcd6765e21d3fe0bfe9d1041d2811bc912988fb8500b78de1"
+        },
+        {
+          "id": "NP-AS:B5:main",
+          "allReturnedFieldsEqual": true,
+          "normalizedResultSha256": "5591bd24c964b2b8147542627d344a6d98a6caf68e3248de19fdcd62e05d24fc"
+        },
+        {
+          "id": "NP-AS:R6:main",
+          "allReturnedFieldsEqual": true,
+          "normalizedResultSha256": "1d4dd6ef763bd246e07369ebcad7545a716a0962c5dbd8aae647d8e10d051be2"
+        }
+      ]
+    },
+    {
+      "branch": "AP",
+      "requests": 13,
+      "checks": [
+        {
+          "id": "NP-AP:R1:main",
+          "allReturnedFieldsEqual": true,
+          "normalizedResultSha256": "1ba5fa60213e910de7f5d4dc562658187ca1094d56aa2edadae463dcbaa67e07"
+        },
+        {
+          "id": "NP-AP:B1:main",
+          "allReturnedFieldsEqual": true,
+          "normalizedResultSha256": "9ff6403bb917546f358ba80accb6e2f0fc8bbcd395186d3ab71dc025621ed707"
+        },
+        {
+          "id": "NP-AP:R2:main",
+          "allReturnedFieldsEqual": true,
+          "normalizedResultSha256": "aa75ff5a51662df0a8d44ec5d2fc039d25f4dc746c018b7ce2277f26d6be2a60"
+        },
+        {
+          "id": "NP-AP:B2:main",
+          "allReturnedFieldsEqual": true,
+          "normalizedResultSha256": "73991372472d90719ca0bd32c99d32d59c5d225c597ce4350763a5362f751ca7"
+        },
+        {
+          "id": "NP-AP:R3:main",
+          "allReturnedFieldsEqual": true,
+          "normalizedResultSha256": "a2995c0282d490a6f74edb3f91959339141a8ad0232d6b37072e7528c28b6006"
+        },
+        {
+          "id": "NP-AP:B3:main",
+          "allReturnedFieldsEqual": true,
+          "normalizedResultSha256": "775946367872c8f5a8b2f6025c2e4014e09d5284a925b293234785986f2a9349"
+        },
+        {
+          "id": "NP-AP:R4:main",
+          "allReturnedFieldsEqual": true,
+          "normalizedResultSha256": "1570ba07d4af599b38829a1e93b1900a76875ec3a998398de6e891e4404f33eb"
+        },
+        {
+          "id": "NP-AP:B4:main",
+          "allReturnedFieldsEqual": true,
+          "normalizedResultSha256": "8228939d3f30dca0927be92e68dcffb2f5dfb2b573bf1057257a62bfe6f5ffd6"
+        },
+        {
+          "id": "NP-AP:R5:main",
+          "allReturnedFieldsEqual": true,
+          "normalizedResultSha256": "5275f94e6fc68c5a110130e8f3a6a5bb3cbdb4cbfd91c80205b7918e0bc2f3d7"
+        },
+        {
+          "id": "NP-AP:B5:main",
+          "allReturnedFieldsEqual": true,
+          "normalizedResultSha256": "a01e52af98a51f1d3760577a0058cc6c5b33384ec68bf790220a2626cded4986"
+        },
+        {
+          "id": "NP-AP:R6:main",
+          "allReturnedFieldsEqual": true,
+          "normalizedResultSha256": "43fcd816900939f859ff083a14c44b743c1c2cb62976cdf53f92a1bf91816ff8"
+        },
+        {
+          "id": "NP-AP:B6:main",
+          "allReturnedFieldsEqual": true,
+          "normalizedResultSha256": "8cf148a44f49ee3aed780de9f0d1b4fbcb113babb7c86d951358f857edefeeba"
+        },
+        {
+          "id": "NP-AP:R7:main",
+          "allReturnedFieldsEqual": true,
+          "normalizedResultSha256": "8a0320605ac6996fa338c69168a7dd5c5747fb719d4e4d6782c7b897fab3b615"
+        }
+      ]
+    },
+    {
+      "branch": "ES",
+      "requests": 13,
+      "checks": [
+        {
+          "id": "NP-ES:R1:main",
+          "allReturnedFieldsEqual": true,
+          "normalizedResultSha256": "98a2c883c5190e841bbf7be4116b28147f2587ee41b4a2872950313c43042286"
+        },
+        {
+          "id": "NP-ES:B1:main",
+          "allReturnedFieldsEqual": true,
+          "normalizedResultSha256": "2bddb1800ca4cf9df7a63b88d46e34852d0d4a077db54299d4e49af38da7f13e"
+        },
+        {
+          "id": "NP-ES:R2:main",
+          "allReturnedFieldsEqual": true,
+          "normalizedResultSha256": "c67504baad4553eb603b29efbef40b0217c133291b9be55561438d99a8eddd03"
+        },
+        {
+          "id": "NP-ES:B2:main",
+          "allReturnedFieldsEqual": true,
+          "normalizedResultSha256": "2e0fb0335740814408e0e78355836fc10583053519b0ddeb5bdf8e4caa344bb2"
+        },
+        {
+          "id": "NP-ES:R3:main",
+          "allReturnedFieldsEqual": true,
+          "normalizedResultSha256": "26d5a97f29bd52b1442f6f87463c365428b89b07f37730b89f4d12077e3c6cc9"
+        },
+        {
+          "id": "NP-ES:B3:main",
+          "allReturnedFieldsEqual": true,
+          "normalizedResultSha256": "badcb8e618b856c426608737624df0cf63e888a1a42bf631e2d98f438da5044d"
+        },
+        {
+          "id": "NP-ES:R4:main",
+          "allReturnedFieldsEqual": true,
+          "normalizedResultSha256": "9965b90ccbfdd361c517f2b303f78c46105693e94651dfe044e0323f0145fd9f"
+        },
+        {
+          "id": "NP-ES:B4:main",
+          "allReturnedFieldsEqual": true,
+          "normalizedResultSha256": "c62490c2dd576fdbaff47f897cf6cc4d4416390f438a5bfddb7899869c04fb71"
+        },
+        {
+          "id": "NP-ES:R5:main",
+          "allReturnedFieldsEqual": true,
+          "normalizedResultSha256": "507fef825315fa5cd5bc2d825ca3862d4b34751d83cc470411b49b391618e14b"
+        },
+        {
+          "id": "NP-ES:B5:main",
+          "allReturnedFieldsEqual": true,
+          "normalizedResultSha256": "5a1daaa20da1f5c3454ce20a6e05bcc55e3b68a8ba8e9728555450c99860d488"
+        },
+        {
+          "id": "NP-ES:R6:main",
+          "allReturnedFieldsEqual": true,
+          "normalizedResultSha256": "1feabfe2a646007292657b825d53c6b0138e4859af38206b61ca73af1afed976"
+        },
+        {
+          "id": "NP-ES:B6:main",
+          "allReturnedFieldsEqual": true,
+          "normalizedResultSha256": "b5bdb71756d47c4691ae818e9dac25eb31ce162af08513bb0c9252111d4031d1"
+        },
+        {
+          "id": "NP-ES:R7:main",
+          "allReturnedFieldsEqual": true,
+          "normalizedResultSha256": "db3814900eb220d1a4295d05c53743683c6e2bef434942b65124d9e220472b03"
+        }
+      ]
+    }
+  ],
+  "observation": [
+    {
+      "branch": "AP",
+      "variant": "R8_USE",
+      "requests": 16,
+      "checks": [
+        {
+          "id": "NP-AP:R1:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "8c7ff92958e062f79bbe8783117c7539d0fe4b65821ca63f0a5564db59268979"
+        },
+        {
+          "id": "NP-AP:B1:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "56eb81557956cfe32e921f84b6804d9967e33471445cf156ff9ffd46ac22f9c7"
+        },
+        {
+          "id": "NP-AP:R2:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "6ea370d007843d49e232b3a2e66554e1a11a8f9d114982d0c16c46065e885f2e"
+        },
+        {
+          "id": "NP-AP:B2:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "44767dab199e539e57ad62095d6f2356e4dcb2358faeba4f8378d5ce14b2ee44"
+        },
+        {
+          "id": "NP-AP:R3:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "e810b9ebfa0ea1c343f8712704e5781c91225f2b34c91072ec032bfd9cf57a7c"
+        },
+        {
+          "id": "NP-AP:B3:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "f6e5994dac45fddefd66cbe0f48c2b4aa51db26932057e76f7aecc27cad72ba0"
+        },
+        {
+          "id": "NP-AP:R4:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "cb5c4481be204c7e3fc1b272139349d43dee619d3b3f313d8b5ffce4e30e6e97"
+        },
+        {
+          "id": "NP-AP:B4:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "3a533cd1d97afc0a7ed7f689fbd6fd57f75cd6e5abc8b22c61f18c0d91f21483"
+        },
+        {
+          "id": "NP-AP:R5:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "d9c222a8b63b53338440dd4bdc5e781a2ff38fa9997ca29078a9ea3782584ef7"
+        },
+        {
+          "id": "NP-AP:B5:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "6ec3ebb3cab653a562084f127c13074198ed9ac687cc875bb57743eb1c247530"
+        },
+        {
+          "id": "NP-AP:R6:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "4100b416989ca544614ebf2fea590b63b0fb14d9522fed59b650ddd3e58f3b36"
+        },
+        {
+          "id": "NP-AP:B6:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "794e01bba8a7f778f12de5f09b31019128f9b5bbf173bcca4e7e5351e97a4fd4"
+        },
+        {
+          "id": "NP-WINDOW-AP-R8_USE:R7:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "15f4ffc652de74ef4e6483d87699c2647b9c081c973c87bfd5c241ff55ea6eff"
+        },
+        {
+          "id": "NP-WINDOW-AP-R8_USE:B7:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "1be6fbbc19e4d2adffc544a2371f589b8b3b7b9e0e6e59c82bc905309a11d712"
+        },
+        {
+          "id": "NP-WINDOW-AP-R8_USE:R8:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "4be91ab36edebe06bb5875bea7493f81bbad1fe93f8159da4db462da1f506e90"
+        },
+        {
+          "id": "NP-WINDOW-AP-R8_USE:B8:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "cbb82ed26e5b81cd10e6d9ca331c3a8b474f4df4653d6dcac60e9822eeeb1b2c"
+        }
+      ]
+    },
+    {
+      "branch": "AP",
+      "variant": "R8_EXPIRE",
+      "requests": 16,
+      "checks": [
+        {
+          "id": "NP-AP:R1:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "8c7ff92958e062f79bbe8783117c7539d0fe4b65821ca63f0a5564db59268979"
+        },
+        {
+          "id": "NP-AP:B1:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "56eb81557956cfe32e921f84b6804d9967e33471445cf156ff9ffd46ac22f9c7"
+        },
+        {
+          "id": "NP-AP:R2:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "6ea370d007843d49e232b3a2e66554e1a11a8f9d114982d0c16c46065e885f2e"
+        },
+        {
+          "id": "NP-AP:B2:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "44767dab199e539e57ad62095d6f2356e4dcb2358faeba4f8378d5ce14b2ee44"
+        },
+        {
+          "id": "NP-AP:R3:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "e810b9ebfa0ea1c343f8712704e5781c91225f2b34c91072ec032bfd9cf57a7c"
+        },
+        {
+          "id": "NP-AP:B3:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "f6e5994dac45fddefd66cbe0f48c2b4aa51db26932057e76f7aecc27cad72ba0"
+        },
+        {
+          "id": "NP-AP:R4:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "cb5c4481be204c7e3fc1b272139349d43dee619d3b3f313d8b5ffce4e30e6e97"
+        },
+        {
+          "id": "NP-AP:B4:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "3a533cd1d97afc0a7ed7f689fbd6fd57f75cd6e5abc8b22c61f18c0d91f21483"
+        },
+        {
+          "id": "NP-AP:R5:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "d9c222a8b63b53338440dd4bdc5e781a2ff38fa9997ca29078a9ea3782584ef7"
+        },
+        {
+          "id": "NP-AP:B5:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "6ec3ebb3cab653a562084f127c13074198ed9ac687cc875bb57743eb1c247530"
+        },
+        {
+          "id": "NP-AP:R6:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "4100b416989ca544614ebf2fea590b63b0fb14d9522fed59b650ddd3e58f3b36"
+        },
+        {
+          "id": "NP-AP:B6:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "794e01bba8a7f778f12de5f09b31019128f9b5bbf173bcca4e7e5351e97a4fd4"
+        },
+        {
+          "id": "NP-WINDOW-AP-R8_EXPIRE:R7:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "0fd10a19a556df9dc17222c4b342bbc2f36f7f37b3baddac2125f457e324da94"
+        },
+        {
+          "id": "NP-WINDOW-AP-R8_EXPIRE:B7:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "0f563a8b112e6d6fba578b5a767b02da8e8fa124940918b3b435556fadb8b62c"
+        },
+        {
+          "id": "NP-WINDOW-AP-R8_EXPIRE:R8:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "d12216a30a3e567f0fabcc0c857bbfe70ec5098657f2c19ea7c554844081554f"
+        },
+        {
+          "id": "NP-WINDOW-AP-R8_EXPIRE:B8:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "eea3a192608b9c5222d483e94ce91911f9602db49caab9603556fad8ebba78d3"
+        }
+      ]
+    },
+    {
+      "branch": "AP",
+      "variant": "R7_CARRIER_MOVE",
+      "requests": 14,
+      "checks": [
+        {
+          "id": "NP-AP:R1:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "8c7ff92958e062f79bbe8783117c7539d0fe4b65821ca63f0a5564db59268979"
+        },
+        {
+          "id": "NP-AP:B1:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "56eb81557956cfe32e921f84b6804d9967e33471445cf156ff9ffd46ac22f9c7"
+        },
+        {
+          "id": "NP-AP:R2:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "6ea370d007843d49e232b3a2e66554e1a11a8f9d114982d0c16c46065e885f2e"
+        },
+        {
+          "id": "NP-AP:B2:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "44767dab199e539e57ad62095d6f2356e4dcb2358faeba4f8378d5ce14b2ee44"
+        },
+        {
+          "id": "NP-AP:R3:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "e810b9ebfa0ea1c343f8712704e5781c91225f2b34c91072ec032bfd9cf57a7c"
+        },
+        {
+          "id": "NP-AP:B3:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "f6e5994dac45fddefd66cbe0f48c2b4aa51db26932057e76f7aecc27cad72ba0"
+        },
+        {
+          "id": "NP-AP:R4:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "cb5c4481be204c7e3fc1b272139349d43dee619d3b3f313d8b5ffce4e30e6e97"
+        },
+        {
+          "id": "NP-AP:B4:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "3a533cd1d97afc0a7ed7f689fbd6fd57f75cd6e5abc8b22c61f18c0d91f21483"
+        },
+        {
+          "id": "NP-AP:R5:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "d9c222a8b63b53338440dd4bdc5e781a2ff38fa9997ca29078a9ea3782584ef7"
+        },
+        {
+          "id": "NP-AP:B5:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "6ec3ebb3cab653a562084f127c13074198ed9ac687cc875bb57743eb1c247530"
+        },
+        {
+          "id": "NP-AP:R6:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "4100b416989ca544614ebf2fea590b63b0fb14d9522fed59b650ddd3e58f3b36"
+        },
+        {
+          "id": "NP-AP:B6:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "794e01bba8a7f778f12de5f09b31019128f9b5bbf173bcca4e7e5351e97a4fd4"
+        },
+        {
+          "id": "NP-WINDOW-AP-R7_CARRIER_MOVE:R7:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "947d8fac7e622f76fa24a3cfaefd1c76c866ce041bb40bfa2d89180290d02838"
+        },
+        {
+          "id": "NP-WINDOW-AP-R7_CARRIER_MOVE:B7:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "743eb0243ef60a32f0e6fe75263eab23555dbe3af1d85939ac1a929f7ff068ef"
+        }
+      ]
+    },
+    {
+      "branch": "ES",
+      "variant": "R8_USE",
+      "requests": 16,
+      "checks": [
+        {
+          "id": "NP-ES:R1:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "34f080df29b5e221ecf5b98ae885529b20e7ca25650d7b73591d1c6560ccf371"
+        },
+        {
+          "id": "NP-ES:B1:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "05227c7451ca7c6b83aadcbcaedabdb99a0037e5a5dee9c3dd3d6a2cb3ec4e26"
+        },
+        {
+          "id": "NP-ES:R2:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "35c2153641e0dd256d21597aa90ead028e54cd6fc939d75a9812a0aae0f11306"
+        },
+        {
+          "id": "NP-ES:B2:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "379a65efe8c763dca820374c5bcd3aac552022ccc5919ebff269b984067e291b"
+        },
+        {
+          "id": "NP-ES:R3:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "c83a7c5f34bb0fdf5017bd47687690a45b169545bc71b44e58746827c7df4520"
+        },
+        {
+          "id": "NP-ES:B3:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "c86cbaaf8a09db59f5eea93bf395fb7fb5b7f656d337f4e3d05ef390bd6adf5e"
+        },
+        {
+          "id": "NP-ES:R4:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "4b2e419062668e4a75a1074bb755b8ef5c02d66761bf876b4c2fd758b0409544"
+        },
+        {
+          "id": "NP-ES:B4:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "019a2461e73551ade0489183d7b864190a17085034f3614fcf22877b5fd173ab"
+        },
+        {
+          "id": "NP-ES:R5:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "29451b8dba6eeef51f940977ba9ed925512bbabd8ddf15ec61ae8acde5e74898"
+        },
+        {
+          "id": "NP-ES:B5:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "15e3514af17856dc3885c78e31d8129a0ab87696524f42612fda9f3cfbd84b68"
+        },
+        {
+          "id": "NP-ES:R6:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "47475ddfc7fad6e2d64c73f572dc7426031f7dbaa57d2a666fa2ba19688a6312"
+        },
+        {
+          "id": "NP-ES:B6:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "51542e3c1f353a840ff041cd36cc3bc5b7bb1b99790252daec22e819c0bfa7df"
+        },
+        {
+          "id": "NP-WINDOW-ES-R8_USE:R7:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "a4a5f1f4e2a36ffda5b9f646ccf899ba372fea3259906688c11e2a0ec51a72ea"
+        },
+        {
+          "id": "NP-WINDOW-ES-R8_USE:B7:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "814d24c7543a955e74fcbf30a9e827951969eb5f0c7ada055c2dbcad0d362045"
+        },
+        {
+          "id": "NP-WINDOW-ES-R8_USE:R8:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "b9c6d4ab3d91ac4ca40adc75dcf653df1d9d9fbd5d89892eb1e20a09fbf5d7d5"
+        },
+        {
+          "id": "NP-WINDOW-ES-R8_USE:B8:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "9fb935abf2352c0eb2c47581073474fe6d580ca1f65939c1795a32b3f95c8d96"
+        }
+      ]
+    },
+    {
+      "branch": "ES",
+      "variant": "R8_EXPIRE",
+      "requests": 16,
+      "checks": [
+        {
+          "id": "NP-ES:R1:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "34f080df29b5e221ecf5b98ae885529b20e7ca25650d7b73591d1c6560ccf371"
+        },
+        {
+          "id": "NP-ES:B1:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "05227c7451ca7c6b83aadcbcaedabdb99a0037e5a5dee9c3dd3d6a2cb3ec4e26"
+        },
+        {
+          "id": "NP-ES:R2:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "35c2153641e0dd256d21597aa90ead028e54cd6fc939d75a9812a0aae0f11306"
+        },
+        {
+          "id": "NP-ES:B2:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "379a65efe8c763dca820374c5bcd3aac552022ccc5919ebff269b984067e291b"
+        },
+        {
+          "id": "NP-ES:R3:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "c83a7c5f34bb0fdf5017bd47687690a45b169545bc71b44e58746827c7df4520"
+        },
+        {
+          "id": "NP-ES:B3:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "c86cbaaf8a09db59f5eea93bf395fb7fb5b7f656d337f4e3d05ef390bd6adf5e"
+        },
+        {
+          "id": "NP-ES:R4:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "4b2e419062668e4a75a1074bb755b8ef5c02d66761bf876b4c2fd758b0409544"
+        },
+        {
+          "id": "NP-ES:B4:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "019a2461e73551ade0489183d7b864190a17085034f3614fcf22877b5fd173ab"
+        },
+        {
+          "id": "NP-ES:R5:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "29451b8dba6eeef51f940977ba9ed925512bbabd8ddf15ec61ae8acde5e74898"
+        },
+        {
+          "id": "NP-ES:B5:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "15e3514af17856dc3885c78e31d8129a0ab87696524f42612fda9f3cfbd84b68"
+        },
+        {
+          "id": "NP-ES:R6:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "47475ddfc7fad6e2d64c73f572dc7426031f7dbaa57d2a666fa2ba19688a6312"
+        },
+        {
+          "id": "NP-ES:B6:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "51542e3c1f353a840ff041cd36cc3bc5b7bb1b99790252daec22e819c0bfa7df"
+        },
+        {
+          "id": "NP-WINDOW-ES-R8_EXPIRE:R7:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "d2e45d2398a4d494a18706b9e051e14b2cc1296df4544f55a742aa2bff415b97"
+        },
+        {
+          "id": "NP-WINDOW-ES-R8_EXPIRE:B7:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "8762fe9cbd0f630dd9b0ef7ce4bdbe8a08bd09a84da533ee5a008e1578bc8819"
+        },
+        {
+          "id": "NP-WINDOW-ES-R8_EXPIRE:R8:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "bb4683d9a458ca74319ba0709744ecbba4f4fcdcb4e984b0aa97d54ad2c686cc"
+        },
+        {
+          "id": "NP-WINDOW-ES-R8_EXPIRE:B8:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "f845c704fbf61243de77d9d887ab57241835b69e9de4f76ed31c7996b96a9c96"
+        }
+      ]
+    },
+    {
+      "branch": "ES",
+      "variant": "R7_CARRIER_MOVE",
+      "requests": 14,
+      "checks": [
+        {
+          "id": "NP-ES:R1:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "34f080df29b5e221ecf5b98ae885529b20e7ca25650d7b73591d1c6560ccf371"
+        },
+        {
+          "id": "NP-ES:B1:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "05227c7451ca7c6b83aadcbcaedabdb99a0037e5a5dee9c3dd3d6a2cb3ec4e26"
+        },
+        {
+          "id": "NP-ES:R2:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "35c2153641e0dd256d21597aa90ead028e54cd6fc939d75a9812a0aae0f11306"
+        },
+        {
+          "id": "NP-ES:B2:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "379a65efe8c763dca820374c5bcd3aac552022ccc5919ebff269b984067e291b"
+        },
+        {
+          "id": "NP-ES:R3:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "c83a7c5f34bb0fdf5017bd47687690a45b169545bc71b44e58746827c7df4520"
+        },
+        {
+          "id": "NP-ES:B3:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "c86cbaaf8a09db59f5eea93bf395fb7fb5b7f656d337f4e3d05ef390bd6adf5e"
+        },
+        {
+          "id": "NP-ES:R4:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "4b2e419062668e4a75a1074bb755b8ef5c02d66761bf876b4c2fd758b0409544"
+        },
+        {
+          "id": "NP-ES:B4:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "019a2461e73551ade0489183d7b864190a17085034f3614fcf22877b5fd173ab"
+        },
+        {
+          "id": "NP-ES:R5:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "29451b8dba6eeef51f940977ba9ed925512bbabd8ddf15ec61ae8acde5e74898"
+        },
+        {
+          "id": "NP-ES:B5:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "15e3514af17856dc3885c78e31d8129a0ab87696524f42612fda9f3cfbd84b68"
+        },
+        {
+          "id": "NP-ES:R6:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "47475ddfc7fad6e2d64c73f572dc7426031f7dbaa57d2a666fa2ba19688a6312"
+        },
+        {
+          "id": "NP-ES:B6:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "51542e3c1f353a840ff041cd36cc3bc5b7bb1b99790252daec22e819c0bfa7df"
+        },
+        {
+          "id": "NP-WINDOW-ES-R7_CARRIER_MOVE:R7:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "d2502f1c2e2a913a3dbf977aceebf8b7a672a96016534e3faad5152dc8a81ce2"
+        },
+        {
+          "id": "NP-WINDOW-ES-R7_CARRIER_MOVE:B7:main",
+          "authorityPlayerViewsAndRngEqual": true,
+          "normalizedAuthoritySha256": "b856630e2527b5e2e3ac54acfdf867af1a76f428bb73a2a443b062542080771c"
+        }
+      ]
+    }
+  ],
+  "rawBodiesComparedInMemoryOnly": true,
+  "rawAuthoritySecretEventBodiesPublished": false,
+  "productionRandomSampling": false,
+  "independentQA": false
+}

@@ -10,6 +10,7 @@ import { isGeneralInCheck } from '../../src/rules.ts';
 import type { AssassinationCommand, GameState, HeroAbilityCommand, MoveCommand, RandomInt, Side } from '../../src/types.ts';
 
 export type NpBranch = 'AS' | 'AP' | 'ES';
+export type NpWindowVariant = 'R8_USE' | 'R8_EXPIRE' | 'R7_CARRIER_MOVE';
 export const ORIGINAL_NP32_SOURCE = Object.freeze({
   handoffCommit:'f631bad61b11f06070f5631a8a0ded7ea660bab1', engineParent:'570fdf189867ec93355f0eca66362deb72cca53c',
   contractSha256:'be1a9aff0b0f9e3f088afd0ee99c19a140f4690208cedf93f3fe39c3c61c945f',
@@ -24,6 +25,19 @@ let serial=0;
  * Accepts neither room/state JSON nor player-selected RNG callbacks. */
 export function createStandardNp32Session(contractText:string,rngText:string,guardsText:string,branch:NpBranch,
   probe: {failDescent?:boolean;withoutObservation?:boolean} = {}) {
+  return createSession(contractText,rngText,guardsText,branch,probe);
+}
+
+/** Declared NG12 extensions, never the original R7 assassination tape. No caller
+ * supplied state, moves, RNG or declarations enter this room-owning driver. */
+export function createStandardNp32WindowSession(contractText:string,rngText:string,guardsText:string,branch:'AP'|'ES',
+  variant:NpWindowVariant,probe:{withoutObservation?:boolean}={}) {
+  if (!['AP','ES'].includes(branch) || !['R8_USE','R8_EXPIRE','R7_CARRIER_MOVE'].includes(variant)) fail('window variant/branch mismatch');
+  return createSession(contractText,rngText,guardsText,branch,probe,variant);
+}
+
+function createSession(contractText:string,rngText:string,guardsText:string,branch:NpBranch,
+  probe:{failDescent?:boolean;withoutObservation?:boolean},variant?:NpWindowVariant) {
   if(hash(contractText)!==ORIGINAL_NP32_SOURCE.contractSha256 || hash(rngText)!==ORIGINAL_NP32_SOURCE.rngSha256 ||
     hash(guardsText)!==ORIGINAL_NP32_SOURCE.guardsSha256 || !['AS','AP','ES'].includes(branch)) fail('immutable source/branch mismatch');
   const contract=JSON.parse(contractText), rngContract=JSON.parse(rngText), guardMatrix=JSON.parse(guardsText);
@@ -70,19 +84,41 @@ export function createStandardNp32Session(contractText:string,rngText:string,gua
   invoke(()=>advanceRemoteRoomTime(room,random,10000));
   if(room!.phase!=='playing' || room!.game!.state.turn!=='red') fail('natural preparation/start incomplete');
   const initial=structuredClone(room!);
-  const declarations=[...contract.full_prefix.filter((x:any)=>x.type!=='H21_invincible_descent'),...contract.branches[branch].actions].map((x:any)=>{
+  const originalDeclarations=[...contract.full_prefix.filter((x:any)=>x.type!=='H21_invincible_descent'),...contract.branches[branch].actions].map((x:any)=>{
     const turn=(x.formal_turn as string).replace('.action','');
     return {id:`NP-${branch}:${turn}:main`,turn,actor:turn.startsWith('R')?'red':'black',...x};
   });
+  const extra=(turn:string,type:string,from:number[],to:number[],suffix='main')=>({
+    id:`NP-WINDOW-${branch}-${variant}:${turn}:${suffix}`,turn,actor:turn.startsWith('R')?'red':'black',
+    formal_turn:turn,type,from,to,provenance:'DECLARED_EXTENSION_NOT_ORIGINAL_PREFIX',
+  });
+  const declarations=variant ? [
+    ...originalDeclarations.slice(0,-1), // Original inputs through B6; replace no source bytes.
+    extra('R7',variant==='R7_CARRIER_MOVE'?'H02_later_carrier_move':'normal_move',variant==='R7_CARRIER_MOVE'?[0,4]:[2,5],variant==='R7_CARRIER_MOVE'?[0,5]:[2,4]),
+    extra('B7','normal_move',[8,4],[8,5]),
+    ...(variant==='R7_CARRIER_MOVE'?[]:[
+      extra('R8',variant==='R8_USE'?'H02_later_assassination_with_M04_path':'normal_move',variant==='R8_USE'?[0,4]:[4,6],variant==='R8_USE'?[0,2]:[4,5]),
+      extra('B8','normal_move',[8,5],[7,5]),
+    ]),
+  ] : originalDeclarations;
+  const probes=variant ? [
+    extra('R8','H02_later_assassination_with_M04_path',[0,4],[0,1],'empty-target'),
+    extra('R8','H02_later_assassination_with_M04_path',[0,4],[4,0],'king-target'),
+    extra('R8','H02_later_assassination_with_M04_path',[8,9],[8,8],'other-carrier'),
+    extra(variant==='R7_CARRIER_MOVE'?'R8':'R9','H02_later_assassination_with_M04_path',variant==='R8_USE'&&branch==='AP'?[0,2]:variant==='R7_CARRIER_MOVE'?[0,5]:[0,4],variant==='R8_USE'&&branch==='AP'?[0,0]:[0,2],'spent-opportunity'),
+  ] : [];
   const index=new Map(declarations.map((x:any)=>[x.id,x]));
+  for(const p of probes)index.set(p.id,p);
   const acceptedCommands=new Map<string,MoveCommand|HeroAbilityCommand|AssassinationCommand>();let requestCount=0;
   const views=()=>({public:publicRemoteRoom(room!),red:playerRoomView(room!,players.red),black:playerRoomView(room!,players.black)});
   return {
-    binding:Object.freeze({...ORIGINAL_NP32_SOURCE,branch,tupleId:'STD-NP32-AS-AP-ES',roomId,players:Object.freeze({...players})}),
+    binding:Object.freeze({...ORIGINAL_NP32_SOURCE,branch,tupleId:'STD-NP32-AS-AP-ES',roomId,players:Object.freeze({...players}),
+      ...(variant?{windowVariant:variant,evidenceKind:'DECLARED_NATURAL_EXTENSION_NOT_ORIGINAL_AS_AP_ES_PREFIX' as const}: {})}),
     initial, declarations:structuredClone(declarations), branchGuard:structuredClone(branchGuard),
+    ...(variant?{probes:structuredClone(probes)}:{}),
     snapshot:()=>structuredClone(room!), draws:()=>structuredClone(draws), views,
     step(id:string,options:{playerId?:string;expectedRevision?:number;now?:number}={}){
-      const d=index.get(id) as any;if(!d)fail('request absent from original NP32 source');
+      const d=index.get(id) as any;if(!d)fail('request absent from original NP32 source or fixed window plan');
       const before=structuredClone(room!), current=room!, actor=d.actor as Side;
       const now=options.now??11000+requestCount++*1000, playerId=options.playerId??players[actor];
       const common={actionId:roomId+':'+id,expectedRevision:options.expectedRevision??current.game!.state.revision};
@@ -96,7 +132,7 @@ export function createStandardNp32Session(contractText:string,rngText:string,gua
         if(!piece)fail('original request source no longer present');
         const move={...common,pieceId:piece.id,from:{x:from[0],y:from[1]},to:{x:to[0],y:to[1]}};
         if(d.type==='normal_move'){kind='move';command=move;}
-        else {kind='assassination';command={...move,kind:'assassination',...(d.type==='H02_later_assassination_with_M04_path'?{useStrongStrike:true}:{source:'hero' as const})};}
+        else {kind='assassination';command={...move,kind:'assassination',...(d.type==='H02_later_assassination_with_M04_path'?{useStrongStrike:true}:d.type==='H02_later_carrier_move'?{}:{source:'hero' as const})};}
       }
       try {
         let duplicate=false;
