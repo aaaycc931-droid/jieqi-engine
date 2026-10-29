@@ -1,0 +1,103 @@
+{
+  "schema": "lezi.standard_np32.window_source_audit.v1",
+  "source_handoff": "96e78d142fe15fac87289a704f6aba89861da18d",
+  "engine_parent": "1bda5bc9f7840d0d601a85fb0faeda842753a199",
+  "actual_read_scope": [
+    {
+      "path": "worklines/standard/rules/shared/02_CURRENT_HEROES.md",
+      "git_blob_sha": "fad0dcf16e35014cb64ca14ee14d30a8616049a3",
+      "sha256": "207a29f3198907989101dc107d26169c6646ebd68b5870c6b20d4fee0a126f74"
+    },
+    {
+      "path": "worklines/standard/rules/shared/03_CURRENT_MUTATIONS.md",
+      "git_blob_sha": "f1355ee129febb3a39caec4fefca73c9687bae9b",
+      "sha256": "2a214aed640a1d6c3fe91f835447f38d5bd7f933783ab24632a7763def9c99fa"
+    },
+    {
+      "path": "worklines/standard/specs/NP_H02_M04_H21_AS_AP_ES_CONTRACT_20261020.json",
+      "git_blob_sha": "4fb70b4d29a9b077ce799e4c00375982d1f7a066",
+      "sha256": "be1a9aff0b0f9e3f088afd0ee99c19a140f4690208cedf93f3fe39c3c61c945f"
+    },
+    {
+      "path": "worklines/standard/rules/confirmed/H02_M04_ASSASSINATION_GEOMETRY_CONFIRMATION_20261017.json",
+      "git_blob_sha": "59d5268e1dff3b79747cabb72b6b444ce481b0c0",
+      "sha256": "365368bf1d6204e83fcdce8939fbee9048f85bf4a1f4a7340d23985c866ece67"
+    },
+    {
+      "path": "worklines/standard/rules/confirmed/H02_M04_PATH_DRAGON_SCALE_CONTINUATION_CONFIRMATION_20261018.json",
+      "git_blob_sha": "2d8a3094005f17a87f26d38a16a3bde73e0c9495",
+      "sha256": "e783a91e14c6c281df255a532f474c369258004858f5b257b8ca536edea999c8"
+    },
+    {
+      "path": "worklines/standard/rules/confirmed/H02_M04_ACTIVATION_ENDPOINT_DRAGON_SCALE_CONFIRMATION_20261019.json",
+      "git_blob_sha": "376361b461387f5e9fdf62657575e210e53eabf4",
+      "sha256": "5e930601062a770771bd6eb6d196f2faabaf57c3f7aef9357f45b08584480230"
+    },
+    {
+      "engine_fixture": "RNG_CONTRACT.json",
+      "sha256": "99c58b51bc473cb58793b2ea7f3e5481e27a24608522d9d1da71a579a4ad0e55"
+    },
+    {
+      "engine_fixture": "OBSERVATION_GUARD_MATRIX.json",
+      "sha256": "91fb32892405ca7ecbe74d2666707dc50060302fb2f3947e2f1fb41f4bb34ae5"
+    }
+  ],
+  "H02_body_scope": "H02 original source and 2026-10-17/18/19 source confirmations; NG12 in unchanged original NP contract and observation guards",
+  "window_contract": {
+    "activation": "R6 successfully completed",
+    "first_subsequent_own_turn": "R7",
+    "second_subsequent_own_turn": "R8",
+    "expire": "after unused R8 formal settlement; enemy B6/B7 do not decrement owner windows",
+    "carrier_move": "using carrier without assassination ends source on its action"
+  },
+  "source_guard_note": "Original NG12 label includes historical R7 wording; use unchanged H02 two-subsequent-owner-turn rule and actual activation at R6. Do not rewrite historical input or infer expiry from label alone.",
+  "derived_variants": {
+    "branches": [
+      "AP",
+      "ES"
+    ],
+    "variants": [
+      "R8_USE",
+      "R8_EXPIRE",
+      "R7_CARRIER_MOVE"
+    ],
+    "retained_original_requests_per_variant": 12,
+    "derivation": "Retain original real room/selection/RPS/M04/tape and commands through B6, declare new R7 onward, no manual state injection. Original AS11/AP13/ES13 untouched."
+  },
+  "actual_validation": {
+    "new_tests": 27,
+    "focused_tests": 66,
+    "related_files": 54,
+    "related_tests": 848,
+    "failures": 0,
+    "original_parent_request_pairs": 37,
+    "observation_request_pairs": 92,
+    "six_sequence_main_requests": 92,
+    "canonical_duplicates": 16,
+    "canonical_rejected_probes": 18
+  },
+  "game_source_files_changed": 0,
+  "formal_ordinary_acceptance": false,
+  "all_NG12_acceptance": false,
+  "independent_QA": false,
+  "not_run": [
+    "full_TypeScript_check",
+    "UI_build_device_Bluetooth",
+    "complete_product_mode_acceptance"
+  ],
+  "open": [
+    "ordinary_NG11",
+    "covered_sources",
+    "tri_state_consumer_migration",
+    "HC64_formal_acceptance",
+    "exact56_phase_view_client_slots"
+  ],
+  "protected": {
+    "rules": true,
+    "three_worklines": true,
+    "hero_designs": true,
+    "UI": true,
+    "scoring": "frozen",
+    "NET": "paused"
+  }
+}
