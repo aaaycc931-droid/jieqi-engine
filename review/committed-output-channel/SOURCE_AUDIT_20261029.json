@@ -1,0 +1,94 @@
+{
+  "schema": "lezi.main.committed_output.source_audit.v1",
+  "source_handoff_commit": "825dcb42aab686096e3a7111b9e4ac7c72f1d9b9",
+  "engine_parent": "760caf57d454af0db3be92d5b52ffc3cc9078d06",
+  "actual_receiver_source_scopes": [
+    {
+      "workline": "half_chaos",
+      "path": "worklines/half_chaos/HC54_ROOM_CLIENT_OUTPUT_CALLER_AUDIT_20261029.json",
+      "git_blob_sha": "f4fe6bec578578ec800e76fbecd9636831a4c119",
+      "main_read_scope": "complete findings/owner_requests/acceptance boundary; selected r53/r54 return objects; source-only summary, no independent device QA"
+    },
+    {
+      "workline": "chaos",
+      "path": "worklines/chaos/CH_OUTPUT_CHANNEL_TIMEOUT_REJECTION_TRIAGE_20261029.json",
+      "git_blob_sha": "ed35f009df4b0345aab58e5a22a4899ebe5b0a3b",
+      "main_read_scope": "complete source-qualified seed476 H15/H11 urgent probe and private-pair oracle; adopted as reproduction plan"
+    },
+    {
+      "workline": "standard",
+      "path": "worklines/standard/reviews/STD_PR18_R8_WINDOW_RECEIVER_REVIEW_20261029.md",
+      "git_blob_sha": "6e72102fb61c1fd385cda10bb856c85d1072f8ce",
+      "main_read_scope": "complete PR18 receiver review, selected current receipt objects; separate observability map read only as return summary, full map not adopted"
+    }
+  ],
+  "adopted_technical_inputs": [
+    "HC54 actual committed output, four IN_CHECK, dedup ACK and mode-gate limits",
+    "CH urgent A expiry/rejection stale-peer hypothesis and original seed476 private pair",
+    "STD bounded PR18 receipt and internal H02 carrier command route caution; full observability map not newly adopted"
+  ],
+  "confirmed_defect": {
+    "source": "CH-CHANNEL-01-A-EXPIRE-REJECT-NO-PUSH",
+    "environment": "actual BluetoothHostRoom plus actual production WebView channel functions; recording native/renderer endpoints",
+    "original_seed": 476,
+    "recruitment_seeds": [
+      0,
+      1
+    ],
+    "actual_inherited_A_deadline": 65000,
+    "deadline_provenance": "red1 executed at5000 starts black clock, +60000; black1 at10000 retains it. Do not copy separate H11 example70000.",
+    "parent_at_or_after_deadline": "authority red/noA, error-only output, applied view still black/A",
+    "current": "same authority/events/RNG, error message then current sanitized snapshot; both recording sinks red/noA",
+    "product_scope": "publish latest committed state after an action attempt, not intermediate atomic state; existing v2 payload unchanged",
+    "separate_failure": "Synchronous publication/encoding or throwing endpoint failure no longer recast as rule refusal. Actual native IO catches IOException and emits transport-error; no device failure test claimed."
+  },
+  "original_half_server_evidence": {
+    "requests": 110,
+    "public_json": 110,
+    "player_json": 220,
+    "normal_action_messages": 100,
+    "source_in_check_refusals": 4,
+    "refused_ids": [
+      "MA-DS01-02:R4:pre-1",
+      "MA-DS01-02:R4:pre-2",
+      "MA-DS03:R4:pre-1",
+      "MA-DS04:B3:pre-1"
+    ],
+    "new_exact_payload_server_retries": 106,
+    "new_same_payload_refusal_controls": 4,
+    "derived_probes_are_original110": false,
+    "client_error_receipts_observed": 0
+  },
+  "caller_limits": [
+    "BluetoothHostRoom only admits jieqi; half_chaos/xiangqi MODE_TRANSPORT_PENDING retained",
+    "Class returns views without duplicate ACK; errors serialize message only in actual web path, no code invented",
+    "views()/handle advance time; caller output is not passive mid-stage observation",
+    "Native bridge/receiver functions source reviewed; real Android/radio/DOM not executed",
+    "Actual published online transport remains disabled in app source; no fabricated WebSocket/cloud adapter"
+  ],
+  "validation": {
+    "new_tests": 20,
+    "related_files": 58,
+    "related_passed": 895,
+    "failed": 0,
+    "separate_web_static_files": 2,
+    "separate_web_static_passed": 50,
+    "unchanged_binary_asset_tests_NOT_RUN": 4,
+    "production_code_modules_compiled": 37,
+    "full_asset_build": false,
+    "full_TypeScript_check": false,
+    "independent_QA": false
+  },
+  "boundary": {
+    "complete_original56_discharged": 0,
+    "formal_original64_accepted": 0,
+    "real_device_delivery": false,
+    "gameplay_delta": 0,
+    "protocol_schema_delta": 0,
+    "UI_assets_changed": false,
+    "mode_gate_changed": false,
+    "scoring": "frozen",
+    "NET": "paused"
+  },
+  "private_raw_sha256": "df0d02bcba9282dd5e19fa435ecad280d68d9d5d9ccf05b062946ba7cd90d606"
+}

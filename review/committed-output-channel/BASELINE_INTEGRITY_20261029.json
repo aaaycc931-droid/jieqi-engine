@@ -1,0 +1,770 @@
+{
+  "baseline_commit": "760caf57d454af0db3be92d5b52ffc3cc9078d06",
+  "verified_local_files": 191,
+  "verified": [
+    {
+      "path": "android/app/src/main/java/com/jieqi/bluetooth/BluetoothGameSession.java",
+      "sha": "067f11abbccbc694901231458a1ba1c447c587b4"
+    },
+    {
+      "path": "android/app/src/main/java/com/jieqi/bluetooth/GameWebBridge.java",
+      "sha": "dacdffd64365f1ef4859c0f4a24293a2eb6dc86c"
+    },
+    {
+      "path": "android/app/src/main/java/com/jieqi/bluetooth/MainActivity.java",
+      "sha": "7173bec7fdd07bd25671a36e74e4cb7fc1368024"
+    },
+    {
+      "path": "android/app/src/main/res/values/styles.xml",
+      "sha": "1f57652006b3df35cba29b3627931f19e24e5e8e"
+    },
+    {
+      "path": "docs/HALF_CHAOS_EXACT_STAGE_VIEWS_20261029.md",
+      "sha": "948cce51f49184c1b803bf7257fb35ae81a839cb"
+    },
+    {
+      "path": "docs/PUBLIC_PATH_QUALIFICATION_RESEARCH_20261028.md",
+      "sha": "1add595fb2ae81fd3a5637ac11875867a7c68b25"
+    },
+    {
+      "path": "docs/PUBLIC_PATH_QUERY_RESEARCH_20261028.md",
+      "sha": "0a312a3127be33acdd6875f8ed93a302c02b94db"
+    },
+    {
+      "path": "docs/SHARED_RUNTIME_RESEARCH_20261027.md",
+      "sha": "37d0b7977e627ce1a6cc013e684a9b6dbd39e6be"
+    },
+    {
+      "path": "docs/STANDARD_NP32_RESEARCH_20261028.md",
+      "sha": "a848962382003fd5f667dd8488b2025ec54d6cba"
+    },
+    {
+      "path": "docs/STANDARD_NP32_WINDOW_RESEARCH_20261029.md",
+      "sha": "e14fea8f6baf3ef0d2b4f54af6e25ccd16f1d617"
+    },
+    {
+      "path": "package.json",
+      "sha": "34b26233ab157051caeae779771ddc0fceb24465"
+    },
+    {
+      "path": "review/half-chaos-stage-views/BASELINE_INTEGRITY_20261029.json",
+      "sha": "84ade4fb628fe15a0f7cbc7e74c8904e92bafac8"
+    },
+    {
+      "path": "review/half-chaos-stage-views/COMMAND_20261029.json",
+      "sha": "80ef9be6409c264041584f5e0a0d6d8845b7db35"
+    },
+    {
+      "path": "review/half-chaos-stage-views/DIFFERENTIAL_20261029.json",
+      "sha": "0da54468fd603f0ab55950751f182927228f562a"
+    },
+    {
+      "path": "review/half-chaos-stage-views/OWNER_ARTIFACT_20261029.json",
+      "sha": "06530d1ebf0ee0c74353b7a143853edeb0daa99a"
+    },
+    {
+      "path": "review/half-chaos-stage-views/RESULTS_20261029.json",
+      "sha": "a3ec52fd163f2fd43688e84ea83996e74247abdb"
+    },
+    {
+      "path": "review/half-chaos-stage-views/SOURCE_AUDIT_20261029.json",
+      "sha": "7d492eb72c2de6ff3203c78980c70cb3ef185ac1"
+    },
+    {
+      "path": "review/half-chaos-stage-views/related-final-20261029.tap",
+      "sha": "922689acbac9166ef76e1be66b8ecaf5565d4234"
+    },
+    {
+      "path": "review/public-path-qualification/BASELINE_INTEGRITY_20261028.json",
+      "sha": "ddf74656701d140876cdd062112cc5678e75fcf5"
+    },
+    {
+      "path": "review/public-path-qualification/COMMAND_20261028.json",
+      "sha": "433d9419fda0691f0623388218a9f528a8a59836"
+    },
+    {
+      "path": "review/public-path-qualification/DIFFERENTIAL_20261028.json",
+      "sha": "29ddd0661bf9071c6bcc4774f6318e2738447f26"
+    },
+    {
+      "path": "review/public-path-qualification/RESULTS_20261028.json",
+      "sha": "ca0082e7c19af13932e849828df46323786a2641"
+    },
+    {
+      "path": "review/public-path-qualification/SOURCE_AUDIT_20261028.json",
+      "sha": "69f38a58adf101c035ad75d41c190ffab9384330"
+    },
+    {
+      "path": "review/public-path-qualification/related-final-20261028.tap",
+      "sha": "c8eb9077da49bb1123594a4d6449c5ea15af4cb4"
+    },
+    {
+      "path": "review/public-path-query/BASELINE_INTEGRITY_20261028.json",
+      "sha": "e27bfd42d184c66c3ebc0409ecb59f3e710f95ac"
+    },
+    {
+      "path": "review/public-path-query/COMMAND_20261028.json",
+      "sha": "cfeb5b67bcbfd3a4e5f0e59d90127eefd570b51b"
+    },
+    {
+      "path": "review/public-path-query/DIFFERENTIAL_20261028.json",
+      "sha": "3ea372b925afd9998cb95e18a83cca8286152313"
+    },
+    {
+      "path": "review/public-path-query/RESULTS_20261028.json",
+      "sha": "1e46a78ee2f98c3420b8a750d7b8f091a10d26b9"
+    },
+    {
+      "path": "review/public-path-query/related-final-20261028.tap",
+      "sha": "b5e2ea5168817d45c97e9648df0a42f1b4f80efe"
+    },
+    {
+      "path": "review/shared-runtime/RESULTS_20261027.json",
+      "sha": "df94903e906ac06bd89b7f3d9b24bb65e09c34cc"
+    },
+    {
+      "path": "review/standard-np32-window/BASELINE_INTEGRITY_20261029.json",
+      "sha": "79e5d73c897b3d12cb5e3ee5168fb2999229a578"
+    },
+    {
+      "path": "review/standard-np32-window/COMMAND_20261029.json",
+      "sha": "20c0c1afa1ed598f865046de07148ce1ad687005"
+    },
+    {
+      "path": "review/standard-np32-window/DIFFERENTIAL_20261029.json",
+      "sha": "e2f146565a23897f70451c16a0207a5df0f81f88"
+    },
+    {
+      "path": "review/standard-np32-window/RESULTS_20261029.json",
+      "sha": "cfa8bb5da1e1f0c0e416cc946d9b3276c88b2d1b"
+    },
+    {
+      "path": "review/standard-np32-window/SOURCE_AUDIT_20261029.json",
+      "sha": "a34acaa275b67522dd13544e67d054493dfc0cdb"
+    },
+    {
+      "path": "review/standard-np32-window/related-final-20261029.tap",
+      "sha": "faea58261b939da48d5a68209faf8919afe23e56"
+    },
+    {
+      "path": "review/standard-np32/COMMAND_20261028.json",
+      "sha": "22396fa77b93b42b36fde298be0dc036eed8efa7"
+    },
+    {
+      "path": "review/standard-np32/RESULTS_20261028.json",
+      "sha": "ff1140fb68529b3908c036d9106fcb58733d0404"
+    },
+    {
+      "path": "review/standard-np32/related-final-20261028.tap",
+      "sha": "b72a32b370a239baad088ed74c0859d9b7ec43b2"
+    },
+    {
+      "path": "scripts/build-web.ts",
+      "sha": "c180950214ac54366b506096cc9ee455ceff4d33"
+    },
+    {
+      "path": "scripts/research/half-chaos-stage-differential.ts",
+      "sha": "4949f83ad11948dc7f9678819c26e200ea407d09"
+    },
+    {
+      "path": "scripts/research/half-chaos-stage-views.ts",
+      "sha": "6d423b5bcfa531bdc0efb98dec290646c1418ff6"
+    },
+    {
+      "path": "scripts/research/original-half-chaos.ts",
+      "sha": "604ef2ce92b92ba8e57cf5670cd81e72fef38d2d"
+    },
+    {
+      "path": "scripts/research/public-path-qualification.ts",
+      "sha": "d70b8490152a8211f4e1c279f76ecde7e67b991b"
+    },
+    {
+      "path": "scripts/research/public-path-query-differential.ts",
+      "sha": "b699aa33fb2a5aed2150daec63a03d21f1a1c4c8"
+    },
+    {
+      "path": "scripts/research/standard-np32-window-differential.ts",
+      "sha": "ef0993372eb065dd8fdb0aea6bf0bdc5b8dcde9c"
+    },
+    {
+      "path": "scripts/research/standard-np32-window.ts",
+      "sha": "08acf27298e790e9e12272fe4313148b57f28d9f"
+    },
+    {
+      "path": "scripts/research/standard-np32.ts",
+      "sha": "9e98f7c119c1d552715363a87341a42a06623c57"
+    },
+    {
+      "path": "scripts/scoring/cluster.ts",
+      "sha": "39d57b5ed84f2ca1ee764d4b8963a5380a157af9"
+    },
+    {
+      "path": "scripts/scoring/fixture-runner.ts",
+      "sha": "d5b49a6d40eca3ffdaf06b7ea3a6e8ae419315d8"
+    },
+    {
+      "path": "scripts/scoring/fixtures/mode-bridge/HC_N01_AUTHORITY_PERMUTATION_WITNESSES.json",
+      "sha": "d355f47fd332109c716076b9b0f95e575bae131d"
+    },
+    {
+      "path": "scripts/scoring/fixtures/mode-bridge/HC_N01_INFORMATION_EQUIVALENCE.json",
+      "sha": "8fb7686cb8ca1847e295ce4f198e28447e3dab9f"
+    },
+    {
+      "path": "scripts/scoring/fixtures/mode-bridge/HC_N01_LEGAL_PREFIXES.json",
+      "sha": "21e30a0cd2295998e5e9306eb0c9ebb49897267d"
+    },
+    {
+      "path": "scripts/scoring/fixtures/mode-bridge/HC_N02_H11_FIELD_ORACLES.json",
+      "sha": "3d7aea6e09ae33ba86742d3f8f6b5af344e08592"
+    },
+    {
+      "path": "scripts/scoring/fixtures/mode-bridge/STD_FX01_STANDARD_OPENING.json",
+      "sha": "dcc5f128b801a66fe46c17f45deb940bc4d8ed4a"
+    },
+    {
+      "path": "scripts/scoring/fixtures/mode-bridge/STD_FX02_LEGAL_PREFIX.json",
+      "sha": "f61a12defba22734123dcf1106f74caaba0f3d89"
+    },
+    {
+      "path": "scripts/scoring/fixtures/mode-bridge/STD_FX14_OUTCOME_CLASSIFICATION.json",
+      "sha": "623ea6c5b54d31efd748fa80fd5ccbf7a628c341"
+    },
+    {
+      "path": "scripts/scoring/fixtures/mode-bridge/STD_H01_H02_H11_SCOPED_PREFIXES.json",
+      "sha": "5865bbc2eac8cd90db4ecaacd37090ed185b35d2"
+    },
+    {
+      "path": "scripts/scoring/fixtures/mode-bridge/STD_INFORMATION_ISOLATION_VECTORS.json",
+      "sha": "4595d3080e3f53085172a924e26808dc16af957c"
+    },
+    {
+      "path": "scripts/scoring/mechanism-evidence.ts",
+      "sha": "e1f0a845b2b5e7bb4ddf6cc7a2a9de8bdefe40b2"
+    },
+    {
+      "path": "scripts/scoring/mode-fixture-loader.ts",
+      "sha": "f6dfb963bfbae035740003955f094824f661aea8"
+    },
+    {
+      "path": "scripts/scoring/mode-qualification-cases.ts",
+      "sha": "7bd3da61155ee87ff7156aeb601a7160e507f555"
+    },
+    {
+      "path": "scripts/scoring/policy-archive.ts",
+      "sha": "2860c0496da3b9cb728226737842d9b83b7ace35"
+    },
+    {
+      "path": "scripts/scoring/policy-observation.ts",
+      "sha": "63cedb68e1e28c0ce120f048d106371a8fd0113d"
+    },
+    {
+      "path": "scripts/scoring/policy-process.ts",
+      "sha": "a12b946f216769e7686a35262dad439060932d7e"
+    },
+    {
+      "path": "scripts/scoring/policy-session.ts",
+      "sha": "f7c402c7860b5bc8c5389b7ee86e95f6a900839e"
+    },
+    {
+      "path": "scripts/scoring/policy-worker.ts",
+      "sha": "e36b9e5e046b2d075d6ff8b139c6128b29d55f0c"
+    },
+    {
+      "path": "scripts/scoring/research-log.ts",
+      "sha": "e972222f746e0ca12537a4e907a6815ebdaae98a"
+    },
+    {
+      "path": "scripts/scoring/run-acceptance.ts",
+      "sha": "85c53a9bda5c24ce057ae0fa4707df8e45dd61c4"
+    },
+    {
+      "path": "scripts/scoring/run-mode-qualification.ts",
+      "sha": "ebe449dc3fdfb2ae94b5839d43ce0148a35a3625"
+    },
+    {
+      "path": "scripts/scoring/run-policy-qualification.ts",
+      "sha": "f954b3e15ceb8f18673b0c7175161baf62d550cf"
+    },
+    {
+      "path": "scripts/scoring/semantic-rng.ts",
+      "sha": "7ae485b581010620453317a3812dfdc8a0157114"
+    },
+    {
+      "path": "scripts/scoring/validate.ts",
+      "sha": "23e73731276abcdc750944d07021a568852504ef"
+    },
+    {
+      "path": "src/bluetooth-host-room.ts",
+      "sha": "80659ebf86c6bfbe678f67cd7aff9f01a8fa151c"
+    },
+    {
+      "path": "src/bluetooth-protocol.ts",
+      "sha": "d3d665f53588d30dc1b6e3a31fd3f300043cd7cd"
+    },
+    {
+      "path": "src/errors.ts",
+      "sha": "4abef6f0c9296cad333b10aa5c9e24b56c6f624f"
+    },
+    {
+      "path": "src/game.ts",
+      "sha": "fe86e6adce83aca4171d38c75321bf3e178a4245"
+    },
+    {
+      "path": "src/ghosts.ts",
+      "sha": "a24ef4bf971cb89825c442e9f51e29e2359f8ec1"
+    },
+    {
+      "path": "src/hero-actions.ts",
+      "sha": "2de406812dd1737ff0b861655cf6dcce1a474fb7"
+    },
+    {
+      "path": "src/hero-brawl.ts",
+      "sha": "a6b583b4bc563f24dbda710c5d63eae1df2bba6d"
+    },
+    {
+      "path": "src/hero-children.ts",
+      "sha": "2c5ef5b0afdf7975f3a71d1c94ba2035ed912416"
+    },
+    {
+      "path": "src/hero-descent.ts",
+      "sha": "fc3146acb9476f6b6537fc64f4055cc46444c0f8"
+    },
+    {
+      "path": "src/hero-forms.ts",
+      "sha": "e42cb0854bd71dfaf4004268ec79e11c115c692d"
+    },
+    {
+      "path": "src/hero-progress.ts",
+      "sha": "4a2fa1742283cf14781b51f6e43169aa37ec856e"
+    },
+    {
+      "path": "src/hero-river.ts",
+      "sha": "9954e51d12f7d2c218e70cc42a18988a787ffa2c"
+    },
+    {
+      "path": "src/hero-shuffle.ts",
+      "sha": "316973714c38e642d68f188ec978fd9c46fb754d"
+    },
+    {
+      "path": "src/heroes.ts",
+      "sha": "0958d1e16103de4b808a96d4fb825bf446a45e59"
+    },
+    {
+      "path": "src/index.ts",
+      "sha": "2becff16faa802aec425479d69ee3730542b28d1"
+    },
+    {
+      "path": "src/mechanism-observer.ts",
+      "sha": "0d185ad1c580e8e4654523170b1a4702dddd6299"
+    },
+    {
+      "path": "src/modes.ts",
+      "sha": "cb05c2fcfb0c617b6310e08ef8593e1d12ad95cc"
+    },
+    {
+      "path": "src/mutations.ts",
+      "sha": "a433d6f562686a3e654dd9d003db562a4e30a424"
+    },
+    {
+      "path": "src/proposal-review.ts",
+      "sha": "a2d8a463b556bf26183383a9fdbc6fa12a45013d"
+    },
+    {
+      "path": "src/public-path-qualification.ts",
+      "sha": "a1b1841d577b1b1403fe4a70c53294a14471a50b"
+    },
+    {
+      "path": "src/remote-room.ts",
+      "sha": "37194aac340d8fed5d6ac02e0001bf4bfd65784b"
+    },
+    {
+      "path": "src/research-source-context.ts",
+      "sha": "b7bf2f759f4422729abec1eb84bbbc6c956d6858"
+    },
+    {
+      "path": "src/room.ts",
+      "sha": "687ce619fb798224e0b80c593c955a25b38b32f0"
+    },
+    {
+      "path": "src/rps.ts",
+      "sha": "ce158c5252b4ce4fd8a3b57815f052d276384666"
+    },
+    {
+      "path": "src/rules.ts",
+      "sha": "959eb04f6d4bd6a0f9a5ca480b75eb5bd93fa8e0"
+    },
+    {
+      "path": "src/settlement-context.ts",
+      "sha": "58052bee1c08392f887fbf1e7f1ec7501c2d8cf4"
+    },
+    {
+      "path": "src/settlement.ts",
+      "sha": "6655e6c0a3b319992bc23e0d216a502bf252702d"
+    },
+    {
+      "path": "src/setup.ts",
+      "sha": "15df513e8204d48464c097453c7bf9b83748c9f5"
+    },
+    {
+      "path": "src/sha256.ts",
+      "sha": "d9c0326f753dc5ef3fcf3a021e5b9258c0f068e8"
+    },
+    {
+      "path": "src/shan-board.ts",
+      "sha": "0a3d0767f3040a84fef643762cc58b1e5d0dacdc"
+    },
+    {
+      "path": "src/shan-core.ts",
+      "sha": "9c7a82ff1ef04334fe3a0e29a0b25dfe885598fc"
+    },
+    {
+      "path": "src/slots.ts",
+      "sha": "84971b8e5f52f6ea1e20ee4ddbe2e4c8b736f911"
+    },
+    {
+      "path": "src/spaces.ts",
+      "sha": "cc4db990fe5683a44b6a95ba50620370a242f49d"
+    },
+    {
+      "path": "src/turns.ts",
+      "sha": "325eea5b12ad36ec7b1fc8bdd50c1a56833f0612"
+    },
+    {
+      "path": "src/types.ts",
+      "sha": "75e987b74186440d3d2b2f20addb43a5fcbf43e5"
+    },
+    {
+      "path": "tests/action-turn-contracts.test.ts",
+      "sha": "057fa40ca20887cdd0717536872b9ef4be7d800b"
+    },
+    {
+      "path": "tests/android-shell.test.ts",
+      "sha": "166bd0d3b1602f5e5c7801ed715ca5932183242f"
+    },
+    {
+      "path": "tests/as-scale-source.test.ts",
+      "sha": "660878cedcae5fbe0c7beebc8caae89245d3cc12"
+    },
+    {
+      "path": "tests/assassination.test.ts",
+      "sha": "7e5fb5def5d0aa1f71177039ad18a7257cb421bb"
+    },
+    {
+      "path": "tests/bluetooth-disconnect.test.ts",
+      "sha": "3f9229e62b32ebe5831055bc680e7085db46d77c"
+    },
+    {
+      "path": "tests/bluetooth-host-room.test.ts",
+      "sha": "66d09c402ab3f0c9e689bb7dc9e7d5f68a04f950"
+    },
+    {
+      "path": "tests/bluetooth-private-contracts.test.ts",
+      "sha": "22552654313c59a1833d39b97c6b884fb8981e2c"
+    },
+    {
+      "path": "tests/bluetooth-protocol.test.ts",
+      "sha": "b4bbb466f2fc94a3642f0b40314b83ba8fe321de"
+    },
+    {
+      "path": "tests/bomb-target-boundaries.test.ts",
+      "sha": "e7432180d7bf66f1daacdd93195e1b5dcf878535"
+    },
+    {
+      "path": "tests/check-end-network.test.ts",
+      "sha": "dcacd114b2ed56a723b0f53c68cd68c561b264f0"
+    },
+    {
+      "path": "tests/confirmed-runtime.test.ts",
+      "sha": "10593dcd87f80a2722c4e52d38359660e9959df3"
+    },
+    {
+      "path": "tests/cross-rule-contracts.test.ts",
+      "sha": "cd49065c824f05ae24865ecfb8a0462512bad917"
+    },
+    {
+      "path": "tests/current-control.test.ts",
+      "sha": "f065f5ebee0bce27061c9b96bad73bad46007b7c"
+    },
+    {
+      "path": "tests/dark-identity.test.ts",
+      "sha": "baefff4c6aefa75e37bca9acc4ae77ddd9802e31"
+    },
+    {
+      "path": "tests/design-gap-runtime.test.ts",
+      "sha": "bd2a0e336fbf6542fc34caf17b0cd4b7ef214921"
+    },
+    {
+      "path": "tests/destruction-batch.test.ts",
+      "sha": "214c0ccc661eb3acce50a477f0b0ec3a73b2e639"
+    },
+    {
+      "path": "tests/exception-contracts.test.ts",
+      "sha": "6d96ee12464a3dfbf1bcd34bbbc48809483c2b26"
+    },
+    {
+      "path": "tests/fixtures/half-chaos-original/HC51_PAIR_VIEW_CONTRACT.json",
+      "sha": "22abe23c22ab0032aa014e6a4afbf6f3f128b66f"
+    },
+    {
+      "path": "tests/fixtures/half-chaos-original/INITIALIZATION_WITNESS_DATA.json",
+      "sha": "83b1e80eea254d17d3c3f9fee1e978c4aa284965"
+    },
+    {
+      "path": "tests/fixtures/half-chaos-original/REPLAY_ACTION_DATA.json",
+      "sha": "d8453df0104ffdef95fd22f705cf355d53b8d027"
+    },
+    {
+      "path": "tests/fixtures/scoring/ACCEPTANCE_CRITERIA.json",
+      "sha": "9db648c035853eb2663711fa6afd15beb3205a49"
+    },
+    {
+      "path": "tests/fixtures/scoring/CONFIRMATION_H11_B_COUNT.json",
+      "sha": "8ba28677b76f6dcd6a4b368592133e9b0ad044b6"
+    },
+    {
+      "path": "tests/fixtures/scoring/CONFIRMATION_HC_H11_B_COUNT_CLOCK.json",
+      "sha": "218e95d56994f944343bde1aed0d5792b744cc4c"
+    },
+    {
+      "path": "tests/fixtures/scoring/FIXTURE_SPECIFICATIONS.json",
+      "sha": "6e6aee99bb2e32e10a733a62321b5e9f4698caa3"
+    },
+    {
+      "path": "tests/fixtures/scoring/INITIAL_LAYOUT.json",
+      "sha": "ab2e2e6edf936309693ed523ae8cec89b2da4471"
+    },
+    {
+      "path": "tests/fixtures/scoring/LOG_FIELD_PLAN.json",
+      "sha": "9735cbcb81768bd82d77c66750a04d8bfa4a6c69"
+    },
+    {
+      "path": "tests/fixtures/scoring/RESET_REALIZATION.json",
+      "sha": "3926fb8596ed92c8b78644fb010621c121ed0bd0"
+    },
+    {
+      "path": "tests/fixtures/scoring/RETURN_CONTRACT.json",
+      "sha": "72024bb07a3f55a6f4c8560fa1be61b06941871c"
+    },
+    {
+      "path": "tests/fixtures/standard-np32/M04_SYMBOLIC_WITNESSES.json",
+      "sha": "b2b43503877bd4db3c29dd450ed14e1fc1f74efc"
+    },
+    {
+      "path": "tests/fixtures/standard-np32/NP_CONTRACT.json",
+      "sha": "4fb70b4d29a9b077ce799e4c00375982d1f7a066"
+    },
+    {
+      "path": "tests/fixtures/standard-np32/OBSERVATION_GUARD_MATRIX.json",
+      "sha": "294c988f9c1cfa78eb76129b93371f819d2ffb1b"
+    },
+    {
+      "path": "tests/fixtures/standard-np32/RNG_CONTRACT.json",
+      "sha": "4be095dd7d9799062b1f23f4fb3421f5231c2133"
+    },
+    {
+      "path": "tests/flight-turn-boundaries.test.ts",
+      "sha": "f256f9b5cb5f2893e43f4230967f58a8105d5b75"
+    },
+    {
+      "path": "tests/flow-contracts.test.ts",
+      "sha": "e0ba1b52cb4cae3a634077b153054978d0b1bc95"
+    },
+    {
+      "path": "tests/flow-fixtures.ts",
+      "sha": "0c49fd82d927f8b140125283ae06283294de0ffb"
+    },
+    {
+      "path": "tests/game-modes.test.ts",
+      "sha": "0f0f12bcf246358ec4a46ecb7dc8bef434c2d5db"
+    },
+    {
+      "path": "tests/ghost-objects.test.ts",
+      "sha": "ed4c0a43599b26d16e0f10c3f6cba6b305e89bd9"
+    },
+    {
+      "path": "tests/h11-a-deadline.test.ts",
+      "sha": "486ccf8406e10fa793ff0869968d28adf343d27f"
+    },
+    {
+      "path": "tests/h15-current-runtime.test.ts",
+      "sha": "70692bf6f4db1cd2cfcd0fe0376ad7c3c02eab7c"
+    },
+    {
+      "path": "tests/h21-rng-evidence.test.ts",
+      "sha": "85e5e396ee5dc2620c6fe2742a54847aabfd4236"
+    },
+    {
+      "path": "tests/half-chaos-stage-views.test.ts",
+      "sha": "1b19693ffe8b40c8203dcbb2c01d79b431bd2d2f"
+    },
+    {
+      "path": "tests/helpers.ts",
+      "sha": "deeca7beb40a0a60b098a5b8899ca125fca72915"
+    },
+    {
+      "path": "tests/hero-child-boundaries.test.ts",
+      "sha": "3fdd46dde8d8498e20998f5fb5859ff831bab04b"
+    },
+    {
+      "path": "tests/hero-cross-settlement.test.ts",
+      "sha": "004f6df600f73525d55004f9a152a6c2922e17b0"
+    },
+    {
+      "path": "tests/hero-descent-atom.test.ts",
+      "sha": "2568b5562fd79335e3f9a97b1c2afb3b7c98ab67"
+    },
+    {
+      "path": "tests/hero-descent-boundaries.test.ts",
+      "sha": "fef0e78d1d9c7715f00165dd439186345fbd0c72"
+    },
+    {
+      "path": "tests/hero-forms.test.ts",
+      "sha": "386a8ec876dde944a6b6c894359066a0bc2a7170"
+    },
+    {
+      "path": "tests/hero-transfer-r5.test.ts",
+      "sha": "665c90274d0a70088e4ed3c7d5e2c3476332fbfe"
+    },
+    {
+      "path": "tests/hourglass-safety-boundaries.test.ts",
+      "sha": "603b32aadfd5e0720bb04223498f6e6eec74608c"
+    },
+    {
+      "path": "tests/main-path-closure.test.ts",
+      "sha": "4a75fb08bab20a0eab47957c5b6086a9803ba3b8"
+    },
+    {
+      "path": "tests/movement.test.ts",
+      "sha": "b1b78a02b03b570a2689bb24580d406b840409e9"
+    },
+    {
+      "path": "tests/mutation-rarity.test.ts",
+      "sha": "d9454ae32691bb9a60a74dfe51e46e451a59739f"
+    },
+    {
+      "path": "tests/mutation.test.ts",
+      "sha": "4eb8934044a2fed61b87e561babbbc6a972b82f0"
+    },
+    {
+      "path": "tests/original-half-chaos-research.test.ts",
+      "sha": "1f8b2f4484e5cf9b9dc2a919052ff4607bd80ca5"
+    },
+    {
+      "path": "tests/proposal-review.test.ts",
+      "sha": "036cd27d524f9af38c00e9c4bb5ed917bcff529d"
+    },
+    {
+      "path": "tests/public-path-qualification.test.ts",
+      "sha": "064c428b65f3cf3d86f1c902f2a3cf0a4b23b7f3"
+    },
+    {
+      "path": "tests/public-path-query-fixtures.ts",
+      "sha": "f9d9debec6f59e0c8a3c7e403f862f77fb88a780"
+    },
+    {
+      "path": "tests/public-path-query.test.ts",
+      "sha": "e4cf96c848881a8f0027be3288bfe4f9aac43912"
+    },
+    {
+      "path": "tests/public-target-contracts.test.ts",
+      "sha": "6862826e230ff40af2d76ac85fc8bbeb319d484d"
+    },
+    {
+      "path": "tests/remote-room.test.ts",
+      "sha": "cf88bbcdfc1c95e7737b43804e7a61dca9f0baf0"
+    },
+    {
+      "path": "tests/research-evidence-validity.test.ts",
+      "sha": "4e2e9d5f77020ede73378832c3b91848b6c504b5"
+    },
+    {
+      "path": "tests/rewind-action-contracts.test.ts",
+      "sha": "25b792a942ae284389355b3e38a756ec5aa8b73a"
+    },
+    {
+      "path": "tests/river-space.test.ts",
+      "sha": "bf011364b10135a97461e2bab8ef60be383d8d3d"
+    },
+    {
+      "path": "tests/scoring-mechanism.test.ts",
+      "sha": "15d8426acb2c0de7fc811c6ee73911dcb4c2990e"
+    },
+    {
+      "path": "tests/scoring-mode-bridge.test.ts",
+      "sha": "06b0eb952d47b771afcb94b0fbdc17718b432e78"
+    },
+    {
+      "path": "tests/scoring-policy-adapter.test.ts",
+      "sha": "4d088e4d73e1e0d07c96855bc0af49a1bd8c0464"
+    },
+    {
+      "path": "tests/setup-rps.test.ts",
+      "sha": "6b21e1e030120ffdd260eca612c14b8881dfc519"
+    },
+    {
+      "path": "tests/shan-board.test.ts",
+      "sha": "5d90c2b1b1cfcd418f826f1a90296a07a0a0cea5"
+    },
+    {
+      "path": "tests/shan-core.test.ts",
+      "sha": "530a20e3dc2a303df87905835f7eee611b110691"
+    },
+    {
+      "path": "tests/snapshot-resource-contracts.test.ts",
+      "sha": "1107e4bf8cfd7f0a1c462bfd873754e780608b96"
+    },
+    {
+      "path": "tests/standard-np32-research.test.ts",
+      "sha": "584ab554e7959298f47249dd69dd7bf59ef4be93"
+    },
+    {
+      "path": "tests/standard-np32-window.test.ts",
+      "sha": "d243ecd399ad9f7a05166dc5c5e6956571c6f27c"
+    },
+    {
+      "path": "tests/time-line-contracts.test.ts",
+      "sha": "22c0058170f00299dd8127e557b22e126f16efb5"
+    },
+    {
+      "path": "tests/warrior.test.ts",
+      "sha": "b6e4d19cb67c2367fd33388237a203ec526eb112"
+    },
+    {
+      "path": "tests/web-gameplay-v4.test.ts",
+      "sha": "186a898716e78c5434c6230b1e66014cf2ad3044"
+    },
+    {
+      "path": "tests/web-layout.test.ts",
+      "sha": "e2d8d7bbd84444f45a687eaa9759c92f5c0991de"
+    },
+    {
+      "path": "tests/web-messages.test.ts",
+      "sha": "1012ba0fff8b6fb648130b0a1c9642cacb76c18c"
+    },
+    {
+      "path": "web/app.ts",
+      "sha": "0ffd81fb73cf8e62eb4faaff4aa1751f9338557e"
+    },
+    {
+      "path": "web/home-menu.css",
+      "sha": "1af5062033f9530cd8563880fb370c167cc93e22"
+    },
+    {
+      "path": "web/index.html",
+      "sha": "3b1aed17785c32399d98a5f3cd0ee123e3e4e1f2"
+    },
+    {
+      "path": "web/messages.ts",
+      "sha": "e1159efe6acc3bedae47da0968f3ff01da4001c6"
+    },
+    {
+      "path": "web/style.css",
+      "sha": "206141a1ce32cc5a88ad37e8448036f3ea3db976"
+    },
+    {
+      "path": "web/ui-refresh.css",
+      "sha": "a8b7da2ce34d2264e9842a5584fb11875d332dae"
+    }
+  ]
+}
