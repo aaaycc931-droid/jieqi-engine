@@ -1,0 +1,54 @@
+{
+  "engineCommit": "7a1dfbc92efa2a54bb85175cc251856bb2cdb4d3",
+  "scope": "actual DOM production-module render after the published synthetic swap fixture, not browser layout",
+  "actualSwapEndpoints": [
+    {
+      "x": 0,
+      "y": 6
+    },
+    {
+      "x": 2,
+      "y": 6
+    }
+  ],
+  "lastMove": {
+    "actionId": "local-mwevk3tf-zye1eq-1fm90a5-2",
+    "pieceId": "a",
+    "actingSide": "red",
+    "from": {
+      "x": 0,
+      "y": 0
+    },
+    "to": {
+      "x": 0,
+      "y": 0
+    },
+    "landed": false,
+    "tier": 2,
+    "keywords": [
+      "占步",
+      "耗费",
+      "移置"
+    ],
+    "countsAsFormalTurn": true,
+    "classification": {
+      "tier": 2,
+      "keywords": [
+        "占步",
+        "耗费",
+        "移置"
+      ],
+      "source": "hero",
+      "opportunity": "main",
+      "countsAsFormalTurn": true
+    }
+  },
+  "markerPositions": [
+    {
+      "x": 0,
+      "y": 0,
+      "classes": "point selected last-from last-to"
+    }
+  ],
+  "reproduced_by": "hero-pilot executor before repair"
+}

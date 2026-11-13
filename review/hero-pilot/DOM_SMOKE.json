@@ -4,9 +4,35 @@
     "default pool excludes pilot",
     "real selection → RPS → 32-piece engine initialization",
     "synthetic midgame: actual skill button → pair selector → authority → resource display → handoff",
+    "actual endpoints (0,6)/(2,6) display explicit two-piece labels; no false origin/ordinary markers",
+    "action-bound markers survive transient event clearing",
+    "duplicate command adds no marker, message, cost or handoff",
+    "next ordinary move clears swap labels and preserves normal from/to markers",
+    "enemy target, same-piece no-op and stale command keep prior feedback and state unchanged",
+    "no available partner opens explanation without invented success feedback",
     "actual resignation and result panel"
   ],
-  "passed": 4,
+  "passed": 10,
+  "swapMarkers": [
+    {
+      "x": 0,
+      "y": 6,
+      "from": false,
+      "to": false,
+      "relay": true,
+      "text": "换轨 ↔",
+      "label": "红马，坐标 1, 7，上一手换轨：两枚棋交换位置"
+    },
+    {
+      "x": 2,
+      "y": 6,
+      "from": false,
+      "to": false,
+      "relay": true,
+      "text": "换轨 ↔",
+      "label": "红车，坐标 3, 7，上一手换轨：两枚棋交换位置"
+    }
+  ],
   "layout_and_browser_verified": false,
-  "fixture_boundary": "Full opening is real UI initialization. Skill and resignation start from explicitly installed synthetic midgame; not a naturally played game."
+  "fixture_boundary": "Full opening is real UI initialization. Skill and resignation start from explicitly installed synthetic midgame; not a naturally played game. Invalid/duplicate commands call the exported production handler; transient-event reset is a test hook."
 }

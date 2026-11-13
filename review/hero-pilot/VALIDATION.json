@@ -9,7 +9,8 @@
   "source": {
     "engine_parent": "7f47b740b01b9a1e6ef126fc9e2628682b603e6d",
     "development_base": "71145df45ad17215a3731e53150b6728e079e375",
-    "binding": "SHA256 of actual production source, tests and scripts below; handoff pins containing engine commit after publication"
+    "binding": "Original v1 evidence at engine_commit; source hashes and original 1025/34/18/4 results remain historical. Current visual repair is separately bound in VISUAL_REPAIR.json.",
+    "engine_commit": "7a1dfbc92efa2a54bb85175cc251856bb2cdb4d3"
   },
   "source_sha256": {
     "scripts/hero-pilot/dom-smoke.ts": "d0fe17eaaf64b6e8d4223552547c0b669859be47a05a34d6f046f6e4267d74e9",
@@ -122,5 +123,13 @@
     "engine_merged": false,
     "deployed": false
   },
-  "status": "ENGINEERING_CANDIDATE_WITH_BROWSER_QA_GAP"
+  "status": "ENGINEERING_CANDIDATE_WITH_BROWSER_QA_GAP",
+  "latest_followup": {
+    "task": "MAIN-HERO-PILOT-SWAP-VISUAL-REPAIR-20261113",
+    "report": "VISUAL_REPAIR.json",
+    "unit_regression_pass": 155,
+    "production_dom_checks": 10,
+    "royal_probe_checks": 3,
+    "browser_verified": false
+  }
 }

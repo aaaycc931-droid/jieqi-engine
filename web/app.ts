@@ -2680,6 +2680,7 @@ function renderBoard(): void {
   const legalKeys = new Set(legalMoves.map(positionKey));
   const pieces = new Map(gameState.pieces.filter(isBoardPiece).map((piece) => [positionKey(piece), piece]));
   const lastMove = gameState.lastMove;
+  const relayEndpoints = new Set(lastMove?.relaySwap?.map(p => positionKey(p.to)) ?? []);
   const executionPlan = gameState.status === "execution"
     ? getAutomaticExecutionPlan(gameState)
     : undefined;
@@ -2716,8 +2717,18 @@ function renderBoard(): void {
       }
       if (piece?.id === selectedPieceId) point.classList.add("selected");
       if (legalKeys.has(key)) point.classList.add(piece ? "legal-capture" : "legal-empty");
-      if (lastMove && positionKey(lastMove.from) === key) point.classList.add("last-from");
-      if (lastMove && positionKey(lastMove.to) === key) point.classList.add("last-to");
+      if (lastMove?.relaySwap) {
+        if (relayEndpoints.has(key)) {
+          point.classList.add("last-relay");
+          point.setAttribute("aria-label", `${point.getAttribute("aria-label")}，上一手换轨：两枚棋交换位置`);
+          const marker = document.createElement("small");
+          marker.className = "relay-marker"; marker.textContent = "换轨 ↔";
+          marker.setAttribute("aria-hidden", "true"); point.append(marker);
+        }
+      } else {
+        if (lastMove && positionKey(lastMove.from) === key) point.classList.add("last-from");
+        if (lastMove && positionKey(lastMove.to) === key) point.classList.add("last-to");
+      }
       if (executionPlan && positionKey(executionPlan.from) === key) point.classList.add("execution-source");
       if (executionPlan && positionKey(executionPlan.to) === key) point.classList.add("execution-target");
       const trapLayers = ownTrapCounts.get(key) ?? 0;
@@ -3892,8 +3903,14 @@ function runTransferredHeroCommand(command: HeroAbilityCommand): void {
     gameSecret.traps = structuredClone(localTraps);
     const previousSide = gameState.turn, previousClock = gameState.turnDeadlineAt;
     const result = applyHeroAbility(gameState, gameSecret, command);
+    if (command.ability === "relay_swap" && result.duplicate) return;
     gameState = result.state; gameSecret = result.secret; localTraps = gameSecret.traps ?? [];
     selectedPieceId = undefined;
+    if (command.ability === "relay_swap" && gameState.lastMove?.relaySwap) {
+      const [a, b] = gameState.lastMove.relaySwap;
+      latestAnnouncement = `${previousSide === "red" ? "红方" : "蓝方"}换轨：两枚棋交换位置（${a.from.x + 1}列${a.from.y + 1}行 ↔ ${b.from.x + 1}列${b.from.y + 1}行），消耗一次并结束本手。`;
+      appendLocalSystemMessage(latestAnnouncement);
+    }
     if (previousSide !== gameState.turn || previousClock === undefined && !gameState.pendingShuffle) startFormalClock(gameState, Date.now(), gameSecret);
     renderGame();
     if (gameState.status === "execution") beginAutomaticExecution();

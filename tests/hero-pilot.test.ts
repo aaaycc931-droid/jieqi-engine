@@ -42,6 +42,10 @@ for (const side of ["red", "black"] as const) test(`swap ${side}: two endpoints,
   assert.equal(r.state.formalTurns![side], 1);
   assert.notEqual(r.state.turn, side);
   assert.equal(r.state.lastMove!.tier, 2);
+  assert.deepEqual(r.state.lastMove!.relaySwap, [
+    { pieceId: "a", from: { x: 0, y: side === "red" ? 6 : 3 }, to: { x: 2, y: side === "red" ? 6 : 3 } },
+    { pieceId: "b", from: { x: 2, y: side === "red" ? 6 : 3 }, to: { x: 0, y: side === "red" ? 6 : 3 } },
+  ]);
   assert.deepEqual(r.state.lastMove!.keywords, ["占步", "耗费", "移置"]);
   assert.equal(r.state.lastCompletedFormalTurn!.phase, "turn_end");
   assert.equal(publicStateSnapshot(r.state).heroRuntime![side]!.relayUses, 1);
@@ -120,6 +124,7 @@ test("canonical endpoints preserve landing order under reversed command", () => 
   const a = applyHeroAbility(f.state, f.secret, swap(f.state), 1000, () => 0);
   const b = applyHeroAbility(f.state, f.secret, swap(f.state, { pieceId: "b", partnerId: "a" }), 1000, () => 0);
   assert.deepEqual(a.state.pieces, b.state.pieces); assert.deepEqual(a.state.automaticEvents, b.state.automaticEvents);
+  assert.deepEqual(a.state.lastMove!.relaySwap, b.state.lastMove!.relaySwap);
 });
 test("infection rechecks each arrival and effects follow identity without refresh", () => {
   const f = fixture(); f.state.effectsByPieceId!.a = { barrier: { owner: "red", enemyTurnsRemaining: 2 } };

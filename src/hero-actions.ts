@@ -334,6 +334,14 @@ function applyFreshHeroAbility(state: GameState, secret: SecretState, command: H
     s.revision += 1;
     if (endsTurn) {
       s.lastMove = { actionId: command.actionId, pieceId: command.pieceId ?? `hero:${side}`, actingSide: side, from: command.to ?? { x: 0, y: 0 }, to: command.to ?? { x: 0, y: 0 }, landed: false, ...actionFields(classification) };
+      if (command.ability === "relay_swap") {
+        const [a, b] = [command.pieceId!, command.partnerId!].sort().map(id => beforeAction.pieces.find(p => p.id === id)!);
+        const from = { x: a.x, y: a.y }, to = { x: b.x, y: b.y };
+        // Keep truthful compatibility coordinates; the explicit two-piece record
+        // owns presentation. Classification/history stay II-level displacement.
+        s.lastMove.from = from; s.lastMove.to = to;
+        s.lastMove.relaySwap = [{ pieceId: a.id, from, to }, { pieceId: b.id, from: to, to: from }];
+      }
       if (command.ability === "inner_wave" && s.pieces.some(p => p.id === command.pieceId && getController(p) === side) && !closeDirectDeaths(s, k, side) && !isGeneralInCheck(s, side)) {
         closeMainActionAtom(s, command.actionId);
         s.pendingHeroChild = { kind: "inner_wave", side, pieceId: command.pieceId!, parent: copy(s.lastMove) };

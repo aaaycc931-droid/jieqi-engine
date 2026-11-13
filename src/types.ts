@@ -152,6 +152,9 @@ export interface LastMove {
   actingSide: Side;
   from: Position;
   to: Position;
+  /** Public display record for a two-piece displacement, not an ordinary move.
+   * Sorted by piece ID; persists with this action even if transient events clear. */
+  relaySwap?: Array<{ pieceId: string; from: Position; to: Position }>;
   captured?: CapturedPiece;
   /** 路径碾碎按行进顺序记录，供双方一致播放战车/铁马效果。 */
   pathCrushed?: CapturedPiece[];
