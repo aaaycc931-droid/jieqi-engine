@@ -1,0 +1,184 @@
+TAP version 13
+# Subtest: BTHOST-01 SHA-256 邀请口令哈希在 Node 与 WebView 使用相同标准结果
+ok 1 - BTHOST-01 SHA-256 邀请口令哈希在 Node 与 WebView 使用相同标准结果
+  ---
+  duration_ms: 2.641367
+  type: 'test'
+  ...
+# Subtest: BTHOST-02 物理连接后只有房主保存完整房间，来宾只收到公开 RPS 状态
+ok 2 - BTHOST-02 物理连接后只有房主保存完整房间，来宾只收到公开 RPS 状态
+  ---
+  duration_ms: 3.861223
+  type: 'test'
+  ...
+# Subtest: BTHOST-03 双方猜拳后由房主权威建局，并向来宾发送揭示后仍安全的公开棋盘
+ok 3 - BTHOST-03 双方猜拳后由房主权威建局，并向来宾发送揭示后仍安全的公开棋盘
+  ---
+  duration_ms: 5.54866
+  type: 'test'
+  ...
+# Subtest: BTHOST-04 英雄、陷阱和私有坐标均通过房主单点结算
+ok 4 - BTHOST-04 英雄、陷阱和私有坐标均通过房主单点结算
+  ---
+  duration_ms: 27.795499
+  type: 'test'
+  ...
+# Subtest: BTHOST-05 来宾操作仍受回合、版本和房主规则引擎约束
+ok 5 - BTHOST-05 来宾操作仍受回合、版本和房主规则引擎约束
+  ---
+  duration_ms: 2.886905
+  type: 'test'
+  ...
+# Subtest: BTHOST-06 英雄选择起主动退出由房主立即权威判负
+ok 6 - BTHOST-06 英雄选择起主动退出由房主立即权威判负
+  ---
+  duration_ms: 0.941536
+  type: 'test'
+  ...
+# Subtest: BTHOST-07 再战邀请由房主计时并在对方接受后建立全新选英雄阶段
+ok 7 - BTHOST-07 再战邀请由房主计时并在对方接受后建立全新选英雄阶段
+  ---
+  duration_ms: 1.685384
+  type: 'test'
+  ...
+# Subtest: BTHOST-08 双方聊天经房主权威同步且不阻塞行棋回合
+ok 8 - BTHOST-08 双方聊天经房主权威同步且不阻塞行棋回合
+  ---
+  duration_ms: 3.507052
+  type: 'test'
+  ...
+# Subtest: SOURCE: all 36 imported production/package blobs match fixed PR22
+ok 9 - SOURCE: all 36 imported production/package blobs match fixed PR22
+  ---
+  duration_ms: 7.117257
+  type: 'test'
+  ...
+# Subtest: hero attempt has no game action ID; exact attempt survives phase transition and repeated queries
+ok 10 - hero attempt has no game action ID; exact attempt survives phase transition and repeated queries
+  ---
+  duration_ms: 7.586504
+  type: 'test'
+  ...
+# Subtest: new hero attempt rejection does not replace the original accepted receipt
+ok 11 - new hero attempt rejection does not replace the original accepted receipt
+  ---
+  duration_ms: 1.997396
+  type: 'test'
+  ...
+# Subtest: hero expiry follows actual host dispatch ordering and never falsely accepts the late selection
+ok 12 - hero expiry follows actual host dispatch ordering and never falsely accepts the late selection
+  ---
+  duration_ms: 0.973667
+  type: 'test'
+  ...
+# Subtest: same raw normal-return API would time out; a result is not inferred just from room changes
+ok 13 - same raw normal-return API would time out; a result is not inferred just from room changes
+  ---
+  duration_ms: 1.17883
+  type: 'test'
+  ...
+# Subtest: natural RPS to resign to finished: old receipt remains accepted after a later INVALID_PHASE
+ok 14 - natural RPS to resign to finished: old receipt remains accepted after a later INVALID_PHASE
+  ---
+  duration_ms: 7.201734
+  type: 'test'
+  ...
+# Subtest: postcommit projection fault is isolated from original action evidence
+ok 15 - postcommit projection fault is isolated from original action evidence
+  ---
+  duration_ms: 2.409525
+  type: 'test'
+  ...
+# Subtest: pre-dispatch RNG fault has no fabricated rule rejection
+ok 16 - pre-dispatch RNG fault has no fabricated rule rejection
+  ---
+  duration_ms: 0.930847
+  type: 'test'
+  ...
+# Subtest: query never advances expired clocks, consumes RNG, projects, or mutates the authority
+ok 17 - query never advances expired clocks, consumes RNG, projects, or mutates the authority
+  ---
+  duration_ms: 1.197704
+  type: 'test'
+  ...
+# Subtest: actor authority: another bound player cannot look up this actor record; unknown caller is invalid
+ok 18 - actor authority: another bound player cannot look up this actor record; unknown caller is invalid
+  ---
+  duration_ms: 3.160996
+  type: 'test'
+  ...
+# Subtest: JSON key ordering matches, but changed hero, omitted/null/default/extra fields cannot borrow a receipt
+ok 19 - JSON key ordering matches, but changed hero, omitted/null/default/extra fields cannot borrow a receipt
+  ---
+  duration_ms: 1.803283
+  type: 'test'
+  ...
+# Subtest: authority restart / different match epoch / missing record cannot reconstruct prior outcomes
+ok 20 - authority restart / different match epoch / missing record cannot reconstruct prior outcomes
+  ---
+  duration_ms: 0.677965
+  type: 'test'
+  ...
+# Subtest: FIFO count eviction and oversized binding leave unknown, never not-sent/rejected
+ok 21 - FIFO count eviction and oversized binding leave unknown, never not-sent/rejected
+  ---
+  duration_ms: 1.25454
+  type: 'test'
+  ...
+# Subtest: ID-only engine dedup cannot authenticate a new resign payload
+ok 22 - ID-only engine dedup cannot authenticate a new resign payload
+  ---
+  duration_ms: 14.235915
+  type: 'test'
+  ...
+# Subtest: unsupported action / same research attempt are refused before execution without changing old evidence
+ok 23 - unsupported action / same research attempt are refused before execution without changing old evidence
+  ---
+  duration_ms: 0.979507
+  type: 'test'
+  ...
+# Subtest: caller mutations to input, returned answer and research snapshot cannot rewrite saved evidence
+ok 24 - caller mutations to input, returned answer and research snapshot cannot rewrite saved evidence
+  ---
+  duration_ms: 0.462162
+  type: 'test'
+  ...
+# Subtest: prototype success output matches actual unchanged BluetoothHostRoom for same hero source
+ok 25 - prototype success output matches actual unchanged BluetoothHostRoom for same hero source
+  ---
+  duration_ms: 1.230085
+  type: 'test'
+  ...
+# Subtest: prototype resign output matches unchanged host from the same natural RPS prefix
+ok 26 - prototype resign output matches unchanged host from the same natural RPS prefix
+  ---
+  duration_ms: 5.530846
+  type: 'test'
+  ...
+# Subtest: aggregate binding-byte limit evicts oldest even below count limit; queries do not renew retention
+ok 27 - aggregate binding-byte limit evicts oldest even below count limit; queries do not renew retention
+  ---
+  duration_ms: 0.903505
+  type: 'test'
+  ...
+# Subtest: canonical binding rejects lossy/non-data inputs without invoking accessors
+ok 28 - canonical binding rejects lossy/non-data inputs without invoking accessors
+  ---
+  duration_ms: 0.799972
+  type: 'test'
+  ...
+# Subtest: old v2 parser permits a namespaced hello but still rejects a v3/new-type upgrade
+ok 29 - old v2 parser permits a namespaced hello but still rejects a v3/new-type upgrade
+  ---
+  duration_ms: 0.441995
+  type: 'test'
+  ...
+1..29
+# tests 29
+# suites 0
+# pass 29
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 503.231097
