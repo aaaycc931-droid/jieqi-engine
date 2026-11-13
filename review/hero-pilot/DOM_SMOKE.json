@@ -1,0 +1,12 @@
+{
+  "kind": "jsdom_production_module_interaction",
+  "checks": [
+    "default pool excludes pilot",
+    "real selection → RPS → 32-piece engine initialization",
+    "synthetic midgame: actual skill button → pair selector → authority → resource display → handoff",
+    "actual resignation and result panel"
+  ],
+  "passed": 4,
+  "layout_and_browser_verified": false,
+  "fixture_boundary": "Full opening is real UI initialization. Skill and resignation start from explicitly installed synthetic midgame; not a naturally played game."
+}

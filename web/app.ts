@@ -1,7 +1,8 @@
+import { getRelayPairs, RELAY_USES } from "../src/hero-pilot.ts";
 import { configureHeroPreparation } from "../src/hero-progress.ts";
 import { getHeroPackage } from "../src/hero-forms.ts";
 import { isBoardPiece } from "../src/spaces.ts";
-import { HERO_IDS, HERO_CATALOG as heroCatalog } from "../src/heroes.ts";
+import { HERO_IDS, EXPERIMENTAL_HERO_IDS, HERO_CATALOG as heroCatalog } from "../src/heroes.ts";
 import { applyHeroAbility, getShadowRevealedTargets, getBombers, startFormalClock, formalTurnDurationMs } from "../src/hero-actions.ts";
 import { initializeFeatureSecret } from "../src/settlement.ts";
 // The browser playground must only load browser-safe modules.  In particular,
@@ -1901,7 +1902,7 @@ function renderHeroSelection(overrideState?: ReturnType<typeof heroSelectionStat
 
   }
 
-  heroGrid.replaceChildren(...HERO_IDS.map((heroId) => {
+  heroGrid.replaceChildren(...(new URLSearchParams(location.search).get("heroPilot") === "1" && !bluetoothSelection ? [...HERO_IDS, ...EXPERIMENTAL_HERO_IDS] : HERO_IDS).map((heroId) => {
     const hero = heroCatalog[heroId];
     const button = document.createElement("button");
     button.type = "button";
@@ -2132,6 +2133,7 @@ function startGame(): void {
     mutation,
     { red: localHeroPackages[assignments.red]?.form ?? "front", black: localHeroPackages[assignments.black]?.form ?? "front" },
     { red: localHeroPackages[assignments.red]?.variant, black: localHeroPackages[assignments.black]?.variant },
+    new URLSearchParams(location.search).get("heroPilot") === "1",
   );
   gameSecret = session.secret;
   localPrivateViewerSide = "red";
@@ -2216,9 +2218,9 @@ function baseRuntimeSkillEntries(side: Side, hero: HeroId): RuntimeSkillEntry[] 
     const runtime = gameState?.heroRuntime?.[side];
     if (hero === "berserker" && gameState?.featureRules?.mutation === "chaos") return [{ key: "ability:brawl", title: "乱斗", state: `费用 ${6 + 5 * (runtime?.chargeCount ?? 0)} 战意`, catalogIndex: 0, active: true }];
     const passive = ["qin_long", "murozond_minion", "prince", "single_blade", "berserker", "shuffler"].includes(hero) || hero === "death_knight" && gameState?.featureRules?.heroSelections?.[side]?.form !== "inner";
-    const abilities = hero === "death_knight" ? ["inner_ghost_burst"] : hero === "devout_zealot" ? ["invoke"] : hero === "deathwing" ? ["destruction"] : hero === "murozond" ? [gameState?.featureRules?.mutation === "end_time" ? "bomb" : "timeline_twist"] : hero === "nozdormu" ? [gameState?.featureRules?.mutation === "end_time" ? "hourglass" : "rewind"] : hero === "wind" ? ["shadow"] : hero === "warlock" ? ["burning_flame"] : hero === "night" ? ["insight"] : hero === "sky_admiral" ? ["landing"] : hero === "jiang_he" ? [gameState?.featureRules?.heroSelections?.[side]?.form === "inner" ? "inner_wave" : "river_enter", "river_move", "river_exit"] : [];
+    const abilities = hero === "siheng" ? ["relay_swap"] : hero === "death_knight" ? ["inner_ghost_burst"] : hero === "devout_zealot" ? ["invoke"] : hero === "deathwing" ? ["destruction"] : hero === "murozond" ? [gameState?.featureRules?.mutation === "end_time" ? "bomb" : "timeline_twist"] : hero === "nozdormu" ? [gameState?.featureRules?.mutation === "end_time" ? "hourglass" : "rewind"] : hero === "wind" ? ["shadow"] : hero === "warlock" ? ["burning_flame"] : hero === "night" ? ["insight"] : hero === "sky_admiral" ? ["landing"] : hero === "jiang_he" ? [gameState?.featureRules?.heroSelections?.[side]?.form === "inner" ? "inner_wave" : "river_enter", "river_move", "river_exit"] : [];
     if (passive) return [{ key: `passive:${hero}`, title: heroCatalog[hero].skills[0].name, state: "被动技能", catalogIndex: 0, active: false }];
-    return abilities.map((ability, index) => ({ key: `ability:${ability}`, title: ability === "hourglass" ? "时光沙漏" : ability === "bomb" ? "时空扭曲炸弹" : heroCatalog[hero].skills[index]?.name ?? heroCatalog[hero].skills[0].name, state: hero === "wind" ? "秘密技能｜每局最多两次" : ability === "invoke" ? `祈求 ${runtime?.invokeCount ?? 0}/4` : ability === "hourglass" ? `剩余 ${gameState?.hourglasses ?? 0}` : runtime?.used ? "已用" : "主动技能", catalogIndex: index, active: true }));
+    return abilities.map((ability, index) => ({ key: `ability:${ability}`, title: ability === "hourglass" ? "时光沙漏" : ability === "bomb" ? "时空扭曲炸弹" : heroCatalog[hero].skills[index]?.name ?? heroCatalog[hero].skills[0].name, state: hero === "siheng" ? `剩余 ${RELAY_USES - (runtime?.relayUses ?? 0)}/${RELAY_USES} 次｜占步` : hero === "wind" ? "秘密技能｜每局最多两次" : ability === "invoke" ? `祈求 ${runtime?.invokeCount ?? 0}/4` : ability === "hourglass" ? `剩余 ${gameState?.hourglasses ?? 0}` : runtime?.used ? "已用" : "主动技能", catalogIndex: index, active: true }));
   }
   const assassination = gameState?.assassination?.[side];
   const entries: RuntimeSkillEntry[] = [{
@@ -3962,6 +3964,21 @@ function renderTransferredHeroControls(): void {
 }
 function openTransferredHeroAbility(ability: HeroAbilityCommand["ability"]): void {
   if (!gameState || gameState.status !== "playing") return;
+  if (ability === "relay_swap") {
+    const pairs = getRelayPairs(gameState);
+    if (!pairs.length) return showDialog("换轨暂不可用", "需要剩余次数、未受将军，以及距离4内的两枚己方明置非将帅地面棋；无形棋、封锁外入内和强制窗口不能发动。先正常行棋，等待搭档就位。", "知道了", () => undefined);
+    const select = document.createElement("select"); select.setAttribute("aria-label", "换轨搭档");
+    for (const [i, pair] of pairs.entries()) {
+      const names = pair.map(id => { const p = gameState!.pieces.find(p => p.id === id)!; return `${p.faceDown ? "暗棋" : pieceLabel[p.color][p.type]}（${p.x + 1}列${p.y + 1}行）`; });
+      select.add(new Option(names.join(" ↔ "), String(i)));
+    }
+    const revision = gameState.revision;
+    showDialog("司衡 · 换轨", "交换两枚搭档的位置，消耗一次换轨和本回合主行动。可将军，不直接消灭棋子。落点陷阱、感染等照常触发；换位不清除附着状态。", "换轨并结束本手", () => {
+      const [pieceId, partnerId] = pairs[Number(select.value)];
+      runTransferredHeroCommand({ kind: "hero_ability", ability, pieceId, partnerId, expectedRevision: revision, actionId: nextActionId() });
+    });
+    dialogText.append(select); return;
+  }
   const controls = document.createElement("div"), side = gameState.turn, pending = gameState.pendingHeroChild;
   const piece = document.createElement("select"); piece.setAttribute("aria-label", "技能棋子");
   const pool = ability === "insight" ? gameState.pieces.filter(p => p.faceDown) : gameState.pieces.filter(p => getController(p) === side);

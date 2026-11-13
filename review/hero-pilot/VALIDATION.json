@@ -1,0 +1,126 @@
+{
+  "schema": "lezi.hero_pilot.validation.v1",
+  "date": "2026-11-13",
+  "subject": "EXP-HERO-001 siheng v1",
+  "environment": {
+    "node": "24.22.1",
+    "jsdom": "31.0.1"
+  },
+  "source": {
+    "engine_parent": "7f47b740b01b9a1e6ef126fc9e2628682b603e6d",
+    "development_base": "71145df45ad17215a3731e53150b6728e079e375",
+    "binding": "SHA256 of actual production source, tests and scripts below; handoff pins containing engine commit after publication"
+  },
+  "source_sha256": {
+    "scripts/hero-pilot/dom-smoke.ts": "d0fe17eaaf64b6e8d4223552547c0b669859be47a05a34d6f046f6e4267d74e9",
+    "scripts/hero-pilot/playout.ts": "ae56011642f9d453a06bab6570a122eff068fef4e30c2f9eae483cb21f98d302",
+    "scripts/hero-pilot/scenarios.ts": "041726b23cf27ae59cca299869761db4150da351b300b1f8d8bb45f4319fa133",
+    "src/game.ts": "1a176592992cdd309a8d10fa4cd74c7b458c0703d500046509da79fe5a820613",
+    "src/hero-actions.ts": "29b36dc76dd8b3f00fa8f06787d9f871098b384297c49db5f6a8bc812a2268e3",
+    "src/hero-forms.ts": "6f8ced0aed7b9a37a0a2e6ea44c2e6d80d33c01554bfe541dc0c7b6c710939a8",
+    "src/hero-pilot.ts": "f4fc52cb42fd38d6cee8327370a47d1e43253d5e4ae61866578be3e912ddfae5",
+    "src/heroes.ts": "1f9d49a790997e5d8353fbf1daaae3cac39e02f590a7a4e694140b6457da57e4",
+    "src/index.ts": "db76e482d87b4b2eb77c044c162a4bcf3d3a17f2344170f6c9b81bdd2c098535",
+    "src/rules.ts": "4c9268b6f9fe6599a8a2c4bf4d93641c02685925443b1f04fcf458fdc00e373a",
+    "src/types.ts": "8e2b79b4a1bf8a70d6c5f948721f14e784148170f8a595d1771a7f725484bda8",
+    "tests/hero-pilot.test.ts": "4ec53d78a0fe21826b2db744aea748bbe52d939282a594c021c73234a82d44fd",
+    "web/app.ts": "82a6c597d6b65778df414ae745ade571f09c556584a11f00bd0add84f6b593db"
+  },
+  "passed": [
+    {
+      "command": "node --test --test-concurrency=1 tests/*.test.ts",
+      "tests": 1025,
+      "pass": 1025,
+      "fail": 0,
+      "duration_ms": 79045.242216,
+      "qualification": "ran with 31 pilot tests; subsequently added 3 tests only, no production source change"
+    },
+    {
+      "command": "node --test tests/hero-pilot.test.ts",
+      "tests": 34,
+      "pass": 34,
+      "fail": 0,
+      "qualification": "final focused run includes real alternating cycle, H06 restoration, H05 rejection"
+    },
+    {
+      "command": "node scripts/hero-pilot/scenarios.ts",
+      "witnesses": 9,
+      "scope": "synthetic mid/endgame and real 32-piece opening; not reachability/minimax proof"
+    },
+    {
+      "command": "node scripts/hero-pilot/playout.ts",
+      "games": 18,
+      "natural_terminals": 16,
+      "budget_resignations": 2,
+      "rejected_candidates": 0,
+      "full_example": {
+        "seed": 19,
+        "pilotSide": "black",
+        "allowedRange": 4,
+        "actions": 30,
+        "skillUses": 1,
+        "naturalEnding": "ambush"
+      }
+    },
+    {
+      "command": "node scripts/hero-pilot/dom-smoke.ts",
+      "checks": 4,
+      "scope": "production DOM module; skill section uses declared synthetic fixture; no rendering/real browser claim"
+    },
+    {
+      "command": "npm run build:web",
+      "status": "passed",
+      "output": "dist/web/index.html"
+    }
+  ],
+  "failed_attempts_not_adopted": [
+    {
+      "kind": "runner",
+      "failure": "timestamp wrongly supplied to deferTurnEnd argument",
+      "resolution": "excluded old results, fixed false,now,undefined,rng; added turn handoff invariant and reran"
+    },
+    {
+      "kind": "test_expectation",
+      "failure": "expected infection2 before ghost owner turn end",
+      "resolution": "corrected to existing timing1; reran"
+    },
+    {
+      "kind": "experiment_control",
+      "failure": "shared sequential tie RNG consumed by extra skill candidates",
+      "resolution": "action-keyed deterministic jitter; replaced all final experiment results"
+    },
+    {
+      "kind": "DOM_harness",
+      "failure": "clearOpeningTimers helper absent",
+      "resolution": "cleared actual timer in test-only fixture hook; reran4checks"
+    },
+    {
+      "kind": "Chromium",
+      "failure": "headless launch EPERM process singleton/socket",
+      "resolution": "not verified; no bypass"
+    },
+    {
+      "kind": "cloud_browser",
+      "failure": "local file URL denied by browser security policy",
+      "resolution": "stopped; no bypass"
+    }
+  ],
+  "not_run_or_not_proven": [
+    "real browser visual/touch playtest",
+    "Android/native/Bluetooth/NET",
+    "independent QA or human adversarial play",
+    "all hero and mutation combinations",
+    "global calibrated balance",
+    "complete shared pressure/repetition/draw adjudication coverage",
+    "final portrait/animation",
+    "merge or deployment"
+  ],
+  "authority": {
+    "design": "delegated_designer_decision",
+    "scoring_thawed": false,
+    "NET_unpaused": false,
+    "engine_merged": false,
+    "deployed": false
+  },
+  "status": "ENGINEERING_CANDIDATE_WITH_BROWSER_QA_GAP"
+}

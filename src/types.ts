@@ -4,7 +4,7 @@ export type GameModeId = "jieqi" | "half_chaos" | "xiangqi";
 
 export type HeroId = "hunter" | "rogue" | "warrior" | "qin_long" | "murozond"
   | "nozdormu" | "murozond_minion" | "devout_zealot" | "prince" | "deathwing"
-  | "death_knight" | "wind" | "shuffler" | "warlock" | "single_blade" | "night" | "sky_admiral" | "berserker" | "jiang_he";
+  | "death_knight" | "wind" | "shuffler" | "warlock" | "single_blade" | "night" | "sky_admiral" | "berserker" | "jiang_he" | "siheng";
 
 export type HeroForm = "front" | "inner";
 export type GalakrondForm = "nightmare" | "invincible" | "fel" | "storm" | "unspeakable";
@@ -20,6 +20,8 @@ export type MutationId =
   | "cavalry" | "chaos" | "jian_xie" | "end_time";
 
 export interface FeatureRules {
+  /** EXP-HERO-001 offline-only opt-in; never added to the product hero pool. */
+  experimentalHeroPilot?: true;
   /** 本地试玩可只启用一方英雄；联机产品双方选择。受控研究会话可在锁定前关闭指定来源。 */
   heroes?: Partial<Record<Side, HeroId>>;
   /** 单方单一完整形态包；缺省的旧英雄ID只对应现有表包。 */
@@ -252,6 +254,7 @@ export type GhostObjectSpec = GhostObject & { kind: GhostKind; source: string };
 export interface GhostQuery { kind: GhostKind; owner?: Side; source?: string; position?: Position }
 
 export interface HeroRuntime {
+  relayUses?: number;
   used?: boolean; invokeCount?: number; rainActive?: boolean; carefreeSuspended?: boolean;
   omen?: true; descended?: true;
   pupil?: number; insightCount?: number; insightTurn?: number;
@@ -341,8 +344,9 @@ export interface MoveCommand {
 }
 
 export interface HeroAbilityCommand {
+  partnerId?: string;
   kind: "hero_ability";
-  ability: "invoke" | "unspeakable" | "destruction" | "timeline_twist" | "rewind" | "hourglass" | "bomb" | "shadow" | "burning_flame" | "insight" | "inner_ghost_burst" | "ascension" | "storm_assault" | "river_enter" | "river_move" | "river_exit" | "inner_wave" | "landing" | "blade_shift" | "charge_move" | "charge_attack" | "wave_move" | "skip_child" | "shuffle" | "brawl" | "brawl_attack" | "training";
+  ability: "relay_swap" | "invoke" | "unspeakable" | "destruction" | "timeline_twist" | "rewind" | "hourglass" | "bomb" | "shadow" | "burning_flame" | "insight" | "inner_ghost_burst" | "ascension" | "storm_assault" | "river_enter" | "river_move" | "river_exit" | "inner_wave" | "landing" | "blade_shift" | "charge_move" | "charge_attack" | "wave_move" | "skip_child" | "shuffle" | "brawl" | "brawl_attack" | "training";
   actionId: string;
   expectedRevision: number;
   pieceId?: string;
