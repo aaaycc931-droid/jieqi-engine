@@ -1,6 +1,6 @@
 import { RuleError } from "./errors.ts";
 import { sha256Hex } from "./sha256.ts";
-import type { FeatureRules, GameModeId, HeroId, HeroSelection, MutationId, OptionalModeConfig, Side } from "./types.ts";
+import type { FeatureRules, GameModeId, HeroId, HeroSelection, MutationId, OptionalModeConfig, Side, GameState, SecretState, AssassinationCommand, MoveCommand } from "./types.ts";
 
 // Internal source qualification only. No client field, serialized capability,
 // disabled source mask, or product readiness flag grants this authority.
@@ -14,12 +14,13 @@ interface ExactTupleContext { roomId: string; tupleId: HalfChaosResearchTupleId;
 export const STANDARD_NP_RESEARCH_TUPLE = Object.freeze({ red: "rogue", black: "devout_zealot", mutation: "war_chariot", mode: "xiangqi", variant: "invincible" } as const);
 interface StandardNpContext { roomId: string; tupleId: "STD-NP32-AS-AP-ES"; branch: "AS" | "AP" | "ES"; players: Record<Side, string> }
 interface StandardH10PreparationContext { roomId: string; tupleId: "STD-H10-PREPARATION"; players: Record<Side, string> }
+interface StandardH10ForwardContext { roomId: string; tupleId: "STD-H10-FORWARD-PREFIX"; players: Record<Side, string> }
 export const STANDARD_H10_PREPARATION_TUPLE = Object.freeze({ red: "rogue", black: "wind", mutation: "war_chariot", mode: "xiangqi" } as const);
-type ExactResearchContext = ExactTupleContext | StandardNpContext | StandardH10PreparationContext;
+type ExactResearchContext = ExactTupleContext | StandardNpContext | StandardH10PreparationContext | StandardH10ForwardContext;
 const issuedTupleCapabilities = new WeakSet<object>();
 const issuedTupleRooms = new WeakMap<object, Readonly<ExactResearchContext>>();
 let exactScope: Readonly<ExactResearchContext> | undefined;
-const exactTuple = (context: ExactResearchContext) => context.tupleId === "STD-NP32-AS-AP-ES" ? STANDARD_NP_RESEARCH_TUPLE : context.tupleId === "STD-H10-PREPARATION" ? STANDARD_H10_PREPARATION_TUPLE : HALF_CHAOS_RESEARCH_TUPLES[context.tupleId];
+const exactTuple = (context: ExactResearchContext) => context.tupleId === "STD-NP32-AS-AP-ES" ? STANDARD_NP_RESEARCH_TUPLE : context.tupleId === "STD-H10-PREPARATION" || context.tupleId === "STD-H10-FORWARD-PREFIX" ? STANDARD_H10_PREPARATION_TUPLE : HALF_CHAOS_RESEARCH_TUPLES[context.tupleId];
 const exactGameMode = (context: ExactResearchContext) => context.tupleId.startsWith("STD-") ? "xiangqi" : "half_chaos";
 
 /** Internal source-bound T0 only. Does not qualify the conditional R1-R5 tape. */
@@ -35,7 +36,53 @@ export function withExactStandardH10Preparation<T>(context: StandardH10Preparati
   if (context.tupleId !== "STD-H10-PREPARATION") throw new RuleError("RESEARCH_SCOPE_INVALID", "H10准备能力不能替代其他研究");
   return withExactTuple(context, operation);
 }
-export function standardH10PreparationScope(): boolean { return exactScope?.tupleId === "STD-H10-PREPARATION"; }
+export function standardH10PreparationScope(): boolean { return exactScope?.tupleId === "STD-H10-PREPARATION" || standardH10ForwardScope(); }
+export function standardH10ForwardScope(): boolean { return exactScope?.tupleId === "STD-H10-FORWARD-PREFIX"; }
+
+/** Separate capability: the old T0 authority remains unable to execute moves. */
+export function issueOriginalStandardH10Forward(context: StandardH10ForwardContext, prefixText: string, confirmationText: string, atomicText: string): Readonly<StandardH10ForwardContext> {
+  if (context.tupleId !== "STD-H10-FORWARD-PREFIX" ||
+      sha256Hex(prefixText) !== "c98c1acc44734b92be785092e6239e28df56c95421f3a21c8e67ace3f21217f4" ||
+      sha256Hex(confirmationText) !== "78ec040f646f4cd30df341731e7b457870b26cf0a83616ac7425a89a5919121c" ||
+      sha256Hex(atomicText) !== "2276b2678a252b2d5dcbdd4b58f8ba34b0a0a3409b6fab65ec7fdc45411b6212")
+    throw new RuleError("RESEARCH_SCOPE_INVALID", "H10正式前缀能力必须绑定原8手、首次采样确认与原子合同");
+  const issued = Object.freeze({ roomId: context.roomId, tupleId: context.tupleId, players: Object.freeze({ ...context.players }) });
+  issuedTupleCapabilities.add(issued); return issued;
+}
+export function withExactStandardH10Forward<T>(context: StandardH10ForwardContext, operation: () => T): T {
+  if (context.tupleId !== "STD-H10-FORWARD-PREFIX") throw new RuleError("RESEARCH_SCOPE_INVALID", "正式前缀不能借用T0能力");
+  return withExactTuple(context, operation);
+}
+
+// Identity mapping is from the actual standard32 initializer; not synthetic IDs.
+export const STANDARD_H10_FORWARD_TAPE = Object.freeze([
+  ["covered-25",0,6,0,5], ["covered-01",1,0,0,2],
+  ["covered-25",0,5,0,4], ["covered-14",8,3,8,4],
+  ["covered-25",0,4,1,4], ["covered-13",6,3,6,4],
+  ["covered-15",0,9,0,4], ["covered-14",8,4,8,5],
+  ["covered-15",0,4,0,2],
+].map(row => Object.freeze(row)));
+
+/** Exact requests only, before clock/authority mutation; no new wire field. */
+export function requireStandardH10ForwardAction(room: { updatedAt: number; game?: { state: GameState; secret: SecretState } }, playerId: string, command: MoveCommand | AssassinationCommand, kind: "move" | "assassination", now: number): void {
+  if (!standardH10ForwardScope()) return;
+  const game = room.game, i = command.expectedRevision, step = STANDARD_H10_FORWARD_TAPE[i];
+  const side = i % 2 ? "black" : "red";
+  const skill = command as AssassinationCommand;
+  if (!game || !Number.isFinite(now) || now < room.updatedAt || !Number.isInteger(i) || !step || playerId !== exactScope!.players[side] || command.actionId !== `h10-forward-${i}` ||
+      command.pieceId !== step[0] || command.from.x !== step[1] || command.from.y !== step[2] || command.to.x !== step[3] || command.to.y !== step[4] ||
+      kind !== (i === 6 || i === 8 ? "assassination" : "move") ||
+      (i === 6 ? skill.source !== "hero" || Boolean(skill.useStrongStrike) : i === 8 ? skill.source !== undefined || skill.useStrongStrike !== true : skill.source !== undefined || Boolean(skill.useStrongStrike)) ||
+      game.secret.processedActions[command.actionId] === undefined && (game.state.revision !== i || game.state.turn !== side) ||
+      game.state.turnDeadlineAt !== undefined && (!Number.isFinite(game.state.turnDeadlineAt) || now >= game.state.turnDeadlineAt))
+    windPreparationCoverage("仅覆盖原8手与R5的及时、同源精确请求");
+  const { state, secret } = game, wind = secret.wind?.black;
+  if (!modeResearchPermits("xiangqi", state.featureRules) || state.gameMode !== "xiangqi" ||
+      !wind || !["covered-10", "covered-11"].includes(wind.hostId ?? "") || wind.uses !== 1 || wind.activatedOnTurn !== 0 || wind.readyOnTurn !== 8 ||
+      !secret.windPreparation?.black?.completed || state.pendingShuffle || state.pendingHeroChild || state.pendingDescent || state.forcedDefense || state.flowDance || secret.replay ||
+      state.pieces.some(p => p.faceDown || p.layer && p.layer !== "ground") || secret.traps?.length || state.ghosts?.length || state.warps?.length)
+    windPreparationCoverage("H10原前缀来源、准备或空间状态超出资格");
+}
 export function windPreparationCoverage(message: string): never {
   const error = new Error(message); error.name = "WindPreparationCoverageError"; throw error;
 }
@@ -96,7 +143,7 @@ export function registerExactResearchRoom(room: object): void {
   if (!exactScope) throw new RuleError("RESEARCH_SCOPE_INVALID", "权威房间注册必须在内部同步能力内完成");
   issuedTupleRooms.set(room,exactScope);
 }
-export function requireExactResearchRoom(room: {roomId:string;phase?:string;mode:OptionalModeConfig;seats:{host:{playerId:string};guest?:{playerId:string}};game?:{state:{gameMode?:GameModeId;featureRules?:FeatureRules}}}, joiningPlayer?: string): void {
+export function requireExactResearchRoom(room: {roomId:string;phase?:string;mode:OptionalModeConfig;seats:{host:{playerId:string};guest?:{playerId:string}};game?:{state:{gameMode?:GameModeId;featureRules?:FeatureRules}}}, joiningPlayer?: string, forwardAction?: "move" | "assassination"): void {
   if (!exactScope) {
     const rules = room.game?.state.featureRules;
     const restrictedFeatures = (["half_chaos", "xiangqi"].includes(room.mode?.baseMode ?? "") || ["half_chaos", "xiangqi"].includes(room.game?.state.gameMode ?? "")) &&
@@ -110,8 +157,10 @@ export function requireExactResearchRoom(room: {roomId:string;phase?:string;mode
   if (issuedTupleRooms.get(room)!==exactScope || room.seats.host.playerId!==exactScope.players.red ||
       room.seats.guest && room.seats.guest.playerId!==exactScope.players.black || joiningPlayer!==undefined && joiningPlayer!==exactScope.players.black)
     throw new RuleError("RESEARCH_SCOPE_INVALID", "研究入口拒绝未登记权威实例、复制房间或错误席位");
-  if (standardH10PreparationScope() && ["playing", "finished"].includes(room.phase ?? ""))
+  if (exactScope.tupleId === "STD-H10-PREPARATION" && ["playing", "finished"].includes(room.phase ?? ""))
     windPreparationCoverage("本能力只覆盖H10准备，正式行棋、王安全与R5同批结算尚未准入");
+  if (standardH10ForwardScope() && ["playing", "finished"].includes(room.phase ?? "") && !forwardAction)
+    windPreparationCoverage("正式前缀能力不覆盖计时推进、其他技能或房间生命周期");
 }
 export function requireExactResearchAssignments(players: Record<Side,string>, heroes: Partial<Record<Side,HeroId>> | undefined): void {
   if (!exactScope) return;
