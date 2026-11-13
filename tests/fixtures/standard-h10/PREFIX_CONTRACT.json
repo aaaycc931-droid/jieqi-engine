@@ -1,0 +1,173 @@
+{
+  "id": "STD-H10-M04-CONDITIONAL-PREFIX-20261113",
+  "source_commit": "3436693a335f25ea051905821f77e410f6284114",
+  "type": "STATIC_CONDITIONAL_CONTRACT_NOT_ENGINE_FIXTURE",
+  "coordinate_system": "x0..8,y0..9; black back rank y0, red back rank y9; standard32 setup defined in accompanying checker",
+  "heroes": {
+    "red": "H02 old assassination",
+    "black": "H10"
+  },
+  "mutation": "M04 only",
+  "preparation": {
+    "status": "REQUIRED_NOT_EXECUTED",
+    "candidate_example": [
+      "black_pawn_0",
+      "black_pawn_2",
+      "black_horse_7"
+    ],
+    "candidate_list_is_conditional": true,
+    "production_probability_claim": null,
+    "require": "Actual legal preparation must offer distinct eligible bodies and finish selected first shadow at T0; no state injection, no first-turn substitute, no invented RNG tape."
+  },
+  "worlds": [
+    {
+      "id": "A",
+      "chosen_host": "black_pawn_0",
+      "target_path_is_host": true
+    },
+    {
+      "id": "B",
+      "chosen_host": "black_pawn_2",
+      "target_path_is_host": false
+    }
+  ],
+  "prefix": [
+    {
+      "turn": "R1",
+      "piece": "red_pawn_0",
+      "from": [
+        0,
+        6
+      ],
+      "to": [
+        0,
+        5
+      ]
+    },
+    {
+      "turn": "B1",
+      "piece": "black_horse_1",
+      "from": [
+        1,
+        0
+      ],
+      "to": [
+        0,
+        2
+      ]
+    },
+    {
+      "turn": "R2",
+      "piece": "red_pawn_0",
+      "from": [
+        0,
+        5
+      ],
+      "to": [
+        0,
+        4
+      ]
+    },
+    {
+      "turn": "B2",
+      "piece": "black_pawn_8",
+      "from": [
+        8,
+        3
+      ],
+      "to": [
+        8,
+        4
+      ]
+    },
+    {
+      "turn": "R3",
+      "piece": "red_pawn_0",
+      "from": [
+        0,
+        4
+      ],
+      "to": [
+        1,
+        4
+      ]
+    },
+    {
+      "turn": "B3",
+      "piece": "black_pawn_6",
+      "from": [
+        6,
+        3
+      ],
+      "to": [
+        6,
+        4
+      ]
+    },
+    {
+      "turn": "R4",
+      "piece": "red_rook_0",
+      "from": [
+        0,
+        9
+      ],
+      "to": [
+        0,
+        4
+      ],
+      "H02_activation": true
+    },
+    {
+      "turn": "B4",
+      "piece": "black_pawn_8",
+      "from": [
+        8,
+        4
+      ],
+      "to": [
+        8,
+        5
+      ]
+    }
+  ],
+  "target_action": {
+    "turn": "R5",
+    "from": [
+      0,
+      4
+    ],
+    "to": [
+      0,
+      2
+    ],
+    "piece": "red_rook_0",
+    "source": "valid later H02 assassination, first subsequent own formal turn",
+    "path_piece": "black_pawn_0",
+    "endpoint_piece": "black_horse_1",
+    "status": "UNRUN_SOURCE_QUALIFICATION_REQUIRED"
+  },
+  "conditional_oracle": {
+    "common": "M04 independent path crush; endpoint H02 source; no extra hero/scale/defense/flow-dance; do not inherit AS refund. Finish committed atom before terminal decision.",
+    "A": "If legally committed and path host actually destroyed, true black general dies with host; surviving decoy does not save it. Complete committed endpoint/landing before formal terminal.",
+    "B": "Path pawn is not host; its death alone cannot imply true-general death. Endpoint horse also not host. Complete authority/royal checks remain necessary.",
+    "scope": "Source-composition hypothesis V1 only, not newly approved complete H02/H10 policy"
+  },
+  "privacy_obligations": [
+    "Same declared public board/actions before R5; no claim actual serialized views equal.",
+    "Candidate/choice/host facts are synthetic research assumptions, not opponent UI fields.",
+    "After actual path-host death, terminal difference is causal outcome, not a requirement that final worlds remain equal.",
+    "Do not make H10 secret host change public button/target permission."
+  ],
+  "gaps": [
+    "Actual H10 first three-candidate sampling and admission evidence absent for this pair",
+    "H02/H10 excluded from original NP approved narrow runtime family",
+    "Full true-royal/atomic safety, original candidate provenance, wire and independent QA unverified"
+  ],
+  "checks": {
+    "static_geometry": "8 plies and 3 negative controls passed bounded checker; true-royal and engine UNRUN",
+    "engine": "UNRUN",
+    "mode_acceptance": false,
+    "featuresReady": false
+  },
+  "next_owner_request": "Main to assess exact source qualification/preparation contract and independent death atomic observation; no run or implementation authorization inferred."
+}

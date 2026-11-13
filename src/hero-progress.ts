@@ -1,4 +1,5 @@
 import { RuleError } from "./errors.ts";
+import { chooseWindPreparation } from "./wind-preparation.ts";
 import { requireClosedDestructionBatch } from "./settlement-context.ts";
 import { selectedHeroId, selectedHeroSelection, validateHeroForms } from "./hero-forms.ts";
 import { getController, getCurrentPieceType, otherSide } from "./slots.ts";
@@ -74,10 +75,12 @@ export function rebindTrainingAfterShuffle(state: GameState, secret: SecretState
     training.pieceId = selectTrainingBody(state, secret, side, training.type, random);
   }
 }
-export function configureHeroPreparation(state: GameState, secret: SecretState, side: Side, choice: { blade?: "left" | "right"; trainingType?: PieceType }, random: RandomInt = max => Math.floor(Math.random() * max)): void {
+export function configureHeroPreparation(state: GameState, secret: SecretState, side: Side, choice: { blade?: "left" | "right"; trainingType?: PieceType; windCandidateId?: string }, random: RandomInt = max => Math.floor(Math.random() * max)): void {
   validateHeroForms(state, secret);
   if (state.revision !== 0 || state.turnLifecycle || Object.values(state.formalTurns ?? {}).some(n => n > 0)) throw new RuleError("PREPARATION_LOCKED", "只能在开局准备期确定");
-  const hero = selectedHeroId(state, side), runtime = (state.heroRuntime ??= {})[side] ??= {};
+  const hero = selectedHeroId(state, side);
+  if (hero === "wind") { chooseWindPreparation(state, secret, side, choice.windCandidateId); return; }
+  const runtime = (state.heroRuntime ??= {})[side] ??= {};
   if (hero === "single_blade") {
     if (runtime.blade) throw new RuleError("PREPARATION_LOCKED", "刃侧已经确定");
     if (choice.blade !== "left" && choice.blade !== "right") throw new RuleError("INVALID_BLADE", "请选择左刃或右刃");

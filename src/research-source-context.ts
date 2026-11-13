@@ -13,12 +13,32 @@ export type HalfChaosResearchTupleId = keyof typeof HALF_CHAOS_RESEARCH_TUPLES;
 interface ExactTupleContext { roomId: string; tupleId: HalfChaosResearchTupleId; players: Record<Side, string> }
 export const STANDARD_NP_RESEARCH_TUPLE = Object.freeze({ red: "rogue", black: "devout_zealot", mutation: "war_chariot", mode: "xiangqi", variant: "invincible" } as const);
 interface StandardNpContext { roomId: string; tupleId: "STD-NP32-AS-AP-ES"; branch: "AS" | "AP" | "ES"; players: Record<Side, string> }
-type ExactResearchContext = ExactTupleContext | StandardNpContext;
+interface StandardH10PreparationContext { roomId: string; tupleId: "STD-H10-PREPARATION"; players: Record<Side, string> }
+export const STANDARD_H10_PREPARATION_TUPLE = Object.freeze({ red: "rogue", black: "wind", mutation: "war_chariot", mode: "xiangqi" } as const);
+type ExactResearchContext = ExactTupleContext | StandardNpContext | StandardH10PreparationContext;
 const issuedTupleCapabilities = new WeakSet<object>();
 const issuedTupleRooms = new WeakMap<object, Readonly<ExactResearchContext>>();
 let exactScope: Readonly<ExactResearchContext> | undefined;
-const exactTuple = (context: ExactResearchContext) => context.tupleId === "STD-NP32-AS-AP-ES" ? STANDARD_NP_RESEARCH_TUPLE : HALF_CHAOS_RESEARCH_TUPLES[context.tupleId];
-const exactGameMode = (context: ExactResearchContext) => context.tupleId === "STD-NP32-AS-AP-ES" ? "xiangqi" : "half_chaos";
+const exactTuple = (context: ExactResearchContext) => context.tupleId === "STD-NP32-AS-AP-ES" ? STANDARD_NP_RESEARCH_TUPLE : context.tupleId === "STD-H10-PREPARATION" ? STANDARD_H10_PREPARATION_TUPLE : HALF_CHAOS_RESEARCH_TUPLES[context.tupleId];
+const exactGameMode = (context: ExactResearchContext) => context.tupleId.startsWith("STD-") ? "xiangqi" : "half_chaos";
+
+/** Internal source-bound T0 only. Does not qualify the conditional R1-R5 tape. */
+export function issueOriginalStandardH10Preparation(context: StandardH10PreparationContext, prefixText: string, confirmationText: string): Readonly<StandardH10PreparationContext> {
+  if (context.tupleId !== "STD-H10-PREPARATION" ||
+      sha256Hex(prefixText) !== "c98c1acc44734b92be785092e6239e28df56c95421f3a21c8e67ace3f21217f4" ||
+      sha256Hex(confirmationText) !== "78ec040f646f4cd30df341731e7b457870b26cf0a83616ac7425a89a5919121c")
+    throw new RuleError("RESEARCH_SCOPE_INVALID", "H10准备能力必须绑定原合同与首次抽样确认");
+  const issued = Object.freeze({ roomId: context.roomId, tupleId: context.tupleId, players: Object.freeze({ ...context.players }) });
+  issuedTupleCapabilities.add(issued); return issued;
+}
+export function withExactStandardH10Preparation<T>(context: StandardH10PreparationContext, operation: () => T): T {
+  if (context.tupleId !== "STD-H10-PREPARATION") throw new RuleError("RESEARCH_SCOPE_INVALID", "H10准备能力不能替代其他研究");
+  return withExactTuple(context, operation);
+}
+export function standardH10PreparationScope(): boolean { return exactScope?.tupleId === "STD-H10-PREPARATION"; }
+export function windPreparationCoverage(message: string): never {
+  const error = new Error(message); error.name = "WindPreparationCoverageError"; throw error;
+}
 
 /** Issuer used only by the internal original-input driver, never a wire API. */
 export function issueOriginalHalfChaosTuple(context: ExactTupleContext, initializationText: string, replayText: string, replayId: string): Readonly<ExactTupleContext> {
@@ -76,7 +96,7 @@ export function registerExactResearchRoom(room: object): void {
   if (!exactScope) throw new RuleError("RESEARCH_SCOPE_INVALID", "权威房间注册必须在内部同步能力内完成");
   issuedTupleRooms.set(room,exactScope);
 }
-export function requireExactResearchRoom(room: {roomId:string;mode:OptionalModeConfig;seats:{host:{playerId:string};guest?:{playerId:string}};game?:{state:{gameMode?:GameModeId;featureRules?:FeatureRules}}}, joiningPlayer?: string): void {
+export function requireExactResearchRoom(room: {roomId:string;phase?:string;mode:OptionalModeConfig;seats:{host:{playerId:string};guest?:{playerId:string}};game?:{state:{gameMode?:GameModeId;featureRules?:FeatureRules}}}, joiningPlayer?: string): void {
   if (!exactScope) {
     const rules = room.game?.state.featureRules;
     const restrictedFeatures = (["half_chaos", "xiangqi"].includes(room.mode?.baseMode ?? "") || ["half_chaos", "xiangqi"].includes(room.game?.state.gameMode ?? "")) &&
@@ -90,6 +110,8 @@ export function requireExactResearchRoom(room: {roomId:string;mode:OptionalModeC
   if (issuedTupleRooms.get(room)!==exactScope || room.seats.host.playerId!==exactScope.players.red ||
       room.seats.guest && room.seats.guest.playerId!==exactScope.players.black || joiningPlayer!==undefined && joiningPlayer!==exactScope.players.black)
     throw new RuleError("RESEARCH_SCOPE_INVALID", "研究入口拒绝未登记权威实例、复制房间或错误席位");
+  if (standardH10PreparationScope() && ["playing", "finished"].includes(room.phase ?? ""))
+    windPreparationCoverage("本能力只覆盖H10准备，正式行棋、王安全与R5同批结算尚未准入");
 }
 export function requireExactResearchAssignments(players: Record<Side,string>, heroes: Partial<Record<Side,HeroId>> | undefined): void {
   if (!exactScope) return;

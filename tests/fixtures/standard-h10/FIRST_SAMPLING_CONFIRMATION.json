@@ -1,0 +1,31 @@
+{
+  "schema": "lezi.h10.first_sampling_confirmation.v1",
+  "id": "CONF-H10-FIRST-UNIFORM-THREE-20261113",
+  "date_local": "2026-11-13",
+  "timezone": "Asia/Shanghai",
+  "confirmed_by": "project_owner_in_mainline_conversation",
+  "user_quote": "1",
+  "selected_option": "首次从合格棋子本体中等概率、不重复抽取3个；先实现候选至少3个、玩家及时选择的受限研究。",
+  "context_source": {
+    "handoff_head": "232db2c198e050b2ef4c30fa369a6d406fdc2db6",
+    "path": "worklines/main/H10_PREPARATION_IMPLEMENTATION_SCOPE.md",
+    "option": "方案1"
+  },
+  "confirmed": {
+    "sampling": "uniform_without_replacement",
+    "count": 3,
+    "identity": "distinct_stable_piece_bodies_not_piece_names",
+    "implementation_scope": "ordinary H02 old assassination / H10 / M04 only, >=3 eligible candidates, timely choice, no other hero preparation interaction"
+  },
+  "not_confirmed": [
+    "fewer_than_three_or_empty_pool_product_policy",
+    "timeout_or_decline_product_policy",
+    "candidate_invalidation_during_preparation",
+    "all_hero_preparation_ordering",
+    "dark_mode_secret_pool_or_new_visibility",
+    "wind_V3_1_whole_candidate",
+    "mode_opening_merge_deployment_APK"
+  ],
+  "status": "USER_CONFIRMED_IMPLEMENTATION_NOT_YET_REPORTED",
+  "receiver_receipts": "receivers record their own actual read/adoption"
+}

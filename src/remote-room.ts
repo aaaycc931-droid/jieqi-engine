@@ -1,4 +1,6 @@
 import { configureHeroPreparation } from "./hero-progress.ts";
+import { beginWindPreparation, ownWindPreparation } from "./wind-preparation.ts";
+import { standardH10PreparationScope, windPreparationCoverage } from "./research-source-context.ts";
 import { getHeroPackage, validateHeroForms } from "./hero-forms.ts";
 import { HERO_IDS } from "./heroes.ts";
 import { applyHeroAbility, ownerHeroSecrets, startFormalClock } from "./hero-actions.ts";
@@ -237,6 +239,7 @@ export interface PlayerRemoteRoomView extends PublicRemoteRoom {
   ownTrapDraft?: Position[];
   ownTraps?: TrapLayer[];
   ownHeroSecrets?: ReturnType<typeof ownerHeroSecrets>;
+  ownWindPreparation?: ReturnType<typeof ownWindPreparation>;
 }
 
 export interface JoinRoomResult {
@@ -534,6 +537,7 @@ function expireRematchInvitation(room: RemoteRoom, now: number): RemoteRoom {
 }
 
 export function disconnectRemotePlayer(room: RemoteRoom, playerId: string, now = Date.now()): RemoteRoom {
+  rejectUnqualifiedH10Lifecycle(room);
   requireRemotePlayer(room, playerId);
   if (room.phase === "waiting" || room.phase === "finished" || !room.disconnects) return room;
   const current = room.disconnects.players[playerId];
@@ -548,6 +552,7 @@ export function disconnectRemotePlayer(room: RemoteRoom, playerId: string, now =
 }
 
 export function reconnectRemotePlayer(room: RemoteRoom, playerId: string, now = Date.now()): RemoteRoom {
+  rejectUnqualifiedH10Lifecycle(room);
   requireRemotePlayer(room, playerId);
   if (!room.disconnects) return room;
   const timed = applyDisconnectTimeout(room, now);
@@ -612,13 +617,18 @@ function publicFeaturesAfterPreparation(features: RoomFeaturePublicState): RoomF
   };
 }
 
-function beginHeroPreparation(room: RemoteRoom, now: number): RemoteRoom {
+function beginHeroPreparation(room: RemoteRoom, now: number, randomInt: RandomInt = cryptoRandomInt): RemoteRoom {
   const heroes = room.features?.heroes;
   if (!heroes) return { ...room, phase: "playing", updatedAt: now };
   const ready: Record<Side, boolean> = {
     red: !heroes.red || !["hunter", "single_blade", "sky_admiral"].includes(heroes.red),
     black: !heroes.black || !["hunter", "single_blade", "sky_admiral"].includes(heroes.black),
   };
+  if (standardH10PreparationScope() && heroes.black === "wind") {
+    room = copy(room);
+    beginWindPreparation(room.game!.state, room.game!.secret, "black", randomInt);
+    ready.black = false;
+  }
   if (ready.red && ready.black) {
     return {
       ...room,
@@ -918,6 +928,7 @@ export function completeRemoteHeroIntro(
   room: RemoteRoom,
   playerId: string,
   now = Date.now(),
+  randomInt?: RandomInt,
 ): RemoteRoom {
   requireExactResearchRoom(room);
   ensurePhase(room, "hero_intro");
@@ -932,7 +943,7 @@ export function completeRemoteHeroIntro(
     updatedAt: now,
   };
   return roomPlayerIds(room).every((id) => completed[id])
-    ? beginHeroPreparation(nextRoom, now)
+    ? beginHeroPreparation(nextRoom, now, randomInt)
     : nextRoom;
 }
 
@@ -951,6 +962,7 @@ export function updateRemoteTrapDraft(
   positions: readonly Position[],
   now = Date.now(),
 ): RemoteRoom {
+  rejectUnqualifiedH10Lifecycle(room);
   ensurePhase(room, "hero_preparation");
   if (!room.game) throw new RuleError("MISSING_GAME", "房间尚未创建棋局");
   const side = sideForPlayer(room.game, playerId);
@@ -984,6 +996,10 @@ export function completeRemoteHeroPreparation(
   playerId: string,
   now = Date.now(),
 ): RemoteRoom {
+  if (standardH10PreparationScope() || room.game?.secret.windPreparation) {
+    requireExactResearchRoom(room);
+    windPreparationCoverage("H10首次准备必须及时提交本次候选，不能以ready跳过或代选");
+  }
   ensurePhase(room, "hero_preparation");
   if (!room.game) throw new RuleError("MISSING_GAME", "房间尚未创建棋局");
   const side = sideForPlayer(room.game, playerId);
@@ -1043,6 +1059,8 @@ export function advanceRemoteRoomTime(
   now = Date.now(),
 ): RemoteRoom {
   requireExactResearchRoom(room);
+  if (standardH10PreparationScope() && room.phase === "hero_preparation" && now >= (room.features?.heroPreparation?.deadlineAt ?? -Infinity))
+    windPreparationCoverage("首次影超时与拒选规则尚未确认");
   if (room.phase === "playing" && room.game && room.disconnects?.pausedAt === undefined) {
     const timed = copy(room);
     if (timed.game!.state.turnDeadlineAt === undefined) startFormalClock(timed.game!.state, now, timed.game!.secret, randomInt);
@@ -1179,6 +1197,7 @@ export function requestRemoteRematch(
   invitationId: string,
   now = Date.now(),
 ): RemoteActionResult {
+  rejectUnqualifiedH10Lifecycle(room);
   requireRemotePlayer(room, playerId);
   reserveServerActionId(invitationId);
   if (room.phase !== "finished") {
@@ -1210,6 +1229,7 @@ export function respondRemoteRematch(
   accept: boolean,
   now = Date.now(),
 ): RemoteRoom {
+  rejectUnqualifiedH10Lifecycle(room);
   requireRemotePlayer(room, playerId);
   if (room.phase !== "finished") {
     throw new RuleError("INVALID_PHASE", "当前没有可以回应的再战邀请");
@@ -1368,6 +1388,7 @@ export function surrenderRemoteRoom(
   actionId: string,
   now = Date.now(),
 ): RemoteActionResult {
+  rejectUnqualifiedH10Lifecycle(room);
   ensurePhase(room, "playing");
   reserveServerActionId(actionId);
   if (!room.game) throw new RuleError("MISSING_GAME", "房间尚未开始棋局");
@@ -1391,6 +1412,7 @@ export function submitRemoteChat(
   text: string,
   now = Date.now(),
 ): RemoteActionResult {
+  rejectUnqualifiedH10Lifecycle(room);
   ensurePhase(room, "playing");
   reserveServerActionId(messageId);
   requireRemotePlayer(room, playerId);
@@ -1430,6 +1452,7 @@ export function forfeitRemoteRoom(
   actionId: string,
   now = Date.now(),
 ): RemoteActionResult {
+  rejectUnqualifiedH10Lifecycle(room);
   if (room.phase === "finished" && room.forfeitOutcome?.actionId === actionId) {
     return { room, duplicate: true };
   }
@@ -1515,6 +1538,9 @@ export function playerRoomView(
       .filter((trap) => trap.owner === viewerSide)
       .map(cloneTrap) ?? []
     : undefined;
+  const windOffer = viewerSide && room.game && room.phase === "hero_preparation" ? ownWindPreparation(room.game.state, room.game.secret, viewerSide) : undefined;
+  const heroSecrets = viewerSide && room.game ? ownerHeroSecrets(room.game.secret, viewerSide) : undefined;
+  if (heroSecrets?.wind && viewerSide && room.game?.secret.windPreparation?.[viewerSide]) delete heroSecrets.wind.hostId;
   return {
     ...publicRemoteRoom(room),
     viewerSide,
@@ -1522,7 +1548,8 @@ export function playerRoomView(
     ...(room.featureSecret?.heroSelection?.packages?.[playerId] ? { ownHeroSelection: copy(room.featureSecret.heroSelection.packages[playerId]) } : viewerSide && room.game?.state.featureRules?.heroSelections?.[viewerSide] ? { ownHeroSelection: copy(room.game.state.featureRules.heroSelections[viewerSide]) } : {}),
     ...(ownTrapDraft ? { ownTrapDraft } : {}),
     ...(ownTraps ? { ownTraps } : {}),
-    ...(viewerSide && room.game ? { ownHeroSecrets: ownerHeroSecrets(room.game.secret, viewerSide) } : {}),
+    ...(heroSecrets ? { ownHeroSecrets: heroSecrets } : {}),
+    ...(windOffer ? { ownWindPreparation: windOffer } : {}),
   };
 }
 
@@ -1575,12 +1602,28 @@ function trainingTypeLabel(type: import("./types.ts").PieceType | undefined, sid
   return ({ rook: "车", horse: "马", cannon: "炮", pawn: side === "red" ? "兵" : "卒", advisor: "士", elephant: "象", general: "将帅", storm_elemental: "风暴元素" })[type ?? "pawn"];
 }
 
-export function submitRemoteHeroPreparationChoice(room: RemoteRoom, playerId: string, choice: { blade?: "left" | "right"; trainingType?: import("./types.ts").PieceType }, now = Date.now(), randomInt: RandomInt = cryptoRandomInt): RemoteRoom {
+export function submitRemoteHeroPreparationChoice(room: RemoteRoom, playerId: string, choice: { blade?: "left" | "right"; trainingType?: import("./types.ts").PieceType; windCandidateId?: string }, now = Date.now(), randomInt: RandomInt = cryptoRandomInt): RemoteRoom {
+  if (standardH10PreparationScope() || room.game?.secret.windPreparation) requireExactResearchRoom(room);
   ensurePhase(room, "hero_preparation"); requireRemotePlayer(room, playerId);
   if (!room.game) throw new RuleError("MISSING_GAME", "棋局不存在");
   const side = sideForPlayer(room.game, playerId);
+  if (standardH10PreparationScope()) {
+    if (now >= (room.features?.heroPreparation?.deadlineAt ?? -Infinity)) windPreparationCoverage("首次影超时与拒选规则尚未确认");
+    if (side !== "black" || choice.blade !== undefined || choice.trainingType !== undefined) throw new RuleError("RESEARCH_SOURCE_MISMATCH", "首次影研究只接受黑方候选选择");
+  }
   if (room.features?.heroPreparation?.ready[side]) throw new RuleError("PREPARATION_LOCKED", "准备已确认");
   const next = copy(room); configureHeroPreparation(next.game!.state, next.game!.secret, side, choice, randomInt);
+  if (standardH10PreparationScope()) {
+    next.phase = "playing"; next.features = publicFeaturesAfterPreparation(next.features!);
+  }
   if (choice.trainingType !== undefined) next.messages = [...(room.messages ?? []), { id: `system:training:opening:${side}`, kind: "system", text: `${side === "red" ? "红方" : "黑方"}已选择${trainingTypeLabel(choice.trainingType, side)}并成功启动本局训练。`, createdAt: now }];
   next.updatedAt = now; return next;
+}
+
+/** The T0 capability does not qualify transport/exit/rematch lifecycle. */
+function rejectUnqualifiedH10Lifecycle(room: RemoteRoom): void {
+  if (standardH10PreparationScope() || room.game?.secret.windPreparation) {
+    requireExactResearchRoom(room);
+    windPreparationCoverage("H10准备能力不覆盖连接、退出、再战或其他房间交互");
+  }
 }
