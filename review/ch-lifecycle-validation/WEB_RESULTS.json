@@ -1,0 +1,472 @@
+{
+  "schema": "lezi.chaos.lifecycle.web.v1",
+  "base": "71145df45ad17215a3731e53150b6728e079e375",
+  "passed": 8,
+  "failed": 0,
+  "cases": [
+    {
+      "mode": "eof",
+      "order": "receiver_then_sender",
+      "sendMode": "newline",
+      "afterSend": {
+        "pending": true,
+        "unknown": true,
+        "requestId": "recorded:1",
+        "nativeState": "CONNECTED",
+        "authorityChoice": null,
+        "sendAttempts": 1
+      },
+      "observations": [
+        {
+          "endpoint": "receiver",
+          "event": "message",
+          "state": null,
+          "pending": true,
+          "unknown": true,
+          "requestId": "recorded:1",
+          "nativeState": "CONNECTED",
+          "authorityChoice": "shuffler",
+          "sendAttempts": 1
+        },
+        {
+          "endpoint": "receiver",
+          "event": "transport-state",
+          "state": "DISCONNECTED",
+          "pending": true,
+          "unknown": true,
+          "requestId": "recorded:1",
+          "nativeState": "CONNECTED",
+          "authorityChoice": "shuffler",
+          "sendAttempts": 1
+        },
+        {
+          "endpoint": "sender",
+          "event": "transport-state",
+          "state": "DISCONNECTED",
+          "pending": false,
+          "unknown": false,
+          "requestId": null,
+          "nativeState": "DISCONNECTED",
+          "authorityChoice": "shuffler",
+          "sendAttempts": 1
+        }
+      ],
+      "final": {
+        "pending": false,
+        "unknown": false,
+        "requestId": null,
+        "nativeState": "DISCONNECTED",
+        "authorityChoice": "shuffler",
+        "sendAttempts": 1
+      },
+      "attemptTypes": [
+        "action"
+      ],
+      "inputSha256": "5e8c5322596867da65582713f891e21b223581cad3c4f9a47889662c99aeedab",
+      "receiverMessages": 1,
+      "scope": "recorded production native events; actual Web functions and real jieqi room; no live JNI/socket/radio"
+    },
+    {
+      "mode": "eof",
+      "order": "sender_then_receiver",
+      "sendMode": "newline",
+      "afterSend": {
+        "pending": true,
+        "unknown": true,
+        "requestId": "recorded:1",
+        "nativeState": "CONNECTED",
+        "authorityChoice": null,
+        "sendAttempts": 1
+      },
+      "observations": [
+        {
+          "endpoint": "sender",
+          "event": "transport-state",
+          "state": "DISCONNECTED",
+          "pending": false,
+          "unknown": false,
+          "requestId": null,
+          "nativeState": "DISCONNECTED",
+          "authorityChoice": null,
+          "sendAttempts": 1
+        },
+        {
+          "endpoint": "receiver",
+          "event": "message",
+          "state": null,
+          "pending": false,
+          "unknown": false,
+          "requestId": null,
+          "nativeState": "DISCONNECTED",
+          "authorityChoice": "shuffler",
+          "sendAttempts": 1
+        },
+        {
+          "endpoint": "receiver",
+          "event": "transport-state",
+          "state": "DISCONNECTED",
+          "pending": false,
+          "unknown": false,
+          "requestId": null,
+          "nativeState": "DISCONNECTED",
+          "authorityChoice": "shuffler",
+          "sendAttempts": 1
+        }
+      ],
+      "final": {
+        "pending": false,
+        "unknown": false,
+        "requestId": null,
+        "nativeState": "DISCONNECTED",
+        "authorityChoice": "shuffler",
+        "sendAttempts": 1
+      },
+      "attemptTypes": [
+        "action"
+      ],
+      "inputSha256": "5e8c5322596867da65582713f891e21b223581cad3c4f9a47889662c99aeedab",
+      "receiverMessages": 1,
+      "scope": "recorded production native events; actual Web functions and real jieqi room; no live JNI/socket/radio"
+    },
+    {
+      "mode": "ioexception",
+      "order": "receiver_then_sender",
+      "sendMode": "newline",
+      "afterSend": {
+        "pending": true,
+        "unknown": true,
+        "requestId": "recorded:1",
+        "nativeState": "CONNECTED",
+        "authorityChoice": null,
+        "sendAttempts": 1
+      },
+      "observations": [
+        {
+          "endpoint": "receiver",
+          "event": "transport-state",
+          "state": "DISCONNECTED",
+          "pending": true,
+          "unknown": true,
+          "requestId": "recorded:1",
+          "nativeState": "CONNECTED",
+          "authorityChoice": null,
+          "sendAttempts": 1
+        },
+        {
+          "endpoint": "sender",
+          "event": "transport-state",
+          "state": "DISCONNECTED",
+          "pending": false,
+          "unknown": false,
+          "requestId": null,
+          "nativeState": "DISCONNECTED",
+          "authorityChoice": null,
+          "sendAttempts": 1
+        }
+      ],
+      "final": {
+        "pending": false,
+        "unknown": false,
+        "requestId": null,
+        "nativeState": "DISCONNECTED",
+        "authorityChoice": null,
+        "sendAttempts": 1
+      },
+      "attemptTypes": [
+        "action"
+      ],
+      "inputSha256": "5e8c5322596867da65582713f891e21b223581cad3c4f9a47889662c99aeedab",
+      "receiverMessages": 0,
+      "scope": "recorded production native events; actual Web functions and real jieqi room; no live JNI/socket/radio"
+    },
+    {
+      "mode": "ioexception",
+      "order": "sender_then_receiver",
+      "sendMode": "newline",
+      "afterSend": {
+        "pending": true,
+        "unknown": true,
+        "requestId": "recorded:1",
+        "nativeState": "CONNECTED",
+        "authorityChoice": null,
+        "sendAttempts": 1
+      },
+      "observations": [
+        {
+          "endpoint": "sender",
+          "event": "transport-state",
+          "state": "DISCONNECTED",
+          "pending": false,
+          "unknown": false,
+          "requestId": null,
+          "nativeState": "DISCONNECTED",
+          "authorityChoice": null,
+          "sendAttempts": 1
+        },
+        {
+          "endpoint": "receiver",
+          "event": "transport-state",
+          "state": "DISCONNECTED",
+          "pending": false,
+          "unknown": false,
+          "requestId": null,
+          "nativeState": "DISCONNECTED",
+          "authorityChoice": null,
+          "sendAttempts": 1
+        }
+      ],
+      "final": {
+        "pending": false,
+        "unknown": false,
+        "requestId": null,
+        "nativeState": "DISCONNECTED",
+        "authorityChoice": null,
+        "sendAttempts": 1
+      },
+      "attemptTypes": [
+        "action"
+      ],
+      "inputSha256": "5e8c5322596867da65582713f891e21b223581cad3c4f9a47889662c99aeedab",
+      "receiverMessages": 0,
+      "scope": "recorded production native events; actual Web functions and real jieqi room; no live JNI/socket/radio"
+    },
+    {
+      "mode": "partial",
+      "order": "receiver_then_sender",
+      "sendMode": "partial",
+      "afterSend": {
+        "pending": true,
+        "unknown": true,
+        "requestId": "recorded:1",
+        "nativeState": "CONNECTED",
+        "authorityChoice": null,
+        "sendAttempts": 1
+      },
+      "observations": [
+        {
+          "endpoint": "receiver",
+          "event": "transport-state",
+          "state": "ERROR",
+          "pending": true,
+          "unknown": true,
+          "requestId": "recorded:1",
+          "nativeState": "CONNECTED",
+          "authorityChoice": null,
+          "sendAttempts": 1
+        },
+        {
+          "endpoint": "sender",
+          "event": "transport-state",
+          "state": "DISCONNECTED",
+          "pending": false,
+          "unknown": false,
+          "requestId": null,
+          "nativeState": "DISCONNECTED",
+          "authorityChoice": null,
+          "sendAttempts": 1
+        }
+      ],
+      "final": {
+        "pending": false,
+        "unknown": false,
+        "requestId": null,
+        "nativeState": "DISCONNECTED",
+        "authorityChoice": null,
+        "sendAttempts": 1
+      },
+      "attemptTypes": [
+        "action"
+      ],
+      "inputSha256": "1e355aa9ff19207e0eda771f33d691c41003e1bc6a7d2dfefa215b0b2e52e6db",
+      "receiverMessages": 0,
+      "scope": "recorded production native events; actual Web functions and real jieqi room; no live JNI/socket/radio"
+    },
+    {
+      "mode": "partial",
+      "order": "sender_then_receiver",
+      "sendMode": "partial",
+      "afterSend": {
+        "pending": true,
+        "unknown": true,
+        "requestId": "recorded:1",
+        "nativeState": "CONNECTED",
+        "authorityChoice": null,
+        "sendAttempts": 1
+      },
+      "observations": [
+        {
+          "endpoint": "sender",
+          "event": "transport-state",
+          "state": "DISCONNECTED",
+          "pending": false,
+          "unknown": false,
+          "requestId": null,
+          "nativeState": "DISCONNECTED",
+          "authorityChoice": null,
+          "sendAttempts": 1
+        },
+        {
+          "endpoint": "receiver",
+          "event": "transport-state",
+          "state": "ERROR",
+          "pending": false,
+          "unknown": false,
+          "requestId": null,
+          "nativeState": "DISCONNECTED",
+          "authorityChoice": null,
+          "sendAttempts": 1
+        }
+      ],
+      "final": {
+        "pending": false,
+        "unknown": false,
+        "requestId": null,
+        "nativeState": "DISCONNECTED",
+        "authorityChoice": null,
+        "sendAttempts": 1
+      },
+      "attemptTypes": [
+        "action"
+      ],
+      "inputSha256": "1e355aa9ff19207e0eda771f33d691c41003e1bc6a7d2dfefa215b0b2e52e6db",
+      "receiverMessages": 0,
+      "scope": "recorded production native events; actual Web functions and real jieqi room; no live JNI/socket/radio"
+    },
+    {
+      "mode": "newline",
+      "order": "receiver_then_sender",
+      "sendMode": "flush",
+      "afterSend": {
+        "pending": true,
+        "unknown": true,
+        "requestId": "recorded:1",
+        "nativeState": "CONNECTED",
+        "authorityChoice": null,
+        "sendAttempts": 1
+      },
+      "observations": [
+        {
+          "endpoint": "receiver",
+          "event": "message",
+          "state": null,
+          "pending": true,
+          "unknown": true,
+          "requestId": "recorded:1",
+          "nativeState": "CONNECTED",
+          "authorityChoice": "shuffler",
+          "sendAttempts": 1
+        },
+        {
+          "endpoint": "receiver",
+          "event": "transport-state",
+          "state": "DISCONNECTED",
+          "pending": true,
+          "unknown": true,
+          "requestId": "recorded:1",
+          "nativeState": "CONNECTED",
+          "authorityChoice": "shuffler",
+          "sendAttempts": 1
+        },
+        {
+          "endpoint": "sender",
+          "event": "transport-state",
+          "state": "DISCONNECTED",
+          "pending": false,
+          "unknown": false,
+          "requestId": null,
+          "nativeState": "DISCONNECTED",
+          "authorityChoice": "shuffler",
+          "sendAttempts": 1
+        }
+      ],
+      "final": {
+        "pending": false,
+        "unknown": false,
+        "requestId": null,
+        "nativeState": "DISCONNECTED",
+        "authorityChoice": "shuffler",
+        "sendAttempts": 1
+      },
+      "attemptTypes": [
+        "action"
+      ],
+      "inputSha256": "dca3d04032e7e6f65b68840773946883853516d6967ff353cf75807e4fb24048",
+      "receiverMessages": 1,
+      "scope": "recorded production native events; actual Web functions and real jieqi room; no live JNI/socket/radio"
+    },
+    {
+      "mode": "newline",
+      "order": "sender_then_receiver",
+      "sendMode": "flush",
+      "afterSend": {
+        "pending": true,
+        "unknown": true,
+        "requestId": "recorded:1",
+        "nativeState": "CONNECTED",
+        "authorityChoice": null,
+        "sendAttempts": 1
+      },
+      "observations": [
+        {
+          "endpoint": "sender",
+          "event": "transport-state",
+          "state": "DISCONNECTED",
+          "pending": false,
+          "unknown": false,
+          "requestId": null,
+          "nativeState": "DISCONNECTED",
+          "authorityChoice": null,
+          "sendAttempts": 1
+        },
+        {
+          "endpoint": "receiver",
+          "event": "message",
+          "state": null,
+          "pending": false,
+          "unknown": false,
+          "requestId": null,
+          "nativeState": "DISCONNECTED",
+          "authorityChoice": "shuffler",
+          "sendAttempts": 1
+        },
+        {
+          "endpoint": "receiver",
+          "event": "transport-state",
+          "state": "DISCONNECTED",
+          "pending": false,
+          "unknown": false,
+          "requestId": null,
+          "nativeState": "DISCONNECTED",
+          "authorityChoice": "shuffler",
+          "sendAttempts": 1
+        }
+      ],
+      "final": {
+        "pending": false,
+        "unknown": false,
+        "requestId": null,
+        "nativeState": "DISCONNECTED",
+        "authorityChoice": "shuffler",
+        "sendAttempts": 1
+      },
+      "attemptTypes": [
+        "action"
+      ],
+      "inputSha256": "dca3d04032e7e6f65b68840773946883853516d6967ff353cf75807e4fb24048",
+      "receiverMessages": 1,
+      "scope": "recorded production native events; actual Web functions and real jieqi room; no live JNI/socket/radio"
+    }
+  ],
+  "webSha256": "f75b134dea69ef7b90e6535814c58088b6c201a2fadcc8c1d5aaab8dbb0cc9e1",
+  "productionNativeSha256": {
+    "BluetoothGameSession.java": "53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0",
+    "GameWebBridge.java": "a0b337b40ddbdeb47155af438c3b76b071278230bcb9f2ed4111486e934bbcb7"
+  },
+  "receiverResultSha256": "4a9869206f69acd4f33b1294b42bb2ab7d0c1970c21f3d09336f4f17ce4b7eaf",
+  "interpretation": "EOF full JSON is received and chooses shuffler despite sender unknown; same bytes then IOException and partial EOF do not. UI reset erases transient request ID/unknown, not an authoritative result.",
+  "limits": [
+    "Two cross-end replay orders are conditional schedules, not measured Android/JNI timing.",
+    "C1 uses narrow JSON shim; actual TypeScript envelope parser and actual room validate received fixture.",
+    "Only public hero selection fixture. No all-action dedup, result ledger/protocol, full DOM, device or formal CH07 acceptance."
+  ]
+}

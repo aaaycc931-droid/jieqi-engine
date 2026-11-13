@@ -1,0 +1,71 @@
+{
+  "base": "71145df45ad17215a3731e53150b6728e079e375",
+  "tracked_files_verified": 641,
+  "existing_files_modified": [],
+  "sources": {
+    "android/app/src/main/java/com/jieqi/bluetooth/BluetoothGameSession.java": {
+      "git_blob": "48e02db86e4f1dce1f6cc42e10da3b329b4f22c5",
+      "sha256": "53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0"
+    },
+    "android/app/src/main/java/com/jieqi/bluetooth/GameWebBridge.java": {
+      "git_blob": "fddf464605fd2ce3d017eb705069afcde0da5101",
+      "sha256": "a0b337b40ddbdeb47155af438c3b76b071278230bcb9f2ed4111486e934bbcb7"
+    },
+    "scripts/research/native_send_jvm.py": {
+      "git_blob": "5ebeda05eb363096212a5326e3d0c79f68b4887a",
+      "sha256": "3e79694ec79361d398ab2d35a90c4c503ff1d1b497a6322066333cd79f7fd64c"
+    },
+    "scripts/research/native-send-channel.ts": {
+      "git_blob": "4e7179115aa6124e4a9d2f6cb81fff3aaabf76b5",
+      "sha256": "a897315ff88e12de3a8b6cbd002d05f6f550c2e7d923d85e48cc424a2abb5948"
+    },
+    "scripts/research/bluetooth-receipt-channel.ts": {
+      "git_blob": "caab4a61ffe2b5fa493a01a28b5cfdc05e2fe771",
+      "sha256": "03cda7c34e9873951fc9ed5e73c876cee659275d032c8eefea7b6249207f0f34"
+    },
+    "web/app.ts": {
+      "git_blob": "3e5db425a6104b207070330b6709305bc678431a",
+      "sha256": "f75b134dea69ef7b90e6535814c58088b6c201a2fadcc8c1d5aaab8dbb0cc9e1"
+    },
+    "src/bluetooth-protocol.ts": {
+      "git_blob": "d3d665f53588d30dc1b6e3a31fd3f300043cd7cd",
+      "sha256": "adb87d2d9336c976f13bbb77b23a79eb26d321907b293ca1ecac1f68092fb5da"
+    },
+    "src/bluetooth-host-room.ts": {
+      "git_blob": "80659ebf86c6bfbe678f67cd7aff9f01a8fa151c",
+      "sha256": "060ecc33488909f5ad72702cc40835e46e64d6ee3d3b71ac24216ab4207fbc9f"
+    },
+    "review/native-send-accounting/JVM_RESULTS_20261030.json": {
+      "git_blob": "2162dc85af96f1dad44ed23d5f989ff2ab5103d1",
+      "sha256": "8407024e8a0ecebcd28b72c9d3e03514fea4420532ffe0e1eeba8ede741cc1df"
+    }
+  },
+  "environment": {
+    "node": "v24.22.1",
+    "python": "Python 3.12.14",
+    "compiler": "javac 21.0.13"
+  },
+  "attempts": [
+    {
+      "command": "python3 scripts/research/ch-lifecycle-probe.py",
+      "outcome": "initial compilation exit 1; compiler stderr not exposed by initial wrapper; no cases ran",
+      "change": "test shim BluetoothServerSocket.close declares IOException; compiler stderr now propagated",
+      "root_cause": "exact initial diagnostic unavailable, not independently established"
+    },
+    {
+      "command": "python3 scripts/research/ch-lifecycle-probe.py",
+      "exit": 0,
+      "passed": 7,
+      "failed": 0
+    },
+    {
+      "command": "node scripts/research/ch-lifecycle-web.ts",
+      "exit": 0,
+      "passed": 8,
+      "failed": 0,
+      "warning": "Node stripTypeScriptTypes experimental warning"
+    }
+  ],
+  "no_production_changes": true,
+  "raw_private_authority_published": false
+}
