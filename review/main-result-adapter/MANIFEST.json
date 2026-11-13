@@ -1,0 +1,48 @@
+{
+  "base_engine_commit": "71145df45ad17215a3731e53150b6728e079e375",
+  "intended_publication_parent": "6ba35636ecf5c69203225149a7b746893299b39b",
+  "files": [
+    {
+      "path": "src/bluetooth-host-room.ts",
+      "bytes": 10279,
+      "sha256": "812c6dead8f4d5954f96bfe91f5425a7149df9bd2f8271e3ee6baaa59291fc02",
+      "git_blob": "1d358adc1e730a19a5bd487f2b05ea5385799bde"
+    },
+    {
+      "path": "src/host-result-ledger.ts",
+      "bytes": 10093,
+      "sha256": "394933b31bbb0610bc55bd2dc03b545c1559f862f151f6ee22164e8af9804fda",
+      "git_blob": "e0612e8f2e4c6977517f729c9800b068ff957143"
+    },
+    {
+      "path": "tests/host-result-adapter.test.ts",
+      "bytes": 15224,
+      "sha256": "cea440f52dae77dd7031229c879b46964cb4949a3f0b50f387bd817d03ec1427",
+      "git_blob": "7913a0f4800118d0d489d6c1414bd1bcbcd7f9b6"
+    },
+    {
+      "path": "review/main-result-adapter/BASELINE.json",
+      "bytes": 5033,
+      "sha256": "28675f7e81d2b84375c8ecdb4f9d35bc4bedd1ca2158ef6b6201f5c75e65df81",
+      "git_blob": "4d2b7cc926e63013c6d72b24de2e424c3f6ca6d8"
+    },
+    {
+      "path": "review/main-result-adapter/TESTS.tap",
+      "bytes": 8190,
+      "sha256": "d799128382a7eb7089348013d3bcd50e37fa83dc25635ff6281b2007fd518394",
+      "git_blob": "bcd99e578fd891e79573cc82bb839feb9c6d5d4f"
+    },
+    {
+      "path": "review/main-result-adapter/README.md",
+      "bytes": 7043,
+      "sha256": "2520934f767227e370d08162a78e7c392b108ba33f4009732699c3bc2856f6f9",
+      "git_blob": "3b9fbc02dbfd410619ecda738f6dde65e2af3a8b"
+    },
+    {
+      "path": "review/main-result-adapter/RESULTS.json",
+      "bytes": 1604,
+      "sha256": "ea9e33f6d1c070d3a5cb558d47b08a1fe31900ce6cedd3328ff3161f0146936a",
+      "git_blob": "bcbb696094f9823b9c1ee308dcb39e82e5831982"
+    }
+  ]
+}
