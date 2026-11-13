@@ -30,3 +30,5 @@ export * from "./hero-river.ts";
 export * from "./hero-children.ts";
 
 export * from "./hero-shuffle.ts";
+
+export * from "./hero-pilot.ts";

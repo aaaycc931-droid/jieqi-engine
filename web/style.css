@@ -880,6 +880,7 @@ h1 { margin-bottom: 10px; font-size: clamp(28px, 6vw, 42px); }
 .mode-picker label { display: grid; gap: 5px; color: #5d4037; font-size: 13px; }
 .mode-picker select { min-width: 0; border: 1px solid #c7a77d; border-radius: 8px; padding: 7px; background: #fff8e7; color: #3e2519; }
 .effect-marker { position: absolute; right: -2px; bottom: -2px; z-index: 2; min-width: 17px; padding: 1px 3px; border-radius: 9px; color: #fff8dc; background: #67471f; font-size: 11px; font-weight: 800; line-height: 1.2; }
+.relay-marker { position: absolute; top: -5px; left: 50%; transform: translateX(-50%); z-index: 4; white-space: nowrap; padding: 1px 4px; border: 1px solid #806445; border-radius: 3px; color: #4a3624; background: #f5ecd6; font-size: 10px; font-weight: 700; line-height: 1.3; pointer-events: none; }
 .rps-choice {
   position: relative;
   display: grid;

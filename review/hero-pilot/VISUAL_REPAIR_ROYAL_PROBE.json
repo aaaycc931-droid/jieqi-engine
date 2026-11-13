@@ -1,0 +1,23 @@
+{
+  "sourceParent": "7a1dfbc92efa2a54bb85175cc251856bb2cdb4d3",
+  "execution": "visual repair working tree; bound by VISUAL_REPAIR.json source hashes",
+  "kind": "EXECUTOR_RERUN_MAINLINE_SYNTHETIC_ROYAL_PROBE_NOT_INDEPENDENT_QA",
+  "initialProbeCorrection": "Initial full-state equality assertion failed only on lastMove.pieceId following submitted first endpoint. Narrowed assertion to causal effects/secret and explicitly preserved that metadata difference; not a product fix.",
+  "checks": [
+    "eligible public swap with a secret landing trap commits both placements, consumes one use and resolves opened own-general check through existing execution",
+    "reversed endpoints have identical effects/secret after excluding request-order lastMove.pieceId; full states intentionally not claimed equal",
+    "original state/secret remain unchanged; actual automatic execution finishes with opponent winner"
+  ],
+  "passed": 3,
+  "failed": 0,
+  "candidates": [
+    [
+      "a",
+      "b"
+    ]
+  ],
+  "publicSafetyBefore": false,
+  "safeStatus": "playing",
+  "hazardStatus": "execution",
+  "finalStatus": "finished"
+}

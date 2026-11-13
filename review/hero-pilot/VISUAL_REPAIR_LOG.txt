@@ -1,0 +1,38 @@
+Visual feedback repair: actual stdout excerpts; no browser/rendering claim.
+
+hero-pilot-feedback-tests.log SHA256=f62ab1ef32494ad4efedebd9f7f23c37b85b8d0df4653dd648151195c149f5d5
+✔ TIME-CLOCK-03 missing historical clock evidence refuses rewind without consuming it (6.169963ms)
+✔ TIME-SNAPSHOT-01 rewind restores opponent secret skill resources and trap durations without re-landing (5.50191ms)
+ℹ tests 63
+ℹ suites 0
+ℹ pass 63
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 567.398268
+
+hero-pilot-feedback-web-tests.log SHA256=b9a1cee587e5c4addfbb3c2b6216d13bdfa59201971fedb96b69ae137e3060a6
+✔ UI-TRAP-01 普通棋子踩中陷阱只播报击杀，不错误宣告胜利 (1.357533ms)
+✔ UI-TRAP-02 将帅踩中陷阱仍播报伏击胜利 (0.265375ms)
+ℹ tests 92
+ℹ suites 0
+ℹ pass 92
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 558.129328
+
+hero-pilot-feedback-dom.log SHA256=17d4c9da26acfea64f01372d3eb2fed237cb79110386d852e25403d067b1bfa8
+{"kind":"jsdom_production_module_interaction","checks":["default pool excludes pilot","real selection → RPS → 32-piece engine initialization","synthetic midgame: actual skill button → pair selector → authority → resource display → handoff","actual endpoints (0,6)/(2,6) display explicit two-piece labels; no false origin/ordinary markers","action-bound markers survive transient event clearing","duplicate command adds no marker, message, cost or handoff","next ordinary move clears swap labels and preserves normal from/to markers","enemy target, same-piece no-op and stale command keep prior feedback and state unchanged","no available partner opens explanation without invented success feedback","actual resignation and result panel"],"passed":10,"swapMarkers":[{"x":0,"y":6,"from":false,"to":false,"relay":true,"text":"换轨 ↔","label":"红马，坐标 1, 7，上一手换轨：两枚棋交换位置"},{"x":2,"y":6,"from":false,"to":false,"relay":true,"text":"换轨 ↔","label":"红车，坐标 3, 7，上一手换轨：两枚棋交换位置"}],"layout_and_browser_verified":false,"fixture_boundary":"Full opening is real UI initialization. Skill and resignation start from explicitly installed synthetic midgame; not a naturally played game. Invalid/duplicate commands call the exported production handler; transient-event reset is a test hook."}
+
+hero-pilot-feedback-build.log SHA256=3d11bf829af210520aa581999f8d05488492b3d8e30578ffd1f08f105986641e
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> jieqi-engine@0.4.0 build:web
+> node scripts/build-web.ts
+
+(node:61) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+已生成本地试玩网页：dist/web/index.html

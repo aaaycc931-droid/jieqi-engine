@@ -1,3 +1,4 @@
+import { applyRelaySwap } from "./hero-pilot.ts";
 import { applyShuffleAction } from "./hero-shuffle.ts";
 import { emitMechanismEvent, emitMainActionAtomClosed, withIsolatedMechanismEvents } from "./mechanism-observer.ts";
 import { requireClosedDestructionBatch } from "./settlement-context.ts";
@@ -113,9 +114,10 @@ function applyFreshHeroAbility(state: GameState, secret: SecretState, command: H
   beginFormalTurn(s, k, randomInt);
   requireRule(s.turnLifecycle?.phase === "before_main", "INVALID_PRE_MAIN_WINDOW", "只能在正式回合主行动前发动技能");
   const forcedFlyer = s.pieces.find(p => p.layer === "air" && getController(p) === side && s.effectsByPieceId?.[p.id]?.flight?.forcedLanding);
-  const isMain = ["invoke", "destruction", "timeline_twist", "burning_flame", "inner_ghost_burst", "river_enter", "river_move", "river_exit", "inner_wave", "landing"].includes(command.ability);
+  const isMain = ["relay_swap", "invoke", "destruction", "timeline_twist", "burning_flame", "inner_ghost_burst", "river_enter", "river_move", "river_exit", "inner_wave", "landing"].includes(command.ability);
   requireRule(!forcedFlyer || !isMain || command.ability === "landing" && command.pieceId === forcedFlyer.id, "FORCED_LANDING_REQUIRED", "第四个控制方回合的主行动必须原地降落");
   const classification: ActionClassification = { tier: command.ability === "timeline_twist" || command.ability === "rewind" ? 3 : 2, keywords: isMain ? ["占步", "耗费"] : ["耗费"], source: "hero", opportunity: isMain ? "main" : "before_main", countsAsFormalTurn: isMain };
+  if (command.ability === "relay_swap") classification.keywords = ["占步", "耗费", "移置"];
   const beforeAction = copy(s);
   if (command.ability !== "shadow") {
     if (isMain && command.ability !== "timeline_twist") rememberAction(beforeAction, k, undefined, classification.tier, undefined, now, classification);
@@ -128,6 +130,8 @@ function applyFreshHeroAbility(state: GameState, secret: SecretState, command: H
   const ordinaryTime = () => requireRule(s.featureRules?.mutation !== "end_time", "DESTINY_REPLACED", "宿命已替换普通时间技能");
   let endsTurn = false, secretOnly = false;
   switch (command.ability) {
+    case "relay_swap":
+      applyRelaySwap(s, k, side, command); endsTurn = true; break;
     case "training":
       if (isGeneralInCheck(s, side)) { const error = new Error("H15受将启动许可未覆盖"); error.name = "TrainingCoverageError"; throw error; }
       startTraining(s, k, side, command.trainingType, randomInt);
@@ -330,6 +334,14 @@ function applyFreshHeroAbility(state: GameState, secret: SecretState, command: H
     s.revision += 1;
     if (endsTurn) {
       s.lastMove = { actionId: command.actionId, pieceId: command.pieceId ?? `hero:${side}`, actingSide: side, from: command.to ?? { x: 0, y: 0 }, to: command.to ?? { x: 0, y: 0 }, landed: false, ...actionFields(classification) };
+      if (command.ability === "relay_swap") {
+        const [a, b] = [command.pieceId!, command.partnerId!].sort().map(id => beforeAction.pieces.find(p => p.id === id)!);
+        const from = { x: a.x, y: a.y }, to = { x: b.x, y: b.y };
+        // Keep truthful compatibility coordinates; the explicit two-piece record
+        // owns presentation. Classification/history stay II-level displacement.
+        s.lastMove.from = from; s.lastMove.to = to;
+        s.lastMove.relaySwap = [{ pieceId: a.id, from, to }, { pieceId: b.id, from: to, to: from }];
+      }
       if (command.ability === "inner_wave" && s.pieces.some(p => p.id === command.pieceId && getController(p) === side) && !closeDirectDeaths(s, k, side) && !isGeneralInCheck(s, side)) {
         closeMainActionAtom(s, command.actionId);
         s.pendingHeroChild = { kind: "inner_wave", side, pieceId: command.pieceId!, parent: copy(s.lastMove) };

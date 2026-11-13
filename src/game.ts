@@ -62,6 +62,7 @@ export function initializeFeatureGameState(
   mutation?: MutationId,
   forms?: Partial<Record<Side, HeroForm>>,
   variants?: Partial<Record<Side, GalakrondForm>>,
+  experimentalHeroPilot = false,
 ): GameState {
   if (state.heroFormLock !== undefined || state.featureRules !== undefined || state.revision !== 0 || state.lastMove || Object.values(state.formalTurns ?? {}).some(n => n !== 0)) throw new RuleError("HERO_FORM_LOCKED", "英雄形态只能在新局开局时配置，不能重置本局资源");
   const heroSelections = createHeroSelections(heroes, forms, variants);
@@ -76,7 +77,7 @@ export function initializeFeatureGameState(
   }
   nextState.effectsByPieceId = {};
   nextState.assassination = assassination;
-  nextState.featureRules = { heroSelections, ...(heroes ? { heroes: { ...heroes } } : {}), ...(mutation ? { mutation } : {}) };
+  nextState.featureRules = { ...(experimentalHeroPilot ? { experimentalHeroPilot: true as const } : {}), heroSelections, ...(heroes ? { heroes: { ...heroes } } : {}), ...(mutation ? { mutation } : {}) };
   initializeHeroForms(nextState);
   const warrior: WarriorStates = { red: { barrierPieceIds: [], ironArmorAvailable: heroes?.red === "warrior" }, black: { barrierPieceIds: [], ironArmorAvailable: heroes?.black === "warrior" } };
   nextState.warrior = heroes?.red === "warrior" || heroes?.black === "warrior" ? warrior : undefined;
