@@ -1,0 +1,164 @@
+TAP version 13
+# (node:12) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: C5 null model distinguishes key removal from the explicit Android JSON sentinel
+ok 1 - C5 null model distinguishes key removal from the explicit Android JSON sentinel
+  ---
+  duration_ms: 1.256172
+  type: 'test'
+  ...
+# Subtest: C5 real native wrong-instance not_sent clears Web pending without retry
+ok 2 - C5 real native wrong-instance not_sent clears Web pending without retry
+  ---
+  duration_ms: 17.104484
+  type: 'test'
+  ...
+# Subtest: C5 real native wrong-generation not_sent clears Web pending without retry
+ok 3 - C5 real native wrong-generation not_sent clears Web pending without retry
+  ---
+  duration_ms: 10.081929
+  type: 'test'
+  ...
+# Subtest: C5 real native invalid-json not_sent clears Web pending without retry
+ok 4 - C5 real native invalid-json not_sent clears Web pending without retry
+  ---
+  duration_ms: 11.960643
+  type: 'test'
+  ...
+# Subtest: C5 real native disconnected not_sent clears Web pending without retry
+ok 5 - C5 real native disconnected not_sent clears Web pending without retry
+  ---
+  duration_ms: 9.654542
+  type: 'test'
+  ...
+# Subtest: C5 actual native written context keeps the existing one-action one-ping path
+ok 6 - C5 actual native written context keeps the existing one-action one-ping path
+  ---
+  duration_ms: 9.691892
+  type: 'test'
+  ...
+# (node:13) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: inline real old callback set rejected at final JS after native generation changed
+ok 7 - inline real old callback set rejected at final JS after native generation changed
+  ---
+  duration_ms: 28.764195
+  type: 'test'
+  ...
+# Subtest: queued real old callback set rejected at final JS after native generation changed
+ok 8 - queued real old callback set rejected at final JS after native generation changed
+  ---
+  duration_ms: 18.513491
+  type: 'test'
+  ...
+# Subtest: same-generation actual FIFO message survives latest native sequence ahead; duplicates rejected
+ok 9 - same-generation actual FIFO message survives latest native sequence ahead; duplicates rejected
+  ---
+  duration_ms: 11.966333
+  type: 'test'
+  ...
+# Subtest: same-generation reverse sequence rejected (adversarial only)
+ok 10 - same-generation reverse sequence rejected (adversarial only)
+  ---
+  duration_ms: 14.644116
+  type: 'test'
+  ...
+# Subtest: new native instance with same generation rejects old callbacks
+ok 11 - new native instance with same generation rejects old callbacks
+  ---
+  duration_ms: 16.818982
+  type: 'test'
+  ...
+# Subtest: new Web admits events generated after its initialization watermark
+ok 12 - new Web admits events generated after its initialization watermark
+  ---
+  duration_ms: 28.349903
+  type: 'test'
+  ...
+# Subtest: scoped send fixed selection makes one action plus ordinary ping; v2 bytes unchanged
+ok 13 - scoped send fixed selection makes one action plus ordinary ping; v2 bytes unchanged
+  ---
+  duration_ms: 9.400279
+  type: 'test'
+  ...
+# Subtest: scoped bad never falls back or retries
+ok 14 - scoped bad never falls back or retries
+  ---
+  duration_ms: 15.526582
+  type: 'test'
+  ...
+# Subtest: scoped throw never falls back or retries
+ok 15 - scoped throw never falls back or retries
+  ---
+  duration_ms: 20.021554
+  type: 'test'
+  ...
+# Subtest: scoped mismatch never falls back or retries
+ok 16 - scoped mismatch never falls back or retries
+  ---
+  duration_ms: 10.585028
+  type: 'test'
+  ...
+# Subtest: scoped not_sent never falls back or retries
+ok 17 - scoped not_sent never falls back or retries
+  ---
+  duration_ms: 12.407135
+  type: 'test'
+  ...
+# Subtest: late old scoped result does not mutate a new pending request
+ok 18 - late old scoped result does not mutate a new pending request
+  ---
+  duration_ms: 11.018435
+  type: 'test'
+  ...
+# Subtest: bad capability performs zero sends and untagged callbacks cannot clear pending
+ok 19 - bad capability performs zero sends and untagged callbacks cannot clear pending
+  ---
+  duration_ms: 15.213849
+  type: 'test'
+  ...
+# Subtest: legacy bridge preserves one legacy action + ping path and untagged callbacks
+ok 20 - legacy bridge preserves one legacy action + ping path and untagged callbacks
+  ---
+  duration_ms: 8.412186
+  type: 'test'
+  ...
+# Subtest: only same-named scoped method without capability is not trusted
+ok 21 - only same-named scoped method without capability is not trusted
+  ---
+  duration_ms: 12.8054
+  type: 'test'
+  ...
+# Subtest: current lifecycle clears UI without resolving independently retained C4 unknown
+ok 22 - current lifecycle clears UI without resolving independently retained C4 unknown
+  ---
+  duration_ms: 10.238722
+  type: 'test'
+  ...
+# Subtest: Web rebuild rejects previously produced same-generation events
+ok 23 - Web rebuild rejects previously produced same-generation events
+  ---
+  duration_ms: 11.145884
+  type: 'test'
+  ...
+# Subtest: decimal sequence beyond JS integer range keeps adjacent event order
+ok 24 - decimal sequence beyond JS integer range keeps adjacent event order
+  ---
+  duration_ms: 12.741949
+  type: 'test'
+  ...
+# Subtest: exception after context switch cannot mark a new attempt unknown
+ok 25 - exception after context switch cannot mark a new attempt unknown
+  ---
+  duration_ms: 12.685975
+  type: 'test'
+  ...
+1..25
+# tests 25
+# suites 0
+# pass 25
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1926.725191

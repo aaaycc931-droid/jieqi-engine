@@ -4,6 +4,15 @@ import importlib.util,json,subprocess,tempfile,hashlib,re
 ROOT=Path(__file__).resolve().parents[2]
 spec=importlib.util.spec_from_file_location('old',ROOT/'scripts/research/ch-lifecycle-probe.py');old=importlib.util.module_from_spec(spec);spec.loader.exec_module(old)
 SHIMS=dict(old.SHIMS)
+# Android distinguishes Java null (remove the key) from JSONObject.NULL (emit
+# JSON null). Keep this correction local to C5; old C1-C4/PR22 evidence is intact.
+json_source=SHIMS['org/json/JSONObject.java']
+assert 'raw=null;values.put(k,v);return this;' in json_source
+SHIMS['org/json/JSONObject.java']=json_source.replace(
+ 'public class JSONObject {',
+ 'public class JSONObject { public static final Object NULL=new Object(){public String toString(){return "null";}};'
+).replace('raw=null;values.put(k,v);return this;',
+ 'raw=null;if(v==null)values.remove(k);else values.put(k,v);return this;')
 SHIMS['android/bluetooth/BluetoothAdapter.java']=SHIMS['android/bluetooth/BluetoothAdapter.java'].replace('public class BluetoothAdapter {','public class BluetoothAdapter { public static final java.util.concurrent.BlockingQueue<BluetoothServerSocket> servers=new java.util.concurrent.LinkedBlockingQueue<>();').replace('return new BluetoothServerSocket();','BluetoothServerSocket supplied=servers.poll();return supplied==null?new BluetoothServerSocket():supplied;')
 SHIMS['com/jieqi/bluetooth/MainActivity.java']=SHIMS['com/jieqi/bluetooth/MainActivity.java'].replace('public class MainActivity {','public class MainActivity { public static boolean inline;').replace('queue.add(r);','if(inline)r.run();else queue.add(r);')
 SHIMS['com/jieqi/bluetooth/GenerationProbe.java']=r'''package com.jieqi.bluetooth;

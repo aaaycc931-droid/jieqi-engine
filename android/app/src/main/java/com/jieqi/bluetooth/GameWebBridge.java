@@ -134,7 +134,7 @@ public final class GameWebBridge implements BluetoothGameSession.GenerationListe
     catch(IOException e){return scopedResult("unknown",null);}
   }
   private String scopedResult(String status,BluetoothGameSession.Context context){
-    try{return new JSONObject().put("status",status).put("attemptedContext",context==null?null:context.json()).toString();}
+    try{return new JSONObject().put("status",status).put("attemptedContext",context==null?JSONObject.NULL:context.json()).toString();}
     catch(JSONException e){return "{\"status\":\"unknown\",\"attemptedContext\":null}";}
   }
   @Override public void onStateChanged(BluetoothGameSession.Context context,BluetoothGameSession.Role role,BluetoothGameSession.State state,String detail){
