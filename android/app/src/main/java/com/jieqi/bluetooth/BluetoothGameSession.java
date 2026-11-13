@@ -43,269 +43,141 @@ public final class BluetoothGameSession implements Closeable {
     void onMessage(JSONObject message);
   }
 
+
+  public interface GenerationListener extends Listener {
+    void onStateChanged(Context context, Role role, State state, String detail);
+    void onMessage(Context context, JSONObject message);
+  }
+  public static final class Context {
+    public final String instance, generation, sequence;
+    public final Role role;
+    Context(String i, String g, String s, Role r) { instance=i; generation=g; sequence=s; role=r; }
+    public JSONObject json() throws JSONException { return new JSONObject().put("instance",instance).put("generation",generation).put("sequence",sequence).put("role",role.name()); }
+  }
+  // Every resource belongs to one attempt, including a socket still connecting.
+  // Ownership mutations use the session monitor. Connect/accept/read/write waits
+  // run outside it; resource close retains the existing monitor semantics.
+  private static final class Attempt {
+    final String generation; final Role role; final String address;
+    BluetoothSocket socket; BluetoothServerSocket server; BufferedWriter writer;
+    boolean reconnectScheduled;
+    Attempt(String g,Role r,String a){generation=g;role=r;address=a;}
+  }
   private final BluetoothAdapter adapter;
   private final Listener listener;
-  private final ExecutorService io = Executors.newSingleThreadExecutor();
-  private final Handler mainHandler = new Handler(Looper.getMainLooper());
-  private final Object writeLock = new Object();
-
-  private BluetoothServerSocket serverSocket;
-  private BluetoothSocket socket;
-  private BufferedWriter writer;
-  private volatile boolean closed;
-  private volatile boolean autoReconnect;
-  private volatile boolean everConnected;
-  private volatile boolean reconnectScheduled;
-  private volatile Role role = Role.NONE;
-  private volatile Role reconnectRole = Role.NONE;
-  private volatile State state = State.IDLE;
-  private String reconnectAddress;
-
-  public BluetoothGameSession(BluetoothAdapter adapter, Listener listener) {
-    this.adapter = adapter;
-    this.listener = listener;
+  private final ExecutorService io=Executors.newSingleThreadExecutor();
+  private final Handler mainHandler=new Handler(Looper.getMainLooper());
+  private final Object writeLock=new Object();
+  private final String instance=UUID.randomUUID().toString();
+  private java.math.BigInteger generation=java.math.BigInteger.ZERO, sequence=java.math.BigInteger.ZERO;
+  private Attempt current=new Attempt("0",Role.NONE,null);
+  private boolean closed, autoReconnect, everConnected, disposed;
+  private volatile State state=State.IDLE;
+  public BluetoothGameSession(BluetoothAdapter a,Listener l){adapter=a;listener=l;}
+  public synchronized Role getRole(){return current.role;}
+  public State getState(){return state;}
+  private Context context(Attempt a){return new Context(instance,a.generation,sequence.toString(),a.role);}
+  public synchronized Context localContext(){return context(current);}
+  private boolean owns(Attempt a){return current==a&&!closed&&!disposed;}
+  private void closeSocket(Attempt a){if(a.socket!=null)try{a.socket.close();}catch(IOException ignored){}a.socket=null;a.writer=null;}
+  private void closeServer(Attempt a){if(a.server!=null)try{a.server.close();}catch(IOException ignored){}a.server=null;}
+  private Attempt replace(Role role,String address){closeServer(current);closeSocket(current);generation=generation.add(java.math.BigInteger.ONE);current=new Attempt(generation.toString(),role,address);return current;}
+  public synchronized void disconnect(){autoReconnect=false;closed=true;everConnected=false;Attempt a=replace(Role.NONE,null);emit(a,State.DISCONNECTED,"已离开蓝牙房间");}
+  public synchronized void host(){if(disposed)return;autoReconnect=true;everConnected=false;start(Role.HOST,null,false);}
+  public synchronized void join(String address){if(disposed)return;autoReconnect=true;everConnected=false;start(Role.GUEST,address,false);}
+  public synchronized void reconnect(){if(current.role!=Role.NONE&&!disposed){autoReconnect=true;scheduleReconnect(current);}}
+  private synchronized void start(Role role,String address,boolean reconnecting){
+    Attempt a=replace(role,address);closed=false;
+    emit(a,role==Role.HOST?State.LISTENING:State.CONNECTING,role==Role.HOST?(reconnecting?"正在自动等待对方重新连接":"正在等待另一台手机加入"):(reconnecting?"正在自动重新连接房主":"正在连接房主"));
+    io.execute(()->connect(a,reconnecting));
   }
-
-  public Role getRole() { return role; }
-  public State getState() { return state; }
-
-  /** Ends the current room and disables automatic reconnect. */
-  public synchronized void disconnect() {
-    autoReconnect = false;
-    reconnectScheduled = false;
-    closed = true;
-    closeServerSocket();
-    closeSocket();
-    writer = null;
-    role = Role.NONE;
-    reconnectRole = Role.NONE;
-    reconnectAddress = null;
-    everConnected = false;
-    emit(State.DISCONNECTED, "已离开蓝牙房间");
-  }
-
   @SuppressLint("MissingPermission")
-  public synchronized void host() {
-    autoReconnect = true;
-    everConnected = false;
-    reconnectRole = Role.HOST;
-    reconnectAddress = null;
-    startHost(false);
-  }
-
-  @SuppressLint("MissingPermission")
-  public synchronized void join(String address) {
-    autoReconnect = true;
-    everConnected = false;
-    reconnectRole = Role.GUEST;
-    reconnectAddress = address;
-    startGuest(address, false);
-  }
-
-  @SuppressLint("MissingPermission")
-  public synchronized void reconnect() {
-    if (reconnectRole == Role.NONE) return;
-    autoReconnect = true;
-    scheduleReconnect();
-  }
-
-  @SuppressLint("MissingPermission")
-  private synchronized void startHost(boolean reconnecting) {
-    closeServerSocket();
-    closeSocket();
-    closed = false;
-    role = Role.HOST;
-    emit(State.LISTENING, reconnecting ? "正在自动等待对方重新连接" : "正在等待另一台手机加入");
-    io.execute(() -> {
-      BluetoothServerSocket candidate = null;
-      try {
-        candidate = adapter.listenUsingRfcommWithServiceRecord(SERVICE_NAME, SERVICE_UUID);
-        synchronized (this) {
-          if (closed) {
-            candidate.close();
-            return;
-          }
-          serverSocket = candidate;
-        }
-        BluetoothSocket accepted = candidate.accept();
-        closeServerSocket();
-        attach(accepted, reconnecting ? "连接已恢复" : "对方已加入房间");
-      } catch (SecurityException error) {
-        if (!closed) fail("蓝牙权限已失效，请在系统设置重新允许");
-      } catch (IOException error) {
-        if (!closed) handleTransportFailure("创建或等待房间失败：" + safeMessage(error));
-      } finally {
-        synchronized (this) {
-          if (serverSocket == candidate) closeServerSocket();
-        }
-      }
-    });
-  }
-
-  @SuppressLint("MissingPermission")
-  private synchronized void startGuest(String address, boolean reconnecting) {
-    closeServerSocket();
-    closeSocket();
-    closed = false;
-    role = Role.GUEST;
-    emit(State.CONNECTING, reconnecting ? "正在自动重新连接房主" : "正在连接房主");
-    io.execute(() -> {
-      try {
-        BluetoothDevice device = adapter.getRemoteDevice(address);
-        adapter.cancelDiscovery();
-        BluetoothSocket candidate = device.createRfcommSocketToServiceRecord(SERVICE_UUID);
-        synchronized (this) {
-          if (closed) {
-            candidate.close();
-            return;
-          }
-          // Register the connecting socket before connect() blocks so the UI's
-          // cancel action can close it immediately instead of waiting for the
-          // platform RFCOMM timeout.
-          socket = candidate;
-        }
+  private void connect(Attempt a,boolean reconnecting){
+    BluetoothSocket candidate=null;BluetoothServerSocket server=null;
+    try{
+      synchronized(this){if(!owns(a))return;}
+      if(a.role==Role.HOST){
+        server=adapter.listenUsingRfcommWithServiceRecord(SERVICE_NAME,SERVICE_UUID);
+        synchronized(this){if(!owns(a)){server.close();return;}a.server=server;}
+        candidate=server.accept();
+        synchronized(this){closeServer(a);}
+      }else{
+        BluetoothDevice device=adapter.getRemoteDevice(a.address);adapter.cancelDiscovery();
+        candidate=device.createRfcommSocketToServiceRecord(SERVICE_UUID);
+        synchronized(this){if(!owns(a)){candidate.close();return;}a.socket=candidate;}
         candidate.connect();
-        attach(candidate, reconnecting ? "连接已恢复" : "已连接房主");
-      } catch (IllegalArgumentException error) {
-        handleTransportFailure("蓝牙设备地址无效");
-      } catch (SecurityException error) {
-        if (!closed) fail("蓝牙权限已失效，请在系统设置重新允许");
-      } catch (IOException error) {
-        if (!closed) handleTransportFailure("连接失败：" + safeMessage(error));
       }
-    });
+      attach(a,candidate,reconnecting?"连接已恢复":a.role==Role.HOST?"对方已加入房间":"已连接房主");
+    }catch(IllegalArgumentException error){failure(a,"蓝牙设备地址无效",true);}
+     catch(SecurityException error){failure(a,"蓝牙权限已失效，请在系统设置重新允许",false);}
+     catch(IOException error){failure(a,"蓝牙连接失败："+safeMessage(error),true);}
+    finally{synchronized(this){closeServer(a);if(candidate!=null&&a.socket==candidate)closeSocket(a);else if(candidate!=null)try{candidate.close();}catch(IOException ignored){}}}
   }
-
-  /** Whether a failed send reached the stream-write attempt. */
-  public static final class SendFailure extends IOException {
-    public final boolean writeAttempted;
-
-    private SendFailure(String detail, boolean writeAttempted, IOException cause) {
-      super(detail, cause);
-      this.writeAttempted = writeAttempted;
-    }
+  private void attach(Attempt a,BluetoothSocket connected,String detail)throws IOException{
+    synchronized(this){if(!owns(a)){connected.close();return;}a.socket=connected;a.writer=new BufferedWriter(new OutputStreamWriter(connected.getOutputStream(),StandardCharsets.UTF_8));everConnected=true;emit(a,State.CONNECTED,detail);}
+    readLoop(a,connected);
   }
-
-  /** Sends one newline-delimited protocol envelope. May be called from the UI thread. */
-  public void send(JSONObject message) throws IOException, JSONException {
-    validateEnvelope(message);
-    String raw = message.toString();
-    byte[] encoded = raw.getBytes(StandardCharsets.UTF_8);
-    if (encoded.length > MAX_MESSAGE_BYTES) throw new SendFailure("消息超过大小上限", false, null);
-    synchronized (writeLock) {
-      BufferedWriter output = writer;
-      if (output == null || state != State.CONNECTED) throw new SendFailure("蓝牙房间尚未连接", false, null);
-      try {
-        output.write(raw);
-        output.newLine();
-        output.flush();
-      } catch (IOException error) {
-        synchronized (this) {
-          // A failed old writer must not close a replacement connection.
-          if (writer == output) {
-            closeSocket();
-            writer = null;
-            emit(State.DISCONNECTED, "发送结果未知，连接正在恢复");
-            scheduleReconnect();
-          }
-        }
-        throw new SendFailure(safeMessage(error), true, error);
-      }
-    }
-  }
-
-  private void attach(BluetoothSocket connected, String detail) throws IOException {
-    synchronized (this) {
-      if (closed) {
-        connected.close();
-        return;
-      }
-      socket = connected;
-      writer = new BufferedWriter(new OutputStreamWriter(connected.getOutputStream(), StandardCharsets.UTF_8));
-    }
-    everConnected = true;
-    reconnectScheduled = false;
-    emit(State.CONNECTED, detail);
-    readLoop(connected);
-  }
-
-  private void readLoop(BluetoothSocket connected) {
-    try (BufferedReader reader = new BufferedReader(new InputStreamReader(connected.getInputStream(), StandardCharsets.UTF_8))) {
+  private void readLoop(Attempt a,BluetoothSocket connected){
+    try(BufferedReader reader=new BufferedReader(new InputStreamReader(connected.getInputStream(),StandardCharsets.UTF_8))){
       String line;
-      while (!closed && (line = reader.readLine()) != null) {
-        if (line.getBytes(StandardCharsets.UTF_8).length > MAX_MESSAGE_BYTES) {
-          fail("收到超过大小上限的消息");
-          return;
-        }
-        try {
-          JSONObject message = new JSONObject(line);
-          validateEnvelope(message);
-          mainHandler.post(() -> listener.onMessage(message));
-        } catch (JSONException error) {
-          fail("收到无效联机消息");
-          return;
+      while(true){synchronized(this){if(!owns(a))return;}
+        line=reader.readLine();if(line==null)break;
+        synchronized(this){if(!owns(a))return;
+          if(line.getBytes(StandardCharsets.UTF_8).length>MAX_MESSAGE_BYTES){failure(a,"收到超过大小上限的消息",false);return;}
+          try{JSONObject message=new JSONObject(line);validateEnvelope(message);Context c=eventContext(a);
+            mainHandler.post(()->{if(listener instanceof GenerationListener)((GenerationListener)listener).onMessage(c,message);else listener.onMessage(message);});
+          }catch(JSONException error){failure(a,"收到无效联机消息",false);return;}
         }
       }
-      if (!closed) handleUnexpectedDisconnect("对方已断开连接");
-    } catch (IOException error) {
-      if (!closed) handleUnexpectedDisconnect("蓝牙连接已断开");
-    } finally {
-      synchronized (this) { closeSocket(); }
+      failure(a,"对方已断开连接",true);
+    }catch(IOException error){failure(a,"蓝牙连接已断开",true);}
+    finally{synchronized(this){if(a.socket==connected)closeSocket(a);}}
+  }
+  private synchronized void failure(Attempt a,String detail,boolean recover){
+    if(!owns(a))return;
+    emit(a,recover&&everConnected?State.DISCONNECTED:State.ERROR,detail);closeSocket(a);closeServer(a);
+    if(recover&&everConnected)scheduleReconnect(a);
+  }
+  private synchronized void scheduleReconnect(Attempt a){
+    if(!owns(a)||!autoReconnect||a.role==Role.NONE||a.reconnectScheduled||state==State.CONNECTED)return;
+    a.reconnectScheduled=true;
+    mainHandler.postDelayed(()->{synchronized(this){
+      if(!owns(a))return;a.reconnectScheduled=false;
+      if(!autoReconnect||state==State.CONNECTED)return;
+      try{if(!adapter.isEnabled()){emit(a,State.DISCONNECTED,"请开启蓝牙");scheduleReconnect(a);return;}}
+      catch(SecurityException error){autoReconnect=false;failure(a,"蓝牙权限已失效",false);return;}
+      start(a.role,a.address,true);
+    }},1000);
+  }
+  // Capture once when producing the event. Neither Handler nor WebView delivery
+  // is allowed to substitute the later current role/generation for this origin.
+  private Context eventContext(Attempt a){sequence=sequence.add(java.math.BigInteger.ONE);return context(a);}
+  private void emit(Attempt a,State next,String detail){state=next;Context c=eventContext(a);
+    mainHandler.post(()->{if(listener instanceof GenerationListener)((GenerationListener)listener).onStateChanged(c,c.role,next,detail);else listener.onStateChanged(c.role,next,detail);});
+  }
+  public static final class SendFailure extends IOException{
+    public final boolean writeAttempted;public final Context attemptedContext;
+    SendFailure(String detail,boolean attempted,Context c,IOException cause){super(detail,cause);writeAttempted=attempted;attemptedContext=c;}
+  }
+  public void send(JSONObject message)throws IOException,JSONException{sendBound(message,null,null,false);}
+  public Context sendScoped(JSONObject message,String expectedInstance,String expectedGeneration)throws IOException,JSONException{return sendBound(message,expectedInstance,expectedGeneration,true);}
+  // writeLock serializes sends, not lifecycle replacement. The session monitor
+  // atomically compares the expected context and captures this exact writer.
+  private Context sendBound(JSONObject message,String expectedInstance,String expectedGeneration,boolean scoped)throws IOException,JSONException{
+    validateEnvelope(message);String raw=message.toString();
+    if(raw.getBytes(StandardCharsets.UTF_8).length>MAX_MESSAGE_BYTES)throw new SendFailure("消息超过大小上限",false,null,null);
+    synchronized(writeLock){
+      final Attempt a;final BufferedWriter output;final Context captured;
+      synchronized(this){a=current;
+        if(!owns(a)||state!=State.CONNECTED||a.writer==null||(scoped&&(!instance.equals(expectedInstance)||!a.generation.equals(expectedGeneration))))throw new SendFailure("连接上下文不匹配或未连接",false,null,null);
+        output=a.writer;captured=context(a);
+      }
+      try{output.write(raw);output.newLine();output.flush();return captured;}
+      catch(IOException error){synchronized(this){if(owns(a)&&a.writer==output){closeSocket(a);emit(a,State.DISCONNECTED,"发送结果未知，连接正在恢复");scheduleReconnect(a);}}
+        throw new SendFailure(safeMessage(error),true,captured,error);
+      }
     }
   }
-
-  private void handleUnexpectedDisconnect(String detail) {
-    emit(State.DISCONNECTED, detail);
-    synchronized (this) { closeSocket(); }
-    scheduleReconnect();
-  }
-
-  private void handleTransportFailure(String detail) {
-    if (everConnected && autoReconnect) {
-      final boolean enabled;
-      try {
-        enabled = adapter.isEnabled();
-      } catch (SecurityException error) {
-        autoReconnect = false;
-        fail("蓝牙权限已失效，请在系统设置重新允许");
-        return;
-      }
-      emit(State.DISCONNECTED, enabled ? detail : "请开启蓝牙");
-      synchronized (this) { closeServerSocket(); closeSocket(); }
-      scheduleReconnect();
-      return;
-    }
-    fail(detail);
-  }
-
-  @SuppressLint("MissingPermission")
-  private synchronized void scheduleReconnect() {
-    if (!autoReconnect || reconnectRole == Role.NONE || reconnectScheduled || state == State.CONNECTED) return;
-    reconnectScheduled = true;
-    mainHandler.postDelayed(() -> {
-      synchronized (BluetoothGameSession.this) {
-        reconnectScheduled = false;
-        if (!autoReconnect || reconnectRole == Role.NONE || state == State.CONNECTED) return;
-        try {
-          if (!adapter.isEnabled()) {
-            emit(State.DISCONNECTED, "请开启蓝牙");
-            scheduleReconnect();
-            return;
-          }
-        } catch (SecurityException error) {
-          autoReconnect = false;
-          fail("蓝牙权限已失效，请在系统设置重新允许");
-          return;
-        }
-        if (reconnectRole == Role.HOST) {
-          startHost(true);
-        } else if (reconnectAddress != null) {
-          startGuest(reconnectAddress, true);
-        }
-      }
-    }, 1_000);
-  }
-
   private static void validateEnvelope(JSONObject message) throws JSONException {
     if (message.optInt("v", -1) != PROTOCOL_VERSION) throw new JSONException("协议版本不匹配");
     String type = message.optString("type", "");
@@ -315,45 +187,6 @@ public final class BluetoothGameSession implements Closeable {
     }
   }
 
-  private void closeServerSocket() {
-    if (serverSocket == null) return;
-    try { serverSocket.close(); } catch (IOException ignored) { }
-    serverSocket = null;
-  }
-
-  private void closeSocket() {
-    if (socket == null) return;
-    try { socket.close(); } catch (IOException ignored) { }
-    socket = null;
-    writer = null;
-  }
-
-  private void emit(State next, String detail) {
-    state = next;
-    mainHandler.post(() -> listener.onStateChanged(role, next, detail));
-  }
-
-  private void fail(String detail) {
-    emit(State.ERROR, detail);
-    synchronized (this) { closeServerSocket(); closeSocket(); }
-  }
-
-  private static String safeMessage(Exception error) {
-    String message = error.getMessage();
-    return message == null || message.trim().isEmpty() ? "系统蓝牙错误" : message;
-  }
-
-  @Override
-  public synchronized void close() {
-    autoReconnect = false;
-    reconnectScheduled = false;
-    closed = true;
-    closeServerSocket();
-    closeSocket();
-    writer = null;
-    role = Role.NONE;
-    reconnectRole = Role.NONE;
-    state = State.IDLE;
-    io.shutdownNow();
-  }
+  private static String safeMessage(Exception e){return e.getMessage()==null||e.getMessage().trim().isEmpty()?"系统蓝牙错误":e.getMessage();}
+  @Override public synchronized void close(){if(disposed)return;autoReconnect=false;closed=true;replace(Role.NONE,null);disposed=true;state=State.IDLE;io.shutdownNow();}
 }

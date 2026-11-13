@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.Set;
 
 /** Trusted-local-page bridge. It exposes transport only, never Android storage or arbitrary APIs. */
-public final class GameWebBridge implements BluetoothGameSession.Listener {
+public final class GameWebBridge implements BluetoothGameSession.GenerationListener {
   private final MainActivity activity;
   private final WebView webView;
   private final BluetoothAdapter adapter;
@@ -118,6 +118,30 @@ public final class GameWebBridge implements BluetoothGameSession.Listener {
     } catch (IOException error) {
       return sendResult("unknown", error.getMessage());
     }
+  }
+
+  @JavascriptInterface
+  public String localTransportContext() {
+    try { return new JSONObject().put("v",1).put("scopedSend",true).put("context",session==null?null:session.localContext().json()).toString(); }
+    catch(JSONException error){return "null";}
+  }
+  @JavascriptInterface
+  public String sendCheckedScoped(String raw,String instance,String generation) {
+    if(session==null)return scopedResult("not_sent",null);
+    try{return scopedResult("written",session.sendScoped(new JSONObject(raw),instance,generation));}
+    catch(BluetoothGameSession.SendFailure e){return scopedResult(e.writeAttempted?"unknown":"not_sent",e.attemptedContext);}
+    catch(JSONException e){return scopedResult("not_sent",null);}
+    catch(IOException e){return scopedResult("unknown",null);}
+  }
+  private String scopedResult(String status,BluetoothGameSession.Context context){
+    try{return new JSONObject().put("status",status).put("attemptedContext",context==null?null:context.json()).toString();}
+    catch(JSONException e){return "{\"status\":\"unknown\",\"attemptedContext\":null}";}
+  }
+  @Override public void onStateChanged(BluetoothGameSession.Context context,BluetoothGameSession.Role role,BluetoothGameSession.State state,String detail){
+    JSONObject event=new JSONObject();try{event.put("type","transport-state").put("role",role.name()).put("state",state.name()).put("detail",detail).put("adapterEnabled",adapterEnabled()).put("localContext",context.json());}catch(JSONException ignored){}emit(event);
+  }
+  @Override public void onMessage(BluetoothGameSession.Context context,JSONObject message){
+    JSONObject event=new JSONObject();try{event.put("type","message").put("message",message).put("localContext",context.json());}catch(JSONException ignored){}emit(event);
   }
 
   private static String sendResult(String status, String detail) {

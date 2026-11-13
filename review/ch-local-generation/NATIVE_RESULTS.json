@@ -1,0 +1,1307 @@
+{
+  "passed": 16,
+  "failed": 0,
+  "cases": [
+    {
+      "mode": "eof",
+      "uiModel": "inline",
+      "context": "{\"v\":1,\"scopedSend\":true,\"context\":{\"instance\":\"7e58072d-97e3-4106-9401-7db9349e71e9\",\"generation\":\"1\",\"sequence\":\"4\",\"role\":\"HOST\"}}",
+      "scripts": [
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"HOST\\\",\\\"state\\\":\\\"LISTENING\\\",\\\"detail\\\":\\\"正在等待另一台手机加入\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"7e58072d-97e3-4106-9401-7db9349e71e9\\\",\\\"generation\\\":\\\"1\\\",\\\"sequence\\\":\\\"1\\\",\\\"role\\\":\\\"HOST\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"HOST\\\",\\\"state\\\":\\\"CONNECTED\\\",\\\"detail\\\":\\\"对方已加入房间\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"7e58072d-97e3-4106-9401-7db9349e71e9\\\",\\\"generation\\\":\\\"1\\\",\\\"sequence\\\":\\\"2\\\",\\\"role\\\":\\\"HOST\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"message\\\",\\\"message\\\":{\\\"v\\\":2,\\\"type\\\":\\\"action\\\",\\\"id\\\":\\\"recorded:1\\\",\\\"payload\\\":{\\\"kind\\\":\\\"hero\\\",\\\"hero\\\":\\\"shuffler\\\"}},\\\"localContext\\\":{\\\"instance\\\":\\\"7e58072d-97e3-4106-9401-7db9349e71e9\\\",\\\"generation\\\":\\\"1\\\",\\\"sequence\\\":\\\"3\\\",\\\"role\\\":\\\"HOST\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"HOST\\\",\\\"state\\\":\\\"DISCONNECTED\\\",\\\"detail\\\":\\\"对方已断开连接\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"7e58072d-97e3-4106-9401-7db9349e71e9\\\",\\\"generation\\\":\\\"1\\\",\\\"sequence\\\":\\\"4\\\",\\\"role\\\":\\\"HOST\\\"}}\")}));"
+      ],
+      "trace": [
+        "main:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f291c004668",
+        "pool-1-thread-1:receiver:writer-install",
+        "pool-1-thread-1:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f291c004668",
+        "pool-1-thread-1:receiver:readLoop-entry",
+        "pool-1-thread-1:input:bytes:85",
+        "pool-1-thread-1:input:EOF",
+        "pool-1-thread-1:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f291c004ed8",
+        "pool-1-thread-1:input:EOF",
+        "pool-1-thread-1:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f291c004668",
+        "pool-1-thread-1:receiver:socket-close",
+        "pool-1-thread-1:input:close",
+        "pool-1-thread-1:delay:1000",
+        "pool-1-thread-1:input:close",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f291c004668",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f291c004668",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f291c004ed8",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f291c004668"
+      ],
+      "events": [
+        {
+          "type": "transport-state",
+          "role": "HOST",
+          "state": "LISTENING",
+          "detail": "正在等待另一台手机加入",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "7e58072d-97e3-4106-9401-7db9349e71e9",
+            "generation": "1",
+            "sequence": "1",
+            "role": "HOST"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "HOST",
+          "state": "CONNECTED",
+          "detail": "对方已加入房间",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "7e58072d-97e3-4106-9401-7db9349e71e9",
+            "generation": "1",
+            "sequence": "2",
+            "role": "HOST"
+          }
+        },
+        {
+          "type": "message",
+          "message": {
+            "v": 2,
+            "type": "action",
+            "id": "recorded:1",
+            "payload": {
+              "kind": "hero",
+              "hero": "shuffler"
+            }
+          },
+          "localContext": {
+            "instance": "7e58072d-97e3-4106-9401-7db9349e71e9",
+            "generation": "1",
+            "sequence": "3",
+            "role": "HOST"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "HOST",
+          "state": "DISCONNECTED",
+          "detail": "对方已断开连接",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "7e58072d-97e3-4106-9401-7db9349e71e9",
+            "generation": "1",
+            "sequence": "4",
+            "role": "HOST"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "ioexception",
+      "uiModel": "inline",
+      "context": "{\"v\":1,\"scopedSend\":true,\"context\":{\"instance\":\"ddaf1eac-7495-4bb4-aedf-11f95f28f49a\",\"generation\":\"1\",\"sequence\":\"3\",\"role\":\"HOST\"}}",
+      "scripts": [
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"HOST\\\",\\\"state\\\":\\\"LISTENING\\\",\\\"detail\\\":\\\"正在等待另一台手机加入\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"ddaf1eac-7495-4bb4-aedf-11f95f28f49a\\\",\\\"generation\\\":\\\"1\\\",\\\"sequence\\\":\\\"1\\\",\\\"role\\\":\\\"HOST\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"HOST\\\",\\\"state\\\":\\\"CONNECTED\\\",\\\"detail\\\":\\\"对方已加入房间\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"ddaf1eac-7495-4bb4-aedf-11f95f28f49a\\\",\\\"generation\\\":\\\"1\\\",\\\"sequence\\\":\\\"2\\\",\\\"role\\\":\\\"HOST\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"HOST\\\",\\\"state\\\":\\\"DISCONNECTED\\\",\\\"detail\\\":\\\"蓝牙连接已断开\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"ddaf1eac-7495-4bb4-aedf-11f95f28f49a\\\",\\\"generation\\\":\\\"1\\\",\\\"sequence\\\":\\\"3\\\",\\\"role\\\":\\\"HOST\\\"}}\")}));"
+      ],
+      "trace": [
+        "main:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f81d0004668",
+        "pool-1-thread-1:receiver:writer-install",
+        "pool-1-thread-1:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f81d0004668",
+        "pool-1-thread-1:receiver:readLoop-entry",
+        "pool-1-thread-1:input:bytes:85",
+        "pool-1-thread-1:input:IOException",
+        "pool-1-thread-1:input:close",
+        "pool-1-thread-1:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f81d0004668",
+        "pool-1-thread-1:receiver:socket-close",
+        "pool-1-thread-1:input:close",
+        "pool-1-thread-1:delay:1000",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f81d0004668",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f81d0004668",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f81d0004668"
+      ],
+      "events": [
+        {
+          "type": "transport-state",
+          "role": "HOST",
+          "state": "LISTENING",
+          "detail": "正在等待另一台手机加入",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "ddaf1eac-7495-4bb4-aedf-11f95f28f49a",
+            "generation": "1",
+            "sequence": "1",
+            "role": "HOST"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "HOST",
+          "state": "CONNECTED",
+          "detail": "对方已加入房间",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "ddaf1eac-7495-4bb4-aedf-11f95f28f49a",
+            "generation": "1",
+            "sequence": "2",
+            "role": "HOST"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "HOST",
+          "state": "DISCONNECTED",
+          "detail": "蓝牙连接已断开",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "ddaf1eac-7495-4bb4-aedf-11f95f28f49a",
+            "generation": "1",
+            "sequence": "3",
+            "role": "HOST"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "cancel_connect",
+      "uiModel": "inline",
+      "before": "{\"v\":1,\"scopedSend\":true,\"context\":{\"instance\":\"a8054102-fcdd-4bcb-ae83-a48eaf64a5bb\",\"generation\":\"1\",\"sequence\":\"1\",\"role\":\"GUEST\"}}",
+      "context": "{\"v\":1,\"scopedSend\":true,\"context\":{\"instance\":\"a8054102-fcdd-4bcb-ae83-a48eaf64a5bb\",\"generation\":\"3\",\"sequence\":\"4\",\"role\":\"HOST\"}}",
+      "oldClosed": true,
+      "newClosed": false,
+      "scripts": [
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"GUEST\\\",\\\"state\\\":\\\"CONNECTING\\\",\\\"detail\\\":\\\"正在连接房主\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"a8054102-fcdd-4bcb-ae83-a48eaf64a5bb\\\",\\\"generation\\\":\\\"1\\\",\\\"sequence\\\":\\\"1\\\",\\\"role\\\":\\\"GUEST\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"NONE\\\",\\\"state\\\":\\\"DISCONNECTED\\\",\\\"detail\\\":\\\"已离开蓝牙房间\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"a8054102-fcdd-4bcb-ae83-a48eaf64a5bb\\\",\\\"generation\\\":\\\"2\\\",\\\"sequence\\\":\\\"2\\\",\\\"role\\\":\\\"NONE\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"HOST\\\",\\\"state\\\":\\\"LISTENING\\\",\\\"detail\\\":\\\"正在等待另一台手机加入\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"a8054102-fcdd-4bcb-ae83-a48eaf64a5bb\\\",\\\"generation\\\":\\\"3\\\",\\\"sequence\\\":\\\"3\\\",\\\"role\\\":\\\"HOST\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"HOST\\\",\\\"state\\\":\\\"CONNECTED\\\",\\\"detail\\\":\\\"对方已加入房间\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"a8054102-fcdd-4bcb-ae83-a48eaf64a5bb\\\",\\\"generation\\\":\\\"3\\\",\\\"sequence\\\":\\\"4\\\",\\\"role\\\":\\\"HOST\\\"}}\")}));"
+      ],
+      "trace": [
+        "main:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f29f0004898",
+        "main:old:socket-close",
+        "main:input:close",
+        "main:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f29f0004898",
+        "main:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f29f0004898",
+        "pool-1-thread-1:old:connect",
+        "pool-1-thread-1:new:writer-install",
+        "pool-1-thread-1:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f29f0004898",
+        "pool-1-thread-1:new:readLoop-entry",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f29f0004898",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f29f0004898",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f29f0004898",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f29f0004898"
+      ],
+      "events": [
+        {
+          "type": "transport-state",
+          "role": "GUEST",
+          "state": "CONNECTING",
+          "detail": "正在连接房主",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "a8054102-fcdd-4bcb-ae83-a48eaf64a5bb",
+            "generation": "1",
+            "sequence": "1",
+            "role": "GUEST"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "NONE",
+          "state": "DISCONNECTED",
+          "detail": "已离开蓝牙房间",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "a8054102-fcdd-4bcb-ae83-a48eaf64a5bb",
+            "generation": "2",
+            "sequence": "2",
+            "role": "NONE"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "HOST",
+          "state": "LISTENING",
+          "detail": "正在等待另一台手机加入",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "a8054102-fcdd-4bcb-ae83-a48eaf64a5bb",
+            "generation": "3",
+            "sequence": "3",
+            "role": "HOST"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "HOST",
+          "state": "CONNECTED",
+          "detail": "对方已加入房间",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "a8054102-fcdd-4bcb-ae83-a48eaf64a5bb",
+            "generation": "3",
+            "sequence": "4",
+            "role": "HOST"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "cancel_accept",
+      "uiModel": "inline",
+      "context": "{\"v\":1,\"scopedSend\":true,\"context\":{\"instance\":\"5b6f6f95-ea82-4647-afc5-52df920eb8cb\",\"generation\":\"3\",\"sequence\":\"4\",\"role\":\"GUEST\"}}",
+      "oldClosed": true,
+      "newClosed": false,
+      "scripts": [
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"HOST\\\",\\\"state\\\":\\\"LISTENING\\\",\\\"detail\\\":\\\"正在等待另一台手机加入\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"5b6f6f95-ea82-4647-afc5-52df920eb8cb\\\",\\\"generation\\\":\\\"1\\\",\\\"sequence\\\":\\\"1\\\",\\\"role\\\":\\\"HOST\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"NONE\\\",\\\"state\\\":\\\"DISCONNECTED\\\",\\\"detail\\\":\\\"已离开蓝牙房间\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"5b6f6f95-ea82-4647-afc5-52df920eb8cb\\\",\\\"generation\\\":\\\"2\\\",\\\"sequence\\\":\\\"2\\\",\\\"role\\\":\\\"NONE\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"GUEST\\\",\\\"state\\\":\\\"CONNECTING\\\",\\\"detail\\\":\\\"正在连接房主\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"5b6f6f95-ea82-4647-afc5-52df920eb8cb\\\",\\\"generation\\\":\\\"3\\\",\\\"sequence\\\":\\\"3\\\",\\\"role\\\":\\\"GUEST\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"GUEST\\\",\\\"state\\\":\\\"CONNECTED\\\",\\\"detail\\\":\\\"已连接房主\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"5b6f6f95-ea82-4647-afc5-52df920eb8cb\\\",\\\"generation\\\":\\\"3\\\",\\\"sequence\\\":\\\"4\\\",\\\"role\\\":\\\"GUEST\\\"}}\")}));"
+      ],
+      "trace": [
+        "main:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f52ec004aa0",
+        "main:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f52ec004aa0",
+        "main:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f52ec004aa0",
+        "pool-1-thread-1:old:socket-close",
+        "pool-1-thread-1:input:close",
+        "pool-1-thread-1:new:connect",
+        "pool-1-thread-1:new:writer-install",
+        "pool-1-thread-1:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f52ec004aa0",
+        "pool-1-thread-1:new:readLoop-entry",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f52ec004aa0",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f52ec004aa0",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f52ec004aa0",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f52ec004aa0"
+      ],
+      "events": [
+        {
+          "type": "transport-state",
+          "role": "HOST",
+          "state": "LISTENING",
+          "detail": "正在等待另一台手机加入",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "5b6f6f95-ea82-4647-afc5-52df920eb8cb",
+            "generation": "1",
+            "sequence": "1",
+            "role": "HOST"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "NONE",
+          "state": "DISCONNECTED",
+          "detail": "已离开蓝牙房间",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "5b6f6f95-ea82-4647-afc5-52df920eb8cb",
+            "generation": "2",
+            "sequence": "2",
+            "role": "NONE"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "GUEST",
+          "state": "CONNECTING",
+          "detail": "正在连接房主",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "5b6f6f95-ea82-4647-afc5-52df920eb8cb",
+            "generation": "3",
+            "sequence": "3",
+            "role": "GUEST"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "GUEST",
+          "state": "CONNECTED",
+          "detail": "已连接房主",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "5b6f6f95-ea82-4647-afc5-52df920eb8cb",
+            "generation": "3",
+            "sequence": "4",
+            "role": "GUEST"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "old_delay",
+      "uiModel": "inline",
+      "before": "{\"v\":1,\"scopedSend\":true,\"context\":{\"instance\":\"6061aeda-56eb-438c-a956-a949129cc618\",\"generation\":\"2\",\"sequence\":\"5\",\"role\":\"HOST\"}}",
+      "context": "{\"v\":1,\"scopedSend\":true,\"context\":{\"instance\":\"6061aeda-56eb-438c-a956-a949129cc618\",\"generation\":\"2\",\"sequence\":\"5\",\"role\":\"HOST\"}}",
+      "newClosed": false,
+      "scripts": [
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"GUEST\\\",\\\"state\\\":\\\"CONNECTING\\\",\\\"detail\\\":\\\"正在连接房主\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"6061aeda-56eb-438c-a956-a949129cc618\\\",\\\"generation\\\":\\\"1\\\",\\\"sequence\\\":\\\"1\\\",\\\"role\\\":\\\"GUEST\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"GUEST\\\",\\\"state\\\":\\\"CONNECTED\\\",\\\"detail\\\":\\\"已连接房主\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"6061aeda-56eb-438c-a956-a949129cc618\\\",\\\"generation\\\":\\\"1\\\",\\\"sequence\\\":\\\"2\\\",\\\"role\\\":\\\"GUEST\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"GUEST\\\",\\\"state\\\":\\\"DISCONNECTED\\\",\\\"detail\\\":\\\"对方已断开连接\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"6061aeda-56eb-438c-a956-a949129cc618\\\",\\\"generation\\\":\\\"1\\\",\\\"sequence\\\":\\\"3\\\",\\\"role\\\":\\\"GUEST\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"HOST\\\",\\\"state\\\":\\\"LISTENING\\\",\\\"detail\\\":\\\"正在等待另一台手机加入\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"6061aeda-56eb-438c-a956-a949129cc618\\\",\\\"generation\\\":\\\"2\\\",\\\"sequence\\\":\\\"4\\\",\\\"role\\\":\\\"HOST\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"HOST\\\",\\\"state\\\":\\\"CONNECTED\\\",\\\"detail\\\":\\\"对方已加入房间\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"6061aeda-56eb-438c-a956-a949129cc618\\\",\\\"generation\\\":\\\"2\\\",\\\"sequence\\\":\\\"5\\\",\\\"role\\\":\\\"HOST\\\"}}\")}));"
+      ],
+      "trace": [
+        "main:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007ff4f0004668",
+        "pool-1-thread-1:old:connect",
+        "pool-1-thread-1:old:writer-install",
+        "pool-1-thread-1:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007ff4f0004668",
+        "pool-1-thread-1:old:readLoop-entry",
+        "pool-1-thread-1:input:EOF",
+        "pool-1-thread-1:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007ff4f0004668",
+        "pool-1-thread-1:old:socket-close",
+        "pool-1-thread-1:input:close",
+        "pool-1-thread-1:delay:1000",
+        "pool-1-thread-1:input:close",
+        "main:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007ff4f0004668",
+        "pool-1-thread-1:new:writer-install",
+        "pool-1-thread-1:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007ff4f0004668",
+        "pool-1-thread-1:new:readLoop-entry",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007ff4f0004668",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007ff4f0004668",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007ff4f0004668",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007ff4f0004668",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007ff4f0004668"
+      ],
+      "events": [
+        {
+          "type": "transport-state",
+          "role": "GUEST",
+          "state": "CONNECTING",
+          "detail": "正在连接房主",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "6061aeda-56eb-438c-a956-a949129cc618",
+            "generation": "1",
+            "sequence": "1",
+            "role": "GUEST"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "GUEST",
+          "state": "CONNECTED",
+          "detail": "已连接房主",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "6061aeda-56eb-438c-a956-a949129cc618",
+            "generation": "1",
+            "sequence": "2",
+            "role": "GUEST"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "GUEST",
+          "state": "DISCONNECTED",
+          "detail": "对方已断开连接",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "6061aeda-56eb-438c-a956-a949129cc618",
+            "generation": "1",
+            "sequence": "3",
+            "role": "GUEST"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "HOST",
+          "state": "LISTENING",
+          "detail": "正在等待另一台手机加入",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "6061aeda-56eb-438c-a956-a949129cc618",
+            "generation": "2",
+            "sequence": "4",
+            "role": "HOST"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "HOST",
+          "state": "CONNECTED",
+          "detail": "对方已加入房间",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "6061aeda-56eb-438c-a956-a949129cc618",
+            "generation": "2",
+            "sequence": "5",
+            "role": "HOST"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "late_send",
+      "uiModel": "inline",
+      "before": "{\"v\":1,\"scopedSend\":true,\"context\":{\"instance\":\"7b7950e6-062c-447b-8c7b-4d521d20f62f\",\"generation\":\"1\",\"sequence\":\"2\",\"role\":\"GUEST\"}}",
+      "context": "{\"v\":1,\"scopedSend\":true,\"context\":{\"instance\":\"7b7950e6-062c-447b-8c7b-4d521d20f62f\",\"generation\":\"2\",\"sequence\":\"5\",\"role\":\"GUEST\"}}",
+      "result": "{\"status\":\"unknown\",\"attemptedContext\":{\"instance\":\"7b7950e6-062c-447b-8c7b-4d521d20f62f\",\"generation\":\"1\",\"sequence\":\"2\",\"role\":\"GUEST\"}}",
+      "newClosed": false,
+      "scripts": [
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"GUEST\\\",\\\"state\\\":\\\"CONNECTING\\\",\\\"detail\\\":\\\"正在连接房主\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"7b7950e6-062c-447b-8c7b-4d521d20f62f\\\",\\\"generation\\\":\\\"1\\\",\\\"sequence\\\":\\\"1\\\",\\\"role\\\":\\\"GUEST\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"GUEST\\\",\\\"state\\\":\\\"CONNECTED\\\",\\\"detail\\\":\\\"已连接房主\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"7b7950e6-062c-447b-8c7b-4d521d20f62f\\\",\\\"generation\\\":\\\"1\\\",\\\"sequence\\\":\\\"2\\\",\\\"role\\\":\\\"GUEST\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"GUEST\\\",\\\"state\\\":\\\"DISCONNECTED\\\",\\\"detail\\\":\\\"对方已断开连接\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"7b7950e6-062c-447b-8c7b-4d521d20f62f\\\",\\\"generation\\\":\\\"1\\\",\\\"sequence\\\":\\\"3\\\",\\\"role\\\":\\\"GUEST\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"GUEST\\\",\\\"state\\\":\\\"CONNECTING\\\",\\\"detail\\\":\\\"正在自动重新连接房主\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"7b7950e6-062c-447b-8c7b-4d521d20f62f\\\",\\\"generation\\\":\\\"2\\\",\\\"sequence\\\":\\\"4\\\",\\\"role\\\":\\\"GUEST\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"GUEST\\\",\\\"state\\\":\\\"CONNECTED\\\",\\\"detail\\\":\\\"连接已恢复\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"7b7950e6-062c-447b-8c7b-4d521d20f62f\\\",\\\"generation\\\":\\\"2\\\",\\\"sequence\\\":\\\"5\\\",\\\"role\\\":\\\"GUEST\\\"}}\")}));"
+      ],
+      "trace": [
+        "main:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007fea64004668",
+        "pool-1-thread-1:old:connect",
+        "pool-1-thread-1:old:writer-install",
+        "pool-1-thread-1:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007fea64004668",
+        "pool-1-thread-1:old:readLoop-entry",
+        "sender:old:write-blocked",
+        "pool-1-thread-1:input:EOF",
+        "pool-1-thread-1:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007fea64004668",
+        "pool-1-thread-1:old:socket-close",
+        "pool-1-thread-1:input:close",
+        "pool-1-thread-1:delay:1000",
+        "pool-1-thread-1:input:close",
+        "main:virtual-time:+1000",
+        "main:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007fea64004668",
+        "pool-1-thread-1:new:connect",
+        "pool-1-thread-1:new:writer-install",
+        "pool-1-thread-1:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007fea64004668",
+        "pool-1-thread-1:new:readLoop-entry",
+        "sender:old:write-throws",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007fea64004668",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007fea64004668",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007fea64004668",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007fea64004668",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007fea64004668"
+      ],
+      "events": [
+        {
+          "type": "transport-state",
+          "role": "GUEST",
+          "state": "CONNECTING",
+          "detail": "正在连接房主",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "7b7950e6-062c-447b-8c7b-4d521d20f62f",
+            "generation": "1",
+            "sequence": "1",
+            "role": "GUEST"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "GUEST",
+          "state": "CONNECTED",
+          "detail": "已连接房主",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "7b7950e6-062c-447b-8c7b-4d521d20f62f",
+            "generation": "1",
+            "sequence": "2",
+            "role": "GUEST"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "GUEST",
+          "state": "DISCONNECTED",
+          "detail": "对方已断开连接",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "7b7950e6-062c-447b-8c7b-4d521d20f62f",
+            "generation": "1",
+            "sequence": "3",
+            "role": "GUEST"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "GUEST",
+          "state": "CONNECTING",
+          "detail": "正在自动重新连接房主",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "7b7950e6-062c-447b-8c7b-4d521d20f62f",
+            "generation": "2",
+            "sequence": "4",
+            "role": "GUEST"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "GUEST",
+          "state": "CONNECTED",
+          "detail": "连接已恢复",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "7b7950e6-062c-447b-8c7b-4d521d20f62f",
+            "generation": "2",
+            "sequence": "5",
+            "role": "GUEST"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "scoped",
+      "uiModel": "inline",
+      "wrongInstance": "{\"status\":\"not_sent\",\"attemptedContext\":null}",
+      "wrongGeneration": "{\"status\":\"not_sent\",\"attemptedContext\":null}",
+      "beforeBytes": 0,
+      "result": "{\"status\":\"written\",\"attemptedContext\":{\"instance\":\"2666c55f-743a-4c5f-b233-f0d6ec3c31f5\",\"generation\":\"1\",\"sequence\":\"2\",\"role\":\"GUEST\"}}",
+      "wire": "{\"v\":2,\"type\":\"action\",\"id\":\"recorded:1\",\"payload\":{\"kind\":\"hero\",\"hero\":\"shuffler\"}}\n{\"v\":2,\"type\":\"action\",\"id\":\"recorded:1\",\"payload\":{\"kind\":\"hero\",\"hero\":\"shuffler\"}}\n",
+      "context": "{\"v\":1,\"scopedSend\":true,\"context\":{\"instance\":\"2666c55f-743a-4c5f-b233-f0d6ec3c31f5\",\"generation\":\"1\",\"sequence\":\"2\",\"role\":\"GUEST\"}}",
+      "disconnected": "{\"status\":\"not_sent\",\"attemptedContext\":null}",
+      "rebuilt": "{\"v\":1,\"scopedSend\":true,\"context\":{\"instance\":\"046c028a-7aa5-4a76-bda2-10b53a4b35c0\",\"generation\":\"0\",\"sequence\":\"0\",\"role\":\"NONE\"}}",
+      "scripts": [
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"GUEST\\\",\\\"state\\\":\\\"CONNECTING\\\",\\\"detail\\\":\\\"正在连接房主\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"2666c55f-743a-4c5f-b233-f0d6ec3c31f5\\\",\\\"generation\\\":\\\"1\\\",\\\"sequence\\\":\\\"1\\\",\\\"role\\\":\\\"GUEST\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"GUEST\\\",\\\"state\\\":\\\"CONNECTED\\\",\\\"detail\\\":\\\"已连接房主\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"2666c55f-743a-4c5f-b233-f0d6ec3c31f5\\\",\\\"generation\\\":\\\"1\\\",\\\"sequence\\\":\\\"2\\\",\\\"role\\\":\\\"GUEST\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"NONE\\\",\\\"state\\\":\\\"DISCONNECTED\\\",\\\"detail\\\":\\\"已离开蓝牙房间\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"2666c55f-743a-4c5f-b233-f0d6ec3c31f5\\\",\\\"generation\\\":\\\"2\\\",\\\"sequence\\\":\\\"3\\\",\\\"role\\\":\\\"NONE\\\"}}\")}));"
+      ],
+      "trace": [
+        "main:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007fa9d4004668",
+        "pool-1-thread-1:one:connect",
+        "pool-1-thread-1:one:writer-install",
+        "pool-1-thread-1:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007fa9d4004668",
+        "pool-1-thread-1:one:readLoop-entry",
+        "main:one:socket-close",
+        "main:input:close",
+        "main:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007fa9d4004668",
+        "pool-1-thread-1:input:EOF",
+        "pool-1-thread-1:input:close",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007fa9d4004668",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007fa9d4004668",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007fa9d4004668"
+      ],
+      "events": [
+        {
+          "type": "transport-state",
+          "role": "GUEST",
+          "state": "CONNECTING",
+          "detail": "正在连接房主",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "2666c55f-743a-4c5f-b233-f0d6ec3c31f5",
+            "generation": "1",
+            "sequence": "1",
+            "role": "GUEST"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "GUEST",
+          "state": "CONNECTED",
+          "detail": "已连接房主",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "2666c55f-743a-4c5f-b233-f0d6ec3c31f5",
+            "generation": "1",
+            "sequence": "2",
+            "role": "GUEST"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "NONE",
+          "state": "DISCONNECTED",
+          "detail": "已离开蓝牙房间",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "2666c55f-743a-4c5f-b233-f0d6ec3c31f5",
+            "generation": "2",
+            "sequence": "3",
+            "role": "NONE"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "legacy",
+      "uiModel": "inline",
+      "stateCount": 3,
+      "messageCount": 1,
+      "scripts": [],
+      "trace": [
+        "main:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007fe6e00048a8",
+        "pool-2-thread-1:legacy:writer-install",
+        "pool-2-thread-1:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007fe6e00048a8",
+        "pool-2-thread-1:legacy:readLoop-entry",
+        "pool-2-thread-1:input:bytes:85",
+        "pool-2-thread-1:input:EOF",
+        "pool-2-thread-1:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007fe6e0005118",
+        "pool-2-thread-1:input:EOF",
+        "pool-2-thread-1:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007fe6e00048a8",
+        "pool-2-thread-1:legacy:socket-close",
+        "pool-2-thread-1:input:close",
+        "pool-2-thread-1:delay:1000",
+        "pool-2-thread-1:input:close",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007fe6e00048a8",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007fe6e00048a8",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007fe6e0005118",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007fe6e00048a8"
+      ],
+      "events": []
+    },
+    {
+      "mode": "eof",
+      "uiModel": "queued",
+      "context": "{\"v\":1,\"scopedSend\":true,\"context\":{\"instance\":\"efa750d0-4290-4fed-97d4-ac50982aa5a6\",\"generation\":\"1\",\"sequence\":\"4\",\"role\":\"HOST\"}}",
+      "scripts": [
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"HOST\\\",\\\"state\\\":\\\"LISTENING\\\",\\\"detail\\\":\\\"正在等待另一台手机加入\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"efa750d0-4290-4fed-97d4-ac50982aa5a6\\\",\\\"generation\\\":\\\"1\\\",\\\"sequence\\\":\\\"1\\\",\\\"role\\\":\\\"HOST\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"HOST\\\",\\\"state\\\":\\\"CONNECTED\\\",\\\"detail\\\":\\\"对方已加入房间\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"efa750d0-4290-4fed-97d4-ac50982aa5a6\\\",\\\"generation\\\":\\\"1\\\",\\\"sequence\\\":\\\"2\\\",\\\"role\\\":\\\"HOST\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"message\\\",\\\"message\\\":{\\\"v\\\":2,\\\"type\\\":\\\"action\\\",\\\"id\\\":\\\"recorded:1\\\",\\\"payload\\\":{\\\"kind\\\":\\\"hero\\\",\\\"hero\\\":\\\"shuffler\\\"}},\\\"localContext\\\":{\\\"instance\\\":\\\"efa750d0-4290-4fed-97d4-ac50982aa5a6\\\",\\\"generation\\\":\\\"1\\\",\\\"sequence\\\":\\\"3\\\",\\\"role\\\":\\\"HOST\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"HOST\\\",\\\"state\\\":\\\"DISCONNECTED\\\",\\\"detail\\\":\\\"对方已断开连接\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"efa750d0-4290-4fed-97d4-ac50982aa5a6\\\",\\\"generation\\\":\\\"1\\\",\\\"sequence\\\":\\\"4\\\",\\\"role\\\":\\\"HOST\\\"}}\")}));"
+      ],
+      "trace": [
+        "main:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f00d8004668",
+        "pool-1-thread-1:receiver:writer-install",
+        "pool-1-thread-1:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f00d8004668",
+        "pool-1-thread-1:receiver:readLoop-entry",
+        "pool-1-thread-1:input:bytes:85",
+        "pool-1-thread-1:input:EOF",
+        "pool-1-thread-1:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f00d8004ed8",
+        "pool-1-thread-1:input:EOF",
+        "pool-1-thread-1:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f00d8004668",
+        "pool-1-thread-1:receiver:socket-close",
+        "pool-1-thread-1:input:close",
+        "pool-1-thread-1:delay:1000",
+        "pool-1-thread-1:input:close",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f00d8004668",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f00d8004668",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f00d8004ed8",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f00d8004668",
+        "main:ui:execute",
+        "main:ui:execute",
+        "main:ui:execute",
+        "main:ui:execute"
+      ],
+      "events": [
+        {
+          "type": "transport-state",
+          "role": "HOST",
+          "state": "LISTENING",
+          "detail": "正在等待另一台手机加入",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "efa750d0-4290-4fed-97d4-ac50982aa5a6",
+            "generation": "1",
+            "sequence": "1",
+            "role": "HOST"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "HOST",
+          "state": "CONNECTED",
+          "detail": "对方已加入房间",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "efa750d0-4290-4fed-97d4-ac50982aa5a6",
+            "generation": "1",
+            "sequence": "2",
+            "role": "HOST"
+          }
+        },
+        {
+          "type": "message",
+          "message": {
+            "v": 2,
+            "type": "action",
+            "id": "recorded:1",
+            "payload": {
+              "kind": "hero",
+              "hero": "shuffler"
+            }
+          },
+          "localContext": {
+            "instance": "efa750d0-4290-4fed-97d4-ac50982aa5a6",
+            "generation": "1",
+            "sequence": "3",
+            "role": "HOST"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "HOST",
+          "state": "DISCONNECTED",
+          "detail": "对方已断开连接",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "efa750d0-4290-4fed-97d4-ac50982aa5a6",
+            "generation": "1",
+            "sequence": "4",
+            "role": "HOST"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "ioexception",
+      "uiModel": "queued",
+      "context": "{\"v\":1,\"scopedSend\":true,\"context\":{\"instance\":\"a92ee1f6-070d-498c-b7e4-29143a73b8fc\",\"generation\":\"1\",\"sequence\":\"3\",\"role\":\"HOST\"}}",
+      "scripts": [
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"HOST\\\",\\\"state\\\":\\\"LISTENING\\\",\\\"detail\\\":\\\"正在等待另一台手机加入\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"a92ee1f6-070d-498c-b7e4-29143a73b8fc\\\",\\\"generation\\\":\\\"1\\\",\\\"sequence\\\":\\\"1\\\",\\\"role\\\":\\\"HOST\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"HOST\\\",\\\"state\\\":\\\"CONNECTED\\\",\\\"detail\\\":\\\"对方已加入房间\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"a92ee1f6-070d-498c-b7e4-29143a73b8fc\\\",\\\"generation\\\":\\\"1\\\",\\\"sequence\\\":\\\"2\\\",\\\"role\\\":\\\"HOST\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"HOST\\\",\\\"state\\\":\\\"DISCONNECTED\\\",\\\"detail\\\":\\\"蓝牙连接已断开\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"a92ee1f6-070d-498c-b7e4-29143a73b8fc\\\",\\\"generation\\\":\\\"1\\\",\\\"sequence\\\":\\\"3\\\",\\\"role\\\":\\\"HOST\\\"}}\")}));"
+      ],
+      "trace": [
+        "main:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f2b04004668",
+        "pool-1-thread-1:receiver:writer-install",
+        "pool-1-thread-1:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f2b04004668",
+        "pool-1-thread-1:receiver:readLoop-entry",
+        "pool-1-thread-1:input:bytes:85",
+        "pool-1-thread-1:input:IOException",
+        "pool-1-thread-1:input:close",
+        "pool-1-thread-1:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f2b04004668",
+        "pool-1-thread-1:receiver:socket-close",
+        "pool-1-thread-1:input:close",
+        "pool-1-thread-1:delay:1000",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f2b04004668",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f2b04004668",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f2b04004668",
+        "main:ui:execute",
+        "main:ui:execute",
+        "main:ui:execute"
+      ],
+      "events": [
+        {
+          "type": "transport-state",
+          "role": "HOST",
+          "state": "LISTENING",
+          "detail": "正在等待另一台手机加入",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "a92ee1f6-070d-498c-b7e4-29143a73b8fc",
+            "generation": "1",
+            "sequence": "1",
+            "role": "HOST"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "HOST",
+          "state": "CONNECTED",
+          "detail": "对方已加入房间",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "a92ee1f6-070d-498c-b7e4-29143a73b8fc",
+            "generation": "1",
+            "sequence": "2",
+            "role": "HOST"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "HOST",
+          "state": "DISCONNECTED",
+          "detail": "蓝牙连接已断开",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "a92ee1f6-070d-498c-b7e4-29143a73b8fc",
+            "generation": "1",
+            "sequence": "3",
+            "role": "HOST"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "cancel_connect",
+      "uiModel": "queued",
+      "before": "{\"v\":1,\"scopedSend\":true,\"context\":{\"instance\":\"5b96a122-1f55-4346-b791-9dc3aee40bfe\",\"generation\":\"1\",\"sequence\":\"1\",\"role\":\"GUEST\"}}",
+      "context": "{\"v\":1,\"scopedSend\":true,\"context\":{\"instance\":\"5b96a122-1f55-4346-b791-9dc3aee40bfe\",\"generation\":\"3\",\"sequence\":\"4\",\"role\":\"HOST\"}}",
+      "oldClosed": true,
+      "newClosed": false,
+      "scripts": [
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"GUEST\\\",\\\"state\\\":\\\"CONNECTING\\\",\\\"detail\\\":\\\"正在连接房主\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"5b96a122-1f55-4346-b791-9dc3aee40bfe\\\",\\\"generation\\\":\\\"1\\\",\\\"sequence\\\":\\\"1\\\",\\\"role\\\":\\\"GUEST\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"NONE\\\",\\\"state\\\":\\\"DISCONNECTED\\\",\\\"detail\\\":\\\"已离开蓝牙房间\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"5b96a122-1f55-4346-b791-9dc3aee40bfe\\\",\\\"generation\\\":\\\"2\\\",\\\"sequence\\\":\\\"2\\\",\\\"role\\\":\\\"NONE\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"HOST\\\",\\\"state\\\":\\\"LISTENING\\\",\\\"detail\\\":\\\"正在等待另一台手机加入\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"5b96a122-1f55-4346-b791-9dc3aee40bfe\\\",\\\"generation\\\":\\\"3\\\",\\\"sequence\\\":\\\"3\\\",\\\"role\\\":\\\"HOST\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"HOST\\\",\\\"state\\\":\\\"CONNECTED\\\",\\\"detail\\\":\\\"对方已加入房间\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"5b96a122-1f55-4346-b791-9dc3aee40bfe\\\",\\\"generation\\\":\\\"3\\\",\\\"sequence\\\":\\\"4\\\",\\\"role\\\":\\\"HOST\\\"}}\")}));"
+      ],
+      "trace": [
+        "main:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f8910004898",
+        "main:old:socket-close",
+        "main:input:close",
+        "main:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f8910004898",
+        "main:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f8910004898",
+        "pool-1-thread-1:old:connect",
+        "pool-1-thread-1:new:writer-install",
+        "pool-1-thread-1:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f8910004898",
+        "pool-1-thread-1:new:readLoop-entry",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f8910004898",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f8910004898",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f8910004898",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f8910004898",
+        "main:ui:execute",
+        "main:ui:execute",
+        "main:ui:execute",
+        "main:ui:execute"
+      ],
+      "events": [
+        {
+          "type": "transport-state",
+          "role": "GUEST",
+          "state": "CONNECTING",
+          "detail": "正在连接房主",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "5b96a122-1f55-4346-b791-9dc3aee40bfe",
+            "generation": "1",
+            "sequence": "1",
+            "role": "GUEST"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "NONE",
+          "state": "DISCONNECTED",
+          "detail": "已离开蓝牙房间",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "5b96a122-1f55-4346-b791-9dc3aee40bfe",
+            "generation": "2",
+            "sequence": "2",
+            "role": "NONE"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "HOST",
+          "state": "LISTENING",
+          "detail": "正在等待另一台手机加入",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "5b96a122-1f55-4346-b791-9dc3aee40bfe",
+            "generation": "3",
+            "sequence": "3",
+            "role": "HOST"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "HOST",
+          "state": "CONNECTED",
+          "detail": "对方已加入房间",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "5b96a122-1f55-4346-b791-9dc3aee40bfe",
+            "generation": "3",
+            "sequence": "4",
+            "role": "HOST"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "cancel_accept",
+      "uiModel": "queued",
+      "context": "{\"v\":1,\"scopedSend\":true,\"context\":{\"instance\":\"0effd8bb-8048-43a6-b2d3-61c6acfcb040\",\"generation\":\"3\",\"sequence\":\"4\",\"role\":\"GUEST\"}}",
+      "oldClosed": true,
+      "newClosed": false,
+      "scripts": [
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"HOST\\\",\\\"state\\\":\\\"LISTENING\\\",\\\"detail\\\":\\\"正在等待另一台手机加入\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"0effd8bb-8048-43a6-b2d3-61c6acfcb040\\\",\\\"generation\\\":\\\"1\\\",\\\"sequence\\\":\\\"1\\\",\\\"role\\\":\\\"HOST\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"NONE\\\",\\\"state\\\":\\\"DISCONNECTED\\\",\\\"detail\\\":\\\"已离开蓝牙房间\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"0effd8bb-8048-43a6-b2d3-61c6acfcb040\\\",\\\"generation\\\":\\\"2\\\",\\\"sequence\\\":\\\"2\\\",\\\"role\\\":\\\"NONE\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"GUEST\\\",\\\"state\\\":\\\"CONNECTING\\\",\\\"detail\\\":\\\"正在连接房主\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"0effd8bb-8048-43a6-b2d3-61c6acfcb040\\\",\\\"generation\\\":\\\"3\\\",\\\"sequence\\\":\\\"3\\\",\\\"role\\\":\\\"GUEST\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"GUEST\\\",\\\"state\\\":\\\"CONNECTED\\\",\\\"detail\\\":\\\"已连接房主\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"0effd8bb-8048-43a6-b2d3-61c6acfcb040\\\",\\\"generation\\\":\\\"3\\\",\\\"sequence\\\":\\\"4\\\",\\\"role\\\":\\\"GUEST\\\"}}\")}));"
+      ],
+      "trace": [
+        "main:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f302c004aa0",
+        "main:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f302c004aa0",
+        "main:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f302c004aa0",
+        "pool-1-thread-1:old:socket-close",
+        "pool-1-thread-1:input:close",
+        "pool-1-thread-1:new:connect",
+        "pool-1-thread-1:new:writer-install",
+        "pool-1-thread-1:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f302c004aa0",
+        "pool-1-thread-1:new:readLoop-entry",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f302c004aa0",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f302c004aa0",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f302c004aa0",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f302c004aa0",
+        "main:ui:execute",
+        "main:ui:execute",
+        "main:ui:execute",
+        "main:ui:execute"
+      ],
+      "events": [
+        {
+          "type": "transport-state",
+          "role": "HOST",
+          "state": "LISTENING",
+          "detail": "正在等待另一台手机加入",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "0effd8bb-8048-43a6-b2d3-61c6acfcb040",
+            "generation": "1",
+            "sequence": "1",
+            "role": "HOST"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "NONE",
+          "state": "DISCONNECTED",
+          "detail": "已离开蓝牙房间",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "0effd8bb-8048-43a6-b2d3-61c6acfcb040",
+            "generation": "2",
+            "sequence": "2",
+            "role": "NONE"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "GUEST",
+          "state": "CONNECTING",
+          "detail": "正在连接房主",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "0effd8bb-8048-43a6-b2d3-61c6acfcb040",
+            "generation": "3",
+            "sequence": "3",
+            "role": "GUEST"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "GUEST",
+          "state": "CONNECTED",
+          "detail": "已连接房主",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "0effd8bb-8048-43a6-b2d3-61c6acfcb040",
+            "generation": "3",
+            "sequence": "4",
+            "role": "GUEST"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "old_delay",
+      "uiModel": "queued",
+      "before": "{\"v\":1,\"scopedSend\":true,\"context\":{\"instance\":\"9ecd1164-2f06-4be3-ab0d-1622725dcda7\",\"generation\":\"2\",\"sequence\":\"5\",\"role\":\"HOST\"}}",
+      "context": "{\"v\":1,\"scopedSend\":true,\"context\":{\"instance\":\"9ecd1164-2f06-4be3-ab0d-1622725dcda7\",\"generation\":\"2\",\"sequence\":\"5\",\"role\":\"HOST\"}}",
+      "newClosed": false,
+      "scripts": [
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"GUEST\\\",\\\"state\\\":\\\"CONNECTING\\\",\\\"detail\\\":\\\"正在连接房主\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"9ecd1164-2f06-4be3-ab0d-1622725dcda7\\\",\\\"generation\\\":\\\"1\\\",\\\"sequence\\\":\\\"1\\\",\\\"role\\\":\\\"GUEST\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"GUEST\\\",\\\"state\\\":\\\"CONNECTED\\\",\\\"detail\\\":\\\"已连接房主\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"9ecd1164-2f06-4be3-ab0d-1622725dcda7\\\",\\\"generation\\\":\\\"1\\\",\\\"sequence\\\":\\\"2\\\",\\\"role\\\":\\\"GUEST\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"GUEST\\\",\\\"state\\\":\\\"DISCONNECTED\\\",\\\"detail\\\":\\\"对方已断开连接\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"9ecd1164-2f06-4be3-ab0d-1622725dcda7\\\",\\\"generation\\\":\\\"1\\\",\\\"sequence\\\":\\\"3\\\",\\\"role\\\":\\\"GUEST\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"HOST\\\",\\\"state\\\":\\\"LISTENING\\\",\\\"detail\\\":\\\"正在等待另一台手机加入\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"9ecd1164-2f06-4be3-ab0d-1622725dcda7\\\",\\\"generation\\\":\\\"2\\\",\\\"sequence\\\":\\\"4\\\",\\\"role\\\":\\\"HOST\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"HOST\\\",\\\"state\\\":\\\"CONNECTED\\\",\\\"detail\\\":\\\"对方已加入房间\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"9ecd1164-2f06-4be3-ab0d-1622725dcda7\\\",\\\"generation\\\":\\\"2\\\",\\\"sequence\\\":\\\"5\\\",\\\"role\\\":\\\"HOST\\\"}}\")}));"
+      ],
+      "trace": [
+        "main:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f83ec004668",
+        "pool-1-thread-1:old:connect",
+        "pool-1-thread-1:old:writer-install",
+        "pool-1-thread-1:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f83ec004668",
+        "pool-1-thread-1:old:readLoop-entry",
+        "pool-1-thread-1:input:EOF",
+        "pool-1-thread-1:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f83ec004668",
+        "pool-1-thread-1:old:socket-close",
+        "pool-1-thread-1:input:close",
+        "pool-1-thread-1:delay:1000",
+        "pool-1-thread-1:input:close",
+        "main:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f83ec004668",
+        "pool-1-thread-1:new:writer-install",
+        "pool-1-thread-1:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f83ec004668",
+        "pool-1-thread-1:new:readLoop-entry",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f83ec004668",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f83ec004668",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f83ec004668",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f83ec004668",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f83ec004668",
+        "main:ui:execute",
+        "main:ui:execute",
+        "main:ui:execute",
+        "main:ui:execute",
+        "main:ui:execute"
+      ],
+      "events": [
+        {
+          "type": "transport-state",
+          "role": "GUEST",
+          "state": "CONNECTING",
+          "detail": "正在连接房主",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "9ecd1164-2f06-4be3-ab0d-1622725dcda7",
+            "generation": "1",
+            "sequence": "1",
+            "role": "GUEST"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "GUEST",
+          "state": "CONNECTED",
+          "detail": "已连接房主",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "9ecd1164-2f06-4be3-ab0d-1622725dcda7",
+            "generation": "1",
+            "sequence": "2",
+            "role": "GUEST"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "GUEST",
+          "state": "DISCONNECTED",
+          "detail": "对方已断开连接",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "9ecd1164-2f06-4be3-ab0d-1622725dcda7",
+            "generation": "1",
+            "sequence": "3",
+            "role": "GUEST"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "HOST",
+          "state": "LISTENING",
+          "detail": "正在等待另一台手机加入",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "9ecd1164-2f06-4be3-ab0d-1622725dcda7",
+            "generation": "2",
+            "sequence": "4",
+            "role": "HOST"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "HOST",
+          "state": "CONNECTED",
+          "detail": "对方已加入房间",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "9ecd1164-2f06-4be3-ab0d-1622725dcda7",
+            "generation": "2",
+            "sequence": "5",
+            "role": "HOST"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "late_send",
+      "uiModel": "queued",
+      "before": "{\"v\":1,\"scopedSend\":true,\"context\":{\"instance\":\"0b8da95e-eff0-42fc-9ddf-71b4e3b5b1ee\",\"generation\":\"1\",\"sequence\":\"2\",\"role\":\"GUEST\"}}",
+      "context": "{\"v\":1,\"scopedSend\":true,\"context\":{\"instance\":\"0b8da95e-eff0-42fc-9ddf-71b4e3b5b1ee\",\"generation\":\"2\",\"sequence\":\"5\",\"role\":\"GUEST\"}}",
+      "result": "{\"status\":\"unknown\",\"attemptedContext\":{\"instance\":\"0b8da95e-eff0-42fc-9ddf-71b4e3b5b1ee\",\"generation\":\"1\",\"sequence\":\"2\",\"role\":\"GUEST\"}}",
+      "newClosed": false,
+      "scripts": [
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"GUEST\\\",\\\"state\\\":\\\"CONNECTING\\\",\\\"detail\\\":\\\"正在连接房主\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"0b8da95e-eff0-42fc-9ddf-71b4e3b5b1ee\\\",\\\"generation\\\":\\\"1\\\",\\\"sequence\\\":\\\"1\\\",\\\"role\\\":\\\"GUEST\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"GUEST\\\",\\\"state\\\":\\\"CONNECTED\\\",\\\"detail\\\":\\\"已连接房主\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"0b8da95e-eff0-42fc-9ddf-71b4e3b5b1ee\\\",\\\"generation\\\":\\\"1\\\",\\\"sequence\\\":\\\"2\\\",\\\"role\\\":\\\"GUEST\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"GUEST\\\",\\\"state\\\":\\\"DISCONNECTED\\\",\\\"detail\\\":\\\"对方已断开连接\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"0b8da95e-eff0-42fc-9ddf-71b4e3b5b1ee\\\",\\\"generation\\\":\\\"1\\\",\\\"sequence\\\":\\\"3\\\",\\\"role\\\":\\\"GUEST\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"GUEST\\\",\\\"state\\\":\\\"CONNECTING\\\",\\\"detail\\\":\\\"正在自动重新连接房主\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"0b8da95e-eff0-42fc-9ddf-71b4e3b5b1ee\\\",\\\"generation\\\":\\\"2\\\",\\\"sequence\\\":\\\"4\\\",\\\"role\\\":\\\"GUEST\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"GUEST\\\",\\\"state\\\":\\\"CONNECTED\\\",\\\"detail\\\":\\\"连接已恢复\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"0b8da95e-eff0-42fc-9ddf-71b4e3b5b1ee\\\",\\\"generation\\\":\\\"2\\\",\\\"sequence\\\":\\\"5\\\",\\\"role\\\":\\\"GUEST\\\"}}\")}));"
+      ],
+      "trace": [
+        "main:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f0b7c004668",
+        "pool-1-thread-1:old:connect",
+        "pool-1-thread-1:old:writer-install",
+        "pool-1-thread-1:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f0b7c004668",
+        "pool-1-thread-1:old:readLoop-entry",
+        "sender:old:write-blocked",
+        "pool-1-thread-1:input:EOF",
+        "pool-1-thread-1:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f0b7c004668",
+        "pool-1-thread-1:old:socket-close",
+        "pool-1-thread-1:input:close",
+        "pool-1-thread-1:delay:1000",
+        "pool-1-thread-1:input:close",
+        "main:virtual-time:+1000",
+        "main:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f0b7c004668",
+        "pool-1-thread-1:new:connect",
+        "pool-1-thread-1:new:writer-install",
+        "pool-1-thread-1:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f0b7c004668",
+        "pool-1-thread-1:new:readLoop-entry",
+        "sender:old:write-throws",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f0b7c004668",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f0b7c004668",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f0b7c004668",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f0b7c004668",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f0b7c004668",
+        "main:ui:execute",
+        "main:ui:execute",
+        "main:ui:execute",
+        "main:ui:execute",
+        "main:ui:execute"
+      ],
+      "events": [
+        {
+          "type": "transport-state",
+          "role": "GUEST",
+          "state": "CONNECTING",
+          "detail": "正在连接房主",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "0b8da95e-eff0-42fc-9ddf-71b4e3b5b1ee",
+            "generation": "1",
+            "sequence": "1",
+            "role": "GUEST"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "GUEST",
+          "state": "CONNECTED",
+          "detail": "已连接房主",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "0b8da95e-eff0-42fc-9ddf-71b4e3b5b1ee",
+            "generation": "1",
+            "sequence": "2",
+            "role": "GUEST"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "GUEST",
+          "state": "DISCONNECTED",
+          "detail": "对方已断开连接",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "0b8da95e-eff0-42fc-9ddf-71b4e3b5b1ee",
+            "generation": "1",
+            "sequence": "3",
+            "role": "GUEST"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "GUEST",
+          "state": "CONNECTING",
+          "detail": "正在自动重新连接房主",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "0b8da95e-eff0-42fc-9ddf-71b4e3b5b1ee",
+            "generation": "2",
+            "sequence": "4",
+            "role": "GUEST"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "GUEST",
+          "state": "CONNECTED",
+          "detail": "连接已恢复",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "0b8da95e-eff0-42fc-9ddf-71b4e3b5b1ee",
+            "generation": "2",
+            "sequence": "5",
+            "role": "GUEST"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "scoped",
+      "uiModel": "queued",
+      "wrongInstance": "{\"status\":\"not_sent\",\"attemptedContext\":null}",
+      "wrongGeneration": "{\"status\":\"not_sent\",\"attemptedContext\":null}",
+      "beforeBytes": 0,
+      "result": "{\"status\":\"written\",\"attemptedContext\":{\"instance\":\"ade30c02-6877-4f69-b729-0c615aefcdb5\",\"generation\":\"1\",\"sequence\":\"2\",\"role\":\"GUEST\"}}",
+      "wire": "{\"v\":2,\"type\":\"action\",\"id\":\"recorded:1\",\"payload\":{\"kind\":\"hero\",\"hero\":\"shuffler\"}}\n{\"v\":2,\"type\":\"action\",\"id\":\"recorded:1\",\"payload\":{\"kind\":\"hero\",\"hero\":\"shuffler\"}}\n",
+      "context": "{\"v\":1,\"scopedSend\":true,\"context\":{\"instance\":\"ade30c02-6877-4f69-b729-0c615aefcdb5\",\"generation\":\"1\",\"sequence\":\"2\",\"role\":\"GUEST\"}}",
+      "disconnected": "{\"status\":\"not_sent\",\"attemptedContext\":null}",
+      "rebuilt": "{\"v\":1,\"scopedSend\":true,\"context\":{\"instance\":\"8a1364c8-9556-4e88-a825-a6b2842264e0\",\"generation\":\"0\",\"sequence\":\"0\",\"role\":\"NONE\"}}",
+      "scripts": [
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"GUEST\\\",\\\"state\\\":\\\"CONNECTING\\\",\\\"detail\\\":\\\"正在连接房主\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"ade30c02-6877-4f69-b729-0c615aefcdb5\\\",\\\"generation\\\":\\\"1\\\",\\\"sequence\\\":\\\"1\\\",\\\"role\\\":\\\"GUEST\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"GUEST\\\",\\\"state\\\":\\\"CONNECTED\\\",\\\"detail\\\":\\\"已连接房主\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"ade30c02-6877-4f69-b729-0c615aefcdb5\\\",\\\"generation\\\":\\\"1\\\",\\\"sequence\\\":\\\"2\\\",\\\"role\\\":\\\"GUEST\\\"}}\")}));",
+        "window.dispatchEvent(new CustomEvent('jieqi-bluetooth', {detail:JSON.parse(\"{\\\"type\\\":\\\"transport-state\\\",\\\"role\\\":\\\"NONE\\\",\\\"state\\\":\\\"DISCONNECTED\\\",\\\"detail\\\":\\\"已离开蓝牙房间\\\",\\\"adapterEnabled\\\":true,\\\"localContext\\\":{\\\"instance\\\":\\\"ade30c02-6877-4f69-b729-0c615aefcdb5\\\",\\\"generation\\\":\\\"2\\\",\\\"sequence\\\":\\\"3\\\",\\\"role\\\":\\\"NONE\\\"}}\")}));"
+      ],
+      "trace": [
+        "main:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f07d0004668",
+        "pool-1-thread-1:one:connect",
+        "pool-1-thread-1:one:writer-install",
+        "pool-1-thread-1:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f07d0004668",
+        "pool-1-thread-1:one:readLoop-entry",
+        "main:one:socket-close",
+        "main:input:close",
+        "main:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f07d0004668",
+        "pool-1-thread-1:input:EOF",
+        "pool-1-thread-1:input:close",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f07d0004668",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f07d0004668",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f07d0004668",
+        "main:ui:execute",
+        "main:ui:execute",
+        "main:ui:execute"
+      ],
+      "events": [
+        {
+          "type": "transport-state",
+          "role": "GUEST",
+          "state": "CONNECTING",
+          "detail": "正在连接房主",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "ade30c02-6877-4f69-b729-0c615aefcdb5",
+            "generation": "1",
+            "sequence": "1",
+            "role": "GUEST"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "GUEST",
+          "state": "CONNECTED",
+          "detail": "已连接房主",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "ade30c02-6877-4f69-b729-0c615aefcdb5",
+            "generation": "1",
+            "sequence": "2",
+            "role": "GUEST"
+          }
+        },
+        {
+          "type": "transport-state",
+          "role": "NONE",
+          "state": "DISCONNECTED",
+          "detail": "已离开蓝牙房间",
+          "adapterEnabled": true,
+          "localContext": {
+            "instance": "ade30c02-6877-4f69-b729-0c615aefcdb5",
+            "generation": "2",
+            "sequence": "3",
+            "role": "NONE"
+          }
+        }
+      ]
+    },
+    {
+      "mode": "legacy",
+      "uiModel": "queued",
+      "stateCount": 3,
+      "messageCount": 1,
+      "scripts": [],
+      "trace": [
+        "main:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f46400048a8",
+        "pool-2-thread-1:legacy:writer-install",
+        "pool-2-thread-1:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f46400048a8",
+        "pool-2-thread-1:legacy:readLoop-entry",
+        "pool-2-thread-1:input:bytes:85",
+        "pool-2-thread-1:input:EOF",
+        "pool-2-thread-1:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f4640005118",
+        "pool-2-thread-1:input:EOF",
+        "pool-2-thread-1:post:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f46400048a8",
+        "pool-2-thread-1:legacy:socket-close",
+        "pool-2-thread-1:input:close",
+        "pool-2-thread-1:delay:1000",
+        "pool-2-thread-1:input:close",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f46400048a8",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f46400048a8",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f4640005118",
+        "main:execute:com.jieqi.bluetooth.BluetoothGameSession$$Lambda/0x00007f46400048a8"
+      ],
+      "events": []
+    }
+  ],
+  "source_sha256": {
+    "BluetoothGameSession.java": "4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7",
+    "GameWebBridge.java": "3cab05dc3b535b73267e109cf6e5e438bc762db820b8af6acbedd104a4722b4c"
+  },
+  "limits": [
+    "Real JDK21 io/executor; controlled socket/input/output, narrow JSON shim.",
+    "Explicit inline and queued MainActivity models; virtual delayed reconnect, no Android/JNI/radio.",
+    "No reflection or direct attach. Prior exact EOF fixture reused, no old-suite rerun."
+  ]
+}

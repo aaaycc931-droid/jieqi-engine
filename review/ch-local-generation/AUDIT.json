@@ -1,0 +1,34 @@
+{
+  "base": "5cb3df526e1d41d60332b2b1f5c946f41126a720",
+  "task": "MAIN-CH-C5-LOCAL-CONNECTION-GENERATION-20261113",
+  "changed_existing": [
+    "android/app/src/main/java/com/jieqi/bluetooth/BluetoothGameSession.java",
+    "android/app/src/main/java/com/jieqi/bluetooth/GameWebBridge.java",
+    "web/app.ts"
+  ],
+  "protected_tracked_files": 648,
+  "production_changes": 3,
+  "wire_changes": 0,
+  "native_passed": 16,
+  "web_passed": 19,
+  "final_failed": 0,
+  "source_and_evidence_sha256": {
+    "android/app/src/main/java/com/jieqi/bluetooth/BluetoothGameSession.java": "4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7",
+    "android/app/src/main/java/com/jieqi/bluetooth/GameWebBridge.java": "3cab05dc3b535b73267e109cf6e5e438bc762db820b8af6acbedd104a4722b4c",
+    "web/app.ts": "57e0ace10c68ea089168ba764f4dbe7e004d35c8fd2ecde3e5d4019d4d3bdd3f",
+    "scripts/research/ch-generation-native.py": "561edd156943bc72dd0d9df162b58996535f0f901012c4883a7b83bfd648fbaf",
+    "scripts/research/ch-generation-channel.ts": "e333ce7d1f8083c1a330dfd9693710cf9ab4751f382e1445e51d2f155e1384c4",
+    "tests/research/ch-generation-web.test.ts": "4fc509298439ee52efa784aed5901b7bcd039e33fa0e4a03fc3e3b3e8194184f",
+    "review/ch-local-generation/NATIVE_RESULTS.json": "37eec9a6c851e778bfe9278a68ba53f6a0d23cd936e8ed02fd090bee2678606f",
+    "review/ch-local-generation/WEB_TESTS.tap": "15bf137f4af1ed1e6b531ed7d3b36fa485e6735effb8af3b3f5cb8fcf1896132",
+    "review/ch-local-generation/README.md": "29d9099ac19c19baaa56b97db6b179e870ca903cc09e46703197c7fa0c9fe521"
+  },
+  "environment": {
+    "node": "v24.22.1",
+    "java": "openjdk version \"21.0.13\" 2026-10-20\nOpenJDK Runtime Environment (build 21.0.13+9-1-deb13u2-Debian)\nOpenJDK 64-Bit Server VM (build 21.0.13+9-1-deb13u2-Debian, mixed mode, sharing)\n",
+    "python": "Python 3.12.14"
+  },
+  "full_app_strip": "PASS_NOT_TYPECHECK",
+  "diff_check": "PASS",
+  "Android_JNI_radio_browser_independentQA": false
+}

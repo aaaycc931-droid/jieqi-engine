@@ -358,6 +358,8 @@ interface BluetoothNativeBridge {
   join(address: string): void;
   send(message: string): void;
   sendChecked?(message: string): string;
+  localTransportContext?(): string;
+  sendCheckedScoped?(message: string, instance: string, generation: string): string;
   disconnect(): void;
   reconnect(): void;
   openBluetoothSettings(): void;
@@ -365,6 +367,7 @@ interface BluetoothNativeBridge {
 }
 
 interface BluetoothEventDetail {
+  localContext?: unknown;
   event?: string;
   type?: string;
   state?: string;
@@ -1249,6 +1252,27 @@ function sendBluetoothEnvelope<T>(envelope: { v: typeof BLUETOOTH_PROTOCOL_VERSI
   const bridge = nativeBluetooth();
   if (!bridge) throw new Error("此设备没有蓝牙桥接能力");
   const raw = encodeBluetoothEnvelope(envelope);
+  const selected = readLocalTransport(bridge);
+  if (selected.kind === "invalid") throw bluetoothSendFailure("unknown");
+  if (selected.kind === "scoped") {
+    let result: any;
+    try { result = JSON.parse(bridge.sendCheckedScoped!(raw, selected.context.instance, selected.context.generation)); }
+    catch {
+      const current = readLocalTransport(bridge);
+      if (current.kind !== "scoped" || !sameLocalGeneration(selected.context, current.context))
+        throw Object.assign(bluetoothSendFailure("unknown"), { localStale: true });
+      throw bluetoothSendFailure("unknown");
+    }
+    const current = readLocalTransport(bridge);
+    if (current.kind !== "scoped" || !sameLocalGeneration(selected.context, current.context))
+      throw Object.assign(bluetoothSendFailure("unknown"), { localStale: true });
+    if (!result || typeof result !== "object" || Array.isArray(result)) throw bluetoothSendFailure("unknown");
+    if (result.status === "not_sent" && result.attemptedContext === null) throw bluetoothSendFailure("not_sent");
+    if (!validLocalContext(result.attemptedContext) || !sameLocalGeneration(selected.context, result.attemptedContext))
+      throw bluetoothSendFailure("unknown");
+    if (result.status === "written") return;
+    throw bluetoothSendFailure("unknown");
+  }
   if (typeof bridge.sendChecked !== "function") {
     // Legacy bridge has no write result; preserve its existing compatibility path.
     bridge.send(raw);
@@ -1264,6 +1288,51 @@ function sendBluetoothEnvelope<T>(envelope: { v: typeof BLUETOOTH_PROTOCOL_VERSI
   if (result.status === "written") return;
   if (result.status === "not_sent") throw bluetoothSendFailure("not_sent", typeof result.detail === "string" ? result.detail : undefined);
   throw bluetoothSendFailure("unknown");
+}
+
+// Local-only capabilities: never inferred from peer messages or CONNECTED.
+const localGenerationConsumed = new WeakMap<object, { key: string; sequence: string }>();
+const localGenerationSeen = new WeakSet<object>();
+// A reconstructed Web document must not replay events produced before it existed.
+// This watermark is sampled once at module initialization, never per event.
+{ const bridge = nativeBluetooth();
+  if (bridge) { const baseline = readLocalTransport(bridge);
+    if (baseline.kind === "scoped") localGenerationConsumed.set(bridge, {
+      key: baseline.context.instance + ":" + baseline.context.generation, sequence: baseline.context.sequence,
+    });
+  }
+}
+function validLocalContext(c: any): c is { instance: string; generation: string; sequence: string; role: string } {
+  return !!c && typeof c === "object" && !Array.isArray(c) && typeof c.instance === "string" && c.instance.length > 0
+    && c.instance.length <= 128 && [c.generation, c.sequence].every(x => typeof x === "string" && /^(0|[1-9][0-9]{0,99})$/.test(x))
+    && ["NONE", "HOST", "GUEST"].includes(c.role);
+}
+function compareLocalSequence(a: string, b: string): number { return a.length !== b.length ? a.length - b.length : a === b ? 0 : a < b ? -1 : 1; }
+function sameLocalGeneration(a: any, b: any): boolean { return a.instance === b.instance && a.generation === b.generation; }
+function readLocalTransport(bridge: BluetoothNativeBridge): any {
+  if (typeof bridge.localTransportContext !== "function")
+    return { kind: localGenerationSeen.has(bridge) || typeof bridge.sendCheckedScoped === "function" ? "invalid" : "legacy" };
+  localGenerationSeen.add(bridge);
+  try {
+    const value = JSON.parse(bridge.localTransportContext());
+    if (value?.v === 1 && value.scopedSend === true && validLocalContext(value.context) && typeof bridge.sendCheckedScoped === "function")
+      return { kind: "scoped", context: value.context };
+  } catch { /* Invalid optional capability is not permission to resend. */ }
+  return { kind: "invalid" };
+}
+function admitLocalBluetoothEvent(detail: BluetoothEventDetail): boolean {
+  const bridge = nativeBluetooth(); if (!bridge) return false;
+  const current = readLocalTransport(bridge);
+  if (current.kind === "legacy") return detail.localContext === undefined;
+  if (current.kind !== "scoped" || !validLocalContext(detail.localContext)) return false;
+  const c = detail.localContext;
+  if (!sameLocalGeneration(c, current.context) || c.role !== current.context.role) return false;
+  const sequence = c.sequence, key = c.instance + ":" + c.generation;
+  if (sequence === "0" || compareLocalSequence(sequence, current.context.sequence) > 0) return false;
+  const consumed = localGenerationConsumed.get(bridge);
+  if (consumed?.key === key && compareLocalSequence(sequence, consumed.sequence) <= 0) return false;
+  localGenerationConsumed.set(bridge, { key, sequence });
+  return true;
 }
 
 function bluetoothSendFailure(status: "not_sent" | "unknown", detail?: string): Error {
@@ -1306,7 +1375,8 @@ function handleBluetoothAction(action: BluetoothRoomAction): void {
     publishBluetoothViewsAfterAction();
     return;
   }
-  let requestId: string;
+  const sendingSession = bluetooth;
+  let requestId: string | undefined;
   try {
     requestId = bluetoothActionId();
     bluetooth.pendingAction = true;
@@ -1314,6 +1384,7 @@ function handleBluetoothAction(action: BluetoothRoomAction): void {
     bluetooth.pendingActionWriteUnknown = false;
     sendBluetoothEnvelope({ v: BLUETOOTH_PROTOCOL_VERSION, type: "action", id: requestId, payload: action });
   } catch (error) {
+    if (bluetooth !== sendingSession || bluetooth.pendingActionId !== requestId || (error as any)?.localStale) return;
     if ((error as { bluetoothSendStatus?: string } | null)?.bluetoothSendStatus !== "unknown") {
       bluetooth.pendingAction = false;
       bluetooth.pendingActionId = undefined;
@@ -3626,6 +3697,8 @@ window.setInterval(updateVisibleTimers, 250);
 window.addEventListener("jieqi-bluetooth", ((event: CustomEvent<BluetoothEventDetail>) => {
   const detail = event.detail;
   if (!detail) return;
+  if ((detail.event === "state" || detail.type === "transport-state" || detail.type === "message" || detail.type === "transport-error")
+      && !admitLocalBluetoothEvent(detail)) return;
   if (detail.event === "state" || detail.type === "transport-state") {
     if (!bluetooth) return;
     const previousState = bluetooth.nativeState;

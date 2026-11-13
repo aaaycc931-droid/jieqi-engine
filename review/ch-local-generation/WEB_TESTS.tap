@@ -1,0 +1,126 @@
+TAP version 13
+# (node:13) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: inline real old callback set rejected at final JS after native generation changed
+ok 1 - inline real old callback set rejected at final JS after native generation changed
+  ---
+  duration_ms: 24.439411
+  type: 'test'
+  ...
+# Subtest: queued real old callback set rejected at final JS after native generation changed
+ok 2 - queued real old callback set rejected at final JS after native generation changed
+  ---
+  duration_ms: 15.265215
+  type: 'test'
+  ...
+# Subtest: same-generation actual FIFO message survives latest native sequence ahead; duplicates rejected
+ok 3 - same-generation actual FIFO message survives latest native sequence ahead; duplicates rejected
+  ---
+  duration_ms: 13.604568
+  type: 'test'
+  ...
+# Subtest: same-generation reverse sequence rejected (adversarial only)
+ok 4 - same-generation reverse sequence rejected (adversarial only)
+  ---
+  duration_ms: 16.650738
+  type: 'test'
+  ...
+# Subtest: new native instance with same generation rejects old callbacks
+ok 5 - new native instance with same generation rejects old callbacks
+  ---
+  duration_ms: 15.888556
+  type: 'test'
+  ...
+# Subtest: new Web admits events generated after its initialization watermark
+ok 6 - new Web admits events generated after its initialization watermark
+  ---
+  duration_ms: 21.709961
+  type: 'test'
+  ...
+# Subtest: scoped send fixed selection makes one action plus ordinary ping; v2 bytes unchanged
+ok 7 - scoped send fixed selection makes one action plus ordinary ping; v2 bytes unchanged
+  ---
+  duration_ms: 11.846429
+  type: 'test'
+  ...
+# Subtest: scoped bad never falls back or retries
+ok 8 - scoped bad never falls back or retries
+  ---
+  duration_ms: 14.821036
+  type: 'test'
+  ...
+# Subtest: scoped throw never falls back or retries
+ok 9 - scoped throw never falls back or retries
+  ---
+  duration_ms: 16.480671
+  type: 'test'
+  ...
+# Subtest: scoped mismatch never falls back or retries
+ok 10 - scoped mismatch never falls back or retries
+  ---
+  duration_ms: 8.804427
+  type: 'test'
+  ...
+# Subtest: scoped not_sent never falls back or retries
+ok 11 - scoped not_sent never falls back or retries
+  ---
+  duration_ms: 8.787525
+  type: 'test'
+  ...
+# Subtest: late old scoped result does not mutate a new pending request
+ok 12 - late old scoped result does not mutate a new pending request
+  ---
+  duration_ms: 8.55394
+  type: 'test'
+  ...
+# Subtest: bad capability performs zero sends and untagged callbacks cannot clear pending
+ok 13 - bad capability performs zero sends and untagged callbacks cannot clear pending
+  ---
+  duration_ms: 8.601109
+  type: 'test'
+  ...
+# Subtest: legacy bridge preserves one legacy action + ping path and untagged callbacks
+ok 14 - legacy bridge preserves one legacy action + ping path and untagged callbacks
+  ---
+  duration_ms: 8.274398
+  type: 'test'
+  ...
+# Subtest: only same-named scoped method without capability is not trusted
+ok 15 - only same-named scoped method without capability is not trusted
+  ---
+  duration_ms: 12.092449
+  type: 'test'
+  ...
+# Subtest: current lifecycle clears UI without resolving independently retained C4 unknown
+ok 16 - current lifecycle clears UI without resolving independently retained C4 unknown
+  ---
+  duration_ms: 14.831716
+  type: 'test'
+  ...
+# Subtest: Web rebuild rejects previously produced same-generation events
+ok 17 - Web rebuild rejects previously produced same-generation events
+  ---
+  duration_ms: 11.076104
+  type: 'test'
+  ...
+# Subtest: decimal sequence beyond JS integer range keeps adjacent event order
+ok 18 - decimal sequence beyond JS integer range keeps adjacent event order
+  ---
+  duration_ms: 8.476185
+  type: 'test'
+  ...
+# Subtest: exception after context switch cannot mark a new attempt unknown
+ok 19 - exception after context switch cannot mark a new attempt unknown
+  ---
+  duration_ms: 9.507719
+  type: 'test'
+  ...
+1..19
+# tests 19
+# suites 0
+# pass 19
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 569.067485
