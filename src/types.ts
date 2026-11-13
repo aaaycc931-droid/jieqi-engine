@@ -323,6 +323,8 @@ export interface SecretState {
   traps?: Array<{ id: string; owner: Side; position: Position; opponentTurnsRemaining: number }>;
   trueGenerals?: Partial<Record<Side, string>>;
   wind?: Partial<Record<Side, { uses: number; readyOnTurn: number; activatedOnTurn?: number; hostId?: string; decoyId: string }>>;
+  /** Authority-only T0 offer; never part of public state or generic owner secrets. */
+  windPreparation?: Partial<Record<Side, { candidateIds: string[]; poolBinding: string; completed?: true }>>;
   destinyIdentities?: Record<string, { side: Side; kind: "time_warrior" | "infinite_dragon"; anchor: Position; shown: boolean; identity: SecretIdentity }>;
   rewindUsed?: Partial<Record<Side, true>>;
   history?: FormalActionSnapshot[];

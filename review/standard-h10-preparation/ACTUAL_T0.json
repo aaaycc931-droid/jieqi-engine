@@ -1,0 +1,5238 @@
+{
+  "kind": "ACTUAL_T0_PREPARATION_ONLY",
+  "sources": {
+    "engineParent": "71145df45ad17215a3731e53150b6728e079e375",
+    "confirmationCommit": "e7a581d1208479e5ab48d67dd96a77bc969cc0a5",
+    "prefixSha256": "c98c1acc44734b92be785092e6239e28df56c95421f3a21c8e67ace3f21217f4",
+    "confirmationSha256": "78ec040f646f4cd30df341731e7b457870b26cf0a83616ac7425a89a5919121c"
+  },
+  "stages": [
+    "waiting",
+    "hero_selection",
+    "hero_selection",
+    "rps",
+    "rps",
+    "hero_intro",
+    "hero_intro",
+    "hero_preparation",
+    "playing",
+    "playing"
+  ],
+  "draws": [
+    {
+      "bound": 15,
+      "index": 12
+    },
+    {
+      "bound": 14,
+      "index": 11
+    },
+    {
+      "bound": 13,
+      "index": 1
+    }
+  ],
+  "prepared": {
+    "authority": {
+      "roomId": "std-h10-preparation-observation",
+      "inviteTokenHash": "d087c8b1ae4eb06596586ff279058cd414fd0537bae523b8539e212b5c3f2d71",
+      "seats": {
+        "host": {
+          "playerId": "h10-red",
+          "connectedAt": 1000,
+          "lastSeenAt": 1000
+        },
+        "guest": {
+          "playerId": "h10-black",
+          "connectedAt": 1100,
+          "lastSeenAt": 1100
+        }
+      },
+      "mode": {
+        "baseMode": "xiangqi",
+        "heroesEnabled": true,
+        "mutationsEnabled": true
+      },
+      "phase": "hero_preparation",
+      "updatedAt": 1700,
+      "rps": {
+        "status": "resolved",
+        "round": 1,
+        "players": [
+          "h10-red",
+          "h10-black"
+        ],
+        "submitted": {
+          "h10-red": true,
+          "h10-black": true
+        },
+        "lastResult": {
+          "round": 1,
+          "choices": {
+            "h10-red": "rock",
+            "h10-black": "scissors"
+          },
+          "tie": false,
+          "winner": "h10-red",
+          "loser": "h10-black"
+        },
+        "assignments": {
+          "red": "h10-red",
+          "black": "h10-black"
+        }
+      },
+      "rpsSecret": {
+        "choices": {}
+      },
+      "features": {
+        "heroes": {
+          "red": "rogue",
+          "black": "wind"
+        },
+        "heroSelections": {
+          "red": {
+            "heroId": "rogue",
+            "form": "front",
+            "packageId": "rogue:front:v1"
+          },
+          "black": {
+            "heroId": "wind",
+            "form": "front",
+            "packageId": "wind:front:v1"
+          }
+        },
+        "mutation": "war_chariot",
+        "mutationRarity": "legendary",
+        "heroPreparation": {
+          "ready": {
+            "red": true,
+            "black": false
+          },
+          "deadlineAt": 61700
+        }
+      },
+      "featureSecret": {
+        "traps": [],
+        "trapDrafts": {}
+      },
+      "disconnects": {
+        "players": {
+          "h10-red": {
+            "accumulatedMs": 0,
+            "reconnectCount": 0
+          },
+          "h10-black": {
+            "accumulatedMs": 0,
+            "reconnectCount": 0
+          }
+        }
+      },
+      "game": {
+        "players": {
+          "red": "h10-red",
+          "black": "h10-black"
+        },
+        "state": {
+          "gameMode": "xiangqi",
+          "status": "playing",
+          "turn": "red",
+          "revision": 0,
+          "pieces": [
+            {
+              "id": "black-general",
+              "x": 4,
+              "y": 0,
+              "faceDown": false,
+              "color": "black",
+              "type": "general"
+            },
+            {
+              "id": "red-general",
+              "x": 4,
+              "y": 9,
+              "faceDown": false,
+              "color": "red",
+              "type": "general"
+            },
+            {
+              "id": "covered-00",
+              "x": 0,
+              "y": 0,
+              "faceDown": false,
+              "color": "black",
+              "type": "rook"
+            },
+            {
+              "id": "covered-01",
+              "x": 1,
+              "y": 0,
+              "faceDown": false,
+              "color": "black",
+              "type": "horse"
+            },
+            {
+              "id": "covered-02",
+              "x": 2,
+              "y": 0,
+              "faceDown": false,
+              "color": "black",
+              "type": "elephant"
+            },
+            {
+              "id": "covered-03",
+              "x": 3,
+              "y": 0,
+              "faceDown": false,
+              "color": "black",
+              "type": "advisor"
+            },
+            {
+              "id": "covered-04",
+              "x": 5,
+              "y": 0,
+              "faceDown": false,
+              "color": "black",
+              "type": "advisor"
+            },
+            {
+              "id": "covered-05",
+              "x": 6,
+              "y": 0,
+              "faceDown": false,
+              "color": "black",
+              "type": "elephant"
+            },
+            {
+              "id": "covered-06",
+              "x": 7,
+              "y": 0,
+              "faceDown": false,
+              "color": "black",
+              "type": "horse"
+            },
+            {
+              "id": "covered-07",
+              "x": 8,
+              "y": 0,
+              "faceDown": false,
+              "color": "black",
+              "type": "rook"
+            },
+            {
+              "id": "covered-08",
+              "x": 1,
+              "y": 2,
+              "faceDown": false,
+              "color": "black",
+              "type": "cannon"
+            },
+            {
+              "id": "covered-09",
+              "x": 7,
+              "y": 2,
+              "faceDown": false,
+              "color": "black",
+              "type": "cannon"
+            },
+            {
+              "id": "covered-10",
+              "x": 0,
+              "y": 3,
+              "faceDown": false,
+              "color": "black",
+              "type": "pawn"
+            },
+            {
+              "id": "covered-11",
+              "x": 2,
+              "y": 3,
+              "faceDown": false,
+              "color": "black",
+              "type": "pawn"
+            },
+            {
+              "id": "covered-12",
+              "x": 4,
+              "y": 3,
+              "faceDown": false,
+              "color": "black",
+              "type": "pawn"
+            },
+            {
+              "id": "covered-13",
+              "x": 6,
+              "y": 3,
+              "faceDown": false,
+              "color": "black",
+              "type": "pawn"
+            },
+            {
+              "id": "covered-14",
+              "x": 8,
+              "y": 3,
+              "faceDown": false,
+              "color": "black",
+              "type": "pawn"
+            },
+            {
+              "id": "covered-15",
+              "x": 0,
+              "y": 9,
+              "faceDown": false,
+              "color": "red",
+              "type": "rook"
+            },
+            {
+              "id": "covered-16",
+              "x": 1,
+              "y": 9,
+              "faceDown": false,
+              "color": "red",
+              "type": "horse"
+            },
+            {
+              "id": "covered-17",
+              "x": 2,
+              "y": 9,
+              "faceDown": false,
+              "color": "red",
+              "type": "elephant"
+            },
+            {
+              "id": "covered-18",
+              "x": 3,
+              "y": 9,
+              "faceDown": false,
+              "color": "red",
+              "type": "advisor"
+            },
+            {
+              "id": "covered-19",
+              "x": 5,
+              "y": 9,
+              "faceDown": false,
+              "color": "red",
+              "type": "advisor"
+            },
+            {
+              "id": "covered-20",
+              "x": 6,
+              "y": 9,
+              "faceDown": false,
+              "color": "red",
+              "type": "elephant"
+            },
+            {
+              "id": "covered-21",
+              "x": 7,
+              "y": 9,
+              "faceDown": false,
+              "color": "red",
+              "type": "horse"
+            },
+            {
+              "id": "covered-22",
+              "x": 8,
+              "y": 9,
+              "faceDown": false,
+              "color": "red",
+              "type": "rook"
+            },
+            {
+              "id": "covered-23",
+              "x": 1,
+              "y": 7,
+              "faceDown": false,
+              "color": "red",
+              "type": "cannon"
+            },
+            {
+              "id": "covered-24",
+              "x": 7,
+              "y": 7,
+              "faceDown": false,
+              "color": "red",
+              "type": "cannon"
+            },
+            {
+              "id": "covered-25",
+              "x": 0,
+              "y": 6,
+              "faceDown": false,
+              "color": "red",
+              "type": "pawn"
+            },
+            {
+              "id": "covered-26",
+              "x": 2,
+              "y": 6,
+              "faceDown": false,
+              "color": "red",
+              "type": "pawn"
+            },
+            {
+              "id": "covered-27",
+              "x": 4,
+              "y": 6,
+              "faceDown": false,
+              "color": "red",
+              "type": "pawn"
+            },
+            {
+              "id": "covered-28",
+              "x": 6,
+              "y": 6,
+              "faceDown": false,
+              "color": "red",
+              "type": "pawn"
+            },
+            {
+              "id": "covered-29",
+              "x": 8,
+              "y": 6,
+              "faceDown": false,
+              "color": "red",
+              "type": "pawn"
+            }
+          ],
+          "captured": [],
+          "effectsByPieceId": {},
+          "assassination": {
+            "red": {
+              "heroChargeAvailable": true,
+              "mutationChargeAvailable": false
+            },
+            "black": {
+              "heroChargeAvailable": false,
+              "mutationChargeAvailable": false
+            }
+          },
+          "featureRules": {
+            "heroSelections": {
+              "red": {
+                "heroId": "rogue",
+                "form": "front",
+                "packageId": "rogue:front:v1"
+              },
+              "black": {
+                "heroId": "wind",
+                "form": "front",
+                "packageId": "wind:front:v1"
+              }
+            },
+            "heroes": {
+              "red": "rogue",
+              "black": "wind"
+            },
+            "mutation": "war_chariot"
+          },
+          "heroFormLock": {
+            "red": {
+              "heroId": "rogue",
+              "form": "front",
+              "packageId": "rogue:front:v1"
+            },
+            "black": {
+              "heroId": "wind",
+              "form": "front",
+              "packageId": "wind:front:v1"
+            }
+          },
+          "formalTurns": {
+            "red": 0,
+            "black": 0
+          },
+          "heroRuntime": {
+            "red": {
+              "used": false,
+              "invokeCount": 0
+            },
+            "black": {
+              "used": false,
+              "invokeCount": 0
+            }
+          }
+        },
+        "secret": {
+          "identities": {},
+          "processedActions": {},
+          "heroFormLock": {
+            "red": {
+              "heroId": "rogue",
+              "form": "front",
+              "packageId": "rogue:front:v1"
+            },
+            "black": {
+              "heroId": "wind",
+              "form": "front",
+              "packageId": "wind:front:v1"
+            }
+          },
+          "trueGenerals": {
+            "red": "red-general",
+            "black": "black-general"
+          },
+          "wind": {
+            "black": {
+              "uses": 0,
+              "readyOnTurn": 0,
+              "decoyId": "black-general"
+            }
+          },
+          "windPreparation": {
+            "black": {
+              "candidateIds": [
+                "covered-12",
+                "covered-11",
+                "covered-01"
+              ],
+              "poolBinding": "[[\"covered-00\",0,0],[\"covered-01\",1,0],[\"covered-02\",2,0],[\"covered-03\",3,0],[\"covered-04\",5,0],[\"covered-05\",6,0],[\"covered-06\",7,0],[\"covered-07\",8,0],[\"covered-08\",1,2],[\"covered-09\",7,2],[\"covered-10\",0,3],[\"covered-11\",2,3],[\"covered-12\",4,3],[\"covered-13\",6,3],[\"covered-14\",8,3]]"
+            }
+          }
+        }
+      },
+      "messages": [
+        {
+          "id": "system:start:1500",
+          "kind": "system",
+          "text": "对局开始，红方先行。",
+          "createdAt": 1500
+        }
+      ],
+      "chatLastSentAt": {}
+    },
+    "views": {
+      "public": {
+        "roomId": "std-h10-preparation-observation",
+        "seats": {
+          "host": {
+            "playerId": "h10-red",
+            "connectedAt": 1000,
+            "lastSeenAt": 1000
+          },
+          "guest": {
+            "playerId": "h10-black",
+            "connectedAt": 1100,
+            "lastSeenAt": 1100
+          }
+        },
+        "mode": {
+          "baseMode": "xiangqi",
+          "heroesEnabled": true,
+          "mutationsEnabled": true
+        },
+        "phase": "hero_preparation",
+        "rps": {
+          "status": "resolved",
+          "round": 1,
+          "players": [
+            "h10-red",
+            "h10-black"
+          ],
+          "submitted": {
+            "h10-red": true,
+            "h10-black": true
+          },
+          "lastResult": {
+            "round": 1,
+            "choices": {
+              "h10-red": "rock",
+              "h10-black": "scissors"
+            },
+            "tie": false,
+            "winner": "h10-red",
+            "loser": "h10-black"
+          },
+          "assignments": {
+            "red": "h10-red",
+            "black": "h10-black"
+          }
+        },
+        "state": {
+          "gameMode": "xiangqi",
+          "status": "playing",
+          "turn": "red",
+          "revision": 0,
+          "pieces": [
+            {
+              "id": "black-general",
+              "x": 4,
+              "y": 0,
+              "faceDown": false,
+              "color": "black",
+              "type": "general"
+            },
+            {
+              "id": "red-general",
+              "x": 4,
+              "y": 9,
+              "faceDown": false,
+              "color": "red",
+              "type": "general"
+            },
+            {
+              "id": "covered-00",
+              "x": 0,
+              "y": 0,
+              "faceDown": false,
+              "color": "black",
+              "type": "rook"
+            },
+            {
+              "id": "covered-01",
+              "x": 1,
+              "y": 0,
+              "faceDown": false,
+              "color": "black",
+              "type": "horse"
+            },
+            {
+              "id": "covered-02",
+              "x": 2,
+              "y": 0,
+              "faceDown": false,
+              "color": "black",
+              "type": "elephant"
+            },
+            {
+              "id": "covered-03",
+              "x": 3,
+              "y": 0,
+              "faceDown": false,
+              "color": "black",
+              "type": "advisor"
+            },
+            {
+              "id": "covered-04",
+              "x": 5,
+              "y": 0,
+              "faceDown": false,
+              "color": "black",
+              "type": "advisor"
+            },
+            {
+              "id": "covered-05",
+              "x": 6,
+              "y": 0,
+              "faceDown": false,
+              "color": "black",
+              "type": "elephant"
+            },
+            {
+              "id": "covered-06",
+              "x": 7,
+              "y": 0,
+              "faceDown": false,
+              "color": "black",
+              "type": "horse"
+            },
+            {
+              "id": "covered-07",
+              "x": 8,
+              "y": 0,
+              "faceDown": false,
+              "color": "black",
+              "type": "rook"
+            },
+            {
+              "id": "covered-08",
+              "x": 1,
+              "y": 2,
+              "faceDown": false,
+              "color": "black",
+              "type": "cannon"
+            },
+            {
+              "id": "covered-09",
+              "x": 7,
+              "y": 2,
+              "faceDown": false,
+              "color": "black",
+              "type": "cannon"
+            },
+            {
+              "id": "covered-10",
+              "x": 0,
+              "y": 3,
+              "faceDown": false,
+              "color": "black",
+              "type": "pawn"
+            },
+            {
+              "id": "covered-11",
+              "x": 2,
+              "y": 3,
+              "faceDown": false,
+              "color": "black",
+              "type": "pawn"
+            },
+            {
+              "id": "covered-12",
+              "x": 4,
+              "y": 3,
+              "faceDown": false,
+              "color": "black",
+              "type": "pawn"
+            },
+            {
+              "id": "covered-13",
+              "x": 6,
+              "y": 3,
+              "faceDown": false,
+              "color": "black",
+              "type": "pawn"
+            },
+            {
+              "id": "covered-14",
+              "x": 8,
+              "y": 3,
+              "faceDown": false,
+              "color": "black",
+              "type": "pawn"
+            },
+            {
+              "id": "covered-15",
+              "x": 0,
+              "y": 9,
+              "faceDown": false,
+              "color": "red",
+              "type": "rook"
+            },
+            {
+              "id": "covered-16",
+              "x": 1,
+              "y": 9,
+              "faceDown": false,
+              "color": "red",
+              "type": "horse"
+            },
+            {
+              "id": "covered-17",
+              "x": 2,
+              "y": 9,
+              "faceDown": false,
+              "color": "red",
+              "type": "elephant"
+            },
+            {
+              "id": "covered-18",
+              "x": 3,
+              "y": 9,
+              "faceDown": false,
+              "color": "red",
+              "type": "advisor"
+            },
+            {
+              "id": "covered-19",
+              "x": 5,
+              "y": 9,
+              "faceDown": false,
+              "color": "red",
+              "type": "advisor"
+            },
+            {
+              "id": "covered-20",
+              "x": 6,
+              "y": 9,
+              "faceDown": false,
+              "color": "red",
+              "type": "elephant"
+            },
+            {
+              "id": "covered-21",
+              "x": 7,
+              "y": 9,
+              "faceDown": false,
+              "color": "red",
+              "type": "horse"
+            },
+            {
+              "id": "covered-22",
+              "x": 8,
+              "y": 9,
+              "faceDown": false,
+              "color": "red",
+              "type": "rook"
+            },
+            {
+              "id": "covered-23",
+              "x": 1,
+              "y": 7,
+              "faceDown": false,
+              "color": "red",
+              "type": "cannon"
+            },
+            {
+              "id": "covered-24",
+              "x": 7,
+              "y": 7,
+              "faceDown": false,
+              "color": "red",
+              "type": "cannon"
+            },
+            {
+              "id": "covered-25",
+              "x": 0,
+              "y": 6,
+              "faceDown": false,
+              "color": "red",
+              "type": "pawn"
+            },
+            {
+              "id": "covered-26",
+              "x": 2,
+              "y": 6,
+              "faceDown": false,
+              "color": "red",
+              "type": "pawn"
+            },
+            {
+              "id": "covered-27",
+              "x": 4,
+              "y": 6,
+              "faceDown": false,
+              "color": "red",
+              "type": "pawn"
+            },
+            {
+              "id": "covered-28",
+              "x": 6,
+              "y": 6,
+              "faceDown": false,
+              "color": "red",
+              "type": "pawn"
+            },
+            {
+              "id": "covered-29",
+              "x": 8,
+              "y": 6,
+              "faceDown": false,
+              "color": "red",
+              "type": "pawn"
+            }
+          ],
+          "captured": [],
+          "effectsByPieceId": {},
+          "assassination": {
+            "red": {
+              "heroChargeAvailable": true,
+              "mutationChargeAvailable": false
+            },
+            "black": {
+              "heroChargeAvailable": false,
+              "mutationChargeAvailable": false
+            }
+          },
+          "featureRules": {
+            "heroSelections": {
+              "red": {
+                "heroId": "rogue",
+                "form": "front",
+                "packageId": "rogue:front:v1"
+              },
+              "black": {
+                "heroId": "wind",
+                "form": "front",
+                "packageId": "wind:front:v1"
+              }
+            },
+            "heroes": {
+              "red": "rogue",
+              "black": "wind"
+            },
+            "mutation": "war_chariot"
+          },
+          "heroFormLock": {
+            "red": {
+              "heroId": "rogue",
+              "form": "front",
+              "packageId": "rogue:front:v1"
+            },
+            "black": {
+              "heroId": "wind",
+              "form": "front",
+              "packageId": "wind:front:v1"
+            }
+          },
+          "formalTurns": {
+            "red": 0,
+            "black": 0
+          },
+          "heroRuntime": {
+            "red": {
+              "used": false,
+              "invokeCount": 0
+            },
+            "black": {
+              "used": false,
+              "invokeCount": 0
+            }
+          }
+        },
+        "features": {
+          "heroes": {
+            "red": "rogue",
+            "black": "wind"
+          },
+          "heroSelections": {
+            "red": {
+              "heroId": "rogue",
+              "form": "front",
+              "packageId": "rogue:front:v1"
+            },
+            "black": {
+              "heroId": "wind",
+              "form": "front",
+              "packageId": "wind:front:v1"
+            }
+          },
+          "mutation": "war_chariot",
+          "mutationRarity": "legendary",
+          "heroPreparation": {
+            "ready": {
+              "red": true,
+              "black": false
+            },
+            "deadlineAt": 61700
+          }
+        },
+        "disconnects": {
+          "players": {
+            "h10-red": {
+              "accumulatedMs": 0,
+              "reconnectCount": 0
+            },
+            "h10-black": {
+              "accumulatedMs": 0,
+              "reconnectCount": 0
+            }
+          }
+        },
+        "messages": [
+          {
+            "id": "system:start:1500",
+            "kind": "system",
+            "text": "对局开始，红方先行。",
+            "createdAt": 1500
+          }
+        ],
+        "updatedAt": 1700
+      },
+      "red": {
+        "roomId": "std-h10-preparation-observation",
+        "seats": {
+          "host": {
+            "playerId": "h10-red",
+            "connectedAt": 1000,
+            "lastSeenAt": 1000
+          },
+          "guest": {
+            "playerId": "h10-black",
+            "connectedAt": 1100,
+            "lastSeenAt": 1100
+          }
+        },
+        "mode": {
+          "baseMode": "xiangqi",
+          "heroesEnabled": true,
+          "mutationsEnabled": true
+        },
+        "phase": "hero_preparation",
+        "rps": {
+          "status": "resolved",
+          "round": 1,
+          "players": [
+            "h10-red",
+            "h10-black"
+          ],
+          "submitted": {
+            "h10-red": true,
+            "h10-black": true
+          },
+          "lastResult": {
+            "round": 1,
+            "choices": {
+              "h10-red": "rock",
+              "h10-black": "scissors"
+            },
+            "tie": false,
+            "winner": "h10-red",
+            "loser": "h10-black"
+          },
+          "assignments": {
+            "red": "h10-red",
+            "black": "h10-black"
+          }
+        },
+        "state": {
+          "gameMode": "xiangqi",
+          "status": "playing",
+          "turn": "red",
+          "revision": 0,
+          "pieces": [
+            {
+              "id": "black-general",
+              "x": 4,
+              "y": 0,
+              "faceDown": false,
+              "color": "black",
+              "type": "general"
+            },
+            {
+              "id": "red-general",
+              "x": 4,
+              "y": 9,
+              "faceDown": false,
+              "color": "red",
+              "type": "general"
+            },
+            {
+              "id": "covered-00",
+              "x": 0,
+              "y": 0,
+              "faceDown": false,
+              "color": "black",
+              "type": "rook"
+            },
+            {
+              "id": "covered-01",
+              "x": 1,
+              "y": 0,
+              "faceDown": false,
+              "color": "black",
+              "type": "horse"
+            },
+            {
+              "id": "covered-02",
+              "x": 2,
+              "y": 0,
+              "faceDown": false,
+              "color": "black",
+              "type": "elephant"
+            },
+            {
+              "id": "covered-03",
+              "x": 3,
+              "y": 0,
+              "faceDown": false,
+              "color": "black",
+              "type": "advisor"
+            },
+            {
+              "id": "covered-04",
+              "x": 5,
+              "y": 0,
+              "faceDown": false,
+              "color": "black",
+              "type": "advisor"
+            },
+            {
+              "id": "covered-05",
+              "x": 6,
+              "y": 0,
+              "faceDown": false,
+              "color": "black",
+              "type": "elephant"
+            },
+            {
+              "id": "covered-06",
+              "x": 7,
+              "y": 0,
+              "faceDown": false,
+              "color": "black",
+              "type": "horse"
+            },
+            {
+              "id": "covered-07",
+              "x": 8,
+              "y": 0,
+              "faceDown": false,
+              "color": "black",
+              "type": "rook"
+            },
+            {
+              "id": "covered-08",
+              "x": 1,
+              "y": 2,
+              "faceDown": false,
+              "color": "black",
+              "type": "cannon"
+            },
+            {
+              "id": "covered-09",
+              "x": 7,
+              "y": 2,
+              "faceDown": false,
+              "color": "black",
+              "type": "cannon"
+            },
+            {
+              "id": "covered-10",
+              "x": 0,
+              "y": 3,
+              "faceDown": false,
+              "color": "black",
+              "type": "pawn"
+            },
+            {
+              "id": "covered-11",
+              "x": 2,
+              "y": 3,
+              "faceDown": false,
+              "color": "black",
+              "type": "pawn"
+            },
+            {
+              "id": "covered-12",
+              "x": 4,
+              "y": 3,
+              "faceDown": false,
+              "color": "black",
+              "type": "pawn"
+            },
+            {
+              "id": "covered-13",
+              "x": 6,
+              "y": 3,
+              "faceDown": false,
+              "color": "black",
+              "type": "pawn"
+            },
+            {
+              "id": "covered-14",
+              "x": 8,
+              "y": 3,
+              "faceDown": false,
+              "color": "black",
+              "type": "pawn"
+            },
+            {
+              "id": "covered-15",
+              "x": 0,
+              "y": 9,
+              "faceDown": false,
+              "color": "red",
+              "type": "rook"
+            },
+            {
+              "id": "covered-16",
+              "x": 1,
+              "y": 9,
+              "faceDown": false,
+              "color": "red",
+              "type": "horse"
+            },
+            {
+              "id": "covered-17",
+              "x": 2,
+              "y": 9,
+              "faceDown": false,
+              "color": "red",
+              "type": "elephant"
+            },
+            {
+              "id": "covered-18",
+              "x": 3,
+              "y": 9,
+              "faceDown": false,
+              "color": "red",
+              "type": "advisor"
+            },
+            {
+              "id": "covered-19",
+              "x": 5,
+              "y": 9,
+              "faceDown": false,
+              "color": "red",
+              "type": "advisor"
+            },
+            {
+              "id": "covered-20",
+              "x": 6,
+              "y": 9,
+              "faceDown": false,
+              "color": "red",
+              "type": "elephant"
+            },
+            {
+              "id": "covered-21",
+              "x": 7,
+              "y": 9,
+              "faceDown": false,
+              "color": "red",
+              "type": "horse"
+            },
+            {
+              "id": "covered-22",
+              "x": 8,
+              "y": 9,
+              "faceDown": false,
+              "color": "red",
+              "type": "rook"
+            },
+            {
+              "id": "covered-23",
+              "x": 1,
+              "y": 7,
+              "faceDown": false,
+              "color": "red",
+              "type": "cannon"
+            },
+            {
+              "id": "covered-24",
+              "x": 7,
+              "y": 7,
+              "faceDown": false,
+              "color": "red",
+              "type": "cannon"
+            },
+            {
+              "id": "covered-25",
+              "x": 0,
+              "y": 6,
+              "faceDown": false,
+              "color": "red",
+              "type": "pawn"
+            },
+            {
+              "id": "covered-26",
+              "x": 2,
+              "y": 6,
+              "faceDown": false,
+              "color": "red",
+              "type": "pawn"
+            },
+            {
+              "id": "covered-27",
+              "x": 4,
+              "y": 6,
+              "faceDown": false,
+              "color": "red",
+              "type": "pawn"
+            },
+            {
+              "id": "covered-28",
+              "x": 6,
+              "y": 6,
+              "faceDown": false,
+              "color": "red",
+              "type": "pawn"
+            },
+            {
+              "id": "covered-29",
+              "x": 8,
+              "y": 6,
+              "faceDown": false,
+              "color": "red",
+              "type": "pawn"
+            }
+          ],
+          "captured": [],
+          "effectsByPieceId": {},
+          "assassination": {
+            "red": {
+              "heroChargeAvailable": true,
+              "mutationChargeAvailable": false
+            },
+            "black": {
+              "heroChargeAvailable": false,
+              "mutationChargeAvailable": false
+            }
+          },
+          "featureRules": {
+            "heroSelections": {
+              "red": {
+                "heroId": "rogue",
+                "form": "front",
+                "packageId": "rogue:front:v1"
+              },
+              "black": {
+                "heroId": "wind",
+                "form": "front",
+                "packageId": "wind:front:v1"
+              }
+            },
+            "heroes": {
+              "red": "rogue",
+              "black": "wind"
+            },
+            "mutation": "war_chariot"
+          },
+          "heroFormLock": {
+            "red": {
+              "heroId": "rogue",
+              "form": "front",
+              "packageId": "rogue:front:v1"
+            },
+            "black": {
+              "heroId": "wind",
+              "form": "front",
+              "packageId": "wind:front:v1"
+            }
+          },
+          "formalTurns": {
+            "red": 0,
+            "black": 0
+          },
+          "heroRuntime": {
+            "red": {
+              "used": false,
+              "invokeCount": 0
+            },
+            "black": {
+              "used": false,
+              "invokeCount": 0
+            }
+          }
+        },
+        "features": {
+          "heroes": {
+            "red": "rogue",
+            "black": "wind"
+          },
+          "heroSelections": {
+            "red": {
+              "heroId": "rogue",
+              "form": "front",
+              "packageId": "rogue:front:v1"
+            },
+            "black": {
+              "heroId": "wind",
+              "form": "front",
+              "packageId": "wind:front:v1"
+            }
+          },
+          "mutation": "war_chariot",
+          "mutationRarity": "legendary",
+          "heroPreparation": {
+            "ready": {
+              "red": true,
+              "black": false
+            },
+            "deadlineAt": 61700
+          }
+        },
+        "disconnects": {
+          "players": {
+            "h10-red": {
+              "accumulatedMs": 0,
+              "reconnectCount": 0
+            },
+            "h10-black": {
+              "accumulatedMs": 0,
+              "reconnectCount": 0
+            }
+          }
+        },
+        "messages": [
+          {
+            "id": "system:start:1500",
+            "kind": "system",
+            "text": "对局开始，红方先行。",
+            "createdAt": 1500
+          }
+        ],
+        "updatedAt": 1700,
+        "viewerSide": "red",
+        "ownHeroChoice": "rogue",
+        "ownHeroSelection": {
+          "heroId": "rogue",
+          "form": "front",
+          "packageId": "rogue:front:v1"
+        },
+        "ownHeroSecrets": {}
+      },
+      "black": {
+        "roomId": "std-h10-preparation-observation",
+        "seats": {
+          "host": {
+            "playerId": "h10-red",
+            "connectedAt": 1000,
+            "lastSeenAt": 1000
+          },
+          "guest": {
+            "playerId": "h10-black",
+            "connectedAt": 1100,
+            "lastSeenAt": 1100
+          }
+        },
+        "mode": {
+          "baseMode": "xiangqi",
+          "heroesEnabled": true,
+          "mutationsEnabled": true
+        },
+        "phase": "hero_preparation",
+        "rps": {
+          "status": "resolved",
+          "round": 1,
+          "players": [
+            "h10-red",
+            "h10-black"
+          ],
+          "submitted": {
+            "h10-red": true,
+            "h10-black": true
+          },
+          "lastResult": {
+            "round": 1,
+            "choices": {
+              "h10-red": "rock",
+              "h10-black": "scissors"
+            },
+            "tie": false,
+            "winner": "h10-red",
+            "loser": "h10-black"
+          },
+          "assignments": {
+            "red": "h10-red",
+            "black": "h10-black"
+          }
+        },
+        "state": {
+          "gameMode": "xiangqi",
+          "status": "playing",
+          "turn": "red",
+          "revision": 0,
+          "pieces": [
+            {
+              "id": "black-general",
+              "x": 4,
+              "y": 0,
+              "faceDown": false,
+              "color": "black",
+              "type": "general"
+            },
+            {
+              "id": "red-general",
+              "x": 4,
+              "y": 9,
+              "faceDown": false,
+              "color": "red",
+              "type": "general"
+            },
+            {
+              "id": "covered-00",
+              "x": 0,
+              "y": 0,
+              "faceDown": false,
+              "color": "black",
+              "type": "rook"
+            },
+            {
+              "id": "covered-01",
+              "x": 1,
+              "y": 0,
+              "faceDown": false,
+              "color": "black",
+              "type": "horse"
+            },
+            {
+              "id": "covered-02",
+              "x": 2,
+              "y": 0,
+              "faceDown": false,
+              "color": "black",
+              "type": "elephant"
+            },
+            {
+              "id": "covered-03",
+              "x": 3,
+              "y": 0,
+              "faceDown": false,
+              "color": "black",
+              "type": "advisor"
+            },
+            {
+              "id": "covered-04",
+              "x": 5,
+              "y": 0,
+              "faceDown": false,
+              "color": "black",
+              "type": "advisor"
+            },
+            {
+              "id": "covered-05",
+              "x": 6,
+              "y": 0,
+              "faceDown": false,
+              "color": "black",
+              "type": "elephant"
+            },
+            {
+              "id": "covered-06",
+              "x": 7,
+              "y": 0,
+              "faceDown": false,
+              "color": "black",
+              "type": "horse"
+            },
+            {
+              "id": "covered-07",
+              "x": 8,
+              "y": 0,
+              "faceDown": false,
+              "color": "black",
+              "type": "rook"
+            },
+            {
+              "id": "covered-08",
+              "x": 1,
+              "y": 2,
+              "faceDown": false,
+              "color": "black",
+              "type": "cannon"
+            },
+            {
+              "id": "covered-09",
+              "x": 7,
+              "y": 2,
+              "faceDown": false,
+              "color": "black",
+              "type": "cannon"
+            },
+            {
+              "id": "covered-10",
+              "x": 0,
+              "y": 3,
+              "faceDown": false,
+              "color": "black",
+              "type": "pawn"
+            },
+            {
+              "id": "covered-11",
+              "x": 2,
+              "y": 3,
+              "faceDown": false,
+              "color": "black",
+              "type": "pawn"
+            },
+            {
+              "id": "covered-12",
+              "x": 4,
+              "y": 3,
+              "faceDown": false,
+              "color": "black",
+              "type": "pawn"
+            },
+            {
+              "id": "covered-13",
+              "x": 6,
+              "y": 3,
+              "faceDown": false,
+              "color": "black",
+              "type": "pawn"
+            },
+            {
+              "id": "covered-14",
+              "x": 8,
+              "y": 3,
+              "faceDown": false,
+              "color": "black",
+              "type": "pawn"
+            },
+            {
+              "id": "covered-15",
+              "x": 0,
+              "y": 9,
+              "faceDown": false,
+              "color": "red",
+              "type": "rook"
+            },
+            {
+              "id": "covered-16",
+              "x": 1,
+              "y": 9,
+              "faceDown": false,
+              "color": "red",
+              "type": "horse"
+            },
+            {
+              "id": "covered-17",
+              "x": 2,
+              "y": 9,
+              "faceDown": false,
+              "color": "red",
+              "type": "elephant"
+            },
+            {
+              "id": "covered-18",
+              "x": 3,
+              "y": 9,
+              "faceDown": false,
+              "color": "red",
+              "type": "advisor"
+            },
+            {
+              "id": "covered-19",
+              "x": 5,
+              "y": 9,
+              "faceDown": false,
+              "color": "red",
+              "type": "advisor"
+            },
+            {
+              "id": "covered-20",
+              "x": 6,
+              "y": 9,
+              "faceDown": false,
+              "color": "red",
+              "type": "elephant"
+            },
+            {
+              "id": "covered-21",
+              "x": 7,
+              "y": 9,
+              "faceDown": false,
+              "color": "red",
+              "type": "horse"
+            },
+            {
+              "id": "covered-22",
+              "x": 8,
+              "y": 9,
+              "faceDown": false,
+              "color": "red",
+              "type": "rook"
+            },
+            {
+              "id": "covered-23",
+              "x": 1,
+              "y": 7,
+              "faceDown": false,
+              "color": "red",
+              "type": "cannon"
+            },
+            {
+              "id": "covered-24",
+              "x": 7,
+              "y": 7,
+              "faceDown": false,
+              "color": "red",
+              "type": "cannon"
+            },
+            {
+              "id": "covered-25",
+              "x": 0,
+              "y": 6,
+              "faceDown": false,
+              "color": "red",
+              "type": "pawn"
+            },
+            {
+              "id": "covered-26",
+              "x": 2,
+              "y": 6,
+              "faceDown": false,
+              "color": "red",
+              "type": "pawn"
+            },
+            {
+              "id": "covered-27",
+              "x": 4,
+              "y": 6,
+              "faceDown": false,
+              "color": "red",
+              "type": "pawn"
+            },
+            {
+              "id": "covered-28",
+              "x": 6,
+              "y": 6,
+              "faceDown": false,
+              "color": "red",
+              "type": "pawn"
+            },
+            {
+              "id": "covered-29",
+              "x": 8,
+              "y": 6,
+              "faceDown": false,
+              "color": "red",
+              "type": "pawn"
+            }
+          ],
+          "captured": [],
+          "effectsByPieceId": {},
+          "assassination": {
+            "red": {
+              "heroChargeAvailable": true,
+              "mutationChargeAvailable": false
+            },
+            "black": {
+              "heroChargeAvailable": false,
+              "mutationChargeAvailable": false
+            }
+          },
+          "featureRules": {
+            "heroSelections": {
+              "red": {
+                "heroId": "rogue",
+                "form": "front",
+                "packageId": "rogue:front:v1"
+              },
+              "black": {
+                "heroId": "wind",
+                "form": "front",
+                "packageId": "wind:front:v1"
+              }
+            },
+            "heroes": {
+              "red": "rogue",
+              "black": "wind"
+            },
+            "mutation": "war_chariot"
+          },
+          "heroFormLock": {
+            "red": {
+              "heroId": "rogue",
+              "form": "front",
+              "packageId": "rogue:front:v1"
+            },
+            "black": {
+              "heroId": "wind",
+              "form": "front",
+              "packageId": "wind:front:v1"
+            }
+          },
+          "formalTurns": {
+            "red": 0,
+            "black": 0
+          },
+          "heroRuntime": {
+            "red": {
+              "used": false,
+              "invokeCount": 0
+            },
+            "black": {
+              "used": false,
+              "invokeCount": 0
+            }
+          }
+        },
+        "features": {
+          "heroes": {
+            "red": "rogue",
+            "black": "wind"
+          },
+          "heroSelections": {
+            "red": {
+              "heroId": "rogue",
+              "form": "front",
+              "packageId": "rogue:front:v1"
+            },
+            "black": {
+              "heroId": "wind",
+              "form": "front",
+              "packageId": "wind:front:v1"
+            }
+          },
+          "mutation": "war_chariot",
+          "mutationRarity": "legendary",
+          "heroPreparation": {
+            "ready": {
+              "red": true,
+              "black": false
+            },
+            "deadlineAt": 61700
+          }
+        },
+        "disconnects": {
+          "players": {
+            "h10-red": {
+              "accumulatedMs": 0,
+              "reconnectCount": 0
+            },
+            "h10-black": {
+              "accumulatedMs": 0,
+              "reconnectCount": 0
+            }
+          }
+        },
+        "messages": [
+          {
+            "id": "system:start:1500",
+            "kind": "system",
+            "text": "对局开始，红方先行。",
+            "createdAt": 1500
+          }
+        ],
+        "updatedAt": 1700,
+        "viewerSide": "black",
+        "ownHeroChoice": "wind",
+        "ownHeroSelection": {
+          "heroId": "wind",
+          "form": "front",
+          "packageId": "wind:front:v1"
+        },
+        "ownHeroSecrets": {
+          "wind": {
+            "uses": 0,
+            "readyOnTurn": 0,
+            "decoyId": "black-general"
+          }
+        },
+        "ownWindPreparation": {
+          "candidates": [
+            {
+              "pieceId": "covered-12",
+              "x": 4,
+              "y": 3
+            },
+            {
+              "pieceId": "covered-11",
+              "x": 2,
+              "y": 3
+            },
+            {
+              "pieceId": "covered-01",
+              "x": 1,
+              "y": 0
+            }
+          ]
+        }
+      }
+    }
+  },
+  "controls": [
+    {
+      "id": "C0",
+      "chosen": "covered-12",
+      "authority": {
+        "roomId": "std-h10-preparation-observation",
+        "inviteTokenHash": "d087c8b1ae4eb06596586ff279058cd414fd0537bae523b8539e212b5c3f2d71",
+        "seats": {
+          "host": {
+            "playerId": "h10-red",
+            "connectedAt": 1000,
+            "lastSeenAt": 1000
+          },
+          "guest": {
+            "playerId": "h10-black",
+            "connectedAt": 1100,
+            "lastSeenAt": 1100
+          }
+        },
+        "mode": {
+          "baseMode": "xiangqi",
+          "heroesEnabled": true,
+          "mutationsEnabled": true
+        },
+        "phase": "playing",
+        "updatedAt": 1800,
+        "rps": {
+          "status": "resolved",
+          "round": 1,
+          "players": [
+            "h10-red",
+            "h10-black"
+          ],
+          "submitted": {
+            "h10-red": true,
+            "h10-black": true
+          },
+          "lastResult": {
+            "round": 1,
+            "choices": {
+              "h10-red": "rock",
+              "h10-black": "scissors"
+            },
+            "tie": false,
+            "winner": "h10-red",
+            "loser": "h10-black"
+          },
+          "assignments": {
+            "red": "h10-red",
+            "black": "h10-black"
+          }
+        },
+        "rpsSecret": {
+          "choices": {}
+        },
+        "features": {
+          "heroes": {
+            "red": "rogue",
+            "black": "wind"
+          },
+          "heroSelections": {
+            "red": {
+              "heroId": "rogue",
+              "form": "front",
+              "packageId": "rogue:front:v1"
+            },
+            "black": {
+              "heroId": "wind",
+              "form": "front",
+              "packageId": "wind:front:v1"
+            }
+          },
+          "mutation": "war_chariot",
+          "mutationRarity": "legendary"
+        },
+        "featureSecret": {
+          "traps": [],
+          "trapDrafts": {}
+        },
+        "disconnects": {
+          "players": {
+            "h10-red": {
+              "accumulatedMs": 0,
+              "reconnectCount": 0
+            },
+            "h10-black": {
+              "accumulatedMs": 0,
+              "reconnectCount": 0
+            }
+          }
+        },
+        "game": {
+          "players": {
+            "red": "h10-red",
+            "black": "h10-black"
+          },
+          "state": {
+            "gameMode": "xiangqi",
+            "status": "playing",
+            "turn": "red",
+            "revision": 0,
+            "pieces": [
+              {
+                "id": "black-general",
+                "x": 4,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "general"
+              },
+              {
+                "id": "red-general",
+                "x": 4,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "general"
+              },
+              {
+                "id": "covered-00",
+                "x": 0,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "rook"
+              },
+              {
+                "id": "covered-01",
+                "x": 1,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "horse"
+              },
+              {
+                "id": "covered-02",
+                "x": 2,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "elephant"
+              },
+              {
+                "id": "covered-03",
+                "x": 3,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "advisor"
+              },
+              {
+                "id": "covered-04",
+                "x": 5,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "advisor"
+              },
+              {
+                "id": "covered-05",
+                "x": 6,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "elephant"
+              },
+              {
+                "id": "covered-06",
+                "x": 7,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "horse"
+              },
+              {
+                "id": "covered-07",
+                "x": 8,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "rook"
+              },
+              {
+                "id": "covered-08",
+                "x": 1,
+                "y": 2,
+                "faceDown": false,
+                "color": "black",
+                "type": "cannon"
+              },
+              {
+                "id": "covered-09",
+                "x": 7,
+                "y": 2,
+                "faceDown": false,
+                "color": "black",
+                "type": "cannon"
+              },
+              {
+                "id": "covered-10",
+                "x": 0,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-11",
+                "x": 2,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-12",
+                "x": 4,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-13",
+                "x": 6,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-14",
+                "x": 8,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-15",
+                "x": 0,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "rook"
+              },
+              {
+                "id": "covered-16",
+                "x": 1,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "horse"
+              },
+              {
+                "id": "covered-17",
+                "x": 2,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "elephant"
+              },
+              {
+                "id": "covered-18",
+                "x": 3,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "advisor"
+              },
+              {
+                "id": "covered-19",
+                "x": 5,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "advisor"
+              },
+              {
+                "id": "covered-20",
+                "x": 6,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "elephant"
+              },
+              {
+                "id": "covered-21",
+                "x": 7,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "horse"
+              },
+              {
+                "id": "covered-22",
+                "x": 8,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "rook"
+              },
+              {
+                "id": "covered-23",
+                "x": 1,
+                "y": 7,
+                "faceDown": false,
+                "color": "red",
+                "type": "cannon"
+              },
+              {
+                "id": "covered-24",
+                "x": 7,
+                "y": 7,
+                "faceDown": false,
+                "color": "red",
+                "type": "cannon"
+              },
+              {
+                "id": "covered-25",
+                "x": 0,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-26",
+                "x": 2,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-27",
+                "x": 4,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-28",
+                "x": 6,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-29",
+                "x": 8,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              }
+            ],
+            "captured": [],
+            "effectsByPieceId": {},
+            "assassination": {
+              "red": {
+                "heroChargeAvailable": true,
+                "mutationChargeAvailable": false
+              },
+              "black": {
+                "heroChargeAvailable": false,
+                "mutationChargeAvailable": false
+              }
+            },
+            "featureRules": {
+              "heroSelections": {
+                "red": {
+                  "heroId": "rogue",
+                  "form": "front",
+                  "packageId": "rogue:front:v1"
+                },
+                "black": {
+                  "heroId": "wind",
+                  "form": "front",
+                  "packageId": "wind:front:v1"
+                }
+              },
+              "heroes": {
+                "red": "rogue",
+                "black": "wind"
+              },
+              "mutation": "war_chariot"
+            },
+            "heroFormLock": {
+              "red": {
+                "heroId": "rogue",
+                "form": "front",
+                "packageId": "rogue:front:v1"
+              },
+              "black": {
+                "heroId": "wind",
+                "form": "front",
+                "packageId": "wind:front:v1"
+              }
+            },
+            "formalTurns": {
+              "red": 0,
+              "black": 0
+            },
+            "heroRuntime": {
+              "red": {
+                "used": false,
+                "invokeCount": 0
+              },
+              "black": {
+                "used": false,
+                "invokeCount": 0
+              }
+            }
+          },
+          "secret": {
+            "identities": {},
+            "processedActions": {},
+            "heroFormLock": {
+              "red": {
+                "heroId": "rogue",
+                "form": "front",
+                "packageId": "rogue:front:v1"
+              },
+              "black": {
+                "heroId": "wind",
+                "form": "front",
+                "packageId": "wind:front:v1"
+              }
+            },
+            "trueGenerals": {
+              "red": "red-general",
+              "black": "black-general"
+            },
+            "wind": {
+              "black": {
+                "uses": 1,
+                "readyOnTurn": 8,
+                "decoyId": "black-general",
+                "hostId": "covered-12",
+                "activatedOnTurn": 0
+              }
+            },
+            "windPreparation": {
+              "black": {
+                "candidateIds": [],
+                "poolBinding": "",
+                "completed": true
+              }
+            }
+          }
+        },
+        "messages": [
+          {
+            "id": "system:start:1500",
+            "kind": "system",
+            "text": "对局开始，红方先行。",
+            "createdAt": 1500
+          }
+        ],
+        "chatLastSentAt": {}
+      },
+      "views": {
+        "public": {
+          "roomId": "std-h10-preparation-observation",
+          "seats": {
+            "host": {
+              "playerId": "h10-red",
+              "connectedAt": 1000,
+              "lastSeenAt": 1000
+            },
+            "guest": {
+              "playerId": "h10-black",
+              "connectedAt": 1100,
+              "lastSeenAt": 1100
+            }
+          },
+          "mode": {
+            "baseMode": "xiangqi",
+            "heroesEnabled": true,
+            "mutationsEnabled": true
+          },
+          "phase": "playing",
+          "rps": {
+            "status": "resolved",
+            "round": 1,
+            "players": [
+              "h10-red",
+              "h10-black"
+            ],
+            "submitted": {
+              "h10-red": true,
+              "h10-black": true
+            },
+            "lastResult": {
+              "round": 1,
+              "choices": {
+                "h10-red": "rock",
+                "h10-black": "scissors"
+              },
+              "tie": false,
+              "winner": "h10-red",
+              "loser": "h10-black"
+            },
+            "assignments": {
+              "red": "h10-red",
+              "black": "h10-black"
+            }
+          },
+          "state": {
+            "gameMode": "xiangqi",
+            "status": "playing",
+            "turn": "red",
+            "revision": 0,
+            "pieces": [
+              {
+                "id": "black-general",
+                "x": 4,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "general"
+              },
+              {
+                "id": "red-general",
+                "x": 4,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "general"
+              },
+              {
+                "id": "covered-00",
+                "x": 0,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "rook"
+              },
+              {
+                "id": "covered-01",
+                "x": 1,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "horse"
+              },
+              {
+                "id": "covered-02",
+                "x": 2,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "elephant"
+              },
+              {
+                "id": "covered-03",
+                "x": 3,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "advisor"
+              },
+              {
+                "id": "covered-04",
+                "x": 5,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "advisor"
+              },
+              {
+                "id": "covered-05",
+                "x": 6,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "elephant"
+              },
+              {
+                "id": "covered-06",
+                "x": 7,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "horse"
+              },
+              {
+                "id": "covered-07",
+                "x": 8,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "rook"
+              },
+              {
+                "id": "covered-08",
+                "x": 1,
+                "y": 2,
+                "faceDown": false,
+                "color": "black",
+                "type": "cannon"
+              },
+              {
+                "id": "covered-09",
+                "x": 7,
+                "y": 2,
+                "faceDown": false,
+                "color": "black",
+                "type": "cannon"
+              },
+              {
+                "id": "covered-10",
+                "x": 0,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-11",
+                "x": 2,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-12",
+                "x": 4,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-13",
+                "x": 6,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-14",
+                "x": 8,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-15",
+                "x": 0,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "rook"
+              },
+              {
+                "id": "covered-16",
+                "x": 1,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "horse"
+              },
+              {
+                "id": "covered-17",
+                "x": 2,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "elephant"
+              },
+              {
+                "id": "covered-18",
+                "x": 3,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "advisor"
+              },
+              {
+                "id": "covered-19",
+                "x": 5,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "advisor"
+              },
+              {
+                "id": "covered-20",
+                "x": 6,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "elephant"
+              },
+              {
+                "id": "covered-21",
+                "x": 7,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "horse"
+              },
+              {
+                "id": "covered-22",
+                "x": 8,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "rook"
+              },
+              {
+                "id": "covered-23",
+                "x": 1,
+                "y": 7,
+                "faceDown": false,
+                "color": "red",
+                "type": "cannon"
+              },
+              {
+                "id": "covered-24",
+                "x": 7,
+                "y": 7,
+                "faceDown": false,
+                "color": "red",
+                "type": "cannon"
+              },
+              {
+                "id": "covered-25",
+                "x": 0,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-26",
+                "x": 2,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-27",
+                "x": 4,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-28",
+                "x": 6,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-29",
+                "x": 8,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              }
+            ],
+            "captured": [],
+            "effectsByPieceId": {},
+            "assassination": {
+              "red": {
+                "heroChargeAvailable": true,
+                "mutationChargeAvailable": false
+              },
+              "black": {
+                "heroChargeAvailable": false,
+                "mutationChargeAvailable": false
+              }
+            },
+            "featureRules": {
+              "heroSelections": {
+                "red": {
+                  "heroId": "rogue",
+                  "form": "front",
+                  "packageId": "rogue:front:v1"
+                },
+                "black": {
+                  "heroId": "wind",
+                  "form": "front",
+                  "packageId": "wind:front:v1"
+                }
+              },
+              "heroes": {
+                "red": "rogue",
+                "black": "wind"
+              },
+              "mutation": "war_chariot"
+            },
+            "heroFormLock": {
+              "red": {
+                "heroId": "rogue",
+                "form": "front",
+                "packageId": "rogue:front:v1"
+              },
+              "black": {
+                "heroId": "wind",
+                "form": "front",
+                "packageId": "wind:front:v1"
+              }
+            },
+            "formalTurns": {
+              "red": 0,
+              "black": 0
+            },
+            "heroRuntime": {
+              "red": {
+                "used": false,
+                "invokeCount": 0
+              },
+              "black": {
+                "used": false,
+                "invokeCount": 0
+              }
+            }
+          },
+          "features": {
+            "heroes": {
+              "red": "rogue",
+              "black": "wind"
+            },
+            "heroSelections": {
+              "red": {
+                "heroId": "rogue",
+                "form": "front",
+                "packageId": "rogue:front:v1"
+              },
+              "black": {
+                "heroId": "wind",
+                "form": "front",
+                "packageId": "wind:front:v1"
+              }
+            },
+            "mutation": "war_chariot",
+            "mutationRarity": "legendary"
+          },
+          "disconnects": {
+            "players": {
+              "h10-red": {
+                "accumulatedMs": 0,
+                "reconnectCount": 0
+              },
+              "h10-black": {
+                "accumulatedMs": 0,
+                "reconnectCount": 0
+              }
+            }
+          },
+          "messages": [
+            {
+              "id": "system:start:1500",
+              "kind": "system",
+              "text": "对局开始，红方先行。",
+              "createdAt": 1500
+            }
+          ],
+          "updatedAt": 1800
+        },
+        "red": {
+          "roomId": "std-h10-preparation-observation",
+          "seats": {
+            "host": {
+              "playerId": "h10-red",
+              "connectedAt": 1000,
+              "lastSeenAt": 1000
+            },
+            "guest": {
+              "playerId": "h10-black",
+              "connectedAt": 1100,
+              "lastSeenAt": 1100
+            }
+          },
+          "mode": {
+            "baseMode": "xiangqi",
+            "heroesEnabled": true,
+            "mutationsEnabled": true
+          },
+          "phase": "playing",
+          "rps": {
+            "status": "resolved",
+            "round": 1,
+            "players": [
+              "h10-red",
+              "h10-black"
+            ],
+            "submitted": {
+              "h10-red": true,
+              "h10-black": true
+            },
+            "lastResult": {
+              "round": 1,
+              "choices": {
+                "h10-red": "rock",
+                "h10-black": "scissors"
+              },
+              "tie": false,
+              "winner": "h10-red",
+              "loser": "h10-black"
+            },
+            "assignments": {
+              "red": "h10-red",
+              "black": "h10-black"
+            }
+          },
+          "state": {
+            "gameMode": "xiangqi",
+            "status": "playing",
+            "turn": "red",
+            "revision": 0,
+            "pieces": [
+              {
+                "id": "black-general",
+                "x": 4,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "general"
+              },
+              {
+                "id": "red-general",
+                "x": 4,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "general"
+              },
+              {
+                "id": "covered-00",
+                "x": 0,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "rook"
+              },
+              {
+                "id": "covered-01",
+                "x": 1,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "horse"
+              },
+              {
+                "id": "covered-02",
+                "x": 2,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "elephant"
+              },
+              {
+                "id": "covered-03",
+                "x": 3,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "advisor"
+              },
+              {
+                "id": "covered-04",
+                "x": 5,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "advisor"
+              },
+              {
+                "id": "covered-05",
+                "x": 6,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "elephant"
+              },
+              {
+                "id": "covered-06",
+                "x": 7,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "horse"
+              },
+              {
+                "id": "covered-07",
+                "x": 8,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "rook"
+              },
+              {
+                "id": "covered-08",
+                "x": 1,
+                "y": 2,
+                "faceDown": false,
+                "color": "black",
+                "type": "cannon"
+              },
+              {
+                "id": "covered-09",
+                "x": 7,
+                "y": 2,
+                "faceDown": false,
+                "color": "black",
+                "type": "cannon"
+              },
+              {
+                "id": "covered-10",
+                "x": 0,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-11",
+                "x": 2,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-12",
+                "x": 4,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-13",
+                "x": 6,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-14",
+                "x": 8,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-15",
+                "x": 0,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "rook"
+              },
+              {
+                "id": "covered-16",
+                "x": 1,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "horse"
+              },
+              {
+                "id": "covered-17",
+                "x": 2,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "elephant"
+              },
+              {
+                "id": "covered-18",
+                "x": 3,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "advisor"
+              },
+              {
+                "id": "covered-19",
+                "x": 5,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "advisor"
+              },
+              {
+                "id": "covered-20",
+                "x": 6,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "elephant"
+              },
+              {
+                "id": "covered-21",
+                "x": 7,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "horse"
+              },
+              {
+                "id": "covered-22",
+                "x": 8,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "rook"
+              },
+              {
+                "id": "covered-23",
+                "x": 1,
+                "y": 7,
+                "faceDown": false,
+                "color": "red",
+                "type": "cannon"
+              },
+              {
+                "id": "covered-24",
+                "x": 7,
+                "y": 7,
+                "faceDown": false,
+                "color": "red",
+                "type": "cannon"
+              },
+              {
+                "id": "covered-25",
+                "x": 0,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-26",
+                "x": 2,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-27",
+                "x": 4,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-28",
+                "x": 6,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-29",
+                "x": 8,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              }
+            ],
+            "captured": [],
+            "effectsByPieceId": {},
+            "assassination": {
+              "red": {
+                "heroChargeAvailable": true,
+                "mutationChargeAvailable": false
+              },
+              "black": {
+                "heroChargeAvailable": false,
+                "mutationChargeAvailable": false
+              }
+            },
+            "featureRules": {
+              "heroSelections": {
+                "red": {
+                  "heroId": "rogue",
+                  "form": "front",
+                  "packageId": "rogue:front:v1"
+                },
+                "black": {
+                  "heroId": "wind",
+                  "form": "front",
+                  "packageId": "wind:front:v1"
+                }
+              },
+              "heroes": {
+                "red": "rogue",
+                "black": "wind"
+              },
+              "mutation": "war_chariot"
+            },
+            "heroFormLock": {
+              "red": {
+                "heroId": "rogue",
+                "form": "front",
+                "packageId": "rogue:front:v1"
+              },
+              "black": {
+                "heroId": "wind",
+                "form": "front",
+                "packageId": "wind:front:v1"
+              }
+            },
+            "formalTurns": {
+              "red": 0,
+              "black": 0
+            },
+            "heroRuntime": {
+              "red": {
+                "used": false,
+                "invokeCount": 0
+              },
+              "black": {
+                "used": false,
+                "invokeCount": 0
+              }
+            }
+          },
+          "features": {
+            "heroes": {
+              "red": "rogue",
+              "black": "wind"
+            },
+            "heroSelections": {
+              "red": {
+                "heroId": "rogue",
+                "form": "front",
+                "packageId": "rogue:front:v1"
+              },
+              "black": {
+                "heroId": "wind",
+                "form": "front",
+                "packageId": "wind:front:v1"
+              }
+            },
+            "mutation": "war_chariot",
+            "mutationRarity": "legendary"
+          },
+          "disconnects": {
+            "players": {
+              "h10-red": {
+                "accumulatedMs": 0,
+                "reconnectCount": 0
+              },
+              "h10-black": {
+                "accumulatedMs": 0,
+                "reconnectCount": 0
+              }
+            }
+          },
+          "messages": [
+            {
+              "id": "system:start:1500",
+              "kind": "system",
+              "text": "对局开始，红方先行。",
+              "createdAt": 1500
+            }
+          ],
+          "updatedAt": 1800,
+          "viewerSide": "red",
+          "ownHeroChoice": "rogue",
+          "ownHeroSelection": {
+            "heroId": "rogue",
+            "form": "front",
+            "packageId": "rogue:front:v1"
+          },
+          "ownHeroSecrets": {}
+        },
+        "black": {
+          "roomId": "std-h10-preparation-observation",
+          "seats": {
+            "host": {
+              "playerId": "h10-red",
+              "connectedAt": 1000,
+              "lastSeenAt": 1000
+            },
+            "guest": {
+              "playerId": "h10-black",
+              "connectedAt": 1100,
+              "lastSeenAt": 1100
+            }
+          },
+          "mode": {
+            "baseMode": "xiangqi",
+            "heroesEnabled": true,
+            "mutationsEnabled": true
+          },
+          "phase": "playing",
+          "rps": {
+            "status": "resolved",
+            "round": 1,
+            "players": [
+              "h10-red",
+              "h10-black"
+            ],
+            "submitted": {
+              "h10-red": true,
+              "h10-black": true
+            },
+            "lastResult": {
+              "round": 1,
+              "choices": {
+                "h10-red": "rock",
+                "h10-black": "scissors"
+              },
+              "tie": false,
+              "winner": "h10-red",
+              "loser": "h10-black"
+            },
+            "assignments": {
+              "red": "h10-red",
+              "black": "h10-black"
+            }
+          },
+          "state": {
+            "gameMode": "xiangqi",
+            "status": "playing",
+            "turn": "red",
+            "revision": 0,
+            "pieces": [
+              {
+                "id": "black-general",
+                "x": 4,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "general"
+              },
+              {
+                "id": "red-general",
+                "x": 4,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "general"
+              },
+              {
+                "id": "covered-00",
+                "x": 0,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "rook"
+              },
+              {
+                "id": "covered-01",
+                "x": 1,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "horse"
+              },
+              {
+                "id": "covered-02",
+                "x": 2,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "elephant"
+              },
+              {
+                "id": "covered-03",
+                "x": 3,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "advisor"
+              },
+              {
+                "id": "covered-04",
+                "x": 5,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "advisor"
+              },
+              {
+                "id": "covered-05",
+                "x": 6,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "elephant"
+              },
+              {
+                "id": "covered-06",
+                "x": 7,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "horse"
+              },
+              {
+                "id": "covered-07",
+                "x": 8,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "rook"
+              },
+              {
+                "id": "covered-08",
+                "x": 1,
+                "y": 2,
+                "faceDown": false,
+                "color": "black",
+                "type": "cannon"
+              },
+              {
+                "id": "covered-09",
+                "x": 7,
+                "y": 2,
+                "faceDown": false,
+                "color": "black",
+                "type": "cannon"
+              },
+              {
+                "id": "covered-10",
+                "x": 0,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-11",
+                "x": 2,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-12",
+                "x": 4,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-13",
+                "x": 6,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-14",
+                "x": 8,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-15",
+                "x": 0,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "rook"
+              },
+              {
+                "id": "covered-16",
+                "x": 1,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "horse"
+              },
+              {
+                "id": "covered-17",
+                "x": 2,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "elephant"
+              },
+              {
+                "id": "covered-18",
+                "x": 3,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "advisor"
+              },
+              {
+                "id": "covered-19",
+                "x": 5,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "advisor"
+              },
+              {
+                "id": "covered-20",
+                "x": 6,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "elephant"
+              },
+              {
+                "id": "covered-21",
+                "x": 7,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "horse"
+              },
+              {
+                "id": "covered-22",
+                "x": 8,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "rook"
+              },
+              {
+                "id": "covered-23",
+                "x": 1,
+                "y": 7,
+                "faceDown": false,
+                "color": "red",
+                "type": "cannon"
+              },
+              {
+                "id": "covered-24",
+                "x": 7,
+                "y": 7,
+                "faceDown": false,
+                "color": "red",
+                "type": "cannon"
+              },
+              {
+                "id": "covered-25",
+                "x": 0,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-26",
+                "x": 2,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-27",
+                "x": 4,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-28",
+                "x": 6,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-29",
+                "x": 8,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              }
+            ],
+            "captured": [],
+            "effectsByPieceId": {},
+            "assassination": {
+              "red": {
+                "heroChargeAvailable": true,
+                "mutationChargeAvailable": false
+              },
+              "black": {
+                "heroChargeAvailable": false,
+                "mutationChargeAvailable": false
+              }
+            },
+            "featureRules": {
+              "heroSelections": {
+                "red": {
+                  "heroId": "rogue",
+                  "form": "front",
+                  "packageId": "rogue:front:v1"
+                },
+                "black": {
+                  "heroId": "wind",
+                  "form": "front",
+                  "packageId": "wind:front:v1"
+                }
+              },
+              "heroes": {
+                "red": "rogue",
+                "black": "wind"
+              },
+              "mutation": "war_chariot"
+            },
+            "heroFormLock": {
+              "red": {
+                "heroId": "rogue",
+                "form": "front",
+                "packageId": "rogue:front:v1"
+              },
+              "black": {
+                "heroId": "wind",
+                "form": "front",
+                "packageId": "wind:front:v1"
+              }
+            },
+            "formalTurns": {
+              "red": 0,
+              "black": 0
+            },
+            "heroRuntime": {
+              "red": {
+                "used": false,
+                "invokeCount": 0
+              },
+              "black": {
+                "used": false,
+                "invokeCount": 0
+              }
+            }
+          },
+          "features": {
+            "heroes": {
+              "red": "rogue",
+              "black": "wind"
+            },
+            "heroSelections": {
+              "red": {
+                "heroId": "rogue",
+                "form": "front",
+                "packageId": "rogue:front:v1"
+              },
+              "black": {
+                "heroId": "wind",
+                "form": "front",
+                "packageId": "wind:front:v1"
+              }
+            },
+            "mutation": "war_chariot",
+            "mutationRarity": "legendary"
+          },
+          "disconnects": {
+            "players": {
+              "h10-red": {
+                "accumulatedMs": 0,
+                "reconnectCount": 0
+              },
+              "h10-black": {
+                "accumulatedMs": 0,
+                "reconnectCount": 0
+              }
+            }
+          },
+          "messages": [
+            {
+              "id": "system:start:1500",
+              "kind": "system",
+              "text": "对局开始，红方先行。",
+              "createdAt": 1500
+            }
+          ],
+          "updatedAt": 1800,
+          "viewerSide": "black",
+          "ownHeroChoice": "wind",
+          "ownHeroSelection": {
+            "heroId": "wind",
+            "form": "front",
+            "packageId": "wind:front:v1"
+          },
+          "ownHeroSecrets": {
+            "wind": {
+              "uses": 1,
+              "readyOnTurn": 8,
+              "decoyId": "black-general",
+              "activatedOnTurn": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "C1",
+      "chosen": "covered-11",
+      "authority": {
+        "roomId": "std-h10-preparation-observation",
+        "inviteTokenHash": "d087c8b1ae4eb06596586ff279058cd414fd0537bae523b8539e212b5c3f2d71",
+        "seats": {
+          "host": {
+            "playerId": "h10-red",
+            "connectedAt": 1000,
+            "lastSeenAt": 1000
+          },
+          "guest": {
+            "playerId": "h10-black",
+            "connectedAt": 1100,
+            "lastSeenAt": 1100
+          }
+        },
+        "mode": {
+          "baseMode": "xiangqi",
+          "heroesEnabled": true,
+          "mutationsEnabled": true
+        },
+        "phase": "playing",
+        "updatedAt": 1800,
+        "rps": {
+          "status": "resolved",
+          "round": 1,
+          "players": [
+            "h10-red",
+            "h10-black"
+          ],
+          "submitted": {
+            "h10-red": true,
+            "h10-black": true
+          },
+          "lastResult": {
+            "round": 1,
+            "choices": {
+              "h10-red": "rock",
+              "h10-black": "scissors"
+            },
+            "tie": false,
+            "winner": "h10-red",
+            "loser": "h10-black"
+          },
+          "assignments": {
+            "red": "h10-red",
+            "black": "h10-black"
+          }
+        },
+        "rpsSecret": {
+          "choices": {}
+        },
+        "features": {
+          "heroes": {
+            "red": "rogue",
+            "black": "wind"
+          },
+          "heroSelections": {
+            "red": {
+              "heroId": "rogue",
+              "form": "front",
+              "packageId": "rogue:front:v1"
+            },
+            "black": {
+              "heroId": "wind",
+              "form": "front",
+              "packageId": "wind:front:v1"
+            }
+          },
+          "mutation": "war_chariot",
+          "mutationRarity": "legendary"
+        },
+        "featureSecret": {
+          "traps": [],
+          "trapDrafts": {}
+        },
+        "disconnects": {
+          "players": {
+            "h10-red": {
+              "accumulatedMs": 0,
+              "reconnectCount": 0
+            },
+            "h10-black": {
+              "accumulatedMs": 0,
+              "reconnectCount": 0
+            }
+          }
+        },
+        "game": {
+          "players": {
+            "red": "h10-red",
+            "black": "h10-black"
+          },
+          "state": {
+            "gameMode": "xiangqi",
+            "status": "playing",
+            "turn": "red",
+            "revision": 0,
+            "pieces": [
+              {
+                "id": "black-general",
+                "x": 4,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "general"
+              },
+              {
+                "id": "red-general",
+                "x": 4,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "general"
+              },
+              {
+                "id": "covered-00",
+                "x": 0,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "rook"
+              },
+              {
+                "id": "covered-01",
+                "x": 1,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "horse"
+              },
+              {
+                "id": "covered-02",
+                "x": 2,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "elephant"
+              },
+              {
+                "id": "covered-03",
+                "x": 3,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "advisor"
+              },
+              {
+                "id": "covered-04",
+                "x": 5,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "advisor"
+              },
+              {
+                "id": "covered-05",
+                "x": 6,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "elephant"
+              },
+              {
+                "id": "covered-06",
+                "x": 7,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "horse"
+              },
+              {
+                "id": "covered-07",
+                "x": 8,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "rook"
+              },
+              {
+                "id": "covered-08",
+                "x": 1,
+                "y": 2,
+                "faceDown": false,
+                "color": "black",
+                "type": "cannon"
+              },
+              {
+                "id": "covered-09",
+                "x": 7,
+                "y": 2,
+                "faceDown": false,
+                "color": "black",
+                "type": "cannon"
+              },
+              {
+                "id": "covered-10",
+                "x": 0,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-11",
+                "x": 2,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-12",
+                "x": 4,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-13",
+                "x": 6,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-14",
+                "x": 8,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-15",
+                "x": 0,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "rook"
+              },
+              {
+                "id": "covered-16",
+                "x": 1,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "horse"
+              },
+              {
+                "id": "covered-17",
+                "x": 2,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "elephant"
+              },
+              {
+                "id": "covered-18",
+                "x": 3,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "advisor"
+              },
+              {
+                "id": "covered-19",
+                "x": 5,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "advisor"
+              },
+              {
+                "id": "covered-20",
+                "x": 6,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "elephant"
+              },
+              {
+                "id": "covered-21",
+                "x": 7,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "horse"
+              },
+              {
+                "id": "covered-22",
+                "x": 8,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "rook"
+              },
+              {
+                "id": "covered-23",
+                "x": 1,
+                "y": 7,
+                "faceDown": false,
+                "color": "red",
+                "type": "cannon"
+              },
+              {
+                "id": "covered-24",
+                "x": 7,
+                "y": 7,
+                "faceDown": false,
+                "color": "red",
+                "type": "cannon"
+              },
+              {
+                "id": "covered-25",
+                "x": 0,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-26",
+                "x": 2,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-27",
+                "x": 4,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-28",
+                "x": 6,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-29",
+                "x": 8,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              }
+            ],
+            "captured": [],
+            "effectsByPieceId": {},
+            "assassination": {
+              "red": {
+                "heroChargeAvailable": true,
+                "mutationChargeAvailable": false
+              },
+              "black": {
+                "heroChargeAvailable": false,
+                "mutationChargeAvailable": false
+              }
+            },
+            "featureRules": {
+              "heroSelections": {
+                "red": {
+                  "heroId": "rogue",
+                  "form": "front",
+                  "packageId": "rogue:front:v1"
+                },
+                "black": {
+                  "heroId": "wind",
+                  "form": "front",
+                  "packageId": "wind:front:v1"
+                }
+              },
+              "heroes": {
+                "red": "rogue",
+                "black": "wind"
+              },
+              "mutation": "war_chariot"
+            },
+            "heroFormLock": {
+              "red": {
+                "heroId": "rogue",
+                "form": "front",
+                "packageId": "rogue:front:v1"
+              },
+              "black": {
+                "heroId": "wind",
+                "form": "front",
+                "packageId": "wind:front:v1"
+              }
+            },
+            "formalTurns": {
+              "red": 0,
+              "black": 0
+            },
+            "heroRuntime": {
+              "red": {
+                "used": false,
+                "invokeCount": 0
+              },
+              "black": {
+                "used": false,
+                "invokeCount": 0
+              }
+            }
+          },
+          "secret": {
+            "identities": {},
+            "processedActions": {},
+            "heroFormLock": {
+              "red": {
+                "heroId": "rogue",
+                "form": "front",
+                "packageId": "rogue:front:v1"
+              },
+              "black": {
+                "heroId": "wind",
+                "form": "front",
+                "packageId": "wind:front:v1"
+              }
+            },
+            "trueGenerals": {
+              "red": "red-general",
+              "black": "black-general"
+            },
+            "wind": {
+              "black": {
+                "uses": 1,
+                "readyOnTurn": 8,
+                "decoyId": "black-general",
+                "hostId": "covered-11",
+                "activatedOnTurn": 0
+              }
+            },
+            "windPreparation": {
+              "black": {
+                "candidateIds": [],
+                "poolBinding": "",
+                "completed": true
+              }
+            }
+          }
+        },
+        "messages": [
+          {
+            "id": "system:start:1500",
+            "kind": "system",
+            "text": "对局开始，红方先行。",
+            "createdAt": 1500
+          }
+        ],
+        "chatLastSentAt": {}
+      },
+      "views": {
+        "public": {
+          "roomId": "std-h10-preparation-observation",
+          "seats": {
+            "host": {
+              "playerId": "h10-red",
+              "connectedAt": 1000,
+              "lastSeenAt": 1000
+            },
+            "guest": {
+              "playerId": "h10-black",
+              "connectedAt": 1100,
+              "lastSeenAt": 1100
+            }
+          },
+          "mode": {
+            "baseMode": "xiangqi",
+            "heroesEnabled": true,
+            "mutationsEnabled": true
+          },
+          "phase": "playing",
+          "rps": {
+            "status": "resolved",
+            "round": 1,
+            "players": [
+              "h10-red",
+              "h10-black"
+            ],
+            "submitted": {
+              "h10-red": true,
+              "h10-black": true
+            },
+            "lastResult": {
+              "round": 1,
+              "choices": {
+                "h10-red": "rock",
+                "h10-black": "scissors"
+              },
+              "tie": false,
+              "winner": "h10-red",
+              "loser": "h10-black"
+            },
+            "assignments": {
+              "red": "h10-red",
+              "black": "h10-black"
+            }
+          },
+          "state": {
+            "gameMode": "xiangqi",
+            "status": "playing",
+            "turn": "red",
+            "revision": 0,
+            "pieces": [
+              {
+                "id": "black-general",
+                "x": 4,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "general"
+              },
+              {
+                "id": "red-general",
+                "x": 4,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "general"
+              },
+              {
+                "id": "covered-00",
+                "x": 0,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "rook"
+              },
+              {
+                "id": "covered-01",
+                "x": 1,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "horse"
+              },
+              {
+                "id": "covered-02",
+                "x": 2,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "elephant"
+              },
+              {
+                "id": "covered-03",
+                "x": 3,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "advisor"
+              },
+              {
+                "id": "covered-04",
+                "x": 5,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "advisor"
+              },
+              {
+                "id": "covered-05",
+                "x": 6,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "elephant"
+              },
+              {
+                "id": "covered-06",
+                "x": 7,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "horse"
+              },
+              {
+                "id": "covered-07",
+                "x": 8,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "rook"
+              },
+              {
+                "id": "covered-08",
+                "x": 1,
+                "y": 2,
+                "faceDown": false,
+                "color": "black",
+                "type": "cannon"
+              },
+              {
+                "id": "covered-09",
+                "x": 7,
+                "y": 2,
+                "faceDown": false,
+                "color": "black",
+                "type": "cannon"
+              },
+              {
+                "id": "covered-10",
+                "x": 0,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-11",
+                "x": 2,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-12",
+                "x": 4,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-13",
+                "x": 6,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-14",
+                "x": 8,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-15",
+                "x": 0,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "rook"
+              },
+              {
+                "id": "covered-16",
+                "x": 1,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "horse"
+              },
+              {
+                "id": "covered-17",
+                "x": 2,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "elephant"
+              },
+              {
+                "id": "covered-18",
+                "x": 3,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "advisor"
+              },
+              {
+                "id": "covered-19",
+                "x": 5,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "advisor"
+              },
+              {
+                "id": "covered-20",
+                "x": 6,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "elephant"
+              },
+              {
+                "id": "covered-21",
+                "x": 7,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "horse"
+              },
+              {
+                "id": "covered-22",
+                "x": 8,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "rook"
+              },
+              {
+                "id": "covered-23",
+                "x": 1,
+                "y": 7,
+                "faceDown": false,
+                "color": "red",
+                "type": "cannon"
+              },
+              {
+                "id": "covered-24",
+                "x": 7,
+                "y": 7,
+                "faceDown": false,
+                "color": "red",
+                "type": "cannon"
+              },
+              {
+                "id": "covered-25",
+                "x": 0,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-26",
+                "x": 2,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-27",
+                "x": 4,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-28",
+                "x": 6,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-29",
+                "x": 8,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              }
+            ],
+            "captured": [],
+            "effectsByPieceId": {},
+            "assassination": {
+              "red": {
+                "heroChargeAvailable": true,
+                "mutationChargeAvailable": false
+              },
+              "black": {
+                "heroChargeAvailable": false,
+                "mutationChargeAvailable": false
+              }
+            },
+            "featureRules": {
+              "heroSelections": {
+                "red": {
+                  "heroId": "rogue",
+                  "form": "front",
+                  "packageId": "rogue:front:v1"
+                },
+                "black": {
+                  "heroId": "wind",
+                  "form": "front",
+                  "packageId": "wind:front:v1"
+                }
+              },
+              "heroes": {
+                "red": "rogue",
+                "black": "wind"
+              },
+              "mutation": "war_chariot"
+            },
+            "heroFormLock": {
+              "red": {
+                "heroId": "rogue",
+                "form": "front",
+                "packageId": "rogue:front:v1"
+              },
+              "black": {
+                "heroId": "wind",
+                "form": "front",
+                "packageId": "wind:front:v1"
+              }
+            },
+            "formalTurns": {
+              "red": 0,
+              "black": 0
+            },
+            "heroRuntime": {
+              "red": {
+                "used": false,
+                "invokeCount": 0
+              },
+              "black": {
+                "used": false,
+                "invokeCount": 0
+              }
+            }
+          },
+          "features": {
+            "heroes": {
+              "red": "rogue",
+              "black": "wind"
+            },
+            "heroSelections": {
+              "red": {
+                "heroId": "rogue",
+                "form": "front",
+                "packageId": "rogue:front:v1"
+              },
+              "black": {
+                "heroId": "wind",
+                "form": "front",
+                "packageId": "wind:front:v1"
+              }
+            },
+            "mutation": "war_chariot",
+            "mutationRarity": "legendary"
+          },
+          "disconnects": {
+            "players": {
+              "h10-red": {
+                "accumulatedMs": 0,
+                "reconnectCount": 0
+              },
+              "h10-black": {
+                "accumulatedMs": 0,
+                "reconnectCount": 0
+              }
+            }
+          },
+          "messages": [
+            {
+              "id": "system:start:1500",
+              "kind": "system",
+              "text": "对局开始，红方先行。",
+              "createdAt": 1500
+            }
+          ],
+          "updatedAt": 1800
+        },
+        "red": {
+          "roomId": "std-h10-preparation-observation",
+          "seats": {
+            "host": {
+              "playerId": "h10-red",
+              "connectedAt": 1000,
+              "lastSeenAt": 1000
+            },
+            "guest": {
+              "playerId": "h10-black",
+              "connectedAt": 1100,
+              "lastSeenAt": 1100
+            }
+          },
+          "mode": {
+            "baseMode": "xiangqi",
+            "heroesEnabled": true,
+            "mutationsEnabled": true
+          },
+          "phase": "playing",
+          "rps": {
+            "status": "resolved",
+            "round": 1,
+            "players": [
+              "h10-red",
+              "h10-black"
+            ],
+            "submitted": {
+              "h10-red": true,
+              "h10-black": true
+            },
+            "lastResult": {
+              "round": 1,
+              "choices": {
+                "h10-red": "rock",
+                "h10-black": "scissors"
+              },
+              "tie": false,
+              "winner": "h10-red",
+              "loser": "h10-black"
+            },
+            "assignments": {
+              "red": "h10-red",
+              "black": "h10-black"
+            }
+          },
+          "state": {
+            "gameMode": "xiangqi",
+            "status": "playing",
+            "turn": "red",
+            "revision": 0,
+            "pieces": [
+              {
+                "id": "black-general",
+                "x": 4,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "general"
+              },
+              {
+                "id": "red-general",
+                "x": 4,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "general"
+              },
+              {
+                "id": "covered-00",
+                "x": 0,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "rook"
+              },
+              {
+                "id": "covered-01",
+                "x": 1,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "horse"
+              },
+              {
+                "id": "covered-02",
+                "x": 2,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "elephant"
+              },
+              {
+                "id": "covered-03",
+                "x": 3,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "advisor"
+              },
+              {
+                "id": "covered-04",
+                "x": 5,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "advisor"
+              },
+              {
+                "id": "covered-05",
+                "x": 6,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "elephant"
+              },
+              {
+                "id": "covered-06",
+                "x": 7,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "horse"
+              },
+              {
+                "id": "covered-07",
+                "x": 8,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "rook"
+              },
+              {
+                "id": "covered-08",
+                "x": 1,
+                "y": 2,
+                "faceDown": false,
+                "color": "black",
+                "type": "cannon"
+              },
+              {
+                "id": "covered-09",
+                "x": 7,
+                "y": 2,
+                "faceDown": false,
+                "color": "black",
+                "type": "cannon"
+              },
+              {
+                "id": "covered-10",
+                "x": 0,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-11",
+                "x": 2,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-12",
+                "x": 4,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-13",
+                "x": 6,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-14",
+                "x": 8,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-15",
+                "x": 0,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "rook"
+              },
+              {
+                "id": "covered-16",
+                "x": 1,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "horse"
+              },
+              {
+                "id": "covered-17",
+                "x": 2,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "elephant"
+              },
+              {
+                "id": "covered-18",
+                "x": 3,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "advisor"
+              },
+              {
+                "id": "covered-19",
+                "x": 5,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "advisor"
+              },
+              {
+                "id": "covered-20",
+                "x": 6,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "elephant"
+              },
+              {
+                "id": "covered-21",
+                "x": 7,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "horse"
+              },
+              {
+                "id": "covered-22",
+                "x": 8,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "rook"
+              },
+              {
+                "id": "covered-23",
+                "x": 1,
+                "y": 7,
+                "faceDown": false,
+                "color": "red",
+                "type": "cannon"
+              },
+              {
+                "id": "covered-24",
+                "x": 7,
+                "y": 7,
+                "faceDown": false,
+                "color": "red",
+                "type": "cannon"
+              },
+              {
+                "id": "covered-25",
+                "x": 0,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-26",
+                "x": 2,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-27",
+                "x": 4,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-28",
+                "x": 6,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-29",
+                "x": 8,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              }
+            ],
+            "captured": [],
+            "effectsByPieceId": {},
+            "assassination": {
+              "red": {
+                "heroChargeAvailable": true,
+                "mutationChargeAvailable": false
+              },
+              "black": {
+                "heroChargeAvailable": false,
+                "mutationChargeAvailable": false
+              }
+            },
+            "featureRules": {
+              "heroSelections": {
+                "red": {
+                  "heroId": "rogue",
+                  "form": "front",
+                  "packageId": "rogue:front:v1"
+                },
+                "black": {
+                  "heroId": "wind",
+                  "form": "front",
+                  "packageId": "wind:front:v1"
+                }
+              },
+              "heroes": {
+                "red": "rogue",
+                "black": "wind"
+              },
+              "mutation": "war_chariot"
+            },
+            "heroFormLock": {
+              "red": {
+                "heroId": "rogue",
+                "form": "front",
+                "packageId": "rogue:front:v1"
+              },
+              "black": {
+                "heroId": "wind",
+                "form": "front",
+                "packageId": "wind:front:v1"
+              }
+            },
+            "formalTurns": {
+              "red": 0,
+              "black": 0
+            },
+            "heroRuntime": {
+              "red": {
+                "used": false,
+                "invokeCount": 0
+              },
+              "black": {
+                "used": false,
+                "invokeCount": 0
+              }
+            }
+          },
+          "features": {
+            "heroes": {
+              "red": "rogue",
+              "black": "wind"
+            },
+            "heroSelections": {
+              "red": {
+                "heroId": "rogue",
+                "form": "front",
+                "packageId": "rogue:front:v1"
+              },
+              "black": {
+                "heroId": "wind",
+                "form": "front",
+                "packageId": "wind:front:v1"
+              }
+            },
+            "mutation": "war_chariot",
+            "mutationRarity": "legendary"
+          },
+          "disconnects": {
+            "players": {
+              "h10-red": {
+                "accumulatedMs": 0,
+                "reconnectCount": 0
+              },
+              "h10-black": {
+                "accumulatedMs": 0,
+                "reconnectCount": 0
+              }
+            }
+          },
+          "messages": [
+            {
+              "id": "system:start:1500",
+              "kind": "system",
+              "text": "对局开始，红方先行。",
+              "createdAt": 1500
+            }
+          ],
+          "updatedAt": 1800,
+          "viewerSide": "red",
+          "ownHeroChoice": "rogue",
+          "ownHeroSelection": {
+            "heroId": "rogue",
+            "form": "front",
+            "packageId": "rogue:front:v1"
+          },
+          "ownHeroSecrets": {}
+        },
+        "black": {
+          "roomId": "std-h10-preparation-observation",
+          "seats": {
+            "host": {
+              "playerId": "h10-red",
+              "connectedAt": 1000,
+              "lastSeenAt": 1000
+            },
+            "guest": {
+              "playerId": "h10-black",
+              "connectedAt": 1100,
+              "lastSeenAt": 1100
+            }
+          },
+          "mode": {
+            "baseMode": "xiangqi",
+            "heroesEnabled": true,
+            "mutationsEnabled": true
+          },
+          "phase": "playing",
+          "rps": {
+            "status": "resolved",
+            "round": 1,
+            "players": [
+              "h10-red",
+              "h10-black"
+            ],
+            "submitted": {
+              "h10-red": true,
+              "h10-black": true
+            },
+            "lastResult": {
+              "round": 1,
+              "choices": {
+                "h10-red": "rock",
+                "h10-black": "scissors"
+              },
+              "tie": false,
+              "winner": "h10-red",
+              "loser": "h10-black"
+            },
+            "assignments": {
+              "red": "h10-red",
+              "black": "h10-black"
+            }
+          },
+          "state": {
+            "gameMode": "xiangqi",
+            "status": "playing",
+            "turn": "red",
+            "revision": 0,
+            "pieces": [
+              {
+                "id": "black-general",
+                "x": 4,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "general"
+              },
+              {
+                "id": "red-general",
+                "x": 4,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "general"
+              },
+              {
+                "id": "covered-00",
+                "x": 0,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "rook"
+              },
+              {
+                "id": "covered-01",
+                "x": 1,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "horse"
+              },
+              {
+                "id": "covered-02",
+                "x": 2,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "elephant"
+              },
+              {
+                "id": "covered-03",
+                "x": 3,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "advisor"
+              },
+              {
+                "id": "covered-04",
+                "x": 5,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "advisor"
+              },
+              {
+                "id": "covered-05",
+                "x": 6,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "elephant"
+              },
+              {
+                "id": "covered-06",
+                "x": 7,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "horse"
+              },
+              {
+                "id": "covered-07",
+                "x": 8,
+                "y": 0,
+                "faceDown": false,
+                "color": "black",
+                "type": "rook"
+              },
+              {
+                "id": "covered-08",
+                "x": 1,
+                "y": 2,
+                "faceDown": false,
+                "color": "black",
+                "type": "cannon"
+              },
+              {
+                "id": "covered-09",
+                "x": 7,
+                "y": 2,
+                "faceDown": false,
+                "color": "black",
+                "type": "cannon"
+              },
+              {
+                "id": "covered-10",
+                "x": 0,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-11",
+                "x": 2,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-12",
+                "x": 4,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-13",
+                "x": 6,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-14",
+                "x": 8,
+                "y": 3,
+                "faceDown": false,
+                "color": "black",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-15",
+                "x": 0,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "rook"
+              },
+              {
+                "id": "covered-16",
+                "x": 1,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "horse"
+              },
+              {
+                "id": "covered-17",
+                "x": 2,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "elephant"
+              },
+              {
+                "id": "covered-18",
+                "x": 3,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "advisor"
+              },
+              {
+                "id": "covered-19",
+                "x": 5,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "advisor"
+              },
+              {
+                "id": "covered-20",
+                "x": 6,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "elephant"
+              },
+              {
+                "id": "covered-21",
+                "x": 7,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "horse"
+              },
+              {
+                "id": "covered-22",
+                "x": 8,
+                "y": 9,
+                "faceDown": false,
+                "color": "red",
+                "type": "rook"
+              },
+              {
+                "id": "covered-23",
+                "x": 1,
+                "y": 7,
+                "faceDown": false,
+                "color": "red",
+                "type": "cannon"
+              },
+              {
+                "id": "covered-24",
+                "x": 7,
+                "y": 7,
+                "faceDown": false,
+                "color": "red",
+                "type": "cannon"
+              },
+              {
+                "id": "covered-25",
+                "x": 0,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-26",
+                "x": 2,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-27",
+                "x": 4,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-28",
+                "x": 6,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              },
+              {
+                "id": "covered-29",
+                "x": 8,
+                "y": 6,
+                "faceDown": false,
+                "color": "red",
+                "type": "pawn"
+              }
+            ],
+            "captured": [],
+            "effectsByPieceId": {},
+            "assassination": {
+              "red": {
+                "heroChargeAvailable": true,
+                "mutationChargeAvailable": false
+              },
+              "black": {
+                "heroChargeAvailable": false,
+                "mutationChargeAvailable": false
+              }
+            },
+            "featureRules": {
+              "heroSelections": {
+                "red": {
+                  "heroId": "rogue",
+                  "form": "front",
+                  "packageId": "rogue:front:v1"
+                },
+                "black": {
+                  "heroId": "wind",
+                  "form": "front",
+                  "packageId": "wind:front:v1"
+                }
+              },
+              "heroes": {
+                "red": "rogue",
+                "black": "wind"
+              },
+              "mutation": "war_chariot"
+            },
+            "heroFormLock": {
+              "red": {
+                "heroId": "rogue",
+                "form": "front",
+                "packageId": "rogue:front:v1"
+              },
+              "black": {
+                "heroId": "wind",
+                "form": "front",
+                "packageId": "wind:front:v1"
+              }
+            },
+            "formalTurns": {
+              "red": 0,
+              "black": 0
+            },
+            "heroRuntime": {
+              "red": {
+                "used": false,
+                "invokeCount": 0
+              },
+              "black": {
+                "used": false,
+                "invokeCount": 0
+              }
+            }
+          },
+          "features": {
+            "heroes": {
+              "red": "rogue",
+              "black": "wind"
+            },
+            "heroSelections": {
+              "red": {
+                "heroId": "rogue",
+                "form": "front",
+                "packageId": "rogue:front:v1"
+              },
+              "black": {
+                "heroId": "wind",
+                "form": "front",
+                "packageId": "wind:front:v1"
+              }
+            },
+            "mutation": "war_chariot",
+            "mutationRarity": "legendary"
+          },
+          "disconnects": {
+            "players": {
+              "h10-red": {
+                "accumulatedMs": 0,
+                "reconnectCount": 0
+              },
+              "h10-black": {
+                "accumulatedMs": 0,
+                "reconnectCount": 0
+              }
+            }
+          },
+          "messages": [
+            {
+              "id": "system:start:1500",
+              "kind": "system",
+              "text": "对局开始，红方先行。",
+              "createdAt": 1500
+            }
+          ],
+          "updatedAt": 1800,
+          "viewerSide": "black",
+          "ownHeroChoice": "wind",
+          "ownHeroSelection": {
+            "heroId": "wind",
+            "form": "front",
+            "packageId": "wind:front:v1"
+          },
+          "ownHeroSecrets": {
+            "wind": {
+              "uses": 1,
+              "readyOnTurn": 8,
+              "decoyId": "black-general",
+              "activatedOnTurn": 0
+            }
+          }
+        }
+      }
+    }
+  ],
+  "limits": {
+    "originalR1R5Executed": false,
+    "originalCandidateExampleForced": false,
+    "trueRoyalQualified": false,
+    "wireOrUIImplemented": false,
+    "productModeOpened": false,
+    "shortagesTimeoutsInvalidation": "COVERAGE_STOP_ONLY"
+  }
+}

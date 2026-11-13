@@ -1,0 +1,622 @@
+TAP version 13
+# Subtest: BTHOST-01 SHA-256 邀请口令哈希在 Node 与 WebView 使用相同标准结果
+ok 1 - BTHOST-01 SHA-256 邀请口令哈希在 Node 与 WebView 使用相同标准结果
+  ---
+  duration_ms: 2.279511
+  type: 'test'
+  ...
+# Subtest: BTHOST-02 物理连接后只有房主保存完整房间，来宾只收到公开 RPS 状态
+ok 2 - BTHOST-02 物理连接后只有房主保存完整房间，来宾只收到公开 RPS 状态
+  ---
+  duration_ms: 4.081953
+  type: 'test'
+  ...
+# Subtest: BTHOST-03 双方猜拳后由房主权威建局，并向来宾发送揭示后仍安全的公开棋盘
+ok 3 - BTHOST-03 双方猜拳后由房主权威建局，并向来宾发送揭示后仍安全的公开棋盘
+  ---
+  duration_ms: 5.78577
+  type: 'test'
+  ...
+# Subtest: BTHOST-04 英雄、陷阱和私有坐标均通过房主单点结算
+ok 4 - BTHOST-04 英雄、陷阱和私有坐标均通过房主单点结算
+  ---
+  duration_ms: 34.743984
+  type: 'test'
+  ...
+# Subtest: BTHOST-05 来宾操作仍受回合、版本和房主规则引擎约束
+ok 5 - BTHOST-05 来宾操作仍受回合、版本和房主规则引擎约束
+  ---
+  duration_ms: 4.463275
+  type: 'test'
+  ...
+# Subtest: BTHOST-06 英雄选择起主动退出由房主立即权威判负
+ok 6 - BTHOST-06 英雄选择起主动退出由房主立即权威判负
+  ---
+  duration_ms: 1.197944
+  type: 'test'
+  ...
+# Subtest: BTHOST-07 再战邀请由房主计时并在对方接受后建立全新选英雄阶段
+ok 7 - BTHOST-07 再战邀请由房主计时并在对方接受后建立全新选英雄阶段
+  ---
+  duration_ms: 2.512094
+  type: 'test'
+  ...
+# Subtest: BTHOST-08 双方聊天经房主权威同步且不阻塞行棋回合
+ok 8 - BTHOST-08 双方聊天经房主权威同步且不阻塞行棋回合
+  ---
+  duration_ms: 5.189859
+  type: 'test'
+  ...
+# Subtest: R4-FORM-01 nineteen transferred front packages retain complete catalog and exact naming
+ok 9 - R4-FORM-01 nineteen transferred front packages retain complete catalog and exact naming
+  ---
+  duration_ms: 13.192484
+  type: 'test'
+  ...
+# Subtest: R4-FORM-02 inner naming is grammar only and never registers an unavailable package
+ok 10 - R4-FORM-02 inner naming is grammar only and never registers an unavailable package
+  ---
+  duration_ms: 1.432773
+  type: 'test'
+  ...
+# Subtest: R4-FORM-03 inner opening is rejected atomically without touching public or secret state
+ok 11 - R4-FORM-03 inner opening is rejected atomically without touching public or secret state
+  ---
+  duration_ms: 1.135678
+  type: 'test'
+  ...
+# Subtest: R4-FORM-04 unknown form, two forms, unknown hero and a form without hero fail closed
+ok 12 - R4-FORM-04 unknown form, two forms, unknown hero and a form without hero fail closed
+  ---
+  duration_ms: 0.578809
+  type: 'test'
+  ...
+# Subtest: R4-FORM-05 partial hero opening fixes only the chosen side and independently owns the lock
+ok 13 - R4-FORM-05 partial hero opening fixes only the chosen side and independently owns the lock
+  ---
+  duration_ms: 4.584159
+  type: 'test'
+  ...
+# Subtest: R4-FORM-06 legacy front snapshots migrate at public projection and authoritative move without input mutation
+ok 14 - R4-FORM-06 legacy front snapshots migrate at public projection and authoritative move without input mutation
+  ---
+  duration_ms: 13.937685
+  type: 'test'
+  ...
+# Subtest: R4-FORM-07 canonical-only selection resolves the whole front package for passives and skills
+ok 15 - R4-FORM-07 canonical-only selection resolves the whole front package for passives and skills
+  ---
+  duration_ms: 7.185902
+  type: 'test'
+  ...
+# Subtest: R4-FORM-08 alias mismatch, wrong package ID and malformed multi-package snapshot are rejected
+ok 16 - R4-FORM-08 alias mismatch, wrong package ID and malformed multi-package snapshot are rejected
+  ---
+  duration_ms: 0.781938
+  type: 'test'
+  ...
+# Subtest: R4-FORM-09 public per-game lock forbids switching, removal or adding another hero
+ok 17 - R4-FORM-09 public per-game lock forbids switching, removal or adding another hero
+  ---
+  duration_ms: 1.287671
+  type: 'test'
+  ...
+# Subtest: R4-FORM-10 authoritative independent lock rejects even a consistent replacement of all public package fields
+ok 18 - R4-FORM-10 authoritative independent lock rejects even a consistent replacement of all public package fields
+  ---
+  duration_ms: 2.109734
+  type: 'test'
+  ...
+# Subtest: R4-FORM-11 inner snapshot never falls back to front passive, clock, target, death or active skill
+ok 19 - R4-FORM-11 inner snapshot never falls back to front passive, clock, target, death or active skill
+  ---
+  duration_ms: 1.075426
+  type: 'test'
+  ...
+# Subtest: R4-FORM-12 reinitialization cannot reset skills or switch before or after the first action
+ok 20 - R4-FORM-12 reinitialization cannot reset skills or switch before or after the first action
+  ---
+  duration_ms: 5.74239
+  type: 'test'
+  ...
+# Subtest: R4-FORM-13 actual rewind restores history while keeping the entire selected form fixed
+ok 21 - R4-FORM-13 actual rewind restores history while keeping the entire selected form fixed
+  ---
+  duration_ms: 15.620914
+  type: 'test'
+  ...
+# Subtest: R4-FORM-14 a tampered historical package cannot replace the current authoritative game lock
+ok 22 - R4-FORM-14 a tampered historical package cannot replace the current authoritative game lock
+  ---
+  duration_ms: 5.850291
+  type: 'test'
+  ...
+# Subtest: R4-FORM-15 mutation-only and no-hero old snapshots normalize without inventing a hero
+ok 23 - R4-FORM-15 mutation-only and no-hero old snapshots normalize without inventing a hero
+  ---
+  duration_ms: 0.417409
+  type: 'test'
+  ...
+# Subtest: R4-FORM-16 duplicate packets preserve the lock and cannot bypass authoritative mismatch checks
+ok 24 - R4-FORM-16 duplicate packets preserve the lock and cannot bypass authoritative mismatch checks
+  ---
+  duration_ms: 3.118436
+  type: 'test'
+  ...
+# Subtest: R4-FORM-17 actual Bluetooth setup, encoded owner views and reconnect retain public form metadata
+ok 25 - R4-FORM-17 actual Bluetooth setup, encoded owner views and reconnect retain public form metadata
+  ---
+  duration_ms: 14.769726
+  type: 'test'
+  ...
+# Subtest: R4-FORM-18 rematch creates a new game with fresh selections without unlocking the previous game
+ok 26 - R4-FORM-18 rematch creates a new game with fresh selections without unlocking the previous game
+  ---
+  duration_ms: 6.706117
+  type: 'test'
+  ...
+# Subtest: ONLINE-01 邀请口令只能供加入验证，永不进入公开房间
+ok 27 - ONLINE-01 邀请口令只能供加入验证，永不进入公开房间
+  ---
+  duration_ms: 6.363538
+  type: 'test'
+  ...
+# Subtest: ONLINE-02 第二位玩家加入后自动开始秘密猜拳，重复加入幂等
+ok 28 - ONLINE-02 第二位玩家加入后自动开始秘密猜拳，重复加入幂等
+  ---
+  duration_ms: 2.720173
+  type: 'test'
+  ...
+# Subtest: ONLINE-03 猜拳胜者为红方，红方先走，未决选择不公开
+ok 29 - ONLINE-03 猜拳胜者为红方，红方先走，未决选择不公开
+  ---
+  duration_ms: 5.670255
+  type: 'test'
+  ...
+# Subtest: CHAT-01 正式对局消息由房主校验、公开同步并共用两秒冷却
+ok 30 - CHAT-01 正式对局消息由房主校验、公开同步并共用两秒冷却
+  ---
+  duration_ms: 3.489528
+  type: 'test'
+  ...
+# Subtest: ONLINE-03A 猜拳三十秒到时由房主权威随机补齐且秘密结算
+ok 31 - ONLINE-03A 猜拳三十秒到时由房主权威随机补齐且秘密结算
+  ---
+  duration_ms: 1.854619
+  type: 'test'
+  ...
+# Subtest: ONLINE-03B 进入英雄选择后主动退出会立即形成公开判负结果
+ok 32 - ONLINE-03B 进入英雄选择后主动退出会立即形成公开判负结果
+  ---
+  duration_ms: 0.970731
+  type: 'test'
+  ...
+# Subtest: ONLINE-03C 再战邀请公开等待三十秒，拒绝或超时后允许再次邀请
+ok 33 - ONLINE-03C 再战邀请公开等待三十秒，拒绝或超时后允许再次邀请
+  ---
+  duration_ms: 3.369354
+  type: 'test'
+  ...
+# Subtest: ONLINE-03D 接受再战会清除上一局并重新进入秘密英雄选择
+ok 34 - ONLINE-03D 接受再战会清除上一局并重新进入秘密英雄选择
+  ---
+  duration_ms: 0.914676
+  type: 'test'
+  ...
+# Subtest: ONLINE-04 云端自动结算裁决，仅公开动画路线和最终状态
+ok 35 - ONLINE-04 云端自动结算裁决，仅公开动画路线和最终状态
+  ---
+  duration_ms: 14.143689
+  type: 'test'
+  ...
+# Subtest: ONLINE-05 客户端不能伪造服务端专用终局操作 ID
+ok 36 - ONLINE-05 客户端不能伪造服务端专用终局操作 ID
+  ---
+  duration_ms: 0.913885
+  type: 'test'
+  ...
+# Subtest: MODE-01 猜拳前双方确定英雄，只公开确认状态且本人可恢复选择
+ok 37 - MODE-01 猜拳前双方确定英雄，只公开确认状态且本人可恢复选择
+  ---
+  duration_ms: 2.763995
+  type: 'test'
+  ...
+# Subtest: MODE-02 英雄入场后双猎人同时准备，秘密锁定陷阱后才进入走棋
+ok 38 - MODE-02 英雄入场后双猎人同时准备，秘密锁定陷阱后才进入走棋
+  ---
+  duration_ms: 2.985708
+  type: 'test'
+  ...
+# Subtest: MODE-03 非猎人和越界坐标不能布置陷阱
+ok 39 - MODE-03 非猎人和越界坐标不能布置陷阱
+  ---
+  duration_ms: 2.438858
+  type: 'test'
+  ...
+# Subtest: MODE-05 英雄选择六十秒超时只随机未确认玩家并进入猜拳
+ok 40 - MODE-05 英雄选择六十秒超时只随机未确认玩家并进入猜拳
+  ---
+  duration_ms: 0.871044
+  type: 'test'
+  ...
+# Subtest: MODE-06 猎人准备超时保留草稿并随机补齐剩余层
+ok 41 - MODE-06 猎人准备超时保留草稿并随机补齐剩余层
+  ---
+  duration_ms: 2.931237
+  type: 'test'
+  ...
+# Subtest: MODE-04 联机刺杀经房间事务结算，公开状态同步技能次数与隐身标记
+ok 42 - MODE-04 联机刺杀经房间事务结算，公开状态同步技能次数与隐身标记
+  ---
+  duration_ms: 13.119879
+  type: 'test'
+  ...
+# Subtest: HUNTER-01 敌方落点触发一层陷阱，公开触发结果而不公开剩余坐标
+ok 43 - HUNTER-01 敌方落点触发一层陷阱，公开触发结果而不公开剩余坐标
+  ---
+  duration_ms: 6.089477
+  type: 'test'
+  ...
+# Subtest: HUNTER-02 第十个敌方正式回合结束后未触发陷阱失效
+ok 44 - HUNTER-02 第十个敌方正式回合结束后未触发陷阱失效
+  ---
+  duration_ms: 2.777881
+  type: 'test'
+  ...
+# Subtest: HUNTER-03 将帅踏入敌方陷阱时直接以伏击结束
+ok 45 - HUNTER-03 将帅踏入敌方陷阱时直接以伏击结束
+  ---
+  duration_ms: 4.536065
+  type: 'test'
+  ...
+# Subtest: HUNTER-04 壁垒弹回属于移置，触发起点的正常落位陷阱
+ok 46 - HUNTER-04 壁垒弹回属于移置，触发起点的正常落位陷阱
+  ---
+  duration_ms: 2.531823
+  type: 'test'
+  ...
+# Subtest: HUNTER-05 战士铁甲后的额外应将不消耗陷阱回合
+ok 47 - HUNTER-05 战士铁甲后的额外应将不消耗陷阱回合
+  ---
+  duration_ms: 4.101199
+  type: 'test'
+  ...
+# Subtest: HUNTER-06 同格叠层一次只触发一层，其余层照常扣除本次敌方回合
+ok 48 - HUNTER-06 同格叠层一次只触发一层，其余层照常扣除本次敌方回合
+  ---
+  duration_ms: 1.092097
+  type: 'test'
+  ...
+# Subtest: HUNTER-07 暗子翻成陷阱主人控制的棋子时不触发，用于避免低成本验身
+ok 49 - HUNTER-07 暗子翻成陷阱主人控制的棋子时不触发，用于避免低成本验身
+  ---
+  duration_ms: 1.164933
+  type: 'test'
+  ...
+# Subtest: H10-01 actual full32 preparation, stable private candidates, immediate T0 first use
+ok 50 - H10-01 actual full32 preparation, stable private candidates, immediate T0 first use
+  ---
+  duration_ms: 31.249421
+  type: 'test'
+  ...
+# Subtest: H10-02 actual offer is owner-only; two choices have equal public/opponent views at T0
+ok 51 - H10-02 actual offer is owner-only; two choices have equal public/opponent views at T0
+  ---
+  duration_ms: 6.059014
+  type: 'test'
+  ...
+# Subtest: H10-03 exhaustive five-body kernel has 60 ordered triples, six orders per three-body subset
+ok 52 - H10-03 exhaustive five-body kernel has 60 ordered triples, six orders per three-body subset
+  ---
+  duration_ms: 1.709388
+  type: 'test'
+  ...
+# Subtest: H10-04 shortages/duplicate bodies stop without defining product compensation
+ok 53 - H10-04 shortages/duplicate bodies stop without defining product compensation
+  ---
+  duration_ms: 0.902964
+  type: 'test'
+  ...
+# Subtest: H10-05 RNG failures are atomic at actual final intro API
+ok 54 - H10-05 RNG failures are atomic at actual final intro API
+  ---
+  duration_ms: 22.372392
+  type: 'test'
+  ...
+# Subtest: H10-06 re-entering the same private preparation does not reroll
+ok 55 - H10-06 re-entering the same private preparation does not reroll
+  ---
+  duration_ms: 3.285227
+  type: 'test'
+  ...
+# Subtest: H10-07 non-candidate and wrong actor are rejected without state or charge changes
+ok 56 - H10-07 non-candidate and wrong actor are rejected without state or charge changes
+  ---
+  duration_ms: 2.929373
+  type: 'test'
+  ...
+# Subtest: H10-08 deadline choice/clock/ready skip do not silently select a candidate
+ok 57 - H10-08 deadline choice/clock/ready skip do not silently select a candidate
+  ---
+  duration_ms: 2.516763
+  type: 'test'
+  ...
+# Subtest: H10-09 candidate movement/invalidation stops; negative probe is not an actual preparation fixture
+ok 58 - H10-09 candidate movement/invalidation stops; negative probe is not an actual preparation fixture
+  ---
+  duration_ms: 2.313816
+  type: 'test'
+  ...
+# Subtest: H10-10 successful preparation cannot grant formal moves, assassination, shadow, or clock
+ok 59 - H10-10 successful preparation cannot grant formal moves, assassination, shadow, or clock
+  ---
+  duration_ms: 3.418025
+  type: 'test'
+  ...
+# Subtest: H10-11 source bytes, tuple, frozen issued identity and synchronous scope are enforced
+ok 60 - H10-11 source bytes, tuple, frozen issued identity and synchronous scope are enforced
+  ---
+  duration_ms: 1.407786
+  type: 'test'
+  ...
+# Subtest: H10-12 wrong room/mode/source and copied authority cannot borrow preparation admission
+ok 61 - H10-12 wrong room/mode/source and copied authority cannot borrow preparation admission
+  ---
+  duration_ms: 1.668942
+  type: 'test'
+  ...
+# Subtest: H10-13 ordinary product and Bluetooth gates remain closed; non-player cannot read candidates
+ok 62 - H10-13 ordinary product and Bluetooth gates remain closed; non-player cannot read candidates
+  ---
+  duration_ms: 2.039534
+  type: 'test'
+  ...
+# Subtest: H10-14 preparation capability does not grant unqualified transport, exit, chat or rematch lifecycle
+ok 63 - H10-14 preparation capability does not grant unqualified transport, exit, chat or rematch lifecycle
+  ---
+  duration_ms: 3.0832
+  type: 'test'
+  ...
+# Subtest: NP32 AS: actual full 32-piece original prefix and original branch oracle
+ok 64 - NP32 AS: actual full 32-piece original prefix and original branch oracle
+  ---
+  duration_ms: 347.24647
+  type: 'test'
+  ...
+# Subtest: NP32 AP: actual full 32-piece original prefix and original branch oracle
+ok 65 - NP32 AP: actual full 32-piece original prefix and original branch oracle
+  ---
+  duration_ms: 265.54599
+  type: 'test'
+  ...
+# Subtest: NP32 ES: actual full 32-piece original prefix and original branch oracle
+ok 66 - NP32 ES: actual full 32-piece original prefix and original branch oracle
+  ---
+  duration_ms: 342.77497
+  type: 'test'
+  ...
+# Subtest: NP32 AS: B1-B4 prayer, full R5 response, real B5 draw order and free main
+ok 67 - NP32 AS: B1-B4 prayer, full R5 response, real B5 draw order and free main
+  ---
+  duration_ms: 185.346592
+  type: 'test'
+  ...
+# Subtest: NP32 AP: B1-B4 prayer, full R5 response, real B5 draw order and free main
+ok 68 - NP32 AP: B1-B4 prayer, full R5 response, real B5 draw order and free main
+  ---
+  duration_ms: 331.662352
+  type: 'test'
+  ...
+# Subtest: NP32 ES: B1-B4 prayer, full R5 response, real B5 draw order and free main
+ok 69 - NP32 ES: B1-B4 prayer, full R5 response, real B5 draw order and free main
+  ---
+  duration_ms: 332.845054
+  type: 'test'
+  ...
+# Subtest: NP32 client JSON and legacy general source scopes never enable the product tuple
+ok 70 - NP32 client JSON and legacy general source scopes never enable the product tuple
+  ---
+  duration_ms: 2.930957
+  type: 'test'
+  ...
+# Subtest: NP32 immutable contract, RNG and observation sources reject any local tampering
+ok 71 - NP32 immutable contract, RNG and observation sources reject any local tampering
+  ---
+  duration_ms: 0.859383
+  type: 'test'
+  ...
+# Subtest: NP32 capabilities reject copies, cross-mode nesting, foreign room and asynchronous use; finally clears
+ok 72 - NP32 capabilities reject copies, cross-mode nesting, foreign room and asynchronous use; finally clears
+  ---
+  duration_ms: 2.274412
+  type: 'test'
+  ...
+# Subtest: NP32 pre-RPS package selection and actual assignments reject drift before the first draw
+ok 73 - NP32 pre-RPS package selection and actual assignments reject drift before the first draw
+  ---
+  duration_ms: 2.722117
+  type: 'test'
+  ...
+# Subtest: NP32 snapshot isolation, outsiders, stale versions, wrong actor and escaped assassination entry
+ok 74 - NP32 snapshot isolation, outsiders, stale versions, wrong actor and escaped assassination entry
+  ---
+  duration_ms: 6.777508
+  type: 'test'
+  ...
+# Subtest: NP32 actual R5 descent RNG exception refuses entire normal move without state or observer commit
+ok 75 - NP32 actual R5 descent RNG exception refuses entire normal move without state or observer commit
+  ---
+  duration_ms: 128.435268
+  type: 'test'
+  ...
+# Subtest: NP32 actual R5 duplicate does not redraw, repeat begin, change revision or refresh clock
+ok 76 - NP32 actual R5 duplicate does not redraw, repeat begin, change revision or refresh clock
+  ---
+  duration_ms: 135.377359
+  type: 'test'
+  ...
+# Subtest: NP32 AS: observation on/off preserves every returned authority and exact RNG calls
+ok 77 - NP32 AS: observation on/off preserves every returned authority and exact RNG calls
+  ---
+  duration_ms: 313.59242
+  type: 'test'
+  ...
+# Subtest: NP32 AP: observation on/off preserves every returned authority and exact RNG calls
+ok 78 - NP32 AP: observation on/off preserves every returned authority and exact RNG calls
+  ---
+  duration_ms: 365.804324
+  type: 'test'
+  ...
+# Subtest: NP32 ES: observation on/off preserves every returned authority and exact RNG calls
+ok 79 - NP32 ES: observation on/off preserves every returned authority and exact RNG calls
+  ---
+  duration_ms: 370.780446
+  type: 'test'
+  ...
+# Subtest: NP32 actual player/public views contain no authority RNG receipts or private source maps
+ok 80 - NP32 actual player/public views contain no authority RNG receipts or private source maps
+  ---
+  duration_ms: 528.536755
+  type: 'test'
+  ...
+# Subtest: NP32 symbolic W01_SELF_CHECK_FALSE_ACCEPT_LAND/move: unsafe closed path/endpoint/return rejects original candidate
+ok 81 - NP32 symbolic W01_SELF_CHECK_FALSE_ACCEPT_LAND/move: unsafe closed path/endpoint/return rejects original candidate
+  ---
+  duration_ms: 7.032487
+  type: 'test'
+  ...
+# Subtest: NP32 symbolic W01_SELF_CHECK_FALSE_ACCEPT_LAND/activation: unsafe closed path/endpoint/return rejects original candidate
+ok 82 - NP32 symbolic W01_SELF_CHECK_FALSE_ACCEPT_LAND/activation: unsafe closed path/endpoint/return rejects original candidate
+  ---
+  duration_ms: 4.591034
+  type: 'test'
+  ...
+# Subtest: NP32 symbolic W01_SELF_CHECK_FALSE_ACCEPT_LAND/continuing: unsafe closed path/endpoint/return rejects original candidate
+ok 83 - NP32 symbolic W01_SELF_CHECK_FALSE_ACCEPT_LAND/continuing: unsafe closed path/endpoint/return rejects original candidate
+  ---
+  duration_ms: 4.784144
+  type: 'test'
+  ...
+# Subtest: NP32 symbolic W02_SELF_CHECK_FALSE_ACCEPT_BOUNCE/move: unsafe closed path/endpoint/return rejects original candidate
+ok 84 - NP32 symbolic W02_SELF_CHECK_FALSE_ACCEPT_BOUNCE/move: unsafe closed path/endpoint/return rejects original candidate
+  ---
+  duration_ms: 7.731271
+  type: 'test'
+  ...
+# Subtest: NP32 symbolic W02_SELF_CHECK_FALSE_ACCEPT_BOUNCE/activation: unsafe closed path/endpoint/return rejects original candidate
+ok 85 - NP32 symbolic W02_SELF_CHECK_FALSE_ACCEPT_BOUNCE/activation: unsafe closed path/endpoint/return rejects original candidate
+  ---
+  duration_ms: 5.025193
+  type: 'test'
+  ...
+# Subtest: NP32 symbolic W02_SELF_CHECK_FALSE_ACCEPT_BOUNCE/continuing: unsafe closed path/endpoint/return rejects original candidate
+ok 86 - NP32 symbolic W02_SELF_CHECK_FALSE_ACCEPT_BOUNCE/continuing: unsafe closed path/endpoint/return rejects original candidate
+  ---
+  duration_ms: 5.593262
+  type: 'test'
+  ...
+# Subtest: NP32 symbolic W03_PATH_SCALE_NO_CRUSH_CONTRAST/move: shield-survival or enemy-check control remains legal
+ok 87 - NP32 symbolic W03_PATH_SCALE_NO_CRUSH_CONTRAST/move: shield-survival or enemy-check control remains legal
+  ---
+  duration_ms: 6.467934
+  type: 'test'
+  ...
+# Subtest: NP32 symbolic W03_PATH_SCALE_NO_CRUSH_CONTRAST/activation: shield-survival or enemy-check control remains legal
+ok 88 - NP32 symbolic W03_PATH_SCALE_NO_CRUSH_CONTRAST/activation: shield-survival or enemy-check control remains legal
+  ---
+  duration_ms: 4.699366
+  type: 'test'
+  ...
+# Subtest: NP32 symbolic W03_PATH_SCALE_NO_CRUSH_CONTRAST/continuing: shield-survival or enemy-check control remains legal
+ok 89 - NP32 symbolic W03_PATH_SCALE_NO_CRUSH_CONTRAST/continuing: shield-survival or enemy-check control remains legal
+  ---
+  duration_ms: 8.055015
+  type: 'test'
+  ...
+# Subtest: NP32 symbolic W04_NEW_CHECK_VS_ENEMY_ONLY/move: shield-survival or enemy-check control remains legal
+ok 90 - NP32 symbolic W04_NEW_CHECK_VS_ENEMY_ONLY/move: shield-survival or enemy-check control remains legal
+  ---
+  duration_ms: 8.432469
+  type: 'test'
+  ...
+# Subtest: NP32 symbolic W04_NEW_CHECK_VS_ENEMY_ONLY/activation: shield-survival or enemy-check control remains legal
+ok 91 - NP32 symbolic W04_NEW_CHECK_VS_ENEMY_ONLY/activation: shield-survival or enemy-check control remains legal
+  ---
+  duration_ms: 7.176415
+  type: 'test'
+  ...
+# Subtest: NP32 symbolic W04_NEW_CHECK_VS_ENEMY_ONLY/continuing: shield-survival or enemy-check control remains legal
+ok 92 - NP32 symbolic W04_NEW_CHECK_VS_ENEMY_ONLY/continuing: shield-survival or enemy-check control remains legal
+  ---
+  duration_ms: 7.782947
+  type: 'test'
+  ...
+# Subtest: NP32 original authority open batch refuses both main and assassination before cloning
+ok 93 - NP32 original authority open batch refuses both main and assassination before cloning
+  ---
+  duration_ms: 6.386311
+  type: 'test'
+  ...
+# Subtest: NP32 synthetic checking path rook removal/move/endpoint scale=false: real closure resolves check
+ok 94 - NP32 synthetic checking path rook removal/move/endpoint scale=false: real closure resolves check
+  ---
+  duration_ms: 5.246756
+  type: 'test'
+  ...
+# Subtest: NP32 synthetic checking path rook removal/activation/endpoint scale=false: real closure resolves check
+ok 95 - NP32 synthetic checking path rook removal/activation/endpoint scale=false: real closure resolves check
+  ---
+  duration_ms: 4.423851
+  type: 'test'
+  ...
+# Subtest: NP32 synthetic checking path rook removal/continuing/endpoint scale=false: real closure resolves check
+ok 96 - NP32 synthetic checking path rook removal/continuing/endpoint scale=false: real closure resolves check
+  ---
+  duration_ms: 5.390505
+  type: 'test'
+  ...
+# Subtest: NP32 synthetic checking path rook removal/move/endpoint scale=true: real closure resolves check
+ok 97 - NP32 synthetic checking path rook removal/move/endpoint scale=true: real closure resolves check
+  ---
+  duration_ms: 6.446074
+  type: 'test'
+  ...
+# Subtest: NP32 synthetic checking path rook removal/activation/endpoint scale=true: real closure resolves check
+ok 98 - NP32 synthetic checking path rook removal/activation/endpoint scale=true: real closure resolves check
+  ---
+  duration_ms: 6.276317
+  type: 'test'
+  ...
+# Subtest: NP32 synthetic checking path rook removal/continuing/endpoint scale=true: real closure resolves check
+ok 99 - NP32 synthetic checking path rook removal/continuing/endpoint scale=true: real closure resolves check
+  ---
+  duration_ms: 6.324727
+  type: 'test'
+  ...
+# Subtest: NP32 actual R5 timeout ends match before any B5 descent or extra random calls
+ok 100 - NP32 actual R5 timeout ends match before any B5 descent or extra random calls
+  ---
+  duration_ms: 104.123362
+  type: 'test'
+  ...
+# Subtest: NP32 symbolic H21 prayer while checked refuses before resource or formal-counter mutation
+ok 101 - NP32 symbolic H21 prayer while checked refuses before resource or formal-counter mutation
+  ---
+  duration_ms: 9.427073
+  type: 'test'
+  ...
+# Subtest: NP32 synthetic deliberate own-general path death keeps its original terminal result
+ok 102 - NP32 synthetic deliberate own-general path death keeps its original terminal result
+  ---
+  duration_ms: 3.844681
+  type: 'test'
+  ...
+1..102
+# tests 102
+# suites 0
+# pass 102
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 4510.230786
