@@ -1,0 +1,77 @@
+{
+  "schema": "lezi.hc.pr24.scope_review.v1",
+  "dependencyCommit": "f30f1f5541fd84ebbf6aa298a4bcc3e446adeb80",
+  "dependencySource": "scripts/research/main-authority-result-prototype.ts",
+  "dependencySourceSha256": "7e4567142bf6a3194ff410051afa2454e68776cb4f633ce92c6debe64b21f415",
+  "node": "v24.22.1",
+  "command": "HC_PR24_ROOT=/absolute/path/to/pr24-checkout node scripts/research/hc-result-pr24-scope-review.ts",
+  "casesRun": 4,
+  "observationChecksPassed": 4,
+  "guardGapReproductions": 2,
+  "cases": [
+    {
+      "variant": "complete",
+      "scopeKeys": [
+        "authorityId",
+        "roomId",
+        "matchEpoch"
+      ],
+      "constructed": true,
+      "answer": {
+        "query": "valid",
+        "outcome": "accepted"
+      },
+      "queryChangedAuthority": false,
+      "findingReproduced": false,
+      "classification": "valid-scope positive control"
+    },
+    {
+      "variant": "missing-authority",
+      "scopeKeys": [
+        "roomId",
+        "matchEpoch"
+      ],
+      "constructed": true,
+      "answer": {
+        "query": "valid",
+        "outcome": "accepted"
+      },
+      "queryChangedAuthority": false,
+      "findingReproduced": true,
+      "classification": "runtime missing-field guard gap; deliberately outside ResultScope static type"
+    },
+    {
+      "variant": "missing-match",
+      "scopeKeys": [
+        "authorityId",
+        "roomId"
+      ],
+      "constructed": true,
+      "answer": {
+        "query": "valid",
+        "outcome": "accepted"
+      },
+      "queryChangedAuthority": false,
+      "findingReproduced": true,
+      "classification": "runtime missing-field guard gap; deliberately outside ResultScope static type"
+    },
+    {
+      "variant": "empty-authority",
+      "scopeKeys": [
+        "authorityId",
+        "roomId",
+        "matchEpoch"
+      ],
+      "constructed": false,
+      "constructionError": "Exact jieqi scope required",
+      "findingReproduced": false,
+      "classification": "existing empty-string guard control"
+    }
+  ],
+  "limits": [
+    "Not a network or cross-actor exploit; caller/scope are trusted offline inputs in PR24.",
+    "Missing fields are intentional malformed runtime inputs, not correctly typed ResultScope inputs.",
+    "One structural validation issue; two missing-field variants do not count as two defects.",
+    "No PR24 implementation, production source, old 13/29 suites or mode gates changed."
+  ]
+}
