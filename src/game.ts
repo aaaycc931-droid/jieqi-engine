@@ -9,6 +9,7 @@ import { copy, initializeFeatureSecret, destroyPiece, consumeDragonScale, markRe
 import { actionFields, closeMainActionAtom, movementClassification, recordAction } from "./turns.ts";
 import { RuleError } from "./errors.ts";
 import { requireModeFeatureAdaptation } from "./modes.ts";
+import { standardH10ForwardScope } from "./research-source-context.ts";
 import {
   canRevealedPieceAttack,
   findGeneral,
@@ -153,6 +154,11 @@ function pathPiecesForSpecialMove(state: GameState, source: PublicPiece, to: { x
 function finishDirectDeaths(state: GameState, actingSide: Side, secret: SecretState, completePathClosure = false, randomInt?: RandomInt): boolean {
   settleLandings(state, secret);
   resolveWindReturn(state, secret);
+  // The original H10 prefix's surviving public royal must be safe even when
+  // an opponent host dies. Host identity never replaces public check rules.
+  if (completePathClosure && standardH10ForwardScope() &&
+      state.pieces.some(p => !p.faceDown && p.color === actingSide && p.type === "general") && isGeneralInCheck(state, actingSide))
+    throw new RuleError("SELF_CHECK", "H10原子终结前存活己方将帅仍受攻击");
   if (state.lastMove) closeMainActionAtom(state, state.lastMove.actionId);
   const terminal = closeDirectDeaths(state, secret, actingSide, randomInt);
   if (!terminal && completePathClosure && isGeneralInCheck(state, actingSide)) {
@@ -406,14 +412,19 @@ function coveredPathMove(state: GameState, command: MoveCommand): boolean {
   const npFamily = state.gameMode === "xiangqi" && selectedHeroId(state, "red") === "rogue" &&
     selectedHeroSelection(state, "black")?.heroId === "devout_zealot" && selectedHeroSelection(state, "black")?.variant === "invincible" &&
     mutation === "war_chariot" && (state.formalTurns?.[state.turn] ?? 0) < 8 && Math.max(state.formalTurns?.red ?? 0, state.formalTurns?.black ?? 0) <= 8;
+  const h10Family = standardH10ForwardScope() && state.gameMode === "xiangqi" && selectedHeroId(state, "red") === "rogue" &&
+    selectedHeroId(state, "black") === "wind" && mutation === "war_chariot" && [6, 8].includes(state.revision) && state.turn === "red";
   return state.status === "playing" && !state.pendingShuffle && !state.pendingHeroChild && !state.pendingDescent && !state.forcedDefense && !state.flowDance &&
-    (halfFamily || npFamily) &&
+    (halfFamily || npFamily || h10Family) &&
     Boolean(source && !source.faceDown && (!source.layer || source.layer === "ground") &&
     (mutation === "iron_steed" && source.type === "horse" || mutation === "war_chariot" && source.type === "rook"));
 }
 
 /** Public data sufficient for this exact action family; no private stand-ins. */
 export function supportsClosedPublicPathQuery(state: GameState, pieceId: string, side: Side = state.turn): boolean {
+  // This public-only projector constructs a secret without wind.hostId. It
+  // cannot represent H10 authority; the new prefix qualifies no public query.
+  if (selectedHeroId(state, "red") === "wind" || selectedHeroId(state, "black") === "wind") return false;
   if (!Array.isArray(state.captured) || !Number.isInteger(state.revision) || state.status !== "playing") return false;
   const source = pieceById(state, pieceId);
   if (!source || !coveredPathMove({ ...state, turn: side }, { pieceId, from: source, to: source, actionId: "", expectedRevision: state.revision })) return false;
@@ -888,7 +899,11 @@ function applyFreshAuthoritativeAssassination(
   awardWarriorBarrier(nextState, actingSide, source.id, command.from, command.to, movedPiece);
 
 
-  if (finishDirectDeaths(nextState, actingSide, nextSecret, false, query ? forbidQueryRandom : undefined)) {
+  const h10Closure = completePathClosure && standardH10ForwardScope();
+  // O5: consumed continuation ends before the terminal checkpoint. Do not
+  // clear it before path/endpoint effects, or generalize the AS refund branch.
+  if (h10Closure && continuing) endStealth(nextState, source.id);
+  if (finishDirectDeaths(nextState, actingSide, nextSecret, h10Closure && continuing, query ? forbidQueryRandom : undefined)) {
     nextSecret.processedActions[command.actionId] = nextState.revision;
     return { state: nextState, secret: nextSecret, duplicate: false };
   }

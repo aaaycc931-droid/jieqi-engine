@@ -1,0 +1,181 @@
+{
+  "schema": "lezi.standard.atomic_observation_contract.v1",
+  "id": "STD-H10-M04-ATOMIC-OBSERVATION-20261113",
+  "source_commit": "6979552f76ec0a8866510306891eee9137b3ab7c",
+  "engine_commit": "71145df45ad17215a3731e53150b6728e079e375",
+  "prefix_contract": "worklines/standard/specs/STD_H10_M04_PREFIX_CONTRACT_20261113.json",
+  "scope": "source-backed proposed evidence obligations; not engine trace, schema migration, gameplay approval or exact internal total ordering",
+  "obligations": [
+    {
+      "id": "O0",
+      "subject": "准备与输入资格",
+      "rule_basis": "现行H10 T0、H02旧刺杀、唯一M04与原NG11排除",
+      "required_evidence": "权威准备回执、候选实际来源、8手同源记录、R5合法窗口/真帅安全",
+      "implementation_mapping": "既有条件前缀不是实际运行记录；coveredPathMove不含H02/H10",
+      "status": "GATE_NOT_PROVEN",
+      "runtime": "UNRUN"
+    },
+    {
+      "id": "O1",
+      "subject": "行动身份与提交",
+      "rule_basis": "一手主行动、原合法来源窗口",
+      "required_evidence": "actionId、expectedRevision、来源、行动前后权威版本；同一原子关联",
+      "implementation_mapping": "turns.ts recordAction/formal_main_action；processedActions独立核对",
+      "status": "SOURCE_MAPPING_ONLY",
+      "runtime": "UNRUN"
+    },
+    {
+      "id": "O2",
+      "subject": "路径实际消灭",
+      "rule_basis": "M04独立碾碎，不是终点进攻本体击杀",
+      "required_evidence": "pathCrushed、captured/automaticEvents的稳定pieceId与cause；目标黑卒0",
+      "implementation_mapping": "game.ts captureByCrush→settlement.ts destroyPiece；无独立MechanismEvent路径时点",
+      "status": "RECORD_MAPPING_NOT_EXACT_CHECKPOINT",
+      "runtime": "UNRUN"
+    },
+    {
+      "id": "O3",
+      "subject": "宿主与候选终局",
+      "rule_basis": "H10宿主独立死亡；候选终局不得截断已承诺原子",
+      "required_evidence": "世界A宿主=路径卒，B宿主=其他卒；真帅存活因果与终局候选单列",
+      "implementation_mapping": "closeDirectDeaths读取wind.hostId；未见专用candidate_terminal研究事件",
+      "status": "EXACT_INTERMEDIATE_POINT_UNAVAILABLE",
+      "runtime": "UNRUN"
+    },
+    {
+      "id": "O4",
+      "subject": "终点与落位闭合",
+      "rule_basis": "既定终点/落位等承诺先于正式终结",
+      "required_evidence": "目标黑马实际消灭、车在0,2、落位队列闭合、无伪造返回；与路径分开计数",
+      "implementation_mapping": "game.ts终点destroyPiece/lastMove/queueLanding，finishDirectDeaths调用settleLandings",
+      "status": "SOURCE_MAPPING_ONLY",
+      "runtime": "UNRUN"
+    },
+    {
+      "id": "O5",
+      "subject": "H02来源状态收尾",
+      "rule_basis": "使用后机会/来源无形终止，不套AS退款",
+      "required_evidence": "比较effectsByPieceId[rook].stealth、assassination.red.activePieceId、机会状态与费用",
+      "implementation_mapping": "直接死亡terminal return位于continuing endStealth之前，见风险R1",
+      "status": "STATIC_EARLY_RETURN_RISK_UNRUN",
+      "runtime": "UNRUN"
+    },
+    {
+      "id": "O6",
+      "subject": "正式终结与停止推进",
+      "rule_basis": "原子闭合后统一判真帅；正式终结后无新回合",
+      "required_evidence": "A仅当真帅死亡、红帅存活且完整guard成立时红胜；B不得凭路径非宿主直接预填终局结果；无下一begin/end扣层",
+      "implementation_mapping": "finishDirectDeaths→closeDirectDeaths→emitMainActionAtomClosed(sourceTerminal=true)；事件快照可能已finished",
+      "status": "POST_TERMINAL_CHECKPOINT_NOT_PRETERMINAL",
+      "runtime": "UNRUN"
+    },
+    {
+      "id": "O7",
+      "subject": "记录身份一致",
+      "rule_basis": "实际对象、真实致死来源与公开身份各自保留语义",
+      "required_evidence": "以pieceId/cause/position串联；区分captured表、destroy事件副本、lastMove引用，禁止仅按type字段计数",
+      "implementation_mapping": "closeDirectDeaths将宿主captured.type改general；destroy事件保留copy(record)可能仍pawn，见R2",
+      "status": "STATIC_REPRESENTATION_RISK_UNRUN",
+      "runtime": "UNRUN"
+    },
+    {
+      "id": "O8",
+      "subject": "观察失败与隔离",
+      "rule_basis": "研究证据无效不能改变权威结果",
+      "required_evidence": "evidenceValid、观察开/关权威对照，禁止读取secret后输出到player wire",
+      "implementation_mapping": "mechanism-observer.ts同步冻结副本/withIsolatedMechanismEvents；projectCheckpoint只在atom/settled",
+      "status": "REUSE_TECHNICAL_BOUNDARY_NOT_H10_RUN",
+      "runtime": "UNRUN"
+    },
+    {
+      "id": "O9",
+      "subject": "客户端与重复请求",
+      "rule_basis": "PR20—22边界保持，不把快照/pong当接受ACK",
+      "required_evidence": "只用获准已提交投影；重复相同请求不得重扣/重杀需实际证据；unknown不自动补交",
+      "implementation_mapping": "BluetoothHostRoom非jieqi门禁保持；本合同不新增中间帧/ACK协议",
+      "status": "CLIENT_AND_REPLAY_UNRUN",
+      "runtime": "UNRUN"
+    }
+  ],
+  "semantic_partial_order": [
+    "合法提交在来源结算之前",
+    "M04路径处理先于原终点处理",
+    "已承诺终点/落位/死亡记录等必要收尾完成后才正式终结",
+    "正式终结后无新游戏行动/下一回合；结果持久化不算继续游戏"
+  ],
+  "not_asserted": [
+    "候选终局存在专门序列化字段或可捕获回调",
+    "main_action_atom_closed必在status=finished之前",
+    "所有内部H02清理与终局字段必须有某全局唯一总顺序",
+    "世界A/B结束投影必须相等"
+  ],
+  "risks": [
+    {
+      "id": "R1",
+      "kind": "STATIC_CONTROL_FLOW_RISK_NOT_REPRODUCED",
+      "source": "src/game.ts applyFreshAuthoritativeAssassination terminal return before endStealth; finishDirectDeaths emits terminal checkpoint",
+      "claim": "若合法H02/H10来源实际到达该分支，可能在终局返回与快照中仍留有效潜行/载体状态；本轮未证明实际可达或下游危害",
+      "needed": "同源合法准备后A/B真实权威记录；分别核终局前必要来源收尾、返回状态、观察快照和消费者，不能仅以已终局忽略字段义务",
+      "scope": "不得凭静态分支直接改代码/宣称P0已复现"
+    },
+    {
+      "id": "R2",
+      "kind": "STATIC_REPRESENTATION_DIFFERENCE_NOT_AUTOMATIC_BUG",
+      "source": "src/settlement.ts destroyPiece event copy and closeDirectDeaths captured.type reassignment",
+      "claim": "同一宿主的记录type在事件副本与最终captured表可能不同；真实pieceId和cause需先对齐，不按兵种字符串生成第二次死亡",
+      "needed": "实际前后字段/公开权限与原确认语义核对，差异本身不证明泄漏或重复击杀"
+    }
+  ],
+  "negative_specs": [
+    {
+      "id": "N1",
+      "invalid_claim": "路径卒死亡就立刻停止，终点马仍活/车未落位",
+      "expected": "若动作已合法承诺，违反必要原子收尾；不得正式PASS"
+    },
+    {
+      "id": "N2",
+      "invalid_claim": "A世界公开影武者活着，所以宿主死也不终结",
+      "expected": "核真正宿主身份与死亡，不以公开影武者替代真帅"
+    },
+    {
+      "id": "N3",
+      "invalid_claim": "B世界也按A的宿主死亡判红胜",
+      "expected": "拒绝错绑宿主；B仍需自己的最终裁判"
+    },
+    {
+      "id": "N4",
+      "invalid_claim": "拿普通atom闭合事件证明候选终局瞬间已经取证",
+      "expected": "事件实际已finished时只能证明相应后置状态"
+    },
+    {
+      "id": "N5",
+      "invalid_claim": "终局return前未清理H02也不检查，或把它当AS退款",
+      "expected": "按O5核费用/机会/无形；无运行则保留风险"
+    },
+    {
+      "id": "N6",
+      "invalid_claim": "同pieceId的pawn/general两种表示算两次消灭",
+      "expected": "按身份/来源查对应关系，表示差异独立记录"
+    },
+    {
+      "id": "N7",
+      "invalid_claim": "将checkpointProjection或secret直接广播供两个客户端验收",
+      "expected": "禁止扩公开字段；只走既有获准投影与实际来源"
+    },
+    {
+      "id": "N8",
+      "invalid_claim": "为了凑A世界formal_turn_settled，终局后再执行end/begin",
+      "expected": "终局停止规则优先；相应回合末事件缺席可为预期，不补游戏步骤"
+    }
+  ],
+  "validation_scope": {
+    "runtime_cases_executed": 0,
+    "new_engine_runs": 0,
+    "independent_QA": false,
+    "new_rules": 0,
+    "NG11": "OPEN",
+    "featuresReady": false,
+    "scoring": "frozen",
+    "NET": "paused"
+  }
+}

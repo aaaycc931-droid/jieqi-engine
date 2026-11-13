@@ -1,6 +1,6 @@
 import { configureHeroPreparation } from "./hero-progress.ts";
 import { beginWindPreparation, ownWindPreparation } from "./wind-preparation.ts";
-import { standardH10PreparationScope, windPreparationCoverage } from "./research-source-context.ts";
+import { standardH10PreparationScope, windPreparationCoverage, requireStandardH10ForwardAction } from "./research-source-context.ts";
 import { getHeroPackage, validateHeroForms } from "./hero-forms.ts";
 import { HERO_IDS } from "./heroes.ts";
 import { applyHeroAbility, ownerHeroSecrets, startFormalClock } from "./hero-actions.ts";
@@ -1276,7 +1276,8 @@ export function submitRemoteMove(
   now = Date.now(),
   randomInt?: RandomInt,
 ): RemoteActionResult {
-  requireExactResearchRoom(room);
+  requireExactResearchRoom(room, undefined, "move");
+  requireStandardH10ForwardAction(room, playerId, command, "move", now);
   ensurePhase(room, "playing");
   reserveServerActionId(command.actionId);
   if (!room.game) throw new RuleError("MISSING_GAME", "房间尚未开始棋局");
@@ -1336,7 +1337,8 @@ export function submitRemoteAssassination(
   now = Date.now(),
   randomInt?: RandomInt,
 ): RemoteActionResult {
-  requireExactResearchRoom(room);
+  requireExactResearchRoom(room, undefined, "assassination");
+  requireStandardH10ForwardAction(room, playerId, command, "assassination", now);
   ensurePhase(room, "playing");
   reserveServerActionId(command.actionId);
   if (!room.game) throw new RuleError("MISSING_GAME", "房间尚未开始棋局");

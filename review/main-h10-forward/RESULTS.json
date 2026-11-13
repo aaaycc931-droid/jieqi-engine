@@ -1,0 +1,97 @@
+{
+  "id": "MAIN-H10-FORWARD-PREFIX-QUALIFICATION-20261113",
+  "base": "bfc7847dd81d16ee82b81d4e1747a9729c84e77c",
+  "source_handoff": "2b521ba0cfde1c6cf3aa0fc1b2168fe8d0e37c21",
+  "status": "BOUNDED_G4_G5_ORIGINAL_PREFIX_IMPLEMENTED_NOT_MODE_ACCEPTANCE",
+  "mapping": {
+    "red_pawn_0": "covered-25",
+    "black_horse_1": "covered-01",
+    "black_pawn_8": "covered-14",
+    "black_pawn_6": "covered-13",
+    "red_rook_0": "covered-15",
+    "black_pawn_0": "covered-10",
+    "black_pawn_2": "covered-11",
+    "black_horse_7": "covered-06"
+  },
+  "pre_fix_actual_offer_attempts": 8,
+  "final_actual_offer_attempts": 23,
+  "final_draws": 69,
+  "final_selected_offer": {
+    "draws": [
+      {
+        "bound": 15,
+        "index": 11
+      },
+      {
+        "bound": 14,
+        "index": 10
+      },
+      {
+        "bound": 13,
+        "index": 12
+      }
+    ],
+    "candidates": [
+      "covered-11",
+      "covered-10",
+      "covered-14"
+    ]
+  },
+  "original_requests": 18,
+  "formal_random_draws": 0,
+  "new_tests": 15,
+  "targeted_suite": {
+    "tests": 98,
+    "pass": 98
+  },
+  "shared_regression": {
+    "files": 15,
+    "tests": 244,
+    "pass": 244
+  },
+  "suites_overlap": true,
+  "fault_controls": [
+    {
+      "control": "omit_O5_cleanup",
+      "exit": 1,
+      "expected_failure": true,
+      "test": "H10F-06"
+    },
+    {
+      "control": "omit_terminal_royal_guard",
+      "exit": 1,
+      "expected_failure": true,
+      "test": "H10F-15"
+    }
+  ],
+  "O9": {
+    "B": "duplicate true, no mutation",
+    "A": "INVALID_PHASE, no mutation",
+    "wire": "UNRUN"
+  },
+  "owner_evidence": {
+    "filename": "lezi-main-h10-forward-evidence-20261113.zip",
+    "sha256": "2d79dea3f2966da8398416fcd9d5d18233ad05693c95e1adc4b057236e5948cd",
+    "raw_authority_public": false
+  },
+  "sources": {
+    "ATOMIC_OBSERVATION_CONTRACT.json": "2276b2678a252b2d5dcbdd4b58f8ba34b0a0a3409b6fab65ec7fdc45411b6212",
+    "FIRST_SAMPLING_CONFIRMATION.json": "78ec040f646f4cd30df341731e7b457870b26cf0a83616ac7425a89a5919121c",
+    "PREFIX_CONTRACT.json": "c98c1acc44734b92be785092e6239e28df56c95421f3a21c8e67ace3f21217f4"
+  },
+  "protected": {
+    "NET": "paused",
+    "scoring": "frozen",
+    "product_gate": false,
+    "merge": false,
+    "deployment": false,
+    "APK": false,
+    "independent_QA": false,
+    "full_typecheck": "NOT_RUN"
+  },
+  "commands": [
+    "node --test --test-reporter=spec tests/standard-h10-forward.test.ts tests/standard-h10-preparation.test.ts tests/research/std-h10-preparation-review.test.ts tests/standard-np32-research.test.ts tests/standard-np32-window.test.ts",
+    "node --test --test-concurrency=1 --test-reporter=spec tests/standard-h10-forward.test.ts tests/assassination.test.ts tests/as-scale-source.test.ts tests/main-path-closure.test.ts tests/public-path-query.test.ts tests/public-path-qualification.test.ts tests/remote-room.test.ts tests/hero-forms.test.ts tests/game-modes.test.ts tests/flow-contracts.test.ts tests/destruction-batch.test.ts tests/hero-cross-settlement.test.ts tests/original-half-chaos-research.test.ts tests/research-evidence-validity.test.ts tests/action-turn-contracts.test.ts",
+    "node scripts/research/standard-h10-forward.ts OWNER_OUTPUT.json"
+  ]
+}

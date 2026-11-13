@@ -1,0 +1,14 @@
+[
+  {
+    "control": "omit_O5_cleanup",
+    "exit": 1,
+    "expected_failure": true,
+    "test": "H10F-06"
+  },
+  {
+    "control": "omit_terminal_royal_guard",
+    "exit": 1,
+    "expected_failure": true,
+    "test": "H10F-15"
+  }
+]
