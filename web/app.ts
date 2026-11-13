@@ -3713,7 +3713,7 @@ window.setInterval(updateVisibleTimers, 250);
 window.addEventListener("jieqi-bluetooth", ((event: CustomEvent<BluetoothEventDetail>) => {
   const detail = event.detail;
   if (!detail) return;
-  if ((detail.event === "state" || detail.type === "transport-state" || detail.type === "message" || detail.type === "transport-error")
+  if ((detail.event === "state" || detail.type === "transport-state" || detail.event === "message" || detail.type === "message" || detail.type === "transport-error")
       && !admitLocalBluetoothEvent(detail)) return;
   if (detail.event === "state" || detail.type === "transport-state") {
     if (!bluetooth) return;
