@@ -1,0 +1,49 @@
+{
+  "schema": "lezi.standard.h10_t0_review_evidence.v1",
+  "engine_base": "4ae702ea33bfaf728cc7ea78f092975bdc68b342",
+  "handoff_source": "a29d40304d97c3bb98fcfed8894ea44a83c47b5f",
+  "task": "MAIN-STD-H10-T0-IMPLEMENTATION-REVIEW-20261113",
+  "node": "v24.22.1",
+  "own_tests": {
+    "base_h10": 14,
+    "additional": 3,
+    "passed": 17,
+    "failed": 0,
+    "skipped": 0
+  },
+  "standalone_driver_runs": 1,
+  "upstream_102_rerun": false,
+  "production_changes": 0,
+  "formal_R1_R5_runs": 0,
+  "client_UI_runs": 0,
+  "formal_mode_acceptance": false,
+  "upstream_manifest_verified_entries": 12,
+  "fixture_bytes_match_handoff": true,
+  "files": [
+    {
+      "path": "tests/research/std-h10-preparation-review.test.ts",
+      "bytes": 5371,
+      "sha256": "dcfc50554dc80a1fec8f3e16e29a39b6ad9eee8d718d84e6275f6660da0f0ecb"
+    },
+    {
+      "path": "review/std-h10-preparation/BASE14.tap",
+      "bytes": 3432,
+      "sha256": "25cc5930bc83ee293473208ac2daea3c3c42226202aba69393d5f1298b5aa816"
+    },
+    {
+      "path": "review/std-h10-preparation/REVIEW3.tap",
+      "bytes": 904,
+      "sha256": "0ffc27ed3b3e746d85641cd36ca1d1d0d487c39a4845a98158679d6e6876d3da"
+    },
+    {
+      "path": "review/std-h10-preparation/ACTUAL_T0.json",
+      "bytes": 139326,
+      "sha256": "23ea7cb3ae23d4dfe0dcbddb4c03a793b87b20efb49222801c730183380e2af7"
+    },
+    {
+      "path": "review/std-h10-preparation/README.md",
+      "bytes": 3982,
+      "sha256": "d0ed11e03b46fdd102a04548ca47d0c1dd73ab4006cdfaeff69c10513166e048"
+    }
+  ]
+}
