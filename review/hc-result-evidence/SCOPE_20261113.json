@@ -1,0 +1,26 @@
+{
+  "base": "71145df45ad17215a3731e53150b6728e079e375",
+  "protectedGitObjects": {
+    "src": "0bb2ee14f2dde17f9d7e73e72d69332f882e012d",
+    "web": "70a38e8253f4745a434e9a2a501344990b69b623",
+    "android": "f285234dba09c77cfac82d5516ed2e9e5d05f333",
+    "package.json": "34b26233ab157051caeae779771ddc0fceb24465"
+  },
+  "protectedDiffEmpty": true,
+  "artifacts": {
+    "scripts/research/hc-result-evidence.ts": "a2e45e61e112ab4b1e4384498a1400e596ffb2e783359d45d4bef29354c83077",
+    "review/hc-result-evidence/RESULTS_20261113.json": "1bae4f52d749fd5ee04c7db5df62b7e9840784f4848ea299e7e2a1513e6844f9",
+    "review/hc-result-evidence/RUN_LOG_20261113.md": "bd59b5727562d859971a11748b6679fb764a3ec021c66c730b99847d42d1d1c7",
+    "docs/research/HC_RESULT_EVIDENCE.md": "f11bfa7cff9c24958f5a478fb759a51e7cd2b41c5209448aa4344c91beda8755"
+  },
+  "environment": {
+    "node": "v24.22.1",
+    "python": "3.12.14",
+    "java": "openjdk 21.0.13; checked only, not executed for these cases"
+  },
+  "newDriverFinalResult": {
+    "passed": 13,
+    "failed": 0
+  },
+  "independentQA": false
+}

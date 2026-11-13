@@ -1,0 +1,625 @@
+{
+  "schema": "lezi.hc.authority_result_evidence.v1",
+  "base": "71145df45ad17215a3731e53150b6728e079e375",
+  "node": "v24.22.1",
+  "command": "node scripts/research/hc-result-evidence.ts",
+  "sourceHashes": {
+    "src/bluetooth-host-room.ts": "060ecc33488909f5ad72702cc40835e46e64d6ee3d3b71ac24216ab4207fbc9f",
+    "src/remote-room.ts": "0cce9e1a7f0ca7b1adbc1bb27542753d588ad6b10d039bec74ba05b62109769e",
+    "src/room.ts": "ac87e304d37f10ab4230c23f18f9fdda774d23df87a77e17cc295294f1e6b18e",
+    "src/game.ts": "807269dd1466eaa68d78387679362c58053c07e7c70849af893cfda0c3f71b46",
+    "src/heroes.ts": "208172f6c2cd3b435d7d3719b2b2772e866a0045ce4536b77514a98458462373",
+    "src/bluetooth-protocol.ts": "adb87d2d9336c976f13bbb77b23a79eb26d321907b293ca1ecac1f68092fb5da",
+    "web/app.ts": "f75b134dea69ef7b90e6535814c58088b6c201a2fadcc8c1d5aaab8dbb0cc9e1",
+    "scripts/research/bluetooth-receipt-channel.ts": "03cda7c34e9873951fc9ed5e73c876cee659275d032c8eefea7b6249207f0f34",
+    "tests/bluetooth-host-room.test.ts": "4e0530cd853555800de134eb273a6be896a6e50fbd1ab4cdca265f66779b5ea9",
+    "tests/remote-room.test.ts": "3a382dc84a4a156825b88cd8040f10d1eb29837d5524ac60d7e914e3199030da",
+    "tests/hero-forms.test.ts": "106634e28c7415832dc131cc6546143644bfa17f78ef78cfb0f06fa429bd87ad"
+  },
+  "limits": [
+    "offline production TypeScript functions",
+    "recording DOM/native endpoint from existing receipt channel",
+    "explicit test-only projection/serialization injection",
+    "not device/JNI/radio/independent QA",
+    "not half_chaos 56/64 acceptance"
+  ],
+  "passed": 13,
+  "failed": 0,
+  "cases": [
+    {
+      "id": "H1-DIRECT-HERO--1",
+      "status": "PASS",
+      "evidence": {
+        "path": "submitRemoteHeroSelection",
+        "actor": "bluetooth:guest",
+        "requestedHero": "hunter",
+        "deadline": 60200,
+        "now": 60199,
+        "returnedNormally": true,
+        "requestedEffectApplied": true,
+        "syntheticOwnChoice": "hunter",
+        "rngCalls": 0,
+        "before": {
+          "phase": "hero_selection",
+          "revision": null,
+          "status": null,
+          "reason": null,
+          "winner": null,
+          "updatedAt": 200,
+          "messageIds": [],
+          "automaticEventCount": null,
+          "landingEventCount": null,
+          "destructionBatchCount": null
+        },
+        "after": {
+          "phase": "hero_selection",
+          "revision": null,
+          "status": null,
+          "reason": null,
+          "winner": null,
+          "updatedAt": 60199,
+          "messageIds": [],
+          "automaticEventCount": null,
+          "landingEventCount": null,
+          "destructionBatchCount": null
+        },
+        "dispositionFieldPresent": false,
+        "source": "tests/remote-room.test.ts MODE-05 (fixedWarrior), plus deadline-1/at/+1 controls"
+      }
+    },
+    {
+      "id": "H1-DIRECT-HERO-0",
+      "status": "PASS",
+      "evidence": {
+        "path": "submitRemoteHeroSelection",
+        "actor": "bluetooth:guest",
+        "requestedHero": "hunter",
+        "deadline": 60200,
+        "now": 60200,
+        "returnedNormally": true,
+        "requestedEffectApplied": false,
+        "syntheticOwnChoice": "warrior",
+        "rngCalls": 2,
+        "before": {
+          "phase": "hero_selection",
+          "revision": null,
+          "status": null,
+          "reason": null,
+          "winner": null,
+          "updatedAt": 200,
+          "messageIds": [],
+          "automaticEventCount": null,
+          "landingEventCount": null,
+          "destructionBatchCount": null
+        },
+        "after": {
+          "phase": "rps",
+          "revision": null,
+          "status": null,
+          "reason": null,
+          "winner": null,
+          "updatedAt": 60200,
+          "messageIds": [],
+          "automaticEventCount": null,
+          "landingEventCount": null,
+          "destructionBatchCount": null
+        },
+        "dispositionFieldPresent": false,
+        "source": "tests/remote-room.test.ts MODE-05 (fixedWarrior), plus deadline-1/at/+1 controls"
+      }
+    },
+    {
+      "id": "H1-DIRECT-HERO-1",
+      "status": "PASS",
+      "evidence": {
+        "path": "submitRemoteHeroSelection",
+        "actor": "bluetooth:guest",
+        "requestedHero": "hunter",
+        "deadline": 60200,
+        "now": 60201,
+        "returnedNormally": true,
+        "requestedEffectApplied": false,
+        "syntheticOwnChoice": "warrior",
+        "rngCalls": 2,
+        "before": {
+          "phase": "hero_selection",
+          "revision": null,
+          "status": null,
+          "reason": null,
+          "winner": null,
+          "updatedAt": 200,
+          "messageIds": [],
+          "automaticEventCount": null,
+          "landingEventCount": null,
+          "destructionBatchCount": null
+        },
+        "after": {
+          "phase": "rps",
+          "revision": null,
+          "status": null,
+          "reason": null,
+          "winner": null,
+          "updatedAt": 60201,
+          "messageIds": [],
+          "automaticEventCount": null,
+          "landingEventCount": null,
+          "destructionBatchCount": null
+        },
+        "dispositionFieldPresent": false,
+        "source": "tests/remote-room.test.ts MODE-05 (fixedWarrior), plus deadline-1/at/+1 controls"
+      }
+    },
+    {
+      "id": "H1-HOST-HERO--1",
+      "status": "PASS",
+      "evidence": {
+        "path": "BluetoothHostRoom.handle",
+        "actor": "bluetooth:guest",
+        "requestedHero": "hunter",
+        "now": 60099,
+        "deadline": 60100,
+        "errorCode": null,
+        "requestedEffectApplied": true,
+        "syntheticOwnChoice": "hunter",
+        "finalChoiceEqualsRequest": true,
+        "rngCalls": 0,
+        "clockReads": [
+          100,
+          100,
+          100,
+          60099,
+          60099,
+          60099
+        ],
+        "before": {
+          "phase": "hero_selection",
+          "revision": null,
+          "status": null,
+          "reason": null,
+          "winner": null,
+          "updatedAt": 100,
+          "messageIds": [],
+          "automaticEventCount": null,
+          "landingEventCount": null,
+          "destructionBatchCount": null
+        },
+        "after": {
+          "phase": "hero_selection",
+          "revision": null,
+          "status": null,
+          "reason": null,
+          "winner": null,
+          "updatedAt": 60099,
+          "messageIds": [],
+          "automaticEventCount": null,
+          "landingEventCount": null,
+          "destructionBatchCount": null
+        },
+        "reason": "host pre-advance commits timeout before original action phase check"
+      }
+    },
+    {
+      "id": "H1-HOST-HERO-0",
+      "status": "PASS",
+      "evidence": {
+        "path": "BluetoothHostRoom.handle",
+        "actor": "bluetooth:guest",
+        "requestedHero": "hunter",
+        "now": 60100,
+        "deadline": 60100,
+        "errorCode": "INVALID_PHASE",
+        "requestedEffectApplied": false,
+        "syntheticOwnChoice": "hunter",
+        "finalChoiceEqualsRequest": true,
+        "rngCalls": 2,
+        "clockReads": [
+          100,
+          100,
+          100,
+          60100,
+          60100
+        ],
+        "before": {
+          "phase": "hero_selection",
+          "revision": null,
+          "status": null,
+          "reason": null,
+          "winner": null,
+          "updatedAt": 100,
+          "messageIds": [],
+          "automaticEventCount": null,
+          "landingEventCount": null,
+          "destructionBatchCount": null
+        },
+        "after": {
+          "phase": "rps",
+          "revision": null,
+          "status": null,
+          "reason": null,
+          "winner": null,
+          "updatedAt": 60100,
+          "messageIds": [],
+          "automaticEventCount": null,
+          "landingEventCount": null,
+          "destructionBatchCount": null
+        },
+        "reason": "host pre-advance commits timeout before original action phase check"
+      }
+    },
+    {
+      "id": "H1-HOST-HERO-1",
+      "status": "PASS",
+      "evidence": {
+        "path": "BluetoothHostRoom.handle",
+        "actor": "bluetooth:guest",
+        "requestedHero": "hunter",
+        "now": 60101,
+        "deadline": 60100,
+        "errorCode": "INVALID_PHASE",
+        "requestedEffectApplied": false,
+        "syntheticOwnChoice": "hunter",
+        "finalChoiceEqualsRequest": true,
+        "rngCalls": 2,
+        "clockReads": [
+          100,
+          100,
+          100,
+          60101,
+          60101
+        ],
+        "before": {
+          "phase": "hero_selection",
+          "revision": null,
+          "status": null,
+          "reason": null,
+          "winner": null,
+          "updatedAt": 100,
+          "messageIds": [],
+          "automaticEventCount": null,
+          "landingEventCount": null,
+          "destructionBatchCount": null
+        },
+        "after": {
+          "phase": "rps",
+          "revision": null,
+          "status": null,
+          "reason": null,
+          "winner": null,
+          "updatedAt": 60101,
+          "messageIds": [],
+          "automaticEventCount": null,
+          "landingEventCount": null,
+          "destructionBatchCount": null
+        },
+        "reason": "host pre-advance commits timeout before original action phase check"
+      }
+    },
+    {
+      "id": "H1-HOST-PREPARATION-FIRST-AND-ALREADY-READY",
+      "status": "PASS",
+      "evidence": {
+        "path": "BluetoothHostRoom.handle → completeRemoteHeroPreparation",
+        "actor": "bluetooth:host",
+        "action": {
+          "kind": "preparation_ready"
+        },
+        "firstTime": 200,
+        "secondTime": 201,
+        "before": {
+          "phase": "hero_preparation",
+          "revision": 0,
+          "status": "playing",
+          "reason": null,
+          "winner": null,
+          "updatedAt": 100,
+          "messageIds": [
+            "system:start:100"
+          ],
+          "automaticEventCount": 0,
+          "landingEventCount": 0,
+          "destructionBatchCount": 0
+        },
+        "first": {
+          "phase": "hero_preparation",
+          "revision": 0,
+          "status": "playing",
+          "reason": null,
+          "winner": null,
+          "updatedAt": 200,
+          "messageIds": [
+            "system:start:100"
+          ],
+          "automaticEventCount": 0,
+          "landingEventCount": 0,
+          "destructionBatchCount": 0
+        },
+        "again": {
+          "phase": "hero_preparation",
+          "revision": 0,
+          "status": "playing",
+          "reason": null,
+          "winner": null,
+          "updatedAt": 200,
+          "messageIds": [
+            "system:start:100"
+          ],
+          "automaticEventCount": 0,
+          "landingEventCount": 0,
+          "destructionBatchCount": 0
+        },
+        "firstTrapCount": 2,
+        "secondTrapCount": 2,
+        "exactViewsEqual": true,
+        "rngDelta": 0,
+        "returnedNormallyBoth": true,
+        "noTransportOrActionIdAtThisAPI": true,
+        "duplicateDispositionExposed": false,
+        "source": "tests/bluetooth-host-room.test.ts BTHOST-04; second call is new controlled probe, not original half_chaos stimulus"
+      }
+    },
+    {
+      "id": "H2-RESIGN-THEN-SAME-ID",
+      "status": "PASS",
+      "evidence": {
+        "actor": "bluetooth:guest",
+        "action": {
+          "kind": "resign",
+          "expectedRevision": 0,
+          "actionId": "hc-resign-original"
+        },
+        "firstTime": 200,
+        "retryTime": 201,
+        "before": {
+          "phase": "playing",
+          "revision": 0,
+          "status": "playing",
+          "reason": null,
+          "winner": null,
+          "updatedAt": 100,
+          "messageIds": [
+            "system:start:100"
+          ],
+          "automaticEventCount": 0,
+          "landingEventCount": 0,
+          "destructionBatchCount": 0
+        },
+        "committed": {
+          "phase": "finished",
+          "revision": 1,
+          "status": "finished",
+          "reason": "resign",
+          "winner": "red",
+          "updatedAt": 200,
+          "messageIds": [
+            "system:start:100",
+            "system:hc-resign-original"
+          ],
+          "automaticEventCount": 0,
+          "landingEventCount": 0,
+          "destructionBatchCount": 0
+        },
+        "retryError": "INVALID_PHASE",
+        "after": {
+          "phase": "finished",
+          "revision": 1,
+          "status": "finished",
+          "reason": "resign",
+          "winner": "red",
+          "updatedAt": 200,
+          "messageIds": [
+            "system:start:100",
+            "system:hc-resign-original"
+          ],
+          "automaticEventCount": 0,
+          "landingEventCount": 0,
+          "destructionBatchCount": 0
+        },
+        "rngDelta": 0,
+        "actionCategory": "legal resignation, no capture-terminal claim",
+        "source": "BTHOST-03 legal RPS prefix; tests/hero-forms.test.ts resignation/rematch caller"
+      }
+    },
+    {
+      "id": "H2-FORFEIT-COUNTERCONTROL-AND-ACTOR",
+      "status": "PASS",
+      "evidence": {
+        "first": {
+          "phase": "finished",
+          "revision": null,
+          "status": null,
+          "reason": null,
+          "winner": null,
+          "updatedAt": 200,
+          "messageIds": [],
+          "automaticEventCount": null,
+          "landingEventCount": null,
+          "destructionBatchCount": null
+        },
+        "sameIdDuplicate": true,
+        "differentActorSameIdDuplicate": true,
+        "originalLoser": "bluetooth:guest",
+        "otherActor": "bluetooth:host",
+        "hostReturnsSameViews": true,
+        "interpretation": "forfeit has an explicit finished duplicate branch before actor check; differs from resign. Boolean cannot attest actor binding.",
+        "source": "tests/remote-room.test.ts forfeit-before-board duplicate; BTHOST-06; actor variation is additional bounded identity control"
+      }
+    },
+    {
+      "id": "H2-WEB-COMMIT-none",
+      "status": "PASS",
+      "evidence": {
+        "action": {
+          "kind": "resign",
+          "expectedRevision": 0,
+          "actionId": "hc-resign-original"
+        },
+        "actor": "bluetooth:guest",
+        "transportId": "hc-wire-none",
+        "now": 200,
+        "injection": "none",
+        "explicitTestBoundaryInjection": false,
+        "authority": {
+          "phase": "finished",
+          "revision": 1,
+          "status": "finished",
+          "reason": "resign",
+          "winner": "red",
+          "updatedAt": 200,
+          "messageIds": [
+            "system:start:100",
+            "system:hc-resign-original"
+          ],
+          "automaticEventCount": 0,
+          "landingEventCount": 0,
+          "destructionBatchCount": 0
+        },
+        "rngDelta": 0,
+        "viewCalls": 2,
+        "injected": 0,
+        "emitted": [
+          {
+            "type": "snapshot",
+            "id": "snapshot-200-finished"
+          }
+        ],
+        "toasts": [],
+        "attemptedFrameTypes": [
+          "snapshot"
+        ],
+        "retryError": "INVALID_PHASE",
+        "channelSource": {
+          "web": "f75b134dea69ef7b90e6535814c58088b6c201a2fadcc8c1d5aaab8dbb0cc9e1",
+          "apply": "23d222ade0d4eddb061d3014f957fb69cbbb2cc55cc570c07cefbbad2d80a0cc",
+          "channel": "ed596d5dde8cfcef41fa77d3a1d0175741cf9a2b2cadd233f66b817a6f128cfa"
+        },
+        "naturalProductionFaultReproduced": false,
+        "automaticResend": false,
+        "interpretation": "uninjected positive control"
+      }
+    },
+    {
+      "id": "H2-WEB-COMMIT-views",
+      "status": "PASS",
+      "evidence": {
+        "action": {
+          "kind": "resign",
+          "expectedRevision": 0,
+          "actionId": "hc-resign-original"
+        },
+        "actor": "bluetooth:guest",
+        "transportId": "hc-wire-views",
+        "now": 200,
+        "injection": "views",
+        "explicitTestBoundaryInjection": true,
+        "authority": {
+          "phase": "finished",
+          "revision": 1,
+          "status": "finished",
+          "reason": "resign",
+          "winner": "red",
+          "updatedAt": 200,
+          "messageIds": [
+            "system:start:100",
+            "system:hc-resign-original"
+          ],
+          "automaticEventCount": 0,
+          "landingEventCount": 0,
+          "destructionBatchCount": 0
+        },
+        "rngDelta": 0,
+        "viewCalls": 2,
+        "injected": 1,
+        "emitted": [
+          {
+            "type": "error",
+            "id": "hc-wire-views",
+            "payload": {
+              "message": "房主拒绝了此操作。"
+            }
+          },
+          {
+            "type": "snapshot",
+            "id": "snapshot-200-finished"
+          }
+        ],
+        "toasts": [
+          "房主拒绝了此操作。"
+        ],
+        "attemptedFrameTypes": [
+          "error",
+          "snapshot"
+        ],
+        "retryError": "INVALID_PHASE",
+        "channelSource": {
+          "web": "f75b134dea69ef7b90e6535814c58088b6c201a2fadcc8c1d5aaab8dbb0cc9e1",
+          "apply": "23d222ade0d4eddb061d3014f957fb69cbbb2cc55cc570c07cefbbad2d80a0cc",
+          "channel": "ed596d5dde8cfcef41fa77d3a1d0175741cf9a2b2cadd233f66b817a6f128cfa"
+        },
+        "naturalProductionFaultReproduced": false,
+        "automaticResend": false,
+        "interpretation": "post-commit injected view exception is exposed as error although resignation committed"
+      }
+    },
+    {
+      "id": "H2-WEB-COMMIT-serialization",
+      "status": "PASS",
+      "evidence": {
+        "action": {
+          "kind": "resign",
+          "expectedRevision": 0,
+          "actionId": "hc-resign-original"
+        },
+        "actor": "bluetooth:guest",
+        "transportId": "hc-wire-serialization",
+        "now": 200,
+        "injection": "serialization",
+        "explicitTestBoundaryInjection": true,
+        "authority": {
+          "phase": "finished",
+          "revision": 1,
+          "status": "finished",
+          "reason": "resign",
+          "winner": "red",
+          "updatedAt": 200,
+          "messageIds": [
+            "system:start:100",
+            "system:hc-resign-original"
+          ],
+          "automaticEventCount": 0,
+          "landingEventCount": 0,
+          "destructionBatchCount": 0
+        },
+        "rngDelta": 0,
+        "viewCalls": 2,
+        "injected": 1,
+        "emitted": [],
+        "toasts": [
+          "房间同步失败，请重试。"
+        ],
+        "attemptedFrameTypes": [],
+        "retryError": "INVALID_PHASE",
+        "channelSource": {
+          "web": "f75b134dea69ef7b90e6535814c58088b6c201a2fadcc8c1d5aaab8dbb0cc9e1",
+          "apply": "23d222ade0d4eddb061d3014f957fb69cbbb2cc55cc570c07cefbbad2d80a0cc",
+          "channel": "ed596d5dde8cfcef41fa77d3a1d0175741cf9a2b2cadd233f66b817a6f128cfa"
+        },
+        "naturalProductionFaultReproduced": false,
+        "automaticResend": false,
+        "interpretation": "publication serialization failure leaves committed authority intact"
+      }
+    },
+    {
+      "id": "H3-REMATCH-IDENTITY-CONTROL",
+      "status": "PASS",
+      "evidence": {
+        "roomIdUnchanged": true,
+        "oldPhase": "finished",
+        "newPhase": "hero_selection",
+        "oldOutcomeRemoved": true,
+        "matchEpochExposed": false,
+        "source": "BTHOST-07",
+        "meaning": "roomId alone cannot identify the original match"
+      }
+    }
+  ]
+}
