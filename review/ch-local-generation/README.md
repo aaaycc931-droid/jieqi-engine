@@ -1,5 +1,7 @@
 # C5 本机连接代次隔离草稿
 
+2026-11-13 主线接收修复增量：见 [NULL_CONTEXT_FIX.md](NULL_CONTEXT_FIX.md)。原 `4bd8bf4` 的 Java null 序列化缺陷已修，新的跨层回归与25项结果单独记录；下文和原 AUDIT/NATIVE_RESULTS/WEB_TESTS 保留原 C5 历史证据，不冒充修复后重跑。
+
 2026-11-13；任务 MAIN-CH-C5-LOCAL-CONNECTION-GENERATION-20261113。
 基线5cb3df526e1d41d60332b2b1f5c946f41126a720；专属分支codex/ch-local-generation-draft-20261113。
 不是生产采用、远端认证、结果查询协议或设备验证。
