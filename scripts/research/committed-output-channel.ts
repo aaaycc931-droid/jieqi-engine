@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { LocalPendingActions, LocalHostResults } from '../../src/bluetooth-local-results.ts';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { stripTypeScriptTypes } from 'node:module';
@@ -23,7 +24,7 @@ export function createRecordedWebChannel(hostRoom:BluetoothHostRoom,source=webSo
     catch(error){attempts.push({player,kind:action.kind,disposition:'threw',code:(error as any).code??null,message:(error as Error).message});throw error;}
   }};
   const bluetooth={role,nativeState:'CONNECTED',hostRoom:observedRoom,view:undefined as PlayerRemoteRoomView|undefined,pendingAction:false};
-  const context=createContext({bluetooth,BLUETOOTH_PROTOCOL_VERSION,BLUETOOTH_HOST_PLAYER,BLUETOOTH_GUEST_PLAYER,
+  const context=createContext({bluetooth,LocalPendingActions,LocalHostResults,BLUETOOTH_PROTOCOL_VERSION,BLUETOOTH_HOST_PLAYER,BLUETOOTH_GUEST_PLAYER,
     createBluetoothSnapshot,encodeBluetoothEnvelope,parseBluetoothEnvelope,RuleError,
     nativeBluetooth:()=>({send:(raw:string)=>{sendAttempts.push(raw);if(sendFailure)throw Error('recorded native send failure');emitted.push(raw);}}),
     applyBluetoothView:(view:PlayerRemoteRoomView)=>{applied.push(structuredClone(view));bluetooth.view=structuredClone(view);},

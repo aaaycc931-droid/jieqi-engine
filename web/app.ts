@@ -1,4 +1,5 @@
 import { configureHeroPreparation } from "../src/hero-progress.ts";
+import { LocalPendingActions, LocalHostResults, type LocalRequestToken } from "../src/bluetooth-local-results.ts";
 import { getHeroPackage } from "../src/hero-forms.ts";
 import { isBoardPiece } from "../src/spaces.ts";
 import { HERO_IDS, HERO_CATALOG as heroCatalog } from "../src/heroes.ts";
@@ -393,6 +394,9 @@ type BluetoothRole = "host" | "guest";
 interface BluetoothSession {
   role: BluetoothRole;
   hostRoom?: BluetoothHostRoom;
+  hostResults?: LocalHostResults;
+  requestHistory?: LocalPendingActions;
+  pendingRequestToken?: LocalRequestToken;
   view?: PlayerRemoteRoomView;
   nativeState: string;
   pendingAction: boolean;
@@ -1253,17 +1257,25 @@ function sendBluetoothEnvelope<T>(envelope: { v: typeof BLUETOOTH_PROTOCOL_VERSI
   if (!bridge) throw new Error("此设备没有蓝牙桥接能力");
   const raw = encodeBluetoothEnvelope(envelope);
   const selected = readLocalTransport(bridge);
+  // Local memory only: capture the exact encoded request before native write.
+  // It never promotes pong/snapshot/native written into game acceptance.
+  const history = envelope.type === "action" && bluetooth?.role === "guest"
+    ? (bluetooth.requestHistory ??= new LocalPendingActions()) : undefined;
+  const token = history?.remember(raw, selected.kind === "scoped" ? selected.context : undefined);
+  if (token && bluetooth) bluetooth.pendingRequestToken = token;
   if (selected.kind === "invalid") throw bluetoothSendFailure("unknown");
   if (selected.kind === "scoped") {
     let result: any;
     try { result = JSON.parse(bridge.sendCheckedScoped!(raw, selected.context.instance, selected.context.generation)); }
     catch {
       const current = readLocalTransport(bridge);
+      if (token) history!.noteScopedWrite(token, undefined, current.kind === "scoped" ? current.context : undefined);
       if (current.kind !== "scoped" || !sameLocalGeneration(selected.context, current.context))
         throw Object.assign(bluetoothSendFailure("unknown"), { localStale: true });
       throw bluetoothSendFailure("unknown");
     }
     const current = readLocalTransport(bridge);
+    if (token) history!.noteScopedWrite(token, result, current.kind === "scoped" ? current.context : undefined);
     if (current.kind !== "scoped" || !sameLocalGeneration(selected.context, current.context))
       throw Object.assign(bluetoothSendFailure("unknown"), { localStale: true });
     if (!result || typeof result !== "object" || Array.isArray(result)) throw bluetoothSendFailure("unknown");
@@ -1404,14 +1416,18 @@ function handleBluetoothAction(action: BluetoothRoomAction): void {
   }
 }
 
-function handleIncomingBluetoothMessage(raw: string): void {
+function handleIncomingBluetoothMessage(raw: string, nativeEventContext?: unknown): void {
   if (!bluetooth) return;
   try {
     const envelope = parseBluetoothEnvelope(raw);
     if (bluetooth.role === "host" && envelope.type === "action") {
       const action = envelope.payload as BluetoothRoomAction;
       try {
-        bluetooth.hostRoom!.handle(BLUETOOTH_GUEST_PLAYER, action);
+        const local = bluetooth.hostResults?.active() ? bluetooth.hostResults.consume(raw, nativeEventContext) : undefined;
+        if (local?.handled) {
+          if (local.failed) throw local.error;
+        } else if (local && local.reason !== "uncovered") return;
+        else bluetooth.hostRoom!.handle(BLUETOOTH_GUEST_PLAYER, action);
       } catch (error) {
         const message = error instanceof RuleError ? error.message : "房主拒绝了此操作。";
         sendBluetoothEnvelope({ v: BLUETOOTH_PROTOCOL_VERSION, type: "error", id: envelope.id, payload: { message } });
@@ -3751,6 +3767,15 @@ window.addEventListener("jieqi-bluetooth", ((event: CustomEvent<BluetoothEventDe
           admissionSecret: randomSessionText("physical"),
           mode: bluetoothModeConfig(),
         });
+        // Optional internal adapter stays disabled in the default host constructor.
+        // The admitted CONNECTED event is the floor, not the latest native sequence:
+        // later queued messages on this connection must still be processed.
+        if (!bluetooth.hostResults && bluetooth.hostRoom.resultTrackingActive()) {
+          const current = readLocalTransport(nativeBluetooth()!);
+          if (current.kind === "scoped") bluetooth.hostResults = new LocalHostResults(bluetooth.hostRoom,
+            () => { const c = readLocalTransport(nativeBluetooth()!); return c.kind === "scoped" ? c.context : undefined; },
+            { startContext: detail.localContext });
+        }
         if (restoring) {
           const disconnects = bluetooth.hostRoom.views().publicRoom.disconnects?.players ?? {};
           for (const playerId of [BLUETOOTH_HOST_PLAYER, BLUETOOTH_GUEST_PLAYER] as const) {
@@ -3781,6 +3806,8 @@ window.addEventListener("jieqi-bluetooth", ((event: CustomEvent<BluetoothEventDe
     }
 
     if ((detail.state === "DISCONNECTED" || detail.state === "ERROR") && wasEstablished) {
+      bluetooth.requestHistory?.invalidate();
+      bluetooth.hostResults?.retire();
       bluetooth.pendingAction = false;
       bluetooth.pendingActionId = undefined;
       bluetooth.pendingActionWriteUnknown = false;
@@ -3834,7 +3861,7 @@ window.addEventListener("jieqi-bluetooth", ((event: CustomEvent<BluetoothEventDe
       });
     }
   } else if ((detail.event === "message" || detail.type === "message") && detail.message) {
-    handleIncomingBluetoothMessage(typeof detail.message === "string" ? detail.message : JSON.stringify(detail.message));
+    handleIncomingBluetoothMessage(typeof detail.message === "string" ? detail.message : JSON.stringify(detail.message), detail.localContext);
   } else if (detail.type === "permission-granted") {
     renderBluetoothAvailability();
     showToast("蓝牙权限已允许");

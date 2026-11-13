@@ -1,0 +1,98 @@
+{
+  "source_commits": {
+    "parent": "58cc324ddc616d14234d0a8b1ad34696393fb280",
+    "adapter": "e88a5a6bce6732a29e887b10636c827cd3f2eab5"
+  },
+  "files": [
+    {
+      "path": "src/bluetooth-host-room.ts",
+      "bytes": 10363,
+      "sha256": "978171cf75c80845d95c2af4e3471261c2c9603568dc257d3ae39c878ff0dd23"
+    },
+    {
+      "path": "src/host-result-ledger.ts",
+      "bytes": 10093,
+      "sha256": "394933b31bbb0610bc55bd2dc03b545c1559f862f151f6ee22164e8af9804fda"
+    },
+    {
+      "path": "src/bluetooth-local-results.ts",
+      "bytes": 10525,
+      "sha256": "e17a49c0c564f6feac4b797b1d6452a372b2b7f6960cb89154ad2882f3d211ab"
+    },
+    {
+      "path": "web/app.ts",
+      "bytes": 197254,
+      "sha256": "6712fd861906a4b74d114518f800da67f87f03349537adeaeee9746ce150d433"
+    },
+    {
+      "path": "tests/host-result-adapter.test.ts",
+      "bytes": 15224,
+      "sha256": "cea440f52dae77dd7031229c879b46964cb4949a3f0b50f387bd817d03ec1427"
+    },
+    {
+      "path": "tests/bluetooth-local-results.test.ts",
+      "bytes": 19898,
+      "sha256": "9ddb30715238a5f4ae51f63ef1aac9215e036f2976f86c2bcf3ff1089973021c"
+    },
+    {
+      "path": "scripts/research/bluetooth-receipt-channel.ts",
+      "bytes": 8296,
+      "sha256": "0ecfe5bb0af5b13e048ee401d1a492b94a29c6b7336eeae70cb1defcf699abeb"
+    },
+    {
+      "path": "scripts/research/ch-generation-channel.ts",
+      "bytes": 8464,
+      "sha256": "85d2f6bceac6c9449c7291eb17173c6751cc64d8c24901aa32e1b7fab380b143"
+    },
+    {
+      "path": "scripts/research/committed-output-channel.ts",
+      "bytes": 6465,
+      "sha256": "a75afe769a44d26b6bc8fa7b4fa82b9c7c844187e0ea4031704c6ef0c1e217f0"
+    },
+    {
+      "path": "scripts/research/local-result-fault-controls.py",
+      "bytes": 2379,
+      "sha256": "24e352314ec5019ee1beacee6db2343b73a4162b83ade3e469acb7790cf2355e"
+    },
+    {
+      "path": "review/main-local-results/BASELINE.json",
+      "bytes": 860,
+      "sha256": "0ad67adf23fc32b4aad4df0284ef8cbcf8b6421b650ad44b11a0764ce5e3df3a"
+    },
+    {
+      "path": "review/main-local-results/BASELINE_STALE_EVIDENCE.tap",
+      "bytes": 34504,
+      "sha256": "9cdbeaee66b6eaeafc1f167232744845fcd31e0c6bd258e14ee463bd6f058b46"
+    },
+    {
+      "path": "review/main-local-results/BUILD.txt",
+      "bytes": 50,
+      "sha256": "ef1ffebc7492ecacbeb877f0f28bd7c0eb71656bc6581941d648bfed312d7960"
+    },
+    {
+      "path": "review/main-local-results/EXPANDED_INITIAL.tap",
+      "bytes": 67003,
+      "sha256": "4fc30eae95efdb36758d77c2d61acc38dfd650e295d3389f3b8ae7a75443f59c"
+    },
+    {
+      "path": "review/main-local-results/FAULT_CONTROLS.json",
+      "bytes": 772,
+      "sha256": "3246507e0e51c55e3fb5c46ab7bc24a73e617da34017514f144e7b20fbe3fb97"
+    },
+    {
+      "path": "review/main-local-results/README.md",
+      "bytes": 7044,
+      "sha256": "e5763041b1b75e1ea393373f6a4c3609d786da15514d8c97b7ae70cbd9e2104a"
+    },
+    {
+      "path": "review/main-local-results/RESULTS.json",
+      "bytes": 1308,
+      "sha256": "bb0cbe3fc71022b318a9103da48d622b9b550b694a7e9117673a8da10d2ac096"
+    },
+    {
+      "path": "review/main-local-results/TESTS.tap",
+      "bytes": 34332,
+      "sha256": "a4f0edadf439e53d8043b3dc167e940b0b8fef13672d7054db141f29a943660f"
+    }
+  ]
+}

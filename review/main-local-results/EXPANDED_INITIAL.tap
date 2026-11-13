@@ -1,0 +1,1459 @@
+TAP version 13
+# Subtest: BTDISC-07 real host preserves formal clock after RPS and expires at shifted deadline
+ok 1 - BTDISC-07 real host preserves formal clock after RPS and expires at shifted deadline
+  ---
+  duration_ms: 34.524447
+  type: 'test'
+  ...
+# Subtest: BTDISC-01 断线期间暂停英雄选择倒计时，重连后从原剩余时间继续
+ok 2 - BTDISC-01 断线期间暂停英雄选择倒计时，重连后从原剩余时间继续
+  ---
+  duration_ms: 2.246739
+  type: 'test'
+  ...
+# Subtest: BTDISC-02 同一玩家多次断线累计达到 60 秒后直接判负
+ok 3 - BTDISC-02 同一玩家多次断线累计达到 60 秒后直接判负
+  ---
+  duration_ms: 18.007038
+  type: 'test'
+  ...
+# Subtest: BTDISC-03 任一玩家断线后锁定双方全部游戏操作
+ok 4 - BTDISC-03 任一玩家断线后锁定双方全部游戏操作
+  ---
+  duration_ms: 1.801219
+  type: 'test'
+  ...
+# Subtest: BTDISC-04 双方在同一检查点均累计达到 60 秒时判为断线平局
+ok 5 - BTDISC-04 双方在同一检查点均累计达到 60 秒时判为断线平局
+  ---
+  duration_ms: 5.22328
+  type: 'test'
+  ...
+# Subtest: BTDISC-05 成功重连会永久保留累计断线时间并增加重连历史计数
+ok 6 - BTDISC-05 成功重连会永久保留累计断线时间并增加重连历史计数
+  ---
+  duration_ms: 0.862698
+  type: 'test'
+  ...
+# Subtest: BTDISC-06 延迟检查时按实际到达 60 秒的先后裁定，不把错开的超时误判为平局
+ok 7 - BTDISC-06 延迟检查时按实际到达 60 秒的先后裁定，不把错开的超时误判为平局
+  ---
+  duration_ms: 5.48056
+  type: 'test'
+  ...
+# Subtest: BTHOST-01 SHA-256 邀请口令哈希在 Node 与 WebView 使用相同标准结果
+ok 8 - BTHOST-01 SHA-256 邀请口令哈希在 Node 与 WebView 使用相同标准结果
+  ---
+  duration_ms: 19.965729
+  type: 'test'
+  ...
+# Subtest: BTHOST-02 物理连接后只有房主保存完整房间，来宾只收到公开 RPS 状态
+ok 9 - BTHOST-02 物理连接后只有房主保存完整房间，来宾只收到公开 RPS 状态
+  ---
+  duration_ms: 8.327659
+  type: 'test'
+  ...
+# Subtest: BTHOST-03 双方猜拳后由房主权威建局，并向来宾发送揭示后仍安全的公开棋盘
+ok 10 - BTHOST-03 双方猜拳后由房主权威建局，并向来宾发送揭示后仍安全的公开棋盘
+  ---
+  duration_ms: 10.889777
+  type: 'test'
+  ...
+# Subtest: BTHOST-04 英雄、陷阱和私有坐标均通过房主单点结算
+ok 11 - BTHOST-04 英雄、陷阱和私有坐标均通过房主单点结算
+  ---
+  duration_ms: 30.249045
+  type: 'test'
+  ...
+# Subtest: BTHOST-05 来宾操作仍受回合、版本和房主规则引擎约束
+ok 12 - BTHOST-05 来宾操作仍受回合、版本和房主规则引擎约束
+  ---
+  duration_ms: 2.540407
+  type: 'test'
+  ...
+# Subtest: BTHOST-06 英雄选择起主动退出由房主立即权威判负
+ok 13 - BTHOST-06 英雄选择起主动退出由房主立即权威判负
+  ---
+  duration_ms: 0.729239
+  type: 'test'
+  ...
+# Subtest: BTHOST-07 再战邀请由房主计时并在对方接受后建立全新选英雄阶段
+ok 14 - BTHOST-07 再战邀请由房主计时并在对方接受后建立全新选英雄阶段
+  ---
+  duration_ms: 1.09447
+  type: 'test'
+  ...
+# Subtest: BTHOST-08 双方聊天经房主权威同步且不阻塞行棋回合
+ok 15 - BTHOST-08 双方聊天经房主权威同步且不阻塞行棋回合
+  ---
+  duration_ms: 2.063388
+  type: 'test'
+  ...
+# (node:14) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: LOCAL-01 pending captures exact pre-send raw and never takes native written as game acceptance
+ok 16 - LOCAL-01 pending captures exact pre-send raw and never takes native written as game acceptance
+  ---
+  duration_ms: 8.684335
+  type: 'test'
+  ...
+# Subtest: LOCAL-02 explicit null proves not_sent; Android omitted key and mismatched contexts remain unknown
+ok 17 - LOCAL-02 explicit null proves not_sent; Android omitted key and mismatched contexts remain unknown
+  ---
+  duration_ms: 5.225985
+  type: 'test'
+  ...
+# Subtest: LOCAL-03 old response and lifecycle cannot restore applicability or resolve game outcome
+ok 18 - LOCAL-03 old response and lifecycle cannot restore applicability or resolve game outcome
+  ---
+  duration_ms: 7.247374
+  type: 'test'
+  ...
+# Subtest: LOCAL-04 duplicate wire IDs retain separate opaque attempts, forged token and eviction stay unknown
+ok 19 - LOCAL-04 duplicate wire IDs retain separate opaque attempts, forged token and eviction stay unknown
+  ---
+  duration_ms: 0.898936
+  type: 'test'
+  ...
+# Subtest: LOCAL-05 contradictory local callbacks fail to unknown permanently
+ok 20 - LOCAL-05 contradictory local callbacks fail to unknown permanently
+  ---
+  duration_ms: 0.528877
+  type: 'test'
+  ...
+# Subtest: LOCAL-06 malformed request and legacy or bad native capability never acquire trusted scope
+ok 21 - LOCAL-06 malformed request and legacy or bad native capability never acquire trusted scope
+  ---
+  duration_ms: 0.727406
+  type: 'test'
+  ...
+# Subtest: LOCAL-07 real guest hero result binds original room, raw and local event, not peer actor labels
+ok 22 - LOCAL-07 real guest hero result binds original room, raw and local event, not peer actor labels
+  ---
+  duration_ms: 14.186854
+  type: 'test'
+  ...
+# Subtest: LOCAL-08 later same wire ID is a new native arrival, original acceptance survives its rule rejection
+ok 23 - LOCAL-08 later same wire ID is a new native arrival, original acceptance survives its rule rejection
+  ---
+  duration_ms: 1.79094
+  type: 'test'
+  ...
+# Subtest: LOCAL-09 same event is not dispatched twice after raw cache eviction
+ok 24 - LOCAL-09 same event is not dispatched twice after raw cache eviction
+  ---
+  duration_ms: 11.254726
+  type: 'test'
+  ...
+# Subtest: LOCAL-10 query uses no game clock/RNG/views and exposes no private raw or board
+ok 25 - LOCAL-10 query uses no game clock/RNG/views and exposes no private raw or board
+  ---
+  duration_ms: 2.668005
+  type: 'test'
+  ...
+# Subtest: LOCAL-11 native generation/instance/role change, rollback or capability loss retires original owner
+ok 26 - LOCAL-11 native generation/instance/role change, rollback or capability loss retires original owner
+  ---
+  duration_ms: 31.297593
+  type: 'test'
+  ...
+# Subtest: LOCAL-12 actual host disconnect/reconnect closes new delivery; original result remains local history
+ok 27 - LOCAL-12 actual host disconnect/reconnect closes new delivery; original result remains local history
+  ---
+  duration_ms: 1.986815
+  type: 'test'
+  ...
+# Subtest: LOCAL-13 natural resign and rematch retire same-room authority without restoring tracking
+ok 28 - LOCAL-13 natural resign and rematch retire same-room authority without restoring tracking
+  ---
+  duration_ms: 11.515854
+  type: 'test'
+  ...
+# Subtest: LOCAL-14 local owner cannot be reconstructed on the same room; new room has no old token history
+ok 29 - LOCAL-14 local owner cannot be reconstructed on the same room; new room has no old token history
+  ---
+  duration_ms: 1.215246
+  type: 'test'
+  ...
+# Subtest: LOCAL-15 startup watermark, queued FIFO and sequences above 2^53 retain exact ordering
+ok 30 - LOCAL-15 startup watermark, queued FIFO and sequences above 2^53 retain exact ordering
+  ---
+  duration_ms: 1.717382
+  type: 'test'
+  ...
+# Subtest: LOCAL-16 uncovered and malformed envelopes have no host mutation and consume only their event
+ok 31 - LOCAL-16 uncovered and malformed envelopes have no host mutation and consume only their event
+  ---
+  duration_ms: 1.212611
+  type: 'test'
+  ...
+# Subtest: LOCAL-17 late invalid-phase rejection and unknown clock/RNG fault are not successful outcomes
+ok 32 - LOCAL-17 late invalid-phase rejection and unknown clock/RNG fault are not successful outcomes
+  ---
+  duration_ms: 2.093484
+  type: 'test'
+  ...
+# Subtest: LOCAL-18 postcommit projection error retains acceptance without re-executing request
+ok 33 - LOCAL-18 postcommit projection error retains acceptance without re-executing request
+  ---
+  duration_ms: 1.286308
+  type: 'test'
+  ...
+# Subtest: LOCAL-19 host ledger eviction and byte overflow never reconstruct proof from board state
+ok 34 - LOCAL-19 host ledger eviction and byte overflow never reconstruct proof from board state
+  ---
+  duration_ms: 3.269266
+  type: 'test'
+  ...
+# Subtest: LOCAL-20 no implicit activation, invalid limits and malformed native context fail construction
+ok 35 - LOCAL-20 no implicit activation, invalid limits and malformed native context fail construction
+  ---
+  duration_ms: 1.631462
+  type: 'test'
+  ...
+# Subtest: LOCAL-21 reentrant delivery is refused and a native change during dispatch marks historical only
+ok 36 - LOCAL-21 reentrant delivery is refused and a native change during dispatch marks historical only
+  ---
+  duration_ms: 1.612647
+  type: 'test'
+  ...
+# Subtest: LOCAL-22 actual Web scoped sender feeds retained raw and real host result while guest unknown stays unknown
+ok 37 - LOCAL-22 actual Web scoped sender feeds retained raw and real host result while guest unknown stays unknown
+  ---
+  duration_ms: 13.973928
+  type: 'test'
+  ...
+# Subtest: LOCAL-23 actual Web not_sent clears waiting but cannot create a host result
+ok 38 - LOCAL-23 actual Web not_sent clears waiting but cannot create a host result
+  ---
+  duration_ms: 11.155171
+  type: 'test'
+  ...
+# Subtest: LOCAL-24 actual Web sender retains its own pre-send request; written and pong never settle it
+ok 39 - LOCAL-24 actual Web sender retains its own pre-send request; written and pong never settle it
+  ---
+  duration_ms: 16.166366
+  type: 'test'
+  ...
+# Subtest: LOCAL-25 actual final Web listener initializes from CONNECTED event and accepts already queued later action
+ok 40 - LOCAL-25 actual final Web listener initializes from CONNECTED event and accepts already queued later action
+  ---
+  duration_ms: 16.111943
+  type: 'test'
+  ...
+# Subtest: LOCAL-26 actual Web unsupported action still uses legacy dispatcher exactly once
+ok 41 - LOCAL-26 actual Web unsupported action still uses legacy dispatcher exactly once
+  ---
+  duration_ms: 12.549181
+  type: 'test'
+  ...
+# Subtest: LOCAL-27 actual Web disconnect/reconnect retires tracking while keeping legacy play available
+ok 42 - LOCAL-27 actual Web disconnect/reconnect retires tracking while keeping legacy play available
+  ---
+  duration_ms: 12.171415
+  type: 'test'
+  ...
+# Subtest: LOCAL-28 actual guest lifecycle retains historical request and allows a fresh memory entry
+ok 43 - LOCAL-28 actual guest lifecycle retains historical request and allows a fresh memory entry
+  ---
+  duration_ms: 6.316409
+  type: 'test'
+  ...
+# (node:15) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: parent actual complete applyBluetoothView clears pending on a FIFO-delayed periodic snapshot before host sees action
+ok 44 - parent actual complete applyBluetoothView clears pending on a FIFO-delayed periodic snapshot before host sees action
+  ---
+  duration_ms: 38.069909
+  type: 'test'
+  ...
+# Subtest: current actual applyBluetoothView keeps pending through FIFO-delayed periodic and committed snapshots until matching pong
+ok 45 - current actual applyBluetoothView keeps pending through FIFO-delayed periodic and committed snapshots until matching pong
+  ---
+  duration_ms: 36.743345
+  type: 'test'
+  ...
+# Subtest: new guest interoperates with current v2 host without changing wire schema
+ok 46 - new guest interoperates with current v2 host without changing wire schema
+  ---
+  duration_ms: 39.596991
+  type: 'test'
+  ...
+# Subtest: new guest interoperates with PR20 v2 host without changing wire schema
+ok 47 - new guest interoperates with PR20 v2 host without changing wire schema
+  ---
+  duration_ms: 17.852379
+  type: 'test'
+  ...
+# Subtest: PR20 guest and new host retain their existing one-action/one-snapshot exchange
+ok 48 - PR20 guest and new host retain their existing one-action/one-snapshot exchange
+  ---
+  duration_ms: 16.165113
+  type: 'test'
+  ...
+# Subtest: natural H15/H11 0/deadline+0: refusal, latest committed view, then ordered pong
+ok 49 - natural H15/H11 0/deadline+0: refusal, latest committed view, then ordered pong
+  ---
+  duration_ms: 100.247581
+  type: 'test'
+  ...
+# Subtest: natural H15/H11 0/deadline+1: refusal, latest committed view, then ordered pong
+ok 50 - natural H15/H11 0/deadline+1: refusal, latest committed view, then ordered pong
+  ---
+  duration_ms: 52.067189
+  type: 'test'
+  ...
+# Subtest: natural H15/H11 1/deadline+0: refusal, latest committed view, then ordered pong
+ok 51 - natural H15/H11 1/deadline+0: refusal, latest committed view, then ordered pong
+  ---
+  duration_ms: 47.577427
+  type: 'test'
+  ...
+# Subtest: natural H15/H11 1/deadline+1: refusal, latest committed view, then ordered pong
+ok 52 - natural H15/H11 1/deadline+1: refusal, latest committed view, then ordered pong
+  ---
+  duration_ms: 60.972729
+  type: 'test'
+  ...
+# Subtest: a prior actual error and ping/pong control cannot unlock a different pending request
+ok 53 - a prior actual error and ping/pong control cannot unlock a different pending request
+  ---
+  duration_ms: 49.92793
+  type: 'test'
+  ...
+# Subtest: an actual previous pong replay does not release a later request; duplicate current pong is inert
+ok 54 - an actual previous pong replay does not release a later request; duplicate current pong is inert
+  ---
+  duration_ms: 13.178704
+  type: 'test'
+  ...
+# Subtest: guest remains single-flight when a periodic snapshot arrives before pong
+ok 55 - guest remains single-flight when a periodic snapshot arrives before pong
+  ---
+  duration_ms: 9.085101
+  type: 'test'
+  ...
+# Subtest: exact accepted H11 wire replay does not consume RNG or authority twice, and pong carries no duplicate ACK
+ok 56 - exact accepted H11 wire replay does not consume RNG or authority twice, and pong carries no duplicate ACK
+  ---
+  duration_ms: 35.848085
+  type: 'test'
+  ...
+# Subtest: synchronous action send throw clears its pending identity without sending a ping
+ok 57 - synchronous action send throw clears its pending identity without sending a ping
+  ---
+  duration_ms: 7.344926
+  type: 'test'
+  ...
+# Subtest: synchronous ping send throw keeps uncertain action pending; committed snapshot cannot unlock it
+ok 58 - synchronous ping send throw keeps uncertain action pending; committed snapshot cannot unlock it
+  ---
+  duration_ms: 8.625946
+  type: 'test'
+  ...
+# Subtest: explicit native-like swallowed action-send failure is a known boundary: pong alone is not proof of acceptance
+ok 59 - explicit native-like swallowed action-send failure is a known boundary: pong alone is not proof of acceptance
+  ---
+  duration_ms: 13.538825
+  type: 'test'
+  ...
+# Subtest: host local action path does not acquire guest wait identity or emit receipt-control ping
+ok 60 - host local action path does not acquire guest wait identity or emit receipt-control ping
+  ---
+  duration_ms: 13.955333
+  type: 'test'
+  ...
+# Subtest: parent: real chat caller cooldown plus FIFO network delay produces unrelated error during pending game action
+ok 61 - parent: real chat caller cooldown plus FIFO network delay produces unrelated error during pending game action
+  ---
+  duration_ms: 31.439747
+  type: 'test'
+  ...
+# Subtest: current: real chat caller cooldown plus FIFO network delay produces unrelated error during pending game action
+ok 62 - current: real chat caller cooldown plus FIFO network delay produces unrelated error during pending game action
+  ---
+  duration_ms: 29.444175
+  type: 'test'
+  ...
+# (node:16) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CH channel parent 0/deadline+0: authentic old handler reproduces error-only stale peer while authority advances
+ok 63 - CH channel parent 0/deadline+0: authentic old handler reproduces error-only stale peer while authority advances
+  ---
+  duration_ms: 86.427984
+  type: 'test'
+  ...
+# Subtest: CH channel fixed 0/deadline+0: error then committed snapshot updates both sinks without private training leak
+ok 64 - CH channel fixed 0/deadline+0: error then committed snapshot updates both sinks without private training leak
+  ---
+  duration_ms: 44.952021
+  type: 'test'
+  ...
+# Subtest: CH channel parent 0/deadline+1: authentic old handler reproduces error-only stale peer while authority advances
+ok 65 - CH channel parent 0/deadline+1: authentic old handler reproduces error-only stale peer while authority advances
+  ---
+  duration_ms: 31.243549
+  type: 'test'
+  ...
+# Subtest: CH channel fixed 0/deadline+1: error then committed snapshot updates both sinks without private training leak
+ok 66 - CH channel fixed 0/deadline+1: error then committed snapshot updates both sinks without private training leak
+  ---
+  duration_ms: 36.508327
+  type: 'test'
+  ...
+# Subtest: CH channel parent 1/deadline+0: authentic old handler reproduces error-only stale peer while authority advances
+ok 67 - CH channel parent 1/deadline+0: authentic old handler reproduces error-only stale peer while authority advances
+  ---
+  duration_ms: 32.46134
+  type: 'test'
+  ...
+# Subtest: CH channel fixed 1/deadline+0: error then committed snapshot updates both sinks without private training leak
+ok 68 - CH channel fixed 1/deadline+0: error then committed snapshot updates both sinks without private training leak
+  ---
+  duration_ms: 26.405558
+  type: 'test'
+  ...
+# Subtest: CH channel parent 1/deadline+1: authentic old handler reproduces error-only stale peer while authority advances
+ok 69 - CH channel parent 1/deadline+1: authentic old handler reproduces error-only stale peer while authority advances
+  ---
+  duration_ms: 17.887013
+  type: 'test'
+  ...
+# Subtest: CH channel fixed 1/deadline+1: error then committed snapshot updates both sinks without private training leak
+ok 70 - CH channel fixed 1/deadline+1: error then committed snapshot updates both sinks without private training leak
+  ---
+  duration_ms: 22.902015
+  type: 'test'
+  ...
+# Subtest: CH channel 0: accepted at deadline-1 uses original shuffle source once; exact replay emits current snapshot without second action
+ok 71 - CH channel 0: accepted at deadline-1 uses original shuffle source once; exact replay emits current snapshot without second action
+  ---
+  duration_ms: 23.624413
+  type: 'test'
+  ...
+# Subtest: CH channel 0: repeated old late request cannot restart red clock or consume H11
+ok 72 - CH channel 0: repeated old late request cannot restart red clock or consume H11
+  ---
+  duration_ms: 21.378595
+  type: 'test'
+  ...
+# Subtest: CH channel 1: accepted at deadline-1 uses original shuffle source once; exact replay emits current snapshot without second action
+ok 73 - CH channel 1: accepted at deadline-1 uses original shuffle source once; exact replay emits current snapshot without second action
+  ---
+  duration_ms: 21.162071
+  type: 'test'
+  ...
+# Subtest: CH channel 1: repeated old late request cannot restart red clock or consume H11
+ok 74 - CH channel 1: repeated old late request cannot restart red clock or consume H11
+  ---
+  duration_ms: 21.573508
+  type: 'test'
+  ...
+# Subtest: CH channel both private recruitment worlds retain identical complete snapshot/error bytes at the observed deadline
+ok 75 - CH channel both private recruitment worlds retain identical complete snapshot/error bytes at the observed deadline
+  ---
+  duration_ms: 38.725951
+  type: 'test'
+  ...
+# Subtest: CH channel local host refusal also publishes a time-advanced committed room to its peer
+ok 76 - CH channel local host refusal also publishes a time-advanced committed room to its peer
+  ---
+  duration_ms: 22.338916
+  type: 'test'
+  ...
+# Subtest: CH channel accepted action with native send failure is not recast as a rule refusal or submitted twice
+ok 77 - CH channel accepted action with native send failure is not recast as a rule refusal or submitted twice
+  ---
+  duration_ms: 19.705585
+  type: 'test'
+  ...
+# Subtest: CH channel invalid envelope is rejected before touching room, and no success/error response is invented
+ok 78 - CH channel invalid envelope is rejected before touching room, and no success/error response is invented
+  ---
+  duration_ms: 22.276188
+  type: 'test'
+  ...
+# Subtest: half-chaos and ordinary retain their real Bluetooth mode gate; original half-chaos errors are not claimed as client wire
+ok 79 - half-chaos and ordinary retain their real Bluetooth mode gate; original half-chaos errors are not claimed as client wire
+  ---
+  duration_ms: 1.05114
+  type: 'test'
+  ...
+# Subtest: ADAPTER-01 default disabled legacy dispatch remains available, no tracking implicit
+ok 80 - ADAPTER-01 default disabled legacy dispatch remains available, no tracking implicit
+  ---
+  duration_ms: 22.583372
+  type: 'test'
+  ...
+# Subtest: ADAPTER-02 actual host hero commits one source-bound result before phase transition
+ok 81 - ADAPTER-02 actual host hero commits one source-bound result before phase transition
+  ---
+  duration_ms: 7.553032
+  type: 'test'
+  ...
+# Subtest: ADAPTER-03 later refusal is separate from original hero acceptance
+ok 82 - ADAPTER-03 later refusal is separate from original hero acceptance
+  ---
+  duration_ms: 1.814753
+  type: 'test'
+  ...
+# Subtest: ADAPTER-04 query neither calls clock/RNG/views nor returns private input or board
+ok 83 - ADAPTER-04 query neither calls clock/RNG/views nor returns private input or board
+  ---
+  duration_ms: 2.049422
+  type: 'test'
+  ...
+# Subtest: ADAPTER-05 pre-dispatch hero expiry advances real authority but rejects the late command
+ok 84 - ADAPTER-05 pre-dispatch hero expiry advances real authority but rejects the late command
+  ---
+  duration_ms: 1.423405
+  type: 'test'
+  ...
+# Subtest: ADAPTER-06 natural RPS/resign/finished records acceptance and preserves later refusal distinction
+ok 85 - ADAPTER-06 natural RPS/resign/finished records acceptance and preserves later refusal distinction
+  ---
+  duration_ms: 11.645496
+  type: 'test'
+  ...
+# Subtest: ADAPTER-07 explicit postcommit projection fault cannot change accepted into rejected
+ok 86 - ADAPTER-07 explicit postcommit projection fault cannot change accepted into rejected
+  ---
+  duration_ms: 3.572131
+  type: 'test'
+  ...
+# Subtest: ADAPTER-08 explicit clock RNG failure before dispatch produces no command result
+ok 87 - ADAPTER-08 explicit clock RNG failure before dispatch produces no command result
+  ---
+  duration_ms: 3.923757
+  type: 'test'
+  ...
+# Subtest: ADAPTER-09 unreviewed dispatch exception stays unknown with unchanged command authority
+ok 88 - ADAPTER-09 unreviewed dispatch exception stays unknown with unchanged command authority
+  ---
+  duration_ms: 2.500022
+  type: 'test'
+  ...
+# Subtest: ADAPTER-10 stale resign preserves actual refusal without accepting the command
+ok 89 - ADAPTER-10 stale resign preserves actual refusal without accepting the command
+  ---
+  duration_ms: 4.956934
+  type: 'test'
+  ...
+# Subtest: ADAPTER-11 ID-only duplicate from earlier move does not prove a resign attempt
+ok 90 - ADAPTER-11 ID-only duplicate from earlier move does not prove a resign attempt
+  ---
+  duration_ms: 34.104545
+  type: 'test'
+  ...
+# Subtest: ADAPTER-12 retained attempt ID reuse and unsupported actions reject before clock or mutation
+ok 91 - ADAPTER-12 retained attempt ID reuse and unsupported actions reject before clock or mutation
+  ---
+  duration_ms: 1.374794
+  type: 'test'
+  ...
+# Subtest: ADAPTER-13 actor, content, authority and match are independently bound
+ok 92 - ADAPTER-13 actor, content, authority and match are independently bound
+  ---
+  duration_ms: 1.378901
+  type: 'test'
+  ...
+# Subtest: ADAPTER-14 mandatory scope own data fields reject F1 missing/undefined/empty/wrong type/accessors/inheritance
+ok 93 - ADAPTER-14 mandatory scope own data fields reject F1 missing/undefined/empty/wrong type/accessors/inheritance
+  ---
+  duration_ms: 1.795729
+  type: 'test'
+  ...
+# Subtest: ADAPTER-15 malformed query never equates absent scope fields and never invokes getters
+ok 94 - ADAPTER-15 malformed query never equates absent scope fields and never invokes getters
+  ---
+  duration_ms: 1.542196
+  type: 'test'
+  ...
+# Subtest: ADAPTER-16 caller and returned objects cannot rewrite scope or results
+ok 95 - ADAPTER-16 caller and returned objects cannot rewrite scope or results
+  ---
+  duration_ms: 0.823345
+  type: 'test'
+  ...
+# Subtest: ADAPTER-17 FIFO eviction and byte overflow retain unknown without undoing actual commitment
+ok 96 - ADAPTER-17 FIFO eviction and byte overflow retain unknown without undoing actual commitment
+  ---
+  duration_ms: 1.455654
+  type: 'test'
+  ...
+# Subtest: ADAPTER-18 disconnect/reconnect retires tracking; old scope query is local history only
+ok 97 - ADAPTER-18 disconnect/reconnect retires tracking; old scope query is local history only
+  ---
+  duration_ms: 2.095097
+  type: 'test'
+  ...
+# Subtest: ADAPTER-19 actual same-room rematch retires tracking and never reuses original match authority
+ok 98 - ADAPTER-19 actual same-room rematch retires tracking and never reuses original match authority
+  ---
+  duration_ms: 5.783704
+  type: 'test'
+  ...
+# Subtest: ADAPTER-20 new owner cannot reconstruct old receipts from same caller labels
+ok 99 - ADAPTER-20 new owner cannot reconstruct old receipts from same caller labels
+  ---
+  duration_ms: 0.851628
+  type: 'test'
+  ...
+# Subtest: ADAPTER-21 tracked hero and resign output equal legacy actual host for identical natural setup
+ok 100 - ADAPTER-21 tracked hero and resign output equal legacy actual host for identical natural setup
+  ---
+  duration_ms: 10.484301
+  type: 'test'
+  ...
+# Subtest: ADAPTER-22 legacy and tracked paths both read a later second clock for output
+ok 101 - ADAPTER-22 legacy and tracked paths both read a later second clock for output
+  ---
+  duration_ms: 1.391665
+  type: 'test'
+  ...
+# Subtest: ADAPTER-23 reentrant mutating host calls are refused, read-only query remains safe
+ok 102 - ADAPTER-23 reentrant mutating host calls are refused, read-only query remains safe
+  ---
+  duration_ms: 1.163549
+  type: 'test'
+  ...
+# Subtest: ADAPTER-24 canonical body binding rejects lossy/accessor inputs before clock
+ok 103 - ADAPTER-24 canonical body binding rejects lossy/accessor inputs before clock
+  ---
+  duration_ms: 0.692652
+  type: 'test'
+  ...
+# Subtest: ADAPTER-25 advance preserves baseline two clock reads in both legacy and tracked configurations
+ok 104 - ADAPTER-25 advance preserves baseline two clock reads in both legacy and tracked configurations
+  ---
+  duration_ms: 1.998236
+  type: 'test'
+  ...
+# Subtest: ADAPTER-26 reentrant advance is rejected before another clock read or authority mutation
+ok 105 - ADAPTER-26 reentrant advance is rejected before another clock read or authority mutation
+  ---
+  duration_ms: 1.033707
+  type: 'test'
+  ...
+# Subtest: full Java source identity and16 recorded execution cases bind the production native methods
+not ok 106 - full Java source identity and16 recorded execution cases bind the production native methods
+  ---
+  duration_ms: 11.645916
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:6:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:9:64)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:7:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.start (node:internal/test_runner/test:1262:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+  ...
+# Subtest: checked written action and ordered ping interoperate with the actual eligible host and original snapshots
+not ok 107 - checked written action and ordered ping interoperate with the actual eligible host and original snapshots
+  ---
+  duration_ms: 3.454732
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:13:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:9:64)
+    nativeChannelCase (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:20:17)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:14:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+  ...
+# Subtest: no_session: native known prewrite failure clears wait and never sends ping or a fallback action
+not ok 108 - no_session: native known prewrite failure clears wait and never sends ping or a fallback action
+  ---
+  duration_ms: 1.106193
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:18:50'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:9:64)
+    nativeChannelCase (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:20:17)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:19:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: not_connected: native known prewrite failure clears wait and never sends ping or a fallback action
+not ok 109 - not_connected: native known prewrite failure clears wait and never sends ping or a fallback action
+  ---
+  duration_ms: 0.855325
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:18:50'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:9:64)
+    nativeChannelCase (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:20:17)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:19:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: write_zero: native unknown action suppresses ping/retry, retains uncertainty across authorized snapshots
+not ok 110 - write_zero: native unknown action suppresses ping/retry, retains uncertainty across authorized snapshots
+  ---
+  duration_ms: 1.019451
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:23:75'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:9:64)
+    nativeChannelCase (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:20:17)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:24:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: partial: native unknown action suppresses ping/retry, retains uncertainty across authorized snapshots
+not ok 111 - partial: native unknown action suppresses ping/retry, retains uncertainty across authorized snapshots
+  ---
+  duration_ms: 0.944291
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:23:75'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:9:64)
+    nativeChannelCase (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:20:17)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:24:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: newline: native unknown action suppresses ping/retry, retains uncertainty across authorized snapshots
+not ok 112 - newline: native unknown action suppresses ping/retry, retains uncertainty across authorized snapshots
+  ---
+  duration_ms: 1.334258
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:23:75'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:9:64)
+    nativeChannelCase (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:20:17)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:24:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: flush: native unknown action suppresses ping/retry, retains uncertainty across authorized snapshots
+not ok 113 - flush: native unknown action suppresses ping/retry, retains uncertainty across authorized snapshots
+  ---
+  duration_ms: 1.964914
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:23:75'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:9:64)
+    nativeChannelCase (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:20:17)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:24:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: old_writer: native unknown action suppresses ping/retry, retains uncertainty across authorized snapshots
+not ok 114 - old_writer: native unknown action suppresses ping/retry, retains uncertainty across authorized snapshots
+  ---
+  duration_ms: 1.279085
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:23:75'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:9:64)
+    nativeChannelCase (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:20:17)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:24:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: even a derived same-id pong control cannot unlock an unknown action result
+not ok 115 - even a derived same-id pong control cannot unlock an unknown action result
+  ---
+  duration_ms: 9.454541
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:31:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:9:64)
+    nativeChannelCase (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:20:17)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:32:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: checked malformed result null: no fallback send and no release of uncertainty
+not ok 116 - checked malformed result null: no fallback send and no release of uncertainty
+  ---
+  duration_ms: 0.763784
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:37:75'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:9:64)
+    nativeChannelCase (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:20:17)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:38:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: checked malformed result []: no fallback send and no release of uncertainty
+not ok 117 - checked malformed result []: no fallback send and no release of uncertainty
+  ---
+  duration_ms: 1.013711
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:37:75'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:9:64)
+    nativeChannelCase (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:20:17)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:38:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: checked malformed result {"status":"unexpected"}: no fallback send and no release of uncertainty
+not ok 118 - checked malformed result {"status":"unexpected"}: no fallback send and no release of uncertainty
+  ---
+  duration_ms: 0.390287
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:37:75'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:9:64)
+    nativeChannelCase (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:20:17)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:38:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: checked malformed result broken-json: no fallback send and no release of uncertainty
+not ok 119 - checked malformed result broken-json: no fallback send and no release of uncertainty
+  ---
+  duration_ms: 1.039549
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:37:75'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:9:64)
+    nativeChannelCase (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:20:17)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:38:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: checked native exception leaves already-written action unknown without legacy fallback
+not ok 120 - checked native exception leaves already-written action unknown without legacy fallback
+  ---
+  duration_ms: 1.210067
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:43:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:9:64)
+    nativeChannelCase (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:20:17)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:44:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: ping write_zero: written action remains pending before connection events when no pong was received
+not ok 121 - ping write_zero: written action remains pending before connection events when no pong was received
+  ---
+  duration_ms: 2.213889
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:48:50'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:9:64)
+    nativeChannelCase (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:20:17)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:49:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: ping not_connected: written action remains pending before connection events when no pong was received
+not ok 122 - ping not_connected: written action remains pending before connection events when no pong was received
+  ---
+  duration_ms: 0.336317
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:48:50'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:9:64)
+    nativeChannelCase (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:20:17)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:49:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: unknown ping after a known written action may still yield a real pong; this is ordered control, not acceptance status
+not ok 123 - unknown ping after a known written action may still yield a real pong; this is ordered control, not acceptance status
+  ---
+  duration_ms: 0.421035
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:53:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:9:64)
+    nativeChannelCase (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:20:17)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:54:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: actual native state callback reaches production event listener, clears the UI lifecycle wait and keeps disconnected actions locked
+not ok 124 - actual native state callback reaches production event listener, clears the UI lifecycle wait and keeps disconnected actions locked
+  ---
+  duration_ms: 0.418941
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:58:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:9:64)
+    nativeChannelCase (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:20:17)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:59:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: old native transport-error callback alone cannot release a different current unknown action
+not ok 125 - old native transport-error callback alone cannot release a different current unknown action
+  ---
+  duration_ms: 0.334944
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:66:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:9:64)
+    nativeChannelCase (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:20:17)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:67:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: complete native/write/Web report retains unverified acceptance, device and mode boundaries
+not ok 126 - complete native/write/Web report retains unverified acceptance, device and mode boundaries
+  ---
+  duration_ms: 0.68089
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:72:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:9:64)
+    runNativeSendResearch (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:37:16)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/engine/tests/native-send-accounting.test.ts:73:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# (node:34) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: C5 null model distinguishes key removal from the explicit Android JSON sentinel
+ok 127 - C5 null model distinguishes key removal from the explicit Android JSON sentinel
+  ---
+  duration_ms: 1.068993
+  type: 'test'
+  ...
+# Subtest: C5 real native wrong-instance not_sent clears Web pending without retry
+ok 128 - C5 real native wrong-instance not_sent clears Web pending without retry
+  ---
+  duration_ms: 20.542036
+  type: 'test'
+  ...
+# Subtest: C5 real native wrong-generation not_sent clears Web pending without retry
+ok 129 - C5 real native wrong-generation not_sent clears Web pending without retry
+  ---
+  duration_ms: 10.835395
+  type: 'test'
+  ...
+# Subtest: C5 real native invalid-json not_sent clears Web pending without retry
+ok 130 - C5 real native invalid-json not_sent clears Web pending without retry
+  ---
+  duration_ms: 18.480621
+  type: 'test'
+  ...
+# Subtest: C5 real native disconnected not_sent clears Web pending without retry
+ok 131 - C5 real native disconnected not_sent clears Web pending without retry
+  ---
+  duration_ms: 13.944318
+  type: 'test'
+  ...
+# Subtest: C5 actual native written context keeps the existing one-action one-ping path
+ok 132 - C5 actual native written context keeps the existing one-action one-ping path
+  ---
+  duration_ms: 12.109511
+  type: 'test'
+  ...
+# (node:76) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: inline real old callback set rejected at final JS after native generation changed
+ok 133 - inline real old callback set rejected at final JS after native generation changed
+  ---
+  duration_ms: 28.901612
+  type: 'test'
+  ...
+# Subtest: queued real old callback set rejected at final JS after native generation changed
+ok 134 - queued real old callback set rejected at final JS after native generation changed
+  ---
+  duration_ms: 18.360266
+  type: 'test'
+  ...
+# Subtest: same-generation actual FIFO message survives latest native sequence ahead; duplicates rejected
+ok 135 - same-generation actual FIFO message survives latest native sequence ahead; duplicates rejected
+  ---
+  duration_ms: 13.748868
+  type: 'test'
+  ...
+# Subtest: same-generation reverse sequence rejected (adversarial only)
+ok 136 - same-generation reverse sequence rejected (adversarial only)
+  ---
+  duration_ms: 15.684887
+  type: 'test'
+  ...
+# Subtest: new native instance with same generation rejects old callbacks
+ok 137 - new native instance with same generation rejects old callbacks
+  ---
+  duration_ms: 11.08482
+  type: 'test'
+  ...
+# Subtest: new Web admits events generated after its initialization watermark
+ok 138 - new Web admits events generated after its initialization watermark
+  ---
+  duration_ms: 28.919596
+  type: 'test'
+  ...
+# Subtest: scoped send fixed selection makes one action plus ordinary ping; v2 bytes unchanged
+ok 139 - scoped send fixed selection makes one action plus ordinary ping; v2 bytes unchanged
+  ---
+  duration_ms: 15.892875
+  type: 'test'
+  ...
+# Subtest: scoped bad never falls back or retries
+ok 140 - scoped bad never falls back or retries
+  ---
+  duration_ms: 23.811572
+  type: 'test'
+  ...
+# Subtest: scoped throw never falls back or retries
+ok 141 - scoped throw never falls back or retries
+  ---
+  duration_ms: 9.982153
+  type: 'test'
+  ...
+# Subtest: scoped mismatch never falls back or retries
+ok 142 - scoped mismatch never falls back or retries
+  ---
+  duration_ms: 9.188935
+  type: 'test'
+  ...
+# Subtest: scoped not_sent never falls back or retries
+ok 143 - scoped not_sent never falls back or retries
+  ---
+  duration_ms: 8.953395
+  type: 'test'
+  ...
+# Subtest: late old scoped result does not mutate a new pending request
+ok 144 - late old scoped result does not mutate a new pending request
+  ---
+  duration_ms: 10.614432
+  type: 'test'
+  ...
+# Subtest: bad capability performs zero sends and untagged callbacks cannot clear pending
+ok 145 - bad capability performs zero sends and untagged callbacks cannot clear pending
+  ---
+  duration_ms: 12.325024
+  type: 'test'
+  ...
+# Subtest: legacy bridge preserves one legacy action + ping path and untagged callbacks
+ok 146 - legacy bridge preserves one legacy action + ping path and untagged callbacks
+  ---
+  duration_ms: 9.761602
+  type: 'test'
+  ...
+# Subtest: only same-named scoped method without capability is not trusted
+ok 147 - only same-named scoped method without capability is not trusted
+  ---
+  duration_ms: 14.073523
+  type: 'test'
+  ...
+# Subtest: current lifecycle clears UI without resolving independently retained C4 unknown
+ok 148 - current lifecycle clears UI without resolving independently retained C4 unknown
+  ---
+  duration_ms: 14.95712
+  type: 'test'
+  ...
+# Subtest: Web rebuild rejects previously produced same-generation events
+ok 149 - Web rebuild rejects previously produced same-generation events
+  ---
+  duration_ms: 9.232215
+  type: 'test'
+  ...
+# Subtest: decimal sequence beyond JS integer range keeps adjacent event order
+ok 150 - decimal sequence beyond JS integer range keeps adjacent event order
+  ---
+  duration_ms: 9.064394
+  type: 'test'
+  ...
+# Subtest: exception after context switch cannot mark a new attempt unknown
+ok 151 - exception after context switch cannot mark a new attempt unknown
+  ---
+  duration_ms: 9.768345
+  type: 'test'
+  ...
+# node:internal/modules/run_main:107
+#     triggerUncaughtException(
+#     ^
+# AssertionError [ERR_ASSERTION]: actual JVM source identity
+# + actual - expected
+# + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+# - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+#     at nativeResults (file:///workspace/scratch/60b011e86501/engine/scripts/research/native-send-channel.ts:9:64)
+#     at file:///workspace/scratch/60b011e86501/engine/tests/research/ch-lifecycle-pending.test.ts:6:14
+#     at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+#     at async node:internal/modules/esm/loader:647:26
+#     at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+#   generatedMessage: false,
+#   code: 'ERR_ASSERTION',
+#   actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7',
+#   expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0',
+#   operator: 'strictEqual',
+#   diff: 'simple'
+# }
+# Node.js v24.22.1
+# Subtest: tests/research/ch-lifecycle-pending.test.ts
+not ok 10 - tests/research/ch-lifecycle-pending.test.ts
+  ---
+  duration_ms: 358.802337
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/engine/tests/research/ch-lifecycle-pending.test.ts:1:1'
+  failureType: 'testCodeFailure'
+  exitCode: 1
+  signal: ~
+  error: 'test failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+1..152
+# tests 152
+# suites 0
+# pass 130
+# fail 22
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2429.770187

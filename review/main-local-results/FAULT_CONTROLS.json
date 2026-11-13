@@ -1,0 +1,29 @@
+{
+  "production_modified": false,
+  "controls": [
+    {
+      "control": "remove_generation_binding",
+      "focused_case": "LOCAL-11",
+      "exit_code": 1,
+      "expected_failure_observed": true,
+      "tests": [
+        "not ok 1 - LOCAL-11 native generation/instance/role change, rollback or capability loss retires original owner",
+        "# tests 1",
+        "# pass 0",
+        "# fail 1"
+      ]
+    },
+    {
+      "control": "promote_local_written",
+      "focused_case": "LOCAL-01",
+      "exit_code": 1,
+      "expected_failure_observed": true,
+      "tests": [
+        "not ok 1 - LOCAL-01 pending captures exact pre-send raw and never takes native written as game acceptance",
+        "# tests 1",
+        "# pass 0",
+        "# fail 1"
+      ]
+    }
+  ]
+}

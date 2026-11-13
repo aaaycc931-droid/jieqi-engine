@@ -1,0 +1,27 @@
+{
+  "id": "MAIN-BLUETOOTH-LOCAL-RESULT-INTEGRATION-20261113",
+  "parent": "58cc324ddc616d14234d0a8b1ad34696393fb280",
+  "adapter_source": "e88a5a6bce6732a29e887b10636c827cd3f2eab5",
+  "pr26_exact_reuse": [
+    "src/host-result-ledger.ts",
+    "tests/host-result-adapter.test.ts"
+  ],
+  "pr26_host_delta": "one read-only resultTrackingActive method",
+  "other_src_dependencies_identical": true,
+  "changed_existing_paths": [
+    "scripts/research/bluetooth-receipt-channel.ts",
+    "scripts/research/ch-generation-channel.ts",
+    "scripts/research/committed-output-channel.ts",
+    "src/bluetooth-host-room.ts",
+    "web/app.ts"
+  ],
+  "unchanged_existing_paths_verified": 657,
+  "protected": [
+    "native Java and Android assets",
+    "wire v2",
+    "engine main",
+    "mode/feature gates",
+    "H10/G4/G5 and other branch work",
+    "scoring and NET"
+  ]
+}
