@@ -1,0 +1,35 @@
+{
+  "date_local": "2026-11-14",
+  "timezone": "Asia/Shanghai",
+  "code_attempted": "38d40fc2494ce5464af8f91405249f8511524bbf",
+  "node": "v24.22.1",
+  "chromium_installed": "156.0.8078.79",
+  "local_attempt": {
+    "status": "BLOCKED_BEFORE_PAGE",
+    "error": "FATAL:chrome/browser/process_singleton_posix.cc:297 Check failed: . socket() failed: Operation not permitted (1)",
+    "secondary_error": "ptrace: Operation not permitted (1)",
+    "page_executed": false,
+    "source": "actual Playwright local launch result"
+  },
+  "cloud_attempt": {
+    "status": "LOCAL_SERVICE_UNREACHABLE",
+    "local_service": "http://127.0.0.1:8765/web/index.html",
+    "error": "net::ERR_CONNECTION_REFUSED",
+    "page_executed": false,
+    "source": "provided cloud browser createBrowserTab result"
+  },
+  "user_authorization": {
+    "verbatim": "我批准创建所需 socket，以及提供的云浏览器允许进行连接本地测试服务",
+    "received": true,
+    "missing_user_permission": false,
+    "runtime_policy_changed": false,
+    "cloud_local_network_connected": false
+  },
+  "classification": "runtime and network capability limitations; not an automatic approval-review rejection",
+  "capability_settings_interface_available": false,
+  "browser_scenarios_passed": 0,
+  "prepared_smoke_script": "scripts/research/browser-entry-smoke.mjs",
+  "prepared_script_runtime": "NOT_RUN_FINAL_FORM;syntax_checked_only",
+  "remaining": ["module boot", "pre-send retention", "disconnect history", "CONNECTED queued messages", "default-disabled host"],
+  "retry_condition": "actual supported browser launch/network capability change, keeping the explicit authorization"
+}

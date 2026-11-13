@@ -1,0 +1,23 @@
+{
+  "date_local": "2026-11-14",
+  "status": "ALIAS_BOUNDARY_FIXED_BROWSER_ENVIRONMENT_BLOCKED",
+  "tests": { "total": 104, "passed": 104, "failed": 0, "new": 12, "existing": 92, "log": "REGRESSION.tap" },
+  "focused_run": { "passed": 66, "overlaps_final": true },
+  "valid_parent_control": { "passed": 3, "failed": 9 },
+  "production_changed_files": ["web/app.ts"],
+  "production_changed_lines": 1,
+  "build": "PASS_CODE_STRIP_BUILD;binary_assets_not_restored",
+  "browser_runtime": "BLOCKED_BEFORE_PAGE",
+  "browser_scenarios_passed": 0,
+  "Java_Android_JNI_radio": "NOT_RUN",
+  "full_suite": "NOT_RUN;PR29 historical evidence failures retained",
+  "independent_QA": false,
+  "new_game_rules": 0,
+  "wire_changes": 0,
+  "automatic_retry": false,
+  "default_host_tracking": false,
+  "mode_gate_changes": 0,
+  "NET": "paused",
+  "scoring": "frozen",
+  "merge_deploy_APK": false
+}

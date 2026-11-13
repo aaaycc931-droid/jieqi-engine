@@ -1,0 +1,13 @@
+{
+  "repository": "aaaycc931-droid/jieqi-engine",
+  "parent": "38d40fc2494ce5464af8f91405249f8511524bbf",
+  "parent_pr": 29,
+  "parent_web_blob": "c0a267e106120b81c335e1da930cee304a36fc70",
+  "handoff_claim": "0c7d108dd74f06acdae9b8ab4ff7fe140ced67df",
+  "source_files_verified": 47,
+  "source_blob_mismatches": 0,
+  "production_delta": "web/app.ts: add event === message to the existing native event admission predicate",
+  "java_message_shape": "type === message; alternate event-only producer not observed",
+  "parent_control": { "tests": 12, "pass": 3, "fail": 9, "log": "PARENT_ALIAS.tap" },
+  "invalid_earlier_fixture": "INITIAL_WRONG_HELPER.tap; old helper silently ignored scoped bridge extras; excluded from valid comparison"
+}
