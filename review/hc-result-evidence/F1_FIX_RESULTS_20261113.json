@@ -1,0 +1,51 @@
+{
+  "schema": "lezi.hc.r60.f1_fix_review.v1",
+  "dependencyCommit": "6ba35636ecf5c69203225149a7b746893299b39b",
+  "dependencySource": "scripts/research/main-authority-result-prototype.ts",
+  "dependencySourceSha256": "a3273c37bec618c5d73a8eef3ea1197292d8256bd5c1daa9d61d074963458c61",
+  "node": "v24.22.1",
+  "command": "HC_PR24_FIXED_ROOT=/absolute/path/to/fixed-pr24 node scripts/research/hc-result-f1-fix-review.ts",
+  "casesRun": 4,
+  "passed": 4,
+  "failed": 0,
+  "cases": [
+    {
+      "id": "F1-FIX-01",
+      "case": "complete own scope retains legitimate accepted result",
+      "passed": true
+    },
+    {
+      "id": "F1-FIX-02",
+      "case": "original missing authorityId variant",
+      "constructor": "rejected before room mutation",
+      "query": {
+        "query": "invalid"
+      },
+      "passed": true
+    },
+    {
+      "id": "F1-FIX-03",
+      "case": "original missing matchEpoch variant",
+      "constructor": "rejected before room mutation",
+      "query": {
+        "query": "invalid"
+      },
+      "passed": true
+    },
+    {
+      "id": "F1-FIX-04",
+      "case": "query.scope omitted",
+      "answer": {
+        "query": "invalid"
+      },
+      "queryChangedAuthority": false,
+      "passed": true
+    }
+  ],
+  "limits": [
+    "New repair controls only; old r59 observations remain unchanged.",
+    "Trusted offline caller and intentionally malformed scope; no remote exploit claim.",
+    "No old 13/29/32/34/935 suites, PR26 runtime tests, original mode matrices or devices run.",
+    "No production or main research implementation changed; not full independent QA."
+  ]
+}

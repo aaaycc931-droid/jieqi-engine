@@ -1,0 +1,31 @@
+# HC r60 — F1 repair reception and actual host source review
+
+2026-11-13, Asia/Shanghai. Task: `MAIN-HC-F1-FIX-AND-HOST-ADAPTER-REVIEW-20261113` from handoff `4bd603113914ff8c4fd59cb8fc9c497f347fdb62`. This completes both bounded phases, not product acceptance.
+
+## Pinned inputs and actual execution
+
+- Previous HC evidence: `2204ef656c4d72684c0fce8f52789108796ed1f0`; old four observations are unchanged.
+- Fixed PR24: `6ba35636ecf5c69203225149a7b746893299b39b`, separate clean read-only dependency. Read complete fix report, new scope tests, implementation and the actual fix diff. The report resolves to engine `docs/research/MAIN_RESULT_SCOPE_FIX_20261113.md`, not the handoff main directory.
+- PR26: `e88a5a6bce6732a29e887b10636c827cd3f2eab5`, separate clean read-only dependency. Read complete changed host, new ledger, 26-test source, README, RESULTS and MANIFEST; relevant remote-room hero, time, resign, rematch and disconnect/reconnect implementations were read. Seven manifest entries match file sizes, SHA256 and Git blobs. PR24 and PR26 are open drafts, unmerged at review.
+- Actually ran `HC_PR24_FIXED_ROOT=/absolute/path/to/fixed-pr24 node scripts/research/hc-result-f1-fix-review.ts`, Node v24.22.1: **4 new repair controls passed, 0 failed**. Complete scope preserves accepted; missing authorityId and missing matchEpoch each reject construction without changing the input room and return invalid on queries; omitted query.scope returns invalid. The authority remains unchanged across these queries.
+- No original 13/29/32/34/935 suite or original 110/56 matrix was rerun. PR26's 34 passes are the mainline's published execution report, not this branch's execution. No PR26 runtime experiment was added because the bounded review found no concrete new defect hypothesis requiring one.
+
+## Source findings
+
+| Boundary | Source and bounded conclusion | Limitation |
+|---|---|---|
+| Single authority owner | `BluetoothHostRoom.owned` contains both room and result ledger; legacy and tracked actions share dispatch; append allocates before publishing one owner reference. | In-process ordering only; no crash durability, distributed atomicity or wire delivery proof. |
+| Default and legacy behavior | Tracking is absent unless explicitly configured. Legacy switch dispatch preserves arguments, returns `.room`, and retains separate pre-dispatch and output time advances. | Source comparison; mainline's legacy equality/8-host checks were read, not rerun here. |
+| Two clock reads and reentry | Tracked dispatch obtains the first time before settlement; `projectViews` obtains the second after room/result publication. `advance` wraps both old advances inside the mutation guard. Public mutators use the same guard when tracking exists. | No new clock policy; injected callback failures and differing second times are mainline test evidence, not natural device observations. |
+| Disposition and output | Hero acceptance requires fresh selection before the deadline and actual confirmed choice. Resign requires fresh playing state/action ID, nonduplicate finished resign and revision +1. Only listed RuleError codes become rejected; other failures/duplicates remain unknown. Output failure occurs after publication. | Only hero/resign reviewed. Not proof for moves, skills, preparation or all exception behavior. |
+| Scope, actor and content | Host constructs mandatory scope identifiers; ledger queries validate detached JSON before comparison, use actor+attempt ID and full canonical action binding. Wrong complete scope yields unknown; malformed scope invalid. | Trusted caller supplies actor and authority labels. PR26 accepts extra JSON scope keys while fixed PR24 requires exactly three; PR26 still requires all three identifiers. This difference does not reproduce F1 and is not claimed as a defect. |
+| Lifecycle | Disconnect/reconnect retire before output; successful rematch response retires on actual finished→new-match transition. Old original-scope records remain local history; no reactivation API. | Legacy untracked gameplay remains usable. Retirement, local C5 generation and remote authenticated continuity are distinct; no cross-reconnect authentication established. |
+| FIFO and absence | Retained IDs are refused before dispatch; full binding bytes and entry limits evict FIFO. Queries do not refresh retention. Oversized-for-budget committed actions can have no record. | Globally fresh IDs after eviction are explicitly a caller prerequisite, not enforced durable deduplication. Missing record remains unknown; no automatic replay. |
+
+No new confirmed implementation defect was found in these bounded source paths. This is not a proof of absence. The required F1 repair is accepted only for the tested scope boundary; the broader host adapter is received as a default-off engineering draft, with mainline runtime results kept at report level.
+
+## Review boundary and next trigger
+
+Audit trigger: explicit adversarial/fix review; medium engineering evidence risk, reversible isolated research. Claim sources: pinned source facts, four actual local observations, and separately labeled mainline reports. Assumptions: trusted internal callers, fresh IDs, read-only fixed dependencies and no hostile reflection/proxy object execution. Competing explanation checked: malformed input can violate TypeScript's static shape; the runtime guard is therefore tested directly, while no remote attack is inferred. Failure condition: a missing required identifier still obtains an accepted receipt, valid inputs regress, or room/results can demonstrably diverge in the reviewed entry. None occurred in the four controls; PR26 behavior beyond source review remains unverified by this branch. Residual risks: future wire caller authentication, retention persistence, all other actions, real devices, full independent QA and original half-chaos acceptance.
+
+Only own `hc-result-*` research and review files are added. No `src`, PR24/PR26 implementation, protocol, game rule, other workline, mode gate, scoring or NET changes. Stop after publishing this review. Next: receive a concrete mainline host/wire/caller/lifecycle change or a reproducible new issue, then review only its affected boundary; no repeated polling or old-suite expansion. Mainline receipt of this r60 return remains UNKNOWN until its own record exists.
