@@ -76,9 +76,9 @@
     },
     {
       "path": "review/standard-h10-preparation/README.md",
-      "sha256": "95170ac980fd61815ccc73a8d3d0cf806a97a3ca560a8c7c218eb353b329c824",
-      "git_blob": "4ca162b321a46d43840695f9037620582e8379a9",
-      "bytes": 5230
+      "sha256": "106582568aa4604a428bb60284b143c9bcbc564d235cee58ed8c5622a93cc737",
+      "git_blob": "eccfe255d5081b850a3261d3341213d9a46e03aa",
+      "bytes": 5380
     },
     {
       "path": "review/standard-h10-preparation/TESTS.tap",

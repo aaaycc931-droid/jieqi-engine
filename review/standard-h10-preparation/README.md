@@ -26,6 +26,6 @@ Negative probes that deliberately change a candidate coordinate are labelled syn
 
 ## Remaining mainline work
 
-The standard line can now review and run this T0-only source/evidence package on its own isolated test branch. G1 and the preparation part of G4 have concrete implementation evidence. Full G4 forward-prefix qualification, G5 true-royal legality/closed R5 atomic settlement, original A/B reachability, G2/G3 unresolved policies, actual frontend/wire and independent acceptance remain open. H02 shadow-step, whole Wind V3.1, scoring ledger, NET, and product `featuresReady=false` boundaries are unchanged.
+The standard line can now review and run this T0-only source/evidence package on its own isolated test branch. G1 and the preparation part of G4 have concrete implementation evidence. G2 has confirmed >=3 sampling implementation evidence; shortage and failure policies remain open. G3 has three server projections and clearing evidence, while actual UI/client delivery remains open. Full G4 forward-prefix qualification, G5 true-royal legality/closed R5 atomic settlement, original A/B reachability and independent acceptance remain open. H02 shadow-step, whole Wind V3.1, scoring ledger, NET, and product `featuresReady=false` boundaries are unchanged.
 
 No generic royal-safety or terminal-order fix is included. The older mainline `MAIN-BLUETOOTH-UNKNOWN-RESULT-RECONCILIATION-20261030` work remains queued independently.
