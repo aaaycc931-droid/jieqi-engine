@@ -1,0 +1,40 @@
+{
+  "id": "MAIN-BLUETOOTH-LOCAL-RESULT-INTEGRATION-20261113",
+  "new_tests": 28,
+  "applicable_run": {
+    "tests": 137,
+    "passed": 137,
+    "failed": 0,
+    "old_affected": 109
+  },
+  "expanded_initial": {
+    "tests": 152,
+    "passed": 130,
+    "failed": 22,
+    "reason": "pre-C5 historical native source identity guard"
+  },
+  "clean_parent_control": {
+    "tests": 22,
+    "passed": 0,
+    "failed": 22,
+    "same_hash_pair": true
+  },
+  "fault_controls_expected_fail": 2,
+  "early_fixture_failure": "22/23 before corrected malformed-context test fixture; no production change",
+  "test_quality_correction": "generation mutant initially passed because sequence rollback masked binding assertion; forward sequences now separate dimensions",
+  "build": "PASS repository Node strip transpiler, not full typecheck",
+  "diff_check": "PASS",
+  "scope": "actual TypeScript host and actual Web functions in VM; documented JVM substitute in existing six null checks",
+  "not_run": [
+    "real browser",
+    "Android/JNI/radio/device",
+    "independent QA",
+    "original native16/full C1-C4",
+    "original 56/64",
+    "full test suite clean acceptance"
+  ],
+  "no_merge_deploy_APK": true,
+  "host_tracking_default_enabled": false,
+  "guest_authoritative_result_channel": false,
+  "automatic_retry": false
+}

@@ -1,0 +1,669 @@
+TAP version 13
+# Subtest: full Java source identity and16 recorded execution cases bind the production native methods
+not ok 1 - full Java source identity and16 recorded execution cases bind the production native methods
+  ---
+  duration_ms: 4.595088
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:6:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:9:64)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:7:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.start (node:internal/test_runner/test:1262:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+  ...
+# Subtest: checked written action and ordered ping interoperate with the actual eligible host and original snapshots
+not ok 2 - checked written action and ordered ping interoperate with the actual eligible host and original snapshots
+  ---
+  duration_ms: 0.949481
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:13:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:9:64)
+    nativeChannelCase (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:20:17)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:14:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+  ...
+# Subtest: no_session: native known prewrite failure clears wait and never sends ping or a fallback action
+not ok 3 - no_session: native known prewrite failure clears wait and never sends ping or a fallback action
+  ---
+  duration_ms: 0.684847
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:18:50'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:9:64)
+    nativeChannelCase (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:20:17)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:19:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: not_connected: native known prewrite failure clears wait and never sends ping or a fallback action
+not ok 4 - not_connected: native known prewrite failure clears wait and never sends ping or a fallback action
+  ---
+  duration_ms: 0.717548
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:18:50'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:9:64)
+    nativeChannelCase (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:20:17)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:19:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: write_zero: native unknown action suppresses ping/retry, retains uncertainty across authorized snapshots
+not ok 5 - write_zero: native unknown action suppresses ping/retry, retains uncertainty across authorized snapshots
+  ---
+  duration_ms: 0.760929
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:23:75'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:9:64)
+    nativeChannelCase (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:20:17)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:24:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: partial: native unknown action suppresses ping/retry, retains uncertainty across authorized snapshots
+not ok 6 - partial: native unknown action suppresses ping/retry, retains uncertainty across authorized snapshots
+  ---
+  duration_ms: 0.719712
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:23:75'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:9:64)
+    nativeChannelCase (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:20:17)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:24:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: newline: native unknown action suppresses ping/retry, retains uncertainty across authorized snapshots
+not ok 7 - newline: native unknown action suppresses ping/retry, retains uncertainty across authorized snapshots
+  ---
+  duration_ms: 0.615097
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:23:75'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:9:64)
+    nativeChannelCase (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:20:17)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:24:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: flush: native unknown action suppresses ping/retry, retains uncertainty across authorized snapshots
+not ok 8 - flush: native unknown action suppresses ping/retry, retains uncertainty across authorized snapshots
+  ---
+  duration_ms: 0.536089
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:23:75'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:9:64)
+    nativeChannelCase (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:20:17)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:24:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: old_writer: native unknown action suppresses ping/retry, retains uncertainty across authorized snapshots
+not ok 9 - old_writer: native unknown action suppresses ping/retry, retains uncertainty across authorized snapshots
+  ---
+  duration_ms: 0.714553
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:23:75'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:9:64)
+    nativeChannelCase (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:20:17)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:24:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: even a derived same-id pong control cannot unlock an unknown action result
+not ok 10 - even a derived same-id pong control cannot unlock an unknown action result
+  ---
+  duration_ms: 0.887736
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:31:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:9:64)
+    nativeChannelCase (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:20:17)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:32:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: checked malformed result null: no fallback send and no release of uncertainty
+not ok 11 - checked malformed result null: no fallback send and no release of uncertainty
+  ---
+  duration_ms: 0.82061
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:37:75'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:9:64)
+    nativeChannelCase (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:20:17)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:38:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: checked malformed result []: no fallback send and no release of uncertainty
+not ok 12 - checked malformed result []: no fallback send and no release of uncertainty
+  ---
+  duration_ms: 1.641781
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:37:75'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:9:64)
+    nativeChannelCase (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:20:17)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:38:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: checked malformed result {"status":"unexpected"}: no fallback send and no release of uncertainty
+not ok 13 - checked malformed result {"status":"unexpected"}: no fallback send and no release of uncertainty
+  ---
+  duration_ms: 0.327751
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:37:75'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:9:64)
+    nativeChannelCase (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:20:17)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:38:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: checked malformed result broken-json: no fallback send and no release of uncertainty
+not ok 14 - checked malformed result broken-json: no fallback send and no release of uncertainty
+  ---
+  duration_ms: 0.398583
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:37:75'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:9:64)
+    nativeChannelCase (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:20:17)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:38:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: checked native exception leaves already-written action unknown without legacy fallback
+not ok 15 - checked native exception leaves already-written action unknown without legacy fallback
+  ---
+  duration_ms: 0.536029
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:43:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:9:64)
+    nativeChannelCase (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:20:17)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:44:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: ping write_zero: written action remains pending before connection events when no pong was received
+not ok 16 - ping write_zero: written action remains pending before connection events when no pong was received
+  ---
+  duration_ms: 0.671522
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:48:50'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:9:64)
+    nativeChannelCase (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:20:17)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:49:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: ping not_connected: written action remains pending before connection events when no pong was received
+not ok 17 - ping not_connected: written action remains pending before connection events when no pong was received
+  ---
+  duration_ms: 0.463023
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:48:50'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:9:64)
+    nativeChannelCase (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:20:17)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:49:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: unknown ping after a known written action may still yield a real pong; this is ordered control, not acceptance status
+not ok 18 - unknown ping after a known written action may still yield a real pong; this is ordered control, not acceptance status
+  ---
+  duration_ms: 0.597815
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:53:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:9:64)
+    nativeChannelCase (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:20:17)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:54:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: actual native state callback reaches production event listener, clears the UI lifecycle wait and keeps disconnected actions locked
+not ok 19 - actual native state callback reaches production event listener, clears the UI lifecycle wait and keeps disconnected actions locked
+  ---
+  duration_ms: 0.589309
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:58:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:9:64)
+    nativeChannelCase (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:20:17)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:59:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: old native transport-error callback alone cannot release a different current unknown action
+not ok 20 - old native transport-error callback alone cannot release a different current unknown action
+  ---
+  duration_ms: 0.516142
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:66:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:9:64)
+    nativeChannelCase (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:20:17)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:67:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: complete native/write/Web report retains unverified acceptance, device and mode boundaries
+not ok 21 - complete native/write/Web report retains unverified acceptance, device and mode boundaries
+  ---
+  duration_ms: 0.728028
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:72:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    actual JVM source identity
+    + actual - expected
+    
+    + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+    - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+  actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+  operator: 'strictEqual'
+  stack: |-
+    nativeResults (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:9:64)
+    runNativeSendResearch (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:37:16)
+    TestContext.<anonymous> (file:///workspace/scratch/60b011e86501/baseline/tests/native-send-accounting.test.ts:73:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# node:internal/modules/run_main:107
+#     triggerUncaughtException(
+#     ^
+# AssertionError [ERR_ASSERTION]: actual JVM source identity
+# + actual - expected
+# + '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7'
+# - '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0'
+#     at nativeResults (file:///workspace/scratch/60b011e86501/baseline/scripts/research/native-send-channel.ts:9:64)
+#     at file:///workspace/scratch/60b011e86501/baseline/tests/research/ch-lifecycle-pending.test.ts:6:14
+#     at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+#     at async node:internal/modules/esm/loader:647:26
+#     at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+#   generatedMessage: false,
+#   code: 'ERR_ASSERTION',
+#   actual: '4e52e33d0078c1effbe355b34e2e4831e6e1f10defb2891c27ee245963794da7',
+#   expected: '53f5d62d31529bc82b38c82ba280069795361826c31110bdfff23f95884af1a0',
+#   operator: 'strictEqual',
+#   diff: 'simple'
+# }
+# Node.js v24.22.1
+# Subtest: tests/research/ch-lifecycle-pending.test.ts
+not ok 2 - tests/research/ch-lifecycle-pending.test.ts
+  ---
+  duration_ms: 354.766093
+  type: 'test'
+  location: '/workspace/scratch/60b011e86501/baseline/tests/research/ch-lifecycle-pending.test.ts:1:1'
+  failureType: 'testCodeFailure'
+  exitCode: 1
+  signal: ~
+  error: 'test failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+1..22
+# tests 22
+# suites 0
+# pass 0
+# fail 22
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 411.2237

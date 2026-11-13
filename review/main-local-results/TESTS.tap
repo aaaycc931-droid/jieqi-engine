@@ -1,0 +1,842 @@
+TAP version 13
+# Subtest: BTDISC-07 real host preserves formal clock after RPS and expires at shifted deadline
+ok 1 - BTDISC-07 real host preserves formal clock after RPS and expires at shifted deadline
+  ---
+  duration_ms: 47.851341
+  type: 'test'
+  ...
+# Subtest: BTDISC-01 断线期间暂停英雄选择倒计时，重连后从原剩余时间继续
+ok 2 - BTDISC-01 断线期间暂停英雄选择倒计时，重连后从原剩余时间继续
+  ---
+  duration_ms: 2.657685
+  type: 'test'
+  ...
+# Subtest: BTDISC-02 同一玩家多次断线累计达到 60 秒后直接判负
+ok 3 - BTDISC-02 同一玩家多次断线累计达到 60 秒后直接判负
+  ---
+  duration_ms: 22.604477
+  type: 'test'
+  ...
+# Subtest: BTDISC-03 任一玩家断线后锁定双方全部游戏操作
+ok 4 - BTDISC-03 任一玩家断线后锁定双方全部游戏操作
+  ---
+  duration_ms: 6.610775
+  type: 'test'
+  ...
+# Subtest: BTDISC-04 双方在同一检查点均累计达到 60 秒时判为断线平局
+ok 5 - BTDISC-04 双方在同一检查点均累计达到 60 秒时判为断线平局
+  ---
+  duration_ms: 11.037851
+  type: 'test'
+  ...
+# Subtest: BTDISC-05 成功重连会永久保留累计断线时间并增加重连历史计数
+ok 6 - BTDISC-05 成功重连会永久保留累计断线时间并增加重连历史计数
+  ---
+  duration_ms: 1.094211
+  type: 'test'
+  ...
+# Subtest: BTDISC-06 延迟检查时按实际到达 60 秒的先后裁定，不把错开的超时误判为平局
+ok 7 - BTDISC-06 延迟检查时按实际到达 60 秒的先后裁定，不把错开的超时误判为平局
+  ---
+  duration_ms: 6.998359
+  type: 'test'
+  ...
+# Subtest: BTHOST-01 SHA-256 邀请口令哈希在 Node 与 WebView 使用相同标准结果
+ok 8 - BTHOST-01 SHA-256 邀请口令哈希在 Node 与 WebView 使用相同标准结果
+  ---
+  duration_ms: 3.2291
+  type: 'test'
+  ...
+# Subtest: BTHOST-02 物理连接后只有房主保存完整房间，来宾只收到公开 RPS 状态
+ok 9 - BTHOST-02 物理连接后只有房主保存完整房间，来宾只收到公开 RPS 状态
+  ---
+  duration_ms: 4.001499
+  type: 'test'
+  ...
+# Subtest: BTHOST-03 双方猜拳后由房主权威建局，并向来宾发送揭示后仍安全的公开棋盘
+ok 10 - BTHOST-03 双方猜拳后由房主权威建局，并向来宾发送揭示后仍安全的公开棋盘
+  ---
+  duration_ms: 7.778713
+  type: 'test'
+  ...
+# Subtest: BTHOST-04 英雄、陷阱和私有坐标均通过房主单点结算
+ok 11 - BTHOST-04 英雄、陷阱和私有坐标均通过房主单点结算
+  ---
+  duration_ms: 85.228422
+  type: 'test'
+  ...
+# Subtest: BTHOST-05 来宾操作仍受回合、版本和房主规则引擎约束
+ok 12 - BTHOST-05 来宾操作仍受回合、版本和房主规则引擎约束
+  ---
+  duration_ms: 9.367065
+  type: 'test'
+  ...
+# Subtest: BTHOST-06 英雄选择起主动退出由房主立即权威判负
+ok 13 - BTHOST-06 英雄选择起主动退出由房主立即权威判负
+  ---
+  duration_ms: 1.113747
+  type: 'test'
+  ...
+# Subtest: BTHOST-07 再战邀请由房主计时并在对方接受后建立全新选英雄阶段
+ok 14 - BTHOST-07 再战邀请由房主计时并在对方接受后建立全新选英雄阶段
+  ---
+  duration_ms: 2.459726
+  type: 'test'
+  ...
+# Subtest: BTHOST-08 双方聊天经房主权威同步且不阻塞行棋回合
+ok 15 - BTHOST-08 双方聊天经房主权威同步且不阻塞行棋回合
+  ---
+  duration_ms: 4.14063
+  type: 'test'
+  ...
+# (node:50) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: LOCAL-01 pending captures exact pre-send raw and never takes native written as game acceptance
+ok 16 - LOCAL-01 pending captures exact pre-send raw and never takes native written as game acceptance
+  ---
+  duration_ms: 13.096058
+  type: 'test'
+  ...
+# Subtest: LOCAL-02 explicit null proves not_sent; Android omitted key and mismatched contexts remain unknown
+ok 17 - LOCAL-02 explicit null proves not_sent; Android omitted key and mismatched contexts remain unknown
+  ---
+  duration_ms: 1.375064
+  type: 'test'
+  ...
+# Subtest: LOCAL-03 old response and lifecycle cannot restore applicability or resolve game outcome
+ok 18 - LOCAL-03 old response and lifecycle cannot restore applicability or resolve game outcome
+  ---
+  duration_ms: 5.453438
+  type: 'test'
+  ...
+# Subtest: LOCAL-04 duplicate wire IDs retain separate opaque attempts, forged token and eviction stay unknown
+ok 19 - LOCAL-04 duplicate wire IDs retain separate opaque attempts, forged token and eviction stay unknown
+  ---
+  duration_ms: 0.685849
+  type: 'test'
+  ...
+# Subtest: LOCAL-05 contradictory local callbacks fail to unknown permanently
+ok 20 - LOCAL-05 contradictory local callbacks fail to unknown permanently
+  ---
+  duration_ms: 0.389166
+  type: 'test'
+  ...
+# Subtest: LOCAL-06 malformed request and legacy or bad native capability never acquire trusted scope
+ok 21 - LOCAL-06 malformed request and legacy or bad native capability never acquire trusted scope
+  ---
+  duration_ms: 4.786124
+  type: 'test'
+  ...
+# Subtest: LOCAL-07 real guest hero result binds original room, raw and local event, not peer actor labels
+ok 22 - LOCAL-07 real guest hero result binds original room, raw and local event, not peer actor labels
+  ---
+  duration_ms: 17.381218
+  type: 'test'
+  ...
+# Subtest: LOCAL-08 later same wire ID is a new native arrival, original acceptance survives its rule rejection
+ok 23 - LOCAL-08 later same wire ID is a new native arrival, original acceptance survives its rule rejection
+  ---
+  duration_ms: 1.767606
+  type: 'test'
+  ...
+# Subtest: LOCAL-09 same event is not dispatched twice after raw cache eviction
+ok 24 - LOCAL-09 same event is not dispatched twice after raw cache eviction
+  ---
+  duration_ms: 2.876944
+  type: 'test'
+  ...
+# Subtest: LOCAL-10 query uses no game clock/RNG/views and exposes no private raw or board
+ok 25 - LOCAL-10 query uses no game clock/RNG/views and exposes no private raw or board
+  ---
+  duration_ms: 9.333082
+  type: 'test'
+  ...
+# Subtest: LOCAL-11 native generation/instance/role change, rollback or capability loss retires original owner
+ok 26 - LOCAL-11 native generation/instance/role change, rollback or capability loss retires original owner
+  ---
+  duration_ms: 18.051146
+  type: 'test'
+  ...
+# Subtest: LOCAL-12 actual host disconnect/reconnect closes new delivery; original result remains local history
+ok 27 - LOCAL-12 actual host disconnect/reconnect closes new delivery; original result remains local history
+  ---
+  duration_ms: 2.023192
+  type: 'test'
+  ...
+# Subtest: LOCAL-13 natural resign and rematch retire same-room authority without restoring tracking
+ok 28 - LOCAL-13 natural resign and rematch retire same-room authority without restoring tracking
+  ---
+  duration_ms: 22.979476
+  type: 'test'
+  ...
+# Subtest: LOCAL-14 local owner cannot be reconstructed on the same room; new room has no old token history
+ok 29 - LOCAL-14 local owner cannot be reconstructed on the same room; new room has no old token history
+  ---
+  duration_ms: 0.857459
+  type: 'test'
+  ...
+# Subtest: LOCAL-15 startup watermark, queued FIFO and sequences above 2^53 retain exact ordering
+ok 30 - LOCAL-15 startup watermark, queued FIFO and sequences above 2^53 retain exact ordering
+  ---
+  duration_ms: 5.174709
+  type: 'test'
+  ...
+# Subtest: LOCAL-16 uncovered and malformed envelopes have no host mutation and consume only their event
+ok 31 - LOCAL-16 uncovered and malformed envelopes have no host mutation and consume only their event
+  ---
+  duration_ms: 0.815761
+  type: 'test'
+  ...
+# Subtest: LOCAL-17 late invalid-phase rejection and unknown clock/RNG fault are not successful outcomes
+ok 32 - LOCAL-17 late invalid-phase rejection and unknown clock/RNG fault are not successful outcomes
+  ---
+  duration_ms: 1.846172
+  type: 'test'
+  ...
+# Subtest: LOCAL-18 postcommit projection error retains acceptance without re-executing request
+ok 33 - LOCAL-18 postcommit projection error retains acceptance without re-executing request
+  ---
+  duration_ms: 5.351518
+  type: 'test'
+  ...
+# Subtest: LOCAL-19 host ledger eviction and byte overflow never reconstruct proof from board state
+ok 34 - LOCAL-19 host ledger eviction and byte overflow never reconstruct proof from board state
+  ---
+  duration_ms: 11.878268
+  type: 'test'
+  ...
+# Subtest: LOCAL-20 no implicit activation, invalid limits and malformed native context fail construction
+ok 35 - LOCAL-20 no implicit activation, invalid limits and malformed native context fail construction
+  ---
+  duration_ms: 1.857513
+  type: 'test'
+  ...
+# Subtest: LOCAL-21 reentrant delivery is refused and a native change during dispatch marks historical only
+ok 36 - LOCAL-21 reentrant delivery is refused and a native change during dispatch marks historical only
+  ---
+  duration_ms: 1.623947
+  type: 'test'
+  ...
+# Subtest: LOCAL-22 actual Web scoped sender feeds retained raw and real host result while guest unknown stays unknown
+ok 37 - LOCAL-22 actual Web scoped sender feeds retained raw and real host result while guest unknown stays unknown
+  ---
+  duration_ms: 33.677422
+  type: 'test'
+  ...
+# Subtest: LOCAL-23 actual Web not_sent clears waiting but cannot create a host result
+ok 38 - LOCAL-23 actual Web not_sent clears waiting but cannot create a host result
+  ---
+  duration_ms: 23.58182
+  type: 'test'
+  ...
+# Subtest: LOCAL-24 actual Web sender retains its own pre-send request; written and pong never settle it
+ok 39 - LOCAL-24 actual Web sender retains its own pre-send request; written and pong never settle it
+  ---
+  duration_ms: 23.407904
+  type: 'test'
+  ...
+# Subtest: LOCAL-25 actual final Web listener initializes from CONNECTED event and accepts already queued later action
+ok 40 - LOCAL-25 actual final Web listener initializes from CONNECTED event and accepts already queued later action
+  ---
+  duration_ms: 24.314073
+  type: 'test'
+  ...
+# Subtest: LOCAL-26 actual Web unsupported action still uses legacy dispatcher exactly once
+ok 41 - LOCAL-26 actual Web unsupported action still uses legacy dispatcher exactly once
+  ---
+  duration_ms: 6.718457
+  type: 'test'
+  ...
+# Subtest: LOCAL-27 actual Web disconnect/reconnect retires tracking while keeping legacy play available
+ok 42 - LOCAL-27 actual Web disconnect/reconnect retires tracking while keeping legacy play available
+  ---
+  duration_ms: 16.972736
+  type: 'test'
+  ...
+# Subtest: LOCAL-28 actual guest lifecycle retains historical request and allows a fresh memory entry
+ok 43 - LOCAL-28 actual guest lifecycle retains historical request and allows a fresh memory entry
+  ---
+  duration_ms: 7.725344
+  type: 'test'
+  ...
+# Subtest: BT-PRIVATE-01 actual Wind/Hunter setup and shadow change only the owner's serialized view
+ok 44 - BT-PRIVATE-01 actual Wind/Hunter setup and shadow change only the owner's serialized view
+  ---
+  duration_ms: 39.085946
+  type: 'test'
+  ...
+# Subtest: BT-PRIVATE-02 wrong-turn shadow is rejected without consuming or leaking private state
+ok 45 - BT-PRIVATE-02 wrong-turn shadow is rejected without consuming or leaking private state
+  ---
+  duration_ms: 46.57997
+  type: 'test'
+  ...
+# Subtest: BT-PRIVATE-03 reconnect preserves owner-only secrets and shifts the shared deadline once
+ok 46 - BT-PRIVATE-03 reconnect preserves owner-only secrets and shifts the shared deadline once
+  ---
+  duration_ms: 12.245412
+  type: 'test'
+  ...
+# Subtest: BT-01 协议消息可编码并在接收端无损解析
+ok 47 - BT-01 协议消息可编码并在接收端无损解析
+  ---
+  duration_ms: 2.840707
+  type: 'test'
+  ...
+# Subtest: BT-02 错误版本、未知类型与非对象消息在规则层之前被拒绝
+ok 48 - BT-02 错误版本、未知类型与非对象消息在规则层之前被拒绝
+  ---
+  duration_ms: 1.226697
+  type: 'test'
+  ...
+# Subtest: BT-03 超出 RFCOMM 单消息上限的数据不会被编码或接收
+ok 49 - BT-03 超出 RFCOMM 单消息上限的数据不会被编码或接收
+  ---
+  duration_ms: 2.532111
+  type: 'test'
+  ...
+# Subtest: BT-04 快照只接收调用方提供的公开视图，并保留幂等 id
+ok 50 - BT-04 快照只接收调用方提供的公开视图，并保留幂等 id
+  ---
+  duration_ms: 0.563872
+  type: 'test'
+  ...
+# (node:58) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: parent actual complete applyBluetoothView clears pending on a FIFO-delayed periodic snapshot before host sees action
+ok 51 - parent actual complete applyBluetoothView clears pending on a FIFO-delayed periodic snapshot before host sees action
+  ---
+  duration_ms: 28.436983
+  type: 'test'
+  ...
+# Subtest: current actual applyBluetoothView keeps pending through FIFO-delayed periodic and committed snapshots until matching pong
+ok 52 - current actual applyBluetoothView keeps pending through FIFO-delayed periodic and committed snapshots until matching pong
+  ---
+  duration_ms: 24.684584
+  type: 'test'
+  ...
+# Subtest: new guest interoperates with current v2 host without changing wire schema
+ok 53 - new guest interoperates with current v2 host without changing wire schema
+  ---
+  duration_ms: 41.103799
+  type: 'test'
+  ...
+# Subtest: new guest interoperates with PR20 v2 host without changing wire schema
+ok 54 - new guest interoperates with PR20 v2 host without changing wire schema
+  ---
+  duration_ms: 20.046749
+  type: 'test'
+  ...
+# Subtest: PR20 guest and new host retain their existing one-action/one-snapshot exchange
+ok 55 - PR20 guest and new host retain their existing one-action/one-snapshot exchange
+  ---
+  duration_ms: 17.958954
+  type: 'test'
+  ...
+# Subtest: natural H15/H11 0/deadline+0: refusal, latest committed view, then ordered pong
+ok 56 - natural H15/H11 0/deadline+0: refusal, latest committed view, then ordered pong
+  ---
+  duration_ms: 69.657076
+  type: 'test'
+  ...
+# Subtest: natural H15/H11 0/deadline+1: refusal, latest committed view, then ordered pong
+ok 57 - natural H15/H11 0/deadline+1: refusal, latest committed view, then ordered pong
+  ---
+  duration_ms: 32.794766
+  type: 'test'
+  ...
+# Subtest: natural H15/H11 1/deadline+0: refusal, latest committed view, then ordered pong
+ok 58 - natural H15/H11 1/deadline+0: refusal, latest committed view, then ordered pong
+  ---
+  duration_ms: 34.447269
+  type: 'test'
+  ...
+# Subtest: natural H15/H11 1/deadline+1: refusal, latest committed view, then ordered pong
+ok 59 - natural H15/H11 1/deadline+1: refusal, latest committed view, then ordered pong
+  ---
+  duration_ms: 30.474941
+  type: 'test'
+  ...
+# Subtest: a prior actual error and ping/pong control cannot unlock a different pending request
+ok 60 - a prior actual error and ping/pong control cannot unlock a different pending request
+  ---
+  duration_ms: 29.848934
+  type: 'test'
+  ...
+# Subtest: an actual previous pong replay does not release a later request; duplicate current pong is inert
+ok 61 - an actual previous pong replay does not release a later request; duplicate current pong is inert
+  ---
+  duration_ms: 7.678276
+  type: 'test'
+  ...
+# Subtest: guest remains single-flight when a periodic snapshot arrives before pong
+ok 62 - guest remains single-flight when a periodic snapshot arrives before pong
+  ---
+  duration_ms: 10.473208
+  type: 'test'
+  ...
+# Subtest: exact accepted H11 wire replay does not consume RNG or authority twice, and pong carries no duplicate ACK
+ok 63 - exact accepted H11 wire replay does not consume RNG or authority twice, and pong carries no duplicate ACK
+  ---
+  duration_ms: 31.842051
+  type: 'test'
+  ...
+# Subtest: synchronous action send throw clears its pending identity without sending a ping
+ok 64 - synchronous action send throw clears its pending identity without sending a ping
+  ---
+  duration_ms: 6.531608
+  type: 'test'
+  ...
+# Subtest: synchronous ping send throw keeps uncertain action pending; committed snapshot cannot unlock it
+ok 65 - synchronous ping send throw keeps uncertain action pending; committed snapshot cannot unlock it
+  ---
+  duration_ms: 7.13368
+  type: 'test'
+  ...
+# Subtest: explicit native-like swallowed action-send failure is a known boundary: pong alone is not proof of acceptance
+ok 66 - explicit native-like swallowed action-send failure is a known boundary: pong alone is not proof of acceptance
+  ---
+  duration_ms: 7.509872
+  type: 'test'
+  ...
+# Subtest: host local action path does not acquire guest wait identity or emit receipt-control ping
+ok 67 - host local action path does not acquire guest wait identity or emit receipt-control ping
+  ---
+  duration_ms: 7.139923
+  type: 'test'
+  ...
+# Subtest: parent: real chat caller cooldown plus FIFO network delay produces unrelated error during pending game action
+ok 68 - parent: real chat caller cooldown plus FIFO network delay produces unrelated error during pending game action
+  ---
+  duration_ms: 27.798361
+  type: 'test'
+  ...
+# Subtest: current: real chat caller cooldown plus FIFO network delay produces unrelated error during pending game action
+ok 69 - current: real chat caller cooldown plus FIFO network delay produces unrelated error during pending game action
+  ---
+  duration_ms: 27.975021
+  type: 'test'
+  ...
+# (node:65) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: CH channel parent 0/deadline+0: authentic old handler reproduces error-only stale peer while authority advances
+ok 70 - CH channel parent 0/deadline+0: authentic old handler reproduces error-only stale peer while authority advances
+  ---
+  duration_ms: 94.362662
+  type: 'test'
+  ...
+# Subtest: CH channel fixed 0/deadline+0: error then committed snapshot updates both sinks without private training leak
+ok 71 - CH channel fixed 0/deadline+0: error then committed snapshot updates both sinks without private training leak
+  ---
+  duration_ms: 53.425103
+  type: 'test'
+  ...
+# Subtest: CH channel parent 0/deadline+1: authentic old handler reproduces error-only stale peer while authority advances
+ok 72 - CH channel parent 0/deadline+1: authentic old handler reproduces error-only stale peer while authority advances
+  ---
+  duration_ms: 33.9494
+  type: 'test'
+  ...
+# Subtest: CH channel fixed 0/deadline+1: error then committed snapshot updates both sinks without private training leak
+ok 73 - CH channel fixed 0/deadline+1: error then committed snapshot updates both sinks without private training leak
+  ---
+  duration_ms: 41.915521
+  type: 'test'
+  ...
+# Subtest: CH channel parent 1/deadline+0: authentic old handler reproduces error-only stale peer while authority advances
+ok 74 - CH channel parent 1/deadline+0: authentic old handler reproduces error-only stale peer while authority advances
+  ---
+  duration_ms: 36.93677
+  type: 'test'
+  ...
+# Subtest: CH channel fixed 1/deadline+0: error then committed snapshot updates both sinks without private training leak
+ok 75 - CH channel fixed 1/deadline+0: error then committed snapshot updates both sinks without private training leak
+  ---
+  duration_ms: 52.153422
+  type: 'test'
+  ...
+# Subtest: CH channel parent 1/deadline+1: authentic old handler reproduces error-only stale peer while authority advances
+ok 76 - CH channel parent 1/deadline+1: authentic old handler reproduces error-only stale peer while authority advances
+  ---
+  duration_ms: 28.709279
+  type: 'test'
+  ...
+# Subtest: CH channel fixed 1/deadline+1: error then committed snapshot updates both sinks without private training leak
+ok 77 - CH channel fixed 1/deadline+1: error then committed snapshot updates both sinks without private training leak
+  ---
+  duration_ms: 40.155851
+  type: 'test'
+  ...
+# Subtest: CH channel 0: accepted at deadline-1 uses original shuffle source once; exact replay emits current snapshot without second action
+ok 78 - CH channel 0: accepted at deadline-1 uses original shuffle source once; exact replay emits current snapshot without second action
+  ---
+  duration_ms: 39.412528
+  type: 'test'
+  ...
+# Subtest: CH channel 0: repeated old late request cannot restart red clock or consume H11
+ok 79 - CH channel 0: repeated old late request cannot restart red clock or consume H11
+  ---
+  duration_ms: 27.79324
+  type: 'test'
+  ...
+# Subtest: CH channel 1: accepted at deadline-1 uses original shuffle source once; exact replay emits current snapshot without second action
+ok 80 - CH channel 1: accepted at deadline-1 uses original shuffle source once; exact replay emits current snapshot without second action
+  ---
+  duration_ms: 22.576635
+  type: 'test'
+  ...
+# Subtest: CH channel 1: repeated old late request cannot restart red clock or consume H11
+ok 81 - CH channel 1: repeated old late request cannot restart red clock or consume H11
+  ---
+  duration_ms: 21.988017
+  type: 'test'
+  ...
+# Subtest: CH channel both private recruitment worlds retain identical complete snapshot/error bytes at the observed deadline
+ok 82 - CH channel both private recruitment worlds retain identical complete snapshot/error bytes at the observed deadline
+  ---
+  duration_ms: 38.457635
+  type: 'test'
+  ...
+# Subtest: CH channel local host refusal also publishes a time-advanced committed room to its peer
+ok 83 - CH channel local host refusal also publishes a time-advanced committed room to its peer
+  ---
+  duration_ms: 18.799201
+  type: 'test'
+  ...
+# Subtest: CH channel accepted action with native send failure is not recast as a rule refusal or submitted twice
+ok 84 - CH channel accepted action with native send failure is not recast as a rule refusal or submitted twice
+  ---
+  duration_ms: 24.186918
+  type: 'test'
+  ...
+# Subtest: CH channel invalid envelope is rejected before touching room, and no success/error response is invented
+ok 85 - CH channel invalid envelope is rejected before touching room, and no success/error response is invented
+  ---
+  duration_ms: 24.934961
+  type: 'test'
+  ...
+# Subtest: half-chaos and ordinary retain their real Bluetooth mode gate; original half-chaos errors are not claimed as client wire
+ok 86 - half-chaos and ordinary retain their real Bluetooth mode gate; original half-chaos errors are not claimed as client wire
+  ---
+  duration_ms: 0.8477
+  type: 'test'
+  ...
+# Subtest: ADAPTER-01 default disabled legacy dispatch remains available, no tracking implicit
+ok 87 - ADAPTER-01 default disabled legacy dispatch remains available, no tracking implicit
+  ---
+  duration_ms: 15.097023
+  type: 'test'
+  ...
+# Subtest: ADAPTER-02 actual host hero commits one source-bound result before phase transition
+ok 88 - ADAPTER-02 actual host hero commits one source-bound result before phase transition
+  ---
+  duration_ms: 3.697664
+  type: 'test'
+  ...
+# Subtest: ADAPTER-03 later refusal is separate from original hero acceptance
+ok 89 - ADAPTER-03 later refusal is separate from original hero acceptance
+  ---
+  duration_ms: 0.999563
+  type: 'test'
+  ...
+# Subtest: ADAPTER-04 query neither calls clock/RNG/views nor returns private input or board
+ok 90 - ADAPTER-04 query neither calls clock/RNG/views nor returns private input or board
+  ---
+  duration_ms: 1.263135
+  type: 'test'
+  ...
+# Subtest: ADAPTER-05 pre-dispatch hero expiry advances real authority but rejects the late command
+ok 91 - ADAPTER-05 pre-dispatch hero expiry advances real authority but rejects the late command
+  ---
+  duration_ms: 3.946118
+  type: 'test'
+  ...
+# Subtest: ADAPTER-06 natural RPS/resign/finished records acceptance and preserves later refusal distinction
+ok 92 - ADAPTER-06 natural RPS/resign/finished records acceptance and preserves later refusal distinction
+  ---
+  duration_ms: 10.430989
+  type: 'test'
+  ...
+# Subtest: ADAPTER-07 explicit postcommit projection fault cannot change accepted into rejected
+ok 93 - ADAPTER-07 explicit postcommit projection fault cannot change accepted into rejected
+  ---
+  duration_ms: 6.65058
+  type: 'test'
+  ...
+# Subtest: ADAPTER-08 explicit clock RNG failure before dispatch produces no command result
+ok 94 - ADAPTER-08 explicit clock RNG failure before dispatch produces no command result
+  ---
+  duration_ms: 0.749467
+  type: 'test'
+  ...
+# Subtest: ADAPTER-09 unreviewed dispatch exception stays unknown with unchanged command authority
+ok 95 - ADAPTER-09 unreviewed dispatch exception stays unknown with unchanged command authority
+  ---
+  duration_ms: 0.675199
+  type: 'test'
+  ...
+# Subtest: ADAPTER-10 stale resign preserves actual refusal without accepting the command
+ok 96 - ADAPTER-10 stale resign preserves actual refusal without accepting the command
+  ---
+  duration_ms: 1.943514
+  type: 'test'
+  ...
+# Subtest: ADAPTER-11 ID-only duplicate from earlier move does not prove a resign attempt
+ok 97 - ADAPTER-11 ID-only duplicate from earlier move does not prove a resign attempt
+  ---
+  duration_ms: 12.891586
+  type: 'test'
+  ...
+# Subtest: ADAPTER-12 retained attempt ID reuse and unsupported actions reject before clock or mutation
+ok 98 - ADAPTER-12 retained attempt ID reuse and unsupported actions reject before clock or mutation
+  ---
+  duration_ms: 0.6595
+  type: 'test'
+  ...
+# Subtest: ADAPTER-13 actor, content, authority and match are independently bound
+ok 99 - ADAPTER-13 actor, content, authority and match are independently bound
+  ---
+  duration_ms: 0.728729
+  type: 'test'
+  ...
+# Subtest: ADAPTER-14 mandatory scope own data fields reject F1 missing/undefined/empty/wrong type/accessors/inheritance
+ok 100 - ADAPTER-14 mandatory scope own data fields reject F1 missing/undefined/empty/wrong type/accessors/inheritance
+  ---
+  duration_ms: 1.112584
+  type: 'test'
+  ...
+# Subtest: ADAPTER-15 malformed query never equates absent scope fields and never invokes getters
+ok 101 - ADAPTER-15 malformed query never equates absent scope fields and never invokes getters
+  ---
+  duration_ms: 0.964368
+  type: 'test'
+  ...
+# Subtest: ADAPTER-16 caller and returned objects cannot rewrite scope or results
+ok 102 - ADAPTER-16 caller and returned objects cannot rewrite scope or results
+  ---
+  duration_ms: 0.577948
+  type: 'test'
+  ...
+# Subtest: ADAPTER-17 FIFO eviction and byte overflow retain unknown without undoing actual commitment
+ok 103 - ADAPTER-17 FIFO eviction and byte overflow retain unknown without undoing actual commitment
+  ---
+  duration_ms: 0.884229
+  type: 'test'
+  ...
+# Subtest: ADAPTER-18 disconnect/reconnect retires tracking; old scope query is local history only
+ok 104 - ADAPTER-18 disconnect/reconnect retires tracking; old scope query is local history only
+  ---
+  duration_ms: 1.566321
+  type: 'test'
+  ...
+# Subtest: ADAPTER-19 actual same-room rematch retires tracking and never reuses original match authority
+ok 105 - ADAPTER-19 actual same-room rematch retires tracking and never reuses original match authority
+  ---
+  duration_ms: 2.472299
+  type: 'test'
+  ...
+# Subtest: ADAPTER-20 new owner cannot reconstruct old receipts from same caller labels
+ok 106 - ADAPTER-20 new owner cannot reconstruct old receipts from same caller labels
+  ---
+  duration_ms: 0.496335
+  type: 'test'
+  ...
+# Subtest: ADAPTER-21 tracked hero and resign output equal legacy actual host for identical natural setup
+ok 107 - ADAPTER-21 tracked hero and resign output equal legacy actual host for identical natural setup
+  ---
+  duration_ms: 9.180317
+  type: 'test'
+  ...
+# Subtest: ADAPTER-22 legacy and tracked paths both read a later second clock for output
+ok 108 - ADAPTER-22 legacy and tracked paths both read a later second clock for output
+  ---
+  duration_ms: 0.90628
+  type: 'test'
+  ...
+# Subtest: ADAPTER-23 reentrant mutating host calls are refused, read-only query remains safe
+ok 109 - ADAPTER-23 reentrant mutating host calls are refused, read-only query remains safe
+  ---
+  duration_ms: 0.545417
+  type: 'test'
+  ...
+# Subtest: ADAPTER-24 canonical body binding rejects lossy/accessor inputs before clock
+ok 110 - ADAPTER-24 canonical body binding rejects lossy/accessor inputs before clock
+  ---
+  duration_ms: 0.463143
+  type: 'test'
+  ...
+# Subtest: ADAPTER-25 advance preserves baseline two clock reads in both legacy and tracked configurations
+ok 111 - ADAPTER-25 advance preserves baseline two clock reads in both legacy and tracked configurations
+  ---
+  duration_ms: 2.803767
+  type: 'test'
+  ...
+# Subtest: ADAPTER-26 reentrant advance is rejected before another clock read or authority mutation
+ok 112 - ADAPTER-26 reentrant advance is rejected before another clock read or authority mutation
+  ---
+  duration_ms: 0.516223
+  type: 'test'
+  ...
+# (node:107) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: C5 null model distinguishes key removal from the explicit Android JSON sentinel
+ok 113 - C5 null model distinguishes key removal from the explicit Android JSON sentinel
+  ---
+  duration_ms: 1.113276
+  type: 'test'
+  ...
+# Subtest: C5 real native wrong-instance not_sent clears Web pending without retry
+ok 114 - C5 real native wrong-instance not_sent clears Web pending without retry
+  ---
+  duration_ms: 19.423593
+  type: 'test'
+  ...
+# Subtest: C5 real native wrong-generation not_sent clears Web pending without retry
+ok 115 - C5 real native wrong-generation not_sent clears Web pending without retry
+  ---
+  duration_ms: 12.65168
+  type: 'test'
+  ...
+# Subtest: C5 real native invalid-json not_sent clears Web pending without retry
+ok 116 - C5 real native invalid-json not_sent clears Web pending without retry
+  ---
+  duration_ms: 9.786327
+  type: 'test'
+  ...
+# Subtest: C5 real native disconnected not_sent clears Web pending without retry
+ok 117 - C5 real native disconnected not_sent clears Web pending without retry
+  ---
+  duration_ms: 10.260171
+  type: 'test'
+  ...
+# Subtest: C5 actual native written context keeps the existing one-action one-ping path
+ok 118 - C5 actual native written context keeps the existing one-action one-ping path
+  ---
+  duration_ms: 9.803479
+  type: 'test'
+  ...
+# (node:114) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: inline real old callback set rejected at final JS after native generation changed
+ok 119 - inline real old callback set rejected at final JS after native generation changed
+  ---
+  duration_ms: 30.482696
+  type: 'test'
+  ...
+# Subtest: queued real old callback set rejected at final JS after native generation changed
+ok 120 - queued real old callback set rejected at final JS after native generation changed
+  ---
+  duration_ms: 24.529588
+  type: 'test'
+  ...
+# Subtest: same-generation actual FIFO message survives latest native sequence ahead; duplicates rejected
+ok 121 - same-generation actual FIFO message survives latest native sequence ahead; duplicates rejected
+  ---
+  duration_ms: 14.413004
+  type: 'test'
+  ...
+# Subtest: same-generation reverse sequence rejected (adversarial only)
+ok 122 - same-generation reverse sequence rejected (adversarial only)
+  ---
+  duration_ms: 9.997069
+  type: 'test'
+  ...
+# Subtest: new native instance with same generation rejects old callbacks
+ok 123 - new native instance with same generation rejects old callbacks
+  ---
+  duration_ms: 11.298175
+  type: 'test'
+  ...
+# Subtest: new Web admits events generated after its initialization watermark
+ok 124 - new Web admits events generated after its initialization watermark
+  ---
+  duration_ms: 21.01284
+  type: 'test'
+  ...
+# Subtest: scoped send fixed selection makes one action plus ordinary ping; v2 bytes unchanged
+ok 125 - scoped send fixed selection makes one action plus ordinary ping; v2 bytes unchanged
+  ---
+  duration_ms: 10.640118
+  type: 'test'
+  ...
+# Subtest: scoped bad never falls back or retries
+ok 126 - scoped bad never falls back or retries
+  ---
+  duration_ms: 10.338566
+  type: 'test'
+  ...
+# Subtest: scoped throw never falls back or retries
+ok 127 - scoped throw never falls back or retries
+  ---
+  duration_ms: 13.893514
+  type: 'test'
+  ...
+# Subtest: scoped mismatch never falls back or retries
+ok 128 - scoped mismatch never falls back or retries
+  ---
+  duration_ms: 11.942547
+  type: 'test'
+  ...
+# Subtest: scoped not_sent never falls back or retries
+ok 129 - scoped not_sent never falls back or retries
+  ---
+  duration_ms: 10.619943
+  type: 'test'
+  ...
+# Subtest: late old scoped result does not mutate a new pending request
+ok 130 - late old scoped result does not mutate a new pending request
+  ---
+  duration_ms: 10.42642
+  type: 'test'
+  ...
+# Subtest: bad capability performs zero sends and untagged callbacks cannot clear pending
+ok 131 - bad capability performs zero sends and untagged callbacks cannot clear pending
+  ---
+  duration_ms: 13.230107
+  type: 'test'
+  ...
+# Subtest: legacy bridge preserves one legacy action + ping path and untagged callbacks
+ok 132 - legacy bridge preserves one legacy action + ping path and untagged callbacks
+  ---
+  duration_ms: 8.770704
+  type: 'test'
+  ...
+# Subtest: only same-named scoped method without capability is not trusted
+ok 133 - only same-named scoped method without capability is not trusted
+  ---
+  duration_ms: 13.276444
+  type: 'test'
+  ...
+# Subtest: current lifecycle clears UI without resolving independently retained C4 unknown
+ok 134 - current lifecycle clears UI without resolving independently retained C4 unknown
+  ---
+  duration_ms: 17.904604
+  type: 'test'
+  ...
+# Subtest: Web rebuild rejects previously produced same-generation events
+ok 135 - Web rebuild rejects previously produced same-generation events
+  ---
+  duration_ms: 12.735816
+  type: 'test'
+  ...
+# Subtest: decimal sequence beyond JS integer range keeps adjacent event order
+ok 136 - decimal sequence beyond JS integer range keeps adjacent event order
+  ---
+  duration_ms: 10.744294
+  type: 'test'
+  ...
+# Subtest: exception after context switch cannot mark a new attempt unknown
+ok 137 - exception after context switch cannot mark a new attempt unknown
+  ---
+  duration_ms: 11.643498
+  type: 'test'
+  ...
+1..137
+# tests 137
+# suites 0
+# pass 137
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2275.792753

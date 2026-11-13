@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { LocalPendingActions, LocalHostResults } from '../../src/bluetooth-local-results.ts';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { stripTypeScriptTypes } from 'node:module';
@@ -38,7 +39,7 @@ export function createReceiptChannel(room:BluetoothHostRoom,role:'host'|'guest',
     if(result!=='drop')emitted.push(raw);
   }};
   if(checkedSend)Object.assign(bridge,{sendChecked:(raw:string)=>{attempted.push(raw);return checkedSend(raw);}});
-  const scope:any={bluetooth,BLUETOOTH_PROTOCOL_VERSION,BLUETOOTH_HOST_PLAYER,BLUETOOTH_GUEST_PLAYER,
+  const scope:any={bluetooth,LocalPendingActions,LocalHostResults,BLUETOOTH_PROTOCOL_VERSION,BLUETOOTH_HOST_PLAYER,BLUETOOTH_GUEST_PLAYER,
     createBluetoothSnapshot,encodeBluetoothEnvelope,parseBluetoothEnvelope,RuleError,
     nativeBluetooth:()=>bridge,bluetoothActionId:()=>`recorded:${++id}`,
     showToast:(message:string)=>toasts.push(message),isBluetoothTransportInterrupted:()=>bluetooth.nativeState!=='CONNECTED',
