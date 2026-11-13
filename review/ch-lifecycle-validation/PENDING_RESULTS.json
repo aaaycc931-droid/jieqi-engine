@@ -1,0 +1,27 @@
+{
+  "task": "MAIN-CH-PENDING-REQUEST-PRESERVATION-PROTOTYPE-20261113",
+  "base": "09af8bf1dae274e180d123370b86d444aafad4c9",
+  "semantic_reference": "f30f1f5541fd84ebbf6aa298a4bcc3e446adeb80",
+  "node": "v24.22.1",
+  "command": "node --test --test-reporter=tap tests/research/ch-lifecycle-pending.test.ts",
+  "passed": 16,
+  "failed": 0,
+  "attempts": "Initial 16 passed; added per-instance local token and strengthened restart-after-recapture control; final 16 passed. No old suites rerun.",
+  "sha256": {
+    "scripts/research/ch-lifecycle-pending.ts": "ef0459365ec8f05064fe87f614f28cd28c9b400f98e01c5f7db8b8b86ac9818e",
+    "tests/research/ch-lifecycle-pending.test.ts": "186ced76127f4ff89033485d4e4e4a29f0f4449d4f473074334dd45d7a7ad372",
+    "review/ch-lifecycle-validation/PENDING_TESTS.tap": "9ea5c55336ab63dfaef47e283fb172fab3e979f88672274e154b112701db17a2"
+  },
+  "previous_tracked_paths": 647,
+  "previous_tracked_diff": [],
+  "production_changes": 0,
+  "wire_changes": 0,
+  "limits": [
+    "Memory-only research wrapper; no production persistence.",
+    "Original raw has no authority/match/trusted generation: production_missing remains null/unknown.",
+    "fixtureAnswer is explicit synthetic test seam aligned with PR24 semantics, not PR24 integration or authenticated reply.",
+    "Exact raw-byte binding, not canonical JSON interoperability.",
+    "Count-bounded 256 records, no byte budget or durable restoration claim.",
+    "Untagged legacy callbacks never resolve stored requests; production UI itself remains unchanged."
+  ]
+}

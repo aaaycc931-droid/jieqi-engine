@@ -1,0 +1,108 @@
+TAP version 13
+# (node:13) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: recorded eof UI clear retains original unknown
+ok 1 - recorded eof UI clear retains original unknown
+  ---
+  duration_ms: 28.248338
+  type: 'test'
+  ...
+# Subtest: recorded ioexception UI clear retains original unknown
+ok 2 - recorded ioexception UI clear retains original unknown
+  ---
+  duration_ms: 17.076848
+  type: 'test'
+  ...
+# Subtest: not_sent does not imply authority outcome
+ok 3 - not_sent does not imply authority outcome
+  ---
+  duration_ms: 0.442586
+  type: 'test'
+  ...
+# Subtest: written does not imply authority outcome
+ok 4 - written does not imply authority outcome
+  ---
+  duration_ms: 0.266446
+  type: 'test'
+  ...
+# Subtest: unknown does not imply authority outcome
+ok 5 - unknown does not imply authority outcome
+  ---
+  duration_ms: 0.181359
+  type: 'test'
+  ...
+# Subtest: reject wrong actor binding
+ok 6 - reject wrong actor binding
+  ---
+  duration_ms: 0.209261
+  type: 'test'
+  ...
+# Subtest: reject wrong authority binding
+ok 7 - reject wrong authority binding
+  ---
+  duration_ms: 0.176139
+  type: 'test'
+  ...
+# Subtest: reject wrong room binding
+ok 8 - reject wrong room binding
+  ---
+  duration_ms: 0.17129
+  type: 'test'
+  ...
+# Subtest: reject wrong match binding
+ok 9 - reject wrong match binding
+  ---
+  duration_ms: 0.200114
+  type: 'test'
+  ...
+# Subtest: reject wrong raw binding
+ok 10 - reject wrong raw binding
+  ---
+  duration_ms: 0.308725
+  type: 'test'
+  ...
+# Subtest: missing historical scope cannot be filled in by a reply
+ok 11 - missing historical scope cannot be filled in by a reply
+  ---
+  duration_ms: 0.299768
+  type: 'test'
+  ...
+# Subtest: late old evidence and untagged callback do not resolve a new attempt
+ok 12 - late old evidence and untagged callback do not resolve a new attempt
+  ---
+  duration_ms: 0.265535
+  type: 'test'
+  ...
+# Subtest: FIFO eviction and new memory instance are unknown
+ok 13 - FIFO eviction and new memory instance are unknown
+  ---
+  duration_ms: 0.264342
+  type: 'test'
+  ...
+# Subtest: caller mutations cannot change retained binding or answer
+ok 14 - caller mutations cannot change retained binding or answer
+  ---
+  duration_ms: 0.383104
+  type: 'test'
+  ...
+# Subtest: conflicting accepted/rejected evidence remains conflict
+ok 15 - conflicting accepted/rejected evidence remains conflict
+  ---
+  duration_ms: 0.161952
+  type: 'test'
+  ...
+# Subtest: missing transport ID never becomes attributable
+ok 16 - missing transport ID never becomes attributable
+  ---
+  duration_ms: 0.238384
+  type: 'test'
+  ...
+1..16
+# tests 16
+# suites 0
+# pass 16
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 388.234242
