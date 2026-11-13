@@ -1,0 +1,11 @@
+# PR24 F1 scope validation fix
+
+Source: half-chaos r59 report at handoff `6fb9a01ab58cdf92c8fa297c7ebbcc606a7db5f0`, actual four-control evidence at engine `2204ef656c4d72684c0fce8f52789108796ed1f0`. This is one runtime guard gap, with two missing-field variants, in a trusted offline prototype; it is not a demonstrated remote exploit.
+
+Mainline read the r59 report, complete minimal driver and result JSON. It independently reproduced both variants on byte-verified PR24 `f30f1f5541fd84ebbf6aa298a4bcc3e446adeb80` (source SHA256 `7e4567142bf6a3194ff410051afa2454e68776cb4f633ce92c6debe64b21f415`): omitting authorityId or matchEpoch allowed construction and an accepted query after a real create/join/hero selection. No host/state injection was used.
+
+The constructor now requires exactly three own enumerable data fields: authorityId, roomId and matchEpoch, all nonblank strings. Scope accessors, inherited identifiers, missing/undefined/null/wrong-type fields, extra keys and non-object scopes are rejected. A null-prototype object with all valid own data fields remains valid. Query validates its own scope data property before comparison; malformed scope yields invalid, a structurally valid different scope remains unknown. No missing identifiers can gain a receipt by comparing undefined with undefined.
+
+Validation: Node v24.22.1; `node --test --test-reporter=tap tests/main-result-scope-validation.test.ts tests/main-authority-result-prototype.test.ts tests/bluetooth-host-room.test.ts`: **32 tests passed, 0 failed** (3 new tests including 32 malformed scope controls per relevant boundary, plus prior 29). Raw output: `review/main-result-prototype/scope-fix-tests.tap`. The legacy 36 production/package blob identity check still passes; this fix changes only the research prototype and adds its targeted test/evidence. The previous RESULTS.json/tests.tap remain historical PR24 evidence.
+
+No wire, production adapter, authentication, native generation, product mode, scoring, NET, APK, merge or deployment is included. This is the minimum concrete repair requested by r59, and a separate host adapter must enforce the same boundary. The half-chaos executor should verify the fixed source and the two original reproductions, then stop; it must not replace its immutable old evidence or rerun the old 13/29/935 matrices merely to restate receipt.
