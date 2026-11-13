@@ -1,0 +1,43 @@
+{
+  "id": "MAIN-HOST-RESULT-OPTIONAL-ADAPTER-20261113",
+  "source_baseline": "71145df45ad17215a3731e53150b6728e079e375",
+  "semantic_parent": "6ba35636ecf5c69203225149a7b746893299b39b",
+  "node": "v24.22.1",
+  "command": "node --test --test-reporter=tap tests/host-result-adapter.test.ts tests/bluetooth-host-room.test.ts",
+  "tests": 34,
+  "passed": 34,
+  "failed": 0,
+  "new_adapter_cases": 26,
+  "unchanged_host_cases": 8,
+  "scope": "actual BluetoothHostRoom optional internal entry, default disabled; no wire/native/app caller connected",
+  "HC_r59_F1": "own mandatory scope data fields and query validation covered",
+  "initial_new_test_run": {
+    "tests": 32,
+    "passed": 32,
+    "failed": 0
+  },
+  "production_existing_files_modified": [
+    "src/bluetooth-host-room.ts"
+  ],
+  "production_new_files": [
+    "src/host-result-ledger.ts"
+  ],
+  "native_web_wire_changes": 0,
+  "full_suite_or_build_run": false,
+  "independent_QA": false,
+  "device_runs": 0,
+  "NET": "PAUSED",
+  "scoring": "FROZEN",
+  "mode_gates_unchanged": true,
+  "review_correction": {
+    "finding": "optional tracking advance performed its first advance before mutation guard; guard added around entire method",
+    "source_rechecked": "71145df/src/bluetooth-host-room.ts blob80659ebf86c6bfbe678f67cd7aff9f01a8fa151c",
+    "baseline_advance_clock_reads": 2,
+    "final_advance_clock_reads": 2,
+    "new_tests": [
+      "ADAPTER-25",
+      "ADAPTER-26"
+    ],
+    "review_claim_corrected": "initial one-read baseline assumption was wrong; direct fixed-source read established two reads and final code preserves them"
+  }
+}

@@ -1,0 +1,214 @@
+TAP version 13
+# Subtest: BTHOST-01 SHA-256 邀请口令哈希在 Node 与 WebView 使用相同标准结果
+ok 1 - BTHOST-01 SHA-256 邀请口令哈希在 Node 与 WebView 使用相同标准结果
+  ---
+  duration_ms: 2.426775
+  type: 'test'
+  ...
+# Subtest: BTHOST-02 物理连接后只有房主保存完整房间，来宾只收到公开 RPS 状态
+ok 2 - BTHOST-02 物理连接后只有房主保存完整房间，来宾只收到公开 RPS 状态
+  ---
+  duration_ms: 4.574001
+  type: 'test'
+  ...
+# Subtest: BTHOST-03 双方猜拳后由房主权威建局，并向来宾发送揭示后仍安全的公开棋盘
+ok 3 - BTHOST-03 双方猜拳后由房主权威建局，并向来宾发送揭示后仍安全的公开棋盘
+  ---
+  duration_ms: 6.141333
+  type: 'test'
+  ...
+# Subtest: BTHOST-04 英雄、陷阱和私有坐标均通过房主单点结算
+ok 4 - BTHOST-04 英雄、陷阱和私有坐标均通过房主单点结算
+  ---
+  duration_ms: 28.001153
+  type: 'test'
+  ...
+# Subtest: BTHOST-05 来宾操作仍受回合、版本和房主规则引擎约束
+ok 5 - BTHOST-05 来宾操作仍受回合、版本和房主规则引擎约束
+  ---
+  duration_ms: 3.023909
+  type: 'test'
+  ...
+# Subtest: BTHOST-06 英雄选择起主动退出由房主立即权威判负
+ok 6 - BTHOST-06 英雄选择起主动退出由房主立即权威判负
+  ---
+  duration_ms: 0.823395
+  type: 'test'
+  ...
+# Subtest: BTHOST-07 再战邀请由房主计时并在对方接受后建立全新选英雄阶段
+ok 7 - BTHOST-07 再战邀请由房主计时并在对方接受后建立全新选英雄阶段
+  ---
+  duration_ms: 1.327796
+  type: 'test'
+  ...
+# Subtest: BTHOST-08 双方聊天经房主权威同步且不阻塞行棋回合
+ok 8 - BTHOST-08 双方聊天经房主权威同步且不阻塞行棋回合
+  ---
+  duration_ms: 3.339016
+  type: 'test'
+  ...
+# Subtest: ADAPTER-01 default disabled legacy dispatch remains available, no tracking implicit
+ok 9 - ADAPTER-01 default disabled legacy dispatch remains available, no tracking implicit
+  ---
+  duration_ms: 8.55811
+  type: 'test'
+  ...
+# Subtest: ADAPTER-02 actual host hero commits one source-bound result before phase transition
+ok 10 - ADAPTER-02 actual host hero commits one source-bound result before phase transition
+  ---
+  duration_ms: 3.415489
+  type: 'test'
+  ...
+# Subtest: ADAPTER-03 later refusal is separate from original hero acceptance
+ok 11 - ADAPTER-03 later refusal is separate from original hero acceptance
+  ---
+  duration_ms: 1.797152
+  type: 'test'
+  ...
+# Subtest: ADAPTER-04 query neither calls clock/RNG/views nor returns private input or board
+ok 12 - ADAPTER-04 query neither calls clock/RNG/views nor returns private input or board
+  ---
+  duration_ms: 1.900053
+  type: 'test'
+  ...
+# Subtest: ADAPTER-05 pre-dispatch hero expiry advances real authority but rejects the late command
+ok 13 - ADAPTER-05 pre-dispatch hero expiry advances real authority but rejects the late command
+  ---
+  duration_ms: 1.308601
+  type: 'test'
+  ...
+# Subtest: ADAPTER-06 natural RPS/resign/finished records acceptance and preserves later refusal distinction
+ok 14 - ADAPTER-06 natural RPS/resign/finished records acceptance and preserves later refusal distinction
+  ---
+  duration_ms: 7.897217
+  type: 'test'
+  ...
+# Subtest: ADAPTER-07 explicit postcommit projection fault cannot change accepted into rejected
+ok 15 - ADAPTER-07 explicit postcommit projection fault cannot change accepted into rejected
+  ---
+  duration_ms: 2.698382
+  type: 'test'
+  ...
+# Subtest: ADAPTER-08 explicit clock RNG failure before dispatch produces no command result
+ok 16 - ADAPTER-08 explicit clock RNG failure before dispatch produces no command result
+  ---
+  duration_ms: 1.51822
+  type: 'test'
+  ...
+# Subtest: ADAPTER-09 unreviewed dispatch exception stays unknown with unchanged command authority
+ok 17 - ADAPTER-09 unreviewed dispatch exception stays unknown with unchanged command authority
+  ---
+  duration_ms: 0.673917
+  type: 'test'
+  ...
+# Subtest: ADAPTER-10 stale resign preserves actual refusal without accepting the command
+ok 18 - ADAPTER-10 stale resign preserves actual refusal without accepting the command
+  ---
+  duration_ms: 2.293196
+  type: 'test'
+  ...
+# Subtest: ADAPTER-11 ID-only duplicate from earlier move does not prove a resign attempt
+ok 19 - ADAPTER-11 ID-only duplicate from earlier move does not prove a resign attempt
+  ---
+  duration_ms: 10.957825
+  type: 'test'
+  ...
+# Subtest: ADAPTER-12 retained attempt ID reuse and unsupported actions reject before clock or mutation
+ok 20 - ADAPTER-12 retained attempt ID reuse and unsupported actions reject before clock or mutation
+  ---
+  duration_ms: 0.610538
+  type: 'test'
+  ...
+# Subtest: ADAPTER-13 actor, content, authority and match are independently bound
+ok 21 - ADAPTER-13 actor, content, authority and match are independently bound
+  ---
+  duration_ms: 0.519119
+  type: 'test'
+  ...
+# Subtest: ADAPTER-14 mandatory scope own data fields reject F1 missing/undefined/empty/wrong type/accessors/inheritance
+ok 22 - ADAPTER-14 mandatory scope own data fields reject F1 missing/undefined/empty/wrong type/accessors/inheritance
+  ---
+  duration_ms: 1.102627
+  type: 'test'
+  ...
+# Subtest: ADAPTER-15 malformed query never equates absent scope fields and never invokes getters
+ok 23 - ADAPTER-15 malformed query never equates absent scope fields and never invokes getters
+  ---
+  duration_ms: 0.891392
+  type: 'test'
+  ...
+# Subtest: ADAPTER-16 caller and returned objects cannot rewrite scope or results
+ok 24 - ADAPTER-16 caller and returned objects cannot rewrite scope or results
+  ---
+  duration_ms: 0.703723
+  type: 'test'
+  ...
+# Subtest: ADAPTER-17 FIFO eviction and byte overflow retain unknown without undoing actual commitment
+ok 25 - ADAPTER-17 FIFO eviction and byte overflow retain unknown without undoing actual commitment
+  ---
+  duration_ms: 0.840758
+  type: 'test'
+  ...
+# Subtest: ADAPTER-18 disconnect/reconnect retires tracking; old scope query is local history only
+ok 26 - ADAPTER-18 disconnect/reconnect retires tracking; old scope query is local history only
+  ---
+  duration_ms: 1.173629
+  type: 'test'
+  ...
+# Subtest: ADAPTER-19 actual same-room rematch retires tracking and never reuses original match authority
+ok 27 - ADAPTER-19 actual same-room rematch retires tracking and never reuses original match authority
+  ---
+  duration_ms: 2.51474
+  type: 'test'
+  ...
+# Subtest: ADAPTER-20 new owner cannot reconstruct old receipts from same caller labels
+ok 28 - ADAPTER-20 new owner cannot reconstruct old receipts from same caller labels
+  ---
+  duration_ms: 0.461792
+  type: 'test'
+  ...
+# Subtest: ADAPTER-21 tracked hero and resign output equal legacy actual host for identical natural setup
+ok 29 - ADAPTER-21 tracked hero and resign output equal legacy actual host for identical natural setup
+  ---
+  duration_ms: 4.7943
+  type: 'test'
+  ...
+# Subtest: ADAPTER-22 legacy and tracked paths both read a later second clock for output
+ok 30 - ADAPTER-22 legacy and tracked paths both read a later second clock for output
+  ---
+  duration_ms: 0.639042
+  type: 'test'
+  ...
+# Subtest: ADAPTER-23 reentrant mutating host calls are refused, read-only query remains safe
+ok 31 - ADAPTER-23 reentrant mutating host calls are refused, read-only query remains safe
+  ---
+  duration_ms: 0.620828
+  type: 'test'
+  ...
+# Subtest: ADAPTER-24 canonical body binding rejects lossy/accessor inputs before clock
+ok 32 - ADAPTER-24 canonical body binding rejects lossy/accessor inputs before clock
+  ---
+  duration_ms: 0.471549
+  type: 'test'
+  ...
+# Subtest: ADAPTER-25 advance preserves baseline two clock reads in both legacy and tracked configurations
+ok 33 - ADAPTER-25 advance preserves baseline two clock reads in both legacy and tracked configurations
+  ---
+  duration_ms: 1.127102
+  type: 'test'
+  ...
+# Subtest: ADAPTER-26 reentrant advance is rejected before another clock read or authority mutation
+ok 34 - ADAPTER-26 reentrant advance is rejected before another clock read or authority mutation
+  ---
+  duration_ms: 0.524148
+  type: 'test'
+  ...
+1..34
+# tests 34
+# suites 0
+# pass 34
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 462.742635

@@ -1,0 +1,193 @@
+{
+  "sourceCommit": "71145df45ad17215a3731e53150b6728e079e375",
+  "publishParentMayBe": "6ba35636ecf5c69203225149a7b746893299b39b",
+  "source_manifest_origin": "PR24/review/main-result-prototype/source-manifest.json",
+  "production_package_original_files_checked": 36,
+  "unchanged_files": [
+    {
+      "path": "package.json",
+      "blob": "34b26233ab157051caeae779771ddc0fceb24465",
+      "bytes": 644
+    },
+    {
+      "path": "src/bluetooth-protocol.ts",
+      "blob": "d3d665f53588d30dc1b6e3a31fd3f300043cd7cd",
+      "bytes": 2868
+    },
+    {
+      "path": "src/errors.ts",
+      "blob": "4abef6f0c9296cad333b10aa5c9e24b56c6f624f",
+      "bytes": 189
+    },
+    {
+      "path": "src/game.ts",
+      "blob": "fe86e6adce83aca4171d38c75321bf3e178a4245",
+      "bytes": 57923
+    },
+    {
+      "path": "src/ghosts.ts",
+      "blob": "a24ef4bf971cb89825c442e9f51e29e2359f8ec1",
+      "bytes": 5592
+    },
+    {
+      "path": "src/hero-actions.ts",
+      "blob": "2de406812dd1737ff0b861655cf6dcce1a474fb7",
+      "bytes": 26571
+    },
+    {
+      "path": "src/hero-brawl.ts",
+      "blob": "a6b583b4bc563f24dbda710c5d63eae1df2bba6d",
+      "bytes": 4973
+    },
+    {
+      "path": "src/hero-children.ts",
+      "blob": "2c5ef5b0afdf7975f3a71d1c94ba2035ed912416",
+      "bytes": 4894
+    },
+    {
+      "path": "src/hero-descent.ts",
+      "blob": "fc3146acb9476f6b6537fc64f4055cc46444c0f8",
+      "bytes": 9740
+    },
+    {
+      "path": "src/hero-forms.ts",
+      "blob": "e42cb0854bd71dfaf4004268ec79e11c115c692d",
+      "bytes": 6091
+    },
+    {
+      "path": "src/hero-progress.ts",
+      "blob": "4a2fa1742283cf14781b51f6e43169aa37ec856e",
+      "bytes": 10189
+    },
+    {
+      "path": "src/hero-river.ts",
+      "blob": "9954e51d12f7d2c218e70cc42a18988a787ffa2c",
+      "bytes": 3705
+    },
+    {
+      "path": "src/hero-shuffle.ts",
+      "blob": "316973714c38e642d68f188ec978fd9c46fb754d",
+      "bytes": 7561
+    },
+    {
+      "path": "src/heroes.ts",
+      "blob": "0958d1e16103de4b808a96d4fb825bf446a45e59",
+      "bytes": 6519
+    },
+    {
+      "path": "src/index.ts",
+      "blob": "2becff16faa802aec425479d69ee3730542b28d1",
+      "bytes": 871
+    },
+    {
+      "path": "src/mechanism-observer.ts",
+      "blob": "0d185ad1c580e8e4654523170b1a4702dddd6299",
+      "bytes": 5604
+    },
+    {
+      "path": "src/modes.ts",
+      "blob": "cb05c2fcfb0c617b6310e08ef8593e1d12ad95cc",
+      "bytes": 1791
+    },
+    {
+      "path": "src/mutations.ts",
+      "blob": "a433d6f562686a3e654dd9d003db562a4e30a424",
+      "bytes": 7720
+    },
+    {
+      "path": "src/proposal-review.ts",
+      "blob": "a2d8a463b556bf26183383a9fdbc6fa12a45013d",
+      "bytes": 2814
+    },
+    {
+      "path": "src/public-path-qualification.ts",
+      "blob": "a1b1841d577b1b1403fe4a70c53294a14471a50b",
+      "bytes": 4361
+    },
+    {
+      "path": "src/remote-room.ts",
+      "blob": "37194aac340d8fed5d6ac02e0001bf4bfd65784b",
+      "bytes": 62698
+    },
+    {
+      "path": "src/research-source-context.ts",
+      "blob": "b7bf2f759f4422729abec1eb84bbbc6c956d6858",
+      "bytes": 13625
+    },
+    {
+      "path": "src/room.ts",
+      "blob": "687ce619fb798224e0b80c593c955a25b38b32f0",
+      "bytes": 2914
+    },
+    {
+      "path": "src/rps.ts",
+      "blob": "ce158c5252b4ce4fd8a3b57815f052d276384666",
+      "bytes": 3678
+    },
+    {
+      "path": "src/rules.ts",
+      "blob": "959eb04f6d4bd6a0f9a5ca480b75eb5bd93fa8e0",
+      "bytes": 23321
+    },
+    {
+      "path": "src/settlement-context.ts",
+      "blob": "58052bee1c08392f887fbf1e7f1ec7501c2d8cf4",
+      "bytes": 557
+    },
+    {
+      "path": "src/settlement.ts",
+      "blob": "6655e6c0a3b319992bc23e0d216a502bf252702d",
+      "bytes": 30946
+    },
+    {
+      "path": "src/setup.ts",
+      "blob": "15df513e8204d48464c097453c7bf9b83748c9f5",
+      "bytes": 3614
+    },
+    {
+      "path": "src/sha256.ts",
+      "blob": "d9c0326f753dc5ef3fcf3a021e5b9258c0f068e8",
+      "bytes": 3623
+    },
+    {
+      "path": "src/shan-board.ts",
+      "blob": "0a3d0767f3040a84fef643762cc58b1e5d0dacdc",
+      "bytes": 14145
+    },
+    {
+      "path": "src/shan-core.ts",
+      "blob": "9c7a82ff1ef04334fe3a0e29a0b25dfe885598fc",
+      "bytes": 13942
+    },
+    {
+      "path": "src/slots.ts",
+      "blob": "84971b8e5f52f6ea1e20ee4ddbe2e4c8b736f911",
+      "bytes": 4276
+    },
+    {
+      "path": "src/spaces.ts",
+      "blob": "cc4db990fe5683a44b6a95ba50620370a242f49d",
+      "bytes": 1521
+    },
+    {
+      "path": "src/turns.ts",
+      "blob": "325eea5b12ad36ec7b1fc8bdd50c1a56833f0612",
+      "bytes": 3950
+    },
+    {
+      "path": "src/types.ts",
+      "blob": "75e987b74186440d3d2b2f20addb43a5fcbf43e5",
+      "bytes": 14127
+    }
+  ],
+  "changed_existing_files": [
+    "src/bluetooth-host-room.ts"
+  ],
+  "new_code": "src/host-result-ledger.ts",
+  "host_baseline_direct_read": {
+    "ref": "71145df45ad17215a3731e53150b6728e079e375",
+    "path": "src/bluetooth-host-room.ts",
+    "blob": "80659ebf86c6bfbe678f67cd7aff9f01a8fa151c",
+    "advance_clock_reads": 2
+  }
+}
