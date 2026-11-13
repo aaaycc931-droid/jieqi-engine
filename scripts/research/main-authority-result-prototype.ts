@@ -59,6 +59,18 @@ const unknown = (): Answer => ({ query: 'valid', outcome: 'unknown' });
 const keyFor = (actor: string, id: string) => JSON.stringify([actor, id]);
 const bytes = (s: string) => new TextEncoder().encode(s).length;
 
+// ResultScope is a runtime boundary as well as a TypeScript shape. Never let
+// absent identifiers compare equal through undefined, or evaluate accessors.
+function validScope(scope: unknown): scope is ResultScope {
+  if (!scope || typeof scope !== 'object' || Array.isArray(scope)) return false;
+  const names = ['authorityId', 'roomId', 'matchEpoch'];
+  if (Reflect.ownKeys(scope).length !== names.length) return false;
+  return names.every(key => {
+    const d = Object.getOwnPropertyDescriptor(scope, key);
+    return !!d && d.enumerable && 'value' in d && typeof d.value === 'string' && !!d.value.trim();
+  });
+}
+
 export class OfflineAuthorityResultPrototype {
   readonly #scope: Readonly<ResultScope>;
   readonly #actors: ReadonlySet<string>;
@@ -75,8 +87,8 @@ export class OfflineAuthorityResultPrototype {
     /** Fault injection only; never evidence that production naturally throws. */
     projectionForTest?: (room: RemoteRoom) => unknown;
   }) {
-    if (normalizeGameMode(options.room.mode.baseMode) !== 'jieqi' || options.scope.roomId !== options.room.roomId ||
-        Object.values(options.scope).some(s => typeof s !== 'string' || !s.trim())) throw new TypeError('Exact jieqi scope required');
+    if (normalizeGameMode(options.room.mode.baseMode) !== 'jieqi' || !validScope(options.scope) || options.scope.roomId !== options.room.roomId)
+      throw new TypeError('Exact jieqi scope required');
     const guest = options.room.seats.guest?.playerId;
     if (!guest || guest === options.room.seats.host.playerId) throw new TypeError('Two distinct bound players required');
     this.#actors = new Set([options.room.seats.host.playerId, guest]);
@@ -98,8 +110,10 @@ export class OfflineAuthorityResultPrototype {
   // No clock, RNG, projection, engine dispatch, or state assignment in queries.
   query(callerActor: string, q: ResultQuery): Answer {
     if (!this.#actors.has(callerActor)) return { query: 'invalid' };
-    if (q.scope.authorityId !== this.#scope.authorityId || q.scope.roomId !== this.#scope.roomId ||
-        q.scope.matchEpoch !== this.#scope.matchEpoch) return unknown();
+    const scope = q && typeof q === 'object' ? Object.getOwnPropertyDescriptor(q, 'scope') : undefined;
+    if (!scope || !('value' in scope) || !validScope(scope.value)) return { query: 'invalid' };
+    if (scope.value.authorityId !== this.#scope.authorityId || scope.value.roomId !== this.#scope.roomId ||
+        scope.value.matchEpoch !== this.#scope.matchEpoch) return unknown();
     if (typeof q.transportId !== 'string' || !q.transportId.trim()) return { query: 'invalid' };
     let binding: string;
     try { binding = canonicalJson(q.action); } catch { return { query: 'invalid' }; }
