@@ -1,0 +1,20 @@
+/* Scoped to the second hero. Existing art and UI approvals are untouched. */
+[data-hero="cen_ying"] { position: relative; overflow: hidden; }
+[data-hero="cen_ying"]::before, [data-hero="cen_ying"]::after { display: none !important; }
+[data-hero="cen_ying"] > span { visibility: hidden; }
+[data-hero-pilot2-art] { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
+[data-hero-pilot2-art="figure"] { object-fit: contain; object-position: center bottom; }
+[data-art-fallback="岑缨"]::after { display: grid !important; position: absolute; inset: 0; place-items: center; content: "岑缨"; color: #f6e6ca; background: #3c433f; }
+.cen-ying-picker { display: grid; gap: 9px; margin-top: 12px; }
+.cen-ying-picker label { display: grid; gap: 4px; color: #e9d7b6; text-align: left; }
+.cen-ying-picker select { width: 100%; min-height: 42px; border: 1px solid #947453; border-radius: 6px; padding: 7px; color: #f7ead5; background: #252c2c; font: inherit; }
+.cen-ying-pull-preview { margin: 2px 0; font-size: 13px; line-height: 1.5; }
+.cen-ying-preview-board { display: grid; grid-template-columns: repeat(9, 1fr); gap: 2px; max-width: 270px; width: 100%; margin: 0 auto; padding: 5px; border: 1px solid #8a7254; border-radius: 6px; background: #dfc9a4; color: #797063; }
+.cen-ying-preview-board span { display: grid; place-items: center; min-width: 0; aspect-ratio: 1.2; font-size: 12px; line-height: 1; border: 1px solid transparent; border-radius: 3px; }
+.cen-ying-preview-board [data-side="red"] { color: #96372e; }
+.cen-ying-preview-board [data-side="black"] { color: #233e43; }
+.cen-ying-preview-board .anchor { background: #ffe3a2; border-color: #97742c; font-weight: 700; }
+.cen-ying-preview-board .target { background: #f0c0ae; border: 2px solid #a64437; }
+.cen-ying-preview-board .landing { border: 2px dashed #236c65; background: #c7d8c0; }
+.cen-ying-picker > small { font-size: 11px; line-height: 1.5; }
+.cen-ying-trial-note { padding: 6px 10px; margin: 0; color: #e5c69a; font-size: 12px; text-align: center; }

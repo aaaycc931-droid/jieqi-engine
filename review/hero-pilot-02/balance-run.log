@@ -1,0 +1,36 @@
+{"id":"93-red-disabled","ordinary":83,"skills":0,"terminal":"natural_terminal","winner":"red","reason":"checkmate"}
+{"id":"93-red-enabled","ordinary":83,"skills":0,"terminal":"natural_terminal","winner":"red","reason":"checkmate"}
+{"id":"93-black-disabled","ordinary":45,"skills":0,"terminal":"natural_terminal","winner":"red","reason":"checkmate"}
+{"id":"93-black-enabled","ordinary":45,"skills":0,"terminal":"natural_terminal","winner":"red","reason":"checkmate"}
+{"id":"95-red-disabled","ordinary":5,"skills":0,"terminal":"natural_terminal","winner":"black","reason":"ambush"}
+{"id":"95-red-enabled","ordinary":5,"skills":0,"terminal":"natural_terminal","winner":"black","reason":"ambush"}
+{"id":"95-black-disabled","ordinary":20,"skills":0,"terminal":"natural_terminal","winner":"black","reason":"ambush"}
+{"id":"95-black-enabled","ordinary":20,"skills":0,"terminal":"natural_terminal","winner":"black","reason":"ambush"}
+{"id":"97-red-disabled","ordinary":29,"skills":0,"terminal":"natural_terminal","winner":"red","reason":"ambush"}
+{"id":"97-red-enabled","ordinary":29,"skills":0,"terminal":"natural_terminal","winner":"red","reason":"ambush"}
+{"id":"97-black-disabled","ordinary":16,"skills":0,"terminal":"natural_terminal","winner":"red","reason":"ambush"}
+{"id":"97-black-enabled","ordinary":16,"skills":0,"terminal":"natural_terminal","winner":"red","reason":"ambush"}
+{"id":"98-red-disabled","ordinary":140,"skills":0,"terminal":"budget_resignation","winner":"black","reason":"resign"}
+{"id":"98-red-enabled","ordinary":140,"skills":0,"terminal":"budget_resignation","winner":"black","reason":"resign"}
+{"id":"98-black-disabled","ordinary":140,"skills":0,"terminal":"budget_resignation","winner":"black","reason":"resign"}
+{"id":"98-black-enabled","ordinary":140,"skills":0,"terminal":"budget_resignation","winner":"black","reason":"resign"}
+{"id":"93-red-enabled-exercise","ordinary":42,"skills":2,"terminal":"natural_terminal","winner":"red","reason":"checkmate"}
+{"id":"93-black-enabled-exercise","ordinary":10,"skills":2,"terminal":"natural_terminal","winner":"red","reason":"ambush"}
+{"id":"97-red-enabled-exercise","ordinary":41,"skills":2,"terminal":"natural_terminal","winner":"black","reason":"ambush"}
+{"id":"97-black-enabled-exercise","ordinary":6,"skills":2,"terminal":"natural_terminal","winner":"red","reason":"ambush"}
+{
+  "fixtureGroups": 6,
+  "pairedSeedColorConditions": 8,
+  "pairedPolicyRollouts": 16,
+  "deliberateSkillExercises": 4,
+  "completeRollouts": 20,
+  "naturalTerminals": 16,
+  "budgetResignations": 4,
+  "pairedPolicySkillUses": 0,
+  "totalActualSkillUses": 8,
+  "completedGamesWithActualSkill": 4,
+  "runtimeFailures": 0,
+  "globalBalanceProven": false,
+  "humanPlaytest": false,
+  "formalScoringRun": false
+}

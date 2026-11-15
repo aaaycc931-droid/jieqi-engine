@@ -1,7 +1,11 @@
 import type { HeroId } from "./types.ts";
 export const HERO_IDS: readonly HeroId[] = ["hunter", "rogue", "warrior", "qin_long", "murozond", "nozdormu", "murozond_minion", "devout_zealot", "prince", "deathwing", "death_knight", "wind", "shuffler", "warlock", "single_blade", "night", "sky_admiral", "berserker", "jiang_he"];
+/** 独立试点包可由显式本机入口选择；不加入默认/随机/联机产品池。 */
+export const EXPERIMENTAL_HERO_IDS: readonly HeroId[] = ["cen_ying"];
+export const ALL_HERO_IDS: readonly HeroId[] = [...HERO_IDS, ...EXPERIMENTAL_HERO_IDS];
 const skill = (name: string, text: string) => ({ name, description: text, fullDescription: text });
 export const HERO_CATALOG = {
+  cen_ying: { name: "岑缨", skills: [skill("引缆", "每局两次，占整手。以己方明置非将帅地面棋为锚，将同线距离2至3、间隔无地面棋的敌方明置非将帅地面棋向锚牵引一格。目标落点须为空且己将安全；不直接吃子，双方均可见剩余次数。") ] },
   hunter: { name: "猎人", skills: [skill("陷阱", "准备秘密布置两层己方半场陷阱；合格敌方地面进入消耗一层并直接消灭。完整覆盖12个敌方正式回合，第12回合末失效。") ] },
   rogue: { name: "潜行者", skills: [skill("刺杀", "每来源每局一次；己方明置非将帅先完成正常移动/进攻，存活受控则无形，并保留随后两个己方回合的刺杀机会。刺杀可指定无形、绕过普通防御，不能指定将帅。") ] },
   warrior: { name: "战士", skills: [skill("防护壁垒", "最多三枚不同的己方非将帅明棋首次离开己方九宫时获得壁垒。壁垒抵挡一次普通进攻（明确绕过来源除外）并弹回攻击者；持续三个敌方正式回合结束，名额不返还。"), skill("铁甲", "将帅免疫一次背刺。仅己方正式回合中因揭示或倒戈产生背刺时，获得一次额外立即应将。")] },

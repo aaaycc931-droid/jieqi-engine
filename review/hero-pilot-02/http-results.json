@@ -1,0 +1,43 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "path": "/web/?heroPilot2=1",
+      "status": 200,
+      "mime": "text/html; charset=utf-8",
+      "bytes": 31689,
+      "sha256": "e99fd5df212f8a545496b27b9e4e6cbae62abf5043fc4b81f2ab002aed7535a0"
+    },
+    {
+      "path": "/web/hero-pilot-02.css",
+      "status": 200,
+      "mime": "text/css; charset=utf-8",
+      "bytes": 2066,
+      "sha256": "6455af5c313987ea598be2807e2305128bf800d323c453bd285c3fbd2114d74c"
+    },
+    {
+      "path": "/web/assets/heroes/cen-ying/portrait-192.webp",
+      "status": 200,
+      "mime": "image/webp",
+      "bytes": 9852,
+      "sha256": "bd1e1a00f05600945a0ad165c2096d944f4b7eaa5d681b34a1e490ffa11f8be9"
+    },
+    {
+      "path": "/web/assets/heroes/cen-ying/portrait-384.webp",
+      "status": 200,
+      "mime": "image/webp",
+      "bytes": 34972,
+      "sha256": "7a1087203fa6010fb9994bd1c6a6dba0588b3cdd863e36720e1a230417f2d0a3"
+    },
+    {
+      "path": "/web/assets/heroes/cen-ying/figure-768.webp",
+      "status": 200,
+      "mime": "image/webp",
+      "bytes": 90364,
+      "sha256": "922dd8803171aa1aaec094ef574bcfd37a175f296793520e47796f1fd5e19b2c"
+    }
+  ],
+  "limits": [
+    "Same-process local HTTP resource availability and MIME only; no browser layout, decoding or device accessibility verification."
+  ]
+}

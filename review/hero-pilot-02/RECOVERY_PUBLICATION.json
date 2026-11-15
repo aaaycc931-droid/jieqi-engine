@@ -1,0 +1,75 @@
+{
+  "schema": "lezi.hero_pilot_02.recovery_publication.v1",
+  "work_id": "EXP-HERO-002",
+  "engine_repository": "aaaycc931-droid/jieqi-engine",
+  "engine_branch": "codex/autonomous-hero-02-20261114",
+  "expected_engine_head": "71145df45ad17215a3731e53150b6728e079e375",
+  "status": "PREPARED_NOT_PUBLISHED",
+  "original_delta_files": 36,
+  "original_delta_files_byte_identical": 33,
+  "metadata_changes": [
+    {
+      "path": "art/hero-pilot-02/ASSET_MANIFEST.json",
+      "original_sha256": "25e632d4b166387f43bc8c55b966a5794f10a1234e67daa608ae8f1ccfa57344",
+      "public_sha256": "743d198e95508c830feaffbcf2bc8a5c12adf424d1f648b2da9e3683b28cfba7",
+      "reason": "metadata-only privacy minimization and corresponding asset manifest binding"
+    },
+    {
+      "path": "art/hero-pilot-02/PROMPTS.json",
+      "original_sha256": "7f7885d107724b6cc19b7898ee7060cfc94f5030979c3ea36369801ceba632e0",
+      "public_sha256": "37ffa784fc582e8dedf1bdf7323e30d218c8fc1abebcef4b5ada26104a77e582",
+      "reason": "metadata-only privacy minimization and corresponding asset manifest binding"
+    },
+    {
+      "path": "review/hero-pilot-02/VALIDATION.json",
+      "original_sha256": "4a61c4b4b0e110a2ae8c6122d172ec2ad28741b70ae42b478bfcd89906d8afb2",
+      "public_sha256": "ccca8cc2622d7f16401c53a840fecd21750491ffedf2108e162b9560a719e79f",
+      "reason": "metadata-only privacy minimization and corresponding asset manifest binding"
+    }
+  ],
+  "removed_execution_location_fields": 6,
+  "checks": [
+    {
+      "check": "all_preserved_originals_size_sha256_git_blob",
+      "passed": 54
+    },
+    {
+      "check": "original_validation_source_bindings",
+      "passed": 16
+    },
+    {
+      "check": "original_validation_evidence_bindings",
+      "passed": 4
+    },
+    {
+      "check": "public_copy_keeps_all_executable_and_evidence_bindings",
+      "passed": 20
+    },
+    {
+      "check": "selected_masters_and_runtime_art_byte_identity",
+      "passed": 5
+    }
+  ],
+  "art_regenerated": false,
+  "business_tests_rerun": false,
+  "historical_results": {
+    "full_regression": "1044/1044",
+    "dom_cases": 15,
+    "http_resources": 5,
+    "balance_games": 20,
+    "source": "preserved original VALIDATION.json and hash-bound logs",
+    "not_current_runtime_reexecution": true
+  },
+  "remaining": [
+    "engineering branch publication and remote readback",
+    "draft PR creation",
+    "original-workline return of actual engine commit",
+    "real browser and touch",
+    "human or stronger-policy balance",
+    "independent QA",
+    "full typecheck"
+  ],
+  "main_received": "UNKNOWN",
+  "merge_deployment_APK": "OUT_OF_SCOPE",
+  "current_transport_limit": "No working direct GitHub network route in the recovery runtime; exposed connector actions do not accept a local-file bulk upload. No credential request or review bypass is used."
+}

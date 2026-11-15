@@ -2,6 +2,7 @@ import { configureHeroPreparation } from "../src/hero-progress.ts";
 import { getHeroPackage } from "../src/hero-forms.ts";
 import { isBoardPiece } from "../src/spaces.ts";
 import { HERO_IDS, HERO_CATALOG as heroCatalog } from "../src/heroes.ts";
+import { createCenYingPullPicker, heroPilot2Enabled, pilot2HeroPool, pilot2Position, renderPilot2Art } from "./hero-pilot-02.ts";
 import { applyHeroAbility, getShadowRevealedTargets, getBombers, startFormalClock, formalTurnDurationMs } from "../src/hero-actions.ts";
 import { initializeFeatureSecret } from "../src/settlement.ts";
 // The browser playground must only load browser-safe modules.  In particular,
@@ -80,6 +81,11 @@ import { trapTriggerAnnouncement } from "./messages.ts";
 
 const PLAYER_ONE = "玩家一";
 const PLAYER_TWO = "玩家二";
+const heroPilot2 = heroPilot2Enabled(window.location.search);
+if (heroPilot2) {
+  const style = document.createElement("link"); style.rel = "stylesheet";
+  style.href = new URL("./hero-pilot-02.css", import.meta.url).href; document.head.append(style);
+}
 const choiceLabel: Record<RpsChoice, string> = { rock: "石头", scissors: "剪刀", paper: "布" };
 const pieceLabel = {
   red: { general: "帅", advisor: "仕", elephant: "相", horse: "马", rook: "车", cannon: "炮", pawn: "兵", storm_elemental: "风暴元素" },
@@ -1827,6 +1833,9 @@ function heroSelectionState(): { selected?: HeroId; confirmed: boolean; opponent
 }
 
 function renderHeroSelection(overrideState?: ReturnType<typeof heroSelectionState>): void {
+  let pilotNote = document.getElementById("hero-pilot-02-note");
+  if (heroPilot2 && !pilotNote) { pilotNote = document.createElement("p"); pilotNote.id = "hero-pilot-02-note"; pilotNote.className = "cen-ying-trial-note"; heroGrid.before(pilotNote); }
+  if (pilotNote) { pilotNote.hidden = Boolean(bluetooth) || selectedGameMode !== "jieqi"; pilotNote.textContent = "岑缨试点 · 可在本机混乱象棋选择"; }
   const state = overrideState ?? heroSelectionState();
   const selected = state.selected;
   const remaining = secondsRemaining(state.deadlineAt);
@@ -1845,6 +1854,7 @@ function renderHeroSelection(overrideState?: ReturnType<typeof heroSelectionStat
   if (!selected) {
     heroSelectionName.textContent = "请选择英雄";
     heroDetailAvatar.dataset.hero = "";
+    renderPilot2Art(heroDetailAvatar, undefined);
     heroDetailAvatar.setAttribute("aria-label", "英雄形象尚未定稿");
     heroSkillList.replaceChildren();
     heroSkillDescription.textContent = "选择下方英雄后查看技能。";
@@ -1852,7 +1862,8 @@ function renderHeroSelection(overrideState?: ReturnType<typeof heroSelectionStat
     const hero = heroCatalog[selected];
     heroSelectionName.textContent = hero.name;
     heroDetailAvatar.dataset.hero = selected;
-    heroDetailAvatar.setAttribute("aria-label", `${hero.name}形象占位，正式画像尚未定稿`);
+    renderPilot2Art(heroDetailAvatar, selected, true);
+    heroDetailAvatar.setAttribute("aria-label", selected === "cen_ying" ? "岑缨 · 悬衡界引缆人" : `${hero.name}形象占位，正式画像尚未定稿`);
     activeSkillIndex = Math.min(activeSkillIndex, hero.skills.length - 1);
     heroSkillList.replaceChildren(...hero.skills.map((skill, index) => {
       const button = document.createElement("button");
@@ -1901,13 +1912,14 @@ function renderHeroSelection(overrideState?: ReturnType<typeof heroSelectionStat
 
   }
 
-  heroGrid.replaceChildren(...HERO_IDS.map((heroId) => {
+  heroGrid.replaceChildren(...pilot2HeroPool(HERO_IDS, heroPilot2, Boolean(bluetooth), selectedGameMode).map((heroId) => {
     const hero = heroCatalog[heroId];
     const button = document.createElement("button");
     button.type = "button";
     button.className = `hero-grid-item${selected === heroId ? " selected" : ""}`;
     button.disabled = state.confirmed || pending;
     button.innerHTML = `<span class="hero-art-placeholder grid-avatar" data-hero="${heroId}" aria-hidden="true"></span><span class="hero-grid-name${hero.name.length > 4 ? " long-name" : ""}">${hero.name}</span>`;
+    renderPilot2Art(button.querySelector<HTMLElement>(".grid-avatar")!, heroId);
     button.setAttribute("aria-label", `选择${hero.name}`);
     button.addEventListener("click", () => {
       if (state.confirmed) return;
@@ -2197,6 +2209,7 @@ function runtimeSkillEntries(side: Side, hero: HeroId): RuntimeSkillEntry[] {
 }
 
 function baseRuntimeSkillEntries(side: Side, hero: HeroId): RuntimeSkillEntry[] {
+  if (hero === "cen_ying") return [{ key: "ability:tether_pull", title: "引缆", state: `剩余 ${Math.max(0, 2 - (gameState?.heroRuntime?.[side]?.tetherPullUses ?? 0))}/2 · 占整手`, catalogIndex: 0, active: true }];
   if (hero === "hunter") {
     const ready = gameState?.status === "playing" || gameState?.status === "execution" || gameState?.status === "finished";
     return [{ key: "hunter-trap", title: "陷阱", state: ready ? "已秘密布置" : "准备中", catalogIndex: 0, active: false }];
@@ -2332,6 +2345,7 @@ function setBattleHeroAvatars(heroes: Record<Side, HeroId>, visible: boolean): v
     const avatar = element<HTMLElement>(`${side}-hero-avatar`);
     avatar.hidden = !visible;
     avatar.dataset.hero = heroes[side];
+    renderPilot2Art(avatar, heroes[side]);
     avatar.title = battleHeroName(side);
   }
 }
@@ -2956,6 +2970,8 @@ function renderGame(): void {
   if (heroes) {
     element<HTMLElement>("black-hero-avatar").dataset.hero = heroes.black;
     element<HTMLElement>("red-hero-avatar").dataset.hero = heroes.red;
+    renderPilot2Art(element<HTMLElement>("black-hero-avatar"), heroes.black);
+    renderPilot2Art(element<HTMLElement>("red-hero-avatar"), heroes.red);
   }
   renderRuntimeStatusPanels(heroes);
   renderCaptureCounts();
@@ -3838,6 +3854,7 @@ showMainMenu();
 
 function openHeroAbility(ability: HeroAbilityCommand["ability"]): void {
   if (!gameState || gameState.status !== "playing") return;
+  if (ability === "tether_pull") return openCenYingPull();
   if (!["invoke", "destruction", "rewind", "hourglass", "bomb", "timeline_twist", "shadow"].includes(ability)) return openTransferredHeroAbility(ability);
   const controls = document.createElement("div");
   const piece = document.createElement("select");
@@ -3882,15 +3899,48 @@ function localGameHandoff(): void {
   });
 }
 
+function openCenYingPull(): void {
+  if (!gameState || !gameSecret || bluetooth || !heroPilot2) return showToast("引缆在岑缨本机试点中开放。");
+  if (localPrivateViewerSide !== gameState.turn) return showToast("请先由当前玩家接手设备。");
+  const picker = createCenYingPullPicker(gameState);
+  if (!picker.options.length) {
+    const exhausted = (gameState.heroRuntime?.[gameState.turn]?.tetherPullUses ?? 0) >= 2;
+    showDialog("引缆", exhausted ? "本局两次引缆已用完。" : "当前没有合法引缆。需要己方明棋作锚，与敌方明棋同线相距2–3格，中间地面畅通；双方均不能是将帅、暗棋或无形棋。当前受将或拉动后己将受威胁时也不可发动。", "知道了", () => undefined);
+    return;
+  }
+  const revision = gameState.revision, actionId = nextActionId();
+  showDialog("岑缨 · 引缆", "敌棋向己方锚点拉近一格。消耗一次引缆和整个回合；对手随后正常行动。", "引缆 · 消耗本回合", () => {
+    const option = picker.selected(); if (!option) return;
+    runTransferredHeroCommand({ kind: "hero_ability", ability: "tether_pull", anchorPieceId: option.anchorPieceId, pieceId: option.pieceId, expectedRevision: revision, actionId });
+  });
+  dialogText.append(picker.root);
+  const cancel = document.createElement("button"); cancel.type = "button"; cancel.className = "quiet-button";
+  cancel.textContent = "取消，继续考虑"; cancel.setAttribute("aria-label", "取消引缆");
+  cancel.addEventListener("click", () => flowDialog.close()); picker.root.append(cancel);
+}
+
 function runTransferredHeroCommand(command: HeroAbilityCommand): void {
   if (!gameState) return;
   if (bluetooth) { handleBluetoothAction({ kind: "hero_ability", command }); return; }
   if (!gameSecret || localPrivateViewerSide !== gameState.turn) return showToast("请先由当前玩家接手设备。");
   try {
-    gameSecret.traps = structuredClone(localTraps);
+    // A stale/cancelled trial command must not mutate even the private snapshot.
+    // Existing hero paths retain their current trap synchronization behavior.
+    const actionSecret = command.ability === "tether_pull"
+      ? { ...gameSecret, traps: structuredClone(localTraps) }
+      : gameSecret;
+    if (command.ability !== "tether_pull") gameSecret.traps = structuredClone(localTraps);
     const previousSide = gameState.turn, previousClock = gameState.turnDeadlineAt;
-    const result = applyHeroAbility(gameState, gameSecret, command);
+    const result = applyHeroAbility(gameState, actionSecret, command);
+    if (command.ability === "tether_pull" && result.duplicate) return showToast("这次引缆已经处理。");
     gameState = result.state; gameSecret = result.secret; localTraps = gameSecret.traps ?? [];
+    if (command.ability === "tether_pull" && gameState.lastMove) {
+      assassinationArmed = false; strongStrikeArmed = false;
+      const moved = gameState.lastMove;
+      latestAnnouncement = `岑缨发动引缆：敌棋从${pilot2Position(moved.from)}拉至${pilot2Position(moved.to)}，己方锚点留在原位。`;
+      appendLocalSystemMessage(latestAnnouncement);
+      queueFormalEventCues(gameState, false, "引缆发动");
+    }
     selectedPieceId = undefined;
     if (previousSide !== gameState.turn || previousClock === undefined && !gameState.pendingShuffle) startFormalClock(gameState, Date.now(), gameSecret);
     renderGame();

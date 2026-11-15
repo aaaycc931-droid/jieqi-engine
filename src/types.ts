@@ -4,7 +4,7 @@ export type GameModeId = "jieqi" | "half_chaos" | "xiangqi";
 
 export type HeroId = "hunter" | "rogue" | "warrior" | "qin_long" | "murozond"
   | "nozdormu" | "murozond_minion" | "devout_zealot" | "prince" | "deathwing"
-  | "death_knight" | "wind" | "shuffler" | "warlock" | "single_blade" | "night" | "sky_admiral" | "berserker" | "jiang_he";
+  | "death_knight" | "wind" | "shuffler" | "warlock" | "single_blade" | "night" | "sky_admiral" | "berserker" | "jiang_he" | "cen_ying";
 
 export type HeroForm = "front" | "inner";
 export type GalakrondForm = "nightmare" | "invincible" | "fel" | "storm" | "unspeakable";
@@ -252,6 +252,8 @@ export type GhostObjectSpec = GhostObject & { kind: GhostKind; source: string };
 export interface GhostQuery { kind: GhostKind; owner?: Side; source?: string; position?: Position }
 
 export interface HeroRuntime {
+  /** EXP-HERO-002：公开的本局成功引缆次数；随完整回溯快照恢复。 */
+  tetherPullUses?: number;
   used?: boolean; invokeCount?: number; rainActive?: boolean; carefreeSuspended?: boolean;
   omen?: true; descended?: true;
   pupil?: number; insightCount?: number; insightTurn?: number;
@@ -342,11 +344,13 @@ export interface MoveCommand {
 
 export interface HeroAbilityCommand {
   kind: "hero_ability";
-  ability: "invoke" | "unspeakable" | "destruction" | "timeline_twist" | "rewind" | "hourglass" | "bomb" | "shadow" | "burning_flame" | "insight" | "inner_ghost_burst" | "ascension" | "storm_assault" | "river_enter" | "river_move" | "river_exit" | "inner_wave" | "landing" | "blade_shift" | "charge_move" | "charge_attack" | "wave_move" | "skip_child" | "shuffle" | "brawl" | "brawl_attack" | "training";
+  ability: "invoke" | "unspeakable" | "destruction" | "timeline_twist" | "rewind" | "hourglass" | "bomb" | "shadow" | "burning_flame" | "insight" | "inner_ghost_burst" | "ascension" | "storm_assault" | "river_enter" | "river_move" | "river_exit" | "inner_wave" | "landing" | "blade_shift" | "charge_move" | "charge_attack" | "wave_move" | "skip_child" | "shuffle" | "brawl" | "brawl_attack" | "training" | "tether_pull";
   actionId: string;
   expectedRevision: number;
   pieceId?: string;
   to?: Position;
+  /** 引缆的己方公开锚；pieceId 为被牵引的敌棋，落点由规则派生。 */
+  anchorPieceId?: string;
   randomCovered?: boolean;
   secretInsight?: boolean;
   trainingType?: PieceType;

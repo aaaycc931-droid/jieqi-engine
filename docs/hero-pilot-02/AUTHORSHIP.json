@@ -1,0 +1,25 @@
+{
+  "schema": "lezi.hero_authorship.v1",
+  "work_id": "EXP-HERO-002",
+  "hero_id": "cen_ying",
+  "original_design_model": null,
+  "original_design_model_status": "UNKNOWN_PENDING_ORIGINAL_PLATFORM_EVIDENCE",
+  "original_art_direction_model": null,
+  "original_art_direction_model_status": "UNKNOWN",
+  "image_generation_tool": {
+    "label": "built-in image_gen.imagegen",
+    "evidence": "original art prompt and asset records",
+    "underlying_model": null
+  },
+  "contributors": [
+    {
+      "role": "bounded recovery and publication preparation",
+      "model_label": "GPT-6 Astra Pro",
+      "label_evidence": "assistant self-report only; not independently verified platform telemetry",
+      "contribution": "Recovered and hash-verified originals; prepared privacy-minimized publication metadata and transport helper. No hero redesign, repainting, gameplay modification, or new game-test result.",
+      "original_creator_credit": false
+    }
+  ],
+  "publication_state": "PREPARED_NOT_PUBLISHED",
+  "frontend_label_installed": false
+}
