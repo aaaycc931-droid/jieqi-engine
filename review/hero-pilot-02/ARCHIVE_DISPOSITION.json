@@ -1,0 +1,27 @@
+{
+  "schema":"lezi.hero_pilot_02.archive_disposition.v1",
+  "work_id":"EXP-HERO-002",
+  "date":"2026-11-16",
+  "original_archive":{"filename":"cen-ying-recovery-20261114.zip","bytes":12722717,"sha256":"2ace4d651b35e0e6b8f8f2923632c07e8ead800c805e66e72ba7dad2d7d89ea5","owner_held_preserved":true,"retrieved_this_closeout":true,"zip_crc":"PASS","manifest_original_files_verified":54,"public_archive_upload":false},
+  "prepared_archive":{"filename":"cen-ying-publication-ready-20261114.zip","bytes":5394577,"sha256":"842a2a45ce9ab9a3873b3fd7063b19ce33f70cee8598cb7d7edcb15cbea51a1f","zip_crc":"PASS","candidate_files_verified":38},
+  "source_manifest_groups":{"engine_delta":36,"generated_originals":3,"handoff_original":9,"original_logs":5,"dependency_context":1,"total":54},
+  "published_scope":"38 prepared candidate paths are present after canonical master reconciliation; the original36 delta included33 byte-identical originals and3 privacy-minimized metadata files. Later authorship and closeout records are explicitly new metadata, not original execution evidence.",
+  "duplicate_selected_originals":"Two generated-original entries have the same bytes as the selected masters and are not uploaded again under execution-ID filenames.",
+  "historical_handoff_snapshots":"Nine original workline snapshots remain in the owner archive. Current published workline files supersede their operational state; snapshots are not current receipts.",
+  "dependency_context":"Baseline package.json is retained as original context, not a new engine dependency change.",
+  "supplements_not_published":[
+    {"kind":"unselected_initial_art","archive_path":"generated-originals/exec-780d0d86-9934-4bf6-84b7-de60497b913a.png","bytes":2288094,"sha256":"e38987e83996d1552e5708156ff47a2510a3d11d1a8f8a11abbd6e11f5e11cb1","git_blob_sha":"87208e2bb2f32f4f93c840c244409c96b4cfb5fa"},
+    {"kind":"original_log","archive_path":"original-logs/core-02-final.log","bytes":4585,"sha256":"219254b1b2519e3044b241fe88a3147737a8f99da48d1b35f2e48d44d75c27b8","git_blob_sha":"a86a0ca699cb83a6c98a6b14a99c16e0aaaddbf4"},
+    {"kind":"original_log","archive_path":"original-logs/core-02-root-verification.log","bytes":4588,"sha256":"652e3c86ae98ae4cd413004f08b00d2bb9b71f476139b7b9834cb2be864ee087","git_blob_sha":"e5b3bf473d9fde78daad185fba003b688c84ead3"},
+    {"kind":"original_log","archive_path":"original-logs/core-02-targeted.log","bytes":16037,"sha256":"78b77eeb875a71004830f89543f8961223b1caa57ed07fe3c80b5240e999347e","git_blob_sha":"e8870352023c8129910bbf57154cafca61a1a554"},
+    {"kind":"original_log","archive_path":"original-logs/full-02-test.log","bytes":129956,"sha256":"c127dbbab603520e6131fff0f330d617b6cc3035a4c38552578ac2732ee16f7c","git_blob_sha":"dc2eb1ebd765434d673383155ebf721c8a17dd7f"},
+    {"kind":"original_log","archive_path":"original-logs/web-02-regression.log","bytes":5719,"sha256":"545a7b40ed2c4f11887267dcdda62e8d3f0b68d9accf470fbe3a2d9cb2b7992b","git_blob_sha":"b5830828f3a49113d6d4937072b14c82c9d58bf8"},
+    {"kind":"recovery_snapshot","archive_path":"source-git-status.txt","bytes":1095,"sha256":"b6eb20e5b9ac934e0a4522d0fb5146970990c3c8da2c655920ce5cc3e2cd8d2b","git_blob_sha":"5394fe60bb8715bcf5790d3fd0ecfef2572a1925"},
+    {"kind":"recovery_snapshot","archive_path":"tracked-changes.patch","bytes":28129,"sha256":"3a2e7739d61128cfba371b009cb4eadd6c560b24704ea97440179356d6413374","git_blob_sha":"04a6182422d3d0e737f7764f49d8e05e728c1a13"}
+  ],
+  "disposition":"RETAINED_IN_OWNER_ARCHIVE_NOT_UPLOADED_TO_REPOSITORY; an explicit closeout exception, not a claim of full historical-original upload and not a claim that the owner waived preservation.",
+  "automatic_reupload":false,
+  "resume_policy":"The owner has ended this hero production/upload execution. A new explicit task is required to reopen archival transfer or acceptance.",
+  "private_account_ids_source_locations_or_credentials_published":false,
+  "image_base64_model_text_reconstruction_used":false
+}

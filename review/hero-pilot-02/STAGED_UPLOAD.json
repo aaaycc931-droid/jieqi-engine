@@ -1,290 +1,49 @@
 {
   "schema": "lezi.hero_pilot_02.staged_upload.v1",
   "work_id": "EXP-HERO-002",
-  "date_local": "2026-11-15",
-  "batch_id": "R8-BATCH-1",
-  "status": "PARTIAL_CANDIDATE_PUBLICATION",
-  "authority": "Owner explicitly requested staged upload; dedicated hero branch only.",
-  "source_package_sha256": "842a2a45ce9ab9a3873b3fd7063b19ce33f70cee8598cb7d7edcb15cbea51a1f",
-  "base_commit": "71145df45ad17215a3731e53150b6728e079e375",
-  "included_files": [
-    {
-      "path": "art/hero-pilot-02/ASSET_MANIFEST.json",
-      "bytes": 12197,
-      "sha256": "743d198e95508c830feaffbcf2bc8a5c12adf424d1f648b2da9e3683b28cfba7",
-      "git_blob_sha": "81fa1cfee6cf800d806280fcb62a103666c328cd",
-      "mode": "100644"
-    },
-    {
-      "path": "art/hero-pilot-02/PROMPTS.json",
-      "bytes": 6601,
-      "sha256": "37ffa784fc582e8dedf1bdf7323e30d218c8fc1abebcef4b5ada26104a77e582",
-      "git_blob_sha": "e1f2507f7960ca62e1c3fdbc3525effd9a91157d",
-      "mode": "100644"
-    },
-    {
-      "path": "art/hero-pilot-02/export-assets.cjs",
-      "bytes": 5310,
-      "sha256": "edacee1e7cf3fa7127fa821e5e16f8028716bb905f8f46f27d368ba3dfa9d78c",
-      "git_blob_sha": "e05cf084e3cee428d5371274bff28c477ecc2712",
-      "mode": "100644"
-    },
-    {
-      "path": "docs/hero-pilot-02/AUTHORSHIP.json",
-      "bytes": 1042,
-      "sha256": "ea30bb5623a3788bf2fe0d179326d7ab4c1b2746459cf3ebd7bca147b45cdb19",
-      "git_blob_sha": "5243a4dddf3478ccc6c0b00b9299bef008cf04e8",
-      "mode": "100644"
-    },
-    {
-      "path": "docs/hero-pilot-02/BALANCE.md",
-      "bytes": 14962,
-      "sha256": "ca9bc7446cf8221df383a78b070b8c11d6e13b2cd50c6369bdbf3491a1f67e55",
-      "git_blob_sha": "19b80c2b486c5f4271b1687afe7f22a977631140",
-      "mode": "100644"
-    },
-    {
-      "path": "docs/hero-pilot-02/DESIGN.md",
-      "bytes": 5649,
-      "sha256": "a48f9381b4c35cef871d769491d9e988363ca671da9339fac4a97d97af67106e",
-      "git_blob_sha": "f1dfa6e532b314bb4eeb1b6cb7e7cfab553e600b",
-      "mode": "100644"
-    },
-    {
-      "path": "docs/hero-pilot-02/IMPLEMENTATION.md",
-      "bytes": 5835,
-      "sha256": "c6879a92fdd0a59c0ab6de4ceaf888ffee3953b1c83777cd89c5469bd41d846b",
-      "git_blob_sha": "83bc72bc26a469536344af94efc89e2e1098bf42",
-      "mode": "100644"
-    },
-    {
-      "path": "docs/hero-pilot-02/README.md",
-      "bytes": 2867,
-      "sha256": "4438a60094f2ffa83fa5f3ff220aabb63187dedcf4748bf500e676b37673f2ec",
-      "git_blob_sha": "17bfc6316ca2b63f1a0c1202abbf3f3ea05ba554",
-      "mode": "100644"
-    },
-    {
-      "path": "review/hero-pilot-02/RECOVERY_PUBLICATION.json",
-      "bytes": 2842,
-      "sha256": "8ca968330ce74ea51eedde5fd49365461872424024cf37d5fbb069969b2ef27c",
-      "git_blob_sha": "88b01f0b2739f38e8cf78e8a83d44daa4c3cd51b",
-      "mode": "100644"
-    },
-    {
-      "path": "review/hero-pilot-02/VALIDATION.json",
-      "bytes": 5408,
-      "sha256": "ccca8cc2622d7f16401c53a840fecd21750491ffedf2108e162b9560a719e79f",
-      "git_blob_sha": "1a7fa4df9d4451a799f7c2a0103dc9ea4845d946",
-      "mode": "100644"
-    },
-    {
-      "path": "review/hero-pilot-02/balance-range-preliminary.json",
-      "bytes": 3355,
-      "sha256": "abf589206c42eacd378b646333a4e475ee0b4e88cac15c2def10784c4450196e",
-      "git_blob_sha": "ca46447af392f431ca312b1fa61ff47baa475aa7",
-      "mode": "100644"
-    },
-    {
-      "path": "review/hero-pilot-02/balance-results.json",
-      "bytes": 528788,
-      "sha256": "0f92ee366ff7fd0d6dce75ebcc127f670c5522c8b98b9edcb60177552511eeb7",
-      "git_blob_sha": "82e211b78a32f8ce4eb008e0bae792db629bea90",
-      "mode": "100644"
-    },
-    {
-      "path": "review/hero-pilot-02/balance-run.log",
-      "bytes": 2755,
-      "sha256": "5c3bba4021bee3df2c8f3a974a0c3582f0e5c0fc0f6adfc75d46eb024d638fec",
-      "git_blob_sha": "11351b35207db71dc682b7fb27ee86c341a31182",
-      "mode": "100644"
-    },
-    {
-      "path": "review/hero-pilot-02/dom-results.json",
-      "bytes": 3361,
-      "sha256": "9877f7b714c04d78078f457d97eb35c7be1c680d3ad2b34bd5707a6039aa9f15",
-      "git_blob_sha": "ac448a5215d5b92055593223dc76cb2b5254c805",
-      "mode": "100644"
-    },
-    {
-      "path": "review/hero-pilot-02/dom-run.log",
-      "bytes": 222,
-      "sha256": "aff45ec80e68a48d4f628d0a5438befc34bea9e4c38cfa05d5534e6f4884c186",
-      "git_blob_sha": "c6cf7f88edadc62701c3aac2c12ce5c1163fdf68",
-      "mode": "100644"
-    },
-    {
-      "path": "review/hero-pilot-02/http-results.json",
-      "bytes": 1314,
-      "sha256": "41d959d44834373537c70ea0a9718b381020aa12d1f3116b5ccb333c1da5ae4e",
-      "git_blob_sha": "42440aebe81ee64244c74114ec87924b232e4d2f",
-      "mode": "100644"
-    },
-    {
-      "path": "review/hero-pilot-02/regression-run.log",
-      "bytes": 105748,
-      "sha256": "45277b9d801f62eb36a30417f1ffb59fe6d82826bfbff5b40abade886eb339b6",
-      "git_blob_sha": "2b61091e0670b78d97fdda863305fcfed40b65cc",
-      "mode": "100644"
-    },
-    {
-      "path": "scripts/build-web.ts",
-      "bytes": 2269,
-      "sha256": "7ae95a0440370157d49e41b430bf2fc01aae02795b3205fb8841431d04e326a2",
-      "git_blob_sha": "9222916a349539aec844f564e90059cf88e5f5ed",
-      "mode": "100644"
-    },
-    {
-      "path": "scripts/review/hero-pilot-02-balance.ts",
-      "bytes": 21496,
-      "sha256": "864dd878402289d8e9e1c2320a8ccd5db3b6e1388002b1d289e6e785069574f2",
-      "git_blob_sha": "973961634c51cbc6f4ee37a23f46a3b37f32e053",
-      "mode": "100644"
-    },
-    {
-      "path": "scripts/review/hero-pilot-02-dom.mjs",
-      "bytes": 14441,
-      "sha256": "4ebe4a2db3678783b3544e560b28004316a4f6395c8a308fffa15d6060fe2d2f",
-      "git_blob_sha": "43492c708bf59eb77c153eb1f09a86b23ddf33f2",
-      "mode": "100644"
-    },
-    {
-      "path": "scripts/serve-web.ts",
-      "bytes": 2437,
-      "sha256": "20555e785010cbb9965ea3120537c59d057f481f1b62fee7820a2b01128e96ee",
-      "git_blob_sha": "1c15f01e0f5502c390f8d8a297d530cbe55191b7",
-      "mode": "100644"
-    },
-    {
-      "path": "src/game.ts",
-      "bytes": 58105,
-      "sha256": "3ad81f9ec06e8d7fcd9cf88e063d28e51a5af3781240bd4d7661d6f094bf1197",
-      "git_blob_sha": "3cdf907ea58cd2b820643b5f3b34fe144679f7f6",
-      "mode": "100644"
-    },
-    {
-      "path": "src/hero-actions.ts",
-      "bytes": 28997,
-      "sha256": "133de0b2449488b662216f1f11c4b52217bbcd35e911e007b783210239124af6",
-      "git_blob_sha": "4a99ffce9af7b4b6e7c9457dc7c2ddaae8ec6360",
-      "mode": "100644"
-    },
-    {
-      "path": "src/hero-cen-ying.ts",
-      "bytes": 3141,
-      "sha256": "8d5c40188edb2e54f3171878e3ac763177aba26fa299dab9604c05ac2f3c0768",
-      "git_blob_sha": "6d506a8774df8a9867eca448629a859c0415652c",
-      "mode": "100644"
-    },
-    {
-      "path": "src/hero-forms.ts",
-      "bytes": 6099,
-      "sha256": "29c941bd85eab5cfbcf616fff1b2f9bb00613fff1799a2c1b4a2d34caa793955",
-      "git_blob_sha": "74fc54491b8fa3567d0d034802ed66a429bfe1bc",
-      "mode": "100644"
-    },
-    {
-      "path": "src/heroes.ts",
-      "bytes": 7089,
-      "sha256": "6bb75e2f05fc6f15e21566b9b851638126ce03a48c2192ece6415b5bbd442f6f",
-      "git_blob_sha": "ec18cb43a72a21bca490b81acbc4c448598cf6e1",
-      "mode": "100644"
-    },
-    {
-      "path": "src/index.ts",
-      "bytes": 908,
-      "sha256": "50ccc9cfca0063fb100ddb3a90b2331d867bec1a8fa8c64f0f0d81d6647f5b14",
-      "git_blob_sha": "683251b5cfffd55a4a083ee1da4f72d9faf51566",
-      "mode": "100644"
-    },
-    {
-      "path": "src/rules.ts",
-      "bytes": 23477,
-      "sha256": "5b4caa09d7cbc8a77355c3688b3b4d7151799d6a6cfc52c71b74e7cb87c685a0",
-      "git_blob_sha": "192fb1c2f2b22e6eaf4bcd3fad3c6b3b627ee6b0",
-      "mode": "100644"
-    },
-    {
-      "path": "src/types.ts",
-      "bytes": 14393,
-      "sha256": "0f9b6b393a2d38d0cb3de174e8840a66a216239a5704bd4ea52cef264a39cb97",
-      "git_blob_sha": "bf5256701245d5a244e9da1311f45b89a06641fc",
-      "mode": "100644"
-    },
-    {
-      "path": "tests/hero-pilot-02.test.ts",
-      "bytes": 20227,
-      "sha256": "79ee103bc8aa506927dcac9e850d8441c134323f1c38cf5fcf57eba3c2485cdd",
-      "git_blob_sha": "3dd589f6fd3675691e60d8a248f4d5dcf390229b",
-      "mode": "100644"
-    },
-    {
-      "path": "web/app.ts",
-      "bytes": 194605,
-      "sha256": "3c8c757cf0e03b0f51b381cade56074c36bfd93280792880ebab039104dc8a7d",
-      "git_blob_sha": "de3059a8bf9798d5840a9d80d513bbf57408d044",
-      "mode": "100644"
-    },
-    {
-      "path": "web/assets/heroes/cen-ying/figure-768.webp",
-      "bytes": 90364,
-      "sha256": "922dd8803171aa1aaec094ef574bcfd37a175f296793520e47796f1fd5e19b2c",
-      "git_blob_sha": "15c19077fb28b949f0aaa2d5c9cf56f0e23d1399",
-      "mode": "100644"
-    },
-    {
-      "path": "web/assets/heroes/cen-ying/portrait-192.webp",
-      "bytes": 9852,
-      "sha256": "bd1e1a00f05600945a0ad165c2096d944f4b7eaa5d681b34a1e490ffa11f8be9",
-      "git_blob_sha": "63af377fc2645c6de37a9a4d0f69088f4d76387e",
-      "mode": "100644"
-    },
-    {
-      "path": "web/assets/heroes/cen-ying/portrait-384.webp",
-      "bytes": 34972,
-      "sha256": "7a1087203fa6010fb9994bd1c6a6dba0588b3cdd863e36720e1a230417f2d0a3",
-      "git_blob_sha": "5566bfb0ffb83f9bb9529104a6459fc73202c5f9",
-      "mode": "100644"
-    },
-    {
-      "path": "web/hero-pilot-02.css",
-      "bytes": 2066,
-      "sha256": "6455af5c313987ea598be2807e2305128bf800d323c453bd285c3fbd2114d74c",
-      "git_blob_sha": "02469e3cfd4936fdd02d09ec88726d1a0cf9df3c",
-      "mode": "100644"
-    },
-    {
-      "path": "web/hero-pilot-02.ts",
-      "bytes": 5548,
-      "sha256": "da4b8daed4a9d6731533b6f97786dc911986f5aeac77ff7563cb309be5b9bd27",
-      "git_blob_sha": "9b1ddf75a3bbfd43e32297eea520163db70e804b",
-      "mode": "100644"
-    }
+  "hero": "岑缨",
+  "date_local": "2026-11-16",
+  "status": "OWNER_CLOSED_SELECTED_DELIVERY_COMPLETE_WITH_RECORDED_EXCEPTIONS",
+  "current_execution_active": false,
+  "production_execution_closed": true,
+  "automatic_next_batch": false,
+  "authority": "TASK_FROM_USER.json plus current owner request to finish and formally end this hero production/upload",
+  "owner_instruction_verbatim": "提交完毕，现在由你来进行该英雄的全部收束收尾，正式结束本英雄制作与上传，同时注明该英雄为chat模式GPT-6 Pro推理程度制作，不过你也可以用更规范的名称",
+  "engine": {
+    "repository": "aaaycc931-droid/jieqi-engine",
+    "branch": "codex/autonomous-hero-02-20261114",
+    "base": "71145df45ad17215a3731e53150b6728e079e375",
+    "batch_1_commit": "101a970020fa7130c1367a04f67fdbb03dff5d3a",
+    "owner_png_upload_commit": "0438c32ea3bc1e8b8b9620ad7a856eab87cf88c4",
+    "canonical_masters_and_credit_commit": "2c0256d582fa7ea815b47f78d5fb055b76d586cd",
+    "draft_pr": 31,
+    "candidate_files_published": 38,
+    "candidate_files_total": 38,
+    "selected_candidate_upload_complete": true,
+    "all_original_archive_files_uploaded_to_repository": false
+  },
+  "canonical_masters": [
+    {"path":"art/hero-pilot-02/masters/cen-ying-figure-v1.png","bytes":2236966,"sha256":"7de2f26f0241527f6ea84ef0e5bee71780029b19417d521cd2aa8c76439c70da","git_blob_sha":"44c18285cd98a877f64303e94cce410de7c76934"},
+    {"path":"art/hero-pilot-02/masters/cen-ying-portrait-v1.png","bytes":2832675,"sha256":"d3397e8850e2150d1dd41ed8a897b47c0efd9685c8fa0d9bff31f913b017decb","git_blob_sha":"27c3bfc9c14db794e27b2bc2568ca487a9df1509"}
   ],
-  "pending_candidate_files": [
-    {
-      "path": "art/hero-pilot-02/masters/cen-ying-figure-v1.png",
-      "bytes": 2236966,
-      "sha256": "7de2f26f0241527f6ea84ef0e5bee71780029b19417d521cd2aa8c76439c70da",
-      "git_blob_sha": "44c18285cd98a877f64303e94cce410de7c76934",
-      "mode": "100644"
-    },
-    {
-      "path": "art/hero-pilot-02/masters/cen-ying-portrait-v1.png",
-      "bytes": 2832675,
-      "sha256": "d3397e8850e2150d1dd41ed8a897b47c0efd9685c8fa0d9bff31f913b017decb",
-      "git_blob_sha": "27c3bfc9c14db794e27b2bc2568ca487a9df1509",
-      "mode": "100644"
-    }
-  ],
-  "additional_pending_scope": "Recovered original supplementary materials remain to be mapped and uploaded in a later batch; this 38-file manifest is the engineering candidate, not all original artifacts.",
-  "verification": "Local payload sizes, SHA-256 and Git blob IDs checked against prepared manifest; remote publication/readback result is recorded in the hero workline. Historical game tests not rerun.",
-  "acceptance_pending": [
-    "real browser/touch",
-    "human or stronger-policy balance",
-    "independent QA",
-    "full typecheck"
-  ],
+  "pending_candidate_files": [],
+  "verification": {
+    "local_originals_size_sha256_git_blob": {"passed":54,"date":"2026-11-16"},
+    "local_prepared_files_size_sha256_git_blob": {"passed":38,"date":"2026-11-16"},
+    "both_zip_crc": "PASS",
+    "batch_1_remote_bytes": "Historical exact readback of 36 files at 101a970; no changed-code retest claimed",
+    "new_master_readback": "Remote canonical path, size and Git blob SHA match the locally SHA256-verified originals; no fresh remote PNG byte download claimed",
+    "delta_from_batch_1_to_canonical_commit": "Only two master additions, AUTHORSHIP metadata update and CREDITS addition; executable sources, runtime assets and historical logs unchanged",
+    "game_tests_rerun": false,
+    "art_regenerated_or_reencoded": false
+  },
+  "authorship": {"display":"GPT-6 Pro（Chat 对话模式）","evidence":"owner-confirmed on 2026-11-16","platform_telemetry_verified":false,"report":"../../docs/hero-pilot-02/AUTHORSHIP.json"},
+  "archival_exceptions": {"supplement_files_not_published":8,"mapping_verified":true,"original_archive_preserved":true,"report":"ARCHIVE_DISPOSITION.json","owner_waiver_of_archive_claimed":false},
+  "remaining_acceptance": ["real browser/touch","human or stronger-policy balance","independent QA","full typecheck"],
   "main_received": "UNKNOWN",
-  "merge_deployment_APK": "NOT_PERFORMED"
+  "next_action": "NONE_AUTOMATIC_OWNER_ENDED_PRODUCTION_AND_UPLOAD; reopen only for a new explicit task",
+  "merge_deployment_APK_mode_rule_expansion": "NOT_PERFORMED",
+  "project_or_other_worklines_paused": false,
+  "previous_full_stage_report": {"commit":"101a970020fa7130c1367a04f67fdbb03dff5d3a","path":"review/hero-pilot-02/STAGED_UPLOAD.json"},
+  "closeout": "../../docs/hero-pilot-02/FINAL_CLOSEOUT.md"
 }
