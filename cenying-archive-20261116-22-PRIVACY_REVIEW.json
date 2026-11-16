@@ -1,0 +1,26 @@
+{
+  "scope": "Specific archival19 files; text patterns plus review of historical handoff/recovery prose. Not a full security audit.",
+  "new_public_copy_count": 1,
+  "originals_modified": false,
+  "changes": [
+    {
+      "original_archive_path": "original-logs/full-02-test.log",
+      "public_path": "review/hero-pilot-02/history/20261114/original-logs/full-02-test.public-redacted.log",
+      "replacement_count": 1,
+      "line_number": 1093,
+      "replacement": "<PRIVATE_EXECUTION_ROOT>",
+      "scope": "Only the private execution-root prefix. Test name, source-relative file, line/column, failure, assertion, stack and all other bytes retained.",
+      "original_in_private_recovery_archive": true,
+      "original_identity": {
+        "bytes": 129956,
+        "sha256": "c127dbbab603520e6131fff0f330d617b6cc3035a4c38552578ac2732ee16f7c",
+        "git_blob_sha": "dc2eb1ebd765434d673383155ebf721c8a17dd7f"
+      },
+      "public_identity": {
+        "bytes": 129934,
+        "sha256": "adf2b35f1bc60879171b49a67dbf9dd41e398734b0e96832c84b4374a6ce0f6f",
+        "git_blob_sha": "d33cb71f977f2fb634c029d20a571ae7a1b2b370"
+      }
+    }
+  ]
+}

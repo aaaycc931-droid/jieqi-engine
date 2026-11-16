@@ -1,0 +1,314 @@
+{
+  "status": "LOCAL_CANDIDATE_NOT_PUBLISHED",
+  "repository": "aaaycc931-droid/jieqi-engine",
+  "branch": "codex/autonomous-hero-02-20261114",
+  "observed_head": "00021784caab48265b279a22f77e18a2351cc9eb",
+  "reuse_pr": 31,
+  "file_count": 19,
+  "files": [
+    {
+      "source_archive_path": "handoff-original/CURRENT_STATE.json",
+      "proposed_repository_path": "review/hero-pilot-02/history/20261114/handoff-original/CURRENT_STATE.json",
+      "status": "PREPARED_LOCALLY_NOT_UPLOADED",
+      "representation": "EXACT_ORIGINAL_BYTES",
+      "source_identity": {
+        "bytes": 877,
+        "sha256": "2a35dc3f7b36e6c736b6b2a39eb95944748f6d1b7af1877b00a1affe3f296ba9",
+        "git_blob_sha": "f9ecca9a04f526aff6f668d4b89cf089b2bf67de"
+      },
+      "public_identity": {
+        "bytes": 877,
+        "sha256": "2a35dc3f7b36e6c736b6b2a39eb95944748f6d1b7af1877b00a1affe3f296ba9",
+        "git_blob_sha": "f9ecca9a04f526aff6f668d4b89cf089b2bf67de"
+      }
+    },
+    {
+      "source_archive_path": "handoff-original/DESIGN.md",
+      "proposed_repository_path": "review/hero-pilot-02/history/20261114/handoff-original/DESIGN.md",
+      "status": "PREPARED_LOCALLY_NOT_UPLOADED",
+      "representation": "EXACT_ORIGINAL_BYTES",
+      "source_identity": {
+        "bytes": 4572,
+        "sha256": "49030d865a2def0a9df838b01d737b18fe325946ee9063dea305429256bc53b3",
+        "git_blob_sha": "850dab0ade65fb171f1e09014d325cfae5eeb586"
+      },
+      "public_identity": {
+        "bytes": 4572,
+        "sha256": "49030d865a2def0a9df838b01d737b18fe325946ee9063dea305429256bc53b3",
+        "git_blob_sha": "850dab0ade65fb171f1e09014d325cfae5eeb586"
+      }
+    },
+    {
+      "source_archive_path": "handoff-original/DESIGNER_BRIEF.md",
+      "proposed_repository_path": "review/hero-pilot-02/history/20261114/handoff-original/DESIGNER_BRIEF.md",
+      "status": "PREPARED_LOCALLY_NOT_UPLOADED",
+      "representation": "EXACT_ORIGINAL_BYTES",
+      "source_identity": {
+        "bytes": 1547,
+        "sha256": "a69fef22841c04028a439cf79036a79ab5473d422058984e8fde6a967d481bba",
+        "git_blob_sha": "a2ad1e82e49aad9d01d7dc10d7c2ec1ab3e90503"
+      },
+      "public_identity": {
+        "bytes": 1547,
+        "sha256": "a69fef22841c04028a439cf79036a79ab5473d422058984e8fde6a967d481bba",
+        "git_blob_sha": "a2ad1e82e49aad9d01d7dc10d7c2ec1ab3e90503"
+      }
+    },
+    {
+      "source_archive_path": "handoff-original/PROJECT_INSTRUCTIONS.txt",
+      "proposed_repository_path": "review/hero-pilot-02/history/20261114/handoff-original/PROJECT_INSTRUCTIONS.txt",
+      "status": "PREPARED_LOCALLY_NOT_UPLOADED",
+      "representation": "EXACT_ORIGINAL_BYTES",
+      "source_identity": {
+        "bytes": 1716,
+        "sha256": "36632c60d8e4aaf6d8e9932f9d272f59dbba423be007ba7add0da6463f156f1c",
+        "git_blob_sha": "09f2c5d618a2a0c00220bd58200022e550a541f2"
+      },
+      "public_identity": {
+        "bytes": 1716,
+        "sha256": "36632c60d8e4aaf6d8e9932f9d272f59dbba423be007ba7add0da6463f156f1c",
+        "git_blob_sha": "09f2c5d618a2a0c00220bd58200022e550a541f2"
+      }
+    },
+    {
+      "source_archive_path": "handoff-original/READ_RECEIPTS.json",
+      "proposed_repository_path": "review/hero-pilot-02/history/20261114/handoff-original/READ_RECEIPTS.json",
+      "status": "PREPARED_LOCALLY_NOT_UPLOADED",
+      "representation": "EXACT_ORIGINAL_BYTES",
+      "source_identity": {
+        "bytes": 2265,
+        "sha256": "d6f6c4064d5d359330080789660a2fd6cff8032bdc069fc2d6c0f7008eed4d85",
+        "git_blob_sha": "221040e9194200392a2313d3294da74f96e00a9d"
+      },
+      "public_identity": {
+        "bytes": 2265,
+        "sha256": "d6f6c4064d5d359330080789660a2fd6cff8032bdc069fc2d6c0f7008eed4d85",
+        "git_blob_sha": "221040e9194200392a2313d3294da74f96e00a9d"
+      }
+    },
+    {
+      "source_archive_path": "handoff-original/RETURN_TO_MAIN.json",
+      "proposed_repository_path": "review/hero-pilot-02/history/20261114/handoff-original/RETURN_TO_MAIN.json",
+      "status": "PREPARED_LOCALLY_NOT_UPLOADED",
+      "representation": "EXACT_ORIGINAL_BYTES",
+      "source_identity": {
+        "bytes": 802,
+        "sha256": "f0f5907a5c3acfd71b42db90545617739d4e563a2871ac21cc36ab27bb992138",
+        "git_blob_sha": "f232857d800c613db7f2a6db4ac858e932ed8e1b"
+      },
+      "public_identity": {
+        "bytes": 802,
+        "sha256": "f0f5907a5c3acfd71b42db90545617739d4e563a2871ac21cc36ab27bb992138",
+        "git_blob_sha": "f232857d800c613db7f2a6db4ac858e932ed8e1b"
+      }
+    },
+    {
+      "source_archive_path": "handoff-original/SESSION_CLOSEOUT.json",
+      "proposed_repository_path": "review/hero-pilot-02/history/20261114/handoff-original/SESSION_CLOSEOUT.json",
+      "status": "PREPARED_LOCALLY_NOT_UPLOADED",
+      "representation": "EXACT_ORIGINAL_BYTES",
+      "source_identity": {
+        "bytes": 481,
+        "sha256": "1a7c4a4b359426f96b124946cbf3455a0db56ac6dc8ea68a65a19070bc14b33a",
+        "git_blob_sha": "6b6fa4c21a8da9d8dfdc34f25c53417dca5c316f"
+      },
+      "public_identity": {
+        "bytes": 481,
+        "sha256": "1a7c4a4b359426f96b124946cbf3455a0db56ac6dc8ea68a65a19070bc14b33a",
+        "git_blob_sha": "6b6fa4c21a8da9d8dfdc34f25c53417dca5c316f"
+      }
+    },
+    {
+      "source_archive_path": "handoff-original/START_HERE.md",
+      "proposed_repository_path": "review/hero-pilot-02/history/20261114/handoff-original/START_HERE.md",
+      "status": "PREPARED_LOCALLY_NOT_UPLOADED",
+      "representation": "EXACT_ORIGINAL_BYTES",
+      "source_identity": {
+        "bytes": 2097,
+        "sha256": "b66d50b382c04294383615672728bcdc02733b912509aac53b41e0b3111ad7d7",
+        "git_blob_sha": "b141a35717dcd69b0f3a273ed21ffbf7fd229a53"
+      },
+      "public_identity": {
+        "bytes": 2097,
+        "sha256": "b66d50b382c04294383615672728bcdc02733b912509aac53b41e0b3111ad7d7",
+        "git_blob_sha": "b141a35717dcd69b0f3a273ed21ffbf7fd229a53"
+      }
+    },
+    {
+      "source_archive_path": "handoff-original/TASK_FROM_USER.json",
+      "proposed_repository_path": "review/hero-pilot-02/history/20261114/handoff-original/TASK_FROM_USER.json",
+      "status": "PREPARED_LOCALLY_NOT_UPLOADED",
+      "representation": "EXACT_ORIGINAL_BYTES",
+      "source_identity": {
+        "bytes": 3094,
+        "sha256": "0080444f9d4b19c8cdc8c8bbeab9c51e9044b8ffaf65b4c4f30ddee3baba8f03",
+        "git_blob_sha": "34aff17c210e2bc1c1365edd7c70e73f06502c7b"
+      },
+      "public_identity": {
+        "bytes": 3094,
+        "sha256": "0080444f9d4b19c8cdc8c8bbeab9c51e9044b8ffaf65b4c4f30ddee3baba8f03",
+        "git_blob_sha": "34aff17c210e2bc1c1365edd7c70e73f06502c7b"
+      }
+    },
+    {
+      "source_archive_path": "original-logs/core-02-final.log",
+      "proposed_repository_path": "review/hero-pilot-02/history/20261114/original-logs/core-02-final.log",
+      "status": "PREPARED_LOCALLY_NOT_UPLOADED",
+      "representation": "EXACT_ORIGINAL_BYTES",
+      "source_identity": {
+        "bytes": 4585,
+        "sha256": "219254b1b2519e3044b241fe88a3147737a8f99da48d1b35f2e48d44d75c27b8",
+        "git_blob_sha": "a86a0ca699cb83a6c98a6b14a99c16e0aaaddbf4"
+      },
+      "public_identity": {
+        "bytes": 4585,
+        "sha256": "219254b1b2519e3044b241fe88a3147737a8f99da48d1b35f2e48d44d75c27b8",
+        "git_blob_sha": "a86a0ca699cb83a6c98a6b14a99c16e0aaaddbf4"
+      }
+    },
+    {
+      "source_archive_path": "original-logs/core-02-root-verification.log",
+      "proposed_repository_path": "review/hero-pilot-02/history/20261114/original-logs/core-02-root-verification.log",
+      "status": "PREPARED_LOCALLY_NOT_UPLOADED",
+      "representation": "EXACT_ORIGINAL_BYTES",
+      "source_identity": {
+        "bytes": 4588,
+        "sha256": "652e3c86ae98ae4cd413004f08b00d2bb9b71f476139b7b9834cb2be864ee087",
+        "git_blob_sha": "e5b3bf473d9fde78daad185fba003b688c84ead3"
+      },
+      "public_identity": {
+        "bytes": 4588,
+        "sha256": "652e3c86ae98ae4cd413004f08b00d2bb9b71f476139b7b9834cb2be864ee087",
+        "git_blob_sha": "e5b3bf473d9fde78daad185fba003b688c84ead3"
+      }
+    },
+    {
+      "source_archive_path": "original-logs/core-02-targeted.log",
+      "proposed_repository_path": "review/hero-pilot-02/history/20261114/original-logs/core-02-targeted.log",
+      "status": "PREPARED_LOCALLY_NOT_UPLOADED",
+      "representation": "EXACT_ORIGINAL_BYTES",
+      "source_identity": {
+        "bytes": 16037,
+        "sha256": "78b77eeb875a71004830f89543f8961223b1caa57ed07fe3c80b5240e999347e",
+        "git_blob_sha": "e8870352023c8129910bbf57154cafca61a1a554"
+      },
+      "public_identity": {
+        "bytes": 16037,
+        "sha256": "78b77eeb875a71004830f89543f8961223b1caa57ed07fe3c80b5240e999347e",
+        "git_blob_sha": "e8870352023c8129910bbf57154cafca61a1a554"
+      }
+    },
+    {
+      "source_archive_path": "original-logs/full-02-test.log",
+      "proposed_repository_path": "review/hero-pilot-02/history/20261114/original-logs/full-02-test.public-redacted.log",
+      "status": "PREPARED_LOCALLY_NOT_UPLOADED",
+      "representation": "PUBLIC_REDACTED_COPY",
+      "source_identity": {
+        "bytes": 129956,
+        "sha256": "c127dbbab603520e6131fff0f330d617b6cc3035a4c38552578ac2732ee16f7c",
+        "git_blob_sha": "dc2eb1ebd765434d673383155ebf721c8a17dd7f"
+      },
+      "public_identity": {
+        "bytes": 129934,
+        "sha256": "adf2b35f1bc60879171b49a67dbf9dd41e398734b0e96832c84b4374a6ce0f6f",
+        "git_blob_sha": "d33cb71f977f2fb634c029d20a571ae7a1b2b370"
+      }
+    },
+    {
+      "source_archive_path": "original-logs/web-02-regression.log",
+      "proposed_repository_path": "review/hero-pilot-02/history/20261114/original-logs/web-02-regression.log",
+      "status": "PREPARED_LOCALLY_NOT_UPLOADED",
+      "representation": "EXACT_ORIGINAL_BYTES",
+      "source_identity": {
+        "bytes": 5719,
+        "sha256": "545a7b40ed2c4f11887267dcdda62e8d3f0b68d9accf470fbe3a2d9cb2b7992b",
+        "git_blob_sha": "b5830828f3a49113d6d4937072b14c82c9d58bf8"
+      },
+      "public_identity": {
+        "bytes": 5719,
+        "sha256": "545a7b40ed2c4f11887267dcdda62e8d3f0b68d9accf470fbe3a2d9cb2b7992b",
+        "git_blob_sha": "b5830828f3a49113d6d4937072b14c82c9d58bf8"
+      }
+    },
+    {
+      "source_archive_path": "README_RECOVERY.md",
+      "proposed_repository_path": "review/hero-pilot-02/history/20261114/recovery/README_RECOVERY.md",
+      "status": "PREPARED_LOCALLY_NOT_UPLOADED",
+      "representation": "EXACT_ORIGINAL_BYTES",
+      "source_identity": {
+        "bytes": 2759,
+        "sha256": "de5566ec7d4e7f08c1e160be10d4b587ca3e6951d2b7bfa9bdfacea9a4aaa023",
+        "git_blob_sha": "984ab5139411594f0961d3cc7b371bee385f9db7"
+      },
+      "public_identity": {
+        "bytes": 2759,
+        "sha256": "de5566ec7d4e7f08c1e160be10d4b587ca3e6951d2b7bfa9bdfacea9a4aaa023",
+        "git_blob_sha": "984ab5139411594f0961d3cc7b371bee385f9db7"
+      }
+    },
+    {
+      "source_archive_path": "RECOVERY_OBSERVATION.json",
+      "proposed_repository_path": "review/hero-pilot-02/history/20261114/recovery/RECOVERY_OBSERVATION.json",
+      "status": "PREPARED_LOCALLY_NOT_UPLOADED",
+      "representation": "EXACT_ORIGINAL_BYTES",
+      "source_identity": {
+        "bytes": 7527,
+        "sha256": "b9ee2fa56ed7ab46be856c05f658495d0ff519da2cbb6b3d82d59ef228ad7b63",
+        "git_blob_sha": "212e312ec50aa7426eaab9348b54d952689d7389"
+      },
+      "public_identity": {
+        "bytes": 7527,
+        "sha256": "b9ee2fa56ed7ab46be856c05f658495d0ff519da2cbb6b3d82d59ef228ad7b63",
+        "git_blob_sha": "212e312ec50aa7426eaab9348b54d952689d7389"
+      }
+    },
+    {
+      "source_archive_path": "source-git-status.txt",
+      "proposed_repository_path": "review/hero-pilot-02/history/20261114/recovery/source-git-status.txt",
+      "status": "PREPARED_LOCALLY_NOT_UPLOADED",
+      "representation": "EXACT_ORIGINAL_BYTES",
+      "source_identity": {
+        "bytes": 1095,
+        "sha256": "b6eb20e5b9ac934e0a4522d0fb5146970990c3c8da2c655920ce5cc3e2cd8d2b",
+        "git_blob_sha": "5394fe60bb8715bcf5790d3fd0ecfef2572a1925"
+      },
+      "public_identity": {
+        "bytes": 1095,
+        "sha256": "b6eb20e5b9ac934e0a4522d0fb5146970990c3c8da2c655920ce5cc3e2cd8d2b",
+        "git_blob_sha": "5394fe60bb8715bcf5790d3fd0ecfef2572a1925"
+      }
+    },
+    {
+      "source_archive_path": "tracked-changes.patch",
+      "proposed_repository_path": "review/hero-pilot-02/history/20261114/recovery/tracked-changes.patch",
+      "status": "PREPARED_LOCALLY_NOT_UPLOADED",
+      "representation": "EXACT_ORIGINAL_BYTES",
+      "source_identity": {
+        "bytes": 28129,
+        "sha256": "3a2e7739d61128cfba371b009cb4eadd6c560b24704ea97440179356d6413374",
+        "git_blob_sha": "04a6182422d3d0e737f7764f49d8e05e728c1a13"
+      },
+      "public_identity": {
+        "bytes": 28129,
+        "sha256": "3a2e7739d61128cfba371b009cb4eadd6c560b24704ea97440179356d6413374",
+        "git_blob_sha": "04a6182422d3d0e737f7764f49d8e05e728c1a13"
+      }
+    },
+    {
+      "source_archive_path": "generated-originals/exec-780d0d86-9934-4bf6-84b7-de60497b913a.png",
+      "proposed_repository_path": "review/hero-pilot-02/history/20261114/unselected-art/cen-ying-initial-unselected.png",
+      "status": "PREPARED_LOCALLY_NOT_UPLOADED",
+      "representation": "EXACT_ORIGINAL_BYTES",
+      "source_identity": {
+        "bytes": 2288094,
+        "sha256": "e38987e83996d1552e5708156ff47a2510a3d11d1a8f8a11abbd6e11f5e11cb1",
+        "git_blob_sha": "87208e2bb2f32f4f93c840c244409c96b4cfb5fa"
+      },
+      "public_identity": {
+        "bytes": 2288094,
+        "sha256": "e38987e83996d1552e5708156ff47a2510a3d11d1a8f8a11abbd6e11f5e11cb1",
+        "git_blob_sha": "87208e2bb2f32f4f93c840c244409c96b4cfb5fa"
+      }
+    }
+  ]
+}

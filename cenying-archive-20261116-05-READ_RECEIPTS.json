@@ -1,0 +1,58 @@
+{
+  "schema": "lezi.hero_pilot_02.receipts.v1",
+  "receiver": "hero_pilot_02_executor",
+  "date_local": "2026-11-14",
+  "source_handoff": "3a79094615d2583fd91c5ff33afe99272b8975b7",
+  "reads": [
+    {
+      "paths": [
+        "AGENTS.md",
+        "collaboration/CURRENT.json",
+        "collaboration/X_Collaboration_Integrated_Candidate_2026-10-13.md",
+        "docs/WORKFLOW.md"
+      ],
+      "scope": "角色/授权、项目工作约定、交接/中断恢复、来源激活与并发保存段；非整部协作正文"
+    },
+    {
+      "paths": [
+        "worklines/hero-pilot/START_HERE.md",
+        "worklines/hero-pilot/TASK_FROM_MAIN.json",
+        "worklines/hero-pilot/DESIGNER_BRIEF.md",
+        "worklines/hero-pilot/DESIGN.md",
+        "worklines/hero-pilot/CURRENT_STATE.json",
+        "worklines/hero-pilot/SESSION_CLOSEOUT.json",
+        "worklines/hero-pilot/RETURN_TO_MAIN.json"
+      ],
+      "scope": "第一英雄试点完整相关源；继承质量要求与悬衡界局部设定，不接管其待办"
+    },
+    {
+      "paths": [
+        "worklines/main/START_HERE.txt",
+        "worklines/main/CURRENT_STATE.json",
+        "CURRENT_HANDOFF.json"
+      ],
+      "scope": "当前路由、主线next_action/local_result_integration与相关工程基线，非累计登记全文"
+    },
+    {
+      "paths": [
+        "worklines/standard/rules/shared/01_CURRENT_RULES.md",
+        "worklines/standard/rules/shared/02_CURRENT_HEROES.md",
+        "worklines/standard/rules/shared/03_CURRENT_MUTATIONS.md"
+      ],
+      "scope": "行动、落位、公开/秘密、H03/H05/H06/H13、堡垒等相关完整规则；进一步裁判测试由子代理按实际读段补证"
+    },
+    {
+      "paths": [
+        "worklines/ui/WORLD_LORE_CANON_20261109.md",
+        "worklines/ui/WORLD_LORE_CONFIRMED_EXTENSION_20261111.md",
+        "worklines/ui/HERO_WORLD_ORIGIN_GROUPS_20261109.md",
+        "worklines/ui/HERO_VISUAL_STYLE_INDEPENDENCE_RULE_20261109.md"
+      ],
+      "commit": "e2c8d4f2799998f37fbfda25e3c9a5b0ca03525d",
+      "scope": "完整正文；后续六批世界观边界另由只读子代理核验"
+    }
+  ],
+  "adopted": "只在本英雄范围采用当前适用规则与用户新委托",
+  "other_receiver_status": "UNKNOWN_NOT_WRITTEN"
+}
+

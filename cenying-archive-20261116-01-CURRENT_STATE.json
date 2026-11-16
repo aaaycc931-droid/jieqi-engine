@@ -1,0 +1,28 @@
+{
+  "schema": "lezi.hero_pilot_02.state.v1",
+  "updated_on": "2026-11-14",
+  "work_id": "EXP-HERO-002",
+  "hero": "岑缨",
+  "status": "DESIGN_V1_AND_REAL_ENGINE_IMPLEMENTATION_IN_PROGRESS",
+  "authority": "TASK_FROM_USER.json",
+  "engine": {
+    "branch": "codex/autonomous-hero-02-20261114",
+    "base": "71145df45ad17215a3731e53150b6728e079e375",
+    "published_code": false,
+    "draft_pr": null
+  },
+  "progress": {
+    "lore_verified": true,
+    "design_v1": true,
+    "core_vertical_slice_local": true,
+    "web_in_progress": true,
+    "art_in_progress": true,
+    "full_validation": false,
+    "independent_QA": false,
+    "human_balance": false
+  },
+  "next_action": "完成核心边界、真实页面接入、生成美术、战术/完整对局实验，修复后发布专属代码与准确回传。",
+  "main_receipt": "UNKNOWN",
+  "other_worklines": "UNMODIFIED"
+}
+

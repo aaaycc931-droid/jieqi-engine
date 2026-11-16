@@ -1,0 +1,69 @@
+{
+  "schema": "lezi.autonomous_hero.task.v1",
+  "id": "USER-AUTONOMOUS-HERO-02-20261114",
+  "work_id": "EXP-HERO-002",
+  "created_on": "2026-11-14",
+  "timezone": "Asia/Shanghai",
+  "source": "本对话用户直接委托",
+  "main_dispatch": null,
+  "count": 1,
+  "authority": {
+    "verbatim_excerpt": "我想让你来做第2个……总之就是第2个独立英雄……他和AI自主设计的第1个英雄司衡处于同一世界……你还是充分发挥这个自主能力",
+    "interpreted_scope": "继承用户所引用启动词中的代任设计席位、自主人物/技能/真实代码/试玩/验证与保存回传要求；本次对象明确改为第2英雄。",
+    "delegated": [
+      "本英雄的创意比较、人物、局部背景、外观、技能、数值与迭代",
+      "专属分支真实引擎、离线完整对局、资源接入、相关验证与局部平衡实验",
+      "自有交接目录增量写回、专属工程分支与draft PR"
+    ],
+    "exclusions": [
+      "不接管或修改司衡及PR23",
+      "不修改旧英雄正式设计、世界A—D归属、其他线原画",
+      "不解冻评分原账本或NET、不开放其他模式",
+      "不合并、部署或发布APK",
+      "受托决定不冒称用户逐条确认；自测不冒称独立QA"
+    ],
+    "upload_authorization_source": "worklines/standard/SESSION_CLOSEOUT.json#/upload_update_authorization，用户2026-11-13原话：所有对话均拥有全部上传与更新权限；结合本次新英雄具体委托与公开项目范围",
+    "decision_status": "delegated_designer_decision"
+  },
+  "repositories": {
+    "handoff": {
+      "repo": "aaaycc931-droid/lezi-handoff-packages",
+      "branch": "main",
+      "owned_prefix": "worklines/hero-pilot-02"
+    },
+    "engine": {
+      "repo": "aaaycc931-droid/jieqi-engine",
+      "branch": "codex/autonomous-hero-02-20261114",
+      "base_ref": "codex/main-native-send-accounting-20261030",
+      "base_commit": "71145df45ad17215a3731e53150b6728e079e375",
+      "base_pr": 22
+    },
+    "lore": {
+      "repo": "aaaycc931-droid/lezi-handoff-packages",
+      "branch": "ui/restart-asof-20261104-1119",
+      "read_only": true
+    }
+  },
+  "identity": {
+    "hero_id": "cen_ying",
+    "name": "岑缨",
+    "world_work_id": "WORLD-EXP-01",
+    "world_label": "世界E：悬衡界",
+    "formal_H_number": "UNASSIGNED"
+  },
+  "quality": {
+    "same_standard_as_existing_heroes": true,
+    "scope": "jieqi offline full engine, explicit opt-in",
+    "rule_template": "../hero-pilot/TASK_FROM_MAIN.json#design_contract",
+    "required": [
+      "至少3名当前规则对标，区分设计与实现",
+      "成本、时序、资源、公开/秘密、王安全、失败/重复与终局完整定义",
+      "真实权威实现与可选择试玩，不能只交旁路",
+      "合理反事实、对手反制、至少完整合法演练",
+      "真实pass/fail/unrun和源绑定、阶段保存、读回"
+    ]
+  },
+  "source_handoff_head": "3a79094615d2583fd91c5ff33afe99272b8975b7",
+  "source_lore_head": "e2c8d4f2799998f37fbfda25e3c9a5b0ca03525d"
+}
+
