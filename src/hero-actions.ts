@@ -1,3 +1,4 @@
+import { CEN_YING_MAX_PULLS, getCenYingPullOptions } from "./hero-cen-ying.ts";
 import { applyShuffleAction } from "./hero-shuffle.ts";
 import { emitMechanismEvent, emitMainActionAtomClosed, withIsolatedMechanismEvents } from "./mechanism-observer.ts";
 import { requireClosedDestructionBatch } from "./settlement-context.ts";
@@ -87,13 +88,18 @@ function endSkillTurn(state: GameState, secret: SecretState, side: Side, randomI
 export function applyHeroAbility(state: GameState, secret: SecretState, command: HeroAbilityCommand, now = Date.now(), randomInt: RandomInt = max => Math.floor(Math.random() * max)): MoveResult {
   validateHeroForms(state, secret);
   if (secret.processedActions[command.actionId] !== undefined) return { state: copy(state), secret: copy(secret), duplicate: true };
+  if (command.ability === "tether_pull") {
+    requireClosedDestructionBatch(state);
+    // Do not let generic child handlers reinterpret a malformed pull as "skip".
+    requireRule(!state.pendingShuffle && !state.pendingHeroChild && !state.pendingDescent, "INVALID_PHASE", "必须先完成当前来源专属窗口");
+  }
   if (state.pendingShuffle) return applyShuffleAction(state, secret, command, randomInt);
   if (state.pendingHeroChild) return applyHeroChild(state, secret, command, now, randomInt);
   if (command.ability === "brawl") return applyBrawlStart(state, secret, command, now, randomInt);
   if (state.pendingDescent) return applyDescentAction(state, secret, command, now);
   requireRule(command.expectedRevision === state.revision, "STALE_REVISION", "客户端棋局版本已经过期");
   requireRule(state.status === "playing" && !state.forcedDefense && !state.flowDance, "INVALID_PHASE", "只能在自己的正式回合开始发动技能");
-  if (command.ability === "training" || command.ability === "rewind") {
+  if (command.ability === "training" || command.ability === "rewind" || command.ability === "tether_pull") {
     return withIsolatedMechanismEvents(() => applyFreshHeroAbility(state, secret, command, now, randomInt));
   }
   if (command.ability === "hourglass") {
@@ -113,13 +119,26 @@ function applyFreshHeroAbility(state: GameState, secret: SecretState, command: H
   beginFormalTurn(s, k, randomInt);
   requireRule(s.turnLifecycle?.phase === "before_main", "INVALID_PRE_MAIN_WINDOW", "只能在正式回合主行动前发动技能");
   const forcedFlyer = s.pieces.find(p => p.layer === "air" && getController(p) === side && s.effectsByPieceId?.[p.id]?.flight?.forcedLanding);
-  const isMain = ["invoke", "destruction", "timeline_twist", "burning_flame", "inner_ghost_burst", "river_enter", "river_move", "river_exit", "inner_wave", "landing"].includes(command.ability);
+  const isMain = ["invoke", "destruction", "timeline_twist", "burning_flame", "inner_ghost_burst", "river_enter", "river_move", "river_exit", "inner_wave", "landing", "tether_pull"].includes(command.ability);
   requireRule(!forcedFlyer || !isMain || command.ability === "landing" && command.pieceId === forcedFlyer.id, "FORCED_LANDING_REQUIRED", "第四个控制方回合的主行动必须原地降落");
-  const classification: ActionClassification = { tier: command.ability === "timeline_twist" || command.ability === "rewind" ? 3 : 2, keywords: isMain ? ["占步", "耗费"] : ["耗费"], source: "hero", opportunity: isMain ? "main" : "before_main", countsAsFormalTurn: isMain };
+  // Freeze the public pair before recording the main action changes the phase.
+  if (command.ability === "tether_pull") {
+    requireRule(hero === "cen_ying", "WRONG_HERO", "英雄没有引缆技能");
+    requireRule((s.gameMode ?? "jieqi") === "jieqi", "HERO_PILOT_MODE", "岑缨试点当前仅支持现有揭棋");
+    requireRule((s.heroRuntime?.[side]?.tetherPullUses ?? 0) < CEN_YING_MAX_PULLS, "SKILL_USED", "本局引缆次数已用完");
+    requireRule(!isGeneralInCheck(s, side), "IN_CHECK", "受将军时不能发动引缆");
+    requireRule(!k.replay, "REPLAY_REQUIRED", "必须先完成回溯同棋重走");
+    requireRule(command.to === undefined, "TETHER_DESTINATION_DERIVED", "引缆落点由锚与敌棋位置确定");
+  }
+  const pullOption = command.ability === "tether_pull"
+    ? getCenYingPullOptions(s, side).find(option => option.anchorPieceId === command.anchorPieceId && option.pieceId === command.pieceId)
+    : undefined;
+  if (command.ability === "tether_pull") requireRule(pullOption, "INVALID_TETHER_PAIR", "请选择同线距离2至3、间隔无地面棋且落位后己将安全的公开锚与敌棋");
+  const classification: ActionClassification = { tier: command.ability === "timeline_twist" || command.ability === "rewind" ? 3 : 2, keywords: isMain ? ["占步", "耗费", ...(command.ability === "tether_pull" ? ["移置"] : [])] : ["耗费"], source: "hero", opportunity: isMain ? "main" : "before_main", countsAsFormalTurn: isMain };
   const beforeAction = copy(s);
   if (command.ability !== "shadow") {
-    if (isMain && command.ability !== "timeline_twist") rememberAction(beforeAction, k, undefined, classification.tier, undefined, now, classification);
-    recordAction(s, { ...classification, actionId: command.actionId, actingSide: side });
+    if (isMain && command.ability !== "timeline_twist") rememberAction(beforeAction, k, pullOption?.pieceId, classification.tier, pullOption?.from, now, classification);
+    recordAction(s, { ...classification, actionId: command.actionId, actingSide: side, ...(pullOption ? { pieceId: pullOption.pieceId, from: pullOption.from, to: pullOption.to } : {}) });
   }
   s.heroRuntime ??= {};
   const runtime = s.heroRuntime[side] ??= {};
@@ -128,6 +147,14 @@ function applyFreshHeroAbility(state: GameState, secret: SecretState, command: H
   const ordinaryTime = () => requireRule(s.featureRules?.mutation !== "end_time", "DESTINY_REPLACED", "宿命已替换普通时间技能");
   let endsTurn = false, secretOnly = false;
   switch (command.ability) {
+    case "tether_pull": {
+      runtime.tetherPullUses = (runtime.tetherPullUses ?? 0) + 1;
+      // relocatePiece records the moved ENEMY controller for traps/infections.
+      // No hidden landing effect is sampled in the preceding public preflight.
+      requireRule(relocatePiece(s, k, pullOption!.pieceId, pullOption!.to, "cen_ying:tether_pull"), "INVALID_TETHER_LANDING", "引缆落位已不可用");
+      endsTurn = true;
+      break;
+    }
     case "training":
       if (isGeneralInCheck(s, side)) { const error = new Error("H15受将启动许可未覆盖"); error.name = "TrainingCoverageError"; throw error; }
       startTraining(s, k, side, command.trainingType, randomInt);
@@ -329,7 +356,9 @@ function applyFreshHeroAbility(state: GameState, secret: SecretState, command: H
   if (!secretOnly) {
     s.revision += 1;
     if (endsTurn) {
-      s.lastMove = { actionId: command.actionId, pieceId: command.pieceId ?? `hero:${side}`, actingSide: side, from: command.to ?? { x: 0, y: 0 }, to: command.to ?? { x: 0, y: 0 }, landed: false, ...actionFields(classification) };
+      s.lastMove = pullOption
+        ? { actionId: command.actionId, pieceId: pullOption.pieceId, actingSide: side, from: { ...pullOption.from }, to: { ...pullOption.to }, landed: true, ...actionFields(classification) }
+        : { actionId: command.actionId, pieceId: command.pieceId ?? `hero:${side}`, actingSide: side, from: command.to ?? { x: 0, y: 0 }, to: command.to ?? { x: 0, y: 0 }, landed: false, ...actionFields(classification) };
       if (command.ability === "inner_wave" && s.pieces.some(p => p.id === command.pieceId && getController(p) === side) && !closeDirectDeaths(s, k, side) && !isGeneralInCheck(s, side)) {
         closeMainActionAtom(s, command.actionId);
         s.pendingHeroChild = { kind: "inner_wave", side, pieceId: command.pieceId!, parent: copy(s.lastMove) };

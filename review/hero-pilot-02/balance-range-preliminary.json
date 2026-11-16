@@ -1,0 +1,29 @@
+{
+  "schema": "lezi.hero_pilot_02.preliminary_range_observation.v1",
+  "executed_on": "2026-11-14",
+  "status": "HISTORICAL_EXPLORATORY_OBSERVATION_NOT_RELEASE_VALIDATION",
+  "source_binding": "This early read-only probe was executed before the new skill module existed. It used the then-loaded src/rules.ts, src/setup.ts, src/game.ts, src/slots.ts, src/spaces.ts and src/settlement.ts. Individual file hashes were not captured at that time, so this record must not be used as an exact-final-source acceptance result.",
+  "method": "Eight fixed-seed ordinary random playouts, up to 80 actions each. Each accepted action used applyAuthoritativeMove. At each playing boundary, a separate public geometry enumerator counted revealed non-general ground ally/enemy pairs in an unobstructed orthogonal line, distance 2..3 or 2..4, with a one-square pull toward the ally, placementAllowed and final public own-king safety. No new hero ability was executed and no hidden identity/trap was used for candidate selection. Games stopped at the authority's execution stage or 80-action budget; these were not recorded as completed games.",
+  "seeds": [91, 92, 93, 94, 95, 96, 97, 98],
+  "rows": [
+    { "seed": 91, "ordinary_actions": 10, "first_3_ply_zero_based": null, "first_4_ply_zero_based": null, "stop_status": "execution", "reason": "ambush" },
+    { "seed": 92, "ordinary_actions": 4, "first_3_ply_zero_based": null, "first_4_ply_zero_based": null, "stop_status": "execution", "reason": "ambush" },
+    { "seed": 93, "ordinary_actions": 80, "first_3_ply_zero_based": 5, "first_4_ply_zero_based": 5, "stop_status": "playing" },
+    { "seed": 94, "ordinary_actions": 8, "first_3_ply_zero_based": null, "first_4_ply_zero_based": null, "stop_status": "execution", "reason": "ambush" },
+    { "seed": 95, "ordinary_actions": 64, "first_3_ply_zero_based": 4, "first_4_ply_zero_based": 4, "stop_status": "execution", "reason": "checkmate" },
+    { "seed": 96, "ordinary_actions": 8, "first_3_ply_zero_based": null, "first_4_ply_zero_based": null, "stop_status": "execution", "reason": "ambush" },
+    { "seed": 97, "ordinary_actions": 80, "first_3_ply_zero_based": 15, "first_4_ply_zero_based": 15, "stop_status": "playing" },
+    { "seed": 98, "ordinary_actions": 79, "first_3_ply_zero_based": 10, "first_4_ply_zero_based": 6, "stop_status": "execution", "reason": "ambush" }
+  ],
+  "sampled_turns": 333,
+  "range_2_to_3": { "turns_with_at_least_one_candidate": 236, "total_candidate_pairs": 568 },
+  "range_2_to_4": { "turns_with_at_least_one_candidate": 244, "total_candidate_pairs": 688 },
+  "interpretation": "The extra fourth square added 8 sampled turns with candidates. This preliminary availability result did not justify widening the chosen range. It says nothing about whether a candidate is strategically valuable, complete rule compatibility or balanced strength.",
+  "limitations": [
+    "Very weak random policy; four early ambush endings had no candidate at either range.",
+    "Longer games contribute more sampled positions; the fractions are not per-game or per-player success rates.",
+    "No actual new-hero execution or 4-square variant implementation.",
+    "No exact source hash binding; do not include in release test pass totals.",
+    "This observation is retained for the design decision history, not as a claim of global balance."
+  ]
+}

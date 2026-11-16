@@ -1,5 +1,5 @@
 import { RuleError } from "./errors.ts";
-import { HERO_CATALOG, HERO_IDS } from "./heroes.ts";
+import { HERO_CATALOG, ALL_HERO_IDS } from "./heroes.ts";
 import type { GameState, HeroForm, HeroId, HeroSelection, HeroSelections, SecretState, Side, GalakrondForm } from "./types.ts";
 
 const sides = ["red", "black"] as const;
@@ -14,7 +14,7 @@ export function heroSkillLabel(heroName: string, skillName: string, form: HeroFo
 
 /** 本次移交的19英雄及两个独立里包；迦拉克隆五子包在英雄确认时固定。 */
 export function getHeroPackage(heroId: HeroId, form: HeroForm = "front", variant?: GalakrondForm) {
-  if (!HERO_IDS.includes(heroId)) return fail("未知英雄");
+  if (!ALL_HERO_IDS.includes(heroId)) return fail("未知英雄");
   if (form !== "front" && form !== "inner") return fail("未知英雄形态");
   if (form === "inner" && !["jiang_he", "death_knight"].includes(heroId)) throw new RuleError("HERO_FORM_UNAVAILABLE", "该英雄没有正式移交的里形态完整包");
   if (variant !== undefined && (heroId !== "devout_zealot" || form !== "front" || !["nightmare", "invincible", "fel", "storm", "unspeakable"].includes(variant))) return fail("未知或不适用的迦拉克隆完整形态");

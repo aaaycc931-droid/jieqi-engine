@@ -1,3 +1,4 @@
+import { getCenYingPullOptions } from "./hero-cen-ying.ts";
 import { strongBladeSide } from "./hero-progress.ts";
 import { selectedHeroId, validateHeroForms } from "./hero-forms.ts";
 import { isBoardPiece, isGround, isRiver } from "./spaces.ts";
@@ -511,6 +512,7 @@ export function hasAnyLegalMove(state: GameState, side: Side): boolean {
   if (selection?.heroId === "jiang_he" && (selection.form === "front" || !runtime?.used) && state.pieces.some(p => getController(p) === side && (isRiver(p) || isGround(p) && [4,5].includes(p.y) && state.effectsByPieceId?.[p.id]?.riverQualified))) return true;
 
   const stateForSide: GameState = { ...state, status: "playing", turn: side };
+  if (hero === "cen_ying" && getCenYingPullOptions(stateForSide, side).length > 0) return true;
   return stateForSide.pieces.some(
     (piece) =>
       isBoardPiece(piece) && getController(piece) === side &&

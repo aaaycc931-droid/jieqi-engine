@@ -1,0 +1,938 @@
+{
+  "status": "LOCAL_DRAFT_REQUIRES_PUBLICATION_AND_REMOTE_READBACK",
+  "known_recovered_members": 59,
+  "all_originals_preserved_in_private_source_zip": true,
+  "all_public_uploads_complete": false,
+  "counts": {
+    "PREPARED_NOT_PUBLISHED": 19,
+    "PRIVATE_ORIGINAL_ONLY": 1,
+    "BASELINE_REFERENCE_NO_NEW_DEPENDENCY_EDIT": 1,
+    "EXISTING_PUBLIC_DERIVATIVE_ORIGINAL_RETAINED_PRIVATELY": 3,
+    "EXISTING_PUBLIC_ORIGINAL": 33,
+    "DUPLICATE_OF_EXISTING_PUBLIC_MASTER": 2
+  },
+  "entries": [
+    {
+      "archive_path": "README_RECOVERY.md",
+      "source_identity": {
+        "bytes": 2759,
+        "sha256": "de5566ec7d4e7f08c1e160be10d4b587ca3e6951d2b7bfa9bdfacea9a4aaa023",
+        "git_blob_sha": "984ab5139411594f0961d3cc7b371bee385f9db7"
+      },
+      "in_original_54_manifest": false,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "disposition": "PREPARED_NOT_PUBLISHED",
+      "proposed_repository_path": "review/hero-pilot-02/history/20261114/recovery/README_RECOVERY.md",
+      "representation": "EXACT_ORIGINAL_BYTES",
+      "public_identity": {
+        "bytes": 2759,
+        "sha256": "de5566ec7d4e7f08c1e160be10d4b587ca3e6951d2b7bfa9bdfacea9a4aaa023",
+        "git_blob_sha": "984ab5139411594f0961d3cc7b371bee385f9db7"
+      }
+    },
+    {
+      "archive_path": "RECOVERY_MANIFEST.json",
+      "source_identity": {
+        "bytes": 61558,
+        "sha256": "73763ed6a95a537cc83bad2fc5989068a3dbcb1a323c654e0de5267461ba5057",
+        "git_blob_sha": "72a7a601ab5a1d7e2545c010b8cb8640afc1b4d3"
+      },
+      "in_original_54_manifest": false,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "disposition": "PRIVATE_ORIGINAL_ONLY",
+      "reason": "Contains original private execution paths and snapshot metadata; do not publish the raw manifest."
+    },
+    {
+      "archive_path": "RECOVERY_OBSERVATION.json",
+      "source_identity": {
+        "bytes": 7527,
+        "sha256": "b9ee2fa56ed7ab46be856c05f658495d0ff519da2cbb6b3d82d59ef228ad7b63",
+        "git_blob_sha": "212e312ec50aa7426eaab9348b54d952689d7389"
+      },
+      "in_original_54_manifest": false,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "disposition": "PREPARED_NOT_PUBLISHED",
+      "proposed_repository_path": "review/hero-pilot-02/history/20261114/recovery/RECOVERY_OBSERVATION.json",
+      "representation": "EXACT_ORIGINAL_BYTES",
+      "public_identity": {
+        "bytes": 7527,
+        "sha256": "b9ee2fa56ed7ab46be856c05f658495d0ff519da2cbb6b3d82d59ef228ad7b63",
+        "git_blob_sha": "212e312ec50aa7426eaab9348b54d952689d7389"
+      }
+    },
+    {
+      "archive_path": "dependency-context/package.json",
+      "source_identity": {
+        "bytes": 644,
+        "sha256": "db688514f3a2200e3098b87c59bdbfb326bd5fc5e08ad719421025c9de87559c",
+        "git_blob_sha": "34b26233ab157051caeae779771ddc0fceb24465"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "disposition": "BASELINE_REFERENCE_NO_NEW_DEPENDENCY_EDIT",
+      "repository_path": "package.json",
+      "reference_commit": "71145df45ad17215a3731e53150b6728e079e375",
+      "remote_blob_identity_checked_this_session": true
+    },
+    {
+      "archive_path": "engine-delta/art/hero-pilot-02/ASSET_MANIFEST.json",
+      "source_identity": {
+        "bytes": 12407,
+        "sha256": "25e632d4b166387f43bc8c55b966a5794f10a1234e67daa608ae8f1ccfa57344",
+        "git_blob_sha": "488e77aa3ab477a713ef2cf6275f0685d69544f4"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "repository_path": "art/hero-pilot-02/ASSET_MANIFEST.json",
+      "disposition": "EXISTING_PUBLIC_DERIVATIVE_ORIGINAL_RETAINED_PRIVATELY",
+      "remote_evidence": "Previously published candidate delivery; immutable source report read at 00021784caab48265b279a22f77e18a2351cc9eb. Exact remote bytes not downloaded again in this session.",
+      "recorded_public_sha256": "743d198e95508c830feaffbcf2bc8a5c12adf424d1f648b2da9e3683b28cfba7"
+    },
+    {
+      "archive_path": "engine-delta/art/hero-pilot-02/PROMPTS.json",
+      "source_identity": {
+        "bytes": 6805,
+        "sha256": "7f7885d107724b6cc19b7898ee7060cfc94f5030979c3ea36369801ceba632e0",
+        "git_blob_sha": "8a58cde0aefa836173d50c03f63077a84cee690b"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "repository_path": "art/hero-pilot-02/PROMPTS.json",
+      "disposition": "EXISTING_PUBLIC_DERIVATIVE_ORIGINAL_RETAINED_PRIVATELY",
+      "remote_evidence": "Previously published candidate delivery; immutable source report read at 00021784caab48265b279a22f77e18a2351cc9eb. Exact remote bytes not downloaded again in this session.",
+      "recorded_public_sha256": "37ffa784fc582e8dedf1bdf7323e30d218c8fc1abebcef4b5ada26104a77e582"
+    },
+    {
+      "archive_path": "engine-delta/art/hero-pilot-02/export-assets.cjs",
+      "source_identity": {
+        "bytes": 5310,
+        "sha256": "edacee1e7cf3fa7127fa821e5e16f8028716bb905f8f46f27d368ba3dfa9d78c",
+        "git_blob_sha": "e05cf084e3cee428d5371274bff28c477ecc2712"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "repository_path": "art/hero-pilot-02/export-assets.cjs",
+      "disposition": "EXISTING_PUBLIC_ORIGINAL",
+      "remote_evidence": "Previously published candidate delivery; immutable source report read at 00021784caab48265b279a22f77e18a2351cc9eb. Exact remote bytes not downloaded again in this session."
+    },
+    {
+      "archive_path": "engine-delta/art/hero-pilot-02/masters/cen-ying-figure-v1.png",
+      "source_identity": {
+        "bytes": 2236966,
+        "sha256": "7de2f26f0241527f6ea84ef0e5bee71780029b19417d521cd2aa8c76439c70da",
+        "git_blob_sha": "44c18285cd98a877f64303e94cce410de7c76934"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "repository_path": "art/hero-pilot-02/masters/cen-ying-figure-v1.png",
+      "disposition": "EXISTING_PUBLIC_ORIGINAL",
+      "remote_evidence": "Previously published candidate delivery; immutable source report read at 00021784caab48265b279a22f77e18a2351cc9eb. Exact remote bytes not downloaded again in this session."
+    },
+    {
+      "archive_path": "engine-delta/art/hero-pilot-02/masters/cen-ying-portrait-v1.png",
+      "source_identity": {
+        "bytes": 2832675,
+        "sha256": "d3397e8850e2150d1dd41ed8a897b47c0efd9685c8fa0d9bff31f913b017decb",
+        "git_blob_sha": "27c3bfc9c14db794e27b2bc2568ca487a9df1509"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "repository_path": "art/hero-pilot-02/masters/cen-ying-portrait-v1.png",
+      "disposition": "EXISTING_PUBLIC_ORIGINAL",
+      "remote_evidence": "Previously published candidate delivery; immutable source report read at 00021784caab48265b279a22f77e18a2351cc9eb. Exact remote bytes not downloaded again in this session."
+    },
+    {
+      "archive_path": "engine-delta/docs/hero-pilot-02/BALANCE.md",
+      "source_identity": {
+        "bytes": 14962,
+        "sha256": "ca9bc7446cf8221df383a78b070b8c11d6e13b2cd50c6369bdbf3491a1f67e55",
+        "git_blob_sha": "19b80c2b486c5f4271b1687afe7f22a977631140"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "repository_path": "docs/hero-pilot-02/BALANCE.md",
+      "disposition": "EXISTING_PUBLIC_ORIGINAL",
+      "remote_evidence": "Previously published candidate delivery; immutable source report read at 00021784caab48265b279a22f77e18a2351cc9eb. Exact remote bytes not downloaded again in this session."
+    },
+    {
+      "archive_path": "engine-delta/docs/hero-pilot-02/DESIGN.md",
+      "source_identity": {
+        "bytes": 5649,
+        "sha256": "a48f9381b4c35cef871d769491d9e988363ca671da9339fac4a97d97af67106e",
+        "git_blob_sha": "f1dfa6e532b314bb4eeb1b6cb7e7cfab553e600b"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "repository_path": "docs/hero-pilot-02/DESIGN.md",
+      "disposition": "EXISTING_PUBLIC_ORIGINAL",
+      "remote_evidence": "Previously published candidate delivery; immutable source report read at 00021784caab48265b279a22f77e18a2351cc9eb. Exact remote bytes not downloaded again in this session."
+    },
+    {
+      "archive_path": "engine-delta/docs/hero-pilot-02/IMPLEMENTATION.md",
+      "source_identity": {
+        "bytes": 5835,
+        "sha256": "c6879a92fdd0a59c0ab6de4ceaf888ffee3953b1c83777cd89c5469bd41d846b",
+        "git_blob_sha": "83bc72bc26a469536344af94efc89e2e1098bf42"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "repository_path": "docs/hero-pilot-02/IMPLEMENTATION.md",
+      "disposition": "EXISTING_PUBLIC_ORIGINAL",
+      "remote_evidence": "Previously published candidate delivery; immutable source report read at 00021784caab48265b279a22f77e18a2351cc9eb. Exact remote bytes not downloaded again in this session."
+    },
+    {
+      "archive_path": "engine-delta/docs/hero-pilot-02/README.md",
+      "source_identity": {
+        "bytes": 2867,
+        "sha256": "4438a60094f2ffa83fa5f3ff220aabb63187dedcf4748bf500e676b37673f2ec",
+        "git_blob_sha": "17bfc6316ca2b63f1a0c1202abbf3f3ea05ba554"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "repository_path": "docs/hero-pilot-02/README.md",
+      "disposition": "EXISTING_PUBLIC_ORIGINAL",
+      "remote_evidence": "Previously published candidate delivery; immutable source report read at 00021784caab48265b279a22f77e18a2351cc9eb. Exact remote bytes not downloaded again in this session."
+    },
+    {
+      "archive_path": "engine-delta/review/hero-pilot-02/VALIDATION.json",
+      "source_identity": {
+        "bytes": 5068,
+        "sha256": "4a61c4b4b0e110a2ae8c6122d172ec2ad28741b70ae42b478bfcd89906d8afb2",
+        "git_blob_sha": "84a2221276f285943a2cf2794cc129e93d0e3072"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "repository_path": "review/hero-pilot-02/VALIDATION.json",
+      "disposition": "EXISTING_PUBLIC_DERIVATIVE_ORIGINAL_RETAINED_PRIVATELY",
+      "remote_evidence": "Previously published candidate delivery; immutable source report read at 00021784caab48265b279a22f77e18a2351cc9eb. Exact remote bytes not downloaded again in this session.",
+      "recorded_public_sha256": "ccca8cc2622d7f16401c53a840fecd21750491ffedf2108e162b9560a719e79f"
+    },
+    {
+      "archive_path": "engine-delta/review/hero-pilot-02/balance-range-preliminary.json",
+      "source_identity": {
+        "bytes": 3355,
+        "sha256": "abf589206c42eacd378b646333a4e475ee0b4e88cac15c2def10784c4450196e",
+        "git_blob_sha": "ca46447af392f431ca312b1fa61ff47baa475aa7"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "repository_path": "review/hero-pilot-02/balance-range-preliminary.json",
+      "disposition": "EXISTING_PUBLIC_ORIGINAL",
+      "remote_evidence": "Previously published candidate delivery; immutable source report read at 00021784caab48265b279a22f77e18a2351cc9eb. Exact remote bytes not downloaded again in this session."
+    },
+    {
+      "archive_path": "engine-delta/review/hero-pilot-02/balance-results.json",
+      "source_identity": {
+        "bytes": 528788,
+        "sha256": "0f92ee366ff7fd0d6dce75ebcc127f670c5522c8b98b9edcb60177552511eeb7",
+        "git_blob_sha": "82e211b78a32f8ce4eb008e0bae792db629bea90"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "repository_path": "review/hero-pilot-02/balance-results.json",
+      "disposition": "EXISTING_PUBLIC_ORIGINAL",
+      "remote_evidence": "Previously published candidate delivery; immutable source report read at 00021784caab48265b279a22f77e18a2351cc9eb. Exact remote bytes not downloaded again in this session."
+    },
+    {
+      "archive_path": "engine-delta/review/hero-pilot-02/balance-run.log",
+      "source_identity": {
+        "bytes": 2755,
+        "sha256": "5c3bba4021bee3df2c8f3a974a0c3582f0e5c0fc0f6adfc75d46eb024d638fec",
+        "git_blob_sha": "11351b35207db71dc682b7fb27ee86c341a31182"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "repository_path": "review/hero-pilot-02/balance-run.log",
+      "disposition": "EXISTING_PUBLIC_ORIGINAL",
+      "remote_evidence": "Previously published candidate delivery; immutable source report read at 00021784caab48265b279a22f77e18a2351cc9eb. Exact remote bytes not downloaded again in this session."
+    },
+    {
+      "archive_path": "engine-delta/review/hero-pilot-02/dom-results.json",
+      "source_identity": {
+        "bytes": 3361,
+        "sha256": "9877f7b714c04d78078f457d97eb35c7be1c680d3ad2b34bd5707a6039aa9f15",
+        "git_blob_sha": "ac448a5215d5b92055593223dc76cb2b5254c805"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "repository_path": "review/hero-pilot-02/dom-results.json",
+      "disposition": "EXISTING_PUBLIC_ORIGINAL",
+      "remote_evidence": "Previously published candidate delivery; immutable source report read at 00021784caab48265b279a22f77e18a2351cc9eb. Exact remote bytes not downloaded again in this session."
+    },
+    {
+      "archive_path": "engine-delta/review/hero-pilot-02/dom-run.log",
+      "source_identity": {
+        "bytes": 222,
+        "sha256": "aff45ec80e68a48d4f628d0a5438befc34bea9e4c38cfa05d5534e6f4884c186",
+        "git_blob_sha": "c6cf7f88edadc62701c3aac2c12ce5c1163fdf68"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "repository_path": "review/hero-pilot-02/dom-run.log",
+      "disposition": "EXISTING_PUBLIC_ORIGINAL",
+      "remote_evidence": "Previously published candidate delivery; immutable source report read at 00021784caab48265b279a22f77e18a2351cc9eb. Exact remote bytes not downloaded again in this session."
+    },
+    {
+      "archive_path": "engine-delta/review/hero-pilot-02/http-results.json",
+      "source_identity": {
+        "bytes": 1314,
+        "sha256": "41d959d44834373537c70ea0a9718b381020aa12d1f3116b5ccb333c1da5ae4e",
+        "git_blob_sha": "42440aebe81ee64244c74114ec87924b232e4d2f"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "repository_path": "review/hero-pilot-02/http-results.json",
+      "disposition": "EXISTING_PUBLIC_ORIGINAL",
+      "remote_evidence": "Previously published candidate delivery; immutable source report read at 00021784caab48265b279a22f77e18a2351cc9eb. Exact remote bytes not downloaded again in this session."
+    },
+    {
+      "archive_path": "engine-delta/review/hero-pilot-02/regression-run.log",
+      "source_identity": {
+        "bytes": 105748,
+        "sha256": "45277b9d801f62eb36a30417f1ffb59fe6d82826bfbff5b40abade886eb339b6",
+        "git_blob_sha": "2b61091e0670b78d97fdda863305fcfed40b65cc"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "repository_path": "review/hero-pilot-02/regression-run.log",
+      "disposition": "EXISTING_PUBLIC_ORIGINAL",
+      "remote_evidence": "Previously published candidate delivery; immutable source report read at 00021784caab48265b279a22f77e18a2351cc9eb. Exact remote bytes not downloaded again in this session."
+    },
+    {
+      "archive_path": "engine-delta/scripts/build-web.ts",
+      "source_identity": {
+        "bytes": 2269,
+        "sha256": "7ae95a0440370157d49e41b430bf2fc01aae02795b3205fb8841431d04e326a2",
+        "git_blob_sha": "9222916a349539aec844f564e90059cf88e5f5ed"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "repository_path": "scripts/build-web.ts",
+      "disposition": "EXISTING_PUBLIC_ORIGINAL",
+      "remote_evidence": "Previously published candidate delivery; immutable source report read at 00021784caab48265b279a22f77e18a2351cc9eb. Exact remote bytes not downloaded again in this session."
+    },
+    {
+      "archive_path": "engine-delta/scripts/review/hero-pilot-02-balance.ts",
+      "source_identity": {
+        "bytes": 21496,
+        "sha256": "864dd878402289d8e9e1c2320a8ccd5db3b6e1388002b1d289e6e785069574f2",
+        "git_blob_sha": "973961634c51cbc6f4ee37a23f46a3b37f32e053"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "repository_path": "scripts/review/hero-pilot-02-balance.ts",
+      "disposition": "EXISTING_PUBLIC_ORIGINAL",
+      "remote_evidence": "Previously published candidate delivery; immutable source report read at 00021784caab48265b279a22f77e18a2351cc9eb. Exact remote bytes not downloaded again in this session."
+    },
+    {
+      "archive_path": "engine-delta/scripts/review/hero-pilot-02-dom.mjs",
+      "source_identity": {
+        "bytes": 14441,
+        "sha256": "4ebe4a2db3678783b3544e560b28004316a4f6395c8a308fffa15d6060fe2d2f",
+        "git_blob_sha": "43492c708bf59eb77c153eb1f09a86b23ddf33f2"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "repository_path": "scripts/review/hero-pilot-02-dom.mjs",
+      "disposition": "EXISTING_PUBLIC_ORIGINAL",
+      "remote_evidence": "Previously published candidate delivery; immutable source report read at 00021784caab48265b279a22f77e18a2351cc9eb. Exact remote bytes not downloaded again in this session."
+    },
+    {
+      "archive_path": "engine-delta/scripts/serve-web.ts",
+      "source_identity": {
+        "bytes": 2437,
+        "sha256": "20555e785010cbb9965ea3120537c59d057f481f1b62fee7820a2b01128e96ee",
+        "git_blob_sha": "1c15f01e0f5502c390f8d8a297d530cbe55191b7"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "repository_path": "scripts/serve-web.ts",
+      "disposition": "EXISTING_PUBLIC_ORIGINAL",
+      "remote_evidence": "Previously published candidate delivery; immutable source report read at 00021784caab48265b279a22f77e18a2351cc9eb. Exact remote bytes not downloaded again in this session."
+    },
+    {
+      "archive_path": "engine-delta/src/game.ts",
+      "source_identity": {
+        "bytes": 58105,
+        "sha256": "3ad81f9ec06e8d7fcd9cf88e063d28e51a5af3781240bd4d7661d6f094bf1197",
+        "git_blob_sha": "3cdf907ea58cd2b820643b5f3b34fe144679f7f6"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "repository_path": "src/game.ts",
+      "disposition": "EXISTING_PUBLIC_ORIGINAL",
+      "remote_evidence": "Previously published candidate delivery; immutable source report read at 00021784caab48265b279a22f77e18a2351cc9eb. Exact remote bytes not downloaded again in this session."
+    },
+    {
+      "archive_path": "engine-delta/src/hero-actions.ts",
+      "source_identity": {
+        "bytes": 28997,
+        "sha256": "133de0b2449488b662216f1f11c4b52217bbcd35e911e007b783210239124af6",
+        "git_blob_sha": "4a99ffce9af7b4b6e7c9457dc7c2ddaae8ec6360"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "repository_path": "src/hero-actions.ts",
+      "disposition": "EXISTING_PUBLIC_ORIGINAL",
+      "remote_evidence": "Previously published candidate delivery; immutable source report read at 00021784caab48265b279a22f77e18a2351cc9eb. Exact remote bytes not downloaded again in this session."
+    },
+    {
+      "archive_path": "engine-delta/src/hero-cen-ying.ts",
+      "source_identity": {
+        "bytes": 3141,
+        "sha256": "8d5c40188edb2e54f3171878e3ac763177aba26fa299dab9604c05ac2f3c0768",
+        "git_blob_sha": "6d506a8774df8a9867eca448629a859c0415652c"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "repository_path": "src/hero-cen-ying.ts",
+      "disposition": "EXISTING_PUBLIC_ORIGINAL",
+      "remote_evidence": "Previously published candidate delivery; immutable source report read at 00021784caab48265b279a22f77e18a2351cc9eb. Exact remote bytes not downloaded again in this session."
+    },
+    {
+      "archive_path": "engine-delta/src/hero-forms.ts",
+      "source_identity": {
+        "bytes": 6099,
+        "sha256": "29c941bd85eab5cfbcf616fff1b2f9bb00613fff1799a2c1b4a2d34caa793955",
+        "git_blob_sha": "74fc54491b8fa3567d0d034802ed66a429bfe1bc"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "repository_path": "src/hero-forms.ts",
+      "disposition": "EXISTING_PUBLIC_ORIGINAL",
+      "remote_evidence": "Previously published candidate delivery; immutable source report read at 00021784caab48265b279a22f77e18a2351cc9eb. Exact remote bytes not downloaded again in this session."
+    },
+    {
+      "archive_path": "engine-delta/src/heroes.ts",
+      "source_identity": {
+        "bytes": 7089,
+        "sha256": "6bb75e2f05fc6f15e21566b9b851638126ce03a48c2192ece6415b5bbd442f6f",
+        "git_blob_sha": "ec18cb43a72a21bca490b81acbc4c448598cf6e1"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "repository_path": "src/heroes.ts",
+      "disposition": "EXISTING_PUBLIC_ORIGINAL",
+      "remote_evidence": "Previously published candidate delivery; immutable source report read at 00021784caab48265b279a22f77e18a2351cc9eb. Exact remote bytes not downloaded again in this session."
+    },
+    {
+      "archive_path": "engine-delta/src/index.ts",
+      "source_identity": {
+        "bytes": 908,
+        "sha256": "50ccc9cfca0063fb100ddb3a90b2331d867bec1a8fa8c64f0f0d81d6647f5b14",
+        "git_blob_sha": "683251b5cfffd55a4a083ee1da4f72d9faf51566"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "repository_path": "src/index.ts",
+      "disposition": "EXISTING_PUBLIC_ORIGINAL",
+      "remote_evidence": "Previously published candidate delivery; immutable source report read at 00021784caab48265b279a22f77e18a2351cc9eb. Exact remote bytes not downloaded again in this session."
+    },
+    {
+      "archive_path": "engine-delta/src/rules.ts",
+      "source_identity": {
+        "bytes": 23477,
+        "sha256": "5b4caa09d7cbc8a77355c3688b3b4d7151799d6a6cfc52c71b74e7cb87c685a0",
+        "git_blob_sha": "192fb1c2f2b22e6eaf4bcd3fad3c6b3b627ee6b0"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "repository_path": "src/rules.ts",
+      "disposition": "EXISTING_PUBLIC_ORIGINAL",
+      "remote_evidence": "Previously published candidate delivery; immutable source report read at 00021784caab48265b279a22f77e18a2351cc9eb. Exact remote bytes not downloaded again in this session."
+    },
+    {
+      "archive_path": "engine-delta/src/types.ts",
+      "source_identity": {
+        "bytes": 14393,
+        "sha256": "0f9b6b393a2d38d0cb3de174e8840a66a216239a5704bd4ea52cef264a39cb97",
+        "git_blob_sha": "bf5256701245d5a244e9da1311f45b89a06641fc"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "repository_path": "src/types.ts",
+      "disposition": "EXISTING_PUBLIC_ORIGINAL",
+      "remote_evidence": "Previously published candidate delivery; immutable source report read at 00021784caab48265b279a22f77e18a2351cc9eb. Exact remote bytes not downloaded again in this session."
+    },
+    {
+      "archive_path": "engine-delta/tests/hero-pilot-02.test.ts",
+      "source_identity": {
+        "bytes": 20227,
+        "sha256": "79ee103bc8aa506927dcac9e850d8441c134323f1c38cf5fcf57eba3c2485cdd",
+        "git_blob_sha": "3dd589f6fd3675691e60d8a248f4d5dcf390229b"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "repository_path": "tests/hero-pilot-02.test.ts",
+      "disposition": "EXISTING_PUBLIC_ORIGINAL",
+      "remote_evidence": "Previously published candidate delivery; immutable source report read at 00021784caab48265b279a22f77e18a2351cc9eb. Exact remote bytes not downloaded again in this session."
+    },
+    {
+      "archive_path": "engine-delta/web/app.ts",
+      "source_identity": {
+        "bytes": 194605,
+        "sha256": "3c8c757cf0e03b0f51b381cade56074c36bfd93280792880ebab039104dc8a7d",
+        "git_blob_sha": "de3059a8bf9798d5840a9d80d513bbf57408d044"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "repository_path": "web/app.ts",
+      "disposition": "EXISTING_PUBLIC_ORIGINAL",
+      "remote_evidence": "Previously published candidate delivery; immutable source report read at 00021784caab48265b279a22f77e18a2351cc9eb. Exact remote bytes not downloaded again in this session."
+    },
+    {
+      "archive_path": "engine-delta/web/assets/heroes/cen-ying/figure-768.webp",
+      "source_identity": {
+        "bytes": 90364,
+        "sha256": "922dd8803171aa1aaec094ef574bcfd37a175f296793520e47796f1fd5e19b2c",
+        "git_blob_sha": "15c19077fb28b949f0aaa2d5c9cf56f0e23d1399"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "repository_path": "web/assets/heroes/cen-ying/figure-768.webp",
+      "disposition": "EXISTING_PUBLIC_ORIGINAL",
+      "remote_evidence": "Previously published candidate delivery; immutable source report read at 00021784caab48265b279a22f77e18a2351cc9eb. Exact remote bytes not downloaded again in this session."
+    },
+    {
+      "archive_path": "engine-delta/web/assets/heroes/cen-ying/portrait-192.webp",
+      "source_identity": {
+        "bytes": 9852,
+        "sha256": "bd1e1a00f05600945a0ad165c2096d944f4b7eaa5d681b34a1e490ffa11f8be9",
+        "git_blob_sha": "63af377fc2645c6de37a9a4d0f69088f4d76387e"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "repository_path": "web/assets/heroes/cen-ying/portrait-192.webp",
+      "disposition": "EXISTING_PUBLIC_ORIGINAL",
+      "remote_evidence": "Previously published candidate delivery; immutable source report read at 00021784caab48265b279a22f77e18a2351cc9eb. Exact remote bytes not downloaded again in this session."
+    },
+    {
+      "archive_path": "engine-delta/web/assets/heroes/cen-ying/portrait-384.webp",
+      "source_identity": {
+        "bytes": 34972,
+        "sha256": "7a1087203fa6010fb9994bd1c6a6dba0588b3cdd863e36720e1a230417f2d0a3",
+        "git_blob_sha": "5566bfb0ffb83f9bb9529104a6459fc73202c5f9"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "repository_path": "web/assets/heroes/cen-ying/portrait-384.webp",
+      "disposition": "EXISTING_PUBLIC_ORIGINAL",
+      "remote_evidence": "Previously published candidate delivery; immutable source report read at 00021784caab48265b279a22f77e18a2351cc9eb. Exact remote bytes not downloaded again in this session."
+    },
+    {
+      "archive_path": "engine-delta/web/hero-pilot-02.css",
+      "source_identity": {
+        "bytes": 2066,
+        "sha256": "6455af5c313987ea598be2807e2305128bf800d323c453bd285c3fbd2114d74c",
+        "git_blob_sha": "02469e3cfd4936fdd02d09ec88726d1a0cf9df3c"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "repository_path": "web/hero-pilot-02.css",
+      "disposition": "EXISTING_PUBLIC_ORIGINAL",
+      "remote_evidence": "Previously published candidate delivery; immutable source report read at 00021784caab48265b279a22f77e18a2351cc9eb. Exact remote bytes not downloaded again in this session."
+    },
+    {
+      "archive_path": "engine-delta/web/hero-pilot-02.ts",
+      "source_identity": {
+        "bytes": 5548,
+        "sha256": "da4b8daed4a9d6731533b6f97786dc911986f5aeac77ff7563cb309be5b9bd27",
+        "git_blob_sha": "9b1ddf75a3bbfd43e32297eea520163db70e804b"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "repository_path": "web/hero-pilot-02.ts",
+      "disposition": "EXISTING_PUBLIC_ORIGINAL",
+      "remote_evidence": "Previously published candidate delivery; immutable source report read at 00021784caab48265b279a22f77e18a2351cc9eb. Exact remote bytes not downloaded again in this session."
+    },
+    {
+      "archive_path": "generated-originals/exec-3fd270eb-46b3-4feb-97ec-5898d1509572.png",
+      "source_identity": {
+        "bytes": 2236966,
+        "sha256": "7de2f26f0241527f6ea84ef0e5bee71780029b19417d521cd2aa8c76439c70da",
+        "git_blob_sha": "44c18285cd98a877f64303e94cce410de7c76934"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "disposition": "DUPLICATE_OF_EXISTING_PUBLIC_MASTER",
+      "repository_path": "art/hero-pilot-02/masters/cen-ying-figure-v1.png"
+    },
+    {
+      "archive_path": "generated-originals/exec-780d0d86-9934-4bf6-84b7-de60497b913a.png",
+      "source_identity": {
+        "bytes": 2288094,
+        "sha256": "e38987e83996d1552e5708156ff47a2510a3d11d1a8f8a11abbd6e11f5e11cb1",
+        "git_blob_sha": "87208e2bb2f32f4f93c840c244409c96b4cfb5fa"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "disposition": "PREPARED_NOT_PUBLISHED",
+      "proposed_repository_path": "review/hero-pilot-02/history/20261114/unselected-art/cen-ying-initial-unselected.png",
+      "representation": "EXACT_ORIGINAL_BYTES",
+      "public_identity": {
+        "bytes": 2288094,
+        "sha256": "e38987e83996d1552e5708156ff47a2510a3d11d1a8f8a11abbd6e11f5e11cb1",
+        "git_blob_sha": "87208e2bb2f32f4f93c840c244409c96b4cfb5fa"
+      }
+    },
+    {
+      "archive_path": "generated-originals/exec-79108609-6f30-4898-85f8-3b3f0a774088.png",
+      "source_identity": {
+        "bytes": 2832675,
+        "sha256": "d3397e8850e2150d1dd41ed8a897b47c0efd9685c8fa0d9bff31f913b017decb",
+        "git_blob_sha": "27c3bfc9c14db794e27b2bc2568ca487a9df1509"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "disposition": "DUPLICATE_OF_EXISTING_PUBLIC_MASTER",
+      "repository_path": "art/hero-pilot-02/masters/cen-ying-portrait-v1.png"
+    },
+    {
+      "archive_path": "handoff-original/CURRENT_STATE.json",
+      "source_identity": {
+        "bytes": 877,
+        "sha256": "2a35dc3f7b36e6c736b6b2a39eb95944748f6d1b7af1877b00a1affe3f296ba9",
+        "git_blob_sha": "f9ecca9a04f526aff6f668d4b89cf089b2bf67de"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "disposition": "PREPARED_NOT_PUBLISHED",
+      "proposed_repository_path": "review/hero-pilot-02/history/20261114/handoff-original/CURRENT_STATE.json",
+      "representation": "EXACT_ORIGINAL_BYTES",
+      "public_identity": {
+        "bytes": 877,
+        "sha256": "2a35dc3f7b36e6c736b6b2a39eb95944748f6d1b7af1877b00a1affe3f296ba9",
+        "git_blob_sha": "f9ecca9a04f526aff6f668d4b89cf089b2bf67de"
+      }
+    },
+    {
+      "archive_path": "handoff-original/DESIGN.md",
+      "source_identity": {
+        "bytes": 4572,
+        "sha256": "49030d865a2def0a9df838b01d737b18fe325946ee9063dea305429256bc53b3",
+        "git_blob_sha": "850dab0ade65fb171f1e09014d325cfae5eeb586"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "disposition": "PREPARED_NOT_PUBLISHED",
+      "proposed_repository_path": "review/hero-pilot-02/history/20261114/handoff-original/DESIGN.md",
+      "representation": "EXACT_ORIGINAL_BYTES",
+      "public_identity": {
+        "bytes": 4572,
+        "sha256": "49030d865a2def0a9df838b01d737b18fe325946ee9063dea305429256bc53b3",
+        "git_blob_sha": "850dab0ade65fb171f1e09014d325cfae5eeb586"
+      }
+    },
+    {
+      "archive_path": "handoff-original/DESIGNER_BRIEF.md",
+      "source_identity": {
+        "bytes": 1547,
+        "sha256": "a69fef22841c04028a439cf79036a79ab5473d422058984e8fde6a967d481bba",
+        "git_blob_sha": "a2ad1e82e49aad9d01d7dc10d7c2ec1ab3e90503"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "disposition": "PREPARED_NOT_PUBLISHED",
+      "proposed_repository_path": "review/hero-pilot-02/history/20261114/handoff-original/DESIGNER_BRIEF.md",
+      "representation": "EXACT_ORIGINAL_BYTES",
+      "public_identity": {
+        "bytes": 1547,
+        "sha256": "a69fef22841c04028a439cf79036a79ab5473d422058984e8fde6a967d481bba",
+        "git_blob_sha": "a2ad1e82e49aad9d01d7dc10d7c2ec1ab3e90503"
+      }
+    },
+    {
+      "archive_path": "handoff-original/PROJECT_INSTRUCTIONS.txt",
+      "source_identity": {
+        "bytes": 1716,
+        "sha256": "36632c60d8e4aaf6d8e9932f9d272f59dbba423be007ba7add0da6463f156f1c",
+        "git_blob_sha": "09f2c5d618a2a0c00220bd58200022e550a541f2"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "disposition": "PREPARED_NOT_PUBLISHED",
+      "proposed_repository_path": "review/hero-pilot-02/history/20261114/handoff-original/PROJECT_INSTRUCTIONS.txt",
+      "representation": "EXACT_ORIGINAL_BYTES",
+      "public_identity": {
+        "bytes": 1716,
+        "sha256": "36632c60d8e4aaf6d8e9932f9d272f59dbba423be007ba7add0da6463f156f1c",
+        "git_blob_sha": "09f2c5d618a2a0c00220bd58200022e550a541f2"
+      }
+    },
+    {
+      "archive_path": "handoff-original/READ_RECEIPTS.json",
+      "source_identity": {
+        "bytes": 2265,
+        "sha256": "d6f6c4064d5d359330080789660a2fd6cff8032bdc069fc2d6c0f7008eed4d85",
+        "git_blob_sha": "221040e9194200392a2313d3294da74f96e00a9d"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "disposition": "PREPARED_NOT_PUBLISHED",
+      "proposed_repository_path": "review/hero-pilot-02/history/20261114/handoff-original/READ_RECEIPTS.json",
+      "representation": "EXACT_ORIGINAL_BYTES",
+      "public_identity": {
+        "bytes": 2265,
+        "sha256": "d6f6c4064d5d359330080789660a2fd6cff8032bdc069fc2d6c0f7008eed4d85",
+        "git_blob_sha": "221040e9194200392a2313d3294da74f96e00a9d"
+      }
+    },
+    {
+      "archive_path": "handoff-original/RETURN_TO_MAIN.json",
+      "source_identity": {
+        "bytes": 802,
+        "sha256": "f0f5907a5c3acfd71b42db90545617739d4e563a2871ac21cc36ab27bb992138",
+        "git_blob_sha": "f232857d800c613db7f2a6db4ac858e932ed8e1b"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "disposition": "PREPARED_NOT_PUBLISHED",
+      "proposed_repository_path": "review/hero-pilot-02/history/20261114/handoff-original/RETURN_TO_MAIN.json",
+      "representation": "EXACT_ORIGINAL_BYTES",
+      "public_identity": {
+        "bytes": 802,
+        "sha256": "f0f5907a5c3acfd71b42db90545617739d4e563a2871ac21cc36ab27bb992138",
+        "git_blob_sha": "f232857d800c613db7f2a6db4ac858e932ed8e1b"
+      }
+    },
+    {
+      "archive_path": "handoff-original/SESSION_CLOSEOUT.json",
+      "source_identity": {
+        "bytes": 481,
+        "sha256": "1a7c4a4b359426f96b124946cbf3455a0db56ac6dc8ea68a65a19070bc14b33a",
+        "git_blob_sha": "6b6fa4c21a8da9d8dfdc34f25c53417dca5c316f"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "disposition": "PREPARED_NOT_PUBLISHED",
+      "proposed_repository_path": "review/hero-pilot-02/history/20261114/handoff-original/SESSION_CLOSEOUT.json",
+      "representation": "EXACT_ORIGINAL_BYTES",
+      "public_identity": {
+        "bytes": 481,
+        "sha256": "1a7c4a4b359426f96b124946cbf3455a0db56ac6dc8ea68a65a19070bc14b33a",
+        "git_blob_sha": "6b6fa4c21a8da9d8dfdc34f25c53417dca5c316f"
+      }
+    },
+    {
+      "archive_path": "handoff-original/START_HERE.md",
+      "source_identity": {
+        "bytes": 2097,
+        "sha256": "b66d50b382c04294383615672728bcdc02733b912509aac53b41e0b3111ad7d7",
+        "git_blob_sha": "b141a35717dcd69b0f3a273ed21ffbf7fd229a53"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "disposition": "PREPARED_NOT_PUBLISHED",
+      "proposed_repository_path": "review/hero-pilot-02/history/20261114/handoff-original/START_HERE.md",
+      "representation": "EXACT_ORIGINAL_BYTES",
+      "public_identity": {
+        "bytes": 2097,
+        "sha256": "b66d50b382c04294383615672728bcdc02733b912509aac53b41e0b3111ad7d7",
+        "git_blob_sha": "b141a35717dcd69b0f3a273ed21ffbf7fd229a53"
+      }
+    },
+    {
+      "archive_path": "handoff-original/TASK_FROM_USER.json",
+      "source_identity": {
+        "bytes": 3094,
+        "sha256": "0080444f9d4b19c8cdc8c8bbeab9c51e9044b8ffaf65b4c4f30ddee3baba8f03",
+        "git_blob_sha": "34aff17c210e2bc1c1365edd7c70e73f06502c7b"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "disposition": "PREPARED_NOT_PUBLISHED",
+      "proposed_repository_path": "review/hero-pilot-02/history/20261114/handoff-original/TASK_FROM_USER.json",
+      "representation": "EXACT_ORIGINAL_BYTES",
+      "public_identity": {
+        "bytes": 3094,
+        "sha256": "0080444f9d4b19c8cdc8c8bbeab9c51e9044b8ffaf65b4c4f30ddee3baba8f03",
+        "git_blob_sha": "34aff17c210e2bc1c1365edd7c70e73f06502c7b"
+      }
+    },
+    {
+      "archive_path": "original-logs/core-02-final.log",
+      "source_identity": {
+        "bytes": 4585,
+        "sha256": "219254b1b2519e3044b241fe88a3147737a8f99da48d1b35f2e48d44d75c27b8",
+        "git_blob_sha": "a86a0ca699cb83a6c98a6b14a99c16e0aaaddbf4"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "disposition": "PREPARED_NOT_PUBLISHED",
+      "proposed_repository_path": "review/hero-pilot-02/history/20261114/original-logs/core-02-final.log",
+      "representation": "EXACT_ORIGINAL_BYTES",
+      "public_identity": {
+        "bytes": 4585,
+        "sha256": "219254b1b2519e3044b241fe88a3147737a8f99da48d1b35f2e48d44d75c27b8",
+        "git_blob_sha": "a86a0ca699cb83a6c98a6b14a99c16e0aaaddbf4"
+      }
+    },
+    {
+      "archive_path": "original-logs/core-02-root-verification.log",
+      "source_identity": {
+        "bytes": 4588,
+        "sha256": "652e3c86ae98ae4cd413004f08b00d2bb9b71f476139b7b9834cb2be864ee087",
+        "git_blob_sha": "e5b3bf473d9fde78daad185fba003b688c84ead3"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "disposition": "PREPARED_NOT_PUBLISHED",
+      "proposed_repository_path": "review/hero-pilot-02/history/20261114/original-logs/core-02-root-verification.log",
+      "representation": "EXACT_ORIGINAL_BYTES",
+      "public_identity": {
+        "bytes": 4588,
+        "sha256": "652e3c86ae98ae4cd413004f08b00d2bb9b71f476139b7b9834cb2be864ee087",
+        "git_blob_sha": "e5b3bf473d9fde78daad185fba003b688c84ead3"
+      }
+    },
+    {
+      "archive_path": "original-logs/core-02-targeted.log",
+      "source_identity": {
+        "bytes": 16037,
+        "sha256": "78b77eeb875a71004830f89543f8961223b1caa57ed07fe3c80b5240e999347e",
+        "git_blob_sha": "e8870352023c8129910bbf57154cafca61a1a554"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "disposition": "PREPARED_NOT_PUBLISHED",
+      "proposed_repository_path": "review/hero-pilot-02/history/20261114/original-logs/core-02-targeted.log",
+      "representation": "EXACT_ORIGINAL_BYTES",
+      "public_identity": {
+        "bytes": 16037,
+        "sha256": "78b77eeb875a71004830f89543f8961223b1caa57ed07fe3c80b5240e999347e",
+        "git_blob_sha": "e8870352023c8129910bbf57154cafca61a1a554"
+      }
+    },
+    {
+      "archive_path": "original-logs/full-02-test.log",
+      "source_identity": {
+        "bytes": 129956,
+        "sha256": "c127dbbab603520e6131fff0f330d617b6cc3035a4c38552578ac2732ee16f7c",
+        "git_blob_sha": "dc2eb1ebd765434d673383155ebf721c8a17dd7f"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "disposition": "PREPARED_NOT_PUBLISHED",
+      "proposed_repository_path": "review/hero-pilot-02/history/20261114/original-logs/full-02-test.public-redacted.log",
+      "representation": "PUBLIC_REDACTED_COPY",
+      "public_identity": {
+        "bytes": 129934,
+        "sha256": "adf2b35f1bc60879171b49a67dbf9dd41e398734b0e96832c84b4374a6ce0f6f",
+        "git_blob_sha": "d33cb71f977f2fb634c029d20a571ae7a1b2b370"
+      }
+    },
+    {
+      "archive_path": "original-logs/web-02-regression.log",
+      "source_identity": {
+        "bytes": 5719,
+        "sha256": "545a7b40ed2c4f11887267dcdda62e8d3f0b68d9accf470fbe3a2d9cb2b7992b",
+        "git_blob_sha": "b5830828f3a49113d6d4937072b14c82c9d58bf8"
+      },
+      "in_original_54_manifest": true,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "disposition": "PREPARED_NOT_PUBLISHED",
+      "proposed_repository_path": "review/hero-pilot-02/history/20261114/original-logs/web-02-regression.log",
+      "representation": "EXACT_ORIGINAL_BYTES",
+      "public_identity": {
+        "bytes": 5719,
+        "sha256": "545a7b40ed2c4f11887267dcdda62e8d3f0b68d9accf470fbe3a2d9cb2b7992b",
+        "git_blob_sha": "b5830828f3a49113d6d4937072b14c82c9d58bf8"
+      }
+    },
+    {
+      "archive_path": "source-git-status.txt",
+      "source_identity": {
+        "bytes": 1095,
+        "sha256": "b6eb20e5b9ac934e0a4522d0fb5146970990c3c8da2c655920ce5cc3e2cd8d2b",
+        "git_blob_sha": "5394fe60bb8715bcf5790d3fd0ecfef2572a1925"
+      },
+      "in_original_54_manifest": false,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "disposition": "PREPARED_NOT_PUBLISHED",
+      "proposed_repository_path": "review/hero-pilot-02/history/20261114/recovery/source-git-status.txt",
+      "representation": "EXACT_ORIGINAL_BYTES",
+      "public_identity": {
+        "bytes": 1095,
+        "sha256": "b6eb20e5b9ac934e0a4522d0fb5146970990c3c8da2c655920ce5cc3e2cd8d2b",
+        "git_blob_sha": "5394fe60bb8715bcf5790d3fd0ecfef2572a1925"
+      }
+    },
+    {
+      "archive_path": "tracked-changes.patch",
+      "source_identity": {
+        "bytes": 28129,
+        "sha256": "3a2e7739d61128cfba371b009cb4eadd6c560b24704ea97440179356d6413374",
+        "git_blob_sha": "04a6182422d3d0e737f7764f49d8e05e728c1a13"
+      },
+      "in_original_54_manifest": false,
+      "original_preservation": "Existing private original recovery ZIP, verified in this session",
+      "publication_this_session": false,
+      "disposition": "PREPARED_NOT_PUBLISHED",
+      "proposed_repository_path": "review/hero-pilot-02/history/20261114/recovery/tracked-changes.patch",
+      "representation": "EXACT_ORIGINAL_BYTES",
+      "public_identity": {
+        "bytes": 28129,
+        "sha256": "3a2e7739d61128cfba371b009cb4eadd6c560b24704ea97440179356d6413374",
+        "git_blob_sha": "04a6182422d3d0e737f7764f49d8e05e728c1a13"
+      }
+    }
+  ]
+}

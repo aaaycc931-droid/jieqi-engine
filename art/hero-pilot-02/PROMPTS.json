@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "hero_id": "cen_ying",
+  "hero_name": "岑缨",
+  "status": "delegated_designer_decision",
+  "user_individually_approved_images": false,
+  "generator": "built-in image_gen.imagegen",
+  "prompts": [
+    {
+      "id": "figure-initial",
+      "use_case": "stylized-concept",
+      "transparent_background": true,
+      "prompt": "Use case: stylized-concept\nAsset type: production-ready full-body game hero illustration with genuine transparent alpha, a single original adult character.\nPrimary request: Create Cen Ying (岑缨), an original female cable-rescue worker from a fantasy world of slowly drifting inhabited stone platforms joined by cables, ballast and docks. She is approximately 30, compactly strong and sturdy, warm brown skin, short black hair with one small rust-red braid, keen eyes with a trace of laughter. She looks decisive, practical and humane, willing to abandon broken equipment to save a life.\nSubject details: ivory rough-woven short work jacket, worn ochre-red scarf and a short shoulder cape, coal-grey work trousers, well-worn copper buckles and tied rope, thick leather work gloves, robust boots. A large believable hand-cranked rescue winch and coiled cable at one side of her waist; in a hand a foldable grappling hook with a ceramic-white counterweight head. Clear asymmetrical silhouette: large winch on one side, short shoulder cape on the other. All tools are physical rescue equipment with credible attachment and scale.\nStyle/medium: polished hand-painted fantasy game concept art, rich painterly brushwork with clearly resolved edges and anatomy; sophisticated textile, leather, ceramic and worn-copper materials. Strong illustration, not a photograph and not anime.\nComposition/framing: one full character, head to toes completely visible with a generous clear margin around the entire hair, boots, winch, rope and hook. Vertical portrait composition. Stable natural standing pose with a little active forward readiness, three-quarter view. Hands and tool grips anatomically clear. Readable single silhouette for a game character panel.\nLighting/color: warm terracotta red, ivory, deep charcoal grey, aged copper, with restrained oxidized verdigris accents; soft warm directional key light and restrained cool rim light.\nBackground: completely transparent alpha everywhere outside the character and tools; no opaque background, no floor, no scenery, no drawn checkerboard.\nConstraints: ONLY one woman. No text, name labels, signatures, watermarks, logo, chessboard, game UI, frame, extra characters, turnaround or split-panel sheet. No wings, no magical flight, no sexy armour, no revealing outfit, no blue-green robe, no paired balance-weight silhouette. Do not crop any foot, tool, rope, hair or part of the figure. No broad magical energy effects. Her skill is grounded in pulling with a cable, not all-powerful magnetism.",
+      "selected": false
+    },
+    {
+      "id": "figure-final",
+      "use_case": "background-extraction",
+      "transparent_background": true,
+      "prompt": "Use case: background-extraction\nAsset type: final transparent full-body game character cutout.\nInput image 1 is the edit target and definitive identity reference: Cen Ying, the adult female cable-rescue worker.\nChange ONLY the background cleanup and framing. Keep the exact same woman, face, short black hair and rust-red braid, warm brown skin, expression, body build, pose, ivory jacket, terracotta scarf/short cape, gloves, coal trousers, boots, large copper winch, cable and ceramic-white weighted hook. Preserve her realistic painterly material details and silhouette.\nRemove every brown atmosphere, soft halo, ground shadow and background remnant outside her figure, tools and ropes. Outside all subject pixels must be genuinely fully transparent alpha, not a black, grey, white or checkerboard painting. Solid subject interior should be opaque. Delicate hair and fabric edge antialiasing can remain. Clean cutout suitable for any colored UI background.\nGive the whole full-body figure more breathing room: fit her within roughly 90% of the image height with at least 5% canvas padding above the hair and below both boots, and keep the entire hook, winch and hanging ropes inside side margins. No anatomy, garment or tool cropping. Maintain a vertical composition.\nNo text, logos, watermarks, scenery, frame or additional subjects. This is the same character, not a redesign.",
+      "reference": "figure-initial",
+      "selected": true,
+      "master": "masters/cen-ying-figure-v1.png"
+    },
+    {
+      "id": "portrait-final",
+      "use_case": "identity-preserve",
+      "transparent_background": false,
+      "prompt": "Use case: identity-preserve\nAsset type: square game hero portrait, chest-up.\nInput image 1: definitive identity and costume reference for the SAME original adult female hero, Cen Ying. Create one square chest-up portrait of her, preserve her facial bone structure and features, warm brown freckled skin, short tousled black hair and the one rust-red braid, keen eyes with a faint confident smile, age about 30 and sturdy adult build. Same ivory coarse work jacket, worn terracotta/ochre-red scarf and short cape, dark leather straps and old copper buckles; restrained oxidized copper detail. This is the exact same character, not a younger, glamour, delicate, or redesigned version.\nStyle: polished hand-painted fantasy game illustration with the reference's rich tactile details and clearly resolved edges. Readable at small icon sizes.\nComposition: 1:1 square canvas; centered head and upper chest, the face is prominent and unobscured, looking slightly to the viewer's right in a natural three-quarter pose. Keep all top hair within frame, short braid clearly visible, enough quiet margin around the head. Show the scarf, cape edge and jacket straps as recognizable costume anchors. No need to cram the large waist winch into a chest-up crop.\nBackground: simple opaque deep indigo-charcoal grey, subtle soft lighting separation, no scenery, no effects, no frame. Warm face lighting, gentle cool edge light.\nConstraints: one woman only. No text, logos, watermark, UI, chessboard, split panels, other faces, wings, ornate armour, sexualized pose, or magical powers. Preserve original identity.",
+      "reference": "figure-final",
+      "selected": true,
+      "master": "masters/cen-ying-portrait-v1.png"
+    }
+  ],
+  "public_copy_note": "Original execution-location fields omitted. Artwork, prompt text, and selected asset bytes are unchanged; original metadata is preserved separately."
+}

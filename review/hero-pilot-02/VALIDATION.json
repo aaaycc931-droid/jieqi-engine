@@ -1,0 +1,114 @@
+{
+  "schema": "lezi.hero_pilot_02.validation.v1",
+  "work_id": "EXP-HERO-002",
+  "hero": "cen_ying",
+  "date": "2026-11-14",
+  "status": "ENGINEERING_CANDIDATE_WITH_EXPLICIT_ACCEPTANCE_GAPS",
+  "engine_base": "71145df45ad17215a3731e53150b6728e079e375",
+  "source_binding": "Executed against dirty worktree on the stated base; exact final source SHA-256 values below, publication commit bound by handoff CURRENT_STATE.",
+  "source_sha256": {
+    "src/types.ts": "0f9b6b393a2d38d0cb3de174e8840a66a216239a5704bd4ea52cef264a39cb97",
+    "src/heroes.ts": "6bb75e2f05fc6f15e21566b9b851638126ce03a48c2192ece6415b5bbd442f6f",
+    "src/hero-forms.ts": "29c941bd85eab5cfbcf616fff1b2f9bb00613fff1799a2c1b4a2d34caa793955",
+    "src/game.ts": "3ad81f9ec06e8d7fcd9cf88e063d28e51a5af3781240bd4d7661d6f094bf1197",
+    "src/hero-actions.ts": "133de0b2449488b662216f1f11c4b52217bbcd35e911e007b783210239124af6",
+    "src/hero-cen-ying.ts": "8d5c40188edb2e54f3171878e3ac763177aba26fa299dab9604c05ac2f3c0768",
+    "src/rules.ts": "5b4caa09d7cbc8a77355c3688b3b4d7151799d6a6cfc52c71b74e7cb87c685a0",
+    "src/index.ts": "50ccc9cfca0063fb100ddb3a90b2331d867bec1a8fa8c64f0f0d81d6647f5b14",
+    "web/app.ts": "3c8c757cf0e03b0f51b381cade56074c36bfd93280792880ebab039104dc8a7d",
+    "web/hero-pilot-02.ts": "da4b8daed4a9d6731533b6f97786dc911986f5aeac77ff7563cb309be5b9bd27",
+    "web/hero-pilot-02.css": "6455af5c313987ea598be2807e2305128bf800d323c453bd285c3fbd2114d74c",
+    "tests/hero-pilot-02.test.ts": "79ee103bc8aa506927dcac9e850d8441c134323f1c38cf5fcf57eba3c2485cdd",
+    "scripts/build-web.ts": "7ae95a0440370157d49e41b430bf2fc01aae02795b3205fb8841431d04e326a2",
+    "scripts/serve-web.ts": "20555e785010cbb9965ea3120537c59d057f481f1b62fee7820a2b01128e96ee",
+    "scripts/review/hero-pilot-02-balance.ts": "864dd878402289d8e9e1c2320a8ccd5db3b6e1388002b1d289e6e785069574f2",
+    "scripts/review/hero-pilot-02-dom.mjs": "4ebe4a2db3678783b3544e560b28004316a4f6395c8a308fffa15d6060fe2d2f"
+  },
+  "regression": {
+    "command": "node --test --test-reporter=spec tests/*.test.ts",
+    "total": 1044,
+    "passed": 1044,
+    "failed": 0,
+    "skipped": 0,
+    "new_hero_cases_included": 50,
+    "log": "review/hero-pilot-02/regression-run.log",
+    "sha256": "45277b9d801f62eb36a30417f1ffb59fe6d82826bfbff5b40abade886eb339b6"
+  },
+  "build": {
+    "command": "node scripts/build-web.ts",
+    "passed": true,
+    "full_typecheck": false,
+    "method": "Node stripTypeScriptTypes"
+  },
+  "dom": {
+    "passed": true,
+    "cases": 15,
+    "errors": 0,
+    "real_browser": false,
+    "evidence": "review/hero-pilot-02/dom-results.json",
+    "sha256": "9877f7b714c04d78078f457d97eb35c7be1c680d3ad2b34bd5707a6039aa9f15"
+  },
+  "http": {
+    "passed": true,
+    "resources": 5,
+    "same_process": true,
+    "evidence": "review/hero-pilot-02/http-results.json",
+    "sha256": "41d959d44834373537c70ea0a9718b381020aa12d1f3116b5ccb333c1da5ae4e"
+  },
+  "balance": {
+    "evidence": "review/hero-pilot-02/balance-results.json",
+    "sha256": "0f92ee366ff7fd0d6dce75ebcc127f670c5522c8b98b9edcb60177552511eeb7",
+    "games": 20,
+    "natural_terminals": 16,
+    "budget_resignations": 4,
+    "execution_failures": 0,
+    "paired_games": 16,
+    "paired_skill_uses": 0,
+    "deliberate_games": 4,
+    "deliberate_skill_uses": 8,
+    "fixture_groups": 6,
+    "tactical_all_first_replies": 6,
+    "global_balance_proven": false,
+    "formal_scoring_performed": false
+  },
+  "art": {
+    "manifest": "art/hero-pilot-02/ASSET_MANIFEST.json",
+    "manifest_sha256": "743d198e95508c830feaffbcf2bc8a5c12adf424d1f648b2da9e3683b28cfba7",
+    "generated_masters": 2,
+    "runtime_exports": 3,
+    "runtime_total_bytes": 135188,
+    "visual_review": true,
+    "user_individual_approval_claimed": false,
+    "original_manifest_sha256": "25e632d4b166387f43bc8c55b966a5794f10a1234e67daa608ae8f1ccfa57344"
+  },
+  "fixed_during_review": [
+    "Initial Android HTML mirror regression: restored web/index.html and load trial CSS from app only when opt-in. Final full suite passes.",
+    "Added explicit non-consuming cancel control.",
+    "Clear assassination/strong-strike armed flags after successful tether pull.",
+    "Stale UI command no longer mutates the original private traps property.",
+    "Remove fallback art marker when switching away from Cen Ying."
+  ],
+  "remaining": [
+    {
+      "item": "real_browser_and_touch",
+      "status": "ENVIRONMENT_BLOCKED",
+      "evidence": "Chromium Unix socket EPERM; cloud browser local address connection refused. No real browser screenshot or rendering pass."
+    },
+    {
+      "item": "human_or_stronger_policy_balance",
+      "status": "NOT_DONE",
+      "evidence": "One-ply paired policy selected zero skills; deliberate skill runs only validate execution."
+    },
+    {
+      "item": "independent_QA",
+      "status": "NOT_DONE",
+      "evidence": "Same-task peer code/design review completed; not independent acceptance."
+    },
+    {
+      "item": "merge_deployment_APK",
+      "status": "OUT_OF_SCOPE"
+    }
+  ],
+  "verdict": "Publish as a reviewable draft engineering candidate. No complete balance, real-browser, independent QA, or release acceptance claimed.",
+  "recovery_metadata_note": "Only asset metadata reference updated after removal of execution-location fields. This is preserved original runtime evidence, not a rerun; all 16 executable source hashes and 4 evidence hashes are unchanged."
+}

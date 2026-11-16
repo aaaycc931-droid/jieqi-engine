@@ -1,0 +1,33 @@
+ M scripts/build-web.ts
+ M scripts/serve-web.ts
+ M src/game.ts
+ M src/hero-actions.ts
+ M src/hero-forms.ts
+ M src/heroes.ts
+ M src/index.ts
+ M src/rules.ts
+ M src/types.ts
+ M web/app.ts
+?? art/hero-pilot-02/ASSET_MANIFEST.json
+?? art/hero-pilot-02/PROMPTS.json
+?? art/hero-pilot-02/export-assets.cjs
+?? art/hero-pilot-02/masters/cen-ying-figure-v1.png
+?? art/hero-pilot-02/masters/cen-ying-portrait-v1.png
+?? docs/hero-pilot-02/BALANCE.md
+?? docs/hero-pilot-02/DESIGN.md
+?? docs/hero-pilot-02/IMPLEMENTATION.md
+?? docs/hero-pilot-02/README.md
+?? review/hero-pilot-02/VALIDATION.json
+?? review/hero-pilot-02/balance-range-preliminary.json
+?? review/hero-pilot-02/balance-results.json
+?? review/hero-pilot-02/dom-results.json
+?? review/hero-pilot-02/http-results.json
+?? scripts/review/hero-pilot-02-balance.ts
+?? scripts/review/hero-pilot-02-dom.mjs
+?? src/hero-cen-ying.ts
+?? tests/hero-pilot-02.test.ts
+?? web/assets/heroes/cen-ying/figure-768.webp
+?? web/assets/heroes/cen-ying/portrait-192.webp
+?? web/assets/heroes/cen-ying/portrait-384.webp
+?? web/hero-pilot-02.css
+?? web/hero-pilot-02.ts

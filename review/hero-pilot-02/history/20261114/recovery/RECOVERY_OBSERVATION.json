@@ -1,0 +1,203 @@
+{
+  "schema": "lezi.hero_pilot_02.recovery_evidence_observation.v1",
+  "work_id": "EXP-HERO-002",
+  "hero": "cen_ying",
+  "hero_name": "岑缨",
+  "observed_at_utc": "2026-11-14T06:22:37.566905+00:00",
+  "method": "Read and hash original source and logs only; no business tests, builds, images, or game executions rerun.",
+  "original_validation_source_bindings": [
+    {
+      "path": "src/types.ts",
+      "expected_sha256": "0f9b6b393a2d38d0cb3de174e8840a66a216239a5704bd4ea52cef264a39cb97",
+      "actual_sha256": "0f9b6b393a2d38d0cb3de174e8840a66a216239a5704bd4ea52cef264a39cb97",
+      "matches": true
+    },
+    {
+      "path": "src/heroes.ts",
+      "expected_sha256": "6bb75e2f05fc6f15e21566b9b851638126ce03a48c2192ece6415b5bbd442f6f",
+      "actual_sha256": "6bb75e2f05fc6f15e21566b9b851638126ce03a48c2192ece6415b5bbd442f6f",
+      "matches": true
+    },
+    {
+      "path": "src/hero-forms.ts",
+      "expected_sha256": "29c941bd85eab5cfbcf616fff1b2f9bb00613fff1799a2c1b4a2d34caa793955",
+      "actual_sha256": "29c941bd85eab5cfbcf616fff1b2f9bb00613fff1799a2c1b4a2d34caa793955",
+      "matches": true
+    },
+    {
+      "path": "src/game.ts",
+      "expected_sha256": "3ad81f9ec06e8d7fcd9cf88e063d28e51a5af3781240bd4d7661d6f094bf1197",
+      "actual_sha256": "3ad81f9ec06e8d7fcd9cf88e063d28e51a5af3781240bd4d7661d6f094bf1197",
+      "matches": true
+    },
+    {
+      "path": "src/hero-actions.ts",
+      "expected_sha256": "133de0b2449488b662216f1f11c4b52217bbcd35e911e007b783210239124af6",
+      "actual_sha256": "133de0b2449488b662216f1f11c4b52217bbcd35e911e007b783210239124af6",
+      "matches": true
+    },
+    {
+      "path": "src/hero-cen-ying.ts",
+      "expected_sha256": "8d5c40188edb2e54f3171878e3ac763177aba26fa299dab9604c05ac2f3c0768",
+      "actual_sha256": "8d5c40188edb2e54f3171878e3ac763177aba26fa299dab9604c05ac2f3c0768",
+      "matches": true
+    },
+    {
+      "path": "src/rules.ts",
+      "expected_sha256": "5b4caa09d7cbc8a77355c3688b3b4d7151799d6a6cfc52c71b74e7cb87c685a0",
+      "actual_sha256": "5b4caa09d7cbc8a77355c3688b3b4d7151799d6a6cfc52c71b74e7cb87c685a0",
+      "matches": true
+    },
+    {
+      "path": "src/index.ts",
+      "expected_sha256": "50ccc9cfca0063fb100ddb3a90b2331d867bec1a8fa8c64f0f0d81d6647f5b14",
+      "actual_sha256": "50ccc9cfca0063fb100ddb3a90b2331d867bec1a8fa8c64f0f0d81d6647f5b14",
+      "matches": true
+    },
+    {
+      "path": "web/app.ts",
+      "expected_sha256": "3c8c757cf0e03b0f51b381cade56074c36bfd93280792880ebab039104dc8a7d",
+      "actual_sha256": "3c8c757cf0e03b0f51b381cade56074c36bfd93280792880ebab039104dc8a7d",
+      "matches": true
+    },
+    {
+      "path": "web/hero-pilot-02.ts",
+      "expected_sha256": "da4b8daed4a9d6731533b6f97786dc911986f5aeac77ff7563cb309be5b9bd27",
+      "actual_sha256": "da4b8daed4a9d6731533b6f97786dc911986f5aeac77ff7563cb309be5b9bd27",
+      "matches": true
+    },
+    {
+      "path": "web/hero-pilot-02.css",
+      "expected_sha256": "6455af5c313987ea598be2807e2305128bf800d323c453bd285c3fbd2114d74c",
+      "actual_sha256": "6455af5c313987ea598be2807e2305128bf800d323c453bd285c3fbd2114d74c",
+      "matches": true
+    },
+    {
+      "path": "tests/hero-pilot-02.test.ts",
+      "expected_sha256": "79ee103bc8aa506927dcac9e850d8441c134323f1c38cf5fcf57eba3c2485cdd",
+      "actual_sha256": "79ee103bc8aa506927dcac9e850d8441c134323f1c38cf5fcf57eba3c2485cdd",
+      "matches": true
+    },
+    {
+      "path": "scripts/build-web.ts",
+      "expected_sha256": "7ae95a0440370157d49e41b430bf2fc01aae02795b3205fb8841431d04e326a2",
+      "actual_sha256": "7ae95a0440370157d49e41b430bf2fc01aae02795b3205fb8841431d04e326a2",
+      "matches": true
+    },
+    {
+      "path": "scripts/serve-web.ts",
+      "expected_sha256": "20555e785010cbb9965ea3120537c59d057f481f1b62fee7820a2b01128e96ee",
+      "actual_sha256": "20555e785010cbb9965ea3120537c59d057f481f1b62fee7820a2b01128e96ee",
+      "matches": true
+    },
+    {
+      "path": "scripts/review/hero-pilot-02-balance.ts",
+      "expected_sha256": "864dd878402289d8e9e1c2320a8ccd5db3b6e1388002b1d289e6e785069574f2",
+      "actual_sha256": "864dd878402289d8e9e1c2320a8ccd5db3b6e1388002b1d289e6e785069574f2",
+      "matches": true
+    },
+    {
+      "path": "scripts/review/hero-pilot-02-dom.mjs",
+      "expected_sha256": "4ebe4a2db3678783b3544e560b28004316a4f6395c8a308fffa15d6060fe2d2f",
+      "actual_sha256": "4ebe4a2db3678783b3544e560b28004316a4f6395c8a308fffa15d6060fe2d2f",
+      "matches": true
+    }
+  ],
+  "original_validation_evidence_bindings": [
+    {
+      "label": "regression",
+      "path": "review/hero-pilot-02/regression-run.log",
+      "expected_sha256": "45277b9d801f62eb36a30417f1ffb59fe6d82826bfbff5b40abade886eb339b6",
+      "actual_sha256": "45277b9d801f62eb36a30417f1ffb59fe6d82826bfbff5b40abade886eb339b6",
+      "matches": true
+    },
+    {
+      "label": "dom",
+      "path": "review/hero-pilot-02/dom-results.json",
+      "expected_sha256": "9877f7b714c04d78078f457d97eb35c7be1c680d3ad2b34bd5707a6039aa9f15",
+      "actual_sha256": "9877f7b714c04d78078f457d97eb35c7be1c680d3ad2b34bd5707a6039aa9f15",
+      "matches": true
+    },
+    {
+      "label": "http",
+      "path": "review/hero-pilot-02/http-results.json",
+      "expected_sha256": "41d959d44834373537c70ea0a9718b381020aa12d1f3116b5ccb333c1da5ae4e",
+      "actual_sha256": "41d959d44834373537c70ea0a9718b381020aa12d1f3116b5ccb333c1da5ae4e",
+      "matches": true
+    },
+    {
+      "label": "balance",
+      "path": "review/hero-pilot-02/balance-results.json",
+      "expected_sha256": "0f92ee366ff7fd0d6dce75ebcc127f670c5522c8b98b9edcb60177552511eeb7",
+      "actual_sha256": "0f92ee366ff7fd0d6dce75ebcc127f670c5522c8b98b9edcb60177552511eeb7",
+      "matches": true
+    }
+  ],
+  "original_log_summaries": {
+    "core_targeted": {
+      "pass": 155,
+      "fail": 0
+    },
+    "core_final": {
+      "pass": 50,
+      "fail": 0
+    },
+    "core_root_verification": {
+      "pass": 50,
+      "fail": 0
+    },
+    "web_regression": {
+      "pass": 61,
+      "fail": 0
+    },
+    "early_full_regression": {
+      "pass": 1043,
+      "fail": 1,
+      "failed_case": "ANDROID-ASSET-01"
+    },
+    "final_full_regression": {
+      "pass": 1044,
+      "fail": 0
+    },
+    "prepared_DOM": {
+      "cases": 15,
+      "pass": true,
+      "real_browser": false
+    },
+    "same_process_HTTP": {
+      "resources": 5,
+      "pass": true
+    },
+    "balance": {
+      "games": 20,
+      "natural_terminals": 16,
+      "budget_resignations": 4,
+      "paired_skill_uses": 0,
+      "deliberate_skill_uses": 8
+    }
+  },
+  "duplicate_counts_not_added_together": true,
+  "remaining_original_limits": [
+    {
+      "item": "real_browser_and_touch",
+      "status": "ENVIRONMENT_BLOCKED",
+      "evidence": "Chromium Unix socket EPERM; cloud browser local address connection refused. No real browser screenshot or rendering pass."
+    },
+    {
+      "item": "human_or_stronger_policy_balance",
+      "status": "NOT_DONE",
+      "evidence": "One-ply paired policy selected zero skills; deliberate skill runs only validate execution."
+    },
+    {
+      "item": "independent_QA",
+      "status": "NOT_DONE",
+      "evidence": "Same-task peer code/design review completed; not independent acceptance."
+    },
+    {
+      "item": "merge_deployment_APK",
+      "status": "OUT_OF_SCOPE"
+    }
+  ],
+  "publication": "No source code branch, PR, merge, or deployment created by this recovery.",
+  "source_session_runtime_status": "UNKNOWN; stable snapshot does not prove earlier platform execution stopped."
+}

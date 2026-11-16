@@ -1,0 +1,27 @@
+{
+  "schema": "lezi.hero_pilot_02.return.v1",
+  "work_id": "EXP-HERO-002",
+  "source": "用户2026-11-14本对话直接新委托，非主线派发",
+  "status": "STARTED_INDEPENDENT_SECOND_HERO",
+  "entry": "worklines/hero-pilot-02/START_HERE.md",
+  "design": {
+    "name": "岑缨",
+    "world": "WORLD-EXP-01 悬衡界",
+    "ability": "引缆",
+    "decision": "delegated_designer_decision",
+    "stage": "v1_engine_validation_in_progress"
+  },
+  "engine": {
+    "branch": "codex/autonomous-hero-02-20261114",
+    "base": "71145df45ad17215a3731e53150b6728e079e375",
+    "published_code": false
+  },
+  "main_received": "UNKNOWN",
+  "protection": [
+    "司衡及PR23未改",
+    "独立UI分支只读",
+    "旧英雄、评分原账本、NET、其他模式门禁保持",
+    "未合并部署"
+  ]
+}
+

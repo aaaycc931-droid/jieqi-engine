@@ -1,0 +1,53 @@
+{
+  "schema": "lezi.hero_pilot_02.archive_disposition.v2",
+  "work_id": "EXP-HERO-002",
+  "date": "2026-11-16",
+  "status": "KNOWN_RECOVERED_SCOPE_ARCHIVE_COMPLETE",
+  "scope": "Only the 59 files actually recovered and inventoried; not unsaved conversation, full platform trace or internal reasoning. Archiving is not product acceptance.",
+  "owner_upload_commit": "d8d4fcb9bcd603ac9026f7e27c1ee3c03012d003",
+  "archive_publication_commit": "b82d338481c2c7a20ab1cd78bc3b496acafdd874",
+  "archive_root": "review/hero-pilot-02/history/20261114/",
+  "original_archive": {"filename":"cen-ying-recovery-20261114.zip","bytes":12722717,"sha256":"2ace4d651b35e0e6b8f8f2923632c07e8ead800c805e66e72ba7dad2d7d89ea5","private_original_preserved":true,"fresh_zip_crc":"PASS","fresh_manifest_identity_checks":54,"fresh_all_member_identity_checks":59,"identity_fields":["bytes","sha256","git_blob_sha"],"raw_zip_publicly_uploaded":false},
+  "upload_reconciliation": {"expected_transfer_files":24,"owner_uploaded":23,"owner_objects_matching_prepared_bundle":23,"missing_on_owner_upload":"cenying-archive-20261116-11-core-02-root-verification.log","restored_from_verified_package":true,"restored_original_bytes":4588,"restored_original_git_blob":"e5b3bf473d9fde78daad185fba003b688c84ead3","final_transfer_files":24,"historical_payload_files":19,"preparation_records_including_index":5,"additional_archive_readme":1,"temporary_root_files_removed":23,"remaining_upload_files":0,"image_regenerated_or_reencoded":false},
+  "verification": {
+    "published_commit_read_back": "b82d338481c2c7a20ab1cd78bc3b496acafdd874",
+    "method": "Compute local Git blob and Git tree objects from the verified upload bundle; compare with published GitHub content/tree identities at the fixed commit. This is cryptographic object/path verification, not a fresh remote byte download of every binary.",
+    "all_24_destination_objects_and_paths": "PASS",
+    "subtrees": {
+      "handoff-original": {"files":9,"git_tree_sha":"1ad7c2839f08270bf61f7bb7980a45faa93b19c2"},
+      "original-logs": {"files":5,"git_tree_sha":"6258d9eea3e79e002f1d51dd5909679b569b1ea5"},
+      "recovery": {"files":4,"git_tree_sha":"8b40ea3cc20a14e3ae8bfdbb966ff0459833adde"},
+      "unselected-art": {"files":1,"git_tree_sha":"2a00ed0218dc40d82c2d04454b4774926a2bc207"},
+      "preparation": {"files":5,"git_tree_sha":"2f04e3b12a4f458b027d7cd0c0527ae925b2482d"}
+    },
+    "preexisting_delivery": "Historical 36-file exact readback and canonical-master identity evidence retained from STAGED_UPLOAD.json at85c87f87bd4e5c0919194a7b69e4c51277853b33. Fresh comparison from that commit to b82d338 shows only archive additions and the earlier resume note; preexisting delivery content is unchanged. Not represented as fresh byte downloads or fresh tests.",
+    "baseline_package_json_current_git_blob": "34b26233ab157051caeae779771ddc0fceb24465",
+    "main_and_branch_publication": "latest-parent; expected SHA; force=false"
+  },
+  "complete_59_member_ledger": {
+    "immutable_inventory_commit":"b82d338481c2c7a20ab1cd78bc3b496acafdd874",
+    "immutable_inventory_path":"review/hero-pilot-02/history/20261114/preparation/FULL_RECOVERY_DISPOSITION_DRAFT.json",
+    "immutable_inventory_git_blob":"f7367962143c6120f5c9391a7b0c5f3913ce43fb",
+    "immutable_inventory_sha256":"4ca47c4c55f47d5438888f9db31dc89a0d905e6e98c5f0329aaef6e462bbfa00",
+    "row_key":"archive_path",
+    "row_count":59,
+    "all_original_member_paths_unique_and_complete":true,
+    "resolution_rule":"Use all59 immutable entries for source identity and destination. For the19 entries whose historical disposition is PREPARED_NOT_PUBLISHED, proposed_repository_path is now the published path at archive_publication_commit, its public_identity is verified, and current disposition is PUBLISHED_HISTORY_VERIFIED. The other40 entries retain their recorded destinations. Historical snapshot publication_this_session/LOCAL/PENDING flags describe preparation only and are overridden by this current resolution, not silently rewritten.",
+    "resolved_counts":{"PUBLISHED_HISTORY_VERIFIED":19,"EXISTING_PUBLIC_ORIGINAL_UNCHANGED":33,"EXISTING_PUBLIC_DERIVATIVE_ORIGINAL_RETAINED_PRIVATELY":3,"DUPLICATE_OF_EXISTING_PUBLIC_MASTER":2,"BASELINE_REFERENCE_NO_NEW_DEPENDENCY_EDIT":1,"PRIVATE_ORIGINAL_ONLY":1},
+    "resolved_total":59,
+    "unresolved_member_count":0
+  },
+  "privacy": {"historical_payload_exact_originals":18,"historical_payload_public_redacted_copies":1,"privacy_record":"history/20261114/preparation/PRIVACY_REVIEW.json","unredacted_log_preserved_privately":true,"three_unredacted_metadata_originals_preserved_privately":true,"original_recovery_manifest_preserved_privately":true,"all_raw_originals_publicly_uploaded":false,"correction":"The earlier resume note's no-obvious-private-path screening was incomplete. The original full-test log contains one execution-root prefix; only the labelled public-redacted copy is published. Failure evidence is retained.","full_security_audit_claimed":false},
+  "known_recovered_scope_archiving_complete":true,
+  "all_original_archive_files_uploaded_to_repository":false,
+  "selected_engine_candidates_complete":38,
+  "pending_archive_uploads":[],
+  "remaining_acceptance":["real browser/touch","human or stronger-policy balance","independent QA","full typecheck"],
+  "main_received":"UNKNOWN",
+  "draft_pr":31,
+  "merge_deploy_APK_mode_expansion":"NOT_PERFORMED",
+  "game_tests_rerun":false,
+  "other_worklines":"UNCHANGED_NOT_PAUSED",
+  "previous_record":{"commit":"85c87f87bd4e5c0919194a7b69e4c51277853b33","path":"review/hero-pilot-02/ARCHIVE_DISPOSITION.json","git_blob":"fd5bec2423c99e5ebf1732193582fe2f7c049f85"},
+  "next_action":"No further owner upload is required for the inventoried archive. Publish own-workline return and let the receiver record its actual receipt; keep product acceptance and release gates unchanged."
+}

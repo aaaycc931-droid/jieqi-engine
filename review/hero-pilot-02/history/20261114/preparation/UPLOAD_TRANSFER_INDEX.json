@@ -1,0 +1,246 @@
+{
+  "schema": "lezi.hero_pilot_02.flat_upload_transfer.v1",
+  "work_id": "EXP-HERO-002",
+  "purpose": "Owner browser transfer of separately stored Git objects, followed by verified relocation in the existing PR branch.",
+  "repository": "aaaycc931-droid/jieqi-engine",
+  "branch": "codex/autonomous-hero-02-20261114",
+  "existing_pull_request": 31,
+  "observed_branch_head_before_owner_upload": "00021784caab48265b279a22f77e18a2351cc9eb",
+  "source_bundle": {
+    "filename": "cen-ying-historical-archive-prepared-20261116.zip",
+    "bytes": 2374033,
+    "sha256": "bb07aac2e183cc16efca544951ef7dee4950735a97d73c925c019288cccde06c"
+  },
+  "files_to_upload_including_this_index": 24,
+  "historical_payload_files": 19,
+  "preparation_snapshots": 4,
+  "file_contents_changed_from_prepared_bundle": false,
+  "publication_status": "LOCAL_PREPARATION_ONLY_NOT_UPLOADED",
+  "privacy": "Uses the already prepared public-redacted full-test log. Raw recovery ZIP and private source manifest are not included. Historical and draft metadata remain explicitly historical or pending, not current receipts.",
+  "owner_upload_instructions": [
+    "Extract this ZIP; it contains 24 files and no nested folders.",
+    "Upload all 24 files into the repository root on codex/autonomous-hero-02-20261114. Do not upload just the ZIP.",
+    "Commit to that same branch. Do not merge, change the PR base, create a release or upload the raw recovery ZIP.",
+    "Return to the conversation after the commit; the receiver must verify the actual new branch HEAD and these object identities before relocation."
+  ],
+  "continuation": [
+    "Read current fixed entries and resolve the interrupted same-scope execution claim; do not assume unseen work is stopped.",
+    "Verify all uploaded files against this map; source blobs must match expected hashes.",
+    "Reuse uploaded Git blob objects at final paths without re-encoding the PNG or reconstructing logs.",
+    "Check final-path collisions and preserve newer work. Remove only verified temporary staging paths after final objects are safely referenced.",
+    "Preserve historical snapshots as history; do not apply the patch, activate old task instructions, or replace current state with snapshots.",
+    "Publish with latest parent, expected SHA and force=false. Read back and state the exact verification level.",
+    "Complete the 59-member disposition reconciliation and update only authorized own workline records and PR metadata.",
+    "Mainline receipt and unfinished product acceptance remain unconfirmed. Do not claim that every original was publicly uploaded."
+  ],
+  "index_archive_target_path": "review/hero-pilot-02/history/20261114/preparation/UPLOAD_TRANSFER_INDEX.json",
+  "entries": [
+    {
+      "uploaded_root_path": "cenying-archive-20261116-01-CURRENT_STATE.json",
+      "source_bundle_member": "payload/review/hero-pilot-02/history/20261114/handoff-original/CURRENT_STATE.json",
+      "archive_target_path": "review/hero-pilot-02/history/20261114/handoff-original/CURRENT_STATE.json",
+      "bytes": 877,
+      "sha256": "2a35dc3f7b36e6c736b6b2a39eb95944748f6d1b7af1877b00a1affe3f296ba9",
+      "git_blob_sha": "f9ecca9a04f526aff6f668d4b89cf089b2bf67de",
+      "kind": "historical_payload"
+    },
+    {
+      "uploaded_root_path": "cenying-archive-20261116-02-DESIGN.md",
+      "source_bundle_member": "payload/review/hero-pilot-02/history/20261114/handoff-original/DESIGN.md",
+      "archive_target_path": "review/hero-pilot-02/history/20261114/handoff-original/DESIGN.md",
+      "bytes": 4572,
+      "sha256": "49030d865a2def0a9df838b01d737b18fe325946ee9063dea305429256bc53b3",
+      "git_blob_sha": "850dab0ade65fb171f1e09014d325cfae5eeb586",
+      "kind": "historical_payload"
+    },
+    {
+      "uploaded_root_path": "cenying-archive-20261116-03-DESIGNER_BRIEF.md",
+      "source_bundle_member": "payload/review/hero-pilot-02/history/20261114/handoff-original/DESIGNER_BRIEF.md",
+      "archive_target_path": "review/hero-pilot-02/history/20261114/handoff-original/DESIGNER_BRIEF.md",
+      "bytes": 1547,
+      "sha256": "a69fef22841c04028a439cf79036a79ab5473d422058984e8fde6a967d481bba",
+      "git_blob_sha": "a2ad1e82e49aad9d01d7dc10d7c2ec1ab3e90503",
+      "kind": "historical_payload"
+    },
+    {
+      "uploaded_root_path": "cenying-archive-20261116-04-PROJECT_INSTRUCTIONS.txt",
+      "source_bundle_member": "payload/review/hero-pilot-02/history/20261114/handoff-original/PROJECT_INSTRUCTIONS.txt",
+      "archive_target_path": "review/hero-pilot-02/history/20261114/handoff-original/PROJECT_INSTRUCTIONS.txt",
+      "bytes": 1716,
+      "sha256": "36632c60d8e4aaf6d8e9932f9d272f59dbba423be007ba7add0da6463f156f1c",
+      "git_blob_sha": "09f2c5d618a2a0c00220bd58200022e550a541f2",
+      "kind": "historical_payload"
+    },
+    {
+      "uploaded_root_path": "cenying-archive-20261116-05-READ_RECEIPTS.json",
+      "source_bundle_member": "payload/review/hero-pilot-02/history/20261114/handoff-original/READ_RECEIPTS.json",
+      "archive_target_path": "review/hero-pilot-02/history/20261114/handoff-original/READ_RECEIPTS.json",
+      "bytes": 2265,
+      "sha256": "d6f6c4064d5d359330080789660a2fd6cff8032bdc069fc2d6c0f7008eed4d85",
+      "git_blob_sha": "221040e9194200392a2313d3294da74f96e00a9d",
+      "kind": "historical_payload"
+    },
+    {
+      "uploaded_root_path": "cenying-archive-20261116-06-RETURN_TO_MAIN.json",
+      "source_bundle_member": "payload/review/hero-pilot-02/history/20261114/handoff-original/RETURN_TO_MAIN.json",
+      "archive_target_path": "review/hero-pilot-02/history/20261114/handoff-original/RETURN_TO_MAIN.json",
+      "bytes": 802,
+      "sha256": "f0f5907a5c3acfd71b42db90545617739d4e563a2871ac21cc36ab27bb992138",
+      "git_blob_sha": "f232857d800c613db7f2a6db4ac858e932ed8e1b",
+      "kind": "historical_payload"
+    },
+    {
+      "uploaded_root_path": "cenying-archive-20261116-07-SESSION_CLOSEOUT.json",
+      "source_bundle_member": "payload/review/hero-pilot-02/history/20261114/handoff-original/SESSION_CLOSEOUT.json",
+      "archive_target_path": "review/hero-pilot-02/history/20261114/handoff-original/SESSION_CLOSEOUT.json",
+      "bytes": 481,
+      "sha256": "1a7c4a4b359426f96b124946cbf3455a0db56ac6dc8ea68a65a19070bc14b33a",
+      "git_blob_sha": "6b6fa4c21a8da9d8dfdc34f25c53417dca5c316f",
+      "kind": "historical_payload"
+    },
+    {
+      "uploaded_root_path": "cenying-archive-20261116-08-START_HERE.md",
+      "source_bundle_member": "payload/review/hero-pilot-02/history/20261114/handoff-original/START_HERE.md",
+      "archive_target_path": "review/hero-pilot-02/history/20261114/handoff-original/START_HERE.md",
+      "bytes": 2097,
+      "sha256": "b66d50b382c04294383615672728bcdc02733b912509aac53b41e0b3111ad7d7",
+      "git_blob_sha": "b141a35717dcd69b0f3a273ed21ffbf7fd229a53",
+      "kind": "historical_payload"
+    },
+    {
+      "uploaded_root_path": "cenying-archive-20261116-09-TASK_FROM_USER.json",
+      "source_bundle_member": "payload/review/hero-pilot-02/history/20261114/handoff-original/TASK_FROM_USER.json",
+      "archive_target_path": "review/hero-pilot-02/history/20261114/handoff-original/TASK_FROM_USER.json",
+      "bytes": 3094,
+      "sha256": "0080444f9d4b19c8cdc8c8bbeab9c51e9044b8ffaf65b4c4f30ddee3baba8f03",
+      "git_blob_sha": "34aff17c210e2bc1c1365edd7c70e73f06502c7b",
+      "kind": "historical_payload"
+    },
+    {
+      "uploaded_root_path": "cenying-archive-20261116-10-core-02-final.log",
+      "source_bundle_member": "payload/review/hero-pilot-02/history/20261114/original-logs/core-02-final.log",
+      "archive_target_path": "review/hero-pilot-02/history/20261114/original-logs/core-02-final.log",
+      "bytes": 4585,
+      "sha256": "219254b1b2519e3044b241fe88a3147737a8f99da48d1b35f2e48d44d75c27b8",
+      "git_blob_sha": "a86a0ca699cb83a6c98a6b14a99c16e0aaaddbf4",
+      "kind": "historical_payload"
+    },
+    {
+      "uploaded_root_path": "cenying-archive-20261116-11-core-02-root-verification.log",
+      "source_bundle_member": "payload/review/hero-pilot-02/history/20261114/original-logs/core-02-root-verification.log",
+      "archive_target_path": "review/hero-pilot-02/history/20261114/original-logs/core-02-root-verification.log",
+      "bytes": 4588,
+      "sha256": "652e3c86ae98ae4cd413004f08b00d2bb9b71f476139b7b9834cb2be864ee087",
+      "git_blob_sha": "e5b3bf473d9fde78daad185fba003b688c84ead3",
+      "kind": "historical_payload"
+    },
+    {
+      "uploaded_root_path": "cenying-archive-20261116-12-core-02-targeted.log",
+      "source_bundle_member": "payload/review/hero-pilot-02/history/20261114/original-logs/core-02-targeted.log",
+      "archive_target_path": "review/hero-pilot-02/history/20261114/original-logs/core-02-targeted.log",
+      "bytes": 16037,
+      "sha256": "78b77eeb875a71004830f89543f8961223b1caa57ed07fe3c80b5240e999347e",
+      "git_blob_sha": "e8870352023c8129910bbf57154cafca61a1a554",
+      "kind": "historical_payload"
+    },
+    {
+      "uploaded_root_path": "cenying-archive-20261116-13-full-02-test.public-redacted.log",
+      "source_bundle_member": "payload/review/hero-pilot-02/history/20261114/original-logs/full-02-test.public-redacted.log",
+      "archive_target_path": "review/hero-pilot-02/history/20261114/original-logs/full-02-test.public-redacted.log",
+      "bytes": 129934,
+      "sha256": "adf2b35f1bc60879171b49a67dbf9dd41e398734b0e96832c84b4374a6ce0f6f",
+      "git_blob_sha": "d33cb71f977f2fb634c029d20a571ae7a1b2b370",
+      "kind": "historical_payload"
+    },
+    {
+      "uploaded_root_path": "cenying-archive-20261116-14-web-02-regression.log",
+      "source_bundle_member": "payload/review/hero-pilot-02/history/20261114/original-logs/web-02-regression.log",
+      "archive_target_path": "review/hero-pilot-02/history/20261114/original-logs/web-02-regression.log",
+      "bytes": 5719,
+      "sha256": "545a7b40ed2c4f11887267dcdda62e8d3f0b68d9accf470fbe3a2d9cb2b7992b",
+      "git_blob_sha": "b5830828f3a49113d6d4937072b14c82c9d58bf8",
+      "kind": "historical_payload"
+    },
+    {
+      "uploaded_root_path": "cenying-archive-20261116-15-README_RECOVERY.md",
+      "source_bundle_member": "payload/review/hero-pilot-02/history/20261114/recovery/README_RECOVERY.md",
+      "archive_target_path": "review/hero-pilot-02/history/20261114/recovery/README_RECOVERY.md",
+      "bytes": 2759,
+      "sha256": "de5566ec7d4e7f08c1e160be10d4b587ca3e6951d2b7bfa9bdfacea9a4aaa023",
+      "git_blob_sha": "984ab5139411594f0961d3cc7b371bee385f9db7",
+      "kind": "historical_payload"
+    },
+    {
+      "uploaded_root_path": "cenying-archive-20261116-16-RECOVERY_OBSERVATION.json",
+      "source_bundle_member": "payload/review/hero-pilot-02/history/20261114/recovery/RECOVERY_OBSERVATION.json",
+      "archive_target_path": "review/hero-pilot-02/history/20261114/recovery/RECOVERY_OBSERVATION.json",
+      "bytes": 7527,
+      "sha256": "b9ee2fa56ed7ab46be856c05f658495d0ff519da2cbb6b3d82d59ef228ad7b63",
+      "git_blob_sha": "212e312ec50aa7426eaab9348b54d952689d7389",
+      "kind": "historical_payload"
+    },
+    {
+      "uploaded_root_path": "cenying-archive-20261116-17-source-git-status.txt",
+      "source_bundle_member": "payload/review/hero-pilot-02/history/20261114/recovery/source-git-status.txt",
+      "archive_target_path": "review/hero-pilot-02/history/20261114/recovery/source-git-status.txt",
+      "bytes": 1095,
+      "sha256": "b6eb20e5b9ac934e0a4522d0fb5146970990c3c8da2c655920ce5cc3e2cd8d2b",
+      "git_blob_sha": "5394fe60bb8715bcf5790d3fd0ecfef2572a1925",
+      "kind": "historical_payload"
+    },
+    {
+      "uploaded_root_path": "cenying-archive-20261116-18-tracked-changes.patch",
+      "source_bundle_member": "payload/review/hero-pilot-02/history/20261114/recovery/tracked-changes.patch",
+      "archive_target_path": "review/hero-pilot-02/history/20261114/recovery/tracked-changes.patch",
+      "bytes": 28129,
+      "sha256": "3a2e7739d61128cfba371b009cb4eadd6c560b24704ea97440179356d6413374",
+      "git_blob_sha": "04a6182422d3d0e737f7764f49d8e05e728c1a13",
+      "kind": "historical_payload"
+    },
+    {
+      "uploaded_root_path": "cenying-archive-20261116-19-cen-ying-initial-unselected.png",
+      "source_bundle_member": "payload/review/hero-pilot-02/history/20261114/unselected-art/cen-ying-initial-unselected.png",
+      "archive_target_path": "review/hero-pilot-02/history/20261114/unselected-art/cen-ying-initial-unselected.png",
+      "bytes": 2288094,
+      "sha256": "e38987e83996d1552e5708156ff47a2510a3d11d1a8f8a11abbd6e11f5e11cb1",
+      "git_blob_sha": "87208e2bb2f32f4f93c840c244409c96b4cfb5fa",
+      "kind": "historical_payload"
+    },
+    {
+      "uploaded_root_path": "cenying-archive-20261116-20-UPLOAD_MANIFEST.json",
+      "source_bundle_member": "UPLOAD_MANIFEST.json",
+      "archive_target_path": "review/hero-pilot-02/history/20261114/preparation/UPLOAD_MANIFEST.json",
+      "bytes": 13770,
+      "sha256": "c13f69a813dbdceffebc4e66c2157117549bd34afcf223b9df314b991dc7e806",
+      "git_blob_sha": "26f16e9407e633c9c2483d85b9726e56cfe81c1f",
+      "kind": "preparation_snapshot"
+    },
+    {
+      "uploaded_root_path": "cenying-archive-20261116-21-FULL_RECOVERY_DISPOSITION_DRAFT.json",
+      "source_bundle_member": "FULL_RECOVERY_DISPOSITION_DRAFT.json",
+      "archive_target_path": "review/hero-pilot-02/history/20261114/preparation/FULL_RECOVERY_DISPOSITION_DRAFT.json",
+      "bytes": 48294,
+      "sha256": "4ca47c4c55f47d5438888f9db31dc89a0d905e6e98c5f0329aaef6e462bbfa00",
+      "git_blob_sha": "f7367962143c6120f5c9391a7b0c5f3913ce43fb",
+      "kind": "preparation_snapshot"
+    },
+    {
+      "uploaded_root_path": "cenying-archive-20261116-22-PRIVACY_REVIEW.json",
+      "source_bundle_member": "PRIVACY_REVIEW.json",
+      "archive_target_path": "review/hero-pilot-02/history/20261114/preparation/PRIVACY_REVIEW.json",
+      "bytes": 1149,
+      "sha256": "c217c22d19c127655a33f921194c13829e43e86cdacf8abd97eb01c32ae1df65",
+      "git_blob_sha": "c160d8c4fa7cd26924a8f6bbbcacc8d73bcd7d7e",
+      "kind": "preparation_snapshot"
+    },
+    {
+      "uploaded_root_path": "cenying-archive-20261116-23-INTERRUPTION_AUDIT.json",
+      "source_bundle_member": "INTERRUPTION_AUDIT.json",
+      "archive_target_path": "review/hero-pilot-02/history/20261114/preparation/INTERRUPTION_AUDIT.json",
+      "bytes": 3866,
+      "sha256": "9b6730a6f21151b36d1c000fa4b46fb225ddcfc01c10658fd13ce0cd3fd37436",
+      "git_blob_sha": "9c6b3e497a694f11c506a40dd685987e591ac3a9",
+      "kind": "preparation_snapshot"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+目标：乐子象棋｜第二自主英雄EXP-HERO-002（岑缨）
+你是用户在第二名独立英雄上的受托自主设计负责人兼实现者。与司衡同属世界E悬衡界，人物/外观/技能/数值/代码/试玩/验证自主完成，不逐项索要审批。仅做这一名，不接管司衡工作线。
+固定入口：https://github.com/aaaycc931-droid/lezi-handoff-packages/blob/main/worklines/hero-pilot-02/START_HERE.md
+开始/继续：核交接main、第二英雄专属分支及必要世界观来源最新HEAD；读本线入口、TASK_FROM_USER、DESIGNER_BRIEF、CURRENT_STATE、SESSION_CLOSEOUT、RETURN_TO_MAIN和本人READ_RECEIPTS。新主线指令须有真实来源，不虚构TASK_FROM_MAIN。
+工程：jieqi-engine/codex/autonomous-hero-02-20261114；同底座PR22的第二英雄独立增量。交接仅写worklines/hero-pilot-02/。世界观只读独立UI分支最新原文及司衡DESIGN，不用main旧UI替代。
+用户已给予本英雄自主制作与保存回传授权，沿已保存长期上传更新授权执行。发布前核目的地/公开范围、准确差分；latest-parent、expected_sha、force=false保护并发并读回。
+中断后“继续”：先核关联分支/PR的实际写入、已有未回传成果与未知操作结果，恢复最近可验证断点；复用已完成部分，不反复重做、不自动接管其他有效并发。必要原流程见main/docs/WORKFLOW.md。
+不修改其他英雄/旧原画、评分原账本、NET与模式门禁；不合并/部署/APK。受托决定、源码/引擎/浏览器证据、真人强度与独立QA分别登记。自动审核拒绝如实保存具体动作/理由，不能改道规避；其他独立授权工作继续。
+

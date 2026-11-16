@@ -1,0 +1,78 @@
+{
+  "schema": "lezi.hero_pilot_02.interruption_audit.local.v1",
+  "work_id": "EXP-HERO-002",
+  "prepared_at_utc": "2026-11-16T07:40:10.124580+00:00",
+  "scope": "Audit and local publication preparation only; no repository writes in this session.",
+  "observed_heads": {
+    "personal_main": "19d9591f5a0d2235fe10c70b8afd6aa9a6d091fc",
+    "handoff_main": "e4d597fc3d916b5e1548df86c9d42f099e3eb536",
+    "engine_pr31": "00021784caab48265b279a22f77e18a2351cc9eb"
+  },
+  "pr31": {
+    "state": "open",
+    "draft": true,
+    "merged": false,
+    "head_branch": "codex/autonomous-hero-02-20261114"
+  },
+  "last_verified_remote_writes": [
+    {
+      "repository": "lezi-handoff-packages",
+      "commit": "e4d597fc3d916b5e1548df86c9d42f099e3eb536",
+      "change": "CURRENT_STATE.json marks archival continuation active; no archive completion receipt."
+    },
+    {
+      "repository": "jieqi-engine",
+      "commit": "00021784caab48265b279a22f77e18a2351cc9eb",
+      "change": "Only review/hero-pilot-02/ARCHIVE_RESUME_VERIFICATION_20261116.md added after 85c87f87bd4e5c0919194a7b69e4c51277853b33."
+    }
+  ],
+  "original_archive": {
+    "filename": "cen-ying-recovery-20261114.zip",
+    "identity": {
+      "bytes": 12722717,
+      "sha256": "2ace4d651b35e0e6b8f8f2923632c07e8ead800c805e66e72ba7dad2d7d89ea5",
+      "git_blob_sha": "cd0aa9bcec7ead69007df909806bf59247b4a882"
+    },
+    "zip_crc": "PASS",
+    "members": 59,
+    "original_manifest_entries_verified": 54,
+    "size_sha256_git_blob_checks": "PASS"
+  },
+  "prepared_historical_files": {
+    "total": 19,
+    "previously_named_supplements": 8,
+    "historical_handoff_snapshots": 9,
+    "recovery_notes": 2,
+    "byte_identical_originals": 18,
+    "redacted_public_log_copies": 1,
+    "actually_uploaded_this_session": 0
+  },
+  "privacy_correction": "full-02-test.log contains a private execution root at line1093. The earlier statement that all five logs lacked an obvious private path was too broad. No original bytes were altered; public copy is distinctly named.",
+  "current_capability": {
+    "repository_account_push_permission": true,
+    "github_read_connector": "WORKING",
+    "available_connector_write_actions": "NOT_EXPOSED_THIS_SESSION",
+    "container_api_github_dns": "FAILED_gaierror_errno_-3",
+    "gh_cli_available": false,
+    "new_write_attempt_claimed": false
+  },
+  "earlier_unpublished_work": "19-file public upload set and full59 public disposition table were not found as published PR files or a newly saved Library archive in the inspected2026-11-16 window. Their original sources remain recoverable. Unseen temporary files or dangling Git objects are not declared lost or published.",
+  "remaining_acceptance": [
+    "real browser/touch",
+    "human or stronger-policy balance",
+    "independent QA",
+    "full typecheck"
+  ],
+  "main_received": "UNKNOWN",
+  "game_tests_rerun": false,
+  "image_regenerated": false,
+  "merge_deployment_APK": false,
+  "next_step": "Restore a working authenticated write and local-file transfer route; re-read both heads and PR, resume the same claim, verify non-conflicting target paths, publish19 historical files plus accurate coverage/privacy metadata to the same PR branch, then read back hashes and update the owned workline records and PR description. Do not rerun production or apply the old patch.",
+  "repository_state_updates_performed": false,
+  "sources": [
+    "https://github.com/aaaycc931-droid/lezi-handoff-packages/commit/e4d597fc3d916b5e1548df86c9d42f099e3eb536",
+    "https://github.com/aaaycc931-droid/jieqi-engine/compare/85c87f87bd4e5c0919194a7b69e4c51277853b33...00021784caab48265b279a22f77e18a2351cc9eb",
+    "https://github.com/aaaycc931-droid/jieqi-engine/pull/31",
+    "https://github.com/aaaycc931-droid/jieqi-engine/blob/00021784caab48265b279a22f77e18a2351cc9eb/review/hero-pilot-02/RECOVERY_PUBLICATION.json"
+  ]
+}

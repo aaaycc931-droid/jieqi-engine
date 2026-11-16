@@ -1,0 +1,20 @@
+{
+  "schema":"lezi.hero_pilot_02.staged_upload.v2",
+  "work_id":"EXP-HERO-002",
+  "hero":"岑缨",
+  "date_local":"2026-11-16",
+  "status":"SELECTED_DELIVERY_AND_KNOWN_ARCHIVE_COMPLETE",
+  "production_execution_closed":true,
+  "automatic_next_batch":false,
+  "authority":"TASK_FROM_USER.json and newer explicit historical-archive continuation; owner's uploaded files checked under the same task",
+  "engine":{"repository":"aaaycc931-droid/jieqi-engine","branch":"codex/autonomous-hero-02-20261114","base":"71145df45ad17215a3731e53150b6728e079e375","draft_pr":31,"candidate_files_published":38,"candidate_files_total":38,"selected_candidate_upload_complete":true,"all_original_archive_files_uploaded_to_repository":false},
+  "historical_archive":{"owner_upload_commit":"d8d4fcb9bcd603ac9026f7e27c1ee3c03012d003","published_commit":"b82d338481c2c7a20ab1cd78bc3b496acafdd874","expected_transfer_files":24,"owner_uploaded_files":23,"missing_log_restored_exactly":1,"verified_final_transfer_files":24,"historical_payload_files":19,"additional_readme":1,"known_recovered_members":59,"resolved_storage_destinations":59,"pending_upload_files":[],"report":"ARCHIVE_DISPOSITION.json","private_originals_remain_private":true},
+  "verification":{"original_zip_crc":"PASS","fresh_original_manifest_identities":54,"fresh_all_source_member_identities":59,"destination_git_blob_and_subtree_identity":"PASS_ALL24","preexisting_delivery":"Prior exact-byte36 and master-object checks reused; fresh85c87f8..b82d338 comparison confirms no changes to earlier delivery","fresh_remote_binary_byte_download_claimed":false,"game_tests_rerun":false,"art_regenerated_or_reencoded":false},
+  "authorship":{"display":"GPT-6 Pro（Chat 对话模式）","evidence":"owner-confirmed on2026-11-16","platform_telemetry_verified":false,"report":"../../docs/hero-pilot-02/AUTHORSHIP.json"},
+  "remaining_acceptance":["real browser/touch","human or stronger-policy balance","independent QA","full typecheck"],
+  "main_received":"UNKNOWN",
+  "next_action":"Own-workline return and actual receiver receipt; no further archive upload required. No automatic acceptance or release work.",
+  "merge_deployment_APK_mode_rule_expansion":"NOT_PERFORMED",
+  "project_or_other_worklines_paused":false,
+  "previous_full_stage_report":{"commit":"85c87f87bd4e5c0919194a7b69e4c51277853b33","path":"review/hero-pilot-02/STAGED_UPLOAD.json"}
+}

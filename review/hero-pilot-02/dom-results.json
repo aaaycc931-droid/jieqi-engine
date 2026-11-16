@@ -1,0 +1,86 @@
+{
+  "authority": "prepared_dom_execution_non_normative",
+  "runtime": "jsdom 26.1.0 / Node VM modules",
+  "node": "v24.22.1",
+  "sourceCommitAtRun": "71145df45ad17215a3731e53150b6728e079e375",
+  "workingTreeDirty": true,
+  "sourceHashes": {
+    "web/app.ts": "3c8c757cf0e03b0f51b381cade56074c36bfd93280792880ebab039104dc8a7d",
+    "web/hero-pilot-02.ts": "da4b8daed4a9d6731533b6f97786dc911986f5aeac77ff7563cb309be5b9bd27",
+    "web/hero-pilot-02.css": "6455af5c313987ea598be2807e2305128bf800d323c453bd285c3fbd2114d74c",
+    "src/hero-cen-ying.ts": "8d5c40188edb2e54f3171878e3ac763177aba26fa299dab9604c05ac2f3c0768",
+    "src/hero-actions.ts": "133de0b2449488b662216f1f11c4b52217bbcd35e911e007b783210239124af6",
+    "dist/web/app.js": "354b24318476997b136d557372454de5a480c7e797a44e095a27d88bc9d2b183",
+    "scripts/review/hero-pilot-02-dom.mjs": "4ebe4a2db3678783b3544e560b28004316a4f6395c8a308fffa15d6060fe2d2f"
+  },
+  "cases": [
+    {
+      "name": "Default selection stays at 19 heroes and loads no trial stylesheet",
+      "passed": true
+    },
+    {
+      "name": "Opt-in offline selection exposes the twentieth hero, portrait and detail figure",
+      "passed": true
+    },
+    {
+      "name": "Changing hero clears the figure and failed-image fallback",
+      "passed": true
+    },
+    {
+      "name": "Non-jieqi modes and remote hero pools do not gain the trial hero",
+      "passed": true
+    },
+    {
+      "name": "Runtime control opens a public 90-cell preview with real coordinates and explicit turn cost",
+      "passed": true
+    },
+    {
+      "name": "Cancellation leaves the board, turn, charge and secret state unchanged",
+      "passed": true
+    },
+    {
+      "name": "Actual confirmation commits the pull, correct markers, public charge and private handoff",
+      "passed": true
+    },
+    {
+      "name": "Repeated submission after handoff cannot spend another charge or announce another success",
+      "passed": true
+    },
+    {
+      "name": "Opponent can make a normal board move after a successful pull and equipment handoff",
+      "passed": true
+    },
+    {
+      "name": "Black-side UI mirror commits the same one-square displacement and two-use resource",
+      "passed": true
+    },
+    {
+      "name": "A stale open picker is rejected atomically without success messages or charge consumption",
+      "passed": true
+    },
+    {
+      "name": "Blocked geometry shows an explanation and offers no actionable target picker",
+      "passed": true
+    },
+    {
+      "name": "Exhaustion is explained and never creates a third activation",
+      "passed": true
+    },
+    {
+      "name": "Multiple public anchors and targets update the derived preview instead of accepting coordinates",
+      "passed": true
+    },
+    {
+      "name": "Picker output is independent of secret identities and traps",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "passed": true,
+  "limits": [
+    "Actual built web/app.js and its module graph execute against a simulated DOM; fixtures are appended in memory only.",
+    "No browser layout, CSS pixel rendering, native touch, image decoding, physical device, Bluetooth or online acceptance.",
+    "Chromium was blocked by socket EPERM; the separate cloud browser could not reach the local server.",
+    "Prepared positions are interface checks, not human playtesting or a balance proof."
+  ]
+}

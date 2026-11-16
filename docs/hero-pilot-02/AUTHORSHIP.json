@@ -1,0 +1,58 @@
+{
+  "schema": "lezi.hero_authorship.v1",
+  "work_id": "EXP-HERO-002",
+  "hero_id": "cen_ying",
+  "updated_on": "2026-11-16",
+  "display_credit": "AI 主创：GPT-6 Pro｜Chat 对话模式（制作配置由项目所有者确认）",
+  "original_design_model": "GPT-6 Pro",
+  "original_design_model_status": "OWNER_CONFIRMED_20261116_NOT_INDEPENDENT_PLATFORM_VERIFICATION",
+  "original_execution_mode": "Chat",
+  "reasoning_configuration": {
+    "owner_wording": "chat模式GPT-6 Pro推理程度制作",
+    "normalized_display": "GPT-6 Pro（Chat 对话模式）",
+    "separate_reasoning_effort_enum": null,
+    "note": "保留本人对型号与推理配置的原始表述；不补造独立的 API 型号、推理档位枚举或平台遥测。"
+  },
+  "owner_confirmation": {
+    "date": "2026-11-16",
+    "source": "current visible owner message in the same upload conversation",
+    "verbatim": "提交完毕，现在由你来进行该英雄的全部收束收尾，正式结束本英雄制作与上传，同时注明该英雄为chat模式GPT-6 Pro推理程度制作，不过你也可以用更规范的名称",
+    "scope": "本英雄的原制作主创署名及制作配置；不将后续恢复者改署为原主创。"
+  },
+  "original_art_direction_model": null,
+  "original_art_direction_model_status": "NOT_SEPARATELY_VERIFIED",
+  "image_generation_tool": {
+    "label": "built-in image_gen.imagegen",
+    "evidence": "original art prompt and asset records",
+    "underlying_model": null
+  },
+  "contributors": [
+    {
+      "role": "bounded recovery and publication preparation",
+      "model_label": "GPT-6 Astra Pro",
+      "label_evidence": "assistant self-report only; not independently verified platform telemetry",
+      "contribution": "Recovered and hash-verified originals; prepared privacy-minimized publication metadata and transport helper. No hero redesign, repainting, gameplay modification, or new game-test result.",
+      "original_creator_credit": false
+    },
+    {
+      "role": "original PNG upload",
+      "actor": "project owner",
+      "commit": "0438c32ea3bc1e8b8b9620ad7a856eab87cf88c4",
+      "contribution": "Uploaded the two unchanged selected PNG masters through the GitHub web interface."
+    },
+    {
+      "role": "final publication reconciliation and closeout",
+      "model_label": "GPT-6 Astra Pro",
+      "label_evidence": "assistant self-report only; not independently verified platform telemetry",
+      "contribution": "Verified original package and uploaded blob identities, restored canonical master paths, recorded owner-confirmed original credit and reconciled archival/acceptance boundaries.",
+      "original_creator_credit": false
+    }
+  ],
+  "publication_state": "SELECTED_MASTERS_PRESENT_CANONICAL_PATHS_RECONCILED",
+  "frontend_label_installed": false,
+  "previous_authorship_source": {
+    "commit": "0438c32ea3bc1e8b8b9620ad7a856eab87cf88c4",
+    "path": "docs/hero-pilot-02/AUTHORSHIP.json",
+    "blob_sha": "5243a4dddf3478ccc6c0b00b9299bef008cf04e8"
+  }
+}
