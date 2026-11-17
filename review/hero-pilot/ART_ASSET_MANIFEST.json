@@ -1,0 +1,63 @@
+{
+  "version": "siheng-art-v1",
+  "tool": "built-in imagegen",
+  "packager": "sharp 0.35.5",
+  "operation": "unchanged original PNGs; proportional resize and WebP encoding only; no synthetic repainting",
+  "files": [
+    {
+      "path": "art/hero-pilot/siheng-portrait-v1.png",
+      "sha256": "450725d4f22be8ea06efc31971a046281fd4a5cb660537f20c1a9c46e490e849",
+      "bytes": 1738083,
+      "width": 1024,
+      "height": 1536,
+      "format": "png",
+      "hasAlpha": true
+    },
+    {
+      "path": "art/hero-pilot/siheng-avatar-master-v1.png",
+      "sha256": "25b5d1f9b064ba373713e6566d1b98214fa75c3e90713d12177a93da24c8539b",
+      "bytes": 2201804,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "hasAlpha": false
+    },
+    {
+      "path": "web/assets/hero-pilot/siheng-portrait-v1.webp",
+      "sha256": "a6a36b3cc103f3258a8259272bfcfef16d28caf2c5a16af612d40ddf5940b609",
+      "bytes": 124242,
+      "width": 768,
+      "height": 1152,
+      "format": "webp",
+      "hasAlpha": true
+    },
+    {
+      "path": "web/assets/hero-pilot/siheng-avatar-64-v1.webp",
+      "sha256": "afc2cfd0560f68ded8d1735caad8c593588a5bed0dd22b4f13c88f3250906153",
+      "bytes": 1834,
+      "width": 64,
+      "height": 64,
+      "format": "webp",
+      "hasAlpha": false
+    },
+    {
+      "path": "web/assets/hero-pilot/siheng-avatar-128-v1.webp",
+      "sha256": "39cb7ca6819e2593bf171737d116645e1b228a1ff56f82afe4537531efebb184",
+      "bytes": 5188,
+      "width": 128,
+      "height": 128,
+      "format": "webp",
+      "hasAlpha": false
+    },
+    {
+      "path": "web/assets/hero-pilot/siheng-avatar-256-v1.webp",
+      "sha256": "3478e57251a52a944f738f0d1888b2562474aac73c2f2147f21466b2f2374ee2",
+      "bytes": 14694,
+      "width": 256,
+      "height": 256,
+      "format": "webp",
+      "hasAlpha": false
+    }
+  ],
+  "proofSheet": "review/hero-pilot/ART_QA_CONTACT.png"
+}

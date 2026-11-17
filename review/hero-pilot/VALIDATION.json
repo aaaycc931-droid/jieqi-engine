@@ -113,7 +113,7 @@
     "all hero and mutation combinations",
     "global calibrated balance",
     "complete shared pressure/repetition/draw adjudication coverage",
-    "final portrait/animation",
+    "animation; static portrait delivered, browser visual acceptance pending",
     "merge or deployment"
   ],
   "authority": {
@@ -130,6 +130,25 @@
     "unit_regression_pass": 155,
     "production_dom_checks": 10,
     "royal_probe_checks": 3,
+    "browser_verified": false,
+    "historical_commit": "5ab688c96f4960aad70467e7e4c15c21dc55a2e1"
+  },
+  "latest_art_followup": {
+    "report": "ART_VALIDATION.json",
+    "base_engine": "5ab688c96f4960aad70467e7e4c15c21dc55a2e1",
+    "static_art_finalized": true,
+    "web_tests": 56,
+    "dom_checks": 14,
+    "http_assets": 4,
+    "browser_verified": false
+  },
+  "latest_art_recovery": {
+    "report": "ART_RECOVERY.json",
+    "original_art_report": "ART_VALIDATION.json",
+    "web_tests": 56,
+    "dom_checks": 14,
+    "http_assets": 4,
+    "production_changes_vs_recovered_worktree": 0,
     "browser_verified": false
   }
 }

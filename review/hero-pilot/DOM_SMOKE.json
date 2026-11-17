@@ -2,7 +2,11 @@
   "kind": "jsdom_production_module_interaction",
   "checks": [
     "default pool excludes pilot",
+    "Siheng roster and selected detail use real responsive avatar assets",
+    "handoff clears previous private selection artwork; existing hero placeholder preserved",
     "real selection → RPS → 32-piece engine initialization",
+    "real opening stage mounts Siheng full portrait only for the selected hero",
+    "battle avatar and hero detail expose the real portrait; other hero unchanged",
     "synthetic midgame: actual skill button → pair selector → authority → resource display → handoff",
     "actual endpoints (0,6)/(2,6) display explicit two-piece labels; no false origin/ordinary markers",
     "action-bound markers survive transient event clearing",
@@ -12,7 +16,7 @@
     "no available partner opens explanation without invented success feedback",
     "actual resignation and result panel"
   ],
-  "passed": 10,
+  "passed": 14,
   "swapMarkers": [
     {
       "x": 0,

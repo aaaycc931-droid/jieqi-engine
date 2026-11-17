@@ -1,4 +1,5 @@
 import { getRelayPairs, RELAY_USES } from "../src/hero-pilot.ts";
+import { mountHeroArt, sihengPortraitMarkup } from "./hero-art.ts";
 import { configureHeroPreparation } from "../src/hero-progress.ts";
 import { getHeroPackage } from "../src/hero-forms.ts";
 import { isBoardPiece } from "../src/spaces.ts";
@@ -769,6 +770,8 @@ function scheduleOpeningStage(stage: "mutation" | "heroes", delayMs: number): vo
       const redHero = element<HTMLElement>("intro-red-hero");
       blackHero.querySelector("b")!.textContent = battleHeroName("black");
       redHero.querySelector("b")!.textContent = battleHeroName("red");
+      mountHeroArt(blackHero.querySelector<HTMLElement>(".hero-art-placeholder")!, heroes.black, "portrait");
+      mountHeroArt(redHero.querySelector<HTMLElement>(".hero-art-placeholder")!, heroes.red, "portrait");
       heroIntroStage.hidden = false;
       heroIntroStage.classList.add("playing");
       scheduleOpeningStage("heroes", 2_000);
@@ -1847,13 +1850,15 @@ function renderHeroSelection(overrideState?: ReturnType<typeof heroSelectionStat
     heroSelectionName.textContent = "请选择英雄";
     heroDetailAvatar.dataset.hero = "";
     heroDetailAvatar.setAttribute("aria-label", "英雄形象尚未定稿");
+    mountHeroArt(heroDetailAvatar, undefined);
     heroSkillList.replaceChildren();
     heroSkillDescription.textContent = "选择下方英雄后查看技能。";
   } else {
     const hero = heroCatalog[selected];
     heroSelectionName.textContent = hero.name;
     heroDetailAvatar.dataset.hero = selected;
-    heroDetailAvatar.setAttribute("aria-label", `${hero.name}形象占位，正式画像尚未定稿`);
+    heroDetailAvatar.setAttribute("aria-label", selected === "siheng" ? "司衡头像：短深灰发、米白领巾、深青工作袍" : `${hero.name}形象占位，正式画像尚未定稿`);
+    mountHeroArt(heroDetailAvatar, selected);
     activeSkillIndex = Math.min(activeSkillIndex, hero.skills.length - 1);
     heroSkillList.replaceChildren(...hero.skills.map((skill, index) => {
       const button = document.createElement("button");
@@ -1910,6 +1915,7 @@ function renderHeroSelection(overrideState?: ReturnType<typeof heroSelectionStat
     button.disabled = state.confirmed || pending;
     button.innerHTML = `<span class="hero-art-placeholder grid-avatar" data-hero="${heroId}" aria-hidden="true"></span><span class="hero-grid-name${hero.name.length > 4 ? " long-name" : ""}">${hero.name}</span>`;
     button.setAttribute("aria-label", `选择${hero.name}`);
+    mountHeroArt(button.querySelector<HTMLElement>(".grid-avatar")!, heroId);
     button.addEventListener("click", () => {
       if (state.confirmed) return;
       heroDraft = heroId; heroFormDraft = "front"; galakrondDraft = "unspeakable";
@@ -2277,7 +2283,7 @@ function showHeroDetails(side: Side): void {
   const info = heroCatalog[hero];
   const skills = info.skills.map((skill) => `<details><summary>${skill.name}</summary><p>${skill.fullDescription}</p></details>`).join("");
   const runtime = heroRuntimeSummary(side, hero).map((line) => `<li>${line}</li>`).join("");
-  showMatchDetails(`${side === "red" ? "红方" : "蓝方"}·${info.name}`, `${skills}<h3>本局公开状态</h3><ul>${runtime}</ul>`);
+  showMatchDetails(`${side === "red" ? "红方" : "蓝方"}·${info.name}`, `${hero === "siheng" ? sihengPortraitMarkup() : ""}${skills}<h3>本局公开状态</h3><ul>${runtime}</ul>`);
 }
 
 function skillEntryForButton(button: HTMLButtonElement): { side: Side; hero: HeroId; entry: RuntimeSkillEntry } | undefined {
@@ -2335,6 +2341,7 @@ function setBattleHeroAvatars(heroes: Record<Side, HeroId>, visible: boolean): v
     avatar.hidden = !visible;
     avatar.dataset.hero = heroes[side];
     avatar.title = battleHeroName(side);
+    mountHeroArt(avatar, heroes[side]);
   }
 }
 
@@ -2969,6 +2976,8 @@ function renderGame(): void {
   if (heroes) {
     element<HTMLElement>("black-hero-avatar").dataset.hero = heroes.black;
     element<HTMLElement>("red-hero-avatar").dataset.hero = heroes.red;
+    mountHeroArt(element<HTMLElement>("black-hero-avatar"), heroes.black);
+    mountHeroArt(element<HTMLElement>("red-hero-avatar"), heroes.red);
   }
   renderRuntimeStatusPanels(heroes);
   renderCaptureCounts();
