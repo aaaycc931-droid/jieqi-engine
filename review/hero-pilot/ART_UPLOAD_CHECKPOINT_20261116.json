@@ -4,7 +4,7 @@
   "timezone": "Asia/Shanghai",
   "work_id": "EXP-HERO-001",
   "original_task_id": "MAIN-AUTONOMOUS-HERO-01-20261113",
-  "status": "CANONICAL_31_FILE_TREE_PREPARED_REF_PUBLICATION_AND_READBACK_PENDING",
+  "status": "CANONICAL_ART_PUBLISHED_AND_READ_BACK",
   "scope": "Complete the existing Siheng artwork publication on the existing PR23 branch using exact uploaded/original objects; preserve original artwork, exports, implementation and historical evidence.",
   "authority": {
     "source": "Owner supplied the two interrupted conversation excerpts in the current recovery request.",
@@ -23,7 +23,8 @@
     "merged": false,
     "runtime_parent": "5ab688c96f4960aad70467e7e4c15c21dc55a2e1",
     "owner_upload_commit": "fae3dc6580deeebee0ef1a87a0c7a68b44354baf",
-    "full_art_publication_complete": false
+    "full_art_publication_complete": true,
+    "canonical_publication_commit": "2ba4e01c9d8e6ea896327b2c412c44a03bdc7d45"
   },
   "prior_preservation": {
     "commit": "3df63e0c8d100fe040a32de4e0f8246c3b046b06",
@@ -74,7 +75,14 @@
       "result": "MATCH"
     },
     "canonical_paths_in_this_candidate_tree": 31,
-    "canonical_commit_readback": "PENDING_AFTER_REF_PUBLICATION",
+    "canonical_commit_readback": {
+      "commit": "2ba4e01c9d8e6ea896327b2c412c44a03bdc7d45",
+      "git_blob_and_size_matches": 31,
+      "source_index_exact": true,
+      "checkpoint_exact": true,
+      "unrelated_path_changes": 0,
+      "tree_truncated": false
+    },
     "source_delta": {
       "web/app.ts": "Only import/mount real Siheng artwork at roster, details, opening, battle avatars; Siheng portrait panel and aria label. Existing swap-feedback and gate logic untouched.",
       "web/style.css": "Eight artwork-only style rules added; existing rules retained.",
@@ -91,11 +99,13 @@
     "art_regenerated": false,
     "reencoded": false,
     "reimplementation": false,
-    "gameplay_rules_changed": false
+    "gameplay_rules_changed": false,
+    "completed_canonical_commit": "2ba4e01c9d8e6ea896327b2c412c44a03bdc7d45",
+    "bytes_changed_from_verified_sources": 0
   },
   "staging_cleanup": {
-    "status": "NOT_STARTED_PRESERVE_UNTIL_CANONICAL_READBACK",
-    "candidate_source_blob_paths": [
+    "status": "VERIFIED_DUPLICATE_PATHS_RETIRED_IN_ENCLOSING_TREE",
+    "paths": [
       "review/hero-pilot/upload-staging/20261116/retained-objects/art/hero-pilot/PROMPTS.json",
       "review/hero-pilot/upload-staging/20261116/retained-objects/art/hero-pilot/README.md",
       "review/hero-pilot/upload-staging/20261116/siheng-art-20261116-03-siheng-avatar-master-v1.png",
@@ -126,11 +136,15 @@
       "review/hero-pilot/upload-staging/20261116/retained-objects/web/assets/hero-pilot/siheng-avatar-64-v1.webp",
       "review/hero-pilot/upload-staging/20261116/siheng-art-20261116-29-siheng-portrait-v1.webp",
       "review/hero-pilot/upload-staging/20261116/siheng-art-20261116-30-hero-art.ts",
-      "review/hero-pilot/upload-staging/20261116/siheng-art-20261116-31-style.css"
+      "review/hero-pilot/upload-staging/20261116/siheng-art-20261116-31-style.css",
+      "review/hero-pilot/upload-staging/20261116/siheng-art-20261116-INDEX.json"
     ],
-    "candidate_index_path": "review/hero-pilot/upload-staging/20261116/siheng-art-20261116-INDEX.json",
-    "replacement_index_path": "review/hero-pilot/ART_UPLOAD_SOURCE_INDEX_20261116.json",
-    "history_retained": true
+    "count": 32,
+    "canonical_replacement_verified_at": "2ba4e01c9d8e6ea896327b2c412c44a03bdc7d45",
+    "source_index_replacement": "review/hero-pilot/ART_UPLOAD_SOURCE_INDEX_20261116.json",
+    "original_paths_recoverable_at_owner_upload_commit": "fae3dc6580deeebee0ef1a87a0c7a68b44354baf",
+    "method": "Ordinary scoped tree deletion after published canonical readback; no history rewrite or object purge",
+    "post_publication_receipt_location": "lezi-handoff-packages/worklines/hero-pilot/CURRENT_STATE.json#art_upload_completion"
   },
   "validation": {
     "new_game_tests_run": false,
@@ -145,9 +159,6 @@
   "private_original_package_and_extra_owner_png_variants": "Remain private; no raw recovery ZIP or extra owner-upload variants included.",
   "main_art_receipt": "UNKNOWN",
   "not_completed": [
-    "Ref publication and readback of prepared31 canonical paths",
-    "Cleanup of verified staging paths after canonical readback",
-    "PR/workline completion return",
     "real browser/touch",
     "human adversarial balance",
     "full independent QA",
@@ -155,5 +166,6 @@
   ],
   "merge_deployment_APK_mode_opening": false,
   "other_worklines_unchanged": true,
-  "active_background_work_claimed": false
+  "active_background_work_claimed": false,
+  "next_action": "Mainline may read the original31 canonical files on PR23 and write its own art receipt. Runtime/browser/human/animation acceptance remains distinct."
 }
