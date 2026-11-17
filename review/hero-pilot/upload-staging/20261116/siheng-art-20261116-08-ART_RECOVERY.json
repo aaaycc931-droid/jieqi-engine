@@ -1,0 +1,184 @@
+{
+  "schema": "lezi.hero_pilot.art_recovery.v1",
+  "date_local": "2026-11-13",
+  "timezone": "Asia/Shanghai",
+  "status": "ORIGINAL_WORKTREE_ART_CODE_EXPORTS_AND_LOGS_RECOVERED_AND_RECHECKED",
+  "engine_parent": "5ab688c96f4960aad70467e7e4c15c21dc55a2e1",
+  "handoff_source": "fa2c03d6ee9de5ae4c0441e42100c0ea07519f05",
+  "ui_source": "82785937c284720e1f770ad7dadd9c0b1c41b87b",
+  "recovery_method": "Read-only original worktree discovery, full isolated copy, original seven implementation files and four runtime exports retained byte-for-byte. No character generation, repainting, re-encoding or reimplementation.",
+  "recovered_code_sha256": {
+    "web/hero-art.ts": "6b9345539e39e21db43d4cb6a295cdb58eff384847e87c91f86782215c1596bf",
+    "web/app.ts": "6bbd66e8410938253ea09a8371db200d47748cf371412b12d802ecd048cc704f",
+    "web/style.css": "899e92f7eff194c87a87db95cfc17b009de26a57835ef9949c0a1965d4a5b281",
+    "scripts/serve-web.ts": "ea2de19f45f905835fb0b13a6e64e9bb0b85b4267817ca8c38020d8e8e4d4c4c",
+    "scripts/hero-pilot/dom-smoke.ts": "91371167ccc7d54c74a7da0fa6e98234c73b6bd3a19d859f8035465a46d20362",
+    "scripts/hero-pilot/package-art.cjs": "3b9f56b6bd7a580cac0ecf63f1ddccf78a84f36b7b1aa0ea5884c1a329fd24ea",
+    "scripts/hero-pilot/verify-art.cjs": "379b884e18c20720efc23dddd05402e2ef4daff0588794f7dccb2a4e5d1cea89"
+  },
+  "recovered_runtime_assets": [
+    {
+      "path": "web/assets/hero-pilot/siheng-portrait-v1.webp",
+      "sha256": "a6a36b3cc103f3258a8259272bfcfef16d28caf2c5a16af612d40ddf5940b609",
+      "bytes": 124242,
+      "width": 768,
+      "height": 1152,
+      "format": "webp",
+      "hasAlpha": true
+    },
+    {
+      "path": "web/assets/hero-pilot/siheng-avatar-64-v1.webp",
+      "sha256": "afc2cfd0560f68ded8d1735caad8c593588a5bed0dd22b4f13c88f3250906153",
+      "bytes": 1834,
+      "width": 64,
+      "height": 64,
+      "format": "webp",
+      "hasAlpha": false
+    },
+    {
+      "path": "web/assets/hero-pilot/siheng-avatar-128-v1.webp",
+      "sha256": "39cb7ca6819e2593bf171737d116645e1b228a1ff56f82afe4537531efebb184",
+      "bytes": 5188,
+      "width": 128,
+      "height": 128,
+      "format": "webp",
+      "hasAlpha": false
+    },
+    {
+      "path": "web/assets/hero-pilot/siheng-avatar-256-v1.webp",
+      "sha256": "3478e57251a52a944f738f0d1888b2562474aac73c2f2147f21466b2f2374ee2",
+      "bytes": 14694,
+      "width": 256,
+      "height": 256,
+      "format": "webp",
+      "hasAlpha": false
+    }
+  ],
+  "runtime_total_bytes": 145958,
+  "uploaded_source_comparison": [
+    {
+      "file_name": "沉稳深青夹克肖像-2.png",
+      "recovered_path": "art/hero-pilot/siheng-avatar-master-v1.png",
+      "uploaded_bytes": 2975891,
+      "recovered_bytes": 2201804,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "rgba_pixels_equal": true,
+      "bytes_equal": false,
+      "decision": "Keep exact recovered generation master and original exports; uploaded file is preserved separately by its existing identity."
+    },
+    {
+      "file_name": "西衡透明背景全身立绘-1.png",
+      "recovered_path": "art/hero-pilot/siheng-portrait-v1.png",
+      "uploaded_bytes": 1224560,
+      "recovered_bytes": 1738083,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "rgba_pixels_equal": false,
+      "alpha_pixels_equal": true,
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "different_pixels": 850025,
+      "different_visible_pixels": 58171,
+      "different_zero_alpha_pixels": 791854,
+      "max_composited_rgb_difference_8bit_float": 0.996078431372549,
+      "mean_composited_rgb_difference_8bit_float": 0.011267932567721099,
+      "comparison_method": "Convert both to RGBA; compare channel bytes and absolute RGB delta multiplied by common alpha / 255. Identical alpha means this composited difference applies to every common background before rounding.",
+      "interpretation": "Same visible character and alpha silhouette on inspection; raw PNGs are not byte/pixel-identical. Re-encoding cause is not proven.",
+      "decision": "Preserve original recovered master and four original exports without repainting or re-encoding. Uploaded source remains separately preserved; do not falsely declare byte equality."
+    }
+  ],
+  "original_log_recovery": {
+    "matches_recorded_sha256": true,
+    "files": [
+      {
+        "path": "review/hero-pilot/art-recovery-logs/original-build.log",
+        "sha256": "2eee99e89b29d60114939db581f90035abf4d12ff22fd4919542f1a0b4386019"
+      },
+      {
+        "path": "review/hero-pilot/art-recovery-logs/original-dom.log",
+        "sha256": "ec43f0dc4992bc3962efec351e8627a42e679534a3dc6c5a32cd1096100a9302"
+      },
+      {
+        "path": "review/hero-pilot/art-recovery-logs/original-web.log",
+        "sha256": "c910347d020163f9bb6a8a3ce5fa9b9f33649f21952967d44be15e9ac68bfceb"
+      }
+    ]
+  },
+  "recheck": {
+    "web_tests": {
+      "passed": 56,
+      "failed": 0,
+      "command": "node --test tests/web-gameplay-v4.test.ts tests/web-layout.test.ts tests/web-messages.test.ts"
+    },
+    "production_dom": {
+      "passed": 14,
+      "command": "node scripts/hero-pilot/dom-smoke.ts",
+      "scope": "production module with synthetic midgame fixture; not rendered browser"
+    },
+    "build": {
+      "status": "PASS",
+      "command": "npm run build:web",
+      "temporary_test_hooks_absent_from_final_build": true
+    },
+    "asset_delivery": {
+      "status": "PASS",
+      "command": "node scripts/hero-pilot/verify-art.cjs",
+      "manifest_files": 6,
+      "built_assets": 4,
+      "http_200_mime_hash_checks": 4
+    },
+    "contact_sheet": {
+      "sizes": [
+        48,
+        64,
+        96
+      ],
+      "backgrounds": [
+        "light parchment",
+        "dark teal"
+      ],
+      "status": "REVIEWED_BY_EXECUTOR",
+      "observed": "Face and charcoal/ivory/teal blocks remain discernible. Small wrist tools are visible in the full portrait, not the avatar."
+    }
+  },
+  "recheck_logs": [
+    {
+      "path": "review/hero-pilot/art-recovery-logs/recheck-assets.log",
+      "sha256": "298b6caabf1962efdc133006dd32a72e9395ddd28484b9654d22526f6697a49f"
+    },
+    {
+      "path": "review/hero-pilot/art-recovery-logs/recheck-build.log",
+      "sha256": "66bd52587ca4a4e9bfb84d2b1a342a77159a870e3e982886d31717fb974fc22d"
+    },
+    {
+      "path": "review/hero-pilot/art-recovery-logs/recheck-dom.log",
+      "sha256": "ec43f0dc4992bc3962efec351e8627a42e679534a3dc6c5a32cd1096100a9302"
+    },
+    {
+      "path": "review/hero-pilot/art-recovery-logs/recheck-web.log",
+      "sha256": "6259005af6d1f9b61a91f2981f1516367e9e5324e8da646d7486627a23071dee"
+    }
+  ],
+  "execution_note": "One initial local build overlapped DOM test temporary module and included its generated hook. Final build and asset checks reran after DOM completion; final dist checked free of hidden .hero-pilot-dom files. Dist is not published.",
+  "not_rerun": [
+    "1025 full engine suite",
+    "18 engine playouts",
+    "155 swap-repair regression",
+    "3 royal probes"
+  ],
+  "not_verified": [
+    "real browser layout and touch",
+    "human adversarial balance",
+    "full independent QA",
+    "animation",
+    "merge/deployment"
+  ],
+  "private_library_ids_links_or_hashes_published": false
+}
