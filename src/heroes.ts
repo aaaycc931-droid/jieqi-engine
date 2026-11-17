@@ -1,7 +1,9 @@
 import type { HeroId } from "./types.ts";
 export const HERO_IDS: readonly HeroId[] = ["hunter", "rogue", "warrior", "qin_long", "murozond", "nozdormu", "murozond_minion", "devout_zealot", "prince", "deathwing", "death_knight", "wind", "shuffler", "warlock", "single_blade", "night", "sky_admiral", "berserker", "jiang_he"];
+export const EXPERIMENTAL_HERO_IDS: readonly HeroId[] = ["siheng"];
 const skill = (name: string, text: string) => ({ name, description: text, fullDescription: text });
 export const HERO_CATALOG = {
+  siheng: { name: "司衡", skills: [skill("换轨", "试验世界E·悬衡界的航路匠。每局两次，占用整个正式行动；未被将军时，交换曼哈顿距离不超过4的两枚己方明置、非将帅、非无形地面棋。不经中间格，不直接进攻；遵守封锁并正常结算落点风险。换位后可将军，对手照常应将。双方可见剩余次数。") ] },
   hunter: { name: "猎人", skills: [skill("陷阱", "准备秘密布置两层己方半场陷阱；合格敌方地面进入消耗一层并直接消灭。完整覆盖12个敌方正式回合，第12回合末失效。") ] },
   rogue: { name: "潜行者", skills: [skill("刺杀", "每来源每局一次；己方明置非将帅先完成正常移动/进攻，存活受控则无形，并保留随后两个己方回合的刺杀机会。刺杀可指定无形、绕过普通防御，不能指定将帅。") ] },
   warrior: { name: "战士", skills: [skill("防护壁垒", "最多三枚不同的己方非将帅明棋首次离开己方九宫时获得壁垒。壁垒抵挡一次普通进攻（明确绕过来源除外）并弹回攻击者；持续三个敌方正式回合结束，名额不返还。"), skill("铁甲", "将帅免疫一次背刺。仅己方正式回合中因揭示或倒戈产生背刺时，获得一次额外立即应将。")] },

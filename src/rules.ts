@@ -1,3 +1,4 @@
+import { getRelayPairs } from "./hero-pilot.ts";
 import { strongBladeSide } from "./hero-progress.ts";
 import { selectedHeroId, validateHeroForms } from "./hero-forms.ts";
 import { isBoardPiece, isGround, isRiver } from "./spaces.ts";
@@ -506,6 +507,7 @@ export function hasAnyLegalMove(state: GameState, side: Side): boolean {
   if (hero === "deathwing" && !runtime?.used) return true;
   if (hero === "devout_zealot" && (runtime?.invokeCount ?? 0) < 4 && !isGeneralInCheck(state, side)) return true;
   if (hero === "warlock" && !runtime?.used && state.pieces.some(p => isBoardPiece(p) && getController(p) === side)) return true;
+  if (hero === "siheng" && getRelayPairs(state, side).length > 0) return true;
   const selection = state.featureRules?.heroSelections?.[side];
   if (selection?.heroId === "death_knight" && selection.form === "inner" && !runtime?.used) return true;
   if (selection?.heroId === "jiang_he" && (selection.form === "front" || !runtime?.used) && state.pieces.some(p => getController(p) === side && (isRiver(p) || isGround(p) && [4,5].includes(p.y) && state.effectsByPieceId?.[p.id]?.riverQualified))) return true;

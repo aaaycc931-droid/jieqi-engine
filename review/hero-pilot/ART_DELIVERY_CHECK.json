@@ -1,0 +1,17 @@
+{
+  "kind": "art_binary_build_and_real_local_http",
+  "manifestFiles": 6,
+  "buildCopies": 4,
+  "httpAssets": 4,
+  "httpContentType": "image/webp",
+  "sourceHashesMatch": true,
+  "transparentPortraitCorner": true,
+  "passed": true,
+  "browserLayoutVerified": false,
+  "served": [
+    "web/assets/hero-pilot/siheng-portrait-v1.webp",
+    "web/assets/hero-pilot/siheng-avatar-64-v1.webp",
+    "web/assets/hero-pilot/siheng-avatar-128-v1.webp",
+    "web/assets/hero-pilot/siheng-avatar-256-v1.webp"
+  ]
+}

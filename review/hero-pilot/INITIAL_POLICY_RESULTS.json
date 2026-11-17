@@ -1,0 +1,6 @@
+{
+  "status": "INVALID_RUNNER_EVIDENCE_EXCLUDED",
+  "reason": "runner incorrectly passed timestamp as applyAuthoritativeMove fourth argument (deferTurnEnd), disabling handoff. All initial/v2 18-game outcomes are invalid as game/balance evidence. Corrected to false,now,undefined,rng and added handoff invariant. No shared engine change needed.",
+  "results_adopted": 0,
+  "regression_test": "check response test now asserts return to pilot side"
+}

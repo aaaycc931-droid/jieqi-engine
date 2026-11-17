@@ -1,0 +1,83 @@
+{
+  "schema": "lezi.hero_pilot.visual_repair.v1",
+  "task": "MAIN-HERO-PILOT-SWAP-VISUAL-REPAIR-20261113",
+  "date_local": "2026-11-13",
+  "timezone": "Asia/Shanghai",
+  "source_parent": "7a1dfbc92efa2a54bb85175cc251856bb2cdb4d3",
+  "dispatch_source": "04ae7489b0577f93fa074ae3854f8caf823253ee",
+  "status": "VERIFIED_CANDIDATE_BROWSER_QA_REMAINS",
+  "change": "public action-bound dual displacement metadata, distinct endpoint badges and one local message; duplicate feedback no-op",
+  "rules_changed": false,
+  "production_files": [
+    "src/types.ts",
+    "src/hero-actions.ts",
+    "web/app.ts",
+    "web/style.css"
+  ],
+  "sha256": {
+    "src/types.ts": "3128a899398efb50a2ae1a740cf0074c307960c154daaf98400fc1b564ef422f",
+    "src/hero-actions.ts": "b88c8f6ad4b35f7cb9241a1bfc48ec7245ee9059a710262e4032163e9fa6ecfa",
+    "web/app.ts": "8ae34fdba665aeae73ddd73667067d0b9e44e9b01bfea395c87f4ddce5a0597c",
+    "web/style.css": "3ff8877a55bd57807dda6221f84e18a28808325cc3955ce1ccc2f412a25f7297",
+    "tests/hero-pilot.test.ts": "69a4d1f85c583c862c7b1d39e70f771d203f72330f4f6b45985a447d78e08384",
+    "scripts/hero-pilot/dom-smoke.ts": "096e8cd8911723cdcb688fa8b73bc36c09873b122952bb2c808670a50b3fa0af",
+    "scripts/hero-pilot/visual-repair-royal-probe.ts": "a87bf5442da8e6afd89514e591f18e5954fd73e2f55e3333505886c9afafc523"
+  },
+  "before": "VISUAL_REPAIR_BEFORE.json",
+  "passed": [
+    {
+      "command": "node --test tests/hero-pilot.test.ts tests/time-line-contracts.test.ts tests/hero-forms.test.ts",
+      "tests": 63,
+      "pass": 63,
+      "fail": 0
+    },
+    {
+      "command": "node --test tests/hero-transfer-r5.test.ts tests/web-gameplay-v4.test.ts tests/web-messages.test.ts tests/web-layout.test.ts",
+      "tests": 92,
+      "pass": 92,
+      "fail": 0
+    },
+    {
+      "command": "node scripts/hero-pilot/dom-smoke.ts",
+      "checks": 10,
+      "evidence": "DOM_SMOKE.json",
+      "scope": "production DOM; synthetic skill fixture, not browser rendering"
+    },
+    {
+      "command": "node scripts/hero-pilot/visual-repair-royal-probe.ts",
+      "checks": 3,
+      "evidence": "VISUAL_REPAIR_ROYAL_PROBE.json",
+      "scope": "executor rerun of mainline synthetic probe, not independent QA"
+    },
+    {
+      "command": "npm run build:web",
+      "status": "PASS"
+    },
+    {
+      "command": "git diff --check",
+      "status": "PASS"
+    }
+  ],
+  "asserted_boundaries": [
+    "real endpoints 0,6 and 2,6; no unrelated 0,0 marker",
+    "explicit two-piece label, not ordinary move marker",
+    "marker survives transient event clearing",
+    "enemy target, same-piece no-op and stale revision preserve prior state/feedback",
+    "duplicate preserves resource, turn, messages and markers",
+    "next ordinary move replaces special marks with unchanged from/to classes",
+    "no candidate dialog does not invent a success",
+    "canonical endpoint metadata and actual landing order unchanged",
+    "H05 exclusion, H06 snapshot behavior, trial gate/default pool regression green"
+  ],
+  "not_run": [
+    "full 1025-test suite (no new reason)",
+    "18-game weak-policy experiment (historical evidence stays at parent)",
+    "real browser rendering/touch",
+    "human adversarial balance",
+    "final portrait",
+    "full independent QA",
+    "merge/deployment"
+  ],
+  "failed_product_checks_this_round": [],
+  "execution_note": "Initial multi-file apply_patch validation failed before changing files; corrected patch applied. Product verification had no failing checks after repair."
+}

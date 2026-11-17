@@ -1,5 +1,5 @@
 import { RuleError } from "./errors.ts";
-import { HERO_CATALOG, HERO_IDS } from "./heroes.ts";
+import { HERO_CATALOG, HERO_IDS, EXPERIMENTAL_HERO_IDS } from "./heroes.ts";
 import type { GameState, HeroForm, HeroId, HeroSelection, HeroSelections, SecretState, Side, GalakrondForm } from "./types.ts";
 
 const sides = ["red", "black"] as const;
@@ -14,7 +14,7 @@ export function heroSkillLabel(heroName: string, skillName: string, form: HeroFo
 
 /** 本次移交的19英雄及两个独立里包；迦拉克隆五子包在英雄确认时固定。 */
 export function getHeroPackage(heroId: HeroId, form: HeroForm = "front", variant?: GalakrondForm) {
-  if (!HERO_IDS.includes(heroId)) return fail("未知英雄");
+  if (![...HERO_IDS, ...EXPERIMENTAL_HERO_IDS].includes(heroId)) return fail("未知英雄");
   if (form !== "front" && form !== "inner") return fail("未知英雄形态");
   if (form === "inner" && !["jiang_he", "death_knight"].includes(heroId)) throw new RuleError("HERO_FORM_UNAVAILABLE", "该英雄没有正式移交的里形态完整包");
   if (variant !== undefined && (heroId !== "devout_zealot" || form !== "front" || !["nightmare", "invincible", "fel", "storm", "unspeakable"].includes(variant))) return fail("未知或不适用的迦拉克隆完整形态");
@@ -57,10 +57,14 @@ function readSelections(value: HeroSelections): HeroSelections {
 }
 
 /** 纯公开判定：旧快照仅缺省为既有表包，显式未知/里包不降级。 */
-export function validateHeroForms(state: Pick<GameState, "featureRules" | "heroFormLock">, secret?: SecretState): HeroSelections {
+export function validateHeroForms(state: Pick<GameState, "featureRules" | "heroFormLock" | "gameMode">, secret?: SecretState): HeroSelections {
   const rules = state.featureRules;
   const legacy = createHeroSelections(rules?.heroes);
   const selections = rules?.heroSelections === undefined ? legacy : readSelections(rules.heroSelections);
+  if (sides.some(side => selections[side]?.heroId === "siheng") &&
+      (rules?.experimentalHeroPilot !== true || (state.gameMode ?? "jieqi") !== "jieqi")) {
+    throw new RuleError("HERO_PILOT_DISABLED", "司衡仅可在明确开启的现有揭棋离线试点中使用");
+  }
   if (rules?.heroes !== undefined && sides.some(side => legacy[side]?.heroId !== selections[side]?.heroId)) fail("英雄ID与完整形态选择冲突");
   for (const lock of [state.heroFormLock, secret?.heroFormLock]) {
     if (lock !== undefined && JSON.stringify(readSelections(lock)) !== JSON.stringify(selections)) {
@@ -83,9 +87,9 @@ export function initializeHeroForms(state: GameState, secret?: SecretState): voi
 }
 
 /** 表技能分派入口，里包仅由独立选择入口分派，显式形态必须先匹配已注册的完整包。 */
-export function selectedHeroId(state: Pick<GameState, "featureRules" | "heroFormLock">, side: Side): HeroId | undefined {
+export function selectedHeroId(state: Pick<GameState, "featureRules" | "heroFormLock" | "gameMode">, side: Side): HeroId | undefined {
   const selection = validateHeroForms(state)[side];
   return selection?.form === "front" ? selection.heroId : undefined;
 }
 
-export function selectedHeroSelection(state: Pick<GameState, "featureRules" | "heroFormLock">, side: Side): HeroSelection | undefined { return validateHeroForms(state)[side]; }
+export function selectedHeroSelection(state: Pick<GameState, "featureRules" | "heroFormLock" | "gameMode">, side: Side): HeroSelection | undefined { return validateHeroForms(state)[side]; }

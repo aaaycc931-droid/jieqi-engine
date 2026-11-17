@@ -1,0 +1,79 @@
+{
+  "schema": "lezi.hero_pilot.art_validation.v1",
+  "date_local": "2026-11-13",
+  "timezone": "Asia/Shanghai",
+  "status": "ART_V1_FINALIZED_UNDER_DELEGATION_AND_INTEGRATED",
+  "engine_parent": "5ab688c96f4960aad70467e7e4c15c21dc55a2e1",
+  "sources": {
+    "handoff": "944af919e01d7345644366442e9c0780c5b7a2b9",
+    "visual_rules": "82785937c284720e1f770ad7dadd9c0b1c41b87b"
+  },
+  "decision": "painterly practical route-mechanic character, charcoal hair/ivory collar/teal coat/brass weights; independent hero style under existing delegation",
+  "source_sha256": {
+    "web/hero-art.ts": "6b9345539e39e21db43d4cb6a295cdb58eff384847e87c91f86782215c1596bf",
+    "web/app.ts": "6bbd66e8410938253ea09a8371db200d47748cf371412b12d802ecd048cc704f",
+    "web/style.css": "899e92f7eff194c87a87db95cfc17b009de26a57835ef9949c0a1965d4a5b281",
+    "scripts/serve-web.ts": "ea2de19f45f905835fb0b13a6e64e9bb0b85b4267817ca8c38020d8e8e4d4c4c",
+    "scripts/hero-pilot/dom-smoke.ts": "91371167ccc7d54c74a7da0fa6e98234c73b6bd3a19d859f8035465a46d20362",
+    "scripts/hero-pilot/package-art.cjs": "3b9f56b6bd7a580cac0ecf63f1ddccf78a84f36b7b1aa0ea5884c1a329fd24ea",
+    "scripts/hero-pilot/verify-art.cjs": "379b884e18c20720efc23dddd05402e2ef4daff0588794f7dccb2a4e5d1cea89"
+  },
+  "asset_manifest": "ART_ASSET_MANIFEST.json",
+  "prompts": "../../art/hero-pilot/PROMPTS.json",
+  "actual_checks": [
+    {
+      "command": "node --test tests/web-gameplay-v4.test.ts tests/web-layout.test.ts tests/web-messages.test.ts",
+      "passed": 56,
+      "failed": 0
+    },
+    {
+      "command": "node scripts/hero-pilot/dom-smoke.ts",
+      "passed": 14,
+      "scope": "actual production module, synthetic skill fixture; no browser rendering"
+    },
+    {
+      "command": "npm run build:web",
+      "status": "PASS"
+    },
+    {
+      "command": "node scripts/hero-pilot/verify-art.cjs",
+      "manifest_files": 6,
+      "built_assets": 4,
+      "real_http_200_hash_mime_checks": 4,
+      "status": "PASS"
+    },
+    {
+      "command": "node scripts/hero-pilot/package-art.cjs + visual inspection of contact sheet",
+      "thumbnail_sizes_css_px": [
+        48,
+        64,
+        96
+      ],
+      "grounds": [
+        "light parchment",
+        "dark teal"
+      ],
+      "observation": "face/hair silhouette, ivory collar and teal torso remain distinct; weights belong to full portrait, not expected to be legible at 48px",
+      "status": "PASS_EXECUTOR_VISUAL_REVIEW"
+    }
+  ],
+  "static_assets_finalized": true,
+  "rules_changed": false,
+  "default_hero_pool_changed": false,
+  "global_ui_redesign_adopted": false,
+  "final_portrait_animation": false,
+  "not_verified": [
+    "real browser layout/touch",
+    "human adversarial balance",
+    "full independent QA",
+    "animation",
+    "merge/deployment"
+  ],
+  "prior_failures_and_corrections": [
+    {
+      "issue": "initial generated portrait put weights on anatomical right wrist",
+      "resolution": "imagegen edit moved them to left wrist; initial image excluded from repository master"
+    }
+  ],
+  "image_origin": "AI generated, original PNG preserved; this is not user-by-user artwork confirmation"
+}

@@ -1,0 +1,7924 @@
+{
+  "scope": "local engineering experiment, weak public policy; not human play or calibrated win rate",
+  "mutation": "iron_wall",
+  "nearParameter": "range2 is a legal subset policy under final range4 authority",
+  "actionEncoding": "m=ordinary move pieceId,x,y; s=relay pieceId,partnerId; automatic_execution or voluntary_resignation as named. Seed and script reproduce initial hidden layout, revisions, action IDs and time.",
+  "results": [
+    {
+      "seed": 7,
+      "pilotSide": "red",
+      "allowedRange": 0,
+      "summary": {
+        "acceptedActions": 21,
+        "skillUses": 0,
+        "status": "finished",
+        "winner": "red",
+        "reason": "ambush",
+        "publicMaterialDelta": 4,
+        "finalPieces": 15,
+        "finalPublicSHA256": "900d9920e6baeba3b643294ebef7844bf7300c2454b8f690635a189af20dc562",
+        "cappedBeforeResignation": false
+      },
+      "stages": [
+        {
+          "ply": 0,
+          "pieces": 32,
+          "revealed": 2,
+          "pairs": 0,
+          "checked": false
+        },
+        {
+          "ply": 12,
+          "pieces": 20,
+          "revealed": 7,
+          "pairs": 0,
+          "checked": false
+        }
+      ],
+      "failures": [],
+      "actions": [
+        [
+          "m",
+          "covered-23",
+          1,
+          0
+        ],
+        [
+          "m",
+          "covered-00",
+          1,
+          0
+        ],
+        [
+          "m",
+          "covered-24",
+          7,
+          0
+        ],
+        [
+          "m",
+          "covered-07",
+          8,
+          3
+        ],
+        [
+          "m",
+          "covered-22",
+          8,
+          6
+        ],
+        [
+          "m",
+          "black-general",
+          3,
+          0
+        ],
+        [
+          "m",
+          "covered-15",
+          0,
+          6
+        ],
+        [
+          "m",
+          "covered-15",
+          2,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          5,
+          9
+        ],
+        [
+          "m",
+          "covered-15",
+          2,
+          9
+        ],
+        [
+          "m",
+          "covered-07",
+          6,
+          3
+        ],
+        [
+          "m",
+          "covered-15",
+          1,
+          9
+        ],
+        [
+          "m",
+          "covered-07",
+          6,
+          0
+        ],
+        [
+          "m",
+          "covered-08",
+          1,
+          7
+        ],
+        [
+          "m",
+          "covered-07",
+          7,
+          0
+        ],
+        [
+          "m",
+          "covered-15",
+          1,
+          7
+        ],
+        [
+          "m",
+          "covered-20",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-09",
+          7,
+          8
+        ],
+        [
+          "m",
+          "covered-09",
+          6,
+          6
+        ],
+        [
+          "m",
+          "covered-02",
+          4,
+          2
+        ],
+        [
+          "automatic_execution",
+          null
+        ]
+      ]
+    },
+    {
+      "seed": 7,
+      "pilotSide": "red",
+      "allowedRange": 2,
+      "summary": {
+        "acceptedActions": 21,
+        "skillUses": 0,
+        "status": "finished",
+        "winner": "red",
+        "reason": "ambush",
+        "publicMaterialDelta": 4,
+        "finalPieces": 15,
+        "finalPublicSHA256": "2da2834b36a15605d47f90d2645759023bf47b8258ce32c9f988e198c68710fd",
+        "cappedBeforeResignation": false
+      },
+      "stages": [
+        {
+          "ply": 0,
+          "pieces": 32,
+          "revealed": 2,
+          "pairs": 0,
+          "checked": false
+        },
+        {
+          "ply": 12,
+          "pieces": 20,
+          "revealed": 7,
+          "pairs": 0,
+          "checked": false
+        }
+      ],
+      "failures": [],
+      "actions": [
+        [
+          "m",
+          "covered-23",
+          1,
+          0
+        ],
+        [
+          "m",
+          "covered-00",
+          1,
+          0
+        ],
+        [
+          "m",
+          "covered-24",
+          7,
+          0
+        ],
+        [
+          "m",
+          "covered-07",
+          8,
+          3
+        ],
+        [
+          "m",
+          "covered-22",
+          8,
+          6
+        ],
+        [
+          "m",
+          "black-general",
+          3,
+          0
+        ],
+        [
+          "m",
+          "covered-15",
+          0,
+          6
+        ],
+        [
+          "m",
+          "covered-15",
+          2,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          5,
+          9
+        ],
+        [
+          "m",
+          "covered-15",
+          2,
+          9
+        ],
+        [
+          "m",
+          "covered-07",
+          6,
+          3
+        ],
+        [
+          "m",
+          "covered-15",
+          1,
+          9
+        ],
+        [
+          "m",
+          "covered-07",
+          6,
+          0
+        ],
+        [
+          "m",
+          "covered-08",
+          1,
+          7
+        ],
+        [
+          "m",
+          "covered-07",
+          7,
+          0
+        ],
+        [
+          "m",
+          "covered-15",
+          1,
+          7
+        ],
+        [
+          "m",
+          "covered-20",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-09",
+          7,
+          8
+        ],
+        [
+          "m",
+          "covered-09",
+          6,
+          6
+        ],
+        [
+          "m",
+          "covered-02",
+          4,
+          2
+        ],
+        [
+          "automatic_execution",
+          null
+        ]
+      ]
+    },
+    {
+      "seed": 7,
+      "pilotSide": "red",
+      "allowedRange": 4,
+      "summary": {
+        "acceptedActions": 21,
+        "skillUses": 0,
+        "status": "finished",
+        "winner": "red",
+        "reason": "ambush",
+        "publicMaterialDelta": 4,
+        "finalPieces": 15,
+        "finalPublicSHA256": "2da2834b36a15605d47f90d2645759023bf47b8258ce32c9f988e198c68710fd",
+        "cappedBeforeResignation": false
+      },
+      "stages": [
+        {
+          "ply": 0,
+          "pieces": 32,
+          "revealed": 2,
+          "pairs": 0,
+          "checked": false
+        },
+        {
+          "ply": 12,
+          "pieces": 20,
+          "revealed": 7,
+          "pairs": 0,
+          "checked": false
+        }
+      ],
+      "failures": [],
+      "actions": [
+        [
+          "m",
+          "covered-23",
+          1,
+          0
+        ],
+        [
+          "m",
+          "covered-00",
+          1,
+          0
+        ],
+        [
+          "m",
+          "covered-24",
+          7,
+          0
+        ],
+        [
+          "m",
+          "covered-07",
+          8,
+          3
+        ],
+        [
+          "m",
+          "covered-22",
+          8,
+          6
+        ],
+        [
+          "m",
+          "black-general",
+          3,
+          0
+        ],
+        [
+          "m",
+          "covered-15",
+          0,
+          6
+        ],
+        [
+          "m",
+          "covered-15",
+          2,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          5,
+          9
+        ],
+        [
+          "m",
+          "covered-15",
+          2,
+          9
+        ],
+        [
+          "m",
+          "covered-07",
+          6,
+          3
+        ],
+        [
+          "m",
+          "covered-15",
+          1,
+          9
+        ],
+        [
+          "m",
+          "covered-07",
+          6,
+          0
+        ],
+        [
+          "m",
+          "covered-08",
+          1,
+          7
+        ],
+        [
+          "m",
+          "covered-07",
+          7,
+          0
+        ],
+        [
+          "m",
+          "covered-15",
+          1,
+          7
+        ],
+        [
+          "m",
+          "covered-20",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-09",
+          7,
+          8
+        ],
+        [
+          "m",
+          "covered-09",
+          6,
+          6
+        ],
+        [
+          "m",
+          "covered-02",
+          4,
+          2
+        ],
+        [
+          "automatic_execution",
+          null
+        ]
+      ]
+    },
+    {
+      "seed": 7,
+      "pilotSide": "black",
+      "allowedRange": 0,
+      "summary": {
+        "acceptedActions": 21,
+        "skillUses": 0,
+        "status": "finished",
+        "winner": "red",
+        "reason": "ambush",
+        "publicMaterialDelta": -4,
+        "finalPieces": 15,
+        "finalPublicSHA256": "900d9920e6baeba3b643294ebef7844bf7300c2454b8f690635a189af20dc562",
+        "cappedBeforeResignation": false
+      },
+      "stages": [],
+      "failures": [],
+      "actions": [
+        [
+          "m",
+          "covered-23",
+          1,
+          0
+        ],
+        [
+          "m",
+          "covered-00",
+          1,
+          0
+        ],
+        [
+          "m",
+          "covered-24",
+          7,
+          0
+        ],
+        [
+          "m",
+          "covered-07",
+          8,
+          3
+        ],
+        [
+          "m",
+          "covered-22",
+          8,
+          6
+        ],
+        [
+          "m",
+          "black-general",
+          3,
+          0
+        ],
+        [
+          "m",
+          "covered-15",
+          0,
+          6
+        ],
+        [
+          "m",
+          "covered-15",
+          2,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          5,
+          9
+        ],
+        [
+          "m",
+          "covered-15",
+          2,
+          9
+        ],
+        [
+          "m",
+          "covered-07",
+          6,
+          3
+        ],
+        [
+          "m",
+          "covered-15",
+          1,
+          9
+        ],
+        [
+          "m",
+          "covered-07",
+          6,
+          0
+        ],
+        [
+          "m",
+          "covered-08",
+          1,
+          7
+        ],
+        [
+          "m",
+          "covered-07",
+          7,
+          0
+        ],
+        [
+          "m",
+          "covered-15",
+          1,
+          7
+        ],
+        [
+          "m",
+          "covered-20",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-09",
+          7,
+          8
+        ],
+        [
+          "m",
+          "covered-09",
+          6,
+          6
+        ],
+        [
+          "m",
+          "covered-02",
+          4,
+          2
+        ],
+        [
+          "automatic_execution",
+          null
+        ]
+      ]
+    },
+    {
+      "seed": 7,
+      "pilotSide": "black",
+      "allowedRange": 2,
+      "summary": {
+        "acceptedActions": 21,
+        "skillUses": 0,
+        "status": "finished",
+        "winner": "red",
+        "reason": "ambush",
+        "publicMaterialDelta": -4,
+        "finalPieces": 15,
+        "finalPublicSHA256": "db8b83edf58602c8e5f24e6423cbf2e1feaafbcbc9e93a52f8d5751e22e710dd",
+        "cappedBeforeResignation": false
+      },
+      "stages": [],
+      "failures": [],
+      "actions": [
+        [
+          "m",
+          "covered-23",
+          1,
+          0
+        ],
+        [
+          "m",
+          "covered-00",
+          1,
+          0
+        ],
+        [
+          "m",
+          "covered-24",
+          7,
+          0
+        ],
+        [
+          "m",
+          "covered-07",
+          8,
+          3
+        ],
+        [
+          "m",
+          "covered-22",
+          8,
+          6
+        ],
+        [
+          "m",
+          "black-general",
+          3,
+          0
+        ],
+        [
+          "m",
+          "covered-15",
+          0,
+          6
+        ],
+        [
+          "m",
+          "covered-15",
+          2,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          5,
+          9
+        ],
+        [
+          "m",
+          "covered-15",
+          2,
+          9
+        ],
+        [
+          "m",
+          "covered-07",
+          6,
+          3
+        ],
+        [
+          "m",
+          "covered-15",
+          1,
+          9
+        ],
+        [
+          "m",
+          "covered-07",
+          6,
+          0
+        ],
+        [
+          "m",
+          "covered-08",
+          1,
+          7
+        ],
+        [
+          "m",
+          "covered-07",
+          7,
+          0
+        ],
+        [
+          "m",
+          "covered-15",
+          1,
+          7
+        ],
+        [
+          "m",
+          "covered-20",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-09",
+          7,
+          8
+        ],
+        [
+          "m",
+          "covered-09",
+          6,
+          6
+        ],
+        [
+          "m",
+          "covered-02",
+          4,
+          2
+        ],
+        [
+          "automatic_execution",
+          null
+        ]
+      ]
+    },
+    {
+      "seed": 7,
+      "pilotSide": "black",
+      "allowedRange": 4,
+      "summary": {
+        "acceptedActions": 21,
+        "skillUses": 0,
+        "status": "finished",
+        "winner": "red",
+        "reason": "ambush",
+        "publicMaterialDelta": -4,
+        "finalPieces": 15,
+        "finalPublicSHA256": "db8b83edf58602c8e5f24e6423cbf2e1feaafbcbc9e93a52f8d5751e22e710dd",
+        "cappedBeforeResignation": false
+      },
+      "stages": [],
+      "failures": [],
+      "actions": [
+        [
+          "m",
+          "covered-23",
+          1,
+          0
+        ],
+        [
+          "m",
+          "covered-00",
+          1,
+          0
+        ],
+        [
+          "m",
+          "covered-24",
+          7,
+          0
+        ],
+        [
+          "m",
+          "covered-07",
+          8,
+          3
+        ],
+        [
+          "m",
+          "covered-22",
+          8,
+          6
+        ],
+        [
+          "m",
+          "black-general",
+          3,
+          0
+        ],
+        [
+          "m",
+          "covered-15",
+          0,
+          6
+        ],
+        [
+          "m",
+          "covered-15",
+          2,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          5,
+          9
+        ],
+        [
+          "m",
+          "covered-15",
+          2,
+          9
+        ],
+        [
+          "m",
+          "covered-07",
+          6,
+          3
+        ],
+        [
+          "m",
+          "covered-15",
+          1,
+          9
+        ],
+        [
+          "m",
+          "covered-07",
+          6,
+          0
+        ],
+        [
+          "m",
+          "covered-08",
+          1,
+          7
+        ],
+        [
+          "m",
+          "covered-07",
+          7,
+          0
+        ],
+        [
+          "m",
+          "covered-15",
+          1,
+          7
+        ],
+        [
+          "m",
+          "covered-20",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-09",
+          7,
+          8
+        ],
+        [
+          "m",
+          "covered-09",
+          6,
+          6
+        ],
+        [
+          "m",
+          "covered-02",
+          4,
+          2
+        ],
+        [
+          "automatic_execution",
+          null
+        ]
+      ]
+    },
+    {
+      "seed": 19,
+      "pilotSide": "red",
+      "allowedRange": 0,
+      "summary": {
+        "acceptedActions": 32,
+        "skillUses": 0,
+        "status": "finished",
+        "winner": "red",
+        "reason": "checkmate",
+        "publicMaterialDelta": 20.5,
+        "finalPieces": 16,
+        "finalPublicSHA256": "b1097b73c08a3b5ec9d0a4cfb6a978a1868d16ff0627b3dd5bd0956dfb25f9b3",
+        "cappedBeforeResignation": false
+      },
+      "stages": [
+        {
+          "ply": 0,
+          "pieces": 32,
+          "revealed": 2,
+          "pairs": 0,
+          "checked": false
+        },
+        {
+          "ply": 12,
+          "pieces": 22,
+          "revealed": 10,
+          "pairs": 0,
+          "checked": false
+        },
+        {
+          "ply": 30,
+          "pieces": 17,
+          "revealed": 16,
+          "pairs": 0,
+          "checked": false
+        }
+      ],
+      "failures": [],
+      "actions": [
+        [
+          "m",
+          "covered-23",
+          1,
+          0
+        ],
+        [
+          "m",
+          "covered-09",
+          7,
+          9
+        ],
+        [
+          "m",
+          "covered-22",
+          8,
+          6
+        ],
+        [
+          "m",
+          "covered-07",
+          8,
+          3
+        ],
+        [
+          "m",
+          "covered-15",
+          0,
+          6
+        ],
+        [
+          "m",
+          "covered-00",
+          0,
+          3
+        ],
+        [
+          "m",
+          "red-general",
+          3,
+          9
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          0
+        ],
+        [
+          "m",
+          "covered-23",
+          2,
+          0
+        ],
+        [
+          "m",
+          "covered-05",
+          4,
+          2
+        ],
+        [
+          "m",
+          "covered-27",
+          4,
+          5
+        ],
+        [
+          "m",
+          "covered-05",
+          4,
+          3
+        ],
+        [
+          "m",
+          "covered-17",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-08",
+          1,
+          7
+        ],
+        [
+          "m",
+          "covered-20",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          1
+        ],
+        [
+          "m",
+          "covered-24",
+          7,
+          3
+        ],
+        [
+          "m",
+          "covered-06",
+          5,
+          1
+        ],
+        [
+          "m",
+          "covered-06",
+          7,
+          3
+        ],
+        [
+          "m",
+          "covered-11",
+          2,
+          4
+        ],
+        [
+          "m",
+          "covered-19",
+          4,
+          8
+        ],
+        [
+          "m",
+          "covered-13",
+          6,
+          4
+        ],
+        [
+          "m",
+          "covered-19",
+          4,
+          5
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          0
+        ],
+        [
+          "m",
+          "covered-26",
+          2,
+          5
+        ],
+        [
+          "m",
+          "covered-11",
+          2,
+          5
+        ],
+        [
+          "m",
+          "covered-28",
+          6,
+          5
+        ],
+        [
+          "m",
+          "covered-13",
+          4,
+          6
+        ],
+        [
+          "m",
+          "covered-20",
+          4,
+          6
+        ],
+        [
+          "m",
+          "covered-05",
+          4,
+          4
+        ],
+        [
+          "m",
+          "covered-28",
+          6,
+          0
+        ],
+        [
+          "automatic_execution",
+          null
+        ]
+      ]
+    },
+    {
+      "seed": 19,
+      "pilotSide": "red",
+      "allowedRange": 2,
+      "summary": {
+        "acceptedActions": 32,
+        "skillUses": 0,
+        "status": "finished",
+        "winner": "red",
+        "reason": "checkmate",
+        "publicMaterialDelta": 20.5,
+        "finalPieces": 16,
+        "finalPublicSHA256": "ae13e105990a15ce9e0a7a4d6b9e76ee689ced916be9e3b781738111aeac1e63",
+        "cappedBeforeResignation": false
+      },
+      "stages": [
+        {
+          "ply": 0,
+          "pieces": 32,
+          "revealed": 2,
+          "pairs": 0,
+          "checked": false
+        },
+        {
+          "ply": 12,
+          "pieces": 22,
+          "revealed": 10,
+          "pairs": 0,
+          "checked": false
+        },
+        {
+          "ply": 14,
+          "pieces": 22,
+          "revealed": 12,
+          "pairs": 1,
+          "checked": false
+        },
+        {
+          "ply": 16,
+          "pieces": 21,
+          "revealed": 13,
+          "pairs": 1,
+          "checked": false
+        },
+        {
+          "ply": 18,
+          "pieces": 21,
+          "revealed": 15,
+          "pairs": 1,
+          "checked": false
+        },
+        {
+          "ply": 20,
+          "pieces": 20,
+          "revealed": 15,
+          "pairs": 1,
+          "checked": false
+        },
+        {
+          "ply": 22,
+          "pieces": 20,
+          "revealed": 17,
+          "pairs": 2,
+          "checked": false
+        },
+        {
+          "ply": 24,
+          "pieces": 19,
+          "revealed": 16,
+          "pairs": 2,
+          "checked": false
+        },
+        {
+          "ply": 26,
+          "pieces": 18,
+          "revealed": 16,
+          "pairs": 2,
+          "checked": false
+        },
+        {
+          "ply": 28,
+          "pieces": 18,
+          "revealed": 17,
+          "pairs": 3,
+          "checked": false
+        },
+        {
+          "ply": 30,
+          "pieces": 17,
+          "revealed": 16,
+          "pairs": 3,
+          "checked": false
+        }
+      ],
+      "failures": [],
+      "actions": [
+        [
+          "m",
+          "covered-23",
+          1,
+          0
+        ],
+        [
+          "m",
+          "covered-09",
+          7,
+          9
+        ],
+        [
+          "m",
+          "covered-22",
+          8,
+          6
+        ],
+        [
+          "m",
+          "covered-07",
+          8,
+          3
+        ],
+        [
+          "m",
+          "covered-15",
+          0,
+          6
+        ],
+        [
+          "m",
+          "covered-00",
+          0,
+          3
+        ],
+        [
+          "m",
+          "red-general",
+          3,
+          9
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          0
+        ],
+        [
+          "m",
+          "covered-23",
+          2,
+          0
+        ],
+        [
+          "m",
+          "covered-05",
+          4,
+          2
+        ],
+        [
+          "m",
+          "covered-27",
+          4,
+          5
+        ],
+        [
+          "m",
+          "covered-05",
+          4,
+          3
+        ],
+        [
+          "m",
+          "covered-17",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-08",
+          1,
+          7
+        ],
+        [
+          "m",
+          "covered-20",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          1
+        ],
+        [
+          "m",
+          "covered-24",
+          7,
+          3
+        ],
+        [
+          "m",
+          "covered-06",
+          5,
+          1
+        ],
+        [
+          "m",
+          "covered-06",
+          7,
+          3
+        ],
+        [
+          "m",
+          "covered-11",
+          2,
+          4
+        ],
+        [
+          "m",
+          "covered-19",
+          4,
+          8
+        ],
+        [
+          "m",
+          "covered-13",
+          6,
+          4
+        ],
+        [
+          "m",
+          "covered-19",
+          4,
+          5
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          0
+        ],
+        [
+          "m",
+          "covered-26",
+          2,
+          5
+        ],
+        [
+          "m",
+          "covered-11",
+          2,
+          5
+        ],
+        [
+          "m",
+          "covered-28",
+          6,
+          5
+        ],
+        [
+          "m",
+          "covered-13",
+          4,
+          6
+        ],
+        [
+          "m",
+          "covered-20",
+          4,
+          6
+        ],
+        [
+          "m",
+          "covered-05",
+          4,
+          4
+        ],
+        [
+          "m",
+          "covered-28",
+          6,
+          0
+        ],
+        [
+          "automatic_execution",
+          null
+        ]
+      ]
+    },
+    {
+      "seed": 19,
+      "pilotSide": "red",
+      "allowedRange": 4,
+      "summary": {
+        "acceptedActions": 32,
+        "skillUses": 0,
+        "status": "finished",
+        "winner": "red",
+        "reason": "checkmate",
+        "publicMaterialDelta": 20.5,
+        "finalPieces": 16,
+        "finalPublicSHA256": "ae13e105990a15ce9e0a7a4d6b9e76ee689ced916be9e3b781738111aeac1e63",
+        "cappedBeforeResignation": false
+      },
+      "stages": [
+        {
+          "ply": 0,
+          "pieces": 32,
+          "revealed": 2,
+          "pairs": 0,
+          "checked": false
+        },
+        {
+          "ply": 6,
+          "pieces": 26,
+          "revealed": 8,
+          "pairs": 2,
+          "checked": false
+        },
+        {
+          "ply": 8,
+          "pieces": 24,
+          "revealed": 8,
+          "pairs": 2,
+          "checked": false
+        },
+        {
+          "ply": 10,
+          "pieces": 23,
+          "revealed": 9,
+          "pairs": 1,
+          "checked": false
+        },
+        {
+          "ply": 12,
+          "pieces": 22,
+          "revealed": 10,
+          "pairs": 1,
+          "checked": false
+        },
+        {
+          "ply": 14,
+          "pieces": 22,
+          "revealed": 12,
+          "pairs": 2,
+          "checked": false
+        },
+        {
+          "ply": 16,
+          "pieces": 21,
+          "revealed": 13,
+          "pairs": 3,
+          "checked": false
+        },
+        {
+          "ply": 18,
+          "pieces": 21,
+          "revealed": 15,
+          "pairs": 3,
+          "checked": false
+        },
+        {
+          "ply": 20,
+          "pieces": 20,
+          "revealed": 15,
+          "pairs": 3,
+          "checked": false
+        },
+        {
+          "ply": 22,
+          "pieces": 20,
+          "revealed": 17,
+          "pairs": 6,
+          "checked": false
+        },
+        {
+          "ply": 24,
+          "pieces": 19,
+          "revealed": 16,
+          "pairs": 4,
+          "checked": false
+        },
+        {
+          "ply": 26,
+          "pieces": 18,
+          "revealed": 16,
+          "pairs": 4,
+          "checked": false
+        },
+        {
+          "ply": 28,
+          "pieces": 18,
+          "revealed": 17,
+          "pairs": 7,
+          "checked": false
+        },
+        {
+          "ply": 30,
+          "pieces": 17,
+          "revealed": 16,
+          "pairs": 8,
+          "checked": false
+        }
+      ],
+      "failures": [],
+      "actions": [
+        [
+          "m",
+          "covered-23",
+          1,
+          0
+        ],
+        [
+          "m",
+          "covered-09",
+          7,
+          9
+        ],
+        [
+          "m",
+          "covered-22",
+          8,
+          6
+        ],
+        [
+          "m",
+          "covered-07",
+          8,
+          3
+        ],
+        [
+          "m",
+          "covered-15",
+          0,
+          6
+        ],
+        [
+          "m",
+          "covered-00",
+          0,
+          3
+        ],
+        [
+          "m",
+          "red-general",
+          3,
+          9
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          0
+        ],
+        [
+          "m",
+          "covered-23",
+          2,
+          0
+        ],
+        [
+          "m",
+          "covered-05",
+          4,
+          2
+        ],
+        [
+          "m",
+          "covered-27",
+          4,
+          5
+        ],
+        [
+          "m",
+          "covered-05",
+          4,
+          3
+        ],
+        [
+          "m",
+          "covered-17",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-08",
+          1,
+          7
+        ],
+        [
+          "m",
+          "covered-20",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          1
+        ],
+        [
+          "m",
+          "covered-24",
+          7,
+          3
+        ],
+        [
+          "m",
+          "covered-06",
+          5,
+          1
+        ],
+        [
+          "m",
+          "covered-06",
+          7,
+          3
+        ],
+        [
+          "m",
+          "covered-11",
+          2,
+          4
+        ],
+        [
+          "m",
+          "covered-19",
+          4,
+          8
+        ],
+        [
+          "m",
+          "covered-13",
+          6,
+          4
+        ],
+        [
+          "m",
+          "covered-19",
+          4,
+          5
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          0
+        ],
+        [
+          "m",
+          "covered-26",
+          2,
+          5
+        ],
+        [
+          "m",
+          "covered-11",
+          2,
+          5
+        ],
+        [
+          "m",
+          "covered-28",
+          6,
+          5
+        ],
+        [
+          "m",
+          "covered-13",
+          4,
+          6
+        ],
+        [
+          "m",
+          "covered-20",
+          4,
+          6
+        ],
+        [
+          "m",
+          "covered-05",
+          4,
+          4
+        ],
+        [
+          "m",
+          "covered-28",
+          6,
+          0
+        ],
+        [
+          "automatic_execution",
+          null
+        ]
+      ]
+    },
+    {
+      "seed": 19,
+      "pilotSide": "black",
+      "allowedRange": 0,
+      "summary": {
+        "acceptedActions": 32,
+        "skillUses": 0,
+        "status": "finished",
+        "winner": "red",
+        "reason": "checkmate",
+        "publicMaterialDelta": -20.5,
+        "finalPieces": 16,
+        "finalPublicSHA256": "b1097b73c08a3b5ec9d0a4cfb6a978a1868d16ff0627b3dd5bd0956dfb25f9b3",
+        "cappedBeforeResignation": false
+      },
+      "stages": [],
+      "failures": [],
+      "actions": [
+        [
+          "m",
+          "covered-23",
+          1,
+          0
+        ],
+        [
+          "m",
+          "covered-09",
+          7,
+          9
+        ],
+        [
+          "m",
+          "covered-22",
+          8,
+          6
+        ],
+        [
+          "m",
+          "covered-07",
+          8,
+          3
+        ],
+        [
+          "m",
+          "covered-15",
+          0,
+          6
+        ],
+        [
+          "m",
+          "covered-00",
+          0,
+          3
+        ],
+        [
+          "m",
+          "red-general",
+          3,
+          9
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          0
+        ],
+        [
+          "m",
+          "covered-23",
+          2,
+          0
+        ],
+        [
+          "m",
+          "covered-05",
+          4,
+          2
+        ],
+        [
+          "m",
+          "covered-27",
+          4,
+          5
+        ],
+        [
+          "m",
+          "covered-05",
+          4,
+          3
+        ],
+        [
+          "m",
+          "covered-17",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-08",
+          1,
+          7
+        ],
+        [
+          "m",
+          "covered-20",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          1
+        ],
+        [
+          "m",
+          "covered-24",
+          7,
+          3
+        ],
+        [
+          "m",
+          "covered-06",
+          5,
+          1
+        ],
+        [
+          "m",
+          "covered-06",
+          7,
+          3
+        ],
+        [
+          "m",
+          "covered-11",
+          2,
+          4
+        ],
+        [
+          "m",
+          "covered-19",
+          4,
+          8
+        ],
+        [
+          "m",
+          "covered-13",
+          6,
+          4
+        ],
+        [
+          "m",
+          "covered-19",
+          4,
+          5
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          0
+        ],
+        [
+          "m",
+          "covered-26",
+          2,
+          5
+        ],
+        [
+          "m",
+          "covered-11",
+          2,
+          5
+        ],
+        [
+          "m",
+          "covered-28",
+          6,
+          5
+        ],
+        [
+          "m",
+          "covered-13",
+          4,
+          6
+        ],
+        [
+          "m",
+          "covered-20",
+          4,
+          6
+        ],
+        [
+          "m",
+          "covered-05",
+          4,
+          4
+        ],
+        [
+          "m",
+          "covered-28",
+          6,
+          0
+        ],
+        [
+          "automatic_execution",
+          null
+        ]
+      ]
+    },
+    {
+      "seed": 19,
+      "pilotSide": "black",
+      "allowedRange": 2,
+      "summary": {
+        "acceptedActions": 32,
+        "skillUses": 1,
+        "status": "finished",
+        "winner": "red",
+        "reason": "checkmate",
+        "publicMaterialDelta": -16,
+        "finalPieces": 15,
+        "finalPublicSHA256": "3a7ea4377d88a85aa02f97c81de4163e44a06d730c7edf2982734d8d6e43111c",
+        "cappedBeforeResignation": false
+      },
+      "stages": [
+        {
+          "ply": 13,
+          "pieces": 22,
+          "revealed": 11,
+          "pairs": 1,
+          "checked": false
+        },
+        {
+          "ply": 15,
+          "pieces": 21,
+          "revealed": 12,
+          "pairs": 1,
+          "checked": false
+        },
+        {
+          "ply": 17,
+          "pieces": 21,
+          "revealed": 14,
+          "pairs": 3,
+          "checked": false
+        },
+        {
+          "ply": 19,
+          "pieces": 20,
+          "revealed": 14,
+          "pairs": 2,
+          "checked": false
+        },
+        {
+          "ply": 21,
+          "pieces": 20,
+          "revealed": 16,
+          "pairs": 2,
+          "checked": false
+        },
+        {
+          "ply": 23,
+          "pieces": 19,
+          "revealed": 16,
+          "pairs": 1,
+          "checked": false
+        }
+      ],
+      "failures": [],
+      "actions": [
+        [
+          "m",
+          "covered-23",
+          1,
+          0
+        ],
+        [
+          "m",
+          "covered-09",
+          7,
+          9
+        ],
+        [
+          "m",
+          "covered-22",
+          8,
+          6
+        ],
+        [
+          "m",
+          "covered-07",
+          8,
+          3
+        ],
+        [
+          "m",
+          "covered-15",
+          0,
+          6
+        ],
+        [
+          "m",
+          "covered-00",
+          0,
+          3
+        ],
+        [
+          "m",
+          "red-general",
+          3,
+          9
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          0
+        ],
+        [
+          "m",
+          "covered-23",
+          2,
+          0
+        ],
+        [
+          "m",
+          "covered-05",
+          4,
+          2
+        ],
+        [
+          "m",
+          "covered-27",
+          4,
+          5
+        ],
+        [
+          "m",
+          "covered-05",
+          4,
+          3
+        ],
+        [
+          "m",
+          "covered-17",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-08",
+          1,
+          7
+        ],
+        [
+          "m",
+          "covered-20",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          1
+        ],
+        [
+          "m",
+          "covered-24",
+          7,
+          3
+        ],
+        [
+          "m",
+          "covered-06",
+          5,
+          1
+        ],
+        [
+          "m",
+          "covered-06",
+          7,
+          3
+        ],
+        [
+          "m",
+          "covered-11",
+          2,
+          4
+        ],
+        [
+          "m",
+          "covered-19",
+          4,
+          8
+        ],
+        [
+          "m",
+          "covered-13",
+          6,
+          4
+        ],
+        [
+          "m",
+          "covered-19",
+          4,
+          5
+        ],
+        [
+          "s",
+          "covered-05",
+          "covered-03"
+        ],
+        [
+          "m",
+          "covered-26",
+          2,
+          5
+        ],
+        [
+          "m",
+          "covered-11",
+          2,
+          5
+        ],
+        [
+          "m",
+          "covered-28",
+          6,
+          5
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          4
+        ],
+        [
+          "m",
+          "covered-28",
+          6,
+          4
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          5
+        ],
+        [
+          "m",
+          "covered-28",
+          6,
+          0
+        ],
+        [
+          "automatic_execution",
+          null
+        ]
+      ]
+    },
+    {
+      "seed": 19,
+      "pilotSide": "black",
+      "allowedRange": 4,
+      "summary": {
+        "acceptedActions": 30,
+        "skillUses": 1,
+        "status": "finished",
+        "winner": "black",
+        "reason": "ambush",
+        "publicMaterialDelta": 0.5,
+        "finalPieces": 16,
+        "finalPublicSHA256": "c242e6a7568c0bca581438652bfb6072a133276105d0d0b7a9f67bd01382ea8b",
+        "cappedBeforeResignation": false
+      },
+      "stages": [
+        {
+          "ply": 5,
+          "pieces": 27,
+          "revealed": 7,
+          "pairs": 1,
+          "checked": false
+        },
+        {
+          "ply": 7,
+          "pieces": 25,
+          "revealed": 8,
+          "pairs": 1,
+          "checked": false
+        },
+        {
+          "ply": 9,
+          "pieces": 23,
+          "revealed": 8,
+          "pairs": 1,
+          "checked": false
+        },
+        {
+          "ply": 11,
+          "pieces": 23,
+          "revealed": 10,
+          "pairs": 2,
+          "checked": false
+        },
+        {
+          "ply": 13,
+          "pieces": 22,
+          "revealed": 11,
+          "pairs": 3,
+          "checked": false
+        },
+        {
+          "ply": 15,
+          "pieces": 21,
+          "revealed": 12,
+          "pairs": 3,
+          "checked": false
+        },
+        {
+          "ply": 17,
+          "pieces": 21,
+          "revealed": 14,
+          "pairs": 8,
+          "checked": false
+        },
+        {
+          "ply": 19,
+          "pieces": 20,
+          "revealed": 14,
+          "pairs": 5,
+          "checked": false
+        },
+        {
+          "ply": 21,
+          "pieces": 20,
+          "revealed": 16,
+          "pairs": 7,
+          "checked": false
+        },
+        {
+          "ply": 23,
+          "pieces": 19,
+          "revealed": 16,
+          "pairs": 8,
+          "checked": false
+        }
+      ],
+      "failures": [],
+      "actions": [
+        [
+          "m",
+          "covered-23",
+          1,
+          0
+        ],
+        [
+          "m",
+          "covered-09",
+          7,
+          9
+        ],
+        [
+          "m",
+          "covered-22",
+          8,
+          6
+        ],
+        [
+          "m",
+          "covered-07",
+          8,
+          3
+        ],
+        [
+          "m",
+          "covered-15",
+          0,
+          6
+        ],
+        [
+          "m",
+          "covered-00",
+          0,
+          3
+        ],
+        [
+          "m",
+          "red-general",
+          3,
+          9
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          0
+        ],
+        [
+          "m",
+          "covered-23",
+          2,
+          0
+        ],
+        [
+          "m",
+          "covered-05",
+          4,
+          2
+        ],
+        [
+          "m",
+          "covered-27",
+          4,
+          5
+        ],
+        [
+          "m",
+          "covered-05",
+          4,
+          3
+        ],
+        [
+          "m",
+          "covered-17",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-08",
+          1,
+          7
+        ],
+        [
+          "m",
+          "covered-20",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          1
+        ],
+        [
+          "m",
+          "covered-24",
+          7,
+          3
+        ],
+        [
+          "m",
+          "covered-06",
+          5,
+          1
+        ],
+        [
+          "m",
+          "covered-06",
+          7,
+          3
+        ],
+        [
+          "m",
+          "covered-11",
+          2,
+          4
+        ],
+        [
+          "m",
+          "covered-19",
+          4,
+          8
+        ],
+        [
+          "m",
+          "covered-13",
+          6,
+          4
+        ],
+        [
+          "m",
+          "covered-19",
+          4,
+          5
+        ],
+        [
+          "s",
+          "covered-07",
+          "covered-13"
+        ],
+        [
+          "m",
+          "covered-26",
+          2,
+          5
+        ],
+        [
+          "m",
+          "covered-07",
+          7,
+          3
+        ],
+        [
+          "m",
+          "covered-28",
+          6,
+          5
+        ],
+        [
+          "m",
+          "covered-13",
+          6,
+          5
+        ],
+        [
+          "m",
+          "covered-16",
+          3,
+          8
+        ],
+        [
+          "automatic_execution",
+          null
+        ]
+      ]
+    },
+    {
+      "seed": 43,
+      "pilotSide": "red",
+      "allowedRange": 0,
+      "summary": {
+        "acceptedActions": 129,
+        "skillUses": 0,
+        "status": "finished",
+        "winner": "red",
+        "reason": "stalemate",
+        "publicMaterialDelta": 6,
+        "finalPieces": 5,
+        "finalPublicSHA256": "27665a11195b7d48d717de3374b38a9d3076fa5304df2a366be27f7c631fe66a",
+        "cappedBeforeResignation": false
+      },
+      "stages": [
+        {
+          "ply": 0,
+          "pieces": 32,
+          "revealed": 2,
+          "pairs": 0,
+          "checked": false
+        },
+        {
+          "ply": 12,
+          "pieces": 21,
+          "revealed": 6,
+          "pairs": 0,
+          "checked": false
+        },
+        {
+          "ply": 30,
+          "pieces": 12,
+          "revealed": 8,
+          "pairs": 0,
+          "checked": false
+        },
+        {
+          "ply": 60,
+          "pieces": 5,
+          "revealed": 5,
+          "pairs": 0,
+          "checked": false
+        },
+        {
+          "ply": 100,
+          "pieces": 5,
+          "revealed": 5,
+          "pairs": 0,
+          "checked": false
+        }
+      ],
+      "failures": [],
+      "actions": [
+        [
+          "m",
+          "covered-24",
+          7,
+          0
+        ],
+        [
+          "m",
+          "covered-08",
+          1,
+          9
+        ],
+        [
+          "m",
+          "covered-15",
+          1,
+          9
+        ],
+        [
+          "m",
+          "covered-00",
+          0,
+          3
+        ],
+        [
+          "m",
+          "covered-22",
+          7,
+          9
+        ],
+        [
+          "m",
+          "covered-07",
+          8,
+          3
+        ],
+        [
+          "m",
+          "covered-22",
+          7,
+          2
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          0
+        ],
+        [
+          "m",
+          "covered-22",
+          7,
+          0
+        ],
+        [
+          "m",
+          "covered-15",
+          2,
+          9
+        ],
+        [
+          "m",
+          "covered-22",
+          6,
+          0
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          1
+        ],
+        [
+          "m",
+          "covered-22",
+          6,
+          3
+        ],
+        [
+          "m",
+          "covered-15",
+          2,
+          6
+        ],
+        [
+          "m",
+          "covered-22",
+          8,
+          3
+        ],
+        [
+          "m",
+          "covered-15",
+          4,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          3,
+          9
+        ],
+        [
+          "m",
+          "covered-15",
+          4,
+          3
+        ],
+        [
+          "m",
+          "covered-22",
+          4,
+          3
+        ],
+        [
+          "m",
+          "covered-02",
+          4,
+          2
+        ],
+        [
+          "m",
+          "covered-22",
+          2,
+          3
+        ],
+        [
+          "m",
+          "covered-02",
+          3,
+          2
+        ],
+        [
+          "m",
+          "covered-23",
+          3,
+          7
+        ],
+        [
+          "m",
+          "covered-23",
+          2,
+          8
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          9
+        ],
+        [
+          "m",
+          "covered-02",
+          4,
+          2
+        ],
+        [
+          "m",
+          "covered-20",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-20",
+          4,
+          8
+        ],
+        [
+          "m",
+          "covered-19",
+          4,
+          8
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          1
+        ],
+        [
+          "m",
+          "covered-22",
+          2,
+          8
+        ],
+        [
+          "m",
+          "covered-01",
+          3,
+          1
+        ],
+        [
+          "m",
+          "covered-29",
+          8,
+          5
+        ],
+        [
+          "m",
+          "covered-02",
+          4,
+          6
+        ],
+        [
+          "m",
+          "covered-28",
+          6,
+          5
+        ],
+        [
+          "m",
+          "covered-02",
+          0,
+          6
+        ],
+        [
+          "m",
+          "covered-22",
+          2,
+          1
+        ],
+        [
+          "m",
+          "covered-02",
+          0,
+          9
+        ],
+        [
+          "m",
+          "covered-19",
+          3,
+          9
+        ],
+        [
+          "m",
+          "covered-02",
+          0,
+          3
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "covered-02",
+          4,
+          3
+        ],
+        [
+          "m",
+          "covered-28",
+          4,
+          3
+        ],
+        [
+          "m",
+          "covered-03",
+          3,
+          3
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          2,
+          1
+        ],
+        [
+          "m",
+          "covered-28",
+          2,
+          1
+        ],
+        [
+          "m",
+          "covered-01",
+          3,
+          2
+        ],
+        [
+          "m",
+          "covered-19",
+          4,
+          8
+        ],
+        [
+          "m",
+          "covered-01",
+          3,
+          3
+        ],
+        [
+          "m",
+          "covered-19",
+          5,
+          7
+        ],
+        [
+          "m",
+          "covered-01",
+          3,
+          4
+        ],
+        [
+          "m",
+          "covered-19",
+          4,
+          6
+        ],
+        [
+          "m",
+          "covered-01",
+          3,
+          5
+        ],
+        [
+          "m",
+          "covered-19",
+          3,
+          5
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          2
+        ],
+        [
+          "m",
+          "covered-19",
+          4,
+          4
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          3,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          9
+        ],
+        [
+          "m",
+          "black-general",
+          3,
+          1
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          3,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          3,
+          7
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          1
+        ],
+        [
+          "m",
+          "covered-19",
+          3,
+          3
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          0
+        ],
+        [
+          "m",
+          "red-general",
+          3,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          3,
+          0
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          3,
+          1
+        ],
+        [
+          "m",
+          "covered-19",
+          2,
+          2
+        ],
+        [
+          "m",
+          "black-general",
+          3,
+          0
+        ],
+        [
+          "m",
+          "covered-28",
+          4,
+          3
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          0
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          9
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          1
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          2
+        ],
+        [
+          "m",
+          "covered-19",
+          3,
+          3
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          1
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          0
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          0
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          9
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          1
+        ],
+        [
+          "m",
+          "covered-28",
+          6,
+          1
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          1
+        ],
+        [
+          "m",
+          "covered-19",
+          4,
+          4
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          3,
+          7
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          1
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          2
+        ],
+        [
+          "m",
+          "covered-28",
+          4,
+          3
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          1
+        ],
+        [
+          "m",
+          "covered-28",
+          2,
+          1
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          9
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          3,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          3,
+          7
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          1
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          1
+        ],
+        [
+          "m",
+          "covered-19",
+          5,
+          3
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          2
+        ],
+        [
+          "m",
+          "covered-19",
+          4,
+          4
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          3,
+          7
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          1
+        ],
+        [
+          "m",
+          "covered-19",
+          5,
+          3
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          1
+        ],
+        [
+          "m",
+          "covered-19",
+          6,
+          2
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ]
+      ]
+    },
+    {
+      "seed": 43,
+      "pilotSide": "red",
+      "allowedRange": 2,
+      "summary": {
+        "acceptedActions": 40,
+        "skillUses": 1,
+        "status": "finished",
+        "winner": "red",
+        "reason": "checkmate",
+        "publicMaterialDelta": 4,
+        "finalPieces": 8,
+        "finalPublicSHA256": "3811be5c3cba75df5b96acaf2a050417e648c667f9b92c83f6278bc209e2b69e",
+        "cappedBeforeResignation": false
+      },
+      "stages": [
+        {
+          "ply": 0,
+          "pieces": 32,
+          "revealed": 2,
+          "pairs": 0,
+          "checked": false
+        },
+        {
+          "ply": 12,
+          "pieces": 21,
+          "revealed": 6,
+          "pairs": 0,
+          "checked": false
+        },
+        {
+          "ply": 30,
+          "pieces": 12,
+          "revealed": 8,
+          "pairs": 1,
+          "checked": false
+        },
+        {
+          "ply": 32,
+          "pieces": 11,
+          "revealed": 8,
+          "pairs": 1,
+          "checked": false
+        },
+        {
+          "ply": 34,
+          "pieces": 11,
+          "revealed": 9,
+          "pairs": 1,
+          "checked": false
+        }
+      ],
+      "failures": [],
+      "actions": [
+        [
+          "m",
+          "covered-24",
+          7,
+          0
+        ],
+        [
+          "m",
+          "covered-08",
+          1,
+          9
+        ],
+        [
+          "m",
+          "covered-15",
+          1,
+          9
+        ],
+        [
+          "m",
+          "covered-00",
+          0,
+          3
+        ],
+        [
+          "m",
+          "covered-22",
+          7,
+          9
+        ],
+        [
+          "m",
+          "covered-07",
+          8,
+          3
+        ],
+        [
+          "m",
+          "covered-22",
+          7,
+          2
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          0
+        ],
+        [
+          "m",
+          "covered-22",
+          7,
+          0
+        ],
+        [
+          "m",
+          "covered-15",
+          2,
+          9
+        ],
+        [
+          "m",
+          "covered-22",
+          6,
+          0
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          1
+        ],
+        [
+          "m",
+          "covered-22",
+          6,
+          3
+        ],
+        [
+          "m",
+          "covered-15",
+          2,
+          6
+        ],
+        [
+          "m",
+          "covered-22",
+          8,
+          3
+        ],
+        [
+          "m",
+          "covered-15",
+          4,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          3,
+          9
+        ],
+        [
+          "m",
+          "covered-15",
+          4,
+          3
+        ],
+        [
+          "m",
+          "covered-22",
+          4,
+          3
+        ],
+        [
+          "m",
+          "covered-02",
+          4,
+          2
+        ],
+        [
+          "m",
+          "covered-22",
+          2,
+          3
+        ],
+        [
+          "m",
+          "covered-02",
+          3,
+          2
+        ],
+        [
+          "m",
+          "covered-23",
+          3,
+          7
+        ],
+        [
+          "m",
+          "covered-23",
+          2,
+          8
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          9
+        ],
+        [
+          "m",
+          "covered-02",
+          4,
+          2
+        ],
+        [
+          "m",
+          "covered-20",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-20",
+          4,
+          8
+        ],
+        [
+          "m",
+          "covered-19",
+          4,
+          8
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          1
+        ],
+        [
+          "m",
+          "covered-22",
+          2,
+          8
+        ],
+        [
+          "m",
+          "covered-01",
+          3,
+          1
+        ],
+        [
+          "m",
+          "covered-29",
+          8,
+          5
+        ],
+        [
+          "m",
+          "covered-02",
+          4,
+          6
+        ],
+        [
+          "s",
+          "covered-19",
+          "covered-22"
+        ],
+        [
+          "m",
+          "covered-02",
+          6,
+          6
+        ],
+        [
+          "m",
+          "covered-22",
+          5,
+          8
+        ],
+        [
+          "m",
+          "covered-03",
+          5,
+          3
+        ],
+        [
+          "m",
+          "covered-22",
+          5,
+          3
+        ],
+        [
+          "automatic_execution",
+          null
+        ]
+      ]
+    },
+    {
+      "seed": 43,
+      "pilotSide": "red",
+      "allowedRange": 4,
+      "summary": {
+        "acceptedActions": 40,
+        "skillUses": 1,
+        "status": "finished",
+        "winner": "red",
+        "reason": "checkmate",
+        "publicMaterialDelta": 4,
+        "finalPieces": 8,
+        "finalPublicSHA256": "3811be5c3cba75df5b96acaf2a050417e648c667f9b92c83f6278bc209e2b69e",
+        "cappedBeforeResignation": false
+      },
+      "stages": [
+        {
+          "ply": 0,
+          "pieces": 32,
+          "revealed": 2,
+          "pairs": 0,
+          "checked": false
+        },
+        {
+          "ply": 12,
+          "pieces": 21,
+          "revealed": 6,
+          "pairs": 0,
+          "checked": false
+        },
+        {
+          "ply": 20,
+          "pieces": 14,
+          "revealed": 5,
+          "pairs": 1,
+          "checked": false
+        },
+        {
+          "ply": 30,
+          "pieces": 12,
+          "revealed": 8,
+          "pairs": 1,
+          "checked": false
+        },
+        {
+          "ply": 32,
+          "pieces": 11,
+          "revealed": 8,
+          "pairs": 1,
+          "checked": false
+        },
+        {
+          "ply": 34,
+          "pieces": 11,
+          "revealed": 9,
+          "pairs": 1,
+          "checked": false
+        }
+      ],
+      "failures": [],
+      "actions": [
+        [
+          "m",
+          "covered-24",
+          7,
+          0
+        ],
+        [
+          "m",
+          "covered-08",
+          1,
+          9
+        ],
+        [
+          "m",
+          "covered-15",
+          1,
+          9
+        ],
+        [
+          "m",
+          "covered-00",
+          0,
+          3
+        ],
+        [
+          "m",
+          "covered-22",
+          7,
+          9
+        ],
+        [
+          "m",
+          "covered-07",
+          8,
+          3
+        ],
+        [
+          "m",
+          "covered-22",
+          7,
+          2
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          0
+        ],
+        [
+          "m",
+          "covered-22",
+          7,
+          0
+        ],
+        [
+          "m",
+          "covered-15",
+          2,
+          9
+        ],
+        [
+          "m",
+          "covered-22",
+          6,
+          0
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          1
+        ],
+        [
+          "m",
+          "covered-22",
+          6,
+          3
+        ],
+        [
+          "m",
+          "covered-15",
+          2,
+          6
+        ],
+        [
+          "m",
+          "covered-22",
+          8,
+          3
+        ],
+        [
+          "m",
+          "covered-15",
+          4,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          3,
+          9
+        ],
+        [
+          "m",
+          "covered-15",
+          4,
+          3
+        ],
+        [
+          "m",
+          "covered-22",
+          4,
+          3
+        ],
+        [
+          "m",
+          "covered-02",
+          4,
+          2
+        ],
+        [
+          "m",
+          "covered-22",
+          2,
+          3
+        ],
+        [
+          "m",
+          "covered-02",
+          3,
+          2
+        ],
+        [
+          "m",
+          "covered-23",
+          3,
+          7
+        ],
+        [
+          "m",
+          "covered-23",
+          2,
+          8
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          9
+        ],
+        [
+          "m",
+          "covered-02",
+          4,
+          2
+        ],
+        [
+          "m",
+          "covered-20",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-20",
+          4,
+          8
+        ],
+        [
+          "m",
+          "covered-19",
+          4,
+          8
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          1
+        ],
+        [
+          "m",
+          "covered-22",
+          2,
+          8
+        ],
+        [
+          "m",
+          "covered-01",
+          3,
+          1
+        ],
+        [
+          "m",
+          "covered-29",
+          8,
+          5
+        ],
+        [
+          "m",
+          "covered-02",
+          4,
+          6
+        ],
+        [
+          "s",
+          "covered-19",
+          "covered-22"
+        ],
+        [
+          "m",
+          "covered-02",
+          6,
+          6
+        ],
+        [
+          "m",
+          "covered-22",
+          5,
+          8
+        ],
+        [
+          "m",
+          "covered-03",
+          5,
+          3
+        ],
+        [
+          "m",
+          "covered-22",
+          5,
+          3
+        ],
+        [
+          "automatic_execution",
+          null
+        ]
+      ]
+    },
+    {
+      "seed": 43,
+      "pilotSide": "black",
+      "allowedRange": 0,
+      "summary": {
+        "acceptedActions": 129,
+        "skillUses": 0,
+        "status": "finished",
+        "winner": "red",
+        "reason": "stalemate",
+        "publicMaterialDelta": -6,
+        "finalPieces": 5,
+        "finalPublicSHA256": "27665a11195b7d48d717de3374b38a9d3076fa5304df2a366be27f7c631fe66a",
+        "cappedBeforeResignation": false
+      },
+      "stages": [],
+      "failures": [],
+      "actions": [
+        [
+          "m",
+          "covered-24",
+          7,
+          0
+        ],
+        [
+          "m",
+          "covered-08",
+          1,
+          9
+        ],
+        [
+          "m",
+          "covered-15",
+          1,
+          9
+        ],
+        [
+          "m",
+          "covered-00",
+          0,
+          3
+        ],
+        [
+          "m",
+          "covered-22",
+          7,
+          9
+        ],
+        [
+          "m",
+          "covered-07",
+          8,
+          3
+        ],
+        [
+          "m",
+          "covered-22",
+          7,
+          2
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          0
+        ],
+        [
+          "m",
+          "covered-22",
+          7,
+          0
+        ],
+        [
+          "m",
+          "covered-15",
+          2,
+          9
+        ],
+        [
+          "m",
+          "covered-22",
+          6,
+          0
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          1
+        ],
+        [
+          "m",
+          "covered-22",
+          6,
+          3
+        ],
+        [
+          "m",
+          "covered-15",
+          2,
+          6
+        ],
+        [
+          "m",
+          "covered-22",
+          8,
+          3
+        ],
+        [
+          "m",
+          "covered-15",
+          4,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          3,
+          9
+        ],
+        [
+          "m",
+          "covered-15",
+          4,
+          3
+        ],
+        [
+          "m",
+          "covered-22",
+          4,
+          3
+        ],
+        [
+          "m",
+          "covered-02",
+          4,
+          2
+        ],
+        [
+          "m",
+          "covered-22",
+          2,
+          3
+        ],
+        [
+          "m",
+          "covered-02",
+          3,
+          2
+        ],
+        [
+          "m",
+          "covered-23",
+          3,
+          7
+        ],
+        [
+          "m",
+          "covered-23",
+          2,
+          8
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          9
+        ],
+        [
+          "m",
+          "covered-02",
+          4,
+          2
+        ],
+        [
+          "m",
+          "covered-20",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-20",
+          4,
+          8
+        ],
+        [
+          "m",
+          "covered-19",
+          4,
+          8
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          1
+        ],
+        [
+          "m",
+          "covered-22",
+          2,
+          8
+        ],
+        [
+          "m",
+          "covered-01",
+          3,
+          1
+        ],
+        [
+          "m",
+          "covered-29",
+          8,
+          5
+        ],
+        [
+          "m",
+          "covered-02",
+          4,
+          6
+        ],
+        [
+          "m",
+          "covered-28",
+          6,
+          5
+        ],
+        [
+          "m",
+          "covered-02",
+          0,
+          6
+        ],
+        [
+          "m",
+          "covered-22",
+          2,
+          1
+        ],
+        [
+          "m",
+          "covered-02",
+          0,
+          9
+        ],
+        [
+          "m",
+          "covered-19",
+          3,
+          9
+        ],
+        [
+          "m",
+          "covered-02",
+          0,
+          3
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "covered-02",
+          4,
+          3
+        ],
+        [
+          "m",
+          "covered-28",
+          4,
+          3
+        ],
+        [
+          "m",
+          "covered-03",
+          3,
+          3
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          2,
+          1
+        ],
+        [
+          "m",
+          "covered-28",
+          2,
+          1
+        ],
+        [
+          "m",
+          "covered-01",
+          3,
+          2
+        ],
+        [
+          "m",
+          "covered-19",
+          4,
+          8
+        ],
+        [
+          "m",
+          "covered-01",
+          3,
+          3
+        ],
+        [
+          "m",
+          "covered-19",
+          5,
+          7
+        ],
+        [
+          "m",
+          "covered-01",
+          3,
+          4
+        ],
+        [
+          "m",
+          "covered-19",
+          4,
+          6
+        ],
+        [
+          "m",
+          "covered-01",
+          3,
+          5
+        ],
+        [
+          "m",
+          "covered-19",
+          3,
+          5
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          2
+        ],
+        [
+          "m",
+          "covered-19",
+          4,
+          4
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          3,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          9
+        ],
+        [
+          "m",
+          "black-general",
+          3,
+          1
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          3,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          3,
+          7
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          1
+        ],
+        [
+          "m",
+          "covered-19",
+          3,
+          3
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          0
+        ],
+        [
+          "m",
+          "red-general",
+          3,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          3,
+          0
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          3,
+          1
+        ],
+        [
+          "m",
+          "covered-19",
+          2,
+          2
+        ],
+        [
+          "m",
+          "black-general",
+          3,
+          0
+        ],
+        [
+          "m",
+          "covered-28",
+          4,
+          3
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          0
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          9
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          1
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          2
+        ],
+        [
+          "m",
+          "covered-19",
+          3,
+          3
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          1
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          0
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          0
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          9
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          1
+        ],
+        [
+          "m",
+          "covered-28",
+          6,
+          1
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          1
+        ],
+        [
+          "m",
+          "covered-19",
+          4,
+          4
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          3,
+          7
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          1
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          2
+        ],
+        [
+          "m",
+          "covered-28",
+          4,
+          3
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          1
+        ],
+        [
+          "m",
+          "covered-28",
+          2,
+          1
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          9
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          3,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          3,
+          7
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          1
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          1
+        ],
+        [
+          "m",
+          "covered-19",
+          5,
+          3
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          2
+        ],
+        [
+          "m",
+          "covered-19",
+          4,
+          4
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          3,
+          7
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          1
+        ],
+        [
+          "m",
+          "covered-19",
+          5,
+          3
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          1
+        ],
+        [
+          "m",
+          "covered-19",
+          6,
+          2
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ]
+      ]
+    },
+    {
+      "seed": 43,
+      "pilotSide": "black",
+      "allowedRange": 2,
+      "summary": {
+        "acceptedActions": 181,
+        "skillUses": 2,
+        "status": "finished",
+        "winner": "black",
+        "reason": "resign",
+        "publicMaterialDelta": 4,
+        "finalPieces": 3,
+        "finalPublicSHA256": "192df543079911d85b9d81f766b722e14f7b893086f787ba3f8b19005b64eab3",
+        "cappedBeforeResignation": true
+      },
+      "stages": [
+        {
+          "ply": 31,
+          "pieces": 11,
+          "revealed": 7,
+          "pairs": 1,
+          "checked": false
+        },
+        {
+          "ply": 33,
+          "pieces": 11,
+          "revealed": 9,
+          "pairs": 3,
+          "checked": false
+        },
+        {
+          "ply": 35,
+          "pieces": 11,
+          "revealed": 10,
+          "pairs": 1,
+          "checked": false
+        },
+        {
+          "ply": 37,
+          "pieces": 10,
+          "revealed": 10,
+          "pairs": 1,
+          "checked": false
+        },
+        {
+          "ply": 39,
+          "pieces": 10,
+          "revealed": 10,
+          "pairs": 1,
+          "checked": false
+        },
+        {
+          "ply": 41,
+          "pieces": 9,
+          "revealed": 9,
+          "pairs": 1,
+          "checked": false
+        },
+        {
+          "ply": 43,
+          "pieces": 8,
+          "revealed": 8,
+          "pairs": 1,
+          "checked": false
+        }
+      ],
+      "failures": [],
+      "actions": [
+        [
+          "m",
+          "covered-24",
+          7,
+          0
+        ],
+        [
+          "m",
+          "covered-08",
+          1,
+          9
+        ],
+        [
+          "m",
+          "covered-15",
+          1,
+          9
+        ],
+        [
+          "m",
+          "covered-00",
+          0,
+          3
+        ],
+        [
+          "m",
+          "covered-22",
+          7,
+          9
+        ],
+        [
+          "m",
+          "covered-07",
+          8,
+          3
+        ],
+        [
+          "m",
+          "covered-22",
+          7,
+          2
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          0
+        ],
+        [
+          "m",
+          "covered-22",
+          7,
+          0
+        ],
+        [
+          "m",
+          "covered-15",
+          2,
+          9
+        ],
+        [
+          "m",
+          "covered-22",
+          6,
+          0
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          1
+        ],
+        [
+          "m",
+          "covered-22",
+          6,
+          3
+        ],
+        [
+          "m",
+          "covered-15",
+          2,
+          6
+        ],
+        [
+          "m",
+          "covered-22",
+          8,
+          3
+        ],
+        [
+          "m",
+          "covered-15",
+          4,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          3,
+          9
+        ],
+        [
+          "m",
+          "covered-15",
+          4,
+          3
+        ],
+        [
+          "m",
+          "covered-22",
+          4,
+          3
+        ],
+        [
+          "m",
+          "covered-02",
+          4,
+          2
+        ],
+        [
+          "m",
+          "covered-22",
+          2,
+          3
+        ],
+        [
+          "m",
+          "covered-02",
+          3,
+          2
+        ],
+        [
+          "m",
+          "covered-23",
+          3,
+          7
+        ],
+        [
+          "m",
+          "covered-23",
+          2,
+          8
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          9
+        ],
+        [
+          "m",
+          "covered-02",
+          4,
+          2
+        ],
+        [
+          "m",
+          "covered-20",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-20",
+          4,
+          8
+        ],
+        [
+          "m",
+          "covered-19",
+          4,
+          8
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          1
+        ],
+        [
+          "m",
+          "covered-22",
+          2,
+          8
+        ],
+        [
+          "m",
+          "covered-01",
+          3,
+          1
+        ],
+        [
+          "m",
+          "covered-29",
+          8,
+          5
+        ],
+        [
+          "m",
+          "covered-02",
+          4,
+          6
+        ],
+        [
+          "m",
+          "covered-28",
+          6,
+          5
+        ],
+        [
+          "m",
+          "covered-02",
+          0,
+          6
+        ],
+        [
+          "m",
+          "covered-22",
+          2,
+          1
+        ],
+        [
+          "m",
+          "covered-02",
+          0,
+          9
+        ],
+        [
+          "m",
+          "covered-19",
+          3,
+          9
+        ],
+        [
+          "m",
+          "covered-02",
+          0,
+          3
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "covered-02",
+          4,
+          3
+        ],
+        [
+          "m",
+          "covered-28",
+          4,
+          3
+        ],
+        [
+          "s",
+          "covered-03",
+          "covered-01"
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          3
+        ],
+        [
+          "m",
+          "red-general",
+          3,
+          7
+        ],
+        [
+          "s",
+          "covered-01",
+          "covered-03"
+        ],
+        [
+          "m",
+          "covered-19",
+          4,
+          8
+        ],
+        [
+          "m",
+          "covered-01",
+          4,
+          4
+        ],
+        [
+          "m",
+          "covered-19",
+          5,
+          7
+        ],
+        [
+          "m",
+          "covered-01",
+          4,
+          5
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-01",
+          4,
+          6
+        ],
+        [
+          "m",
+          "covered-19",
+          4,
+          6
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          2
+        ],
+        [
+          "m",
+          "covered-22",
+          2,
+          2
+        ],
+        [
+          "m",
+          "covered-03",
+          2,
+          2
+        ],
+        [
+          "m",
+          "covered-19",
+          3,
+          5
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          3
+        ],
+        [
+          "m",
+          "covered-19",
+          4,
+          4
+        ],
+        [
+          "m",
+          "covered-03",
+          6,
+          4
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "covered-03",
+          8,
+          5
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          6,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          3,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          5
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          6,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          1
+        ],
+        [
+          "m",
+          "covered-19",
+          5,
+          3
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          9
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          5
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "covered-03",
+          5,
+          3
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          9
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          5
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          5,
+          8
+        ],
+        [
+          "m",
+          "covered-03",
+          6,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          5,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          7,
+          8
+        ],
+        [
+          "m",
+          "red-general",
+          5,
+          8
+        ],
+        [
+          "m",
+          "covered-03",
+          6,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          5,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          5
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          1
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          3,
+          1
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          2,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          5,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          5
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          2,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          5
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          2,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          5,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          5
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          6,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          5
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          2,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          5
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          6,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          5,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          5
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          6,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          3,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          9
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          5
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "black-general",
+          3,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          1
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          0
+        ],
+        [
+          "m",
+          "red-general",
+          3,
+          8
+        ],
+        [
+          "m",
+          "covered-03",
+          2,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          3,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          5
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          1
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "covered-03",
+          6,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          9
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          5
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          1
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          0
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          1
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          1
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          6,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          0
+        ],
+        [
+          "m",
+          "red-general",
+          3,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          0
+        ],
+        [
+          "m",
+          "red-general",
+          3,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          5
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          1
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          1
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          6,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          9
+        ],
+        [
+          "m",
+          "covered-03",
+          7,
+          8
+        ],
+        [
+          "voluntary_resignation",
+          "red"
+        ]
+      ]
+    },
+    {
+      "seed": 43,
+      "pilotSide": "black",
+      "allowedRange": 4,
+      "summary": {
+        "acceptedActions": 181,
+        "skillUses": 2,
+        "status": "finished",
+        "winner": "black",
+        "reason": "resign",
+        "publicMaterialDelta": 4,
+        "finalPieces": 3,
+        "finalPublicSHA256": "192df543079911d85b9d81f766b722e14f7b893086f787ba3f8b19005b64eab3",
+        "cappedBeforeResignation": true
+      },
+      "stages": [
+        {
+          "ply": 7,
+          "pieces": 25,
+          "revealed": 7,
+          "pairs": 1,
+          "checked": false
+        },
+        {
+          "ply": 31,
+          "pieces": 11,
+          "revealed": 7,
+          "pairs": 1,
+          "checked": false
+        },
+        {
+          "ply": 33,
+          "pieces": 11,
+          "revealed": 9,
+          "pairs": 3,
+          "checked": false
+        },
+        {
+          "ply": 35,
+          "pieces": 11,
+          "revealed": 10,
+          "pairs": 1,
+          "checked": false
+        },
+        {
+          "ply": 37,
+          "pieces": 10,
+          "revealed": 10,
+          "pairs": 1,
+          "checked": false
+        },
+        {
+          "ply": 39,
+          "pieces": 10,
+          "revealed": 10,
+          "pairs": 1,
+          "checked": false
+        },
+        {
+          "ply": 41,
+          "pieces": 9,
+          "revealed": 9,
+          "pairs": 1,
+          "checked": false
+        },
+        {
+          "ply": 43,
+          "pieces": 8,
+          "revealed": 8,
+          "pairs": 1,
+          "checked": false
+        }
+      ],
+      "failures": [],
+      "actions": [
+        [
+          "m",
+          "covered-24",
+          7,
+          0
+        ],
+        [
+          "m",
+          "covered-08",
+          1,
+          9
+        ],
+        [
+          "m",
+          "covered-15",
+          1,
+          9
+        ],
+        [
+          "m",
+          "covered-00",
+          0,
+          3
+        ],
+        [
+          "m",
+          "covered-22",
+          7,
+          9
+        ],
+        [
+          "m",
+          "covered-07",
+          8,
+          3
+        ],
+        [
+          "m",
+          "covered-22",
+          7,
+          2
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          0
+        ],
+        [
+          "m",
+          "covered-22",
+          7,
+          0
+        ],
+        [
+          "m",
+          "covered-15",
+          2,
+          9
+        ],
+        [
+          "m",
+          "covered-22",
+          6,
+          0
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          1
+        ],
+        [
+          "m",
+          "covered-22",
+          6,
+          3
+        ],
+        [
+          "m",
+          "covered-15",
+          2,
+          6
+        ],
+        [
+          "m",
+          "covered-22",
+          8,
+          3
+        ],
+        [
+          "m",
+          "covered-15",
+          4,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          3,
+          9
+        ],
+        [
+          "m",
+          "covered-15",
+          4,
+          3
+        ],
+        [
+          "m",
+          "covered-22",
+          4,
+          3
+        ],
+        [
+          "m",
+          "covered-02",
+          4,
+          2
+        ],
+        [
+          "m",
+          "covered-22",
+          2,
+          3
+        ],
+        [
+          "m",
+          "covered-02",
+          3,
+          2
+        ],
+        [
+          "m",
+          "covered-23",
+          3,
+          7
+        ],
+        [
+          "m",
+          "covered-23",
+          2,
+          8
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          9
+        ],
+        [
+          "m",
+          "covered-02",
+          4,
+          2
+        ],
+        [
+          "m",
+          "covered-20",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-20",
+          4,
+          8
+        ],
+        [
+          "m",
+          "covered-19",
+          4,
+          8
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          1
+        ],
+        [
+          "m",
+          "covered-22",
+          2,
+          8
+        ],
+        [
+          "m",
+          "covered-01",
+          3,
+          1
+        ],
+        [
+          "m",
+          "covered-29",
+          8,
+          5
+        ],
+        [
+          "m",
+          "covered-02",
+          4,
+          6
+        ],
+        [
+          "m",
+          "covered-28",
+          6,
+          5
+        ],
+        [
+          "m",
+          "covered-02",
+          0,
+          6
+        ],
+        [
+          "m",
+          "covered-22",
+          2,
+          1
+        ],
+        [
+          "m",
+          "covered-02",
+          0,
+          9
+        ],
+        [
+          "m",
+          "covered-19",
+          3,
+          9
+        ],
+        [
+          "m",
+          "covered-02",
+          0,
+          3
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "covered-02",
+          4,
+          3
+        ],
+        [
+          "m",
+          "covered-28",
+          4,
+          3
+        ],
+        [
+          "s",
+          "covered-03",
+          "covered-01"
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          3
+        ],
+        [
+          "m",
+          "red-general",
+          3,
+          7
+        ],
+        [
+          "s",
+          "covered-01",
+          "covered-03"
+        ],
+        [
+          "m",
+          "covered-19",
+          4,
+          8
+        ],
+        [
+          "m",
+          "covered-01",
+          4,
+          4
+        ],
+        [
+          "m",
+          "covered-19",
+          5,
+          7
+        ],
+        [
+          "m",
+          "covered-01",
+          4,
+          5
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-01",
+          4,
+          6
+        ],
+        [
+          "m",
+          "covered-19",
+          4,
+          6
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          2
+        ],
+        [
+          "m",
+          "covered-22",
+          2,
+          2
+        ],
+        [
+          "m",
+          "covered-03",
+          2,
+          2
+        ],
+        [
+          "m",
+          "covered-19",
+          3,
+          5
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          3
+        ],
+        [
+          "m",
+          "covered-19",
+          4,
+          4
+        ],
+        [
+          "m",
+          "covered-03",
+          6,
+          4
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "covered-03",
+          8,
+          5
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          6,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          3,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          5
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          6,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          1
+        ],
+        [
+          "m",
+          "covered-19",
+          5,
+          3
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          9
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          5
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "covered-03",
+          5,
+          3
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          9
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          5
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          5,
+          8
+        ],
+        [
+          "m",
+          "covered-03",
+          6,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          5,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          7,
+          8
+        ],
+        [
+          "m",
+          "red-general",
+          5,
+          8
+        ],
+        [
+          "m",
+          "covered-03",
+          6,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          5,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          5
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          1
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          3,
+          1
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          2,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          5,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          5
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          2,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          5
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          2,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          5,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          5
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          6,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          5
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          2,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          5
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          6,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          5,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          5
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          6,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          3,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          9
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          5
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "black-general",
+          3,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          1
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          0
+        ],
+        [
+          "m",
+          "red-general",
+          3,
+          8
+        ],
+        [
+          "m",
+          "covered-03",
+          2,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          3,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          5
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          1
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "covered-03",
+          6,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          9
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          5
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          1
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          0
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          1
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          1
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          6,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          0
+        ],
+        [
+          "m",
+          "red-general",
+          3,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          0
+        ],
+        [
+          "m",
+          "red-general",
+          3,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          4,
+          5
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "black-general",
+          4,
+          1
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          1
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          7
+        ],
+        [
+          "m",
+          "covered-03",
+          6,
+          6
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          8
+        ],
+        [
+          "m",
+          "black-general",
+          5,
+          2
+        ],
+        [
+          "m",
+          "red-general",
+          4,
+          9
+        ],
+        [
+          "m",
+          "covered-03",
+          7,
+          8
+        ],
+        [
+          "voluntary_resignation",
+          "red"
+        ]
+      ]
+    }
+  ],
+  "completeGame": {
+    "seed": 19,
+    "pilotSide": "black",
+    "allowedRange": 4,
+    "initialPublic": {
+      "status": "playing",
+      "turn": "red",
+      "revision": 0,
+      "pieces": [
+        {
+          "id": "black-general",
+          "x": 4,
+          "y": 0,
+          "faceDown": false,
+          "color": "black",
+          "type": "general"
+        },
+        {
+          "id": "red-general",
+          "x": 4,
+          "y": 9,
+          "faceDown": false,
+          "color": "red",
+          "type": "general"
+        },
+        {
+          "id": "covered-00",
+          "x": 0,
+          "y": 0,
+          "faceDown": true
+        },
+        {
+          "id": "covered-01",
+          "x": 1,
+          "y": 0,
+          "faceDown": true
+        },
+        {
+          "id": "covered-02",
+          "x": 2,
+          "y": 0,
+          "faceDown": true
+        },
+        {
+          "id": "covered-03",
+          "x": 3,
+          "y": 0,
+          "faceDown": true
+        },
+        {
+          "id": "covered-04",
+          "x": 5,
+          "y": 0,
+          "faceDown": true
+        },
+        {
+          "id": "covered-05",
+          "x": 6,
+          "y": 0,
+          "faceDown": true
+        },
+        {
+          "id": "covered-06",
+          "x": 7,
+          "y": 0,
+          "faceDown": true
+        },
+        {
+          "id": "covered-07",
+          "x": 8,
+          "y": 0,
+          "faceDown": true
+        },
+        {
+          "id": "covered-08",
+          "x": 1,
+          "y": 2,
+          "faceDown": true
+        },
+        {
+          "id": "covered-09",
+          "x": 7,
+          "y": 2,
+          "faceDown": true
+        },
+        {
+          "id": "covered-10",
+          "x": 0,
+          "y": 3,
+          "faceDown": true
+        },
+        {
+          "id": "covered-11",
+          "x": 2,
+          "y": 3,
+          "faceDown": true
+        },
+        {
+          "id": "covered-12",
+          "x": 4,
+          "y": 3,
+          "faceDown": true
+        },
+        {
+          "id": "covered-13",
+          "x": 6,
+          "y": 3,
+          "faceDown": true
+        },
+        {
+          "id": "covered-14",
+          "x": 8,
+          "y": 3,
+          "faceDown": true
+        },
+        {
+          "id": "covered-15",
+          "x": 0,
+          "y": 9,
+          "faceDown": true
+        },
+        {
+          "id": "covered-16",
+          "x": 1,
+          "y": 9,
+          "faceDown": true
+        },
+        {
+          "id": "covered-17",
+          "x": 2,
+          "y": 9,
+          "faceDown": true
+        },
+        {
+          "id": "covered-18",
+          "x": 3,
+          "y": 9,
+          "faceDown": true
+        },
+        {
+          "id": "covered-19",
+          "x": 5,
+          "y": 9,
+          "faceDown": true
+        },
+        {
+          "id": "covered-20",
+          "x": 6,
+          "y": 9,
+          "faceDown": true
+        },
+        {
+          "id": "covered-21",
+          "x": 7,
+          "y": 9,
+          "faceDown": true
+        },
+        {
+          "id": "covered-22",
+          "x": 8,
+          "y": 9,
+          "faceDown": true
+        },
+        {
+          "id": "covered-23",
+          "x": 1,
+          "y": 7,
+          "faceDown": true
+        },
+        {
+          "id": "covered-24",
+          "x": 7,
+          "y": 7,
+          "faceDown": true
+        },
+        {
+          "id": "covered-25",
+          "x": 0,
+          "y": 6,
+          "faceDown": true
+        },
+        {
+          "id": "covered-26",
+          "x": 2,
+          "y": 6,
+          "faceDown": true
+        },
+        {
+          "id": "covered-27",
+          "x": 4,
+          "y": 6,
+          "faceDown": true
+        },
+        {
+          "id": "covered-28",
+          "x": 6,
+          "y": 6,
+          "faceDown": true
+        },
+        {
+          "id": "covered-29",
+          "x": 8,
+          "y": 6,
+          "faceDown": true
+        }
+      ],
+      "captured": [],
+      "effectsByPieceId": {},
+      "assassination": {
+        "red": {
+          "heroChargeAvailable": false,
+          "mutationChargeAvailable": false
+        },
+        "black": {
+          "heroChargeAvailable": false,
+          "mutationChargeAvailable": false
+        }
+      },
+      "featureRules": {
+        "experimentalHeroPilot": true,
+        "heroSelections": {
+          "black": {
+            "heroId": "siheng",
+            "form": "front",
+            "packageId": "siheng:front:v1"
+          }
+        },
+        "heroes": {
+          "black": "siheng"
+        },
+        "mutation": "iron_wall"
+      },
+      "heroFormLock": {
+        "black": {
+          "heroId": "siheng",
+          "form": "front",
+          "packageId": "siheng:front:v1"
+        }
+      },
+      "formalTurns": {
+        "red": 0,
+        "black": 0
+      },
+      "heroRuntime": {
+        "red": {
+          "used": false,
+          "invokeCount": 0
+        },
+        "black": {
+          "used": false,
+          "invokeCount": 0
+        }
+      }
+    },
+    "trace": [
+      {
+        "ply": 0,
+        "side": "red",
+        "kind": "move",
+        "pieceId": "covered-23",
+        "from": {
+          "x": 1,
+          "y": 7
+        },
+        "to": {
+          "x": 1,
+          "y": 0
+        },
+        "expectedRevision": 0,
+        "actionId": "play:0",
+        "resultingStatus": "playing",
+        "checkedNext": false,
+        "captured": 1,
+        "uses": 0
+      },
+      {
+        "ply": 1,
+        "side": "black",
+        "kind": "move",
+        "pieceId": "covered-09",
+        "from": {
+          "x": 7,
+          "y": 2
+        },
+        "to": {
+          "x": 7,
+          "y": 9
+        },
+        "expectedRevision": 1,
+        "actionId": "play:1",
+        "resultingStatus": "playing",
+        "checkedNext": false,
+        "captured": 2,
+        "uses": 0
+      },
+      {
+        "ply": 2,
+        "side": "red",
+        "kind": "move",
+        "pieceId": "covered-22",
+        "from": {
+          "x": 8,
+          "y": 9
+        },
+        "to": {
+          "x": 8,
+          "y": 6
+        },
+        "expectedRevision": 2,
+        "actionId": "play:2",
+        "resultingStatus": "playing",
+        "checkedNext": false,
+        "captured": 3,
+        "uses": 0
+      },
+      {
+        "ply": 3,
+        "side": "black",
+        "kind": "move",
+        "pieceId": "covered-07",
+        "from": {
+          "x": 8,
+          "y": 0
+        },
+        "to": {
+          "x": 8,
+          "y": 3
+        },
+        "expectedRevision": 3,
+        "actionId": "play:3",
+        "resultingStatus": "playing",
+        "checkedNext": false,
+        "captured": 4,
+        "uses": 0
+      },
+      {
+        "ply": 4,
+        "side": "red",
+        "kind": "move",
+        "pieceId": "covered-15",
+        "from": {
+          "x": 0,
+          "y": 9
+        },
+        "to": {
+          "x": 0,
+          "y": 6
+        },
+        "expectedRevision": 4,
+        "actionId": "play:4",
+        "resultingStatus": "playing",
+        "checkedNext": false,
+        "captured": 5,
+        "uses": 0
+      },
+      {
+        "ply": 5,
+        "side": "black",
+        "kind": "move",
+        "pieceId": "covered-00",
+        "from": {
+          "x": 0,
+          "y": 0
+        },
+        "to": {
+          "x": 0,
+          "y": 3
+        },
+        "expectedRevision": 5,
+        "actionId": "play:5",
+        "resultingStatus": "playing",
+        "checkedNext": false,
+        "captured": 6,
+        "uses": 0
+      },
+      {
+        "ply": 6,
+        "side": "red",
+        "kind": "move",
+        "pieceId": "red-general",
+        "from": {
+          "x": 4,
+          "y": 9
+        },
+        "to": {
+          "x": 3,
+          "y": 9
+        },
+        "expectedRevision": 6,
+        "actionId": "play:6",
+        "resultingStatus": "playing",
+        "checkedNext": false,
+        "captured": 7,
+        "uses": 0
+      },
+      {
+        "ply": 7,
+        "side": "black",
+        "kind": "move",
+        "pieceId": "black-general",
+        "from": {
+          "x": 4,
+          "y": 0
+        },
+        "to": {
+          "x": 5,
+          "y": 0
+        },
+        "expectedRevision": 7,
+        "actionId": "play:7",
+        "resultingStatus": "playing",
+        "checkedNext": false,
+        "captured": 8,
+        "uses": 0
+      },
+      {
+        "ply": 8,
+        "side": "red",
+        "kind": "move",
+        "pieceId": "covered-23",
+        "from": {
+          "x": 1,
+          "y": 0
+        },
+        "to": {
+          "x": 2,
+          "y": 0
+        },
+        "expectedRevision": 8,
+        "actionId": "play:8",
+        "resultingStatus": "playing",
+        "checkedNext": false,
+        "captured": 9,
+        "uses": 0
+      },
+      {
+        "ply": 9,
+        "side": "black",
+        "kind": "move",
+        "pieceId": "covered-05",
+        "from": {
+          "x": 6,
+          "y": 0
+        },
+        "to": {
+          "x": 4,
+          "y": 2
+        },
+        "expectedRevision": 9,
+        "actionId": "play:9",
+        "resultingStatus": "playing",
+        "checkedNext": false,
+        "captured": 9,
+        "uses": 0
+      },
+      {
+        "ply": 10,
+        "side": "red",
+        "kind": "move",
+        "pieceId": "covered-27",
+        "from": {
+          "x": 4,
+          "y": 6
+        },
+        "to": {
+          "x": 4,
+          "y": 5
+        },
+        "expectedRevision": 10,
+        "actionId": "play:10",
+        "resultingStatus": "playing",
+        "checkedNext": false,
+        "captured": 9,
+        "uses": 0
+      },
+      {
+        "ply": 11,
+        "side": "black",
+        "kind": "move",
+        "pieceId": "covered-05",
+        "from": {
+          "x": 4,
+          "y": 2
+        },
+        "to": {
+          "x": 4,
+          "y": 3
+        },
+        "expectedRevision": 11,
+        "actionId": "play:11",
+        "resultingStatus": "playing",
+        "checkedNext": false,
+        "captured": 10,
+        "uses": 0
+      },
+      {
+        "ply": 12,
+        "side": "red",
+        "kind": "move",
+        "pieceId": "covered-17",
+        "from": {
+          "x": 2,
+          "y": 9
+        },
+        "to": {
+          "x": 4,
+          "y": 7
+        },
+        "expectedRevision": 12,
+        "actionId": "play:12",
+        "resultingStatus": "playing",
+        "checkedNext": false,
+        "captured": 10,
+        "uses": 0
+      },
+      {
+        "ply": 13,
+        "side": "black",
+        "kind": "move",
+        "pieceId": "covered-08",
+        "from": {
+          "x": 1,
+          "y": 2
+        },
+        "to": {
+          "x": 1,
+          "y": 7
+        },
+        "expectedRevision": 13,
+        "actionId": "play:13",
+        "resultingStatus": "playing",
+        "checkedNext": false,
+        "captured": 10,
+        "uses": 0
+      },
+      {
+        "ply": 14,
+        "side": "red",
+        "kind": "move",
+        "pieceId": "covered-20",
+        "from": {
+          "x": 6,
+          "y": 9
+        },
+        "to": {
+          "x": 4,
+          "y": 7
+        },
+        "expectedRevision": 14,
+        "actionId": "play:14",
+        "resultingStatus": "playing",
+        "checkedNext": false,
+        "captured": 11,
+        "uses": 0
+      },
+      {
+        "ply": 15,
+        "side": "black",
+        "kind": "move",
+        "pieceId": "covered-03",
+        "from": {
+          "x": 3,
+          "y": 0
+        },
+        "to": {
+          "x": 4,
+          "y": 1
+        },
+        "expectedRevision": 15,
+        "actionId": "play:15",
+        "resultingStatus": "playing",
+        "checkedNext": false,
+        "captured": 11,
+        "uses": 0
+      },
+      {
+        "ply": 16,
+        "side": "red",
+        "kind": "move",
+        "pieceId": "covered-24",
+        "from": {
+          "x": 7,
+          "y": 7
+        },
+        "to": {
+          "x": 7,
+          "y": 3
+        },
+        "expectedRevision": 16,
+        "actionId": "play:16",
+        "resultingStatus": "playing",
+        "checkedNext": false,
+        "captured": 11,
+        "uses": 0
+      },
+      {
+        "ply": 17,
+        "side": "black",
+        "kind": "move",
+        "pieceId": "covered-06",
+        "from": {
+          "x": 7,
+          "y": 0
+        },
+        "to": {
+          "x": 5,
+          "y": 1
+        },
+        "expectedRevision": 17,
+        "actionId": "play:17",
+        "resultingStatus": "playing",
+        "checkedNext": false,
+        "captured": 11,
+        "uses": 0
+      },
+      {
+        "ply": 18,
+        "side": "red",
+        "kind": "move",
+        "pieceId": "covered-06",
+        "from": {
+          "x": 5,
+          "y": 1
+        },
+        "to": {
+          "x": 7,
+          "y": 3
+        },
+        "expectedRevision": 18,
+        "actionId": "play:18",
+        "resultingStatus": "playing",
+        "checkedNext": false,
+        "captured": 12,
+        "uses": 0
+      },
+      {
+        "ply": 19,
+        "side": "black",
+        "kind": "move",
+        "pieceId": "covered-11",
+        "from": {
+          "x": 2,
+          "y": 3
+        },
+        "to": {
+          "x": 2,
+          "y": 4
+        },
+        "expectedRevision": 19,
+        "actionId": "play:19",
+        "resultingStatus": "playing",
+        "checkedNext": false,
+        "captured": 12,
+        "uses": 0
+      },
+      {
+        "ply": 20,
+        "side": "red",
+        "kind": "move",
+        "pieceId": "covered-19",
+        "from": {
+          "x": 5,
+          "y": 9
+        },
+        "to": {
+          "x": 4,
+          "y": 8
+        },
+        "expectedRevision": 20,
+        "actionId": "play:20",
+        "resultingStatus": "playing",
+        "checkedNext": false,
+        "captured": 12,
+        "uses": 0
+      },
+      {
+        "ply": 21,
+        "side": "black",
+        "kind": "move",
+        "pieceId": "covered-13",
+        "from": {
+          "x": 6,
+          "y": 3
+        },
+        "to": {
+          "x": 6,
+          "y": 4
+        },
+        "expectedRevision": 21,
+        "actionId": "play:21",
+        "resultingStatus": "playing",
+        "checkedNext": false,
+        "captured": 12,
+        "uses": 0
+      },
+      {
+        "ply": 22,
+        "side": "red",
+        "kind": "move",
+        "pieceId": "covered-19",
+        "from": {
+          "x": 4,
+          "y": 8
+        },
+        "to": {
+          "x": 4,
+          "y": 5
+        },
+        "expectedRevision": 22,
+        "actionId": "play:22",
+        "resultingStatus": "playing",
+        "checkedNext": false,
+        "captured": 13,
+        "uses": 0
+      },
+      {
+        "ply": 23,
+        "side": "black",
+        "kind": "swap",
+        "pieceId": "covered-07",
+        "partnerId": "covered-13",
+        "expectedRevision": 23,
+        "actionId": "play:23",
+        "resultingStatus": "playing",
+        "checkedNext": false,
+        "captured": 13,
+        "uses": 1
+      },
+      {
+        "ply": 24,
+        "side": "red",
+        "kind": "move",
+        "pieceId": "covered-26",
+        "from": {
+          "x": 2,
+          "y": 6
+        },
+        "to": {
+          "x": 2,
+          "y": 5
+        },
+        "expectedRevision": 24,
+        "actionId": "play:24",
+        "resultingStatus": "playing",
+        "checkedNext": false,
+        "captured": 13,
+        "uses": 1
+      },
+      {
+        "ply": 25,
+        "side": "black",
+        "kind": "move",
+        "pieceId": "covered-07",
+        "from": {
+          "x": 6,
+          "y": 4
+        },
+        "to": {
+          "x": 7,
+          "y": 3
+        },
+        "expectedRevision": 25,
+        "actionId": "play:25",
+        "resultingStatus": "playing",
+        "checkedNext": false,
+        "captured": 14,
+        "uses": 1
+      },
+      {
+        "ply": 26,
+        "side": "red",
+        "kind": "move",
+        "pieceId": "covered-28",
+        "from": {
+          "x": 6,
+          "y": 6
+        },
+        "to": {
+          "x": 6,
+          "y": 5
+        },
+        "expectedRevision": 26,
+        "actionId": "play:26",
+        "resultingStatus": "playing",
+        "checkedNext": false,
+        "captured": 14,
+        "uses": 1
+      },
+      {
+        "ply": 27,
+        "side": "black",
+        "kind": "move",
+        "pieceId": "covered-13",
+        "from": {
+          "x": 8,
+          "y": 3
+        },
+        "to": {
+          "x": 6,
+          "y": 5
+        },
+        "expectedRevision": 27,
+        "actionId": "play:27",
+        "resultingStatus": "playing",
+        "checkedNext": false,
+        "captured": 15,
+        "uses": 1
+      },
+      {
+        "ply": 28,
+        "side": "red",
+        "kind": "move",
+        "pieceId": "covered-16",
+        "from": {
+          "x": 1,
+          "y": 9
+        },
+        "to": {
+          "x": 3,
+          "y": 8
+        },
+        "expectedRevision": 28,
+        "actionId": "play:28",
+        "resultingStatus": "execution",
+        "captured": 15,
+        "uses": 1
+      },
+      {
+        "ply": 29,
+        "kind": "automatic_execution",
+        "status": "finished",
+        "winner": "black",
+        "reason": "ambush"
+      }
+    ],
+    "stages": [
+      {
+        "ply": 5,
+        "pieces": 27,
+        "revealed": 7,
+        "pairs": 1,
+        "checked": false
+      },
+      {
+        "ply": 7,
+        "pieces": 25,
+        "revealed": 8,
+        "pairs": 1,
+        "checked": false
+      },
+      {
+        "ply": 9,
+        "pieces": 23,
+        "revealed": 8,
+        "pairs": 1,
+        "checked": false
+      },
+      {
+        "ply": 11,
+        "pieces": 23,
+        "revealed": 10,
+        "pairs": 2,
+        "checked": false
+      },
+      {
+        "ply": 13,
+        "pieces": 22,
+        "revealed": 11,
+        "pairs": 3,
+        "checked": false
+      },
+      {
+        "ply": 15,
+        "pieces": 21,
+        "revealed": 12,
+        "pairs": 3,
+        "checked": false
+      },
+      {
+        "ply": 17,
+        "pieces": 21,
+        "revealed": 14,
+        "pairs": 8,
+        "checked": false
+      },
+      {
+        "ply": 19,
+        "pieces": 20,
+        "revealed": 14,
+        "pairs": 5,
+        "checked": false
+      },
+      {
+        "ply": 21,
+        "pieces": 20,
+        "revealed": 16,
+        "pairs": 7,
+        "checked": false
+      },
+      {
+        "ply": 23,
+        "pieces": 19,
+        "revealed": 16,
+        "pairs": 8,
+        "checked": false
+      }
+    ],
+    "failures": [],
+    "summary": {
+      "acceptedActions": 30,
+      "skillUses": 1,
+      "status": "finished",
+      "winner": "black",
+      "reason": "ambush",
+      "publicMaterialDelta": 0.5,
+      "finalPieces": 16,
+      "finalPublicSHA256": "c242e6a7568c0bca581438652bfb6072a133276105d0d0b7a9f67bd01382ea8b",
+      "cappedBeforeResignation": false
+    }
+  }
+}

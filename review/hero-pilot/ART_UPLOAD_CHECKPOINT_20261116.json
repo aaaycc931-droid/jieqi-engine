@@ -1,0 +1,171 @@
+{
+  "schema": "lezi.hero_pilot.art_upload_checkpoint.v2",
+  "date": "2026-11-17",
+  "timezone": "Asia/Shanghai",
+  "work_id": "EXP-HERO-001",
+  "original_task_id": "MAIN-AUTONOMOUS-HERO-01-20261113",
+  "status": "CANONICAL_ART_PUBLISHED_AND_READ_BACK",
+  "scope": "Complete the existing Siheng artwork publication on the existing PR23 branch using exact uploaded/original objects; preserve original artwork, exports, implementation and historical evidence.",
+  "authority": {
+    "source": "Owner supplied the two interrupted conversation excerpts in the current recovery request.",
+    "confirmation_1": "我现在批准你进行所有的上传与更新操作，你进行下一步吧。",
+    "confirmation_2": "将包内司衡原图、导出资产和配套工程提交到公开仓库 jieqi-engine 的 PR23 专属分支",
+    "same_scope_reconfirmation_required": false,
+    "old_approval_blocker": "The 2026-11-13 request for public-art disclosure approval is historical; the owner subsequently gave explicit same-destination publication authorization. Platform/tool checks still apply.",
+    "latest_confirmation": "我上传了，你来检查处理吧",
+    "latest_confirmation_date": "2026-11-17"
+  },
+  "engine": {
+    "repository": "aaaycc931-droid/jieqi-engine",
+    "branch": "codex/autonomous-hero-01-20261113",
+    "pr": 23,
+    "draft": true,
+    "merged": false,
+    "runtime_parent": "5ab688c96f4960aad70467e7e4c15c21dc55a2e1",
+    "owner_upload_commit": "fae3dc6580deeebee0ef1a87a0c7a68b44354baf",
+    "full_art_publication_complete": true,
+    "canonical_publication_commit": "2ba4e01c9d8e6ea896327b2c412c44a03bdc7d45"
+  },
+  "prior_preservation": {
+    "commit": "3df63e0c8d100fe040a32de4e0f8246c3b046b06",
+    "path": "review/hero-pilot/ART_UPLOAD_CHECKPOINT_20261116.json",
+    "blob": "bc6b14482c519b8a7269e7b3d74c44f705812ef2",
+    "note": "Immutable original checkpoint retains quota-interruption evidence, source preservation, old object probes and historical environment limitations; no history rewritten."
+  },
+  "source_index": {
+    "path": "review/hero-pilot/ART_UPLOAD_SOURCE_INDEX_20261116.json",
+    "git_blob": "d2e352c881878ab394fe6db2f4be9ad10b176eb1",
+    "owner_upload_path": "review/hero-pilot/upload-staging/20261116/siheng-art-20261116-INDEX.json",
+    "owner_upload_commit": "fae3dc6580deeebee0ef1a87a0c7a68b44354baf",
+    "immutable_preparation_record": true,
+    "note": "Original uploaded_root_path fields are filenames. Actual transfer prefix is observed_staging_root; old index status/instructions describe preparation, not current publication."
+  },
+  "owner_transfer": {
+    "observed_staging_root": "review/hero-pilot/upload-staging/20261116/",
+    "commit": "fae3dc6580deeebee0ef1a87a0c7a68b44354baf",
+    "files": 29,
+    "payload_files": 28,
+    "index_files": 1,
+    "retained_objects_reused": 3,
+    "extra_staging_files": 0,
+    "missing_sources": 0
+  },
+  "verification": {
+    "source_manifest_files": 31,
+    "git_blob_identity_matches": 31,
+    "byte_size_matches": 31,
+    "total_payload_bytes": 4826661,
+    "source_objects_accessible_in_upload_tree": true,
+    "target_paths_unique": true,
+    "all_31_canonical_targets_unchanged_since_runtime_parent": true,
+    "canonical_new_paths": 24,
+    "canonical_existing_path_updates": 7,
+    "fresh_text_size_sha256_git_blob_recheck": {
+      "files": 16,
+      "result": "PASS",
+      "reviewer": "read-only source review subagent",
+      "scope": "Read-only source, historical-evidence bindings and local digest recomputation; not full independent QA or a new game test run"
+    },
+    "historical_bindings": {
+      "evidence_date": "2026-11-13",
+      "implementation_files": 7,
+      "asset_files": 6,
+      "original_logs": 3,
+      "recovery_recheck_logs": 4,
+      "result": "MATCH"
+    },
+    "canonical_paths_in_this_candidate_tree": 31,
+    "canonical_commit_readback": {
+      "commit": "2ba4e01c9d8e6ea896327b2c412c44a03bdc7d45",
+      "git_blob_and_size_matches": 31,
+      "source_index_exact": true,
+      "checkpoint_exact": true,
+      "unrelated_path_changes": 0,
+      "tree_truncated": false
+    },
+    "source_delta": {
+      "web/app.ts": "Only import/mount real Siheng artwork at roster, details, opening, battle avatars; Siheng portrait panel and aria label. Existing swap-feedback and gate logic untouched.",
+      "web/style.css": "Eight artwork-only style rules added; existing rules retained.",
+      "scripts/serve-web.ts": "Only image/webp MIME registration added.",
+      "scripts/hero-pilot/dom-smoke.ts": "Artwork checks added; prior default-pool and swap-feedback/invalid/no-op/stale/duplicate/normal-move checks retained.",
+      "web/hero-art.ts": "New Siheng-only artwork utility; other-hero mounting clears any previous image and preserves placeholders.",
+      "scripts/hero-pilot/package-art.cjs": "New packaging helper for source PNGs, WebP sizes and contact sheet; not executed in this review.",
+      "scripts/hero-pilot/verify-art.cjs": "New asset/hash/build/local-HTTP verifier; not executed in this review."
+    }
+  },
+  "publication": {
+    "method": "Reuse exact31 existing blobs in one tree based on the latest verified owner-upload head; latest-parent expected_sha force=false",
+    "file_index": "review/hero-pilot/ART_UPLOAD_SOURCE_INDEX_20261116.json",
+    "art_regenerated": false,
+    "reencoded": false,
+    "reimplementation": false,
+    "gameplay_rules_changed": false,
+    "completed_canonical_commit": "2ba4e01c9d8e6ea896327b2c412c44a03bdc7d45",
+    "bytes_changed_from_verified_sources": 0
+  },
+  "staging_cleanup": {
+    "status": "VERIFIED_DUPLICATE_PATHS_RETIRED_IN_ENCLOSING_TREE",
+    "paths": [
+      "review/hero-pilot/upload-staging/20261116/retained-objects/art/hero-pilot/PROMPTS.json",
+      "review/hero-pilot/upload-staging/20261116/retained-objects/art/hero-pilot/README.md",
+      "review/hero-pilot/upload-staging/20261116/siheng-art-20261116-03-siheng-avatar-master-v1.png",
+      "review/hero-pilot/upload-staging/20261116/siheng-art-20261116-04-siheng-portrait-v1.png",
+      "review/hero-pilot/upload-staging/20261116/siheng-art-20261116-05-ART_ASSET_MANIFEST.json",
+      "review/hero-pilot/upload-staging/20261116/siheng-art-20261116-06-ART_DELIVERY_CHECK.json",
+      "review/hero-pilot/upload-staging/20261116/siheng-art-20261116-07-ART_QA_CONTACT.png",
+      "review/hero-pilot/upload-staging/20261116/siheng-art-20261116-08-ART_RECOVERY.json",
+      "review/hero-pilot/upload-staging/20261116/siheng-art-20261116-09-ART_RUN_LOG.txt",
+      "review/hero-pilot/upload-staging/20261116/siheng-art-20261116-10-ART_VALIDATION.json",
+      "review/hero-pilot/upload-staging/20261116/siheng-art-20261116-11-DOM_SMOKE.json",
+      "review/hero-pilot/upload-staging/20261116/siheng-art-20261116-12-README.md",
+      "review/hero-pilot/upload-staging/20261116/siheng-art-20261116-13-VALIDATION.json",
+      "review/hero-pilot/upload-staging/20261116/siheng-art-20261116-14-original-build.log",
+      "review/hero-pilot/upload-staging/20261116/siheng-art-20261116-15-original-dom.log",
+      "review/hero-pilot/upload-staging/20261116/siheng-art-20261116-16-original-web.log",
+      "review/hero-pilot/upload-staging/20261116/siheng-art-20261116-17-recheck-assets.log",
+      "review/hero-pilot/upload-staging/20261116/siheng-art-20261116-18-recheck-build.log",
+      "review/hero-pilot/upload-staging/20261116/siheng-art-20261116-19-recheck-dom.log",
+      "review/hero-pilot/upload-staging/20261116/siheng-art-20261116-20-recheck-web.log",
+      "review/hero-pilot/upload-staging/20261116/siheng-art-20261116-21-dom-smoke.ts",
+      "review/hero-pilot/upload-staging/20261116/siheng-art-20261116-22-package-art.cjs",
+      "review/hero-pilot/upload-staging/20261116/siheng-art-20261116-23-verify-art.cjs",
+      "review/hero-pilot/upload-staging/20261116/siheng-art-20261116-24-serve-web.ts",
+      "review/hero-pilot/upload-staging/20261116/siheng-art-20261116-25-app.ts",
+      "review/hero-pilot/upload-staging/20261116/siheng-art-20261116-26-siheng-avatar-128-v1.webp",
+      "review/hero-pilot/upload-staging/20261116/siheng-art-20261116-27-siheng-avatar-256-v1.webp",
+      "review/hero-pilot/upload-staging/20261116/retained-objects/web/assets/hero-pilot/siheng-avatar-64-v1.webp",
+      "review/hero-pilot/upload-staging/20261116/siheng-art-20261116-29-siheng-portrait-v1.webp",
+      "review/hero-pilot/upload-staging/20261116/siheng-art-20261116-30-hero-art.ts",
+      "review/hero-pilot/upload-staging/20261116/siheng-art-20261116-31-style.css",
+      "review/hero-pilot/upload-staging/20261116/siheng-art-20261116-INDEX.json"
+    ],
+    "count": 32,
+    "canonical_replacement_verified_at": "2ba4e01c9d8e6ea896327b2c412c44a03bdc7d45",
+    "source_index_replacement": "review/hero-pilot/ART_UPLOAD_SOURCE_INDEX_20261116.json",
+    "original_paths_recoverable_at_owner_upload_commit": "fae3dc6580deeebee0ef1a87a0c7a68b44354baf",
+    "method": "Ordinary scoped tree deletion after published canonical readback; no history rewrite or object purge",
+    "post_publication_receipt_location": "lezi-handoff-packages/worklines/hero-pilot/CURRENT_STATE.json#art_upload_completion"
+  },
+  "validation": {
+    "new_game_tests_run": false,
+    "old_logs_kept_byte_identical": true,
+    "historical_date": "2026-11-13",
+    "historical_web_tests": 56,
+    "historical_dom_checks": 14,
+    "historical_build": "PASS",
+    "historical_http_asset_checks": 4,
+    "note": "Fresh file/identity/static-source checks do not rerun or refresh historical runtime results; same-model subagent review is not full independent QA."
+  },
+  "private_original_package_and_extra_owner_png_variants": "Remain private; no raw recovery ZIP or extra owner-upload variants included.",
+  "main_art_receipt": "UNKNOWN",
+  "not_completed": [
+    "real browser/touch",
+    "human adversarial balance",
+    "full independent QA",
+    "animation"
+  ],
+  "merge_deployment_APK_mode_opening": false,
+  "other_worklines_unchanged": true,
+  "active_background_work_claimed": false,
+  "next_action": "Mainline may read the original31 canonical files on PR23 and write its own art receipt. Runtime/browser/human/animation acceptance remains distinct."
+}

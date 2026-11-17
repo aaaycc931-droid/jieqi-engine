@@ -1,0 +1,26 @@
+Art v1 verification stdout excerpts (browser/layout not claimed).
+
+hero-pilot-art-web.log SHA256=c910347d020163f9bb6a8a3ce5fa9b9f33649f21952967d44be15e9ac68bfceb
+✔ UI-TRAP-01 普通棋子踩中陷阱只播报击杀，不错误宣告胜利 (1.353213ms)
+✔ UI-TRAP-02 将帅踩中陷阱仍播报伏击胜利 (0.318094ms)
+ℹ tests 56
+ℹ suites 0
+ℹ pass 56
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 365.119779
+
+hero-pilot-art-dom.log SHA256=ec43f0dc4992bc3962efec351e8627a42e679534a3dc6c5a32cd1096100a9302
+{"kind":"jsdom_production_module_interaction","checks":["default pool excludes pilot","Siheng roster and selected detail use real responsive avatar assets","handoff clears previous private selection artwork; existing hero placeholder preserved","real selection → RPS → 32-piece engine initialization","real opening stage mounts Siheng full portrait only for the selected hero","battle avatar and hero detail expose the real portrait; other hero unchanged","synthetic midgame: actual skill button → pair selector → authority → resource display → handoff","actual endpoints (0,6)/(2,6) display explicit two-piece labels; no false origin/ordinary markers","action-bound markers survive transient event clearing","duplicate command adds no marker, message, cost or handoff","next ordinary move clears swap labels and preserves normal from/to markers","enemy target, same-piece no-op and stale command keep prior feedback and state unchanged","no available partner opens explanation without invented success feedback","actual resignation and result panel"],"passed":14,"swapMarkers":[{"x":0,"y":6,"from":false,"to":false,"relay":true,"text":"换轨 ↔","label":"红马，坐标 1, 7，上一手换轨：两枚棋交换位置"},{"x":2,"y":6,"from":false,"to":false,"relay":true,"text":"换轨 ↔","label":"红车，坐标 3, 7，上一手换轨：两枚棋交换位置"}],"layout_and_browser_verified":false,"fixture_boundary":"Full opening is real UI initialization. Skill and resignation start from explicitly installed synthetic midgame; not a naturally played game. Invalid/duplicate commands call the exported production handler; transient-event reset is a test hook."}
+
+hero-pilot-art-build.log SHA256=2eee99e89b29d60114939db581f90035abf4d12ff22fd4919542f1a0b4386019
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> jieqi-engine@0.4.0 build:web
+> node scripts/build-web.ts
+
+(node:54) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+已生成本地试玩网页：dist/web/index.html

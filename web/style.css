@@ -774,6 +774,14 @@ button:focus-visible, .brand:focus-visible { outline: 3px solid #e6ae4d; outline
 .hero-art-placeholder[data-hero="rogue"]::before { content: "潜"; opacity: .82; }
 .hero-art-placeholder[data-hero="warrior"]::before { content: "战"; opacity: .82; }
 .hero-art-placeholder::after { position: absolute; inset: 20%; z-index: -1; border-radius: 50%; background: radial-gradient(circle, rgba(30,25,21,.15), transparent 68%); content: ""; }
+.has-hero-art { font-size: 0 !important; }
+.hero-art-placeholder.has-hero-art::before, .hero-art-placeholder.has-hero-art::after, .v4-player-avatar.has-hero-art > span { display: none; }
+.hero-character-art { display: block; width: 86%; height: 86%; object-fit: cover; border-radius: 10%; pointer-events: none; }
+[data-art-kind="portrait"] > .hero-character-art { width: 100%; height: 100%; object-fit: contain; border-radius: 0; }
+.hero-art-placeholder.has-hero-art[data-art-kind="portrait"] { background: none; }
+.siheng-portrait-panel { margin: 0 auto 16px; text-align: center; }
+.siheng-portrait-panel img { display: block; max-height: min(52vh, 620px); max-width: 100%; margin: auto; object-fit: contain; }
+.siheng-portrait-panel figcaption { margin-top: 6px; color: #5c5546; font-size: 14px; }
 .detail-avatar { width: min(100%, 126px); aspect-ratio: 1; align-self: center; }
 .hero-detail-copy { min-width: 0; align-self: center; }
 .hero-stage-label { margin: 0 0 1px; color: rgba(37,23,19,.5); font-size: clamp(9px, 2.2cqw, 14px); font-weight: 800; letter-spacing: .14em; }
@@ -880,6 +888,7 @@ h1 { margin-bottom: 10px; font-size: clamp(28px, 6vw, 42px); }
 .mode-picker label { display: grid; gap: 5px; color: #5d4037; font-size: 13px; }
 .mode-picker select { min-width: 0; border: 1px solid #c7a77d; border-radius: 8px; padding: 7px; background: #fff8e7; color: #3e2519; }
 .effect-marker { position: absolute; right: -2px; bottom: -2px; z-index: 2; min-width: 17px; padding: 1px 3px; border-radius: 9px; color: #fff8dc; background: #67471f; font-size: 11px; font-weight: 800; line-height: 1.2; }
+.relay-marker { position: absolute; top: -5px; left: 50%; transform: translateX(-50%); z-index: 4; white-space: nowrap; padding: 1px 4px; border: 1px solid #806445; border-radius: 3px; color: #4a3624; background: #f5ecd6; font-size: 10px; font-weight: 700; line-height: 1.3; pointer-events: none; }
 .rps-choice {
   position: relative;
   display: grid;

@@ -1,0 +1,43 @@
+Recorded stdout excerpts; full regression list reproducible via command. No independent QA.
+
+hero-pilot-full-tests.log SHA256(full stdout)=6248ff7f7250d0ef3fad329f207f5a32fcb5492dac0cb57325eb41fe301fd0f9
+✔ UI-RULES-03 走法图反映现行乐子象棋规则而非传统规则占位 (0.239557ms)
+✔ UI-RULES-04 规则图支持卡片放大、显式关闭、遮罩关闭与系统返回逐层关闭 (1.606757ms)
+✔ UI-TRAP-01 普通棋子踩中陷阱只播报击杀，不错误宣告胜利 (1.22783ms)
+✔ UI-TRAP-02 将帅踩中陷阱仍播报伏击胜利 (0.184404ms)
+ℹ tests 1025
+ℹ suites 0
+ℹ pass 1025
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 79045.242216
+
+hero-pilot-final-unit.log SHA256(full stdout)=ede1b6eb022ffbe98e965c076c07a9d0394966fd518688af65d5022d410abd2d
+✔ private identities and clock unchanged on illegal request; duplicate no extra tick (4.967082ms)
+✔ two actual alternating turns exhaust swaps; returning positions cannot create an infinite loop (7.56768ms)
+✔ opponent H06 rewinds positions and swap cost through the existing full snapshot (5.64693ms)
+✔ H05 cannot reinterpret this tier II two-piece displacement as a historical ordinary piece move (2.394094ms)
+ℹ tests 34
+ℹ suites 0
+ℹ pass 34
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 458.007807
+
+hero-pilot-build.log SHA256(full stdout)=9f6984738da253a5c684fd94273770abb51c19d569002501b99541fdc704829f
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> jieqi-engine@0.4.0 build:web
+> node scripts/build-web.ts
+
+(node:33) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+已生成本地试玩网页：dist/web/index.html
+
+hero-pilot-dom.log SHA256(full stdout)=3995b2ae26917c1e47bdcad96c0d7efb4bce1e34ddc921b0b3436ddaa1ad8ac7
+{"kind":"jsdom_production_module_interaction","checks":["default pool excludes pilot","real selection → RPS → 32-piece engine initialization","synthetic midgame: actual skill button → pair selector → authority → resource display → handoff","actual resignation and result panel"],"passed":4,"layout_and_browser_verified":false,"fixture_boundary":"Full opening is real UI initialization. Skill and resignation start from explicitly installed synthetic midgame; not a naturally played game."}
+

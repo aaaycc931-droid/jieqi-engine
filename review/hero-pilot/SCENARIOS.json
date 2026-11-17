@@ -1,0 +1,810 @@
+{
+  "scope": "synthetic legal positions except explicit real-32 opening; no reachability claim",
+  "cases": [
+    {
+      "id": "fork-red",
+      "input": {
+        "status": "playing",
+        "turn": "red",
+        "revision": 0,
+        "pieces": [
+          {
+            "id": "red-general",
+            "color": "red",
+            "type": "general",
+            "x": 3,
+            "y": 9,
+            "faceDown": false
+          },
+          {
+            "id": "black-general",
+            "color": "black",
+            "type": "general",
+            "x": 5,
+            "y": 0,
+            "faceDown": false
+          },
+          {
+            "id": "a",
+            "color": "red",
+            "type": "rook",
+            "x": 0,
+            "y": 6,
+            "faceDown": false
+          },
+          {
+            "id": "b",
+            "color": "red",
+            "type": "pawn",
+            "x": 4,
+            "y": 6,
+            "faceDown": false
+          },
+          {
+            "id": "horse1",
+            "color": "black",
+            "type": "horse",
+            "x": 4,
+            "y": 2,
+            "faceDown": false
+          },
+          {
+            "id": "horse2",
+            "color": "black",
+            "type": "horse",
+            "x": 8,
+            "y": 6,
+            "faceDown": false
+          }
+        ],
+        "captured": [],
+        "effectsByPieceId": {},
+        "assassination": {
+          "red": {
+            "heroChargeAvailable": false,
+            "mutationChargeAvailable": false
+          },
+          "black": {
+            "heroChargeAvailable": false,
+            "mutationChargeAvailable": false
+          }
+        },
+        "featureRules": {
+          "experimentalHeroPilot": true,
+          "heroSelections": {
+            "red": {
+              "heroId": "siheng",
+              "form": "front",
+              "packageId": "siheng:front:v1"
+            }
+          },
+          "heroes": {
+            "red": "siheng"
+          }
+        },
+        "heroFormLock": {
+          "red": {
+            "heroId": "siheng",
+            "form": "front",
+            "packageId": "siheng:front:v1"
+          }
+        },
+        "formalTurns": {
+          "red": 0,
+          "black": 0
+        },
+        "heroRuntime": {
+          "red": {
+            "used": false,
+            "invokeCount": 0
+          },
+          "black": {
+            "used": false,
+            "invokeCount": 0
+          }
+        }
+      },
+      "actions": [
+        "swap a/b",
+        "opponent horse2 retreats",
+        "a captures horse1"
+      ],
+      "skillMaterialGain": 4,
+      "skillImmediateDestruction": 0,
+      "opponentReplyLegal": true,
+      "control": [
+        "a moves to (0,2), rotated for black",
+        "horse1 retreats to (2,3), rotated"
+      ],
+      "controlMaterialGain": 0,
+      "range2PairAvailable": false,
+      "range4PairAvailable": true,
+      "claim": "specific scripted tactical witness, not exhaustive minimax or global score"
+    },
+    {
+      "id": "counter-partner-red",
+      "input": {
+        "status": "playing",
+        "turn": "black",
+        "revision": 0,
+        "pieces": [
+          {
+            "id": "red-general",
+            "color": "red",
+            "type": "general",
+            "x": 3,
+            "y": 9,
+            "faceDown": false
+          },
+          {
+            "id": "black-general",
+            "color": "black",
+            "type": "general",
+            "x": 5,
+            "y": 0,
+            "faceDown": false
+          },
+          {
+            "id": "a",
+            "color": "red",
+            "type": "rook",
+            "x": 0,
+            "y": 6,
+            "faceDown": false
+          },
+          {
+            "id": "b",
+            "color": "red",
+            "type": "pawn",
+            "x": 4,
+            "y": 6,
+            "faceDown": false
+          },
+          {
+            "id": "cutter",
+            "color": "black",
+            "type": "rook",
+            "x": 4,
+            "y": 0,
+            "faceDown": false
+          }
+        ],
+        "captured": [],
+        "effectsByPieceId": {},
+        "assassination": {
+          "red": {
+            "heroChargeAvailable": false,
+            "mutationChargeAvailable": false
+          },
+          "black": {
+            "heroChargeAvailable": false,
+            "mutationChargeAvailable": false
+          }
+        },
+        "featureRules": {
+          "experimentalHeroPilot": true,
+          "heroSelections": {
+            "red": {
+              "heroId": "siheng",
+              "form": "front",
+              "packageId": "siheng:front:v1"
+            }
+          },
+          "heroes": {
+            "red": "siheng"
+          }
+        },
+        "heroFormLock": {
+          "red": {
+            "heroId": "siheng",
+            "form": "front",
+            "packageId": "siheng:front:v1"
+          }
+        },
+        "formalTurns": {
+          "red": 0,
+          "black": 0
+        },
+        "heroRuntime": {
+          "red": {
+            "used": false,
+            "invokeCount": 0
+          },
+          "black": {
+            "used": false,
+            "invokeCount": 0
+          }
+        }
+      },
+      "action": "opponent captures b before the pilot turn",
+      "pairsAfter": 0,
+      "normalMovesRemain": true
+    },
+    {
+      "id": "counter-check-red",
+      "input": {
+        "status": "playing",
+        "turn": "red",
+        "revision": 0,
+        "pieces": [
+          {
+            "id": "red-general",
+            "color": "red",
+            "type": "general",
+            "x": 3,
+            "y": 9,
+            "faceDown": false
+          },
+          {
+            "id": "black-general",
+            "color": "black",
+            "type": "general",
+            "x": 5,
+            "y": 0,
+            "faceDown": false
+          },
+          {
+            "id": "a",
+            "color": "red",
+            "type": "rook",
+            "x": 0,
+            "y": 6,
+            "faceDown": false
+          },
+          {
+            "id": "b",
+            "color": "red",
+            "type": "pawn",
+            "x": 4,
+            "y": 6,
+            "faceDown": false
+          },
+          {
+            "id": "checker",
+            "color": "black",
+            "type": "rook",
+            "x": 3,
+            "y": 5,
+            "faceDown": false
+          }
+        ],
+        "captured": [],
+        "effectsByPieceId": {},
+        "assassination": {
+          "red": {
+            "heroChargeAvailable": false,
+            "mutationChargeAvailable": false
+          },
+          "black": {
+            "heroChargeAvailable": false,
+            "mutationChargeAvailable": false
+          }
+        },
+        "featureRules": {
+          "experimentalHeroPilot": true,
+          "heroSelections": {
+            "red": {
+              "heroId": "siheng",
+              "form": "front",
+              "packageId": "siheng:front:v1"
+            }
+          },
+          "heroes": {
+            "red": "siheng"
+          }
+        },
+        "heroFormLock": {
+          "red": {
+            "heroId": "siheng",
+            "form": "front",
+            "packageId": "siheng:front:v1"
+          }
+        },
+        "formalTurns": {
+          "red": 0,
+          "black": 0
+        },
+        "heroRuntime": {
+          "red": {
+            "used": false,
+            "invokeCount": 0
+          },
+          "black": {
+            "used": false,
+            "invokeCount": 0
+          }
+        }
+      },
+      "pairs": 0,
+      "claim": "forcing check denies relay; normal check responses remain"
+    },
+    {
+      "id": "late-no-partner-red",
+      "input": {
+        "status": "playing",
+        "turn": "red",
+        "revision": 0,
+        "pieces": [
+          {
+            "id": "red-general",
+            "color": "red",
+            "type": "general",
+            "x": 3,
+            "y": 9,
+            "faceDown": false
+          },
+          {
+            "id": "black-general",
+            "color": "black",
+            "type": "general",
+            "x": 5,
+            "y": 0,
+            "faceDown": false
+          },
+          {
+            "id": "a",
+            "color": "red",
+            "type": "rook",
+            "x": 0,
+            "y": 6,
+            "faceDown": false
+          }
+        ],
+        "captured": [],
+        "effectsByPieceId": {},
+        "assassination": {
+          "red": {
+            "heroChargeAvailable": false,
+            "mutationChargeAvailable": false
+          },
+          "black": {
+            "heroChargeAvailable": false,
+            "mutationChargeAvailable": false
+          }
+        },
+        "featureRules": {
+          "experimentalHeroPilot": true,
+          "heroSelections": {
+            "red": {
+              "heroId": "siheng",
+              "form": "front",
+              "packageId": "siheng:front:v1"
+            }
+          },
+          "heroes": {
+            "red": "siheng"
+          }
+        },
+        "heroFormLock": {
+          "red": {
+            "heroId": "siheng",
+            "form": "front",
+            "packageId": "siheng:front:v1"
+          }
+        },
+        "formalTurns": {
+          "red": 0,
+          "black": 0
+        },
+        "heroRuntime": {
+          "red": {
+            "used": false,
+            "invokeCount": 0
+          },
+          "black": {
+            "used": false,
+            "invokeCount": 0
+          }
+        }
+      },
+      "pairs": 0,
+      "claim": "two charges can be stranded in a sparse endgame"
+    },
+    {
+      "id": "fork-black",
+      "input": {
+        "status": "playing",
+        "turn": "black",
+        "revision": 0,
+        "pieces": [
+          {
+            "id": "red-general",
+            "color": "black",
+            "type": "general",
+            "x": 5,
+            "y": 0,
+            "faceDown": false
+          },
+          {
+            "id": "black-general",
+            "color": "red",
+            "type": "general",
+            "x": 3,
+            "y": 9,
+            "faceDown": false
+          },
+          {
+            "id": "a",
+            "color": "black",
+            "type": "rook",
+            "x": 8,
+            "y": 3,
+            "faceDown": false
+          },
+          {
+            "id": "b",
+            "color": "black",
+            "type": "pawn",
+            "x": 4,
+            "y": 3,
+            "faceDown": false
+          },
+          {
+            "id": "horse1",
+            "color": "red",
+            "type": "horse",
+            "x": 4,
+            "y": 7,
+            "faceDown": false
+          },
+          {
+            "id": "horse2",
+            "color": "red",
+            "type": "horse",
+            "x": 0,
+            "y": 3,
+            "faceDown": false
+          }
+        ],
+        "captured": [],
+        "effectsByPieceId": {},
+        "assassination": {
+          "red": {
+            "heroChargeAvailable": false,
+            "mutationChargeAvailable": false
+          },
+          "black": {
+            "heroChargeAvailable": false,
+            "mutationChargeAvailable": false
+          }
+        },
+        "featureRules": {
+          "experimentalHeroPilot": true,
+          "heroSelections": {
+            "black": {
+              "heroId": "siheng",
+              "form": "front",
+              "packageId": "siheng:front:v1"
+            }
+          },
+          "heroes": {
+            "black": "siheng"
+          }
+        },
+        "heroFormLock": {
+          "black": {
+            "heroId": "siheng",
+            "form": "front",
+            "packageId": "siheng:front:v1"
+          }
+        },
+        "formalTurns": {
+          "red": 0,
+          "black": 0
+        },
+        "heroRuntime": {
+          "red": {
+            "used": false,
+            "invokeCount": 0
+          },
+          "black": {
+            "used": false,
+            "invokeCount": 0
+          }
+        }
+      },
+      "actions": [
+        "swap a/b",
+        "opponent horse2 retreats",
+        "a captures horse1"
+      ],
+      "skillMaterialGain": 4,
+      "skillImmediateDestruction": 0,
+      "opponentReplyLegal": true,
+      "control": [
+        "a moves to (0,2), rotated for black",
+        "horse1 retreats to (2,3), rotated"
+      ],
+      "controlMaterialGain": 0,
+      "range2PairAvailable": false,
+      "range4PairAvailable": true,
+      "claim": "specific scripted tactical witness, not exhaustive minimax or global score"
+    },
+    {
+      "id": "counter-partner-black",
+      "input": {
+        "status": "playing",
+        "turn": "red",
+        "revision": 0,
+        "pieces": [
+          {
+            "id": "red-general",
+            "color": "black",
+            "type": "general",
+            "x": 5,
+            "y": 0,
+            "faceDown": false
+          },
+          {
+            "id": "black-general",
+            "color": "red",
+            "type": "general",
+            "x": 3,
+            "y": 9,
+            "faceDown": false
+          },
+          {
+            "id": "a",
+            "color": "black",
+            "type": "rook",
+            "x": 8,
+            "y": 3,
+            "faceDown": false
+          },
+          {
+            "id": "b",
+            "color": "black",
+            "type": "pawn",
+            "x": 4,
+            "y": 3,
+            "faceDown": false
+          },
+          {
+            "id": "cutter",
+            "color": "red",
+            "type": "rook",
+            "x": 4,
+            "y": 9,
+            "faceDown": false
+          }
+        ],
+        "captured": [],
+        "effectsByPieceId": {},
+        "assassination": {
+          "red": {
+            "heroChargeAvailable": false,
+            "mutationChargeAvailable": false
+          },
+          "black": {
+            "heroChargeAvailable": false,
+            "mutationChargeAvailable": false
+          }
+        },
+        "featureRules": {
+          "experimentalHeroPilot": true,
+          "heroSelections": {
+            "black": {
+              "heroId": "siheng",
+              "form": "front",
+              "packageId": "siheng:front:v1"
+            }
+          },
+          "heroes": {
+            "black": "siheng"
+          }
+        },
+        "heroFormLock": {
+          "black": {
+            "heroId": "siheng",
+            "form": "front",
+            "packageId": "siheng:front:v1"
+          }
+        },
+        "formalTurns": {
+          "red": 0,
+          "black": 0
+        },
+        "heroRuntime": {
+          "red": {
+            "used": false,
+            "invokeCount": 0
+          },
+          "black": {
+            "used": false,
+            "invokeCount": 0
+          }
+        }
+      },
+      "action": "opponent captures b before the pilot turn",
+      "pairsAfter": 0,
+      "normalMovesRemain": true
+    },
+    {
+      "id": "counter-check-black",
+      "input": {
+        "status": "playing",
+        "turn": "black",
+        "revision": 0,
+        "pieces": [
+          {
+            "id": "red-general",
+            "color": "black",
+            "type": "general",
+            "x": 5,
+            "y": 0,
+            "faceDown": false
+          },
+          {
+            "id": "black-general",
+            "color": "red",
+            "type": "general",
+            "x": 3,
+            "y": 9,
+            "faceDown": false
+          },
+          {
+            "id": "a",
+            "color": "black",
+            "type": "rook",
+            "x": 8,
+            "y": 3,
+            "faceDown": false
+          },
+          {
+            "id": "b",
+            "color": "black",
+            "type": "pawn",
+            "x": 4,
+            "y": 3,
+            "faceDown": false
+          },
+          {
+            "id": "checker",
+            "color": "red",
+            "type": "rook",
+            "x": 5,
+            "y": 4,
+            "faceDown": false
+          }
+        ],
+        "captured": [],
+        "effectsByPieceId": {},
+        "assassination": {
+          "red": {
+            "heroChargeAvailable": false,
+            "mutationChargeAvailable": false
+          },
+          "black": {
+            "heroChargeAvailable": false,
+            "mutationChargeAvailable": false
+          }
+        },
+        "featureRules": {
+          "experimentalHeroPilot": true,
+          "heroSelections": {
+            "black": {
+              "heroId": "siheng",
+              "form": "front",
+              "packageId": "siheng:front:v1"
+            }
+          },
+          "heroes": {
+            "black": "siheng"
+          }
+        },
+        "heroFormLock": {
+          "black": {
+            "heroId": "siheng",
+            "form": "front",
+            "packageId": "siheng:front:v1"
+          }
+        },
+        "formalTurns": {
+          "red": 0,
+          "black": 0
+        },
+        "heroRuntime": {
+          "red": {
+            "used": false,
+            "invokeCount": 0
+          },
+          "black": {
+            "used": false,
+            "invokeCount": 0
+          }
+        }
+      },
+      "pairs": 0,
+      "claim": "forcing check denies relay; normal check responses remain"
+    },
+    {
+      "id": "late-no-partner-black",
+      "input": {
+        "status": "playing",
+        "turn": "black",
+        "revision": 0,
+        "pieces": [
+          {
+            "id": "red-general",
+            "color": "black",
+            "type": "general",
+            "x": 5,
+            "y": 0,
+            "faceDown": false
+          },
+          {
+            "id": "black-general",
+            "color": "red",
+            "type": "general",
+            "x": 3,
+            "y": 9,
+            "faceDown": false
+          },
+          {
+            "id": "a",
+            "color": "black",
+            "type": "rook",
+            "x": 8,
+            "y": 3,
+            "faceDown": false
+          }
+        ],
+        "captured": [],
+        "effectsByPieceId": {},
+        "assassination": {
+          "red": {
+            "heroChargeAvailable": false,
+            "mutationChargeAvailable": false
+          },
+          "black": {
+            "heroChargeAvailable": false,
+            "mutationChargeAvailable": false
+          }
+        },
+        "featureRules": {
+          "experimentalHeroPilot": true,
+          "heroSelections": {
+            "black": {
+              "heroId": "siheng",
+              "form": "front",
+              "packageId": "siheng:front:v1"
+            }
+          },
+          "heroes": {
+            "black": "siheng"
+          }
+        },
+        "heroFormLock": {
+          "black": {
+            "heroId": "siheng",
+            "form": "front",
+            "packageId": "siheng:front:v1"
+          }
+        },
+        "formalTurns": {
+          "red": 0,
+          "black": 0
+        },
+        "heroRuntime": {
+          "red": {
+            "used": false,
+            "invokeCount": 0
+          },
+          "black": {
+            "used": false,
+            "invokeCount": 0
+          }
+        }
+      },
+      "pairs": 0,
+      "claim": "two charges can be stranded in a sparse endgame"
+    },
+    {
+      "id": "real-32-opening",
+      "pieces": 32,
+      "hiddenPieces": 30,
+      "pairs": 0,
+      "claim": "skill cannot reveal or operate on covered pieces"
+    }
+  ]
+}
